@@ -1,0 +1,142 @@
+<?php
+class RegistrerteOgInnberettedeMapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+        //print ("Accouint: ". $a . "khlk: ". $h);
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+       			{
+       			   	if (is_array($v)){
+        				for($i=0; $i< count($v); $i++) {
+        					$this->ORID[$item[$i]]=$v[$i];
+        				}
+       			   	}
+        			else
+           				$this->ORID[$item] = $v;
+       			}
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+       			   	if (is_array($v)){
+        				for($i=0; $i< count($v); $i++) {
+        					$this->ORID[$this->Account[$a]][$i]=$v[$i];
+        				}
+       			   	}
+        			else
+        			{
+						$this->ORID[$this->Account[$a]] = $v;
+        			}
+	            return 1;
+    	    }
+       	}
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+		
+	{  $this->addMapping('D1', 'EnhetNavn-datadef-1', 'VName');
+		$this->addMapping('D18', 'EnhetOrganisasjonsnummer-datadef-18', 'OrgNumber');
+		$this->addMapping('D15', 'EnhetAdresse-datadef-15', 'VAddress');
+		$this->addMapping('D26', 'OppgavegiverFodselsnummer-datadef-26', '');
+		$this->addMapping('D6673', 'EnhetPostnummer-datadef-6673', 'VZipCode');
+		$this->addMapping('D6674', 'EnhetPoststed-datadef-6674', 'VCity');
+		$this->addMapping('D280', 'RegnskapsforerNavn-datadef-280', 'FVName');
+		$this->addMapping('D3651', 'RegnskapsforerOrganisasjonsnummer-datadef-3651', 'FOrgNumber');
+		$this->addMapping('D281', 'RegnskapsforerAdresse-datadef-281', 'FVAddress');
+		$this->addMapping('D6678', 'RegnskapsforerPostnummer-datadef-6678', 'FVZipCode');
+		$this->addMapping('D6679', 'RegnskapsforerPoststed-datadef-6679', 'FVCity');
+		$this->addMapping('D8499', 'LonnskostnaderKontonummerSpesifisertKonti-datadef-8499', '100.2');
+		$this->addMapping('D8509', 'LonnskostnaderKontonavnSpesifisertKonti-datadef-8509', '100.3');
+		$this->addMapping('D8500', 'LonnskostnaderOppgavepliktigeSpesifisertKonti-datadef-8500', '100.4');
+		$this->addMapping('D11293', 'GodtgjorelserTidligereArSpesifisertKonto-datadef-11293', '100.51');
+		$this->addMapping('D11294', 'FradragIkkeForfalteLonningerPaloptSpesifisertKonto-datadef-11294', '100.6');
+		$this->addMapping('D11295', 'LonnskostnaderOppgavepliktigeSpesifisertKonto-datadef-11295', '100.71');
+		$this->addMapping('D11296', 'LonnskostnaderArbeidsgiveravgiftspliktigeSpesifisertKonto-datadef-11296', '100.8');
+		$this->addMapping('D8501', 'LonnskostnaderOppgavepliktige-datadef-8501', '110.4');
+		$this->addMapping('D6630', 'GodtgjorelserTidligereAr-datadef-6630', '110.5');
+		$this->addMapping('D6633', 'FradragIkkeForfalteLonningerPalopt-datadef-6633', '110.6');
+		$this->addMapping('D14876', 'LonnskostnaderOppgavepliktigeSamlede-datadef-14876', '110.7');
+		$this->addMapping('D14888', 'YtelserArbeidsgiveravgiftspliktige-datadef-14888', '110.8');
+		$this->addMapping('D13878', 'AnsattNaturalytelserKontonummer-datadef-13878', '111.2');
+		$this->addMapping('D6627', 'AnsattNaturalytelser-datadef-6627', '111.4');
+		$this->addMapping('D13879', 'TilskuddOffentligArbeidskraftKontonummer-datadef-13879', '112.2');
+		$this->addMapping('D7711', 'TilskuddOffentligArbeidskraft-datadef-7711', '112.4');
+		$this->addMapping('D13880', 'RefusjonOffentligArbeidskraftKontonummer-datadef-13880', '113.2');
+		$this->addMapping('D7712', 'RefusjonOffentligArbeidskraft-datadef-7712', '113.4');
+		$this->addMapping('D13881', 'PensjonsordningerTilskuddPremieAvgiftspliktigeKontonummer-datadef-13881', '114.2');
+		$this->addMapping('D11297', 'PensjonsordningerTilskuddPremieAvgiftspliktige-datadef-11297', '114.4');
+		$this->addMapping('D6632', 'PersoninntektAktiveAkjonarerBeregnet-datadef-6632', '115.2');
+		$this->addMapping('D11291', 'LonnskostnaderLonnsoppgavepliktigeOppgavepliktige-datadef-11291', '115.4');
+		$this->addMapping('D11292', 'LonnskostnaderLonnsoppgavepliktigeArbeidsgiveravgiftspliktige-datadef-11292', '120.8');
+				
+		       
+        
+	}
+ }
+?>

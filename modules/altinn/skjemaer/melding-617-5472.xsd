@@ -1,0 +1,1960 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--title='RF-1149: Tilleggsskjema til RF-1145 og RF-1147 om kreditfradrag' lang='NOB'-->
+    <xs:element name="Skjema">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>RF-1149 Tilleggsskjema til RF-1145 og RF-1147 om kreditfradrag 2006</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>I dette skjema spesifiserer enmannsforetak beløpet i post 2.5 i  skjemaet Fradrag i norsk skatt for skatt betalt i utlandet  (kreditfradrag) for lønnsmotakere, pensjonister og personlig  næringsdrivende (RF-1147).  </p>
+                    <p>Deltakerliknede selskaper og aksjeselskaper mv. spesifiserer beløpet i  post 2.1 i skjemaet Fradrag i norsk skatt for skatt betalt i utlandet  (kreditfradrag) for aksjeselskap mv. og deltakerliknede selskaper  (RF-1145).  </p>
+                    <p>Spesifikasjonen baseres på opplysningene gitt i næringsoppgave 1  (RF-1175), næringsoppgave 2 (RF-1167), næringsoppgave 3 (RF-1170)  eller næringsoppgave 4 (RF-1173).  </p>
+                    <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  </p>
+                    <p>delegeringsvedtak av 28. november 1994, jf. ligningsloven § 4-3 nr.  2.  </p>
+                    <p>Tilleggsskjemaet skal fylles ut av enmannsforetak, deltakerliknet  selskap og aksjeselskap mv. som krever fradrag i norsk skatt for  betalt skatt i utlandet for næringsvirksomhet i utlandet og som  leverer Næringsoppgave 1
+                        (RF-1175),  Næringsoppgave 2 (RF-1167),  Næringsoppgave 3 (RF 1170) eller Næringsoppgave 4 (RF 1173). Det skal  fylles ut et tilleggsskjema for hver næringsvirksomhet.  Tilleggsskjemaet skal leveres sammen med skjemaet Fradrag
+                        i norsk  skatt for skatt betalt i utlandet (kreditfradrag) for lønnsmottakere,  pensjonister og personlig næringsdrivende (RF-1147) eller skjemaet  Fradrag i norsk skatt for skatt betalt i utlandet (kreditfradrag) for
+                        aksjeselskaper mv. og deltakerliknede selskaper (RF-1145).  </p>
+                    <p>I skjemaet spesifiseres de inntekter og kostnader som er ført i  næringsoppgavene, og som direkte kan tilordnes utlandet. Hver enkelt  inntekts- og kostnadspost må vurderes separat for å avgjøre om den  skal henføres til
+                        virksomheten i Norge eller i utlandet, dvs. om den  enkelte inntekt/kostnad rettmessig er knyttet til virksomheten i  Norge eller til det faste driftsstedet i utlandet. Den enkelte  inntekt/kostnad skal tilordnes Norge eller
+                        utlandet etter hvor den  ville blitt tilordnet dersom virksomheten i de forskjellige land  hadde vært helt selvstendige og frittstående enheter.  </p>
+                    <p>Inntekter og kostnader som ikke kan spesifiseres og henføres direkte  til de enkelte deler av virksomheten, tilordnes utlandet etter den  indirekte fordelingsmetoden og skal bare tas med i RF-1145 post 4  eller 5 eller i
+                        RF-1147 post 4. Se nærmere om dette i rettledningene  til disse skjemaene, RF-1146 og RF-1148. For informasjon om  fortegnsbruk se RF-1146 og RF-1148.  </p>
+                    <p/>
+                    <p>Andre offentlige organers bruk av opplysninger i RF-1149.  </p>
+                    <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjema, RF-1149, helt eller delvis bli  benyttet også av andre offentlige organer som har hjemmel til å  innhente de samme
+                        opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt. samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>RF-1149 Tilleggsskjema til RF-1145 og RF-1147 om kreditfrådrag 2006</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>I dette skjema skal enkeltpersonføretak spesifisere beløpet i post 2.5  i skjemaet Frådrag i norsk skatt for skatt betalt i utlandet  (kreditfrådrag) for lønnstakarar, pensjonistar og personleg  næringsdrivande (RF-1147).  </p>
+                    <p>Deltakerlikna selskap og aksjeselskap o.a. skal spesifisere beløpet i  post 2.1 i skjemaet Frådrag i norsk skatt for skatt betalt i utlandet  (kreditfrådrag) for aksjeselskap o.a. og deltakerlikna selskap  (RF-1145).  </p>
+                    <p>Spesifikasjonen skal byggje på opplysningane som er gitt i  næringsoppgåve 1 (RF-1175), næringsoppgåve 2 (RF-1167),  næringsoppgåve 3 (RF-1170) eller næringsoppgåve 4 (RF-1173).  </p>
+                    <p>Fastsatt av Skattedirektoratet med heimel i Finansdepartementet sitt  delegeringsvedtak av 28. november 1994, jf. likningslova § 4-3 nr.  2.  </p>
+                    <p>Tilleggsskjemaet skal fyllast ut av enkeltpersonføretak, deltakarlikna  selskap og aksjeselskap o.a. som krev frådrag i norsk skatt for skatt  betalt i utlandet for næringsverksemd i utlandet, og som leverer  Næringsoppgåve 1
+                        (RF-1175),  Næringsoppgåve 2 (RF-1167),  Næringsoppgåve 3 (RF 1170) eller Næringsoppgåve 4 (RF 1173).  </p>
+                    <p>Det skal fyllast ut eit tilleggsskjema for kvar næringsverksemd.  Tilleggsskjemaet skal leverast saman med skjemaet Frådrag i norsk  skatt for skatt betalt i utlandet (kreditfrådrag) for lønnstakarar,  pensjonistar og personleg
+                        næringsdrivande (RF-1147) eller skjema  Frådrag i norsk skatt for skatt betalt i utlandet (kreditfrådrag) for  aksjeselskap o.a. og deltakarlikna selskap (RF-1145).  </p>
+                    <p>I skjemaet skal ein spesifisere inntekter og kostnader som er førte i  næringsoppgåvene, og som direkte kan tilordnast utlandet. Kvar enkelt  inntekts- og kostnadspost må vurderast kvar for seg for å avgjere om  posten skal
+                        reknast til verksemda i Noreg eller i utlandet, dvs. om  kostnaden eller inntekta rettmessig er knytt til verksemda i Noreg  eller til den faste driftsstaden i utlandet. Kvar inntekt og kostnad  skal tilordnast Noreg eller
+                        utlandet etter der beløpet ville ha blitt  ført dersom verksemdene i dei ulike landa hadde vore heilt  sjølvstendige og frittståande einingar.  </p>
+                    <p>Inntekter og kostnader som ikkje kan spesifiserast og knytast direkte  til dei einskilde delane av verksemda, skal tilordnast utlandet etter  den indirekte fordelingsmetoden og skal berre takast med i RF-1145  post 4 eller 5
+                        eller i RF-1147 post 4. Sjå rettleiingane til desse  skjema, RF-1146 og RF-1148.For informasjon om bruk av forteikn, sjå  RF-1146 og RF-1148.  </p>
+                    <p/>
+                    <p>Andre offentlege organs bruk av opplysningar i RF-1149.  </p>
+                    <p>For å samordne og forenkle oppgåveinnleveringa frå næringslivet, kan  opplysningar som blir gitt i dette skjema, RF-1149, heilt eller  delvis brukast også av andre offentlege organ som har heimel til å  hente inn dei same
+                        opplysningane, jf. lov om Oppgaveregisteret §§ 5  og 6. Opplysningar om ev. samordning kan ein få ved å kontakte  Oppgaveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GenerellInformasjon-grp-1051"/>
+                <xs:element minOccurs="0" ref="DriftsresultatIUtlandet-grp-448"/>
+                <xs:element minOccurs="0" ref="ResultatAvFinansinntekterOgFinanskostnaderIUtlandet-grp-2404"/>
+                <xs:element minOccurs="0" ref="ResultatAvEkstraordinareInntekterOgKostnaderIUtlandet-grp-450"/>
+                <xs:element minOccurs="0" ref="ResultatInntektUnderskuddUtland-grp-451"/>
+            </xs:sequence>
+            <xs:attribute fixed="617" name="skjemanummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="5472" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="RF-1149" name="blankettnummer" type="xs:string" use="optional"/>
+            <xs:attribute fixed="Tilleggsskjema til RF-1145 og RF-1147 om kreditfradrag" name="tittel" type="xs:string" use="optional"/>
+            <xs:attribute fixed="446" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+            <xs:attribute name="etatid" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="974761076">
+                            <xs:annotation>
+                                <xs:documentation>SKATTEDIREKTORATET</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:anyAttribute/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GenerellInformasjon-grp-1051">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Generell informasjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Generell informasjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Avgiver-grp-447"/>
+            </xs:sequence>
+            <xs:attribute fixed="1051" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Avgiver-grp-447">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Avgiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>I dette skjema spesifiserer enmannsforetak beløpet i post 2.5 i  skjemaet  Fradrag i norsk skatt for skatt betalt i utlandet  kredittfradrag) for lønnsmottakere, pensjonister og personlig  næringsdrivende (RF-1147).  </p>
+                    <p>Deltakerliknede selskaper og aksjeselskaper mv. spesifiserer beløpet i  post 2.1 i skjemaet Fradrag i norsk skatt for skatt betalt i utlandet  kredittfradrag) for aksjeselskap mv. og deltakerliknede selskaper  (RF-1145).  </p>
+                    <p>Spesifikasjonen baseres på opplysningene gitt i næringsoppgave 1  (RF-1175) og næringsoppgave 2 (RF-1167).</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Avgivar</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>I dette skjema spesifiserer einmannsføretak beløpet i post 2.5 i  skjemaet  Frådrag i norsk skatt for skatt betalt i utlandet  kredittfrådrag) for lønnstakarar, pensjonistar og personleg  næringsdrivande (RF-1147).  </p>
+                    <p>Deltakerlikna selskap og aksjeselskap mv. spesifiserer beløpet i post  2.1 i skjemaet Frådrag i norsk skatt for skatt betalt i utlandet  kredittfrådrag) for aksjeselskap mv. og deltakerlikna selskap  (RF-1145).  </p>
+                    <p>Spesifikasjonen skal byggje på opplysningane som er gitt i  næringsoppgåve 1 (RF-1175) og næringsoppgåve 2 (RF-1167).</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="OppgavegiverNavn-datadef-68">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverFodselsnummer-datadef-26">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Fødselsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Fødselsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetOrganisasjonsnummer-datadef-18">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Org.nr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Org.nr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverAdresse-datadef-69">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverPostnummer-datadef-6676">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverPoststed-datadef-6677">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Poststed</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Poststad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="447" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OppgavegiverNavn-datadef-68">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Navn på oppgavegiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="DEF">
+                    <p>Namn på oppgåvegjevar</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">1</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="68" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst175-repformat-8">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="175"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverFodselsnummer-datadef-26">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Fødselsnummer til oppgavegiveren</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">2</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst1111Modulus11-repformat-18">
+                    <xs:attribute fixed="26" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst1111Modulus11-repformat-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">18</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="11"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetOrganisasjonsnummer-datadef-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummeret til enheten</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Organisasjonsnummer til årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="18" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst99Modulus11-repformat-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">1</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverAdresse-datadef-69">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Adresse til oppgavegiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="DEF">
+                    <p>Adressa til oppgavegjevar</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="69" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst35-repformat-3">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="35"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverPostnummer-datadef-6676">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Postnummer til oppgavegiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">5</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="6676" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst44BareTall-repformat-10">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">10</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+                    <p>Enter positive integer with four digits</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Feltet krever positivt heltall med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Feltet krev positivt heiltal med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="4"/>
+            <xs:pattern value="[0-9]{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverPoststed-datadef-6677">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Poststed til oppgavegiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="6677" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsresultatIUtlandet-grp-448">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>1 Driftsresultat i utlandet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Her oppgis hvor stor del av driftsinntektene og driftskostnadene som  gjelder næringsvirksomheten i utlandet. Se postene 3000-9900 og  4005-9910 i næringsoppgave 1,  postene 3000-9000 og 4005-9010 i  næringsoppgave 2 eller
+                        tilsvarende poster i næringsoppgave 3 og  næringsoppgave 4.  </p>
+                    <p>For driftsmidler som er brukt både i Norge og utlandet, må  avskrivningene fordeles etter hvor inntekten knyttet til driftsmidlet  anses oppebåret.  </p>
+                    <p>De som leverer næringsoppgave 2 må korrigere for eventuelle  kostnader/inntekter som ikke er fradragsberettiget/skattepliktige ved  inntektslikningen. Se postene 0610-0650 og 0800-0810 i næringsoppgave  2. Det må videre
+                        korrigeres for forskjeller som påvirker forholdet  mellom regnskapsmessig og skattemessig inntekt, se postene 0660-0750,  0820-0900 og 0930 i næringsoppgave 2. Tilsvarende gjelder de som  leverer næringsoppgave 3 eller
+                        næringsoppgave 4.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>1 Driftsresultat i utlandet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Her fører ein opp kor stor del av driftsinntektene og driftskostnadene   som gjeld næringsverksemd i utlandet. Sjå postane 3000 - 9900 og  4005 - 9910 i næringsoppgåve 1 og postane 3000 - 9000 og 4005 - 9010  i næringsoppgåve 2
+                        eller tilsvarande postar i næringsoppgåve 3 og  næringsoppgåve 4.  </p>
+                    <p>For driftsmiddel som er brukte både i Noreg og utlandet, må  avskrivningar fordelast etter kor inntekta knytta til driftsmiddelet  må reknast som opptent.  </p>
+                    <p>Dei som leverer næringsoppgåve 2 må korrigere for eventuelle  kostnader/ inntekter som det ikkje er frådragsrett for eller som  ikkje er skattepliktige ved inntektslikninga. Sjå postane 0610-0650  og 0800-0810 i næringsoppgåve
+                        2. Det må vidare korrigerast for  forskjellar som påverkar forholdet mellom rekneskapsmessig og  skattemessig inntekt, sjå postane 0660-0750, 0820-0900 og 0930 i  næringsoppgåve 2. Tilsvarande gjeld dei som leverer
+                        næringsoppgåve 3  eller næringsoppgåve 4.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Driftsinntekter-grp-2372"/>
+                <xs:element minOccurs="0" ref="Driftskostnader-grp-2375"/>
+                <xs:element minOccurs="0" ref="DriftsresultatUtland-datadef-7815">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>1.4 Driftsresultat i utlandet</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Post 1.2.5 minus post 1.3.6</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>1.4 Driftsresultat i utlandet</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Post 1.2.5 minus post 1.3.6</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="448" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Driftsinntekter-grp-2372">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>1.2 Driftsinntekter</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>1.2 Driftsinntekter</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Salgsinntekter-grp-2373"/>
+                <xs:element minOccurs="0" ref="InntektAvFastEiendom-grp-2374"/>
+                <xs:element maxOccurs="25" minOccurs="0" ref="AndreDriftsinntekter-grp-3805"/>
+                <xs:element minOccurs="0" ref="DriftsinntekterUtland-datadef-7805">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>1.2.5 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>1.2.5 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2372" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Salgsinntekter-grp-2373">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>1.2.1 Salgsinntekter</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>1.2.1 Salsinntekter</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="SalgsinntekterUtlandPosthenvisning-datadef-7799">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgave post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgåve post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SalgsinntekterUtland-datadef-7800">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2373" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SalgsinntekterUtlandPosthenvisning-datadef-7799">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">7</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="7799" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SalgsinntekterUtland-datadef-7800">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7800" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopHeltall15-repformat-37">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">37</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="InntektAvFastEiendom-grp-2374">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>1.2.2 Inntekt av fast eiendom</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>1.2.2 Inntekt av fast eigedom</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="InntekterFastEiendomUtlandPosthenvisning-datadef-7801">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgave post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgåve post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="InntekterFastEiendomUtland-datadef-7802">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2374" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntekterFastEiendomUtlandPosthenvisning-datadef-7801">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="7801" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntekterFastEiendomUtland-datadef-7802">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">10</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7802" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AndreDriftsinntekter-grp-3805">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>1.2.3 Andre driftsinntekter</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Spesifiser</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>1.2.3 Andre driftsinntekter</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                    <p>Spesifiser</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="DriftsinntekterAndreUtlandPosthenvisning-datadef-7803">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgave post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgåve post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsinntekterAndreUtland-datadef-7804">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="3805" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsinntekterAndreUtlandPosthenvisning-datadef-7803">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">11</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="7803" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsinntekterAndreUtland-datadef-7804">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">12</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7804" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsinntekterUtland-datadef-7805">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">13</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7805" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Driftskostnader-grp-2375">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>1.3 Driftskostnader</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>1.3 Driftskostnader</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Varekostnad-grp-2376"/>
+                <xs:element minOccurs="0" ref="LonnMv-grp-2377"/>
+                <xs:element minOccurs="0" ref="OrdinareAvskrivninger-grp-4181"/>
+                <xs:element maxOccurs="25" minOccurs="0" ref="AndreDriftskostnader-grp-3806"/>
+                <xs:element minOccurs="0" ref="DriftskostnaderUtlandSkattemessig-datadef-7814">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>1.3.6 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>1.3.6 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2375" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Varekostnad-grp-2376">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>1.3.1 Varekostnad</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>1.3.1 Varekostnad</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="VarekostnadUtlandPosthenvisning-datadef-7806">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgave post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgåve post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="VarekostnadUtland-datadef-7807">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2376" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="VarekostnadUtlandPosthenvisning-datadef-7806">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">14</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="7806" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="VarekostnadUtland-datadef-7807">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">15</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7807" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LonnMv-grp-2377">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>1.3.2 Lønn mv.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>1.3.2 Lønn o.a.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="LonnskostnaderUtlandPosthenvisning-datadef-7808">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgave post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgåve post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="LonnskostnaderUtland-datadef-7809">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2377" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LonnskostnaderUtlandPosthenvisning-datadef-7808">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">16</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="7808" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LonnskostnaderUtland-datadef-7809">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">17</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7809" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OrdinareAvskrivninger-grp-4181">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>1.3.3 Ordinære avskrivninger</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>1.3.3 Ordinære avskrivingar</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="AvskrivningerOrdinareUtlandPosthenvisning-datadef-7810">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgave post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgåve post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="AvskrivningerOrdinareUtland-datadef-7811">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4181" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AvskrivningerOrdinareUtlandPosthenvisning-datadef-7810">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">18</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="7810" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AvskrivningerOrdinareUtland-datadef-7811">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">19</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7811" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AndreDriftskostnader-grp-3806">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>1.3.4 Andre driftskostnader</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Spesifiser</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>1.3.4 Andre driftskostnader</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                    <p>Spesifiser</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="DriftskostnaderAndreUtlandPosthenvisning-datadef-7812">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgave post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgåve post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftskostnaderAndreUtlandSkattemessig-datadef-7813">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="3806" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftskostnaderAndreUtlandPosthenvisning-datadef-7812">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">20</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="7812" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftskostnaderAndreUtlandSkattemessig-datadef-7813">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">21</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7813" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftskostnaderUtlandSkattemessig-datadef-7814">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">22</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7814" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsresultatUtland-datadef-7815">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">23</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7815" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ResultatAvFinansinntekterOgFinanskostnaderIUtlandet-grp-2404">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>2 Resultat av finansinntekter og finanskostnader i utlandet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Her oppgis hvor stor del av finansinntektene og finanskostnadene som  gjelder næringsvirksomhet i utlandet. Se postene 8060-8099, 0411,  0412 og 8160-8199 i næringsoppgave 1, postene 8005-8080 og 8006,  8115, 8160-8170 i
+                        næringsoppgave 2 eller tilsvarende poster i  næringsoppgave 3 og næringsoppgave 4.  </p>
+                    <p>De som leverer næringsoppgave 2 må korrigere for forskjeller som  påvirker forholdet mellom regnskapsmessig og skattemessig inntekt, se  postene 0660-0750, 0820-0900 og 0930 i næringsoppgave 2. Tilsvarende  gjelder de som
+                        leverer næringsoppgave 3 eller næringsoppgave 4.  </p>
+                    <p>Utbytte et norsk morselskap har mottatt fra utenlandsk datterselskap,  skal ikke medtas her når det kreves kreditfradrag etter skatteloven §  16-30.  </p>
+                    <p>Vær oppmerksom på at rentekostnadene ikke skal fordeles i  tilleggsskjemaet. De skal først fordeles i post 5.1 i RF-1145 eller i  post 4.1 i RF-1147.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>2 Resultat av finansinntektar og finanskostnadar i utlandet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Her fører ein opp kor stor del av finansinntektene og finanskostnadene  som går fram av næringsoppgåva som gjeld næringsverksemda i utlandet.  Sjå postane 8060 - 8099, 0411, 0412 og 8160 - 8199 i næringsoppgåve 1  og postane
+                        8005 - 8080 og 8006, 8115, 8160 - 8170 i næringsoppgåve 2  eller tilsvarande postar i næringsoppgåve 3 og næringsoppgåve 4.  </p>
+                    <p>Det må korrigerast for forskjellar som påverkar forholdet mellom  rekneskapsmessig og skattemessig inntekt, sjå postane 0660 - 0750,  0820 - 0900 og 0930 i næringsoppgåve 2. Tilsvarande gjeld dei som  leverer næringsoppgåve 3
+                        eller næringsoppgåve 4.  </p>
+                    <p>Utbytte eit norsk morselskap har motteke frå eit utanlandsk  dotterselskap, skal ikkje takast med her når ein krev kreditfrådrag  etter skattelova § 16-30.  </p>
+                    <p>Merk at rentekostnadene ikkje skal fordelast i tilleggsskjemaet. Dei  skal først fordelast i post 5.1 i RF-1145 eller post 4.1 i RF-1147.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Finansinntekter-grp-2405"/>
+                <xs:element minOccurs="0" ref="FinanskostnaderEksklRentekostnader-grp-2408"/>
+                <xs:element minOccurs="0" ref="ResultatFinansUtland-datadef-7826">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>2.3 Resultat av finansinntekter og finanskostnader i utlandet</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Post 2.1.5 minus post 2.2.3</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>2.3 Resultat av finansinntekter og finanskostnader i utlandet</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Post 2.1.5 minus post 2.2.3</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2404" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Finansinntekter-grp-2405">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>2.1 Finansinntekter</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>2.1 Finansinntekter</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="UtbytteAvAksjerOL-grp-2406"/>
+                <xs:element minOccurs="0" ref="Renteinntekter-grp-2407"/>
+                <xs:element maxOccurs="25" minOccurs="0" ref="AndreFinansinntekter-grp-3807"/>
+                <xs:element minOccurs="0" ref="FinansinntekterUtland-datadef-7822">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>2.1.5 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>2.1.5 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2405" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UtbytteAvAksjerOL-grp-2406">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>2.1.1 Utbytte av aksjer o.l.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>2.1.1 Utbytte av aksjar o.l.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="AksjeutbytteMvUtlandPosthenvisning-datadef-7816">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgave post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgåve post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="AksjeutbytteMvUtland-datadef-7817">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2406" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjeutbytteMvUtlandPosthenvisning-datadef-7816">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">24</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="7816" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjeutbytteMvUtland-datadef-7817">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">25</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7817" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Renteinntekter-grp-2407">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>2.1.2 Renteinntekter</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>2.1.2 Renteinntekter</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="RenteinntekterUtlandPosthenvisning-datadef-7818">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgave post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgåve post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RenteinntekterUtland-datadef-7819">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2407" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RenteinntekterUtlandPosthenvisning-datadef-7818">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">26</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="7818" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RenteinntekterUtland-datadef-7819">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">27</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7819" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AndreFinansinntekter-grp-3807">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>2.1.3 Andre finansinntekter</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Spesifiser</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>2.1.3 Andre finansinntekter</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                    <p>Spesifiser</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FinansinntekterAndreUtlandPosthenvisning-datadef-7820">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgave post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgåve post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FinansinntekterAndreUtland-datadef-7821">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="3807" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FinansinntekterAndreUtlandPosthenvisning-datadef-7820">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">28</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="7820" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FinansinntekterAndreUtland-datadef-7821">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">29</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7821" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FinansinntekterUtland-datadef-7822">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">30</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7822" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FinanskostnaderEksklRentekostnader-grp-2408">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>2.2 Finanskostnader, ekskl. rentekostnader</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>2.2 Finanskostnader, utan rentekostnader</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="25" minOccurs="0" ref="Finanskostnader-grp-3809"/>
+                <xs:element minOccurs="0" ref="FinanskostnaderUtland-datadef-7825">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>2.2.3 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>2.2.3 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2408" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Finanskostnader-grp-3809">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>2.2.1 Finanskostnader, ekskl. rentekostnader</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Spesifiser</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>2.2.1 Finanskostnader, utan rentekostnader</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                    <p>Spesifiser</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FinanskostnaderUtlandPosthenvisningSpesifisertFinanskostnader-datadef-7823">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgave post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgåve post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FinanskostnaderUtlandSpesifisertFinanskostnader-datadef-7824">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="3809" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FinanskostnaderUtlandPosthenvisningSpesifisertFinanskostnader-datadef-7823">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">31</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="7823" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FinanskostnaderUtlandSpesifisertFinanskostnader-datadef-7824">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">32</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7824" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FinanskostnaderUtland-datadef-7825">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">33</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7825" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ResultatFinansUtland-datadef-7826">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">34</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7826" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ResultatAvEkstraordinareInntekterOgKostnaderIUtlandet-grp-450">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>3 Resultat av ekstraordinære inntekter og kostnader i utlandet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Her oppgis hvor stor del av ekstraordinære inntekter og kostnader som  gjelder næringsvirksomheten i utlandet. Se postene 8400 og 8500 i  næringsoppgave 2.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>3 Resultat av ekstraordinære inntekter og kostnader i utlandet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Her fører ein opp kor stor del av ekstraordinære inntekter og  kostnader som gjeld næringsverksemd i utlandet. Sjå postane 8400 og  8500 i næringsoppgåve 2.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="ResultatAvEkstraordinareInntekterOgKostnaderIUtlandet-grp-2409"/>
+            </xs:sequence>
+            <xs:attribute fixed="450" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ResultatAvEkstraordinareInntekterOgKostnaderIUtlandet-grp-2409">
+        <xs:annotation/>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="EkstraordinareInntekter-grp-2384"/>
+                <xs:element minOccurs="0" ref="EkstraordinareKostnader-grp-2385"/>
+                <xs:element minOccurs="0" ref="ResultatEkstraordinarePosterUtland-datadef-7831">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>3.3 Sum ekstraordinære poster</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>3.3 Sum ekstraordinære postar</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2409" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EkstraordinareInntekter-grp-2384">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>3.1 Ekstraordinære inntekter</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>3.1 Ekstraordinære inntekter</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="InntekterEkstraordinareUtlandPosthenvisning-datadef-7827">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgave post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgåve post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="InntekterEkstraordinareUtland-datadef-7828">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2384" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntekterEkstraordinareUtlandPosthenvisning-datadef-7827">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">35</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="7827" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntekterEkstraordinareUtland-datadef-7828">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">36</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7828" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EkstraordinareKostnader-grp-2385">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>3.2 Ekstraordinære kostnader</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>3.2 Ekstraordinære kostnader</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="KostnaderEkstraordinareUtlandPosthenvisning-datadef-7829">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgave post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Inkl. i næringsoppgåve post</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KostnaderEkstraordinareUtland-datadef-7830">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2385" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KostnaderEkstraordinareUtlandPosthenvisning-datadef-7829">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">37</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="7829" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KostnaderEkstraordinareUtland-datadef-7830">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">38</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7830" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ResultatEkstraordinarePosterUtland-datadef-7831">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">39</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7831" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ResultatInntektUnderskuddUtland-grp-451">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>4 Resultat inntekt/underskudd i utlandet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Beløpet i post 4 overføres post 2.5 i skjemaet Fradrag i norsk skatt  for skatt betalt i utlandet (kreditfradrag) for lønnsmottakere,  pensjonister og personlig næringsdrivende (RF-1147) eller post 2.1 i  skjemaet Fradrag i
+                        norsk skatt for skatt betalt i utlandet  (kreditfradrag) for aksjeselskaper mv. og deltakerliknede selskaper  (RF-1145).</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Overføres til post 2.1 i RF-1145 eller post 2.5 i RF-1147</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>4 Resultat inntekt/underskott i utlandet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Beløpet i post 4 skal overførast til post 2.5 i skjemaet Frådrag i  norsk skatt for skatt betalt i utlandet (kreditfrådrag) for  lønnstakarar, pensjonistar og personleg næringsdrivande (RF-1147)  eller post 2.1 i skjemaet
+                        Frådrag i norsk skatt for skatt betalt i  utlandet (kreditfrådrag) for aksjeselskap o.a. og deltakarlikna  selskap (RF-1145).</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                    <p>Skal overførast til post 2.1 i RF-1145 eller post 2.5 i RF-1147</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="ResultatUtlandSpesifisertResultat-datadef-20441">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="451" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ResultatUtlandSpesifisertResultat-datadef-20441">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">40</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20441" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

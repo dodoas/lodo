@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--title='NB-0003: Betalingsformidlingsstatistikk' lang='NOB'-->
+    <xs:element name="Skjema">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>NB-0003 Betalingsformidlingsstatistikk</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Om skjema NB-0003 Betalingsformidlingsstatistikk  </p>
+                    <p/>
+                    <p/>
+                    <p>Hvem skal levere  </p>
+                    <p/>
+                    <p>Forretnings- og sparebanker har ansvar for å levere rapport 1A - 1C  </p>
+                    <p>Utstedere av innenlandske kredittkort skal levere rapport 3A og 3B  </p>
+                    <p>Oljeselskaper skal levere rapport 4A og 4B  </p>
+                    <p/>
+                    <p/>
+                    <p>Innsendingsfrekvens  </p>
+                    <p/>
+                    <p>Alle A-rapporter (som gjelder antall kort, avtaler, brukersteder,  betalingsterminaler mv) skal leveres en gang per år. Når det gjelder  de andre rapportene, kan rapportørene velge om dataene skal sendes  per år, per kvartal
+                        eller per måned.  </p>
+                    <p/>
+                    <p>Tidsfristen for innsendelse av data vil være 20. arbeidsdager etter  statistikkperiodens utløp.  </p>
+                    <p/>
+                    <p/>
+                    <p>Om skjema  </p>
+                    <p/>
+                    <p>Oppgavesettet består av skjema NB-0003, Betalingsformidlingsstatistikk  med XML/SDV-vedlegg. Innholdet i vedlegget er meddelt rapportørene i  kravspesifikasjonen, herunder kodelisten og veiledningen til den  enkelte rapport. Se
+                        Norges Banks internettsider  www.norges-bank.no/stat/rapport.  </p>
+                    <p/>
+                    <p/>
+                    <p/>
+                    <p>Skjemaeier/innkrever  </p>
+                    <p/>
+                    <p>Norges Bank</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Avgiverinformasjon-grp-5654"/>
+            </xs:sequence>
+            <xs:attribute fixed="1123" name="skjemanummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="4754" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="NB-0003" name="blankettnummer" type="xs:string" use="optional"/>
+            <xs:attribute fixed="Betalingsformidlingsstatistikk" name="tittel" type="xs:string" use="optional"/>
+            <xs:attribute fixed="5653" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+            <xs:attribute name="etatid" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="937884117">
+                            <xs:annotation>
+                                <xs:documentation>NORGES BANK</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:anyAttribute/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Avgiverinformasjon-grp-5654">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Generell informasjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Innsending av rapporteringsfil i XML/SDV-format gjøres ved å klikke på  arkfanen vedlegg til venstre. Spesifikasjon av rapportene finnes  tilgjengelig på www.norges-bank.no/stat/rapport/. Rapporten skal  inneholde tall for
+                        rapporteringsperioden. Kontroller om tallene er  for riktig periode.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="EnhetOrganisasjonsnummer-datadef-18">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Har du husket vedlegg?</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetNavn-datadef-1">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Avsender</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5654" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EnhetOrganisasjonsnummer-datadef-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummeret til enheten</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Organisasjonsnummer til årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">2</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="18" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst99Modulus11-repformat-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">1</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetNavn-datadef-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Navn på juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Navn på årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">1</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="1" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst175-repformat-8">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="175"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

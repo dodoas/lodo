@@ -1,0 +1,905 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--title='RF-1116: Klage på likningen for privatpersoner' lang='NOB'-->
+    <xs:element name="Skjema">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>RF-1116 Klage på likningen for lønnstakere/pensjonister</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Skjema benyttes av lønnstakere og pensjonister som skal klage på  likningen. NB! Inneholder klagen sensitive opplysninger (f. eks. om  sykdom) må klagen sendes i brev til likningskontoret</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>RF-1116 Klage på likningen for lønnstakarar og pensjonistar</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Skjema gjeld lønnstakarar og pesjonistar som klagar på likninga. NB!  Inneheld skjema sensitive opplysningar (t.d. om sjukdom) må klaga  sendast i brev til likningskontoret.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="OpplysningerOmOppgavegiver-grp-5849"/>
+                <xs:element minOccurs="0" ref="Klage-grp-5855"/>
+            </xs:sequence>
+            <xs:attribute fixed="1251" name="skjemanummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="4944" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="RF-1116" name="blankettnummer" type="xs:string" use="optional"/>
+            <xs:attribute fixed="Klage på likningen for privatpersoner" name="tittel" type="xs:string" use="optional"/>
+            <xs:attribute fixed="5845" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+            <xs:attribute name="etatid" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="974761076">
+                            <xs:annotation>
+                                <xs:documentation>SKATTEDIREKTORATET</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:anyAttribute/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OpplysningerOmOppgavegiver-grp-5849">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Informasjon om skattyter</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Informasjon om skattytar</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="skattyteropplysninger-grp-5859"/>
+                <xs:element minOccurs="0" ref="Kontaktinformasjon-grp-5860"/>
+                <xs:element minOccurs="0" ref="Klagefrist-grp-5861"/>
+            </xs:sequence>
+            <xs:attribute fixed="5849" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="skattyteropplysninger-grp-5859">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Skattyteropplysninger</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Opplysningar om skattytar</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="OppgavegiverNavn-datadef-68">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverPostadresse-datadef-2442">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postadresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Postadresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverPostnummer-datadef-6676">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Postnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverPoststed-datadef-6677">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Poststed</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Poststad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverFodselsnummer-datadef-26">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Fødselsnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Fødselsnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5859" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OppgavegiverNavn-datadef-68">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Navn på oppgavegiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="DEF">
+                    <p>Namn på oppgåvegjevar</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="68" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst175-repformat-8">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="175"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverPostadresse-datadef-2442">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">5</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst105-repformat-9">
+                    <xs:attribute fixed="2442" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst105-repformat-9">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="105"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverPostnummer-datadef-6676">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Postnummer til oppgavegiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="6676" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst44BareTall-repformat-10">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">10</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+                    <p>Enter positive integer with four digits</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Feltet krever positivt heltall med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Feltet krev positivt heiltal med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="4"/>
+            <xs:pattern value="[0-9]{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverPoststed-datadef-6677">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Poststed til oppgavegiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">7</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="6677" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst35-repformat-3">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="35"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverFodselsnummer-datadef-26">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Fødselsnummer til oppgavegiveren</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst1111Modulus11-repformat-18">
+                    <xs:attribute fixed="26" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst1111Modulus11-repformat-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">18</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="11"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="Kontaktinformasjon-grp-5860">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Kontaktinformasjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Fyll inn navn og e-postadresse på den likningskontoret kan kontakte i  forbindelse med saksbehandlingen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Kontaktinformasjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Sett inn namn og e-postadresse på den som likningskontoret kan kotakte  i samband med saksbehandlinga.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="KontaktpersonNavn-datadef-2">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KontaktpersonEPost-datadef-2876">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>e-postadresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>e-postadresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5860" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KontaktpersonNavn-datadef-2">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst150-repformat-13">
+                    <xs:attribute fixed="2" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst150-repformat-13">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">13</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="150"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="KontaktpersonEPost-datadef-2876">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Kontaktpersonens epostadresse</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst100-repformat-48">
+                    <xs:attribute fixed="2876" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst100-repformat-48">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">48</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="Klagefrist-grp-5861">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Klagefrist</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Klagefrist</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="KlagemeldingSendtInnenKlagefrist-datadef-25454">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Klagen er levert innen klagefristen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Leveres klagen innen klagefristen?  </p>
+                                <p/>
+                                <p>Klagefristen er tre uker etter at utleggingen er kunngjort. For de som  får skatteoppgjør i juni er likevel fristen 10. august. Er  klagefristen oversittet, har du ikke rett til å få klagen behandlet.  Du kan anmode
+                                    likningskontoret om å likevel behandle klagen. En slik  anmodning skal begrunnes (se under)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Klaga er levert innen klagefristen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Er klaga levert innen fristen?  </p>
+                                <p/>
+                                <p>Klagefristen er tre veker etter at utlegginga er kunngjort. For dei  som får skatteoppgjeret i juni er likevel fristen 10. august. Har  klagefristen gått ut, kan du likevel oppmode likningskontoret om å  behandle
+                                    klaga. Ei slik oppmodning skal grunngjevas (sjå under)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KlageGjeldendeInntektsar-datadef-25455">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Klagen/anmodningen om endring gjelder inntektsåret:</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Gjelder klagen andre inntektsår enn 2005 er klagefristen oversittet og  du har ikke rett til å få klagen behandlet. Klagen blir i stedet  ansett som en anmodning om å endre likningen for dette aktuelle
+                                    inntektsåret.  </p>
+                                <p/>
+                                <p>Gjelder klagen/anmodningen flere inntektsår, er det tilstrekkelig å  opplyse om det siste av inntektsårene. Det må imidlertid gå klart  frem av begrunnelsen hvilke inntektsår klagen/anmodningen gjelder.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Klaga/oppmodinga om endring gjeld inntektsåret:</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Gjeld klaga andre inntektsår enn 2005 er klagefristen utløpt og du har  ikkje rett til å få klaga behandla. Klaga blir i staden behandla som  ei oppmoding om å endre likninga for det aktuelle inntektsåret.  </p>
+                                <p/>
+                                <p>Gjeld klaga/oppmodinga fleire inntektsår, er det nok å sette inn det  siste av inntektsårane. Det må imidlertid gå klart fram av  grunngjevinga kva for inntektsår klaga/oppmodinga gjeld.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KlageUtloptKlagefristBegrunnelse-datadef-25456">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Gi begrunnelse for at likningskontoret skal behandle klagen selv om  klagefristen er oversittet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Er klagefristen oversittet har du ikke rett til å få klagen behandlet.  Det samme gjelder om likningen er fastsatt ved skjønn etter  ligningsloven § 8-2.  </p>
+                                <p/>
+                                <p>Du kan anmode likningkontoret om likevel å behandle klagen. En slik  anmodning skal begrunnes. Ved vurderingen om klagen skal behandles  skal det blant annet tas hensyn til spørsmålets betydning, skattyters
+                                    forhold, sakens opplysnng og den tid som er gått.  </p>
+                                <p/>
+                                <p>Inneholder begrunnelsen mer enn 1 000 tegn, må begrunnelsen leveres  som vedlegg.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>NB! Inneholder begrunnelsen sensitive opplysninger (f. eks. om sykdom)  må klagen sendes i eget brev til likningskontoret.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Grunngje kvifor likningskontoret skal behandle klaga sjølv om  klagefristen er utløypt.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Er klagfristen utløpt har du ikkje rett til å få klaga behandla. Det  same gjeld om likninga er fastsett ved skjønn etter ligningsloven §  8-2.  </p>
+                                <p/>
+                                <p>Du kan oppmode likningskontoret om å likevel behandle klaga. Ei slik  oppmoding skal grunngjevas. Ved vurderinga om klaga skal behandlast  skal ein mellom anna ta omsyn til spørsmålet si betydning,  skattytaren sine
+                                    forhold, opplysning av saka og den tida som har  gått.  </p>
+                                <p/>
+                                <p>Inneheld grunngjevinga meir enn 1 000 tekn, må ho leverast på eige  vedlegg.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>NB! Inneheld grunngjevinga sensitive opplysningar (t.d om sjukdom) må  klaga sendast i eige brev til likningskontoret</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5861" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KlagemeldingSendtInnenKlagefrist-datadef-25454">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Om klage er sendt innen klagefristen.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">10</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+                    <xs:attribute fixed="25454" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg2JaNei-repformat-4">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="3"/>
+            <xs:enumeration value="Ja">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Yes</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Ja</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Ja</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Nei">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>No</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Nei</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Nei</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="KlageGjeldendeInntektsar-datadef-25455">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Inntektsåret klagen gjelder for.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">11</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Ar44-repformat-6">
+                    <xs:attribute fixed="25455" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Ar44-repformat-6">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:gYear"/>
+    </xs:simpleType>
+    <xs:element name="KlageUtloptKlagefristBegrunnelse-datadef-25456">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Begrunnelse for klage.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">12</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst1000-repformat-77">
+                    <xs:attribute fixed="25456" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst1000-repformat-77">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">77</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="1000"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="Klage-grp-5855">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Klage på likningen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Klage på likninga</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="spesifisering-grp-5862"/>
+                <xs:element minOccurs="0" ref="begrunnelse-grp-5863"/>
+            </xs:sequence>
+            <xs:attribute fixed="5855" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="spesifisering-grp-5862">
+        <xs:annotation/>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="KlageSpesifisering-datadef-25457">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Hva påklages?</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her må du angi hva som påklages (for eksempel post i selvangivelsen).  Det kan være at en inntekt er satt for høyt eller et manglende  fradrag. Du må samtidig ta med en konkret påstand, for eksempel oppgi  det
+                                    beløpet på den aktuelle posten som du mener er korrekt.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Spesifiser hva (for eksempel hvilke poster) klagen gjelder</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Kva gjeld klaga?</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her skal du oppgje kva som påklagast (t.d. post i sjølvmeldinga). Det  kan til dømes vere at ei inntekt er satt for høgt eller eit manglande  frådrag. Du må samstundes fremme ein konkret påstand, til dømes det
+                                    beløp på den aktuelle posten som du meiner er rett.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Spesifiser kva (t.d kva postar) klaga gjeld</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5862" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KlageSpesifisering-datadef-25457">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Spesifisering av hva det klages på.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">13</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst1000-repformat-77">
+                    <xs:attribute fixed="25457" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="begrunnelse-grp-5863">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Grunngjeving</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="KlageBegrunnelse-datadef-25458">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Begrunnelse for klagen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Det skal gå klart frem hva du mener er feil og begrunnelse for det.  Skatteoppgjøret viser de beløpene du selv har ført i selvangivelsen,  ved siden av de beløpene likningskontoret har lagt til grunn.  Kontroller at
+                                    beløpene stemmer (det kan være små differanser på grunn  av øreavrunding). Vær oppmerksom på at du må betale restskatten i  rett tid selv om du klager på likningen.  </p>
+                                <p/>
+                                <p>Du kan legge ved elektroniske vedlegg ved å trykke på arkfanen  Vedlegg, øverst til venstre i skjemaet. Merk vedleggene med  fødselsnummer. Inneholder begrunnelsen mer enn 1 000 tegn, må  begrunnelsen leveres som
+                                    vedlegg.  </p>
+                                <p/>
+                                <p>Klagen behandles av likningekontoret. Likningskontoret tar kontakt  dersom det trenger mer informasjon eller dokumentasjon. Forventet  saksbehandlingstid er ca tre måneder.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Alle klager skal begrunnes. Begrunnelsen må inneholde bestemte  påstander og redegjøre for de forhold som påstandene bygger på.  </p>
+                                <p/>
+                                <p>NB! Inneholder begrunnelsen sensitive opplysninger (f. eks. om sykdom)  må du sende begrunnelsen i eget brev til likningskontoret.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Grunngjeving for klaga</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Det skal gå klart frem kva du meiner er feil og ei grunngjeving for  det. Skatteoppgjeret viser dei beløpa du sjølv har ført i  sjølvmeldinga, ved sidan av dei beløpa likningskontoret har lagd til  grunn. Kontroller
+                                    at beløpa er riktige (det kan vere små skilnader på  grunn av øyreavrunding). Vær merksam på at du må betale restskatten i  rett tid sjølv om du klagar på likninga.  </p>
+                                <p/>
+                                <p/>
+                                <p>Du kan legge ved elektroniske vedlegg ved å trykke på arkfana Vedlegg,  øvst til venstre i skjema. Merk vedlegga med fødselsnummer. Inneheld  grunngjevinga meir enn 1 000 tekn, må ho leverast på eige vedlegg.  </p>
+                                <p/>
+                                <p>Klaga behandles av likningekontoret. Likningskontoret tek kontakt  dersom det treng meir informasjon eller dokumentasjon.  Saksbehandlingstida er ca tre måneder.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Alle klagar skal grunngevast. Grunngjevinga skal inneholde bestemte  påstander og redegjere for dei forholda påstandane byggjer på.  </p>
+                                <p/>
+                                <p>NB! Inneheld grunngjevinga sensitive opplysningar (t.d. om sjukdom) må  ho sendast i eige brev til likningskontoret.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EiendomNaringAnnenKommuneNavn-datadef-19785">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Klagen skal sendes likningskontoret i følgende kommune:</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Klagen skal sendast likningskontoret i følgande kommune:</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="EiendomNaringAnnenKommuneKommunenummerSpesifisertEiendomMv-datadef-17034"/>
+            </xs:sequence>
+            <xs:attribute fixed="5863" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KlageBegrunnelse-datadef-25458">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Begrunnelse for klage.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">14</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst1000-repformat-77">
+                    <xs:attribute fixed="25458" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EiendomNaringAnnenKommuneNavn-datadef-19785">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">1</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="19785" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EiendomNaringAnnenKommuneKommunenummerSpesifisertEiendomMv-datadef-17034">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">2</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="17034" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

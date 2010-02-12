@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1205: Aksjonærbidrag - beregning av underskudd</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-103-2930.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2565/Selskap-grp-2566/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2565/Selskap-grp-2566/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2565/Selskap-grp-2566/EnhetAdresse-datadef-15"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2565/Selskap-grp-2566/EnhetPostnummer-datadef-6673"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2565/Selskap-grp-2566/EnhetPoststed-datadef-6674"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1205 Aksjonærbidrag 2004 Beregning av underskudd</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Fylles ut av aksjeselskap eller allmennaksjeselskap som er nevnt i  skatteloven § 10-20. Lov/forskrifter er inntatt på side 2 av  rettledningen.  </p>
+                <p/>
+                <p>Særlig om bruken av fortegn i skjemaet, se rettledingen.  </p>
+                <p/>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i forskrift av 22. november  1999 nr. 1160 § 10-20-1.  </p>
+                <p/>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1205. For å  samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i Aksjonærbidrag 2004 Beregning av underskudd,  RF-1205, helt eller delvis bli
+                    benyttet også av andre offentlige  organer som har hjemmel til å innhente de samme opplysningene, jf.  lov om Oppgaveregisteret §§ 5 og 6. Opplysninger om evt. samordning  kan fås ved henvendelse til Oppgaveregisteret på telefon
+                    75 00 75 00,  eller Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Vedlegges selvangivelsen til selskapets hovedkontorkommune for  inntektsåret 2004.</p>
+            </xforms:hint>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1205 Aksjonærbidrag 2004 Utrekning av underskott</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Skal fyllast ut av aksjeselskap eller allmennaksjeselskap som er nemnt  i skattelova § 10-20. Lov/forskrifter er innteke på side 2 i  rettleiinga.  </p>
+                <p/>
+                <p>Særlig om bruk av forteikn i skjema, sjå rettleiinga.  </p>
+                <p/>
+                <p>Fastsett av Skattedirektoratet med heimel i forskrift av 22. november  1999 nr. 1160 § 10-20-1.  </p>
+                <p/>
+                <p>Andre offentlege organ sin bruk av opplysingar i RF-1205. For å  samordna og forenkla oppgåveinnleveringa frå næringslivet, kan  opplysingar som vert avgjeve i Aksjonærbidrag 2004 Utrekning av  underskott, RF-1205, heilt eller
+                    delvis bli nytta også av andre  offentlege organ som har heimel til å innhente dei same opplysingar,  jf. lov om Oppgåveregisteret §§ 5 og 6. Opplysingar om evt.  samordning kan ein få ved å vende seg til Oppgåveregisteret på
+                    telefon 75 00 75 00, eller Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NON">
+                <p>Skal leggjast ved sjølvmeldinga som blir levert til selskapet sin  hovudkontorkommune for inntektsåret 2004</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-2565">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2565/Likningskontor-grp-2567">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Likningskontor</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Likningskontor</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2565/Likningskontor-grp-2567/LigningskontorKommune-datadef-8464">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Til likningskontoret for (kommune)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Til likningskontoret for (kommune)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2565/Selskap-grp-2566">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Selskap</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Selskap</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2565/Selskap-grp-2566/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2565/Selskap-grp-2566/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2565/Selskap-grp-2566/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2565/Selskap-grp-2566/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2565/Selskap-grp-2566/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2565/Selskap-grp-2566/AksjonarbidragUnderskuddAksjonarer-datadef-2297">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall aksjonærer som har innbetalt bidrag til dekning av underskudd i  2003</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Talet på aksjonærar som har betalt inn bidrag til dekning av  underskott i 2003</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2565/Selskap-grp-2566/AksjonarbidragUnderskuddAksjonarerAdgang-datadef-2298">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Samlet antall aksonærer med adgang til å dekke underskudd i 2003 med  innbetaling av bidrag</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Samla tal på aksjonærar med høve til å dekkje underskott i 2003 med  innbetaling av bidrag</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2565/Regnskapsforer-grp-2568">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Regnskapsfører</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Rekneskapsførar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2565/Regnskapsforer-grp-2568/RegnskapsforerNavn-datadef-280">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2565/Regnskapsforer-grp-2568/RegnskapsforerAdresse-datadef-281">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2565/Regnskapsforer-grp-2568/RegnskapsforerPostnummer-datadef-6678">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2565/Regnskapsforer-grp-2568/RegnskapsforerPoststed-datadef-6679">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/BeregningAvUnderskudd-grp-375">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Beregning av underskudd</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Utrekning av underskott</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/BeregningAvUnderskudd-grp-375/BeregningAvUnderskuddFraInntektsaretTilFordelingPaAksjene-grp-2572">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1 Beregning av underskudd i 2004 til fordeling på aksjene</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1 Utrekning av underskott i 2004 til fordeling på aksjane</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/BeregningAvUnderskudd-grp-375/BeregningAvUnderskuddFraInntektsaretTilFordelingPaAksjene-grp-2572/UnderskuddSkatteligningen-datadef-19468">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1.1 Underskudd ved skattelikningen i 2004</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Overføres fra Selvangivelse for aksjeselskap mv., post 231</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>1.1 Underskott ved skattelikninga i 2004</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Før over frå Sjølvmelding for aksjeselskap m.m., post 231</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvUnderskudd-grp-375/BeregningAvUnderskuddFraInntektsaretTilFordelingPaAksjene-grp-2572/AksjonarbidragAksjonarMottatt-datadef-16031">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1.2 a Aksjonærbidrag mottatt i 2004</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>1.2 a Aksjonærbidrag motteke i 2004</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvUnderskudd-grp-375/BeregningAvUnderskuddFraInntektsaretTilFordelingPaAksjene-grp-2572/AksjonarbidragUnderskuddFjoraret-datadef-11990">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1.2  b Herav til dekning av underskudd i 2003</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Jf. selvangivelsen for 2003, post 231</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>1.2 b Av dette til dekning av underskott i 2003</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Jf. sjølvmeldinga for 2003, post 231</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvUnderskudd-grp-375/BeregningAvUnderskuddFraInntektsaretTilFordelingPaAksjene-grp-2572/AksjonarbidragUnderskudd-datadef-2299">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1.2 c Mottatt aksjonærbidrag til dekning av underskudd i 2004</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>1.2 c Motteke aksjonærbidrag til dekning av underskott i 2004</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvUnderskudd-grp-375/BeregningAvUnderskuddFraInntektsaretTilFordelingPaAksjene-grp-2572/UnderskuddTilFordeling-datadef-1158">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1.3 Beregnet underskudd i 2004 til fordeling på aksjene</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>1.3 Utrekna underskott i 2004 til fordeling på aksjane</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/BeregningAvUnderskudd-grp-375/AvregningAvUnderskuddFraFjoraretsInntektsar-grp-2573">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2 Avregning av underskudd i 2003</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2 Avrekning av underskott i 2003</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/BeregningAvUnderskudd-grp-375/AvregningAvUnderskuddFraFjoraretsInntektsar-grp-2573/InntektForFradragUnderskuddFjoraret-datadef-11991">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.1 Underskudd i 2003</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Overføres fra Selvangivelse for aksjeselskap mv. for 2003 post 231</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>2.1 Underskott i 2003</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Før over frå sjølvmeldinga for 2003, post 231</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvUnderskudd-grp-375/AvregningAvUnderskuddFraFjoraretsInntektsar-grp-2573/UnderskuddFramfortFjoraret-datadef-11993">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.3 Underskudd til fremføring</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Overføres selvangivelsen for aksjeselskap mv., kolonne merket  romertall I for 2003</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>2.3 Underskott til framføring</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Før over til Sjølvmelding for aksjeselskap m.m., kolonne merka  romertall I for år 2003</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

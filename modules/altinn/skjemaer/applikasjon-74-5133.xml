@@ -1,0 +1,1371 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1122: Tilleggsskj for overnatt/serv.sted som serverer øl/vin/brennevin</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-74-5134.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-979/Avgiver-grp-329/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-979/Avgiver-grp-329/OppgavegiverFodselsnummer-datadef-26"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1122 Tilleggsskjema for overnattings- og serveringssteder som  serverer øl, vin og brennevin 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Skjemaet skal leveres ukrevet som vedlegg til næringsoppgaven for alle  skattytere som driver overnattings- eller serveringssted og som  serverer øl, vin og brennevin. Dersom skattyter driver flere  virksomheter, skal det fylles ut
+                    et skjema for hver virksomhet.  </p>
+                <p/>
+                <p>Dersom fyllestgjørende svar av ulike grunner ikke vil fremgå av de  enkelte svarrubrikker, må ytterligere opplysninger gis i eget vedlegg  sammen med skjemaet.  </p>
+                <p/>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. november 1994, jf. ligningsloven § 4-4 nr.  7.  </p>
+                <p/>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1122  </p>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i Tilleggsskjema for overnattings- og  serveringssteder som serverer øl, vin og brennevin, RF-1122, helt  eller delvis bli benyttet også
+                    av andre offentlige organer som har  hjemmel til å innhente de samme opplysningene, jf. lov om  Oppgaveregisteret §§ 5 og 6. Opplysninger om evt. samordning kan fås  ved henvendelse til Oppgaveregisteret på telefon 75 00 75 00,
+                    eller  Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1122 Tilleggsskjema for overnattings- og serveringsstader som  serverer øl, vin og brennevin 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Skjemaet skal leverast som vedlegg til næringsoppgåva for alle  skattytarar som driv overnattings- eller serveringsstad, og som  serverer øl, vin og brennevin. Dersom skattytar driv fleire  verksemder, skal han/ho fylle ut eitt
+                    skjema for kvar verksemd.  </p>
+                <p/>
+                <p>Dersom fullstendige svar av ulike grunnar ikkje går fram av dei  einskilde svarrubrikkane, må ein gi ytterlegare opplysninga i eige  vedlegg samen med skjemaet.  </p>
+                <p/>
+                <p>Fastsett av Skattedirektoratet med heimel i Finansdepartementet sitt  delegeringsvedtak av 28. november 1994, jf. likningslova § 4-4 nr.  7.  </p>
+                <p/>
+                <p>Andre offentlege organs bruk av opplysningar i RF-1122  </p>
+                <p>For å samordne og forenkle oppgåveinnleveringa frå næringslivet kan  opplysningar som blir gitt i Tilleggsskjema for overnattings- og  serveringsstader som serverer øl, vin og brennevin, RF-1122, heilt  eller delvis brukast også av
+                    andre offentlege organ som har heimel  til å hente inn dei same opplysningane, jf. lov om Oppgaveregisteret  §§ 5 og 6. Opplysningar om ev. samordning kan ein få ved å vende seg  til Oppgaveregisteret på telefon 75 00 75 00, eller
+                    Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-979">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-979/Avgiver-grp-329">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Avgiver</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Avgivar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-979/Avgiver-grp-329/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-979/Avgiver-grp-329/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-979/Avgiver-grp-329/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-979/Avgiver-grp-329/ServeringsstedAdresse-datadef-23040">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Serveringstedets adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Servereringsstadens adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-979/Avgiver-grp-329/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-979/Avgiver-grp-329/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Varer-grp-330">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>1 Spesifikasjon av varebeholdning, varekjøp mv.</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>1 Spesifikasjon av varelager, varekjøp o.a.</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Varer-grp-330/Vareart-grp-2282">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Vareart</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Vareart</p>
+                    </xforms:caption>
+                    <xforms:group ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Matvarer-grp-2474">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Matvarer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Matvarer</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Matvarer-grp-2474/LagerbeholdningMatvarerFjoraret-datadef-8160">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebeholdning pr. 1.1</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varelager pr. 1.1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Matvarer-grp-2474/VarekjopMatvarer-datadef-8161">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varekjøp</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varekjøp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Matvarer-grp-2474/LagerbeholdningMatvarer-datadef-8162">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebeholdning pr. 31.12</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varelager pr. 31.12</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Matvarer-grp-2474/InntakskostMatvarerSolgte-datadef-8163">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Solgte varers inntakskost</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inntakskost på selde varer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Matvarer-grp-2474/SalgMatvarer-datadef-8164">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Salg ekskl. mva.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sal ekskl. mva.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Matvarer-grp-2474/FortjenesteMatvarerBrutto-datadef-1913">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bruttofortjeneste</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Bruttoforteneste</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/Varer-grp-330/Vareart-grp-2282/TobakkSigaretterMv-grp-2475">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tobakk, sigaretter mv.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Tobakk, sigarettar o.a.</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/TobakkSigaretterMv-grp-2475/LagerbeholdningTobakkSigaretterMvFjoraret-datadef-8165">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebeholdning pr. 1.1</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varelager pr. 1.1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/TobakkSigaretterMv-grp-2475/VarekjopTobakkSigaretterMv-datadef-8166">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varekjøp</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varekjøp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/TobakkSigaretterMv-grp-2475/LagerbeholdningTobakkSigaretterMv-datadef-8167">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebeholdning pr. 31.12</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varelager pr. 31.12</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/TobakkSigaretterMv-grp-2475/InntakskostTobakkSigaretterMvSolgte-datadef-8168">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Solgte varers inntakskost</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inntakskost på selde varer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/TobakkSigaretterMv-grp-2475/SalgTobakkSigaretterMv-datadef-8169">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Salg ekskl. mva.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sal ekskl. mva.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/TobakkSigaretterMv-grp-2475/FortjenesteTobakkSigaretterMvBrutto-datadef-8170">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bruttofortjeneste</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Bruttoforteneste</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/Varer-grp-330/Vareart-grp-2282/KaffeTe-grp-2476">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kaffe, te</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kaffi, te</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/KaffeTe-grp-2476/LagerbeholdningKaffeTeFjoraret-datadef-8171">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebeholdning pr. 1.1</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varelager pr. 1.1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/KaffeTe-grp-2476/VarekjopKaffeTe-datadef-8172">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varekjøp</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varekjøp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/KaffeTe-grp-2476/LagerbeholdningKaffeTe-datadef-8173">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebeholdning pr. 31.12</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varelager pr. 31.12</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/KaffeTe-grp-2476/InntakskostKaffeTeSolgte-datadef-8174">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Solgte varers inntakskost</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inntakskost på selde varer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/KaffeTe-grp-2476/SalgKaffeTe-datadef-8175">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Salg ekskl. mva.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sal ekskl. mva.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/KaffeTe-grp-2476/FortjenesteKaffeTeBrutto-datadef-8176">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bruttofortjeneste</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Bruttoforteneste</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Mineralvann-grp-2477">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Mineralvann</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Mineralvatn</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Mineralvann-grp-2477/LagerbeholdningMineralvannFjoraret-datadef-8177">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebeholdning pr. 1.1</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varelager pr. 1.1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Mineralvann-grp-2477/VarekjopMineralvann-datadef-8178">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varekjøp</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varekjøp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Mineralvann-grp-2477/LagerbeholdningMineralvann-datadef-8179">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebeholdning pr. 31.12</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varelager pr. 31.12</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Mineralvann-grp-2477/InntakskostMineralvannSolgte-datadef-8180">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Solgte varers inntakskost</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inntakskost på selde varer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Mineralvann-grp-2477/SalgMineralvann-datadef-8181">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Salg ekskl. mva.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sal ekskl. mva.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Mineralvann-grp-2477/FortjenesteMineralvannBrutto-datadef-8182">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bruttofortjeneste</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Bruttoforteneste</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/Varer-grp-330/Vareart-grp-2282/RusbrusCider-grp-4171">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Rusbrus/Cider</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Rusbrus/Cider</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/RusbrusCider-grp-4171/LagerbeholdningRusbrusCiderFjoraret-datadef-19672">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebeholdning pr. 1.1</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varelager pr. 1.1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/RusbrusCider-grp-4171/VarekjopRusbrusCider-datadef-19673">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varekjøp</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varekjøp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/RusbrusCider-grp-4171/LagerbeholdningRusbrusCider-datadef-19674">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebeholdning pr. 31.12</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varelager pr. 31.12</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/RusbrusCider-grp-4171/InntakskostRusbrusCiderSolgte-datadef-19675">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Solgte varers inntakskost</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inntakskost på selde varer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/RusbrusCider-grp-4171/SalgRusbrusCider-datadef-19676">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Salg ekskl. mva.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sal ekskl. mva.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/RusbrusCider-grp-4171/FortjenesteRusbrusCiderBrutto-datadef-19677">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bruttofortjeneste</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Bruttoforteneste</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Ol-grp-2478">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Øl</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Øl</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Ol-grp-2478/LagerbeholdningOlFjoraret-datadef-8183">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebeholdning pr. 1.1</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varelager pr. 1.1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Ol-grp-2478/VarekjopOl-datadef-8184">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varekjøp</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varekjøp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Ol-grp-2478/LagerbeholdningOl-datadef-8185">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebeholdning pr. 31.12</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varelager pr. 31.12</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Ol-grp-2478/InntakskostOlSolgte-datadef-8186">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Solgte varers inntakskost</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inntakskost på selde varer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Ol-grp-2478/SalgOl-datadef-8187">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Salg ekskl. mva.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sal ekskl. mva.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Ol-grp-2478/FortjenesteOlBrutto-datadef-8188">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bruttofortjeneste</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Bruttoforteneste</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Vin-grp-2479">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Vin</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Vin</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Vin-grp-2479/LagerbeholdningVinFjoraret-datadef-8189">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebeholdning pr. 1.1</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varelager pr. 1.1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Vin-grp-2479/VarekjopVin-datadef-8190">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varekjøp</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varekjøp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Vin-grp-2479/LagerbeholdningVin-datadef-8191">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebeholdning pr. 31.12</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varelager pr. 31.12</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Vin-grp-2479/InntakskostVinSolgte-datadef-8192">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Solgte varers inntakskost</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inntakskost på selde varer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Vin-grp-2479/SalgVin-datadef-8193">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Salg ekskl. mva.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sal ekskl. mva.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Vin-grp-2479/FortjenesteVinBrutto-datadef-8194">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bruttofortjeneste</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Bruttoforteneste</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Brennevin-grp-2480">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Brennevin</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Brennevin</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Brennevin-grp-2480/LagerbeholdningBrennevinFjoraret-datadef-8195">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebeholdning pr. 1.1</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varelager pr. 1.1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Brennevin-grp-2480/VarekjopBrennevin-datadef-8196">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varekjøp</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varekjøp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Brennevin-grp-2480/LagerbeholdningBrennevin-datadef-8197">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebeholdning pr. 31.12</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varelager pr. 31.12</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Brennevin-grp-2480/InntakskostBrennevinSolgte-datadef-8198">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Solgte varers inntakskost</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inntakskost på selde varer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Brennevin-grp-2480/SalgBrennevin-datadef-8199">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Salg ekskl. mva.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sal ekskl. mva.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Brennevin-grp-2480/FortjenesteBrennevinBrutto-datadef-8200">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bruttofortjeneste</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Bruttoforteneste</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/Varer-grp-330/Vareart-grp-2282/AndreVarer-grp-2481">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Andre varer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Andre varer</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/AndreVarer-grp-2481/LagerbeholdningVarerAndreFjoraret-datadef-8201">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebeholdning pr. 1.1</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varelager pr. 1.1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/AndreVarer-grp-2481/VarekjopVarerAndre-datadef-8202">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varekjøp</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varekjøp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/AndreVarer-grp-2481/LagerbeholdningVarerAndre-datadef-8203">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebeholdning pr. 31.12</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varelager pr. 31.12</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/AndreVarer-grp-2481/InntakskostVarerAndreSolgte-datadef-8204">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Solgte varers inntakskost</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inntakskost på selde varer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/AndreVarer-grp-2481/SalgVarerAndre-datadef-8205">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Salg ekskl. mva.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sal ekskl. mva.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/AndreVarer-grp-2481/FortjenesteVarerAndreBrutto-datadef-8206">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bruttofortjeneste</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Bruttoforteneste</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Sum-grp-2482">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Sum-grp-2482/LagerbeholdningFjoraretSkattemessig-datadef-8207">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum varebeholdning pr. 1.1</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum varelager pr. 1.1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Sum-grp-2482/Varekjop-datadef-8208">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum varekjøp</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum varekjøp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Sum-grp-2482/LagerbeholdningSkattemessig-datadef-1909">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum varebeholdning pr. 31.12</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum varelager pr. 31.12</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Sum-grp-2482/InntakskostVarerSolgte-datadef-1910">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum solgte varers inntakskost</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum inntakskost på selde varer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Sum-grp-2482/SalgVarer-datadef-1911">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum salg ekskl. mva.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum sal ekskl. mva.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Varer-grp-330/Vareart-grp-2282/Sum-grp-2482/FortjenesteBrutto-datadef-1912">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum bruttofortjeneste</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum bruttoforteneste</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/AndreInntekter-grp-2324">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>2 Legitimasjon av omsetning, garderobeinntekter og cover charge</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>2 Legitimasjon av omsetninga, garderobeinntekter og cover charge</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/AndreInntekter-grp-2324/Inntektstype-grp-2484">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Inntektstype</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Sum av inntekter (avgiftspliktig omsetning angis eksklusive  merverdiavgift)</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Inntektstype</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Sum inntekter (avgiftspliktig omsetning skal førast opp eksklusive  meirverdiavgift)</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/AndreInntekter-grp-2324/Inntektstype-grp-2484/OmsetningLosji-datadef-764">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Overnatting</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Overnatting</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AndreInntekter-grp-2324/Inntektstype-grp-2484/Garderobeinntekter-datadef-1933">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Garderobeinntekter</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Garderobeinntekter</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:group ref="/Skjema/AndreInntekter-grp-2324/Inntektstype-grp-2484/CoverCharge-grp-2485">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Cover charge</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Cover charge</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/AndreInntekter-grp-2324/Inntektstype-grp-2484/CoverCharge-grp-2485/CoverChargeAvgiftspliktig-datadef-1935">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Avgiftspliktig</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Avgiftspliktig</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AndreInntekter-grp-2324/Inntektstype-grp-2484/CoverCharge-grp-2485/CoverChargeAvgiftsfri-datadef-8221">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Avgiftsfri</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Avgiftsfri</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SpilleinntekterFraAutomaterMv-grp-340">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>3 Spilleinntekter fra automater mv.</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>3 Speleinntekter frå automatar o.a.</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/SpilleinntekterFraAutomaterMv-grp-340/Spilleautomater-datadef-1928">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Finnes det spilleautomater i lokalene?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Finst det speleautomatar i lokala?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:group ref="/Skjema/SpilleinntekterFraAutomaterMv-grp-340/Eier-grp-4172">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Eier</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Eigar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SpilleinntekterFraAutomaterMv-grp-340/Eier-grp-4172/SpilleautomaterEierNavn-datadef-1929">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpilleinntekterFraAutomaterMv-grp-340/Eier-grp-4172/SpilleautomaterEierAdresse-datadef-1930">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpilleinntekterFraAutomaterMv-grp-340/Eier-grp-4172/SpilleautomaterEierPostnummer-datadef-8209">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpilleinntekterFraAutomaterMv-grp-340/Eier-grp-4172/SpilleautomaterEierPoststed-datadef-8210">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SpilleinntekterFraAutomaterMv-grp-340/AndelAvSpilleinntekterVirksomhetens-grp-4173">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Virksomhetens andel av spilleinntekter</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Verksemda sin andel av speleinntekter</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SpilleinntekterFraAutomaterMv-grp-340/AndelAvSpilleinntekterVirksomhetens-grp-4173/SpilleautomaterInntektProsent-datadef-1931">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>I prosent</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>I prosent</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpilleinntekterFraAutomaterMv-grp-340/AndelAvSpilleinntekterVirksomhetens-grp-4173/OmsetningSpilleautomater-datadef-1932">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>I kroner</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>I kroner</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/KostTilPersonalet-grp-336">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>4 Kost til personalet</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Herunder kost til daglig leder, styre og aksjonærer</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>4 Kost til personalet</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NON">
+                    <p>Også kost til dagleg leiar, styre og aksjonærar</p>
+                </xforms:hint>
+                <xforms:selectOne ref="/Skjema/KostTilPersonalet-grp-336/FriKostAnsatte-datadef-1914">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Har noen av personalet fri kost?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Har nokon av personalet fri kost?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/KostTilPersonalet-grp-336/FriKostAntall-datadef-1915">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Hvis Ja, hvor mange?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Dersom ja, kor mange?</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KostTilPersonalet-grp-336/FriKostPersonalkontoUttaksverdi-datadef-1916">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgi personalkontoens samlede uttaksverdi (inkl. mva.)</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>I kroner</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Gi opp samla uttaksverdi på personalkontoen (inkl. mva.)</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>I kronar</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/KostTilPersonalet-grp-336/FriKostSkattedirektoratetsTakseringsregler-datadef-1917">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Brukes satsene i Skattedirektoratets takseringsregler?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Blir satsane i Skattedirektoratet sine takseringsreglar nytta?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/KostTilPersonalet-grp-336/FriKostPaslag-datadef-1918">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Hvis nei, oppgi hvilke påslag i prosent som benyttes</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Dersom nei, gi opp kor stort påslag i prosent som blir nytta</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/PrivatUttakAvVarer-grp-337">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>5 Privat uttak av varer</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>5 Privat uttak av varer</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/PrivatUttakAvVarer-grp-337/UttakVarerOmsetningsverdi-datadef-1919">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Er alminnelig omsetningsverdi brukt ved verdsettelsen av varer uttatt  til privat bruk?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Er vanleg omsetjingsverdi brukt ved verdsetjinga av varer som er tekne  ut til privat bruk?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/PrivatUttakAvVarer-grp-337/UttakVarerPaslag-datadef-1920">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Hvis nei, oppgi påslag i prosent som er benyttet</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Dersom nei, kor stort påslag i prosent er nytta?</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/PrivatUttakAvVarer-grp-337/UttakVarerInntektsfort-datadef-1921">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Er beløpet inntektsført og belastet privat konto?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Er beløpet ført som inntekt og belasta privatkontoen?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/PrivatUttakAvVarer-grp-337/UttakVarerRegistrert-datadef-1922">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Er beløpene registrert i særskilt bok eller lignende system for hvert  uttak?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Er beløpa registrerte i særskild bok eller liknande system for kvart  uttak?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/PrivatUttakAvVarer-grp-337/UttakVarer-datadef-1923">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgi samlet verdi på uttak av varer til privat bruk som er ført på  salgskonto (inkl. mva.)</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Gi opp samla verdi på uttak av varer til privat bruk som er førte på  salskonto (inkl. mva.)</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Representasjon-grp-339">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>6 Representasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>6 Representasjon</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/Representasjon-grp-339/UttakRepresentasjonOmsetningsverdi-datadef-1924">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Hvis det er foretatt uttak til representasjon, er alminnelig  omsetningsverdi brukt ved beregning av uttaksverdien?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Dersom det er gjort uttak til representasjon, er i så fall vanleg  omsetjingsverdi nytta ved fastsetjinga av uttaksverdien?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/Representasjon-grp-339/UttakRepresentasjonPaslag-datadef-1925">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Hvis nei, oppgi hvilket påslag i prosent som er benyttet</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Dersom nei, kor stort påslag i prosent er nytta?</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Representasjon-grp-339/UttakRepresentasjon-datadef-1926">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Samlet uttaksverdi til representasjon føres her (inkl. mva.)</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Samla beløp for uttak til representasjon skal førast her (inkl. mva.)</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

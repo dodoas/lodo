@@ -1,0 +1,1062 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--title='NB-0002: Valutahandelsstatistikk' lang='NOB'-->
+    <xs:element name="Skjema">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                    <p>NB-0002 Valutahandelstatistikk</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>NB-0002 Valutahandelsstatistikk</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GenerellInformasjon-grp-5239"/>
+            </xs:sequence>
+            <xs:attribute fixed="1047" name="skjemanummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="5522" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="NB-0002" name="blankettnummer" type="xs:string" use="optional"/>
+            <xs:attribute fixed="Valutahandelsstatistikk" name="tittel" type="xs:string" use="optional"/>
+            <xs:attribute fixed="5238" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+            <xs:attribute name="etatid" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="937884117">
+                            <xs:annotation>
+                                <xs:documentation>NORGES BANK</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:anyAttribute/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GenerellInformasjon-grp-5239">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                    <p>Generell informasjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Generell informasjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Rapporteringsenhet-grp-5240"/>
+                <xs:element maxOccurs="1000" minOccurs="0" ref="Valutahandel-grp-5241"/>
+            </xs:sequence>
+            <xs:attribute fixed="5239" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Rapporteringsenhet-grp-5240">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                    <p>Rapporteringsenhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Rapporteringsenhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="EnhetOrganisasjonsnummer-datadef-18">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Avsender</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Avsenders organisasjonsnummer. D - nummer (tildeles) hvis utenlands  enhet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Avsender</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Avsenders organisasjonsnummer. D - nummer (tildeles) hvis utenlands  enhet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="AvgiverRapportorOrganisasjonsnummer-datadef-23221">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                                <p>The organization number of the unit which the data apply, i.e the  dummy number for foreign banks without a Norwegian branch. Foreign  bank with a Norwegian branch/subsidiary should use the organization  number of
+                                    the Norwegian unit.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Rapportør</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Rapportørens organisasjonsnummer, D - nummer hvis utenlandsk  rapportør, norsk filials organisasjonsnummer hvis tilleggsrapport fra  utenlandsk hovedkontor/filial.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Rapportør</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="InnsendelseDato-datadef-22420">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                                <p>Delivery date.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Dato for innsendingen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Dato for innsending.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Dato for innsendingen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5240" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EnhetOrganisasjonsnummer-datadef-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummeret til enheten</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Organisasjonsnummer til årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">1</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="18" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst99Modulus11-repformat-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">1</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="AvgiverRapportorOrganisasjonsnummer-datadef-23221">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Rapportørens organisasjonsnummer.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">2</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="23221" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InnsendelseDato-datadef-22420">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Dato-repformat-5">
+                    <xs:attribute fixed="22420" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Dato-repformat-5">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">5</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:date"/>
+    </xs:simpleType>
+    <xs:element name="Valutahandel-grp-5241">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                    <p>Valutahandel</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="HINT">
+                    <p>The fields below can be used to report corrections, or as an  alternativ to send the report via attachment.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Valutahandel</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Feltene nedenfor kan benyttes ved innsendelse av korreksjon, eller som  et alternativ til å sende inn rapporten via vedlegg.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="TransaksjonDato-datadef-3233">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Dato tallene gjelder for</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Dato tallene gjelder for</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ValutahandelDatatype-datadef-23222">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                                <p>When reporting corrections it is important that data is stated as the  change (+/-) to the previous delivered numbers.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Datatype</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Ved innsendelse av korreksjoner er det viktig at tallene leveres som  endringer (+/-) til de tidligere innleverte tallene.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Datatype</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="VaultahandelHandelstype-datadef-23223">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Handelstype</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Handelstype</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ValutahandelKontraktstype-datadef-23224">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Kontraktstype</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Kontraktstype</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ValutahandelMotpart-datadef-23225">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Motpart</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Motpart</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ValutahandelValuta-datadef-23226">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Valuta</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Valuta</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ValutahandelAntallHandler-datadef-23227">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Antall handler</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Antall handler</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ValutahandelBelop-datadef-23228">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ValutahandelDeltaverdi-datadef-23229">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Deltaverdi</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Deltaverdi</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5241" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="TransaksjonDato-datadef-3233">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Dator for transaksjonen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Dato-repformat-5">
+                    <xs:attribute fixed="3233" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ValutahandelDatatype-datadef-23222">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">5</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg2Datatype-repformat-336">
+                    <xs:attribute fixed="23222" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg2Datatype-repformat-336">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">336</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="1"/>
+            <xs:enumeration value="O">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Ordinary delivery</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Ordinær leveranse</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="K">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Correction</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Korrigering</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="VaultahandelHandelstype-datadef-23223">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg2Handelstype-repformat-337">
+                    <xs:attribute fixed="23223" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg2Handelstype-repformat-337">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">337</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="1"/>
+            <xs:enumeration value="K">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Purchase</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Kjøp</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="S">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Sale</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Salg</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="ValutahandelKontraktstype-datadef-23224">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">7</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg16Kontraktstype-repformat-338">
+                    <xs:attribute fixed="23224" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg16Kontraktstype-repformat-338">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">338</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="2"/>
+            <xs:maxLength value="6"/>
+            <xs:enumeration value="SPOT">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Spot</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Spot</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="T0d1d">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Outright forward - 0 days to 1 day</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Termin - 0 tom 1 dag</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="T3d3m">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Outright forward - 3 days to 3 months</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Termin - 3 dg tom 3 mnd</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="T3m6m">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Outright forward - 3 months to 6 months</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Termin - 3 mnd tom 6 mnd</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="T6m12m">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Outright forward - 6 months to 12 months</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Termin - 6 mnd tom 12 mnd</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="TY2">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Outright forward - 1 year to 2 years</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Termin - 12 mnd tom 2 år</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="TREST">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Outright forward - Over 2 years</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Termin - over 2 år</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="S0d2d">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Swap - 0 days to 2 days</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Swap - 0 tom 2 dager</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="S3d3m">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Swap - 3 days to 3 months</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Swap - 3 dg tom 3 mnd</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="S3m6m">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Swap - 3 months to 6 months</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Swap - 3 mnd tom 6 mnd</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="S6m12m">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Swap - 6 months to 12 months</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Swap - 6 mnd tom 12 mnd</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SY2">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Swap - 1 year to 2 years</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Swap - 12 mnd tom 2 år</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SREST">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Swap - Over 2 years</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Swap - over 2 år</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="OP">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Options - put</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Opsjon - Put</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="OC">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Options - call</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Opsjon - Call</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="OR">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Options - others</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Opsjon - Rest</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="ValutahandelMotpart-datadef-23225">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg10MotpartValutahandel-repformat-339">
+                    <xs:attribute fixed="23225" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg10MotpartValutahandel-repformat-339">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">339</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="4"/>
+            <xs:enumeration value="BARB">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Other reporting banks</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Andre rapportørbanker</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BAUT">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Other foreign banks</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Andre utenlandske banker</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BANO">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Other Norwegian banks</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Andre norske banker</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="FSNO">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Other Norwegian financial clients</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Andre norske kunder i finansiell sektor</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="OSNO">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Norwegian oil companies</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Oljeselskaper</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="IFNO">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Norwegian non-financial clients excluding oil companies</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Norske ikke-finansielle kunder ekskl. oljeselskapene</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="FSUT">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Other foreign financial clients</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Utenlandske kunder i finansiell sektor ellers</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="IFUT">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Foreign non-financial clients</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Utenlandske ikke-finansielle kunder</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NBNO">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Norges Bank</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Norges Bank</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="INTR">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Internal trade</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Internhandel</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="ValutahandelValuta-datadef-23226">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg3ValutaEURNOKUSDNOKAndeNOK-repformat-340">
+                    <xs:attribute fixed="23226" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg3ValutaEURNOKUSDNOKAndeNOK-repformat-340">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">340</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="3"/>
+            <xs:enumeration value="EUR">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>EURNOK, measured in EUR</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>EURNOK, målt i EUR</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="USD">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>USDNOK, measured in USD</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>USDNOK, målt i USD</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NOK">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>AndreNOK, measured in NOK</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>AndreNOK, målt i NOK</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="ValutahandelAntallHandler-datadef-23227">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">10</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="23227" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Heltall15-repformat-79">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">79</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="ValutahandelBelop-datadef-23228">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">11</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="23228" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ValutahandelDeltaverdi-datadef-23229">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Forvented endringforhold mellom opsjonspris og kursen på den underliggende valuta.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">12</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="23229" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -1,0 +1,209 @@
+<?
+class NaeringsOppgave2
+{
+    var $_report;
+    var $_altinnMapping;
+    var $_generalReport;
+    var $_comanyInfo;
+
+    var $_sumLine;
+    var $_sumPart;
+    var $_sumGroup;
+    var $_sumTotal;
+    var $_total;
+
+    var $_fromPeriod;
+    var $_toPeriod;
+    var $_thisYear;
+    var $_lastYear;
+    var $_enableLastYear;
+
+    ##############################################################
+    #array('fromPeriod'=>'2004-01', 'toPeriod'=>'2004-12', 'enableLastYear'=>'1', 'report'=>'5')
+    function NaeringsOppgave2($args)
+    {
+        global $_SETUP, $_date, $_lib;
+        require_once $_SETUP['HOME_DIR']."/code/lodo/lib/altinnmapping.class";
+        includelogic('report/general');
+        includelogic('company/companyinfo');
+
+        $this->_enableLastYear = $args['enableLastYear'] = 1;
+        $this->_report = $args['report'] = 5;
+
+        $this->_altinnMapping = new AltinnMapping($this->_report);
+        $this->_generalReport = new GeneralReport(array($args));
+        $this->_comanyInfo = new ComanyInfo(array());
+
+        $this->_fromPeriod = $args['fromPeriod'];
+        $this->_toPeriod = $args['toPeriod'];
+        $this->_thisYear = $_lib['date']->get_this_year($args['fromPeriod']);
+        $this->_lastYear = $this->_thisYear-1;
+
+        //$this->_altinnMapping->NeringsOppgave2Mapping();
+        $this->BuildCompanyInfo();
+        list($this->_sumLine, $this->_sumPart, $this->_sumGroup, $this->_sumTotal, $this->_total) = $this->_generalReport->GetReport($args);
+        $this->InsertMapping();
+    }
+
+    ##############################################################
+    function BuildCompanyInfo()
+    {
+        global $_date, $_lib;
+        $lastDay = $_lib['date']->get_last_day_in_month($this->_toPeriod);
+        $this->setAccount('FromPeriod', $this->_fromPeriod.'-01');
+        $this->setAccount('ToPeriod', $lastDay);
+        $this->setAccount('VName', $this->_comanyInfo->CustomerCompany->VName);
+        $this->setAccount('VAddress', $this->_comanyInfo->CustomerCompany->VAddress);
+        $this->setAccount('VZipCode', $this->_comanyInfo->CustomerCompany->VZipCode);
+        $this->setAccount('VCity', $this->_comanyInfo->CustomerCompany->VCity);
+        //$this->setAccount('OrgNumber', $this->_comanyInfo->CustomerCompany->OrgNumber);
+        $this->setAccount('OrgNumber', str_replace(" ", "", $this->_comanyInfo->CustomerCompany->OrgNumber2));
+
+        $this->setAccount('KontaktPersonNavn', $this->_comanyInfo->CustomerPerson->FirstName . ' ' . $this->_comanyInfo->CustomerPerson->LastName);
+        $this->setAccount('KontaktPersonTelefon', $this->_comanyInfo->CustomerPerson->DirectPhone);
+
+//        $this->setAccount('FoundedYear', $this->IsFoundedThisYear($ComanyInfo->CustomerCompany->FoundedDate));
+        if ($this->IsFoundedThisYear($ComanyInfo->CustomerCompany->FoundedDate) > 0)
+        	$this->setAccount('FoundedYear', 'Ja');
+        else
+        	$this->setAccount('FoundedYear', 'Nei');
+        $this->setAccount('WorkAmount', $this->_comanyInfo->CalculateLabour($this->_fromPeriod, $this->_toPeriod));
+        $this->setAccount('Category', $this->_comanyInfo->CustomerCompany->Category);
+
+        //$this->setAccount('FOrgNumber', $this->_comanyInfo->RegnskapCompany->OrgNumber);
+        $this->setAccount('FOrgNumber', str_replace(" ", "", $this->_comanyInfo->RegnskapCompany->OrgNumber2));
+        $this->setAccount('FVName', $this->_comanyInfo->RegnskapCompany->VName);
+        $this->setAccount('FVAddress', $this->_comanyInfo->RegnskapCompany->VAddress);
+        $this->setAccount('FVZipCode', $this->_comanyInfo->RegnskapCompany->VZipCode);
+        $this->setAccount('FVCity', $this->_comanyInfo->RegnskapCompany->VCity);
+
+        //$this->setAccount('ROrgNumber', $this->_comanyInfo->RevisorCompany->OrgNumber);
+        $this->setAccount('ROrgNumber', str_replace(" ", "", $this->_comanyInfo->RevisorCompany->OrgNumber2));
+        $this->setAccount('RVName', $this->_comanyInfo->RevisorCompany->VName);
+        $this->setAccount('RVAddress', $this->_comanyInfo->RevisorCompany->VAddress);
+        $this->setAccount('RVZipCode', $this->_comanyInfo->RevisorCompany->VZipCode);
+        $this->setAccount('RVCity', $this->_comanyInfo->RevisorCompany->VCity);
+        $this->setAccount('RName', $this->_comanyInfo->RevisorPerson->FirstName . ' ' . $this->_comanyInfo->RevisorPerson->LastName);
+
+        $this->setAccount('Regnskapsregler', 'Ja');
+        $this->setAccount('Regnskapsplikt', 'Ja');
+        $this->setAccount('Revisjonspliktig', 'Ja');
+        $this->setAccount('PersoninntektAS', 'Ja');
+        $this->setAccount('ThisExternal', 'Ja');
+        $this->setAccount('ExternalAccountant', 'Ja');
+
+        $this->setAccount('RegnskapsregleneSmaForetak', 'Ja');
+        $this->setAccount('ArsregnskapRegnskapsregler', 'Ja');
+        $this->setAccount('ArsregnskapValuta', 'NOK');
+        
+        
+        $this->setAccount('ThisYear', $this->_thisYear);
+        $this->setAccount('LastYear', $this->_lastYear);
+    }
+
+    ##############################################################
+    function InsertMapping()
+    {
+        foreach($this->_sumPart as $lineID => $yearHash)
+        {
+            if($lineID != 0)
+            {
+                foreach($yearHash as $year => $valueHash)
+                {
+                    $retval = 1;
+                    if($year == $this->_thisYear)
+                    {
+                        //print "D$lineID - $year == $this->_thisYear - ".$valueHash['saldo']."<br>";
+                        $retval = $this->setAccount("D$lineID", $valueHash['saldo']);
+                    }
+                    elseif($year == $this->_lastYear)
+                    {
+                        //print "F$lineID - $year == $this->_lastYear - ".$valueHash['saldo']."<br>";
+                        $retval = $this->setAccount("F$lineID", $valueHash['saldo']);
+                    }
+                    else
+                    {
+                        $retval = $this->setAccount('ERROR '.$lineID, $valueHash['saldo']);
+                    }
+
+                    if($retval == 0)
+                    {
+                        print "Sjekk konto ".$this->_generalReport->GetAccountByLine($lineID)." - linjenr $lineID i rapporten finnes ikke i altinn skjemaet<br />";
+                    }
+                }
+            }
+        }
+
+        foreach($this->_sumGroup as $lineID => $yearHash)
+        {
+            if($lineID != 0)
+            {
+                foreach($yearHash as $year => $valueHash)
+                {
+                    if($year == $this->_thisYear)
+                    {
+                        //print "D$lineID - $year == $this->_thisYear - ".$valueHash['saldo']."<br>";
+                        $retval = $this->setAccount("D$lineID", $valueHash['saldo']);
+                    }
+                    elseif($year == $this->_lastYear)
+                    {
+                        //print "F$lineID - $year == $this->_lastYear - ".$valueHash['saldo']."<br>";
+                        $retval = $this->setAccount("F$lineID", $valueHash['saldo']);
+                    }
+                    else
+                    {
+                        $retval = $this->setAccount('ERROR'.$lineID, $valueHash['saldo']);
+                    }
+
+                    if($retval == 0)
+                    {
+                        print "Sjekk konto ".$this->_generalReport->GetAccountByLine($lineID)." - linjenr $lineID i rapporten finnes ikke i altinn skjemaet<br />";
+                    }
+                }
+            }
+        }
+    }
+
+    function IsFoundedThisYear($FoundedDate)
+    {
+        global $_date, $_lib;
+        $foundedYear = $_lib['date']->get_this_year($FoundedDate);
+        if($foundedYear < ($this->_thisYear - 4))
+        {
+            return '0';
+        }
+        else
+        {
+            return '1';
+        }
+    }
+
+    ##############################################################
+    #funksjoner mot mapping object
+    function addMapping($o, $h, $a)
+    {
+        $this->_altinnMapping->addMapping($o, $h, $a);
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->_altinnMapping->setOrid($o, $v);
+    }
+
+    function setAccount($a, $v)
+    {
+        $retval = $this->_altinnMapping->setAccount($a, $v);
+        return $retval;
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->_altinnMapping->setHuman($h, $v);
+    }
+
+    function getOridArray()
+    {
+        return $this->_altinnMapping->getOridArray();
+    }
+}
+?>

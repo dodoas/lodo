@@ -1,0 +1,57 @@
+<?
+
+#Usage
+# new DeltakerensOppgaveKalk(array('sumPart'=>$_sumPart, 'sumGroup'=>$_sumGroup))
+#Ikke periode 13???);
+#
+
+class DeltakerensOppgaveKalk
+{
+    var $_sumPart;
+    var $_sumGroup;
+   
+
+    ############################################################################
+    function DeltakerensOppgaveKalk($args)
+    {	
+       
+    }
+    
+
+    ############################################################################
+    function calculate($ThisYear, $_sumPart, $_sumGroup)
+    {   $this->_sumGroup = $_sumGroup;
+    	$this->_sumPart  = $_sumPart;
+    	
+        
+
+    }//function headLodic
+    
+    
+    ############################################################################
+    function sumGroupLogic($Line, $Year, $reportHash, $sumGroup){
+    	 $this->_sumGroup=$sumGroup;
+    	 
+  
+    }
+
+   
+     ############################################################################
+    function sumGroup($LineNum, $Year, $reportHash)
+    {
+        $this->_sumGroup[$LineNum][$Year]['in']     += $reportHash['AmountIn'];
+        $this->_sumGroup[$LineNum][$Year]['out']    += $reportHash['AmountOut'];
+        $this->_sumGroup[$LineNum][$Year]['saldo']  += $reportHash['AmountIn'] - $reportHash['AmountOut'];
+    }
+    
+    function getSumPart(){
+   		return $this->_sumPart;	
+    }
+    
+    function getSumGroup(){
+   		return $this->_sumGroup;	
+    }
+    
+
+}
+?>

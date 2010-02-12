@@ -1,0 +1,970 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1223: Tilleggsskjema for drosje- og lastebilnæring m.v.</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-72-3930.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-1056/Avgiver-grp-4202/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-1056/Avgiver-grp-4202/OppgavegiverFodselsnummer-datadef-26"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1223 Tilleggsskjema for drosje- og lastebilnæringen mv. 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Skjemaet skal fylles ut av alle som innehar bevilling for  personbefordring utenfor rute eller driver med lastebilnæring. Dette  gjelder også aksjeselskaper eller deltakerliknede selskaper.  </p>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1223.  </p>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjemaet, helt eller delvis bli  benyttet også av andre offentlige organer som har hjemmel til å  innhente de samme
+                    opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt. samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.  </p>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. november 1994, jf. likningsloven § 4-4 nr.  7.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1223 Tilleggsskjema for drosje- og lastebilnæring m.m. 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Skjemaet skal fyllast ut av alle som har løyve for persontransport  utanfor rute eller som driv med lastebilnæring. Dette gjeld også  aksjeselskap eller deltakerlikna selskap.  </p>
+                <p>Andre offentlege organ sin bruk av opplysingar i RF-1223.  </p>
+                <p>For å samordna og forenkla oppgåveinnleveringa frå næringslivet, kan  opplysingar som vert avgjeve i skjemaet, heilt eller delvis bli nytta  også av andre offentlege organ som har heimel til å innhente dei same  opplysingar, jf.
+                    lov om Oppgåveregisteret §§ 5 og 6. Opplysingar om  evt. samordning kan ein få ved å vende seg til Oppgåveregisteret på  telefon 75 00 75 00, eller Skattedirektoratet på telefon 22 07 70  00.  </p>
+                <p>Fastsett av Skattedirektoratet med heimel i Finansdepartementet sitt  delegeringsvedtak av 28. november 1994, jf. likningslova § 4-4 nr 7.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-1056">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-1056/Avgiver-grp-4202">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Avgiver</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Avgivar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1056/Avgiver-grp-4202/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1056/Avgiver-grp-4202/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1056/Avgiver-grp-4202/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Nærings-(kontor-)adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Nærings-(kontor-)adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1056/Avgiver-grp-4202/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Feltet for organisasjonsnummer skal fylles ut av alle som har fått  tildelt organisasjonsnummer etter lov om Enhetsregisteret av 3. juni  1994 nr. 15.</p>
+                        </xforms:help>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Feltet for organisasjonsnummer skal fyllast ut av alle som er tildelt  organisasjonsnummer etter lov om Enhetsregisteret av 3. juni 1994 nr.  15.</p>
+                        </xforms:help>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1056/Avgiver-grp-4202/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1056/Avgiver-grp-4202/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Kjoretoy-grp-3824">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Kjøretøy</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Køyretøy</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_Kjoretoy-grp-3825" nodeset="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825">
+                    <xforms:group ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kjøretøy</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Køyretøy</p>
+                        </xforms:caption>
+                        <xforms:group ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/OpplysningerOmKjorelengderMv-grp-348">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Opplysninger om kjørelengde mv.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Det skal fylles ut én kolonne for hver bil/løyve (alle poster skal  fylles ut).</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Opplysningar om kjørelengder m.m.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Det skal fyllast ut ein kolonne for kvar bil/løyve (alle postar skal  fyllast ut).</p>
+                            </xforms:help>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/OpplysningerOmKjorelengderMv-grp-348/LoyvenummerSpesifisertLoyve-datadef-1862">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1 Løyvenr.</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Det skal fylles ut en kolonne for hvert løyve. Er det benyttet flere  biler til det samme løyvet i løpet av året, f.eks. ved bytte av bil,  skal det samme løyvenummeret fylles ut på nytt slik at hver bil har
+                                        sin kolonne. Utleide løyver skal føres opp med løyvenummeret.  </p>
+                                    <p>Erstatningsløyve og reserveløyve skal føres opp med eget løyvenummer.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Også på utleide løyver, se pkt. 4, 18A og 23</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>1 Løyvenr.</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Det skal fyllast ut ein kolonne for kvart løyve. Er det nytta fleire  bilar til det same løyvet i løpet av året, t.d. ved bytte av bil,  skal det same løyvenummeret fyllast ut på nytt slik at kvar bil har  sin
+                                        kolonne. Utleigde løyver skal førast opp med løyvenummeret.  </p>
+                                    <p>Erstatningsløyve og reserveløyve skal førast opp med eige løyvenummer.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Også på utleigde løyver, sjå pkt. 4, 18A og 23</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/OpplysningerOmKjorelengderMv-grp-348/BilRegistreringsnummerSpesifisertLoyve-datadef-7955">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>2 Registreringsnr.</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>2 Registreringsnr.</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/OpplysningerOmKjorelengderMv-grp-348/BilRegistreringsdatoSpesifisertLoyve-datadef-7956">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>3 Registreringsdato</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>3 Registreringsdato</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/OpplysningerOmKjorelengderMv-grp-348/BilInnkjopsdatoSpesifisertLoyve-datadef-1863">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Innkjøpsår</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Innkjøpsår</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/OpplysningerOmKjorelengderMv-grp-348/BilDriftTidsromSpesifisertLoyve-datadef-1864">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>4 Tidsrom bilen har gått på dette løyvet/utleid i inntektsåret</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Her skal føres opp tidsrom (fra-til) den enkelte bilen har gått på det  aktuelle løyvet.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>4 Tidsrom bilen har gått på dette løyvet/utleigd i inntektsåret</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Her skal ein føre opp tidsrom (frå-til) den enkelte bilen har gått på  det aktuelle løyvet.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/OpplysningerOmKjorelengderMv-grp-348/BilMerkeTypeSpesifisertLoyve-datadef-7957">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>5 Bilmerke og type</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>5 Bilmerke og type</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/OpplysningerOmKjorelengderMv-grp-348/BilKilometerstandSpesifisertLoyve-datadef-7958">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>6 Kilometerstand 31.12</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Avlest kilometerteller fra speedometeret</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>6 Kilometerstand 31.12</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Avlese kilometerteljar frå fartsmålaren</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/OpplysningerOmKjorelengderMv-grp-348/BilKilometerstandFjoraretSpesifisertLoyve-datadef-7950">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>7 Kilometerstand 01.01</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Avlest kilometerteller fra speedometeret</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>7 Kilometerstand 01.01</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Avlese kilometerteljar frå fartsmålaren</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/OpplysningerOmKjorelengderMv-grp-348/BilKjorelengdeSpesifisertLoyve-datadef-7959">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>8 Antall kilometer kjørt i året</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>8 Talet på kilometer køyrt i året</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/OpplysningerOmKjorelengderMv-grp-348/BilKjorelengdeNaringSpesifisertLoyve-datadef-1865">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>9 Herav antall kilometer i næring</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>9 Av desse, talet på kilometer i næring</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/OpplysningerOmKjorelengderMv-grp-348/BilDrivstoffSpesifisertLoyve-datadef-1866">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>10 Antall liter drivstoff</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Sett B for bensin, D for diesel og G for gass</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>10 Talet på liter drivstoff</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Sett B for bensin, D for diesel og G for gass</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/OpplysningerOmKjorelengderMv-grp-348/LastebilVektSpesifisertLoyve-datadef-1867">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>11 Total vekt (vekt + lasteevne) for lastebil</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>11 Total vekt (vekt + lasteevne) for lastebil</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                        <xforms:group ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/Bilkostnader-grp-350">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bilkostnader</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Disse postene, 12 - 17, skal fylles ut uavhengig av hvordan skattyter  har spesifisert kostnadene i næringsoppgaven.  </p>
+                                <p>Postene 12 - 16 må fylles ut også for de som bare har en bil i  næringsvirksomheten.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Bilkostnader</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Desse postane, 12 - 17, skal fyllast ut uavhengig av korleis  skattytaren har spesifisert kostnadene i næringsoppgåva.  </p>
+                                <p>Postane 12 - 16 skal fyllast ut sjølv om ein bare har ein bil i  næringa.</p>
+                            </xforms:help>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/Bilkostnader-grp-350/BilkostnaderDrivstoffSpesifisertLoyve-datadef-1868">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>12 Drivstoff (bensin/diesel/gass)</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Jf. næringsoppgaven post 7000</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>12 Drivstoff (bensin/diesel/gass)</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Jf. næringsoppgåva post 7000</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/Bilkostnader-grp-350/BilkostnaderSmoreoljeSpesifisertLoyve-datadef-1869">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>13 Smøreolje</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Jf. næringsoppgaven post 7020</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>13 Smøreolje</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Jf. næringsoppgåva post 7020</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/Bilkostnader-grp-350/BilkostnaderVedlikeholdReparasjonerSpesifisertLoyve-datadef-1870">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>14 Vedlikehold/reparasjoner på biler</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Her skal også kostnader til bildekk, bilvask, vindusviskere osv. tas  med.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Jf. næringsoppgaven post 7020</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>14 Vedlikehald/reparasjonar på bilar</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Her skal også kostnader til bildekk, bilvask, vindusviskarar osv.  takast med.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Jf. næringsoppgåva post 7020</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/Bilkostnader-grp-350/BilkostnaderForsikringAvgifterSpesifisertLoyve-datadef-1871">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>15 Forsikring/avgifter</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Her skal bare forsikring på biler tas med. Andre forsikringer skal tas  med i næringsoppgaven post 7500.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Jf. næringsoppgaven post 7040</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>15 Forsikring/avgifter</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Her skal berre forsikringa på bilar takast med. Andre forsikringar  skal takast med i næringsoppgåva post 7500.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Jf. næringsoppgåva post 7040</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/Bilkostnader-grp-350/BilkostnaderLeasingleieSpesifisertLoyve-datadef-1872">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>16 Leasingleie</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Jf. næringsoppgaven post 6400</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>16 Leasingleige</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Jf. næringsoppgåva post 6400</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/Bilkostnader-grp-350/BilkostnaderSpesifisertLoyve-datadef-7960">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>17 Sum bilkostnader</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Postene 12-16 skal bare inneholde kostnader som gjelder bilen(e). I  post 14 skal også kostnader til bildekk, bilvask, vindusviskere osv.  tas med.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>17 Sum bilkostnadar</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Postane 12 - 16 skal berre innehalde kostnader som gjeld bilen/bilane.  I post 14 skal også kostnader til bildekk, bilvask, vindusviskarar  osv. takast med.</p>
+                                </xforms:help>
+                            </xforms:input>
+                        </xforms:group>
+                        <xforms:group ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/TilleggsopplysningerForDrosjeeiere-grp-351">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Tilleggsopplysninger for drosjeeiere</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Tilleggsopplysningar for drosjeeigarar</p>
+                            </xforms:caption>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/TilleggsopplysningerForDrosjeeiere-grp-351/KjoreinntekterKredittSpesifisertLoyve-datadef-1873">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>18 A Kjøreinntekter, kreditt</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>I postene 18 og 19 skal bare inntekt fra transportoppdrag tas med.  </p>
+                                    <p>Dersom post 18 inneholder kjøring hvor fakturering skjer til  trygdekontor, skal den del av fakturert beløp som gjelder betaling  for ventetid opplyses særskilt. Dette gjelder også skolebarnkjøring  for det
+                                        offentlige. For skolebarnkjøring gjelder også at samlet  antall kilometer skal opplyses.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Ved utleie, oppgi leieinntekter</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>18 A Køyreinntekter, kreditt</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>I postane 18 og 19 skal berre inntekt frå transportoppdrag takast  med.  </p>
+                                    <p>Dersom post 18 inneheld køyring med fakturering til trygdekontor, skal  den delen av det fakturerte beløp som gjeld betaling for venting  opplysast særskild. Dette gjeld også skolebornkøyring for det
+                                        offentlege. For skolebornkøyring gjeld også at samla kilometertal  skal opplysast.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Når utleige, gi opp leigeinntekta</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/TilleggsopplysningerForDrosjeeiere-grp-351/KjoreinntekterKredittVentetidSpesifisertLoyve-datadef-1874">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>18 B Herav betaling for ventetid ved kjøring med fakturering til  trygdekontor</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>I postene 18 og 19 skal bare inntekt fra transportoppdrag tas med.  </p>
+                                    <p>Dersom post 18 inneholder kjøring hvor fakturering skjer til  trygdekontor, skal den del av fakturert beløp som gjelder betaling  for ventetid opplyses særskilt. Dette gjelder også skolebarnkjøring  for det
+                                        offentlige. For skolebarnkjøring gjelder også at samlet  antall kilometer skal opplyses.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>18 B Av dette er betaling for venting når køyringa blir fakturert til  trygdekontor</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>I postane 18 og 19 skal berre inntekt frå transportoppdrag takast  med.  </p>
+                                    <p>Dersom post 18 inneheld køyring med fakturering til trygdekontor, skal  den delen av det fakturerte beløp som gjeld betaling for venting  opplysast særskild. Dette gjeld også skolebornkøyring for det
+                                        offentlege. For skolebornkøyring gjeld også at samla kilometertal  skal opplysast.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/TilleggsopplysningerForDrosjeeiere-grp-351/KjoreinntekterKredittSkolebarnkjoringSpesifisertLoyve-datadef-1875">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>18 C Herav skolebarnkjøring for det offentlige</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>I postene 18 og 19 skal bare inntekt fra transportoppdrag tas med.  </p>
+                                    <p>Dersom post 18 inneholder kjøring hvor fakturering skjer til  trygdekontor, skal den del av fakturert beløp som gjelder betaling  for ventetid opplyses særskilt. Dette gjelder også skolebarnkjøring  for det
+                                        offentlige. For skolebarnkjøring gjelder også at samlet  antall kilometer skal opplyses.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>18 C Av dette kjøyring med skuleborn for det offentlege</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>I postane 18 og 19 skal berre inntekt frå transportoppdrag takast  med.  </p>
+                                    <p>Dersom post 18 inneheld køyring med fakturering til trygdekontor, skal  den delen av det fakturerte beløp som gjeld betaling for venting  opplysast særskild. Dette gjeld også skolebornkøyring for det
+                                        offentlege. For skolebornkøyring gjeld også at samla kilometertal  skal opplysast.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/TilleggsopplysningerForDrosjeeiere-grp-351/SkolebarnkjoringKilometerSpesifisertLoyve-datadef-1876">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>18 D Antall kilometer med skolebarnkjøring oppgis her</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>I postene 18 og 19 skal bare inntekt fra transportoppdrag tas med.  </p>
+                                    <p>Dersom post 18 inneholder kjøring hvor fakturering skjer til  trygdekontor, skal den del av fakturert beløp som gjelder betaling  for ventetid opplyses særskilt. Dette gjelder også skolebarnkjøring  for det
+                                        offentlige. For skolebarnkjøring gjelder også at samlet  antall kilometer skal opplyses.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>18 D Talet på kilometer køyring med skuleborn skal førast her</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>I postane 18 og 19 skal berre inntekt frå transportoppdrag takast  med.  </p>
+                                    <p>Dersom post 18 inneheld køyring med fakturering til trygdekontor, skal  den delen av det fakturerte beløp som gjeld betaling for venting  opplysast særskild. Dette gjeld også skolebornkøyring for det
+                                        offentlege. For skolebornkøyring gjeld også at samla kilometertal  skal opplysast.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/TilleggsopplysningerForDrosjeeiere-grp-351/KjoreinntekterKontantSpesifisertLoyve-datadef-1877">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>19 Kjøreinntekter, kontant</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>I postene 18 og 19 skal bare inntekt fra transportoppdrag tas med.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>19 Køyreinntekter, kontant</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>I postane 18 og 19 skal berre inntekt frå transportoppdrag takast med.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/TilleggsopplysningerForDrosjeeiere-grp-351/TaksameterTypeSpesifisertLoyve-datadef-1878">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>20 Taksametermerke/-type</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>20 Taksametermerke/-type</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/TilleggsopplysningerForDrosjeeiere-grp-351/TaksameterBesatteKilometerSpesifisertLoyve-datadef-1879">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>21 Antall besatte kilometer når taksameter brukes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>21 Talet på besette kilometer når taksameter blir nytta</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:selectOne ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/TilleggsopplysningerForDrosjeeiere-grp-351/InnberetningStandardfordelArbeidsgiversBilSpesifisertLoyve-datadef-1880">
+                                <xforms:choices>
+                                    <xforms:item>
+                                        <xforms:value>Ja</xforms:value>
+                                        <xforms:caption brreg:lang="EN">
+                                            <p>Yes</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Ja</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Ja</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>Nei</xforms:value>
+                                        <xforms:caption brreg:lang="EN">
+                                            <p>No</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Nei</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Nei</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                </xforms:choices>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>22 Er standardfordelen ved disponering av arbeidsgivers bil  innberettet i arbeidstakers lønn- og trekkoppgave?</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>22  Er standardfordelen ved disponering av bilen til arbeidsgivar  opplyst i arbeidstakaren si lønns- og trekkoppgave?</p>
+                                </xforms:caption>
+                            </xforms:selectOne>
+                            <xforms:selectOne ref="/Skjema/Kjoretoy-grp-3824/Kjoretoy-grp-3825/TilleggsopplysningerForDrosjeeiere-grp-351/LoyveUtleidSpesifisertLoyve-datadef-1881">
+                                <xforms:choices>
+                                    <xforms:item>
+                                        <xforms:value>Ja</xforms:value>
+                                        <xforms:caption brreg:lang="EN">
+                                            <p>Yes</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Ja</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Ja</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>Nei</xforms:value>
+                                        <xforms:caption brreg:lang="EN">
+                                            <p>No</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Nei</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Nei</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                </xforms:choices>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>23 Er løyvet utleid?</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>23 Er løyvet utleigd?</p>
+                                </xforms:caption>
+                            </xforms:selectOne>
+                        </xforms:group>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/AndreOpplysninger-grp-3501">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Andre opplysninger</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Andre opplysningar</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/AndreOpplysninger-grp-3501/GarasjeleieBeregnet-datadef-1882">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>24 Er garasjeleie beregnet?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>24 Er garasjeleige rekna ut?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/AndreOpplysninger-grp-3501/Garasjeleie-datadef-1883">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Hvis ja, oppgi beløp</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Dersom ja, gi opp sum</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/AndreOpplysninger-grp-3501/KontorleieBeregnet-datadef-1884">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>25 Er kontorleie beregnet?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>25 Er kontorleige rekna ut?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/AndreOpplysninger-grp-3501/Kontorleie-datadef-1885">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Hvis ja, oppgi beløp</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Dersom ja, gi opp sum</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/AndreOpplysninger-grp-3501/DrosjevirksomhetDriftssted-datadef-19403">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Hjemmet</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Hjemmet</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Heimen</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Sentral</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sentral</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sentral</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>26 Drives drosjevirksomheten fra</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>26 Blir drosjeversemda driven frå</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/AndreOpplysninger-grp-3501/DriftsstedBoligAvstand-datadef-1887">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>27 Avstand mellom hjem/bolig og sentral dersom drosjevirksomheten  drives fra sentral</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>27 Avstand mellom heim/bustad og sentral dersom drosjeverksemda blir  driven frå sentral</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Leietakere-grp-2570">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Leietakere</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Dersom noen av løyvene er utleid, skal opplysninger om leietaker  fylles ut her</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Leigetakare</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NON">
+                    <p>Dersom nokon av løyvene er utleigde, skal opplysningar om leigetakar  fyllast ut her</p>
+                </xforms:hint>
+                <xforms:repeat id="repeat_Leietakere-grp-5105" nodeset="/Skjema/Leietakere-grp-2570/Leietakere-grp-5105">
+                    <xforms:group ref="/Skjema/Leietakere-grp-2570/Leietakere-grp-5105">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Leietakere</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Leietakere-grp-2570/Leietakere-grp-5105/LeietakerLoyvenummerSpesifisertLoyve-datadef-1888">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Løyve nr.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Løyve nr.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Leietakere-grp-2570/Leietakere-grp-5105/LeietakerNavnSpesifisertLoyve-datadef-1889">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Navn på leietaker</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Namn på leigetakar</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Leietakere-grp-2570/Leietakere-grp-5105/LeietakerAdresseSpesifisertLoyve-datadef-1890">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Adresse</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Adresse</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Leietakere-grp-2570/Leietakere-grp-5105/LeietakerPostnummerSpesifisertLoyve-datadef-7951">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter positive integer with four digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Postnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever positivt heltall med fire siffer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Postnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev positivt heiltal med fire siffer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Leietakere-grp-2570/Leietakere-grp-5105/LeietakerPoststedSpesifisertLoyve-datadef-7952">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Poststed</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Poststad</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Leietakere-grp-2570/Leietakere-grp-5105/LeietakerFodselsnummerSpesifisertLoyve-datadef-1891">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fødselsnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fødselsnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/PrivatBrukDisponeringAvBil-grp-2571">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Hvem har disponert bilen(e) til privat bruk?</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Kven har disponert bilen (bilane) til privat bruk?</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_HvemHarDisponertBilenETilPrivatBruk-grp-5106" nodeset="/Skjema/PrivatBrukDisponeringAvBil-grp-2571/HvemHarDisponertBilenETilPrivatBruk-grp-5106">
+                    <xforms:group ref="/Skjema/PrivatBrukDisponeringAvBil-grp-2571/HvemHarDisponertBilenETilPrivatBruk-grp-5106">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Hvem har disponert bilen(e) til privat bruk?</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Kven har disponert bilen (bilane) til privat bruk?</p>
+                        </xforms:hint>
+                        <xforms:input ref="/Skjema/PrivatBrukDisponeringAvBil-grp-2571/HvemHarDisponertBilenETilPrivatBruk-grp-5106/LeietakerPrivatBrukLoyvenummerSpesifisertLoyve-datadef-1892">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Registreringsnr.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Registreringsnr.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/PrivatBrukDisponeringAvBil-grp-2571/HvemHarDisponertBilenETilPrivatBruk-grp-5106/LeietakerPrivatBrukNavnSpesifisertLoyve-datadef-1893">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Navn på den som har disponert bil</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Namn til den som har disponert bil</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/PrivatBrukDisponeringAvBil-grp-2571/HvemHarDisponertBilenETilPrivatBruk-grp-5106/LeietakerPrivatBrukAdresseSpesifisertLoyve-datadef-1894">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Adresse</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Adresse</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/PrivatBrukDisponeringAvBil-grp-2571/HvemHarDisponertBilenETilPrivatBruk-grp-5106/LeietakerPrivatBrukPostnummerSpesifisertLoyve-datadef-7953">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter positive integer with four digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Postnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever positivt heltall med fire siffer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Postnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev positivt heiltal med fire siffer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/PrivatBrukDisponeringAvBil-grp-2571/HvemHarDisponertBilenETilPrivatBruk-grp-5106/LeietakerPrivatBrukPoststedSpesifisertLoyve-datadef-7954">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Poststed</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Poststad</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/PrivatBrukDisponeringAvBil-grp-2571/HvemHarDisponertBilenETilPrivatBruk-grp-5106/LeietakerPrivatBrukFodselsnummerSpesifisertLoyve-datadef-1895">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fødselsnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fødselsnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

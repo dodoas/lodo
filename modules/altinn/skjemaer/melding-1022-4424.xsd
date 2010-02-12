@@ -1,0 +1,971 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--title='RF-1206: Oppgave over avgitt og mottatt konsernbidrag' lang='NOB'-->
+    <xs:element name="Skjema">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>RF-1206  Oppgave over avgitt og mottatt konsernbidrag 2005</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GenerellInformasjon-grp-5085"/>
+                <xs:element minOccurs="0" ref="AvgittKonsernbidrag-grp-5086"/>
+                <xs:element minOccurs="0" ref="MottattKonsernbidrag-grp-5090"/>
+            </xs:sequence>
+            <xs:attribute fixed="1022" name="skjemanummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="4424" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="RF-1206" name="blankettnummer" type="xs:string" use="optional"/>
+            <xs:attribute fixed="Oppgave over avgitt og mottatt konsernbidrag" name="tittel" type="xs:string" use="optional"/>
+            <xs:attribute fixed="5084" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+            <xs:attribute name="etatid" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="974761076">
+                            <xs:annotation>
+                                <xs:documentation>SKATTEDIREKTORATET</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:anyAttribute/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GenerellInformasjon-grp-5085">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Generell informasjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Selskap som har avgitt eller mottatt konsernbidrag for inntektsåret  2005 skal fylle ut skjema RF-1206 og legge dette ved selvangivelsen  (RF-1028). Skjemaet er fastsatt i medhold av ligningslovens§ 4-4  nr.5.  </p>
+                    <p/>
+                    <p>Merknader til utfylling av de enkelte poster:  </p>
+                    <p>Innledningsvis fyller skattyter ut sitt navn og organisasjonsnummer.  Totalt avgitt konsernbidrag fra selskapet, henholdsvis mottatt  konsernbidrag (med og uten skattemessig virkning) skal angis i  postene øverst i skjemaet.  </p>
+                    <p>Skjemaet er delt i to - opplysninger om avgitt og mottatt  konsernbidrag.  </p>
+                    <p>Det skal fylles ut organisasjonsnummer og navn på selskap  konsernbidrag er avgitt til/mottatt fra.  </p>
+                    <p>Det må krysses av på spørsmålet om det foreligger  stemmerettsbegrensninger i noen av selskapene. Hvis ja må det gis  nærmere opplysninger om stemmerettsbegrensningene i feltet ved siden  av. I posten gitt til selskap/mottatt
+                        fra selskap skal det gis  opplysninger om hvilket beløp som er ytet, henholdsvis mottatt, i  konsernbidrag. Skill konsernbidrag som er avgitt uten skattemessig  virkning fra konsernbidrag med skattemessig virkning.  </p>
+                    <p>I feltet &lt;&lt;Hvordan er konserntilknytningen mellom giver og mottaker>>  må det fremgå av opplysningene at giver og mottaker er i et slikt  konsernforhold som hjemler konsernbidrag. Det må fremgå av  opplysningene at
+                        konsernbidraget er ytet mellom aksjeselskap eller  likestilte selskap som begge er eiet direkte eller indirekte med mer  enn 90% av konsernspissen. Det nå oppgis opplysninger om selskapets  navn, organisasjonsnummer og
+                        eierandel - det er bare nødvendig å gi  disse opplysningene for selskaper som det må vises til for å vise at  skattekonserntilknytningen tilfredsstiller vilkårene i sktl. § 10-4.  Avslutningsvis skal det også spesifiseres
+                        hvordan bidraget-(ene) er  ført fra andre skjema. Her oppgis RF-nummer på skjemaet, postnummer  samt beløp.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="EnhetNavn-datadef-1">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetOrganisasjonsnummer-datadef-18">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KonsernbidragAvgitt-datadef-2632">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Totalt avgitt konsernbidrag fra selskapet med og uten skattemessig  virkning</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KonsernbidragMottatt-datadef-2209">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Totalt mottatt konservbidrag fra alle selskap med og uten skattemessig  virkning</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="Konsernspiss-grp-5613"/>
+            </xs:sequence>
+            <xs:attribute fixed="5085" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EnhetNavn-datadef-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Navn på juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Navn på årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">1</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="1" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst175-repformat-8">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="175"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetOrganisasjonsnummer-datadef-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummeret til enheten</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Organisasjonsnummer til årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">2</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="18" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst99Modulus11-repformat-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">1</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="KonsernbidragAvgitt-datadef-2632">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="2632" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopHeltall15-repformat-37">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">37</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="KonsernbidragMottatt-datadef-2209">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="2209" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Konsernspiss-grp-5613">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Konsernspiss</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="KonsernspissNorskOrganisasjonsnummerKonsernbidragoppgave-datadef-24518">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KonsernspissNorskNavnKonsernbidragsoppgave-datadef-24519">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5613" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KonsernspissNorskOrganisasjonsnummerKonsernbidragoppgave-datadef-24518">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummer til øverste morselskap i konsernstruktur.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">5</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="24518" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KonsernspissNorskNavnKonsernbidragsoppgave-datadef-24519">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Navn til øverste morselskap i konsernstruktur.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="24519" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AvgittKonsernbidrag-grp-5086">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Avgitt konsernbidrag</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="50" minOccurs="0" ref="UdeltTilSelskap-grp-5087"/>
+                <xs:element maxOccurs="10" minOccurs="0" ref="ForingAvKonsernbidragetISkjemaene-grp-5089"/>
+            </xs:sequence>
+            <xs:attribute fixed="5086" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UdeltTilSelskap-grp-5087">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Utdelt til selskap</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="MottakerKonsernbidragOrganisasjonsnummer-datadef-22374">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="MottakerKonsernbidragNavn-datadef-22375">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="MottakerKonsernbidragStemmerettsbegrensninger-datadef-22376">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Stemmerettsbegrensninger</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="MottakerKonsernbidragStemmerettsbegrensningerBeskrivelse-datadef-22377">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Derson ja gi opplysninger</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KonsernbidragMedSkattemessigVirkningAvgitt-datadef-22378">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Utdeling til selskapet med skattemessig virkning</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KonsernbidragUtenSkattemessigVirkningAvgitt-datadef-22379">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Utdeling til selskapet uten skattemessig virkning</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5087" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MottakerKonsernbidragOrganisasjonsnummer-datadef-22374">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummer til mottaker av avgitt konsernbidrag.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">7</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="22374" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MottakerKonsernbidragNavn-datadef-22375">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Navn på mottaker av avgitt konsernbidrag.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="22375" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MottakerKonsernbidragStemmerettsbegrensninger-datadef-22376">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Stemmerettsbegrensning hos mottaker av avgitt konsernbidrag.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">11</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+                    <xs:attribute fixed="22376" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg2JaNei-repformat-4">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="3"/>
+            <xs:enumeration value="Ja">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Yes</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Ja</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Ja</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Nei">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>No</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Nei</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Nei</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="MottakerKonsernbidragStemmerettsbegrensningerBeskrivelse-datadef-22377">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Beskrivelse av stemmerettsbegrensning hos mottaker av avgitt konsernbidrag.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">12</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst3500-repformat-17">
+                    <xs:attribute fixed="22377" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst3500-repformat-17">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">17</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="3500"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="KonsernbidragMedSkattemessigVirkningAvgitt-datadef-22378">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Avgitt konsernbidrag med skattemessig virkning.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22378" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KonsernbidragUtenSkattemessigVirkningAvgitt-datadef-22379">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Avgitt konsernbidrag uten skattemessig virkning.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">10</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22379" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ForingAvKonsernbidragetISkjemaene-grp-5089">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Hvordan er konsernbidraget ført i skjemaene?</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Her gis opplysninger om føringene i skjemaene med skjema (RF-nummer),  postnummer og beløp</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="KonsernbidragAvgittSpesifisertSkjemaSkjemanummer-datadef-24890">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Skjema (RF-nummer)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KonsernbidragAvgittSpesifisertSkjemaSkjemapostnummer-datadef-24889">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KonsernbidragAvgittSpesifisertSkjemaBelop-datadef-24888">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5089" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KonsernbidragAvgittSpesifisertSkjemaSkjemanummer-datadef-24890">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Skjemanummer til skjema hvor det er ført opp avgitt konsernbidrag.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">13</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="24890" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst35-repformat-3">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="35"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="KonsernbidragAvgittSpesifisertSkjemaSkjemapostnummer-datadef-24889">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Skjemapostnummer vedrørende spesifisert skjema hvor det er ført opp avgitt konserbidrag.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">14</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="24889" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KonsernbidragAvgittSpesifisertSkjemaBelop-datadef-24888">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Avgitt konsernbidrag oppgitt på spesifisert skjema.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">15</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24888" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MottattKonsernbidrag-grp-5090">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Mottatt konsernbidrag</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Skatteplikt for morselskapet  </p>
+                    <p>Konsernbidrag anses som skattepliktig inntekt for mottakende selskap.  Den del av konsernbidraget som giverselskapet ikke får fradrag for  fordi det overstiger den ellers skattepliktige alminnelige inntekt,  er ikke
+                        skattepliktig for mottakerselskapet. Bidraget anses som  skattepliktig inntekt samme inntektsår som det er fradragsberettiget  for giverselskapet.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="50" minOccurs="0" ref="MottattFraSelskap-grp-5091"/>
+                <xs:element maxOccurs="10" minOccurs="0" ref="ForingISkjemaene-grp-5093"/>
+            </xs:sequence>
+            <xs:attribute fixed="5090" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MottattFraSelskap-grp-5091">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Mottatt fra selskap</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="AvgiverKonsernbidragOrganisasjonsnummer-datadef-22391">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="AvgiverKonsernbidragNavn-datadef-22392">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="AvgiverKonsernbidragStemmerettsbegrensninger-datadef-22393">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Stemmerettsbegrensninger</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="AvgiverKonsernbidragStemmerettsbegrensningerBeskrivelse-datadef-22394">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Dersom ja gi opplysninger</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KonsernbidragMedSkattemessigVirkningMottatt-datadef-22395">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Utdeling fra selskapet med skattemessig virkning</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KonsernbidragUtenSkattemessigVirkningMottatt-datadef-22396">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Utdeling fra selskapet uten skattemessig virkning</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5091" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AvgiverKonsernbidragOrganisasjonsnummer-datadef-22391">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummer til avgiver av mottatt konsernbidrag.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">16</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="22391" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AvgiverKonsernbidragNavn-datadef-22392">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Navn til avgiver av mottatt konsernbidrag.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">17</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="22392" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AvgiverKonsernbidragStemmerettsbegrensninger-datadef-22393">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Stemmerettsbegrensning hos avgiver av mottatt konsernbidrag.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">20</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+                    <xs:attribute fixed="22393" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AvgiverKonsernbidragStemmerettsbegrensningerBeskrivelse-datadef-22394">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Beskrivelse av stemmerettsbegrensning hos avgiver av mottatt konsernbidrag.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">21</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst3500-repformat-17">
+                    <xs:attribute fixed="22394" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KonsernbidragMedSkattemessigVirkningMottatt-datadef-22395">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Mottatt konsernbidrag med skattemessig virkning.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">18</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22395" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KonsernbidragUtenSkattemessigVirkningMottatt-datadef-22396">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Mottatt konsernbidrag uten skattemessig virkning.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">19</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22396" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ForingISkjemaene-grp-5093">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Hvordan er konsernbidraget ført i skjemaene?</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Her gis opplysninger om føringen i skjemaene med skjema (RF-nummer),  postnummer og beløp.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="KonsernbidragMotattSpesifisertSkjemaSkjemanummer-datadef-24887">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Skjema (RF-nummer)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KonsernbidragMottattSpesifisertSkjemaSkjemapostnummer-datadef-24886">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KonsernbidragMottattSpesifisertSkjemaBelop-datadef-24885">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5093" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KonsernbidragMotattSpesifisertSkjemaSkjemanummer-datadef-24887">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Skjemanummer til skjema hvor det er ført opp mottatt konsernbidrag.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">22</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="24887" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KonsernbidragMottattSpesifisertSkjemaSkjemapostnummer-datadef-24886">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Skjemapostnummer vedrørende spesifisert skjema hvor det er ført opp mottatt konsernbidrag.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">23</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="24886" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KonsernbidragMottattSpesifisertSkjemaBelop-datadef-24885">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Mottatt konsernbidrag oppgitt på spesifisert skjema.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">24</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24885" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

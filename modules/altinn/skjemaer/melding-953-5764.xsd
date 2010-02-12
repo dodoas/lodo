@@ -1,0 +1,1312 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--title='RF-1220: Tilleggsskjema for beregning av deltakerens inntekt i ANS mv, skogbruk' lang='NOB'-->
+    <xs:element name="Skjema">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>RF-1220 Tilleggsskjema for beregning av deltakerens inntekt i  ansvarlige selskaper mv. i skogbruk og reindrift i 2006</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>For deltakere i ansvarlig selskap m.v. i skogbruk må  gjennomsnittsligningen foregå hos den enkelte deltaker. Skjemaet må  derfor fylles ut for hver enkelt deltaker.  </p>
+                    <p/>
+                    <p>Selskapet skal fylle ut skjemaet, og vedlegge det selskapsoppgaven.  </p>
+                    <p/>
+                    <p>Fortegnsbruk  </p>
+                    <p>Se rettledningen til selskapsoppgaven (RF-1216) om fortegnsbruk.  </p>
+                    <p/>
+                    <p>Fastsatt av Skattedirektoratet med hjemmel i Finans-  </p>
+                    <p>departementets delegeringsvedtak av 28. november 1994,  </p>
+                    <p>jf. likningsloven §§ 4-3 nr. 2 og 4-4 nr. 7, jf. § 4-9.  </p>
+                    <p/>
+                    <p>Andre offentlige organers bruk av opplysninger i RF-1221  </p>
+                    <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjema, RF-1221B, helt eller delvis  </p>
+                    <p>bli benyttet også av andre offentlige organer som har hjemmel til å  innhente de samme opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt. samordning kan fås ved henvendelse til  Oppgaveregisteret på
+                        telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Skjemaet fylles ut og leveres av selskapet sammen med selskapsoppgaven  (RF-1215)</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>RF-1220 Tilleggsskjema for berekning av deltakaren si inntekt  </p>
+                    <p>i ansvarlige selskap mv. i skogbruk og reindrift i 2006</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>For deltakarar i ansvarleg selskap m.m. i skogbruk må  gjennomsnittslikninga foregå hos den enkelte deltakaren. Skjemaet må  derfor fyllast ut for kvar enkelt deltakar.  </p>
+                    <p/>
+                    <p>Selskapet fylle ut skjemaet, og vedlegga det selskapsoppgåva.  </p>
+                    <p/>
+                    <p>Særleg om bruk av forteikn i skjemaet  </p>
+                    <p>Sjå rettleiinga til selskapsoppgåva (RF-1216) om bruk av forteikn.  </p>
+                    <p/>
+                    <p>Fastsett av Skattedirektoratet med heimmel i Finansdepartementet sitt  delegeringsvedtak av 28. november 1994, jf. likningsloven §§ 4-3 nr.  2 og 4-4 nr. 7, jf. § 4-9.  </p>
+                    <p/>
+                    <p>Andre offentlege organ sin bruk av opplysningar i RF-1221  </p>
+                    <p>For å samordne og forenkle oppgåveinnleveringa frå næringslivet, kan  opplysningar som vert gjeve i dette skjemaet, RF-1221, heilt eller  delvis bli nytta også av andre offentlege organ som har heimel til å  innhente dei same
+                        opplysningane, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysningar om evt. samordning kan ein få  ved å vende seg  til  Oppgaveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                    <p>Skjemaet fyllast ut av selskapet og leverast samen med selskapsoppgåva  (RF-1215)</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GenerellInformasjon-grp-4343"/>
+                <xs:element minOccurs="0" ref="Grunnlag-grp-5117"/>
+                <xs:element minOccurs="0" ref="GjennomsnittsberegningPrDeltaker-grp-4346"/>
+            </xs:sequence>
+            <xs:attribute fixed="953" name="skjemanummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="5764" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="RF-1220" name="blankettnummer" type="xs:string" use="optional"/>
+            <xs:attribute fixed="Tilleggsskjema for beregning av deltakerens inntekt i ANS mv, skogbruk" name="tittel" type="xs:string" use="optional"/>
+            <xs:attribute fixed="4342" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+            <xs:attribute name="etatid" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="974761076">
+                            <xs:annotation>
+                                <xs:documentation>SKATTEDIREKTORATET</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:anyAttribute/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GenerellInformasjon-grp-4343">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Generell informasjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Generell informasjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Deltaker-grp-4344"/>
+                <xs:element minOccurs="0" ref="Selskap-grp-4345"/>
+            </xs:sequence>
+            <xs:attribute fixed="4343" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Deltaker-grp-4344">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Deltaker</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Deltakar</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="DeltakerNavn-datadef-1025">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DeltakerEierandel-datadef-1028">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Selskapsandel</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Selskapsdel</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DeltakerFodselsnummer-datadef-3647">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Fødselsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Fødselsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DeltakerAdresse-datadef-1070">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DeltakerPostnummer-datadef-7835">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DeltakerPoststed-datadef-7836">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Poststed</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Poststad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DeltakerKommune-datadef-3112">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Bosteds-/kontorkommune</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Bustads-/kontorkommune</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DeltakerOrganisasjonsnummer-datadef-3648">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4344" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DeltakerNavn-datadef-1025">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">1</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="1025" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst35-repformat-3">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="35"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="DeltakerEierandel-datadef-1028">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Deltakers eierandel i juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">2</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Desimal73Desimaler-repformat-136">
+                    <xs:attribute fixed="1028" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Desimal73Desimaler-repformat-136">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">136</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+                    <p>Enter number with three fraction digits</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Feltet krever tre desimaler</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Feltet krev tre desimalar</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="7"/>
+            <xs:pattern value="-{0,1}[0-9]{1,}\.[0-9]{3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="DeltakerFodselsnummer-datadef-3647">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Deltaker sitt fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst1111Modulus11-repformat-18">
+                    <xs:attribute fixed="3647" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst1111Modulus11-repformat-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">18</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="11"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="DeltakerAdresse-datadef-1070">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="1070" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DeltakerPostnummer-datadef-7835">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">5</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="7835" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst44BareTall-repformat-10">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">10</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+                    <p>Enter positive integer with four digits</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Feltet krever positivt heltall med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Feltet krev positivt heiltal med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="4"/>
+            <xs:pattern value="[0-9]{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="DeltakerPoststed-datadef-7836">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="7836" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DeltakerKommune-datadef-3112">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">7</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="3112" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DeltakerOrganisasjonsnummer-datadef-3648">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="3648" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst99Modulus11-repformat-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">1</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="Selskap-grp-4345">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Selskap</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Selskap</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="EnhetNavn-datadef-1">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetOrganisasjonsform-datadef-756">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Ansvarsform</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Ansvarsform</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetAdresse-datadef-15">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Kontor- (virksomhets-)adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Kontoradresse (næringsadresse) til selskapet</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetPostnummer-datadef-6673">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+                                <p>Enter number with three fraction digits</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                                <p>Feltet krev positivt heiltall med fire siffer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetPoststed-datadef-6674">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Poststed</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Poststad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4345" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EnhetNavn-datadef-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Navn på juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Navn på årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="1" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst175-repformat-8">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="175"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetOrganisasjonsform-datadef-756">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Enhetens juridiske organisasjonsform</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Organisasjonsform</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">10</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="756" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EnhetAdresse-datadef-15">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Forretningsadresse til juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">11</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst105-repformat-9">
+                    <xs:attribute fixed="15" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst105-repformat-9">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="105"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetPostnummer-datadef-6673">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Postnummer i forretningsadressen til juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">12</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="6673" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EnhetPoststed-datadef-6674">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Poststed i forretningsadressen til juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">13</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="6674" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Grunnlag-grp-5117">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Grunnlag</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Grunnlag</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="ResultatSkogbrukReindriftANSForGjennomsnittsberegningAndel-datadef-22422">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>101 Korrigert driftsresultat, fordelt etter eierandeler/etter avtale  om overskuddsfordeling. Beløpet hentes fra post 312/330 i  Tilleggsskjema RF-1177</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Beløpet som skal føres her, hentes fra Tilleggsskjema RF-1177, post  312 (skogbruk) og 330 (reindrift). Gjelder enten skattyter nytter  Næringsoppgave 1 eller Næringsoppgave 2.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Beløpet hentes fra post 313/330 i tilleggsskjemaet RF-1177</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>101 Korrigert driftsresultat, fordelt etter eigardel/etter avtale om  overskottsfordeling. Beløpet hentar ein frå post 312/330 i  Tilleggsskjema RF-1177</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Beløpet som skal førast her, hentar ein frå Tilleggsskjema RF-1177  post 312 (skogbruk) og 330 (reindrift). Gjeld anten skattytar nyttar  Næringsoppgåve 1 eller Næringsoppgåve 2.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ArbeidsgodtgjorelseANSMvDeltakerSkogbrukReindrift-datadef-22423">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>102 Arbeidsgodtgjørelse til deltaker, jf. del av post 5600 i  næringsoppgave 1 eller 2</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Eventuell arbeidsgodtgørelse fra ANS-et skal inngå i  gjennomsnittsberegningen og tillegges i denne posten.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>102 Arbeidsgodtgjering til deltakar, jf. del av post 5600 i  Næringsoppgåve 1 eller 2.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Eventuell arbeidsgodtgjering frå ANS-et skal gå inn i  gjennomsnittsutrekninga og leggjast til i denne posten.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GjennomsnittsinntektAlminneligInntektSkogReinGrunnlag2004-datadef-22424">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>104 Sum grunnlag for beregning av gjennomsnittsinntekt for alminnelig  inntekt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Beløpet overføres post 109</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>104 Sum grunnlag for utrekning av gjennomsnittsinntekt for allmenn  inntekt. Beløpet skal overførast til post 109.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5117" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ResultatSkogbrukReindriftANSForGjennomsnittsberegningAndel-datadef-22422">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Deltakers andel av korrigert driftsresultat for gjennomsnittsberegning ved skogbruk og reindrift i ANS.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">14</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22422" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopHeltall15-repformat-37">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">37</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="ArbeidsgodtgjorelseANSMvDeltakerSkogbrukReindrift-datadef-22423">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Arbeidsgodtgjørelse fra ANS mv i skogbruk og reindrift.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">15</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22423" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GjennomsnittsinntektAlminneligInntektSkogReinGrunnlag2004-datadef-22424">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">16</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22424" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GjennomsnittsberegningPrDeltaker-grp-4346">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Gjennomsnittsberegning pr. deltaker</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Gjennomsnittsberekning pr. deltaker</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GjennomsnittsberegningForAlminneligInntekt-grp-4347"/>
+            </xs:sequence>
+            <xs:attribute fixed="4346" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GjennomsnittsberegningForAlminneligInntekt-grp-4347">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Gjennomsnittsberegning for alminnelig inntekt</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>År</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Gjennomsnittsberekning for alminneleg inntekt</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Skogbruk-grp-5118"/>
+                <xs:element minOccurs="0" ref="Reindrift-grp-5119"/>
+            </xs:sequence>
+            <xs:attribute fixed="4347" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Skogbruk-grp-5118">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Skogbruk</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GjennomsnittsinntektAlminneligInntektSkogGrunnlag2002-datadef-20180">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>105 2002</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>105 2002</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GjennomsnittsinntektAlminneligInntektSkogGrunnlag2003-datadef-20176">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>106 2003</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Beløpet overføres post 109</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>106 2003</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Beløpet skal overførast til post 109</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GjennomsnittsinntektAlminneligInntektSkogGrunnlag2004-datadef-22428">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>107 2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>107 2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GjennomsnittsinntektAlminneligInntektSkogGrunnlag2005-datadef-24447">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>108 2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>108 2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GjennomsnittsinntektAlminneligInntektSkogGrunnlag2006-datadef-27172">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>109 2006</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>109 2006</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GjennomsnittsinntektAlminneligInntektSkogGrunnlagSum5Ar-datadef-20181">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>110 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>110 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GjennomsnittsinntektAlminneligInntektSkogGrunnlagSnitt5Ar-datadef-20182">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>111 Gjennomsnittsinntekt 2006</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>111 Gjennomsnittsinntekt 2006</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ResultatANSMvDeltakerAndel-datadef-20183">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>113 Korreksjon skogbruk/reindrift (gj.snittsberegning) Overføres  deltakeroppgaven post 102d</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>113 Korreksjon skogbruk/reindrift (gj.snittsutrekning). Skal  overførast til deltakeroppgåva post 102d</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5118" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GjennomsnittsinntektAlminneligInntektSkogGrunnlag2002-datadef-20180">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">17</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20180" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GjennomsnittsinntektAlminneligInntektSkogGrunnlag2003-datadef-20176">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">18</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20176" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GjennomsnittsinntektAlminneligInntektSkogGrunnlag2004-datadef-22428">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">19</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22428" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GjennomsnittsinntektAlminneligInntektSkogGrunnlag2005-datadef-24447">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">21</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24447" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GjennomsnittsinntektAlminneligInntektSkogGrunnlag2006-datadef-27172">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">23</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="27172" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GjennomsnittsinntektAlminneligInntektSkogGrunnlagSum5Ar-datadef-20181">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">25</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20181" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GjennomsnittsinntektAlminneligInntektSkogGrunnlagSnitt5Ar-datadef-20182">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">27</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20182" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ResultatANSMvDeltakerAndel-datadef-20183">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">29</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20183" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Reindrift-grp-5119">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Reindrift</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GjennomsnittsinntektAlminneligInntektReinGrunnlag2004-datadef-22427">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>108 2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>108 2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GjennomsnittsinntektAlminneligInntektReinGrunnlag2005-datadef-24448">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>109 2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>109 2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GjennomsnittsinntektAlminneligInntektReinGrunnlag2006-datadef-27173"/>
+                <xs:element minOccurs="0" ref="GjennomsnittsinntektAlminneligInntektReinGrunnlagSum3Ar-datadef-22429">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>110 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>110 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GjennomsnittsinntektAlminneligInntektReinGrunnlagSnitt3Ar-datadef-22430">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>111 Gjennomsnittsinntekt 2006</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>111 Gjennomsnittsinntekt 2006</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ResultatANSMvReindriftDeltakerAndel-datadef-22431">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>113 Korreksjon skogbruk/reindrift (gj.snittsberegning). Overføres  deltakeroppgaven post 102e</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Overføres deltageroppgaven post 102e</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>113 Korreksjon skogbruk/reindrift (gj.snittsutrekning). Skal overf.  til deltakaroppgåve post 102e</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5119" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GjennomsnittsinntektAlminneligInntektReinGrunnlag2004-datadef-22427">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">20</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22427" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GjennomsnittsinntektAlminneligInntektReinGrunnlag2005-datadef-24448">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">22</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24448" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GjennomsnittsinntektAlminneligInntektReinGrunnlag2006-datadef-27173">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">24</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="27173" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GjennomsnittsinntektAlminneligInntektReinGrunnlagSum3Ar-datadef-22429">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">26</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22429" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GjennomsnittsinntektAlminneligInntektReinGrunnlagSnitt3Ar-datadef-22430">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">28</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22430" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ResultatANSMvReindriftDeltakerAndel-datadef-22431">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">30</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22431" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

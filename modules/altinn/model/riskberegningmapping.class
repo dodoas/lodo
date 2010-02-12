@@ -1,0 +1,139 @@
+<?php
+/* copy right
+ * Created on 09.jun.2005
+ * by Anh Le
+ * 
+ * 
+ */
+class RISKBeregningMapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+           			$this->ORID[$item] = $v;
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+            	$item = $this->Account[$a];
+            	$this->ORID[$item] = $v;
+	            return 1;
+    	    }
+       	}
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+	{	$this->addMapping('D1', 'EnhetNavn-datadef-1', 'VName');
+		$this->addMapping('D18', 'EnhetOrganisasjonsnummer-datadef-18', 'OrgNumber');
+		$this->addMapping('D15', 'EnhetAdresse-datadef-15', 'VAddress');
+		$this->addMapping('D6673', 'EnhetPostnummer-datadef-6673', 'VZipCode');
+		$this->addMapping('D6674', 'EnhetPoststed-datadef-6674', 'VCity');
+		$this->addMapping('D280', 'RegnskapsforerNavn-datadef-280', 'FVName');
+		$this->addMapping('D281', 'RegnskapsforerAdresse-datadef-281', 'FVAddress');
+		$this->addMapping('D6678', 'RegnskapsforerPostnummer-datadef-6678', 'FVZipCode');
+		$this->addMapping('D6679', 'RegnskapsforerPoststed-datadef-6679', 'FVCity');
+		$this->addMapping('D16535', 'InntektSkattbarNettoRISK-datadef-16535', '0.5');
+		$this->addMapping('D15561', 'KonsernbidragMottattBeskattet-datadef-15561', '0.7');
+		$this->addMapping('D22480', 'InntektSkattbarNettoEkslKonsernbidragRISKGrunnlag-datadef-22480', '1a');
+		$this->addMapping('D22509', 'InntektSkattbarNettoEkslKonsernbidragRISKGrunnlagPositiv-datadef-22509', '1b');
+		$this->addMapping('D7600', 'RISKBeregningNegativSaldoGjenstaende-datadef-7600', '2');
+		$this->addMapping('D7601', 'RISKBeregningNegativSaldoInntektsforing-datadef-7601', '3');
+		$this->addMapping('D7602', 'RISKBeregningNegativSaldoRestbelop-datadef-7602', '4');
+		$this->addMapping('D1098', 'Korreksjonsinntekt-datadef-1098', '5');
+		$this->addMapping('D1998', 'RISKBeregningGrunnlag-datadef-1998', '6');
+		$this->addMapping('D7603', 'RISKBeregningGrunnlagSkatt-datadef-7603', '7');
+		$this->addMapping('D7604', 'RISKBeregningSkattPetroleumskatteloven-datadef-7604', '8');
+		$this->addMapping('D7606', 'GodtgjorelseUtbytteUbenyttet-datadef-7606', '9');
+		$this->addMapping('D7607', 'RISKBelopBeregnetPositivtBelopDelsum-datadef-7607', '10a');
+		$this->addMapping('D7611', 'RISKBelopBeregnetNegativtBelopDelsum-datadef-7611', '10b');
+		$this->addMapping('D235', 'UtbytteAvsatt-datadef-235', '11');
+		$this->addMapping('D13949', 'UtbytteDifferanseAvsattUtdelt-datadef-13949', '12');
+		$this->addMapping('D13950', 'RealisasjonsRISK-datadef-13950', '13');
+		$this->addMapping('D13951', 'RISKBelopFusjonMorDatter-datadef-13951', '14');
+		$this->addMapping('D13952', 'KonsernbidragIkkeSkattepliktigIkkeFradragsberettiget-datadef-13952', '15');
+		$this->addMapping('D15575', 'SkattRefusjonPersoninntekt-datadef-15575', '16');
+		$this->addMapping('D5780', 'SkattGrunnrenteinntekt-datadef-5780', '17');
+		$this->addMapping('D22481', 'RISKBelopEgneSlettedeAksjer-datadef-22481', '18');
+		$this->addMapping('D7609', 'RISKBeregningSkattlagtKapitalTilbakeholdt-datadef-7609', '19');
+		$this->addMapping('D1125', 'AksjerMvAntall-datadef-1125', '20a');
+		$this->addMapping('D2001', 'RISKBelopPrAksje-datadef-2001', '20b');
+		$this->addMapping('D11641', 'UtjevningsfondEndringSparebank-datadef-11641', '23');
+		$this->addMapping('D20194', 'GrunnfondOverkursfondUtjevningsfondFondsemisjonEndring-datadef-20194', '24');
+		$this->addMapping('D20195', 'GrunnfondIkkeInnbetaltUtbetalingReduksjon-datadef-20195', '25');
+		$this->addMapping('D20196', 'RISKBeregningGrunnfondsbevisGrunnlag-datadef-20196', '26');
+		$this->addMapping('D11637', 'GrunnfondsbevisAntall-datadef-11637', '27a');
+		$this->addMapping('D22508', 'RISKBelopPerGrunnfondsbevis-datadef-22508', '27b');
+		$this->addMapping('D11639', 'RISKBelopNegativtReverseringUtjevningsfondAndel-datadef-11639', '28');
+				
+		
+		        
+        
+	}
+ }
+?>

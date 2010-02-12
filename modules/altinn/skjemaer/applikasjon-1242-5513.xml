@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">BR-1013: Samordnet registermelding - signeringsoppgave</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1242-5514.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/Signering-grp-5789/Meldingsinformasjon-grp-5790"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Signering-grp-5789/Meldingsinformasjon-grp-5790/OppgavegiverSigneringsoppgaveNavn-datadef-26977"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Signering-grp-5789/Meldingsinformasjon-grp-5790/OppgavegiverSigneringsoppgaveOrganisasjonsnummer-datadef-26978"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Signering-grp-5789/Meldingsinformasjon-grp-5790/MeldingType-datadef-25451"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Signering-grp-5789/Meldingsinformasjon-grp-5790/MeldingsidentifikasjonMeldingsnummer-datadef-26658"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Signering-grp-5789/Meldingsinformasjon-grp-5790/MeldingsidentifikasjonKonvoluttID-datadef-26659"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Signering-grp-5789/Meldingsinformasjon-grp-5790/MeldingsidentifikasjonSigneringstransaksjonsID-datadef-26660"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Signering-grp-5789/Meldingsinformasjon-grp-5790/DokumenterTilSignering-datadef-25452"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>Samordnet registermelding - signering</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Her kan du signere Samordnet registermelding og/eller eventuelle  vedlegg som trenger signatur. De dokumentene du skal signere er  merket, de øvrige dokumentene er til orientering.  </p>
+                <p/>
+                <p>For å signere Samordnet registermelding, må du klikke på lenken til  skjemaet. Da får du opp skjemaets signeringsside. For å få opp  innholdet i dokumentene klikker du på knappen Vis skjema nederst på  siden og klikker videre på
+                    lenkene til de aktuelle dokumentene.  </p>
+                <p/>
+                <p>Du signerer ved å klikke på Signer og send inn. Meldingen og  eventuelle vedlegg blir automatisk sendt inn til  Brønnøysundregistrene når alle har signert.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/Signering-grp-5789">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:group ref="/Skjema/Signering-grp-5789/Meldingsinformasjon-grp-5790">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:input ref="/Skjema/Signering-grp-5789/Meldingsinformasjon-grp-5790/OppgavegiverSigneringsoppgaveNavn-datadef-26977">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Signering-grp-5789/Meldingsinformasjon-grp-5790/OppgavegiverSigneringsoppgaveOrganisasjonsnummer-datadef-26978">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer:</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Signering-grp-5789/Meldingsinformasjon-grp-5790/MeldingType-datadef-25451">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Meldingen gjelder:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Signering-grp-5789/Meldingsinformasjon-grp-5790/MeldingsidentifikasjonMeldingsnummer-datadef-26658">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Signering-grp-5789/Meldingsinformasjon-grp-5790/MeldingsidentifikasjonKonvoluttID-datadef-26659">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Signering-grp-5789/Meldingsinformasjon-grp-5790/MeldingsidentifikasjonSigneringstransaksjonsID-datadef-26660">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Signering-grp-5789/Meldingsinformasjon-grp-5790/DokumenterTilSignering-datadef-25452">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Meldingen består av:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

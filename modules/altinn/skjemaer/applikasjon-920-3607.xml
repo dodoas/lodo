@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">VT-1507: Lånekassen, stipend/lån til utdanning</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-920-3608.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4015/StudiefinansieringInnledning-datadef-19002" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4015/StudiefinansieringSigneringsfrist-datadef-19003" required="true"/>
+            <xforms:bind ref="/Skjema/AvsenderOgMottaker-grp-4021" required="true"/>
+            <xforms:bind ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/LanekassenNavn-datadef-19393" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/LanInnvilgetDato-datadef-3227" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/Bilagsnummer-datadef-19371" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/RegionkontorNavn-datadef-19001" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/SaksbehandlerNavn-datadef-6597"/>
+            <xforms:bind readOnly="true" ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/RegionkontorPostadresse-datadef-19007"/>
+            <xforms:bind readOnly="true" ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/RegionkontorPostadressePostnummer-datadef-19008"/>
+            <xforms:bind readOnly="true" ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/RegionkontorPostadressePoststed-datadef-19009"/>
+            <xforms:bind readOnly="true" ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/LanekassenOrganisasjonsnummer-datadef-19394" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/RegionkontorKontoradresse-datadef-19010" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/LanekassenTelefonnummer-datadef-19395" required="true"/>
+            <xforms:bind ref="/Skjema/AvsenderOgMottaker-grp-4021/Mottaker-grp-3964" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/AvsenderOgMottaker-grp-4021/Mottaker-grp-3964/OppgavegiverNavn-datadef-68" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/AvsenderOgMottaker-grp-4021/Mottaker-grp-3964/OppgavegiverFodselsnummer-datadef-26" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/AvsenderOgMottaker-grp-4021/Mottaker-grp-3964/InnsenderKundenummer-datadef-3444" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/AvsenderOgMottaker-grp-4021/Mottaker-grp-3964/SkoleNavn-datadef-22064" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/AvsenderOgMottaker-grp-4021/Mottaker-grp-3964/SkoleLandNavn-datadef-22065" required="true"/>
+            <xforms:bind ref="/Skjema/VedtakOmTildeling-grp-3962" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/VedtakOmTildeling-grp-3962/StudiefinansieringStipendLanTildeltPeriodeSpesifisertType-datadef-19006" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/SlikErStipendOgEllerLanRegnetUt-grp-4024/StudiefinansieringBeregningPeriode-datadef-19012" required="true"/>
+            <xforms:bind ref="/Skjema/NarmereOrientering-grp-3968" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/NarmereOrientering-grp-3968/StudiefinansieringTilleggsopplysninger-datadef-19019" required="true"/>
+            <xforms:bind ref="/Skjema/OpplysningspliktKlagerett-grp-4025" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/OpplysningspliktKlagerett-grp-4025/StudiefinansieringOpplysningspliktKlage-datadef-19011" required="true"/>
+            <xforms:bind ref="/Skjema/Gjeldsbrev-grp-3969" required="true"/>
+            <xforms:bind ref="/Skjema/Gjeldsbrev-grp-3969/Lanebelop-grp-3970" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Gjeldsbrev-grp-3969/Lanebelop-grp-3970/StudiefinansieringLanTildelt-datadef-19370" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Gjeldsbrev-grp-3969/Lanebelop-grp-3970/StudiefinansieringStipendBelop-datadef-22066" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Gjeldsbrev-grp-3969/Lanebelop-grp-3970/GjeldIPerioden-datadef-19020" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Gjeldsbrev-grp-3969/Gjeld-datadef-1119" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Gjeldsbrev-grp-3969/StudiefinansieringTilbakebetalingRenter-datadef-19396" required="true"/>
+            <xforms:bind ref="/Skjema/DetteMaDuBekrefteVedAKrysseAvIFeltene-grp-4018" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/DetteMaDuBekrefteVedAKrysseAvIFeltene-grp-4018/StudiefinansieringVilkarErkjennelse-datadef-19015" required="true"/>
+            <xforms:bind ref="/Skjema/DetteMaDuBekrefteVedAKrysseAvIFeltene-grp-4018/StudiefinansieringVilkarBekreftelse-datadef-19368" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/DetteMaDuBekrefteVedAKrysseAvIFeltene-grp-4018/StudiefinansieringVilkarLest-datadef-19398" required="true"/>
+            <xforms:bind ref="/Skjema/UtbetalingKontonummer-grp-4016" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/UtbetalingKontonummer-grp-4016/StudiefinansieringTildeltUtbetalingstidspunkt-datadef-19018" required="true"/>
+            <xforms:bind ref="/Skjema/Kontonummer-grp-4017" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Kontonummer-grp-4017/KontonummerForeslatt-datadef-22254" required="true"/>
+            <xforms:bind ref="/Skjema/Kontonummer-grp-4017/OppgavegiverKontonummerEndring-datadef-19397" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Kontonummer-grp-4017/StudiefinansieringKontonummerManglerBekreftelse-datadef-22067" required="true"/>
+            <xforms:bind ref="/Skjema/Kontonummer-grp-4017/OppgavegiverKontonummerBekreftet-datadef-19021" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Kontonummer-grp-4017/OppgavegiverKontonummerBekreftelse-datadef-19014" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Kontonummer-grp-4017/StudiefinansieringKontonummerBekreftelse-datadef-22068" required="true"/>
+            <xforms:bind ref="/Skjema/Sammendrag-grp-4034" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Sammendrag-grp-4034/OppgavegiverKontonummer-datadef-8774" required="true"/>
+            <xforms:bind ref="/Skjema/Sammendrag-grp-4034/StudiefinansieringSigneringBekreftelse-datadef-19369" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Sammendrag-grp-4034/StudiefinansieringSigneringErkjennelse-datadef-19017" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>VT-1507 Vedtak om tildeling av stipend/lån og gjeldsbrev</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Vedtak om tildeling av stipend/lån og gjeldsbrev.  </p>
+                <p/>
+                <p>Skjemaet er et dokument som inneholder vedtak, låneavtale og  gjeldsbrev. Det er avtalen mellom deg og Lånekassen. Du må klikke deg  gjennom alle sidene ved å trykke på knappen Neste>>. Dokumentet  signeres til slutt med en digital
+                    signatur. Din digitale signatur på  dokumentet aksepteres av Lånekassen som likeverdig med en underskrift  på papir.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>Vedtak om tildeling av stipend/lån og gjeldsbrev.  </p>
+                <p/>
+                <p>Skjemaet er et dokument som inneholder vedtak, låneavtale og  gjeldsbrev. Det er avtalen mellom deg og Lånekassen. Du må klikke deg  gjennom alle sidene ved å trykke på knappen Neste>>. Dokumentet  signeres til slutt med en digital
+                    signatur. Din digitale signatur på  dokumentet aksepteres av Lånekassen som likeverdig med en underskrift  på papir.</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Vedtak om tildeling av stipend/lån og gjeldsbrev.  </p>
+                <p>Dette er et elektronisk dokument fra Statens lånekasse for utdanning.  Dokumentet inneholder vedtak, låneavtale og gjeldsbrev og erstatter  dagens utbetalingspapir. Du må klikke deg gjennom alle sidene ved å  trykke på Neste>>. Til
+                    slutt vil du kunne signere dokumentet med en  elektronisk signatur. En elektronisk signatur er likeverdig med en  håndskrevet signatur.  </p>
+                <p/>
+                <p>Når dokumentet er signert vil pengene overføres direkte til det  kontonummeret som er oppgitt.  </p>
+                <p/>
+                <p>Dersom du har behov for mer informasjon om Lånekassens ordninger eller  ønsker å vite mer om forskriftene, kan du gå til www.lanekassen.no.  Der finner du telefonnummer, e-post- og postadresser til Lånekassen.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-4015">
+                <brreg:sensitivitet type="Særlig sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Svar på søknad om støtte fra Lånekassen</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Svar på søknad om støtte fra Lånekassen</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-4015/StudiefinansieringInnledning-datadef-19002">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Særlig sensitiv"/>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-4015/StudiefinansieringSigneringsfrist-datadef-19003">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Særlig sensitiv"/>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/AvsenderOgMottaker-grp-4021">
+                <brreg:sensitivitet type="Særlig sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Avsender og kunde</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Avsendar og kunde</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022">
+                    <brreg:sensitivitet type="Særlig sensitiv"/>
+                    <xforms:input ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/LanekassenNavn-datadef-19393">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Særlig sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Avsender</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Avsender</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/LanInnvilgetDato-datadef-3227">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Særlig sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Vår dato</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Vår dato</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/Bilagsnummer-datadef-19371">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Særlig sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bilagsnummer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Bilagsnummer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/RegionkontorNavn-datadef-19001">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Særlig sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kontor</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kontor</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/SaksbehandlerNavn-datadef-6597">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Særlig sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Saksbehandler</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Saksbehandlar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/RegionkontorPostadresse-datadef-19007">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Særlig sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Statens lånekasse for utdanning Postadresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Statens lånekasse for utdanning Postadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/RegionkontorPostadressePostnummer-datadef-19008">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Særlig sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/RegionkontorPostadressePoststed-datadef-19009">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Særlig sensitiv"/>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/LanekassenOrganisasjonsnummer-datadef-19394">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Særlig sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/RegionkontorKontoradresse-datadef-19010">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Særlig sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Besøksadresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Besøksadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AvsenderOgMottaker-grp-4021/Avsender-grp-4022/LanekassenTelefonnummer-datadef-19395">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Særlig sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefonnummer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Telefonnummer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/AvsenderOgMottaker-grp-4021/Mottaker-grp-3964">
+                    <brreg:sensitivitet type="Særlig sensitiv"/>
+                    <xforms:input ref="/Skjema/AvsenderOgMottaker-grp-4021/Mottaker-grp-3964/OppgavegiverNavn-datadef-68">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Særlig sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kunde</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kunde</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AvsenderOgMottaker-grp-4021/Mottaker-grp-3964/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Særlig sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnummer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnummer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AvsenderOgMottaker-grp-4021/Mottaker-grp-3964/InnsenderKundenummer-datadef-3444">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Særlig sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kundenummer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kundenummer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AvsenderOgMottaker-grp-4021/Mottaker-grp-3964/SkoleNavn-datadef-22064">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Særlig sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Skolens navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Skolens navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AvsenderOgMottaker-grp-4021/Mottaker-grp-3964/SkoleLandNavn-datadef-22065">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Særlig sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Land</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Land</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/VedtakOmTildeling-grp-3962">
+                <brreg:sensitivitet type="Særlig sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Vedtak om stipend og/eller lån til utdanning</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Vedtak om stipend og/eller lån til utdanning</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/VedtakOmTildeling-grp-3962/StudiefinansieringStipendLanTildeltPeriodeSpesifisertType-datadef-19006">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Særlig sensitiv"/>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SlikErStipendOgEllerLanRegnetUt-grp-4024">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Slik er støtten beregnet</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Slik er støtten beregnet</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/SlikErStipendOgEllerLanRegnetUt-grp-4024/StudiefinansieringBeregningPeriode-datadef-19012">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Særlig sensitiv"/>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/NarmereOrientering-grp-3968">
+                <brreg:sensitivitet type="Særlig sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Meldinger til deg</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Meldinger til deg</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/NarmereOrientering-grp-3968/StudiefinansieringTilleggsopplysninger-datadef-19019">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Særlig sensitiv"/>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OpplysningspliktKlagerett-grp-4025">
+                <brreg:sensitivitet type="Særlig sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Klagerett og opplysningsplikt</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Klagerett og opplysningsplikt</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/OpplysningspliktKlagerett-grp-4025/StudiefinansieringOpplysningspliktKlage-datadef-19011">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Særlig sensitiv"/>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Gjeldsbrev-grp-3969">
+                <brreg:sensitivitet type="Særlig sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Gjeldsbrev/stipendmelding</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Gjeldsbrev/stipendmelding</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Gjeldsbrev-grp-3969/Lanebelop-grp-3970">
+                    <brreg:sensitivitet type="Særlig sensitiv"/>
+                    <xforms:input ref="/Skjema/Gjeldsbrev-grp-3969/Lanebelop-grp-3970/StudiefinansieringLanTildelt-datadef-19370">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Særlig sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Periode</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Periode</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Gjeldsbrev-grp-3969/Lanebelop-grp-3970/StudiefinansieringStipendBelop-datadef-22066">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Særlig sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Stipend kr</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Stipend</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Gjeldsbrev-grp-3969/Lanebelop-grp-3970/GjeldIPerioden-datadef-19020">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Særlig sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tildelt lån kr</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Tildelt lån</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/Gjeldsbrev-grp-3969/Gjeld-datadef-1119">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Særlig sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Mitt samlede lån utgjør etter dette kr</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Samla lån etter dette kr</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Gjeldsbrev-grp-3969/StudiefinansieringTilbakebetalingRenter-datadef-19396">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Særlig sensitiv"/>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/DetteMaDuBekrefteVedAKrysseAvIFeltene-grp-4018">
+                <brreg:sensitivitet type="Særlig sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Dette aksepterer du ved å krysse av</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Dette aksepterer du ved å krysse av</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/DetteMaDuBekrefteVedAKrysseAvIFeltene-grp-4018/StudiefinansieringVilkarErkjennelse-datadef-19015">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Særlig sensitiv"/>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/DetteMaDuBekrefteVedAKrysseAvIFeltene-grp-4018/StudiefinansieringVilkarBekreftelse-datadef-19368">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Særlig sensitiv"/>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Du må velge Ja for å bekrefte at du har lest og godkjenner vilkårene</p>
+                    </xforms:alert>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Du må velge Ja for å bekrefte at du har lest og godkjenner vilkårene</p>
+                    </xforms:alert>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/DetteMaDuBekrefteVedAKrysseAvIFeltene-grp-4018/StudiefinansieringVilkarLest-datadef-19398">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Særlig sensitiv"/>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/UtbetalingKontonummer-grp-4016">
+                <brreg:sensitivitet type="Særlig sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Utbetaling</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Utbetaling</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/UtbetalingKontonummer-grp-4016/StudiefinansieringTildeltUtbetalingstidspunkt-datadef-19018">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Særlig sensitiv"/>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Kontonummer-grp-4017">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Kontonummer</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Kontonummer</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Kontonummer-grp-4017/KontonummerForeslatt-datadef-22254">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                </xforms:input>
+                <xforms:repeat id="repeat_OppgavegiverKontonummerEndring-datadef-19397" nodeset="/Skjema/Kontonummer-grp-4017/OppgavegiverKontonummerEndring-datadef-19397">
+                    <xforms:selectOne ref="/Skjema/Kontonummer-grp-4017/OppgavegiverKontonummerEndring-datadef-19397">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Kontonr</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Kontonr</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>3</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Kontonr</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>4</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Kontonr</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>5</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Kontonr</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>6</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Kontonr</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>7</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Kontonummer mangler</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Lånekassen foreslår å overføre pengene til følgende konto:</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Lånekassen foreslår å overføre pengene til følgende konto:</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/Kontonummer-grp-4017/StudiefinansieringKontonummerManglerBekreftelse-datadef-22067">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/Kontonummer-grp-4017/OppgavegiverKontonummerBekreftet-datadef-19021">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Du må velge Ja for å bekrefte at kontonummeret er riktig</p>
+                    </xforms:alert>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Du må velge Ja for å bekrefte at kontonummeret er riktig</p>
+                    </xforms:alert>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/Kontonummer-grp-4017/OppgavegiverKontonummerBekreftelse-datadef-19014">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Kontonummer-grp-4017/StudiefinansieringKontonummerBekreftelse-datadef-22068">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Sammendrag-grp-4034">
+                <brreg:sensitivitet type="Særlig sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Sammendrag</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Samandrag</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Sammendrag-grp-4034/OppgavegiverKontonummer-datadef-8774">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Særlig sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kontonummer</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kontonummer</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/Sammendrag-grp-4034/StudiefinansieringSigneringBekreftelse-datadef-19369">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Særlig sensitiv"/>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Du må velge Ja for å bekrefte at opplysningene på denne siden er  riktige</p>
+                    </xforms:alert>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/Sammendrag-grp-4034/StudiefinansieringSigneringErkjennelse-datadef-19017">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Særlig sensitiv"/>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

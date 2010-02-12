@@ -1,0 +1,1127 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--title='RF-1231: Spesifikasjon av formue/gjeld og inntekt/fradrag tilknyttet utlandet' lang='NOB'-->
+    <xs:element name="Skjema">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>RF-1231 Spesifikasjon av innskudd i utenlandsk bank mv. og BSU-sparing  i annen EØS-stat 2005</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Skattytere som har eller i løpet av året har hatt konto i utenlandsk  bank som ikke er knytta til næringsverksemd, har plikt til å fylle ut  dette skjemaet som vedlegg til sjølvmeldinga.  </p>
+                    <p/>
+                    <p>Årsoppgave fra spareinstitusjon må vedlegges dette skjema.  Skjema må  leveres hvert år fra og med opprettelse av konto til og med det år  konto blir slettet.  Det året bustadsparekonto opprettes eller  overføres fra en
+                        spareinstitusjon til en annen, skal også  BSU-kontrakt vedlegges.  </p>
+                    <p/>
+                    <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. Nov 1994, jf. likningsloven § 4-4 nr. 7.  </p>
+                    <p/>
+                    <p>Andre offentlige organers bruk av opplysninger i RF-1231.  </p>
+                    <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjema, RF-1231, helt eller delvis bli  benyttet også av andre offentlige organer som har hjemmel til å  innhente de samme
+                        opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt. samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Vedlegg til selvangivelsen for 2005</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>RF-1231 Spesifikasjon av innskott i utenlandsk bank o.l. og  BSU-sparing i annan EØS-stat 2005</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Skattytarar som har eller har hatt konto i utenlandsk bank som ikkje  er tilknytta næringsverksemd, har plikt til å fylle ut dette skjemaet  som vedlegg til sjølvmeldinga.  </p>
+                    <p/>
+                    <p>Årsoppgave fra spareinstitusjon må vedlegge dette skjema.  Skjema må  leverast kvart år frå og med oppretting av konto til og med det år  konto blir sletta.  Det året boligsparekonto opprettast eller  overførast frå ein
+                        spreinstitusjon til ein anna, skal også  BSU-kontrakt leggast ved.  </p>
+                    <p/>
+                    <p>Fastsett av Skattedirektoratet med heimel i Finansdepartementet sitt  delegeringsvedtak av 28. Nov 1994, jf. likningslova § 4-4 nr. 7.  </p>
+                    <p/>
+                    <p>Andre offentlege organ som bruker opplysningar i RF-1231.  </p>
+                    <p>For å samordna og forenkla oppgåveinnleveringa frå næringslivet, kan  opplysningar som blir gitt i dette skjema, RF-1231, heilt eller  delvis bli nytta også av andre offentlege organ som har heimel til å  innhente dei same
+                        opplysningane, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysningar om evt. samordning kan ein få ved å vende seg til  Oppgåveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                    <p>Vedlegg til sjølvmeldinga for 2005</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GenerellInformasjon-grp-1057"/>
+                <xs:element minOccurs="0" ref="InnskuddIUtenlandskeBankerMv-grp-390"/>
+                <xs:element minOccurs="0" ref="BSUSparingIAnnenEOSStat-grp-4937"/>
+                <xs:element minOccurs="0" ref="IIISumForAlleKontiInklusiveBSUKonto-grp-4972"/>
+            </xs:sequence>
+            <xs:attribute fixed="748" name="skjemanummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="3690" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="RF-1231" name="blankettnummer" type="xs:string" use="optional"/>
+            <xs:attribute fixed="Spesifikasjon av formue/gjeld og inntekt/fradrag tilknyttet utlandet" name="tittel" type="xs:string" use="optional"/>
+            <xs:attribute fixed="388" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+            <xs:attribute name="etatid" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="974761076">
+                            <xs:annotation>
+                                <xs:documentation>SKATTEDIREKTORATET</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:anyAttribute/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GenerellInformasjon-grp-1057">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Innledning</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Innledning</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Avgiver-grp-389"/>
+            </xs:sequence>
+            <xs:attribute fixed="1057" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Avgiver-grp-389">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Avgiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Avgivar</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="OppgavegiverNavn-datadef-68">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="OppgavegiverFodselsnummer-datadef-26">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Fødselsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Fødselsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="389" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OppgavegiverNavn-datadef-68">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Navn på oppgavegiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="DEF">
+                    <p>Namn på oppgåvegjevar</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">1</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="68" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst175-repformat-8">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="175"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverFodselsnummer-datadef-26">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Fødselsnummer til oppgavegiveren</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">2</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst1111Modulus11-repformat-18">
+                    <xs:attribute fixed="26" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst1111Modulus11-repformat-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">18</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="11"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="InnskuddIUtenlandskeBankerMv-grp-390">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Innskudd i utenlandske banker mv.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Her spesifiseres innskudd i utenlandske banker mv.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Innskott i utanlandske bankar o.l.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Her spesifiserast inskott i utanlandske bankar o.l.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="50" minOccurs="0" ref="InnskuddIUtenlandskeBankerMv-grp-403"/>
+            </xs:sequence>
+            <xs:attribute fixed="390" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InnskuddIUtenlandskeBankerMv-grp-403">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Innskudd i utenlandske banker mv.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Innskott i utanlandske bankar o.l.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="BankMvUtlandNavnSpesifisertBankMv-datadef-8080">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Bankens, institusjonens navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namnet til banken, institusjonen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KontohaverUtlandKontonummerSpesifisertBankMv-datadef-8081">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Kontonummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Kontonummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KontohaverUtlandSpesifisertBankMv-datadef-8082">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navnet som kontoen lyder på</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namnet som kontoen lyder på</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="BankinnskuddMvUtlandValutaFjoraretSpesifisertBankMv-datadef-8083">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Innestående pr. 01.01 i inntektsåret i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Er kontoen opprettet i løpet av året, oppgis innestående ved kontoens  opprettelse.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Inneståande pr. 01.01 i inntektsåret i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Er kontoen oppretta i inntektsåret, skal ein gje opp inneståande ved  opprettinga av kontoen.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="BankinnskuddMvUtlandSpesifisertBankMv-datadef-8085">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Innestående pr. 01.01 i året etter inntektsåret NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Summen av alle konti blir overført til siste side i skjemaet  </p>
+                                <p/>
+                                <p>Er kontoen avsluttet i løpet av året, oppgis innestående ved kontoens  avslutning, men beløpet skal ikke tas med i den sum som overføres til  post 4.1.9.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Inneståande pr. 01.01 i året etter inntektsåret i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Summen av alle konti blir overført til siste side i skjemaet  </p>
+                                <p/>
+                                <p>Er kontoen avslutta i inntektsåret, skal ein gi opp inneståande ved  avslutning av kontoen, men beløpet skal ikkje takast med i den summen  som skal førast over til post 4.1.9</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ValutakursSpesifisertBankMv-datadef-5761">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Valutakurs som er brukt ved omregning av innestående</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Valutakurs som er nytta ved omrekning av inneståande</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RenteinntekterMvUtlandBankinnskuddMvSpesifisertBankMv-datadef-8087">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Renter, avkastning i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Summen av alle konti blir overført til siste side i skjemaet</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Renter, avkasting i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Summen av alle konti blir overført til siste side i skjemaet</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ValutakursRenterOmregningSpesifisertBankMv-datadef-21990">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Valutakurs som er brukt ved omregning av renter, avkastning</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Valutakurs som er nytta ved omrekning av renter,avkastning</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkattetrekkUtlandRenteavkastningSpesifisertBankMv-datadef-8089">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Trukket skatt i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Summen av alle konti blir overført til siste side i skjemaet</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>III Trekt skatt i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Summen av alle konti blir overført til siste side i skjemaet</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="403" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="BankMvUtlandNavnSpesifisertBankMv-datadef-8080">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="8080" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst35-repformat-3">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="35"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="KontohaverUtlandKontonummerSpesifisertBankMv-datadef-8081">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="8081" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KontohaverUtlandSpesifisertBankMv-datadef-8082">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">5</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="8082" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="BankinnskuddMvUtlandValutaFjoraretSpesifisertBankMv-datadef-8083">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="8083" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopHeltall15-repformat-37">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">37</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="BankinnskuddMvUtlandSpesifisertBankMv-datadef-8085">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">7</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="8085" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ValutakursSpesifisertBankMv-datadef-5761">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Desimal153Desimaler-repformat-137">
+                    <xs:attribute fixed="5761" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Desimal153Desimaler-repformat-137">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">137</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Feltet krever tre desimaler</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Feltet krev tre desimalar</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="15"/>
+            <xs:pattern value="-{0,1}[0-9]{1,}\.[0-9]{3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="RenteinntekterMvUtlandBankinnskuddMvSpesifisertBankMv-datadef-8087">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="8087" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ValutakursRenterOmregningSpesifisertBankMv-datadef-21990">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">10</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Desimal153Desimaler-repformat-137">
+                    <xs:attribute fixed="21990" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkattetrekkUtlandRenteavkastningSpesifisertBankMv-datadef-8089">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">11</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="8089" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="BSUSparingIAnnenEOSStat-grp-4937">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>BSU sparing i annen EØS stat</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>BSU sparing i anna EØS stat</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="BankMvBSUEOSStatNavn-datadef-21991">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Bankens, institusjonens navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Bankens, institusjonens namn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KontohaverBSUEOSStatKontonummer-datadef-21992">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Kontonummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Kontonummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KontohaverBSUEOSStatNavn-datadef-21993">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navnet som kontoen lyder på</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namnet som kontoen lyder på</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="BankinnskuddMvBSUEOSStatValutaFjoraret-datadef-21994">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>I Innestående pr 01.01 i inntektsåret NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>I Inneståande pr 01.01 i inntektsåret i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="BankinnskuddMvBSUEOSStatBelop-datadef-21995">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Innestående pr 01.01 i året etter inntektsåret i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Summen blir overført til siste side i skjemaet</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Inneståande pr 01.01 i året etter inntektsåret i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Summen blir overført til siste side i skjemaet</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ValutakursBSUEOSStat-datadef-21996">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Valutakurs som er brukt ved omregning av innestående</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Valutakurs som er nytta ved omrekning av innestående</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RenteinntekterMvBSUEOSStatBelop-datadef-21997">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Renter, avkastning i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Renter, avkastning i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ValutakursRenterOmregningBSUEOSStatBelop-datadef-21998">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Valutakurs som er brukt ved omregning av renter, avkastning</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Valutakurs som er nytta ved omrekning av renter, avkastning</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkattetrekkBSUEOSStatRenteavkastningBelop-datadef-21999">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Trukket skatt i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Summen blir overført til siste side i skjemaet</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Trukket skatt i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Summen blir overført til siste side i skjemaet</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SparebelopInnbetaltBSUEOSStat-datadef-22000">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Innbetalt sparebeløp i inntektsåret</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Overføres selvangivelsen post 1.5.1</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Innbetalt sparebeløp i inntektsåret</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Overførast til sjølmeldinga post 1.5.1</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="UttakBoligformalBSUEOSStatBelop-datadef-22001">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Uttak til boligformål iht. BSU kontrakt foretatt i 2005 i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Uttak til bustadsformål iht. BSU kontrakt foreteken i inntektsåret i  NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="UttakAnnetFormalBSUEOSStatBelop-datadef-22002">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Uttak til annet formål foretatt i inntektsåret i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Uttak til annet formål foreteken i inntektsåret i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4937" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="BankMvBSUEOSStatNavn-datadef-21991">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">12</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="21991" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KontohaverBSUEOSStatKontonummer-datadef-21992">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">13</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="21992" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KontohaverBSUEOSStatNavn-datadef-21993">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">14</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="21993" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="BankinnskuddMvBSUEOSStatValutaFjoraret-datadef-21994">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">15</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="21994" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="BankinnskuddMvBSUEOSStatBelop-datadef-21995">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">16</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="21995" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ValutakursBSUEOSStat-datadef-21996">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">17</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Desimal153Desimaler-repformat-137">
+                    <xs:attribute fixed="21996" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RenteinntekterMvBSUEOSStatBelop-datadef-21997">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">18</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="21997" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ValutakursRenterOmregningBSUEOSStatBelop-datadef-21998">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">19</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Desimal153Desimaler-repformat-137">
+                    <xs:attribute fixed="21998" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkattetrekkBSUEOSStatRenteavkastningBelop-datadef-21999">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">20</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="21999" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SparebelopInnbetaltBSUEOSStat-datadef-22000">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">21</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22000" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UttakBoligformalBSUEOSStatBelop-datadef-22001">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">22</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22001" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UttakAnnetFormalBSUEOSStatBelop-datadef-22002">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">23</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22002" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="IIISumForAlleKontiInklusiveBSUKonto-grp-4972">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Sum alle konti (inklusive BSU konto)</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Sum alle konti (inklusive BSU konto)</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="BankinnskuddMvUtlandSkattemessig-datadef-8090">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Sum innestående pr.01.01 i året etter inntektsåret i NOK (overføres  til selvangivelsen under post 4.1.9)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Beløpet som fremkommer er summen av inntastede verdier fra tidligere  sider</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>I Sum inneståande pr.01.01 i året etter inntektsåret i NOK (overførast  til sjølvmeldinga post 4.1.9)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Beløpet som kjem fram her er summen av inntastede verdiar frå  tidligare sider</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RenteavkastningMvUtlandBankinnskuddMv-datadef-8091">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Sum renter, avkastning pr 01.01 i året etter inntektsåret i NOK  (overføres selvangivelsen under post 3.1.6)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Beløpet som fremkommer er summen av inntastede verdier fra tidligere  sider</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Sum renter, avkastning pr 01.01 i året etter inntektsåret i NOK  (overførast sjølvmeldinga post 3.1.6)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Beløpet som kjem fram her er summen av inntastede verdiar frå  tidligare sider</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkattetrekkUtlandRenteavkastning-datadef-8092">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Sum trukket i skatt i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Beløpet som fremkommer er summen av inntastede verdier fra tidligere  sider</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Sum trekt skatt i NOK</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Beløpet som kjem fram her er summen av inntastede verdiar frå  tidligare sider</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4972" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="BankinnskuddMvUtlandSkattemessig-datadef-8090">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">24</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="8090" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RenteavkastningMvUtlandBankinnskuddMv-datadef-8091">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">25</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="8091" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkattetrekkUtlandRenteavkastning-datadef-8092">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">26</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="8092" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

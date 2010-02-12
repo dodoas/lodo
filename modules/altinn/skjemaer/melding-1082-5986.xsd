@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--title='SFT-0001: Generell administrativ informasjon om rapporteringspliktige' lang='NOB'-->
+    <xs:element name="Skjema">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Egenrapportering av utslippstall.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Egenrapportering av utslippstall fra bedrifter med  utslippstillatelse.  </p>
+                    <p/>
+                    <p>Industribedrifter som driver virksomhet som kan medføre fare for  forurensning, skal ha utslippstillatelse i medhold av lov om vern mot  forurensninger og om avfall (forurensningsloven av 13. mars 1981 nr.  6).  </p>
+                    <p/>
+                    <p>Alle norske bedrifter i klasse 1, 2 og 3 med utslippstillatelse og  alle bedrifter med særskilte beredskapskrav, skal årlig innen 1. mars  rapportere utslippstall og status for beredskapsutvikling til  forurensningsmyndigheten.  </p>
+                    <p/>
+                    <p>Egenrapporteringen er en slags miljøselvangivelse for bedrifter med  utslippstillatelse, og som har fått krav om å levere slik  rapportering. Bedriftene skal rapportere om utslipp og avfall fra sin  virksomhet.  </p>
+                    <p/>
+                    <p>Les mer:  </p>
+                    <p> - Veiledning til bedriftenes egenrapportering til  forurensningsmyndighetene:  http://www.sft.no/publikasjoner/andre/1929/ta1929.pdf  </p>
+                    <p>- Forurensningsloven:  http://www.lovdata.no/all/hl-19810313-006.html  </p>
+                    <p/>
+                    <p>Telefonnr til Fylkesmannen og SFT:  </p>
+                    <p>Fylkesmannen i Aust-Agder  37 01 73 00  </p>
+                    <p>Fylkesmannen i Buskerud   32 26 66 00  </p>
+                    <p>Fylkesmannen i Finnmark   78 95 03 00  </p>
+                    <p>Fylkesmannen i Hedmark   62 55 10 00  </p>
+                    <p>Fylkesmannen i Hordaland  55 57 20 00  </p>
+                    <p>Fylkesmannen i Møre og Romsdal  71 25 80 00  </p>
+                    <p>Fylkesmannen i Nordland   75 53 15 00  </p>
+                    <p>Fylkesmannen i Nord-Trøndelag  74 16 80 00  </p>
+                    <p>Fylkesmannen i Oppland   61 26 60 00  </p>
+                    <p>Fylkesmannen i Oslo og Akershus  22 00 35 00  </p>
+                    <p>Fylkesmannen i Rogaland   51 56 87 00  </p>
+                    <p>Fylkesmannen i Sogn og Fjordane  57 65 50 00  </p>
+                    <p>Fylkesmannen i Sør-Trøndelag  73 19 90 00  </p>
+                    <p>Fylkesmannen i Telemark   35 58 61 10  </p>
+                    <p>Fylkesmannen i Troms   77 64 20 00  </p>
+                    <p>Fylkesmannen i Vest-Agder  38 17 60 00  </p>
+                    <p>Fylkesmannen i Vestfold   33 37 10 00  </p>
+                    <p>Fylkesmannen i Østfold   69 24 70 00  </p>
+                    <p>Statens forurensningstilsyn  22 57 34 00</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GenerellInfo-grp-5542"/>
+            </xs:sequence>
+            <xs:attribute fixed="1082" name="skjemanummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="5986" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="SFT-0001" name="blankettnummer" type="xs:string" use="optional"/>
+            <xs:attribute fixed="Generell administrativ informasjon om rapporteringspliktige" name="tittel" type="xs:string" use="optional"/>
+            <xs:attribute fixed="5465" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+            <xs:attribute name="etatid" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="970935657">
+                            <xs:annotation>
+                                <xs:documentation>STATENS FORURENSNINGSTILSYN</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:anyAttribute/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GenerellInfo-grp-5542">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Generell informasjon om rapporteringspliktige.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GenerellInformasjon-grp-5546"/>
+                <xs:element minOccurs="0" ref="Eggenrapporter-grp-6592"/>
+            </xs:sequence>
+            <xs:attribute fixed="5542" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GenerellInformasjon-grp-5546">
+        <xs:annotation/>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="OppgaveAr-datadef-11236">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Rapporteringsår:</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetOrganisasjonsnummer-datadef-18">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnummer til årsregnskapets eier (juridisk enhet):</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="BedriftOrganisasjonsnummer-datadef-19">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnummer (bedrift):</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="BedriftNavn-datadef-336">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Bedriftsnavn:</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="BedriftAdresse-datadef-319">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postadresse:</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="BedriftPostnummer-datadef-8908">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnummer:</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="BedriftPoststed-datadef-8909">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Poststed:</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="BedriftNACEKode-datadef-6186">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Næringsgrupperingsnummer (NACE):</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Alle bedrifter plasseres i bransjer. Bransjekodene er de samme som  standard for næringsgrupper fra Statistisk sentralbyrå (SSB). De er i  tråd med EUs vedtak vedrørende Nomenclature générale des Activités
+                                    economiques dans les Communautés Européenes (NACE).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="BedriftNaring-datadef-52">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beskrivelse av næringsgruppering:</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Alle bedrifter plasseres i bransjer. Bransjekodene er de samme som  standard for næringsgrupper fra Statistisk sentralbyrå (SSB). De er i  tråd med EUs vedtak vedrørende Nomenclature générale des Activités
+                                    economiques dans les Communautés Européenes (NACE). Hver  næringsgrupperingskode har en tilhørende beskrivelse. Denne  beskrivelsen skal angis her.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="BedriftEMASRegistrert-datadef-23230">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Er bedriften EMAS-registrert?</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>EMAS - Eco-Management and Audit Scheme er en frivillig ordning for  miljøregistrering av virksomheter innen EU. Gjennom EØS-avtalen kan  også norske bedrifter delta i ordningen. En EMAS-godkjenning betyr at
+                                    bedriften både overholder og går lenger i sitt miljøarbeid enn det  som er lovfestede miljøkrav.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="BedriftISO14001Sertifisert-datadef-23231">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Er bedriften ISO-sertifisert?</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>ISO står for International Standardization Organisation. Kravene til  ISO 14001 tilsvarer EMAS, med unntak av ekstern rapportering og  registrering.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="BedriftIPPCDirektiv-datadef-24326">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Er bedriften omfattet av IPPC-direktivet?</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>IPPC-direktivet, Council Directive 96/61/EC concerning Integrated  Pollution Prevention and Control.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5546" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OppgaveAr-datadef-11236">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">1</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Ar44-repformat-6">
+                    <xs:attribute fixed="11236" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Ar44-repformat-6">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:gYear"/>
+    </xs:simpleType>
+    <xs:element name="EnhetOrganisasjonsnummer-datadef-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummeret til enheten</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Organisasjonsnummer til årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">2</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="18" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst99Modulus11-repformat-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">1</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="BedriftOrganisasjonsnummer-datadef-19">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="19" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="BedriftNavn-datadef-336">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst70-repformat-7">
+                    <xs:attribute fixed="336" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst70-repformat-7">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">7</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="70"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="BedriftAdresse-datadef-319">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">5</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst105-repformat-9">
+                    <xs:attribute fixed="319" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst105-repformat-9">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="105"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="BedriftPostnummer-datadef-8908">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="8908" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst44BareTall-repformat-10">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">10</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+                    <p>Enter positive integer with four digits</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Feltet krever positivt heltall med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Feltet krev positivt heiltal med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="4"/>
+            <xs:pattern value="[0-9]{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="BedriftPoststed-datadef-8909">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">7</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="8909" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst35-repformat-3">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="35"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="BedriftNACEKode-datadef-6186">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst6-repformat-39">
+                    <xs:attribute fixed="6186" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst6-repformat-39">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">39</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="6"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="BedriftNaring-datadef-52">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Beskrivelse av hvilke produksjonsaktiviteter som blir utført innen bedriften</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="52" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst175-repformat-8">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="175"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="BedriftEMASRegistrert-datadef-23230">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">10</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+                    <xs:attribute fixed="23230" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg2JaNei-repformat-4">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="3"/>
+            <xs:enumeration value="Ja">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Yes</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Ja</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Ja</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Nei">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>No</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Nei</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Nei</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="BedriftISO14001Sertifisert-datadef-23231">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">11</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+                    <xs:attribute fixed="23231" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="BedriftIPPCDirektiv-datadef-24326">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Hvorvidt bedriften omfattes av IPPC-direktivet. (Integrert forebygging og begrensning av forurensning)</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">12</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+                    <xs:attribute fixed="24326" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Eggenrapporter-grp-6592">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Kryss av for hvilken type egenrapport som skal fylles ut:</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Egenrapportene finner du ved å velge arkfanen Vedlegg. Velg riktig  vedleggsskjema i nedtrekkslisten og trykk Legg til.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="EgenrapportUtslippTypeRapport-datadef-26848">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Kryss av for type egenrapport som er vedlagt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="6592" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EgenrapportUtslippTypeRapport-datadef-26848">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">13</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteFlereValg2EgenrapportUtslipp-repformat-571">
+                    <xs:attribute fixed="26848" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteFlereValg2EgenrapportUtslipp-repformat-571">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">571</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:list itemType="KodelisteFlereValg2EgenrapportUtslipp-repformat-571-item"/>
+    </xs:simpleType>
+    <xs:simpleType name="KodelisteFlereValg2EgenrapportUtslipp-repformat-571-item">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="140"/>
+            <xs:enumeration value="Egenrapportering_for_bedrifter_med_kvotepliktige_utslipp_av_CO2">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Egenrapportering for bedrifter med kvotepliktige utslipp av CO2</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Egenrapportering_av_utslippstall_fra_bedrifter_med_utslippstillatelse">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Rapportering fra bedrifter med utslippstillatelse og avfallsdeponier med rapporteringskrav</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

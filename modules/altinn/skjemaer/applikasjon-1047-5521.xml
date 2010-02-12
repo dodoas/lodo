@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">NB-0002: Valutahandelsstatistikk</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1047-5522.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5239/Rapporteringsenhet-grp-5240/EnhetOrganisasjonsnummer-datadef-18"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-5239/Rapporteringsenhet-grp-5240/AvgiverRapportorOrganisasjonsnummer-datadef-23221" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-5239/Rapporteringsenhet-grp-5240/InnsendelseDato-datadef-22420" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="EN">
+                <p>NB-0002 Valutahandelstatistikk</p>
+            </xforms:caption>
+            <xforms:caption brreg:lang="NOB">
+                <p>NB-0002 Valutahandelsstatistikk</p>
+            </xforms:caption>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-5239">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="EN">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-5239/Rapporteringsenhet-grp-5240">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Rapporteringsenhet</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Rapporteringsenhet</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5239/Rapporteringsenhet-grp-5240/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Avsender</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Avsenders organisasjonsnummer. D - nummer (tildeles) hvis utenlands  enhet.</p>
+                        </xforms:help>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Avsender</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Avsenders organisasjonsnummer. D - nummer (tildeles) hvis utenlands  enhet.</p>
+                        </xforms:help>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5239/Rapporteringsenhet-grp-5240/AvgiverRapportorOrganisasjonsnummer-datadef-23221">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Rapportør</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Rapportørens organisasjonsnummer, D - nummer hvis utenlandsk  rapportør, norsk filials organisasjonsnummer hvis tilleggsrapport fra  utenlandsk hovedkontor/filial.</p>
+                        </xforms:help>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Rapportør</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:help brreg:lang="EN">
+                            <p>The organization number of the unit which the data apply, i.e the  dummy number for foreign banks without a Norwegian branch. Foreign  bank with a Norwegian branch/subsidiary should use the organization  number of the
+                                Norwegian unit.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5239/Rapporteringsenhet-grp-5240/InnsendelseDato-datadef-22420">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:help brreg:lang="EN">
+                            <p>Delivery date.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Dato for innsendingen</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dato for innsending.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Dato for innsendingen</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:repeat id="repeat_Valutahandel-grp-5241" nodeset="/Skjema/GenerellInformasjon-grp-5239/Valutahandel-grp-5241">
+                    <xforms:group ref="/Skjema/GenerellInformasjon-grp-5239/Valutahandel-grp-5241">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Valutahandel</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="EN">
+                            <p>The fields below can be used to report corrections, or as an  alternativ to send the report via attachment.</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Valutahandel</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Feltene nedenfor kan benyttes ved innsendelse av korreksjon, eller som  et alternativ til å sende inn rapporten via vedlegg.</p>
+                        </xforms:hint>
+                        <xforms:input ref="/Skjema/GenerellInformasjon-grp-5239/Valutahandel-grp-5241/TransaksjonDato-datadef-3233">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Dato tallene gjelder for</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Dato tallene gjelder for</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-5239/Valutahandel-grp-5241/ValutahandelDatatype-datadef-23222">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>O</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Ordinary delivery</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ordinær leveranse</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>K</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Correction</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Korrigering</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:help brreg:lang="EN">
+                                <p>When reporting corrections it is important that data is stated as the  change (+/-) to the previous delivered numbers.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Datatype</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Ved innsendelse av korreksjoner er det viktig at tallene leveres som  endringer (+/-) til de tidligere innleverte tallene.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Datatype</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-5239/Valutahandel-grp-5241/VaultahandelHandelstype-datadef-23223">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>K</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Purchase</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Kjøp</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>S</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Sale</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Salg</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Handelstype</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Handelstype</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-5239/Valutahandel-grp-5241/ValutahandelKontraktstype-datadef-23224">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>SPOT</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Spot</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Spot</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>T0d1d</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Outright forward - 0 days to 1 day</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Termin - 0 tom 1 dag</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>T3d3m</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Outright forward - 3 days to 3 months</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Termin - 3 dg tom 3 mnd</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>T3m6m</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Outright forward - 3 months to 6 months</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Termin - 3 mnd tom 6 mnd</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>T6m12m</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Outright forward - 6 months to 12 months</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Termin - 6 mnd tom 12 mnd</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>TY2</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Outright forward - 1 year to 2 years</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Termin - 12 mnd tom 2 år</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>TREST</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Outright forward - Over 2 years</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Termin - over 2 år</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>S0d2d</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Swap - 0 days to 2 days</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Swap - 0 tom 2 dager</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>S3d3m</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Swap - 3 days to 3 months</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Swap - 3 dg tom 3 mnd</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>S3m6m</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Swap - 3 months to 6 months</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Swap - 3 mnd tom 6 mnd</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>S6m12m</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Swap - 6 months to 12 months</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Swap - 6 mnd tom 12 mnd</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>SY2</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Swap - 1 year to 2 years</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Swap - 12 mnd tom 2 år</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>SREST</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Swap - Over 2 years</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Swap - over 2 år</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>OP</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Options - put</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Opsjon - Put</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>OC</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Options - call</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Opsjon - Call</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>OR</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Options - others</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Opsjon - Rest</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kontraktstype</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kontraktstype</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-5239/Valutahandel-grp-5241/ValutahandelMotpart-datadef-23225">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>BARB</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Other reporting banks</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Andre rapportørbanker</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>BAUT</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Other foreign banks</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Andre utenlandske banker</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>BANO</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Other Norwegian banks</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Andre norske banker</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>FSNO</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Other Norwegian financial clients</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Andre norske kunder i finansiell sektor</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>OSNO</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Norwegian oil companies</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Oljeselskaper</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>IFNO</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Norwegian non-financial clients excluding oil companies</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Norske ikke-finansielle kunder ekskl. oljeselskapene</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>FSUT</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Other foreign financial clients</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Utenlandske kunder i finansiell sektor ellers</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>IFUT</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Foreign non-financial clients</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Utenlandske ikke-finansielle kunder</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>NBNO</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Norges Bank</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Norges Bank</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>INTR</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Internal trade</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Internhandel</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Motpart</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Motpart</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-5239/Valutahandel-grp-5241/ValutahandelValuta-datadef-23226">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>EUR</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>EURNOK, measured in EUR</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>EURNOK, målt i EUR</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>USD</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>USDNOK, measured in USD</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>USDNOK, målt i USD</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>NOK</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>AndreNOK, measured in NOK</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>AndreNOK, målt i NOK</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Valuta</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Valuta</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/GenerellInformasjon-grp-5239/Valutahandel-grp-5241/ValutahandelAntallHandler-datadef-23227">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Antall handler</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Antall handler</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GenerellInformasjon-grp-5239/Valutahandel-grp-5241/ValutahandelBelop-datadef-23228">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beløp</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Beløp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GenerellInformasjon-grp-5239/Valutahandel-grp-5241/ValutahandelDeltaverdi-datadef-23229">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Deltaverdi</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Deltaverdi</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

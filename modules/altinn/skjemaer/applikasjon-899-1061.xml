@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-9997-H: Realisasjonsoppgave</brreg:tittel>
+    <brreg:hode>
+        <xforms:model><!--INSTANCE HOLDER: Instansen kan plasseres her!--><xforms:schema xlink:href="melding-899-1062.xsd"/><!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!--><xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/Likningskontor-grp-3752"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/Likningskontor-grp-3752/LigningskontorNavn-datadef-17601"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/Likningskontor-grp-3752/LigningskontorAdresse-datadef-17602"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/Likningskontor-grp-3752/LigningskontorPostnummer-datadef-17603"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/Likningskontor-grp-3752/LigningskontorPoststed-datadef-17604"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/Likningskontor-grp-3752/OppgaveDato-datadef-17605"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/Likningskontor-grp-3752/LigningskontorKontoradresse-datadef-17606"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/Likningskontor-grp-3752/LigningskontorTelefonnummer-datadef-17607"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/Likningskontor-grp-3752/LigningskontorTelefaksnummer-datadef-17608"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/Aksjonar-grp-3344"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/Aksjonar-grp-3344/AksjonarNavn-datadef-1153"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/Aksjonar-grp-3344/AksjonarAdresse-datadef-1154"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/Aksjonar-grp-3344/AksjonarPostnummer-datadef-7598"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/Aksjonar-grp-3344/AksjonarPoststed-datadef-7599"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/OppgavenGjelder-grp-3345"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/OppgavenGjelder-grp-3345/AksjonarIdentifikajsonsnummer-datadef-17771"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/OppgavenGjelder-grp-3345/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/OppgavenGjelder-grp-3345/EnhetOrganisasjonsnummer-datadef-18"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/OppgavenGjelder-grp-3345/EnhetISINNummer-datadef-17513"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/OppgavenGjelder-grp-3345/AksjerMvPalydende-datadef-11315"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3343/OppgavenGjelder-grp-3345/Aksjeklasse-datadef-17609"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Sum-grp-3347"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Sum-grp-3347/AksjerRealisasjonGevinstTap-datadef-18678"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Sum-grp-3347/AksjerRealisasjonErvervOmkostninger-datadef-17622"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Sum-grp-3347/AksjerRealisasjonGevinstTapNetto-datadef-17623"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>Realisasjonsoppgave</p>
+            </xforms:caption>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-3343">
+                <brreg:sensitivitet type="Mindre sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-3343/Likningskontor-grp-3752">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Likningskontor</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3343/Likningskontor-grp-3752/LigningskontorNavn-datadef-17601">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3343/Likningskontor-grp-3752/LigningskontorAdresse-datadef-17602">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3343/Likningskontor-grp-3752/LigningskontorPostnummer-datadef-17603">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3343/Likningskontor-grp-3752/LigningskontorPoststed-datadef-17604">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3343/Likningskontor-grp-3752/OppgaveDato-datadef-17605">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Dato</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3343/Likningskontor-grp-3752/LigningskontorKontoradresse-datadef-17606">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kontoradresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3343/Likningskontor-grp-3752/LigningskontorTelefonnummer-datadef-17607">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefonnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3343/Likningskontor-grp-3752/LigningskontorTelefaksnummer-datadef-17608">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefaksnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-3343/Aksjonar-grp-3344">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Aksjonær</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3343/Aksjonar-grp-3344/AksjonarNavn-datadef-1153">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3343/Aksjonar-grp-3344/AksjonarAdresse-datadef-1154">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3343/Aksjonar-grp-3344/AksjonarPostnummer-datadef-7598">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3343/Aksjonar-grp-3344/AksjonarPoststed-datadef-7599">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-3343/OppgavenGjelder-grp-3345">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgaven gjelder</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3343/OppgavenGjelder-grp-3345/AksjonarIdentifikajsonsnummer-datadef-17771">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Id.nr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3343/OppgavenGjelder-grp-3345/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3343/OppgavenGjelder-grp-3345/EnhetOrganisasjonsnummer-datadef-18">
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3343/OppgavenGjelder-grp-3345/EnhetISINNummer-datadef-17513">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>ISIN nr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3343/OppgavenGjelder-grp-3345/AksjerMvPalydende-datadef-11315">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Pålydende</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3343/OppgavenGjelder-grp-3345/Aksjeklasse-datadef-17609">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Aksjeklasse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Sum-grp-3347">
+                <brreg:preutfyll/>
+                <brreg:sensitivitet type="Mindre sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Sum</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Sum-grp-3347/AksjerRealisasjonGevinstTap-datadef-18678">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum gevinst/tap</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>(post 12)</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Sum-grp-3347/AksjerRealisasjonErvervOmkostninger-datadef-17622">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum omkostninger</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>(post 13 og 14)</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Sum-grp-3347/AksjerRealisasjonGevinstTapNetto-datadef-17623">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Netto overført til selvangivelse eller næringsoppgave</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>(negativt beløp post 12)</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

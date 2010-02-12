@@ -1,0 +1,1669 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-0004: Omsetningsoppgave for primærnæringene</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-213-4412.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2590/Avgiftspliktig-grp-4901/RapporteringsenhetNavn-datadef-21771" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2590/Avgiftspliktig-grp-4901/RapporteringsenhetAdresse-datadef-21773"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2590/Avgiftspliktig-grp-4901/RapporteringsenhetPostnummer-datadef-21774" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2590/Avgiftspliktig-grp-4901/RapporteringsenhetPoststed-datadef-21775" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-2590/Avgiftspliktig-grp-4901/OppgaveType-datadef-5659" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2590/Avgiftspliktig-grp-4901/RapporteringsenhetOrganisasjonsnummer-datadef-21772" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2590/Avgiftspliktig-grp-4901/RapporteringsenhetKontonummer-datadef-21776"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-2590/Termin-grp-2591/TerminType-datadef-20654" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-2590/Termin-grp-2591/Termin-datadef-20655" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-2590/Termin-grp-2591/TerminAr-datadef-20656" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-0004 Omsetningsoppgave for primærnæringene</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Alle beløp skal oppgis i hele kroner.  </p>
+                <p/>
+                <p>Omsetning fra annen næring enn jordbruk, hagebruk, gartneri, skogbruk,  husdyrhold og fiske.  </p>
+                <p>Omsetning fra annen næring under kr 30.000 rapporteres i post 3, 4, 5  eller 6, avhengig av hvilken sats merverdiavgiften skal beregnes  med.  </p>
+                <p>Det er ikke adgang til å rapportere samlet omsetning fra annen næring  over kr 30.000 i primærnæringsoppgaven. Omsetning i annen næring over  kr 30.000, skal rapporteres i alminnelig omsetningsoppgave. Dersom  det avdekkes
+                    omsetning fra annen næring over kr 30.000 innrapportert  på primærnæringsoppgaven, vil det bli beregnet renter og eventuelt  fastsatt tilleggsavgift.  </p>
+                <p/>
+                <p>Forklaringsfelter  </p>
+                <p>Aktiverte forklaringsfelt må fylles ut. Uten forklaring vil ikke  oppgaven bli videresendt til fylkesskattekontoret.  </p>
+                <p/>
+                <p>Om utfylling og innsending  </p>
+                <p>Fyll ut og send inn omsetningsoppgaven så snart den er klar, selv om  avgiftsbeløpet først blir betalt nærmere fristen. Rund av alle beløp  ned til nærmeste hele krone. Husk å sende inn oppgave også for  terminer der omsetningen er
+                    null.  </p>
+                <p>Når omsetningsoppgaven ikke er innkommet til rett tid eller i korrekt  form, kan fylkesskattekontoret øke utgående avgift med inntil 3  prosent, minimum 250 kroner og maksimum 5000 kroner. Bruk alltid  oppgaveblankett for rett
+                    termin.  </p>
+                <p/>
+                <p>Innbetaling og utbetaling  </p>
+                <p>Avgiftsbeløp under 100 kroner per termin skal innberettes, men ikke  betales. Tilgodebeløp på under 50 kroner skal innberettes, men blir  ikke betalt tilbake. Beløp under disse grensene skal heller ikke  avregnes i oppgavene for
+                    senere terminer.  </p>
+                <p>Beløp som blir betalt tilbake, blir sendt til kontoen som den  avgiftspliktige har oppgitt til fylkesskattekontoret. Ved endring av  kontonummer, husk å varsle fylkesskattekontoret.  </p>
+                <p>Bruk tilsendte giroblankett ved belastning av konto eller ved betaling  på post eller bank. Beløpet kan også betales til skattefogdkontoret  kontant eller med sjekk. Giroblanketten skal alltid følge med når du  betaler på denne
+                    måten. Ved betaling på annen måte enn ved å bruke  tilsendte betalingskort må kundeidentifikasjon (KID) oppgis. Beløp  som ikke er betalt i rett tid, blir tillagt renter etter gjeldende  sats.  </p>
+                <p/>
+                <p>Frister og terminer  </p>
+                <p>Fristen for å sende inn omsetningsoppgave for primærnæringene og  innbetaling av avgift er tre måneder og ti dager etter utløpet av  året (10. april). Blir omsetningsoppgaven sendt i posten, må brevet  være poststemplet innen
+                    fristen.  </p>
+                <p/>
+                <p>Etter søknad kan fylkesskattekontoret samtykke i avvikende (kortere)  terminer når det foreligger særlige forhold. Fristen vil da være en  måned og ti dager etter utløpet av terminen.  </p>
+                <p/>
+                <p>Plikt  </p>
+                <p>Plikten til å sende inn omsetningsoppgave og betale avgift går fram av  merverdiavgiftsloven.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-0004 Omsetningsoppgåve for primærnæringane</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Alle beløp skal givast opp i heile kroner.  </p>
+                <p/>
+                <p>Omsetning frå anna næring enn jordbruk, hagebruk, gartneri, skogbruk,  husdyrhald og fiske.  </p>
+                <p>Omsetning frå anna næring under kr 30.000 skal rapporterast i post 3,  4, 5 eller 6, avhengig av kva for ein sats meirverdiavgifta skal  reknast ut med.  </p>
+                <p>Det er ikkje høve til å rapportere samla omsetning frå anna næring  over kr 30.000 i primærnæringsoppgåva. Omsetning i anna næring over  kr 30.000 skal rapporterast i alminneleg omsetningsoppgåve. Dersom  det blir avdekt at
+                    omsetning frå anna næring over kr 30.000 er  innrapportert på primærnæringsoppgåva, vil det bli rekna renter og  eventuelt fastsett tilleggsavgift.  </p>
+                <p/>
+                <p>Forklaringsfelt  </p>
+                <p>Aktiverte forklaringsfelt må fyllast ut. Utan forklaring blir oppgåva  ikkje send vidare til fylkesskattekontoret.  </p>
+                <p/>
+                <p>Om utfylling og innsending  </p>
+                <p>Fyll ut og send inn omsetningsoppgåva så snart ho er klar, sjølv om  avgiftsbeløpet først blir betalt nærmare fristen. Rund av alle beløp  ned til nærmaste heile krone. Hugs å sende inn oppgåve også for  terminar der omsetninga er
+                    null.  </p>
+                <p>Når omsetningsoppgåva ikkje er innkomen til rett tid eller i korrekt  form, kan fylkesskattekontoret auke utgåande avgift med inntil 3  prosent, minimum 250 kroner og maksimum 5000 kroner. Bruk alltid  oppgåveblankett for rett
+                    termin.  </p>
+                <p/>
+                <p>Innbetaling og utbetaling  </p>
+                <p>Avgiftsbeløp under 100 kroner per termin skal givast opp men ikkje  betalast. Tilgodebeløp på under 50 kroner skal givast opp, men blir  ikkje betalt tilbake. Beløp under desse grensene skal heller ikkje  avreknast i oppgåvene for
+                    seinare terminar.  </p>
+                <p>Beløp som blir betalt tilbake, blir sendt til kontoen som den  avgiftspliktige har oppgitt til fylkesskattekontoret. Ved endring av  kontonummer, hugs å varsle fylkesskattekontoret.  </p>
+                <p>Bruk tilsend giroblankett ved belastning av konto eller ved betaling  på post eller bank. Beløpet kan òg betalast til skattefutkontoret  kontant eller med sjekk. Giroblanketten skal alltid følgje med når du  betaler på denne måten.
+                    Betaler du på annan måte enn ved å bruke  tilsendt betalingskort, må kundeidentifikasjon (KID) givast opp.  Beløp som ikkje er betalt i rett tid, blir tillagt renter etter  gjeldande sats.  </p>
+                <p/>
+                <p>Fristar og terminar  </p>
+                <p>Fristen for å sende inn omsetningsoppgåve for primærnæringane og  innbetaling av avgift er tre månader og ti dagar etter utløpet av  året (10. april). Blir omsetningsoppgåva send i posten, må brevet  vere poststempla innan fristen.  </p>
+                <p/>
+                <p>Etter søknad kan fylkesskattekontoret samtykkje i avvikande (kortare)  terminar når det ligg føre særlege forhold. Fristen er då ein månad  og ti dagar etter utløpet av terminen.  </p>
+                <p/>
+                <p>Plikt  </p>
+                <p>Plikta til å sende inn omsetningsoppgåve og betale avgift går fram av  meirverdiavgiftslova.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-2590">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2590/Avgiftspliktig-grp-4901">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Avgiftspliktig</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Avgiftspliktig</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2590/Avgiftspliktig-grp-4901/RapporteringsenhetNavn-datadef-21771">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2590/Avgiftspliktig-grp-4901/RapporteringsenhetAdresse-datadef-21773">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2590/Avgiftspliktig-grp-4901/RapporteringsenhetPostnummer-datadef-21774">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2590/Avgiftspliktig-grp-4901/RapporteringsenhetPoststed-datadef-21775">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-2590/Avgiftspliktig-grp-4901/OppgaveType-datadef-5659">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Hovedoppgave (første innsending for terminen)</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Hovudoppgåve (første innsending for terminen)</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>3</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Korrigert oppgave (erstatter tidligere oppgaver for terminen)</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Korrigert oppgåve (erstattar tidlegare oppgåver for terminen)</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Tilleggsoppgave (tillegg til tidligere oppgaver for terminen)</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Tilleggsoppgåve (tillegg til tidlegare oppgåver for terminen)</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Oppgavetype</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Oppgåvetype</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2590/Avgiftspliktig-grp-4901/RapporteringsenhetOrganisasjonsnummer-datadef-21772">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Org.nr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Org.nr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2590/Avgiftspliktig-grp-4901/RapporteringsenhetKontonummer-datadef-21776">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kontonr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kontonr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2590/Avgiftspliktig-grp-4901/KIDnummerOmsetning-datadef-18616">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>KID nr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>KID nr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2590/Termin-grp-2591">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Termin</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Termin</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2590/Termin-grp-2591/TerminType-datadef-20654">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Termin type</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Termin type</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-2590/Termin-grp-2591/Termin-datadef-20655">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>013</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1.Kvartal (jan,feb,mars)</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>1.Kvartal (jan,feb,mars)</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>023</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>2.Kvartal (apr,mai,juni)</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>2.Kvartal (apr,mai,juni)</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>033</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>3.Kvartal (jul,aug,sept)</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>3.Kvartal (jul,aug,sept)</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>043</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>4.Kvartal (okt,nov,des)</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>4.Kvartal (okt,nov,des)</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>014</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Januar - februar</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Januar - februar</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>024</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Mars - april</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Mars - april</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>034</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Mai - juni</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Mai - juni</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>044</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Juli - august</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Juli - august</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>054</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>September - oktober</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>September - oktober</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>064</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>November - desember</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>November - desember</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>015</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Januar</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Januar</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>025</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Februar</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Februar</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>035</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Mars</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Mars</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>045</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>April</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>April</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>055</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Mai</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Mai</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>065</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Juni</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Juni</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>075</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Juli</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Juli</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>085</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>August</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>August</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>095</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>September</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>September</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>105</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Oktober</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Oktober</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>115</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>November</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>November</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>125</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Desember</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Desember</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>016</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1.Halvdel januar</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>1.Halvdel januar</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>026</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>2.Halvdel januar</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>2.Halvdel januar</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>036</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1.Halvdel februar</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>1.Halvdel februar</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>046</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>2.Halvdel februar</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>2.Halvdel februar</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>056</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1.Halvdel mars</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>1.Halvdel mars</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>066</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>2.Halvdel mars</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>2.Halvdel mars</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>076</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1.Halvdel april</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>1.Halvdel april</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>086</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>2.Halvdel april</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>2.Halvdel april</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>096</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1.Halvdel mai</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>1.Halvdel mai</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>106</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>2.Halvdel mai</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>2.Halvdel mai</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>116</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1.Halvdel juni</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>1.Halvdel juni</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>126</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>2.Halvdel juni</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>2.Halvdel juni</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>136</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1.Halvdel juli</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>1.Halvdel juli</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>146</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>2.Halvdel juli</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>2.Halvdel juli</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>156</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1.Halvdel august</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>1.Halvdel august</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>166</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>2.Halvdel august</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>2.Halvdel august</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>176</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1.Halvdel september</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>1.Halvdel september</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>186</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>2.Halvdel september</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>2.Halvdel september</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>196</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1.Halvdel oktober</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>1.Halvdel oktober</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>206</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>2.Halvdel oktober</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>2.Halvdel oktober</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>216</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1.Halvdel november</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>1.Halvdel november</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>226</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>2.Halvdel november</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>2.Halvdel november</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>236</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1.Halvdel desember</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>1.Halvdel desember</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>246</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>2.Halvdel desember</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>2.Halvdel desember</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>018</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 1</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 1</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>028</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 2</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 2</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>038</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 3</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 3</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>048</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 4</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 4</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>058</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 5</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 5</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>068</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 6</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 6</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>078</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 7</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 7</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>088</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 8</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 8</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>098</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 9</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 9</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>108</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 10</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 10</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>118</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 11</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 11</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>128</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 12</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 12</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>138</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 13</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 13</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>148</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 14</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 14</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>158</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 15</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 15</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>168</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 16</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 16</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>178</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 17</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 17</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>188</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 18</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 18</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>198</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 19</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 19</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>208</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 20</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 20</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>218</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 21</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 21</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>228</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 22</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 22</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>238</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 23</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 23</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>248</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 24</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 24</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>258</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 25</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 25</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>268</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 26</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 26</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>278</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 27</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 27</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>288</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 28</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 28</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>298</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 29</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 29</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>308</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 30</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 30</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>318</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 31</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 31</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>328</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 32</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 32</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>338</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 33</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 33</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>348</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 34</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 34</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>358</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 35</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 35</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>368</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 36</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 36</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>378</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 37</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 37</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>388</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 38</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 38</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>398</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 39</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 39</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>408</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 40</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 40</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>418</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 41</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 41</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>428</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 42</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 42</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>438</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 43</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 43</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>448</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 44</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 44</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>458</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 45</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 45</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>468</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 46</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 46</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>478</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 47</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 47</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>488</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 48</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 48</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>498</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 49</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 49</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>508</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 50</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 50</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>518</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 51</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 51</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>528</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 52</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 52</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>538</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Uke 53</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Uke 53</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>011</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Årlig</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Årleg</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Termin oppgaveperiode</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Termin oppgåveperiode</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2590/Termin-grp-2591/TerminAr-datadef-20656">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>År</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>År</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Avgiftsposter-grp-2593">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Avgiftsposter</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Avgiftspostar</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Avgiftsposter-grp-2593/Grunnlag-grp-2594">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Grunnlag</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Grunnlag</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/Grunnlag-grp-2594/OmsetningTermin-datadef-8446">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 1 Samlet omsetning og uttak innenfor og utenfor  merverdiavgiftsloven (mva-loven)</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres summen av:  </p>
+                            <p>a. all omsetning og uttak av varer og tjenester som faller utenfor  merverdiavgiftslovens område  </p>
+                            <p>b. all omsetning og uttak av varer og tjenester som faller innenfor  merverdiavgiftslovens område, dvs. post 2  </p>
+                            <p>Beløpet innhentes til bruk i offisiell statistikk. Finansielle  inntekter, eventuelle offentlige tilskudd og merverdiavgift skal ikke  tas med.  </p>
+                            <p>Du skal ikke ta med beløpet i post 1 i beregningsgrunnlaget til  avgiften.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 1 Samla omsetning og uttak innanfor og utanfor  meirverdiavgiftslova (mva-lova)</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her fører du summen av:  </p>
+                            <p>a. all omsetning og uttak av varer og tenester som fell utanfor  området for meirverdiavgiftslova  </p>
+                            <p>b. all omsetning og uttak av varer og tenester som fell innanfor  området for meirverdiavgiftslova, dvs. post 2  </p>
+                            <p>Beløpet blir innhenta til bruk i offisiell statistikk. Finansielle  inntekter, eventuelle offentlege tilskott og meirverdiavgift skal  ikkje takast med.  </p>
+                            <p>Du skal ikkje ta med beløpet i post 1 i utrekningsgrunnlaget til  avgifta.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/Grunnlag-grp-2594/OmsetningTerminAvgiftspliktig-datadef-10095">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 2 Samlet omsetning og uttak innenfor mva-loven. Summen av post 3,  4, 5 og 6. Avgift ikke medregnet</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres summen av:  </p>
+                            <p>a. all omsetning av varer og tjenester i terminen som det skal  beregnes avgift av  </p>
+                            <p>b. all omsetning av varer og tjenester innenfor merverdiavgiftsloven,  men hvor omsetningen er fritatt fra avgiftsplikt såkalt nullsats.  </p>
+                            <p>c. alle uttak av varer og tjenester til privat bruk eller til bruk i  den delen av virksomheten som faller utenfor merverdiavgiftsloven.  Under denne posten skal det også tas med eventuelle uttak av varer og  tjenester
+                                som ville vært fritatt ved omsetning, det vil si uttak som  ikke skal avgiftsberegnes.  </p>
+                            <p>d. verdien av varer og tjenester som i terminen er levert i bytte for  andre varer eller tjenester. Avgiften skal i disse tilfeller beregnes  av den alminnelige omsetningsverdi for tilsvarende varer eller  tjenester.  </p>
+                            <p>Det oppførte beløpet i post 2 skal tilsvare summen av postene 3, 4, 5  og 6. Beløpet som føres opp i denne posten skal oppgis uten at  merverdiavgift tas med.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 2 Samla omsetning og uttak innanfor mva-lova. Summen av post 3,  4, 5 og 6. Avgift ikkje medrekna</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her fører du summen av:  </p>
+                            <p>a. all omsetning av varer og tenester i terminen som det skal reknast  ut avgift av  </p>
+                            <p>b. all omsetning av varer og tenester innanfor meirverdiavgiftslova,  men der omsetninga er friteken frå avgiftsplikt, såkalla nullsats.  </p>
+                            <p>c. alle uttak av varer og tenester til privat bruk eller til bruk i  den delen av verksemda som fell utanfor meirverdiavgiftslova. Under  denne posten skal det òg takast med eventuelle uttak av varer og  tenester som
+                                ville vore fritekne ved omsetning, det vil seie uttak  som ikkje skal avgiftsutreknast.  </p>
+                            <p>d. verdien av varer og tenester som i terminen er leverte i byte for  andre varer eller tenester. Avgifta skal i desse tilfella reknast ut  av den alminnelege omsetningsverdien for tilsvarande varer eller  tenester.  </p>
+                            <p>Det oppførte beløpet i post 2 skal tilsvare summen av postane 3, 4, 5  og 6. Beløpet som blir ført opp i denne posten, skal givast opp utan  at meirverdiavgift blir teken med.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/Grunnlag-grp-2594/OmsetningTerminAvgiftsfri-datadef-10096">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 3 Omsetning og uttak i post 2 som er fritatt for merverdiavgift</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres omsetning og uttak av varer og tjenester som er innenfor  merverdiavgiftsloven, men som er fritatt for merverdiavgift, såkalt  nullsats. Her medtas også produkter fra eget jordbruk, skogbruk og  fiske, jf.
+                                merverdiavgiftslovens § 14 siste ledd.  </p>
+                            <p>Post 3, 4, 5 og 6 summeres i post 2.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 3 Omsetning og uttak i post 2 som er fritekne for meirverdiavgift</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her fører du omsetning og uttak av varer og tenester som er innanfor  meirverdiavgiftslova, men som er fritekne for meirverdiavgift,  såkalla nullsats. Her tek du òg med produkt frå eige jordbruk,  skogbruk og fiske,
+                                jf. meirverdiavgiftslova § 14 siste ledd.  </p>
+                            <p>Post 3, 4, 5 og 6 skal summerast i post 2.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/Grunnlag-grp-2594/MerverdiavgiftUtgaendeTerminHoySatsGrunnlag-datadef-10097">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 4 Omsetning og uttak i post 2 med standard sats, og beregnet  avgift 25 %</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>a. beregningsgrunnlag (avgiftsgrunnlag) for utgående merverdiavgift  standard sats innenfor jordbruk, husdyrhold, hagebruk, gartneri,  skogbruk og fiske. Se beregningsregelen under post 2  </p>
+                            <p>b. beregnet utgående merverdiavgift. Her fører du utgående  merverdiavgift, 25 % av beregningsgrunnlaget (avgiftsgrunnlaget)  </p>
+                            <p>Post 3, 4, 5 og 6 summeres i post 2.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 4 Omsetning og uttak i post 2 med standard sats, og utrekna  avgift 25 %</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>a. utrekningsgrunnlag (avgiftsgrunnlag) for utgåande meirverdiavgift  standard sats innanfor jordbruk, husdyrhald, hagebruk, gartneri,  skogbruk og fiske. Sjå utrekningsregelen under post 2  </p>
+                            <p>b. utrekna utgåande meirverdiavgift. Her fører du utgåande  meirverdiavgift, 25 % av utrekningsgrunnlaget (avgiftsgrunnlaget)  </p>
+                            <p>Post 3, 4, 5 og 6 skal summerast i post 2.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/Grunnlag-grp-2594/MerverdiavgiftUtgaendeTerminMiddelsSatsGrunnlag-datadef-20319">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 5 Omsetning og uttak i post 2 med middels sats, og beregnet  avgift 13 %</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>a. beregningsgrunnlag (avgiftsgrunnlag) for utgående merverdiavgift  som skal beregnes med middels sats, dvs. omsetning av næringsmidler  (mat- og drikkevarer) innenfor jordbruk, husdyrhold, hagebruk,  gartneri,
+                                skogbruk og fiske. Her føres også beregningsgrunnlag  (avgiftsgrunnlag) for utgående merverdiavgift særskilt sats innen  fiske, dvs. fiskeres omsetning av råfisk gjennom fiskesalgslag som  skal beregnes med 11,11 %. Se
+                                beregningsregelen under post 2.  </p>
+                            <p>b. beregnet utgående merverdiavgift. Her fører du utgående  merverdiavgift, 13 % av beregningsgrunnlaget (avgiftsgrunnlaget). Når  omsetningen gjelder fiskeres salg av råfisk til fiskesalgslag  beregnes 11,11 %.  </p>
+                            <p>Post 3, 4, 5 og 6 summeres i post 2.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 5 Omsetning og uttak i post 2 med middels sats, og utrekna avgift  13 %</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>a. utrekningsgrunnlag (avgiftsgrunnlag) for utgåande meirverdiavgift  som skal reknast ut med middels sats, dvs. omsetning av næringsmiddel  (mat- og drikkevarer) innanfor jordbruk, husdyrhald, hagebruk,  gartneri,
+                                skogbruk og fiske. Her fører du òg utrekningsgrunnlag  (avgiftsgrunnlag) for utgåande meirverdiavgift særskild sats innanfor  fiske, dvs. fiskarars omsetning av råfisk gjennom fiskesalslag som  skal reknast ut med
+                                11,11 %. Sjå utrekningsregelen under post 2.  </p>
+                            <p>b. utrekna utgåande meirverdiavgift. Her fører du utgåande  meirverdiavgift, 13 % av utrekningsgrunnlaget (avgiftsgrunnlaget).  Når omsetninga gjeld fiskarars sal av råfisk til fiskesalslag, blir  det rekna 11,11 %.  </p>
+                            <p>Post 3, 4, 5 og 6 skal summerast i post 2.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/Grunnlag-grp-2594/MerverdiavgiftUtgaendeTerminLavSatsGrunnlag-datadef-14360">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 6 Omsetning og uttak i post 2 med lav sats, og beregnet avgift 8  %</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>a. I grunnlagsfeltet føres grunnlag for utgående merverdiavgift lav  sats 8 %, dvs. omsetning og formidling av persontransporttjenester,  samt ferging av kjøretøy på innenlandsk veisamband.  </p>
+                            <p>b. I avgiftsfeltet føres beregnet utgående merverdiavgift, dvs 8 % av  grunnlaget.  </p>
+                            <p>Post 3, 4, 5 og 6 summeres i post 2.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 6 Omsetning og uttak i post 2 med låg sats, og utrekna avgift 8 %</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>a. I grunnlagsfeltet fører du grunnlag for utgåande meirverdiavgift  låg sats 8 %, dvs. omsetning og formidling av  persontransporttenester, og ferjing av kjøretøy på innanlandsk  vegsamband.  </p>
+                            <p>b. I avgiftsfeltet fører du utrekna utgåande meirverdiavgift, dvs. 8 %  av grunnlaget.  </p>
+                            <p>Post 3, 4, 5 og 6 skal summerast i post 2.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/Grunnlag-grp-2594/MerverdiavgiftUtgaendeTjenesterUtlandTerminGrunnlag-datadef-14362">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 7 Beregningsgrunnlag for tjenester kjøpt i utlandet, og beregnet  avgift 25 %</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres summen av avgiftspliktige tjenester kjøpt fra utlandet, og  beregnet merverdiavgift 25 %.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 7 Utrekningsgrunnlag for tenester kjøpte i utlandet, og utrekna  avgift 25 %</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her fører du summen av avgiftspliktige tenester kjøpte frå utlandet,  og utrekna meirverdiavgift 25 %.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Avgiftsposter-grp-2593/BeregnetAvgift-grp-2595">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Beregnet avgift</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Utrekna avgift</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/BeregnetAvgift-grp-2595/MerverdiavgiftUtgaendeTerminHoySatsBeregnet-datadef-10098">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 4 Omsetning og uttak i post 2 med standard sats, og beregnet  avgift 25 %</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 4 Omsetning og uttak i post 2 med standard sats, og utrekna  avgift 25 %</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/BeregnetAvgift-grp-2595/MerverdiavgiftUtgaendeTerminMiddelsSatsBeregning-datadef-20320">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 5 Omsetning og uttak i post 2 med middels sats, og beregnet  avgift 13 %</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 5 Omsetning og uttak i post 2 med middels sats, og utrekna avgift  13 %</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/BeregnetAvgift-grp-2595/MerverdiavgiftUtgaendeTerminLavSatsBeregnet-datadef-14361">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 6 Omsetning og uttak i post 2 med lav sats, og beregnet avgift 8  %</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 6 Omsetning og uttak i post 2 med låg sats, og utrekna avgift 8 %</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/BeregnetAvgift-grp-2595/MerverdiavgiftUtgaendeTjenesterUtlandTerminBeregnet-datadef-14363">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 7 Beregningsgrunnlag for tjenester kjøpt i utlandet, og beregnet  avgift 25 %</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 7 Utrekningsgrunnlag for tenester kjøpte i utlandet, og utrekna  avgift 25 %</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/BeregnetAvgift-grp-2595/MerverdiavgiftInngaendeTerminHoySats-datadef-8450">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 8 Fradragsberettiget inngående avgift, standard sats</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres fradragsberettiget inngående avgift, standard sats 25 %.  Inngående merverdiavgift føres til fradrag i oppgaven for den  terminen kjøpet registreres i regnskapet (selv om betaling ikke har  funnet sted). Bare
+                                avgift til bruk i virksomhet innenfor  merverdiavgiftsloven gir rett til fradrag.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 8 Frådragsgodkjend inngåande avgift, standard sats</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her fører du frådragsgodkjend inngåande avgift, standard sats 25 %.  Inngåande meirverdiavgift skal førast til frådrag i oppgåva for den  terminen då kjøpet blir registrert i rekneskapen (sjølv om betaling  ikkje har
+                                skjedd). Berre avgift til bruk i verksemd innanfor  meirverdiavgiftslova gir rett til frådrag.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/BeregnetAvgift-grp-2595/MerverdiavgiftInngaendeTerminMiddelsSats-datadef-20322">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 9 Fradragsberettiget inngående avgift, middels sats</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres fradragsberettiget inngående avgift middels sats 13 %, dvs.  fradragsberettiget avgift på kjøp av næringsmidler. Inngående avgift  føres til fradrag i oppgaven for den terminen kjøpet registreres i  regnskapet
+                                (selv om betaling ikke har funnet sted). Bare avgift til  bruk i virksomhet innenfor merverdiavgiftsloven gir rett til fradrag.  Det er ikke fradragsrett ved innkjøp av kost mv. til innehaver,  ledelse, ansatte mv.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 9 Frådragsgodkjend inngåande avgift, middels sats</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her fører du frådragsgodkjend inngåande avgift middels sats 13 %, dvs.  frådragsgodkjend avgift på kjøp av næringsmiddel. Inngåande avgift  skal førast til frådrag i oppgåva for den terminen då kjøpet blir  registrert i
+                                rekneskapen (sjølv om betaling ikkje har skjedd). Berre  avgift til bruk i verksemd innanfor meirverdiavgiftslova gir rett til  frådrag. Det er ikkje frådragsrett ved innkjøp av kost o.a. til  innehavar, leiing,
+                                tilsette o.a.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/BeregnetAvgift-grp-2595/MerverdiavgiftInngaendeTerminLavSats-datadef-14364">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 10 Fradragsberettiget inngående avgift, lav sats</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres fradragsberettiget avgift lav sats 8 %, dvs  fradragsberettiget avgift på kjøp av persontransporttjenester.  Inngående avgift føres til fradrag i oppgaven for den terminen kjøpet  skal registreres i regnskapet
+                                (selv om betaling ikke har funnet  sted). Bare inngående avgift til bruk innenfor merverdiavgiftsloven  gir rett til fradrag. Det gis ikke fradrag for utgifter til kjøring  mellom hjem og arbeid. Når det gjelder
+                                utgifter til anskaffelse,  bruk, drift mv. av personkjøretøyer gis i utgangspunktet ingen  fradragsrett.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 10 Frådragsgodkjend inngåande avgift, låg sats</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her fører du frådragsgodkjend avgift låg sats 8 %, dvs.  frådragsgodkjend avgift på kjøp av persontransporttenester. Inngåande  avgift skal førast til frådrag i oppgåva for den terminen då kjøpet  skal registrerast i
+                                rekneskapen (sjølv om betaling ikkje har skjedd).  Berre inngåande avgift til bruk innanfor meirverdiavgiftslova gir  rett til frådrag. Det blir ikkje gitt frådrag for utgifter til  kjøring mellom heim og arbeid. Når
+                                det gjeld utgifter til kjøp, bruk,  drift o.a. av personkjøretøy, er det i utgangspunktet ingen  frådragsrett.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/BeregnetAvgift-grp-2595/AvgiftTerminTilGode-datadef-8452">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>11 Avgift til gode</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres summen av postene 4, 5, 6 og 7 minus post 8, 9 og 10.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>11 Avgift til gode</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her fører du summen av postane 4, 5, 6 og 7 minus post 8, 9 og 10.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/BeregnetAvgift-grp-2595/AvgiftTerminABetale-datadef-8453">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>11 Avgift å betale</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres summen av postene 4, 5, 6, og 7 minus post 8, 9 og 10.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>11 Avgift å betale</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her fører du summen av postane 4, 5, 6 og 7 minus post 8, 9 og 10.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Avgiftsposter-grp-2593/Forklaring-grp-3486">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Forklaring til avvik i postene over</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Forklaring til avvik i postane over</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/Forklaring-grp-3486/OmsetningTerminForklaring-datadef-18615">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 1 Samlet omsetning og uttak innenfor og utenfor  merverdiavgiftsloven (mva-loven)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 1 Samla omsetning og uttak innanfor og utanfor  meirverdiavgiftslova (mva-lova)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/Forklaring-grp-3486/OmsetningTerminAvgiftspliktigForklaring-datadef-18613">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 2 Samlet omsetning og uttak innenfor mva-loven. Er lik summen av  post 3, 4, 5 og 6. Avgift ikke medregnet</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 2 Samla omsetning og uttak innanfor mva-lova. Er lik summen av  post 3, 4, 5 og 6. Avgift ikkje medrekna</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/Forklaring-grp-3486/OmsetningTerminAvgiftsfriForklaring-datadef-18614">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 3 Omsetning og uttak i post 2 som er fritatt for merverdiavgift</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 3 Omsetning og uttak i post 2 som er fritekne for meirverdiavgift</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/Forklaring-grp-3486/MerverdiavgiftUtgaendeTerminHoySatsForklaring-datadef-18596">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 4 Omsetning og uttak i post 2 med standard sats, og beregnet  avgift 25 %</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 4 Omsetning og uttak i post 2 med standard sats, og utrekna  avgift 25 %</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/Forklaring-grp-3486/MerverdiavgiftUtgaendeTerminMiddelsSatsForklaring-datadef-20321">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 5 Omsetning og uttak i post 2 med middels sats, og beregnet  avgift 13 %</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 5 Omsetning og uttak i post 2 med middels sats, og utrekna avgift  13 %</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/Forklaring-grp-3486/MerverdiavgiftUtgaendeTerminLavSatsForklaring-datadef-18597">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 6 Omsetning og uttak i post 2 med lav sats, og beregnet avgift 8  %</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 6 Omsetning og uttak i post 2 med låg sats, og utrekna avgift 8 %</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/Forklaring-grp-3486/MerverdiavgiftUtgaendeTjenesterUtlandTerminForklaring-datadef-18598">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 7 Beregningsgrunnlag for tjenester kjøpt i utlandet, og beregnet  avgift 25 %</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 7 Utrekningsgrunnlag for tenester kjøpte i utlandet, og utrekna  avgift 25 %</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/Forklaring-grp-3486/MerverdiavgiftInngaendeTerminHoySatsForklaring-datadef-19663">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 8 Fradragsberettiget inngående avgift, standard sats</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 8 Frådragsgodkjend inngåande avgift, standard sats</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/Forklaring-grp-3486/MerverdiavgiftInngaendeTerminMiddelsSatsForklaring-datadef-20323">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 9 Fradragsberettiget inngående avgift, middels sats</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 9 Frådragsgodkjend inngåande avgift, middels sats</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Avgiftsposter-grp-2593/Forklaring-grp-3486/MerverdiavgiftInngaendeTerminLavSatsForklaring-datadef-19664">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Post 10 Fradragsberettiget inngående avgift, lav sats</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 10 Frådragsgodkjend inngåande avgift, låg sats</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Tilleggsopplysninger-grp-210">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Tilleggsopplysninger</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Avgiftsbeløp under kr 100 per termin skal ikke betales</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Tilleggsopplysningar</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NON">
+                    <p>Avgiftsbeløp under kr 100 per termin skal ikkje betalast</p>
+                </xforms:hint>
+                <xforms:selectOne ref="/Skjema/Tilleggsopplysninger-grp-210/TilleggsopplysningerForklaringSendt-datadef-8458">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Eventuelle forklaringer til oppgaven sendt fylkesskattekontoret</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Avgiftsbeløp til gode under kr 50 vil ikke bli betalt tilbake</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Eventuelle forklaringar til oppgåva som er send til  fylkesskattekontoret</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Avgiftsbeløp til gode under kr 50 vil ikkje bli betalt tilbake</p>
+                    </xforms:hint>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/Tilleggsopplysninger-grp-210/OmsetningsoppgaverTilleggsopplysninger-datadef-19684">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Legg inn tilleggsopplysninger her. Opplysning om endring av  kontonummer legges bare til grunn dersom oppgaven er signert av  person som kan forplikte enheten iht opplysninger i Enhetsregisteret</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Skyldig avgift skal betales innen innleveringsfrist til:  </p>
+                        <p>Merverdiavgift  </p>
+                        <p>Skattedirektoratet  </p>
+                        <p>Postboks 6300 Etterstad  </p>
+                        <p>0603 Oslo  </p>
+                        <p/>
+                        <p>Konto: 7690 05 00013</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Legg inn tilleggsopplysningar her. Opplysning om endring av  kontonummer blir lagt til grunn berre dersom oppgåva er signert av  person som kan forplikte eininga i samsvar med opplysningar i  Einingsregisteret</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Skyldig avgift skal betalast innan innleveringsfrist til:  </p>
+                        <p>Meirverdiavgift  </p>
+                        <p>Skattedirektoratet  </p>
+                        <p>Postboks 6300 Etterstad  </p>
+                        <p>0603 Oslo  </p>
+                        <p/>
+                        <p>Konto: 7690 05 00013</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

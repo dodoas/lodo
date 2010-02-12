@@ -1,0 +1,856 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1015: Lønns- og trekkoppgave</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1083-4292.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5549/Avgiver-grp-5575/RapporteringsenhetOrganisasjonsnummer-datadef-21772"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5549/Avgiver-grp-5575/RapporteringsenhetNavn-datadef-21771"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5549/Avgiver-grp-5575/RapporteringsenhetAdresse-datadef-21773"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5549/Avgiver-grp-5575/RapporteringsenhetPostnummer-datadef-21774"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5549/Avgiver-grp-5575/RapporteringsenhetPoststed-datadef-21775"/>
+            <xforms:bind ref="/Skjema/Innledning-grp-5549/InformasjonOmOppgaven-grp-5548/OppgaveEndringsoppgave-datadef-24334" required="true"/>
+            <xforms:bind ref="/Skjema/Innledning-grp-5549/InformasjonOmOppgaven-grp-5548/OppgaveSjofolk-datadef-24335" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1015 Lønns- og trekkoppgave for 2005</p>
+            </xforms:caption>
+            <xforms:group ref="/Skjema/Innledning-grp-5549">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Innledning-grp-5549/Avgiver-grp-5575">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Arbeidsgiver</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/Avgiver-grp-5575/RapporteringsenhetOrganisasjonsnummer-datadef-21772">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/Avgiver-grp-5575/RapporteringsenhetNavn-datadef-21771">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Arbeidsgivers navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/Avgiver-grp-5575/RapporteringsenhetAdresse-datadef-21773">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/Avgiver-grp-5575/RapporteringsenhetPostnummer-datadef-21774">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/Avgiver-grp-5575/RapporteringsenhetPoststed-datadef-21775">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sted</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Innledning-grp-5549/Arbeidstaker-grp-5547">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Arbeidstaker</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Ved innberetning i kodegruppen 400 Utbetalinger til næringsdrivende,  godtas organisasjonsnummer i stedet for  arbeidstakerens/oppdragtakerens fødselsnummer.  </p>
+                        <p/>
+                        <p>Du behøver i såfall ikke fylle ut disse feltene angående Arbeidstaker  - i slike tilfeller må feltene for Oppdragstaker fylles ut.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Identifiseres med fødselsnummer</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/Arbeidstaker-grp-5547/AnsattFodselsnummer-datadef-1224">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/Arbeidstaker-grp-5547/AnsattNavn-datadef-1223">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/Arbeidstaker-grp-5547/AnsattAdresse-datadef-23161">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/Arbeidstaker-grp-5547/AnsattPostnummer-datadef-8466">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/Arbeidstaker-grp-5547/AnsattPoststed-datadef-23162">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sted</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/Arbeidstaker-grp-5547/AnsattSkattekortkommunenummer-datadef-23289">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Skattekommune</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Innledning-grp-5549/Oppdragstaker-grp-5574">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppdragstaker</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Ved innberetning i kodegruppen 400 Utbetalinger til næringsdrivende,  eksl.mva., godtas organisasjonsnummer i stedet for  arbeidstakerens/oppdragstakerens fødselsnummer. Om når ytelsen til  næringsdrivende er
+                            lønnsoppgavepliktige, se Skattedirektoratets  arbeidsgiverhefter, del 3.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Identifiseres med org.nr</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/Oppdragstaker-grp-5574/NaringsdrivendeLonnsmottakerOrganisasjonsnummer-datadef-24396">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/Oppdragstaker-grp-5574/NaringsdrivendeLonnsmottakerNavn-datadef-24397">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/Oppdragstaker-grp-5574/NaringsdrivendeLonnsmottakerAdresse-datadef-24398">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/Oppdragstaker-grp-5574/NaringsdrivendeLonnsmottakerPostnummer-datadef-24399">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/Oppdragstaker-grp-5574/NaringsdrivendeLonnsmottakerPoststed-datadef-24400">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sted</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/Oppdragstaker-grp-5574/NaringsdrivendeLonnsmottakerSkattekortkommuneNummer-datadef-24401">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Skattekommune</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Innledning-grp-5549/InformasjonOmOppgaven-grp-5548">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Innledning</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/Innledning-grp-5549/InformasjonOmOppgaven-grp-5548/AnsattAnsettelseHeleAret-datadef-24333">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Har arbeidstakeren vært ansatt gjennom hele året?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Foruten fast arbeidsforhold, heltid eller deltid, menes med ansatt  </p>
+                            <p>gjennom hele året at arbeidstaker er ansatt f.eks. faste ukedager  eller i fast turnus gjennom hele året, f.eks. hver onsdag og torsdag,  annen hver helg osv. Det samme gjelder styremedlem o.l. som har hatt  vervet hele
+                                året.  </p>
+                            <p/>
+                            <p>Når en arbeidstaker er ansatt for noen dager i forskjellige perioder,    </p>
+                            <p>f.eks. i vinterferie, sommerferie mv., regnes ikke dette som ansatt  gjennom hele året. Antall dager skal da oppgis.</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/InformasjonOmOppgaven-grp-5548/ArbeidsforholdStartdato-datadef-23170">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fra dato</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>dd.mm.åååå</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/InformasjonOmOppgaven-grp-5548/ArbeidsforholdSluttdato-datadef-23171">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Til dato</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>dd.mm.åååå</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5549/InformasjonOmOppgaven-grp-5548/ArbeidsforholdAntallDager-datadef-24364">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall dager</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Ved ansettelse i atskilte perioder, oppgis antall arbeidsdager.  </p>
+                            <p/>
+                            <p>Når en arbeidstaker er ansatt for noen dager i forskjellige perioder,    </p>
+                            <p>f.eks. i vinterferie, sommerferie mv., regnes ikke dette som ansatt  gjennom hele året. Antall dager skal da oppgis.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:selectOne ref="/Skjema/Innledning-grp-5549/InformasjonOmOppgaven-grp-5548/OppgaveEndringsoppgave-datadef-24334">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Er dette en endringsoppgave?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>De beløpene som berøres av endringen, skal fylles ut med  </p>
+                            <p>endringsbeløpet(differansen i forhold til tidligere innsendt oppgave),  eventuelt med beløp som ikke er innberettet tidligere. Mangler det en  opplysning under en tidligere innberettet kode (f.eks. antall), er  det kun
+                                den manglende opplysningen som skal innberettes på  endringsoppgaven. Sett ikke opptidligere riktig innberettede beløp i  endringsoppgaven.  </p>
+                            <p/>
+                            <p>Reduksjon eller annullering av tidligere innberettet beløp skal merkes  med negativt fortegn (minus) foran endringsbeløpet. Det må ikke  sendes inn erstatningsoppgave (ny oppgave), da dette kan føre til at
+                                arbeidstakeren blir ilignet for høy inntekt.</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/Innledning-grp-5549/InformasjonOmOppgaven-grp-5548/OppgaveSjofolk-datadef-24335">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Gjelder oppgaven sjøfolk?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Merk at dette feltet for særskilt fradrag for sjøfolk ikke skal brukes  for fiskere. Fiskere med krav på særskilt fradrag for fiskere skal  kreve dette i selvangivelsen. For å få særskilt fradrag for sjøfolk  er det et
+                                vilkår at skattyter har arbeid om bord på skip i fart som  hovedbeskjeftigelse, og at arbeidet til sammen utgjør minst 130 dager  i samme inntektsår.  </p>
+                            <p/>
+                            <p>Skattyter som arbeider ombord på flytende innstallasjon har ikke krav  på særskilt fradrag for sjøfolk. (Statsloser har ikke krav på  særskilt fradrag for sjøfolk).  </p>
+                            <p/>
+                            <p>Selv om skattyter rent faktisk ikke har arbeidet om bord i minst 130    </p>
+                            <p>dager, er vilkåret likevel oppfylt for en arbeidstaker som er ansatt  for arbeid om bord, og hvor arbeidsforholdet direkte omfattes av en  tariffavtale som forutsetter minst 130 dager gjennomsnittlig om bord  i løpet av
+                                året.  </p>
+                            <p/>
+                            <p>Det presiseres at det er bare for  sjøfolk med inntekt om bord at det  gis rett til særskilt fradrag. Det er derfor bare for disse det skal  krysses av i rubrikken Oppgaven gjelder for sjøfolk med inntekt om  bord som
+                                gir rett til sjømannsfradrag på lønns- og trekkoppgaven.  Dette gjelder uavhengig av om sjøfolk er gitt fradraget på  forskuddsstadiet.  </p>
+                            <p/>
+                            <p>Alle opplysningene på lønns- og trekkoppgaven hvor denne ruten er  krysset av, må kun omfatte ytelser som gir  grunnlag for særskilt  fradrag for sjøfolk. Oppgaven kan likevel inneholde skattefrie  ytelser, slik som fri
+                                kost, fri uniform mv.  </p>
+                            <p>For sjøfolk som har krav på fradrag for småutgifter, kan antall døgn  om  </p>
+                            <p>bord  </p>
+                            <p>hvor arbeidsgiver ikke for en vesentlig del har dekket  småutgiftene,  </p>
+                            <p>innberettes under kode 921. Opphold på under 48 timer, som inngår som    </p>
+                            <p>en del  </p>
+                            <p>av den ordinære arbeidstid, skal ikke innberettes under denne kode.    </p>
+                            <p>Sjøfolks  </p>
+                            <p>inntekter som ikke omfattes av ordningen med særskilt fradrag for  </p>
+                            <p>sjøfolk,  </p>
+                            <p>skal innberettes på egen oppgave. Lønn til sjøfolk som er  utenlandske  </p>
+                            <p>statsborgere og trygdet etter folketrygdloven § 2-6, skal innberettes    </p>
+                            <p>under  </p>
+                            <p>kode 111-A .</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Lonnsopplysninger-grp-5550">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Lønnsopplysninger</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Lonnsopplysninger-grp-5550/MestBrukteKoder-grp-5636">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Mest brukte koder</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/MestBrukteKoder-grp-5636/AnsattLonn-datadef-1226">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>111-A Lønn, honorarer, trekkpliktige ytelser</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Under denne kode innberettes utbetalt lønn og annen  kontantgodtgjørelse for arbeid som ikke er utført som ledd i  selvstendig næringsvirksomhet, herunder bl.a. (oppregningen nedenfor  er ikke uttømmende):  </p>
+                            <p>* godtgjørelse som medlem av styre, representantskap, utvalg, råd o.l.  (jf. kode 114(-A))  </p>
+                            <p>* forfatterhonorar som ikke er beregnet etter salg  </p>
+                            <p>* feriepenger  </p>
+                            <p>* sykepenger  </p>
+                            <p>* fødselspenger  </p>
+                            <p>* refusjon av utgifter/godtgjørelse til reise mellom hjem og  arbeidssted  </p>
+                            <p>* skattepliktig del av fosterhjemsgodtgjørelse  </p>
+                            <p>* drikkepenger for prosentlønnet serveringspersonale  </p>
+                            <p>* representasjonsgodtgjørelse  </p>
+                            <p>* skattepliktig del av brenselstilskudd (oppvarming av egen bolig)  </p>
+                            <p>* hundefører- og hundetreningstillegg  </p>
+                            <p>* skattepliktig sluttvederlag  </p>
+                            <p>* skattepliktig del av tilleggssluttvederlag  </p>
+                            <p>* lønn opptjent på norsk kontinentalsokkel av personer skattemessig    </p>
+                            <p>bosatt i Norge  </p>
+                            <p>* lønn til sjøfolk som er utenlandske statsborgere og trygdet etter    </p>
+                            <p>ftrl. § 2-6  </p>
+                            <p>* erstatning for tapt arbeidsfortjeneste - om skattefrie erstatninger,  se kode 911  </p>
+                            <p/>
+                            <p>Lønn som er opptjent før dødsfall og utbetalt etter, og som avdøde  faktisk og rettslig hadde adgang til å få utbetalt før dødsfallet,  innberettes her. Dersom avdøde ikke hadde faktisk og rettslig adgang  til å få lønn
+                                eller feriepenger utbetalt før dødsfallet, er  godtgjørelsen arv og skal lønnsinnberettes i kode 916.  </p>
+                            <p>Om etterlønn, jf. kode 214.  </p>
+                            <p>Om opsjonsytelser ved innløsning eller salg av opsjoner i  arbeidsforhold (kontantytelser), se kode 131-A.  </p>
+                            <p>Om lønn og annen kontantgodtgjørelse for arbeid utført i utlandet,  </p>
+                            <p>herunder på utenlandsk  kontinentalsokkel, se kode 113-A.  </p>
+                            <p>Om trekkpliktige naturalytelser for arbeid utført i utlandet, se kode    </p>
+                            <p>136-A.  </p>
+                            <p>Om lønn opptjent av utlending på norsk kontinentalsokkel, se kode  124-A.  </p>
+                            <p>Om ikke avgiftspliktig lønn og annen kontantgodtgjørelse for arbeid    </p>
+                            <p>utført i Norge, se kode 129.  </p>
+                            <p>Om ikke avgiftspliktige naturalytelser for arbeid utført i Norge, se    </p>
+                            <p>kode 137.  </p>
+                            <p>Om godtgjørelse til privatperson for arbeidsoppdrag i oppdragsgivers    </p>
+                            <p>hjem, se kode 140.  </p>
+                            <p>Om godtgjørelse fra ideelle organisasjoner, se kode 139.  </p>
+                            <p>Om godtgjørelse til dagmamma som passer barn i dagmammaens hjem, se    </p>
+                            <p>kode 404.  </p>
+                            <p>For arbeidstaker ansatt på nettolønnsordning, se kodene 961-A og kode    </p>
+                            <p>971-A.  </p>
+                            <p>Om utbetaling av bonus i forsvaret, se kode 128-A.  </p>
+                            <p>Om lønn som skattlegges etter svalbardskatteloven, se kode 913-A.  </p>
+                            <p>Om lønn som skattlegges etter skatteloven for Jan Mayen, se kode  914-A.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/MestBrukteKoder-grp-5636/AnsattForskuddstrekk-datadef-1333">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>950 Forskuddstrekk</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Under denne kode innberettes foretatt forskuddstrekk til Norge.  </p>
+                            <p>Regulært trekk av trygdeavgift for arbeidstakere som ikke skal  skattlegges i Norge, innberettes også her. Trekk av trygdeavgift som  skal innbetales til Folketrygdkontoret for utenlandssaker, skal ikke  innberettes.  </p>
+                            <p/>
+                            <p>Trukket skatt og trygdeavgift til Svalbard skal også tas med her.  Trukket skatt og trygdeavgift til Jan Mayen skal ikke tas med her  (innberettes under kode 914-A).  </p>
+                            <p/>
+                            <p>Trukket trygdeavgift for grensegjengere som ikke er skattepliktig til  Norge, skal ikke innberettes.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/AnsattFeriepengegrunnlag-datadef-2918">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>000 Feriepengegrunnlag</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Under denne kode innberettes opptjent feriepengegrunnlag pr. 31.12.  i  </p>
+                        <p>opptjeningsåret. Har det skjedd et oppgjør av feriepengene ved  fratreden, oppgis intet beløp i dette feltet.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/AnsattNaturalytelserTrekkpliktig-datadef-2926">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>112-A Trekkpliktige naturalytelser</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Under denne kode innberettes skattepliktige og trekkpliktige  naturalytelser som er godtgjørelse for arbeid som ikke er utført som  ledd i selvstendig næringsvirksomhet, herunder bl.a. (oppregningen  nedenfor er ikke
+                            uttømmende):  </p>
+                        <p>* skattepliktig fordel av fritt arbeidstøy  </p>
+                        <p>* skattepliktig verdi av gaver i ansettelsesforhold  </p>
+                        <p>* feriereise betalt av arbeidsgiver  </p>
+                        <p>* fri strøm  </p>
+                        <p>* fri avis - i utgangspunktet alle slike abonnementer, men for  </p>
+                        <p>arbeidstakere med spesielt informasjonsbehov kun verdien av ett  abonnement (likevel ingen fordel når slik arbeidstaker selv holder  abonnement på en dagsavis)  </p>
+                        <p>* ektefelle/familie med på tjenestereise bekostet av arbeidsgiver  </p>
+                        <p>* frie hjemreiser for utenlands arbeidstaker ved besøk i hjemmet  når  </p>
+                        <p>arbeidsgiveren dekker billettutgifter direkte ( i de tilfellene det    </p>
+                        <p>ikke foreligger trekkplikt, se kode 724)  </p>
+                        <p>* skattepliktig fordel av bompengeabonnement/-avgift, månedskort,  </p>
+                        <p>klippekort betalt av arbeidsgiver  </p>
+                        <p>* fri kost og losji i henhold til satser fastsatt av  Skattedirektoratet (i de tilfellene det ikke foreligger trekkplikt,  se kode 522 og 525)  </p>
+                        <p>* skattepliktig fordel ved arbeidsgivers tilskudd til barnehage for  de  </p>
+                        <p>ansattes barn  </p>
+                        <p/>
+                        <p>Om skattefri dekning av kostnader til bedriftsbarnehageplass, se kode    </p>
+                        <p>520  </p>
+                        <p/>
+                        <p>Om fri bolig i arbeidsforhold, se kode 121-A.  </p>
+                        <p>Om opsjon i arbeidsforhold som er trekkpliktig fordel ved innløsning    </p>
+                        <p>eller salg (naturalytelser), se kode 133-A.  </p>
+                        <p>Ansattes kjøp av aksjer/grunnfondsbevis til underkurs innberettes i    </p>
+                        <p>kode 132-A.  </p>
+                        <p>Om fri kost og losji til privatperson for arbeidsoppdrag i  </p>
+                        <p>oppdragsgivers hjem, se kode 140.  </p>
+                        <p>Om fri kost og losji til dagmamma (praktikant) som passer barn i  </p>
+                        <p>barnets hjem, se kode 134.  </p>
+                        <p>Om skattepliktige, men trekkfrie naturalytelser, eksempelvis fri  </p>
+                        <p>motorsykkel, fri båt mv., se kode 549.  </p>
+                        <p>Trekkpliktige naturalytelser som ikke er avgiftspliktige skal  </p>
+                        <p>innberettes i kode 137.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/AnsattForsikringUlykkeYrkesskadeSkattepliktig-datadef-2927">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>116-A Skattepliktig del av ulykkesforsikring og yrkesskadeforsikring</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Skattepliktig del av ulykkesforsikring og yrkesskadeforsikring  </p>
+                        <p>(merpremie) - andre betalte premier mv.  </p>
+                        <p>Under denne kode innberettes skattepliktige og trekkpliktige fordeler    </p>
+                        <p>ved premier mv. betalt av arbeidsgiver, herunder bl.a.:  </p>
+                        <p>* skattepliktig premie til ulykkesforsikring  </p>
+                        <p>* gruppelivsforsikringspremie  </p>
+                        <p>* personavbruddsforsikringspremie  </p>
+                        <p>* livrentepremie  </p>
+                        <p>* innbetaling/premie til individuell  pensjonsspareavtale/pensjonsforsikringsavtale (IPA)  </p>
+                        <p/>
+                        <p>Arbeidsgivers dekning av premie til loss of license-forsikring skal    </p>
+                        <p>også innberettes under denne kode for den del av premien som dekker    </p>
+                        <p>skattepliktig syke- og ulykkesforsikring. Den del av  forsikringspremien som eventuelt dekker kollektiv livrenteforsikring  innberettes bare når arbeidsgiveren selv behandler den som lønn.  </p>
+                        <p/>
+                        <p>Yrkesskadeforsikringspremie som dekker arbeidsgivers normale  erstatningsansvar skal ikke innberettes, men dersom det er tegnet  </p>
+                        <p>yrkesskadeforsikring som gir dekning utover dette, eller f.eks. ferie    </p>
+                        <p>og fritidsforsikring i tillegg, skal denne merpremie innberettes her.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:group ref="/Skjema/Lonnsopplysninger-grp-5550/FriTelefon-grp-5568">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>130-A Fri telefon</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Koden skal benyttes både når arbeidsgiver er abonnent (naturalytelse)    </p>
+                        <p>og når arbeidstaker er abonnent (trekkpliktig utgiftsgodtgjørelse).  Under denne kode innberettes den verdi som overstiger det som kan  dekkes etter den generelle ordning for tjenestemenn i staten.  </p>
+                        <p/>
+                        <p>Til drift av teleutstyr (fasttelefon eller mobiltelefon) dekkes inntil  kr 800 pr. kvartal (abonnement og bruk). Der sterke tjenestlige  grunner tilsier at det er behov for 2 abonnementer (fasttelefon og  mobiltelefon)
+                            dekkes inntil kr 1600 pr.  </p>
+                        <p>kvartal. Avgift for eventuelle legitimerte tjenestesamtaler  spesifisert etter regning kan dekkes i tillegg.  </p>
+                        <p/>
+                        <p>Dersom arbeidsgiver anser det mer hensiktsmessig å dekke  ISDN-abonnement i stedet for ordinært abonnement for fasttelefon, kan  merkostnaden til slikt abonnement i tillegg dekkes etter den  generelle ordning for
+                            tjenestemenn i staten. Merkostnaden er  differansen  </p>
+                        <p>mellom ordinært abonnement og det aktuelle ISDN-abonnementet hos  </p>
+                        <p>teleoperatøren.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/FriTelefon-grp-5568/AnsattFriTelefonBelop-datadef-24343">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beløp</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Når det gjelder dekning av utgifter til telefon for arbeidstaker som    </p>
+                            <p>har et yrke som tilsier høyere telefonutgifter enn det som kan dekkes  etter den generelle ordning for tjenestemenn i staten, må  arbeidsgiver skjønnsmessig anslå skattyters private fordel. I  beløpsfeltet innberetter
+                                arbeidsgiver den skjønnsmessig anslåtte  private fordel.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/FriTelefon-grp-5568/AvsattFriTelefonGenerellOrdning-datadef-24344">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Dekket over den generelle ordning</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>I feltet gis opplysning om det totale beløp arbeidsgiver har dekket    </p>
+                            <p>utover den generelle ordning for tjenestemenn i staten. Når koden  omfatter ytelser som ikke er arbeidsgiveravgiftspliktige, skal koden  brukes uten angivelse av -A. Når denne kode benyttes, skal det ikke  gis
+                                tilleggsopplysninger i kode 849. Ved helt eller delvis dekning av  flere telefonabonnement, skal koden derfor benyttes en gang for hvert  abonnement. Som utgangspunkt, er dekning utover generell ordning for
+                                statstjenestemenn skattepliktig i sin helhet.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Lonnsopplysninger-grp-5550/PensjonIOgUtenforArbeidsforholdOgLivrenterIArbeidsforholdMV-grp-5557">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>211 Pensjon i og utenfor arbeidsforhold og livrenter i arbeidsforhold  m.v.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Under denne kode innberettes kontante pensjonsytelser fra andre enn  </p>
+                        <p>folketrygden, som det ikke skal svares arbeidsgiveravgift av. Se også    </p>
+                        <p>kode 212-A, 216 (føderåd) og kodene 225 (etterbetaling) og 230  (naturalytelser).</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/PensjonIOgUtenforArbeidsforholdOgLivrenterIArbeidsforholdMV-grp-5557/AnsattPensjon-datadef-2929">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beløp</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/PensjonIOgUtenforArbeidsforholdOgLivrenterIArbeidsforholdMV-grp-5557/AnsattPensjonStartdato-datadef-24348">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fra dato</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>dd.mm.åååå</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/PensjonIOgUtenforArbeidsforholdOgLivrenterIArbeidsforholdMV-grp-5557/AnsattPensjonSluttdato-datadef-24349">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Til dato</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>dd.mm.åååå</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/AnsattFoderadJordOgSkogbruk-datadef-24350">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>216 Føderåd</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Under denne kode innberettes føderåd i jord- og skogbruk. Andre  </p>
+                        <p>naturalytelser innberettes under kode 230.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/AnsattFagforeningskontingent-datadef-1330">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>311 Fagforeningskontingent</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Under denne kode innberettes den totalt innbetalte  fagforeningskontingent, både når kontingenten er trukket i lønnen og  når den er betalt direkte av arbeidstakeren til foreningen.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/AnsattPremiePensjonsordning-datadef-1331">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>312 Premie til pensjonsordninger</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Under denne kode innberettes premie til offentlige og godkjente  private pensjonsordninger, herunder pensjonsordninger for  skogsarbeidere fiskere og sjøfolk. Videre innberettes trukket  tilskudd til foretakspensjonsordning
+                            og innskuddspensjonsordning.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/AnsattUnderholdsbidrag-datadef-1332">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>313 Underholdsbidrag etter pålegg fra Trygdeetatens innkrevingssentral</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Under denne kode innberettes underholdsbidrag som er fratrukket  </p>
+                        <p>inntekten etter pålegg fra Trygdeetatens innkrevingssentral og som gir  fradragsrett.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/AnsattPremieFondTrygd-datadef-2919">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>314 Premie til fond og trygd</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Under denne kode innberettes trygdepremie. Videre innberettes trukket    </p>
+                        <p>premie til opplysnings- og utviklingsfond, i de tilfeller hvor lønnen  i kode 111-A ikke allerede er redusert tilsvarende (staten).</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/AnsattUnderholdsbidragIkkeFradregsberretiget-datadef-19662">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>316 Underholdsbidrag etter pålegg fra Trygdeetatens innkrevingssentral  (ikke fradragsberettiget)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Under denne kode innberettes underholdsbidrag som er fratrukket  </p>
+                        <p>inntekten etter pålegg fra Trygdeetatens innkrevingssentral og som  ikke gir fradragsrett.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/NaringsdrivendeUtbetaling-datadef-2920">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>401 Utbetalinger mv. til næringsdrivende</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Under denne kode innberettes alle oppgavepliktige utbetalinger og  </p>
+                        <p>naturalytelser til næringsdrivende ekskl. mva., unntatt ytelser som  nevnt under kodene 402-406 og 445-448. I forskrift av 30.12.1983 nr.  1974 §§ 6 og 7 er oppgaveplikten for utbetalinger til  </p>
+                        <p>selvstendig næringsdrivende begrenset. For spørsmål om hvem som ansees  som næringsdrivende, se Skattedirektoratets brosjyre Lønnstaker  eller  </p>
+                        <p>næringsdrivende? (RF-2028).  </p>
+                        <p/>
+                        <p>Styrehonorar og godtgjørelse som medlem av representantskap, utvalg,    </p>
+                        <p>råd o.l. til næringsdrivende skal innberettes under kode 111-A eller  kode 114-A.  </p>
+                        <p/>
+                        <p>Kodene kode 402 og kode 403 gjelder kun offentlige oppgavegivere.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:group ref="/Skjema/Lonnsopplysninger-grp-5550/DiettgodtgjorelseMOvernattingPaTjenestereiseInnlandUtlandSt-grp-5560">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>610 Diettgodtgjørelse m/overnatting på tjenestereise - innland/utland  - statens satser/tariffbestemte satser</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Under denne kode innberettes diettgodtgjørelse, nattillegg og antall    </p>
+                        <p>døgn på tjenestereiser i Norge og i utlandet. Diettgodtgjørelsen  innberettes under denne kode bare ved opphold på hotell og når den er  utbetalt etter:  </p>
+                        <p/>
+                        <p>* satser i statens reiseregulativ (særavtale) (eller lavere), eller  </p>
+                        <p>* overenskomst mellom arbeidstaker- og arbeidsgiverorganisasjon, dvs.    </p>
+                        <p>satser tilsvarende statens regulativ (særavtale) (eller lavere)  </p>
+                        <p/>
+                        <p>For diettgodtgjørelse ved overnatting på hybel/brakke (privat)  eller  </p>
+                        <p>pensjonat, skal kode 623 og 627 benyttes.  </p>
+                        <p>Eventuell mergodtgjørelse innberettes i kode kode 155-A.  </p>
+                        <p>Diettgodtgjørelsen må følge legitimasjonskravene i  Skattedirektoratets  </p>
+                        <p>forskrift om forskuddstrekk i utgiftsgodtgjørelser.  </p>
+                        <p/>
+                        <p>I tillegg innberettes nattillegg når det er utbetalt på tjenestereise    </p>
+                        <p>etter:  </p>
+                        <p>* satser i statens reiseregulativ (særavtale) (eller lavere), eller  </p>
+                        <p>* overenskomst mellom arbeidstaker- og arbeidsgiverorganisasjon,  dvs.  </p>
+                        <p>tariffbestemte satser (eller lavere)  </p>
+                        <p>Overnatting dekket etter regning innberettes ikke.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/DiettgodtgjorelseMOvernattingPaTjenestereiseInnlandUtlandSt-grp-5560/AnsattDiettMedOvernattingBelop-datadef-24351">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beløp</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/DiettgodtgjorelseMOvernattingPaTjenestereiseInnlandUtlandSt-grp-5560/AnsattDiettMedOvernattingDiettdelBelop-datadef-24352">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Herav diettgodtgjørelse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/DiettgodtgjorelseMOvernattingPaTjenestereiseInnlandUtlandSt-grp-5560/AnsattDiettMedOvernattingAntallDogn-datadef-24353">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall døgn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Lonnsopplysninger-grp-5550/TrekkfriBilgodtgjorelseMV-grp-5564">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>711 Trekkfri bilgodtgjørelse</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Under denne kode innberettes trekkfri bilgodtgjørelse etter satsene i  statens reiseregulativ (særavtale) (eller lavere) for bilgodtgjørelse  når legitimasjonskravene i Skattedirektoratets forskrift om  forskuddstrekk i
+                            utgiftsgodtgjørelser er fulgt. Passasjertillegg  eller andre tillegg skal innberettes under kode 714.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/TrekkfriBilgodtgjorelseMV-grp-5564/AnsattBilgodtgjorelseTrekkfri-datadef-2928">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beløp</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/TrekkfriBilgodtgjorelseMV-grp-5564/AnsattBilgodtgjorelseTrekkfriAntallKilometer-datadef-24358">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall kilometer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:repeat id="repeat_OvrigeKoder-grp-5573" nodeset="/Skjema/Lonnsopplysninger-grp-5550/OvrigeKoder-grp-5573">
+                    <xforms:group ref="/Skjema/Lonnsopplysninger-grp-5550/OvrigeKoder-grp-5573">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Øvrige koder</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>I denne tabellen kan du legge inn de lønns- og trekkoppgavekodene det  ikke er egne felter for.  </p>
+                            <p/>
+                            <p>På www.skatteetaten.no finnes til enhver tid en ajourført versjon  av  </p>
+                            <p>kodeoversikten: Kodeoversikten (9. utgave) gjelder fra og med  </p>
+                            <p>inntektsåret 2005 (lønns- og trekkoppgaver som leveres i januar 2006)</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/OvrigeKoder-grp-5573/LonnsoppgavekodeKodenummer-datadef-23934">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kode</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Med kode menes lønns- og trekkoppgavekode.  </p>
+                                <p>Eks 118-A, som er koden for fri bil.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/OvrigeKoder-grp-5573/LonnsoppgaveSpesifisertLonnsoppgavekodeBelop-datadef-23936">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beløp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5550/OvrigeKoder-grp-5573/LonnsoppgaveSpesifisertLonnsoppgavekodeBeskrivelse-datadef-24395">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Tekst</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her oppgir du de tilleggsopplysningene den aktuelle koden krever.  </p>
+                                <p/>
+                                <p>Eksempel  </p>
+                                <p>For kode 118-A Fri bil må du i tekstfeltet oppgi:  </p>
+                                <p/>
+                                <p>Listepris: xxxxx  Tidsrom: dato - dato Bilens reg.nr: xx xxxxx  </p>
+                                <p/>
+                                <p/>
+                                <p>På www.skatteetaten.no finnes til enhver tid en ajourført versjon  av  </p>
+                                <p>kodeoversikten: Kodeoversikten (9. utgave) gjelder fra og med  </p>
+                                <p>inntektsåret2005 (lønns- og trekkoppgaver som leveres i januar 2006)</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

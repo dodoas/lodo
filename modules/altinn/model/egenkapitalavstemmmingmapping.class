@@ -1,0 +1,175 @@
+<?php
+class EgenkapitalAvstemmingMapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+    }
+    
+     function addArrayMapping($o, $h, $_arrayOfValues)
+    {
+        $this->Human[$o] = $h;
+        
+        foreach (arrayOfValues as $a => $v )
+        	$this->Account[$a][] = $o;
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+           			$this->ORID[$item] = $v;
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+            	$item = $this->Account[$a];
+            	$this->ORID[$item] = $v;
+	            return 1;
+    	    }
+       	}
+    }
+    
+    function setArrayAccount($a, $_arrayOfValues)
+    {
+        if($this->Account[$a] == '')
+        {
+            $this->ORID['FEIL: '.$a] = $v;
+            return 0;
+        }
+        else
+        { 	if (is_array($_arrayOfValues)) {
+        		foreach ($_arrayOfValues as $index => $v) {
+        			$this->ORID[$this->Account[$a]][$index]=$v;
+        		}
+            } 
+            else {
+            	$this->ORID[$this->Account[$a]] = $v;
+        	}
+            return 1;
+        }
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+	{ $this->addMapping('D1', 'EnhetNavn-datadef-1', 'VName');
+$this->addMapping('D18', 'EnhetOrganisasjonsnummer-datadef-18', 'OrgNumber');
+$this->addMapping('D26', 'OppgavegiverFodselsnummer-datadef-26', 'SocialSecurityID');
+$this->addMapping('D15', 'EnhetAdresse-datadef-15', 'VAddress');
+$this->addMapping('D6673', 'EnhetPostnummer-datadef-6673', 'VZipCode');
+$this->addMapping('D6674', 'EnhetPoststed-datadef-6674', 'VCity');
+$this->addMapping('D280', 'RegnskapsforerNavn-datadef-280', 'FVName');
+$this->addMapping('D3651', 'RegnskapsforerOrganisasjonsnummer-datadef-3651', 'FOrgNumber');
+$this->addMapping('D17491', 'EgenkapitalASMvFjoraret-datadef-17491', '100');
+$this->addMapping('D17492', 'ArsresultatASMv-datadef-17492', '101');
+$this->addMapping('D17493', 'UtbytteASMvAvsatt-datadef-17493', '102');
+$this->addMapping('D17494', 'KonsernbidragASMvMottatt-datadef-17494', '103');
+$this->addMapping('D17495', 'KonsernbidragASMvAvgitt-datadef-17495', '104');
+$this->addMapping('D11307', 'Kontantinnskudd-datadef-11307', '105');
+$this->addMapping('D11308', 'Tingsinnskudd-datadef-11308', '106');
+$this->addMapping('D11309', 'AksjekapitalNedsettelseKontanter-datadef-11309', '107');
+$this->addMapping('D11310', 'AksjekapitalNedsettelseEiendelerAndre-datadef-11310', '108');
+$this->addMapping('D17496', 'AksjonarbidragASMv-datadef-17496', '109');
+$this->addMapping('D11311', 'GjeldEttergivelse-datadef-11311', '110');
+$this->addMapping('D11312', 'AksjerEgneKjop-datadef-11312', '111');
+$this->addMapping('D11313', 'AksjerEgneSalg-datadef-11313', '112');
+$this->addMapping('D8681', 'PrinsippendringerEgenkapitalen-datadef-8681', '113');
+$this->addMapping('D17422', 'AksjekapitalGjeldKonvertert-datadef-17422', '114');
+$this->addMapping('D19807', 'UtbytteAvsattUtdeltDifferanse-datadef-19807', '115');
+$this->addMapping('D11314', 'EgenkapitalEndringerAndre-datadef-11314', '116');
+$this->addMapping('D22248', 'FondVerdiendringerAretsEndring-datadef-22248', '117');
+$this->addMapping('D13548', 'EgenkapitalAvstemt-datadef-13548', '150');
+$this->addMapping('D1125', 'AksjerMvAntall-datadef-1125', '200');
+$this->addMapping('D11315', 'AksjerMvPalydende-datadef-11315', '201');
+$this->addMapping('D11316', 'AksjerAntallOmsatt-datadef-11316', '202');
+$this->addMapping('D11317', 'AksjerFordeltSplitt-datadef-11317', '203');
+$this->addMapping('D11318', 'AksjerFordeltSpleis-datadef-11318', '204');
+$this->addMapping('D19980', 'AksjekapitalInnbetaltFjoraret-datadef-19980', '207a');
+$this->addMapping('D11319', 'AksjekapitalInnbetaltOkning-datadef-11319', '207b');
+$this->addMapping('D11320', 'AksjekapitalInnbetaltNedgang-datadef-11320', '207c');
+$this->addMapping('D19979', 'AksjekapitalInnbetaltOverkurs-datadef-19979', '207d');
+$this->addMapping('D14125', 'EgenkapitalEnkeltmannsforetakFjoraret-datadef-14125', '300');
+$this->addMapping('D14126', 'ArsresultatEnkeltmannsforetak-datadef-14126', '301');
+$this->addMapping('D11321', 'InnskuddKontanter-datadef-11321', '303');
+$this->addMapping('D11322', 'InnskuddEiendeler-datadef-11322', '304');
+$this->addMapping('D7592', 'BilPrivatkjoring-datadef-7592', '305');
+$this->addMapping('D14167', 'PrinsippendringerEgenkapitalEnkeltmannsforetak-datadef-14167', '306');
+$this->addMapping('D14112', 'EgenkapitalKorreksjoner-datadef-14112', '307');
+$this->addMapping('D14127', 'EgenkapitalEnkeltmannsforetakAvstemt-datadef-14127', '350');
+$this->addMapping('D291', 'PrivatkontoKontantuttak-datadef-291', '400');
+$this->addMapping('D6935', 'PrivatkontoUttakDriftsmidler-datadef-6935', '401');
+$this->addMapping('D294', 'PrivatkontoUttakVarerTjenester-datadef-294', '402');
+$this->addMapping('D295', 'PrivatkontoNaringsbyggEgenBolig-datadef-295', '403');
+$this->addMapping('D296', 'PrivatkontoLysVarme-datadef-296', '404');
+$this->addMapping('D297', 'PrivatkontoTelefonkostnader-datadef-297', '405');
+$this->addMapping('D298', 'PrivatkontoDiverse-datadef-298', '406');
+$this->addMapping('D292', 'PrivatkontoSkatter-datadef-292', '407');
+$this->addMapping('D6937', 'PrivatkontoNaringsbil-datadef-6937', '408');
+$this->addMapping('D11323', 'PrivatkontoSykeUlykkesforsikringPremie-datadef-11323', '409');
+$this->addMapping('D6936', 'PrivatkontoSykepengerTilleggstrygd-datadef-6936', '410');
+$this->addMapping('D7354', 'Privatkonto-datadef-7354', '450');
+		
+       
+        
+	}
+ }
+?>

@@ -1,0 +1,2087 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1197: Rederibeskatning etter skatteloven § 8-10</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-814-4508.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2602/Selskap-grp-396/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2602/Selskap-grp-396/EnhetOrganisasjonsnummer-datadef-18"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1197 Rederibeskatning etter skatteloven § 8-10 vedlegg 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Rederibeskatning etter skatteloven § 8-10 flg.  </p>
+                <p/>
+                <p>Skjemaet er fastsatt av Skattedirektoratet med hjemmel i  Finansdepartementets delegeringsvedtak av 28. november 1994, jfr.  ligningsloven § 4-4 nr. 7.  </p>
+                <p/>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1197. For å  samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjemaet, RF-1197, helt eller delvis  bli benyttet også av andre
+                    offentlige organer som har hjemmel til å  innhente de samme opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt. Samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller
+                    Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-2602">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2602/Selskap-grp-396">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Aksje-/allmennaksjeselskap</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2602/Selskap-grp-396/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2602/Selskap-grp-396/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2602/Kontaktperson-grp-5052">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kontaktperson</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2602/Kontaktperson-grp-5052/KontaktpersonNavn-datadef-2">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2602/Kontaktperson-grp-5052/KontaktpersonTelefonnummer-datadef-3">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefonnummer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/MellomvarendeMedKonsernselskapAksjonarerDeltakere-grp-5027">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>I Mellomværende med konsernselskap/aksjonærer/deltakere</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Prinsipper for verdsettelse/Spesifisering av tjenester mv.  </p>
+                    <p>Transaksjoner og øvrige mellomværende mellom selskap og direkte eller  indirekte interessefellesskap og mellom selskap og  aksjonærer/deltakere, skal prises til virkelig verdi som om  selskapene mv. var uavhengige parter
+                        (armlengdeprinsippet).  </p>
+                    <p/>
+                    <p>Det bes vedlagt en nøyaktig redegjørelse for hvilken fremgangsmåte som  er benyttet ved fastsettelse av pris på transaksjonene/tjenestene,  herunder dokumentasjon for at prisen er armlengdeprinsipp. For andre  mellomværender
+                        (fordringer og gjeld) bes opplyst hvilken valuta  fordringen eller gjelden er i og hvilken rentesats mv. som er lagt  til grunn.</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_FordringGjeld-grp-5028" nodeset="/Skjema/MellomvarendeMedKonsernselskapAksjonarerDeltakere-grp-5027/FordringGjeld-grp-5028">
+                    <xforms:group ref="/Skjema/MellomvarendeMedKonsernselskapAksjonarerDeltakere-grp-5027/FordringGjeld-grp-5028">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fordring på/gjeld til</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/MellomvarendeMedKonsernselskapAksjonarerDeltakere-grp-5027/FordringGjeld-grp-5028/DebitorKreditorKonsernselskapMvNavnSpesifisertSelskapMv-datadef-13230">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fordring på/gjeld til</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:group ref="/Skjema/MellomvarendeMedKonsernselskapAksjonarerDeltakere-grp-5027/FordringGjeld-grp-5028/Pr0101-grp-5030">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>01.01</p>
+                            </xforms:caption>
+                            <xforms:input ref="/Skjema/MellomvarendeMedKonsernselskapAksjonarerDeltakere-grp-5027/FordringGjeld-grp-5028/Pr0101-grp-5030/FordringerMellomvarendeKonsernselskapMvFjoraretSpesifisert-datadef-15617">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Fordring pr 01.01</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/MellomvarendeMedKonsernselskapAksjonarerDeltakere-grp-5027/FordringGjeld-grp-5028/Pr0101-grp-5030/GjeldMellomvarendeKonsernselskapMvFjoraretSpesifisertKredito-datadef-15620">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Gjeld pr 01.01</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                        <xforms:group ref="/Skjema/MellomvarendeMedKonsernselskapAksjonarerDeltakere-grp-5027/FordringGjeld-grp-5028/Pr3112-grp-5031">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>31.12</p>
+                            </xforms:caption>
+                            <xforms:input ref="/Skjema/MellomvarendeMedKonsernselskapAksjonarerDeltakere-grp-5027/FordringGjeld-grp-5028/Pr3112-grp-5031/FordringerMellomvarendeKonsernselskapMvSpesifisertDebitor-datadef-15618">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Fordring pr 31.12</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/MellomvarendeMedKonsernselskapAksjonarerDeltakere-grp-5027/FordringGjeld-grp-5028/Pr3112-grp-5031/GjeldMellomvarendeKonsernselskapMvSpesifisertKreditor-datadef-15621">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Gjeld pr 31.12</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                        <xforms:group ref="/Skjema/MellomvarendeMedKonsernselskapAksjonarerDeltakere-grp-5027/FordringGjeld-grp-5028/Renter-grp-5032">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>I Mellomværende med konsernselskap/aksjonærer/deltakere</p>
+                            </xforms:caption>
+                            <xforms:input ref="/Skjema/MellomvarendeMedKonsernselskapAksjonarerDeltakere-grp-5027/FordringGjeld-grp-5028/Renter-grp-5032/RenterMellomvarendeKonsernselskapMvSpesifisertDebitor-datadef-15619">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Renter opptjent</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/MellomvarendeMedKonsernselskapAksjonarerDeltakere-grp-5027/FordringGjeld-grp-5028/Renter-grp-5032/RenterGjeldMellomvarendeKonsernselskapMvSpesifisertKreditor-datadef-15622">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Renter påløpt</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Transaksjoner med konsernselskap</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Prinsipper for verdsettelse/Spesifisering av tjenester mv.  </p>
+                    <p>Transaksjoner og øvrige mellomværende mellom selskap og direkte eller  indirekte interessefellesskap og mellom selskap og  aksjonærer/deltakere, skal prises til virkelig verdi som om  selskapene mv. var uavhengige parter
+                        (armlengdeprinsippet).  </p>
+                    <p/>
+                    <p>Det bes vedlagt en nøyaktig redegjørelse for hvilken fremgangsmåte som  er benyttet ved fastsettelse av pris på transaksjonene/tjenestene,  herunder dokumentasjon for at prisen er armlengdeprinsipp. For andre  mellomværender
+                        (fordringer og gjeld) bes opplyst hvilken valuta  fordringen eller gjelden er i og hvilken rentesats mv. som er lagt  til grunn.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/ManagementhonorarerFeeMv1-grp-5034">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Managementhonorarer (-fee) mv.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Hvis det er forskjellig honorar pr. type skip, bes det om en nærmere  spesifikasjon i eget vedlegg</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/ManagementhonorarerFeeMv1-grp-5034/TransaksjonerLedelsesfunksjonerKonsernManagementhonorarMv-datadef-17517">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ledelsesfunksjoner</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/ManagementhonorarerFeeMv1-grp-5034/TransaksjonerKommersiellManagementKonsernManagementhonorarMv-datadef-17518">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommersiell management. Befraktning, operasjon, etc</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/ManagementhonorarerFeeMv1-grp-5034/TransaksjonerTekniskManagementKonsernManagementhonorarMv-datadef-17519">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Teknisk management. Bemanning, teknisk drift, etc.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/ManagementhonorarerFeeMv1-grp-5034/TransaksjonerManagementKonsernManagementhonorarMv-datadef-17520">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Andre management tjenester</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/ManagementhonorarerFeeMv1-grp-5034/TransaksjonerRegnskapKonsernselskapManagementhonorarMv-datadef-17521">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Regnskap</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/ManagementhonorarerFeeMv1-grp-5034/TransaksjonerLeiekostnaderSkipKonsernselskapBelop-datadef-12751">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Leiekostnader for innleide skip</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Kun leiebeløpet</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/ManagementhonorarerFeeMv1-grp-5034/TransaksjonerLeieinntekterSkipKonsernselskapBelop-datadef-12753">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Leieinntekter for utleide skip</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Kun leiebeløpet</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/UtleggForReder2-grp-5035">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Utlegg for reder</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her spesifiseres skipets driftskostnader for eksempel bemanningshyre,  bunkers etc.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/UtleggForReder2-grp-5035/TransaksjonerLedelsesfunksjonerKonsernselskapUtleggReder-datadef-17522">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/UtleggForReder2-grp-5035/TransaksjonerKommersiellDriftKonsernselskapUtleggReder-datadef-17523">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/UtleggForReder2-grp-5035/TransaksjonerTekniskManagementKonsernselskapUtleggReder-datadef-17524">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/UtleggForReder2-grp-5035/TransaksjonerManagementKonsernselskapUtelggReder-datadef-17525">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/UtleggForReder2-grp-5035/TransaksjonerRegnskapKonsernselskapUtleggReder-datadef-17526">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/NavnPaSelskapDetErUtfortTransaksjonerMed-grp-5036">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Navn på selskap det er utført transaksjoner med</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/NavnPaSelskapDetErUtfortTransaksjonerMed-grp-5036/TransaksjonerLedelsesfunksjonerKonsernselskapNavn-datadef-5904">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/NavnPaSelskapDetErUtfortTransaksjonerMed-grp-5036/TransaksjonerKommersiellDriftKonsernselskapNavn-datadef-12744">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/NavnPaSelskapDetErUtfortTransaksjonerMed-grp-5036/TransaksjonerTekniskDriftKonsernselskapNavn-datadef-12746">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/NavnPaSelskapDetErUtfortTransaksjonerMed-grp-5036/TransaksjonerManagementKonsernselskapNavn-datadef-12748">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/NavnPaSelskapDetErUtfortTransaksjonerMed-grp-5036/TransaksjonerRegnskapKonsernselskapNavn-datadef-12756">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/NavnPaSelskapDetErUtfortTransaksjonerMed-grp-5036/TransaksjonerLeiekostnaderSkipKonsernselskapNavn-datadef-12752">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/NavnPaSelskapDetErUtfortTransaksjonerMed-grp-5036/TransaksjonerLeieinntekterSkipKonsernselskapNavn-datadef-12754">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/DiverseOpplysninger-grp-5037">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Diverse opplysninger</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/DiverseOpplysninger-grp-5037/SkipManagementAntall-datadef-17527">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall skip det er utført management for</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/DiverseOpplysninger-grp-5037/SkipManagementType-datadef-17528">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Skipstype</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Bulk, tank, kjøl etc.</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TransaksjonerMedKonsernselskap-grp-5033/DiverseOpplysninger-grp-5037/SkipManagementStorrelse-datadef-17529">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Skipsstørrelse (dwt.)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OpplysningerOmEOSRegistrertTonnasje-grp-5610">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Opplysninger om EØS registrert tonnasje</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Fra og med inntektsåret 2005 er det krav om at selskap innenfor  ordningen må opprettholde eller øke sin andel EØS-registrerte  tonnasje, jf. sktl. § 8-11 åttende ledd. For inntektsåret 2005 skal  dette vilkåret vurderes i
+                        forhold til EØS-registrert tonnasje pr. 1.  juli 2005 og 31. desember 2005. Kravet om å opprettholde eller øke  andel EØS-registrert tonnasje gjelder ikke så lenge selskapet har  minst 60 prosent EØS-registrert tonnasje.
+                        Kravene til EØS-registrert  tonnasje gjelder både aksjeselskaper innenfor ordningen og  deltakerlignede selskaper som har én eller flere deltakere som lignes  innenfor ordningen.  </p>
+                    <p/>
+                    <p>Selskapets krav til EØS-registrert tonnasje gjelder ikke dersom den  samlede andelen EØS-registrert tonnasje innenfor ordningen (dvs.  vurdert ift. samtlige selskaper innenfor ordningen) er økt over de to  siste inntektsårene.
+                        Et slikt unntak vil første gang kunne gjelde for  inntektsåret 2006, dersom andelen EØS-registrert tonnasje pr.  31.12.2005 er økt i forhold til andelen pr. 31.12.2004/01.01.2005.  For å kunne fange opp slike endringer er det
+                        derfor viktig at  selskapene også oppgir andel EØS-registrert tonnasje pr. 01.01.2005.  Det skal derfor for inntektsåret 2005 oppgis i prosent hva  EØS-registrert tonnasje utgjør av samlet tonnasje på tidspunktene  01.01.2005,
+                        01.07.2005 og 31.12.2005. Andelen EØS-registrert tonnasje  skal oppgis selv om selskapet ikke har et selvstendig krav til å  oppfylle vilkåret om EØS-registrert tonnasje, fordi selskapet er  kontrollert av et annet selskap
+                        innenfor ordningen, se nedenfor.  </p>
+                    <p/>
+                    <p>Opplysninger om EØS-registrert tonnasje gjelder bare skip som er eiet  av skattyter. Innleide skip skal således ikke medtas ved beregningen  av om vilkåret er oppfylt.  </p>
+                    <p/>
+                    <p>Dersom selskap innenfor ordningen har bestemmende innflytelse over et  annet selskap innenfor ordningen iht. regnskapsloven § 1-3, skal  andelen EØS-registrert tonnasje beregnes samlet på morselskapets og  datterselskapets
+                        hånd. Vilkåret til EØS-registrert tonnasje skal i  slike tilfeller kun vurderes i forhold til morselskapet.  Datterselskapets totale tonnasje skal medtas ved beregningen i  morselskapet, selv om morselskapets eierandel er
+                        mindre enn 100%.  </p>
+                    <p/>
+                    <p>Et morselskap som kontrollerer et eller flere underliggende selskaper,  må oppgi navn og organisasjonsnummer på disse underliggende  selskapene slik at ligningsmyndighetene kan vurdere flaggkravet  samlet for disse selskapene.
+                        Likeledes skal et underliggende selskap  oppgi navn og organisasjonsnummer på det kontrollerende selskap som  det skal beregnes konsolidert EØS-registrert tonnasje på.  </p>
+                    <p/>
+                    <p/>
+                </xforms:help>
+                <xforms:input ref="/Skjema/OpplysningerOmEOSRegistrertTonnasje-grp-5610/TonnasjeEOSRegistertAndelSkattearetsInngang-datadef-24505">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Andel EØS registrert tonnasje i forhold til selskapets totale tonnasje  01.01.05 i %</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmEOSRegistrertTonnasje-grp-5610/TonnasjeEOSRegistertAndel0107ISkattearet-datadef-24506">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Andel EØS registrert tonnasje i forhold til selskapets totale tonnasje  01.07.2005 i %</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmEOSRegistrertTonnasje-grp-5610/TonnasjeEOSRegistertAndelSkattearetsUtgang-datadef-24507">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Andel EØS registrert tonnasje i forhold til selskapets totale tonnasje  31.12.2005 i %</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:repeat id="repeat_KonsoliderteSelskaper-grp-5611" nodeset="/Skjema/OpplysningerOmEOSRegistrertTonnasje-grp-5610/KonsoliderteSelskaper-grp-5611">
+                    <xforms:group ref="/Skjema/OpplysningerOmEOSRegistrertTonnasje-grp-5610/KonsoliderteSelskaper-grp-5611">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Hvis selskapet skal konsolideres med andre selskaper må navn og  organisasjonsnummer på det/de konsoliderte selskap(ene) oppgis her</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/OpplysningerOmEOSRegistrertTonnasje-grp-5610/KonsoliderteSelskaper-grp-5611/FusjonspartNavn-datadef-21540">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Selskapets navn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmEOSRegistrertTonnasje-grp-5610/KonsoliderteSelskaper-grp-5611/FusjonspartOrganisasjonsnummer-datadef-21541">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Organisasjonsnummer</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Inntredelsesbeskatning-grp-402">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>II Inntredelsesbeskatning etter sktl. § 8-14</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Fylles ut av aksje-/allmennaksjeselskaper og deltakerlignede  selskaper  </p>
+                    <p>I det året aksjeselskapet trer inn i den særskilte  rederibeskatningsordningen skal selskapet skattelegges for  differansen mellom foretatte avskrivninger og beregnede avskrivninger  etter sktl § 14-62 annet ledd. Det samme
+                        gjelder når aksjeselskapet  innenfor ordningen har fått overført et skip etter reglene i sktl §  11-21. Beregningen foretas bare for skip som er ervervet for mindre  enn 8 år siden målt fra utgangen av inntektsåret.  </p>
+                    <p>Også deltakerlignet selskap skal fylle ut postene i kolonne II i det  året selskapet har deltaker som trer inn i ordningen. Beregningen  gjelder bare for tidsrommet etter ervervet av andelen, eventuelt  ervervet for den som
+                        overfører andelen etter sktl § 11-21.  </p>
+                    <p>Postene under II behøver bare fylles ut dersom skattyter trer inn i  ordningen i inntektsåret, eller har fått overført skip eller andel i  deltakerlignet selskap etter reglene i skatteloven § 11-21 i  inntektsåret. Det er
+                        heller ikke nødvendig å fylle ut annet enn post  201 dersom alle skip i selskapet er ervervet for mer enn 8 år siden,  regnet fra utgangen av inntektsåret.</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_Inntredelsesbeskatning-grp-2609" nodeset="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609">
+                    <xforms:group ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>II Inntredelsesbeskatning etter sktl. § 8-14</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/SkipKostprisSpesifisertSkip-datadef-22484">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>200 Skipets kostpris</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres selskapets kostpris for skipet</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/SkipSpesifisertSkipLeveringsdato-datadef-22485">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>201 Erversdato skip</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres dato for selskapets erverv av skipet. Dersom ervervet  skjedde for mer enn 8 år siden, regnet fra utgangen av inntektsåret,  behøver ingen andre poster under II fylles ut.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:group ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>202 År</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Beregning av differanse mellom saldoavskrivning og  lineæravskrivning  </p>
+                                <p>Den faktiske årlige saldoavskrivningen for skipet må eventuelt hentes  fra selskapets skatteregnskap og føres her. Lineæravskrivning skal  normalt beregnes til 4% av skipets kostpris, og skal for det år  skipet
+                                    erverves, beregnes forholdsmessig etter eiertid i året.</p>
+                            </xforms:help>
+                            <xforms:group ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Saldoavskrivninger-grp-2611">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Saldoavskrivninger</p>
+                                </xforms:caption>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Saldoavskrivninger-grp-2611/SkipSpesifisertSkipAvskrivningSaldo1997-datadef-22486">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>1997</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Saldoavskrivninger-grp-2611/SkipSpesifisertSkipAvskrivningSaldo1998-datadef-22489">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>1998</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Saldoavskrivninger-grp-2611/SkipSpesifisertSkipAvskrivningSaldo1999-datadef-22492">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>1999</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Saldoavskrivninger-grp-2611/SkipSpesifisertSkipAvskrivningSaldo2000-datadef-22495">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>2000</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Saldoavskrivninger-grp-2611/SkipSpesifisertSkipAvskrivningSaldo2001-datadef-22498">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>2001</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Saldoavskrivninger-grp-2611/SkipSpesifisertSkipAvskrivningSaldo2002-datadef-22501">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>2002</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Saldoavskrivninger-grp-2611/SkipSpesifisertSkipAvskrivningSaldo2003-datadef-22504">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>2003</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Saldoavskrivninger-grp-2611/SkipSpesifisertSkipAvskrivningSaldo2004-datadef-24508">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>2004</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                            </xforms:group>
+                            <xforms:group ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Linearavskrivninger-grp-2612">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Lineæravskrivninger</p>
+                                </xforms:caption>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Linearavskrivninger-grp-2612/SkipSpesifisertSkipAvskrivningLinear1997-datadef-22488">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>1997</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Linearavskrivninger-grp-2612/SkipSpesifisertSkipAvskrivningLinear1998-datadef-22490">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>1998</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Linearavskrivninger-grp-2612/SkipSpesifisertSkipAvskrivningLinear1999-datadef-22493">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>1999</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Linearavskrivninger-grp-2612/SkipSpesifisertSkipAvskrivningLinear2000-datadef-22496">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>2000</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Linearavskrivninger-grp-2612/SkipSpesifisertSkipAvskrivningLinear2001-datadef-22499">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>2001</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Linearavskrivninger-grp-2612/SkipSpesifisertSkipAvskrivningLinear2002-datadef-22502">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>2002</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Linearavskrivninger-grp-2612/SkipSpesifisertSkipAvskrivningLinear2003-datadef-22505">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>2003</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Linearavskrivninger-grp-2612/SkipSpesifisertSkipAvskrivningLinear2004-datadef-24509">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>2004</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                            </xforms:group>
+                            <xforms:group ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Differanse-grp-2613">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Differanse</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Den faktiske årlige saldoavskrivningen for skipet må eventuelt hentes  fra selskapets skatteregnskap og føres her. Lineæravskrivning skal  normalt beregnes til 4% av skipets kostpris, og skal for det år  skipet
+                                        erverves, beregnes forholdsmessig etter eiertid i året.</p>
+                                </xforms:help>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Differanse-grp-2613/SkipSpesifisertSkipAvskrivningSaldoLinearDifferanse1997-datadef-22487">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>1997</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Differanse-grp-2613/SkipSpesifisertSkipAvskrivningSaldoLinearDifferanse1998-datadef-22491">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>1998</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Differanse-grp-2613/SkipSpesifisertSkipAvskrivningSaldoLinearDifferanse1999-datadef-22494">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>1999</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Differanse-grp-2613/SkipSpesifisertSkipAvskrivningSaldoLinearDifferanse2000-datadef-22497">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>2000</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Differanse-grp-2613/SkipSpesifisertSkipAvskrivningSaldoLinearDifferanse2001-datadef-22500">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>2001</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Differanse-grp-2613/SkipSpesifisertSkipAvskrivningSaldoLinearDifferanse2002-datadef-22503">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>2002</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Differanse-grp-2613/SkipSpesifisertSkipAvskrivningSaldoLinearDifferanse2003-datadef-22506">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>2003</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/Differanse-grp-2613/SkipSpesifisertSkipAvskrivningSaldoLinearDifferanse2004-datadef-24510">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>2004</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                            </xforms:group>
+                            <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/Inntredelsesbeskatning-grp-2609/inntredelsesbeskPrAr-grp-5104/SkipSpesifisertSkipAvskrivningSaldoLinearDifferanse-datadef-22507">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>203 Sum differanse</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Sum differanse mellom faktisk saldoavskrivning og beregnet  lineæravskrivning for direkte eide skip i beregningsårene.</p>
+                                </xforms:help>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/AvskrivningSkipAndelDifferanse-datadef-12717">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>204 Fra underliggende selskap</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom aksjeselskapet som trer inn i ordningen eier andeler eller  aksjer i deltakerlignede selskaper eller NOKUS, skal det beregnes en  inntredelsesbeskatning på grunnlag av skipet i det deltakerlignede  selskapet. Det
+                            samme gjelder dersom andel/aksje i et slikt selskap er  overført ved konsernintern overføring til et selskap innenfor  ordningen. Denne posten skal bare fylles ut for deltaker i slikt  selskap.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/UnderskuddFramforbartRederi-datadef-14857">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>205 Fradrag for fremførbart underskudd ved inntreden</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom aksjeselskapet har fremførbart underskudd etter sktl § 14-6 på  inntredelsestidspunktet, kan beregnet inntektstillegg under postene  203 og 204 reduseres med slikt underskudd. Dersom aksjeselskapet har  fremførbart
+                            underskudd etter sktl § 10-43 fjerde ledd (pga  fradragsramme i KS og NOKUS) kan slikt underskudd bare begrense  inntektstillegg beregnet på grunnlag av andelene i de deltakerlignede  selskap som underskuddet vedrører.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Inntredelsesbeskatning-grp-402/InntektInntreden-datadef-12761">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>206 Sum skattepliktig inntekt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Sum skattepliktig inntektstillegg ved inntreden eller ved  konsernintern overføring overføres til post 790.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>III Inntektstillegg for høy egenkapital etter sktl. § 8-15 syvende  ledd (kun for aksjeselskaper)</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Fylles bare ut av aksjeselskap  </p>
+                    <p>Tillegg for høy egenkapital beregnes bare på skattesubjektes hånd.  Deltakerlignede selskaper, herunder NOKUS-selskaper, behøver derfor  ikke fylle ut dette avsnittet i skjemaet. Beregningen for  aksjeselskaper gjøres ved at
+                        den delen av bokført egenkapital som  overstiger 30% av summen av gjeld og egenkapital multipliseres med en  normrente. For å unngå at samme verdi medtas i beregningen for to  forskjellige selskap, skal bokført verdi av aksjer
+                        i underliggende  rederibeskattede selskap trekkes ut ved beregningen. Når det gjelder  aksjer og andeler i underliggende deltakerlignede selskaper og NOKUS  som er bokført etter kostmetoden, skal disse bokførte verdiene
+                        erstattes med deltakers andel av bokført totalverdi i de  underliggende selskapene. Er andelen/-aksjene bokført etter  egenkapitalmetoden skal deltakers bokførte verdi av andelen økes med  deltakers andel av det underliggende
+                        selskapets gjeld. Både for  andeler ført etter kostmetoden og egenkapitalmetoden skal dessuten en  forholdsmessig andel av disse selskapers gjeld være med når  aksjeselskapets egenkapitalandel skal beregnes. På denne måten
+                        skal  metode for bokføring ikke påvirke beregnet inntektstillegg. Dog vil  deltakers eventuelle over- eller underpris ikke bli hensyntatt når  andelen/aksjen er ført etter kostmetoden. For nystiftet selskap i  året føres
+                        åpningsstatus i kolonnen for 1.1, og beregnet tillegg i  post 345 reduseres forholdsmessig etter antall dager selskapet har  eksistert i året. For selskaper som fører betalbar skatt eller utsatt  skatt i balansen, se nærmere
+                        om beregningen under Endringer i  betalbar skatt/utsatt skatt.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>I Inntektstillegg for høy egenkapital etter sktl. § 8-15 syvende ledd</p>
+                    </xforms:caption>
+                    <xforms:group ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/InntektstilleggForHoyEgenkapitalBegynnelsen-grp-2605">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>01.01</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/InntektstilleggForHoyEgenkapitalBegynnelsen-grp-2605/EiendelerFjoraretForKorrigering-datadef-22799">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>301 Sum eiendeler</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Overføres fra RF-1167 post 9400</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Her føres selskapets bokførte totalkapital</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/InntektstilleggForHoyEgenkapitalBegynnelsen-grp-2605/FradragAksjerMvKostmetodenFjoraret-datadef-13832">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>305 Fradrag for bokført verdi av andeler/aksjer i deltakerlignede  selskaper og NOKUS som er bokført etter kostmetoden, samt aksjer i  rederibeskattede aksjeselskap</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Dersom selskapet har aksjer i NOKUS eller andeler i øvrige  deltakerlignede selskaper som er bokført etter kostmetoden, skal  denne verdien erstattes av deltakers andel av det underliggende  selskaps totalkapital.
+                                    Hele den bokførte verdi av det underliggende  selskap skal derfor trekkes ut under denne posten. Det samme gjelder  bokført verdi av aksjer i underliggende rederibeskattede  aksjeselskaper som er egne
+                                    skattesubjekt, og som derfor selv får  beregnet eventuellt tillegg for høy egenkapital.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Av andeler/aksjer i deltakerliknede selskaper og NOKUS som er bokført  etter kostmetoden, samt aksjer i rederibeskattet aksjeselskap</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/InntektstilleggForHoyEgenkapitalBegynnelsen-grp-2605/TilleggKapitalKostmetodenFjoraret-datadef-13834">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>310 Tillegg for andel totalkapital for andeler/aksjer i  deltakerlignede selskaper og NOKUS bokført etter kostmetoden</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Dersom selskapet har aksjer i NOKUS eller andeler i øvrige  deltakerlignede selskaper som er bokført etter kostmetoden, er denne  verdien trukket ut under post 305 ovenfor, og skal under denne post  erstattes av
+                                    deltakers andel av det underliggende selskaps  totalkapital. Deltakers andel av slik verdi overføres fra RF-1221  post 162, RF-1228 post 457 eller RF-1246 post 417.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>For andeler /aksjer i deltakerliknede selskaper og NOKUS bokført etter  kostmetoden</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/InntektstilleggForHoyEgenkapitalBegynnelsen-grp-2605/TilleggGjeldNettometodenFjoraret-datadef-13836">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>315 Tillegg for andel gjeld for andeler/aksjer i deltakerlignede  selskaper som er bokført etter egenkapital-metoden</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Dersom selskapet har aksjer i NOKUS eller andeler i øvrige  deltakerlignede selskaper som er bokført etter egenkapitalmetoden,  skal denne verdien økes med deltakers andel av det underliggende  selskapets bokførte
+                                    gjeld. Dette gjøres for å få lik skattemessig  behandling uansett bokføringsmetode. Deltakers andel av det  underliggende selskapets gjeld hentes fra Rf-1221 post 164, RF-1228  post 458 eller RF-1246 post 518.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>For andeler/aksjer i deltakerliknede selskaper bokført etter  egenkapitalmetoden</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/InntektstilleggForHoyEgenkapitalBegynnelsen-grp-2605/TotalkapitalFjoraret-datadef-13838">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>320 Sum korrigerte eiendeler</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Summen som beregnes her vil være den verdi av totalkapitalen som skal  være med i beregningen av tillegg for høy egenkapital.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/InntektstilleggForHoyEgenkapitalBegynnelsen-grp-2605/GjeldFjoraret-datadef-7184">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>325 Egen gjeld</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres selskapets egen bokførte gjeld. Som gjeld regnes også  regnskapsmessige avsetninger, betalbar skatt og utsatt skatt.  </p>
+                                <p/>
+                                <p>Endringer i betalbar skatt/utsatt skatt  </p>
+                                <p>Et tillegg for høy egenkapital som medfører økt skattepliktig inntekt,  vil øke regnskapsposten betalbar skatt. Betalbar skatt er  regnskapsmessig gjeld som igjen reduserer grunnlaget for tillegg for  høy
+                                    egenkapital. Tillegg for høy egenkapital som nevnt ovenfor vil  imidlertid redusere grunnlaget for utsatt skatt tilsvarende. På grunn  av periodisering vil skattesatsen som anvendes ved beregning av  utsatt skatt
+                                    som oftest være betydelig lavere. Effekten av endringen  i utsatt skatt vil derfor redusere virkningen av økningen i betalbar  skatt, men normalt ikke eliminere den.  </p>
+                                <p/>
+                                <p>Når det bare føres betalbar skatt og ikke utsatt skatt:  </p>
+                                <p>Effekten av inntektstillegget på betalbar skatt kan hensynstas ved at  tillegget først beregnes på grunnlag av betalbar skatt beregnet før  tillegget. Deretter reduseres tillegget ved å multiplisere det med en
+                                    faktor på 0,9951. MERK at det er bare den delen av tillegget som  skaper eller øker skattepliktig inntekt for inntektsåret som skal  reduseres med faktoren, mens ubeskattet del skal tillegges uendret.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/InntektstilleggForHoyEgenkapitalBegynnelsen-grp-2605/GjeldAndelANSKSNOKUSMvFjoraret-datadef-18114">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>330 Tillegg for andel gjeld i deltakerlignede selskaper og NOKUS som  er bokført etter egenkapital- eller kostmetoden</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres deltakerens andel av bokført gjeld fra deltakerliknede  selskaper som er ført etter netto- eller kostmetoden. Disse beløpene  hentes fra RF-1221 postr 164, RF-1228 post 458 eller RF-1246 post  518. Dersom
+                                    andelene er ført etter bruttometoden, vil deltakers andel  av gjelden være inkludert i eget regnskap som gjeld i post 325.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>For deltakerliknede selskaper og NOKUS som er bokført etter  egenkapital- eller kostmetoden</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/InntektstilleggForHoyEgenkapitalBegynnelsen-grp-2605/GjeldKorrigertFjoraret-datadef-18108">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>335 Sum korrigerte gjeldsposter</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Summen som beregnes her vil være den gjelden som skal være med i  beregningen av tillegg for høy egenkapital.</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/InntektstilleggForHoyEgenkapitalSlutten-grp-2604">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>31.12</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/InntektstilleggForHoyEgenkapitalSlutten-grp-2604/Eiendeler-datadef-219">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Overført fra RF-1190 post 9400</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/InntektstilleggForHoyEgenkapitalSlutten-grp-2604/FradragAksjerMvKostmetoden-datadef-13833">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/InntektstilleggForHoyEgenkapitalSlutten-grp-2604/TilleggKapitalKostmetoden-datadef-13835">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/InntektstilleggForHoyEgenkapitalSlutten-grp-2604/TilleggGjeldNettometoden-datadef-13837">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/InntektstilleggForHoyEgenkapitalSlutten-grp-2604/Totalkapital-datadef-13839">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>320 Sum korrigerte eiendeler</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/InntektstilleggForHoyEgenkapitalSlutten-grp-2604/Gjeld-datadef-1119">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>325 Egen gjeld</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/InntektstilleggForHoyEgenkapitalSlutten-grp-2604/GjeldAndelANSKSNOKUSMv-datadef-18115">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/InntektstilleggForHoyEgenkapitalSlutten-grp-2604/GjeldKorrigert-datadef-18109">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/Gjennomsnitt-grp-3502">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Gjennomsnitt</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/Gjennomsnitt-grp-3502/EiendelerKorrigertGjennomsnitt-datadef-18113">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>320 Sum korrigerte eiendeler</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggForHoyEgenkapital-grp-2603/Gjennomsnitt-grp-3502/GjeldKorrigertGjennomsnitt-datadef-18110">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>335 Sum korrigerte gjeldsposter</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+                <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/TotalkapitalGjennomsnitt50Prosent-datadef-18111">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>340 30% av gjennomsnittlige eiendeler</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Fra post 320c</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/TotalkapitalGjennomsnittUtover50Prosent-datadef-18112">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>345 Gjennomsnittlig egenkapital utover 70 %</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Den delen av gjennomsnittlig egenkapital som overstiger 70% av  gjennomsnittlig totalkapital skal multipliseres med årets normrente  fastsatt av Finansdepartementets forskrift til skatteloven § 8-15-1  hvor normrenten skal
+                            fastsettes til årsgjennomsnittet av renten på  norske statsobligasjoner med tre års løpetid tillagt 0,5%. Beløpet  skal tillegges skattepliktig inntekt, og skal overføres til post 765.    </p>
+                        <p>Normrenten for inntektsåret 2004 er beregnet til 3,5%.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/TotalkapitalGjennomsnittNormrente-datadef-13841">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Normrente av positivt beløp</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>4,7%</p>
+                    </xforms:hint>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever to desimaler</p>
+                    </xforms:alert>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev to desimalar</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/InntektstilleggForHoyEgenkapital-grp-397/InntektstilleggHoyEgenkapital-datadef-13843">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Inntektstillegg for høy egenkapital</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Beregnet tillegg for høy egenkapital  </p>
+                        <p>Den delen av gjennomsnittlig egenkapital som overstiger 70% av  gjennomsnittlig totalkapital skal multipliseres med årets normrente  fastsatt av Finansdepartementet. Beløpet skal tillegges skattepliktig  inntekt, og skal
+                            overføres til post 765. Normrenten blir fastsatt av  Finansdep. i forskrift til skatteloven § 8-15.  </p>
+                        <p/>
+                        <p>Endringer i betalbar skatt/utsatt skatt  </p>
+                        <p>Et tillegg for høy egenkapital som medfører økt skattepliktig inntekt,  vil øke regnskapsposten betalbar skatt. Betalbar skatt er  regnskapsmessig gjeld som igjen reduserer grunnlaget for tillegg for  høy egenkapital.
+                            Tillegg for høy egenkapital som nevn ovenfor vil  imidlertid redusere grunnlaget for utsatt skatt tilsvarende. På grunn  av periodisering vil skattesatsen som anvendes ved beregning av  utsatt skatt som oftest være
+                            betydelig lavere. Effekten av endringen  i utsatt skatt vil derfor redusere virkningen av økningen i betalbar  skatt, men normalt ikke eliminere den.  </p>
+                        <p/>
+                        <p>Når det bare føres betalbar skatt og ikke utsatt skatt  </p>
+                        <p>Effekten av inntektstillegget på betalbar skatt kan hensyntas ved at  tillegget først beregnes på grunnlag av betalbar skatt beregnet før  tillegget. Deretter reduseres tillegget ved å multiplisere det med en  faktor på
+                            0,9935. (Faktoren er beregnet på grunnlag av en normrente  på 4,7%) MERK at det er bare den delen av tillegget som skaper eller  øker skattepliktig inntekt for 2004 som skal reduseres med faktoren,  mens ubeskattet del
+                            skal tillegges uendret.  </p>
+                        <p/>
+                        <p>Når det føres utsatt skatt i tillegg til betalbar skatt  </p>
+                        <p>Dersom det føres utsatt skatt, vil faktoren avhenge av hvilken  neddiskonterte skattesats som anvendes på utsatt skatt.  I tabellen i  rettledningen vil man kunne lese av hvilken faktor som skal benyttes  på skattepliktig
+                            del av inntektstillegget for å finne redusert  inntektstillegg på denne delen av tillegget, gradert etter hvilken  neddiskontert skattesats selskapet benytter på utsatt skatt.  Merk at  også denne faktoren bare skal
+                            benyttes på den delen av  inntektstillegget som skaper eller øker skattepliktig inntekt.  </p>
+                        <p/>
+                        <p>For eksempler  og tabell se rettledningen.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Beløpet overføres til post 765</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-414">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>IV Andeler/aksjer i rederibeskattede selskap bokført etter  egenkapital- eller kostmetoden</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Fylles ut av aksjeselskaper og deltakerlignede selskaper som eier  aksjer og andeler i underliggende rederibeskattede selskaper  </p>
+                    <p>Beregningen i tabellen skal foretas fordi en i aksjeselskapets  finansaktiva under post 420 kun skal ta med en forholdsmessig del av  bokført verdi på andeler og aksjer i underliggende deltakerlignede  selskaper (inkl. NOKUS)
+                        og rederibeskattede aksjeselskaper som er  bokført etter egenkapitalmetoden eller kostmetoden. Den  forholdsmessige del beregnes ved å bruke det underliggende selskaps  beregnede prosentandel av finansaktiva og multiplisere
+                        denne med  eierselskapets bokførte verdi av andelen eller aksjene.  </p>
+                    <p>I kolonne I føres navnene på de underliggende selskapene, men bare de  selskaper hvor andelen eller aksjen er bokført etter  egenkapitalmetoden eller kostmetoden.  </p>
+                    <p>I kolonne II og V føres eierselskapets bokførte verdi av andelen eller  aksjen henholdsvis pr. 1.1 og 31.12 i inntektsåret. I kolonne III og  VI føres vedkommende underliggende selskaps beregnede prosentandel av
+                        gjennomsnittlig finansaktiva i forhold til gjennomsnittlig  totalkapital. Det er således den samme prosentsatsen som skal  benyttes i kolonne III og kolonne VI. For deltakerlignede selskaper  hentes denne prosentsatsen fra
+                        RF-1221 post 158, RF-1228 post 454  eller RF-1246 post 515.  </p>
+                    <p>Bokført verdi multiplisert med prosentsats gir den andel av bokført  verdi i eierselskapet som skal henføres til finanskapital ved  eierselskapets beregning av finanskapitalens andel av totalkapitalen.  Disse verdiene beregnes
+                        i kolonne IV og VII. Summen av kolonne IV og  VII overføres til post 420.</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-2618" nodeset="/Skjema/AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-414/AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-2618">
+                    <xforms:group ref="/Skjema/AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-414/AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-2618">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>IV Andeler/aksjer i rederibeskattede selskap bokført etter  nettometoden eller kostmetoden</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-414/AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-2618/SelskapRederiNavn-datadef-14858">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>I Selskap</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-414/AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-2618/EiendelerFinansaktivaFjoraretSpesifisertSelskap-datadef-13857">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>II Bokført verdi 1.1</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Med bokført verdi menes den verdien det underliggende selskap er  bokført med hos eierselskapet. Prosentandel finansaktiva fra  underliggende KS, ANS og NOKUS hentes fra RF-1221 post 112, RF-1228  post 330 eller
+                                    Rf-1246 post 415.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-414/AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-2618/EiendelerFinansaktivaAndelProsentSpsifisertSelskap-datadef-13858">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter number with three fraction digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>III % andel finanskap.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever tre desimaler</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev tre desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-414/AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-2618/EiendelerFinansaktivaAndelFjoraretSpesifisertSelskap-datadef-13859">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>IV Andel finanskap.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-414/AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-2618/EiendelerFinansaktivaSpesifisertSelskap-datadef-13860">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>V Bokført verdi 31.12</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Med bokført verdi menes den verdien det underliggende selskap er  bokført med hos eierselskapet. Prosentandel finansaktiva fra  underliggende KS, ANS og NOKUS hentes fra RF-1221 post 112, RF-1228  post 330 eller
+                                    Rf-1246 post 415.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-414/AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-2618/EiendelerFinansaktivaAndelSpesifisertSelskap-datadef-13861">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>VII Andel finanskap.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-414/EiendelerFinansaktivaAndelFjoraret-datadef-13862">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>410 Sum</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Overføres til post 420</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AndelerAksjerIRederibeskattedeSelskapBokfortEtterNettometode-grp-414/EiendelerFinansaktivaAndel-datadef-13863">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>410 Sum</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Overføres til post 501</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Rentefradrag-grp-406">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Rentefradrag etter sktl. § 8-15 annet ledd</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Fylles ut av aksje-/allmennaksjeselskaper og deltakerlignede  selskaper  </p>
+                    <p>Fradraget for renteutgifter i finansinntekten skal begrenses til den  del av renteutgiften som etter en forholdsmessig fordeling faller på  finanskapitalens andel av totalkapitalen. Som finanskapital må regnes  aktivaposter
+                        hvor avkastningen skal skattlegges løpende. Også  børsnoterte aksjer som er skattefrie etter § 2-38 (fritaksmetoden) må  anses som finansaktiva. Fordelingen skal skje etter den  gjennomsnittlige bokførte verdier av
+                        aktivapostene pr. 1.1 og  31.12.  </p>
+                    <p>Bokført verdi av andeler og aksjer i underliggende deltakerlignede  selskaper og rederibeskattede aksjeselskaper skal tilordnes  finansaktiva med den samme prosentsats som er beregnet i disse  selskaper, dvs. til andelen
+                        finansaktiva i disse selskapene. For  andeler som er bokført etter bruttoprinsippet, skjer dette  automatisk. For andre andeler/aksjer skjer beregningen som redegjort  ovenfor.  </p>
+                    <p/>
+                    <p/>
+                </xforms:help>
+                <xforms:group ref="/Skjema/Rentefradrag-grp-406/Rentefradrag-grp-2614">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Rentefradrag og fradragsberettiget valutatap/skattepliktig  valutagevinst</p>
+                    </xforms:caption>
+                    <xforms:group ref="/Skjema/Rentefradrag-grp-406/Rentefradrag-grp-2614/RentefradragBegynnelsen-grp-2615">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>01.01</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Rentefradrag-grp-406/Rentefradrag-grp-2614/RentefradragBegynnelsen-grp-2615/EiendelerAndreFinansaktivaEgetSelskapFjoraret-datadef-13849">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>421 Andre finansaktiva fra eget selskap</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres annen finansaktiva som hentes fra RF-1167 side 3. Dette vil  være de fleste omløpsmidlene (unntatt varelager) som er ført under  post 9350 og en rekke av postene under anleggsmidler. I større  selskap er
+                                    det en fordel om de finansposter som er ført under post  421 spesifiseres.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Rentefradrag-grp-406/Rentefradrag-grp-2614/RentefradragBegynnelsen-grp-2615/EiendelerFinansaktivaFjoraret-datadef-13852">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>422 Sum finansaktiva i selskapet  </p>
+                                <p/>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Sum finansaktiva i begge kolonner summeres og divideres med 2 for å  finne gjennomsnittlig finansaktiva i året.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Rentefradrag-grp-406/Rentefradrag-grp-2614/RentefradragBegynnelsen-grp-2615/EiendelerFradragsberegning815Fjoraret-datadef-23069">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>423 Totalkapital</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Bokført totalkapital hentes fra RF-1167 post 9400. Beløpet i begge  kollonner summeres og dividres med 2 for å finne gjennomsnittlig  totalkapital i året.</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/Rentefradrag-grp-406/Rentefradrag-grp-2614/RentefradragSlutten-grp-2616">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>31.12</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Rentefradrag-grp-406/Rentefradrag-grp-2614/RentefradragSlutten-grp-2616/EiendelerAndreFinansaktivaEgetSelskap-datadef-13850">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>421 Andre finansaktiva fra eget selskap</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Rentefradrag-grp-406/Rentefradrag-grp-2614/RentefradragSlutten-grp-2616/EiendelerFinansaktiva-datadef-13853">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>422 Sum finansaktiva i selskapet</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Rentefradrag-grp-406/Rentefradrag-grp-2614/RentefradragSlutten-grp-2616/EiendelerFradragsberegning815-datadef-23070">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>423 Totalkapital overført fra RF-1167 post 9400</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/Rentefradrag-grp-406/Rentefradrag-grp-2614/RentefradragGjennomsnitt-grp-2617">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Gjennomsnitt</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Rentefradrag-grp-406/Rentefradrag-grp-2614/RentefradragGjennomsnitt-grp-2617/EiendelerFinansaktivaGjennomsnitt-datadef-13854">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>422 Sum finansaktiva i selskapet</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Rentefradrag-grp-406/Rentefradrag-grp-2614/RentefradragGjennomsnitt-grp-2617/EiendelerGjennomsnitt-datadef-22273">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>423 Totalkapital</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Overført fra RF-1167 eller RF-1175 begges post 9400</p>
+                            </xforms:hint>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+                <xforms:input ref="/Skjema/Rentefradrag-grp-406/RentekostnaderRederi-datadef-15514">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>425 Faktisk rentekostnad</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Faktisk rentekostnad hentes fra RF-1167 post 8130 og 8150. For  aksjeselskaper som eier andeler i underliggende deltakerlignede  selskaper som er bokført etter bruttometoden, skal andel  renteutgifter fra det underliggende
+                            selskap ikke tas med. Selskapets  egne faktiske renteutgifter mulitpliseres med prosentsatsen fra post  424 for å finne den andel av renteutgiftene som kan fradras i  finansinntekten. Fradragsberettiget renteutgift
+                            overføres til post  720. For nærmere innhold av begrepet renter, se lignings ABC 2004  side 903 flg.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Rentefradrag-grp-406/RenteutgifterAndelFradragsberettigetProsent-datadef-22272">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:alert brreg:lang="EN">
+                        <p>Enter number with three fraction digits</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>424 Gjennomsnitt i %</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Gjennomsnittlig finansaktiva dividert med gjennomsnittlig totalkapital  multiplisert med 100 gir finanskapitalen i prosent av totalkapitalen.  Denne prosentsatsen gir fradragsberettiget andel av selskapets  renteutgifter og valutatap/gevinst.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever tre desimaler</p>
+                    </xforms:alert>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev tre desimalar</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Rentefradrag-grp-406/RenteutgifterAndelFradragsberettiget-datadef-13856">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Fradragsberettiget renteutgift</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:group ref="/Skjema/Rentefradrag-grp-406/Valuta-grp-5612">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Valutagevinst/tap</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Rentefradrag-grp-406/Valuta-grp-5612/ValutagevinstNettoKortsiktigPostBeregningsgrunnlag-datadef-25041">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>430 Valutagevinst og -tap på kortsiktige poster</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Rentefradrag-grp-406/Valuta-grp-5612/ValutagevinstNettoKortsiktigPost-datadef-25042">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beregnet gevinst-/tap</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Rentefradrag-grp-406/Valuta-grp-5612/ValutagevinstNettoRealisertLangsiktigPostEtter010105GrLag-datadef-25043">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>431 Realisert valutagevinst og -tap langsiktige poster etablert etter  01.01.2005</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Rentefradrag-grp-406/Valuta-grp-5612/ValutagevinstNettoRealisertLangsiktigPostEtter010105-datadef-25044">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beregnet gevinst-/tap</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Rentefradrag-grp-406/Valuta-grp-5612/ValutagevinstNettoRealisertLangsiktigPostFor010105-datadef-25045">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>432 Realisert valutagevinst og -tap langsiktige poster etablert før  01.01.2005</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Rentefradrag-grp-406/Valuta-grp-5612/OmvurderingskontoValutaFjoraret-datadef-25046">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>433 Omvurderingskonto 01.01.2005</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Rentefradrag-grp-406/Valuta-grp-5612/OmvurderingskontoValuta-datadef-1060">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>434 Omvurderingskonto 31.12.2005</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Rentefradrag-grp-406/Valuta-grp-5612/ValutagevinstAgioSkattemessig-datadef-7436">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>440 Sum skattepliktig valutagevinst/-tap</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Beløpet overføres fra post 433.  </p>
+                            <p/>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>V Beregning av tonnasjeskatt</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Registrert i EØS-land  </p>
+                    <p>For hvert enkelt skip skal det oppgis om skipet er registrert i  EØS-land. Dette skal gjøres for tidspunktene 01.01.2005, 01.07.2005  og 31.12.2005. Det skal ikke settes kryss for EØS-registrert tonnasje  på tidspunkter hvor
+                        skipet ikke er eid av selskapet. Dette gjelder i  tilfeller hvor skipet er kjøpt eller solgt i løpet av inntektsåret.    </p>
+                    <p>Opplysninger om registreringsstat for skipet skal gis uavhengig av om  selskapet er kontrollert av annet selskap innenfor ordningen, og  således ikke selv vil ha et selvstendig krav om EØS-registrert  tonnasjeandel.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Fylles ut av aksje-/almennaksjeselskaper og deltakerlignede selskaper</p>
+                </xforms:hint>
+                <xforms:repeat id="repeat_Skipet-grp-5040" nodeset="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040">
+                    <xforms:group ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>V Beregning av tonnasjeskatt</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040/SkipNavnSpesifisertSkip-datadef-11815">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Skipets navn</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Tonnasjeskatt skal også svares for innleid skip og flyttbar  innretning, når eieren ikke er skattepliktig til Norge for inntekten  ved utleie av skipet eller innretningen, jf. skatteloven § 8-16  første ledd.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040/SkipEOSRegistrertSkattearetsInngang-datadef-24513">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>Ja</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Yes</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Nei</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>No</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Registrert i EØS-land 01.01.05</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:selectOne ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040/SkipEOSRegistrert0107ISkattearet-datadef-24514">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>Ja</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Yes</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Nei</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>No</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Registrert i EØS-land 01.07.05</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:selectOne ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040/SkipEOSRegistrertSkattearetsUtgang-datadef-24515">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>Ja</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Yes</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Nei</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>No</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Registrert i EØS-land 31.12.05</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040/SkipDriftPeriodeSpesifisertSkip-datadef-12692">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Antall dager</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Tonnasjeskatten beregnes med 365 dager for et helt år. Har skipet vært  ute av drift i et sammenhengende tidsrom av mer enn tre måneder i  inntektsåret, skal tonnasjeskatt likevel ikke svares for det tidrom  skipet
+                                    eller innretningen har vært ute av drift, jf. forskrift av 19  november 1999 nr. 1158 § 8-16-1 første ledd.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:group ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040/NettoTonnasje-grp-5041">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Netto tonnasje</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Med skipets nettotonnasje eller den flyttbare innretnings  nettotonnasje foreslås nettotonnasje slik denne til enhver tid er  fastsatt i målebrev som er gyldig her i riket iht. forskrift av 26.  juli 1994 nr.749 om
+                                    måling av fartøyer. Ved beregning av  tonnasjeskatt skal nettotonnasjen avrundes til nærmeste hele tusen  tonn, jf. forskrift av 19. november 1999 nr.1158 §8-16-1 fjerde ledd.</p>
+                            </xforms:help>
+                            <xforms:input ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040/NettoTonnasje-grp-5041/SkipNettotonnInntil1000NettotonnSpesifisertSkip-datadef-12693">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>0 - 1.000 nt</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Sats</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040/NettoTonnasje-grp-5041/SkipNettotonn100110000NettotonnSpesifisertSkip-datadef-12694">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1.001 - 10.000 nt</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>50 pr 1000 nt</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040/NettoTonnasje-grp-5041/SkipNettotonn1000125000NettotonnSpesifisertSkip-datadef-12695">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>10.001 - 25.000 nt</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>33 pr 1000 nt</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040/NettoTonnasje-grp-5041/SkipNettotonnOver25000NettotonnSpesifisertSkip-datadef-12696">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Over 25.000 nt</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>16 pr 1000 nt</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040/NettoTonnasje-grp-5041/SkipNettotonnSpesifisertSkip-datadef-14153">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Sum</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                        <xforms:group ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040/Sum-grp-5043">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum</p>
+                            </xforms:caption>
+                            <xforms:input ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040/Sum-grp-5043/Tonnasjeskatt100110000NettotonnSpesifisertSkip-datadef-12697">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1.001 - 10.000 nt</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040/Sum-grp-5043/Tonnasjeskatt1000125000NettotonnSpesifisertSkip-datadef-12698">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040/Sum-grp-5043/TonnasjeskattOver25000NettotonnSpesifisertSkip-datadef-12699">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040/Sum-grp-5043/TonnasjeskattForMiljoreduksjonSpesifisertSkip-datadef-12700">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040/Sum-grp-5043/TonnasjeskattMiljoreduksjonSpesifisertSkip-datadef-12701">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Miljøreduksjon</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Miljøreduksjon – eksempel ved tonnasjeskatt på kr 260.610 og  miljøfaktor på 5/40:  </p>
+                                    <p>Sum tonnasjeskatt/antall dager = tonnasjeskatt pr. dag:  </p>
+                                    <p>260.610/365 =  714  </p>
+                                    <p>Tonnasjeskatt pr. dag x miljøfaktor = miljøreduksjon pr. dag:  </p>
+                                    <p>714 x 5/40 =    89,25  </p>
+                                    <p>Miljøreduksjon x antall dager miljøreduksjonen gjelder = reduksjon  tonnasjeskatt:  </p>
+                                    <p>89,25 x 300 =   26.775  </p>
+                                    <p>Miljøreduksjonen er en reduksjon i tonnasjeskatten som følger av  forskriften av 19. november 1999 nr. 1158 § 8-16 B. Reduksjon i  tonnasjeskatt på grunnlag av fartøyets miljøstandard.  </p>
+                                    <p/>
+                                    <p/>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Skipet-grp-5040/Sum-grp-5043/TonnasjeskattSpesifisertSkip-datadef-12702">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Sum tonnasjeskatt</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/TonnasjeskattEgetSelskap-datadef-22800">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>510 Sum tonnasjeskatt i eget selskap</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her summeres tonnasjeskatten for alle skipene i selskapet. Posten skal  fyles ut både av aksjeselskap/allmennaksjeselskap, deltakerlignede  selskap og NOKUS. Deltakerliknede selskap og NOKUS skal overføre  beløpet i post
+                            510 til de respektive selskapsoppgavene, henholdsvis  Rf-1215 post 211 for ANS, RF-1226 post 211 for KS og RF-1245 post 430  for NOKUS. Aksjeselskap/allmennaksjeselskap som ikke eier eller leier  skip direkte, skal ikke
+                            fylle ut post 510.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/TonnasjeskattAndelNOKUSSelskapMv-datadef-14868">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>515 Andel tonnasjeskatt fra NOKUS og deltakerliknede selskap</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Andel av tonnasjeskatt fra deltakerliknede selskap og NOKUS legges til  aksjeselskapets/allmennaksjeselskapets gene tonnasjeskatt. beløpet  overføres fra deltakeroppgaven RF-1221 post 156 (ANS), RF-1228 post  453 (KS) eller
+                            RF-1245 post 514.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Denne post fylles kun ut av aksjeselskap/allmennaksjeselskap.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/Tonnasjeskatt-datadef-5857">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>520 Sum tonnasjeskatt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Aksjeselskapets/almennaksjeselskapets egen tonnasjeskatt (fra post  510) og andel av tonnasjeskatt i deltakerliknede selskap og NOKUS  summeres her. Beløpet overføres til post 795.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Denne post benyttes av både aksjeselskap/almennaksjeselskap, NOKUS og  deltagerliknede selskap</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:group ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/NettoTonnasje-grp-5044">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Netto tonnasje</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/BeregningAvTonnasjeskatt-grp-5039/NettoTonnasje-grp-5044/RederiTonnasjeNetto-datadef-12703">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>530 Sum nettotonnasje</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>VI Beregning av skattepliktig utbytteinntekt og saldo på konto for  beskattet inntekt</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Fylles bare ut av aksje-/almennaksjeselskap  </p>
+                    <p/>
+                    <p>Postene 610 og 630 fylles bare ut for selskaper som trer inn i  ordningen i inntektsåret</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Kun for inntreden i 2005</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/EgenkapitalRegnskapsmessig-datadef-15516">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>610 selskapets totale regnskapsmessige egenkapital før tilbakeføring  av utsatt skatt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres selskapets regnskapsmessige egenkapital pr. 1. januar i  inntektsåret.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/AksjekapitalInnbetaltOverkurs-datadef-19979">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>615 Skattemessig innbetalt aksjekapital inkl. overkurs</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Beløpet skal representere skattemessig innbetalt kapital pr.  inntredelsesdato. For nystiftede selskaper vil dette være pålydende  aksjekapital inklusive overkurs. For eldre selskaper må eventuelle  fondsemisjoner trekkes
+                            fra. For selskaper som er opprettet etter  fsfin. § 11-20 (tidligere omdannelsesforskriften av 17.01.91) vil det  være skattemessig verdi ved omdannelsen som skal regnes som  skattemessig innbetalt kapital.  </p>
+                        <p/>
+                        <p/>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/ForskjellerMidlertidige-datadef-13218">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>620 Netto positive/negative midlertidige forskjeller mellom  regnskapsmessige og skattemessige verdier</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Netto positive midlertidige forskjeller mellom de regnskapsmessige og  skattemessige verdier gir generelt et uttrykk for selskapets  ubeskattede inntekter. Som ledd i beregningen av inngående saldo på  konto for
+                            tilbakeholdt beskattet inntekt tas det utgangspunkt i de  midlertidige forskjeller slik disse fremkommer i RF-1217 for  foregående inntektsår.  </p>
+                        <p/>
+                        <p/>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/SkattSkattefordelUtsatt-datadef-13219">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>625 Regnskapsført utsatt skatt/regnskapsført utsatt skattefordel</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Det er kun egenkapitalandelen av netto positive forskjeller eller den  beskattede andel av netto negative midlertidiger forskjeller som skal  fratrekkes kontoen. I post 620 er netto positive midlertidige  forskjeller eller
+                            netto negative midlertidige forskjeller trukket  fra/lagt til i sin helhet. Regnskapsført utsatt skatt må derfor  tillegges kontoen slik at bare egenkapitalandelen av netto positive  midlertidige forskjeller reduserer
+                            kontoen. Dersom selskapet har ført  utsatt skattefordel i regnskapet, må regnskapsført utsatt  skattefordel fratrekkes kontoen slik at det bare er den beskattede  andelen av netto negative midlertidige forskjeller som
+                            tillegges  kontoen.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/InntektBeskattetSaldoInngaende-datadef-5869">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>630 Inngående saldo på konto for beskattet inntekt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Inngående saldo på kontoen skal vise hvilken del av selskapets kapital  som er opptjent og beskattet tidligere. Dette er et beløp som  selskapet kan avsette som utbytte uten beskatning. For nystiftede  selskaper vil
+                            inngangsverdi på kontoen alltid være 0. For selskaper  som er stiftet i forbindelse med konsernintern overføring, vil  kontoen bli negativ, i det den må reduseres med den latente gevinsten  på den overførte eiendel. Også
+                            for selskaper som har hatt  skattemessige tap, vil saldoen i noen tilfeller kunne få en negativ  inngangsverdi.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:group ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/MellomsaldoPaTilbakeholdtBeskattetInntektISelskapet-grp-5046">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Mellomsaldo på tilbakeholdt beskattet inntekt i selskapet</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/MellomsaldoPaTilbakeholdtBeskattetInntektISelskapet-grp-5046/InntektBeskattetSaldoUtgaendeFjoraret-datadef-12778">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>640 Inngående saldo på konto for tilbakeholdt beskattet inntekt</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Beløpet overføres fra post 692 i RF-1197 for inntektsåret 2004.  Selskap som trer inn i ordningen i 2005 overfører beløpet fra post  630.  </p>
+                            <p/>
+                            <p/>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/MellomsaldoPaTilbakeholdtBeskattetInntektISelskapet-grp-5046/InntekterSkattepliktig-datadef-5865">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>642 Skattepliktig inntekt</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Netto positiv finansinntekt, inntektsføring fra gevinst- og tapskonto  og inntektsføring ved inntreden skal føres i denne posten. Beløpene  hentes fra selvangivelsen RF-1028 post 261, samt postene 785 og 790 i  RF-1197.
+                                Netto finansunderskudd kommer ikke til fradrag på  kontoen.  </p>
+                            <p/>
+                            <p/>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/MellomsaldoPaTilbakeholdtBeskattetInntektISelskapet-grp-5046/SkattBeregnetSkattepliktigInntekt-datadef-5870">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>644 Beregnet skatt av beløpet i post 642 redusert med eventuelt  ubenyttet godtgjørelsesfradrag fra tidligere år</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Beregnet skatt fremkommer ved at beløpet i post 642 avrundes ned til  nærmeste 100 og multipliseres med 0,28. Beregnet skatt skal reduseres  med eventuell ubenyttet godtgjørelse fra tidligere år.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/MellomsaldoPaTilbakeholdtBeskattetInntektISelskapet-grp-5046/AksjeutbytteDatterselskaper-datadef-2838">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>646 Mottatt beskattet utbytte fra selskap innenfor ordningen</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Utdeling av beskattet inntekt fra aksjeselskap/allmennaksjeselskap  innenfor ordningen skal tillegges mottakerens konto for tilbakeholdt  beskattet inntekt, jf. sktl § 8-15 sjette ledd annet punkt.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/MellomsaldoPaTilbakeholdtBeskattetInntektISelskapet-grp-5046/KonsernbidragMottattBeskattet-datadef-15561">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>648 Mottatt beskattet konsernbidrag</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Konsernbidreg kan bare mottas fra annet  aksjeselskap/allmennaksjeselskap innenfor ordningen. Konsernbidrag  som ytes av beskattet inntekt skal tillegges mottakers konto for  tilbakeholdt beskattet inntekt.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/MellomsaldoPaTilbakeholdtBeskattetInntektISelskapet-grp-5046/KonsernbidragYtetBeskattet-datadef-15562">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>650 Ytet konsernbidrag av beskattet inntekt</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Ytet konsernbidrag skal bare fratrekkes kontoen så lenge den er  positiv. Dvs. kontoen kan ikke får en negativ saldo pga. ytet  konsernbidrag.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/MellomsaldoPaTilbakeholdtBeskattetInntektISelskapet-grp-5046/ForskjellerMidlertidigeKonserninterne-datadef-15567">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>652 Positiv midlertidig forskjell knyttet til konserninterne  overføringer foretatt i inntektsåret</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Ved konserninterne overføringer etter fsfin. 19.11.1999 nr. 1158 §  11-21 fra et selskap utenfor ordningen til et rederibeskattet  selskap, vil det oppstå en skattemessig gevinst. I slike tilfeller  skal forskjellen
+                                mellom vederlaget (virkelig verdi) og skattemessig  verdi på det overførte trekkes fra det mottakende selskaps konto for  beskattet inntekt som en positiv midlertidig forskjell. Ved  overføring fra det rederibeskattede
+                                selskap skal gevinsten legges til  det overdragende selskaps konto for beskattet inntekt som en negativ  midlertidig forskjell.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Spesifiseres på eget vedlegg</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/MellomsaldoPaTilbakeholdtBeskattetInntektISelskapet-grp-5046/InntektGevinstSkatteloven238-datadef-22332">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>654 Inntekter og gevinster som omfattes av skatteloven § 2-38</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Etter sktl. § 8-15 tredje ledd femte og sjette punktum skal konto for  beskattet inntekt reguleres med finansinntekter og –tap som er  unntatt beskatning eller fradragsføring etter sktl. § 2-38.  </p>
+                            <p>Utbytte og gevinst/tap ved realisasjon av aksjer i børsnoterte  selskaper skal legges til/trekkes fra kontoen.  </p>
+                            <p>Det gjelder imidlertid visse unntak for utbytte og gevinst/tap ved  realisasjon av aksjer i børsnoterte selskap hjemmehørende i land  utenfor EØS. Gevinst på slike aksjer er skattepliktig når aksjene i  løpet av de to
+                                siste år før realisasjon på noe tidspunkt er eiet med  mindre enn 10%. Tap er fradragsberettiget når skattyter og hans  nærstående til sammen ikke har eiet 10% eller mer på noe tidspunkt de  siste 2 år før
+                                realisasjonen. Utbytte er skattepliktig når  eierandelen i selskapet ikke sammenhengende har vært mer enn 10% i  løpet av en toårsperiode som omfatter realisasjonstidspunktet.  </p>
+                            <p>Bestemmelsen gjelder også realisasjon av aksjer i aksjeselskap  innenfor ordningen. Reglene gjelder på tilsvarende måte for  finansielle instrumenter som har slike aksjer som underliggende  objekt.  </p>
+                            <p>Etter sktl. § 8-15 tredje ledd syvende til niende punktum skal gevinst  ved overføring av aksjer til nærstående ikke tillegges konto for  beskattet inntekt.  </p>
+                            <p>Ved realisasjon av aksje i underliggende selskap innenfor ordningen  (jf. sktl. § 8-11 første ledd g), skal netto ubeskattet konsernbidrag  som det underliggende selskapet har mottatt de to siste  regnskapsårene ikke
+                                regnes med i utgangsverdien ved beregningen av  gevinst eller tap. Konsernbidrag som er besluttet før 6. oktober 2004  skal imidlertid ikke tas i betraktning ved anvendelsen av  bestemmelsen.  </p>
+                            <p>Ved beregning av aksjetap eller aksjegevinst skal aksjens  inngangsverdi ikke reguleres for RISK-beløp eller korreksjonsbeløp  etter sktl. § 10-32 fjerde og femte ledd.  </p>
+                            <p/>
+                            <p/>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/MellomsaldoPaTilbakeholdtBeskattetInntektISelskapet-grp-5046/UtgiftTapSkatteloven238-datadef-22333">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>656 Utgifter og tap som omfattes av skatteloven § 2-38</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Etter sktl. § 8-15 tredje ledd femte og sjette punktum skal konto for  beskattet inntekt reguleres med finansinntekter og –tap som er  unntatt beskatning eller fradragsføring etter sktl. § 2-38.  </p>
+                            <p>Utbytte og gevinst/tap ved realisasjon av aksjer i børsnoterte  selskaper skal legges til/trekkes fra kontoen.  </p>
+                            <p>Det gjelder imidlertid visse unntak for utbytte og gevinst/tap ved  realisasjon av aksjer i børsnoterte selskap hjemmehørende i land  utenfor EØS. Gevinst på slike aksjer er skattepliktig når aksjene i  løpet av de to
+                                siste år før realisasjon på noe tidspunkt er eiet med  mindre enn 10%. Tap er fradragsberettiget når skattyter og hans  nærstående til sammen ikke har eiet 10% eller mer på noe tidspunkt de  siste 2 år før
+                                realisasjonen. Utbytte er skattepliktig når  eierandelen i selskapet ikke sammenhengende har vært mer enn 10% i  løpet av en toårsperiode som omfatter realisasjonstidspunktet.  </p>
+                            <p>Bestemmelsen gjelder også realisasjon av aksjer i aksjeselskap  innenfor ordningen. Reglene gjelder på tilsvarende måte for  finansielle instrumenter som har slike aksjer som underliggende  objekt.  </p>
+                            <p>Etter sktl. § 8-15 tredje ledd syvende til niende punktum skal gevinst  ved overføring av aksjer til nærstående ikke tillegges konto for  beskattet inntekt.  </p>
+                            <p>Ved realisasjon av aksje i underliggende selskap innenfor ordningen  (jf. sktl. § 8-11 første ledd g), skal netto ubeskattet konsernbidrag  som det underliggende selskapet har mottatt de to siste  regnskapsårene ikke
+                                regnes med i utgangsverdien ved beregningen av  gevinst eller tap. Konsernbidrag som er besluttet før 6. oktober 2004  skal imidlertid ikke tas i betraktning ved anvendelsen av  bestemmelsen.  </p>
+                            <p>Ved beregning av aksjetap eller aksjegevinst skal aksjens  inngangsverdi ikke reguleres for RISK-beløp eller korreksjonsbeløp  etter sktl. § 10-32 fjerde og femte ledd.  </p>
+                            <p/>
+                            <p/>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/MellomsaldoPaTilbakeholdtBeskattetInntektISelskapet-grp-5046/MellomsaldoDiverse-datadef-6369">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>658 Diverse</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>I denne posten føres beløp som ikke dekkes av de øvrige poster på  skjemaet.  </p>
+                            <p/>
+                            <p>Ved fusjon skal konto for beskattet inntekt i det overdragende selskap  legges til, mens skattemessig innbetalt kapital i det overdragende  selskap skal øke det overtakende selskaps skattemessige innbetalte  kapital.
+                                Ved mor-datter fusjon skal kontoen tillegges  datterselskapets samlede skattemessige verdi som består av saldo på  konto for beskattet inntekt og innbetalt kapital, men med fradrag for  morselskapets skattemessige
+                                kostpris av aksjeposten i datter. Ved  fisjon reduseres kontoen med det utfisjonerte selskapets andel.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(eks: fusjon og fisjon)</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/MellomsaldoPaTilbakeholdtBeskattetInntektISelskapet-grp-5046/InntektBeskattetMellomsaldo-datadef-10300">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>660 Mellomsaldo på konto for tilbakeholdt beskattet inntekt</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Denne mellomsaldoen brukes ved beregningen av størrelsen  &lt;&lt;skattemessig del av avsatt/utdelt utbytte.>></p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/BeregningAvUbeskattetUtdeltUtbytte-grp-5047">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Beregning av ubeskattet utdelt utbytte</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/BeregningAvUbeskattetUtdeltUtbytte-grp-5047/UtbytteUtbetalt-datadef-3654">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>670 Avsetning/utdeling som nevnt i skatteloven § 8-15 femte ledd a 1-3</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>For å komme frem til den skattepliktige del av avsatt/utdelt utbytte,  må det tas utgangspunkt i hele avsetningen/utdelingen. Ved innløsning  av enkeltaksjer tas bare med den delen av innløsningssummen som  overstiger
+                                aksjens andel av skattemessig innbetalt kapital. Under  postene 672 og 676 blir den del av utbyttet som ikke skal  skattlegges, trukket fra.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/BeregningAvUbeskattetUtdeltUtbytte-grp-5047/UtbytteUtbetaltUbeskattet-datadef-5871">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>674 Ubeskattet utdelt utbytte</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Denne størrelsen representerer den del av utbyttet som er delt ut av  inntekt som ikke tidligere er blitt beskattet i selskapet. Blir  beløpet i post 674 negativt, betyr dette at avsetningen holder seg  innenfor
+                                beskattet kapital, det blir ingenting å skattlegge og  beløpet settes til null.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/BeregningAvUbeskattetUtdeltUtbytte-grp-5047/UtbytteUtbetaltSkattepliktig-datadef-5872">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>678 Skattepliktig del av avsatt/utdelt utbytte</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom beløpet er positivt har det skjedd en utdeling/avsetning av  ubeskattet inntekt til aksjonær utenfor ordningen. Dette beløpet vil  derfor være gjenstand for utbyttebeskatning. Beløpet brukes da i  beregningen av
+                                skattepliktig utbytteinntekt under post 680. Dersom  det framkommer et negativt beløp under denne posten har det ikke  skjedd en utdeling/avsetning av ubeskattet inntekt til aksjonær  utenfor ordningen. det skal da
+                                ikke beregnes skattepliktig  utbytteinntekt.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Kun positivt beløp</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/BeregningAvSkattepliktigUtbytteinntekt-grp-5048">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Beregning av skattepliktig utbytteinntekt</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/BeregningAvSkattepliktigUtbytteinntekt-grp-5048/UtbytteSkattepliktig-datadef-5873">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>680 Skattepliktig utbytteinntekt</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Ved beregning av skattepliktig utbytteinntekt skal det benyttes en  bruttometode. Dvs. at aksjeselskapet/allmennaksjeselskapet skal  inntektsføre et bruttobeløp som, etter at beregnet skatt av  bruttobeløpet er trukket
+                                fra, svarer til utdelingen. Dette beløpet  beregnes ved at ubeskattet utdelt utbytte divideres med 0,72.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Positivt beløp i post 678 oppgrosses (se rettledningen). Beløpet  overføres post 780</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/UtgaendeSaldoPaKontoForTilbakeholdtBeskattetInntekt-grp-5049">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Utgående saldo på konto for tilbakeholdt beskattet inntekt</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/UtgaendeSaldoPaKontoForTilbakeholdtBeskattetInntekt-grp-5049/UtbytteSkattBeregnet-datadef-5874">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>688 Beregnet skatt på utbytteinntekt</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Utlignet skatt skal trekkes fra kontoen, jf. skatteloven § 8-15 tredje  ledd. I dette ligger at det er beregnet skatt på årets skattepliktige  inntekt som skal trekkes fra kontoen. (Se også hjelpetekst post 644).
+                                Beregnet skatt på årets utbytteinntekt framkommer ved å multiplisere  beløpet i post 680 med 0,28. Eventuelt godtgjørelsesfradrag som  overstiger beregnet skatt i post 644 skal trekkes fra.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Beløpet i post 680 * 0,28 minus eventuelt rest godtgjørelsesfradrag</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/UtgaendeSaldoPaKontoForTilbakeholdtBeskattetInntekt-grp-5049/UtbytteUtdeltASASAKorrigert-datadef-12779">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>676 Utdeling av ubeskattet utbytte til et annet  aksjeselskap/allmennaksjeselskap innenfor ordningen</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Beløpet overføres fra post 676</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/UtgaendeSaldoPaKontoForTilbakeholdtBeskattetInntekt-grp-5049/InntektBeskattetSaldoUtgaende-datadef-10301">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>692 Utgående saldo på konto for tilbakeholdt beskattet inntekt</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Utgående saldo på konto for tilbakeholdt skattlagt inntekt overføres  til neste års skjema.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/KapitalInnbetaltSkattemessig-datadef-10303">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>694 Skattemessig innbetalt aksjekapital inklusive overkurs</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Selskapets samlede skattemessige verdi er summen av kontoens størrelse  og skattemessig innbetalt kapital. Det er derfor viktig at  skattemessig innbetalt kapital ved inntreden i ordningen ajourholdes  ved ytterligere
+                            innbetalinger eller utbetalinger, fusjoner og  fisjoner og innløsning av enkeltaksjer.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvInngaendeSaldoPaKontoForTilbakeholdtBeskattetInnte-grp-5045/EiendelerSkattemessige-datadef-1061">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>696 Selskapets samlede skattemessige verdi</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres summen av post 692 og post 694.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/BeregningAvSkattepliktigInntektForRederiselskap-grp-5050">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>VII Beregning av skattepliktig inntekt for rederiselskap</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Fylles ut av aksje/almennaksjeselskaper og deltakerlignede selskaper</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/BeregningAvSkattepliktigInntektForRederiselskap-grp-5050/RenteinntekterKonsern-datadef-149">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>701 Renteinntekt fra foretak i samme konsern</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres renteinntekter fra foretak i samme konsern</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Overføres fra næringsoppgaven RF-1167 side 2 post 8030</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvSkattepliktigInntektForRederiselskap-grp-5050/RenteinntekterAndreUnntak-datadef-12762">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>705 Annen renteinntekt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres andre renteinntekter som hentes fra næringsoppgaven side 2  post 8050. Merk at posten ikke skal inkludere andel finansinntekter  fra underliggende selskaper.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Ekskl. andel fra underliggende selskap</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvSkattepliktigInntektForRederiselskap-grp-5050/FinansinntekterAndreUnntak-datadef-12763">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>710 Annen finansinntekt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres andre finansinntekter, for eksempel gevinst og tap på  omsettelige obligasjoner, finansielle opsjoner og finansielle  instrumenter. Merk at posten ikke skal inkludere andel  finansinntekter fra underliggende
+                            selskaper. Etter skatteloven § 2-38  er realisasjon av finansielle instrumenter med aksjer som  underliggende objekt skattefritt fra og med 26. mars 2004.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Ekskl. andel fra underliggende selskap</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvSkattepliktigInntektForRederiselskap-grp-5050/FinanskostnaderFradragUnntak-datadef-12765">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>725 Annen finanskostnad ekskl. andel fra underliggende selskap</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres andre finanskostnader inklusive eventuelle renter av  restskatt. Merk at posten ikke skal inkludere andel finanskostnader  fra underliggende selskaper.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvSkattepliktigInntektForRederiselskap-grp-5050/AksjerMvRederiRealisasjonGevinst-datadef-12767">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>735 Regnskapsmessig tap/gevinst ved realisasjon av andel/aksje i  selskap som nevnt i sktl. § 8-11 første ledd d-g</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her legges til kostnadsført tap, eller trekkes fra inntektsførte  gevinster ved realisasjon av aksjer/andeler som nevnt i skatteloven §  8-11 første ledd d-g. Det er forutsatt at gevinst/tap er inkludert i  post 710 eller
+                            post 725 ovenfor.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvSkattepliktigInntektForRederiselskap-grp-5050/RenteinntekterSkatt-datadef-259">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>740 Rentekostnad på iliknet skatt/renteinntekt på tilbakebetalt skatt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her legges til rentekostnad på iliknet skatt eller trekkes fra  renteinntekt på tilbakebetalt skatt. Slike rentekostnader og  renteinntekter skal ikke påvirke den skattepliktige inntekten. Det er  forutsatt at slike renter
+                            er inkluder i postene ovenfor.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvSkattepliktigInntektForRederiselskap-grp-5050/UtbytteSkattefrittSkatteloven238-datadef-22334">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>745 Utbytte skattefritt etter skatteloven § 2-38</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Utbytte som omfattes av sktl. § 2-38 er skattefritt. Dette omfatter  bl.a. lovlig utbytte fra norske aksjeselskaper, hvilket innebærer at  utbytte fra aksjeselskap som lignes etter reglene i sktl. § 8-10 flg.  og norske
+                            børsnoterte selskaper skal inngå i denne posten. I tillegg  omfattes utbytte på aksjer i selskaper hjemmehørende i EØS, samt  utbytte på aksjer i selskaper hjemmehørende i land utenfor EØS dersom  skattyter i de to siste
+                            årene sammenhengende har eid minst 10% av  aksjene. Det er laget overgangsregler ift. kravet til 10% eierandel i  selskaper hjemmehørende i land utenfor EØS. Utbytte på aksjer i  selskaper hjemmehørende i lavskatteland
+                            utenfor EØS er skattepliktig  uavhengig av eierandel. Utbyttebeløpet kommer bare til fradrag i  denne posten dersom utbytte er ført som finansinntekt i post 710  ovenfor.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvSkattepliktigInntektForRederiselskap-grp-5050/AksjerMvRealisasjonTapUnntak-datadef-10294">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>750 Regnskapsmessig tap/gevinst ved realisasjon av aksjer mv med  unntak av tap/gevinst ved salg av aksjer i selskap som nevnt i  skatteloven § 8-11 første ledd f-g</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her tilbakeføres regnskapsmessig tap/gevinst ved salg av aksjer mv.  som ikke er nevnt i skatteloven § 8-11 første ledd f-g. Det er  forutsatt at tapet/gevinsten er inkludert i postene ovenfor.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvSkattepliktigInntektForRederiselskap-grp-5050/AksjerMvRealisasjonGevinstSkattemessigUnntak-datadef-12768">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>755 Skattemessig gevinst/fradragsberettiget tap ved realisasjon av  aksjer mv.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres skattemessig gevinst/tap ved realisasjon av aksjer mv. som  er skattepliktig inntekt fordi aksjene ikke omfattes av bestemmelsen  i skatteloven § 2-38.  </p>
+                        <p>Realisasjon av aksjer i selskaper hjemmehørende i Norge og EØS er  skattefritt. Realisasjon av aksjer i selskap hjemmehørende i land  utenfor EØS er imidlertid i enkelte tilfeller unntatt fra § 2-38.  Gevinst på slike
+                            aksjer er skattepliktig når aksjene i løpet av de to  siste år før realisasjon på noe tidspunkt er eiet med mindre enn 10%.  Tap er fradragsberettiget når skattyter og hans nærstående til sammen  ikke har eiet 10% eller
+                            mer på noe tidspunkt de siste 2 år før  realisasjonen. Det er laget overgangsregler ift. kravet til 10%  eierandel i selskaper hjemmehørende i land utenfor EØS.  </p>
+                        <p>Gevinster og tap på aksjer i selskaper hjemmehørende i lavskatteland  utenfor EØS er skattepliktig/fradragsberettiget uavhengig av  eierandel.  </p>
+                        <p>Reglene gjelder på samme måte for andeler i aksjefond og finansielle  instrumenter med aksjer som underliggende objekt.  </p>
+                        <p>Ved gevinst/tap knyttet til realisasjon av aksjer mv. som er  skattepliktig/fradragsberettiget, skal RF-1061 oppgave over  realisasjon av aksjer vedlegges.  </p>
+                        <p/>
+                        <p/>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>RF-1061 skal vedlegges</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvSkattepliktigInntektForRederiselskap-grp-5050/OverskuddAndelUnderliggendeSelskapSkattemessig-datadef-5901">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>760 Andel av skattemessig finansoverskudd/finansunderskudd fra  underliggende selskap</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres andel av skattemessig finansresultatfra underliggende  deltakerliknet selskaper. Beløpet fremkommer på deltakeroppgaven  RF-1221 post 150 for ANS, RF-1228 post 450 for KS eller RF-1246 post  506 for NOKUS</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Deltageroppgaven vedlegges</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvSkattepliktigInntektForRederiselskap-grp-5050/FinansinntekterSkattemessig-datadef-11802">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>770 Sum finansinntekt/finansunderskudd</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Aksje-/almennaksjeselskaper skal overføre neto  finansinntekt/finansunderskudd til selvangivelsen RF-1028 post 231.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:group ref="/Skjema/BeregningAvSkattepliktigInntektForRederiselskap-grp-5050/Oppsummering-grp-5051">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppsummering</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/BeregningAvSkattepliktigInntektForRederiselskap-grp-5050/Oppsummering-grp-5051/GevinstTapskontoInntektsfort-datadef-2044">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>785 Inntektsført fra gevinst/tapskonto</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

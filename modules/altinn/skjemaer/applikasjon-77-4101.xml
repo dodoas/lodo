@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1240: Beregning av justeringsfaktor til bruk ved omfordeling av RISK-beløp</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-77-4102.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2709/Foretak-grp-2710/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2709/Foretak-grp-2710/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2709/Foretak-grp-2710/EnhetAdresse-datadef-15"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2709/Foretak-grp-2710/EnhetPostnummer-datadef-6673"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2709/Foretak-grp-2710/EnhetPoststed-datadef-6674"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1240 Beregning av justeringsfaktor til bruk ved omfordeling av  RISK-beløp 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Oppgaven skal leveres av sparebanker og verdipapirfond.  For  aksjeselskap og allmennaksjeselskap skjer beregning av  justeringsfaktor i RF-1086, Aksjonærregisteroppgaven.  </p>
+                <p>Den eierandel et grunnfondsbevis mv representerer kan endres i løpet  av eiertiden uten at eierens samlede eierinteresser endrer seg.  Antall bevis mv kan økes ved fondsemisjon eller ved at et bevis mv  splittes opp i flere bevis
+                    mv.  Antall bevis mv kan reduseres ved at  et antall bevis gjøres om til et nytt bevis mv (spleis).  Også ved  fusjon eller fisjon kan antallet endre seg for den enkelte eier, uten  at eierinteressene endres.  Når det skjer en
+                    endring av  grunnfondsbevisets mv forholdsmessige andel av foretakets verdier  mv., skal det skje en omfordeling av tidligere fastsatte RISK-beløp.    </p>
+                <p>Skatteloven § 10-34 tredje ledd, jf. 7. ledd og forskrift av 19.  november 1999 nr. 1158 § 10-34-1 annet ledd, gir anvisning på at det  ved omfordelingen av RISK skal benyttes en justeringsfaktor.  Det  følger av skatteloven §
+                    10-30 første ledd at likt med aksje i § 10  regnes andel i verdipapirfond, samt grunnfondsbevis.  </p>
+                <p>Forskriften gir også anvisning på hvordan justeringsfaktoren skal  beregnes.  Dette skjema er basert på nevnte forskrift og kan benyttes  ved beregningen.  </p>
+                <p>Når det finner sted en endring som nevnt i skatteloven § 10-34 tredje  ledd skal foretaket uten ugrunnet opphold, og senest ved årets utgang  sende melding om endringen til likningskontoret for kontorkommunen,  eventuelt
+                    Sentralskattekontoret for storbedrifter.  Foretaket plikter  også å sende melding til eierne om at tidligere RISK-beløp må  omfordeles.  Slik melding skal gis innen 20. februar i året etter at  endringen har funnet sted (normalt
+                    likningsåret), jf. forskrift av  19. november 1999 nr 1158 § 10-34-15.  </p>
+                <p/>
+                <p/>
+                <p/>
+                <p/>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjemaet RF-1240, helt eller delvis  bli benyttet også av andre offentlige organer som har hjemmel til å  innhente de samme
+                    opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt. samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1240 Utrekning av justeringsfaktor til bruk ved omfordeling av  RISK-beløp 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Oppgåva skal leverast av sparebanker og verdipapirfond.  Utrekning av  justeringsfaktor for aksjar i aksjeselskap og allmennaksjeselskap  skjer i RF-1086 Aksjonærregisteroppgaven.  </p>
+                <p/>
+                <p>Den eigardel grunnfondsbeviset mm representerer kan endrast i løpet av  eigartida utan at eigaren sin samla eigarinteresse blir endra.  Talet  på grunnfondsbevis kan aukast ved fondsemisjon eller ved at eit  grunnfondsbevis blir
+                    splitta opp i fleire.  Talet på grunnfondsbevis  kan også reduserast ved at fleire bevis med mer blir gjort om til eit  nytt bevis (spleis.  Også ved fusjon eller fisjon kan talet på  grunnfondsbevis endre seg for den enkelte
+                    eigar, utan at  eigarinteressa blir endra.  Når det skjer ei endring av  grunnfondsbeviset sin del av verdiane m.m. i foretaket, skal det skje  ei omfordeling av tidlegare fastsette RISK-beløp.  </p>
+                <p/>
+                <p>Skattelova § 10-34 tredje ledd, jf. sjuande ledd, jf forskrift av 19.  november 1999 nr. 1158 § 10-34-1 andre ledd, skildrar at det ved  omfordelinga av tidlegare RISK-beløp skal nyttast ein  justeringsfaktor. Det føgjer av
+                    skatteloven § 10-30 første ledd at  likt med aksje i § 10-34 regnes part i verdipapirfond og  grunnfondsbevis i sparebanker. Forskrifta skildrar også korleis  utrekninga av justeringsfaktoren skal gjerast.  Dette skjema er  basert
+                    på nemnda forskrift og kan nyttast ved utrekninga.  </p>
+                <p>Når det skjer ei endring som nemnt i skattelova § 10-34 tredje ledd  skal foretaket utan ugranna opphald, og seinart ved utganget av året,  sende melding om endringa til likningskontoret for kontorkommunen,  eventuelt
+                    Sentralskattekontoret for storbedrifter.  Foretaket plikter  også å sende melding til eigarane om at tidlegare RISK-beløp må  omfordelast.  Slik melding skal gis innan 20. februar i året etter at  endringen har funnet stad
+                    (normalt likningsåret), jf. forskrift av  19. november 1999 nr 1158 § 10-34-15.  </p>
+                <p/>
+                <p>For å samordna og forenkla oppgåveinnleveringa frå næringslivet, kan  opplysingar som vert avgjeve i dette skjemaet RF-1240, heilt eller  delvis bli nytta også av andre offentlege organ som har heimel til å  innhente dei same
+                    opplysingar, jf. lov om Oppgåveregisteret §§ 5 og  6. Opplysingar om evt. samordning kan ein få ved å vende seg til  Oppgåveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-2709">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2709/Foretak-grp-2710">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Foretaket(sparebanken, verdipapirfond mv)</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Overtakende ved fusjon og fisjon. Overdragende ved fisjon med  nedsettelse av pålydende.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Foretaket(sparebanken, verdipapirfond mv)</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Overtakande ved fusjon og fisjon. Overdragande ved fisjon med  nedsetjing av pålydande.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2709/Foretak-grp-2710/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2709/Foretak-grp-2710/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2709/Foretak-grp-2710/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Nærings-/kontoradresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Nærings-/kontoradresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2709/Foretak-grp-2710/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2709/Foretak-grp-2710/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2709/Regnskapsforer-grp-2711">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Regnskapsfører</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Rekneskapsførar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2709/Regnskapsforer-grp-2711/RegnskapsforerNavn-datadef-280">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2709/Regnskapsforer-grp-2711/RegnskapsforerAdresse-datadef-281">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Forretningsadresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Forretningsadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2709/Regnskapsforer-grp-2711/RegnskapsforerPostnummer-datadef-6678">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2709/Regnskapsforer-grp-2711/RegnskapsforerPoststed-datadef-6679">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/FondsemisjonSplittOgSpleis-grp-2712">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Fondsemisjon, splitt og spleis</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Fondsemisjon, splitt og spleis</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/FondsemisjonSplittOgSpleis-grp-2712/Justeringstilfelle-grp-2713">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Justeringstilfelle</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Justeringstilfelle</p>
+                    </xforms:caption>
+                    <xforms:group ref="/Skjema/FondsemisjonSplittOgSpleis-grp-2712/Justeringstilfelle-grp-2713/RegistreringsdatoIForetaksregisteretVedFondsemisjonJusteringsar-grp-2714">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Registreringsdato i Foretaksregisteret ved fondsemisjon. Justeringsår  og dato ved splitt, spleis</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Registreringsdato i Foretaksregisteret ved fondsemisjon. Justeringsår  og dato ved splitt, spleis</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/FondsemisjonSplittOgSpleis-grp-2712/Justeringstilfelle-grp-2713/RegistreringsdatoIForetaksregisteretVedFondsemisjonJusteringsar-grp-2714/FondsemisjonDato-datadef-2002">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fondsemisjon</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fondsemisjon</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FondsemisjonSplittOgSpleis-grp-2712/Justeringstilfelle-grp-2713/RegistreringsdatoIForetaksregisteretVedFondsemisjonJusteringsar-grp-2714/AksjesplittDato-datadef-2003">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Splitt</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Splitt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FondsemisjonSplittOgSpleis-grp-2712/Justeringstilfelle-grp-2713/RegistreringsdatoIForetaksregisteretVedFondsemisjonJusteringsar-grp-2714/AksjespleisDato-datadef-2004">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Spleis</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Spleis</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/FondsemisjonSplittOgSpleis-grp-2712/Justeringstilfelle-grp-2713/AntallGrunnfondsbevisForJusteringsdato-grp-2715">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>I) Antall grunnfondsbevis mv før justeringsdato</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>I) Talet på grunnfondsbevis mm før justeringsdato</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/FondsemisjonSplittOgSpleis-grp-2712/Justeringstilfelle-grp-2713/AntallGrunnfondsbevisForJusteringsdato-grp-2715/AksjerAntallForFondsemisjon-datadef-8028">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fondsemisjon</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fondsemisjon</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FondsemisjonSplittOgSpleis-grp-2712/Justeringstilfelle-grp-2713/AntallGrunnfondsbevisForJusteringsdato-grp-2715/AksjerAntallForSplitt-datadef-8031">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Splitt</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Splitt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FondsemisjonSplittOgSpleis-grp-2712/Justeringstilfelle-grp-2713/AntallGrunnfondsbevisForJusteringsdato-grp-2715/AksjerAntallForSpleis-datadef-8034">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Spleis</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Spleis</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/FondsemisjonSplittOgSpleis-grp-2712/Justeringstilfelle-grp-2713/AntallGrunnfondsbevisEtterJusteringsdato-grp-2716">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>II) Antall grunnfondsbevis mv etter justeringsdato</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>II) Talet på grunnfondsbevis mv etter justeringsdato</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/FondsemisjonSplittOgSpleis-grp-2712/Justeringstilfelle-grp-2713/AntallGrunnfondsbevisEtterJusteringsdato-grp-2716/AksjerAntallEtterFondsemisjon-datadef-8029">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fondsemisjon</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fondsemisjon</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FondsemisjonSplittOgSpleis-grp-2712/Justeringstilfelle-grp-2713/AntallGrunnfondsbevisEtterJusteringsdato-grp-2716/AksjerAntallEtterSplitt-datadef-8032">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Splitt</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Splitt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FondsemisjonSplittOgSpleis-grp-2712/Justeringstilfelle-grp-2713/AntallGrunnfondsbevisEtterJusteringsdato-grp-2716/AksjerAntallEtterSpleis-datadef-8035">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Spleis</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Spleis</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/FondsemisjonSplittOgSpleis-grp-2712/Justeringstilfelle-grp-2713/Justeringsfaktor-grp-2717">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Justeringsfaktor (I:II)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Justeringsfaktor (I:II)</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/FondsemisjonSplittOgSpleis-grp-2712/Justeringstilfelle-grp-2713/Justeringsfaktor-grp-2717/RISKJusteringsfaktorFondsemisjon-datadef-8030">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fondsemisjon</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever fire desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fondsemisjon</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev fire desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FondsemisjonSplittOgSpleis-grp-2712/Justeringstilfelle-grp-2713/Justeringsfaktor-grp-2717/RISKJusteringsfaktorSplitt-datadef-8033">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Splitt</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever fire desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Splitt</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev fire desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FondsemisjonSplittOgSpleis-grp-2712/Justeringstilfelle-grp-2713/Justeringsfaktor-grp-2717/RISKJusteringsfaktorSpleis-datadef-8036">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Spleis</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever fire desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Spleis</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev fire desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SkattefriFusjon-grp-2718">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Skattefri fusjon</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Er det flere overdragende foretak, skal det overtakende foretaket gi  opplysninger for hvert av de overdragende foretakene. Ved fusjon  mellom morforetak og heleid  datterforetak og ved fusjon uten  vederlag mellom heleide
+                        datterforetak, skal det ikke beregnes  justeringsfaktor.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Skattefri fusjon</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Er det fleire overdragande foretak, skal det overtakande foretaket gje  opplysningar for kvart av dei overdragande foretaka. Ved fusjon  mellom morforetak og heleigd dotterforetak og ved fusjon utan  vederlag mellom heleigde
+                        dotterforetak, skal det ikkje utreknas  justeringsfaktor.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/SkattefriFusjon-grp-2718/EnhetOvertakendeFusjonerendeNavn-datadef-1993">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Det overtakende (fusjonerende) foretakets navn (evt det overtakende  foretakets morforetak hvis grunnfondsbevis mv som gis som vederlag er  utstedt i morforetaket)</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Det overtakande (fusjonerande) foretaket sitt namn (evt. det  overtakande foretak sitt morforetak om grunnfondsbevis mm som vert  gitt som vederlag er utstedt i morforetaket)</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SkattefriFusjon-grp-2718/EnhetOvertakendeFusjonerendeOrganisasjonsnummer-datadef-1995">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Organisasjonsnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Organisasjonsnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:repeat id="repeat_Fusjon-grp-3803" nodeset="/Skjema/SkattefriFusjon-grp-2718/Fusjon-grp-3803">
+                    <xforms:group ref="/Skjema/SkattefriFusjon-grp-2718/Fusjon-grp-3803">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Overdragende (innfusjonerte) selskap</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Er det flere overdragende foretak, skal det overtakende foretak gi  opplysninger for hvert av de overdragende foretakende. Ved fusjon  mellom morselskap og heleid datterforetak og ved fusjon uten vederlag  mellom
+                                morselskap og heleid datterforetak, skal det ikke beregnes  justeringsfaktor.</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Overdragande (innfusjonerte) selskap</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Er det fleire overdragande foretak, skal det overtakande foretaket gje  opplysningar for kvart av dei overdragande foretaka. Ved fusjon  mellom morselskap og heleigd dotterforetak og ved fusjon utan  vederlag mellom
+                                heleigde dotterforetak, skal det ikkje utreknas  justeringsfaktor</p>
+                        </xforms:hint>
+                        <xforms:input ref="/Skjema/SkattefriFusjon-grp-2718/Fusjon-grp-3803/EnhetOverdragendeInnfusjonerteNavn-datadef-1994">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Det overdragende (innfusjonerte) foretakets navn</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Er det flere overdragende selskap, skal det overtakende selskap gi  opplysninger for hvert av de overdragende selskapene. Ved fusjon  mellom morselskap og heleid datterselskap og ved fusjon uten vederlag  mellom
+                                    heleide datterselskap, skal det ikke beregnes  justeringsfaktor.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Det overdragande (innfusjonerte) foretaket sitt namn</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Er det fleire overdragande selskap, skal det overtakande selskap gi  opplysningar for kvart av dei overdragande selskapane. Ved fusjon  mellom morselskap og heleid datterselskap og ved fusjon uten vederlag  mellom
+                                    heleide datterselskap, skal det ikkje beregnes  justeringsfaktor.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SkattefriFusjon-grp-2718/Fusjon-grp-3803/EnhetOverdragendeInnfusjonerteOrganisasjonsnummer-datadef-1996">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Organisasjonsnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Organisasjonsnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:group ref="/Skjema/SkattefriFusjon-grp-2718/Justeringsfaktor-grp-2719">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Justeringsfaktor</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Justeringsfaktor</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SkattefriFusjon-grp-2718/Justeringsfaktor-grp-2719/FusjonDato-datadef-2005">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Registreringsdato i Foretaksregisteret</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Registreringsdato i Foretaksregisteret</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SkattefriFusjon-grp-2718/Justeringsfaktor-grp-2719/AksjerOverdragendeSelskapAntall-datadef-2006">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>I) Antall  grunnfondsbevis mv i det overdragende (innfusjonerte)  foretaket</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p/>
+                            <p>I) Talet på grunnfondsbevis mm i det overdragande (innfusjonerte)  foretaket</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SkattefriFusjon-grp-2718/Justeringsfaktor-grp-2719/AksjerMottattOvertakendeSelskapAntall-datadef-2007">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>IIa) Antall grunnfondsbevis mv som gis som vederlag i det overtakende  (fusjonerende) foretaket</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p/>
+                            <p>IIa) Talet på grunnfondsbevis mm motteke som vederlag i det  overtakande (fusjonerande) foretaket</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SkattefriFusjon-grp-2718/Justeringsfaktor-grp-2719/RISKJusteringsfaktorFusjonOverdragende-datadef-8037">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Justeringsfaktor (I:IIa)</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever fire desimaler</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Justeringsfaktor (I:IIa)</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev fire desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SkattefriFusjon-grp-2718/Justeringsfaktor-grp-2719/AksjerMottattOvertakendeMorselskapAntall-datadef-8038">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>IIb) Antall grunnfondsbevis mv mottatt som vederlag i det overtakende  foretakets morforetak</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p/>
+                            <p>IIb) Talet på grunnfondsbevis mm motteke som vederlag i det  overtakande foretaket sitt morforetak</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SkattefriFusjon-grp-2718/Justeringsfaktor-grp-2719/RISKJusteringsfaktorKonsernFusjonOverdragende-datadef-8039">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Justeringsfaktor (I:IIb)</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever fire desimaler</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Justeringsfaktor (I:IIb)</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev fire desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SkattefriFisjon-grp-2720">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Skattefri fisjon</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Inkl. fisjon med nedsettelse av pålydende mv pr. andel mv i  overdragende foretak</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Skattefri fisjon</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NON">
+                    <p>Inkl. fisjon med nedsetjing av pålydande m m pr. andel i det  overdragande foretaket</p>
+                </xforms:hint>
+                <xforms:repeat id="repeat_Fisjon-grp-3804" nodeset="/Skjema/SkattefriFisjon-grp-2720/Fisjon-grp-3804">
+                    <xforms:group ref="/Skjema/SkattefriFisjon-grp-2720/Fisjon-grp-3804">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Overtakende (utfusjonerte) selskap</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Overtakande (utfusjonerte) selskap</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/SkattefriFisjon-grp-2720/Fisjon-grp-3804/EnhetOvertakendeUtfisjonerteNavn-datadef-2008">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Det overtakende (utfisjonerte) foretakets navn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Det overtakande (utfisjonerte) foretaket sitt namn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SkattefriFisjon-grp-2720/Fisjon-grp-3804/EnhetOvertakendeUtfisjonerteOrganisasjonsnummer-datadef-2009">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Organisasjonsnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Organisasjonsnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/SkattefriFisjon-grp-2720/EnhetOverdragendeFisjonerendeNavn-datadef-2010">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Det overdragende (fisjonerende) foretakets navn</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Det overdragande (fisjonerande) foretaket sitt namn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SkattefriFisjon-grp-2720/EnhetOverdragendeFisjonerendeOrganisasjonsnummer-datadef-2011">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Organisasjonsnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Organisasjonsnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:group ref="/Skjema/SkattefriFisjon-grp-2720/Justeringsfaktor-grp-2721">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Justeringsfaktor</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Justeringsfaktor</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SkattefriFisjon-grp-2720/Justeringsfaktor-grp-2721/FisjonDato-datadef-2012">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Registreringsdato i Foretaksregisteret</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Registreringsdato i Foretaksregisteret</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SkattefriFisjon-grp-2720/Justeringsfaktor-grp-2721/AksjerOvertakendeUtfisjonertePalydende-datadef-2013">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter number with two fraction digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>I) Pålydende mv pr. andel i det overtakende (utfisjonerte) foretaket</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever to desimaler</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>I) Pålydande m m pr. andel i det overtakande (utfisjonerte) foretaket</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev to desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SkattefriFisjon-grp-2720/Justeringsfaktor-grp-2721/AksjerOverdragendeFisjonerendePalydende-datadef-2014">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter number with two fraction digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>II) Pålydende mv pr. andel mv i det overdragende (fisjonerende)  foretaket</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever to desimaler</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>II) Pålydande m m pr. andel i det overdragande (fisjonerande)  foretaket</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev to desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SkattefriFisjon-grp-2720/Justeringsfaktor-grp-2721/RISKJusteringsfaktorFisjonOvertakende-datadef-8040">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Justeringsfaktor for overtakende foretak (I:II)</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever fire desimaler</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Justeringsfaktor for overtakende foretak (I:II)</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev fire desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SkattefriFisjon-grp-2720/Justeringsfaktor-grp-2721/AksjerOverdragendeEtterFisjonenPalydende-datadef-13953">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter number with two fraction digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>I) Pålydende mv pr. andel mv i det overdragende foretaket etter  fisjonen</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever to desimaler</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>I) Pålydande m m pr. andel i det overdragande foretaket etter fisjonen</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev to desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SkattefriFisjon-grp-2720/Justeringsfaktor-grp-2721/AksjerJusteringsfaktorFisjonOverdragende-datadef-13954">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Justeringsfaktor for overdragende foretak med nedsettelse av pålydende  (I:II)</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever fire desimaler</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Justeringsfaktor for overdragande foretak med nedsetjing av pålydande  (I:II)</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev fire desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

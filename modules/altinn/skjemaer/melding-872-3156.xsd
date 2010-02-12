@@ -1,0 +1,3430 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--title='RF-1120: Skjema for beregning av friinntekt' lang='NOB'-->
+    <xs:element name="Skjema">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>RF-1120 Skjema for beregning av friinntekt 2004</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Ved levering av skjema via Altinn, må det fylles ut ett eksemplar av  skjema per felt. Tabell 1 skal ikke summeres, dette vil bli håndtert  i mottakene saksbehandlingssystem.  </p>
+                    <p/>
+                    <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. november 1994, jf. ligningsloven § 4-4 nr.  7.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GenerellInformasjon-grp-3940"/>
+                <xs:element minOccurs="0" ref="DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943"/>
+                <xs:element minOccurs="0" ref="DriftsmidlerIHhtPetrsktlErvervetFor-grp-4368"/>
+                <xs:element minOccurs="0" ref="InnleideFlyttbareProduksjonsinnretninger-grp-4371"/>
+                <xs:element minOccurs="0" ref="GevinstEllerTapForDriftsmidler-grp-4374"/>
+                <xs:element minOccurs="0" ref="ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378"/>
+                <xs:element minOccurs="0" ref="SamletabellForBeregningAvFriinntekt-grp-4398"/>
+            </xs:sequence>
+            <xs:attribute fixed="872" name="skjemanummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="3156" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="RF-1120" name="blankettnummer" type="xs:string" use="optional"/>
+            <xs:attribute fixed="Skjema for beregning av friinntekt" name="tittel" type="xs:string" use="optional"/>
+            <xs:attribute fixed="3939" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+            <xs:attribute name="etatid" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="974761076">
+                            <xs:annotation>
+                                <xs:documentation>SKATTEDIREKTORATET</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:anyAttribute/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GenerellInformasjon-grp-3940">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Generell informasjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Skjema-grp-3941"/>
+                <xs:element minOccurs="0" ref="Enhet-grp-3942"/>
+            </xs:sequence>
+            <xs:attribute fixed="3940" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Skjema-grp-3941">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Skjema</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="SkjemaNummer-datadef-20370">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Skjema nr</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkjemaSiderTotalt-datadef-16474">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>av totalt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="3941" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkjemaNummer-datadef-20370">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">1</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="20370" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Heltall15-repformat-79">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">79</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="SkjemaSiderTotalt-datadef-16474">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">2</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="16474" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Enhet-grp-3942">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="EnhetNavn-datadef-1">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="EnhetOrganisasjonsnummer-datadef-18">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnr</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetAdresse-datadef-15">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Nærings-(kontor-)adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetPostnummer-datadef-6673">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetPoststed-datadef-6674">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Poststed</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="3942" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EnhetNavn-datadef-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Navn på årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="1" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst175-repformat-8">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="175"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetOrganisasjonsnummer-datadef-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummeret til enheten</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Organisasjonsnummer til årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="18" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst99Modulus11-repformat-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">1</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetAdresse-datadef-15">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">5</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst105-repformat-9">
+                    <xs:attribute fixed="15" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst105-repformat-9">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="105"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetPostnummer-datadef-6673">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="6673" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst44BareTall-repformat-10">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">10</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+                    <p>Enter positive integer with four digits</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Feltet krever positivt heltall med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Feltet krev positivt heiltal med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="4"/>
+            <xs:pattern value="[0-9]{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetPoststed-datadef-6674">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">7</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="6674" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst35-repformat-3">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="35"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Tabell 1 - Driftsmidler i hht. petrosktl. § 3b, ervervet i 1992 eller  senere</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="OljefeltIdentitet-datadef-20371">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Felt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element maxOccurs="25" minOccurs="0" ref="DriftsmidlerIHhtPetrosktlErvervetSenere-grp-4366"/>
+                <xs:element minOccurs="0" ref="Sum-grp-4367"/>
+            </xs:sequence>
+            <xs:attribute fixed="3943" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OljefeltIdentitet-datadef-20371">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="20371" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerIHhtPetrosktlErvervetSenere-grp-4366">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Tabell 1 - Driftsmidler i hht. petrosktl. § 3b, ervervet i 1992 eller  senere</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="InvesteringArSpesifisertAr-datadef-20197">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>1 Investeringsår 1999-2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektGrunnlagSpesifisertInvesteringsar-datadef-16697">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>2 Friinntektsgrunnlag i hht. s/a for 2003. For 2004 oppgis kostpris</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektDriftsmRealisertHistKostprisGamleReglerSpesAr-datadef-16700">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>3 Salgssum maks historisk kost for driftsmidler realisert i 2004 i  hht. gamle regler.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektDriftsmRealisertHistKostprisNyeReglerSpesAr-datadef-16703">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>4 Historisk kost for driftsmidler realisert i 2004 i hht. nye regler</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektGrunnlagKorreksjonIkkeInnarbeidetSpesifisertAr-datadef-16706">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>5 Korreksjon i grunnlag pga. ligning i 2002 samt vedtak, kjennelse mv.  ikke tidligere innarbeidet i s/a</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektGrunnlagKorreksjonIkkeInnarbeidet10SpesifAr-datadef-16708">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>6 Korreksjon i grunnlag pga. § 10. Eventuelle andre overføringer og  justeringer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektsgrunnlagSpesifisertAr-datadef-16710">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>7 Friinnteksgrunnlag i hht. s/a for 2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4366" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InvesteringArSpesifisertAr-datadef-20197">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Ar44-repformat-6">
+                    <xs:attribute fixed="20197" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Ar44-repformat-6">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:gYear"/>
+    </xs:simpleType>
+    <xs:element name="FriinntektGrunnlagSpesifisertInvesteringsar-datadef-16697">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Friinntektsgrunnlag i henhold til selvangivelse for 2000</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">10</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16697" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopHeltall15-repformat-37">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">37</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="FriinntektDriftsmRealisertHistKostprisGamleReglerSpesAr-datadef-16700">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Salgssum maks historisk kostpris for driftsmidler realisert i 2001 i henhold til gamle regler</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">11</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16700" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektDriftsmRealisertHistKostprisNyeReglerSpesAr-datadef-16703">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Salgssum maks historisk kostpris for driftsmidler realisert i 2001 i henhold til nye regler</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">12</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16703" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektGrunnlagKorreksjonIkkeInnarbeidetSpesifisertAr-datadef-16706">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Korreksjon i grunnlag for friinntekt som følge av fjorårets ligning eller vedtak, kjennelser mv. ikke tidligere innarbeidet i selvangivelsen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">13</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16706" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektGrunnlagKorreksjonIkkeInnarbeidet10SpesifAr-datadef-16708">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Korreksjon i grunnlag for friinntekt som følge av § 10 eller vedtak, kjennelser mv. ikke tidligere innarbeidet i selvangivelsen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">14</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16708" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsgrunnlagSpesifisertAr-datadef-16710">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Friinntektsgrunnlag i henhold til fjorårets selvangivelse</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">15</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16710" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Sum-grp-4367">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Sum</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektGrunnlagSamletIkkeKorrigert-datadef-16699">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>2 Friinntektsgrunnlag i hht. s/a for 2003. For 2004 oppgis kostpris</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektDriftsmRealisertHistKostprisGamleReglerSamlet-datadef-16702">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>3 Salgssum maks historisk kost for driftsmidler realisert i 2004 i  hht. gamle regler.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektDriftsmRealisertHistKostprisNyeReglerSamlet-datadef-16705">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>4 Historisk kost for driftsmidler realisert i 2004 i hht. nye regler</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektGrunnlagKorreksjonIkkeInnarbeidetSamlet-datadef-16707">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>5 Korreksjon i grunnlag pga. ligning i 2002 samt vedtak, kjennelse mv.  ikke tidligere innarbeidet i s/a</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektGrunnlagKorreksjonIkkeInnarbeidet10Samlet-datadef-16709">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>6 Korreksjon i grunnlag pga. § 10. Eventuelle andre overføringer og  justeringer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektsgrunnlagSamlet-datadef-16711">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>7 Friinnteksgrunnlag i hht. s/a for 2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="Friinntekt5-datadef-16712">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>8 Friinntekt for 2004 - 5%</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4367" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektGrunnlagSamletIkkeKorrigert-datadef-16699">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet ukorrigert friinntektsgrunnlag</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">16</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16699" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektDriftsmRealisertHistKostprisGamleReglerSamlet-datadef-16702">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet salgsum i henhold til historisk kostpris for driftsmidler realisert i 2001 etter gamle regler</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">17</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16702" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektDriftsmRealisertHistKostprisNyeReglerSamlet-datadef-16705">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet salgsum i henhold til historisk kostpris for driftsmidler realisert i 2001 etter nye regler</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">18</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16705" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektGrunnlagKorreksjonIkkeInnarbeidetSamlet-datadef-16707">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet korreksjonsbeløp i grunnlag for friinntekt som følge av fjorårets ligning eller vedtak, kjennelser mv. ikke tidligere innarbeidet i selvangivelsen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">19</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16707" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektGrunnlagKorreksjonIkkeInnarbeidet10Samlet-datadef-16709">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet korreksjon i grunnlag for friinntekten som følge av § 10, eller eventuelt andre overføringer og justeringer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">20</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16709" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsgrunnlagSamlet-datadef-16711">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet friinntektsgrunnlag</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">21</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16711" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Friinntekt5-datadef-16712">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Friinntekt 5%</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">22</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16712" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerIHhtPetrsktlErvervetFor-grp-4368">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Tabell 2 - Driftsmidler i hht. petrsktl. § 3b, ervervet før 1. januar  1987 og påbegynt avskrevet i 2002 eller tidligere</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="25" minOccurs="0" ref="DriftsmidlerIHhtPetrsktlErvervetFor-grp-4369"/>
+                <xs:element minOccurs="0" ref="Sum-grp-4370"/>
+            </xs:sequence>
+            <xs:attribute fixed="4368" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerIHhtPetrsktlErvervetFor-grp-4369">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Tabell 2 - Driftsmidler i hht. petrsktl. § 3b, ervervet før 1. januar  1987 og påbegynt avskrevet i 2002 eller tidligere</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektsgrunnlagetInntattArSpesifisertAr-datadef-20198">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>1 År inntatt i friinntektsgrunnlaget</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektErvervFor1987GrunnlagSpesifisertInvesteringsar-datadef-16713">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>2 Friinnteksgrunnlaget i hht. s/a for 2003. For 2004 oppgis beløp  påbegynt avskrevet i 2003</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>1. år for friinntekt 1990 - 2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektErvervFor1987HistKostprisGamleReglerSpesAr-datadef-16716">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>3 Salgsum maks historisk kost for driftsmidler realisert i 2002 i hht.  gamle regler</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektErvervFor1987KorreksjonIkkeInnarbeidetSpesifAr-datadef-16719">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>4 Korreksjon i grunnlag pga. ligning 2002 samt vedtak, kjennelser mv.  ikke tidligere innarbeidet i s/a</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektErvervFor1987IkkeInnarbeidet10SpesifAr-datadef-16721">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>5 Korreksjon i grunnlag pga. § 10. Eventuelle andre overføringer og  justeringer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektsgrunnlagErvervFor1987SpesifisertAr-datadef-16723">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>6 Friinntektsgrunnlag i hht. s/a for 2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4369" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsgrunnlagetInntattArSpesifisertAr-datadef-20198">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">23</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Ar44-repformat-6">
+                    <xs:attribute fixed="20198" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektErvervFor1987GrunnlagSpesifisertInvesteringsar-datadef-16713">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Friinntektsgrunnlag i henhold til selvangivelsen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">24</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16713" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektErvervFor1987HistKostprisGamleReglerSpesAr-datadef-16716">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Driftsmidler ervervet før 1987 og påbegynt avskrevet i 2000 eller tidligere. Salgssum maks. historisk kostpris for driftsmidler realisert i 2000 i henhold til gamle regler</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">25</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16716" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektErvervFor1987KorreksjonIkkeInnarbeidetSpesifAr-datadef-16719">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Korreksjon i grunnlag pga ligning 2000 samt vedtak mv ikke tidligere innarbeidet i selvangivelsen og spesifisert år</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">26</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16719" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektErvervFor1987IkkeInnarbeidet10SpesifAr-datadef-16721">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">27</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16721" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsgrunnlagErvervFor1987SpesifisertAr-datadef-16723">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Friinntektsgrunnlag i henhold til selvangivelse for 2001 for selvangivelsen for 2001</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">28</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16723" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Sum-grp-4370">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Sum</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektErvervFor1987GrunnlagSamletIkkeKorrigert-datadef-16715">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>2 Friinnteksgrunnlaget i hht. s/a for 2003. For 2004 oppgis beløp  påbegynt avskrevet i 2003</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektErvervFor1987HistKostprisGamleReglerSamlet-datadef-16717">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>3 Salgsum maks historisk kost for driftsmidler realisert i 2003 i hht.  gamle regler</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektErvervFor1987KorreksjonIkkeInnarbeidetSamlet-datadef-16720">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>4 Korreksjon i grunnlag pga. ligning 2002 samt vedtak, kjennelser mv.  ikke tidligere innarbeidet i s/a</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektErvervFor1987IkkeInnarbeidet10Samlet-datadef-16722">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>5 Korreksjon i grunnlag pga. § 10. Eventuelle andre overføringer og  justeringer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektsgrunnlagErvervFor1987Samlet-datadef-16724">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>6 Friinntektsgrunnlag i hht. s/a for 2003</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="Friinntekt175-datadef-16725">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>7 Friinntekt for 2004 - 1,75%</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4370" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektErvervFor1987GrunnlagSamletIkkeKorrigert-datadef-16715">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet friinntektsgrunnlag av driftsmidler ervervet før 1987 før korrigering</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">29</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16715" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektErvervFor1987HistKostprisGamleReglerSamlet-datadef-16717">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet salgssum for driftsmidler realisert i 2000 i henhold til gamle regler</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">30</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16717" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektErvervFor1987KorreksjonIkkeInnarbeidetSamlet-datadef-16720">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet korreksjon i grunnlag pga ligning 2000 samt vedtak mv ikke tidligere innarbeidet i selvangivelsen og spesifisert år</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">31</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16720" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektErvervFor1987IkkeInnarbeidet10Samlet-datadef-16722">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Korreksjon i grunnlag av friinntekt pga § 10. Eventuelt andre overføringer og justeringer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">32</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16722" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsgrunnlagErvervFor1987Samlet-datadef-16724">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet friinntektsgrunnlag for driftsmidler ervervet før 1987</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">33</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16724" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Friinntekt175-datadef-16725">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet friinntekt for driftsmidler ervervet før 1987</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">34</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16725" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InnleideFlyttbareProduksjonsinnretninger-grp-4371">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Tabell 3 - Innleide, flyttbare produksjonsinnretninger som det kreves  friintekt for etter petrsktl. § 3i</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="25" minOccurs="0" ref="InnleideFlyttbareProduksjonsinnretninger-grp-4372"/>
+                <xs:element minOccurs="0" ref="Sum-grp-4373"/>
+            </xs:sequence>
+            <xs:attribute fixed="4371" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InnleideFlyttbareProduksjonsinnretninger-grp-4372">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Tabell 3 - Innleide, flyttbare produksjonsinnretninger som det kreves  friintekt for etter petrsktl. § 3i</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="LeieforholdPabegyntArSpesifisertAr-datadef-20199">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>1 Leieforhold påbegynt 1999-2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektInnleideInnretningerGrunnlagSpesifisertAr-datadef-16726">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>2 Friinntektsgrunnlag i hht. s/a for 2003. For 2004 oppgis beregnet  kostpris</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektInnleideInnretningerBeregnetKostprisSpesifisertAr-datadef-16727">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>3 Beregnet kostpris for driftsmidler hvor eieforholdet er opphørt i  2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektInnleideInnretningerKorreksjonLigningSpesifisertAr-datadef-16728">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>4 Korreksjon i grunnlag pga. ligning i 2002 samt vedtak, kjennelser  mv. Ikke tidligere innarbeidet i s/a</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektInnleideInnretningerKorreksjon10SpesifisertAr-datadef-16729">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>5 Korreksjon i grunnlag pga. § 10. Eventuelle andre overføringer og  justeringer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektsgrunnlagInnleideInnretningerSpesifisertAr-datadef-16730">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>6 Friinntektsgrunnlag i hht. s/a for 2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4372" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LeieforholdPabegyntArSpesifisertAr-datadef-20199">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">35</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Ar44-repformat-6">
+                    <xs:attribute fixed="20199" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektInnleideInnretningerGrunnlagSpesifisertAr-datadef-16726">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Friinntekt i henhold til selvangivelsen for 2000</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">36</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16726" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektInnleideInnretningerBeregnetKostprisSpesifisertAr-datadef-16727">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Beregnet kostpris spesifisert år</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">37</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16727" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektInnleideInnretningerKorreksjonLigningSpesifisertAr-datadef-16728">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Korreksjon i grunnlag på grunn av ligning 2000 samt vedtak, kjennelser mv. ikke tidligere innarbeidet i selvangivelsen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">38</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16728" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektInnleideInnretningerKorreksjon10SpesifisertAr-datadef-16729">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Korreksjon i grunnlag på grunn av §10, samt eventuelle andre overføringer og justeringer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">39</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16729" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsgrunnlagInnleideInnretningerSpesifisertAr-datadef-16730">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Friinntektsgrunnlag i henhold til selvangivelsen spesifisert år</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">40</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16730" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Sum-grp-4373">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Sum</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektInnleideInnretningerGrunnlagSamlet-datadef-16732">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>2 Friinntektsgrunnlag i hht. s/a for 2003. For 2004 oppgis beregnet  kostpris</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektInnleideInnretningerBeregnetKostprisSamlet-datadef-16733">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>3 Beregnet kostpris for driftsmidler hvor eieforholdet er opphørt i  2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektInnleideInnretningerKorreksjonLigningSamlet-datadef-16734">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>4 Korreksjon i grunnlag pga. ligning i 2002 samt vedtak, kjennelser  mv. Ikke tidligere innarbeidet i s/a</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektInnleideInnretningerKorreksjon10Samlet-datadef-16735">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>5 Korreksjon i grunnlag pga. § 10. Eventuelle andre overføringer og  justeringer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektsgrunnlagInnleideInnretningerSpesifisertAr-datadef-16736">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>6 Friinntektsgrunnlag i hht. s/a for 2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektInnleideInnretninger5-datadef-16737">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>7 Friinntekt for 2004 - 5%</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4373" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektInnleideInnretningerGrunnlagSamlet-datadef-16732">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet friinntektsgrunnlag beregnet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">41</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16732" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektInnleideInnretningerBeregnetKostprisSamlet-datadef-16733">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Beregnet kostpris for driftsmidler hvor leieforholdet er opphørt i ligningsåret</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">42</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16733" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektInnleideInnretningerKorreksjonLigningSamlet-datadef-16734">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet korreksjon i grunnlag på grunn av ligning samt vedtak, kjennelser mv. ikke tidligere innarbeidet i selvangivelsen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">43</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16734" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektInnleideInnretningerKorreksjon10Samlet-datadef-16735">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet korreksjon i grunnlag på grunn av §10, samt eventuelle andre overføringer og justeringer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">44</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16735" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsgrunnlagInnleideInnretningerSpesifisertAr-datadef-16736">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Friinntektsgrunnlag på innleide flyttbare produksjonsinnretninger i henhold til selvangivelsen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">45</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16736" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektInnleideInnretninger5-datadef-16737">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Friinntekt 5% for innleide flyttbare produksjonsinnretninger i ligningsåret</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">46</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16737" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstEllerTapForDriftsmidler-grp-4374">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Tabell 4 - Gevinst eller tap for driftsmidler i hht. petrsktl. § 3b,  realisert i hht. nye regler for gevinstbeskatning</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="25" minOccurs="0" ref="GevinstEllerTapForDriftsmidler-grp-4375"/>
+                <xs:element minOccurs="0" ref="Sum-grp-4376"/>
+            </xs:sequence>
+            <xs:attribute fixed="4374" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstEllerTapForDriftsmidler-grp-4375">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Tabell 4 - Gevinst eller tap for driftsmidler i hht. petrsktl. § 3b,  realisert i hht. nye regler for gevinstbeskatning</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="RealisasjonArSpesifisertAr-datadef-20200">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>1 Realisasjonsår 1999-2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektGevinstTapUtgangsverdiSpesifisertAr-datadef-16738">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>2 Utgangsverdi driftsmidler realisert i 2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektGevinstTapInngangsverdiSpesifisertAr-datadef-16739">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>3 Inngangsverdi driftsmidler realisert i 2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektsgrunnlagGevinstTapGrunnlagSpesifisertAr-datadef-16740">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>4 Friinntektsgrunnlag i hht. s/a for 2003. For 2004 oppgis gevinst/tap</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektGevinstTapKorreksjonSpesifisertAr-datadef-16741">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>5 Korreksjon i grunnlag pga. ligning 2002 samt vedtak, kjennelser mv.  Ikke tidligere innarbeidet i s/a</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektGevinstTapKorreksjon10SpesifisertAr-datadef-16742">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>6 Korreksjon i grunnlag pga. § 10. Eventuelle andre overføringer og  justeringer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektGevinstTapGrunnlagSpesifisertAr-datadef-16743">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>7 Friinntektsgrunnlaget i hht. s/a for 2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4375" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RealisasjonArSpesifisertAr-datadef-20200">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">47</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Ar44-repformat-6">
+                    <xs:attribute fixed="20200" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektGevinstTapUtgangsverdiSpesifisertAr-datadef-16738">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Utgangsverdi for driftsmidler realisert i ligningsåret</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">48</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16738" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektGevinstTapInngangsverdiSpesifisertAr-datadef-16739">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>inngangsverdi for driftsmidler realisert i ligningsåret</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">49</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16739" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsgrunnlagGevinstTapGrunnlagSpesifisertAr-datadef-16740">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Friinntektsgrunnlag i henhold til selvangivelsen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">50</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16740" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektGevinstTapKorreksjonSpesifisertAr-datadef-16741">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Korreksjon i friinntektsgrunnlaget på grunnlag av ligning samt vedtak, kjennelser mv. som tidligere ikke er innarbeidet i selvangivelsen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">51</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16741" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektGevinstTapKorreksjon10SpesifisertAr-datadef-16742">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Korreksjon i friinntektsgrunnlag på grunn av §10 og eventuelle andre overføringer og justeringer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">52</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16742" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektGevinstTapGrunnlagSpesifisertAr-datadef-16743">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Friinntektsgrunnlag i henhold til selvangivelsen for ligningsåret</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">53</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16743" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Sum-grp-4376">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Sum</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektGevinstTapUtgangsverdiSamlet-datadef-16744">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>2 Utgangsverdi driftsmidler realisert i 2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektGevinstTapInngangsverdiSamlet-datadef-16745">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>3 Inngangsverdi driftsmidler realisert i 2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektsgrunnlagGevinstTapGrunnlagSamlet-datadef-16746">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>4 Friinntektsgrunnlag i hht. s/a for 2003. For 2004 oppgis gevinst/tap</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektGevinstTapKorreksjonSamlet-datadef-16747">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>5 Korreksjon i grunnlag pga. ligning 2002 samt vedtak, kjennelser mv.  Ikke tidligere innarbeidet i s/a</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektGevinstTapKorreksjon10Samlet-datadef-16748">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>6 Korreksjon i grunnlag pga. § 10. Eventuelle andre overføringer og  justeringer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektGevinstTapGrunnlagSamlet-datadef-16749">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>7 Friinntektsgrunnlaget i hht. s/a for 2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FrinntektGevinstTap5-datadef-16750">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>8 Friinntekt for 2004 - 5%</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4376" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektGevinstTapUtgangsverdiSamlet-datadef-16744">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet utgangsverdi av driftsmidler realisert i ligningsåret</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">54</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16744" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektGevinstTapInngangsverdiSamlet-datadef-16745">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet inngangsverdi av driftsmidler realisert i ligningsåret</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">55</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16745" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsgrunnlagGevinstTapGrunnlagSamlet-datadef-16746">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet friinntektsgrunnlag i henhold til selvangivelsen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">56</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16746" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektGevinstTapKorreksjonSamlet-datadef-16747">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet korreksjon i grunnlag på grunn av ligning, samt vedtak kjennelser mv. ikke tidligere innarbeidet i selvangivelsen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">57</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16747" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektGevinstTapKorreksjon10Samlet-datadef-16748">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet korreksjon i friinntektsgrunnlag på grunn av §10 og eventuelle andre overføringer og justeringer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">58</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16748" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektGevinstTapGrunnlagSamlet-datadef-16749">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet friinntektsgrunnlag i henhold til selvangivelsen for ligningsåret</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">59</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16749" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FrinntektGevinstTap5-datadef-16750">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlet friinntekt jfr gevinst eller tap for ligningsåret</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">60</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16750" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Tabell 5 - Reduksjon og økning av friinntekt til fremføring pr.  31.12.2002, samt reduksjon og økning av friinntektsbeløp for 2002 og  tidligere år</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="KorreksjonAvFriinntektTilFremforing-grp-4379"/>
+                <xs:element minOccurs="0" ref="KorreksjonAvFriinntektForTidligereAr-grp-4380"/>
+                <xs:element minOccurs="0" ref="KorreksjonAvFriinntektForTidligereArSomFolgeAvAndre-grp-4381"/>
+                <xs:element minOccurs="0" ref="Sum-grp-4382"/>
+                <xs:element minOccurs="0" ref="SumOverfort-grp-4383"/>
+            </xs:sequence>
+            <xs:attribute fixed="4378" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KorreksjonAvFriinntektTilFremforing-grp-4379">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>A Korreksjon av friinntekt til fremføring pr 31.12.2002 som følge av  ligning 2002 samt vedtak, kjennelser mv. ikke tidligere innarbeidet i  s/a</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Skal spesifiseres</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="NomineltFriinntektsbelopForTidligereAr-grp-4384"/>
+                <xs:element minOccurs="0" ref="NomineltFriinntektsbelop-grp-4388"/>
+                <xs:element minOccurs="0" ref="Fremforingsrente-grp-4392"/>
+            </xs:sequence>
+            <xs:attribute fixed="4379" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="NomineltFriinntektsbelopForTidligereAr-grp-4384">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>6 Nominelt friinntektsbeløp for 2001 og tidligere år</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektNominell2001OgTidlArKorrigert-datadef-20201">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Friinntektsbeløp for 2001 og tidligere år</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4384" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektNominell2001OgTidlArKorrigert-datadef-20201">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">61</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20201" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="NomineltFriinntektsbelop-grp-4388">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>7 Nominelt friinntektsbeløp for 2002</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Kolonne 7 skal kun benyttes av skattytere som har eller har hatt  friinntekt til fremføring for de aktuelle år.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektNominell2002Korrigert-datadef-20202">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Friinntektsbeløp for 2002</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4388" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektNominell2002Korrigert-datadef-20202">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">62</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20202" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Fremforingsrente-grp-4392">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>8 Fremføringsrente ved fremføring av friinntektsbeløp for 2002</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektNominell2002KorrigertFremforingsrente-datadef-20203">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Friinntektsbeløp for 2002</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4392" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektNominell2002KorrigertFremforingsrente-datadef-20203">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">63</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20203" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KorreksjonAvFriinntektForTidligereAr-grp-4380">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>B Korreksjon av friinntekt for tidliger år som følge av  samordningsforskriftenes (§ 10 forskriftens) §§ 2 nr. 2 og 3 nr. 2</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Skal spesifiseres</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FulltFriinntektsbelop-grp-4396"/>
+                <xs:element minOccurs="0" ref="NomineltFriinntektsbelopForTidligereAr-grp-4385"/>
+                <xs:element minOccurs="0" ref="NomineltFriinntektsbelop-grp-4389"/>
+            </xs:sequence>
+            <xs:attribute fixed="4380" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FulltFriinntektsbelop-grp-4396">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>4 Fullt friinntektsbeløp</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektFull1991OgTidlAr-datadef-20204">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Friinntektsbeløp for 1991 og tidligere år</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4396" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektFull1991OgTidlAr-datadef-20204">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">64</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20204" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="NomineltFriinntektsbelopForTidligereAr-grp-4385">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>6 Nominelt friinntektsbeløp for 2001 og tidligere år</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektNominell1991OgTidlAr2Nr2Og3Nr2-datadef-20205">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Friinntektsbeløp for 1991 og tidligere år</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektNominell1992Tom20012Nr2Og3Nr2-datadef-20206">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Friinntektsbeløp for 1992 og til og med 2001</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4385" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektNominell1991OgTidlAr2Nr2Og3Nr2-datadef-20205">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">65</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20205" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektNominell1992Tom20012Nr2Og3Nr2-datadef-20206">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">66</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20206" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="NomineltFriinntektsbelop-grp-4389">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>7 Nominelt friinntektsbeløp for 2002</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektNominell2002-datadef-20207">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Friinntektsbeløp for 2002</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4389" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektNominell2002-datadef-20207">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">67</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20207" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KorreksjonAvFriinntektForTidligereArSomFolgeAvAndre-grp-4381">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>C Korreksjon av friinntekt for tidligere år som følge av andre  overføringer og justeringer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Skal spesifiseres</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FulltFriinntektsbelop-grp-4397"/>
+                <xs:element minOccurs="0" ref="NomineltFriinntektsbelopForTidligereAr-grp-4386"/>
+                <xs:element minOccurs="0" ref="NomineltFriinntektsbelop-grp-4390"/>
+                <xs:element minOccurs="0" ref="Fremforingsrente-grp-4393"/>
+            </xs:sequence>
+            <xs:attribute fixed="4381" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FulltFriinntektsbelop-grp-4397">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>4 Fullt friinntektsbeløp</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektFull1991OgTidlAr-datadef-20208">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Friinntekt for 1991 og tidligere år</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4397" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektFull1991OgTidlAr-datadef-20208">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">68</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20208" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="NomineltFriinntektsbelopForTidligereAr-grp-4386">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>6 Nominelt friinntektsbeløp for 2001 og tidligere år</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektNominell2001OgTidlArJustert-datadef-20209">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Friinntektsbeløp for 1991 og tidligere år</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektNominell2001OgTidlArJustert-datadef-20210">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Friinntektsbeløp for 1992 ti og med 2001</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4386" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektNominell2001OgTidlArJustert-datadef-20209">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">69</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20209" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektNominell2001OgTidlArJustert-datadef-20210">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">70</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20210" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="NomineltFriinntektsbelop-grp-4390">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>7 Nominelt friinntektsbeløp for 2002</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektNominell2002Justert-datadef-20211">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Friinntektsbeløp for 2002</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4390" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektNominell2002Justert-datadef-20211">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">71</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20211" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Fremforingsrente-grp-4393">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>8 Fremføringsrente ved fremføring av friinntektsbeløp for 2002</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektNominell2002JustertFremforingsrente-datadef-20212">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Friinntektsbeløp for 2002</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4393" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektNominell2002JustertFremforingsrente-datadef-20212">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">72</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20212" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Sum-grp-4382">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>D Sum A, B og C</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FrinntektNominell2001OgTidlAr-datadef-20213">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>6 Nominelt friinntektsbeløp for 2001 og tidigere år</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektNominell2002-datadef-20214">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>7 Nominelt friinntektsbeløp for 2002</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektNominell2002Fremforingsrente-datadef-20215">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>8 Fremføringsrente ved fremføring av friinntektsbeløp for 2002</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4382" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FrinntektNominell2001OgTidlAr-datadef-20213">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">73</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20213" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektNominell2002-datadef-20214">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">74</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20214" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektNominell2002Fremforingsrente-datadef-20215">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">75</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20215" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SumOverfort-grp-4383">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>E Sum overført fra D</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektNominell2002Fremforing-datadef-20216">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Friinntektsbeløp for 2002</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4383" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektNominell2002Fremforing-datadef-20216">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">76</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20216" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SamletabellForBeregningAvFriinntekt-grp-4398">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Tabell 6 - Samletabell for beregning av friinntekt 2004</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="25" minOccurs="0" ref="SamletabellForBeregningAvFriinntekt-grp-4399"/>
+                <xs:element minOccurs="0" ref="Sum-grp-4400"/>
+                <xs:element minOccurs="0" ref="Friinntektssats-grp-4401"/>
+                <xs:element minOccurs="0" ref="FriinntektsbelopTidligere-grp-4403"/>
+                <xs:element minOccurs="0" ref="FriinntektsbelopSenere-grp-4402"/>
+            </xs:sequence>
+            <xs:attribute fixed="4398" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SamletabellForBeregningAvFriinntekt-grp-4399">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Tabell 6 - Samletabell for beregning av friinntekt</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>A</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektsgrunnlagArAlleFeltSpesifisertAr-datadef-20217">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>2 År 1990-2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektsgrunnlagAlleFeltKolonne7Tabell1SpesifisertAr-datadef-20218">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>3 Friinntektsgrunnlag i hht. s/a for 2004 - kolonne 7 i tabell 1  summert over alle felt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektsgrunnlagAlleFeltKolonne6Tabell2SpesifisertAr-datadef-20219">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>4 Friinntektsgrunnlag i hht. s/a for 2004 - kolonne 6 i tabell 2  summert over alle felt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektsgrunnlagAlleFeltKolonne6Tabell3SpesifisertAr-datadef-20220">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>5 Friinntektsgrunnlag i hht. s/a for 2004 - kolonne 6 i tabell 3  summert over alle felt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektsgrunnlagAlleFeltKolonne7Tabell4SpesifisertAr-datadef-20221">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>6 Friinntektsgrunnlag i hht. s/a for 2004 - kolonne 7 i tabell 4  summert over alle felt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4399" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsgrunnlagArAlleFeltSpesifisertAr-datadef-20217">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">77</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Ar44-repformat-6">
+                    <xs:attribute fixed="20217" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsgrunnlagAlleFeltKolonne7Tabell1SpesifisertAr-datadef-20218">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">78</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20218" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsgrunnlagAlleFeltKolonne6Tabell2SpesifisertAr-datadef-20219">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">79</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20219" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsgrunnlagAlleFeltKolonne6Tabell3SpesifisertAr-datadef-20220">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">80</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20220" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsgrunnlagAlleFeltKolonne7Tabell4SpesifisertAr-datadef-20221">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">81</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20221" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Sum-grp-4400">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>B Sum</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>C Friinntektssats</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektsgrunnlagAlleFeltKolonne7Tabell1-datadef-20222">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>3 Friinntektsgrunnlag i hht. s/a for 2004 - kolonne 7 i tabell 1  summert over alle felt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Herav 5 %</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektsgrunnlagAlleFeltKolonne6Tabell2-datadef-20223">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>4 Friinntektsgrunnlag i hht. s/a for 2004 - kolonne 6 i tabell 2  summert over alle felt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Herav 1,75%</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektsgrunnlagAlleFeltKolonne6Tabell3-datadef-20224">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>5 Friinntektsgrunnlag i hht. s/a for 2004 - kolonne 6 i tabell 3  summert over alle felt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Herav 5%</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektsgrunnlagAlleFeltKolonne7Tabell4-datadef-20225">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>6 Friinntektsgrunnlag i hht. s/a for 2004 - kolonne 7 i tabell 4  summert over alle felt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Herav 5%</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4400" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsgrunnlagAlleFeltKolonne7Tabell1-datadef-20222">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">82</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20222" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsgrunnlagAlleFeltKolonne6Tabell2-datadef-20223">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">83</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20223" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsgrunnlagAlleFeltKolonne6Tabell3-datadef-20224">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">84</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20224" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsgrunnlagAlleFeltKolonne7Tabell4-datadef-20225">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">85</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20225" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Friinntektssats-grp-4401">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>D Friinntekt</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektAlleFeltKolonne7Tabell1-datadef-20226">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>3 Friinntektsgrunnlag i hht. s/a for 2004 - kolonne 7 i tabell 1  summert over alle felt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektAlleFeltKolonne6Tabell2-datadef-20227">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>4 Friinntektsgrunnlag i hht. s/a for 2004 - kolonne 6 i tabell 2  summert over alle felt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektAlleFeltKolonne6Tabell3-datadef-20228">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>5 Friinntektsgrunnlag i hht. s/a for 2004 - kolonne 6 i tabell 3  summert over alle felt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektAlleFeltKolonne7Tabell4-datadef-20229">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>6 Friinntektsgrunnlag i hht. s/a for 2004 - kolonne 7 i tabell 4  summert over alle felt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4401" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektAlleFeltKolonne7Tabell1-datadef-20226">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">86</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20226" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektAlleFeltKolonne6Tabell2-datadef-20227">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">87</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20227" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektAlleFeltKolonne6Tabell3-datadef-20228">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">88</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20228" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektAlleFeltKolonne7Tabell4-datadef-20229">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">89</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20229" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsbelopTidligere-grp-4403">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Friinntektsbeløp for 2001 og tidligere år</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FriinntektAlleFelt2001OgTidlAr-datadef-20230">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>F Friinntektsbeløp for 2002 og tidligere år</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Rad E tabell 5 summert over alle felt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektProduksjonsgodtgjorelseAlleFelt2001OgTidligereAr-datadef-20232">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>H Framførbar friinntekt og produksjonsgodtgjørelse pr. 31.12.2002 i  hht. s/a for 2002, inklusive fremføringsrente for 2002</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektProduksjonsgodtgjorelseFradrag2001OgTidlAr-datadef-20234">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>I Maksimal friinntekt og produksjonsgodtgjørelse til fradrag i 2003</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="friinntektProduksjongodtgjorelseAlleFeltBenyttet2001OgTidlig-datadef-20236">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>J Herav benyttet friinntekt og produksjonsgodgjørelse i 2003</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektProduksjongodtgjorelseAlleFeltForRente2001OgTidli-datadef-20238">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>K Fremførbar friinntekt og produksjonsgodtgjørelse pr. 31.12.2003, før  fremføringsrente for 2003</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektProduksjongodtgjorelseAlleFeltEtterRente2001OgTid-datadef-20241">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>M Fremførbar friinntekt og produksjonsgodtgjørelse pr. 31.12.2003,  etter fremføringsrenten for 2003</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4403" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektAlleFelt2001OgTidlAr-datadef-20230">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">91</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20230" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektProduksjonsgodtgjorelseAlleFelt2001OgTidligereAr-datadef-20232">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">94</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20232" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektProduksjonsgodtgjorelseFradrag2001OgTidlAr-datadef-20234">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">96</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20234" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="friinntektProduksjongodtgjorelseAlleFeltBenyttet2001OgTidlig-datadef-20236">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">98</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20236" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektProduksjongodtgjorelseAlleFeltForRente2001OgTidli-datadef-20238">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">100</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20238" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektProduksjongodtgjorelseAlleFeltEtterRente2001OgTid-datadef-20241">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">103</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20241" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsbelopSenere-grp-4402">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Friinntektsbeløp for 2002 og senere år</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Friinntektsbelop-datadef-16766">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>E Friinntektsbeløp for 2003 - tabell 1-4 summert over alle felt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Sum rad D for kolonne 3-6 i tabell 6</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektAlleFelt2002OgSenereAr-datadef-20231">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>F Friinntektsbeløp for 2002 og tidligere år</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Rad E tabell 5 summert over alle felt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektsbelopKorreksjon-datadef-16767">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>G Korreksjon av friinntektsbeløp for 2003 hvor det ikke skal gjøres  tihørende korreksjon av friinntektsgrunnlaget</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Skal spesifiseres</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektProduksjonsgodtgjorelseAlleFeltFremforbar2002OgSen-datadef-20233">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>H Framførbar friinntekt og produksjonsgodtgjørelse pr. 31.12.2002 i  hht. s/a for 2002, inklusive fremføringsrente for 2002</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektProduksjonsgodtgjorelseAlleFeltFradrag2002OgSenere-datadef-20235">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>I Maksimal friinntekt og produksjonsgodtgjørelse til fradrag i 2003</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektProduksjonsgodtgjorelseAlleFeltBenyttet2002OgSener-datadef-20237">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>J Herav benyttet friinntekt og produksjonsgodgjørelse i 2003</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektProduksjonsgodtgjorelseAlleFeltForRente2002OgSene-datadef-20239">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>K Fremførbar friinntekt og produksjonsgodtgjørelse pr. 31.13.2003, før  fremføringsrente for 2003</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektProduksjonsgodtgjorelseFremforingsrente-datadef-20240">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>L Fremføringsrente for 2003</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FriinntektProduksjonsgodtgjorelseAlleFeltEtterRente2002OgSe-datadef-20242">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>M Fremførbar friinntekt og produksjonsgodtgjørelse pr. 31.12.2003,  etter fremføringsrenten for 2003</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="4402" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Friinntektsbelop-datadef-16766">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Årets friinntektsbeløp</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">90</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16766" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektAlleFelt2002OgSenereAr-datadef-20231">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">92</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20231" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektsbelopKorreksjon-datadef-16767">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Korreksjon av friinntektsbeløp hvor det ikke skal gjøres tilhørende korreksjon av friinntektsgrunnlaget</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">93</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16767" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektProduksjonsgodtgjorelseAlleFeltFremforbar2002OgSen-datadef-20233">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">95</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20233" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektProduksjonsgodtgjorelseAlleFeltFradrag2002OgSenere-datadef-20235">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">97</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20235" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektProduksjonsgodtgjorelseAlleFeltBenyttet2002OgSener-datadef-20237">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">99</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20237" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektProduksjonsgodtgjorelseAlleFeltForRente2002OgSene-datadef-20239">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">101</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20239" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektProduksjonsgodtgjorelseFremforingsrente-datadef-20240">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">102</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20240" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FriinntektProduksjonsgodtgjorelseAlleFeltEtterRente2002OgSe-datadef-20242">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">104</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20242" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -1,0 +1,2026 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--title='RF-1239: Beregning av RISK' lang='NOB'-->
+    <xs:element name="Skjema">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>RF-1239 Beregning av RISK pr 1.1.2006</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Skjemaet skal benyttes av aksjeselskap, verdipapirfond og sparebanker  for å beregne selskapets påstand om RISK pr. 1.1.2006. Grunnlaget for  beregningen er inntektsåret 2005. Skjemaet skal leveres uavhengig av  om selskapet
+                        har skattepliktig overskudd eller ikke. Skjemaet er  pliktig vedlegg til selvangivelsen, jf. ligningsloven § 4-3 nr. 2.  </p>
+                    <p>Selskapene vil få melding om fastsatt RISK-beløp pr. 1.1.2006 på  skatte-oppgjøret høsten 2006.  </p>
+                    <p/>
+                    <p>Skjemaet er fastsatt av Skattedirektoratet med hjemmel i  Finansdepartementets delegeringsvedtak av 28. november 1994, jf.  ligningsloven § 4-3 nr. 2. Skjemaet skal fylles ut av aksjeselskap  mv. som skal beregne RISK-beløp
+                        etter skatteloven § 10-34, jf. §  10-30.  </p>
+                    <p/>
+                    <p>Andre offentlige organers bruk av opplysninger i RF-1239.  </p>
+                    <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i Beregning av RISK pr 1.1.2006 (RF-1239),  helt eller delvis bli benyttet også av andre offentlige organer som  har hjemmel til å
+                        innhente de samme opplysningene, jf. lov om  Oppgaveregisteret §§ 5 og 6. Opplysninger om evt. samordning kan fås  ved henvendelse til Oppgaveregisteret på telefon 75 00 75 00, eller  Skattedirektoratet på telefon 22 07 70 00.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>RF-1239 Fastsetjing av RISK pr 1.1.2006</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Skjemaet skal nyttast av aksjeselskap, verdipapirfond og sparebank for  å rekne ut selskapet sin påstand om RISK pr. 1.1.2006. Grunnlaget for  denne utrekninga er inntektsåret 2005. Skjemaet skal leverast anten  selskapet har
+                        skattepliktig overskott eller ikkje. Skjemaet er eit  pliktig vedlegg til sjølvmeldinga, jf. § 4-3 nr. 2 i likningslova.  </p>
+                    <p>Alle selskap får ei melding om fastsett RISK-beløp pr. 1.1.2006 på  skatteoppgjeret hausten 2006.  </p>
+                    <p/>
+                    <p>Skjemaet er fastsett av Skattedirektoratet med heimel i  Finansdepartementet sitt delegeringsvedtak av 28. november 1994, jf.  likningslova § 4-3 nr. 2. Skjemaet skal fyllast ut av aksjeselskap  m.m. som skal ha fastsett
+                        RISK-beløp etter skattelova § 10-34, jf. §  10-30.  </p>
+                    <p/>
+                    <p>Andre offentlege organ sin bruk av opplysningar i RF-1239.  </p>
+                    <p>For å samordna og forenkla oppgåveinnleveringa frå næringslivet, kan  opplysningar som vert avgjeve i Fastsetjing av RISK pr. 1.1.2006  (RF-1239), heilt eller delvis bli nytta også av andre offentlege  organ som har heimel til
+                        å innhente dei same opplysningar, jf. lov om  Oppgåveregisteret §§ 5 og 6. Opplysningar om evt. samordning kan ein  få ved å vende seg til Oppgåveregisteret på telefon 75 00 75 00,  eller Skattedirektoratet på telefon  </p>
+                    <p>22 07 70 00.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GenerellInformasjon-grp-1952"/>
+                <xs:element minOccurs="0" ref="BeregningAvRISK-grp-227"/>
+                <xs:element minOccurs="0" ref="BeregningAvRISKForGrunnfondsbevisISparebanker-grp-228"/>
+            </xs:sequence>
+            <xs:attribute fixed="79" name="skjemanummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="5002" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="RF-1239" name="blankettnummer" type="xs:string" use="optional"/>
+            <xs:attribute fixed="Beregning av RISK" name="tittel" type="xs:string" use="optional"/>
+            <xs:attribute fixed="27" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+            <xs:attribute name="etatid" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="974761076">
+                            <xs:annotation>
+                                <xs:documentation>SKATTEDIREKTORATET</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:anyAttribute/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GenerellInformasjon-grp-1952">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Generell informasjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Generell informasjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Selskap-grp-28"/>
+                <xs:element minOccurs="0" ref="Regnskapsforer-grp-229"/>
+            </xs:sequence>
+            <xs:attribute fixed="1952" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Selskap-grp-28">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Selskap</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Selskap</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="EnhetNavn-datadef-1">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="EnhetOrganisasjonsnummer-datadef-18">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetAdresse-datadef-15">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetPostnummer-datadef-6673">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetPoststed-datadef-6674">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Poststed</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Poststad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="28" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EnhetNavn-datadef-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Navn på juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Navn på årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">1</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="1" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst175-repformat-8">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="175"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetOrganisasjonsnummer-datadef-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummeret til enheten</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Organisasjonsnummer til årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">2</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="18" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst99Modulus11-repformat-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">1</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetAdresse-datadef-15">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Forretningsadresse til juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst105-repformat-9">
+                    <xs:attribute fixed="15" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst105-repformat-9">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="105"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetPostnummer-datadef-6673">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Postnummer i forretningsadressen til juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="6673" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst44BareTall-repformat-10">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">10</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+                    <p>Enter positive integer with four digits</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Feltet krever positivt heltall med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Feltet krev positivt heiltal med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="4"/>
+            <xs:pattern value="[0-9]{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetPoststed-datadef-6674">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Poststed i forretningsadressen til juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">5</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="6674" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst35-repformat-3">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="35"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="Regnskapsforer-grp-229">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Regnskapsfører</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Regnskapsførar</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="RegnskapsforerNavn-datadef-280">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RegnskapsforerAdresse-datadef-281">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Forretningsadresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Forretningsadresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RegnskapsforerPostnummer-datadef-6678">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RegnskapsforerPoststed-datadef-6679">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Poststed</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Poststad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="229" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RegnskapsforerNavn-datadef-280">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Regnskapsfører sitt navn</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">39</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="280" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RegnskapsforerAdresse-datadef-281">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Regnskapsfører sin adresse</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">40</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst105-repformat-9">
+                    <xs:attribute fixed="281" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RegnskapsforerPostnummer-datadef-6678">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Postnummer i adressen til regnskapsfører</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">41</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="6678" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RegnskapsforerPoststed-datadef-6679">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Poststed i adressen til regnskapsfører</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">42</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="6679" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="BeregningAvRISK-grp-227">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Beregning av RISK</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Utrekning av RISK</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="InntektSkattbarNettoRISK-datadef-16535">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>0.5 Inntekt/underskudd i 2005. Fremkommer i post 260 i Selvangivelse  for aksjeselskaper mv.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her fører en opp selskapets inntekt i 2005. For rederibeskattede  selskaper hentes beløpet fra post 265 i &lt;&lt;Selvangivelse for  aksjeselskaper m.v>>. For selskaper som betaler særskatt etter
+                                    petroleumsskatteloven § 5, er det alminnelig inntekt utlignet ved  Oljeskatekontoret som skal føres her.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>0.5 Inntekt/underskudd i 2005. Hentast frå post 260 i Sjølvmeldinga  for aksjeselskapar m.m.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her fører ein opp selskapet si inntekt i 2005. selskap som vert  rederibeskattet hentar beløpet i post 265 i &lt;&lt;Sjølvmelding for  aksjeselskap m.m>>. For selskap som betalar særskatt etter § 5 i
+                                    petroleumsskattelova, er det inntekt utlikna ved Oljeskattekontoret  som skal førast i denne posten.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KonsernbidragMottattBeskattet-datadef-15561">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>0.7 Mottatt konsernbidrag</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Mottatt konsernbidrag skal ikke inngå i grunnlaget for  RISK-beregningen og skal derfor trekkes ut. Beløpet fremkommer i  selvangivelsen post 207.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>0.7 Mottatt konsernbidrag hentast frå post 207 i Sjølvmeldinga for  aksjeselskapar m.m.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Konsernbidrag som selskapet har motteke skal ikkje inngå i grunnlaget  for fastsetjing av RISK .Beløpet skal derfor trekkast ut. Beløpet  hentes frå sjølmeldinga post 207.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KonsernbidragMottattUbenyttet-datadef-24520">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>0.8 Mottatt ikke risk-redusert konsernbidrag fra 2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres den del av konsernbidraget som selskapet mottok i 2004, men  som ikke kom til fradrag i grunnlag for beregning av RISK (post 0,5)  pr. 1.1.2005 fordi inntekten i post 0,5 var negativ eller lavere enn
+                                    inntektsført konsernbidrag.  </p>
+                                <p/>
+                                <p>For ytterligere spesifikasjon se rettledningen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>0.8 Motteke ubenytta konsernbidrag frå 2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her fører ein opp delen av konsernbidraget som selskapet mottok i  2004, men som ikkje kom til frådrag i grunnlaget for fastsetjing av  RISK (post 0,5) pr. 1.1.2005 fordi inntekta i post 0,5 var negativ  eller
+                                    lavare enn inntektsført konsernbidrag.  </p>
+                                <p/>
+                                <p>For ytterligere spesifikasjon se rettledningen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KonsernbidragMottattRISKBeregning-datadef-24521">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>0.9 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>0.9 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="InntektSkattbarNettoEkslKonsernbidragRISKGrunnlag-datadef-22480">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>1 Grunnlag for beregning av RISK (Dersom grunnlaget er negativt skal  post 1 høyre kolonne settes til 0)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her fremkommer grunnlaget for beregning av RISK. Ved negativ inntekt  (underskudd) settes post 1 til 0.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>1 Grunnlag for beregning av RISK (Dersom grunnlaget er negativt skal  post 1 høyre kolonne settes til 0)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Beløpet er grunnlag for fastsetjing av RISK. Om selskapet har hatt ei  negativ inntekt (underskott) set ein post 1 til null.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="InntektSkattbarNettoEkslKonsernbidragRISKGrunnlagPositiv-datadef-22509">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>1 Dersom positivt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>1 Dersom positivt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RISKBeregningNegativSaldoGjenstaende-datadef-7600">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>2 Gjenstående negativ saldo mv pr. 01.01.2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Gjenstående negativ saldo pr. 1.1.2005. Beløpet i denne posten  overføres fra post 4 i fjorårets skjema.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Beløpet overføres fra post 4 i fjorårets skjema.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>2 Gjenståande negativ saldo m.m. pr. 01.01.2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Gjenståande negativ saldo pr. 1.1.2005. Beløpet i denne posten fører  ein over frå post 4 i fjorårets skjema.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Beløpet fører ein over frå post 4 i fjorårets skjema.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RISKBeregningNegativSaldoInntektsforing-datadef-7601">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>3 Beregnet inntektsføring av negativ saldo mv. i 2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Etter skatteloven § 19-2 annet ledd bokstav b skal ikke inntektsføring  av negativ saldo og betinget avsatt gevinst som stammer fra før 1992,  påvirke RISK-beregningen. Andelen av den negative saldo mv. som skal
+                                    redusere grunnlaget for RISK-beregningen, fastsettes ved at det  benyttes en prosentandel av beløpet i post 2.  </p>
+                                <p>I utgangspunktet skal prosentandelen beregnes på grunnlag av den samme  prosentsats som er benyttet ved inntektsføring fra gevinst- og  tapskonto for inntektsåret 2005 (minimum 20%, jf. skatteloven § 14-45  fjerde
+                                    ledd). Dersom det er foretatt fradragsføring av saldo på  gevinst- og tapskonto eller gevinst- og tapskonto er null, skal det  benyttes en sats på inntil 20%. Er beløpet i post 4 mindre enn kr 15  000 skal hele
+                                    beløpet føres til fradrag i post 3. Det beløpet som  skal føres til fradrag i denne posten, må likevel begrenses til den  inntekt som fremgår av post 1.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Beløpet i denne posten kan ikke være større enn beløpet i post 1.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>3 Utrekna inntektsføring av negativ saldo m.m. i 2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Etter § 19-2 andre ledd bokstav b i skattelova, skal ikkje  inntektsføring av negativ saldo og på vilkår avsett vinst som stammar  frå før 1992, påverke RISK-utrekninga. Den parten av den negative  saldoen m.m. som
+                                    skal redusere grunnlaget for RISK-utrekninga, finn  ein ved å nytte ein prosentdel av beløpet i post 2.  </p>
+                                <p>I utgangspunktet skal prosentdelen reknast ut på grunnlag av den same  prosentsatsen som er brukt ved inntektsføring frå vinst- og tapskonto  for inntektsåret 2005 (minimum 20%, jf. § 14-45 fjerde ledd i
+                                    skattelova). Dersom det er gjort frådragsføring av saldo på vinst- og  tapskonto eller vinst- og tapskonto er null, skal det nyttast ein  sats på inntil 20%. Er beløpet i post 4 mindre enn  </p>
+                                <p>kr 15000 skal heile beløpet førast til frådrag i post 3. Det beløpet  som skal førast til frådrag i denne posten, må ein likevel avgrense  til den inntekt som går fram av post 1.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Beløpet i denne posten kan ikkje vere større enn beløpet i post 1.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RISKBeregningNegativSaldoRestbelop-datadef-7602">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>4 Sum gjenstående negativ saldo fra før 1992</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres gjenstående del av negativ saldo mv. fra før 1992.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>4 Sum gjenståande negativ saldo frå før 1992</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her fører ein rest negativ saldo m.m. frå før 1992.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="Korreksjonsinntekt-datadef-1098">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>5 Korreksjonsinntekt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres korreksjonsinntekt fastsatt i 2005. Korreksjonsinntekten vil  fremgå av Selvangivelse for aksjeselskaper mv. for 2005 post 350.  Fradragsføring av tidligere fastsatt korreksjonsinntekt skal ikke  foretas i
+                                    denne posten, da det er den reduserte alminnelige inntekt  som fremgår av post 1.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Korreksjonsintekt vil fremgå av Selvangivelse for aksjeselskaper mv.  post 350.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>5 Korreksjonsinntekt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her fører ein opp den korreksjonsinntekta som er fastsett i 2005.  Korreksjonsinntekta går fram av Sjølvmelding for aksjeselskap m.m.  for 2005 post 350. Frådragsføring av korreksjonsinntekt som er  fastsett
+                                    tidlegare, skal ein ikkje ta med på denne posten, da det er  den reduserte alminnelege inntekta som går fram av post 1.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Korreksjonsintekt vil gå fram av Sjølvmelding for aksjeselskap m.m.  post 350.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RISKBeregningGrunnlag-datadef-1998">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>6 Grunnlag for årets RISK-beregning</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her summeres beløpene i postene 1, 3 og 5. Dette er RISK-inntekten som  legges til grunn ved beregningen. Beløpet i denne posten skal ikke  bli lavere enn null.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Beløpet som fremkommer i denne posten kan ikke være lavere enn null.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>6 Grunnlag for RISK-fastsetjing i år</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her summerer ein beløpa i postane 1, 3 og 5. Dette er den  RISK-inntekta som blir lagd til grunn ved utrekninga. Beløpet i  posten skal ikkje bli lågare enn null.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Beløpet som kjem fram i denne posten kan ikkje vere lågare enn null.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RISKBeregningGrunnlagSkatt-datadef-7603">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>7 Skatt: 28% av beløpet i post 6</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Det beregnes 28 pst skatt av beløpet i post 6. Dette er RISK-skatten  som skal legges til grunn ved beregningen. Denne skatten skal  avrundes til nærmeste hele krone.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Skatten avrundes til nærmeste hele krone.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>7 Skatt: 28% av beløpet i post 6</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Ein reknar 28 prosent skatt av beløpet i post 6. Dette er RISK-skatten  som skal leggjast til grunn ved utrekninga. Denne skatten skal  rundast av til nærmaste heile krone.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Skatten runder ein av til nærmaste heile krone.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RISKBeregningSkattPetroleumskatteloven-datadef-7604">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>8  Skatt beregnet etter reglene i petroleumsskatteloven § 5</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Denne posten fylles bare ut for selskaper som har skatteplikt etter  petroleumsskatteloven § 5, jf. § 1.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>8 Skatt rekna etter reglane i § 5 i petroleumsskattelova</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Denne posten skal berre fyllast ut for selskap som har skatteplikt  etter petroleumsskattelova § 5, jf. § 1.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GodtgjorelseUtbytteUbenyttet-datadef-7606">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>9 Ubenyttet godtgjørelse pr. 01.01.2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres ubenyttet godtgjørelse fra RISK-beregningen pr. 1.1.2005  (inntektsåret 2004).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>9 Unytta godtgjersle pr. 01.01.2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her fører ein eventuell  unytta godtgjersle frå RISK-utrekninga pr.  1.1.2005 (inntektsåret 2004).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RISKBelopBeregnetPositivtBelopDelsum-datadef-7607">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>10 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her summeres postene 7-9. Negativt beløp i post 10 skal føres ut i  høyre kolonne.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Negativt beløp i post 10 skal føres ut i høyre kolonne.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>10 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her summerer ein postane 7-9. Negativt beløp i post 10 skal førast ut  i den høgre kolonnen.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Negativt beløp fører ein ut i høgre kolonne.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RISKBelopBeregnetNegativtBelopDelsum-datadef-7611">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>10 Sum negativ</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>10 Sum negativ</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="UtbytteAvsatt-datadef-235">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>11 Avsatt utbytte for 2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Utbytte avsatt i regnskapet for inntektsåret 2005 føres her. Beløpet  hentes fra Næringsoppgave 2 post 2800.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Overføres fra Næringsoppgave 2, post 2800.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>11 Avsett utbytte for 2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Utbyttet som er avsett i rekneskapen for inntektsåret 2005 skal førast  her. Beløpet hentar ein frå Næringsoppgåve 2 post 2800.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Beløpet finn ein i Næringsoppgåve 2 post 2800.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="UtbytteDifferanseAvsattUtdelt-datadef-13949">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>12 Differanse mellom avsatt utbytte ved årsoppgjøret i 2004, og  besluttet utdelt utbytte i 2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres differansen mellom utbytteavsetning i 2004 og besluttet  utdelt utbytte i 2005. Ved vurderingen av hva som skal regnes som  besluttet utdelt utbytte, er det skattelovens utbyttebegrep som skal  legges til
+                                    grunn jf. skatteloven § 10-11 annet ledd. Alt utbytte som  anses for å være tidfestet til 2005 skal tas med. Denne posten vil  f.eks. være aktuell hvis et aksjeselskap foretar kapitalnedsettelse  med nedskriving av
+                                    pålydende hvor de utbetaler tidligere  fondsemittert aksjekapital til aksjonærene.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Ved vurderingen av hva som er besluttet utdelt utbytte, skal  skattelovens utbyttegrep legges til grunn. Som utbytte regnes også  utbetaling av tidligere fondsemittert aksjekapital.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>12 Differanse mellom avsett utbytte ved årsoppgjeret i 2004, og  vedteke utbytte i 2005.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her fører ein opp differansen mellom det utbytte som er avsett for  2004 og det utbytte som ein har vedteke å dele ut i 2005. Når ein  skal vurdere kva som skal reknast som vedteke utdelt utbytte, er det
+                                    utbytteomgrepet i skattelova som skal leggast til grunn jf.  skattelova § 10-11 andre ledd. Alt utbytte som ein reknar for å vere  tidfesta til 2005, skal takast med. Denne posten vil til dømes vere  aktuell dersom
+                                    eit aksjeselskap set ned aksjekapitalen med  nedskriving av pålydande ved at dei utbetaler tidlegare fondsemittert  aksjekapital til aksjonærane.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Ved vurderinga av kva som er vedteke utdelt utbytte, er det skattelova  sitt utbyttegrep som skal leggjast til grunn. Som utbytte reknar ein  også utbetaling av tidlegare fondsemittert aksjekapital.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RISKBelopFusjonMorDatter-datadef-13951">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>14 RISK-beløp ved fusjon mellom morselskap og heleid datterselskap  samt ved fusjon mellom heleide datterselskap som ikke tidligere er  overført som gjennomgående RISK.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Ved fusjon mellom morselskap og heleid datterselskap samt mellom  heleide datterselskap skal sum RISK-beløp i eiertiden tillegges det  overtakende (fusjonerende) selskap ved dets RISK-beregning, i den  grad beløpet
+                                    ikke tidligere er tilordnet etter reglene om  gjennomgående RISK.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Ved innfusjonering av heleid datterselskap i morselskap, skal det  overtakende morselskap tilordnes sum RISK-beløp i eiertiden fra det  innfusjonerte datterselskap. Ved fusjon uten vederlag mellom heleide
+                                    datterselskap skal det overtakende selskap tilordnes sum RISK-beløp i  morselskapets eiertid fra det overdragende selskap.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>14 RISK-beløp ved fusjon mellom morselskap og heleigd dotterselskap og  ved fusjon mellom heleigde dotterselskap som ikkje tidlegare er  overført som gjennomgåande RISK.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Ved fusjon mellom morselskap og eit heleigd dotterselskap og mellom  heleigde dotterselskap skal summen av RISK-beløp i eigartida leggjast  til i det selskapet som tek over (fusjonerende selskap), såfremt  beløpet
+                                    ikkje tidlegare er overført selskapet som gjennomgåande RISK.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Ved innfusjonering av heleigd dotterselskap i morselskap, skal det  overtakande morselskap tilordnast sum RISK-beløp i eigartida frå det  innfusjonerte dotterselskapet. Ved fusjon utan vederlag mellom  heleigde
+                                    dotterselskap, skal det overtakande selskapet tilordnast sum  RISK-beløp i morselskapet si eigartid frå det overdragande selskapet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KonsernbidragIkkeSkattepliktigIkkeFradragsberettiget-datadef-13952">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>15 Ikke fradragsberettiget konsernbidrag</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Konsernbidrag som det givende selskap ikke får fradrag for etter  skatteloven § 10-4 og § 10-2 første ledd, skal komme til fradrag i  denne posten. Dette vil være konsernbidrag som overstiger det givende  selskapets
+                                    skattepliktige alminnelige inntekt.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>15 Konsernbidrag som ikkje kjem til frådrag i inntekta</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Konsernbidrag som det ytande selskap ikkje får frådrag for etter §  10-4 og § 10-2 første ledd i skattelova, skal kome til frådrag i  denne posten. Dette vil vere konsernbidrag som overstig skattepliktig  allmenn inntekt.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkattRefusjonPersoninntekt-datadef-15575">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>16 Refusjon av skatt på beregnet personinntekt etter skatteloven §  16-50</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Krav på refusjon av ilignet toppskatt eller trygdeavgift fra aktiv  eier i selskapet på bakgrunn av beregnet personinntekt et tidligere  år, skal tas med i RISK-beregningen det året skatten er utlignet og  betalt på
+                                    eierens hånd.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Refusjonsbeløpet må kreves det året skatt og avgift på beregnet  personinntekt er utlignet og betalt.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>16 Refusjon av skatt på utrekna personinntekt etter § 16-50 i  skattelova</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Krav på refusjon frå ein aktiv eigar i selskapet på grunn av utlikna  toppskatt eller trygdeavgift i eit tidlegare år, skal førast opp i  RISK-utrekninga i det året skatten er utlikna og betalt på eigaren si  hand.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Refusjonsbeløpet må krevjast det året skatt og avgift på utrekna  personinntekt vert utlikna og betalt.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkattGrunnrenteinntekt-datadef-5780">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>17 Skatt på grunnrenteinntekt etter skattloven § 18-3</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Posten fylles ut av kraftforetak som svarer grunnrenteskatt etter  skatteloven § 18-3.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>17 Skatt på grunnrenteinntekt etter § 18-3 i skattelova</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Posten skal fyllast ut av kraftforetak som svarer grunnrenteskatt  etter skattelova § 18-3.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RISKBelopEgneSlettedeAksjer-datadef-22481">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>18 RISK-beløp på slettede egne aksjer i 2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Når egne aksjer slettes skal RISK-beløp som er tilordnet de egne  aksjene overføres til de resterende aksjene i selskapet. I denne  posten føres akkumulert RISK-beløp på de slettede aksjene.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>18 RISK-beløp på slettede eigne aksjer i 2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Når selskapet sletter eigne aksjar skal RISK-beløp som er tilordna dei  eigne aksjane førast over til dei resterande aksjene i selskapet. I  denne posten førast akkumulert RISK-beløp på dei sletta aksjane.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RISKBeregningSkattlagtKapitalTilbakeholdt-datadef-7609">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>19 Endring i tilbakeholdt skattlagt kapital (TSK)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres summen av post 6 og postene 10-18. Sluttsummen er årets  (2005) endring i tilbakeholdt skattlagt kapital (TSK).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Her summeres beløpene i postene 6-17. Beløpet kan bli positivt eller  negativt.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>19 Endring i tilbakehalden skattlagt kapital (TSK)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her fører ein opp summen av post 6 og postane 10-18. Sluttsummen er  årsendringa (2005) i tilbakehalden skattlagt kapital (TSK).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Her fører ein opp summen av postane 6-17. Beløpet kan bli positivt  eller negativt.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="AksjerMvAntall-datadef-1125">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Antall aksjer mv. pr. 01.01.2006</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Talet på aksjar m.m. pr. 01.01.2006</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RISKBelopPrAksje-datadef-2001">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>20 Beregning av risk pr. aksje</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Beløpet i post 19 fordeles på antall aksjer mv. (inkl. egne aksjer) i  selskapet 1. januar 2006. Dersom aksjene i selskapet har forskjellig  pålydende må det foretas en forholdsmessig fordeling etter pålydende.
+                                    Beløpet avrundes til nærmeste øre (to desimaler).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>TSK fordeles pr. aksje etter pålydende. Dersom det er samme pålydende  på alle aksjer i selskapet, gjøres fordelingen ved at beløpet i post  18 deles på antall aksjer i selskapet pr. 1.1.2006. RISK pr. aksje
+                                    avrundes til nærmeste øre (to desimaler).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>20 Fastsetjing av risk pr. aksje</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Beløpet i post 19 fordeler ein på talet aksjar m.m. (også eigne  aksjar) i selskapet den 1. januar 2006. Dersom aksjene i selskapet  har ulik pålydande, må ein gjere ei tilsvarande rimeleg fordeling  etter
+                                    pålydande. Beløpet skal rundast til nærmaste øre (to  desimalar).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>TSK fordeler ein pr. aksje etter pålydande. Dersom det er same  pålydande på alle aksjar i selskapet, fordeler ein beløpet i post 18  på talet aksjar i selskapet pr. 1.1.2006. RISK pr. aksje skal  avrundast til
+                                    nærmaste øre (to desimalar).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="227" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntektSkattbarNettoRISK-datadef-16535">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16535" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopHeltall15-repformat-37">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">37</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="KonsernbidragMottattBeskattet-datadef-15561">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Mottat beskattet konsernbidrag</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">7</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="15561" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KonsernbidragMottattUbenyttet-datadef-24520">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24520" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KonsernbidragMottattRISKBeregning-datadef-24521">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Mottatt konsernbidrag som er med i beregningsgrunnlaget for RISK.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24521" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntektSkattbarNettoEkslKonsernbidragRISKGrunnlag-datadef-22480">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Skattbar nettoinntekt, eksklusiv mottatt konsernbidrag, til grunnlag for beregning av RISK.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">10</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22480" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntektSkattbarNettoEkslKonsernbidragRISKGrunnlagPositiv-datadef-22509">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Skattbar nettoinntekt, eksklusiv mottatt konsernbidrag, til grunnlag for beregning av RISK. Positiv verdi.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">11</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22509" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RISKBeregningNegativSaldoGjenstaende-datadef-7600">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">12</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7600" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RISKBeregningNegativSaldoInntektsforing-datadef-7601">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">13</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7601" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RISKBeregningNegativSaldoRestbelop-datadef-7602">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">14</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7602" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Korreksjonsinntekt-datadef-1098">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">15</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="1098" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RISKBeregningGrunnlag-datadef-1998">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">16</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="1998" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RISKBeregningGrunnlagSkatt-datadef-7603">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">17</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7603" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RISKBeregningSkattPetroleumskatteloven-datadef-7604">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">18</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7604" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GodtgjorelseUtbytteUbenyttet-datadef-7606">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">19</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7606" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RISKBelopBeregnetPositivtBelopDelsum-datadef-7607">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">20</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7607" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RISKBelopBeregnetNegativtBelopDelsum-datadef-7611">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">21</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7611" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UtbytteAvsatt-datadef-235">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Kontokode 280</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">22</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="235" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UtbytteDifferanseAvsattUtdelt-datadef-13949">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">23</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13949" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RISKBelopFusjonMorDatter-datadef-13951">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">24</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13951" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KonsernbidragIkkeSkattepliktigIkkeFradragsberettiget-datadef-13952">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">25</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13952" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkattRefusjonPersoninntekt-datadef-15575">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Refusjon av skatt på beregnet personinntekt etter skatteloven § 16-40</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">26</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="15575" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkattGrunnrenteinntekt-datadef-5780">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">27</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="5780" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RISKBelopEgneSlettedeAksjer-datadef-22481">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>RISK-beløp på egne slettede aksjer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">28</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22481" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RISKBeregningSkattlagtKapitalTilbakeholdt-datadef-7609">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">29</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7609" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvAntall-datadef-1125">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">30</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="1125" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Heltall15-repformat-79">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">79</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="RISKBelopPrAksje-datadef-2001">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">31</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopDesimal152Desimaler-repformat-146">
+                    <xs:attribute fixed="2001" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopDesimal152Desimaler-repformat-146">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">146</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+                    <p>Enter number with two fraction digits</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Feltet krever to desimaler</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Feltet krev to desimalar</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="15"/>
+            <xs:pattern value="-{0,1}[0-9]{1,}\.[0-9]{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="BeregningAvRISKForGrunnfondsbevisISparebanker-grp-228">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Beregning av RISK for grunnfondsbevis i sparebanker</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Fastsetjing av RISK for grunnfondsbevis i sparebank</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="UtjevningsfondEndringSparebank-datadef-11641">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>23 Endring i sparebankens utjevningsfond</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres endring i sparebankens utjevningsfond. Beløpet vil fremgå av  differansen mellom utjevningsfondets midler pr. 31.12.2004 og  31.12.2005 (se post 5240 i Næringsoppgave 4), med unntak av  nedregulering som
+                                    skyldes fondsemisjon, se post 24. Er fondets  størrelse uendret vil RISK-beløpet være 0.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Dette gjelder likevel ikke nedregulering som skyldes fondsemisjon, jf.  post 24. Se næringsoppgave 4, post 5240. Beløpet kan bli positivt  eller negativt.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>23 Endring i utjamningsfondet i sparebanken</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her fører ein opp endringa i utjamningsfondet i sparebanken. Beløpet  går fram av differansen mellom utjamningsfondets midlar pr.  31.12.2004 og 31.12.2005 (sjå Næringsoppgåve 4 post 5240), med unntak  av
+                                    nedregulering som skyldes fondsemisjon, sjå post 24. Hvis  storleiken på fondet er uendra, er RISK-beløpet 0.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Dette gjeld likevel ikkje nedregulering som skyldast fondsemisjon, jf.  post 24. Sjå næringsoppgåve 4, post 5240. Beløpet kan bli positivt  eller negativt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GrunnfondOverkursfondUtjevningsfondFondsemisjonEndring-datadef-20194">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>24 Endringen i summen av overkursfond, utjevningsfond, og  grunnfondsbeviskapital ved fondsemisjon</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres endringen i summen av overkursfond, utjevningsfond, og  grunnfondsbeviskapital som skyldes fondsemisjon.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>24 Endringa i summen av overkursfond, utjamningsfond, og  grunnfondsbeviskapital ved fondsemisjon</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her førast endringa i summen av overkursfond, utjamningsfond, og  grunnfondsbeviskapital som skyldast fondsemisjon.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GrunnfondIkkeInnbetaltUtbetalingReduksjon-datadef-20195">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>25 Reduksjon i grunnfondsbeviskapitalen ved utbetaling av ikke  innbetalt grunnfondsbeviskapital</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Utdeling av ikke innbetalt grunnfondsbeviskapital vil regulere  inngangsverdien med den endringen i grunnfondsbeviskapitalen som  følger av utbetalingen.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>25 Reduksjon i grunnfondsbeviskapitalen etter utdeling av ikkje  innbetalt grunnfondsbeviskapital</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Utdeling av ikkje innbetalt grunnfondsbeviskapital vil regulere  inngangsverdien med endringa i grunndfondsbeviskapitalen som følgjer  av utbetalingen.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RISKBeregningGrunnfondsbevisGrunnlag-datadef-20196">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>26 Sum endringer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Summen vil vise endring i sparebankenes utjevningsfond i løpet av  eiertiden. Er fondets størrelse uendret vil RISK-beløpet være 0. Ved  fastsettelse av grunnfondsbevisets skattemessige inngangsverdi ses  det bort
+                                    fra akkumulert negativ RISK som innebærer at inngangsverdien  blir lavere enn historisk kostpris, i den utstrekning det negative  RISK-beløpet skyldes nedskrivning av utjevningsfondet for å dekke  regnskapsmessig
+                                    tap i løpet av eiertiden. Dette gjelder ikke  akkumulert negativ RISK i løpet av eiertiden som skyldes mottatt  utbytte utbetalt av midler på utjevningsfondet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>26 Sum endringar</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Summen vil vise endringa i sparebanken sitt utjevningsfond i løpet av  eigartida. Er fondets størrelse uendra vil RISK-beløpet være 0.  Dersom nedskrivning av utjevningsfondet for å dekke tap i rekneskapen  i løpet
+                                    av eigartida fører til akkumulerte negative RISK som igjen  fører til at inngangsverdi op grunnfondsbeviset vert lågare enn  historisk kostpris, skal ein sjå bort frå dette ved fastsetjing av  inngangsverdien.
+                                    Dette gjeld ikkje akkumulert negativ RISK som i  løpet av eigartida som skuldast at motteke utbytte er utbetalt av  midlar på utjevningsfondet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GrunnfondsbevisAntall-datadef-11637">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Antall pr 1.1.2006</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Talet pr 1.1.2006</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RISKBelopPerGrunnfondsbevis-datadef-22508">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>27 Beregning av RISK pr. grunnfondsbevis. Beløpet i post 26 fordeles  på antall grunnfondsbevis pr. 1.1.2006. RISK pr. grunnfondsbevis  avrundes til nærmeste hele øre (to desimaler).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>27 Fastsetjing av RISK pr. grunnfondsbevis. Sum i post 26 fordeler ein  på antall grunnfondsbevis pr. 1.1.2006. RISK pr. grunnfondsbevis  rundast til nærmaste øre (to desimaler).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RISKBelopNegativtReverseringUtjevningsfondAndel-datadef-11639">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>28 Oppgi hvor stor del av negativ RISK som skyldes nedskrivning av  utjevningsfondet for å dekke bankens underskudd.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Posten skal fylles ut ved negativt RISK-beløp på grunnfondsbevis. Ved  fastsettelse av grunnfondsbevisets skattemessig inngangsverdi kan en  se bort fra akkumulert negativt RISK-beløp i den utstrekning denne
+                                    skyldes nedskriving av utjevningsfondet for å dekke bankens  underskudd, når dette fører til at skattemessig inngangsverdi på  grunnfondsbeviset blir lavere enn historisk kostpris. Vi ber derfor  om at negativt
+                                    RISK-beløp som skyldes dette forhold oppgis under post  25, og meddeles eier sammen med RISK-beløpet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Posten er bare aktuell ved negativt RISK-beløp.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>28 Kor stor del av negativt RISK-beløp skriv seg frå nedskrivning av  utjamningsfondet for å dekkje underskot i banken.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Posten skal fylles ut ved negativt RISK-beløp på grunnfondsbevis. Ved  fastsetjing av skattemessig inngangsverdi på grunnfondsbevis kan ein  sjå bort frå akkumulert negativt RISK-beløp som har sin årsak i
+                                    nedskriving på utjamningsfondet for å dekkje underskot i banken når  det fører til at skattemessig inngangsverdi på grunnfondsbeviset vert  lågare en historisk kostpris. Av den grunn ber vi om at negativt
+                                    RISK-beløp som har sin årsak i slik nedskriving vert oppgitt under  post 25 og at grunnfondsbeviseigarane blir varsla når dei får  underretning om RISK-beløpet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Posten er berre aktuell ved negativt RISK-beløp.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="228" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UtjevningsfondEndringSparebank-datadef-11641">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">32</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="11641" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GrunnfondOverkursfondUtjevningsfondFondsemisjonEndring-datadef-20194">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Endring i summen av overkursfond, utjevningsfond og grunnfondsbeviskapital ved fondsemisjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">33</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20194" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GrunnfondIkkeInnbetaltUtbetalingReduksjon-datadef-20195">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Reduksjon i grunnfondsbeviskapitalen ved utbetaling av ikke innbetalt grunnfondsbeviskapital</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">34</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20195" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RISKBeregningGrunnfondsbevisGrunnlag-datadef-20196">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Grunnlag for beregning av RISK per grunnfondsbevis</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">35</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="20196" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GrunnfondsbevisAntall-datadef-11637">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">36</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="11637" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RISKBelopPerGrunnfondsbevis-datadef-22508">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">37</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopDesimal152Desimaler-repformat-146">
+                    <xs:attribute fixed="22508" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RISKBelopNegativtReverseringUtjevningsfondAndel-datadef-11639">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">38</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="11639" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

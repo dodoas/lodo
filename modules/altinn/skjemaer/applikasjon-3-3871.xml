@@ -1,0 +1,1068 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1084: Avskrivningsskjema for saldo- og lineære avskrivinger</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-3-3872.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-1054/Avgiver-grp-48/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-1054/Avgiver-grp-48/OppgavegiverFodselsnummer-datadef-26"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1084 Avskrivningsskjema for saldo- og lineære avskrivninger 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Skjemaet skal fylles ut og leveres som vedlegg til selvangivelsen av  alle skattytere som ved ligningen krever fradrag for avskrivning på  driftsmidler. For driftsmidler som er særskilte for kraftforetak,  bruk imidlertid skjemaet
+                    RF-1152 (lineære avskrivninger). Skjemaet  skal fylles ut selv om det ved realisasjon eller uttak oppstår  negativ saldo i gruppe a, b, c eller d. En eventuell negativ saldo i  saldogruppe a, c eller d skal minst inntektsføres med
+                    gruppens  avskrivningsprosent. Negativ saldo i saldogruppe b skal overføres til  gevinst og tapskonto. Ved realisasjon av driftsmiddel i gruppe e, f,  g, h eller i skal det foretas gevinst-/tapsberegning på  avskrivningsskjemaet.
+                    Skjemaet skal fylles ut selv om saldoen er  avskrevet til 0, men hvor det likevel befinner seg driftsmidler på  saldoen.  </p>
+                <p/>
+                <p>Øverst i høyre hjørne av skjemaet skal man nummerere skjemaene fra 1  og oppover, dersom man har mer enn tre forskjellige saldoer.  </p>
+                <p>For driftsmidler som avskrives etter saldosystemet skal avskrivningene  beregnes på grunnlag av driftsmidlenes saldoverdi ved utgangen av  hvert inntektsår. Det er uten betydning når i året et driftsmiddel er  anskaffet. Ved
+                    lineære avskrivninger skal inngangsverdien for  driftsmidlet fordeles til fradrag likt over driftsmidlets antatte  levetid. Er objektet ervervet i løpet av året, skal årsbeløpet  beregnes forholdsmessig (12 deler) etter antall
+                    påbegynte måneder  objektet har vært eiet i løpet av året. Tilsvarende foretas  forholdsmessig avskrivning dersom objektet realiseres i løpet av  inntektsåret. I skatteloven §§ 14-60 t.o.m. 14-66 er det gitt  særregler for
+                    driftsmiddel som tas inn og ut av norsk  beskatningsområde.  </p>
+                <p/>
+                <p>Særlig om bruken av fortegn i skjema  </p>
+                <p>Hovedregel  </p>
+                <p>I utgangspunktet skal alle tall innrapporteres uten fortegn når det  klart fremgår av ledeteksten om tallet skal tillegges eller trekkes  fra i forhold til den sammenheng det føres inn i. Det skal altså ikke  brukes minustegn når
+                    teksten forteller at det dreier seg om  kostnader, underskudd, mv., og tilsvarende ingen plusstegn ved  inntekter, overskudd mv. Et unntak fra dette kan illustreres ved  følgende eksempel  </p>
+                <p>En utleieaktivitet har i inntektsåret gitt større utgifter enn  inntekter:  </p>
+                <p>Inntekter  30.000  </p>
+                <p>Utgifter 35.000  </p>
+                <p>Underskudd  -   5.000  </p>
+                <p>For å føre dette underskuddet på 5.000 kroner inn i en post med  ledetekst Inntekt ved utleie må beløpet settes med negativt fortegn  for å kunne trekkes fra ? det er jo en kostnad (det motsatte av  ledeteksten) og ikke en inntekt.  </p>
+                <p>Presiseringer  </p>
+                <p>Dersom et felt har forhåndstrykket fortegn (positivt eller negativt)  skal tallet som innrapporteres være uten fortegn. Fortegn brukes kun  i de tilfeller man ønsker å innrapportere et beløp med omvendt  fortegn av det som er
+                    forhåndstrykket. I sum og resultatfelter brukes  alltid minustegn når summen er negativ.  </p>
+                <p/>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. november 1994, jf. ligningsloven § 4-4 nr.  7.  </p>
+                <p/>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1084. For å  samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjemaet, RF-1084, helt eller delvis  bli benyttet også av andre
+                    offentlige organer som har hjemmel til å  innhente de samme opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt. Samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller
+                    Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Vedlegg til næringsoppgave/selvangivelsesskjema</p>
+            </xforms:hint>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1084 Avskrivningsskjema for saldo- og lineære avskrivningar 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Skjemaet skal fyllast ut og leggjast ved sjølvmeldinga av alle  skattytarar som ved likninga krev frådrag for avskriving på  driftsmiddel. For driftsmiddel som er særskilde for kraftforetak,  nyttast skjemaet RF-1152 (ved lineære
+                    avskrivingar). Skjemaet skal  fyllast ut sjølv om det ved realisasjon eller uttak kjem fram negativ  saldo i gruppe a, b, c eller d. Ein eventuell negativ saldo i  saldogruppe a, c eller d skal i det minste førast til inntekt med
+                    avskrivingsprosenten for vedkomande gruppe. Negativ saldo i  saldogruppe b skal førast over til vinst- og tapskontoen. Ved  realisasjon av driftsmiddel i saldogruppe e, f, g, h eller i skal  vinst eller tap utreknast på
+                    avskrivingsskjemaet. Skjemaet skal  fyllast ut óg når saldoen er nedskriven til 0, men det likevel finst  driftsmiddel på saldoen. Øvst i høgre hjørnet av skjemaet skal ein  nummerere skjemaene frå 1 og oppetter dersom ein har
+                    meir enn tre  ulike saldoar.  </p>
+                <p>Dei driftsmidla som avskrivast etter saldoreglane skal reknast ut på  grunnlag av saldoverdien på driftsmidla ved utgangen av kvart  inntektsår. Det har ikkje noko å seie når i året eit driftsmiddel er  skaffa. Når det gjeld dei
+                    lineære avskrivingane, skal kostprisen for  driftsmidlet delast til frådrag likt over levetida til driftsmidlet.  Dersom objektet er skaffa same året, skal summen det året reknast i  12 delar etter kor mange månader i året
+                    objektet har vore skattytaren  sin eigedom. På same vis skal tilmålt avskriving gjennomførast dersom  objektet blir avhenda i inntektsåret. I skattelova §§ 14-60 t.o.m.  14-66 er det gitt særreglar for driftsmiddel som blir tekne
+                    inn og ut  av norsk skatteområde.  </p>
+                <p/>
+                <p>Særleg om bruk av forteikn i skjema, hovudregel  </p>
+                <p>I utgangspunktet skal alle tal innrapporterast utan forteikn når det  klårt går fram av teksten om talet skal leggjast til eller trekkjast  frå i forhold til den samanhengen det blir ført inn i. Det skal altså  ikkje brukast
+                    minusteikn når det går fram av teksten at det dreier  seg om kostnader, underskott mv., og tilsvarande ingen plussteikn ved  inntekter, overskott mv. Et unnatak frå dette kan illustrerast ved  følgjande eksempel :  </p>
+                <p> Ein utleigeaktivitet har i inntektsåret gjeve større utgifter enn  inntekter:  </p>
+                <p/>
+                <p> Inntekter  30.000  </p>
+                <p> utgifter    35.000  </p>
+                <p> underskott -  5.000  </p>
+                <p/>
+                <p> For å føre dette underskotet på 5 000 kroner inn i ein post med tekst  Inntekt ved utleige må beløpet setjast med negativt forteikn for å  kunne trekkjast frå - det er jo ein kostnad (det motsette av teksten)  og ikkje ei inntekt.  </p>
+                <p/>
+                <p> Presiseringar  </p>
+                <p> Dersom eit felt har forhåndstrykt forteikn (positivt eller negativt)  skal talet som blir innrapportert være utan forteikn. Forteikn skal  berre brukast i dei tilfella der ein ønskjer å innrapportere eit  beløp med omvendt
+                    forteikn av det som er forhåndstrykt.  </p>
+                <p> I sum- og resultatfelt skal ein alltid bruke minusteikn når summen er  negativ.  </p>
+                <p/>
+                <p>Fastsett av Skattedirektoratet med heimel i Finansdepartementet sitt  delegeringsvedtak av 28. november 1994, jf. Ligningslova § 4-4  nr.7.  </p>
+                <p/>
+                <p>Andre offentlege organ sin bruk av opplysningar i RF-1084. For å  samordna og forenkle oppgåveinnleveringa  frå næringslivet, kan  opplysningar som vert avgjeve i dette skjemaet, RF-1084, heilt eller  delvis bli nytta også av andre
+                    offentlege organ som har heimel til å  innhente dei same opplysningane, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysningar om evt. Samordning kan ein få ved å vende seg til  Oppgåveregisteret på telefon 75 00 75 00, eller
+                    Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NON">
+                <p>Vedlegg til næringsoppgåve/sjølvmeldingsskjema</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-1054">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-1054/Avgiver-grp-48">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Avgiver</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Avgivar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1054/Avgiver-grp-48/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1054/Avgiver-grp-48/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organinsasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1054/Avgiver-grp-48/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1054/Avgiver-grp-48/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1054/Avgiver-grp-48/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1054/Avgiver-grp-48/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1054/Avgiver-grp-48/EnhetAvskrivningKommunenummer-datadef-19895">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommunenr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kommunenr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1054/Avgiver-grp-48/EnhetAvskrivningKommunenavn-datadef-19896">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommunenavn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kommunenavn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-1054/Regnskapsforer-grp-51">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Regnskapsfører</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Rekneskapsførar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1054/Regnskapsforer-grp-51/RegnskapsforerNavn-datadef-280">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1054/Regnskapsforer-grp-51/RegnskapsforerAdresse-datadef-281">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1054/Regnskapsforer-grp-51/RegnskapsforerPostnummer-datadef-6678">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1054/Regnskapsforer-grp-51/RegnskapsforerPoststed-datadef-6679">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1054/Regnskapsforer-grp-51/RegnskapsforerOrganisasjonsnummer-datadef-3651">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Saldoavskrivninger-grp-59">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Saldoavskrivninger</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Saldoavskrivningsgruppene  </p>
+                    <p>Driftsmidler som inngår i gruppe a, b, c, og d avskrives under ett for  hver gruppe. Grupperingen foretas for hver av skattyterens næringer  og for hver kommune når samme næring drives i flere kommuner og  faller inn under
+                        reglene om stedbunden beskatning etter skatteloven §  3-3. Skal det være saldogrupper for hver kommune, pga. at samme  næring drives i flere kommuner, så må skjema fylles ut med  saldogrupper kun for næringskommunen og leveres
+                        til ligningskontoret  for denne kommune. Driftsmidler som inngår i gruppe e, f, g, h og i  føres på egen saldo for hvert driftsmiddel.  </p>
+                    <p>Gruppe a: kontormaskiner o.l. (30%)  </p>
+                    <p>Gruppe b: ervervet forretningsverdi (goodwill) (20%)  </p>
+                    <p>Gruppe c: vogntog, lastebiler, varebiler o.l. (20%)  </p>
+                    <p>Gruppe d: personbiler, traktorer, maskiner o.l. (20%)  </p>
+                    <p>Gruppe e: skip mv. (14%), f: fly, helikopter (12%), g: anlegg for  overføring og distribusjon av elektrisk kraft og elektroteknisk  utrustning i kraftforetak (5%) h: bygg og anlegg mv. (4%), og i:  forretningsbygg (2%)  </p>
+                    <p>For gruppene h og i må tomteverdien skilles ut slik at den ikke blir  med i avskrivningsgrunnlaget.  </p>
+                    <p>Faste installasjoner som varmeanlegg, kjøle- og fryseanlegg,  elektriske anlegg, sanitæranlegg, heisanlegg o.l. montert i  driftsmiddel innen gruppene e, f, g, h og i skal avskrives sammen med  driftsmidlet. Det samme gjelder
+                        løsøre ombord på skip mv.  </p>
+                    <p>Saldo for bygg med kort levetid kan avskrives med inntil 8%. Som bygg  med kort levetid regnes bygg med så enkel konstruksjon at det må  anses å ha en brukstid på ikke over 20 år fra oppføringen.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Saldoavskrivingar</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Saldoavskrivingsgruppene  </p>
+                    <p>Driftsmiddel i gruppe a, b, c, og d blir avskrivne under eitt for kvar  gruppe. Grupperinga gjer ein for kvar næring skattytaren har, og for  kvar kommune når same næring vert dreve i fleire kommunar, og skal  skattleggjast
+                        etter reglane om stadbunden skattleggjing, jf.  skattelova      § 3-3. Skal det vere saldogrupper for kvar kommune,  pga. at same næring vert dreve i fleire kommunar, så må skjema  fyllast ut med saldogrupper kun for
+                        næringskommunen og leverast til  likningskontoret for denne kommunen. Driftsmiddel som går inn i  gruppe e, f, g, h eller i blir ført på eigen saldo for kvart  driftsmiddel.  </p>
+                    <p>Gruppe a: kontormaskiner o.l. (30%)  </p>
+                    <p>Gruppe b: tileigna forretningsverdi  (goodwill) (20%)  </p>
+                    <p>Gruppe c: vogntog, lastebilar, varebilar o l (20%)  </p>
+                    <p>Gruppe d: personbilar, traktorar, maskiner o l (20%)  </p>
+                    <p>Gruppe e: skip mv. (14%), f: fly, helikopter (12%), g: anlegg for  overføring og distribusjon av elektrisk kraft og elektroteknisk  utrustning i kraftforetak (5%) h: bygg og anlegg mv. (4%) og 1:  forretningsbygg (2%)  </p>
+                    <p> For gruppene h og i må ein skilje tomteverdien ut slik at den ikkje  blir med i avskrivingsgrunnlaget. Faste installasjonar som  varmeanlegg, kjøle- og fryseanlegg, elektriske anlegg, sanitæranlegg,  heisanlegg o.l. montert i
+                        driftsmiddel innan gruppene e, f, g, h og i  skal avskrivast saman med driftsmidlet. Det same gjeld lausøyre  ombord på skip m.m.  </p>
+                    <p>Saldo for bygg med kort levetid kan avskrivast med inntil 8%. Dette  gjeld bygg med så enkel konstruksjon at det må reknast å ha ei  brukstid på ikkje over 20 år frå oppføringa.</p>
+                </xforms:help>
+                <xforms:selectOne ref="/Skjema/Saldoavskrivninger-grp-59/SaldoavskrivningSameie-datadef-19413">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>100 Gjelder dette skjemaet skattyters andel av felles konto i sameie  som ikke går inn under skatteloven §§ 10-40 til 10-45?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Sameier i et bruttolignet sameie som skal avskrive sin ideelle andel  av driftsmidlene, svarer ja her.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>100 Gjeld skattyters del av felles konto i sameige som ikkje går inn  under skattelova §§ 10-40 til 10-45</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Sameigar i eit bruttolikna sameige som skal avskrive sin ideelle del  av driftsmidler, svarer ja her.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:repeat id="repeat_Saldoavskrivninger-grp-2366" nodeset="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366">
+                    <xforms:group ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:selectOne ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/SaldoGruppeSpesifisert-datadef-352">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>a</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>A, kontormaskiner o.l.</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>A, kontormaskiner o.l.</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>b</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>B, ervervet forretningsverdi</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>B, erverva forretningsverdi</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>c</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>C, varebiler, vogntog, lastebiler mv.</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>C, varebiler, vogntog, lastebiler mv.</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>d</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>D, personbiler, maskiner, inventar, mv.</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>D, personbiler, maskiner, inventar, mv.</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>e</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>E, skip, fartøyer, rigger mv.</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>E, skip, fartøyer, rigger mv.</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>f</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>F, fly, helikopter</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>F, fly, helikopter</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>g</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>G, anlegg for overføring og distribusjon av kraft mv.</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>G, anlegg for overføring og distribusjon av kraft mv.</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>h</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>H, bygg, anlegg, hoteller, losjihus og bevertningssteder mv.</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>H, bygg, anlegg, hoteller, losjihus og bevertningssteder mv.</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>i</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>I, forretningsbygg</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>I, forretningsbygg</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>101 Saldogruppe (a-i)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres de forskjellige saldogruppene. I første del av rubrikken  skal det krysses av for hvilken saldogruppe objektet tilhører. I  tillegg skal den valgte avskrivningssatsen oppgis. I andre del av  rubrikken
+                                    nummereres hver saldo, eller videreføres siste års nummer  på den aktuelle saldo. Hver saldo beholder det samme nummeret fra år  til år. Næringsdrivende som driver flere næringer skal angi type  næring.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>101 Saldogruppe (a-i)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her skal dei einskilde saldogruppene førast. I fyrste delen av  rubrikken skal ein krysse av ved den saldogruppa det gjeld.  I  tillegg skal den valte avskrivningssatsen gjevast opp. I andre delen  av rubrikken skal
+                                    kvar saldo nummererast, eller nummeret frå siste år  førast vidare på den aktuelle saldoen. Kvar saldo har det same  nummeret frå år til år. Næringsdrivande som driv fleire næringar,  skal gje opp type næring.</p>
+                            </xforms:help>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/SaldoNummerSpesifisertSaldogruppe-datadef-7665">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Saldonr.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her skal hver saldo nummereres eller videreføres fra siste års nummer  på den aktuelle saldo. Hver saldo beholder det samme nummeret fra år  til år.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Saldonr.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her skal kvar saldo nummererast, eller nummeret frå siste år førast  vidare på den aktuelle saldoen. Kvar saldo har det same nummeret frå  år til år. Dersom man har meir enn tre einskilde saldoar, skal ein  halde
+                                    fram med eit nytt skjma som då blir nr. 2, som markerast øvst i  høgre hjørnet.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/EnhetPrimarnaringSpesifisertSaldo-datadef-17149">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Type næring</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Type næring</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/SaldoavskrivningAvskrivningssats-datadef-19678">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter positive number with two fraction digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Valgt avskrivningssats</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her legges benyttet avskrivningssats inn. Verdien blir brukt  automatisk i beregning av årets avskrivning/inntektsføring i post 110</p>
+                            </xforms:help>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever positivt tall med to desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Vald avskrivingssats</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her legges benyttet avskrivningssats inn. Verdien blir brukt  automatisk i beregning av årets avskrivning/inntektsføring i post 110</p>
+                            </xforms:help>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev positivt tal med to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/SaldoGrunnlagInngaendeSpesifisertSaldogruppe-datadef-6916">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>102 Saldogrunnlag pr. 1.1</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>I denne posten føres positiv eller negativ saldo fra 31.12.03. Beløpet  overføres fra post 111 i fjorårets avskrivningsskjema (RF-1084).</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Overføres fra post 111 i fjorårets skjema</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>102 Saldogrunnlag pr. 1.1</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>I denne posten skal positiv eller negativ saldo frå 31.12.03 førast.  Summen tek ein fra post 111 i avskrivningsskjemaet for 2003.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Ført over frå post 111 i skjema frå året før</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/DriftsmidlerNedskrevetVerdiSpesifisertSaldogruppe-datadef-370">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>103 Beregnet nedskrevet verdi ved utskillelse av driftsmidler</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>I visse tilfelle skal en saldo reduseres med et driftsmiddels  nedskrevne verdi. Dette vil bl.a. kunne være aktuelt når:  </p>
+                                <p>-et forretningsbygg ikke lenger er avskrivbart fordi det leies ut til  boligformål  </p>
+                                <p>-driftsmidlet skal flyttes fra en saldo til en annen innen samme  næring, f.eks. pga. seksjonering av bygning eller bruksendring fra  industribygg til forretningsbygg  </p>
+                                <p>-driftsmidlet flyttes mellom næringer som ligger i forskjellige  kommuner  </p>
+                                <p>-skattyteren overfører driftsmiddel til ektefelle enten til bruk i  ektefellens egen næring eller i forbindelse med skifte av felles bo  ved separasjon/skilsmisse  </p>
+                                <p>-driftsmiddel inndras fordi det har vært brukt i en straffbar  handling  </p>
+                                <p>-driftsmidler overføres fra personlig drevet firma til aksjeselskap  til nedskrevet verdi  </p>
+                                <p>-salg av ideell andel av driftsmidlet  </p>
+                                <p>-et driftsmiddel overføres mellom selskaper innenfor et konsern etter  sktl. § 11-21.  </p>
+                                <p>Beregningen av nedskrevet verdi skal i alle tilfelle foretas på  grunnlag av saldoverdien pr. 1. januar i utskillingsåret med tillegg  av eventuelle påkostninger som er foretatt før begivenheten som har  forårsaket
+                                    utskillelsen fant sted. I visse tilfeller vil nedskrevet  verdi gi seg selv. Dette vil bl.a. være tilfelle dersom:  </p>
+                                <p>-det bare er ett driftsmiddel på saldoen  </p>
+                                <p>-den saldoen driftsmidlet står på er nedskrevet til kr 0  </p>
+                                <p>-alle driftsmidler på en saldo overdras eller det overdras en ideell  andel av samtlige driftsmidler. Nedskrevet verdi vil da være  saldoverdien eller en forholdsmessig andel av denne  </p>
+                                <p>-saldoen var kr 0 da driftsmidlet ble tilført saldo og det senere ikke  er tilført andre driftsmidler på saldoen. Driftsmidlets nedskrevne  verdi vil da være lik saldoverdien.  </p>
+                                <p>I andre tilfeller vil det være behov for å finne nedskrevet verdi på  ett eller flere driftsmidler som inngår på en saldo sammen med  driftsmidler som fortsatt skal være på saldoen. Dersom skattyteren  har ført et
+                                    fullstendig skatteregnskap for hvert enkelt driftsmiddel,  blir den nedskrevne verdi som framgår av dette regnskapet å legge til  grunn. Dersom slikt regnskap ikke foreligger, kan nedskrevet verdi  beregnes ved en
+                                    forholdsmessig fordeling av saldoverdien på grunnlag  av driftsmidlenes omsetningsverdi. Ved oppdeling av bygninger legges  utleieverdien til grunn.  </p>
+                                <p>Det er nedskrevet verdi på den utskilte del som skal føres i post 103  og trekkes ut før en kommer fram til grunnlaget for årets  saldoavskrivninger. For driftsmidler som inngår på saldogruppe a - d,  skal
+                                    nedskrevet verdi på det utskilte driftsmiddel bare beregnes og  føres i post 103 i den grad det ikke er mottatt vederlag mv. som skal  skrives ned på driftsmidlet. Dette vil f.eks. være aktuelt dersom  skattyteren
+                                    overfører driftsmidler på saldogruppe a - d fra en næring  til en annen.  </p>
+                                <p>For driftsmidler som inngår på saldogruppe e - i, skal nedskrevet  verdi av den utskilte del alltid beregnes og føres i post 103.  Beløpet som er ført i post 103 skal overføres et eget saldoskjema for
+                                    gevinstberegning. Eventuelt vederlag eller erstatning mv. vil her bli  ført i post 106. Det vises for øvrig til rettledningen til postene  106 -108.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>103 Utrekna nedskriven verdi av driftsmiddel som er utskilde</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>I visse høve skal ein saldo reduserast med den nedskrivne verdi på eit  driftsmiddel. Dette vil t.d. kunne være aktuelt når:  </p>
+                                <p>- eit forretningsbygg ikkje lenger kan avskrivast fordi det blir leigd  ut til bustadføremål  </p>
+                                <p>- driftsmidlet skal flyttast frå ein saldo til ein annan innan same  næring t.d. pga. seksjonering av bygning eller bruksendring frå  industribygg til forretningsbygg  </p>
+                                <p>- driftsmidlet blir flytta mellom næring som ligg i ulike kommunar  </p>
+                                <p>- skattytar overfører driftsmiddel til ektefelle anten til bruk i  ektefellen si næring eller i sambank med skifte av felles bu ved  separasjon/skilsmål.  </p>
+                                <p>- driftsmiddel blir inndrege fordi det har vore nytt i ei straffbar  handling  </p>
+                                <p>- driftsmiddel blir overført frå personleg drive firma til  aksjeselskap til nedskriven verdi  </p>
+                                <p>- sal av ideell del av driftsmidlet  </p>
+                                <p>- eit driftsmiddel blir ført over mellom selskap innafor eit konsert  etter sktl. §11-21  </p>
+                                <p/>
+                                <p>Utrekning av nedskriven verdi skal i alle høve gjennomførast på  grunnlag av saldoverdien pr. 1. januar i utskiljingsåret med tillegg  av eventuelle påkostingar som er føretekne før utskiljinga. I visse  høve vil
+                                    nedskriven verdi gi seg sjølv. Dette vil m.a. vere tilfelle  dersom:  </p>
+                                <p>- det berre er eitt driftsmiddel på saldoen  </p>
+                                <p>- den saldoen driftsmidlet står på er nedskriven til kr 0  </p>
+                                <p>- alle driftsmiddel på ein saldo bli overdregne eller det blir  overdregen ein ideell part av samtlege driftsmiddel. Nedskriven verdi  vil da vere saldoverdien eller ein høveleg del av denne  </p>
+                                <p>- saldoen var kr 0 da driftsmidlet ble tilført saldo og det seinare  ikkje er tilført andre driftsmiddel på saldoen. Driftsmidlet sin  nedskrivne verdi vil da være lik saldoverdien.  </p>
+                                <p/>
+                                <p>I andre høve må ein for å finne nedskriven verdi på eitt eller fleire  driftsmiddel som inngår på ein saldo saman med driftsmiddel som  framleis skal vere på saldoen. Dersom skattytaren har ført eit  fullstendig
+                                    skatterekneskap for kvart einskild driftsmiddel blir den  nedskrivne verdi som går fram av slik rekneskap å leggje til grunn.  Dersom slikt rekneskap ikkje ligg føre, kan nedskriven verdi reknast  ut ved fordeling
+                                    av saldoverdien på grunnlag av driftsmidla sin  omsetjingsverdi. Ved oppdeling av bygning legg ein utleigeverdien til  grunn.  </p>
+                                <p> Det er nedskriven verdi på den utskilde del som skal førast i post  103 og trekkjast ut før ein kjem fram til grunnlaget for  saldoavskrivingar i året. For driftsmiddel som går inn på saldogruppe  a-d, skal
+                                    nedskriven verdi på det utskilde driftsmiddel berre reknast  ut og førast i post 103 i den grad det ikkje er motteke vederlag m.m.  som skal skrivast ned på driftsmidlet. Dette vil t.d. være aktuelt  dersom
+                                    skattytar fører over driftsmiddel på saldogruppe a-d  frå ei  næring til ei anna.  </p>
+                                <p> For driftsmiddel som går inn på saldogruppe e-h, skal nedskriven  verdi av den utskilde del alltid reknast ut og førast i post 103.  Beløpet som er ført i post 103 skal førast over til eit eige  saldoskjema for
+                                    utrekning av vinsten. Eventuelt vederlag eller  erstatning m.m. vil her bli ført i post 106. Ein syner elles til  rettleiinga til postane 106 ? 108.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/DriftsmidlerNyanskaffelserKostprisSpesifisertSaldogruppe-datadef-6913">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>104a Nyanskaffelser - kostpris</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres kostpris for driftsmidler ervervet i løpet av inntektsåret.  Driftsmidler som er varige og betydelige skal aktiveres og saldo  avskrives. Et driftsmiddel regnes som varig når det ved ervervet  antas å ha
+                                    en brukstid på minst 3 år. Driftsmiddel regnes som  betydelige når kostpris er kr 15.000 eller høyere, inkludert  merverdiavgift dersom det ikke foreligger fradragsrett.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>104a Nyskaffingar - kostpris</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her førast ein kostpris for driftsmiddel som er skaffa i løpet av  inntektsåret. Driftsmiddel som er varige og vesentlege skal  avskrivast og saldoavskrivast. Eit driftsmiddel blir rekna som varig  når ein går ut
+                                    frå at det ved kjøp e.l. har ein brukstid på minst tre  år. Driftsmiddel blir rekna som vesentlig når kostpris er kr 15.000  eller høgare, inkludert eventuell investeringsavgift.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/DriftsmidlerPakostningerSpesifisertSaldogruppe-datadef-6911">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>104b Nyanskaffelser - påkostninger</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Påkostninger på eksisterende eller nyervervede driftsmidler føres her  i sin helhet. Vedlikehold kan kostnadsføres direkte. Velger  skattyteren å aktivere større vedlikeholdskostnader, må det gis  nærmere opplysninger.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>104b Nyskaffingar - påkostingar</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Påkostningar på eksisterande eller nyskaffa driftsmiddel fører ein her  fullt ut. Vedlikehald kan utgiftsførast direkte. Vel skattytaren å  aktivere strørre vedlikehaldsutgifter, må ein gi nærmare  opplysningar.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/DriftsmidlerSalgsgevinstNedskrivingSpesifisertSaldogruppe-datadef-356">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>104c Nedskrivninger på nyanskaffelser med salgsgevinst etter sktl §  14-70</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>På denne posten føres den del av gevinsten ved ufrivillig realisasjon  av driftsmiddel i gruppe e, f, g, h eller i som benyttes til  reinvestering etter skatteloven § 14-44 (4) ledd, jf. § 14-70.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>104c Nedskriving på nyskaffingar med salsgevinst eller sktl. § 14-70</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>På denne posten fører ein den del av vinsten ved ufrivillig  realisasjon av driftsmiddel i grupp e, f, g, h eller i som blir nytta  til reinvestering etter skattelova § 14-44(4), jf. § 14-70.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/TilskuddOffentligeSpesifisertSaldogruppe-datadef-6912">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>104d Offentlige tilskudd og lignende i forbindelse med nyanskaffelser</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Offentlige tilskudd, med unntak av investeringstilskudd til  distriktene etter forskrift gitt av Kongen, skal nedskrives på  kostprisen.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>104d Offentlege tilskot o.l i samband med nyskaffingar</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Offentlege tilskot, med unntak av investeringstilskot til distrikta  etter forskrift gitt av Kongen, skal skrivast ned på kostprisen.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/DriftsmidlerSaldogrunnlagForRealisasjonSpesifisertSaldogruppe-datadef-6907">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>105 Sum grunnlag før realisasjon/uttak</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>105 Sum grunnlag før avhending/uttak</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/DriftsmidlerUttakVederlagSpesifisertSaldogruppe-datadef-6914">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>106 Vederlag ved realisasjon/omsetningsverdi ved uttak av driftsmidler</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Ved realisasjon og uttak av driftsmiddel i gruppe a, b, c eller d kan  vederlaget/omsetningsverdien helt eller delvis nedskrives på saldoen  i vedkommende gruppe i stedet for inntektsføring. Dette gjelder selv  om
+                                    saldoen blir negativ.  </p>
+                                <p>Ved realisasjon av driftsmidler i gruppene e, f, g, h og i, skal det  foretas gevinst/tapsberegning. Det er også her adgang til å ta  vederlaget mv. helt eller delvis til inntekt. Ved beregning av  gevinst/tap må
+                                    det da tas hensyn til det som inntektsføres direkte.    </p>
+                                <p>Dersom realisasjonsvederlaget også omfatter aktiva som ikke er ført på  saldo, f.eks. ved salg av et bygg med tomt, må den del av vederlaget  som gjelder tomten ikke føres her, men skilles ut for egen
+                                    gevinstberegning. Vederlaget som føres i post 106 skal således bare  omfatte driftsmidler som er realisert fra saldoen.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>106 Vederlag ved avhending/omsetjingsverdi ved utak av driftsmiddel</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Ved realisasjon og uttak av driftsmiddel i gruppe a, b, c eller d kan  vederlaget/omsetningsverdien helt eller delvis skrivast ned på  saldoen i vedkommande gruppe i staden for inntektsføring. Dette gjeld  sjølv om
+                                    saldoen er negativ.  </p>
+                                <p>Ved realisasjon av driftsmiddel i gruppene e, f, g, h og i skal det  gjennomførast vinst/tapsutrekning. Det er også her høve til å ta  vederlaget m.m. heilt eller delvis til inntekt. Ved utrekninga av  vinst/tap må
+                                    ein da ta omsyn til det blir ført direkte til  inntekt.  </p>
+                                <p>Dersom vederlaget ved realisasjon også omfattar aktiva som ikkje er  ført på saldo, som t.d. ved sal av eit bygg med tomt, må den delen av  vederlaget som gjeld tomta ikkje førast her, men skiljast ut for egen
+                                    utrekning av vinsten. Vederlaget som førast i post 106 skal såleis  berre omfatte driftsmiddel som er realisert frå saldoen.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/DriftsmidlerVederlagInntektsfortSpesifisertSaldogruppe-datadef-6908">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>107 Herav inntektsført i 2005</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres den delen av vederlaget mv. (ved uttak omsetningsverdien)  som føres direkte til inntekt i realisasjonsåret etter skatteloven §  14-44 (1) og som således ikke skal påvirke grunnlaget for årets
+                                    saldoavskrivning, inntektsføring eller overføring til gevinst- og  tapskonto.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Jf. sktl § 14-44</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>107 Av dette inntektsført i 2005</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her førar ein den delen av vederlaget m.m. (ved uttak  omsetningsverdien.) som blir ført direkte til inntekt i  realisasjonsåret etter skattelova § 14-44 (1) og som såleis ikkje  skal påverke grunnlaget for
+                                    saldoavskriving i året, inntektsføring  eller overføring til vinst- og tapskonto.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Jf. sktl § 14-44</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/DriftsmidlerSaldoavskrivningGrunnlagSpesifisertSaldogruppe-datadef-362">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>108 Grunnlag for årets saldoavskrivning</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her framkommer grunnlaget for årets avskrivninger. For driftsmidler i  saldogruppe a, c eller d vil også eventuell negativ saldo fremkomme  her. Det samme gjelder negativ saldo i saldogruppe b som er etablert  i
+                                    2003. For saldogruppe a, c eller d skal slik negativ saldo  inntektsføres fra og med realisasjonsåret med en andel som minst  tilsvarer gruppens avskrivningssats. Negativ saldo i gruppe b skal  overføres til
+                                    gevinst- og tapskonto. Dette gjelder også negativ saldo  som skyldes nedskrivning med vederlag for opparbeidet  forretningsverdi. Tom positiv saldo i saldogruppe a, b, c eller d  skal avskrives på vanlig måte med
+                                    maksimalt gruppens  avskrivningssats.  </p>
+                                <p>Ved realisasjon eller uttak av driftsmiddel i gruppe e, f, g, h eller  i vil gevinsten eller tapet normalt fremkomme her. Gevinst/tap på  driftsmiddel i gruppene e, f, g, h eller i samt negativ saldo i  gruppe b,
+                                    skal overføres til post 109 før overføring til gevinst- og  tapskonto, eventuelt egen gevinstberegning. For forretningsbygg  ervervet før 1.1.1984 vil skattemessig inngangsverdi bestå av  saldoverdien på
+                                    salgstidspunktet med fradrag for nedre grense for  avskrivning.  </p>
+                                <p>For gevinst på driftsmiddel i gruppe e, f, g, h eller i ved ufrivillig  realisasjon som f.eks. brann eller annen ulykke eller ved  ekspropriasjon mv., kan det kreves betinget skattefritak etter  skatteloven § 14-44
+                                    (4), jf. § 14-70, se post 104c.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Ev. negativ saldo for gruppe a, b, c, eller d og ev. gevinst/tap ved  realisasjon/uttak for gruppe e, f, g, h eller i</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>108 Grunnlag for saldoavskriving i år</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her kjem grunnlaget for avskrivningane fram. For driftsmiddel i  saldogruppe a, c eller d vil også eventuell negativ saldo kome fram  her. Det samme gjeld negativ saldo i saldogruppe b som er etablert i  2001. For
+                                    saldogruppe a, c eller d skal slik negativ saldo førast til  inntekt frå og med realisasjonsåret med ein del som minst svarar til  avskrivningssatsen for gruppa. Negativ saldo i gruppe b skal førast  over til
+                                    vinst- og tapskontoen. Dette gjeld også negativ saldo som  skuldast nedskriving med vederlag for opparbeidd forretningsverdi.  Tom positiv saldo i saldogruppe a, b, c eller d skal avskrivast på  vanleg måte med
+                                    maskimalt gruppa sin avskrivingssats.  </p>
+                                <p> Ved realisasjon eller uttak av driftsmiddel i gruppe e, f, g eller h  vil vinsgten eller tapet normalt kome fram her. Vinst/tap på  driftsmiddel i gruppene e, f, g, h eller i samt negativ saldo i  gruppe b, skal
+                                    førast over til post 109 før ein fører beløpet over  til vinst- og tap. For forretningsbygg skaffa før 01.01.1984 vil  skattemessig inngangsverdi vere saldoverdien på salstidspunktet med  frådrag for nedre grense
+                                    for avskriving.  </p>
+                                <p>For vinst på driftsmiddel i gruppe e, f, g, h eller ved ufrivillig  realisasjon som t.d. brann eller anna ulykke eller ved ekspropriasjon  m.m., kan det krevjast skattefritak på vilkår etter skattelova §  14-44 (4),
+                                    jf.  14-70.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Ev. negativ saldo for gruppe a, b, c, eller d og ev. gevinst/tap ved  realisasjon/uttak for gruppe e, f, g, h eller i</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/DriftsmidlerGevinstTapskontoOverfortSpesifisertSaldogruppe-datadef-6915">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>109 Sum overført til gevinst- og tapskonto</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Beløp som skal overføres til gevinst- og tapskonto, RF-1219, overføres  hit fra post 108. Gevinst føres her med positivt fortegn og tillegges  gevinstbeløpet fra post 108 der dette fremkommer som et tilsvarende
+                                    negativt beløp. Ved tap vil motsatt situasjon oppstå.  Summen/differansen i post 111 vil både i gevinst- og tapstilfellene  bli kr 0. Ved realisasjon av forretningsbygg ervervet før 1.1.1984,  vil nedre grense for
+                                    avskrivning måtte tillegges gevinsten/tapet i  post 109 for å komme fram til skattemessig gevinst/tap som skal  overføres til gevinst- og tapskonto.  </p>
+                                <p>Et tap som framkommer ved uttak av driftsmiddel er normalt ikke  fradragsberettiget, og skal da ikke overføres til gevinst- og  tapskonto.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Gevinster føres med + tegn, tap føres med - tegn.</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>109 Sum overført til gevinst- og tapskonto</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Beløp som skal førast over til vinst- og tapskonto som ein skal føre  frå post 108. Vinst føre her med positivt fortekn og leggje til  vinstbeløpet frå post 108 der dette kjem fram som eit tilsvarande  negativt
+                                    beløp. Ved eit tap vil motsette situasjon oppstå.  Summen/differansen i post 111 vil både i visnt- og tapstilfella bli  kr. 0. Ved realisasjon av forretningsbygg skaffa før 01.01.1984, vil  nedre grensa for
+                                    avskrivning måtte tilleggjast til vinsten/tapet i  post 109 for å komme frem til skattemessig visnt/tap som skal førast  over til vinst- og tapskonto.  </p>
+                                <p> Eit tap som kjem fram ved uttak av driftsmiddel er vanlegvis ikkje  frådragsretti fo. Tapet skal difor i slike tilfelle som oftast ikkje  førast over til vinst- og tapskonto.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Gevinst førast med + teikn, tap førast med - teikn.</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/DriftsmidlerSaldoavskrivningSpesifisertSaldogruppe-datadef-6695">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>110 Årets saldoavskrivning(-)/ev. inntektsføring(+) av del av negativ  saldo i gruppe a, c eller d</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres årets saldoavskrivning. Her inntektsføres også negativ saldo  i saldogruppene a, c eller d med minst gruppens avskrivningssats.  Rest positiv saldo under kr 15.000 kan fradragsføres i sin helhet.  Rest
+                                    negativ saldo under kr 15.000 skal inntektsføres i sin helhet.    </p>
+                                <p/>
+                                <p>Beløpet skal overføres til næringsoppgaven, alternativt kan beløpet  føres direkte i selvangivelsen dersom næringen har opphørt.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>110 Saldoavskrivning i år (-)/ev. inntektsføring (+) av del av negativ  saldo i gruppe a, c eller d</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her fører ein saldoavskrivinga for året. Her fører ein også til  inntekt negativ saldo i saldogruppene a, c eller d med minst  avskrivningsprosenten for saldogruppa. rest postitiv saldo under k  15.000 kan førast
+                                    til frådrag fullt ut. Rest negativ saldo under kr  15.000 skal førast til inntekt fullt ut.  </p>
+                                <p/>
+                                <p>Beløpet skal overførast til næringsoppgåven. Beløpet kan førast  direkte i sjølvmeldinga dersom næringa har oppghørt.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/SaldoGrunnlagSpesifisertSaldogruppe-datadef-365">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>111 Saldogrunnlag per 31.12</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her fremkommer rest positiv saldo pr. 31.12.2005 som skal overføres  til post 102 på avskrivningsskjemaet for år 2006. Det samme gjelder  rest negativ saldo i gruppe a, c eller d.  </p>
+                                <p/>
+                                <p>Ved positiv saldo under 15 000 kan hele beløpet avskrives ved å velge  avskrivningssats 100%. Det er anledning til å velge lavere sats  dersom man velger dette.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Overføres til neste år, post 102</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>111 Saldogrunnlag per 31.12</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her skal ein føre rest positiv saldo pr. 31.12.2005 som skal overføres  til post 102 på avskrivningsskjemaet for år 2006. Det samme gjeld  rest negativ saldo i gruppe a, c eller d.  </p>
+                                <p/>
+                                <p>Ved positiv saldo under 15 000 kan hele beløpet avskrives ved å velge  avskrivningssats 100%. Det er anledning til å velge lavere sats  dersom man velger dette.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Overførast til neste år, post 102</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:group ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/ForretningsbyggAnskaffetFor-grp-4043">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>112 Forretningsbygg anskaffet før 1.1.1984</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her videreføres opplysninger om forretningsbygg som pr. 1.1.1984 ble  oppskrevet i samsvar med § 1-2 i Finansdepartementets forskrift av  29. august 1984.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>112 Forretningsbygg skaffa før 1.1.1984</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her førar ein opplysningar om forretningsbygg som pr. 1.1.1984 ble  oppskrivne i samsvar med § 1-2 i Finansdepartementet sin forskrift av  29. august 1984.</p>
+                            </xforms:help>
+                            <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/ForretningsbyggAnskaffetFor-grp-4043/ForretningsbyggGardsnummerSpesifisertBygg-datadef-11733">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Gårdsnummer</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Gardsnr.</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/ForretningsbyggAnskaffetFor-grp-4043/ForretningsbyggBruksnummerSpesifisertBygg-datadef-11734">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Bruksnummer</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Bruksnr.</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/ForretningsbyggAnskaffetFor-grp-4043/ForretningsbyggSeksjonsnummerSpesifisertBygg-datadef-11735">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Seksjonsnummer</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Seksjonsnummer</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/ForretningsbyggAnskaffetFor-grp-4043/ForretningsbyggAdresseSpesifisertBygg-datadef-11736">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Adresse</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Adresse</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                        <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/ForretningsbyggKostprisSpesifisertBygg-datadef-367">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>113 Historisk kostpris</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her videreføres opplysninger om forretningsbygg som pr. 1.1.1984 ble  oppskrevet i samsvar med § 1-2 i Finansdepartementets forskrift av  29. august 1984.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>113 Historisk kostpris</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her førar ein opplysningar om forretningsbygg som pr. 1.1. 1984 blei  oppskrivne i samsvar med § 1-2 i Finansdepartementet sin forskrift av  29. august 1984.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/ForretningsbyggNedskrevetVerdiSpesifisertBygg-datadef-368">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>114 Nedskrevet verdi 1.1. 1984</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her videreføres opplysninger om forretningsbygg som pr. 1.1.1984 ble  oppskrevet i samsvar med § 1-2 i Finansdepartementets forskrift av  29. august 1984.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>114 Nedskrevet verdi 1.1. 1984</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her førar ein opplysningar om forretningsbygg som pr. 1.1. 1984 blei  oppskrivne i samsvar med § 1-2 i Finansdepartementet sin forskrift av  29. august 1984.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Saldoavskrivninger-grp-59/Saldoavskrivninger-grp-2366/ForretningsbyggAvskrivningNedreGrenseSpesifisertBygg-datadef-369">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>115 Nedre grense for avskrivning</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her videreføres opplysninger om forretningsbygg som pr. 1.1.1984 ble  oppskrevet i samsvar med § 1-2 i Finansdepartementets forskrift av  29.  </p>
+                                <p>august 1984.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>115 Nedre grense for avskriving</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her førar ein opplysningar om forretningsbygg som pr. 1.1. 1984 blei  oppskrivne i samsvar med § 1-2 i Finansdepartementet sin forskrift av  29. august 1984.</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/LineareAvskrivninger-grp-3505">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Lineære avskrivninger</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>I første rubrikk skal objektet nummereres. Samme nummer beholdes fra  år til år. I andre rubrikk angis hvilken type næring objektet brukes  i. I tredje rubrikk angis/beskrives det driftsmiddel eller annet  objekt som er
+                        gjenstand for lineær avskrivning i medhold av  skatteloven, f.eks. påkostninger på leide lokaler, eller  patentrettigheter. I fjerde rubrikk angis ervervsår. I femte rubrikk  oppgis antall år objektet avskrives over. Under
+                        rubrikken på kostpris  inkluderes også f.eks. ytterligere påkostninger på leide lokaler i  leieperioden. I syvende rubrikk skal årets avskrivning fremgå. Siste  rubrikk skal vise nedskrevet verdi pr. 31.12.2005, dvs. etter
+                        fradrag  for årets avskrivninger.  </p>
+                    <p>Rubrikkene skal også benyttes til kostnadsfordeling ved betydelige  innkjøp av reinsdyr og pelsdyr. Kostnader til innkjøp av slike dyr  til verdi over kr 15.000 skal aktiveres og fordeles for reinsdyr over  inntil 3 inntektsår
+                        og inntil 5 inntektsår for pelsdyr.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Lineære avskrivningar</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>I fyrste rubrikk skal objektet nummererast. Ein skal ha same nummeret  frå år til år. I andre rubrikken skal ein opplyse kva for ei type  næring objektet blir nytta i. I tredje rubrikk skal ein opplyse om  det driftsmidlet
+                        eller anna objekt som skal avskrivast lineært etter  reglane i skatteloven, t.d. påkostingar på leigde lokal, eller  patentretter. I fjerde rubrikken skal ein merke av for det året  objektet er skaffa. I femte rubrikken skal
+                        ein føre opp kor mange år  objektet skal avskrivast. Under rubrikken for kostpris skal ein óg ta  med påkostingar på leigde lokal i leigetida. Av sjuande rubrikken  skal avskrivingane i året framgå. Siste rubrikken skal vise
+                        nedskriven verdi pr 31.12.2005, dvs. etter frådrag for avskrivningar  i 2005.  </p>
+                    <p>Rubrikken skal ogå nyttast til kostnadsfordeling ved betydelege  innkjøp av reinsdyr og pelsdyr. Kostnader til innkjøp av slike dyr  til verdi over kr 15.000 skal aktiverast og fordelast over inntil 3  inntektsår for reinsdyr,
+                        og inntil 5 inntektsår for pelsdyr.</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_LineareAvskrivninger-grp-88" nodeset="/Skjema/LineareAvskrivninger-grp-3505/LineareAvskrivninger-grp-88">
+                    <xforms:group ref="/Skjema/LineareAvskrivninger-grp-3505/LineareAvskrivninger-grp-88">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:input ref="/Skjema/LineareAvskrivninger-grp-3505/LineareAvskrivninger-grp-88/ObjektNummer-datadef-7686">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Objektnr.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Objektnr.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/LineareAvskrivninger-grp-3505/LineareAvskrivninger-grp-88/EnhetPrimarnaringSpesifisertObjekt-datadef-17150">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Type næring</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Type næring</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/LineareAvskrivninger-grp-3505/LineareAvskrivninger-grp-88/DriftsmidlerBeskrivelseSpesifisertObjekt-datadef-6909">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beskrivelse av objektet</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Beskriving av objektet</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/LineareAvskrivninger-grp-3505/LineareAvskrivninger-grp-88/DriftsmidlerInnkjopsarSpesifisertObjekt-datadef-6917">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ervervsår</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Året då objektet vart skaffa</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/LineareAvskrivninger-grp-3505/LineareAvskrivninger-grp-88/DriftsmidlerLevetidSpesifisertObjekt-datadef-6918">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Levetid</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Antall år</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Levetid</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Kor mange år</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/LineareAvskrivninger-grp-3505/LineareAvskrivninger-grp-88/DriftsmidlerKostprisSpesifisertObjekt-datadef-6919">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kostpris</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Inkl. påkostninger</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kostpris</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Inkl. påkostningar</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/LineareAvskrivninger-grp-3505/LineareAvskrivninger-grp-88/DriftsmidlerAvskrivningLinearSpesifisertObjekt-datadef-6910">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Årets avskrivning</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Evt. kostnadsfordeling</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Avskriving i året</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/LineareAvskrivninger-grp-3505/LineareAvskrivninger-grp-88/DriftsmidlerNedskrevetVerdiSpesifisertObjekt-datadef-6920">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nedskrevet verdi 31.12.2005</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nedskriven verdi pr. 31.12.2005</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

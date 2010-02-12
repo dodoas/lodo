@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1219: Gevinst- og tapskonto</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-62-3878.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2857/Avgiver-grp-1575/OppgavegiverFodselsnummer-datadef-26"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1219 Gevinst- og tapskonto 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>I næringsvirksomhet skal det føres en egen gevinst- og tapskonto.  Dersom skattyter driver flere adskilte virksomheter, skal det føres  en gevinst- og tapskonto for hver virksomhet og for hver kommune som  vedkommende er
+                    skattepliktig til og som skal tilordnes gevinst eller  tap undergitt stedbunden beskatning etter skatteloven § 3-3. På  skjemaet er det tatt inn et felt der det skal oppgis hvor mange  gevinst- og tapskontoer skattyter har.
+                    Gevinst- og tapskontoen skal  tilføres gevinst og tap ved realisasjon eller uttak i inntektsåret  for driftsmidler i saldogruppe e, f, g, h og i, samt negativ saldo  oppstått i året i saldogruppe b. Tap ved realisasjon av ervervet
+                    forretningsverdi (tom positiv saldo i gruppe b) skal fradragsføres  ved fortsatt avskrivning på saldo i saldogruppe b.  </p>
+                <p>Gevinst- og tapskontoen skal også tilføres gevinst og tap på  ikke-avskrivbare driftsmidler, jf. skatteloven §14-52, med unntak for  finansielle eiendeler som aksjer, obligasjoner og fordringer mv.  Gevinst- og tapskontoen skal
+                    også tilføres enkelte gevinster og tap  som fremkommer etter overgangsreglene i skatteloven § 10-44.  </p>
+                <p>I  tillegg skal gevinst- og tapskontoen i 2005 også tilføres gevinst i  saldogruppene e-i avsatt betinget skattefritt etter skatteloven §  14-70 ved ufrivillig realisasjon i 2004 når gevinsten ikke er  reinvestert innen utgangen av
+                    2005.  </p>
+                <p/>
+                <p>Særlig om bruken av fortegn i skjema  </p>
+                <p>Hovedregel  </p>
+                <p>I utgangspunktet skal alle tall innrapporteres uten fortegn når det  klart fremgår av ledeteksten om tallet skal tillegges eller trekkes  fra i forhold til den sammenheng det føres inn i. Det skal altså ikke  brukes minustegn når
+                    teksten forteller at det dreier seg om  kostnader, underskudd, mv., og tilsvarende ingen plusstegn ved  inntekter, overskudd mv. Et unntak fra dette kan illustreres ved  følgende eksempel :  </p>
+                <p>En utleieaktivitet har i inntektsåret gitt større utgifter enn  inntekter:  </p>
+                <p>Inntekter           30.000  </p>
+                <p>utgifter              35.000  </p>
+                <p>underskudd     -  5.000  </p>
+                <p>For å føre dette underskuddet på 5.000 kroner inn i en post med  ledetekst Inntekt ved utleie må beløpet settes med negativt fortegn  for å kunne trekkes fra - det er jo en kostnad(det motsatte av  ledeteksten) og ikke en inntekt.  </p>
+                <p>Presiseringer  </p>
+                <p>Dersom et felt har forhåndstrykket fortegn (positivt eller negativt)  skal tallet som innrapporteres  være uten fortegn. Fortegn brukes kun  i de tilfeller man ønsker å innrapportere et beløp med omvendt  fortegn av det som er
+                    forhåndstrykket. I sum og resultatfelter brukes  alltid minustegn når summen er negativ.  </p>
+                <p/>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. november 1994, jf. ligningsloven § 4-4 nr.  7.  </p>
+                <p/>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1219B  </p>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i Gevinst- og tapskonto 2005 RF-1219, helt  eller delvis bli benyttet også av andre offentlige organer som har  hjemmel til å innhente de
+                    samme opplysningene, jf. lov om  Oppgaveregisteret §§ 5 og 6. Opplysninger om evt. samordning kan fås  ved henvendelse til Oppgaveregisteret på telefon 75 00 75 00, eller  Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1219 Gevinst- og tapskonto 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>I næringsverksemd skal det førast ein eigen gevinst- og tapskonto.  Dersom skattytar driv fleire sjølvstendige verksemder, skal det  opprettast ein gevinst- og tapskonto for kvar verksemd og for kvar  kommune som vedkomande er
+                    skattepliktig til og som skal tilordnast  gevinst eller tap etter reglane om stadbunden skattlegging etter §  3-3 i skattelova. På skjemaet er det teke inn eit felt der det skal  gis opp kor mange gevinst- og tapskontoar
+                    skattytaren har. Gevinst-  og tapskontoen skal tilførast gevinst og tap ved realisasjon eller  uttak i inntektsåret for driftsmiddel i saldogruppe e, f, g, h og i,  og negativ saldo oppstått i året i saldogruppe b. Tap ved
+                    realisasjon  av tileigna forretningsverdi (tom positiv saldo i gruppe b) skal  førast til frådrag ved at avskrivinga på saldoen held fram.  </p>
+                <p>Gevinst- og tapskontoen skal også tilførast gevinst og tap på  driftsmiddel som ikkje kan avskrivast, jf. skattelova §14-52, med  unntak for eigedelar som aksjar, obligasjonar og krav o.a. Gevinst-  og tapskontoen skal også
+                    tilførast einskilde gevinstar og tap i  samsvar med overgangsreglane i skattelova § 10-44.  </p>
+                <p>I  tillegg skal gevinst- og tapskontoen i 2005 tilførast gevinst i  saldogruppene e-i avsett vilkårbunden skattefritt etter skattelova §  14-70 ved ufrivillig realisasjon i 2004 når gevinsten ikkje er  reinvestert etter reglane
+                    innan utgangen av 2005.  </p>
+                <p/>
+                <p>Særleg om bruk av forteikn i skjema  </p>
+                <p>Hovudregel  </p>
+                <p>I utgangspunktet skal alle tal innrapporterast utan forteikn når det  klart går fram av teksten om talet skal leggjast til eller trekkjast  frå i forhold til den samanheng det blir ført inn i. Det skal altså  ikkje brukast
+                    minusteikn når det går fram av teksten at det dreier  seg om kostnader, underskott, m.m., og tilsvarande ingen plussteikn  ved inntekter, overskott m.m. Eit unnatak frå dette kan illustrerast  ved følgjande eksempel:  </p>
+                <p>Ein utleigeaktivitet har i inntektsåret gjeve større utgifter enn  inntekter:  </p>
+                <p>Inntekter           30.000  </p>
+                <p>utgifter            35.000  </p>
+                <p>underskott        -  5.000  </p>
+                <p>For å føre dette underskottet på 5.000 kroner inn i ein post med tekst  Inntekt ved utleige må beløpet setjast med negativt forteikn for å  kunne trekkjast frå - det er jo en kostnad (det motsette av teksten)  og ikkje ei inntekt.  </p>
+                <p>Presiseringar  </p>
+                <p>Dersom eit felt har førehandstrykt forteikn (positivt eller negativt)  skal talet som blir innrapportert  vere utan forteikn. Forteikn skal  berre brukast i dei tilfella der ein ønskjer å innrapportere eit  beløp med omvendt
+                    forteikn av det som er førehandstrykt. I sum og  resultatfelt skal ein alltid bruke minusteikn når summen er  negativ.  </p>
+                <p/>
+                <p>Fastsett av Skattedirektoratet med heimel i Finansdepartementet sitt  delegeringsvedtak av 28. november 1994, jf. Likningslova §§ 4-4 nr.  7.  </p>
+                <p/>
+                <p>Andre offentlege organs bruk av opplysningar i RF-1219. For å samordna  og forenkla oppgåveinnleveringa  frå næringslivet, kan opplysningar  som blir gitt i dette skjemaet, RF-1219, heilt eller delvis bli nytta  også av andre
+                    offentlege organ som har heimel til å innhente dei same  opplysningane, jf. lov om Oppgaveregisteret §§ 5 og 6. Opplysningar  om ev. Samordning kan ein få ved å kontakte Oppgåveregisteret på  telefon 75 00 75 00, eller
+                    Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-2857">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2857/Avgiver-grp-1575">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Avgiver</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Avgivar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2857/Avgiver-grp-1575/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2857/Avgiver-grp-1575/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2857/Avgiver-grp-1575/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2857/Avgiver-grp-1575/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Org.nr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Org.nr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2857/Avgiver-grp-1575/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2857/Avgiver-grp-1575/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2857/Avgiver-grp-1575/EnhetKommunenummer-datadef-17">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommunenr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kommunenr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2857/Avgiver-grp-1575/EnhetKommuneNavn-datadef-15506">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommunenavn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kommunenamn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2857/Regnskapsforer-grp-1579">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Regnskapsfører</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Rekneskapsførar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2857/Regnskapsforer-grp-1579/RegnskapsforerNavn-datadef-280">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2857/Regnskapsforer-grp-1579/RegnskapsforerAdresse-datadef-281">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2857/Regnskapsforer-grp-1579/RegnskapsforerPostnummer-datadef-6678">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2857/Regnskapsforer-grp-1579/RegnskapsforerPoststed-datadef-6679">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/InngaendeSaldo-grp-5336">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Inngående saldo</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Inngåande saldo</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/InngaendeSaldo-grp-5336/GevinstTapskontoAntall-datadef-1740">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgi antall gevinst- og tapskontoer her</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Gi opp talet på gevinst- og tapskontoar her</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/InngaendeSaldo-grp-5336/GevinstTapskontoSaldoInngaende-datadef-6896">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1 Saldo på gevinst- og tapskonto pr. 31.12.04 overført fra forrige års  gevinst- og tapskonto</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Til denne posten overføres saldo på gevinst- og tapskonto pr 31.  desember 2004. Positivt beløp (+) er gevinst og negativt beløp (÷) er  et tap.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1 Saldo på gevinst- og tapskonto pr. 31.12.04 overført frå gevinst- og  tapskonto siste år</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Til denne posten fører ein saldo på gevinst- og tapskontoen pr. 31.  desember 2004. Positivt beløp (+) er vinst, og negativt beløp (÷) er  tap.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/GevinstMvSomSkalTilleggesGevinstOgTapskontoForFjoraret-grp-1576">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Gevinst</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Gevinster</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/GevinstMvSomSkalTilleggesGevinstOgTapskontoForFjoraret-grp-1576/GevinstTapskontoDriftsmidlerIkkeAvskrivbareGevinst-datadef-1741">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2 Årets gevinst ved realisasjon/uttak av driftsmidler som ikke kan  avskrives etter reglene i skatteloven § 14-40 flg.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres gevinst ved realisasjon/uttak av driftsmidler som ikke kan  avskrives etter reglene i skatteloven § 14-40 flg. Gevinst- og  tapskontoen skal ikke anvendes ved realisasjon av verdipapirer,  fordringer og andre
+                            finanseiendeler. Gevinst ved realisasjon av  kontrakt om kjøp av driftsmiddel skal heller ikke føres her, men tas  til inntekt i sin helhet i realisasjonsåret.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2 Gevinst i året ved realisasjon/uttak av driftsmiddel som ikkje kan  avskrivast etter reglane i skattelova § 14-40 flg.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her skal gevinst førast ved realisasjon/uttak av driftsmiddel som  ikkje kan avskrivast etter reglane i skattelova § 14-40. Gevinst- og  tapskontoen skal ikkje nyttast ved realisasjon av verdipapir, krav og  andre
+                            finanseigedelar. Gevinst ved realisasjon av kontrakt om kjøp av  driftsmiddel skal heller ikkje førast her, men takast til inntekt  fullt ut i realisasjonsåret.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GevinstMvSomSkalTilleggesGevinstOgTapskontoForFjoraret-grp-1576/GevinstTapskontoDriftsmidlerRealisasjonGevinst-datadef-1742">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3 Årets gevinst ved realisasjon/uttak av driftsmidler i saldogruppe  e-i</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres gevinst ved realisasjon/uttak av driftsmidler i saldogruppe  e-i. Det er adgang til å inntektsføre hele eller deler av  salgssummen, eventuelt erstatningen mv. direkte i realisasjonsåret.  Beløpet hentes normalt
+                            fra avskrivingsskjemaet post 109. Ved  realisasjon av forretningsbygg ervervet før 1.1.1984 må gevinst/tap  fra post 109 i avskrivingsskjemaet korrigeres med nedre grense for  avskrivning.  </p>
+                        <p>Tilskudd som er gitt til investering i distriktene etter forskrift  gitt av Kongen, og som ikke skal tilbakebetales, skal regnes som en  del av salgssummen, eventuelt erstatningen mv. ved realisasjon av  driftsmidlet innen
+                            fem år etter at det ble ervervet.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Jf. avskrivingsskjemaet post 109</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>3 Gevinst i året ved realisasjon/uttak av driftsmiddel i saldogruppe  e-i</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein gevinst ved realisasjon/uttak av driftsmiddel i  saldogruppene e-i. Det er høve til å inntektsføre heile eller delar  av salssummen, eventuelt erstatninga m.m., direkte i  realisasjonsåret. Beløpet blir
+                            normalt henta frå avskrivingsskjemaet  post 109. Ved realisasjon av forretningsbygg skaffa før 1.1.1984 må  gevinsten/tapet i post 109 i avskrivingsskjemaet korrigerast med  nedre grense for avskriving.  </p>
+                        <p>Tilskot som er gjeve til investering i distrikta etter forskrift gitt  av Kongen, og som ikkje skal betalast tilbake, skal reknast som ein  del av salssummen, eventuelt erstatninga m.m., ved realisasjon av  driftsmidlet
+                            innan fem år etter at det blei tileigna.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Jf. avskrivingsskjemaet post 109</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GevinstMvSomSkalTilleggesGevinstOgTapskontoForFjoraret-grp-1576/GevinstTapskontoForretningsverdiNegativSaldo-datadef-1743">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4 Negativ saldo oppstått i 2005 i saldogruppe b forretningsverdi  (goodwill)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres negativ saldo oppstått i inntektsåret på saldogruppe b.  Dette gjelder ved realisasjon av både ervervet og opparbeidet  forretningsverdi.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>4 Negativ saldo oppstått i 2005 i saldogruppe b forretningsverdi  (goodwill)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein negativ saldo oppstått i inntektsåret på saldogruppe b.  Dette gjeld ved realisasjon av både tileigna og opparbeidd  forretningsverdi.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GevinstMvSomSkalTilleggesGevinstOgTapskontoForFjoraret-grp-1576/GevinstTapskontoBuskapRealisasjonGevinst-datadef-1744">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5 Gevinst ved realisasjon av hel buskap på gårdsbruk ved opphør av  driftsgren</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Gevinst oppstått ved realisasjon av samtlige dyr som er knyttet  direkte til en driftsgren, f.eks. melkekyr ved opphør av  melkeproduksjon, kan overføres gevinst- og tapskonto. Forutsetningen  er at skattyter fortsetter
+                            jordbruksnæringen. Skattyter kan om han  ønsker det føre gevinsten som vanlig driftsinntekt i året.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>5 Gevinst ved realisasjon av heil buskap på gardsbruk når ein sluttar  med ei driftsgrein</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Gevinst oppstått ved realisasjon av alle dyra som er knytta direkte  til ei driftsgrein, t.d. mjølkekyr når ein sluttar med  mjølkeproduksjon, kan overførast gevinst- og tapskonto. Det er ein  føresetnad at skattytar sjølv
+                            held fram med jordbruksnæringa.  Skattytar kan, om han vil det, føre gevinsten direkte som  driftsinntekt i realisasjonsåret.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GevinstMvSomSkalTilleggesGevinstOgTapskontoForFjoraret-grp-1576/AvsetningerAndreBetingetSkattefrie-datadef-14844">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>6 Andre betinget skattefrie avsetninger som skal føres på gevinst- og  tapskonto</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres 80% av gevinst ved realisasjon av avskrivbare driftsmidler  avsatt etter den tidligere skatteloven § 45 åttende ledd i 2004 og  som ikke er reinvestert i samsvar med reglene innen utgangen av  inntektsåret 2005.
+                            Resterende 20% av ikke reinvestert gevinst  inntektsføres direkte i 2005 i samsvar med skatteloven § 14-44 (4)</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>6 Andre vilkårsbundne skattefrie avsetjingar som skal førast på  gevinst- og tapskonto</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her førar ein 80% av gevinst sett av i 2004 etter den tidlegare  skattelova § 45 åttande ledd på driftsmiddel som kan avskrivast når  gevinsten ikkje er reinvestert i samsvar med reglane innan utgangen  av inntektsåret
+                            2005. Resterande 20% av gevinst som ikkje er  reinvestert, skal førast direkte til inntekt i 2005 i samsvar med  skattelova § 14-44 (4).</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GevinstMvSomSkalTilleggesGevinstOgTapskontoForFjoraret-grp-1576/GevinstTapskontoGevinster-datadef-6899">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>7 Sum postene 2-6</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her summeres alle poster som skal tillegges gevinst- og tapskontoen i  2005.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>7 Sum postane 2-6</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her skal ein summere alle postane som skal leggjast til gevinst- og  tapskontoen i 2005.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GevinstMvSomSkalTilleggesGevinstOgTapskontoForFjoraret-grp-1576/GevinstTapskontoSaldoForTap-datadef-6900">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>8 Sum post 1 + post 7</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>I denne posten skal beløpet i post 7 legges til saldoen pr. 31.12.04 i  post 1.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>8 Sum post 1 + post 7</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>I denne posten skal beløpet i post 8 leggjast til saldoen pr. 31.12.04  i post 1.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/TapMvSomSkalFradrasPaGevinstOgTapskontoForFjoraret-grp-1578">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Tap</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Tap</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/TapMvSomSkalFradrasPaGevinstOgTapskontoForFjoraret-grp-1578/GevinstTapskontoDriftsmidlerIkkeAvskrivbareTap-datadef-1745">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>9 Årets tap ved realisasjon/uttak av driftsmidler som ikke kan  avskrives etter reglene i skatteloven § 14-40 flg.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres tap ved realisasjon av ikke-avskrivbare driftsmidler. For  øvrig vises det til rettledningens  post 2.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>9 Tap i året ved realisasjon av driftsmiddel som ikkje kan avskrivast  etter reglane i skattelova § 14-40 flg.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein tap ved realisasjon av driftsmiddel som ikkje kan  avskrivast etter reglane i skattelova § 14-40 flg. Ein viser elles  til rettleiinga til post 2.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/TapMvSomSkalFradrasPaGevinstOgTapskontoForFjoraret-grp-1578/GevinstTapskontoDriftsmidlerRealisasjonTap-datadef-6901">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>10 Årets tap ved realisasjon/uttak av driftsmidler i saldogruppe e-i</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Tap ved realisasjon av driftsmidler i saldogruppene e-i skal føres  her. Det er ikke adgang til å føre tapet direkte til fradrag i  realisasjonsåret. For øvrig vises det til rettledningens post 3.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Jf. avskrivingsskjema post 109</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>10 Tap i året ved realisasjon av driftsmiddel i saldogruppe e-i</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Tap ved realisasjon av driftsmiddel i saldogruppene e-i skal førast  her. Det er ikkje høve til å føre tapet direkte til frådrag i  realisasjonsåret. Ein viser elles til rettleiinga til  post 3.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Jf. avskrivingsskjema post 109</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/TapMvSomSkalFradrasPaGevinstOgTapskontoForFjoraret-grp-1578/GevinstTapskontoRealisertEiendelVerdiDifferanse-datadef-1746">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>11 Differanse mellom deltakers andel av oppregulert verdi og bokført  skattemessig verdi pr. 31.12.91 på realisert eiendel i deltakerliknet  selskap</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Deltaker som ved overgangen til nettoligning har rett til  oppregulering av inngangsverdien på eiendel som tilhører selskapet,  kan på det tidspunkt selskapet realiserer eiendelen kreve fradrag for  differansen mellom sin
+                            andel av den oppregulerte inngangsverdi og sin  skattemessig bokførte verdi på eiendelen pr. 31. desember 1991.  Fradraget gis ikke direkte i realisasjonsåret, men ved at beløpet  føres på deltakerens gevinst- og tapskonto.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>11 Differanse mellom ein deltakar sin del av oppregulert verdi og  bokført skattemessig verdi pr. 31.12.91 på eigedel som eit  deltakarlikna selskap har realisert</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Deltakar som ved overgangen til nettolikning har rett til  oppregulering av inngangsverdien på eigedel som høyrer til selskapet,  kan på det tidspunktet selskapet realiserer eigedelen krevje frådrag  for differansen mellom
+                            sin del av den oppregulerte inngangsverdi og  sin skattemessig bokførte verdi på eigedelen pr. 31. desember 1991.  Frådraget blir ikkje gitt direkte i realisasjonsåret, men ved at  deltakaren fører beløpet på sin vinst- og tapskonto.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/TapMvSomSkalFradrasPaGevinstOgTapskontoForFjoraret-grp-1578/GevinstTapskontoDeltakerlignetSelskapRealisertEiendelAndel-datadef-1747">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>12 Deltakers andel av gevinst vedr. realisasjon av eiendel fra  deltakerliknet selskap når deltaker oppfyller betingelsene for  skattefrihet etter sktl. § 9-3 (2-6)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom et deltakerlignet selskap realiserer en eiendel med gevinst  hvor en deltaker etter overgangsreglene oppfyller kravene til  skattefritak etter skatteloven § 9-3 (2-6), kan deltakeren kreve  fradrag for den del av
+                            gevinsten som faller på hans andel av  resultatet i selskapet. Fradraget gis ved at beløpet overføres til  deltakerens egen gevinst- og tapskonto.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>12 Deltakars del av gevinst vedk. realisasjon av eigedel frå  deltakarlikna selskap når deltakaren oppfyller vilkåra for  skattefritak etter sktl. § 9-3 (2-6)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dersom eit deltakarlikna selskap realiserer ein eigedel med vinst og  ein deltakar etter overgangsreglane oppfyller krava til skattefritak  etter skattelova § 9-3 (2-6), kan deltakaren krevje frådrag for den  del av vinsten
+                            som fell på hans del av resultatet i selskapet.  Frådraget blir gitt ved at beløpet blir overført til deltakaren sin  eigen vinst- og tapskonto.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/TapMvSomSkalFradrasPaGevinstOgTapskontoForFjoraret-grp-1578/GevinstTapskontoTap-datadef-6902">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>13 Sum postene 9-12</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her summeres alle poster som skal fradras gevinst- og tapskontoen før  en kommer fram til grunnlaget for inntekts- eller fradragsføring.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>13 Sum postane 9-12</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her skal ein summere alle postane som skal trekkjast frå på gevinst-  og tapskontoen før ein kjem fram til grunnlaget for inntekts- eller  frådragsføring.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/GrunnlagOgSaldo-grp-2862">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Grunnlag og saldo</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Grunnlag og saldo</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/GrunnlagOgSaldo-grp-2862/GevinstTapskontoInntektFradragGrunnlag-datadef-6903">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>14 Grunnlag for årets inntekts-/fradragsføring</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres beløpet i post 8 fratrukket beløpet i post 13. Differansen  utgjør grunnlaget for årets inntekts- eller fradragsføring på  gevinst- og tapskonto.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Post 8 - post 13</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>14 Grunnlag for inntekts-/frådragsføring i året</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein beløpet i post 8 fråtrekt beløpet i post 13. Differansen  utgjer grunnlaget for den inntekts- eller frådragsføring som skal  gjerast for 2005.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Post 8 - post 13</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GrunnlagOgSaldo-grp-2862/GevinstTapskontoInntektArets-datadef-6904">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>15a Minimum 20% til inntekt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom grunnlaget i post 14 er positivt skal saldoen reduseres med  minst 20% (inntektsføres). Dersom grunnlaget i post 14  er positivt  med et beløp som er mindre enn kr 15.000, skal beløpet inntektsføres  i sin helhet.  </p>
+                        <p>Ved dødsfall i året må positiv saldo på gevinst- og tapskonto tas til  inntekt i dødsåret. Negativ saldo må føres til fradrag i dødsåret.  Dette gjelder imidlertid ikke så langt gjenlevende ektefelle i  uskifte eller
+                            enearving overtar boet udelt, og trer inn i avdødes  rettigheter og plikter etter skatteloven § 14-40 flg. Ved opphør av  skatteplikten til Norge skal realiserte gevinster, hvor  inntektsføring er utsatt etter
+                            bestemmelsene om gevinst- og  tapskonto, tas til inntekt det året skatteplikten opphører.  Tilsvarende kan tap som ennå ikke er kommet til fradrag  fradragsføres.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Eventuelt restbeløp under kr 15 000 til inntekt.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>15a Minimum 20% til inntekt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dersom grunnlaget i post 14 er positivt skal saldoen reduserast med  minst 20% (inntektsføring). Dersom grunnlaget i post 14  er positivt  med eit beløp som er mindre enn kr 15 000, skal beløpet  inntektsførast fullt ut.  </p>
+                        <p>Ved dødsfall i året må positiv saldo på gevinst- og tapskontoen førast  som inntekt i dødsåret. Negativ saldo må førast til frådrag i  dødsåret. Dette gjelder likevel ikkje så lenge gjenlevande ektefelle  i uskifte eller
+                            einearving tek over buet udelt, og trer inn i rettar  og plikter etter skattelova § 14-40 flg. Ved opphør av skatteplikt  til Noreg skal realiserte gevinstar, der inntektsføringa er utsett  etter reglane om gevinst- og
+                            tapskonto, takast til inntekt det året  skatteplikta opphøyrer. Tilsvarande kan ein trekkje frå tap som enno  ikkje har kome til frådrag.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Eventuelt restbeløp under kr 15 000 til inntekt</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GrunnlagOgSaldo-grp-2862/GevinstTapskontoFradragArets-datadef-21982">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>15b Maksimum 20% til fradrag</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Er grunnlaget i post 14 negativt, kan saldoen reduseres med inntil 20%  (utgiftsføres). Dersom grunnlaget i post 14 er negativt med et beløp  som er mindre enn kr 15.000, kan imidlertid beløpet utgiftsføres i  sin helhet.  </p>
+                        <p>Ved dødsfall i året må positiv saldo på gevinst- og tapskonto tas til  inntekt i dødsåret. Negativ saldo må føres til fradrag i dødsåret.  Dette gjelder imidlertid ikke så langt gjenlevende ektefelle i  uskifte eller
+                            enearving overtar boet udelt, og trer inn i avdødes  rettigheter og plikter etter skatteloven § 14-40 flg. Ved opphør av  skatteplikten til Norge skal realiserte gevinster, hvor  inntektsføring er utsatt etter
+                            bestemmelsene om gevinst- og  tapskonto, tas til inntekt det året skatteplikten opphører.  Tilsvarende kan tap som ennå ikke er kommet til fradrag  fradragsføres.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Eventuelt restbeløp under kr 15 000 til fradrag</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>15b Maksimum 20% til frådrag</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dersom grunnlaget i post 14 er positivt skal saldoen reduserast med  minst 20% (inntektsføring). Er grunnlaget i post 14 negativt, kan  saldoen bli redusert med inntil 20% (frådragsføring). Dersom  grunnlaget i post 14 er
+                            negativt med eit beløp som er mindre enn kr  15 000, kan likevel beløpet trekkjast frå fullt ut. Dersom grunnlaget  i post 14  er positivt med eit beløp som er mindre enn kr 15 000,  skal beløpet inntektsførast fullt ut.  </p>
+                        <p>Ved dødsfall i året må positiv saldo på gevinst- og tapskontoen førast  som inntekt i dødsåret. Negativ saldo må førast til frådrag i  dødsåret. Dette gjelder likevel ikkje så lenge gjenlevande ektefelle  i uskifte eller
+                            einearving tek over buet udelt, og trer inn i rettar  og plikter etter skattelova § 14-40 flg. Ved opphør av skatteplikt  til Noreg skal realiserte gevinstar, der inntektsføringa er utsett  etter reglane om gevinst- og
+                            tapskonto, takast til inntekt det året  skatteplikta opphøyrer. Tilsvarande kan ein trekkje frå tap som enno  ikkje har kome til frådrag.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Eventuelt restbeløp under kr 15 000 til frådrag</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GrunnlagOgSaldo-grp-2862/GevinstTapskontoNaringSaldo-datadef-7963">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>16 Saldo gevinst- og tapskonto 31.12.2005</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>For å se hvordan post 16 beregnes se hjelpetekst under post 15a eller  15 b.  </p>
+                        <p/>
+                        <p>Beløpet i denne posten skal overføres til kolonne II i post 51 i  skjemaet Spesifikasjon av forskjeller mellom regnskapsmessige og  skattemessige verdier (RF-1217). Skattytere som skal levere  Næringsoppgave 1 overfører
+                            beløpet til post 2096 i næringsoppgaven  hvis det er positivt eller post 1299 hvis det er negativt.  </p>
+                        <p>Skattytere som ikke er pliktige til å levere næringsoppgave, skal føre  inntekts-/fradragsføringen fra post 15 direkte i selvangivelsen under  post 5.0 Tilleggsopplysninger med henvisning til post 3.1.8/3.3.7.  Dette skjema
+                            legges ved.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Overføres til post 51 i kolonne II i skjema for Spesifikasjon av  forskjeller... (RF-1217) eller side 3 i Næringsoppgave 1</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>16 Saldo gevinst- og tapskonto 31.12.2005</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>For å sjå korleis post 16 bereknes sjå hjelpetekst under post 15a  eller 15 b.  </p>
+                        <p/>
+                        <p>Beløpet i denne posten skal overførast til kolonne II i post 51 i  skjemaet Spesifikasjon av skilnader mellom rekneskapsmessige og  skattemessige verdiar (RF-1217). Skattytarar som skal levere  Næringsoppgåve 1 førar
+                            beløpet i post 2096 i næringsoppgåva dersom  det er eit positivt tal eller post 1299 dersom det er negativt.  </p>
+                        <p>Skattytarar som ikkje er pliktige til å levere næringsoppgåve, skal  føre  </p>
+                        <p>inntekts-/frådragsføringa frå post 15 direkte i sjølvmeldinga post 5.0  Tilleggsopplysningar og vise til post 3.1.8/3.3.7. Skjemaet skal  leggjast ved.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Skal overførast til post 51 i kolonne II i skjema for Spesifikasjon av  skilnader... (RF-1217) eller side 3 i Næringsoppgåve 1</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/GrunnlagOgSaldo-grp-2862/GevinstTapskontoNaringSaldoOverfortSelvangivelse-datadef-23633">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>17 Er beløpet i post 15a/15b overført direkte til selvangivelsen, og  ikke via næringsoppgaven?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>17 Er beløpet i post 15a/15b overført direkte til sjølvmeldinga, og  ikkje via næringsoppgåva?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

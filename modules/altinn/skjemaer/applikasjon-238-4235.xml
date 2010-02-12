@@ -1,0 +1,2414 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1215: Selskapsoppgave for ansvarlige selskap mv</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-238-4236.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-819/Selskap-grp-2161/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-819/Selskap-grp-2161/EnhetAdresse-datadef-15"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-819/Selskap-grp-2161/EnhetPostnummer-datadef-6673" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-819/Selskap-grp-2161/EnhetPoststed-datadef-6674" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-819/Selskap-grp-2161/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind ref="/Skjema/OvrigeOpplysninger-grp-2177/EnhetFormueVirksomhetFlereKommuner-datadef-17171" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1215 Selskapsoppgave for ansvarlige selskap mv. 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Skjemaet skal benyttes av ansvarlige selskaper med solidarisk og/eller  proratarisk (delt) ansvar og indre selskaper. Dersom selskapet har  stille deltakere eller noen deltakere på annen måte har  beløpsbegrenset ansvar, må
+                    selskapsoppgave for kommandittselskaper  mv. benyttes. Skjemaet skal også benyttes av sameier hvor en felles  utnyttelse av sameietingen er rettet mot andre enn sameierne og denne  bruk ikke er uvesentlig i forhold til sameiernes
+                    egen bruk, jf.  skatteloven § 10-40. Dette vil typisk gjelde der hele eller  vesentlige deler av sameiegjenstanden leies ut. Skjemaet skal ikke  benyttes av ansvarlige selskaper som i sin helhet er eiet av  ektefeller (behandles
+                    skattemessig som enpersonforetak), med mindre  ektefellene lignes atskilt.  </p>
+                <p/>
+                <p>Alle selskaper skal fylle ut IV Fordeling av formue ved skjev  egenkapital og beregning av andel av skattemessig egenkapital per  01.01.2006 i selskapsoppgaven. Se rettledningen til IV.  </p>
+                <p>Selskapet skal levere selskapsoppgaven til ligningskontoret i  selskapets hovedkontorkommune.  </p>
+                <p>Selskaper som leverer selskapsoppgaven på papir, må levere den innen  utgangen av mars i året etter inntektsåret. Selskaper som leverer  selskapsoppgaven elektronisk, må levere den innen utgangen av mai i  året etter inntektsåret.
+                    Har selskapet ikke hovedkontor skal  oppgaven  </p>
+                <p>sendes til likningskontoret i den kommune der flertallet av deltakerne  bor.  </p>
+                <p/>
+                <p>Næringsoppgave 1 for næringsdrivende med begrenset regnskapsplikt  eller Næringsoppgave 2 for aksjeselskap og andre foretak som  utarbeider årsregnskap etter regnskapsloven skal vedlegges  selskapsoppgaven, sammen med eventuelle
+                    andre nødvendige bilag som  f.eks. skjema for beregning av personinntekt, saldoskjema mv.  Selskapet skal som vedlegg til selskapsoppgaven levere Selskapets  oppgave over deltakerens formue og inntekt i ansvarlig selskap mv,
+                    RF-1233.  RF-1233 er den ene av to deltakeroppgaver.  Den andre  deltakeroppgaven - Deltagerens oppgave over egen formue og inntekt i  ansvarlige selskapet m.v., RF-1221 skal selskapet delvis fylle ut.  Den delvis utfylte oppgaven
+                    skal sendes hver enkelt deltager slik at  han kan fylle ut resten, og levere oppgaven sammen med  selvangivelsen.  </p>
+                <p>Selskap som driver med skogbruk skal som vedlegg til selskapsoppgaven  levere Tilleggsskjema for beregning av deltakerens inntekt i  ansvarlige selskaper mv. i skogbruk, RF-1220.  Se rettledning til  post 201 og rettledning i
+                    RF-1220.  </p>
+                <p>NB:Selskapet har plikt til å sende deltakeroppgave også for deltaker  som realiserte andelen sin i begynnelsen av 2005 selv om deltakeren  ikke skal tilordnes noe av årets over-/underskudd på andelen.  Selskapet må være deltakeren
+                    behjelpelig med utfylling av del II i  deltakeroppgaven.  </p>
+                <p>Selskapet er ansvarlig for utfylling og innlevering av selskapsoppgave  mv., og denne skal underskrives av selskapets styre eller daglig  leder.  Har ikke selskapet styre eller daglig leder, underskrives  selskapsoppgaven av en
+                    utpekt representant blant deltakerne, jf.  Ligningsloven § 4-9 nr 4.  </p>
+                <p/>
+                <p>Selskapet skal levere selskapsoppgaven til likningskontoret i  selskapets hovedkontorkommune.  Selskaper som leverer  selskapsoppgaven på papir, må levere den innen utgangen av mars i  året etter inntektsåret.  Selskaper som
+                    leverer selskapsoppgaven  elektronisk, må levere den innen utgangen av mai i året etter  inntektsåret.  Har selskapet ikke hovedkontor skal oppgaven sendes  til likningskontoret i den kommune der flertallet av deltakerne bor.
+                    Selskap som liknes ved Sentralskattekontoret for storbedrifter, skal  sende selskapsoppgave m/vedlegg dit.  </p>
+                <p>Likningen av selskapet vil skje i kontorkommunen, og eventuell klage  fra selskapet skal rettes til og behandles ved dette  likningskontor.  </p>
+                <p/>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28.november 1994, jf. likningsloven § 4-3 nr.  2,  </p>
+                <p>jf. 4-9 nr. 2.  </p>
+                <p/>
+                <p>Det vises til rettledning for utfylling av selskapsoppgave for  ansvarlige selskap (RF-1216).</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Grå felter i skjemaet beregnes på bakgrunn av inntastede verdier i  andre felter i dette skjemaet.  Det blir ikke overført verdier fra  andre skjema til dette skjema. Du må selv overføre verdier mellom  vedleggsskjema, og fra
+                    vedleggsskjema til selskapsoppgaven</p>
+            </xforms:hint>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1215 Selskapsoppgåve for ansvarlege selskap m.m. 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Skjemaet skal nyttast av ansvarlege selskap med solidarisk og/eller  proratarisk (delt) ansvar og indre selskap. Dersom selskapet har  stille deltakarar eller nokre deltakarar på annan måte har avgrensa  økonomisk ansvar, må
+                    selskapsoppgåva for kommandittselskap m.m.  nyttast. Skjemaet skal også nyttast av sameigarar der ei felles  utnytting av sameigetingen er retta mot andre enn sameigarane, og  denne bruken ikkje er uvesentleg i forhold til
+                    sameigarane sin eigen  bruk, jf. skattelova § 10-40. Dette vil typisk gjelde der heile eller  vesentlege delar av sameigetingen blir leigd ut. Skjemaet skal ikkje  nyttast av selskap som er fullt ut eigd av ektefeller (skal
+                    handsamast som einmannsforetak), med mindre ektefellene vert likna  atskilt.  </p>
+                <p/>
+                <p>Næringsoppgåve 1 for næringsdrivende med avgrensa rekneskapsplikt  eller Næringsoppgave 2 for aksjeselskap og andre føretak som  utarbeider årsrekneskap etter rekneskapslova skal leggjast ved  selskapsoppgåva, saman med eventuelle
+                    andre nødvendige bilag som t.d.  skjema for utrekning av personinntekt, saldoskjema o.a.  </p>
+                <p>Selskapet skal som vedlegg til selskapsoppgåva levere Selskapet si  oppgåve over formue og inntekt til deltakar i ansvarlege selskap,  (RF-1233) for alle deltakarane. RF-1233 er den eine av to  deltakaroppgåver.  Den andre
+                    deltakaroppgåva - Deltakaren si oppgåver  over eiga formue og inntekt i ansvarlege selskap, RF-1221 skal  selskapet delvis fylle ut.  Den delvis utfylte oppgåva skal sendast  til kvar enkelt deltakar, slik at han kan fylle ut
+                    resten, og levere  den saman med sjølvmeldinga.  </p>
+                <p>NB: Selskapet har plikt til å sende deltakaroppgåve også for deltakar  som har realisert sin del i byrjinga av 2005, sjølv om deltakaren  ikkje skal tildelast noko av overskotet/underskotet det året.  Selskapet må i den samanhengen
+                    hjelpe deltakaren med å fylle ut del  II i deltakaroppgåva.  Selskap som driv med skogbruk skal som vedlegg  til selskapsoppgåven levere Tilleggsskjema for berekning av  deltakaren si inntekt i ansvarlege selskap mv. i skogbruk,
+                    RF-1220.  Sjå rettleiing til post 201 nedanfor, og rettleiinga i RF-1220.  Selskapet er ansvarleg for utfylling og innlevering av  selskapsoppgåve m.m., og styret eller dagleg leiar i selskapet skal  skrive under.  Har ikkje
+                    selskapet styre eller dagleg leiar, skal ein  oppnemnd representant mellom deltakarane skrive under, jf.  likningslova § 4-9 nr 4. Selskapet skal levere selskapsoppgåva til  ligningskontoret i hovedkontorkommunen. Har ikkje
+                    selskapet  hovudkontor, skal oppgåva sendast til likningskontoret i den kommunen  der fleirtalet av deltakarane bur.  </p>
+                <p/>
+                <p>Selskap som leverer selskapsoppgåva på papir, må levere den innan  utgangen av mars i året etter inntektsåret. Selskap som leverer  selskapsoppgåva elektronisk, må levere den innan utgangen av mai i  året etter inntektsåret.  </p>
+                <p/>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28.november 1994, jf. likningsloven § 4-3 nr.  2,  </p>
+                <p>jf. 4-9 nr. 2.  </p>
+                <p/>
+                <p>Det vises til rettledning for utfylling av selskapsoppgave for  ansvarlige selskap (RF-1216).</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NON">
+                <p>Grå felt i skjemaet bereknes med bakgrunn i inntastede verdiar i andre  felt i skjemaet.  Det blir ikkje overført verdiar frå andre skjema  til dette skjema. Ein må sjølv overføre verdiar mellom  vedleggsskjema, og frå
+                    vedleggsskjema til selskapsoppgåva</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-819">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-819/Selskap-grp-2161">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Selskap</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Selskap</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-819/Selskap-grp-2161/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-819/Selskap-grp-2161/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Nærings-(kontor)adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Nærings-(kontor)adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-819/Selskap-grp-2161/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-819/Selskap-grp-2161/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-819/Selskap-grp-2161/EnhetTelefonnummer-datadef-755">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefon</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Telefon</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-819/Selskap-grp-2161/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-819/Selskap-grp-2161/EnhetKommune-datadef-29">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kontorkommune (navn)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p/>
+                            <p>Kontorkommune (namn)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-819/Selskap-grp-2161/EnhetSkattekommune-datadef-2888">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Skattekommune(r)  </p>
+                            <p/>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p/>
+                            <p>Skattekommuna(r)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-819/Selskap-grp-2161/EnhetOrganisasjonsform-datadef-756">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Selskapsform</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Selskapsform</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-819/Selskap-grp-2161/DeltakereAntall-datadef-1022">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall deltakere</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p/>
+                            <p>Tal deltakarar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-819/Selskap-grp-2161/KonsernspissNorskOrganisasjonsnummer-datadef-19851">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Oppgi organisasjonsnummeret til evt. norsk konsernspiss</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Vedr. opplysning om organisasjonsnummeret til evt. norsk  konsernspiss  </p>
+                            <p>Med norsk menes selskap skattepliktig til Norge. Med konsernspiss  menes øverste/første morsselskap i en uavbrutt rekke som direkte  eller indirekte representerer flertallet av stemmene i de  underliggende selskap etter
+                                definisjonen i selskapsloven § 1-2 (2).</p>
+                        </xforms:help>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsummer</p>
+                        </xforms:alert>
+                        <xforms:help brreg:lang="NON">
+                            <p>Om opplysning om  organisasjonsnummer til evt. norsk konsernspiss  </p>
+                            <p>Med norsk meiner ein selskap skattepliktig til Norge. Med konsernspiss  meiner ein øvste/første morsselskap i ei uavbrutt rekke som direkte  eller indirekte representerer fleirtallet av stemmene i de  underliggande
+                                selskapa etter definisjonen i selskapslova § 1-2 (2).</p>
+                        </xforms:help>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-819/Selskap-grp-2161/EnhetSignaturNavn-datadef-13943">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn på den som signerer oppgaven</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn på den som signerer oppgaven</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-819/Selskap-grp-2161/EnhetKommunenummerDLS-datadef-18070">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommunenr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kommunenr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-819/Regnskapsforer-grp-66">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Regnskapsfører</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Rekneskapsfører</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-819/Regnskapsforer-grp-66/RegnskapsforerNavn-datadef-280">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn  </p>
+                            <p/>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p/>
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-819/Regnskapsforer-grp-66/RegnskapsforerAdresse-datadef-281">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse  </p>
+                            <p/>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p/>
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-819/Regnskapsforer-grp-66/RegnskapsforerPostnummer-datadef-6678">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-819/Regnskapsforer-grp-66/RegnskapsforerPoststed-datadef-6679">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/DeltakereISelskapetSameiet-grp-3503">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Deltakere i selskapet/sameiet</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Deltakarar i selskapet/sameiget</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_DeltakereISelskapetSameiet-grp-2162" nodeset="/Skjema/DeltakereISelskapetSameiet-grp-3503/DeltakereISelskapetSameiet-grp-2162">
+                    <xforms:group ref="/Skjema/DeltakereISelskapetSameiet-grp-3503/DeltakereISelskapetSameiet-grp-2162">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:input ref="/Skjema/DeltakereISelskapetSameiet-grp-3503/DeltakereISelskapetSameiet-grp-2162/DeltakerFodselsnummer-datadef-3647">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fødselsnr.  </p>
+                                <p/>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p/>
+                                <p>Fødselsnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DeltakereISelskapetSameiet-grp-3503/DeltakereISelskapetSameiet-grp-2162/DeltakerOrganisasjonsnummer-datadef-3648">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Organisasjonsnr.  </p>
+                                <p/>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p/>
+                                <p>Organisasjonsnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DeltakereISelskapetSameiet-grp-3503/DeltakereISelskapetSameiet-grp-2162/DeltakerNavn-datadef-1025">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Navn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Namn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DeltakereISelskapetSameiet-grp-3503/DeltakereISelskapetSameiet-grp-2162/DeltakerKommuneSpesifisertKommune-datadef-13804">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bosteds-/hovedkontorkommune</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Bustsads-/hovedkontorkommune</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DeltakereISelskapetSameiet-grp-3503/DeltakereISelskapetSameiet-grp-2162/DeltakerEierandelFjoraretSpesifisertDeltaker-datadef-17172">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter number with three fraction digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Andel i % pr. 31.12.2004</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Tall oppgis i tre desimaler</p>
+                            </xforms:hint>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever tre desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Andel i % pr. 31.12.20004</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Talet må gjevast opp med tre desimalar</p>
+                            </xforms:hint>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev tre desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DeltakereISelskapetSameiet-grp-3503/DeltakereISelskapetSameiet-grp-2162/DeltakerEierandelSpesifisertDeltaker-datadef-7948">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter number with three fraction digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Andel i % pr. 31.12.2005</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Tall oppgis i tre desimaler</p>
+                            </xforms:hint>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever tre desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Andel i % pr. 31.12.2005</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Talet må gjevast opp med tre desimalar</p>
+                            </xforms:hint>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev tre desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/DeltakereISelskapetSameiet-grp-3503/DeltakereISelskapetSameiet-grp-2162/AksjonarDeltakerLikningSkatteloven810Spesifisert-datadef-22070">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>Ja</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Yes</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Nei</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>No</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Krever likning etter sktl. §8-10 flg.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Krev likning etter sktl. §8-10 flg.</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:group ref="/Skjema/DeltakereISelskapetSameiet-grp-3503/DeltakereISelskapetSameiet-grp-2162/Endringer-grp-3884">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Har det skjedd endringer i eierandelen i 2005?</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Sett x under korrekt(e) alternativ(er).</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Har det skjedd endringar i eigardelen i 2005?</p>
+                            </xforms:caption>
+                            <xforms:selectOne ref="/Skjema/DeltakereISelskapetSameiet-grp-3503/DeltakereISelskapetSameiet-grp-2162/Endringer-grp-3884/AndelErvervetSpesifisertDeltaker-datadef-14366">
+                                <xforms:choices>
+                                    <xforms:item>
+                                        <xforms:value>Ja</xforms:value>
+                                        <xforms:caption brreg:lang="EN">
+                                            <p>Yes</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Ja</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Ja</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>Nei</xforms:value>
+                                        <xforms:caption brreg:lang="EN">
+                                            <p>No</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Nei</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Nei</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                </xforms:choices>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Andel ervervet etter 01.01.2005</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Andel ervervet etter 01.01.2005</p>
+                                </xforms:caption>
+                            </xforms:selectOne>
+                            <xforms:selectOne ref="/Skjema/DeltakereISelskapetSameiet-grp-3503/DeltakereISelskapetSameiet-grp-2162/Endringer-grp-3884/AndelRealisertSpesifisertDeltaker-datadef-14365">
+                                <xforms:choices>
+                                    <xforms:item>
+                                        <xforms:value>Ja</xforms:value>
+                                        <xforms:caption brreg:lang="EN">
+                                            <p>Yes</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Ja</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Ja</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>Nei</xforms:value>
+                                        <xforms:caption brreg:lang="EN">
+                                            <p>No</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Nei</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Nei</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                </xforms:choices>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Andel realisert i 2005</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Andel realisert i 2005</p>
+                                </xforms:caption>
+                            </xforms:selectOne>
+                        </xforms:group>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:group ref="/Skjema/DeltakereISelskapetSameiet-grp-3503/SumEierandeler-grp-4257">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum eierandeler</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum eierandeler</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/DeltakereISelskapetSameiet-grp-3503/SumEierandeler-grp-4257/DetakereEierandelerFjoraretKontrollsum-datadef-19958">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Enter number with three fraction digits</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter number with three fraction digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Andel i % pr. 31.12.2004</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>tall oppgis i tre desimaler</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever tre desimaler</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Andel i % pr. 31.12.2004</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev tre desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/DeltakereISelskapetSameiet-grp-3503/SumEierandeler-grp-4257/DeltakereEierandelerKontrollsum-datadef-19959">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter number with three fraction digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Andel i % pr. 31.12.2005</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>tall oppgis i tre desimaler</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever tre desimaler</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Andel i % pr. 31.12.2005</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev tre desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Formuesstilling-grp-2163">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>I Formuesstilling</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>I Formuesstilling</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>I Skattemessig verdi</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>I kolonne I (skattemessig verdi) på side to i selskapsoppgaven skal  det gis en oppstilling av eiendelenes saldoverdier, andre  skattemessige posisjoner og skattemessig gjeld ved utgangen av  inntektsåret (dvs. etter
+                            avskrivninger og andre  årsoppgjørsdisposisjoner).  </p>
+                        <p>NB: Oppstillingen her vil danne grunnlaget for gevinst-/  tapsberegningen og over-/underprisberegningen ved overdragelse av  andeler i selskapet. Selskapet må, dersom deltakere realiserer  andeler, gi dem opplysninger om de
+                            skattemessige verdier/- gjeld som  skal legges til grunn.  </p>
+                        <p/>
+                        <p>Skattemessig verdi bør ikke fylles ut dersom samtlige deltakere i  selskapet krever likning etter de særskilte beskatningsreglene i  skatteloven § 8-10.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>I Skattemessig verdi</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>I kolonne I (skattemessig verdi) på side to i selskapsoppgåva skal ein  gje ei oppstilling av selskapet sine saldoverdiar, andre  skattemessige posisjonar og skattemessig gjeld ved slutten av  inntektsåret (dvs. etter
+                            avskrivningar og andre  årsoppgjersdisposisjonar).  </p>
+                        <p>NB: Oppstillinga her vil danne grunnlaget for vinst-/ tapsutrekninga  og utrekninga av over-/underpris ved overdraging av delar i dette  selskapet. Selskapet må hjelpe deltakarane med å rekne ut kva for  skattemessige
+                            verdiar/-gjeld dei skal leggje til grunn.  </p>
+                        <p/>
+                        <p>Skattemessig verdi bør ikkje fyllast ut dersom alle deltakarar i  selskapet krev likning etter dei særskilde skattleggingsreglane for  reiarlag i skattelova § 8-10.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680/KontormaskinerMvSkattemessigVerdi-datadef-1030">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>101 Kontormaskiner o.l.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Post 101-110  </p>
+                            <p>Som skattemessig verdi (kolonne I) føres saldoverdien (etter årets  avskrivninger). Negativ saldo i avskrivningsgruppe a, c og d føres  opp i kolonne I med sin negative størrelse. Negativ saldo på ervervet
+                                forretningsverdi (avskrivningsgruppe b) skal føres på gevinst- og  tapskonto. Tom positiv saldo i avskrivningsgruppe a-d medtas med  saldobeløp. Likningsmessig formuesverdi (kolonne II) på disse  driftsmidler
+                                fastsettes til den skattemessige saldoverdien av  driftsmidlene, jf. Skattedirektoratets takseringsregler § 2-1-2.  Dersom saldo for driftsmidler er negativ, settes likningsmessig  formuesverdi til null.
+                                Forretningsverdi er ikke skattepliktig formue.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>101 Kontormaskinar o.l.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Post 101-110  </p>
+                            <p>Som skattemessig verdi (kolonne I) set ein saldoverdien (etter  avskrivingar). Negativ saldo i avskrivingsgruppe a, c og d fører ein  opp i kolonne I med dei negative tala. Negativ saldo på tileigna  forretningsverdi
+                                (avskrivingsgruppe b) skal ein føre over på vinst-  og tapskontoen. Tom positiv saldo i avskrivingsgruppe a-d skal takast  med med saldobeløp i kolonne I. Likningsmessig formuesverdi (kolonne  II) på desse driftsmidla
+                                skal fastsetjast til den skattemessige  saldoverdien av driftsmidla, jf. Skattedirektoratet sine  takseringsreglar § 2-1-2. Dersom saldo for driftsmiddel er negativ,  set ein likningsmessig formuesverdi til null.
+                                Forretningsverdi er  ikkje skattepliktig formue.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680/ForretningsverdiErvervetSkattemessigVerdi-datadef-1032">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>102 Ervervet forretningsverdi</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>102 Tileigna forretningsverdi</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680/VogntogLastebilerVarebilerMvSkattemessigVerdi-datadef-1033">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>105 Vogntog, lastebiler, busser, varebiler, drosjebiler og kjøretøy  for transport av funksjonshemmede</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>105 Vogntog, lastebilar, bussar, varebilar, drosjebilar og køyretøy  for transport av funksjonshemma</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680/PersonbilerTraktorerMaskinerMvSkattemessigVerdi-datadef-1035">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>110 Personbiler, traktorer, rullende maskiner og materiell, maskiner,  redskap, instrumenter, inventar mv.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>110 Personbilar, traktorar, rullende maskinar og materiell, maskinar,  reiskap, instrumenter, inventar m.m.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680/SkipFartoyerRiggerMvSkattemessigVerdi-datadef-1037">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>115 Skip, fartøy, rigger mv.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Post 115-136  </p>
+                            <p>Skattemessig verdi settes til saldoverdi (etter årets ev.  avskrivninger). For forretningsbygg ervervet før 1.1.84 settes  skattemessig verdi til den delen av saldoen som kan avskrives, jf.  post 112 i saldoskjemaet.
+                                For ikke avskrivbare eiendeler er kostpris  med tillegg av eventuelle påkostninger skattemessig verdi.  </p>
+                            <p>Likningsmessig formuesverdi skal fastsettes etter skatteloven §§ 4-1  flg., og skal normalt tilsvare omsetningsverdi. Skattedirektoratet  har fastsatt egne takseringsregler for fastsettelse av likningsmessig
+                                formuesverdi for visse typer eiendeler. Til postene 121-136 skal det  i tillegg gis opplysning om i hvilken kommune driftsmiddelet er  hjemmehørende. Benytt ett felt pr. driftsmiddel. Dersom det er flere  enn to
+                                driftsmidler i den aktuelle kategori, spesifiseres disse på et  vedlegg.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>115 Skip, fartøy, riggar m.m.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Post 115-136  </p>
+                            <p>Skattemessig verdi er saldoverdi etter avskrivingar. For  forretningsbygg tileigna før 1.1.84 er skattemessig verdi det av  saldoen som kan avskrivast, jf. post 112 i saldoskjemaet. For  eigedelar som ikkje kan
+                                avskrivast, er det kostprisen med tillegg av  eventuelle påkostingar som er den skattemessige verdien.  </p>
+                            <p>Likningsmessig formuesverdi skal fastsetjast etter skattelova §§ 4-1  flg., og skal normalt tilsvare omsetningsverdi. Skattedirektoratet  har fastsett eigne takseringsreglar for fastsetjing av likningsmessig
+                                formuesverdi på visse typar eigedelar. Til postane 121-136 skal ein i  tillegg gi opplysingar om i kva for ein kommune driftsmidlet høyrer  heime. Benytt eitt felt pr. driftsmiddel. Dersom det er fleire enn to
+                                driftsmiddel i den aktuelle katagorien, må desse spesifiserast på eit  vedlegg.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680/FlyHelikopterSkattemessigVerdi-datadef-1039">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>120 Fly, helikopter</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>120 Fly, helikopter</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680/LagerbeholdningSkattemessig-datadef-115">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>140 Varebeholdning</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Skattemessig verdi av varelager fremgår av post 0170 i Næringsoppgave  1, og post 0150 i Næringsoppgave 2. Likningsmessig formuesverdi  settes lik den skattemessige verdi.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>140 Varelager</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Skattemessig verdi av varelager går fram av post 0170 i Næringsoppgåve  1, og post 0150 i Næringsoppgåve 2. Likningsmessig formuesverdi skal  setjast lik skattemessig verdi.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680/FordringerSkattemessig-datadef-287">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>145 Fordringer</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Skattemessig verdi av fordringer fremgår av Næringsoppgave 2 post  0450. Selskap som benytter Næringsoppgave 1 må selv summere de  aktuelle postene på side 3 i næringsoppgaven og overføre beløpet til  post 145. For
+                                langsiktige fordringer i utenlandsk valuta, se post 12  i RF-1218 (Rettledning til utfylling av skjemaet RF-1217  «Spesifikasjon av forskjeller mellom regnskapsmessige og  skattemessige verdier»), eller rettledningen
+                                til Næringsoppgave 1  post 1595/2275, Se forøvrig post 158.  </p>
+                            <p>Likningsmessig formuesverdi av sikre fordringer skal settes til  pålydende. Usikre fordringer reduseres skjønnsmessig ved  formuesansettelsen, selv om fordringen ikke kan nedskrives med  virkning for inntektslikningen.
+                                Verdien av utestående fordringer i  regnskapets balanse kan normalt benyttes som likningsmessig  formuesverdi.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>145 Krav</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Skattemessig verdi av krav går fram av post 0450 i Næringsoppgåve 2.  Selskap som nyttar Næringsoppgåve 1 må sjølv leggje saman dei  aktuelle postane på side 3 i næringsoppgåva og overføre beløpet til  post 145. For
+                                langsiktige krav i framand valuta, sjå post 12 i  RF-1218 (Rettleing til utfylling av skjemaet RF-1217 Spesifikasjon av  skilnader mellom rekneskapsmessige og skattemessige verdiar), eller  rettleiinga til
+                                Næringsoppgåve 1 post 1595/2275. Sjå post 158.  Likningsmessig formuesverdi av sikre krav skal setjast til pålydande.  Usikre krav skal reduserast etter skjønn ved fastsetjinga av formua,  sjølv om kravet ikkje kan
+                                skrivast ned med verknad for  inntektslikninga. Verdien av uteståande krav i rekneskapen sin  balanse kan normalt nyttast som likningsmessig formuesverdi.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680/BankinnskuddKontantbeholdningSkattemessigVerdi-datadef-1052">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>146 Bankinnskudd/kontantbeholdning</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>146 Bankinnskott/kontantbehaldning</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680/AksjerMvSkattemessigVerdi-datadef-1014">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>147 Aksjer med mer</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres aksjer, andel i verdipapirfond, grunnfondsbevis mv.  </p>
+                            <p>Aksjenes skattemessige verdier settes til kostpris medregnet ev.  RISK-beløp. Det skal ikke tas hensyn til ev. oppregulering av  inngangsverdien pr. 1.1.92 etter overgangsreglene.  </p>
+                            <p>Likningsmessig formuesverdi for børsnoterte aksjer i norske og  utenlandske aksjeselskap settes til 65% av kursverdien pr. 1. januar  i likningsåret. Aksjer notert på SMB-listen ved Oslo Børs verdsettes  til 65% av
+                                kursverdien pr. 1. januar i likningsåret. Grunnfondsbevis  verdsettes til 65 % av kursverdien pr. 1. januar 2006. Er kursen ikke  kjent, settes verdien til 65 % av antatt salgsverdi. Ikke-børsnoterte  aksjer i norske
+                                selskaper settes til 65% av aksjenes forholdsmessige  andel av aksjeselskapets eller allmennaksjeselskapets samlede  skattemessige formuesverdi pr. 1. januar i året forut for  </p>
+                            <p>likningsåret fordelt etter pålydende. Ikke-børsnoterte aksjer i  utenlandske selskap verdsettes til 65% av aksjenes antatte salgsverdi  pr. 1. januar i likningsåret. Aksjene skal verdsettes som  ikke-børsnoterte aksjer
+                                i norske selskaper dersom skattyteren krever  dette og kan sannsynliggjøre selskapets skattemessige formuesverdi.  Andel i verdipapirfond verdsettes til 65% av andelsverdien 1. januar  i likningsåret.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>147 Aksjer m.m.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her fører ein aksjar, andel i verdipapirfond, grunnfondsbevis o.a.  </p>
+                            <p>Den skattemessige verdien av aksjane skal setjast til kostpris  medrekna RISK-beløp. Det skal ikkje takast omsyn til ev.  oppregulering av inngangsverdien pr. 1.1.92 etter  overgangsreglane.  </p>
+                            <p>Likningsmessig formuesverdi for børsnoterte aksjar i norske og  utenlandske aksjeselskap skal setjast til 65% av kursverdien pr. 1.  januar i likningsåret. Aksjar notert på SMB-lista ved Oslo Børs skal  verdsetjast til
+                                65% av kursen pr 1. januar i likningsåret.  Grunnfondsbevis vert verdsette til 65 % av kursverdien pr. 1. januar  2005. Er kursverdien ikkje notert eller kjent, blir verdien sett til  65 % av pårekna salgsverdi.
+                                Ikkje-børsnoterte aksjar i norske selskap  skal setjast til 65% av aksjene sin forholdsmessige del av  aksjeselskapet eller allmennaksjeselskapet sin samla skattemessige  formuesverdi pr. 1. januar i året før
+                                likningsåret, fordelt etter  pålydande. Ikkje-børsnoterte aksjar i utenlandske selskap skal  setjast til 65% av aksjane sin antatte salgsverdi 1. januar i  likningsåret. Aksjene skal verdsetjast som ikkje-børsnoterte
+                                aksjer i  norske selskap dersom skattytar krev dette og kan sannsynleggjere den  skattemessige formuesverdien til selskapet. Part i verdipapirfond  skal verdsetjast til 65% av partsverdien 1. januar i likningsåret.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680/AndelerDeltakerlignedeSelskaperSkattemessigVerdi-datadef-1015">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>148 Andeler i deltakerlignede selskap</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Eier selskapet en andel i et annet deltakerliknet selskap, føres den  opp her. Andelen kan ha negativ verdi.  </p>
+                            <p>Beløpet i post 148 kolonne I settes til andelens skattemessige  egenkapital pr. 31.12 (skattemessig verdi ÷ gjeld, korrigert for  skjev egenkapital) tillagt overpris/ fratrukket underpris. For  kommandittandel/stille
+                                deltakerandel må en legge til ev. fremførbart  underskudd pga. overskredet fradragsramme. Hva andelens skattemessige  egenkapital er, må selskapet få opplyst fra det deltakerliknede  selskapet det eies andel i.
+                                Andelens likningsmessige formuesverdi vil  gå frem av deltakeroppgaven post 101.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>148 Del i deltakerlikna selskap</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Eig selskapet ein part/del i eit anna deltakarlikna selskap, skal  denne førast opp her. Delen kan ha negativ verdi.  </p>
+                            <p>Beløpet i post 148 kolonne I skal setjast til delen sin skattemessige  eigenkapital pr. 31.12. (skattemessige verdiar - gjeld, ev korrigert  for skeiv egeinkapital) med tillegg av ev. overpris/frådrag av ev.  underpris
+                                framføring på delen/parten pga. overskriden frådragsramme.  Kva delen sin skattemessige eigenkapital er, må selskapet få  opplysningar om frå det deltakarlikna selskapet det eig delen i. Den  likningsmessige
+                                formuesverdi på parten finn ein i deltakaroppgåva  post 101.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680/GevinstTapskontoNegativ-datadef-7308">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>151 Sum negative gevinst- og tapskonti</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Post 151-157  </p>
+                            <p>Kolonne II skal ikke benyttes for disse postene. Selskapets negative  gevinst- og tapskonto (tap), jf. post 151, anses som positiv  skattemessig verdi og skal legges til. Selskapets positive gevinst-  og tapskonto
+                                (gevinst) anses som negativ skattemessig verdi og skal  komme til fradrag, jf. post 153. Selskapets negative saldi og tomme  positive saldi skal ikke føres her, men i de poster driftsmiddelet  opprinnelig var
+                                hjemmehørende i, jf. rettledningen til post  101-110.  </p>
+                            <p>Har selskapet andre betingede skattefrie gevinster som ennå ikke er  oppløst, skal de føres med ÷ fortegn i post 155.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>151 Negativ vinst- og tapskonto</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Post 151-157  </p>
+                            <p>Kolonne II skal ikkje nyttast for desse postane.  </p>
+                            <p>Selskapet sin negative vinst- og tapskonto (tap), jf. post 151, utgjer  positiv skattemessig verdi og skal leggjast til. Positiv vinst- og  tapskonto (vinst) utgjer negativ skattemessig verdi og skal komme til  frådrag,
+                                jf. post 153. Selskapet sine negative saldi og tomme  positive saldi skal ikkje førast her, men i dei postar driftsmidlet  opprinneleg høyrde heime i, jf. rettleiinga til post 101-110.  </p>
+                            <p>Har selskapet andre vilkårbundne skattefrie vinstar som enno ikkje er  oppløyst, skal dei førast med ÷forteikn i post 155.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680/GevinstTapskontoPositiv-datadef-7321">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>153 Sum positive gevinst- og tapskonti</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>153 Positiv vinst- og tapskonto</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680/GevinsterAndreBetingetSkattefrie-datadef-1057">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>155 Andre betingede skattefrie gevinster</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>155 Andre vilkårsbundne skattefrie vinstar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680/PosisjonerAndreSkattemessige-datadef-1059">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>157 Andre skattemessige posisjoner</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>157 Andre skattemessige posisjonar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680/OmvurderingskontoValuta-datadef-1060">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>158 Omvurderingskonto - valuta</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres det beløp omvurderingskontoen viser ved årets slutt (gjelder  langsiktige valutafordringer/-gjeld). Gjenspeiler beløpet et  urealisert tap, skal det ha ÷fortegn. For langsiktige  valutafordringer/-gjeld, ført
+                                i hhv. post 145 og 182, se post 12 i  RF-1218 (Rettledning til utfylling av skjemaet RF-1217 «Spesifikasjon  av forskjeller mellom regnskapsmessige og skattemessige verdier»),  eller rettledningen til Næringsoppgave 1
+                                post 1595/2275.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>158 Omvurderingskonto - valuta</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Selskapet fører her beløpet som står på omvurderingskontoen ved  utgangen av inntektsåret (gjeld langsiktige valutakrav/-gjeld). Syner  kontoen eit urealisert tap, skal beløpet førast med eit ÷ teikn. For  langsiktige
+                                valutakrav/-gjeld, ført i postane 145 og 182, sjå post 12  i RF-1218 (Rettleiing til utfylling av skjemaet RF-1217  «Spesifikasjon av skilnader mellom rekneskapsmessige og skattemessige  verdiar»), eller rettleiinga
+                                til Næringsoppgåve 1 post 1595/2275.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680/EiendelerSkattemessige-datadef-1061">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>160 Sum skattemessige verdier</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Postene 101 til 158</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>160 Sum skattemessige verdiar</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Postane 101 til 158</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680/GjeldAnsvarligeSkattemessig-datadef-10090">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>182 Skattemessig gjeld</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Skattemessig gjeld vil ofte være lik likningsmessig gjeld. Men merk at  påløpte, ikke forfalte gjeldsrenter skal medregnes som gjeld her.  Garanti- og serviceavsetninger anses ikke som skattemessig gjeld. For
+                                langsiktig gjeld i utenlandsk valuta, se post 12 i RF-1218  (Rettledning til utfylling av skjemaet RF-1217 «Spesifikasjon av  forskjeller mellom regnskapsmessige og skattemessige verdier»), eller  rettledningen til
+                                Næringsoppgave 1 post 1595/2275, se forøvrig post  158.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>182 Skattemessig gjeld</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Skattemessig gjeld vil ofte vere lik likningsmessig gjeld. Men legg  merke til at renter av gjeld som er tillagd saldo, men enno ikkje har  forfalt skal reknast med som gjeld her. Garanti- og  serviceavsetjingar blir
+                                ikkje sett på som skattemessig gjeld. For  langsiktig gjeld i framand valuta, sjå post 12 i RF-1218 (Rettleiing  til utfylling av skjemaet RF-1217 «Spesifikasjon av skilnader mellom  rekneskapsmessige og skattemessige
+                                verdiar»), eller rettleinga til  Næringsoppgåve 1 post 1595/2275, sjå post 158.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/SkattemessigVerdi-grp-3680/EgenkapitalSkattemessig-datadef-1065">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>189 Skattemessig egenkapital</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Post 160 - post 182</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>189 Skattemessig eigenkapital</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Post 160 - post 182</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Formuesstilling-grp-2163/LikningsmessigFormuesverdi-grp-3681">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>II Likningsmessig formuesverdi</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>I kolonne II føres likningsmessig formuesverdi på selskapets eiendeler  og gjeld. Kapitalavkastningsgrunnlaget ved beregning av  personinntekt, jf. skatteloven § 12-13 annet ledd, skal legges til  grunn som likningsmessig
+                            formuesverdi dersom det er høyere enn den  verdi som ellers ville bli lagt til grunn etter reglene som er omtalt  nedenfor, jf. Skattedirektoratets takseringsregler § 2-1-5</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>II Likningsmessig formuesverdi</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>I kolonne II fører ein likningsmessig formuesverdi på eigedelar og  gjeld i selskapet. Kapitalavkastingsgrunnlaget ved utrekning av  personinntekt, jf. skattelova § 12-13 (2) skal leggjast til grunn som  likningsmessig
+                            formuesverdi dersom den er høgare enn den verdien som  elles ville ha blitt lagt til grunn etter reglane som er omtala  nedanfor, jf. Skattedirektoratet sine takseringsreglar § 2-1-5.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/LikningsmessigFormuesverdi-grp-3681/KontormaskinerMvLigningsmessigFormuesverdi-datadef-1031">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>101 Kontormaskiner o.l.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Post 101-110  </p>
+                            <p>Som skattemessig verdi (kolonne I) føres saldoverdien (etter årets  avskrivninger). Negativ saldo i avskrivningsgruppe a, c og d føres  opp i kolonne I med sin negative størrelse. Negativ saldo på ervervet
+                                forretningsverdi (avskrivningsgruppe b) RF-1216B Elektronisk  utgave  </p>
+                            <p>skal føres på gevinst- og tapskonto. Tom positiv saldo i  avskrivningsgruppe a-d medtas med saldobeløp. Likningsmessig  formuesverdi (kolonne II) på disse driftsmidler fastsettes til den  skattemessige saldoverdien av
+                                driftsmidlene, jf. Skattedirektoratets  takseringsregler pkt. 1.4. Dersom saldo for driftsmidler er negativ,  settes likningsmessig formuesverdi til null. Forretningsverdi er ikke  skattepliktig formue.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>101 Kontormaskinar o.l.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Post 101-110  </p>
+                            <p>Som skattemessig verdi (kolonne I) set ein saldoverdien (etter  avskrivingar). Negativ saldo i avskrivingsgruppe a, c og d fører ein  opp i kolonne I med dei negative tala. Negativ saldo på tileigna  forretningsverdi
+                                (avskrivingsgruppe b) skal ein føre over på vinst-  og tapskontoen. Tom positiv saldo i avskrivingsgruppe a-d skal takast  med med saldobeløp i kolonne I. Likningsmessig formuesverdi (kolonne  II) på desse driftsmidla
+                                skal fastsetjast til den skattemessige  saldoverdien av driftsmidla, jf. Skattedirektoratet sine  takseringsreglar § 2-1-2.  Dersom saldo for driftsmiddel er negativ,  set ein likningsmessig formuesverdi til null.
+                                Forretningsverdi er  ikkje skattepliktig formue.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/LikningsmessigFormuesverdi-grp-3681/VogntogLastebilerVarebilerMvLigningsmessigFormuesverdi-datadef-1034">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>105 Vogntog, lastebiler, busser, varebiler, drosjebiler og kjøretøy  for transport av funksjonshemmede</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>105 Vogntog, lastebilar, bussar, varebilar, drosjebilar og køyretøy  for transport av funksjonshemma</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/LikningsmessigFormuesverdi-grp-3681/PersonbilerTraktorerMaskinerMvLigningsmessigFormuesverdi-datadef-1036">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>110 Personbiler, traktorer, rullende maskiner og materiell, maskiner,  redskap, instrumenter, inventar mv.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>110 Personbilar, traktorar, rullende maskinar og materiell, maskinar,  reiskap, instrumenter, inventar m.m.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/LikningsmessigFormuesverdi-grp-3681/SkipFartoyerRiggerMvLigningsmessigFormuesverdi-datadef-1038">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>115 Skip, fartøy, rigger mv.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Skattemessig verdi settes til saldoverdi etter årets evt.  avskrivninger.  For forretningsbygg ervervet før 1.1.84 settes  skattemessig verdi til den delen av saldoen som kan avskrives, jf  post 112 i saldoskjemaet.
+                                For ikke avskrivbare eiendeler er kostpris  med tillegg av eventuelle påkostninger skattemessig verdi.  Ligningsmessig formuesverdi skal fastsettes etter skatteloven §§ 4-1  flg., og skal normalt tilsvare
+                                omsetningsverdi.  Skattedirektoratet  har fastsatt egne takseringsregler for fastsettelse av ligningsmessig  formuesverdi for visse typer eiendeler.  Til postene 121-136 skal det  i tillegg gis opplysning om i hvilken
+                                kommune driftsmiddelet er  hjemmehørende.  Benytt ett felt pr. driftsmiddel. Dersom det er flere  enn to driftsmidler i den aktuelle kategori, spesifiseres disse på et  vedlegg.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>115 Skip, fartøy, riggar m.m.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Skattemessig verdi er saldoverdi etter avskrivingar.  For  forretningsbygg tileigna før 1.1.84 er skattemessig verdi det av  saldoen som kan avskrivast, jf. post 112 i saldoskjemaet.  For  eigedelar som ikkje kan
+                                avskrivast, er det kostprisen med tillegg av  eventuelle påkostingar som er den skattemessige verdien.  Likningsmessig formuesverdi skal fastsetjast etter skattelova §§ 4-1  flg., og skal normalt tilsvare
+                                omsetningsverdi.  Skattedirektoratet  har fastsett eigne takseringsreglar for fastsetjing av likningsmessig  formuesverdi på visse typar eigedelar.  Til postane 121 - 136 skal  ein i tillegg gi opplysningar om i kva
+                                for ein kommune driftsmidlet  høyrer heime.  Benytt eitt felt pr. driftsmiddel.  Dersom det er  fleire enn to driftsmiddel i den aktuelle katagorien, må desse  spesifiserast på eit vedlegg.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/LikningsmessigFormuesverdi-grp-3681/FlyHelikopterLigningsmessigFormuesverdi-datadef-1040">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>120 Fly, helikopter</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>120 Fly, helikopter</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/LikningsmessigFormuesverdi-grp-3681/LagerbeholdningLigningsmessigFormuesverdi-datadef-1050">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>140 Varebeholdning</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Skattemessig verdi av varelager fremgår av post 0170 i næringsoppgave  1 og og post 0150 i næringsoppgave 2.  Likningsmessig formuesverdi  settes lik den skattemessige verdi.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>140 Varelager</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Skattemessig verdi av varelager går fram av post 0170 i næringsoppgåve  1 og post 0150 i næringsoppgåve 2.  Likningsmessig formuesverdi skal  setjast lik skattemessig verdi.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/LikningsmessigFormuesverdi-grp-3681/FordringerLigningsmessigFormuesverdi-datadef-1051">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>145 Fordringer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>145 Krav</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/LikningsmessigFormuesverdi-grp-3681/BankinnskuddKontantbeholdningLigningsmessigFormuesverdi-datadef-1053">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>146 Bankinnskudd/kontantbeholdning</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>146 Bankinnskott/kontantbehaldning</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/LikningsmessigFormuesverdi-grp-3681/AksjerMvLigningsmessigFormuesverdi-datadef-1054">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>147 Aksjer mv.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>147 Aksjer m.m.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/LikningsmessigFormuesverdi-grp-3681/AndelerDeltakerlignedeSelskaperLigningsmessigFormuesverdi-datadef-1016">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>148 Andeler i deltakerlignede selskap</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>148 Del i deltakerlikna selskap</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/LikningsmessigFormuesverdi-grp-3681/FormuesverdiBruttoLigningsmessig-datadef-1062">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p/>
+                            <p>161 Sum brutto forumesverdi (postene 101 til 150)</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Postene 101 til 150</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>161 Sum brutto forumesverdi</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Postane 101 til 150</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/LikningsmessigFormuesverdi-grp-3681/GjeldLigningsmessig-datadef-1063">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>181 Likningsmessig gjeld</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Det er bare gjeld som er fradragsberettiget ved formueslikningen som  skal føres her, se skatteloven §§ 4-1 og 4-3. Merk at påløpte, ikke  forfalte gjeldsrenter ikke er fradragsberettiget her.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>181 Likningsmessig gjeld</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Det er berre gjeld som kan trekkjast frå ved formueslikninga som skal  førast her, sjå skattelova §§ 4-1 (1) og 4-3. Legg merke til at  renter av gjeld som er lagde til saldo men enno ikkje har forfalle,  ikkje kan
+                                trekkjast frå her.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Formuesstilling-grp-2163/LikningsmessigFormuesverdi-grp-3681/FormuesverdiNettoLigningsmessig-datadef-1066">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>190 Netto formuesverdi (post 161 - post 181)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>190 Netto formuesverdi (post 161 - post 181)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:repeat id="repeat_Landbruksbygg-grp-3856" nodeset="/Skjema/Formuesstilling-grp-2163/Landbruksbygg-grp-3856">
+                    <xforms:group ref="/Skjema/Formuesstilling-grp-2163/Landbruksbygg-grp-3856">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>121 Landbruksbygg</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>121 Landbruksbygg</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Formuesstilling-grp-2163/Landbruksbygg-grp-3856/LandbruksbyggSkattemessigVerdi-datadef-13822">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>I Skattemessig verdi</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>I Skattemessig verdi</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Formuesstilling-grp-2163/Landbruksbygg-grp-3856/LandbruksbyggLigningsmessigFormuesverdi-datadef-13823">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>II Likningsmessig formuesverdi</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>II Likningsmessig formuesverdi</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Formuesstilling-grp-2163/Landbruksbygg-grp-3856/LandbruksbyggKommune-datadef-13824">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kommune</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kommune</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:repeat id="repeat_ByggOgAnleggHotellerLosjihusBevertningsstederMv-grp-3857" nodeset="/Skjema/Formuesstilling-grp-2163/ByggOgAnleggHotellerLosjihusBevertningsstederMv-grp-3857">
+                    <xforms:group ref="/Skjema/Formuesstilling-grp-2163/ByggOgAnleggHotellerLosjihusBevertningsstederMv-grp-3857">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>125 Bygg og anlegg, hoteller, losjihus, bevertningssteder mv.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>125 Bygg og anlegg, hoteller, losjihus, bevertningsstader m.m.</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Formuesstilling-grp-2163/ByggOgAnleggHotellerLosjihusBevertningsstederMv-grp-3857/ByggAnleggSkattemessigVerdi-datadef-1041">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>I Skattemessig verdi</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>I Skattemessig verdi</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Formuesstilling-grp-2163/ByggOgAnleggHotellerLosjihusBevertningsstederMv-grp-3857/ByggAnleggLigningsmessigFormuesverdi-datadef-1042">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>II Likningsmessig formuesverdi</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>II Likningsmessig formuesverdi</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Formuesstilling-grp-2163/ByggOgAnleggHotellerLosjihusBevertningsstederMv-grp-3857/ByggAnleggKommune-datadef-1043">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kommune</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kommune</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:repeat id="repeat_Forretningsbygg-grp-3858" nodeset="/Skjema/Formuesstilling-grp-2163/Forretningsbygg-grp-3858">
+                    <xforms:group ref="/Skjema/Formuesstilling-grp-2163/Forretningsbygg-grp-3858">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>130 Forretningsbygg</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>130 Forretningsbygg</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Formuesstilling-grp-2163/Forretningsbygg-grp-3858/ForretningsbyggSkattemessigVerdi-datadef-1044">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>I Skattemessig verdi</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>I Skattemessig verdi</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Formuesstilling-grp-2163/Forretningsbygg-grp-3858/ForretningsbyggLigningsmessigFormuesverdi-datadef-1045">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>II Likningsmessig formuesverdi</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>II Likningsmessig formuesverdi</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Formuesstilling-grp-2163/Forretningsbygg-grp-3858/ForretningsbyggKommune-datadef-1046">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kommune</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kommune</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:repeat id="repeat_Tomter-grp-3859" nodeset="/Skjema/Formuesstilling-grp-2163/Tomter-grp-3859">
+                    <xforms:group ref="/Skjema/Formuesstilling-grp-2163/Tomter-grp-3859">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>135 Tomter</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>135 Tomter</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Formuesstilling-grp-2163/Tomter-grp-3859/TomterSkattemessigVerdi-datadef-1047">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>I Skattemessig verdi</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>I Skattemessig verdi</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Formuesstilling-grp-2163/Tomter-grp-3859/TomterLigningsmessigFormuesverdi-datadef-1048">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>II Likningsmessig formuesverdi</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>II Likningsmessig formuesverdi</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Formuesstilling-grp-2163/Tomter-grp-3859/TomterKommune-datadef-1049">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kommune</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kommune</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:repeat id="repeat_AndreFormuesposter-grp-3871" nodeset="/Skjema/Formuesstilling-grp-2163/AndreFormuesposter-grp-3871">
+                    <xforms:group ref="/Skjema/Formuesstilling-grp-2163/AndreFormuesposter-grp-3871">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>149 Andre formuesposter</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>149 Andre formuespostar</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Formuesstilling-grp-2163/AndreFormuesposter-grp-3871/FormuesposterAndreSkattemessigVerdi-datadef-1055">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>I Skattemessig verdi</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Spesifiser</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>I Skattemessig verdi</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Spesifiserast</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Formuesstilling-grp-2163/AndreFormuesposter-grp-3871/FormuesposterAndreLigningsmessigFormuesverdi-datadef-1056">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>II Likningsmessig formuesverdi</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Spesifiser</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>II Likningsmessig formuesverdi</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Spesifiserast</p>
+                            </xforms:hint>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/InntektOgFormueISelskapet-grp-2169">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>II Inntekt og formue i selskapet</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Post 201  </p>
+                    <p>Her føres selskapets skattemessige resultat i inntektsåret.  Beløpet  hentes fra næringsoppgave 1 post 9930 eller næringsoppgave 2 post  0998 eller 0999. Årsresultatet er eksklusiv godtgjørelse for  arbeidsinnsats til
+                        deltakerne.  </p>
+                    <p>Vedr. behandling av arbeidsgodtgjørelse  </p>
+                    <p>Selskap som benytter næringsoppgave 1 eller næringsoppgave 2 skal føre  alle former for arbeidsvederlag til deltakerne i post 5600 i  næringsoppgaven.  Dette gjelder enten vederlaget ytes direkte på  grunnlag av
+                        arbeidsinnsatsen som lott til aktiv deltaker i fiske  eller arbeidsvederlag godtgjort gjennom en skjev overskuddsfordeling  i forhold til deltakernes eierandel.  </p>
+                    <p>Ikke-delingsforetak (dvs. selskap hvor det ikke beregnes personinntekt  etter skatteloven § 12-10, jf § 12-12 skal fordele sum  arbeidsvederlag på de respektive deltakerne etter hvilken  godtgjørelse de har mottatt, og overføre
+                        det til den respektives  deltakeroppgave (RF-1233 og RF-1221) i både post 102 b og post  104a.  </p>
+                    <p>Eksempel:  </p>
+                    <p>Har selskapet 4 deltakere (A,B,C og D) hvorav A og B har vært aktive  og mottatt hhv. kr 100.000 og kr 150.000 i arbeidsgodtgjørelse, skal  selskapet fylle ut del I i de enkelte deltakeroppgavene (RF-1233 og  1221), hvorav i
+                        dette tilfelle selskapet må føre opp kr 100.000 i  post 102b og kr 100.000 i post 104a i A sin deltakeroppgave, og kr  150.000 i post 102b og kr 150.000 i post 104a i B sin  deltakeroppgave. (Eventuelt restbeløp i
+                        selskapsoppgaven post 205  skal vanligvis fordeles etter eierandel på deltaker A,B,C og D, og  overføres deltakeroppgavene post 102a.)  </p>
+                    <p>Delingsforetak (dvs. selskap hvor det skal beregnes personinntekt  etter skatteloven § 12-10, jf § 12-12) skal, på samme måte som  ikke-delingsforetak, fordele sum arbeidsgodtgjørelse ut på de enkelte  deltakerne etter hva de
+                        har mottatt.  Har f.eks deltaker E mottatt kr  250.000 i arbeidsgodtgjørelse, skal selskapet føre kr 250.000 i post  102b i deltakeroppgaven (RF-1233 og RF-1221) til E, samt føre opp kr  250.000 i post 7.13 i
+                        personinntektsskjemaet (RF-1224) ved beregning  av E sin personinntekt fra selskapet.  For videre behandling av  beløpet se rettledningen til personinntektsskjemaet (RF-1225) post  7.18 og 7.19.  </p>
+                    <p>For skogsameie skal arbeidsgodtgjørelsen ikke direkte overføres  deltakeroppgaven (RF-1233).  Istedet skal deltakernes respektive  godtgjørelse i ikke-delingsforetak overføres hver enkelt deltakers  tilleggsskjema for beregning
+                        av deltakers inntekt i ansvarlige  selskaper mv. i skogbruk (RF-1220) post 102 og 118, mens  godtgjørelsen i delingsforetak overføres RF-1220 post 102 og post  7.13 i personinntektsskjeamet (RF-1224).  Videre skal de beregnede
+                        beløpene i post 113 og 123 i RF-1220 overføres til de enkelte  deltakeroppgavene (RF-1233 og RF-1221) i henholdsvis post 102d og  post 104.  Dersom gjennomsnittsligning ikke er påbegynt, er det  beløpene i RF-1220 post 109
+                        (korrigert med kapitalposter, jf. post  112), og 118 som skal overføres deltakeroppgavene hhv. post 102 d og  104.  Det vises forøvrig til rettledningen i RF-1220.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>II Inntekt og formue i selskapet</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Post 201  </p>
+                    <p>Her fører ein selskapet sitt skattemessige resultat i inntektsåret.  Beløpet kan hentast frå post 9930 i næringsoppgåve 1, eller post 0998  eller post 0999 i næringsoppgåve 2.  Årsresultatet er eksklusiv  godtgjersle for
+                        arbeidsinnsats til deltakeren.  </p>
+                    <p>Om handsaming av arbeidsgodtgjersle  </p>
+                    <p>Selskap som nyttar næringsoppgåve 1 eller næringsoppgave 2 skal i  utgangspunktet føre alle former for arbeidsgodtgjersle til  deltakarane i post 5600 i næringsoppgåva.  Dette gjeld enten  godtgjersla er ytt i høve til
+                        arbeidsinnsatsen, som lott til aktiv  deltakar i fiske eller vederlag for arbeid godtgjort gjennom ein  skeiv deling av overskott i høve til deltakaren sin eigardel.  </p>
+                    <p>Ikkje-delingsføretak (dvs. selskap kor det ikkje blir utrekna  personinntekt etter skattelova § 12-10, jf 12-12) skal dele sum  arbeidsgodtgjersle på dei respektive deltakarane etter kva for  godtgjersle dei har motteke, og
+                        overføre det til den einskilde si  deltakaroppgåve, RF-1233 og 1221, både post 102 b og post 104a (dvs  at overføringa skal skje både som allmenn inntekt og personinntekt).  Eksempel: Har selskapet fire deltakarar (A,B,C og
+                        D), der A og B har  vore aktive og motteke respektive kr 100.000 i post 102 b og 100.000  i post 104a i i A sin deltakaroppgåve, og 150.000 i post 102 b og  150.000 i post 104a i B sin deltakaroppgåve.  (Eventuelt restbeløp i
+                        selskapsoppgåva post 205 skal vanlegivs delast etter eigardel på  deltakar A,B,C og D, og skal overførast deltakaroppgåvene post 102a.  Delingsføretak (dvs. selskap der ein skal rekne ut personinntekt  etter skattelova §
+                        12-10, jf. § 12-12 skal, på same måte som  ikkje-delingsføretak, dele sum arbeidsgodtgjersle ut på dei einskilde  deltakarane etter kva dei har motteke. Har t.d. deltakar E motteke kr  250.000 i arbeidsgodtgjersle, skal
+                        selskapet føre 250.000 i post 102b  i deltakaroppgåva til E, samt føre opp 250.000 i post 7.13 i  personinntektsskjemaet ved utrekning av E si personinntekt frå  selskapet.  </p>
+                    <p>Skogsameige skal ikkje føre arbeidsgodtgjersla (her i post 202)  direkte over i deltakaroppgåva (RF-1233 og 1221).  I staden skal kva  einskild deltakar sitt tilleggsskjema for berekning av deltakaren si  inntekt i ansvarlege
+                        selskap mv. i skogbruk (RF-1220)post 118 og 120,  mens godtgjersle i ikkje-delingsføretak skal overførast til RF-1220  post 102 og 7.13 i personinntektsskjeamet (RF-1224).  Vidare skal dei  utrekna beløpa i post 113 og post
+                        123 i RF-1220 førast over til kvar  einskild deltakaroppgåve (RF-1233 og RF-1221) respektive post 102d og  104.  Dersom gjennomsnittslikning ikkje er påbegynt, er det beløpa i  RF-1220 post 109 (korrigert med kapitalposter,
+                        jfr. post 112), og 118  som skal overførast til deltakaroppgåvene hhv. post 102d og 104.  Sjå  ellers rettleiinga til RF-1220.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/InntektOgFormueISelskapet-grp-2169/ResultatNaring-datadef-7298">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>201 Overskudd/underskudd i selskapet i følge næringsoppgaven</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres selskapets skattemessige resultat i inntektsåret. Beløpet  hentes fra Næringsoppgave 1 post 9940 eller Næringsoppgave 2 post  0940.  Årsresultatet er ekslusiv godtgjørelse for arbeidsinnsats til  deltakerne.  </p>
+                        <p/>
+                        <p>Vedr. behandling av arbeidsgodtgjørelse, se rettledning, RF-1216.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>201 Overskott/underskott i selskapet i følgje næringsoppgåva</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein selskapet sitt skattemessige resultat i inntektsåret.  Beløpet kan hentast frå post 9940 i Næringsoppgåve 1, eller post 0940  i Næringsoppgåve 2. Årsresultatet er eksklusiv godtgjersle for  arbeidsinnsats til
+                            deltakaren.  </p>
+                        <p/>
+                        <p>Om behandling av arbeidsgodtgjering, sjå rettleiing RF-1216.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/InntektOgFormueISelskapet-grp-2169/AksjeutbytteNorskeSelskaperSkattemessigFullGodtgjorelse-datadef-11239">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>204 Her føres aksjeutbytte fra norske selskaper som gir rett til  godgjørelse</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>I post 204 føres aksjeutbytte fra norske selskaper som gir rett til  godtgjørelse, jf. skatteloven § 10-12 (3) (utbyttet må bl.a. være  lovlig utdelt fra selskapet). Etter sktl. § 2-38 har ikke selskap mv  som omfattes av
+                            fritaksmetoden krav på godtgjørelse. Posten skal  likevel inneholde den andelen av utbytte som disse tilkommer.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Beløpet skal fordeles og overføres til deltakeroppgavene (RF-1233 og  RF-1221) post 103</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>204 Her føres aksjeutbytte frå norske selskaper som gir rett til  godgjersle</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>I post 204 skal selskapet føre aksjeutbytte frå norske selskap som gir  rett til godgjering (full eller redusert) jf. skattelova §10-12  (3)(utbyttet må være lovleg utdelt frå selskapet). Selskap o.a. som  går inn under
+                            fritaksmetoden har ikkje krav på godtgjersle, sjå sktl  § 2-38. Posten skal likevel omfatte del av utbytte som desse  deltakarane har krav på.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Beløpet skal fordelast og overførast til deltakeroppgåene (RF-1233 og  RF-1221) post 103</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/InntektOgFormueISelskapet-grp-2169/ResultatDeltakerlignetSelskapSkattemessig-datadef-7841">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>205 Overskudd/underskudd eksklusive arbeidsgodgjørelse og aksjeutbytte</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Nettosummen av post 201 og 204 føres her. For alle typer selskaper  skal beløpet fordeles på de enkelte deltakere (vanligvis en fordeling  etter eierandel) og overføres deres respektive deltakeroppgaver post  102a.  </p>
+                        <p>Har en selskapsandel skiftet eier i løpet av året, skal inntekten/  underskuddet på andelen deles mellom kjøper og selger etter antall  eiermåneder i realisasjonsåret, jf. skatteloven § 10-41 tredje  punktum.
+                            Overdragelsesmåneden henføres til kjøper.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Beløpet skal fordeles og overføres deltakeroppavene (RF-1233 og  RF-1221) post 102 a</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>205 Overskot/underskot eksklusiv arbeidsgodgjersle og aksjeutbytte</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Nettosummen av postane 201 og 204 skal førast her. Alle slag selskap  skal dele beløpet her og føre det over til dei einskilde deltakarane  sine oppgåver (RF-1221) post 102a.  </p>
+                        <p>Har ein part skifta eigar i løpet av året, skal inntekta/ underskotet  på parten delast mellom seljar og kjøpar etter talet på månader i  realisasjonsåret der kvar har eigd parten, jf. skattelova § 10-41  tredje punktum.
+                            Overdragingsmånaden fell på kjøpar.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Beløpet skal fordelast og overførast deltakeroppåvene (RF-1233 og  RF-1221) post 102 a</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/InntektOgFormueISelskapet-grp-2169/AksjerMvRealisasjonGevinstTapSelskapet-datadef-22353">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>205B Her føres netto gevinster/tap ved realisasjon av aksjer som  inngår i post 205</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>I posten oppgis netto gevinst/tap ved realisasjon mv av aksjer mv i  aksjeselskap mv som omfattes av fritaksmetoden, se sktl § 2-38.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Beløpet skal fordeles og overføres deltakeroppgaven (RF-1233 og  RF-1221) post 102h</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>205B Her føres netto gevinster/tap ved realisasjon av aksjer som  inngår i post 205</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>I posten skal selskapet føre netto gevinst/tap frå realisasjon mm av  aksjar mm i selskap mm som går inn under fritaklsmetoden, jf sktl §  2-38.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Beløpet skal fordelast og overførast deltakeroppgåva (RF-1233 og  RF-1221) post 102h</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SelskaperSomLiknesEtterSktl810-grp-4961">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Spesielt for selskaper som har deltaker som liknes etter skatteloven  §8-10</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Postene 207 til 212 skal bare fylles ut dersom selskapet har en eller  flere deltakere som krever likning etter de særskilte  rederibeskatningsreglene i skatteloven § 8-10.  I så fall må  selskapet levere skjema RF-1197
+                        Rederibeskatning etter sktl. § 8-10  vedlegg 2004.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Spesielt for selskap som har deltakar som blir likna etter skattelova  §8-10</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Postane 207 til 212 skal berre fyllast ut dersom selskapet har ein  eller fleire deltakarar som krev likning etter dei særskilde  skattleggingsreglane for reiarlag i skattelova § 8-10.  I så fall må  selskapet levere skjema
+                        RF-1197 Skattlegging av reiarlag etter sktl.  § 8-10 Vedlegg 2004.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/SelskaperSomLiknesEtterSktl810-grp-4961/FinansinntekterSkattemessig-datadef-11802">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>207 Finansinntekt/underskudd overført fra RF-1197 post 770</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Sum skattepliktig finansinntekt/fradragsberettiget finansunderskudd  overføres fra RF-1197 post 770.  Beløpet fordeles etter eierandel og  overføres til RF-1221 Deltakerens oppgave over formue og inntekt i  ansvarlige
+                            selskaper post 150.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>207 Finansinntekt/underskott overført frå RF-1197 post 770</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Sum skattepliktig finansinntekt/frådragsgodkjent finansunderskott skal  overførast frå RF-1197 post 770.  Beløpet skal fordelast etter  eigardel og overførast til RF-1221 Deltakarens oppgåve over formue og  inntekt i
+                            ansvarlege selskap post 150.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SelskaperSomLiknesEtterSktl810-grp-4961/GevinstTapskontoInntektsfort-datadef-2044">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>209 Inntektsføring fra gevinst/tapskonto, overført fra RF-1197 post 36</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Inntektsføring fra gevinst/tapskonto.  Beløpet overføres fra RF-1197  post 785.  Andel av beløpet skal overføres til RF-1221 post 152 for  deltaker som på inntredelsestidspunktet oppfylte vilkårene for  inntektsføring fra
+                            gevinst og tapskonto i det deltakerlignede  selskapet.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>209 Inntektsføring frå gevinst/tapskonto, overført frå RF-1197 post 36</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Beløpet skal overførast frå RF-1197 post 785.  Del av beløpet skal  overførast til RF-1221 post 152 for deltakar som på  inngangstidspunktet oppfylte vilkåra for inntektsføring frå gevinst-  og tapskonto i det deltakarlikna selskapet.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SelskaperSomLiknesEtterSktl810-grp-4961/InntektInntreden-datadef-12761">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>210 Inntektsføring ved inntreden, overført fra RF-1197 post 37</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Inntekten overføres fra RF-1197 post 790.  Beløpet fordeles etter  eierandel og overføres RF-1221 post 154 for deltaker som har trådt  inn i rederibeskatningsordningen i inntektsåret.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>210 Inntektsføring ved inntreden, overført frå RF-1197 post 37</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Inntekta skal overførast frå RF-1197 post 750.  Beløpet skal fordelast  etter eigardel og overførast til RF-1221 post 154 for deltakar som  har gått inn i reiarskattleggingsordninga i inntektsåret.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SelskaperSomLiknesEtterSktl810-grp-4961/Tonnasjeskatt-datadef-5857">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>211 Tonnasjeskatt fra RF-1197 post 520</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Beløpet fordeles etter eierandel og overføres RF-1221 post 156.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>211 Tonnasjeskatt frå RF-1197 post 520</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Beløpet skal overførast frå RF-1197 post 520.  Beløpet skal fordelast  etter eigardel og overførast til RF-1221 post 156.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SelskaperSomLiknesEtterSktl810-grp-4961/InntektGevinstSkatteloven238-datadef-22332">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Inntekter/gevinster og utgifter/tap som omfattes av skatteloven §2-38</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Etter sktl. § 8-15 tredje ledd femte og sjette punktrum skal konto for  beskattet inntekt i rederibeskattet aksjeselskap reguleres med  finansinntekter og -tap som er unntatt beskatning eller  fradragsføring etter sktl. §
+                            2-38.  </p>
+                        <p>Se forøvrig rettledningen, RF-1216.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Inntekter/gevinster og utgifter/tap som omfattes av skatteloven §2-38</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Etter sktl. § 8-15 tredje ledd femte og sjette punktum skal konto for  skattlagd inntekt i reiarlagsskattlagde aksjeselskap regulerast med  finansinntekter og -tap som er unntekne frå skattlegging eller  frådragsføring
+                            etter sktl. § 2-38.  </p>
+                        <p>Sjå elles rettleiinga, RF-1216.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SelskapMedInntektFormueTilBeskatningIFlereKommuner-grp-2170">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>III Selskap med inntekt/formue til beskatning i flere kommuner</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Postene er bare aktuelle for selskaper som har formue og/eller  inntekter til beskatning i flere kommuner etter reglene om stedbunden  beskatning, jf. skatteloven §§ 3-3, 2-2, 4-30 (1), 6-3 (2) og 6-90.  Utfylling av postene er
+                        frivillig.  </p>
+                    <p/>
+                    <p>Selskapet bes om å fylle ut eget forslag til hvilke kommuner formue  og/eller inntekt skal skattlegges i, samt hvordan formuen og/eller  inntekten fordeler seg mellom kommunene. Dette vil bidra til en  riktig fordeling av
+                        formue og/eller inntekt mellom kommunene, og vil  være med på å forebygge feil slik at samme formues- og inntektsposter  ikke blir beskattet i flere kommuner.  </p>
+                    <p/>
+                    <p>Har selskapet inntekt og/eller formue i flere land skal gjeld og  gjeldsrenter fordeles etter reglene i skatteloven §§ 4-31 og 6-91.  Selskapet skal oppgi fordelingsgrunnlag og fordeling av gjeld og  fordelingsfradrag i eget
+                        vedlegg. Det er bare gjeld og gjeldsrenter  som etter fordeling faller på Norge som skal tas med i fastsettelsen  av formue og inntekt i Norge.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Frivillig utfylling</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>III Selskap med inntekt/formue til beskatning i fleire kommunar</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Postane er berre aktuelle for selskap som har formue og/eller inntekt  som skal skattleggjast i fleire kommunar etter reglane om stadbunden  skattleggjing i skattelova §§ 3-3, 2-2, 4-30 (1), 6-3 (2) og 6-90.  Utfylling av
+                        postane er frivilleg.  </p>
+                    <p/>
+                    <p>Selskapet blir bedd om å fylle ut eige forslag til kva for kommuner  formue og/eller inntekt skal skattleggjast i, og korleis formua  og/eller inntekta fordeler seg mellom kommunane. Dette sikrar ei rett  fordeling av formue
+                        og/eller inntekt mellom kommunene, og er med på å  førebyggje feil slik at same formues- og inntektspostar ikkje blir  skattlagde i fleire kommunar.  </p>
+                    <p/>
+                    <p>Har selskapet inntekt og/eller formue i fleire land, skal ein fordele  gjeld og gjeldsrenter etter reglane i skattelova §§ 4-31 og 6-91.  Selskapet må då opplyse om fordelingsgrunnlag og fordeling av gjeld  og fordelingsfrådrag
+                        i eige vedlegg. Det er berre gjeld og  gjeldsrenter som etter fordeling fell på Noreg, ein skal ta med i  fastsetjinga av formue og inntekt i Noreg.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NON">
+                    <p>Frivilleg utfylling</p>
+                </xforms:hint>
+                <xforms:group ref="/Skjema/SelskapMedInntektFormueTilBeskatningIFlereKommuner-grp-2170/ForslagTilFordeling-grp-3010">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Forslag til fordeling av inntekt og formue</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Postene er bare aktuelle for selskaper som har formue og/eller  inntekter til beskatning i flere kommuner etter reglene om stedbunden  beskatning, jf. skatteloven §§ 3-3, 2-2, 4-30 (1), 6-3 (2) og 6-90.  Selskapet bes om å
+                            fylle ut eget forslag til hvilke kommuner formue  og/eller inntekt skal skattlegges i, samt hvordan formuen og/eller  inntekten fordeler seg mellom kommunene. Dette vil bidra til en  riktig fordeling av formue og/eller
+                            inntekt mellom kommunene, og vil  være med på å forebygge feil slik at samme formues- og inntektsposter  ikke blir beskattet i flere kommuner.  </p>
+                        <p/>
+                        <p>Har selskapet inntekt og/eller formue i flere land skal gjeld og  gjeldsrenter fordeles etter reglene i skatteloven §§ 4-31 og 6-91.  Selskapet skal oppgi fordelingsgrunnlag og fordeling av gjeld og  fordelingsfradrag i
+                            eget vedlegg. Det er bare gjeld og gjeldsrenter  som etter fordeling faller på Norge som skal tas med i fastsettelsen  av formue og inntekt i Norge.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Forslag til fordeling av inntekt og formue</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Postane er berre aktuelle for selskap som har formue og/eller inntekt  som skal skattleggjast i fleire kommunar etter reglane om stadbunden  skattleggjing i skattelova §§ 3-3, 2-2, 4-30 (1), 6-3 (2) og 6-90.  Selskapet bes
+                            om å fylle ut eige forslag til kva for kommuner formue  og/eller inntekt skal skattleggjast i, og korleis formua og/eller  inntekta fordeler seg mellom kommunane. Dette vil bidra til ei rett  fordeling av formue og/eller
+                            inntekt mellom kommunene, og vil vere  med på å forebygge feil slik at same formues- og inntektspostar ikkje  blir beskatta i fleire kommunar.  </p>
+                        <p/>
+                        <p>Har selskapet inntekt og/eller formue i fleire land, skal ein fordele  gjeld og gjeldsrenter etter reglane i skattelova §§ 4-31 og 6-91.  Selskapet må då opplyse om fordelingsgrunnlag og fordeling av gjeld  og
+                            fordelingsfrådrag i eige vedlegg. Det er berre gjeld og  gjeldsrenter som etter fordeling fell på Noreg, ein skal ta med i  fastsetjinga av formue og inntekt i Noreg.</p>
+                    </xforms:help>
+                    <xforms:group ref="/Skjema/SelskapMedInntektFormueTilBeskatningIFlereKommuner-grp-2170/ForslagTilFordeling-grp-3010/Totalt-grp-3066">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Totalt</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Totalt</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/SelskapMedInntektFormueTilBeskatningIFlereKommuner-grp-2170/ForslagTilFordeling-grp-3010/Totalt-grp-3066/InntektStedbundet-datadef-13867">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Inntekt før fordelingsfradrag</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inntekt før fordelingsfrådrag</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SelskapMedInntektFormueTilBeskatningIFlereKommuner-grp-2170/ForslagTilFordeling-grp-3010/Totalt-grp-3066/Fordelingsfradrag-datadef-13806">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fordelingsfradrag</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fordelingsfrådrag</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:repeat id="repeat_Kommune-grp-3067" nodeset="/Skjema/SelskapMedInntektFormueTilBeskatningIFlereKommuner-grp-2170/ForslagTilFordeling-grp-3010/Kommune-grp-3067">
+                        <xforms:group ref="/Skjema/SelskapMedInntektFormueTilBeskatningIFlereKommuner-grp-2170/ForslagTilFordeling-grp-3010/Kommune-grp-3067">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kommune</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kommune</p>
+                            </xforms:caption>
+                            <xforms:input ref="/Skjema/SelskapMedInntektFormueTilBeskatningIFlereKommuner-grp-2170/ForslagTilFordeling-grp-3010/Kommune-grp-3067/EiendomNaringAnnenKommuneKommunenummerSpesifisertEiendomMv-datadef-17034">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:alert brreg:lang="EN">
+                                    <p>Enter positive integer with four digits</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Kommune</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feltet krever positivt heltall med fire siffer</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Kommune</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Feltet krev positivt heiltal med fire siffer</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/SelskapMedInntektFormueTilBeskatningIFlereKommuner-grp-2170/ForslagTilFordeling-grp-3010/Kommune-grp-3067/InntektNaringFordeltSpesifisertKommune-datadef-13808">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Inntekt før fordelingsfradrag</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Inntekt før fordelingsfrådrag</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/SelskapMedInntektFormueTilBeskatningIFlereKommuner-grp-2170/ForslagTilFordeling-grp-3010/Kommune-grp-3067/FordelingsfradragFordeltSpesifisertKommune-datadef-13810">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Fordelingsfradrag</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Fordelingsfrådrag</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/SelskapMedInntektFormueTilBeskatningIFlereKommuner-grp-2170/ForslagTilFordeling-grp-3010/Kommune-grp-3067/ResultatDeltakerlignetSelskapNettoFordeltSpesifisertKommune-datadef-13812">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Netto innt./undersk.</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>(post 205)</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Netto innt./undersk.</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>(post 205)</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/SelskapMedInntektFormueTilBeskatningIFlereKommuner-grp-2170/ForslagTilFordeling-grp-3010/Kommune-grp-3067/FormuesverdiBruttoFordeltSpesifisertKommune-datadef-13814">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Brutto formue</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Brutto formue</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/SelskapMedInntektFormueTilBeskatningIFlereKommuner-grp-2170/ForslagTilFordeling-grp-3010/Kommune-grp-3067/GjeldFordeltSpesifisertKommune-datadef-13816">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Gjeld til fordeling</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Gjeld til fordeling</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/SelskapMedInntektFormueTilBeskatningIFlereKommuner-grp-2170/ForslagTilFordeling-grp-3010/Kommune-grp-3067/FormuesverdiNettoFordeltSpesifisertKommune-datadef-13818">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Netto formue</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>(post 190)</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Netto formue</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>(post 190)</p>
+                                </xforms:hint>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:repeat>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/FordelingAvFormueVedSkjevEgenkapital-grp-3504">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>IV Fordeling av formue ved skjev egenkapital og beregning av andel av  skattemessig egenkapital pr. 01.01.2006</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>For inntektsåret 2005 må tabellen fylles ut av alle selskaper.  Det  vil si både selskaper der deltakernes egenkapitalkonto er ulik  selskapets egenkapital fordelt etter eierandel, for eksempel på grunn  av forskjellig
+                        privatuttak fra selskapet, og der det ikke foreligger  skjev egenkapitl.  Det skyldes at tabellen er utvidet på grunn av nye  regler for skattlegging av deltakere i ansvarlig selskap mv fra  01.01.2006.  </p>
+                    <p/>
+                    <p>I første kolonne oppgis deltakernes navn.  </p>
+                    <p/>
+                    <p>I andre kolonne oppgis deltakerens fødsels eller  organisasjonsnummer.  </p>
+                    <p/>
+                    <p>I tredje kolonne oppgis nettoformuen, post 206 fordelt etter  eierandel.  </p>
+                    <p/>
+                    <p>I fjerde kolonne føres hver enkelt deltakers (faktiske)  regnskapsmessige egenkapitalkonto i selskapet.  Ved bruk av  Næringsoppgave 1, må en bruke deltakerens skattemessige  egenkapitalkonto (beløpet skal hentes fra både post
+                        9960 og 9970 i  Næringsoppgave 1).  </p>
+                    <p/>
+                    <p>I femte kolonne føres selskapets totale egenkapital slik den fremgår  av Næringsoppgave 1 post 9960 og 9970, eller Næringsoppgave 2 post  9450, fordelt på deltakerne etter eierandel.  NB! Det skal være samme  beløp i sumpostene
+                        i kolonne IV og V.  </p>
+                    <p/>
+                    <p>I sjette kollone fremkommer andel nettoformue etter korreksjon for  ulik egenkapital i selskapet, som summen av kolonne tre og fire,  fratrukket kolonne 5.  Andel nettoformue etter korreksjon overføres  post 101 i RF-1233
+                        Selskapets oppgave over deltakerens formue og  inntekt i ansvarlige selskaper mv og post 101 i RF-1221 Deltakerens  oppgave over formue og inntekt i ansvarlige selskaper mv.  </p>
+                    <p/>
+                    <p>Syvende kolonne er tatt inn på grunn av overgangsregelen for  fastsetting av skjermingsgrunnlag og inngangsverdi for andel i  selskap etablert før 1.1.2006.  Se Finansdepartementets  skattelovforskrift § 10-48 -1.  I syvende
+                        kolonne føres hver  deltakers andel av selskapets skattemessige egenkapital (andel av  post 189, kolonne 1), korrigert for eventuell skjev egenkapital.  Andel av selskapets skattemessige egenkapital etter korreksjon  overføres
+                        post 502 i RF-1221.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>IV Fordeling av formue ved skeiv eigenkapital</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>For inntektsåret 2005 må tabellen fylles ut av alle selskaper.  Det  vil si både selskaper der deltakernes egenkapitalkonto er ulik  selskapets egenkapital fordelt etter eierandel, for eksempel på grunn  av forskjellig
+                        privatuttak fra selskapet, og der det ikke foreligger  skjev egenkapitl.  Det skyldes at tabellen er utvidet på grunn av nye  regler for skattlegging av deltakere i ansvarlig selskap mv fra  01.01.2006.  </p>
+                    <p/>
+                    <p>I første kolonne oppgis deltakernes navn.  </p>
+                    <p/>
+                    <p>I andre kolonne oppgis deltakerens fødsels eller  organisasjonsnummer.  </p>
+                    <p/>
+                    <p>I tredje kolonne oppgis nettoformuen, post 206 fordelt etter  eierandel.  </p>
+                    <p/>
+                    <p>I fjerde kolonne føres hver enkelt deltakers (faktiske)  regnskapsmessige egenkapitalkonto i selskapet.  Ved bruk av  Næringsoppgave 1, må en bruke deltakerens skattemessige  egenkapitalkonto (beløpet skal hentes fra både post
+                        9960 og 9970 i  Næringsoppgave 1).  </p>
+                    <p/>
+                    <p>I femte kolonne føres selskapets totale egenkapital slik den fremgår  av Næringsoppgave 1 post 9960 og 9970, eller Næringsoppgave 2 post  9450, fordelt på deltakerne etter eierandel.  NB! Det skal være samme  beløp i sumpostene
+                        i kolonne IV og V.  </p>
+                    <p/>
+                    <p>I sjette kollone fremkommer andel nettoformue etter korreksjon for  ulik egenkapital i selskapet, som summen av kolonne tre og fire,  fratrukket kolonne 5.  Andel nettoformue etter korreksjon overføres  post 101 i RF-1233
+                        Selskapets oppgave over deltakerens formue og  inntekt i ansvarlige selskaper mv og post 101 i RF-1221 Deltakerens  oppgave over formue og inntekt i ansvarlige selskaper mv.  </p>
+                    <p/>
+                    <p>Syvende kolonne er tatt inn på grunn av overgangsregelen for  fastsetting av skjermingsgrunnlag og inngangsverdi for andel i  selskap etablert før 1.1.2006.  Se Finansdepartementets  skattelovforskrift § 10-48 -1.  I syvende
+                        kolonne føres hver  deltakers andel av selskapets skattemessige egenkapital (andel av  post 189, kolonne 1), korrigert for eventuell skjev egenkapital.  Andel av selskapets skattemessige egenkapital etter korreksjon  overføres
+                        post 502 i RF-1221.</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_FordelingAvFormueVedSkjevEgenkapital-grp-2172" nodeset="/Skjema/FordelingAvFormueVedSkjevEgenkapital-grp-3504/FordelingAvFormueVedSkjevEgenkapital-grp-2172">
+                    <xforms:group ref="/Skjema/FordelingAvFormueVedSkjevEgenkapital-grp-3504/FordelingAvFormueVedSkjevEgenkapital-grp-2172">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fordeling av formue ved skjev egenkapital</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Denne delen skal kun fylles ut av selskaper der andelshavernes  egenkapitalkonti er ulik selskapets egenkapital fordelt etter  eierandel. Dette kan f.eks. skyldes forskjellig privatuttak fra  selskapet. I første kolonne
+                                oppgis deltakernes navn.  </p>
+                            <p>I andre kolonne oppgis deltakerens fødsels- eller organisasjonsnummer.  I tredje kolonne oppgis nettoformuen, post 206, fordelt etter  eierandel.  </p>
+                            <p>I fjerde kolonne føres hver enkelt deltakers (faktiske)  regnskapsmessige egekapitalkonto i selskapet.  Ved bruk av  næringsoppgave 1, må en bruke deltakerens skattemessige  egenkapitalkonto (beløpet skal hentes fra
+                                både post 9960 og 9970 i  Næringsoppgave 1).  </p>
+                            <p>I femte kolonne føres selskapets totale egenkapital slik den fremgår  av Næringsoppgave 1 post 9960 og 9970, eller Næringsoppgave 2 post  9450, fordelt på deltakerne etter eierandel. Det skal være samme  beløp i
+                                sumpostene i kolonne IV og V.  </p>
+                            <p>I sjette kolonne fremkommer andel nettoformue etter korreksjon for  ulik egenkapital i selskapet, som summen av kolonne tre og fire,  fratrukket kolonne fem. Andel nettoformue etter korreksjon overføres  den enkeltes
+                                «Oppgave over deltakerens formue og inntekt», RF-1233 og  RF-1221 post 101.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fordeling av formue ved skeiv eigenkapital</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Denne delen skal berre fyllast ut av selskap der deleigarane sine  eigenkapitalkonti er ulik selskapet sin eigenkapital fordelt etter  eigardel. Dette kan t.d. skyldast ulikt privatuttak frå selskapet.    </p>
+                            <p>I første kolonne fører ein deltakarane sine namn.  </p>
+                            <p>I andre kolonne skal ein gje opp deltakaren sitt fødsels- eller  organisasjonsnummer.  </p>
+                            <p>I tredje kolonne fører ein nettoformuen, post 206, fordelt etter  eigardel.  </p>
+                            <p>I fjerde kolonne fører ein den einskilde deltakar sin (faktiske)  rekneskapsmessige eigenkapitalkonto i selskapet.  Dersom  Næringsoppgåve 1 vert nytta, må ein bruke deltakaren sin  skattemessige eigenkapitalkonto
+                                (beløpet skal hentast frå både post  9960 og 9970 i Næringsoppgåve 1).  </p>
+                            <p>I femte kolonne fører ein selskapet sin totale eigenkapital slik den  går fram av post 9960 og 9970 i Næringsoppgåve 1, eller post 9450 i  Næringsoppgåve 2, fordelt på deltakarane etter eigardel. NB! Det skal  være same
+                                beløp i sumpostane i kolonne IV og V. I sjette kolonne kjem  delen av nettoformue etter korreksjon for ulik eigenkapital i  selskapet fram, som summen av kolonne tre og fire, fråtrekt kolonne  fem.  </p>
+                            <p>Deltakarane sin del av nettoformua etter korreksjon fører ein over i  dei respektive «Oppgåve over deltakaren si formue og inntekt»,  RF-1233 og RF-1221 post 101.</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/FordelingAvFormueVedSkjevEgenkapital-grp-3504/FordelingAvFormueVedSkjevEgenkapital-grp-2172/DeltakerNavnFordelingFormueSpesifisertDeltaker-datadef-13864">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Deltakerens navn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Namnet på deltakaren</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingAvFormueVedSkjevEgenkapital-grp-3504/FordelingAvFormueVedSkjevEgenkapital-grp-2172/DeltakerFodselsnummerOrganisasjonsnummerSpesifisertDeltaker-datadef-17363">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fødselsnr./Org.nr</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fødselsnr./Org.nr</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingAvFormueVedSkjevEgenkapital-grp-3504/FordelingAvFormueVedSkjevEgenkapital-grp-2172/FormueNettoEierandelSpesifisertDeltaker-datadef-1073">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Selskapets nettoformue fordelt på deltakeren etter eierandel</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Jf. post 206</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Selskapet si nettoformue fordelt på deltakarane etter eigardel</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Jf. post 206</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingAvFormueVedSkjevEgenkapital-grp-3504/FordelingAvFormueVedSkjevEgenkapital-grp-2172/EgenkapitalkontoSpesifisertDeltaker-datadef-3066">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Deltakerens egenkapital-konto i selskapet</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Deltakaren sin eigenkapitalkonto i selskapet</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingAvFormueVedSkjevEgenkapital-grp-3504/FordelingAvFormueVedSkjevEgenkapital-grp-2172/EgenkapitalSpesifisertDeltaker-datadef-3067">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Selskapets totale egenkapital, fordelt på deltakerne etter eierandel</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Selskapets totale eigenkapital, delt på deltakarane etter eigerdel</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingAvFormueVedSkjevEgenkapital-grp-3504/FordelingAvFormueVedSkjevEgenkapital-grp-2172/FormueNettoAndelKorrigertSpesifisertDeltaker-datadef-3068">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Andel nettoformue etter korreksjon for skjev egenkapital</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Andel nettoformue etter korreksjon for skeiv eigenkapital</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:group ref="/Skjema/FordelingAvFormueVedSkjevEgenkapital-grp-3504/Sum-grp-2467">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/FordelingAvFormueVedSkjevEgenkapital-grp-3504/Sum-grp-2467/Egenkapitalkonti-datadef-8327">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingAvFormueVedSkjevEgenkapital-grp-3504/Sum-grp-2467/EgenkapitalSkjev-datadef-16175">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingAvFormueVedSkjevEgenkapital-grp-3504/Sum-grp-2467/FormueNettoKorrigert-datadef-13865">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/inngangsverdi-grp-5622">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>V. Opplysninger til bruk for beregning av inngangsverdi mv på andel</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>V. Opplysningar til bruk for berekning av inngangsverdi mv på andel</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_deltakeroversikt-grp-5623" nodeset="/Skjema/inngangsverdi-grp-5622/deltakeroversikt-grp-5623">
+                    <xforms:group ref="/Skjema/inngangsverdi-grp-5622/deltakeroversikt-grp-5623">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beregning av inngangsverdi mv på andel pr. deltaker</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Beregning av inngangsverdi mv på andel pr. deltaker</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/inngangsverdi-grp-5622/deltakeroversikt-grp-5623/DeltakerNavnBeregningInngangsverdiSpesifisertDeltaker-datadef-24553">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Deltakers navn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Deltakars navn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/inngangsverdi-grp-5622/deltakeroversikt-grp-5623/DeltakerFodselsnummerOrganisasjonsnummerVerdiAndelSpesifisert-datadef-24554">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fødselsnr./Org.nr</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fødselsnr./Org.nr</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/inngangsverdi-grp-5622/deltakeroversikt-grp-5623/EgenkapitalSkattemessigKorrigertSpesifisertDeltaker-datadef-23802">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Andel skattemessig egenkapital beregnet etter eierandel pr. 31.12.2005  med justering for skjev egenkapital</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Andel skattemessig eigenkapital beregnet etter eigardel pr. 31.12.2005  med justering for skjev eigenkapital</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/inngangsverdi-grp-5622/EgenkapitalSkattemessigKorrigert-datadef-23801">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OvrigeOpplysninger-grp-2177">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>VI. Øvrige opplysninger</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>VI.  Øvrige opplysningar</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/OvrigeOpplysninger-grp-2177/Delingsforetak-datadef-1023">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Er selskapet delingspliktig?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Er selskapet delingspliktig?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/OvrigeOpplysninger-grp-2177/EnhetNaringRederi-datadef-23862">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Er selskapet et rederi?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Er selskapet et rederi?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/OvrigeOpplysninger-grp-2177/EnhetLiberaltYrke-datadef-17000">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Driver selskapet liberal virksomhet?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Driv selskapet liberalverksemd?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/OvrigeOpplysninger-grp-2177/EnhetFormueVirksomhetFlereKommuner-datadef-17171">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Har selskapet formue/virksomhet i flere kommuner?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Har selskapet formue/verksemd i fleire kommunar?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/OvrigeOpplysninger-grp-2177/FusjonFisjon-datadef-5651">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Har selskapet fusjonert/fisjonert i løpet av året?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Har selskapet fusjonert/fisjonert i inntektsåret?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/OvrigeOpplysninger-grp-2177/EnhetStiftetOmdannelse-datadef-13819">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Er selskapet stiftet ved omdannelse?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Er selskapet stifta ved omdanning?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/OvrigeOpplysninger-grp-2177/FormueInntektFordelt-datadef-13820">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Er formue og inntekt fordelt iht. eierandel?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Er formue og inntekt fordelt iht. eigardel?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/OvrigeOpplysninger-grp-2177/TransaksjonerMellomDeltakerSelskap-datadef-13821">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Har det vært transaksjoner som f.eks. overdragelse/leieforhold mellom  selskap og deltakere?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Har det vore transaksjoner, som t.d. overdragelse/leigeforhald mellom  selskap og deltakarar?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/OvrigeOpplysninger-grp-2177/DeltagerNaturalytelser-datadef-17175">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Har deltakerne mottatt naturalytelser fra selskapet, for eksempel fri  bil?</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Opplysninger gis på eget vedlegg</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Har deltakarane motteke naturalytingar frå selskapet, for eksempel fri  bil?</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Opplysningar må gis på eigne vedlegg</p>
+                    </xforms:hint>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/OvrigeOpplysninger-grp-2177/DeltakerRederiSkatteloven810-datadef-22062">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Dersom selskapet er rederi, har selskapet deltakere innen sktl. §8-10?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Dersom selskapet er reiarlag, har selskapet deltakarar innen sktl.  §8-10?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

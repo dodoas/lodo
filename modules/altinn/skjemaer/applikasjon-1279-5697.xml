@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RA-0613: Priser og volumtall til prisindeks på ruteflyging</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1279-5698.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/Enhet-grp-6503/Enhetsinformasjon-grp-6504/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Enhet-grp-6503/Enhetsinformasjon-grp-6504/EnhetPostadresse-datadef-14"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Enhet-grp-6503/Enhetsinformasjon-grp-6504/EnhetOrganisasjonsnummer-datadef-18"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Enhet-grp-6503/Enhetsinformasjon-grp-6504/EnhetNACEKode-datadef-5133"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Enhet-grp-6503/Enhetsinformasjon-grp-6504/EnhetPostadressePostnummer-datadef-11400"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Enhet-grp-6503/Enhetsinformasjon-grp-6504/EnhetPostadressePoststed-datadef-11401"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RA-0613. Priser og volumtall til prisindeks på ruteflyging</p>
+            </xforms:caption>
+            <xforms:caption brreg:lang="NON">
+                <p>RA-0613. Priser og volumtall til prisindeks på ruteflyging</p>
+            </xforms:caption>
+            <xforms:group ref="/Skjema/Enhet-grp-6503">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Enhet</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Einhet</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Enhet-grp-6503/Enhetsinformasjon-grp-6504">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Enhetsinformasjon</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Einhetsinformasjon</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Enhet-grp-6503/Enhetsinformasjon-grp-6504/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Enhetens navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Enhetens navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Enhet-grp-6503/Enhetsinformasjon-grp-6504/EnhetPostadresse-datadef-14">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Enhet-grp-6503/Enhetsinformasjon-grp-6504/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Enhet-grp-6503/Enhetsinformasjon-grp-6504/EnhetNACEKode-datadef-5133">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Næring</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Næring</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Enhet-grp-6503/Enhetsinformasjon-grp-6504/EnhetPostadressePostnummer-datadef-11400">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Enhet-grp-6503/Enhetsinformasjon-grp-6504/EnhetPostadressePoststed-datadef-11401">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Enhet-grp-6503/Enhetsinformasjon-grp-6504/EnhetNavnEndring-datadef-31">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Endring navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Endring namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Enhet-grp-6503/Enhetsinformasjon-grp-6504/EnhetPostadresseEndring-datadef-11878">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Endring postadresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Endring postadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Enhet-grp-6503/Enhetsinformasjon-grp-6504/EnhetPostadressePostnummerEndring-datadef-15436">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Endring postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Endring postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Enhet-grp-6503/Enhetsinformasjon-grp-6504/EnhetPostadressePoststedEndring-datadef-15437">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Endring poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Endring poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Enhet-grp-6503/Enhetsinformasjon-grp-6504/EnhetNaceEndring-datadef-23075">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Endring næring</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Endring næring</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Enhet-grp-6503/Oppgaveperiode-grp-6505">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgaveperiode</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Oppgaveperiode</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Enhet-grp-6503/Oppgaveperiode-grp-6505/RapportAr2006-datadef-27425">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>År</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>År</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Enhet-grp-6503/Oppgaveperiode-grp-6505/RapportManed-datadef-21308">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Måned</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Måned</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Flyvninger-grp-6506">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Flyvninger</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Flyvninger</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_Flyvning-grp-6507" nodeset="/Skjema/Flyvninger-grp-6506/Flyvning-grp-6507">
+                    <xforms:group ref="/Skjema/Flyvninger-grp-6506/Flyvning-grp-6507">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Flyvning</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Flyvning</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Flyvninger-grp-6506/Flyvning-grp-6507/BilletterBookingklasse-datadef-26843">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bookingklasse</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Bookingklasse</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Flyvninger-grp-6506/Flyvning-grp-6507/BilletterBookingklasseSolgteAntall-datadef-26844">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Antall solgte billetter</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Antall solgte billetter</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Flyvninger-grp-6506/Flyvning-grp-6507/BilletterBookingklassePris-datadef-26845">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Billett pris</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Billett pris</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Flyvninger-grp-6506/Flyvning-grp-6507/TilFlyplass-datadef-26846">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Til flyplass</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Til flyplass</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Flyvninger-grp-6506/Flyvning-grp-6507/FraFlyplass-datadef-26847">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fra flyplass</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fra flyplass</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Tilleggsopplysninger-grp-6508">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Tilleggsopplysninger</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Tilleggsopplysninger</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Tilleggsopplysninger-grp-6508/Tilleggsopplysninger-datadef-7683">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Merknader</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Merknadar</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

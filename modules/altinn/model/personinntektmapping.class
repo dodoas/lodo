@@ -1,0 +1,206 @@
+<?php
+class PersonInntektMapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+        //print ("Accouint: ". $a . "khlk: ". $h);
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+           			$this->ORID[$item] = $v;
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+            	$item = $this->Account[$a];
+            	$this->ORID[$item] = $v;
+	            return 1;
+    	    }
+       	}
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+	{  
+        $this->addMapping('D1', 'EnhetNavn-datadef-1', 'VName');
+        $this->addMapping('D26', 'OppgavegiverFodselsnummer-datadef-26', 'SocialSecurityID');
+        $this->addMapping('D18', 'EnhetOrganisasjonsnummer-datadef-18', 'OrgNumber');
+        $this->addMapping('D15', 'EnhetAdresse-datadef-15', 'VAddress');
+        $this->addMapping('D6673', 'EnhetPostnummer-datadef-6673', 'VZipCode');
+        $this->addMapping('D6674', 'EnhetPoststed-datadef-6674', 'VCity');
+        $this->addMapping('D19812', 'EnhetNaringType-datadef-19812', 'NaringType');
+        $this->addMapping('D20284', 'EnhetNaringSpesifisert-datadef-20284', 'Category');
+        $this->addMapping('D280', 'RegnskapsforerNavn-datadef-280', 'FVName');
+        $this->addMapping('D281', 'RegnskapsforerAdresse-datadef-281', 'FVAddress');
+        $this->addMapping('D6678', 'RegnskapsforerPostnummer-datadef-6678', 'FVZipCode');
+        $this->addMapping('D6679', 'RegnskapsforerPoststed-datadef-6679', 'FVCity');
+        $this->addMapping('D19813', 'EnhetNaringsinntektSkattepliktig-datadef-19813', 'D1.1');
+        $this->addMapping('D19814', 'RentekostnaderTillegg-datadef-19814', 'D1.11');
+        $this->addMapping('D19815', 'GevinstTapskontoKostnadfortTillegg-datadef-19815', 'D1.12');
+        $this->addMapping('D19816', 'UnderskuddAndelDATillegg-datadef-19816', 'D1.13');
+        $this->addMapping('D19818', 'KapitalkostnaderTapAndreTillegg-datadef-19818', 'D1.14');
+        $this->addMapping('D19819', 'RenteinntekterFradrag-datadef-19819', 'D1.15');
+        $this->addMapping('D19820', 'GevinstTapskontoInntektsfortFradrag-datadef-19820', 'D1.16');
+        $this->addMapping('D19821', 'OverskuddAndelDAFradrag-datadef-19821', 'D1.17');
+        $this->addMapping('D19822', 'ReduksjonsbelopEiendomLeidInnskudd-datadef-19822', 'D1.18');
+        $this->addMapping('D19823', 'PrimarnaringKorreksjonFradrag-datadef-19823', 'D1.19');
+        $this->addMapping('D19824', 'KapitalinntekterGevinsterAndreFradrag-datadef-19824', 'D1.20');
+        $this->addMapping('D19825', 'EnhetNaringsinntektPersoninntektGrunnlag-datadef-19825', 'D1.21');
+        $this->addMapping('D7513', 'KontormaskinerMvKapitalavkastningVerdsettelsesmetode-datadef-7513', 'V2.1a');
+        $this->addMapping('D7516', 'ForretningsverdiErvervetKapitalavkastningVerdsettelsesmetode-datadef-7516', 'V2.1b');
+        $this->addMapping('D7519', 'VogntogLastebilerMvKapitalavkastningVerdsettelsesmetode-datadef-7519', 'V2.1c');
+        $this->addMapping('D7522', 'PersonbilerTraktorerMvKapitalavkastningVerdsettelsesmetode-datadef-7522', 'V2.1d');
+        $this->addMapping('D7525', 'SkipFartoyerRiggerMvKapitalavkasningVerdsettelsesmetode-datadef-7525', 'V2.1e');
+        $this->addMapping('D7528', 'FlyHelikopterKapitalavkastningVerdsettelsesmetode-datadef-7528', 'V2.1f');
+        $this->addMapping('D19404', 'AnleggKraftoverforingKapitalavkastningVerdsettelsesmetode-datadef-19404', 'V2.1g');
+        $this->addMapping('D7531', 'ByggAnleggKapitalavkastningVerdsettelsesmetode-datadef-7531', 'V2.1h');
+        $this->addMapping('D7534', 'ForretningsbyggKapitalavkastningVerdsettelsesmetode-datadef-7534', 'V2.1i');
+        $this->addMapping('D11242', 'DriftsmiddelAvskrivningLineartVerdsettingsmetode-datadef-11242', 'V2.1j');
+        $this->addMapping('D7514', 'KontormaskinerMvKapitalavkastningInngaendeVerdi-datadef-7514', 'F2.1a');
+        $this->addMapping('D7517', 'ForretningsverdiErvervetKapitalavkastningInngaendeVerdi-datadef-7517', 'F2.1b');
+        $this->addMapping('D7520', 'VogntogLastebilerMvKapitalavkastningInngaendeVerdi-datadef-7520', 'F2.1c');
+        $this->addMapping('D7523', 'PersonbilerTraktorerMvKapitalavkastningInngaendeVerdi-datadef-7523', 'F2.1d');
+        $this->addMapping('D7526', 'SkipFartoyerRiggerMvKapitalavkasningInngaendeVerdi-datadef-7526', 'F2.1e');
+        $this->addMapping('D7529', 'FlyHelikopterKapitalavkastningInngaendeVerdi-datadef-7529', 'F2.1f');
+        $this->addMapping('D17100', 'AnleggKraftoverforingKapitalavkastningInngaendeVerdi-datadef-17100', 'F2.1g');
+        $this->addMapping('D7532', 'ByggAnleggKapitalavkastningInngaendeVerdi-datadef-7532', 'F2.1h');
+        $this->addMapping('D7535', 'ForretningsbyggKapitalavkastningInngaendeVerdi-datadef-7535', 'F2.1i');
+        $this->addMapping('D11243', 'DriftsmidlerAvskrivningLineartInngaendeVerdi-datadef-11243', 'F2.1j');
+        $this->addMapping('D7515', 'KontormaskinerMvKapitalavkastningUtgaendeVerdi-datadef-7515', 'D2.1a');
+        $this->addMapping('D7518', 'ForretningsverdiErvervetKapitalavkastningUtgaendeVerdi-datadef-7518', 'D2.1b');
+        $this->addMapping('D7521', 'VogntogLastebilerMvKapitalavkastningUtgaendeVerdi-datadef-7521', 'D2.1c');
+        $this->addMapping('D7524', 'PersonbilerTraktorerMvKapitalavkastningUtgaendeVerdi-datadef-7524', 'D2.1d');
+        $this->addMapping('D7527', 'SkipFartoyerRiggerMvKapitalavkasningUtgaendeVerdi-datadef-7527', 'D2.1e');
+        $this->addMapping('D7530', 'FlyHelikopterKapitalavkastningUtgaendeVerdi-datadef-7530', 'D2.1f');
+        $this->addMapping('D17101', 'AnleggKraftoverforingKapitalavkastningUtgaendeVerdi-datadef-17101', 'D2.1g');
+        $this->addMapping('D7533', 'ByggAnleggKapitalavkastningUtgaendeVerdi-datadef-7533', 'D2.1h');
+        $this->addMapping('D7536', 'ForretningsbyggKapitalavkastningUtgaendeVerdi-datadef-7536', 'D2.1i');
+        $this->addMapping('D11244', 'DriftsmiddelAvskrivningLineartUtgaendeVerdi-datadef-11244', 'D2.1j');
+        $this->addMapping('D7537', 'DriftsmidlerIkkeAvskrivbareKapitalavkastningVerdsettelsesmetode-datadef-7537', 'V2.2');
+        $this->addMapping('D7540', 'ImmaterielleRettigheterErvervedeKapitalavkVerdsettelsesmetode-datadef-7540', 'V2.3');
+        $this->addMapping('D7543', 'FoUKostnaderKapitalavkastningVerdsettelsesmetode-datadef-7543', 'V2.4');
+        $this->addMapping('D7546', 'VarerKapitalavkastningVerdsettelsesmetode-datadef-7546', 'V2.5');
+        $this->addMapping('D7549', 'KundefordringerKapitalavkastningVerdsettelsesmetode-datadef-7549', 'V2.6');
+        $this->addMapping('D7538', 'DriftsmidlerIkkeAvskrivbareKapitalavkastningInngaendeVerdi-datadef-7538', 'F2.2');
+        $this->addMapping('D7541', 'ImmaterielleRettigheterErvervedeKapitalavkInngaendeVerdi-datadef-7541', 'F2.3');
+        $this->addMapping('D7544', 'FoUKostnaderKapitalavkastningInngaendeVerdi-datadef-7544', 'F2.4');
+        $this->addMapping('D7547', 'VarerKapitalavkastningInngaendeVerdi-datadef-7547', 'F2.5');
+        $this->addMapping('D7550', 'KundefordringerKapitalavkastningInngaendeVerdi-datadef-7550', 'F2.6');
+        $this->addMapping('D7552', 'EiendelerKapitalavkastningInngaendeVerdi-datadef-7552', 'F2.7');
+        $this->addMapping('D7554', 'LeverandorgjeldKundeforskuddKapitalavkastningInngaendeVerdi-datadef-7554', 'F2.8');
+        $this->addMapping('D7556', 'KapitalavkastningsgrunnlagInngaendeVerdi-datadef-7556', 'F2.9');
+        $this->addMapping('D7539', 'DriftsmidlerIkkeAvskrivbareKapitalavkastningUtgaendeVerdi-datadef-7539', 'D2.2');
+        $this->addMapping('D7542', 'ImmaterielleRettigheterErvervedeKapitalavkUtgaendeVerdi-datadef-7542', 'D2.3');
+        $this->addMapping('D7545', 'FoUKostnaderKapitalavkastningUtgaendeVerdi-datadef-7545', 'D2.4');
+        $this->addMapping('D7548', 'VarerKapitalavkastningUtgaendeVerdi-datadef-7548', 'D2.5');
+        $this->addMapping('D7551', 'KundefordringerKapitalavkastningUtgaendeVerdi-datadef-7551', 'D2.6');
+        $this->addMapping('D7553', 'EiendelerKapitalavkastningUtgaendeVerdi-datadef-7553', 'D2.7');
+        $this->addMapping('D7555', 'LeverandorgjeldKundeforskuddKapitalavkastningUtgaendeVerdi-datadef-7555', 'D2.8');
+        $this->addMapping('D7557', 'KapitalavkastningsgrunnlagUtgaendeVerdi-datadef-7557', 'D2.9');
+        $this->addMapping('D2028', 'KapitalavkastningGrunnlag-datadef-2028', 'D2.10');
+        $this->addMapping('D7675', 'Kapitalavkastingsrate-datadef-7675', 'D2.11b');
+        $this->addMapping('D1818', 'DriftTidsrom-datadef-1818', 'D2.11c');
+        $this->addMapping('D7558', 'KapitalavkastningBeregnet-datadef-7558', 'D2.12');
+        $this->addMapping('D2029', 'PersoninntektForelopigBeregnet-datadef-2029', 'D3');
+        $this->addMapping('D2030', 'AktiveTilordnesPersoninntektAntall-datadef-2030', '4.1');
+        $this->addMapping('D2031', 'AktiveEierandel-datadef-2031', '4.2');
+        $this->addMapping('D2032', 'AktiveOverskuddUtbytteRettTilSamlet-datadef-2032', '4.3');
+        $this->addMapping('D2033', 'AktivNavn-datadef-2033', '4.4a');
+        $this->addMapping('D2034', 'AktivKommune-datadef-2034', '4.4b');
+        $this->addMapping('D2035', 'AktivFodselsnummer-datadef-2035', '4.4c');
+        $this->addMapping('D2036', 'AktivOverskuddUtbytteRettTil-datadef-2036', '4.4d');
+        $this->addMapping('D2037', 'AktivIdentifikasjonNavnSpesifisert-datadef-2037', '4.5a');
+        $this->addMapping('D2038', 'AktivIdentifikasjonFodselsnummerSpesifisert-datadef-2038', '4.5b');
+        $this->addMapping('D13697', 'AktivIdentifikasjonOrganisasjonsnummerSpesifisert-datadef-13697', '4.5c');
+        $this->addMapping('D2039', 'AktivIdentifikasjonOverskuddUtbytteSpesifisert-datadef-2039', '4.5d');
+        $this->addMapping('D7559', 'AktivOverskuddUtbytteEgenAndel-datadef-7559', 'D4.8');
+        $this->addMapping('D7560', 'AktivOverskuddUtbytteTotalUtbytteandel-datadef-7560', 'D4.9');
+        $this->addMapping('D11248', 'AndelerEktefelle-datadef-11248', '');
+        $this->addMapping('D7562', 'PersoninntektLonnsfradragBeregningsgrunnlag-datadef-7562', 'D6.1');
+        $this->addMapping('D7563', 'LonnsfradragForetak-datadef-7563', 'D6.2');
+        $this->addMapping('D13076', 'AktivAndelFellesBedriftSelskap-datadef-13076', 'D7.3');
+        $this->addMapping('D7561', 'PersoninntektAktiv-datadef-7561', 'D7.4');
+        $this->addMapping('D7575', 'PersoninntektLonnAnnenGodtgjorelseAktiv-datadef-7575', 'D7.6');
+        $this->addMapping('D7564', 'PersoninntektAktivForelopigAndel-datadef-7564', 'D7.7');
+        $this->addMapping('D7565', 'PersoninntektLonnsfradrag-datadef-7565', 'D7.9');
+        $this->addMapping('D7566', 'PersoninntektLonnsfradragAktiv-datadef-7566', 'D7.10');
+        $this->addMapping('D13698', 'PersoninntektLonnsfradragMinsteBelop-datadef-13698', 'D7.11');
+        $this->addMapping('D7567', 'PersoninntektBeregnetIInntektsaret-datadef-7567', 'D7.12');
+        $this->addMapping('D1456', 'GodtgjorelseDeltakerlignetSelskap-datadef-1456', 'D7.13');
+        $this->addMapping('D2041', 'PersoninntektFremforbarNegativTidligereAr-datadef-2041', 'D7.14');
+        $this->addMapping('D7569', 'PersoninntektForSamordning-datadef-7569', 'D7.15');
+        $this->addMapping('D2043', 'PersoninntektNegativAnnenNaringFradrag-datadef-2043', 'D7.16');
+        $this->addMapping('D7568', 'PersoninntektNegativAnnenNaringTillegg-datadef-7568', 'D7.17');
+        $this->addMapping('D7572', 'PersoninntektBeregnetKorrigert-datadef-7572', 'D7.18');
+        $this->addMapping('D19826', 'PersoninntektPrimarnaringBeregnet-datadef-19826', 'D7.20');
+        $this->addMapping('D19829', 'ArbeidsgodtgjorelsePrimarnaringBeregnet-datadef-19829', 'D7.23');
+        $this->addMapping('D19827', 'PersoninntektLiberalVirksomhetBeregnet-datadef-19827', 'D7.21');
+        $this->addMapping('D19830', 'ArbeidsgodtgjorelseLiberaltVirksomhetBeregnet-datadef-19830', 'D7.24');
+        $this->addMapping('D19828', 'PersonimmtektNaringAnnenBeregnet-datadef-19828', 'D7.22');
+        $this->addMapping('D19831', 'ArbeidsinntektNaringAnnenBeregnet-datadef-19831', 'D7.25');
+	}
+ }
+?>

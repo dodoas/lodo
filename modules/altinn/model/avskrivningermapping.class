@@ -1,0 +1,165 @@
+<?php
+class AvskrivningerMapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+    }
+    
+     function addArrayMapping($o, $h, $_arrayOfValues)
+    {
+        $this->Human[$o] = $h;
+        
+        foreach (arrayOfValues as $a => $v )
+        	$this->Account[$a][] = $o;
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+           			$this->ORID[$item] = $v;
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+            	$item = $this->Account[$a];
+            	$this->ORID[$item] = $v;
+	            return 1;
+    	    }
+       	}
+    }
+    
+    function setArrayAccount($a, $_arrayOfValues)
+    {
+        if($this->Account[$a] == '')
+        {
+            $this->ORID['FEIL: '.$a] = $v;
+            return 0;
+        }
+        else
+        { 	if (is_array($_arrayOfValues)) {
+        		foreach ($_arrayOfValues as $index => $v) {
+        			$this->ORID[$this->Account[$a]][$index]=$v;
+        		}
+            } 
+            else {
+            	$this->ORID[$this->Account[$a]] = $v;
+        	}
+            return 1;
+        }
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+	{
+        $this->addMapping('D1', 'EnhetNavn-datadef-1', 'VName');
+		$this->addMapping('D18', 'EnhetOrganisasjonsnummer-datadef-18', 'OrgNumber');
+		$this->addMapping('D15', 'EnhetAdresse-datadef-15', 'VAddress');
+		$this->addMapping('D26', 'OppgavegiverFodselsnummer-datadef-26', 'SocialSecurityID');
+		$this->addMapping('D6673', 'EnhetPostnummer-datadef-6673', 'VZipCode');
+		$this->addMapping('D6674', 'EnhetPoststed-datadef-6674', 'VCity');
+		$this->addMapping('D19895', 'EnhetAvskrivningKommunenummer-datadef-19895', 'CompanyMunicipality');
+		$this->addMapping('D19896', 'EnhetAvskrivningKommunenavn-datadef-19896', 'CompanyMunicipalityName');
+		$this->addMapping('D280', 'RegnskapsforerNavn-datadef-280', 'FVName');
+		$this->addMapping('D281', 'RegnskapsforerAdresse-datadef-281', 'FVAddress');
+		$this->addMapping('D6678', 'RegnskapsforerPostnummer-datadef-6678', 'FVZipCode');
+		$this->addMapping('D6679', 'RegnskapsforerPoststed-datadef-6679', 'FVCity');
+		$this->addMapping('D3651', 'RegnskapsforerOrganisasjonsnummer-datadef-3651', 'FOrgNumber');
+		$this->addMapping('D19413', 'SaldoavskrivningSameie-datadef-19413', 'SaldoavskrivningSameie');
+		$this->addMapping('D352', 'SaldoGruppeSpesifisert-datadef-352', 'SaldoGruppe');
+		$this->addMapping('D7665', 'SaldoNummerSpesifisertSaldogruppe-datadef-7665', 'SaldoNr');
+		$this->addMapping('D17149', 'EnhetPrimarnaringSpesifisertSaldo-datadef-17149', 'TypeNaering');
+		$this->addMapping('D19678', 'SaldoavskrivningAvskrivningssats-datadef-19678', 'Avskrivningssats');
+		$this->addMapping('D6916', 'SaldoGrunnlagInngaendeSpesifisertSaldogruppe-datadef-6916', '102');
+		$this->addMapping('D370', 'DriftsmidlerNedskrevetVerdiSpesifisertSaldogruppe-datadef-370', '103');
+		$this->addMapping('D6913', 'DriftsmidlerNyanskaffelserKostprisSpesifisertSaldogruppe-datadef-6913', '104a');
+		$this->addMapping('D6911', 'DriftsmidlerPakostningerSpesifisertSaldogruppe-datadef-6911', '104b');
+		$this->addMapping('D356', 'DriftsmidlerSalgsgevinstNedskrivingSpesifisertSaldogruppe-datadef-356', '104c');
+		$this->addMapping('D6912', 'TilskuddOffentligeSpesifisertSaldogruppe-datadef-6912', '104d');
+		$this->addMapping('D6907', 'DriftsmidlerSaldogrunnlagForRealisasjonSpesifisertSaldogruppe-datadef-6907', '105');
+		$this->addMapping('D6914', 'DriftsmidlerUttakVederlagSpesifisertSaldogruppe-datadef-6914', '106');
+		$this->addMapping('D6908', 'DriftsmidlerVederlagInntektsfortSpesifisertSaldogruppe-datadef-6908', '107');
+		$this->addMapping('D362', 'DriftsmidlerSaldoavskrivningGrunnlagSpesifisertSaldogruppe-datadef-362', '108');
+		$this->addMapping('D6915', 'DriftsmidlerGevinstTapskontoOverfortSpesifisertSaldogruppe-datadef-6915', '109');
+		$this->addMapping('D6695', 'DriftsmidlerSaldoavskrivningSpesifisertSaldogruppe-datadef-6695', '110');
+		$this->addMapping('D365', 'SaldoGrunnlagSpesifisertSaldogruppe-datadef-365', '111');
+		$this->addMapping('D11733', 'ForretningsbyggGardsnummerSpesifisertBygg-datadef-11733', '112a');
+		$this->addMapping('D11734', 'ForretningsbyggBruksnummerSpesifisertBygg-datadef-11734', '112a');
+		$this->addMapping('D11735', 'ForretningsbyggSeksjonsnummerSpesifisertBygg-datadef-11735', '112a');
+		$this->addMapping('D11736', 'ForretningsbyggAdresseSpesifisertBygg-datadef-11736', '112b');
+		$this->addMapping('D367', 'ForretningsbyggKostprisSpesifisertBygg-datadef-367', '113');
+		$this->addMapping('D368', 'ForretningsbyggNedskrevetVerdiSpesifisertBygg-datadef-368', '114');
+		$this->addMapping('D369', 'ForretningsbyggAvskrivningNedreGrenseSpesifisertBygg-datadef-369', '115');
+		$this->addMapping('D7686', 'ObjektNummer-datadef-7686', '120a');
+		$this->addMapping('D17150', 'EnhetPrimarnaringSpesifisertObjekt-datadef-17150', '120b');
+		$this->addMapping('D6909', 'DriftsmidlerBeskrivelseSpesifisertObjekt-datadef-6909', '120c');
+		$this->addMapping('D6917', 'DriftsmidlerInnkjopsarSpesifisertObjekt-datadef-6917', '120d');
+		$this->addMapping('D6918', 'DriftsmidlerLevetidSpesifisertObjekt-datadef-6918', '120e');
+		$this->addMapping('D6919', 'DriftsmidlerKostprisSpesifisertObjekt-datadef-6919', '120f');
+		$this->addMapping('D6910', 'DriftsmidlerAvskrivningLinearSpesifisertObjekt-datadef-6910', '120g');
+		$this->addMapping('D6920', 'DriftsmidlerNedskrevetVerdiSpesifisertObjekt-datadef-6920', '120h');
+
+        
+	}
+ }
+?>

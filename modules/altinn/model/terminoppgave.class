@@ -1,0 +1,443 @@
+<?
+
+#Usage
+# new TerminOppgave(array('fromPeriod'=>'2004-01', 'toPeriod'=>'2004-12'))
+#Ikke periode 13???);
+#
+
+class TerminOppgave
+{
+	var $_db;
+	
+    var $_report;
+    var $_altinnMapping;
+    var $_generalReport;
+    var $_comanyInfo;
+
+    var $_sumLine;
+    var $_sumPart;
+    var $_sumGroup;
+    var $_sumTotal;
+    var $_total;
+
+    var $_fromPeriod;
+    var $_toPeriod;
+    var $_period;
+    var $_year;
+    var $_termin;
+    var $_terminitem;
+    
+    var $AKSJESELSKAP=1;
+    var $SELVSTENDIGNAERINGSDRIVENDE=2;
+    
+    var $COMPANY_TYPE=1;
+    
+    var $_kommuneList=array();
+    var $_kommuneNavnList=array();
+    var $_soneList=array();
+    var $_avgiftGrunnlagList=array();
+    var $_satsList=array();
+    var $_sats62List=array();
+    var $_mappingSatsList=array();
+    var $_mappingSats62List=array();
+    var $_birthdateList=array();
+    var $_under62ArGrunnlagList=array();
+    var $_over62ArGrunnlagList=array();
+    var $_beregnetAvgiftList=array();
+    var $_beregnetAvgift62List=array();
+    var $_forskuddTrekkList=array();
+    
+    var $_avgiftList=array();
+    var $_avgift62List=array();
+    var $_forskuddList=array();
+ 
+
+    ############################################################################
+    function TerminOppgave($args)
+    {
+        global $_SETUP, $_date;
+        require_once $_SETUP['HOME_DIR']."/code/lodo/lib/altinnmapping.class";
+        includelogic('report/general');
+        includelogic('company/companyinfo');
+
+        $this->_enableLastYear = $args['enableLastYear'] = 1;
+        $this->_report         = $args['report'];
+        $this->_db             = $args['db'];
+        $this->_year           = $args['year'];
+        $this->_termin         = $args['termin'];
+        $this->_terminitem     = $args['terminitem'];
+        
+        //$this->_period=$args['year'].'-0'.$args['termin'];
+        
+        if (1){
+        switch ($args['termin']) {
+        	case 1: $this->_fromPeriod=$args['year'].'-01';
+        	        $this->_toPeriod=$args['year'].'-02';
+        	    break;
+        	case 2:$this->_fromPeriod=$args['year'].'-03';
+        	        $this->_toPeriod=$args['year'].'-04';
+        	    break;
+        	case 3:
+        	       $this->_fromPeriod=$args['year'].'-05';
+        	        $this->_toPeriod=$args['year'].'-06';
+        	    break;
+        	case 4:
+        	       $this->_fromPeriod=$args['year'].'-07';
+        	        $this->_toPeriod=$args['year'].'-08';
+        	    break;
+        	case 5:
+        	       $this->_fromPeriod=$args['year'].'-09';
+        	        $this->_toPeriod=$args['year'].'-10';
+        	    break;
+        	case 6:
+        	       $this->_fromPeriod=$args['year'].'-11';
+        	        $this->_toPeriod=$args['year'].'-12';
+        	    break;
+        	default: break;
+        }
+        }
+		//Init the mapping list for this report
+        $this->_altinnMapping  = new AltinnMapping($this->_report);
+        
+        //Get the inforamtion of the company
+        $this->_comanyInfo     = new ComanyInfo(array());
+        $args['company_type']=  $this->_comanyInfo->CustomerCompany->ShareValue
+                               +$this->_comanyInfo->CustomerCompany->ShareNumber;
+        
+        if ($args['company_type']>0) {
+        	$this->COMPANY_TYPE=$this->AKSJESELSKAP;
+        }else $this->COMPANY_TYPE=$this->SELVSTENDIGNAERINGSDRIVENDE;
+        
+        $this->avgift ();
+        $this->forskuddTrekk ();
+        
+        //Generate the report
+        $this->_generalReport  = new GeneralReport(array($args));
+
+        $this->_year       = $args['year'];
+
+        //$this->_altinnMapping->Selvangivelse2Mapping();
+        $this->BuildCompanyInfo();
+        //list($this->_sumLine, $this->_sumPart, $this->_sumGroup, $this->_sumTotal, $this->_total) = $this->_generalReport->GetReport($args);
+        
+        
+        //Start the mapping process by assocating the values to the right
+        //ORID
+        $this->InsertMapping();
+        
+        
+        //Start the special calculation for this report
+        //$this->setAccount('2.10', $this->getAccount('D2.9')+$this->getAccount('F2.9'));
+    }
+
+    ############################################################################
+    function BuildCompanyInfo()
+    {
+        $this->setAccount('VName',       $this->_comanyInfo->CustomerCompany->VName);
+        $this->setAccount('VAddress',    $this->_comanyInfo->CustomerCompany->VAddress);
+        $this->setAccount('VZipCode',    $this->_comanyInfo->CustomerCompany->VZipCode);
+        $this->setAccount('VCity',       $this->_comanyInfo->CustomerCompany->VCity);
+        //$this->setAccount('OrgNumber',   $this->_comanyInfo->CustomerCompany->OrgNumber);
+        $this->setAccount('OrgNumber', str_replace(" ", "", $this->_comanyInfo->CustomerCompany->OrgNumber2));
+        $this->setAccount('TaxCompanyMunicipality', $this->_comanyInfo->CustomerCompany->CompanyMunicipality);
+        $this->setAccount('TaxCompanyMunicipalityName', $this->_comanyInfo->CustomerCompany->CompanyMunicipalityName);
+  
+        //$this->setAccount('PhonePrivat', $this->_comanyInfo->CustomerPerson->HomePhone);
+        //$this->setAccount('Phone',   $this->_comanyInfo->CustomerCompany->Phone);
+        //$this->setAccount('Email',   $this->_comanyInfo->CustomerCompany->Email);
+        
+         //If this a hold share company then don't use the social security number'
+        if ($this->COMPANY_TYPE!=$this->AKSJESELSKAP)
+            $this->setAccount('SocialSecurityID',   str_replace(".", "", str_replace("-", "", str_replace(" ", "", $this->_comanyInfo->CustomerPerson->SocialSecurityID))));
+       
+        
+        $this->setAccount('OppgaveTermin',  $this->_termin);
+        $this->setAccount('OppgaveAAr', $this->_year);
+        $this->setAccount('Bunnfradrag', 270000);
+        
+        
+        $this->setAccount('NaeringsKode', '');
+        $this->setAccount('BeregningType', '');//HF(2.1),DF(2.2),HU(2.3),OU(2.4),HH(2.5),FF(2.6)
+        
+   
+    }
+    
+
+   ##############################################################
+    function InsertMapping()
+    {   global $_SETUP, $_date;
+    	$yearold62=0;
+    	
+    	$_list2Lenght=count ($this->_avgift2List);
+    	//print ("list 1:". count ($this->_avgiftList). "<br>");
+    	if (count($this->_avgiftList)>0) {
+    		$index=0;
+    		
+    		while ($index<count ($this->_avgiftList)) {
+	    		$kommune= $this->_avgiftList[$index]['KommuneNumber'];
+	    		$sumGrunnLag=$this->_avgiftList[$index]['AmountThisPeriod'];
+	    		
+	    		for ($i=1; $i < count ($this->_avgiftList); $i++) {
+		    	  
+		    	  if (trim($kommune)==trim($this->_avgiftList[$i]['KommuneNumber'])) {
+		    	  	 $sumGrunnLag += $this->_avgiftList[$i]['AmountThisPeriod'];
+		    	  	 unset ($this->_avgiftList[$i]);
+		    	  }
+		    	
+	    		}//for
+	    		$this->_avgiftList[$index]['AmountThisPeriod']=$sumGrunnLag;
+    		  	$index++;
+    		}//while
+    
+    	}//if
+    	
+    	//print ("list 2:". count ($this->_avgift62List). "<br>");
+    	if (count($this->_avgift62List)>0) {
+    		$index=0;
+    		
+    		while ($index<count ($this->_avgift62List)) {
+	    		$kommune= $this->_avgift62List[$index]['KommuneNumber'];
+	    		$sumGrunnLag=$this->_avgift62List[$index]['AmountThisPeriod'];
+	    		
+	    		for ($i=1; $i < count ($this->_avgift62List); $i++) {
+		    	  
+		    	  if (trim($kommune)==trim($this->_avgift62List[$i]['KommuneNumber'])) {
+		    	  	 $sumGrunnLag += $this->_avgift62List[$i]['AmountThisPeriod'];
+		    	  	 unset ($this->_avgift62List[$i]);
+		    	  }
+		    	
+	    		}//for
+	    		$this->_avgift62List[$index]['AmountThisPeriod']=$sumGrunnLag;
+    		  	$index++;
+    		}//while
+    
+    	}//if
+    	
+    	if (count($this->_avgiftList)>0){
+	    	for ($i=0; $i<count($this->_avgiftList); $i++){
+	    		
+	    		$this->_kommuneList[$i]=$this->_avgiftList[$i]['KommuneNumber'];
+	    		$this->_kommuneNavnList[$i]=$this->_avgiftList[$i]['KommuneName'];
+	    		$this->_soneList[$i]=$this->_avgiftList[$i]['Sone'];
+	    		$this->_under62ArGrunnlagList[$i]=$this->_avgiftList[$i]['AmountThisPeriod'];
+	    		
+	    		$found=false;
+	    		for ($j=0; $j<count($this->_avgift62List); $j++){
+	    			if (trim($this->_avgift62List[$j]['KommuneNumber'])==
+	    			     trim($this->_avgiftList[$i]['KommuneNumber'])){
+	    			     $this->_over62ArGrunnlagList[$i]=$this->_avgift62List[$j]['AmountThisPeriod'];
+	    			     
+	    			     unset ($this->_avgift62List[$j]);
+	    			     $found=true;
+	    			}		
+	    		}//for
+	    	}
+    	}//if
+    	
+    	for ($i=$_list2Lenght; $i>0; $i--){
+    		if (isset($this->_avgift62List[$i])) {
+	    		$this->_kommuneList[$i]=$this->_avgift62List[$i]['KommuneNumber'];
+		    	$this->_kommuneNavnList[$i]=$this->_avgift62List[$i]['KommuneName'];
+		    	$this->_soneList[$i]=$this->_avgift62List[$i]['Sone'];
+		    	$this->_over62ArGrunnlagList[$i]=$this->_avgift62List[$i]['AmountThisPeriod'];
+    		}
+    	}//for
+    	
+    	//Calculate the sum of all avgiftgrunnlag
+    	$sumUnder62AvgiftGrunnlag=0;
+    	$sumOver62AvgiftGrunnlag=0;
+    	for ($i=0; $i<count($this->_under62ArGrunnlagList); $i++) 
+    		$sumUnder62AvgiftGrunnlag+=$this->_under62ArGrunnlagList[$i];
+    		
+        for ($i=0; $i<count($this->_over62ArGrunnlagList); $i++) 
+    		$sumOver62AvgiftGrunnlag+=$this->_over62ArGrunnlagList[$i];
+    
+        //Sum Forskuddtrekk pr kommune
+        $this->forskuddTrekkPrKommune();
+        
+        
+        $forskuddTrekk=array();
+        for ($i=0; $i<count($this->_forskuddList);$i++)
+        	$forskuddTrekkList[$i]=$this->_forskuddList[$i]['AmountThisPeriod'];
+        	
+        //print ("Anh Anh:".$forskuddTrekkList[0]."<br>");
+        //print ("Anh Sonelsit:<br>");
+        //print_r($this->_soneList);
+      $this->setAccount('CompanyMunicipality', $this->_kommuneList);
+      $this->setAccount('CompanyMunicipalityName', $this->_kommuneNavnList);
+      $this->setAccount('Sone', $this->_soneList);
+      $this->setAccount('Under62ArGrunnlag', $this->_under62ArGrunnlagList);
+      $this->setAccount('Over62ArGrunnlag', $this->_over62ArGrunnlagList);
+      $this->setAccount('Forskuddtrekk', $forskuddTrekkList);
+      
+      $this->setAccount('SumUnder62ArGrunnlag', $sumUnder62AvgiftGrunnlag);
+      $this->setAccount('SumOver62ArGrunnlag', $sumOver62AvgiftGrunnlag);
+      
+      	 
+      
+      $this->setAccount('RestFribelop', 0);
+      $this->setAccount('AvgiftSkyldig', 0);
+      $this->setAccount('KIDAvgift', 0);
+      $this->setAccount('KIDForskuddstrekk', 0);
+        
+    }//insertMapping
+    
+   ############################################################################
+    function forskuddTrekkPrKommune() {
+    	if (count($this->_forskuddList)>0) {
+    		$index=0;
+    		
+    		while ($index<count ($this->_forskuddList)) {
+	    		$kommune= $this->_forskuddList[$index]['KommuneNumber'];
+	    		$sumForskuddTrekk=$this->_forskuddList[$index]['AmountThisPeriod'];
+	    		
+	    		for ($i=1; $i < count ($this->_forskuddList); $i++) {
+		    	  
+		    	  if (trim($kommune)==trim($this->_forskuddList[$i]['KommuneNumber'])) {
+		    	  	 $sumForskuddTrekk += $this->_forskuddList[$i]['AmountThisPeriod'];
+		    	  	 unset ($this->_forskuddList[$i]);
+		    	  }
+		    	
+	    		}//for
+	    		$this->_forskuddList[$index]['AmountThisPeriod']=$sumForskuddTrekk;
+    		  	$index++;
+    		}//while
+    
+    	}//if
+    }//forskuddTrekkPrKommune
+    
+    ############################################################################
+    function avgift()
+    {
+        global $_sess, $_dbh, $_dsn, $_date, $_lib;
+        
+        $queryStr = "SELECT sum( SL.AmountThisPeriod) as AmountThisPeriod, S.AccountPlanID,  S.Period, S.SalaryID, ".
+        " A.BirthDate, A.KommuneID, SL.LineNumber FROM salaryline as SL, salary as S LEFT JOIN accountplan as A ". 
+        " ON A.AccountPlanID=S.AccountPlanID WHERE S.SalaryID=SL.SalaryID AND ".
+        " SL.LineNumber>0 AND SL.LineNumber<=25 AND (Period LIKE '$this->_fromPeriod' ".
+        " OR Period LIKE '$this->_toPeriod') GROUP BY S.AccountPlanID";
+        
+        //print ($queryStr. "<br>");		
+        $rs = $this->_db->Query( $queryStr );
+        $index=0;
+        $index62=0;
+		
+		while ($row = $this->_db->NextRow( $rs )) {
+			
+			$queryStr = "SELECT A.BirthDate, K.*, AV.* from accountplan as A, kommune as K, ".
+			             " arbeidsgiveravgift as AV WHERE AccountPlanID=".$row['AccountPlanID']. " AND K.Sone=AV.Code ".
+			             " AND  A.KommuneID=K.KommuneID ";
+			             
+			             
+			//print ($queryStr . "<br>");
+			             
+			$_rs = $this->_db->Query( $queryStr );
+			$_row= $this->_db->NextRow( $_rs );
+			
+			
+			$birthdate= $_row['BirthDate'];
+			$birthyear = $_lib['date']->get_this_year($birthdate);
+			$yearold=$this->_year-$birthyear;
+			//print ('KommuneNr:'.$_row['KommuneNumber']."<br>");
+			//print ('yearold:'.$yearold."<br>");
+			if ($yearold<=62) {
+    	  	    $this->_avgiftList[$index]= array('KommuneNumber' => $_row['KommuneNumber'] , 'KommuneName' => $_row['KommuneName'], 
+                        'Sone' => $_row['Sone'], 'AmountThisPeriod'=>$row['AmountThisPeriod'], 'Sats'=>$_row['Percent'], 'BeregnetAvgift'=>$_row['Percent']*$row['AmountThisPeriod']);
+                $index++;
+			}  	  	 
+	    	else {
+	    	  	$this->_avgift62List[$index62]= array('KommuneNumber'=>$_row['KommuneNumber'] , 'KommuneName'=>$_row['KommuneName'],
+                'Sone'=>$_row['Sone'], 'AmountThisPeriod'=>$row['AmountThisPeriod'], 'Sats'=>$_row['Percent62'],'BeregnetAvgift'=>$_row['Percent62']*$row['AmountThisPeriod']);
+	    	  	$index62++;
+	    	}
+			
+		}//while
+        		 
+    }//function avgift
+    
+     ############################################################################
+    function forskuddTrekk()
+    {
+        global $_sess, $_dbh, $_dsn, $_date;
+        
+        $queryStr = "SELECT sum( SL.AmountThisPeriod) as AmountThisPeriod, S.AccountPlanID,  S.Period, S.SalaryID, ".
+        " A.BirthDate, A.KommuneID, SL.LineNumber FROM salaryline as SL, salary as S LEFT JOIN accountplan as A ". 
+        " ON A.AccountPlanID=S.AccountPlanID WHERE S.SalaryID=SL.SalaryID AND ".
+        " SL.LineNumber>=90 AND SL.LineNumber<=92 AND (Period LIKE '$this->_fromPeriod' ".
+        " OR Period LIKE '$this->_toPeriod') GROUP BY S.AccountPlanID";
+        
+        //print ($queryStr. "<br>");		
+        $rs = $this->_db->Query( $queryStr );
+        $index=0;
+        $index62=0;
+		
+		while ($row = $this->_db->NextRow( $rs )) {
+			
+			$queryStr = "SELECT A.BirthDate, K.*, AV.* from accountplan as A, kommune as K, ".
+			             " arbeidsgiveravgift as AV WHERE AccountPlanID=".$row['AccountPlanID']. " AND K.Sone=AV.Code ".
+			             " AND  A.KommuneID=K.KommuneID ";
+			             
+			             
+			//print ($queryStr . "<br>");
+			             
+			$_rs = $this->_db->Query( $queryStr );
+			$_row= $this->_db->NextRow( $_rs );
+		     
+    	  	$this->_forskuddList[$index]= array('KommuneNumber' => $_row['KommuneNumber'] , 'KommuneName' => $_row['KommuneName'], 
+                        'Sone' => $_row['Sone'], 'AmountThisPeriod'=>$row['AmountThisPeriod'], 'Sats'=>$_row['Percent'], 'BeregnetAvgift'=>$_row['Percent']*$row['AmountThisPeriod']);
+            $index++;	
+			
+		}//while
+        		 
+    }//function forskuddTrekk
+    
+
+    function IsFoundedThisYear($FoundedDate)
+    {
+        global $_date, $_lib;
+        $foundedYear = $_lib['date']->get_this_year($FoundedDate);
+        if($foundedYear < $this->_thisYear)
+        {
+            return '';
+        }
+        else
+        {
+            return $FoundedDate;
+        }
+    }
+
+    ##############################################################
+    #funksjoner mot mapping object
+    function addMapping($o, $h, $a)
+    {
+        $this->_altinnMapping->addMapping($o, $h, $a);
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->_altinnMapping->setOrid($o, $v);
+    }
+
+    function setAccount($a, $v)
+    {
+        $retval = $this->_altinnMapping->setAccount($a, $v);
+        return $retval;
+    }
+    
+    function getAccount($a)
+    {
+        return $this->_altinnMapping->getAccount($a);
+       
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->_altinnMapping->setHuman($h, $v);
+    }
+
+    function getOridArray()
+    {
+        return $this->_altinnMapping->getOridArray();
+    }
+}
+?>

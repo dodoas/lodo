@@ -1,0 +1,2150 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--title='RF-1161: Formuesverdi/eiendomsskattegrunnlag' lang='NOB'-->
+    <xs:element name="Skjema">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>RF-1161 Beregning av nåverdi, av fremtidige utskiftningskostnader for  driftsmidler i kraftanlegg som har begrenset levetid - 2006</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Andre offentlige myndigheters bruk av opplysninger i RF-1161  </p>
+                    <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjema, RF-1161, helt eller delvis bli  benyttet også av andre offentlige organer som har hjemmel til å  innhente de samme
+                        opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om ev. samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller til  Skattedirektoratet på telefon 22 07 70 00.  </p>
+                    <p/>
+                    <p>Fastsatt av Skattedirektoratet med hjemmel i ligningsloven § 4-4 nr. 7  og Finansdepartementets delegeringsvedtak av 28. nov. 1994, jf  forskrift av 19. nov. 1999 nr. 1158 kapittel 18.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Kraftanlegg med samlet påstemplet merkeytelse 10 000 kVA eller mer.  </p>
+                    <p>Skatteloven § 18-5/eigedomsskattelova § 8</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GenerellInformasjon-grp-2496"/>
+                <xs:element minOccurs="0" ref="DriftsmidlerMedAvskrivning-grp-427"/>
+                <xs:element minOccurs="0" ref="DriftsmidlerMedAvskrivning-grp-428"/>
+                <xs:element minOccurs="0" ref="DriftsmidlerISaldogruppeACOgD-grp-435"/>
+                <xs:element minOccurs="0" ref="DriftsmidlerISaldogruppeA-grp-429"/>
+                <xs:element minOccurs="0" ref="DriftsmidlerISaldogruppeC-grp-430"/>
+                <xs:element minOccurs="0" ref="DriftsmidlerISaldogruppeDOgE-grp-431"/>
+                <xs:element minOccurs="0" ref="DriftsmidlerISaldogruppeFGHOgI-grp-5006"/>
+            </xs:sequence>
+            <xs:attribute fixed="762" name="skjemanummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="5480" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="RF-1161" name="blankettnummer" type="xs:string" use="optional"/>
+            <xs:attribute fixed="Formuesverdi/eiendomsskattegrunnlag" name="tittel" type="xs:string" use="optional"/>
+            <xs:attribute fixed="416" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+            <xs:attribute name="etatid" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="974761076">
+                            <xs:annotation>
+                                <xs:documentation>SKATTEDIREKTORATET</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:anyAttribute/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GenerellInformasjon-grp-2496">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Generell informasjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>I dette skjemaet skal nåverdien av fremtidige utskiftningskostnader  for driftsmidler som har begrenset levetid beregnes. Nåverdien av de  totale utskiftningskostnader skal føres opp i post 80 i dette  skjemaet. Beløpet i denne
+                        posten overføres RF-1153 post 361 hvor  beløpet fratrekkes nåverdien av kontantstrømmen over uendelig tid  (post 360) for å komme frem til beregnet formuesverdi i  kraftanlegget.  </p>
+                    <p>Formelen for beregning av fremtidige utskiftningskostnader er tatt inn  i rettledningen.  </p>
+                    <p/>
+                    <p>Kolonne I - Investeringskostnad.  </p>
+                    <p>Ved nåverdiberegningen tas det utgangspunkt i investeringskostnaden.  Dette er nærmere regulert i forskrift til skatteloven § 18-5-9. For  driftsmidler ervervet før 1. januar 1997 settes investeringskostnaden  lik den verdien
+                        som er lagt til grunn i den skattemessige  åpningsbalansen pr. 1. januar 1997, der kroneverdien oppjusteres med  konsumprisindeksen fra 1. januar 1997 til 1. januar 2007. For  driftsmidler ervervet etter 1. januar 1997 settes
+                        investeringskostnaden lik sist observerte historiske  anskaffelseskostnad for det aktuelle driftsmidlet.  Anskaffelseskostnaden skal justeres med gjennomsnittlig endring i  konsumprisindeksen i perioden fra anskaffelsesåret
+                        til  takseringsåret.  </p>
+                    <p/>
+                    <p>Kolonne II - Skattemessig levetid.  </p>
+                    <p>Her føres den skattemessige levetiden, jf. skatteloven § 18-6 (1) og  forskriften § 18-5. Skattemessig levetid for de ulike  driftsmiddelgrupper er forhåndsutfyllt i skjemaet.  </p>
+                    <p/>
+                    <p>Kolonne III - Gjenstående levetid.  </p>
+                    <p>Her føres gjenstående levetid for de driftsmidler som er i bruk i  kraftanlegget. Gjenstående levetid skal som hovedregel settes til  skattemessig levetid (kolonne II) redusert med driftsmidlets alder.  Likningsmyndighetene kan
+                        i særskilte tilfeller, dersom det påvises  tilstrekkelig grunnlag for det, beslutte å fastsette gjenstående  levetid på bakgrunn av befaring etter de ordinære reglene i  ligningsloven. Driftsmidler som avskrives etter
+                        skatteloven § 18-6  (1)a (lineær avskrivning over 67 år), har en minste gjenstående  levetid på 40 år, og driftsmidler som avskrives etter skatteloven §  18-6 (1)b (lineær avskrivning over 40 år), har en minste gjenværende
+                        levetid på 15 år, jf. skatteloven § 18-5 (4) fjerde punktum. Det vil  si at gjenstående levetid aldri kan settes lavere enn hhv. 40 år og  15 år for driftsmidler i disse gruppene. Minste gjenstående levetid  for driftsmidler i
+                        saldogruppe g og i er 10 år, jf. skatteloven §  18-5 (4) femte punktum. For de øvrige saldogrupper er det ikke  fastsatt minste gjenstående levetid.  </p>
+                    <p/>
+                    <p>Kolonne IV - Nåverdi.  </p>
+                    <p>I denne kolonnen vises nåverdien av fremtidige utskiftningskostnader  for de enkelte driftsmiddelgrupper i kraftanlegget. Se rettledningen  vedrørende formelen som skal benyttes.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Selskap-grp-417"/>
+                <xs:element minOccurs="0" ref="Regnskapsforer-grp-437"/>
+                <xs:element minOccurs="0" ref="Kraftanlegget-grp-2499"/>
+            </xs:sequence>
+            <xs:attribute fixed="2496" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Selskap-grp-417">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Selskap</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="EnhetNavn-datadef-1">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetAdresse-datadef-15">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Kontoradresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetPostnummer-datadef-6673">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetPoststed-datadef-6674">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Poststed</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetOrganisasjonsnummer-datadef-18">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="417" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EnhetNavn-datadef-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Navn på juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Navn på årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">1</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="1" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst175-repformat-8">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="175"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetAdresse-datadef-15">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Forretningsadresse til juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">2</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst105-repformat-9">
+                    <xs:attribute fixed="15" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst105-repformat-9">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="105"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetPostnummer-datadef-6673">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Postnummer i forretningsadressen til juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="6673" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst44BareTall-repformat-10">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">10</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+                    <p>Enter positive integer with four digits</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Feltet krever positivt heltall med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Feltet krev positivt heiltal med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="4"/>
+            <xs:pattern value="[0-9]{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetPoststed-datadef-6674">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Poststed i forretningsadressen til juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="6674" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst35-repformat-3">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="35"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetOrganisasjonsnummer-datadef-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummeret til enheten</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Organisasjonsnummer til årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">5</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="18" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst99Modulus11-repformat-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">1</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="Regnskapsforer-grp-437">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Regnskapsfører</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="RegnskapsforerNavn-datadef-280">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn  </p>
+                                <p/>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RegnskapsforerAdresse-datadef-281">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RegnskapsforerPostnummer-datadef-6678">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RegnskapsforerPoststed-datadef-6679">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Poststed</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="437" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RegnskapsforerNavn-datadef-280">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Regnskapsfører sitt navn</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">55</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="280" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RegnskapsforerAdresse-datadef-281">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Regnskapsfører sin adresse</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">56</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst105-repformat-9">
+                    <xs:attribute fixed="281" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RegnskapsforerPostnummer-datadef-6678">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Postnummer i adressen til regnskapsfører</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">57</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="6678" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RegnskapsforerPoststed-datadef-6679">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Poststed i adressen til regnskapsfører</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">58</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="6679" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Kraftanlegget-grp-2499">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Kraftanlegget</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="AnleggLopenummer-datadef-19639">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Løpenummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="AnleggNavn-datadef-2547">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="AnleggKommune-datadef-2759">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Kommune</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="AnleggKommunenummer-datadef-10352">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Kommunenr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KraftverkMerkeytelse-datadef-5929">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Samlet påstemplet merkeytelse i kraftverkets generatorer i kVA</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EVerkEierandel-datadef-2056">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Eierandel i kraftverket</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2499" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AnleggLopenummer-datadef-19639">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Kraftverkets løpenummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">7</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="19639" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AnleggNavn-datadef-2547">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="2547" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AnleggKommune-datadef-2759">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="2759" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AnleggKommunenummer-datadef-10352">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="10352" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KraftverkMerkeytelse-datadef-5929">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">10</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="5929" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Heltall15-repformat-79">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">79</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EVerkEierandel-datadef-2056">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">11</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Desimal72Desimaler-repformat-91">
+                    <xs:attribute fixed="2056" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Desimal72Desimaler-repformat-91">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">91</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Feltet krever to desimaler</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Feltet krev to desimalar</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="7"/>
+            <xs:pattern value="-{0,1}[0-9]{1,}\.[0-9]{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="DriftsmidlerMedAvskrivning-grp-427">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Driftsmidler med avskrivning over 67 år</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="50" minOccurs="0" ref="DriftsmidlerMedAvskrivningHoy-grp-2762"/>
+                <xs:element minOccurs="0" ref="DriftsmidlerAvskrivningstidOver67ArNaverdi-datadef-13292">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>17 Sum nåverdi for gruppen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="427" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerMedAvskrivningHoy-grp-2762">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Driftsmidler med avskrivning over 67 år</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="DriftsmidlerAvskrivningstidOver67ArSpesifisertDriftsmiddel-datadef-13287">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Spesifiser</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerAvskrivningstidOver67ArKostnadSpesifisertDrMid-datadef-13288">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Investeringskostnad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Ved nåverdiberegningen tas det utgangspunkt i investeringskostnaden.  Dette er nærmere regulert i forskrift til skatteloven § 18-5-9.  For  driftsmidler ervervet før 1. januar 1997 settes investeringskostnaden  lik
+                                    den verdien som er lagt til grunn i den skattemessige  åpningsbalansen pr 1. januar 1997, der kroneverdien oppjusteres med  konsumprisindeksen fra 1. januar 1997 til 1. januar 2007.  </p>
+                                <p>For driftsmidler ervervet etter 1. januar 1997 settes  investeringskostnaden lik sist observerte historiske  anskaffelseskostnad for det aktuelle driftsmidlet.  </p>
+                                <p>Anskaffelseskostnaden skal justeres med gjennomsnittlig endring i  konsumprisindeksen i perioden fra anskaffelsesåret til  takseringsåret.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerAvskrivningstidOver67ArLevetidSpesifisertDrfMi-datadef-13289">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Skattemessig levetid</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres den skattemessige levetiden, jf. skatteloven § 18-6 (1) og  forskriften § 18-5.  Skattemessig levertid for de ulike  driftsmiddelgrupper er forhåndsutfylt i skjemaet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Skattemessig levetid = 67</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerAvskrivningstidOver67ArRestlevetidSpesDrm-datadef-13290">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Gjenstående levetid (>=40)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres gjenstående levertid for de driftsmidler som er i bruk i  kraftanlegget.  Gjenstående levetid skal som hovedregel settes til  skattemessig levetid (kolonne II) redusert med driftsmidlets  alder.  </p>
+                                <p>Likningsmyndighetene kan i særskilte tilfeller, dersom det påvises  tilstrekkelig grunnlag for det, beslutte å fastsette gjenstående  levetid på bakgrunn av befaring etter de ordinære reglene i  ligningsloven.  </p>
+                                <p>Driftsmidler som avskrives etter skatteloven § 18-6(1) a (lineær  avskrivning over 67 år), har en minste gjenstående levetid på 15 år,  jf. skatteloven § 18-5(4) fjerde punktum.  Det vil si at gjenstående  levetid
+                                    aldri kan settes lavere enn hhv. 40 år og 15 år for  driftsmidler i disse gruppene.  Minste gjenstående levetid for  driftsmidler i saldogruppe g og i er 10 år, jf. skatteloven § 18-5(4)  femte punktum.  For de
+                                    øvrige saldogrupper er det ikke fastsatt  minste gjenstående levetid.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerAvskrivningstidOver67ArNVSpesifisertDriftsmidde-datadef-13291">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Nåverdi</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>I denne kolonnen vises nåverdien av femtidige utskiftningskostnader  for de enkelte driftsmiddelgrupper i kraftanlegget.  Ved beregningen  av nåverdien benyttes følgende formel:  </p>
+                                <p>       (n-t)  </p>
+                                <p>C0(1+r)  </p>
+                                <p>------------  </p>
+                                <p>     n  </p>
+                                <p>(1+r) -1  </p>
+                                <p>C = investeringskostnad (se kolonne 1), r = rente fastsatt i forskrift  med hjemmel i skatteloven § 18-5(9).  Finansdepartementet beregner og  kunngjør renten i januar 2007. n = skattemessig levetid (se kolonne
+                                    II), t = gjenstående levetid (se kolonne III).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2762" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerAvskrivningstidOver67ArSpesifisertDriftsmiddel-datadef-13287">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">12</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="13287" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerAvskrivningstidOver67ArKostnadSpesifisertDrMid-datadef-13288">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">13</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13288" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopHeltall15-repformat-37">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">37</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="DriftsmidlerAvskrivningstidOver67ArLevetidSpesifisertDrfMi-datadef-13289">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">14</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="13289" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerAvskrivningstidOver67ArRestlevetidSpesDrm-datadef-13290">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">15</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="13290" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerAvskrivningstidOver67ArNVSpesifisertDriftsmidde-datadef-13291">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">16</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13291" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerAvskrivningstidOver67ArNaverdi-datadef-13292">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">17</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13292" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerMedAvskrivning-grp-428">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Driftsmidler med avskrivning over 40 år</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="50" minOccurs="0" ref="DriftsmidlerMedAvskrivingLav-grp-2763"/>
+                <xs:element minOccurs="0" ref="DriftsmidlerAvskrivningstidOver40ArNaverdi-datadef-13298">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>27 Sum nåverdi for gruppen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="428" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerMedAvskrivingLav-grp-2763">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Driftsmidler med avskrivning over 40 år</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="DriftsmidlerAvskrivningstidOver40ArSpesifisertDriftsmiddel-datadef-13293">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Spesifiser</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerAvskrivningstidOver40ArKostnadSpesifisertDrm-datadef-13294">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Investeringskostnad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Ved nåverdiberegningen tas det utgangspunkt i investeringskostnaden.  Dette er nærmere regulert i forskrift til skatteloven § 18-5-9.  For  driftsmidler ervervet før 1. januar 1997 settes investeringskostnaden  lik
+                                    den verdien som er lagt til grunn i den skattemessige  åpningsbalansen pr 1. januar 1997, der kroneverdien oppjusteres med  konsumprisindeksen fra 1. januar 1997 til 1. januar 2007.  </p>
+                                <p>For driftsmidler ervervet etter 1. januar 1997 settes  investeringskostnaden lik sist observerte historiske  anskaffelseskostnad for det aktuelle driftsmidlet.  </p>
+                                <p>Anskaffelseskostnaden skal justeres med gjennomsnittlig endring i  konsumprisindeksen i perioden fra anskaffelsesåret til  takseringsåret.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerAvskrivningstidOver40ArLevetidSpesifisertDrm-datadef-13295">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Skattemessig levetid</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres den skattemessige levetiden, jf. skatteloven § 18-6 (1) og  forskriften § 18-5.  Skattemessig levertid for de ulike  driftsmiddelgrupper er forhåndsutfylt i skjemaet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Skattemessig levetid = 40</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerAvskrivningstidOver40ArRestlevetidSpesDriftsmi-datadef-13296">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Gjenstående levetid (>=15)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres gjenstående levertid for de driftsmidler som er i bruk i  kraftanlegget.  Gjenstående levetid skal som hovedregel settes til  skattemessig levetid (kolonne II) redusert med driftsmidlets  alder.  </p>
+                                <p>Likningsmyndighetene kan i særskilte tilfeller, dersom det påvises  tilstrekkelig grunnlag for det, beslutte å fastsette gjenstående  levetid på bakgrunn av befaring etter de ordinære reglene i  ligningsloven.  </p>
+                                <p>Driftsmidler som avskrives etter skatteloven § 18-6(1) a (lineær  avskrivning over 67 år), har en minste gjenstående levetid på 15 år,  jf. skatteloven § 18-5(4) fjerde punktum.  Det vil si at gjenstående  levetid
+                                    aldri kan settes lavere enn hhv. 40 år og 15 år for  driftsmidler i disse gruppene.  Minste gjenstående levetid for  driftsmidler i saldogruppe g og i er 10 år, jf. skatteloven § 18-5(4)  femte punktum.  For de
+                                    øvrige saldogrupper er det ikke fastsatt  minste gjenstående levetid.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerAvskrivningstidOver40ArNVSpesifisertDriftsmidde-datadef-13297">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Nåverdi</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>I denne kolonnen vises nåverdien av femtidige utskiftningskostnader  for de enkelte driftsmiddelgrupper i kraftanlegget.  Ved beregningen  av nåverdien benyttes følgende formel:  </p>
+                                <p>       (n-t)  </p>
+                                <p>C(1+r)  </p>
+                                <p>------------  </p>
+                                <p>     n  </p>
+                                <p>(1+r) -1  </p>
+                                <p>C = investeringskostnad (se kolonne 1), r = rente fastsatt i forskrift  med hjemmel i skatteloven § 18-5(9).  Finansdepartementet beregner og  kunngjør renten i januar 2007. n = skattemessig levetid (se kolonne
+                                    II), t = gjenstående levetid (se kolonne III).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2763" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerAvskrivningstidOver40ArSpesifisertDriftsmiddel-datadef-13293">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">18</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="13293" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerAvskrivningstidOver40ArKostnadSpesifisertDrm-datadef-13294">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">19</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13294" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerAvskrivningstidOver40ArLevetidSpesifisertDrm-datadef-13295">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">20</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="13295" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerAvskrivningstidOver40ArRestlevetidSpesDriftsmi-datadef-13296">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">21</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="13296" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerAvskrivningstidOver40ArNVSpesifisertDriftsmidde-datadef-13297">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">22</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13297" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerAvskrivningstidOver40ArNaverdi-datadef-13298">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">23</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13298" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerISaldogruppeACOgD-grp-435">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Driftsmidler i saldogruppe a, c og d kan behandles samlet med  skattemessig levetid på 7 år</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="50" minOccurs="0" ref="DriftsmidlerISaldogruppeACOgD-grp-2770"/>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeAbcdLevetid7ArNaverdi-datadef-13340">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>37 Sum nåverdi for gruppen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="435" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerISaldogruppeACOgD-grp-2770">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Driftsmidler i saldogruppe a, c og d kan behandles samlet med  skattemessig levetid på 7 år</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeABCDLevetid7ArSpesDriftsmid-datadef-13335">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Spesifiser</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogrABCDLevetid7ArKostnadSpesDriftsmid-datadef-13336">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Investeringskostnad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Ved nåverdiberegningen tas det utgangspunkt i investeringskostnaden.  Dette er nærmere regulert i forskrift til skatteloven § 18-5-9.  For  driftsmidler ervervet før 1. januar 1997 settes investeringskostnaden  lik
+                                    den verdien som er lagt til grunn i den skattemessige  åpningsbalansen pr 1. januar 1997, der kroneverdien oppjusteres med  konsumprisindeksen fra 1. januar 1997 til 1. januar 2007.  </p>
+                                <p>For driftsmidler ervervet etter 1. januar 1997 settes  investeringskostnaden lik sist observerte historiske  anskaffelseskostnad for det aktuelle driftsmidlet.  </p>
+                                <p>Anskaffelseskostnaden skal justeres med gjennomsnittlig endring i  konsumprisindeksen i perioden fra anskaffelsesåret til  takseringsåret.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeABCDLevetid7ArLevetidSpesDrm-datadef-13337">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Skattemessig levetid</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres den skattemessige levetiden, jf. skatteloven § 18-6 (1) og  forskriften § 18-5.  Skattemessig levertid for de ulike  driftsmiddelgrupper er forhåndsutfylt i skjemaet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Skattemessig levetid = 7</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeAbcdLevetid7ArRestlevetidSpesDrm-datadef-13338">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Gjenstående levetid</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres gjenstående levertid for de driftsmidler som er i bruk i  kraftanlegget.  Gjenstående levetid skal som hovedregel settes til  skattemessig levetid (kolonne II) redusert med driftsmidlets  alder.  </p>
+                                <p>Likningsmyndighetene kan i særskilte tilfeller, dersom det påvises  tilstrekkelig grunnlag for det, beslutte å fastsette gjenstående  levetid på bakgrunn av befaring etter de ordinære reglene i  ligningsloven.  </p>
+                                <p>Driftsmidler som avskrives etter skatteloven § 18-6(1) a (lineær  avskrivning over 67 år), har en minste gjenstående levetid på 15 år,  jf. skatteloven § 18-5(4) fjerde punktum.  Det vil si at gjenstående  levetid
+                                    aldri kan settes lavere enn hhv. 40 år og 15 år for  driftsmidler i disse gruppene.  Minste gjenstående levetid for  driftsmidler i saldogruppe g og i er 10 år, jf. skatteloven § 18-5(4)  femte punktum.  For de
+                                    øvrige saldogrupper er det ikke fastsatt  minste gjenstående levetid.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeAbcdLevetid7ArNaverdiSpesDrm-datadef-13339">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Nåverdi</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>I denne kolonnen vises nåverdien av femtidige utskiftningskostnader  for de enkelte driftsmiddelgrupper i kraftanlegget.  Ved beregningen  av nåverdien benyttes følgende formel:  </p>
+                                <p>       (n-t)  </p>
+                                <p>C(1+r)  </p>
+                                <p>------------  </p>
+                                <p>     n  </p>
+                                <p>(1+r) -1  </p>
+                                <p>C = investeringskostnad (se kolonne 1), r = rente fastsatt i forskrift  med hjemmel i skatteloven § 18-5(9).  Finansdepartementet beregner og  kunngjør renten i januar 2007. n = skattemessig levetid (se kolonne
+                                    II), t = gjenstående levetid (se kolonne III).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2770" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeABCDLevetid7ArSpesDriftsmid-datadef-13335">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">24</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="13335" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogrABCDLevetid7ArKostnadSpesDriftsmid-datadef-13336">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">25</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13336" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeABCDLevetid7ArLevetidSpesDrm-datadef-13337">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">26</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="13337" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeAbcdLevetid7ArRestlevetidSpesDrm-datadef-13338">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">27</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="13338" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeAbcdLevetid7ArNaverdiSpesDrm-datadef-13339">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p/>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">28</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13339" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeAbcdLevetid7ArNaverdi-datadef-13340">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">29</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13340" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerISaldogruppeA-grp-429">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Driftsmidler i saldogruppe a</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="50" minOccurs="0" ref="DriftsmidlerISaldogruppeA-grp-2764"/>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeABNaverdi-datadef-13304">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>47 Sum nåverdi for gruppen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="429" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerISaldogruppeA-grp-2764">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Driftsmidler i saldogruppe a</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeABSpesifisertDriftsmiddel-datadef-13299">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Spesifiser</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeABKostnadSpesifisertDriftsmiddel-datadef-13300">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Investeringskostnad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Ved nåverdiberegningen tas det utgangspunkt i investeringskostnaden.  Dette er nærmere regulert i forskrift til skatteloven § 18-5-9.  For  driftsmidler ervervet før 1. januar 1997 settes investeringskostnaden  lik
+                                    den verdien som er lagt til grunn i den skattemessige  åpningsbalansen pr 1. januar 1997, der kroneverdien oppjusteres med  konsumprisindeksen fra 1. januar 1997 til 1. januar 2007.  </p>
+                                <p>For driftsmidler ervervet etter 1. januar 1997 settes  investeringskostnaden lik sist observerte historiske  anskaffelseskostnad for det aktuelle driftsmidlet.  </p>
+                                <p>Anskaffelseskostnaden skal justeres med gjennomsnittlig endring i  konsumprisindeksen i perioden fra anskaffelsesåret til  takseringsåret.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeABLevetidSpesifisertDriftsmiddel-datadef-13301">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Skattemessig levetid</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres den skattemessige levetiden, jf. skatteloven § 18-6 (1) og  forskriften § 18-5.  Skattemessig levertid for de ulike  driftsmiddelgrupper er forhåndsutfylt i skjemaet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Skattemessig levetid = 5</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeABRestlevetidSpesDriftsmiddel-datadef-13302">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Gjenstående levetid</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres gjenstående levertid for de driftsmidler som er i bruk i  kraftanlegget.  Gjenstående levetid skal som hovedregel settes til  skattemessig levetid (kolonne II) redusert med driftsmidlets  alder.  </p>
+                                <p>Likningsmyndighetene kan i særskilte tilfeller, dersom det påvises  tilstrekkelig grunnlag for det, beslutte å fastsette gjenstående  levetid på bakgrunn av befaring etter de ordinære reglene i  ligningsloven.  </p>
+                                <p>Driftsmidler som avskrives etter skatteloven § 18-6(1) a (lineær  avskrivning over 67 år), har en minste gjenstående levetid på 15 år,  jf. skatteloven § 18-5(4) fjerde punktum.  Det vil si at gjenstående  levetid
+                                    aldri kan settes lavere enn hhv. 40 år og 15 år for  driftsmidler i disse gruppene.  Minste gjenstående levetid for  driftsmidler i saldogruppe g og i er 10 år, jf. skatteloven § 18-5(4)  femte punktum.  For de
+                                    øvrige saldogrupper er det ikke fastsatt  minste gjenstående levetid.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeABNVSpesifisertDriftsmiddel-datadef-13303">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Nåverdi</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>I denne kolonnen vises nåverdien av femtidige utskiftningskostnader  for de enkelte driftsmiddelgrupper i kraftanlegget.  Ved beregningen  av nåverdien benyttes følgende formel:  </p>
+                                <p>       (n-t)  </p>
+                                <p>C(1+r)  </p>
+                                <p>------------  </p>
+                                <p>     n  </p>
+                                <p>(1+r) -1  </p>
+                                <p>C = investeringskostnad (se kolonne 1), r = rente fastsatt i forskrift  med hjemmel i skatteloven § 18-5(9).  Finansdepartementet beregner og  kunngjør renten i januar 2007. n = skattemessig levetid (se kolonne
+                                    II), t = gjenstående levetid (se kolonne III).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2764" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeABSpesifisertDriftsmiddel-datadef-13299">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">30</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="13299" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeABKostnadSpesifisertDriftsmiddel-datadef-13300">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">31</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13300" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeABLevetidSpesifisertDriftsmiddel-datadef-13301">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">32</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="13301" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeABRestlevetidSpesDriftsmiddel-datadef-13302">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">33</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="13302" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeABNVSpesifisertDriftsmiddel-datadef-13303">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">34</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13303" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeABNaverdi-datadef-13304">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">35</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13304" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerISaldogruppeC-grp-430">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Driftsmidler i saldogruppe c</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="50" minOccurs="0" ref="DriftsmidlerISaldogruppeC-grp-2765"/>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeCNaverdi-datadef-13310">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>57 Sum nåverdi for gruppen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="430" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerISaldogruppeC-grp-2765">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Driftsmidler i saldogruppe c</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeCSpesifisertDriftsmiddel-datadef-13305">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Spesifiser</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeCKostnadSpesifisertDriftsmiddel-datadef-13306">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Investeringskostnad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Ved nåverdiberegningen tas det utgangspunkt i investeringskostnaden.  Dette er nærmere regulert i forskrift til skatteloven § 18-5-9.  For  driftsmidler ervervet før 1. januar 1997 settes investeringskostnaden  lik
+                                    den verdien som er lagt til grunn i den skattemessige  åpningsbalansen pr 1. januar 1997, der kroneverdien oppjusteres med  konsumprisindeksen fra 1. januar 1997 til 1. januar 2007.  </p>
+                                <p>For driftsmidler ervervet etter 1. januar 1997 settes  investeringskostnaden lik sist observerte historiske  anskaffelseskostnad for det aktuelle driftsmidlet.  </p>
+                                <p>Anskaffelseskostnaden skal justeres med gjennomsnittlig endring i  konsumprisindeksen i perioden fra anskaffelsesåret til  takseringsåret.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeCLevetidSpesifisertDriftsmiddel-datadef-13307">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Skattemessig levetid</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres den skattemessige levetiden, jf. skatteloven § 18-6 (1) og  forskriften § 18-5.  Skattemessig levertid for de ulike  driftsmiddelgrupper er forhåndsutfylt i skjemaet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Skattemessig levetid = 7</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeCRestlevetidSpesDriftsmiddel-datadef-13308">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Gjenstående levetid</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres gjenstående levertid for de driftsmidler som er i bruk i  kraftanlegget.  Gjenstående levetid skal som hovedregel settes til  skattemessig levetid (kolonne II) redusert med driftsmidlets  alder.  </p>
+                                <p>Likningsmyndighetene kan i særskilte tilfeller, dersom det påvises  tilstrekkelig grunnlag for det, beslutte å fastsette gjenstående  levetid på bakgrunn av befaring etter de ordinære reglene i  ligningsloven.  </p>
+                                <p>Driftsmidler som avskrives etter skatteloven § 18-6(1) a (lineær  avskrivning over 67 år), har en minste gjenstående levetid på 15 år,  jf. skatteloven § 18-5(4) fjerde punktum.  Det vil si at gjenstående  levetid
+                                    aldri kan settes lavere enn hhv. 40 år og 15 år for  driftsmidler i disse gruppene.  Minste gjenstående levetid for  driftsmidler i saldogruppe g og i er 10 år, jf. skatteloven § 18-5(4)  femte punktum.  For de
+                                    øvrige saldogrupper er det ikke fastsatt  minste gjenstående levetid.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeCNVSpesifisertDriftsmiddel-datadef-13309">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Nåverdi</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>I denne kolonnen vises nåverdien av femtidige utskiftningskostnader  for de enkelte driftsmiddelgrupper i kraftanlegget.  Ved beregningen  av nåverdien benyttes følgende formel:  </p>
+                                <p>       (n-t)  </p>
+                                <p>C(1+r)  </p>
+                                <p>------------  </p>
+                                <p>     n  </p>
+                                <p>(1+r) -1  </p>
+                                <p>C = investeringskostnad (se kolonne 1), r = rente fastsatt i forskrift  med hjemmel i skatteloven § 18-5(9).  Finansdepartementet beregner og  kunngjør renten i januar 2007. n = skattemessig levetid (se kolonne
+                                    II), t = gjenstående levetid (se kolonne III).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2765" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeCSpesifisertDriftsmiddel-datadef-13305">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">36</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="13305" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeCKostnadSpesifisertDriftsmiddel-datadef-13306">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">37</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13306" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeCLevetidSpesifisertDriftsmiddel-datadef-13307">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">38</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="13307" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeCRestlevetidSpesDriftsmiddel-datadef-13308">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">39</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="13308" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeCNVSpesifisertDriftsmiddel-datadef-13309">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">40</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13309" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeCNaverdi-datadef-13310">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">41</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13310" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerISaldogruppeDOgE-grp-431">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Driftsmidler i saldogruppe d og e</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="50" minOccurs="0" ref="DriftsmidlerSaldogruppeDOgE-grp-2766"/>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeDENaverdi-datadef-13316">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>67 Sum nåverdi for gruppen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="431" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeDOgE-grp-2766">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Driftsmidler i saldogruppe d og e</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeDESpesifisertDriftsmiddel-datadef-13311">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Spesifiser</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeDEKostnadSpesifisertDriftsmiddel-datadef-13312">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Investeringskostnad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Ved nåverdiberegningen tas det utgangspunkt i investeringskostnaden.  Dette er nærmere regulert i forskrift til skatteloven § 18-5-9.  For  driftsmidler ervervet før 1. januar 1997 settes investeringskostnaden  lik
+                                    den verdien som er lagt til grunn i den skattemessige  åpningsbalansen pr 1. januar 1997, der kroneverdien oppjusteres med  konsumprisindeksen fra 1. januar 1997 til 1. januar 2007.  </p>
+                                <p>For driftsmidler ervervet etter 1. januar 1997 settes  investeringskostnaden lik sist observerte historiske  anskaffelseskostnad for det aktuelle driftsmidlet.  </p>
+                                <p>Anskaffelseskostnaden skal justeres med gjennomsnittlig endring i  konsumprisindeksen i perioden fra anskaffelsesåret til  takseringsåret.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeDELevetidSpesifisertDriftsmiddel-datadef-13313">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Skattemessig levetid</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres den skattemessige levetiden, jf. skatteloven § 18-6 (1) og  forskriften § 18-5.  Skattemessig levertid for de ulike  driftsmiddelgrupper er forhåndsutfylt i skjemaet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Skattemessig levetid = 8</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeDERestlevetidSpesDriftsmiddel-datadef-13314">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Gjenstående levetid  </p>
+                                <p/>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres gjenstående levertid for de driftsmidler som er i bruk i  kraftanlegget.  Gjenstående levetid skal som hovedregel settes til  skattemessig levetid (kolonne II) redusert med driftsmidlets  alder.  </p>
+                                <p>Likningsmyndighetene kan i særskilte tilfeller, dersom det påvises  tilstrekkelig grunnlag for det, beslutte å fastsette gjenstående  levetid på bakgrunn av befaring etter de ordinære reglene i  ligningsloven.  </p>
+                                <p>Driftsmidler som avskrives etter skatteloven § 18-6(1) a (lineær  avskrivning over 67 år), har en minste gjenstående levetid på 15 år,  jf. skatteloven § 18-5(4) fjerde punktum.  Det vil si at gjenstående  levetid
+                                    aldri kan settes lavere enn hhv. 40 år og 15 år for  driftsmidler i disse gruppene.  Minste gjenstående levetid for  driftsmidler i saldogruppe g og i er 10 år, jf. skatteloven § 18-5(4)  femte punktum.  For de
+                                    øvrige saldogrupper er det ikke fastsatt  minste gjenstående levetid.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeDENVSpesifisertDriftsmiddel-datadef-13315">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Nåverdi</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>I denne kolonnen vises nåverdien av femtidige utskiftningskostnader  for de enkelte driftsmiddelgrupper i kraftanlegget.  Ved beregningen  av nåverdien benyttes følgende formel:  </p>
+                                <p>       (n-t)  </p>
+                                <p>C(1+r)  </p>
+                                <p>------------  </p>
+                                <p>     n  </p>
+                                <p>(1+r) -1  </p>
+                                <p>C = investeringskostnad (se kolonne 1), r = rente fastsatt i forskrift  med hjemmel i skatteloven § 18-5(9).  Finansdepartementet beregner og  kunngjør renten i januar 2007. n = skattemessig levetid (se kolonne
+                                    II), t = gjenstående levetid (se kolonne III).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2766" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeDESpesifisertDriftsmiddel-datadef-13311">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">42</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="13311" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeDEKostnadSpesifisertDriftsmiddel-datadef-13312">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">43</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13312" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeDELevetidSpesifisertDriftsmiddel-datadef-13313">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">44</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="13313" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeDERestlevetidSpesDriftsmiddel-datadef-13314">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">45</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="13314" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeDENVSpesifisertDriftsmiddel-datadef-13315">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">46</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13315" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeDENaverdi-datadef-13316">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">47</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="13316" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerISaldogruppeFGHOgI-grp-5006">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Driftsmidler i saldogruppe f,g,h og i</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Skattemessig levetid er henholdsvis 14, 31, 38 og 67 år</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="50" minOccurs="0" ref="DriftsmidlerISaldogruppeFGHOgI-grp-5007"/>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeFghiNaverdi-datadef-22293">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>77 Sum nåverdi for gruppen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="Fradrag-datadef-2719">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>80 Sum beregnet fradrag for nåverdien av fremtidige  utskiftningskostnader. Sum av postene 17, 27, 47, 57, 67 og 77. Eller  post 37 i stedet for postene 47, 57 og den andel av post 67 som  saldogruppe d
+                                    representerer. Overføres RF-1153 post 361.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres summen av alle nåverdiberegningene. Dette beløpet overføres  til RF-1153 post 361, og inngår i beregningen av formuesverdien.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5006" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerISaldogruppeFGHOgI-grp-5007">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Driftsmidler i saldogruppe f,g,h og i</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeFghiSpesifisertDriftsmiddel-datadef-22288">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Spesifiser</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeFghiKostnadSpesifisertDriftsmiddel-datadef-22289">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Investeringskostnad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Ved nåverdiberegningen tas det utgangspunkt i investeringskostnaden.  Dette er nærmere regulert i forskrift til skatteloven § 18-5-9.  For  driftsmidler ervervet før 1. januar 1997 settes investeringskostnaden  lik
+                                    den verdien som er lagt til grunn i den skattemessige  åpningsbalansen pr 1. januar 1997, der kroneverdien oppjusteres med  konsumprisindeksen fra 1. januar 1997 til 1. januar 2007.  </p>
+                                <p>For driftsmidler ervervet etter 1. januar 1997 settes  investeringskostnaden lik sist observerte historiske  anskaffelseskostnad for det aktuelle driftsmidlet.  </p>
+                                <p>Anskaffelseskostnaden skal justeres med gjennomsnittlig endring i  konsumprisindeksen i perioden fra anskaffelsesåret til  takseringsåret.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeFghiLevetidSpesifisertDriftsmiddel-datadef-22290">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Skattemessig levetid</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres den skattemessige levetiden, jf. skatteloven § 18-6 (1) og  forskriften § 18-5.  Skattemessig levertid for de ulike  driftsmiddelgrupper er forhåndsutfylt i skjemaet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Skattemessig levetid = 14/31/38/67</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeFghiRestlevetidSpesifisertDriftsmiddel-datadef-22291">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Gjenstående levetid</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres gjenstående levertid for de driftsmidler som er i bruk i  kraftanlegget.  Gjenstående levetid skal som hovedregel settes til  skattemessig levetid (kolonne II) redusert med driftsmidlets  alder.  </p>
+                                <p>Likningsmyndighetene kan i særskilte tilfeller, dersom det påvises  tilstrekkelig grunnlag for det, beslutte å fastsette gjenstående  levetid på bakgrunn av befaring etter de ordinære reglene i  ligningsloven.  </p>
+                                <p>Driftsmidler som avskrives etter skatteloven § 18-6(1) a (lineær  avskrivning over 67 år), har en minste gjenstående levetid på 15 år,  jf. skatteloven § 18-5(4) fjerde punktum.  Det vil si at gjenstående  levetid
+                                    aldri kan settes lavere enn hhv. 40 år og 15 år for  driftsmidler i disse gruppene.  Minste gjenstående levetid for  driftsmidler i saldogruppe g og i er 10 år, jf. skatteloven § 18-5(4)  femte punktum.  For de
+                                    øvrige saldogrupper er det ikke fastsatt  minste gjenstående levetid.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldogruppeFghiNaverdiSpesifisertDriftsmiddel-datadef-22292">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Nåverdi</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>I denne kolonnen vises nåverdien av femtidige utskiftningskostnader  for de enkelte driftsmiddelgrupper i kraftanlegget.  Ved beregningen  av nåverdien benyttes følgende formel:  </p>
+                                <p>       (n-t)  </p>
+                                <p>C(1+r)  </p>
+                                <p>------------  </p>
+                                <p>     n  </p>
+                                <p>(1+r) -1  </p>
+                                <p>C = investeringskostnad (se kolonne 1), r = rente fastsatt i forskrift  med hjemmel i skatteloven § 18-5(9).  Finansdepartementet beregner og  kunngjør renten i januar 2007. n = skattemessig levetid (se kolonne
+                                    II), t = gjenstående levetid (se kolonne III).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5007" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeFghiSpesifisertDriftsmiddel-datadef-22288">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">48</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="22288" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeFghiKostnadSpesifisertDriftsmiddel-datadef-22289">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">49</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22289" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeFghiLevetidSpesifisertDriftsmiddel-datadef-22290">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">50</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="22290" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeFghiRestlevetidSpesifisertDriftsmiddel-datadef-22291">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">51</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="22291" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeFghiNaverdiSpesifisertDriftsmiddel-datadef-22292">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">52</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22292" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldogruppeFghiNaverdi-datadef-22293">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">53</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22293" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Fradrag-datadef-2719">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">54</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="2719" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

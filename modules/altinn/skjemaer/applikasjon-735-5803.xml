@@ -1,0 +1,1505 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1025: Årsoppgave for arbeidsgiveravgift. Følgeskriv til lønns- og trekkoppg.</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-735-5804.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-1064/ArbeidsOppdragsgiversNavnOgAdresse-grp-1065/SkatteoppkreverKommuneNummer-datadef-16513" required="true"/>
+            <xforms:bind ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/OppgaveEndringsoppgave-datadef-21819" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1025 Årsoppgave for arbeidsgiveravgift - Følgeskriv til lønns- og  trekkoppgaver 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Denne oppgaven og lønns- og tekkoppgavene skal sendes inn innen 20.  januar. For arbeidsgivere i fiske- og fangstvirksomhet er fristen for  innlevering 20. februar.  </p>
+                <p/>
+                <p>Arbeidsgivere som har levert lønn- og trekkoppgavene på diskett e.l.  skal sende inn oppgaven starks de har mottatt Kvittering for mottatte  data.  </p>
+                <p/>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i Årsoppgave for arbeidsgiveravgift -  Følgeskriv til lønns- og trekkoppgaver, RF-1025, helt eller delvis  bli benyttet også av andre
+                    offentlige organer som har hjemmel til å  innhente de samme opplysningene, jf lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller
+                    Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1025 Årsoppgave for arbeidsgivaravgift - Følgjeskriv til løns- og  trekkoppgåver 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Fastsett av Skattedirektoratet  </p>
+                <p>Andre offentlege organ sin bruk av opplysningar i RF-1025. For å  samordna og forenkle oppgåveinnleveringa  frå næringslivet, kan  opplysningar som vert avgjeve i Årsoppgåve for arbeidsgivaravgift -  Følgjeskriv til løns- og
+                    trekkoppgåver, RF-1025, heilt eller delvis  bli nytta også av andre offentlege organ som har heimel til å  innhente dei same opplysningane, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysningar om evt. Samordning kan ein få ved å
+                    vende seg til  Oppgåveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-1064">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Innrapportering av årsoppgave for arbeidsgiveravgift - følgeskriv til  lønns- og trekkoppgaver:  </p>
+                    <p>Denne oppgaven skal vedlegges lønns- og trekkoppgaven og sendes innen  20. januar. For arbeidsgivere i fiske- og fangstvirksomhet er fristen  for innlevering 20. februar. Arbeidsgivere som har levert lønns- og  trekkoppgavene
+                        maskinelt, skal sende oppgaven straks de har mottatt  &lt;&lt;Kvittering for mottatte data>>, vanligvis innen 31. januar. Dersom  kvittering ikke er mottatt innen 1. februar bør Skattedirektoratet  kontaktes. Ett eksemplar
+                        sendes skatteoppkreveren i den kommunen hvor  terminoppgavene er innberettet og arbeidsgiveravgift og  forskuddstrekket innbetalt siste inntektsår. Dersom oppgaven er en  endring av tidligere innsendt oppgave, fyll bare ut
+                        eventuell økning  eller reduksjon. Alle beløp oppgis i hele kroner.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Innleiing</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Innrapportering av årsoppgave for arbeidsgivaravgift - følgjeskriv til  lønns- og trekkoppgaver:  </p>
+                    <p>Denne oppgåva skal leggjast ved lønns- og trekkoppgåva og sendast  innan 20. januar. For arbeidsgivarar i fiske- og fangstverksemd er  fristen for innlevering 20. februar.  Arbeidsgivarar som har levert  lønns- og
+                        trekkoppgåvene maskinelt, skal sende oppgåva straks dei har  motteke Kvittering for mottekne data vanlegvis innan 31. januar.  Dersom kvittering ikkje er motteke innan 1. februar, bør  Skattedirektoratet kontaktast. Eitt
+                        eksemplar skal sendast  skatteoppkrevjaren i den kommunen der terminoppgåvene er innmelde og  arbeidsgivaravgift og forskottstrekk innbetalte siste inntektsår.  </p>
+                    <p>Dersom oppgåva er ei endring til tidlegare innsendt oppgåve, fyller du  berre ut ein eventuell auke eller reduksjon. Alle beløp skal givast  opp i heile kroner.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-1064/ArbeidsOppdragsgiversNavnOgAdresse-grp-1065">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Fra arbeidsgiver</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>For personlig firma må innehavers navn fremgå</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Frå arbeidsgivar</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>For personleg firma må namnet til innehavaren gå fram</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1064/ArbeidsOppdragsgiversNavnOgAdresse-grp-1065/SkatteoppkreverKommuneNummer-datadef-16513">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Til skatteoppkreveren i</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Oppgi kontorkommunen</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Til skatteoppkrevjaren i</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1064/ArbeidsOppdragsgiversNavnOgAdresse-grp-1065/RapporteringsenhetOrganisasjonsnummer-datadef-21772">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1064/ArbeidsOppdragsgiversNavnOgAdresse-grp-1065/RapporteringsenhetNavn-datadef-21771">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1064/ArbeidsOppdragsgiversNavnOgAdresse-grp-1065/RapporteringsenhetAdresse-datadef-21773">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1064/ArbeidsOppdragsgiversNavnOgAdresse-grp-1065/RapporteringsenhetPostnummer-datadef-21774">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1064/ArbeidsOppdragsgiversNavnOgAdresse-grp-1065/RapporteringsenhetPoststed-datadef-21775">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1064/ArbeidsOppdragsgiversNavnOgAdresse-grp-1065/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Arbeids-/oppdragsgivers fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Benyttes av forskuddspliktige.</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Arbeids-/oppdragsgivars fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Nyttast av forskottspliktige</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1064/ArbeidsOppdragsgiversNavnOgAdresse-grp-1065/OppgavegiverTelefonnummer-datadef-620">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tlf.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Tlf.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1064/ArbeidsOppdragsgiversNavnOgAdresse-grp-1065/EnhetEPost-datadef-21591">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Epostadresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Epostadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Avgiftsgrunnlag</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>I linje A føres summene ifølge Kvittering for mottatte data fra  maskinelle lønns- og trekkoppgaver, sonevis fordelt. I linje B føres  summene ifølge de manuelle lønns- og trekkoppgavene som legges ved  denne oppgaven, sonevis fordelt.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>I linje A føres summene ifølge Kvittering for mottatte data fra  maskinelle lønns- og trekkoppgaver.</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Avgiftsgrunnlag</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>I linje A fører du summane ifølgje Kvittering for mottekne data fra  maskinelle lønns- og trekkoppgåver, sonevis fordelte.  I linje B  fører du summane ifølgje dei manuelle lønns- og trekkoppgåvene som  blir lagde ved denne
+                        oppgåva, sonevis fordelte.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NON">
+                    <p>I linje A fører ein summane ifølgje kvittering for mottatte data frå  maskinelle lønns- og trekkoppgåver.</p>
+                </xforms:hint>
+                <xforms:selectOne ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/OppgaveEndringsoppgave-datadef-21819">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ordinæroppgave</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ordinæroppgåve</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Endringsoppgave</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Endringsoppgåve</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Type oppgave</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Type oppgåve</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:group ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/AntallLonnsoppgaver-grp-2634">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall lønns- og trekkoppgaver</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres antall maskinelt innberettede eller manuelt innberettede  lønnsoppgaver</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Talet på lønns- og trekkoppgåver</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her førast antall maskinelt innberetta eller manuelt innberetta  lønnsoppgåver</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/AntallLonnsoppgaver-grp-2634/LonnsoppgaverAntallMaskinelle-datadef-6615">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>A</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>A</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/AntallLonnsoppgaver-grp-2634/LonnsoppgaverAntallManuelle-datadef-8490">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>B</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>B</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/SamledeOppgavepliktigeYtelserIHenholdTilLonnsoppaver-grp-2635">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Samlede oppgavepliktige ytelser i henhold til lønnsoppgaver</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her tas med oppgavepliktige beløp fra samtlige koder på lønns- og  trekkoppgavene (fra de faste rubrikker og for andre koder fra  beløpsfeltet) - unntatt kodene 000, 250, 311-316 og 950.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>I hele kroner</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Samla oppgåvepliktige ytingar etter lønnsoppgåvene</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her tek ein med oppgåvepliktige summar frå alle kodar på lønns- og  trekkoppgåvene (frå dei faste rubrikkane og for andre kodar frå  sumfeltet) - unnateke kodane 000, 250, 311 - 316 og 0950.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>I heile kroner</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/SamledeOppgavepliktigeYtelserIHenholdTilLonnsoppaver-grp-2635/LonnskostnaderOppgavepliktigeMaskinelle-datadef-8487">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>A</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>A</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/SamledeOppgavepliktigeYtelserIHenholdTilLonnsoppaver-grp-2635/LonnskostnaderOppgavepliktigeManuelle-datadef-8491">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>B</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>B</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/SamledeOppgavepliktigeYtelserIHenholdTilLonnsoppaver-grp-2635/LonnskostnaderIkkeOppgavepliktige-datadef-6617">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Utbetalt under grensen for oppgaveplikt</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her tas med avgiftspliktige utbetalinger til personer som ikke har  mottatt mer enn kr 1000 i året, sonevis fordelt. For utbetalinger fra  ideelle organisasjoner og institusjoner er denne grensen kr 2000.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Utbetalt under grensa for oppgåveplikt</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Utbetaling til personar som ikkje har motteke meir enn kr 1000 i året  er friteke for oppgåveplikt. For utbetalingar frå ideelle  organisasjonar og institusjonar er denne grensa kr 2000.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/SamledeOppgavepliktigeYtelserIHenholdTilLonnsoppaver-grp-2635/YtelserLonnsoppgavepliktigeSamlede-datadef-15944">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum brutto</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her summeres alle oppgavepliktige ytelser.  Avgiftspliktige ytelser  for hver av sonene 1-5 summeres, samt summen av alle sonene 1-5 for  både arbeidstakere under og over 62 år.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum brutto</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her summeres alle oppgavepliktige ytelser.  Avgiftspliktige ytelser  for hver av sonene 1-5 summeres, samt summen av alle sonene 1-5 for  både arbeidstakere under og over 62 år.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Herav arbeidsgiveravgiftspliktige ytelser</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Statlige etater og institusjoner skal her bare ta med grunnlaget for  den avgift som betales til skatteoppkreveren.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Inkl. avgiftspliktig pensjon. I hele kroner</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Av dette arbeidsgivaravgiftspliktige ytingar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Statlege etatar og instutisjonar skal her berre ta med grunnlaget for  den avgift som vert betalt til skatteoppkrevjaren.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Inkl. avgiftspliktig pensjon. I heile kroner</p>
+                    </xforms:hint>
+                    <xforms:group ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone1-grp-2636">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Avgiftssone 1</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Avgiftssone 1</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone1-grp-2636/LonnskostnaderArbeidsgiveravgiftspliktigeMaskinelleSone1-datadef-13882">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>A</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>A</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone1-grp-2636/LonnskostnaderArbeidsgiveravgiftspliktigeManuelleSone1-datadef-13887">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>B</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>B</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone1-grp-2636/LonnskostnaderAvgiftpliktigeIkkeOppgavepliktigeSone1-datadef-13892">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utbetalt under grensen for oppgaveplikt</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Utbetalt under grensa for oppgåveplikt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone1-grp-2636/PensjonsordningerTilskuddPremieAvgiftspliktigeSone1-datadef-13897">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Avgiftspliktige tilskudd og premier til pensjonsordninger</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her tas med arbeidsgivers andel av avgiftspliktige tilskudd og premier  til kollektive tjenestepensjonsordninger i forsikringsselskap, til  offentlige pensjonsordninger og til pensjonskasser. (Avgiftspliktige
+                                    pensjonsutbetalinger skal være tatt med i de øverste to linjene). Se  nærmere Skattedirektoratets melding Sk nr. 7/1988 og  Skattedirektoratets melding nr 5/05.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Arbeidsgivar sin del av avgiftspliktige tilskott og premiar til  pensjonsordningar</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her tek ein med arbeidsgivar sin del av avgiftspliktige tilskott og  premiar til kollektive tenestepensjonsordningar i trygdeselskap, til  offentlege pensjonsordningar og til pensjonskassar. (Avgiftspliktige
+                                    pensjonsutbetalingar skal vere tekne med i dei to øveste linjene).  Sjå nærare Skattedirektoratet si melding Sk nr. 7/1988 og  Skattedirektoratets melding nr 5/05.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone1-grp-2636/LonnskostnaderArbeidsgiveravgiftspliktigeSone1-datadef-13902">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone1-grp-2636/LonnskostnadArbeidsgiveravgiftspliktigArbtakerUnder62Sone1-datadef-22213">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum avgiftspliktige ytelser for arbeidstakere under 62 år</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Denne linjen fylles alltid ut dersom man har arbeidstakere som er  under 62 år. Dette er en splitting av sumlinjen ovenfor for hver av  sonene 1-5, samt sum sone 1-5</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum avgiftspliktige ytingar for arbeidstakarar under 62 år</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Denne linja fyller ein alltid ut hvis ein har arbeidstakarar som er  under 62 år. Dette er ei splitting av sumlinja ovanfor, for hvar av  sonane 1-5, samt sum sone 1-5</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone1-grp-2636/RefusjonGrunnlagSone1Under62Ar-datadef-25405">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Refusjon av arbeidsgiveravgift for arbeidstaker under 62 år</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Refusjon av arbeidsgivaravgift for arbeidstakar under 62 år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone1-grp-2636/LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerOver62Sone1-datadef-22219">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum avgiftspliktige ytelser for arbeidstakere over 62 år</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Denne linjen fylles alltid ut dersom man har arbeidstakere som er over  62 år. Dette er en splitting av sumlinjen ovenfor for hver av sonene  1-5, samt sum sone 1-5</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum avgiftspliktige ytingar for arbeidstakarar over 62 år</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Denne linja fyller ein alltid ut hvis ein har arbeidstakarar som er  over 62 år. Dette er ei splitting av sumlinja ovanfor, for hvar av  sonane 1-5, samt sum sone 1-5</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone1-grp-2636/RefusjonGrunnlagSone1Over62Ar-datadef-25410">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Refusjon av arbeidsgiveravgift for arbeidstaker over 62 år</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Refusjon av arbeidsgivaravgift for arbeidstakar over 62 år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone1-grp-2636/LonnskostnaderArbeidsgiveravgiftspliktigeSone1Netto-datadef-25896">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>SUM netto</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>SUM netto</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone2-grp-2637">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Avgiftssone 2</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Avgiftssone 2</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone2-grp-2637/LonnskostnaderArbeidsgiveravgiftspliktigeMaskinelleSone2-datadef-13883">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>A</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>A</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone2-grp-2637/LonnskostnaderArbeidsgiveravgiftspliktigeManuelleSone2-datadef-13888">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>B</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>B</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone2-grp-2637/LonnskostnaderAvgiftpliktigeIkkeOppgavepliktigeSone2-datadef-13893">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utbetalt under grensen for oppgavelikt</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Utbetalt under grensa for oppgåveplikt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone2-grp-2637/PensjonsordningerTilskuddPremieAvgiftspliktigeSone2-datadef-13898">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Avgiftspliktige tilskudd og premier til pensjonsordninger</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Arbeidsgivar sin del av avgiftspliktige tilskott og premiar til  pensjonsordningar</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone2-grp-2637/LonnskostnaderArbeidsgiveravgiftspliktigeSone2-datadef-13903">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Sum</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone2-grp-2637/LonnskostnadArbeidsgiveravgiftspliktigArbtakerUnder62Sone2-datadef-22214">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum avgiftspliktige ytelser for arbeidstakere under 62 år</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum avgiftspliktige ytingar for arbeidstakarar under 62 år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone2-grp-2637/RefusjonGrunnlagSone2Under62Ar-datadef-25406">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Refusjon av arbeidsgiveravgift for arbeidstaker under 62 år</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Refusjon av arbeidsgivaravgift for arbeidstakar under 62 år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone2-grp-2637/LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerOver62Sone2-datadef-22220">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum avgiftspliktige ytelser for arbeidstakere over 62 år</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum avgiftspliktige ytingar for arbeidstakarar over 62 år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone2-grp-2637/RefusjonGrunnlagSone2Over62Ar-datadef-25411">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Refusjon av arbeidsgiveravgift for arbeidstaker over 62 år</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Refusjon av arbeidsgivaravgift for arbeidstakar over 62 år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone2-grp-2637/LonnskostnaderArbeidsgiveravgiftspliktigeSone2Netto-datadef-25897">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>SUM netto</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>SUM netto</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone3-grp-2638">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Avgiftssone 3</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Avgiftssone 3</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone3-grp-2638/LonnskostnaderArbeidsgiveravgiftspliktigeMaskinelleSone3-datadef-13884">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>A</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>A</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone3-grp-2638/LonnskostnaderArbeidsgiveravgiftspliktigeManuelleSone3-datadef-13889">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>B</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>B</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone3-grp-2638/LonnskostnaderAvgiftpliktigeIkkeOppgavepliktigeSone3-datadef-13894">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utbetalt under grensen for oppgaveplikt</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Utbetalt under grensa for oppgåveplikt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone3-grp-2638/PensjonsordningerTilskuddPremieAvgiftspliktigeSone3-datadef-13899">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Avgiftspliktige tilskudd og premier til pensjonsordninger</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Arbeidsgivars sin del av avgiftspliktige tilskott og premiar til  pensjonsordningar</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone3-grp-2638/LonnskostnaderArbeidsgiveravgiftspliktigeSone3-datadef-13904">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone3-grp-2638/LonnskostnadArbeidsgiveravgiftspliktigArbtakerUnder62Sone3-datadef-22215">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum avgiftspliktige ytelser for arbeidstakere under 62 år</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum avgiftspliktige ytelser for arbeidstakere under 62 år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone3-grp-2638/RefusjonGrunnlagSone3Under62Ar-datadef-25407">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Refusjon av arbeidsgiveravgift for arbeidstaker under 62 år</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Refusjon av arbeidsgivaravgift for arbeidstakar under 62 år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone3-grp-2638/LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerOver62Sone3-datadef-22221">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum avgiftspliktige ytelser for arbeidstakere over 62 år</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum avgiftspliktige ytingar for arbeidstakarar over 62 år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone3-grp-2638/RefusjonGrunnlagSone3Over62Ar-datadef-25412">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Refusjon av arbeidsgiveravgift for arbeidstaker over 62 år</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Refusjon av arbeidsgivaravgift for arbeidstakar over 62 år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone3-grp-2638/LonnskostnaderArbeidsgiveravgiftspliktigeSone3Netto-datadef-25898">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>SUM netto</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>SUM netto</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone4-grp-2639">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Avgiftssone 4</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Avgiftssone 4</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone4-grp-2639/LonnskostnaderArbeidsgiveravgiftspliktigeMaskinelleSone4-datadef-13885">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>A</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>A</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone4-grp-2639/LonnskostnaderArbeidsgiveravgiftspliktigeManuelleSone4-datadef-13890">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>B</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>B</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone4-grp-2639/LonnskostnaderAvgiftpliktigeIkkeOppgavepliktigeSone4-datadef-13895">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utbetalt under grensen for oppgaveplikt</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Utbetalt under grensa for oppgåveplikt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone4-grp-2639/PensjonsordningerTilskuddPremieAvgiftspliktigeSone4-datadef-13900">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Avgiftspliktige tilskudd og premier til pensjonsordninger</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Arbeidsgivar sin del av avgiftspliktige tilskott og premiar til  pensjonsordningar</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone4-grp-2639/LonnskostnaderArbeidsgiveravgiftspliktigeSone4-datadef-13905">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone4-grp-2639/LonnskostnadArbeidsgiveravgiftspliktigArbtakerUnder62Sone4-datadef-22216">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum avgiftspliktige ytelser for arbeidstakere under 62 år</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum avgiftspliktige ytingar for arbeidstakarar under 62 år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone4-grp-2639/RefusjonGrunnlagSone4Under62Ar-datadef-25408">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Refusjon av arbeidsgiveravgift for arbeidstaker under 62 år</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Refusjon av arbeidsgivaravgift for arbeidstakar under 62 år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone4-grp-2639/LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerOver62Sone4-datadef-22222">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum avgiftspliktige ytelser for arbeidstakere over 62 år</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum avgiftspliktige ytingar for arbeidstakarar over 62 år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone4-grp-2639/RefusjonGrunnlagSone4Over62Ar-datadef-25413">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Refusjon av arbeidsgiveravgift for arbeidstaker over 62 år</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Refusjon av arbeidsgivaravgift for arbeidstakar over 62 år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone4-grp-2639/LonnskostnaderArbeidsgiveravgiftspliktigeSone4Netto-datadef-25899">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>SUM netto</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>SUM netto</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone5-grp-2640">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Avgiftssone 5</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Avgiftssone 5</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone5-grp-2640/LonnskostnaderArbeidsgiveravgiftspliktigeMaskinelleSone5-datadef-13886">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>A</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>A</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone5-grp-2640/LonnskostnaderArbeidsgiveravgiftspliktigeManuelleSone5-datadef-13891">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>B</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>B</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone5-grp-2640/LonnskostnaderAvgiftpliktigeIkkeOppgavepliktigeSone5-datadef-13896">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utbetalt under grensen for oppgaveplikt</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Utbetalt under grensa for oppgåveplikt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone5-grp-2640/PensjonsordningerTilskuddPremieAvgiftspliktigeSone5-datadef-13901">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Avgiftspliktige tilskudd og premier til pensjonsordninger</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Arbeidsgivar sin del av avgiftspliktige tilskott og premiar til  pensjonsordningar</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone5-grp-2640/LonnskostnaderArbeidsgiveravgiftspliktigeSone5-datadef-13906">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone5-grp-2640/LonnskostnadArbeidsgiveravgiftspliktigArbtakerUnder62Sone5-datadef-22217">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum avgiftspliktige ytelser for arbeidstakere under 62 år</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum avgiftspliktige ytingar for arbeidstakarar under 62 år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone5-grp-2640/RefusjonGrunnlagSone5Under62Ar-datadef-25409">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Refusjon av arbeidsgiveravgift for arbeidstaker under 62 år</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Refusjon av arbeidsgivaravgift for arbeidstakar under 62 år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone5-grp-2640/LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerOver62Sone5-datadef-22223">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum avgiftspliktige ytelser for arbeidstakere over 62 år</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sum avgiftspliktige ytingar for arbeidstakarar over 62 år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone5-grp-2640/RefusjonGrunnlagSone5Over62Ar-datadef-25414">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Refusjon av arbeidsgiveravgift for arbeidstaker over 62 år</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Refusjon av arbeidsgivaravgift for arbeidstakar over 62 år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/Avgiftssoner-grp-2706/Avgiftssone5-grp-2640/LonnskostnaderArbeidsgiveravgiftspliktigeSone5Netto-datadef-25900">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>SUM netto</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>SUM netto</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/TrukketForskuddstrekk-grp-2641">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Trukket forskuddstrekk</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>I linje A føres forskuddstrekk fra kvittering fra mottatt data.  I  linje B føres forskuddstrekk fra de manuelle lønns- og  trekkoppgavene.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>I hele kroner</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Trekt forskottstrekk</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>I linje A Fører du forskottstrekk frå kvittering frå mottekne data.  I  linje B fører du forskottstrekk frå dei manuelle lønns- og  trekkoppgåvene.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>I heile kroner</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/TrukketForskuddstrekk-grp-2641/ForskuddstrekkTrukketMaskinelle-datadef-8489">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>A</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>A</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/TrukketForskuddstrekk-grp-2641/ForskuddstrekkTrukketManuelle-datadef-8493">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>B</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>B</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/TrukketForskuddstrekk-grp-2641/ForskuddstrekkTrukketSkattemessig-datadef-8495">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum forskuddstrekk</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres samlet forskuddstrekk A + B. Kontroller at beløpet stemmer  med samlet forskuddstrekk i terminoppgjørene. Differanser må  forklares.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum forskottstrekk.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her føres samla forskottstrekk A + B. Kontroller at summen stemmer med  samla forskottstrekk i terminoppgjera. Det må gjerast greie for  differansar.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/TrukketForskuddstrekk-grp-2641/LonnskostnaderArbeidsgiveravgiftspliktige-datadef-8507">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum sone 1-5</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum sone 1-5</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/TrukketForskuddstrekk-grp-2641/LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerUnder62Sum-datadef-22218">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum sone 1-5</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Linjen skal alltid fylles ut dersom man har arbeidstakere som er under  62 år.  Dette er en splitting av sumlinjen ovenfor for hver av sonene  1-5, samt sum sone 1-5.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum sone 1-5</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Linjen skal alltid fylles ut dersom man har arbeidstakere som er under  62 år.  Dette er en splitting av sumlinjen ovenfor for hver av sonene  1-5, samt sum sone 1-5.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/TrukketForskuddstrekk-grp-2641/RefusjonGrunnlagAlleSonerUnder62Ar-datadef-25938">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum sone 1-5</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum sone 1-5</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/TrukketForskuddstrekk-grp-2641/LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerOver62Sum-datadef-22224">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum sone 1-5</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Linjen skal alltid fylles ut dersom man har arbeidstakere som er over  62 år.  Dette er en splitting av sumlinjen ovenfor for hver av sonene  1-5, samt sum sone 1-5.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum sone 1-5</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Linjen skal alltid fyllast ut dersom ein har arbeidstakarar som er  over 62 år.  Dette er ei splitting av sum bruttolinja ovanfor for  kvar av sonene 1-5, og dessutan sum sone 1-5.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/TrukketForskuddstrekk-grp-2641/RefusjonGrunnlagAlleSonerOver62Ar-datadef-25939">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum sone 1-5</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum sone 1-5</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/TrukketForskuddstrekk-grp-2641/LonnskostnaderArbeidsgiveravgiftspliktigeAlleSonerNetto-datadef-25940">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum sone 1-5</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum sone 1-5</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:selectOne ref="/Skjema/SammmendragAvLonnsOgTrekkoppgaver-grp-1069/EnhetArbeidsgiveravgiftsberegningUnntaktilfelleTypeNaring-datadef-22212">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>HF</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Produksjon av elektrisitet ved vannkraft etc.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Produksjon av elektrisitet ved vannkraft etc.</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>DF</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Dyrking av jordbruks- og hagebruksvekster etc.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Dyrking av jordbruks- og hagebruksvekster etc.</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>HU</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Godstransport med over 50 årsverk</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Godstransport med over 50 årsverk</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>OU</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Øvrige transportforetak</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Øvrige transportforetak</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>HH</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Statsforvaltningen og foretak omfattet av helseforetaksloven</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Statsforvaltningen og foretak omfattet av helseforetaksloven</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>FF</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fiske og fangst</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fiske og fangst</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Tilhører foretaket et av unntakstilfellene</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Arbeidsgivar skal bare velge unntakstilfelle dersom føretaket tilhører  en av næringene som må beregne arbeidsgiveravgiften på en spesiell  måte. Virksomheten kan bare ha en utregningsmåte for året sett under  ett. Dersom
+                            virksomheten har blandet virksomhet, må det levere flere  oppgaver. For mer informasjon se veiledning til terminoppgåve for  arbeidsgivaragvift og forskuddstrekk &amp; SKD 3/06 Arbeidsgiveravgift  til folketrygden for
+                            2006. Desse finnes under alt om  arbeidsgivaravgift, på www.skatteetaten.no</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Tilhøyrer foretaket eit av unntakstilfella</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Arbeidsgivar skal berre velge unntakstilfelle dersom føretaket  tilhøyrer ei av næringane som må berekne arbeidsgivaravgifta på ein  spesiell måte. Verksemda kan berre ha ein utrekningsmåte for året  sett under eitt. Dersom
+                            verksemda har blanda verksemd, må det  leverast fleire oppgåver. For meir informasjon sjå rettleiinga til  terminoppgåve for arbeidsgivaragvift og forskuddstrekk &amp; SKD 3/06  Arbeidsgiveravgift til folketrygden for
+                            2006. Desse finn ein under  alt om arbeidsgivaravgift, på www.skatteetaten.no</p>
+                    </xforms:help>
+                </xforms:selectOne>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SpesielleGrupper-grp-4996">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Spesielle grupper</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Spesialtilfeller</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/SpesielleGrupper-grp-4996/ArbeidstakereUtsendtTilNorgeFraUSAOgCanada-grp-5599">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Utenlandske arbeidstakere, (USA eller Canada) særskilt prosentsats  (utl.1)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dette gjelder arbeidstakere utsendt til Norge fra USA eller Canada, og  som faller inn under nærmere angitte vilkår i Sosialdepartementess  årlige forskrift om avgift for slike arbeidstakere, skal det betales  avgift etter
+                            nærmere angitt sats dersom det foreligger avgiftsplikt  etter folketrygdelovens §23-2. For 2006 er satsen 7%  </p>
+                        <p>Her føres arbeidsgiveravgiftsgrunnlag og beregnet avgift.  </p>
+                        <p>Avgiftsgrunnlaget skal ikke tas med under 3.0</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>For 2006 er satsen 7%</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Utanlandske arbeidstakarar, (USA eller Canada) særskild prosentsats  (utl.1)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dette gjeld arbeidstakarar som er utsendte til Noreg frå USA eller  Canada, og som fell inn under nærmare oppgitte vilkår i  Sosialdepartementet si årlege forskrift om avgift for slike  arbeidstakarar. Det skal betalast
+                            avgift etter nærmare oppgitt sats  dersom det ligg føre avgiftsplikt etter folketrygdelovas § 23-2. For  2006 er satsen 7%.  </p>
+                        <p>Her fører du arbeidsgivaravgiftsgrunnlag og utrekna avgift.  </p>
+                        <p>Avgiftsgrunnlaget skal ikkje takast med i post 3.0.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>For 2006 er satsen 7%</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/SpesielleGrupper-grp-4996/ArbeidstakereUtsendtTilNorgeFraUSAOgCanada-grp-5599/ArbeidsgiveravgiftUtenlandskArbeidstakerUSACanadaGrunnlag-datadef-22225">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.1 Utenlandske arbeidstakere (USA eller Canada) særskilt prosentsats  (utl 1)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.1 Utenlandske arbeidstakrar (USA eller Canada) særskild prosentsats  (utl 1)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesielleGrupper-grp-4996/ArbeidstakereUtsendtTilNorgeFraUSAOgCanada-grp-5599/ArbeidsgiveravgiftUtenlandskArbeidstakerUSACanadaBeregnet-datadef-22226">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Utenlandske arbeidstakere månedlig prosentsats (utl 2)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Utenlandske arbeidstakarar månedleg prosentsats (utl 2)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SpesielleGrupper-grp-4996/VisseSjomennMedlemITrygdenEtterFolketrygdlovens26-grp-5600">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Utenlandske arbeidstakere - månedlig beløp (utl.2)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dette gjelder sjømenn som er utenlandske statsborgere og som er  trygdet etter f.trl. § 2-6.  Avgiften beregnes etter fast sats pr.  måned per arbeidstaker uten hensyn til antall tjenestedager i  måneden. Her føres antall
+                            måneder og beregnet avgift.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>For 2006 er satsen kr. 278 per måned</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Utanlandske arbeidstakarar - månedlege beløp (utl.2)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dette gjeld sjømenn som er utanlandske statsborgarar , og som er  trygda etter § 2-6 i folketrygdlova.  Det reknast med fast beløp per  månad per arbeidstakar utan omsyn til talet på tenestedagar i  månaden. Her fører du
+                            kor mange månader det gjeld, og utrekna avgift.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Satsen er kr 278 pr. månad.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/SpesielleGrupper-grp-4996/VisseSjomennMedlemITrygdenEtterFolketrygdlovens26-grp-5600/AnsattUtenlandskManeder-datadef-16519">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.2 Antall måneder</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.2 Antall måneder</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesielleGrupper-grp-4996/VisseSjomennMedlemITrygdenEtterFolketrygdlovens26-grp-5600/ArbeidsgiveravgiftUtenlandskManedBeregnet-datadef-16520">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beløp</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Beløp</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SumInnberettetPaDeEnkelteKoderPaManuelleLonnsOgTrekkoppg-grp-1070">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Sum koder innberettet på lønns- og trekkoppgavene lagt ved denne  oppgaven</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Øvrige koder: Her føres sum av beløpene fra alle øvrige koder unntatt  kode 000.  Beløp fra tekstfeltene skal ikke tas med.  </p>
+                    <p>Sum alle koder: Her summeres alle koder uavhengig av fortegn.  Beløp  fra tekstfeltet skal ikke tas med.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Sum innmeldt på dei einskilde kodane på manuelle løns- og  trekkoppgåver som leggast ved denne oppgåven</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Andre kodar: Her fører du sum av beløpa frå alle andre kodar bortsett  frå kode 000.  Beløp frå tekstfelta skal ikkje takast med.  </p>
+                    <p>Sum alle kodar: Her summerer du alle kodar uavhengig av forteikn.  Beløp frå tekstfeltet skal ikkje takast med.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/SumInnberettetPaDeEnkelteKoderPaManuelleLonnsOgTrekkoppg-grp-1070/AnsattLonn-datadef-1226">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>111A</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>111A</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SumInnberettetPaDeEnkelteKoderPaManuelleLonnsOgTrekkoppg-grp-1070/AnsattNaturalytelserTrekkpliktig-datadef-2926">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>112A</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>112A</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SumInnberettetPaDeEnkelteKoderPaManuelleLonnsOgTrekkoppg-grp-1070/AnsattForsikringUlykkeYrkesskadeSkattepliktig-datadef-2927">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>116A</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>116A</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SumInnberettetPaDeEnkelteKoderPaManuelleLonnsOgTrekkoppg-grp-1070/AnsattPensjon-datadef-2929">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>211</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>211</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SumInnberettetPaDeEnkelteKoderPaManuelleLonnsOgTrekkoppg-grp-1070/AnsattFagforeningskontingent-datadef-1330">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>311</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>311</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SumInnberettetPaDeEnkelteKoderPaManuelleLonnsOgTrekkoppg-grp-1070/AnsattPremiePensjonsordning-datadef-1331">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>312</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>312</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SumInnberettetPaDeEnkelteKoderPaManuelleLonnsOgTrekkoppg-grp-1070/AnsattUnderholdsbidrag-datadef-1332">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>313</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>313</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SumInnberettetPaDeEnkelteKoderPaManuelleLonnsOgTrekkoppg-grp-1070/AnsattPremieFondTrygd-datadef-2919">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>314</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>314</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SumInnberettetPaDeEnkelteKoderPaManuelleLonnsOgTrekkoppg-grp-1070/AnsattUnderholdsbidragIkkeFradregsberretiget-datadef-19662">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>316</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>316</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SumInnberettetPaDeEnkelteKoderPaManuelleLonnsOgTrekkoppg-grp-1070/NaringsdrivendeUtbetaling-datadef-2920">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>401</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>401</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SumInnberettetPaDeEnkelteKoderPaManuelleLonnsOgTrekkoppg-grp-1070/AnsattBilgodtgjorelseTrekkfri-datadef-2928">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>711</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>711</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SumInnberettetPaDeEnkelteKoderPaManuelleLonnsOgTrekkoppg-grp-1070/AnsattForskuddstrekk-datadef-1333">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>950 Forskuddstrekk</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>950 Forskottstrekk</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SumInnberettetPaDeEnkelteKoderPaManuelleLonnsOgTrekkoppg-grp-1070/AnsattUtbetalingAnnen-datadef-8498">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Øvrige koder</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Her føres sum av beløpene fra alle øvrige koder unntatt kode 000</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Andre kodar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her føres ein samla sum frå alle dei andre kodane unnateke kode 000.  Summar frå tekstfeltet skal ikkje takast med.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SumInnberettetPaDeEnkelteKoderPaManuelleLonnsOgTrekkoppg-grp-1070/LonnskostnaderInnberettetManuelle-datadef-8508">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum alle koder</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her summeres alle koder uavhengig av fortegn.  Beløp fra tekstfeltet  skal ikke tas med.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum alle kodar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her summeres alle koder uavhengig av fortegn.  Beløp fra tekstfeltet  skal ikke tas med.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Svalbard-grp-1072">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Svalbard</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Disse feltene fylles bare ut av arbeidsgivere med arbeidstakere som  skattlegges etter Svalbardskatteloven.  </p>
+                    <p>Dersom feltene angående Svalbard fylles ut, skal en kopi av  årsoppgaven sendes Skatteoppkreveren for Svalbard v/Troms  Skattefogdkontor.  </p>
+                    <p>Antall lønnsoppgaver samt alle beløp for trekkpliktige ytelser på  Svalbard skal også tas med under Sammendrag av lønns- og  trekkoppgaver og Sum innberettet på de enkelte koder på lønns- og  trekkoppgave</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Dette feltet fylles bare ut av arbeidsgivere med arbeidstakere som  skattleggest etter Svalbardskatteloven</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Svalbard</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Dette feltet skal fyllast ut berre av arbeidsgivarar med  arbeidstakarar som blir skattlagde etter Svalbardskattelova.  Dersom  felt 5 er fylt ut, skal ein kopi av årsoppgåva sendast til  Skatteoppkrevjaren for Svalbard v/Troms
+                        skattefutkontor.  Talet på  lønnsoppgåver og alle beløp for trekkpliktige ytingar skal  spesifiserast under felt 5 og dessutan takast med under felt 3 og 4.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NON">
+                    <p>Dette feltet fyllast berre ut av arbeidsgivarar med arbeidstakarar som  skattleggjast etter Svalbardskattelova</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/Svalbard-grp-1072/OppgaverSvalbard-datadef-6621">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall lønns- og trekkoppgaver</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Tal på lønns- og trekkoppgåver</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Svalbard-grp-1072/LonnskostnaderSvalbard-datadef-6622">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>913A Brutto lønn</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>913A Brutto lønn</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Tala på LTO og 913A brutto lønn skal vera inkluderte i felt I. Skatt  og trygdeavgift skal ikkje takast med under forskottstrekk inder felt  I. 913A brutto lønn skal også takast med i felt II.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Svalbard-grp-1072/SkattetrekkSvalbard-datadef-6623">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Andre trekkpliktige ytelser</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Andre trekkpliktige ytingar</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Svalbard-grp-1072/TrygdeavgiftSvalbard-datadef-6616">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>950 Skatt og trygdeavgift</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>950 Skatt og trygdeavgift</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Merknader-grp-1078">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Merknader</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Merknadar</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Merknader-grp-1078/TilleggsopplysningerArsoppgave-datadef-14878">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Tilleggsopplysninger vedrørende lønns- og trekkoppgaver</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Tilleggsopplysningar om lønns- og trekkoppgåver</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

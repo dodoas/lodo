@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1208: Hjelpeberegninger til overgangsregel C og D for inntektsåret 2005</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1024-5024.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/Generell-grp-5143/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Generell-grp-5143/EnhetOrganisasjonsnummer-datadef-18"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1208  Hjelpeberegninger til overgangsregel C og D for inntektsåret  2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Del 1 skal benyttes av alle aksjeselskap og allmennaksjeselskap med  skattefri gevinst ved realisasjon av aksjer mv i 2004.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/Generell-grp-5143">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Generell-grp-5143/EnhetNavn-datadef-1">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Navn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Generell-grp-5143/EnhetOrganisasjonsnummer-datadef-18">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Organisasjonsnummer</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OvergangsregelC-grp-5603">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Beregning av skattepliktig inntekt etter overgangsregel C</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Aksjeselskap og allmennaksjeselskap som har alminnelig skatteplikt til  Norge, skal foreta inntektsføring i 2005 etter overgangsregel C når  selskapets generalforsamling i inntektsåret 2005 har truffet  beslutning om utdeling
+                        av ubeskattet inntekt, som nedenfor bestemt.  Overgangsregelen skal, så langt den passer, også gjelde for likestilt  selskap og sammenslutning som nevnt i skatteloven § 2-2 første ledd  b-e.  </p>
+                    <p/>
+                    <p>Inntektsføring skal foretas når det oppstår underdekning ved at  selskapets egenkapital i hht balansen i årsoppgjøret for 2004 (med  visse korreksjoner jfr brev FIN 04.03.05) er lavere enn summen av:  </p>
+                    <p>A Innbetalt aksjekapital herunder overkurs, og en beregnet  egenkapitalandel av netto positive midlertidige forskjeller mellom de  verdier som fremkommer i balansen i årsoppgjøret og selskapets  skattemessige verdier.  Ved
+                        beregningen etter første punktum gjelder  annet til fjerde punktum i skatteloven § 10-5 annet ledd og  overgangsregel D tilsvarende.  </p>
+                    <p>B Netto gevinst, etter fradrag for tap, som er innvunnet etter 25.  mars 2004 og som ville vært skattepliktig etter de regler som gjaldt  25. mars 2004, i den utstrekning gevinst ikke skattlegges og tap ikke  kommer til fradrag
+                        etter skatteloven § 2-38.  Netto gevinst etter  første punktum beregnes etter de regler som gjaldt 25. mars 2004.  Beløpet som fastsettes etter første og annet punktum, skal reduseres  med skatten på det beløpet som er
+                        inntektsført etter denne  overgangsregel.  </p>
+                    <p/>
+                    <p>Inntektsføring skal bare foretas så langt underdekningen skyldes:  </p>
+                    <p>A. selskapet har avsatt til utbytte i selskapets årsoppgjør 2004  eller  </p>
+                    <p>B. selskapet har gitt konsernbidrag med virkning for inntektsåret 2004  som overstiger selskapets alminnelige inntekt i 2004 eller  </p>
+                    <p>C. selskapet i 2005 har besluttet å dele ut utbytte, jf. skatteloven §  10-11, som overstiger avsetningen til utbytte i årsregnskapet for  2004 eller  </p>
+                    <p>D. selskapet i 2005 har besluttet å dele ut mer enn aksjens  forholdsmessige andel av innbetalt aksjekapital, herunder overkurs,  ved nedsettelse av aksjekapitalen med innløsning av enkeltaksje.  </p>
+                    <p/>
+                    <p>Inntekten settes til et bruttobeløp som, etter at beregnet skatt av  bruttobeløpet er trukket fra, tilsvarer det utbyttet eller  konsernbidraget som er avsatt eller utdelt ut over grensen etter  annet ledd, jf. tredje ledd.
+                        Inntekten skal likevel settes ned i  samsvar med bestemmelsene i femte og sjette ledd.  </p>
+                    <p/>
+                    <p>Inntekten reduseres med korreksjonsinntekt som selskapet må  inntektsføre i 2004 og 2005 på grunn av utdelinger som selskapets  generalforsamling har besluttet i 2005.  </p>
+                    <p/>
+                    <p>Inntekten som fremkommer etter fjerde og femte ledd, reduseres  forholdsmessig med andelen av den samlede utdeling, jf. tredje ledd,  som tilfaller aksjonærer som ikke har rett til godtgjørelse etter  skatteloven § 10-12 for
+                        det mottatte beløp.  Det skal likevel ikke  foretas inntektsreduksjon ved utdeling til aksjonær som nevnt i  foregående punktum, i den utstrekning slik aksjonær lar inntekten  strømme gjennom ett eller flere ledd i en
+                        eierkjede, og inntekten i  2005 innvinnes som utbytte av aksjonærer som har rett til  godtgjørelse etter skatteloven § 10-12 for det mottatte beløp.  </p>
+                    <p/>
+                    <p>Departementet kan i forskrift gi nærmere regler til utfylling og  gjennomføring av denne overgangsregel.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/OvergangsregelC-grp-5603/AksjekapitalOverkursGjenvarende-datadef-24480">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>101 Skattemessig innbetalt aksjekapital inklusive overkurs som  fremdeles er i behold i selskapet</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres innbetalt aksjekapital inkludert overkurs redusert med  eventuelle utgifter som er ført mot overkursfond, f.eks.  stiftelsesutgifter.  Som innbetalt aksjekapital inkl. overkurs,  regnes bare det som er i behold i
+                            selskapet.  Aksjekapital og  overkurs som er anvendt til dekning av tap eller tilbakebetalt til  aksjonærene skal derfor ikke medtas i denne posten.  </p>
+                        <p>Har selskapet nedskrevet aksjekapital, herunder overkurs, som tapt,  men senere forhøyet aksjekapitalen uten nytegning, vil  kapitalforhøyelsen regnes som innbetalt aksjekapital så lenge den  ligger innenfor den
+                            opprinnelige innbetalte aksjekapital.  I  mellomliggende periode regnes innbetalt aksjekapital til den delen  som er i behold.  Det skal ses bort fra aksjekapital, herunder  overkurs, som skriver seg fra oppskrivning uten
+                            innbetaling, selv om  oppskrivningen gjelder beløp som er skattlagt etter tidligere  selskapsskatteloven § 1-6.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Beløpet i denne poster tilsvarer beløpet som skal føres i post 150 for  beregning av eventuell korreksjonsinntekt.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:group ref="/Skjema/OvergangsregelC-grp-5603/PositiveMidlertidigeForskjeller-grp-5604">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>102</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/OvergangsregelC-grp-5603/PositiveMidlertidigeForskjeller-grp-5604/ForskjellerAksjerPositiveFjoraret-datadef-24481">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>102 Sum positive midlertidige forskjeller 31.12.2004</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres sum positive midlertidige forskjeller pr 31.12.  Beløpet  multipliseres med 0,72 for å få fram egenkapitalandelen av  forskjellene.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OvergangsregelC-grp-5603/PositiveMidlertidigeForskjeller-grp-5604/ForskjellerAksjerPositiveFratrukketSkatteeffektFjoraret-datadef-24482">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x 0,72</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Beløpet som skal føres her, er sum negative midlertidige forskjeller  pr. 31.12.  Beløpet multipliseres med 0,72 for å få frem  egenkaptalandelen av forskjellene.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/OvergangsregelC-grp-5603/NegativeMidlertidigeForskjeller-grp-5605">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>103</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/OvergangsregelC-grp-5603/NegativeMidlertidigeForskjeller-grp-5605/ForskjellerAksjerNegativeFjoraret-datadef-24483">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>103 Sum negative midlertidige forskjeller 31.12.2004</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OvergangsregelC-grp-5603/NegativeMidlertidigeForskjeller-grp-5605/ForskjellerAksjerNegativeFratrukketSkatteeffektFjoraret-datadef-24484">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x 0,72</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/OvergangsregelC-grp-5603/ForskjellerAksjerOvergangsregelDFjoraret-datadef-24486">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>104 Midlertidige forskjeller på aksjer jf. overgangsregel D for 2004  (RF-1208)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres forskjeller (iht overgangsregel D til sktl § 2-38) mellom  regnskapsmessig og skattemessig verdi på aksjer mv. som omfattes av  fritaksmetoden.  Beløpet hentes fra skjemaet Samleoppgave for  realisasjoner av
+                            aksjer mv og hjelpeberegninger til overgangsregel B  og D, samt underlag for overgangsregel C i skattereformen,  RF-1208/2004, post 14.  Vær oppmerksom på at det ved beregningen av  skattemessig verdi ikke skal tas hensyn
+                            til RISK.  Beløpet skal tas  med uten reduksjon for skatt.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OvergangsregelC-grp-5603/ForskjellerAksjerNettoFratrukketSkatteeffektFjoraret-datadef-24485">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>105 Sum midlertidige forskjeller</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres summen av beløpene i post 102, 103 og 104, som da utgjør  netto midlertidige forskjeller, også hensyntatt overgangsregel D.  Dersom beløpet i post 105 blir negativt, skal beløpet som føres i den  høyre kolonne
+                            være 0.  Det er således forskjell mellom fremgangsmåten  for beregning av netto midlertidig forskjell som skal medtas ved  beregning av inntekt etter overgangsregel C og tilsvarende ved  beregning av korreksjonsinntekt i
+                            selvangivelsen post 301 - 350.  I  hht overgangsregel C medtas kun positive midlertidige forskjeller ved  beregning av egenkapitalkravet (post 108).  I selvangivelsen post 301  - 350 medtas også netto negative midlertidige
+                            forskjeller.  Forskjellen skyldes at ved beregning av korreksjonsinntekt i  selvangivelsen foreligger en reverseringsadgang i de tilfeller det  tidligere år er beregnet positiv korreksjonsinntekt.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OvergangsregelC-grp-5603/ForskjellerAksjerPositivNettoFratrukketSkatteeffektFjoraret-datadef-25069">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>105 Sum midlertidige forskjeller (positivt)</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OvergangsregelC-grp-5603/AksjekapitalOverkursGjenvarendeJustertMidlertidigeForskjeller-datadef-24487">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>106 Sum postene 101 og 105</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres summen av post 101 og post 105.  Dette beløpet vil tilsvare  beløpet som skal føres i post 155 nedenfor.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OvergangsregelC-grp-5603/GevinstAksjer260304311204NettoMinusSkatt-datadef-24488">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>107 Netto gevinst etter 25.03.2004 minus skatt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres netto gevinst, etter fradrag for tap, som er innvunnet etter  25. mars 2004 og som ville vært skattepliktig etter de regler som  gjaldt 25. mars 2004, i den utstrekning gevinst ikke skattlegges og  tap ikke kommer
+                            til fradrag etter skatteloven § 2-38.  Netto gevinst  etter første punktum beregnes etter de regler som gjaldt 25. mars  2004, jf. overgangsregel C (2)b.  Beløpet kan hentes fra RF-1208/2004  (overgangsregel B) linje 413.
+                            Det gjøres fradrag for utsatt skatt  som selskapet har avsatt ved årsoppgjøret for 2004 på grunn av  beregnet inntektsføring etter overgangsregel C, jf Ot.prp nr 1  2004-2005 side 103.  Også gevinster i 2005 som
+                            foranlediger utdeling  av utbytte i 2005 skal medregnes.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Her føres netto gevinst, etter fradrag for tap, som er innvunnet etter  25. mars 2004 og som ville vært skattepliktig etter de regler som  gjaldt 25. mars 2004, i den utstrekning gevinst ikke skattlegges og  tap ikke kommer
+                            til fradrag etter skatteloven § 2-38.  Netto gevinst  etter første punktum beregnes etter de regler som gjaldt 25. mars  2004, jfr overgangsregel C (2) b.  Beløpet kan hentes fra  RF-1208/2004 (overgangsregel B) linje 413.
+                            Det gjøres fradrag for  utsatt skatt som selskapet har avsatt ved årsoppgjøret for 2004 på  grunn av beregnet inntektsføring etter overgangsregel C, jf Ot.prp.  nr 1 2004-2005 side 103.  Også gevinster i 2005 som
+                            foranlediger av  utbytte i 2005 skal medregnes.</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OvergangsregelC-grp-5603/AksjekapitalOverkursGjenvarendeJustertOvergangsregelC-datadef-24489">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>108 Sum postene 106 og 107</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Denne summen utgjør kravet til egenkapital etter overgangsregel C(2).</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OvergangsregelC-grp-5603/EgenkapitalFjoraretMinusAretsEkstraordinartUtbytte-datadef-24490">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>109 Egenkapital i balansen for 2004 overført fra næringsoppgaven  redusert med ekstraordinært utbytte mv. i 2005</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Sum egenkapital i balansen hentes fra post 9450 i næringsoppgave 2,  post 5000 i næringsoppgave 3 og post 9350 i næringsoppgave 4.  Denne  summen skal reduseres med eventuelt besluttet utdelt utbytte i 2005  som overstiger
+                            avsetningen til utbytte i årsregnskapet for 2004  og/eller selskapet i 2005 har besluttet å dele ut mer enn aksjens  forholdsmessige andel av innbetalt aksjekapital, herunder overkurs,  ved nedsettelse av aksjekapitalen
+                            med innløsning av enkeltaksje,  eller endret beslutning om utdeling av konsernbidrag, jf. uttalelse  FIN 04. mars 2005.  </p>
+                        <p/>
+                        <p>Sum egenkapital sammenholdes så med summen av skattlagt kapital,  egenkapitaldelen av netto positive midlertidige forskjeller i  selskapet, midlertidig forskjell etter overgangsregel D og netto  skattefri gevinst som
+                            fremkommer i post 108.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OvergangsregelC-grp-5603/DifferanseEgenkapitalBeregningOvergangsregelC-datadef-24491">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>110 Ved underdekning vil det fremkomme en positiv differanse her.  Beløpet overføres til post 112 venstre felt. Dersom beløpet skal i  denne posten er negativt, skal  post 111 til 116 ikke fylles ut.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Ved underdekning vil det framkomme en positiv differanse her.  Dersom  egenkapitalen i selskapet post 109, er mindre enn summen i post 108,  vil det fremkomme en positiv differanse her.  I den utstrekning en  slik positiv
+                            differanse skyldes at det er avsatt utbytte mv. (se post  111), vil utbytteavsetning mv bli rammet av overgangsregel C.  </p>
+                        <p>Dersom beløpet i post 110 er mindre eller lik utbytte mv i post 111,  overføres beløpet i post 110 til post 112.  Dersom beløpet i post 110  er større enn utbytte mv i post 111, overføres beløpet i post 111 til  post 112.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Dersom det fremkommer en negativ differanse her, vil utbytte mv ikke  medføre inntekt etter overgangsregel C.  Resten av skjemaets del 1  skal derfor ikke benyttes.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OvergangsregelC-grp-5603/UnderdekningEgenkapitalBeregningOvergangsregelC-datadef-24492">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>111 utdelt utbytte  </p>
+                        <p>Hvis post 110 er større enn post 111, overfør post 111 til post 112  venstre felt.  Dersom beløpet i denne posten er negativt, skal post  111 til 116 ikke fylles ut.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres:  </p>
+                        <p>a avsatt utbytte i selskapets årsoppgjør for 2004  </p>
+                        <p>b avgitt konsernbidrag med virkning for inntektsåret 2004, som  overstiger selskapets alminnelige inntekt i 2004  </p>
+                        <p>c besluttet utdelt utbytte jfr skatteloven § 10-11, som overstiger  avsetningen til utbytte i årsregnskapet for 2004  </p>
+                        <p>d besluttet utdelt i 2005 mer enn aksjens forholdsmessige andel av  innbetalt aksjekapital, herunder overkurs, ved nedsettelse av  aksjekapitalen med innløsning av enkeltaksje.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OvergangsregelC-grp-5603/InntektBeregnetOvergangsregelCBeregningsgrunnlag-datadef-24493">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>112 Beregnet inntekt, underdekning iht post 111</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Underdekningen som fremkommer i post 110 føres i det venstre feltet  for å divideres med 0,72 slik at det beløp som skal inntektsføres for  skatteberegning fremkommer og føres i det høyre feltet, jfr.  overgangsregel C(4).</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OvergangsregelC-grp-5603/InntektBeregnetOvergangsregelCBeregningsgrunnlagSkattejustert-datadef-24494">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>: 0,72</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres differansen mellom inntekt beregnet i post 112 og beregnet  korreksjonsinntekt oppført i post 113.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OvergangsregelC-grp-5603/InntektBeregnetOvergangsregelC-datadef-24496">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>114 Sum inntekt etter overgangsregel C</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres differansen mellom inntekt beregnet i post 112 og beregnet  korreksjonsinntekt oppført i post 113.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OvergangsregelC-grp-5603/UtdelingSelskapsaksjonarerAndel-datadef-24497">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>115 Andel av samlet utdeling som tilfaller selskapsaksjonær (legg ved  beregning ved gjennomstrømming)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres den andelen av inntekten beregnet i post 114, som tilfaller  selskapsaksjonærer.  </p>
+                        <p>Selskap som har realisert aksjer mv med skattefri gevinst i 2004,  plikter å beregne skatt også når utbytte strømmer gjennom andre  selskap og (til slutt) tilfaller personlige aksjonærer i 2005.  Andelen av aksjeutbytte som
+                            tilfaller selskapsaksjonærer som lar  inntekten strømme gjennom ett eller flere ledd i en eierkjede slik at  inntekten i 2005 innvinnes som utbytte av aksjonærer som har rett til  godtgjørelse etter skatteloven § 10-12 for
+                            det mottatte utbytte, skal  derfor ikke medregnes her, jfr. overgangsregel C(6).</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OvergangsregelC-grp-5603/InntektsforingOvergangsregelC-datadef-23933">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>116 Beløp til inntektsføring - Beløpet overføres til post 208 i  RF-1028</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres den andelen av inntekten beregnet i post 116, som tilfaller  personlige aksjonærer i 2005.  denne andelen kan enten tilfalle  personlige aksjonærer i selskapet eller personlige aksjonærer etter  gjennomstrømming i
+                            en eierkjede.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/HjelpeberegningForPost113-grp-5606">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Hjelpeberegning for post 113 - Beregnet korreksjonsinntekt 2004 med  tillegg av ekstrautdelinger i 2005</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Selskaper som har alminnelig skatteplikt til Norge for hele sitt  overskudd, skal inntektsføre en korreksjonsinntekt dersom selskapet  har utdelt ubeskattet kapital (dvs midlertidige positive forskjeller)  eller har foretatt
+                        avsetning til slik utdeling.  Den beregning som er  foretatt under postene 101 til 113, vil også omfatte slik inntekt som  skal beskattes som korreksjonsinntekt.  Skattepliktig inntekt i hht  overgangsregel C er endelig for
+                        selskapet, mens korreksjonsinntekt er  en reversibel inntekt.  Denne ulikheten medfører at det er viktig å  avgrense skattepliktig inntekt etter overgangsregel C ved å skille ut  den delen av utdeling av ikke beskattet inntekt
+                        som ikke skriver seg  fra skattefrie aksjegevinster, dvs skille ut korreksjonsinntekt etter  sktl § 10-5.  Hjelpeberegning for utskillelse av korreksjonsinntekt  for å avgrense inntektsføring etter overgangsregel C foretas i
+                        postene 150 til 160.  </p>
+                    <p/>
+                    <p>OBS:  </p>
+                    <p>Ovenstående hjelpeberegning for korreksjonsinntekt skal gjennomføres  med de samme forutsetninger som beregning av egenkapitalkravet i  overgangsregel C(2).  Dette kan medføre at beregning av  korreksjonsinntekt med det formål
+                        å isolere eventuell utdeling av  skattefri aksjegevinst, kan avvike fra årets beregning av  korreksjonsinntekt i selvangivelsen postene 301 til 350.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/HjelpeberegningForPost113-grp-5606/DifferanseEgenkapitalHjelpeberegningOvergangsregelC-datadef-24500">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>157 Ved underdekning vil det fremkomme en positiv differanse her.  Beløpet overføres til post 160. Dersom beløpet i denne posten er  negativt, skal post 160 ikke fylles ut</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom egenkapitalen i selskapet er mindre enn summen i post 155, vil  det fremkomme en positiv differanse her.  I den utstrekning en slik  positiv differanse skyldes at det er avsatt utbytte mv., vil  utbytteavsetningen
+                            mv. være foretatt av ikke skattlagt kapital.  </p>
+                        <p>Dersom det oppstår en negativ differanse her, er egenkapitalen i  balansen større enn kravet etter skatteloven § 10-5.  Avsetning til  utbytte mv. vil da ikke være foretatt av ubeskattet kapital, og  betingelsene for
+                            beregning av korreksjonsinntekt vil ikke være til  stede.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/HjelpeberegningForPost113-grp-5606/KorreksjonsinntektBeregningOvergangsregelCBeregningsgrunnlag-datadef-24501">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>160 Beregnet korreksjonsinntekt. Overføres til post 113</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/HjelpeberegningForPost113-grp-5606/KorreksjonsinntektBeregningOvergangsregelC-datadef-24495">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>: 0,72</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OvergangsregelD-grp-5145">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Overgangsregel D. Midlertidige forskjeller mellom skattemessige og  regnskapsmessige verdier på aksjer som påvirker beregning av  korreksjonsinntekt</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Forskjeller mellom skattemessige og regnskapsmessige verdier på aksjer  har inntil innføring av fritaksmetoden vært behandlet som  midlertidige forskjeller (RF-1217 post 111 - 113).  </p>
+                    <p/>
+                    <p>For aksjer som omfattes av fritaksmetoden fom  </p>
+                    <p>26. mars 2004, bortfaller slike forskjeller på aksjer  </p>
+                    <p>og skal derfor ikke lenger medtas i RF 1217.  </p>
+                    <p/>
+                    <p>Forskjeller mellom skattemessig og  </p>
+                    <p>regnskapsmessige verdier for aksjer som omfattes  </p>
+                    <p>av fritaksmetoden, skal imidlertid i hht  </p>
+                    <p>overgangsregel D inngå i beregning av  </p>
+                    <p>korreksjonsinntekt, jfr sktl § 10-5 annet ledd. Det  </p>
+                    <p>skal i denne forbindelse ikke gjøres fradrag for en  </p>
+                    <p>beregnet skatteforpliktelse knyttet til differansen  </p>
+                    <p>mellom skattemessige og regnskapsmessige  </p>
+                    <p>verdier for akjer som omfattes av fritaksmetoden  </p>
+                    <p>jfr § 10-5 annet ledd annet punktum.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/OvergangsregelD-grp-5145/AksjerMvRegnskapsmessigVerdiOvergangsregelD-datadef-22528">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>170 Aksjer regnskapsmessig verdi</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres den regnskapsmessige verdi pr  </p>
+                        <p>31.12.2005 på aksjer som omfattes av  </p>
+                        <p>fritaksmetoden</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OvergangsregelD-grp-5145/AksjerMvSkattemessigVerdiOvergangsregelD-datadef-22529">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>171 Aksjer skattemessig verdi</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres den skattemessige verdi pr  </p>
+                        <p>31.12.2005 på aksjer som omfattes av  </p>
+                        <p>fritaksmetoden.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:group ref="/Skjema/OvergangsregelD-grp-5145/Sum-grp-5146">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>514 Sum</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>(positivt beløp overføres til positive forskjeller og negativt beløp  overføres til negative forskjeller) Overføres til RF-1028 post 306</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/OvergangsregelD-grp-5145/Sum-grp-5146/AksjerMvDifferanseRegnskapSkattOvergangsregelD-datadef-22530">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>172 Sum</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres differanse mellom den regnskapsmessige verdi i post 12 og  den skattemessige verdi i post 13. Positiv differanse føres til  RF-1028 (selvangivelsen) post 306 med positivt fortegn. Negativ  differanse føres til
+                                samme sted med negativt fortegn.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:group ref="/Skjema/OvergangsregelD-grp-5145/Sum-grp-5146/PositiveForskjeller-grp-5147">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Positive forskjeller pr 31.12</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/OvergangsregelD-grp-5145/Sum-grp-5146/PositiveForskjeller-grp-5147/ForskjellerPermanentePositiveAksjer-datadef-22523">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>172 Sum</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres differansen mellom den regnskapsmessige verdi i post 170 og  den skattemessige verdi i post 171.  Positiv differanse føres til  RF-1028 (selvangivelsen) post 306 med positivt fortegn.  Negativ  differanse
+                                    føres til samme sted med negativt fortegn.</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/OvergangsregelD-grp-5145/Sum-grp-5146/NegativeForskjeller-grp-5148">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Negative forskjeller pr 31.12</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/OvergangsregelD-grp-5145/Sum-grp-5146/NegativeForskjeller-grp-5148/ForskjellerPermanenteNegativeAksjer-datadef-22524">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>172 Sum</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres differansen mellom den regnskapsmessige verdi i post 170 og  den skattemessige verdi i post 171.  Positiv differanse føres til  RF-1028 (selvangivelsen) post 306 med positivt fortegn.  Negativ  differanse
+                                    føres til samme sted med negativt fortegn.</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

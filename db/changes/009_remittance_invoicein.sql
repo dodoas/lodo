@@ -1,0 +1,10 @@
+alter table inbarbeidsgiveravgift add TS timestamp;
+alter table invoicein add isReisegarantifond smallint;
+alter table invoicein change ProjectID Project varchar(255);
+alter table invoicein add Department varchar(255);
+alter table invoicein change BankAccount SupplierBankAccount varchar(255);
+alter table invoicein add CustomerBankAccount varchar(255);
+alter table invoicein drop RemittanceApprovedDate;
+alter table invoicein drop RemittanceSendtDate;
+alter table kommune change KommuneNumber KommuneNumber char(5) not null;
+alter table invoicein add RemittanceSequence int not null;

@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1025-E: Årsoppgave for arbeidsgiveravgift. Elektronisk versjon.</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1263-5104.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:group ref="/Skjema/Innledning-grp-5925">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Innledning-grp-5925/TypeOppgave-grp-5924">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>type oppgave</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Innledning-grp-5925/TypeOppgave-grp-5924/OppgaveReferanse-datadef-25933">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Altinn reference</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5925/TypeOppgave-grp-5924/OppgaveAr-datadef-11236">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>År</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:selectOne ref="/Skjema/Innledning-grp-5925/TypeOppgave-grp-5924/OppgaveEndringsoppgave-datadef-21819">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ordinæroppgave</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ordinæroppgåve</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Endringsoppgave</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Endringsoppgåve</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ordinær/endringsoppgave</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Innledning-grp-5925/SKO-grp-5926">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Til SKO</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Innledning-grp-5925/SKO-grp-5926/SkatteoppkreverKommuneNummer-datadef-16513">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommunenr. arbeidsgiver</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5925/SKO-grp-5926/SkatteoppkreverKommuneNavn-datadef-8486">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>kommunennavn, arbeisdgiver</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Innledning-grp-5925/Arbeidsgiver-grp-5927">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Arbeidsgiver</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Innledning-grp-5925/Arbeidsgiver-grp-5927/RapporteringsenhetOrganisasjonsnummer-datadef-21772">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Org.nr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5925/Arbeidsgiver-grp-5927/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>F.nr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5925/Arbeidsgiver-grp-5927/OppgavegiverNavnPreutfylt-datadef-25795">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Bransje-grp-5928">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Branse og spesielle grupper</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/Bransje-grp-5928/ArbeidsgiveravgiftBeregningType-datadef-16522">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>OF</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Hovedregel - generelle næringer</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Hovudregel - generelle næringar</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>HF</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Produksjon av elektrisitet ved vannkraft etc.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Produksjon av elektrisitet ved vasskraft etc.</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>DF</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Dyrking av jordbruks- og hagebruksvekster etc.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Dyrking av jordbruks- og hagebruksvekster etc.</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>HU</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Godstransport med over 50 årsverk</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Godstransport med over 50 årsverk</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>OU</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Øvrige transportforetak</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Øvrige transportføretak</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>HH</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Foretak omfattet av helseforetaksloven</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Føretak omfatta av helseføretaksloven</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>FF</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fiske og fangst</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fiske og fangst</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Bransje</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SpesielleGrupper-grp-5929">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>UTL1 og UTL2</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/SpesielleGrupper-grp-5929/ArbeidsgiveravgiftUtenlandskArbeidstakerUSACanadaGrunnlag-datadef-22225">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>UTL1 grunnlag</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SpesielleGrupper-grp-5929/ArbeidsgiveravgiftUtenlandskArbeidstakerUSACanadaBeregnet-datadef-22226">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>UTL1 beløp</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SpesielleGrupper-grp-5929/AnsattUtenlandskSjofolkManeder-datadef-25894">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>UTL2 antall måneder</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SpesielleGrupper-grp-5929/ArbeidsgiveravgiftUtenlandskSjofolkManedBeregnet-datadef-25895">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>UTL2 beløp</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SammendragLTO-grp-5932">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Sammendrag LTO</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/SammendragLTO-grp-5932/LonnsoppgaverAntallMaskinelle-datadef-6615">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall LTO</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SammendragLTO-grp-5932/ForskuddstrekkTrukketSkattemessig-datadef-8495">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Forskuddstrekk</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SammendragLTO-grp-5932/LonnskostnaderOppgavepliktigeMaskinelle-datadef-8487">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Samlede oppgavepliktige ytelser</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SammendragLTO-grp-5932/YtelserLonnsoppgavepliktigeSamlede-datadef-15944">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum postene 0.5 og 6.2</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Tabell avgiftsgrunnlag</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone1-grp-5931">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sone 1</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone1-grp-5931/LonnskostnaderArbeidsgiveravgiftspliktigeMaskinelleSone1-datadef-13882">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Oppgavepliktige ytelser fra LTO</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone1-grp-5931/LonnskostnaderAvgiftpliktigeIkkeOppgavepliktigeSone1-datadef-13892">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Under grensen for oppgaveplikt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone1-grp-5931/PensjonsordningerTilskuddPremieAvgiftspliktigeSone1-datadef-13897">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Premier til pensjonsordninger</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone1-grp-5931/LonnskostnaderArbeidsgiveravgiftspliktigeSone1-datadef-13902">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Brutto aviftsgrunnlag sone 1</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone1-grp-5931/LonnskostnadArbeidsgiveravgiftspliktigArbtakerUnder62Sone1-datadef-22213">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum brutto avgiftsgrunnlag under 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone1-grp-5931/RefusjonGrunnlagSone1Under62Ar-datadef-25405">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ref under 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone1-grp-5931/LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerOver62Sone1-datadef-22219">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum brutto avgiftsgrunnlag over 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone1-grp-5931/RefusjonGrunnlagSone1Over62Ar-datadef-25410">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ref over 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone1-grp-5931/LonnskostnaderArbeidsgiveravgiftspliktigeSone1Netto-datadef-25896">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Netto avgiftsgrunnlag sone 1</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone2-grp-5933">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sone 2</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone2-grp-5933/LonnskostnaderArbeidsgiveravgiftspliktigeMaskinelleSone2-datadef-13883">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Oppgavepliktige ytelser fra LTO</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone2-grp-5933/LonnskostnaderAvgiftpliktigeIkkeOppgavepliktigeSone2-datadef-13893">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Under grensen for oppgaveplikt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone2-grp-5933/PensjonsordningerTilskuddPremieAvgiftspliktigeSone2-datadef-13898">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Premier til pensjonsordninger</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone2-grp-5933/LonnskostnaderArbeidsgiveravgiftspliktigeSone2-datadef-13903">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Brutto aviftsgrunnlag sone 2</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone2-grp-5933/LonnskostnadArbeidsgiveravgiftspliktigArbtakerUnder62Sone2-datadef-22214">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum brutto avgiftsgrunnlag under 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone2-grp-5933/RefusjonGrunnlagSone2Under62Ar-datadef-25406">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ref under 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone2-grp-5933/LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerOver62Sone2-datadef-22220">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum brutto avgiftsgrunnlag over 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone2-grp-5933/RefusjonGrunnlagSone2Over62Ar-datadef-25411">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ref over 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone2-grp-5933/LonnskostnaderArbeidsgiveravgiftspliktigeSone2Netto-datadef-25897">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Netto avgiftsgrunnlag sone 2</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone3-grp-5934">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sone 3</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone3-grp-5934/LonnskostnaderArbeidsgiveravgiftspliktigeMaskinelleSone3-datadef-13884">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Oppgavepliktige ytelser fra LTO</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone3-grp-5934/LonnskostnaderAvgiftpliktigeIkkeOppgavepliktigeSone3-datadef-13894">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Under grensen for oppgaveplikt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone3-grp-5934/PensjonsordningerTilskuddPremieAvgiftspliktigeSone3-datadef-13899">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Premier til pensjonsordninger</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone3-grp-5934/LonnskostnaderArbeidsgiveravgiftspliktigeSone3-datadef-13904">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Brutto aviftsgrunnlag sone 3</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone3-grp-5934/LonnskostnadArbeidsgiveravgiftspliktigArbtakerUnder62Sone3-datadef-22215">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum brutto avgiftsgrunnlag under 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone3-grp-5934/RefusjonGrunnlagSone3Under62Ar-datadef-25407">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ref under 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone3-grp-5934/LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerOver62Sone3-datadef-22221">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum brutto avgiftsgrunnlag over 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone3-grp-5934/RefusjonGrunnlagSone3Over62Ar-datadef-25412">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ref over 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone3-grp-5934/LonnskostnaderArbeidsgiveravgiftspliktigeSone3Netto-datadef-25898">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Netto avgiftsgrunnlag sone 3</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone4-grp-5935">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sone 4</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone4-grp-5935/LonnskostnaderArbeidsgiveravgiftspliktigeMaskinelleSone4-datadef-13885">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Oppgavepliktige ytelser fra LTO</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone4-grp-5935/LonnskostnaderAvgiftpliktigeIkkeOppgavepliktigeSone4-datadef-13895">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Under grensen for oppgaveplikt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone4-grp-5935/PensjonsordningerTilskuddPremieAvgiftspliktigeSone4-datadef-13900">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Premier til pensjonsordninger</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone4-grp-5935/LonnskostnaderArbeidsgiveravgiftspliktigeSone4-datadef-13905">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Brutto aviftsgrunnlag sone 4</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone4-grp-5935/LonnskostnadArbeidsgiveravgiftspliktigArbtakerUnder62Sone4-datadef-22216">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum brutto avgiftsgrunnlag under 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone4-grp-5935/RefusjonGrunnlagSone4Under62Ar-datadef-25408">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ref under 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone4-grp-5935/LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerOver62Sone4-datadef-22222">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum brutto avgiftsgrunnlag over 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone4-grp-5935/RefusjonGrunnlagSone4Over62Ar-datadef-25413">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ref over 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone4-grp-5935/LonnskostnaderArbeidsgiveravgiftspliktigeSone4Netto-datadef-25899">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Netto avgiftsgrunnlag sone 4</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone5-grp-5936">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sone 5</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone5-grp-5936/LonnskostnaderArbeidsgiveravgiftspliktigeMaskinelleSone5-datadef-13886">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Oppgavepliktige ytelser fra LTO</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone5-grp-5936/LonnskostnaderAvgiftpliktigeIkkeOppgavepliktigeSone5-datadef-13896">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Under grensen for oppgaveplikt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone5-grp-5936/PensjonsordningerTilskuddPremieAvgiftspliktigeSone5-datadef-13901">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Premier til pensjonsordninger</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone5-grp-5936/LonnskostnaderArbeidsgiveravgiftspliktigeSone5-datadef-13906">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Brutto aviftsgrunnlag sone 5</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone5-grp-5936/LonnskostnadArbeidsgiveravgiftspliktigArbtakerUnder62Sone5-datadef-22217">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum brutto avgiftsgrunnlag under 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone5-grp-5936/RefusjonGrunnlagSone5Under62Ar-datadef-25409">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ref under 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone5-grp-5936/LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerOver62Sone5-datadef-22223">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum brutto avgiftsgrunnlag over 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone5-grp-5936/RefusjonGrunnlagSone5Over62Ar-datadef-25414">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ref over 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/Sone5-grp-5936/LonnskostnaderArbeidsgiveravgiftspliktigeSone5Netto-datadef-25900">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Netto avgiftsgrunnlag sone 5</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/TotalSummer-grp-5967">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Totalsummer</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/TotalSummer-grp-5967/LonnskostnaderArbeidsgiveravgiftspliktigeAlleSoner-datadef-25937">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Alle soner: Samlede avgiftspliktige ytelser i samsvar med LTO</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/TotalSummer-grp-5967/LonnskostnaderIkkeOppgavepliktige-datadef-6617">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Alle soner: Under grensen for oppgaveplikt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/TotalSummer-grp-5967/PensjonsordningerTilskuddPremieAvgiftspliktigeAlleSoner-datadef-25936">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Alle soner:  </p>
+                            <p>Premier til pensjonsordninger</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/TotalSummer-grp-5967/LonnskostnaderArbeidsgiveravgiftspliktige-datadef-8507">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Alle soner: Brutto aviftsgrunnlag sone 5</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/TotalSummer-grp-5967/LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerUnder62Sum-datadef-22218">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Alle soner: Sum brutto avgiftsgrunnlag under 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/TotalSummer-grp-5967/RefusjonGrunnlagAlleSonerUnder62Ar-datadef-25938">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Alle soner: Ref under 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/TotalSummer-grp-5967/LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerOver62Sum-datadef-22224">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Alle soner: Sum brutto avgiftsgrunnlag over 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/TotalSummer-grp-5967/RefusjonGrunnlagAlleSonerOver62Ar-datadef-25939">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Alle soner: Ref over 62 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TabellAvgiftsgrunnlag-grp-5930/TotalSummer-grp-5967/LonnskostnaderArbeidsgiveravgiftspliktigeAlleSonerNetto-datadef-25940">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Alle soner: Netto avgiftsgrunnlag sone 5</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Svalbard-grp-5937">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Svalbard</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Svalbard-grp-5937/OppgaverSvalbard-datadef-6621">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall oppgaver Svalbard</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Svalbard-grp-5937/LonnskostnaderSvalbard-datadef-6622">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>913-A brutto lønn Svalbard</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Svalbard-grp-5937/TrekkAnnetSvalbard-datadef-25901">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Andre trekkkpliktige ytelser Svalbard</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Svalbard-grp-5937/TrekkSkattTrygdeavgiftSvalbard-datadef-25902">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>950 Skatt og trygdeavgift Svalbard</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

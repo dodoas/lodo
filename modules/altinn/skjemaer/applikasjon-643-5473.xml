@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1151: Vedlegg til selvangivelsen</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-643-5474.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-2395/Selskap-grp-61/EnhetNavn-datadef-1" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1151 Vedlegg til selvangivelsen 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. nov. 1994 nr 1064, jf ligningslovens § 4-3  nr 2.  </p>
+                <p/>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1151.  </p>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjemaet, RF-1151, helt eller delvis  bli benyttet av andre offentlige organ som har hjemmel til å innhente  de samme
+                    opplysningene, jf. lov om Oppgaveregisteret §§ 5 og 6.  Opplysninger om ev. samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Skjema for kraftverkseiere</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-2395">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Vedlegg til selvangivelsen for kraftforetak, RF-1151, skal leveres av  alle kraftforetak som er eiere av vannkraftverk. For kraftverk som  har en samlet påstemplet merkeytelse under 5.500 KVA, skal kolonne 4,  5 og 6 ikke
+                        fylles ut. Generator tilkoblet turbiner som har inntak i  vassdrag samme sted og utløp i vassdrag samme sted, slik at samme  vannfall utnyttes, regnes å tilhøre samme kraftverk. Et aggregat  regnes som satt ut av drift når
+                        røret er fysisk frakoblet. Dersom  aggregatet har vært ute av drift mer enn halve inntektsåret, regnes  vedkommende generators merkeytelse ikke med i vurderingen av grensen  for samlet påstemplet merkeytelse på 5.500 KVA.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2395/Selskap-grp-61">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Selskap</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2395/Selskap-grp-61/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2395/Selskap-grp-61/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2395/Selskap-grp-61/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2395/Selskap-grp-61/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2395/Selskap-grp-61/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2395/RegnskapsforerInformasjon-grp-6451">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Regnskapsfører</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2395/RegnskapsforerInformasjon-grp-6451/RegnskapsforerNavn-datadef-280">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2395/RegnskapsforerInformasjon-grp-6451/RegnskapsforerAdresse-datadef-281">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2395/RegnskapsforerInformasjon-grp-6451/RegnskapsforerPostnummer-datadef-6678">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2395/RegnskapsforerInformasjon-grp-6451/RegnskapsforerPoststed-datadef-6679">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OppsummeringAlleKraftverk-grp-385">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Oppsummering alle kraftverk</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_OppsummeringAlleKraftverk-grp-5083" nodeset="/Skjema/OppsummeringAlleKraftverk-grp-385/OppsummeringAlleKraftverk-grp-5083">
+                    <xforms:group ref="/Skjema/OppsummeringAlleKraftverk-grp-385/OppsummeringAlleKraftverk-grp-5083">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Oppsummering alle kraftverk</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/OppsummeringAlleKraftverk-grp-385/OppsummeringAlleKraftverk-grp-5083/AnleggLopenummer-datadef-19639">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter positive integer with four digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1) Løpenummer</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Fire siffer</p>
+                            </xforms:hint>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever positivt heltall med fire siffer</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev positivt heiltal med fire siffer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OppsummeringAlleKraftverk-grp-385/OppsummeringAlleKraftverk-grp-5083/AnleggNavn-datadef-2547">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2) Kraftverkets navn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OppsummeringAlleKraftverk-grp-385/OppsummeringAlleKraftverk-grp-5083/KraftverkMerkeytelse-datadef-5929">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3) Påstemplet merkeytelse</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OppsummeringAlleKraftverk-grp-385/OppsummeringAlleKraftverk-grp-5083/InntekterGrunnrenteFramforing-datadef-5916">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4) Negativ grunnrente</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Grunnrente (kolonne 4 og 5).  </p>
+                                <p>Skatt på grunnrenteinntekten beregnes på eget skjema RF-1153 for hvert  enkelt kraftverk. Positiv grunnrenteinntekt i det enkelte kraftverk  føres deretter over til kolonne 5 i dette skjemaet hvor
+                                    grunnrenteinntekten fra alle kraftverkene summeres. Negativ  grunnrenteinntekt fra det enkelte kraftverk overføres til kolonne 4 i  skjemaet. Negativ grunnrenteinntekt kan framføres og komme til  fradrag i senere
+                                    års positiv grunnrenteinntekt i samme kraftverk, men  kan ikke samordnes med positiv grunnrenteinntekt fra andre kraftverk.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Overført fra Rf-1153, post 155</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OppsummeringAlleKraftverk-grp-385/OppsummeringAlleKraftverk-grp-5083/InntekterGrunnrentePositivKraftverk-datadef-22362">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>5) Positiv grunnrente</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Grunnrente (kolonne 4 og 5).  </p>
+                                <p>Skatt på grunnrenteinntekten beregnes på eget skjema RF-1153 for hvert  enkelt kraftverk. Positiv grunnrenteinntekt i det enkelte kraftverk  føres deretter over til kolonne 5 i dette skjemaet hvor
+                                    grunnrenteinntekten fra alle kraftverkene summeres. Negativ  grunnrenteinntekt fra det enkelte kraftverk overføres til kolonne 4 i  skjemaet. Negativ grunnrenteinntekt kan framføres og komme til  fradrag i senere
+                                    års positiv grunnrenteinntekt i samme kraftverk, men  kan ikke samordnes med positiv grunnrenteinntekt fra andre kraftverk.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Overført fra RF-1153, post 155</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OppsummeringAlleKraftverk-grp-385/OppsummeringAlleKraftverk-grp-5083/NaturressursskattGrunnlag-datadef-14870">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>6) Naturressursskattegrunnlag</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Grunnlaget for naturressursskatt beregnes også på skjemaet RF-1153 for  hvert enkelt kraftverk. Grunnlaget for naturressursskatt i det  enkelte kraftverk føres deretter over til kolonne 6 i dette skjemaet  hvor
+                                    grunnlaget for naturressursskatt fra alle kraftverkene summeres.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Overført fra RF-1153, post 213</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OppsummeringAlleKraftverk-grp-385/OppsummeringAlleKraftverk-grp-5083/SkattegrunnlagEiendomKraftverkstorrelseBeregnet-datadef-22860">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>7) Eiendomsskattegrunnlag</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>For kraftverk med en samlet påstemplet merkeytelse på 10.000 KVA eller  mer, skal beregningen på eiendomsskattegrunnlaget foretas på skjemaet  RF-1153 for hvert enkelt kraftverk (Nåverdien av fremtidige
+                                    utskiftingskostnader for driftsmidler i kraftverket inngår i  beregningen, og beregningen av de fremtidige utskiftingskostnadene  skjer på RF-1161).  Eiendomsskattegrunnlaget for det enkelte  kraftverk (post 365 i
+                                    RF-1153), føres deretter over til kolonne 7 i  dette skjemaet.  </p>
+                                <p/>
+                                <p>I kraftverk med samlet påstemplet merkeytelse på mindre enn 10.000  KVA, skal det særskilte eiendomsskattegrunnlaget settes til  skattemessig verdi pr. 1. januar i likningsåret, jf. skatteloven §  18-5(5).  RF-1161
+                                    og RF-1153 skal ikke benyttes ved fastsettelsen av  eiendomsskattegrunnlag i kraftanlegg som har en påstemplet  merkeytelse på under 10 000 KVA. For disse kraftverkene må  eiendomsskattepliktig selv lage en
+                                    oppstilling som viser skattemessig  verdi av alle driftsmidlene i kraftanlegget pr. 1. januar i  likningsåret, og overføre disse verdiene til kolonne 7 i dette  skjemaet.  Som driftsmidler anses fysiske eiendeler i
+                                    form av løsøre  og fast eiendom uavhengig av om de er avskrivbare eller ikke.  Immateriale driftsmidler som fallrettigheter og goodwill skal også  medtas.  </p>
+                                <p/>
+                                <p>For kraftverk under bygging oppgis investert kapital pr. 1. januar i  likningsåret, jf. skatteloven § 18-5 sjette ledd.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>For verk &lt; 10.000 oppgis skattemessig verdi, ellers overført fra  RF-1153 post 365</p>
+                            </xforms:hint>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/OppsummeringAlleKraftverk-grp-385/InntekterGrunnrenteFramfortAlleKraftverk-datadef-26810">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum alle kraftverk, negativ grunnrente</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OppsummeringAlleKraftverk-grp-385/InntekterGrunnrenteSkattepliktig-datadef-5915">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum alle kraftverk, positiv grunnrente</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OppsummeringAlleKraftverk-grp-385/NaturressursskattGrunnlagAlleKraftverk-datadef-22297">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum alle kraftverk, naturressursskattegrunnlag</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OppsummeringAlleKraftverk-grp-385/SkattegrunnlagEiendomKraftverk10000KVAAlleKraftverk-datadef-26811">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum alle kraftverk, eiendomsskattegrunnlag</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

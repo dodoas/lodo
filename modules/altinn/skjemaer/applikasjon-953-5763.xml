@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1220: Tilleggsskjema for beregning av deltakerens inntekt i ANS mv, skogbruk</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-953-5764.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4343/Selskap-grp-4345/EnhetNavn-datadef-1" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1220 Tilleggsskjema for beregning av deltakerens inntekt i  ansvarlige selskaper mv. i skogbruk og reindrift i 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>For deltakere i ansvarlig selskap m.v. i skogbruk må  gjennomsnittsligningen foregå hos den enkelte deltaker. Skjemaet må  derfor fylles ut for hver enkelt deltaker.  </p>
+                <p/>
+                <p>Selskapet skal fylle ut skjemaet, og vedlegge det selskapsoppgaven.  </p>
+                <p/>
+                <p>Fortegnsbruk  </p>
+                <p>Se rettledningen til selskapsoppgaven (RF-1216) om fortegnsbruk.  </p>
+                <p/>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i Finans-  </p>
+                <p>departementets delegeringsvedtak av 28. november 1994,  </p>
+                <p>jf. likningsloven §§ 4-3 nr. 2 og 4-4 nr. 7, jf. § 4-9.  </p>
+                <p/>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1221  </p>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjema, RF-1221B, helt eller delvis  </p>
+                <p>bli benyttet også av andre offentlige organer som har hjemmel til å  innhente de samme opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt. samordning kan fås ved henvendelse til  Oppgaveregisteret på
+                    telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Skjemaet fylles ut og leveres av selskapet sammen med selskapsoppgaven  (RF-1215)</p>
+            </xforms:hint>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1220 Tilleggsskjema for berekning av deltakaren si inntekt  </p>
+                <p>i ansvarlige selskap mv. i skogbruk og reindrift i 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>For deltakarar i ansvarleg selskap m.m. i skogbruk må  gjennomsnittslikninga foregå hos den enkelte deltakaren. Skjemaet må  derfor fyllast ut for kvar enkelt deltakar.  </p>
+                <p/>
+                <p>Selskapet fylle ut skjemaet, og vedlegga det selskapsoppgåva.  </p>
+                <p/>
+                <p>Særleg om bruk av forteikn i skjemaet  </p>
+                <p>Sjå rettleiinga til selskapsoppgåva (RF-1216) om bruk av forteikn.  </p>
+                <p/>
+                <p>Fastsett av Skattedirektoratet med heimmel i Finansdepartementet sitt  delegeringsvedtak av 28. november 1994, jf. likningsloven §§ 4-3 nr.  2 og 4-4 nr. 7, jf. § 4-9.  </p>
+                <p/>
+                <p>Andre offentlege organ sin bruk av opplysningar i RF-1221  </p>
+                <p>For å samordne og forenkle oppgåveinnleveringa frå næringslivet, kan  opplysningar som vert gjeve i dette skjemaet, RF-1221, heilt eller  delvis bli nytta også av andre offentlege organ som har heimel til å  innhente dei same
+                    opplysningane, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysningar om evt. samordning kan ein få  ved å vende seg  til  Oppgaveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NON">
+                <p>Skjemaet fyllast ut av selskapet og leverast samen med selskapsoppgåva  (RF-1215)</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-4343">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-4343/Deltaker-grp-4344">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Deltaker</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Deltakar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4343/Deltaker-grp-4344/DeltakerNavn-datadef-1025">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4343/Deltaker-grp-4344/DeltakerEierandel-datadef-1028">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter number with three fraction digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Selskapsandel</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever tre desimaler</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Selskapsdel</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev tre desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4343/Deltaker-grp-4344/DeltakerFodselsnummer-datadef-3647">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4343/Deltaker-grp-4344/DeltakerAdresse-datadef-1070">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4343/Deltaker-grp-4344/DeltakerPostnummer-datadef-7835">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4343/Deltaker-grp-4344/DeltakerPoststed-datadef-7836">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4343/Deltaker-grp-4344/DeltakerKommune-datadef-3112">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bosteds-/kontorkommune</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Bustads-/kontorkommune</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4343/Deltaker-grp-4344/DeltakerOrganisasjonsnummer-datadef-3648">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-4343/Selskap-grp-4345">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Selskap</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Selskap</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4343/Selskap-grp-4345/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4343/Selskap-grp-4345/EnhetOrganisasjonsform-datadef-756">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ansvarsform</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Ansvarsform</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4343/Selskap-grp-4345/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kontor- (virksomhets-)adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kontoradresse (næringsadresse) til selskapet</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4343/Selskap-grp-4345/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter number with three fraction digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltall med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4343/Selskap-grp-4345/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Grunnlag-grp-5117">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Grunnlag</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Grunnlag</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Grunnlag-grp-5117/ResultatSkogbrukReindriftANSForGjennomsnittsberegningAndel-datadef-22422">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>101 Korrigert driftsresultat, fordelt etter eierandeler/etter avtale  om overskuddsfordeling. Beløpet hentes fra post 312/330 i  Tilleggsskjema RF-1177</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Beløpet som skal føres her, hentes fra Tilleggsskjema RF-1177, post  312 (skogbruk) og 330 (reindrift). Gjelder enten skattyter nytter  Næringsoppgave 1 eller Næringsoppgave 2.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Beløpet hentes fra post 313/330 i tilleggsskjemaet RF-1177</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>101 Korrigert driftsresultat, fordelt etter eigardel/etter avtale om  overskottsfordeling. Beløpet hentar ein frå post 312/330 i  Tilleggsskjema RF-1177</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Beløpet som skal førast her, hentar ein frå Tilleggsskjema RF-1177  post 312 (skogbruk) og 330 (reindrift). Gjeld anten skattytar nyttar  Næringsoppgåve 1 eller Næringsoppgåve 2.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Grunnlag-grp-5117/ArbeidsgodtgjorelseANSMvDeltakerSkogbrukReindrift-datadef-22423">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>102 Arbeidsgodtgjørelse til deltaker, jf. del av post 5600 i  næringsoppgave 1 eller 2</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Eventuell arbeidsgodtgørelse fra ANS-et skal inngå i  gjennomsnittsberegningen og tillegges i denne posten.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>102 Arbeidsgodtgjering til deltakar, jf. del av post 5600 i  Næringsoppgåve 1 eller 2.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Eventuell arbeidsgodtgjering frå ANS-et skal gå inn i  gjennomsnittsutrekninga og leggjast til i denne posten.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Grunnlag-grp-5117/GjennomsnittsinntektAlminneligInntektSkogReinGrunnlag2004-datadef-22424">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>104 Sum grunnlag for beregning av gjennomsnittsinntekt for alminnelig  inntekt</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Beløpet overføres post 109</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>104 Sum grunnlag for utrekning av gjennomsnittsinntekt for allmenn  inntekt. Beløpet skal overførast til post 109.</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/GjennomsnittsberegningPrDeltaker-grp-4346">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Gjennomsnittsberegning pr. deltaker</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Gjennomsnittsberekning pr. deltaker</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GjennomsnittsberegningPrDeltaker-grp-4346/GjennomsnittsberegningForAlminneligInntekt-grp-4347">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Gjennomsnittsberegning for alminnelig inntekt</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>År</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Gjennomsnittsberekning for alminneleg inntekt</p>
+                    </xforms:caption>
+                    <xforms:group ref="/Skjema/GjennomsnittsberegningPrDeltaker-grp-4346/GjennomsnittsberegningForAlminneligInntekt-grp-4347/Skogbruk-grp-5118">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Skogbruk</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/GjennomsnittsberegningPrDeltaker-grp-4346/GjennomsnittsberegningForAlminneligInntekt-grp-4347/Skogbruk-grp-5118/GjennomsnittsinntektAlminneligInntektSkogGrunnlag2002-datadef-20180">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>105 2002</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>105 2002</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GjennomsnittsberegningPrDeltaker-grp-4346/GjennomsnittsberegningForAlminneligInntekt-grp-4347/Skogbruk-grp-5118/GjennomsnittsinntektAlminneligInntektSkogGrunnlag2003-datadef-20176">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>106 2003</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Beløpet overføres post 109</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>106 2003</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Beløpet skal overførast til post 109</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GjennomsnittsberegningPrDeltaker-grp-4346/GjennomsnittsberegningForAlminneligInntekt-grp-4347/Skogbruk-grp-5118/GjennomsnittsinntektAlminneligInntektSkogGrunnlag2004-datadef-22428">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>107 2004</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>107 2004</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GjennomsnittsberegningPrDeltaker-grp-4346/GjennomsnittsberegningForAlminneligInntekt-grp-4347/Skogbruk-grp-5118/GjennomsnittsinntektAlminneligInntektSkogGrunnlag2005-datadef-24447">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>108 2005</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>108 2005</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GjennomsnittsberegningPrDeltaker-grp-4346/GjennomsnittsberegningForAlminneligInntekt-grp-4347/Skogbruk-grp-5118/GjennomsnittsinntektAlminneligInntektSkogGrunnlag2006-datadef-27172">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>109 2006</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>109 2006</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GjennomsnittsberegningPrDeltaker-grp-4346/GjennomsnittsberegningForAlminneligInntekt-grp-4347/Skogbruk-grp-5118/GjennomsnittsinntektAlminneligInntektSkogGrunnlagSum5Ar-datadef-20181">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>110 Sum</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>110 Sum</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GjennomsnittsberegningPrDeltaker-grp-4346/GjennomsnittsberegningForAlminneligInntekt-grp-4347/Skogbruk-grp-5118/GjennomsnittsinntektAlminneligInntektSkogGrunnlagSnitt5Ar-datadef-20182">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>111 Gjennomsnittsinntekt 2006</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>111 Gjennomsnittsinntekt 2006</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GjennomsnittsberegningPrDeltaker-grp-4346/GjennomsnittsberegningForAlminneligInntekt-grp-4347/Skogbruk-grp-5118/ResultatANSMvDeltakerAndel-datadef-20183">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>113 Korreksjon skogbruk/reindrift (gj.snittsberegning) Overføres  deltakeroppgaven post 102d</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>113 Korreksjon skogbruk/reindrift (gj.snittsutrekning). Skal  overførast til deltakeroppgåva post 102d</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/GjennomsnittsberegningPrDeltaker-grp-4346/GjennomsnittsberegningForAlminneligInntekt-grp-4347/Reindrift-grp-5119">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Reindrift</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/GjennomsnittsberegningPrDeltaker-grp-4346/GjennomsnittsberegningForAlminneligInntekt-grp-4347/Reindrift-grp-5119/GjennomsnittsinntektAlminneligInntektReinGrunnlag2004-datadef-22427">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>108 2004</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>108 2004</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GjennomsnittsberegningPrDeltaker-grp-4346/GjennomsnittsberegningForAlminneligInntekt-grp-4347/Reindrift-grp-5119/GjennomsnittsinntektAlminneligInntektReinGrunnlag2005-datadef-24448">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>109 2005</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>109 2005</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GjennomsnittsberegningPrDeltaker-grp-4346/GjennomsnittsberegningForAlminneligInntekt-grp-4347/Reindrift-grp-5119/GjennomsnittsinntektAlminneligInntektReinGrunnlag2006-datadef-27173">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GjennomsnittsberegningPrDeltaker-grp-4346/GjennomsnittsberegningForAlminneligInntekt-grp-4347/Reindrift-grp-5119/GjennomsnittsinntektAlminneligInntektReinGrunnlagSum3Ar-datadef-22429">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>110 Sum</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>110 Sum</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GjennomsnittsberegningPrDeltaker-grp-4346/GjennomsnittsberegningForAlminneligInntekt-grp-4347/Reindrift-grp-5119/GjennomsnittsinntektAlminneligInntektReinGrunnlagSnitt3Ar-datadef-22430">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>111 Gjennomsnittsinntekt 2006</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>111 Gjennomsnittsinntekt 2006</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GjennomsnittsberegningPrDeltaker-grp-4346/GjennomsnittsberegningForAlminneligInntekt-grp-4347/Reindrift-grp-5119/ResultatANSMvReindriftDeltakerAndel-datadef-22431">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>113 Korreksjon skogbruk/reindrift (gj.snittsberegning). Overføres  deltakeroppgaven post 102e</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Overføres deltageroppgaven post 102e</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>113 Korreksjon skogbruk/reindrift (gj.snittsutrekning). Skal overf.  til deltakaroppgåve post 102e</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

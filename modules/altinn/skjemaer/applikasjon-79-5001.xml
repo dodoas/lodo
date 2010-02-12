@@ -1,0 +1,840 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1239: Beregning av RISK</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-79-5002.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-1952/Selskap-grp-28/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-1952/Selskap-grp-28/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-1952/Selskap-grp-28/EnhetAdresse-datadef-15"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-1952/Selskap-grp-28/EnhetPostnummer-datadef-6673"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-1952/Selskap-grp-28/EnhetPoststed-datadef-6674"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1239 Beregning av RISK pr 1.1.2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Skjemaet skal benyttes av aksjeselskap, verdipapirfond og sparebanker  for å beregne selskapets påstand om RISK pr. 1.1.2006. Grunnlaget for  beregningen er inntektsåret 2005. Skjemaet skal leveres uavhengig av  om selskapet har
+                    skattepliktig overskudd eller ikke. Skjemaet er  pliktig vedlegg til selvangivelsen, jf. ligningsloven § 4-3 nr. 2.  </p>
+                <p>Selskapene vil få melding om fastsatt RISK-beløp pr. 1.1.2006 på  skatte-oppgjøret høsten 2006.  </p>
+                <p/>
+                <p>Skjemaet er fastsatt av Skattedirektoratet med hjemmel i  Finansdepartementets delegeringsvedtak av 28. november 1994, jf.  ligningsloven § 4-3 nr. 2. Skjemaet skal fylles ut av aksjeselskap  mv. som skal beregne RISK-beløp etter
+                    skatteloven § 10-34, jf. §  10-30.  </p>
+                <p/>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1239.  </p>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i Beregning av RISK pr 1.1.2006 (RF-1239),  helt eller delvis bli benyttet også av andre offentlige organer som  har hjemmel til å
+                    innhente de samme opplysningene, jf. lov om  Oppgaveregisteret §§ 5 og 6. Opplysninger om evt. samordning kan fås  ved henvendelse til Oppgaveregisteret på telefon 75 00 75 00, eller  Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1239 Fastsetjing av RISK pr 1.1.2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Skjemaet skal nyttast av aksjeselskap, verdipapirfond og sparebank for  å rekne ut selskapet sin påstand om RISK pr. 1.1.2006. Grunnlaget for  denne utrekninga er inntektsåret 2005. Skjemaet skal leverast anten  selskapet har
+                    skattepliktig overskott eller ikkje. Skjemaet er eit  pliktig vedlegg til sjølvmeldinga, jf. § 4-3 nr. 2 i likningslova.  </p>
+                <p>Alle selskap får ei melding om fastsett RISK-beløp pr. 1.1.2006 på  skatteoppgjeret hausten 2006.  </p>
+                <p/>
+                <p>Skjemaet er fastsett av Skattedirektoratet med heimel i  Finansdepartementet sitt delegeringsvedtak av 28. november 1994, jf.  likningslova § 4-3 nr. 2. Skjemaet skal fyllast ut av aksjeselskap  m.m. som skal ha fastsett RISK-beløp
+                    etter skattelova § 10-34, jf. §  10-30.  </p>
+                <p/>
+                <p>Andre offentlege organ sin bruk av opplysningar i RF-1239.  </p>
+                <p>For å samordna og forenkla oppgåveinnleveringa frå næringslivet, kan  opplysningar som vert avgjeve i Fastsetjing av RISK pr. 1.1.2006  (RF-1239), heilt eller delvis bli nytta også av andre offentlege  organ som har heimel til å
+                    innhente dei same opplysningar, jf. lov om  Oppgåveregisteret §§ 5 og 6. Opplysningar om evt. samordning kan ein  få ved å vende seg til Oppgåveregisteret på telefon 75 00 75 00,  eller Skattedirektoratet på telefon  </p>
+                <p>22 07 70 00.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-1952">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-1952/Selskap-grp-28">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Selskap</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Selskap</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1952/Selskap-grp-28/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1952/Selskap-grp-28/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1952/Selskap-grp-28/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1952/Selskap-grp-28/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1952/Selskap-grp-28/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-1952/Regnskapsforer-grp-229">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Regnskapsfører</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Regnskapsførar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1952/Regnskapsforer-grp-229/RegnskapsforerNavn-datadef-280">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1952/Regnskapsforer-grp-229/RegnskapsforerAdresse-datadef-281">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Forretningsadresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Forretningsadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1952/Regnskapsforer-grp-229/RegnskapsforerPostnummer-datadef-6678">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1952/Regnskapsforer-grp-229/RegnskapsforerPoststed-datadef-6679">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/BeregningAvRISK-grp-227">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Beregning av RISK</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Utrekning av RISK</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/InntektSkattbarNettoRISK-datadef-16535">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>0.5 Inntekt/underskudd i 2005. Fremkommer i post 260 i Selvangivelse  for aksjeselskaper mv.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her fører en opp selskapets inntekt i 2005. For rederibeskattede  selskaper hentes beløpet fra post 265 i &lt;&lt;Selvangivelse for  aksjeselskaper m.v>>. For selskaper som betaler særskatt etter  petroleumsskatteloven § 5,
+                            er det alminnelig inntekt utlignet ved  Oljeskatekontoret som skal føres her.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>0.5 Inntekt/underskudd i 2005. Hentast frå post 260 i Sjølvmeldinga  for aksjeselskapar m.m.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein opp selskapet si inntekt i 2005. selskap som vert  rederibeskattet hentar beløpet i post 265 i &lt;&lt;Sjølvmelding for  aksjeselskap m.m>>. For selskap som betalar særskatt etter § 5 i  petroleumsskattelova,
+                            er det inntekt utlikna ved Oljeskattekontoret  som skal førast i denne posten.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/KonsernbidragMottattBeskattet-datadef-15561">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>0.7 Mottatt konsernbidrag</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Mottatt konsernbidrag skal ikke inngå i grunnlaget for  RISK-beregningen og skal derfor trekkes ut. Beløpet fremkommer i  selvangivelsen post 207.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>0.7 Mottatt konsernbidrag hentast frå post 207 i Sjølvmeldinga for  aksjeselskapar m.m.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Konsernbidrag som selskapet har motteke skal ikkje inngå i grunnlaget  for fastsetjing av RISK .Beløpet skal derfor trekkast ut. Beløpet  hentes frå sjølmeldinga post 207.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/KonsernbidragMottattUbenyttet-datadef-24520">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>0.8 Mottatt ikke risk-redusert konsernbidrag fra 2004</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres den del av konsernbidraget som selskapet mottok i 2004, men  som ikke kom til fradrag i grunnlag for beregning av RISK (post 0,5)  pr. 1.1.2005 fordi inntekten i post 0,5 var negativ eller lavere enn  inntektsført
+                            konsernbidrag.  </p>
+                        <p/>
+                        <p>For ytterligere spesifikasjon se rettledningen</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>0.8 Motteke ubenytta konsernbidrag frå 2004</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein opp delen av konsernbidraget som selskapet mottok i  2004, men som ikkje kom til frådrag i grunnlaget for fastsetjing av  RISK (post 0,5) pr. 1.1.2005 fordi inntekta i post 0,5 var negativ  eller lavare enn
+                            inntektsført konsernbidrag.  </p>
+                        <p/>
+                        <p>For ytterligere spesifikasjon se rettledningen</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/KonsernbidragMottattRISKBeregning-datadef-24521">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>0.9 Sum</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>0.9 Sum</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/InntektSkattbarNettoEkslKonsernbidragRISKGrunnlag-datadef-22480">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1 Grunnlag for beregning av RISK (Dersom grunnlaget er negativt skal  post 1 høyre kolonne settes til 0)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her fremkommer grunnlaget for beregning av RISK. Ved negativ inntekt  (underskudd) settes post 1 til 0.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1 Grunnlag for beregning av RISK (Dersom grunnlaget er negativt skal  post 1 høyre kolonne settes til 0)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Beløpet er grunnlag for fastsetjing av RISK. Om selskapet har hatt ei  negativ inntekt (underskott) set ein post 1 til null.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/InntektSkattbarNettoEkslKonsernbidragRISKGrunnlagPositiv-datadef-22509">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1 Dersom positivt</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1 Dersom positivt</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/RISKBeregningNegativSaldoGjenstaende-datadef-7600">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2 Gjenstående negativ saldo mv pr. 01.01.2005</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Gjenstående negativ saldo pr. 1.1.2005. Beløpet i denne posten  overføres fra post 4 i fjorårets skjema.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Beløpet overføres fra post 4 i fjorårets skjema.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2 Gjenståande negativ saldo m.m. pr. 01.01.2005</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Gjenståande negativ saldo pr. 1.1.2005. Beløpet i denne posten fører  ein over frå post 4 i fjorårets skjema.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Beløpet fører ein over frå post 4 i fjorårets skjema.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/RISKBeregningNegativSaldoInntektsforing-datadef-7601">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3 Beregnet inntektsføring av negativ saldo mv. i 2005</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Etter skatteloven § 19-2 annet ledd bokstav b skal ikke inntektsføring  av negativ saldo og betinget avsatt gevinst som stammer fra før 1992,  påvirke RISK-beregningen. Andelen av den negative saldo mv. som skal  redusere
+                            grunnlaget for RISK-beregningen, fastsettes ved at det  benyttes en prosentandel av beløpet i post 2.  </p>
+                        <p>I utgangspunktet skal prosentandelen beregnes på grunnlag av den samme  prosentsats som er benyttet ved inntektsføring fra gevinst- og  tapskonto for inntektsåret 2005 (minimum 20%, jf. skatteloven § 14-45  fjerde ledd).
+                            Dersom det er foretatt fradragsføring av saldo på  gevinst- og tapskonto eller gevinst- og tapskonto er null, skal det  benyttes en sats på inntil 20%. Er beløpet i post 4 mindre enn kr 15  000 skal hele beløpet føres til
+                            fradrag i post 3. Det beløpet som  skal føres til fradrag i denne posten, må likevel begrenses til den  inntekt som fremgår av post 1.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Beløpet i denne posten kan ikke være større enn beløpet i post 1.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>3 Utrekna inntektsføring av negativ saldo m.m. i 2005</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Etter § 19-2 andre ledd bokstav b i skattelova, skal ikkje  inntektsføring av negativ saldo og på vilkår avsett vinst som stammar  frå før 1992, påverke RISK-utrekninga. Den parten av den negative  saldoen m.m. som skal
+                            redusere grunnlaget for RISK-utrekninga, finn  ein ved å nytte ein prosentdel av beløpet i post 2.  </p>
+                        <p>I utgangspunktet skal prosentdelen reknast ut på grunnlag av den same  prosentsatsen som er brukt ved inntektsføring frå vinst- og tapskonto  for inntektsåret 2005 (minimum 20%, jf. § 14-45 fjerde ledd i  skattelova).
+                            Dersom det er gjort frådragsføring av saldo på vinst- og  tapskonto eller vinst- og tapskonto er null, skal det nyttast ein  sats på inntil 20%. Er beløpet i post 4 mindre enn  </p>
+                        <p>kr 15000 skal heile beløpet førast til frådrag i post 3. Det beløpet  som skal førast til frådrag i denne posten, må ein likevel avgrense  til den inntekt som går fram av post 1.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Beløpet i denne posten kan ikkje vere større enn beløpet i post 1.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/RISKBeregningNegativSaldoRestbelop-datadef-7602">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4 Sum gjenstående negativ saldo fra før 1992</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres gjenstående del av negativ saldo mv. fra før 1992.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>4 Sum gjenståande negativ saldo frå før 1992</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein rest negativ saldo m.m. frå før 1992.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/Korreksjonsinntekt-datadef-1098">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5 Korreksjonsinntekt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres korreksjonsinntekt fastsatt i 2005. Korreksjonsinntekten vil  fremgå av Selvangivelse for aksjeselskaper mv. for 2005 post 350.  Fradragsføring av tidligere fastsatt korreksjonsinntekt skal ikke  foretas i denne
+                            posten, da det er den reduserte alminnelige inntekt  som fremgår av post 1.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Korreksjonsintekt vil fremgå av Selvangivelse for aksjeselskaper mv.  post 350.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>5 Korreksjonsinntekt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein opp den korreksjonsinntekta som er fastsett i 2005.  Korreksjonsinntekta går fram av Sjølvmelding for aksjeselskap m.m.  for 2005 post 350. Frådragsføring av korreksjonsinntekt som er  fastsett tidlegare, skal
+                            ein ikkje ta med på denne posten, da det er  den reduserte alminnelege inntekta som går fram av post 1.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Korreksjonsintekt vil gå fram av Sjølvmelding for aksjeselskap m.m.  post 350.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/RISKBeregningGrunnlag-datadef-1998">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>6 Grunnlag for årets RISK-beregning</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her summeres beløpene i postene 1, 3 og 5. Dette er RISK-inntekten som  legges til grunn ved beregningen. Beløpet i denne posten skal ikke  bli lavere enn null.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Beløpet som fremkommer i denne posten kan ikke være lavere enn null.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>6 Grunnlag for RISK-fastsetjing i år</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her summerer ein beløpa i postane 1, 3 og 5. Dette er den  RISK-inntekta som blir lagd til grunn ved utrekninga. Beløpet i  posten skal ikkje bli lågare enn null.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Beløpet som kjem fram i denne posten kan ikkje vere lågare enn null.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/RISKBeregningGrunnlagSkatt-datadef-7603">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>7 Skatt: 28% av beløpet i post 6</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Det beregnes 28 pst skatt av beløpet i post 6. Dette er RISK-skatten  som skal legges til grunn ved beregningen. Denne skatten skal  avrundes til nærmeste hele krone.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Skatten avrundes til nærmeste hele krone.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>7 Skatt: 28% av beløpet i post 6</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Ein reknar 28 prosent skatt av beløpet i post 6. Dette er RISK-skatten  som skal leggjast til grunn ved utrekninga. Denne skatten skal  rundast av til nærmaste heile krone.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Skatten runder ein av til nærmaste heile krone.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/RISKBeregningSkattPetroleumskatteloven-datadef-7604">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>8  Skatt beregnet etter reglene i petroleumsskatteloven § 5</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Denne posten fylles bare ut for selskaper som har skatteplikt etter  petroleumsskatteloven § 5, jf. § 1.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>8 Skatt rekna etter reglane i § 5 i petroleumsskattelova</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Denne posten skal berre fyllast ut for selskap som har skatteplikt  etter petroleumsskattelova § 5, jf. § 1.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/GodtgjorelseUtbytteUbenyttet-datadef-7606">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>9 Ubenyttet godtgjørelse pr. 01.01.2005</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres ubenyttet godtgjørelse fra RISK-beregningen pr. 1.1.2005  (inntektsåret 2004).</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>9 Unytta godtgjersle pr. 01.01.2005</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein eventuell  unytta godtgjersle frå RISK-utrekninga pr.  1.1.2005 (inntektsåret 2004).</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/RISKBelopBeregnetPositivtBelopDelsum-datadef-7607">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>10 Sum</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her summeres postene 7-9. Negativt beløp i post 10 skal føres ut i  høyre kolonne.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Negativt beløp i post 10 skal føres ut i høyre kolonne.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>10 Sum</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her summerer ein postane 7-9. Negativt beløp i post 10 skal førast ut  i den høgre kolonnen.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Negativt beløp fører ein ut i høgre kolonne.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/RISKBelopBeregnetNegativtBelopDelsum-datadef-7611">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>10 Sum negativ</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>10 Sum negativ</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/UtbytteAvsatt-datadef-235">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>11 Avsatt utbytte for 2005</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Utbytte avsatt i regnskapet for inntektsåret 2005 føres her. Beløpet  hentes fra Næringsoppgave 2 post 2800.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Overføres fra Næringsoppgave 2, post 2800.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>11 Avsett utbytte for 2005</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Utbyttet som er avsett i rekneskapen for inntektsåret 2005 skal førast  her. Beløpet hentar ein frå Næringsoppgåve 2 post 2800.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Beløpet finn ein i Næringsoppgåve 2 post 2800.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/UtbytteDifferanseAvsattUtdelt-datadef-13949">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>12 Differanse mellom avsatt utbytte ved årsoppgjøret i 2004, og  besluttet utdelt utbytte i 2005</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres differansen mellom utbytteavsetning i 2004 og besluttet  utdelt utbytte i 2005. Ved vurderingen av hva som skal regnes som  besluttet utdelt utbytte, er det skattelovens utbyttebegrep som skal  legges til grunn
+                            jf. skatteloven § 10-11 annet ledd. Alt utbytte som  anses for å være tidfestet til 2005 skal tas med. Denne posten vil  f.eks. være aktuell hvis et aksjeselskap foretar kapitalnedsettelse  med nedskriving av pålydende
+                            hvor de utbetaler tidligere  fondsemittert aksjekapital til aksjonærene.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Ved vurderingen av hva som er besluttet utdelt utbytte, skal  skattelovens utbyttegrep legges til grunn. Som utbytte regnes også  utbetaling av tidligere fondsemittert aksjekapital.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>12 Differanse mellom avsett utbytte ved årsoppgjeret i 2004, og  vedteke utbytte i 2005.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein opp differansen mellom det utbytte som er avsett for  2004 og det utbytte som ein har vedteke å dele ut i 2005. Når ein  skal vurdere kva som skal reknast som vedteke utdelt utbytte, er det  utbytteomgrepet i
+                            skattelova som skal leggast til grunn jf.  skattelova § 10-11 andre ledd. Alt utbytte som ein reknar for å vere  tidfesta til 2005, skal takast med. Denne posten vil til dømes vere  aktuell dersom eit aksjeselskap set ned
+                            aksjekapitalen med  nedskriving av pålydande ved at dei utbetaler tidlegare fondsemittert  aksjekapital til aksjonærane.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Ved vurderinga av kva som er vedteke utdelt utbytte, er det skattelova  sitt utbyttegrep som skal leggjast til grunn. Som utbytte reknar ein  også utbetaling av tidlegare fondsemittert aksjekapital.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/RISKBelopFusjonMorDatter-datadef-13951">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>14 RISK-beløp ved fusjon mellom morselskap og heleid datterselskap  samt ved fusjon mellom heleide datterselskap som ikke tidligere er  overført som gjennomgående RISK.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Ved fusjon mellom morselskap og heleid datterselskap samt mellom  heleide datterselskap skal sum RISK-beløp i eiertiden tillegges det  overtakende (fusjonerende) selskap ved dets RISK-beregning, i den  grad beløpet ikke
+                            tidligere er tilordnet etter reglene om  gjennomgående RISK.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Ved innfusjonering av heleid datterselskap i morselskap, skal det  overtakende morselskap tilordnes sum RISK-beløp i eiertiden fra det  innfusjonerte datterselskap. Ved fusjon uten vederlag mellom heleide  datterselskap
+                            skal det overtakende selskap tilordnes sum RISK-beløp i  morselskapets eiertid fra det overdragende selskap.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>14 RISK-beløp ved fusjon mellom morselskap og heleigd dotterselskap og  ved fusjon mellom heleigde dotterselskap som ikkje tidlegare er  overført som gjennomgåande RISK.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Ved fusjon mellom morselskap og eit heleigd dotterselskap og mellom  heleigde dotterselskap skal summen av RISK-beløp i eigartida leggjast  til i det selskapet som tek over (fusjonerende selskap), såfremt  beløpet ikkje
+                            tidlegare er overført selskapet som gjennomgåande RISK.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Ved innfusjonering av heleigd dotterselskap i morselskap, skal det  overtakande morselskap tilordnast sum RISK-beløp i eigartida frå det  innfusjonerte dotterselskapet. Ved fusjon utan vederlag mellom  heleigde
+                            dotterselskap, skal det overtakande selskapet tilordnast sum  RISK-beløp i morselskapet si eigartid frå det overdragande selskapet.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/KonsernbidragIkkeSkattepliktigIkkeFradragsberettiget-datadef-13952">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>15 Ikke fradragsberettiget konsernbidrag</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Konsernbidrag som det givende selskap ikke får fradrag for etter  skatteloven § 10-4 og § 10-2 første ledd, skal komme til fradrag i  denne posten. Dette vil være konsernbidrag som overstiger det givende  selskapets
+                            skattepliktige alminnelige inntekt.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>15 Konsernbidrag som ikkje kjem til frådrag i inntekta</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Konsernbidrag som det ytande selskap ikkje får frådrag for etter §  10-4 og § 10-2 første ledd i skattelova, skal kome til frådrag i  denne posten. Dette vil vere konsernbidrag som overstig skattepliktig  allmenn inntekt.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/SkattRefusjonPersoninntekt-datadef-15575">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>16 Refusjon av skatt på beregnet personinntekt etter skatteloven §  16-50</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Krav på refusjon av ilignet toppskatt eller trygdeavgift fra aktiv  eier i selskapet på bakgrunn av beregnet personinntekt et tidligere  år, skal tas med i RISK-beregningen det året skatten er utlignet og  betalt på eierens hånd.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Refusjonsbeløpet må kreves det året skatt og avgift på beregnet  personinntekt er utlignet og betalt.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>16 Refusjon av skatt på utrekna personinntekt etter § 16-50 i  skattelova</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Krav på refusjon frå ein aktiv eigar i selskapet på grunn av utlikna  toppskatt eller trygdeavgift i eit tidlegare år, skal førast opp i  RISK-utrekninga i det året skatten er utlikna og betalt på eigaren si  hand.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Refusjonsbeløpet må krevjast det året skatt og avgift på utrekna  personinntekt vert utlikna og betalt.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/SkattGrunnrenteinntekt-datadef-5780">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>17 Skatt på grunnrenteinntekt etter skattloven § 18-3</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Posten fylles ut av kraftforetak som svarer grunnrenteskatt etter  skatteloven § 18-3.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>17 Skatt på grunnrenteinntekt etter § 18-3 i skattelova</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Posten skal fyllast ut av kraftforetak som svarer grunnrenteskatt  etter skattelova § 18-3.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/RISKBelopEgneSlettedeAksjer-datadef-22481">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>18 RISK-beløp på slettede egne aksjer i 2005</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Når egne aksjer slettes skal RISK-beløp som er tilordnet de egne  aksjene overføres til de resterende aksjene i selskapet. I denne  posten føres akkumulert RISK-beløp på de slettede aksjene.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>18 RISK-beløp på slettede eigne aksjer i 2005</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Når selskapet sletter eigne aksjar skal RISK-beløp som er tilordna dei  eigne aksjane førast over til dei resterande aksjene i selskapet. I  denne posten førast akkumulert RISK-beløp på dei sletta aksjane.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/RISKBeregningSkattlagtKapitalTilbakeholdt-datadef-7609">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>19 Endring i tilbakeholdt skattlagt kapital (TSK)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres summen av post 6 og postene 10-18. Sluttsummen er årets  (2005) endring i tilbakeholdt skattlagt kapital (TSK).</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Her summeres beløpene i postene 6-17. Beløpet kan bli positivt eller  negativt.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>19 Endring i tilbakehalden skattlagt kapital (TSK)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein opp summen av post 6 og postane 10-18. Sluttsummen er  årsendringa (2005) i tilbakehalden skattlagt kapital (TSK).</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Her fører ein opp summen av postane 6-17. Beløpet kan bli positivt  eller negativt.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/AksjerMvAntall-datadef-1125">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall aksjer mv. pr. 01.01.2006</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Talet på aksjar m.m. pr. 01.01.2006</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISK-grp-227/RISKBelopPrAksje-datadef-2001">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:alert brreg:lang="EN">
+                        <p>Enter number with two fraction digits</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>20 Beregning av risk pr. aksje</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Beløpet i post 19 fordeles på antall aksjer mv. (inkl. egne aksjer) i  selskapet 1. januar 2006. Dersom aksjene i selskapet har forskjellig  pålydende må det foretas en forholdsmessig fordeling etter pålydende.  Beløpet
+                            avrundes til nærmeste øre (to desimaler).</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>TSK fordeles pr. aksje etter pålydende. Dersom det er samme pålydende  på alle aksjer i selskapet, gjøres fordelingen ved at beløpet i post  18 deles på antall aksjer i selskapet pr. 1.1.2006. RISK pr. aksje  avrundes til
+                            nærmeste øre (to desimaler).</p>
+                    </xforms:hint>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever to desimaler</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>20 Fastsetjing av risk pr. aksje</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Beløpet i post 19 fordeler ein på talet aksjar m.m. (også eigne  aksjar) i selskapet den 1. januar 2006. Dersom aksjene i selskapet  har ulik pålydande, må ein gjere ei tilsvarande rimeleg fordeling  etter pålydande.
+                            Beløpet skal rundast til nærmaste øre (to  desimalar).</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>TSK fordeler ein pr. aksje etter pålydande. Dersom det er same  pålydande på alle aksjar i selskapet, fordeler ein beløpet i post 18  på talet aksjar i selskapet pr. 1.1.2006. RISK pr. aksje skal  avrundast til nærmaste øre
+                            (to desimalar).</p>
+                    </xforms:hint>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev to desimalar</p>
+                    </xforms:alert>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/BeregningAvRISKForGrunnfondsbevisISparebanker-grp-228">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Beregning av RISK for grunnfondsbevis i sparebanker</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Fastsetjing av RISK for grunnfondsbevis i sparebank</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/BeregningAvRISKForGrunnfondsbevisISparebanker-grp-228/UtjevningsfondEndringSparebank-datadef-11641">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>23 Endring i sparebankens utjevningsfond</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres endring i sparebankens utjevningsfond. Beløpet vil fremgå av  differansen mellom utjevningsfondets midler pr. 31.12.2004 og  31.12.2005 (se post 5240 i Næringsoppgave 4), med unntak av  nedregulering som skyldes
+                            fondsemisjon, se post 24. Er fondets  størrelse uendret vil RISK-beløpet være 0.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Dette gjelder likevel ikke nedregulering som skyldes fondsemisjon, jf.  post 24. Se næringsoppgave 4, post 5240. Beløpet kan bli positivt  eller negativt.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>23 Endring i utjamningsfondet i sparebanken</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein opp endringa i utjamningsfondet i sparebanken. Beløpet  går fram av differansen mellom utjamningsfondets midlar pr.  31.12.2004 og 31.12.2005 (sjå Næringsoppgåve 4 post 5240), med unntak  av nedregulering som
+                            skyldes fondsemisjon, sjå post 24. Hvis  storleiken på fondet er uendra, er RISK-beløpet 0.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Dette gjeld likevel ikkje nedregulering som skyldast fondsemisjon, jf.  post 24. Sjå næringsoppgåve 4, post 5240. Beløpet kan bli positivt  eller negativt</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISKForGrunnfondsbevisISparebanker-grp-228/GrunnfondOverkursfondUtjevningsfondFondsemisjonEndring-datadef-20194">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>24 Endringen i summen av overkursfond, utjevningsfond, og  grunnfondsbeviskapital ved fondsemisjon</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres endringen i summen av overkursfond, utjevningsfond, og  grunnfondsbeviskapital som skyldes fondsemisjon.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>24 Endringa i summen av overkursfond, utjamningsfond, og  grunnfondsbeviskapital ved fondsemisjon</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her førast endringa i summen av overkursfond, utjamningsfond, og  grunnfondsbeviskapital som skyldast fondsemisjon.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISKForGrunnfondsbevisISparebanker-grp-228/GrunnfondIkkeInnbetaltUtbetalingReduksjon-datadef-20195">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>25 Reduksjon i grunnfondsbeviskapitalen ved utbetaling av ikke  innbetalt grunnfondsbeviskapital</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Utdeling av ikke innbetalt grunnfondsbeviskapital vil regulere  inngangsverdien med den endringen i grunnfondsbeviskapitalen som  følger av utbetalingen.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>25 Reduksjon i grunnfondsbeviskapitalen etter utdeling av ikkje  innbetalt grunnfondsbeviskapital</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Utdeling av ikkje innbetalt grunnfondsbeviskapital vil regulere  inngangsverdien med endringa i grunndfondsbeviskapitalen som følgjer  av utbetalingen.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISKForGrunnfondsbevisISparebanker-grp-228/RISKBeregningGrunnfondsbevisGrunnlag-datadef-20196">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>26 Sum endringer</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Summen vil vise endring i sparebankenes utjevningsfond i løpet av  eiertiden. Er fondets størrelse uendret vil RISK-beløpet være 0. Ved  fastsettelse av grunnfondsbevisets skattemessige inngangsverdi ses  det bort fra
+                            akkumulert negativ RISK som innebærer at inngangsverdien  blir lavere enn historisk kostpris, i den utstrekning det negative  RISK-beløpet skyldes nedskrivning av utjevningsfondet for å dekke  regnskapsmessig tap i løpet
+                            av eiertiden. Dette gjelder ikke  akkumulert negativ RISK i løpet av eiertiden som skyldes mottatt  utbytte utbetalt av midler på utjevningsfondet.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>26 Sum endringar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Summen vil vise endringa i sparebanken sitt utjevningsfond i løpet av  eigartida. Er fondets størrelse uendra vil RISK-beløpet være 0.  Dersom nedskrivning av utjevningsfondet for å dekke tap i rekneskapen  i løpet av
+                            eigartida fører til akkumulerte negative RISK som igjen  fører til at inngangsverdi op grunnfondsbeviset vert lågare enn  historisk kostpris, skal ein sjå bort frå dette ved fastsetjing av  inngangsverdien. Dette gjeld
+                            ikkje akkumulert negativ RISK som i  løpet av eigartida som skuldast at motteke utbytte er utbetalt av  midlar på utjevningsfondet.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISKForGrunnfondsbevisISparebanker-grp-228/GrunnfondsbevisAntall-datadef-11637">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall pr 1.1.2006</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Talet pr 1.1.2006</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISKForGrunnfondsbevisISparebanker-grp-228/RISKBelopPerGrunnfondsbevis-datadef-22508">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:alert brreg:lang="EN">
+                        <p>Enter number with two fraction digits</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>27 Beregning av RISK pr. grunnfondsbevis. Beløpet i post 26 fordeles  på antall grunnfondsbevis pr. 1.1.2006. RISK pr. grunnfondsbevis  avrundes til nærmeste hele øre (to desimaler).</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever to desimaler</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>27 Fastsetjing av RISK pr. grunnfondsbevis. Sum i post 26 fordeler ein  på antall grunnfondsbevis pr. 1.1.2006. RISK pr. grunnfondsbevis  rundast til nærmaste øre (to desimaler).</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev to desimalar</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvRISKForGrunnfondsbevisISparebanker-grp-228/RISKBelopNegativtReverseringUtjevningsfondAndel-datadef-11639">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>28 Oppgi hvor stor del av negativ RISK som skyldes nedskrivning av  utjevningsfondet for å dekke bankens underskudd.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Posten skal fylles ut ved negativt RISK-beløp på grunnfondsbevis. Ved  fastsettelse av grunnfondsbevisets skattemessig inngangsverdi kan en  se bort fra akkumulert negativt RISK-beløp i den utstrekning denne  skyldes
+                            nedskriving av utjevningsfondet for å dekke bankens  underskudd, når dette fører til at skattemessig inngangsverdi på  grunnfondsbeviset blir lavere enn historisk kostpris. Vi ber derfor  om at negativt RISK-beløp som
+                            skyldes dette forhold oppgis under post  25, og meddeles eier sammen med RISK-beløpet.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Posten er bare aktuell ved negativt RISK-beløp.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>28 Kor stor del av negativt RISK-beløp skriv seg frå nedskrivning av  utjamningsfondet for å dekkje underskot i banken.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Posten skal fylles ut ved negativt RISK-beløp på grunnfondsbevis. Ved  fastsetjing av skattemessig inngangsverdi på grunnfondsbevis kan ein  sjå bort frå akkumulert negativt RISK-beløp som har sin årsak i  nedskriving på
+                            utjamningsfondet for å dekkje underskot i banken når  det fører til at skattemessig inngangsverdi på grunnfondsbeviset vert  lågare en historisk kostpris. Av den grunn ber vi om at negativt  RISK-beløp som har sin årsak i
+                            slik nedskriving vert oppgitt under  post 25 og at grunnfondsbeviseigarane blir varsla når dei får  underretning om RISK-beløpet.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Posten er berre aktuell ved negativt RISK-beløp.</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

@@ -1,0 +1,1041 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1120: Skjema for beregning av friinntekt</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-872-4988.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3940/Enhet-grp-3942/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3940/Enhet-grp-3942/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3940/Enhet-grp-3942/EnhetAdresse-datadef-15"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3940/Enhet-grp-3942/EnhetPostnummer-datadef-6673"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3940/Enhet-grp-3942/EnhetPoststed-datadef-6674"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1120 Skjema for beregning av friinntekt 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Ved levering av skjema via Altinn, må det fylles ut ett eksemplar av  skjema per felt. Tabell 1 skal ikke summeres, dette vil bli håndtert  i mottakene saksbehandlingssystem.  </p>
+                <p/>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. november 1994, jf. ligningsloven § 4-4 nr.  7.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-3940">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-3940/Skjema-grp-3941">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Skjema</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3940/Skjema-grp-3941/SkjemaNummer-datadef-20370">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Skjema nr</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3940/Skjema-grp-3941/SkjemaSiderTotalt-datadef-16474">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>av totalt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-3940/Enhet-grp-3942">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Enhet</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3940/Enhet-grp-3942/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3940/Enhet-grp-3942/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3940/Enhet-grp-3942/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Nærings-(kontor-)adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3940/Enhet-grp-3942/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3940/Enhet-grp-3942/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Tabell 1 - Driftsmidler i hht. petrosktl. § 3b, ervervet i 1992 eller  senere</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943/OljefeltIdentitet-datadef-20371">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Felt</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:repeat id="repeat_DriftsmidlerIHhtPetrosktlErvervetSenere-grp-4366" nodeset="/Skjema/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-4366">
+                    <xforms:group ref="/Skjema/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-4366">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tabell 1 - Driftsmidler i hht. petrosktl. § 3b, ervervet i 1992 eller  senere</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-4366/InvesteringArSpesifisertAr-datadef-20197">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1 Investeringsår 2000-2005</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-4366/FriinntektGrunnlagSpesifisertInvesteringsar-datadef-16697">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2 Friinntektsgrunnlag i hht. s/a for 2004. For 2005 oppgis kostpris</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-4366/FriinntektDriftsmRealisertHistKostprisGamleReglerSpesAr-datadef-16700">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3 Salgssum maks historisk kost for driftsmidler realisert i 2005 i  hht. gamle regler.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-4366/FriinntektDriftsmRealisertHistKostprisNyeReglerSpesAr-datadef-16703">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4 Historisk kost for driftsmidler realisert i 2005 i hht. nye regler</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-4366/FriinntektGrunnlagKorreksjonIkkeInnarbeidetSpesifisertAr-datadef-16706">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>5 Korreksjon i grunnlag pga. ligning i 2003 samt vedtak, kjennelse mv.  ikke tidligere innarbeidet i s/a</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-4366/FriinntektGrunnlagKorreksjonIkkeInnarbeidet10SpesifAr-datadef-16708">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>6 Korreksjon i grunnlag pga. § 10. Eventuelle andre overføringer og  justeringer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-4366/FriinntektsgrunnlagSpesifisertAr-datadef-16710">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>7 Friinnteksgrunnlag i hht. s/a for 2005</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:group ref="/Skjema/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943/Sum-grp-4367">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943/Sum-grp-4367/FriinntektGrunnlagSamletIkkeKorrigert-datadef-16699">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2 Friinntektsgrunnlag i hht. s/a for 2003. For 2005 oppgis kostpris</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943/Sum-grp-4367/FriinntektDriftsmRealisertHistKostprisGamleReglerSamlet-datadef-16702">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3 Salgssum maks historisk kost for driftsmidler realisert i 2005 i  hht. gamle regler.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943/Sum-grp-4367/FriinntektDriftsmRealisertHistKostprisNyeReglerSamlet-datadef-16705">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4 Historisk kost for driftsmidler realisert i 2005 i hht. nye regler</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943/Sum-grp-4367/FriinntektGrunnlagKorreksjonIkkeInnarbeidetSamlet-datadef-16707">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5 Korreksjon i grunnlag pga. ligning i 2003 samt vedtak, kjennelse mv.  ikke tidligere innarbeidet i s/a</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943/Sum-grp-4367/FriinntektGrunnlagKorreksjonIkkeInnarbeidet10Samlet-datadef-16709">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6 Korreksjon i grunnlag pga. § 10. Eventuelle andre overføringer og  justeringer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943/Sum-grp-4367/FriinntektsgrunnlagSamlet-datadef-16711">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>7 Friinnteksgrunnlag i hht. s/a for 2005</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrosktlErvervetSenere-grp-3943/Sum-grp-4367/Friinntekt5-datadef-16712">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>8 Friinntekt for 2005 - 5%</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4368">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Tabell 2 - Driftsmidler i hht. petrsktl. § 3b, ervervet før 1. januar  1987 og påbegynt avskrevet i 2003 eller tidligere</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_DriftsmidlerIHhtPetrsktlErvervetFor-grp-4369" nodeset="/Skjema/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4368/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4369">
+                    <xforms:group ref="/Skjema/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4368/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4369">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tabell 2 - Driftsmidler i hht. petrsktl. § 3b, ervervet før 1. januar  1987 og påbegynt avskrevet i 2003 eller tidligere</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4368/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4369/FriinntektsgrunnlagetInntattArSpesifisertAr-datadef-20198">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1 År inntatt i friinntektsgrunnlaget</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4368/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4369/FriinntektErvervFor1987GrunnlagSpesifisertInvesteringsar-datadef-16713">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2 Friinnteksgrunnlaget i hht. s/a for 2004. For 2005 oppgis beløp  påbegynt avskrevet i 2004</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>1. år for friinntekt 1990 - 2005</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4368/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4369/FriinntektErvervFor1987HistKostprisGamleReglerSpesAr-datadef-16716">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3 Salgsum maks historisk kost for driftsmidler realisert i 2003 i hht.  gamle regler</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4368/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4369/FriinntektErvervFor1987KorreksjonIkkeInnarbeidetSpesifAr-datadef-16719">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4 Korreksjon i grunnlag pga. ligning 2003 samt vedtak, kjennelser mv.  ikke tidligere innarbeidet i s/a</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4368/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4369/FriinntektErvervFor1987IkkeInnarbeidet10SpesifAr-datadef-16721">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>5 Korreksjon i grunnlag pga. § 10. Eventuelle andre overføringer og  justeringer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4368/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4369/FriinntektsgrunnlagErvervFor1987SpesifisertAr-datadef-16723">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>6 Friinntektsgrunnlag i hht. s/a for 2005</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:group ref="/Skjema/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4368/Sum-grp-4370">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4368/Sum-grp-4370/FriinntektErvervFor1987GrunnlagSamletIkkeKorrigert-datadef-16715">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2 Friinnteksgrunnlaget i hht. s/a for 2004. For 2005 oppgis beløp  påbegynt avskrevet i 2004</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4368/Sum-grp-4370/FriinntektErvervFor1987HistKostprisGamleReglerSamlet-datadef-16717">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3 Salgsum maks historisk kost for driftsmidler realisert i 2004 i hht.  gamle regler</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4368/Sum-grp-4370/FriinntektErvervFor1987KorreksjonIkkeInnarbeidetSamlet-datadef-16720">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4 Korreksjon i grunnlag pga. ligning 2003 samt vedtak, kjennelser mv.  ikke tidligere innarbeidet i s/a</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4368/Sum-grp-4370/FriinntektErvervFor1987IkkeInnarbeidet10Samlet-datadef-16722">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5 Korreksjon i grunnlag pga. § 10. Eventuelle andre overføringer og  justeringer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4368/Sum-grp-4370/FriinntektsgrunnlagErvervFor1987Samlet-datadef-16724">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6 Friinntektsgrunnlag i hht. s/a for 2004</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/DriftsmidlerIHhtPetrsktlErvervetFor-grp-4368/Sum-grp-4370/Friinntekt175-datadef-16725">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>7 Friinntekt for 2005 - 1,75%</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/InnleideFlyttbareProduksjonsinnretninger-grp-4371">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Tabell 3 - Innleide, flyttbare produksjonsinnretninger som det kreves  friintekt for etter petrsktl. § 3i</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_InnleideFlyttbareProduksjonsinnretninger-grp-4372" nodeset="/Skjema/InnleideFlyttbareProduksjonsinnretninger-grp-4371/InnleideFlyttbareProduksjonsinnretninger-grp-4372">
+                    <xforms:group ref="/Skjema/InnleideFlyttbareProduksjonsinnretninger-grp-4371/InnleideFlyttbareProduksjonsinnretninger-grp-4372">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tabell 3 - Innleide, flyttbare produksjonsinnretninger som det kreves  friintekt for etter petrsktl. § 3i</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/InnleideFlyttbareProduksjonsinnretninger-grp-4371/InnleideFlyttbareProduksjonsinnretninger-grp-4372/LeieforholdPabegyntArSpesifisertAr-datadef-20199">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1 Leieforhold påbegynt 2000-2005</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InnleideFlyttbareProduksjonsinnretninger-grp-4371/InnleideFlyttbareProduksjonsinnretninger-grp-4372/FriinntektInnleideInnretningerGrunnlagSpesifisertAr-datadef-16726">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2 Friinntektsgrunnlag i hht. s/a for 2004. For 2005 oppgis beregnet  kostpris</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InnleideFlyttbareProduksjonsinnretninger-grp-4371/InnleideFlyttbareProduksjonsinnretninger-grp-4372/FriinntektInnleideInnretningerBeregnetKostprisSpesifisertAr-datadef-16727">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3 Beregnet kostpris for driftsmidler hvor eieforholdet er opphørt i  2005</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InnleideFlyttbareProduksjonsinnretninger-grp-4371/InnleideFlyttbareProduksjonsinnretninger-grp-4372/FriinntektInnleideInnretningerKorreksjonLigningSpesifisertAr-datadef-16728">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4 Korreksjon i grunnlag pga. ligning i 2003 samt vedtak, kjennelser  mv. Ikke tidligere innarbeidet i s/a</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InnleideFlyttbareProduksjonsinnretninger-grp-4371/InnleideFlyttbareProduksjonsinnretninger-grp-4372/FriinntektInnleideInnretningerKorreksjon10SpesifisertAr-datadef-16729">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>5 Korreksjon i grunnlag pga. § 10. Eventuelle andre overføringer og  justeringer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InnleideFlyttbareProduksjonsinnretninger-grp-4371/InnleideFlyttbareProduksjonsinnretninger-grp-4372/FriinntektsgrunnlagInnleideInnretningerSpesifisertAr-datadef-16730">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>6 Friinntektsgrunnlag i hht. s/a for 2005</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:group ref="/Skjema/InnleideFlyttbareProduksjonsinnretninger-grp-4371/Sum-grp-4373">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/InnleideFlyttbareProduksjonsinnretninger-grp-4371/Sum-grp-4373/FriinntektInnleideInnretningerGrunnlagSamlet-datadef-16732">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2 Friinntektsgrunnlag i hht. s/a for 2004. For 2005 oppgis beregnet  kostpris</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InnleideFlyttbareProduksjonsinnretninger-grp-4371/Sum-grp-4373/FriinntektInnleideInnretningerBeregnetKostprisSamlet-datadef-16733">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3 Beregnet kostpris for driftsmidler hvor eieforholdet er opphørt i  2005</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InnleideFlyttbareProduksjonsinnretninger-grp-4371/Sum-grp-4373/FriinntektInnleideInnretningerKorreksjonLigningSamlet-datadef-16734">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4 Korreksjon i grunnlag pga. ligning i 2003 samt vedtak, kjennelser  mv. Ikke tidligere innarbeidet i s/a</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InnleideFlyttbareProduksjonsinnretninger-grp-4371/Sum-grp-4373/FriinntektInnleideInnretningerKorreksjon10Samlet-datadef-16735">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5 Korreksjon i grunnlag pga. § 10. Eventuelle andre overføringer og  justeringer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InnleideFlyttbareProduksjonsinnretninger-grp-4371/Sum-grp-4373/FriinntektsgrunnlagInnleideInnretningerSpesifisertAr-datadef-16736">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6 Friinntektsgrunnlag i hht. s/a for 2005</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InnleideFlyttbareProduksjonsinnretninger-grp-4371/Sum-grp-4373/FriinntektInnleideInnretninger5-datadef-16737">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>7 Friinntekt for 2005 - 5%</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/GevinstEllerTapForDriftsmidler-grp-4374">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Tabell 4 - Gevinst eller tap for driftsmidler i hht. petrsktl. § 3b,  realisert i hht. nye regler for gevinstbeskatning</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_GevinstEllerTapForDriftsmidler-grp-4375" nodeset="/Skjema/GevinstEllerTapForDriftsmidler-grp-4374/GevinstEllerTapForDriftsmidler-grp-4375">
+                    <xforms:group ref="/Skjema/GevinstEllerTapForDriftsmidler-grp-4374/GevinstEllerTapForDriftsmidler-grp-4375">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tabell 4 - Gevinst eller tap for driftsmidler i hht. petrsktl. § 3b,  realisert i hht. nye regler for gevinstbeskatning</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/GevinstEllerTapForDriftsmidler-grp-4374/GevinstEllerTapForDriftsmidler-grp-4375/RealisasjonArSpesifisertAr-datadef-20200">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1 Realisasjonsår 2000-2005</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GevinstEllerTapForDriftsmidler-grp-4374/GevinstEllerTapForDriftsmidler-grp-4375/FriinntektGevinstTapUtgangsverdiSpesifisertAr-datadef-16738">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2 Utgangsverdi driftsmidler realisert i 2005</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GevinstEllerTapForDriftsmidler-grp-4374/GevinstEllerTapForDriftsmidler-grp-4375/FriinntektGevinstTapInngangsverdiSpesifisertAr-datadef-16739">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3 Inngangsverdi driftsmidler realisert i 2005</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GevinstEllerTapForDriftsmidler-grp-4374/GevinstEllerTapForDriftsmidler-grp-4375/FriinntektsgrunnlagGevinstTapGrunnlagSpesifisertAr-datadef-16740">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4 Friinntektsgrunnlag i hht. s/a for 2004. For 2005 oppgis gevinst/tap</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GevinstEllerTapForDriftsmidler-grp-4374/GevinstEllerTapForDriftsmidler-grp-4375/FriinntektGevinstTapKorreksjonSpesifisertAr-datadef-16741">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>5 Korreksjon i grunnlag pga. ligning 2003 samt vedtak, kjennelser mv.  Ikke tidligere innarbeidet i s/a</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GevinstEllerTapForDriftsmidler-grp-4374/GevinstEllerTapForDriftsmidler-grp-4375/FriinntektGevinstTapKorreksjon10SpesifisertAr-datadef-16742">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>6 Korreksjon i grunnlag pga. § 10. Eventuelle andre overføringer og  justeringer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GevinstEllerTapForDriftsmidler-grp-4374/GevinstEllerTapForDriftsmidler-grp-4375/FriinntektGevinstTapGrunnlagSpesifisertAr-datadef-16743">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>7 Friinntektsgrunnlaget i hht. s/a for 2005</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:group ref="/Skjema/GevinstEllerTapForDriftsmidler-grp-4374/Sum-grp-4376">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GevinstEllerTapForDriftsmidler-grp-4374/Sum-grp-4376/FriinntektGevinstTapUtgangsverdiSamlet-datadef-16744">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2 Utgangsverdi driftsmidler realisert i 2005</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GevinstEllerTapForDriftsmidler-grp-4374/Sum-grp-4376/FriinntektGevinstTapInngangsverdiSamlet-datadef-16745">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3 Inngangsverdi driftsmidler realisert i 2005</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GevinstEllerTapForDriftsmidler-grp-4374/Sum-grp-4376/FriinntektsgrunnlagGevinstTapGrunnlagSamlet-datadef-16746">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4 Friinntektsgrunnlag i hht. s/a for 2004. For 2005 oppgis gevinst/tap</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GevinstEllerTapForDriftsmidler-grp-4374/Sum-grp-4376/FriinntektGevinstTapKorreksjonSamlet-datadef-16747">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5 Korreksjon i grunnlag pga. ligning 2003 samt vedtak, kjennelser mv.  Ikke tidligere innarbeidet i s/a</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GevinstEllerTapForDriftsmidler-grp-4374/Sum-grp-4376/FriinntektGevinstTapKorreksjon10Samlet-datadef-16748">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6 Korreksjon i grunnlag pga. § 10. Eventuelle andre overføringer og  justeringer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GevinstEllerTapForDriftsmidler-grp-4374/Sum-grp-4376/FriinntektGevinstTapGrunnlagSamlet-datadef-16749">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>7 Friinntektsgrunnlaget i hht. s/a for 2005</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GevinstEllerTapForDriftsmidler-grp-4374/Sum-grp-4376/FrinntektGevinstTap5-datadef-16750">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>8 Friinntekt for 2005 - 5%</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Tabell 5 - Reduksjon og økning av friinntekt til fremføring pr.  31.12.2003, samt reduksjon og økning av friinntektsbeløp for 2003 og  tidligere år</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektTilFremforing-grp-4379">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>A Korreksjon av friinntekt til fremføring pr 31.12.2003 som følge av  ligning 2003 samt vedtak, kjennelser mv. ikke tidligere innarbeidet i  s/a</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Skal spesifiseres</p>
+                    </xforms:hint>
+                    <xforms:group ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektTilFremforing-grp-4379/NomineltFriinntektsbelopForTidligereAr-grp-4384">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6 Nominelt friinntektsbeløp for 2001 og tidligere år</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektTilFremforing-grp-4379/NomineltFriinntektsbelopForTidligereAr-grp-4384/FriinntektNominell2001OgTidlArKorrigert-datadef-20201">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Friinntektsbeløp for 2001 og tidligere år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektTilFremforing-grp-4379/NomineltFriinntektsbelop-grp-4388">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>7 Nominelt friinntektsbeløp for 2003</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Kolonne 7 skal kun benyttes av skattytere som har eller har hatt  friinntekt til fremføring for de aktuelle år.</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektTilFremforing-grp-4379/NomineltFriinntektsbelop-grp-4388/FriinntektNominell2002Korrigert-datadef-20202">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Friinntektsbeløp for 2003</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektTilFremforing-grp-4379/Fremforingsrente-grp-4392">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>8 Fremføringsrente ved fremføring av friinntektsbeløp for 2003</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektTilFremforing-grp-4379/Fremforingsrente-grp-4392/FriinntektNominell2002KorrigertFremforingsrente-datadef-20203">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Friinntektsbeløp for 2003</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+                <xforms:group ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektForTidligereAr-grp-4380">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>B Korreksjon av friinntekt for tidliger år som følge av  samordningsforskriftenes (§ 10 forskriftens) §§ 2 nr. 2 og 3 nr. 2</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Skal spesifiseres</p>
+                    </xforms:hint>
+                    <xforms:group ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektForTidligereAr-grp-4380/FulltFriinntektsbelop-grp-4396">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4 Fullt friinntektsbeløp</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektForTidligereAr-grp-4380/FulltFriinntektsbelop-grp-4396/FriinntektFull1991OgTidlAr-datadef-20204">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Friinntektsbeløp for 1991 og tidligere år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektForTidligereAr-grp-4380/NomineltFriinntektsbelopForTidligereAr-grp-4385">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6 Nominelt friinntektsbeløp for 2001 og tidligere år</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektForTidligereAr-grp-4380/NomineltFriinntektsbelopForTidligereAr-grp-4385/FriinntektNominell1991OgTidlAr2Nr2Og3Nr2-datadef-20205">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Friinntektsbeløp for 1991 og tidligere år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektForTidligereAr-grp-4380/NomineltFriinntektsbelopForTidligereAr-grp-4385/FriinntektNominell1992Tom20012Nr2Og3Nr2-datadef-20206">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Friinntektsbeløp for 1992 og til og med 2001</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektForTidligereAr-grp-4380/NomineltFriinntektsbelop-grp-4389">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>7 Nominelt friinntektsbeløp for 2003</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektForTidligereAr-grp-4380/NomineltFriinntektsbelop-grp-4389/FriinntektNominell2002-datadef-20207">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Friinntektsbeløp for 2003</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+                <xforms:group ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektForTidligereArSomFolgeAvAndre-grp-4381">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>C Korreksjon av friinntekt for tidligere år som følge av andre  overføringer og justeringer</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Skal spesifiseres</p>
+                    </xforms:hint>
+                    <xforms:group ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektForTidligereArSomFolgeAvAndre-grp-4381/FulltFriinntektsbelop-grp-4397">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4 Fullt friinntektsbeløp</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektForTidligereArSomFolgeAvAndre-grp-4381/FulltFriinntektsbelop-grp-4397/FriinntektFull1991OgTidlAr-datadef-20208">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Friinntekt for 1991 og tidligere år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektForTidligereArSomFolgeAvAndre-grp-4381/NomineltFriinntektsbelopForTidligereAr-grp-4386">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6 Nominelt friinntektsbeløp for 2001 og tidligere år</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektForTidligereArSomFolgeAvAndre-grp-4381/NomineltFriinntektsbelopForTidligereAr-grp-4386/FriinntektNominell2001OgTidlArJustert-datadef-20209">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Friinntektsbeløp for 1991 og tidligere år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektForTidligereArSomFolgeAvAndre-grp-4381/NomineltFriinntektsbelopForTidligereAr-grp-4386/FriinntektNominell2001OgTidlArJustert-datadef-20210">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Friinntektsbeløp for 1992 ti og med 2001</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektForTidligereArSomFolgeAvAndre-grp-4381/NomineltFriinntektsbelop-grp-4390">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>7 Nominelt friinntektsbeløp for 2003</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektForTidligereArSomFolgeAvAndre-grp-4381/NomineltFriinntektsbelop-grp-4390/FriinntektNominell2002Justert-datadef-20211">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Friinntektsbeløp for 2003</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektForTidligereArSomFolgeAvAndre-grp-4381/Fremforingsrente-grp-4393">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>8 Fremføringsrente ved fremføring av friinntektsbeløp for 2003</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/KorreksjonAvFriinntektForTidligereArSomFolgeAvAndre-grp-4381/Fremforingsrente-grp-4393/FriinntektNominell2002JustertFremforingsrente-datadef-20212">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Friinntektsbeløp for 2003</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+                <xforms:group ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/Sum-grp-4382">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>D Sum A, B og C</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/Sum-grp-4382/FrinntektNominell2001OgTidlAr-datadef-20213">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6 Nominelt friinntektsbeløp for 2001 og tidigere år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/Sum-grp-4382/FriinntektNominell2002-datadef-20214">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>7 Nominelt friinntektsbeløp for 2003</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/Sum-grp-4382/FriinntektNominell2002Fremforingsrente-datadef-20215">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>8 Fremføringsrente ved fremføring av friinntektsbeløp for 2003</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/SumOverfort-grp-4383">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>E Sum overført fra D</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/ReduksjonOgOkningAvFriinntektTilFremforing-grp-4378/SumOverfort-grp-4383/FriinntektNominell2002Fremforing-datadef-20216">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Friinntektsbeløp for 2003</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Tabell 6 - Samletabell for beregning av friinntekt 2005</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_SamletabellForBeregningAvFriinntekt-grp-4399" nodeset="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/SamletabellForBeregningAvFriinntekt-grp-4399">
+                    <xforms:group ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/SamletabellForBeregningAvFriinntekt-grp-4399">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tabell 6 - Samletabell for beregning av friinntekt</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>A</p>
+                        </xforms:hint>
+                        <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/SamletabellForBeregningAvFriinntekt-grp-4399/FriinntektsgrunnlagArAlleFeltSpesifisertAr-datadef-20217">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2 År 1990-2005</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/SamletabellForBeregningAvFriinntekt-grp-4399/FriinntektsgrunnlagAlleFeltKolonne7Tabell1SpesifisertAr-datadef-20218">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3 Friinntektsgrunnlag i hht. s/a for 2005 - kolonne 7 i tabell 1  summert over alle felt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/SamletabellForBeregningAvFriinntekt-grp-4399/FriinntektsgrunnlagAlleFeltKolonne6Tabell2SpesifisertAr-datadef-20219">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4 Friinntektsgrunnlag i hht. s/a for 2005 - kolonne 6 i tabell 2  summert over alle felt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/SamletabellForBeregningAvFriinntekt-grp-4399/FriinntektsgrunnlagAlleFeltKolonne6Tabell3SpesifisertAr-datadef-20220">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>5 Friinntektsgrunnlag i hht. s/a for 2005 - kolonne 6 i tabell 3  summert over alle felt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/SamletabellForBeregningAvFriinntekt-grp-4399/FriinntektsgrunnlagAlleFeltKolonne7Tabell4SpesifisertAr-datadef-20221">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>6 Friinntektsgrunnlag i hht. s/a for 2005 - kolonne 7 i tabell 4  summert over alle felt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:group ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/Sum-grp-4400">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>B Sum</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>C Friinntektssats</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/Sum-grp-4400/FriinntektsgrunnlagAlleFeltKolonne7Tabell1-datadef-20222">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3 Friinntektsgrunnlag i hht. s/a for 2005 - kolonne 7 i tabell 1  summert over alle felt</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Herav 5 %</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/Sum-grp-4400/FriinntektsgrunnlagAlleFeltKolonne6Tabell2-datadef-20223">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4 Friinntektsgrunnlag i hht. s/a for 2005 - kolonne 6 i tabell 2  summert over alle felt</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Herav 1,75%</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/Sum-grp-4400/FriinntektsgrunnlagAlleFeltKolonne6Tabell3-datadef-20224">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5 Friinntektsgrunnlag i hht. s/a for 2005 - kolonne 6 i tabell 3  summert over alle felt</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Herav 5%</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/Sum-grp-4400/FriinntektsgrunnlagAlleFeltKolonne7Tabell4-datadef-20225">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6 Friinntektsgrunnlag i hht. s/a for 2005 - kolonne 7 i tabell 4  summert over alle felt</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Herav 5%</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/Friinntektssats-grp-4401">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>D Friinntekt</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/Friinntektssats-grp-4401/FriinntektAlleFeltKolonne7Tabell1-datadef-20226">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3 Friinntektsgrunnlag i hht. s/a for 2005 - kolonne 7 i tabell 1  summert over alle felt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/Friinntektssats-grp-4401/FriinntektAlleFeltKolonne6Tabell2-datadef-20227">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4 Friinntektsgrunnlag i hht. s/a for 2005 - kolonne 6 i tabell 2  summert over alle felt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/Friinntektssats-grp-4401/FriinntektAlleFeltKolonne6Tabell3-datadef-20228">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5 Friinntektsgrunnlag i hht. s/a for 2005 - kolonne 6 i tabell 3  summert over alle felt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/Friinntektssats-grp-4401/FriinntektAlleFeltKolonne7Tabell4-datadef-20229">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6 Friinntektsgrunnlag i hht. s/a for 2005 - kolonne 7 i tabell 4  summert over alle felt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/FriinntektsbelopTidligere-grp-4403">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Friinntektsbeløp for 2001 og tidligere år</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/FriinntektsbelopTidligere-grp-4403/FriinntektAlleFelt2001OgTidlAr-datadef-20230">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>F Friinntektsbeløp for 2003 og tidligere år</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Rad E tabell 5 summert over alle felt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/FriinntektsbelopTidligere-grp-4403/FriinntektProduksjonsgodtgjorelseAlleFelt2001OgTidligereAr-datadef-20232">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>H Framførbar friinntekt og produksjonsgodtgjørelse pr. 31.12.2003 i  hht. s/a for 2003, inklusive fremføringsrente for 2003</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/FriinntektsbelopTidligere-grp-4403/FriinntektProduksjonsgodtgjorelseFradrag2001OgTidlAr-datadef-20234">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>I Maksimal friinntekt og produksjonsgodtgjørelse til fradrag i 2004</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/FriinntektsbelopTidligere-grp-4403/friinntektProduksjongodtgjorelseAlleFeltBenyttet2001OgTidlig-datadef-20236">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>J Herav benyttet friinntekt og produksjonsgodgjørelse i 2004</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/FriinntektsbelopTidligere-grp-4403/FriinntektProduksjongodtgjorelseAlleFeltForRente2001OgTidli-datadef-20238">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>K Fremførbar friinntekt og produksjonsgodtgjørelse pr. 31.12.2004, før  fremføringsrente for 2004</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/FriinntektsbelopTidligere-grp-4403/FriinntektProduksjongodtgjorelseAlleFeltEtterRente2001OgTid-datadef-20241">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>M Fremførbar friinntekt og produksjonsgodtgjørelse pr. 31.12.2004,  etter fremføringsrenten for 2004</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/FriinntektsbelopSenere-grp-4402">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Friinntektsbeløp for 2003 og senere år</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/FriinntektsbelopSenere-grp-4402/Friinntektsbelop-datadef-16766">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>E Friinntektsbeløp for 2004 - tabell 1-4 summert over alle felt</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Sum rad D for kolonne 3-6 i tabell 6</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/FriinntektsbelopSenere-grp-4402/FriinntektAlleFelt2002OgSenereAr-datadef-20231">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>F Friinntektsbeløp for 2003 og tidligere år</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Rad E tabell 5 summert over alle felt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/FriinntektsbelopSenere-grp-4402/FriinntektsbelopKorreksjon-datadef-16767">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>G Korreksjon av friinntektsbeløp for 2004 hvor det ikke skal gjøres  tihørende korreksjon av friinntektsgrunnlaget</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Skal spesifiseres</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/FriinntektsbelopSenere-grp-4402/FriinntektProduksjonsgodtgjorelseAlleFeltFremforbar2002OgSen-datadef-20233">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>H Framførbar friinntekt og produksjonsgodtgjørelse pr. 31.12.2003 i  hht. s/a for 2003, inklusive fremføringsrente for 2003</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/FriinntektsbelopSenere-grp-4402/FriinntektProduksjonsgodtgjorelseAlleFeltFradrag2002OgSenere-datadef-20235">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>I Maksimal friinntekt og produksjonsgodtgjørelse til fradrag i 2003</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/FriinntektsbelopSenere-grp-4402/FriinntektProduksjonsgodtgjorelseAlleFeltBenyttet2002OgSener-datadef-20237">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>J Herav benyttet friinntekt og produksjonsgodgjørelse i 2004</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/FriinntektsbelopSenere-grp-4402/FriinntektProduksjonsgodtgjorelseAlleFeltForRente2002OgSene-datadef-20239">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>K Fremførbar friinntekt og produksjonsgodtgjørelse pr. 31.13.2004, før  fremføringsrente for 2004</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/FriinntektsbelopSenere-grp-4402/FriinntektProduksjonsgodtgjorelseFremforingsrente-datadef-20240">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>L Fremføringsrente for 2004</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SamletabellForBeregningAvFriinntekt-grp-4398/FriinntektsbelopSenere-grp-4402/FriinntektProduksjonsgodtgjorelseAlleFeltEtterRente2002OgSe-datadef-20242">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>M Fremførbar friinntekt og produksjonsgodtgjørelse pr. 31.12.2004,  etter fremføringsrenten for 2004</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

@@ -1,0 +1,71 @@
+<?
+
+#Usage
+# new AvskrivningerKalk(array('sumPart'=>$_sumPart, 'sumGroup'=>$_sumGroup))
+#Ikke periode 13???);
+#
+
+class AvskrivningerKalk
+{
+    var $_sumPart;
+    var $_sumGroup;
+   
+
+    ############################################################################
+    function AvskrivningerKalk($args)
+    {	
+       
+    }
+    
+
+    ############################################################################
+    function calculate($ThisYear, $_sumPart, $_sumGroup)
+    {   $this->_sumGroup = $_sumGroup;
+    	$this->_sumPart  = $_sumPart;
+    	
+        $this->_sumGroup['105'][$ThisYear]['saldo']=$this->_sumGroup['105a'][$ThisYear]['saldo']-
+                                                    $this->_sumGroup['105b'][$ThisYear]['saldo'];
+                                                    
+        $this->_sumPart['108'][$ThisYear]['saldo']=$this->_sumPart['105'][$ThisYear]['saldo']-
+                                                   $this->_sumPart['106'][$ThisYear]['saldo']+
+                                                   $this->_sumPart['107'][$ThisYear]['saldo'];
+                                                   
+        $this->_sumPart['111'][$ThisYear]['saldo']=$this->_sumPart['108'][$ThisYear]['saldo']+
+                                                    $this->_sumPart['109'][$ThisYear]['saldo']+
+                                                    $this->_sumPart['1010'][$ThisYear]['saldo'];
+
+    }//function headLodic
+    
+    
+    ############################################################################
+    function sumGroupLogic($Line, $Year, $reportHash, $sumGroup){
+    	 $this->_sumGroup=$sumGroup;
+    	 
+    	 
+    	if ($Line == '1.02' || $Line == '1.03' || $Line == '1.04a' || $Line == '1.04b'){
+            $this->sumGroup('1.05a', $Year, $reportHash);
+    	}elseif ($Line == '1.04c' || $Line == '1.04d'){
+        	$this->sumGroup('1.05b', $Year, $reportHash);    			
+        }
+    }
+
+   
+     ############################################################################
+    function sumGroup($LineNum, $Year, $reportHash)
+    {
+        $this->_sumGroup[$LineNum][$Year]['in']     += $reportHash['AmountIn'];
+        $this->_sumGroup[$LineNum][$Year]['out']    += $reportHash['AmountOut'];
+        $this->_sumGroup[$LineNum][$Year]['saldo']  += $reportHash['AmountIn'] - $reportHash['AmountOut'];
+    }
+    
+    function getSumPart(){
+   		return $this->_sumPart;	
+    }
+    
+    function getSumGroup(){
+   		return $this->_sumGroup;	
+    }
+    
+
+}
+?>

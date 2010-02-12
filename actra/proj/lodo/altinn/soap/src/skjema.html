@@ -1,0 +1,33 @@
+<html>
+<head><title>Skjema test</title></head>
+<body>
+
+<form action="servlet/AltInnServlet" method="POST">
+    
+<table>
+<tr><td>batchId</td><td><input type="text" name="batchId"></td></tr>
+<tr><td>enterpriseSystemId</td><td><input type="text" name="enterpriseSystemId"></td></tr>
+<tr><td>participantId</td><td><input type="text" name="participantId"></td></tr>
+<tr><td>sendersReference</td><td><input type="text" name="sendersReference"></td></tr>
+<tr><td>parentReference</td><td><input type="text" name="parentReference"></td></tr>
+
+<tr><td VALIGN="TOP">data</td><td><textarea name="data" ROWS="10" COLS="50"></textarea></TD>
+    <TD VALIGN="TOP">
+Eksempel:<BR>
+&lt;GenerellInformasjon-grp-2581 gruppeid="2581"/&gt;<BR>
+&lt;Avgiftspliktig-grp-50 gruppeid="50"/&gt;
+    </td></tr>
+    <tr><td>passord</td><td><INPUT TYPE="TEXT" NAME="passord" VALUE="altinn2"></Td></TR>
+<tr><td><input type="submit" value="OK"></td><td></td></tr>
+</table>
+
+</form>
+
+<TABLE CELLSPACING=5>
+    <TR><TD>FagsystemId</td><td>participantId</TD><TD>passord</TD></TR>
+    <TR><td>275</td><TD>70973445591</TD><TD>altinn2</TD></TR>
+    <TR><td>277</td><TD>982991099</TD><TD>altinn2</TD></TR>
+    <TR><td>278</td><TD>70973445591</TD><TD>altinn2</TD></TR>
+</TABLE>
+</body>
+</html>

@@ -1,0 +1,1626 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<SchemaDefinition>
+  <xs:schema xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+<!--title='RF-1219: Gevinst- og tapskonto' lang='NOB'-->
+    <xs:element name="Skjema">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>RF-1219 Gevinst- og tapskonto 2007</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+            <p>I næringsvirksomhet skal det føres en egen gevinst- og tapskonto. Har  gevinstene og tapene til skattyteren oppstått både i og utenfor  selvstendig personlig næringsvirksomhet, føres disse på to særskilte  gevinst- og
+                        tapskontoer. Dersom skattyter driver flere atskilte  virksomheter, skal det føres en gevinst- og tapskonto for hver  </p>
+            <p>virksomhet og for hver kommune som vedkommende er skattepliktig til og  som skal tilordnes gevinst eller tap undergitt stedbunden skatteplikt  etter skatteloven § 3-3. På skjemaet er det tatt inn felt for å  nummerere gevinst-
+                        og tapskontoene som skattyteren har. Gevinst- og  tapskontoen skal tilføres gevinst og tap ved realisasjon eller uttak  i inntektsåret for driftsmidler i saldogruppe e,f,g,h og i, samt  negativ  </p>
+            <p>saldo oppstått i året i saldogruppe b. Tap ved realisasjon av ervervet  forretningsverdi (tom positiv saldo i gruppe b) skal fradragsføres  ved fortsatt avskrivning på saldo i gruppe b. Gevinst og tap på ikke  avskrivbare
+                        driftsmidler i næringsvirksomhet, jf. skatteloven §  14-52, skal også tilføres gevinst- og tapskontoen. Dette  </p>
+            <p>gjelder ikke gevinster og tap på eiendeler som aksjer, obligasjoner,  fordringer mv. Er skattyteren deltaker i deltakerliknet selskap som  i  </p>
+            <p>2007 har realisert eiendel ervervet før 31.12.1991, og som gir  deltakeren rett til fradrag etter skatteloven § 10-44 (5), skal  deltakeren føre fradraget.  </p>
+            <p/>
+            <p>I utgangspunktet skal alle tall innrapporteres uten fortegn når det  klart fremgår av ledeteksten om tallet skal tillegges eller trekkes  fra i forhold til den sammenheng det føres i. Det skal altså ikke  </p>
+            <p>brukes minustegn når teksten forteller at det dreier seg om tap mv.,  og tilsvarende ingen plusstegn ved gevinster mv.  </p>
+            <p>Presiseringer  </p>
+            <p>Dersom et felt har forhåndstrykket fortegn (positivt eller negativt)  skal tallet som innrapporteres være uten fortegn. Fortegn brukes kun  i de tilfeller man ønsker å innrapportere et beløp med omvendt  fortegn av det som er
+                        forhåndstrykket. I sum og resultatfelter brukes  alltid minustegn når summen er negativ.  </p>
+            <p/>
+            <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. november 1994, jf. ligningsloven § 4-4 nr.  7.  </p>
+            <p/>
+            <p>Andre offentlige organers bruk av opplysninger i RF-1219B  </p>
+            <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i Gevinst- og tapskonto 2006 RF-1219, helt  eller delvis bli benyttet også av andre offentlige organer som har  hjemmel til å
+                        innhente de samme opplysningene, jf. lov om  Oppgaveregisteret §§ 5 og 6. Opplysninger om evt. samordning kan fås  ved henvendelse til Oppgaveregisteret på telefon 75 00 75 00, eller  Skattedirektoratet på telefon 22 07 70 00.</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>RF-1219 Gevinst- og tapskonto 2007</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+            <p>I næringsverksemd skal det førast ein eigen gevinst- og tapskonto. Har  gevinstane og tapa til skattytaren oppstått både i og utanfor  sjølvstendig personleg næringsverksemd, fører ein desse på to  einskilde gevinst og
+                        tapskonti. Dersom skattytar driv fleire  sjølvstendige verksemder, skal det opprettast ein gevinst- og  tapskonto for kvar verksemd og for kvar kommune som vedkomande er  skattepliktig til, og som skal tilordnast gevinst eller
+                        tap etter  reglane om stadbunden skattlegging etter § 3-3 i skattelova.  </p>
+            <p>På skjemaet er det teke inn eit felt der det skal givast opp kor mange  gevinst- og tapskontoar skattytaren har.  </p>
+            <p>Gevinst- og tapskontoen skal tilførast vinst og tap ved realisasjon  eller uttak i inntektsåret for driftsmiddel i saldogruppe e, f, g, h  og i, samt negativ saldo oppstått i året i saldogruppe b, Tap ved  realisasjon av
+                        ervervet forretningverdi (tom positiv saldo i gruppe  b) skal fradragsføres ved fortsatt avskrivning på saldo i gruppe  b.  </p>
+            <p>Gevinst og tap på driftsmiddel i næringsverksemd, som ikkje kan  avskrivast, jf. skattelova § 14-52, skal også tilførast gevinstog  </p>
+            <p>tapskontoen. Dette gjeld ikkje gevinstar og tap på eigedelar som  aksjar, obligasjonar, krav o.a.  </p>
+            <p>Er skattytaren deltakar i deltakarlikna selskap som i 2007 har  realisert eigedel erverva før 31.12.1991, og som gir deltakaren rett  til frådrag etter skattelova § 10-44 (5), skal deltakaren føre  frådraget inn på gevinst- og
+                        tapskontoen sin. Dette kan ikkje være  same gevinst- og tapskontoen som der kor gevinstar og tap  </p>
+            <p>for næringsverksemd i enkeltpersonføretak føres.  </p>
+            <p/>
+            <p>Fastsett av Skattedirektoratet med heimel i Finansdepartementet sitt  delegeringsvedtak av 28. november 1994, jf. Likningslova §§ 4-4 nr.  7.  </p>
+            <p/>
+            <p>Andre offentlege organs bruk av opplysningar i RF-1219. For å samordna  og forenkla oppgåveinnleveringa  frå næringslivet, kan opplysningar  som blir gitt i dette skjemaet, RF-1219, heilt eller delvis bli nytta  også av andre
+                        offentlege organ som har heimel til å innhente dei same  opplysningane, jf. lov om Oppgaveregisteret §§ 5 og 6. Opplysningar  om ev. Samordning kan ein få ved å kontakte Oppgåveregisteret på  telefon 75 00 75 00, eller
+                        Skattedirektoratet på telefon 22 07 70 00.</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="GenerellInformasjon-grp-2857"/>
+          <xs:element minOccurs="0" ref="InngaendeSaldo-grp-5336"/>
+          <xs:element minOccurs="0" ref="GevinstMvSomSkalTilleggesGevinstOgTapskontoForFjoraret-grp-1576"/>
+          <xs:element minOccurs="0" ref="TapMvSomSkalFradrasPaGevinstOgTapskontoForFjoraret-grp-1578"/>
+          <xs:element minOccurs="0" ref="GrunnlagOgSaldo-grp-2862"/>
+        </xs:sequence>
+        <xs:attribute fixed="62" name="skjemanummer" type="xs:integer" use="required"/>
+        <xs:attribute fixed="6460" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+        <xs:attribute fixed="RF-1219" name="blankettnummer" type="xs:string" use="optional"/>
+        <xs:attribute fixed="Gevinst- og tapskonto" name="tittel" type="xs:string" use="optional"/>
+        <xs:attribute fixed="1574" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+        <xs:attribute name="etatid" use="optional">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="974761076">
+                <xs:annotation>
+                  <xs:documentation>SKATTEDIREKTORATET</xs:documentation>
+                </xs:annotation>
+              </xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+        <xs:anyAttribute/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GenerellInformasjon-grp-2857">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Innledning</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Innledning</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="Avgiver-grp-1575"/>
+        </xs:sequence>
+        <xs:attribute fixed="2857" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="Avgiver-grp-1575">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Avgiver</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Avgivar</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="EnhetNavn-datadef-1">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Navn</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Namn</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="OppgavegiverFodselsnummer-datadef-26">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Fødselsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Fødselsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="EnhetAdresse-datadef-15">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Adresse</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Adresse</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="EnhetOrganisasjonsnummer-datadef-18">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Org.nr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Org.nr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="EnhetPostnummer-datadef-6673">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Postnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Postnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="EnhetPoststed-datadef-6674">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Poststed</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Poststad</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="EnhetKommunenummer-datadef-17">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Kommunenr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Kommunenr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="EnhetKommuneNavn-datadef-15506">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Kommunenavn</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Kommunenamn</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute fixed="1575" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="EnhetNavn-datadef-1">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Navn på juridisk enhet</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Navn på årsregnskapets eier</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">1</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst175-repformat-8">
+            <xs:attribute fixed="1" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst175-repformat-8">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">8</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="175"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverFodselsnummer-datadef-26">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Fødselsnummer til oppgavegiveren</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">2</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst1111Modulus11-repformat-18">
+            <xs:attribute fixed="26" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst1111Modulus11-repformat-18">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">18</brreg:info>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+            <p>Ugyldig fødselsnummer</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+            <p>Ugyldig fødselsnummer</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:length value="11"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetAdresse-datadef-15">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Forretningsadresse til juridisk enhet</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">3</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst105-repformat-9">
+            <xs:attribute fixed="15" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst105-repformat-9">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">9</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="105"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetOrganisasjonsnummer-datadef-18">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Organisasjonsnummeret til enheten</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Organisasjonsnummer til årsregnskapets eier</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">4</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst99Modulus11-repformat-1">
+            <xs:attribute fixed="18" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst99Modulus11-repformat-1">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">1</brreg:info>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+            <p>Ugyldig organisasjonsnummer</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+            <p>Ugyldig organisasjonsnummer</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:length value="9"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetPostnummer-datadef-6673">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Postnummer i forretningsadressen til juridisk enhet</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">5</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst44BareTall-repformat-10">
+            <xs:attribute fixed="6673" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst44BareTall-repformat-10">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">10</brreg:info>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+            <p>Enter positive integer with four digits</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+            <p>Feltet krever positivt heltall med fire siffer</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+            <p>Feltet krev positivt heiltal med fire siffer</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:length value="4"/>
+        <xs:pattern value="[0-9]{4}"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetPoststed-datadef-6674">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Poststed i forretningsadressen til juridisk enhet</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">6</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="6674" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst35-repformat-3">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">3</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="35"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetKommunenummer-datadef-17">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Kommunenummer i forretningsadressen til juridisk enhet</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">7</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst44BareTall-repformat-10">
+            <xs:attribute fixed="17" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="EnhetKommuneNavn-datadef-15506">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Navnet til kommunen hvor næringsdrivende skal tilordnes gevinst eller tap</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">8</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="15506" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="InngaendeSaldo-grp-5336">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Inngående saldo</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Inngåande saldo</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="GevinstTapskontoSaldonummer-datadef-28165">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Gevinst og tapskonto nummer</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Gevinst og tapskonto nummer</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="GevinstTapskontoAntall-datadef-1740">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>av i alt</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>av i alt</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="GevinstTapskontoSaldoInngaende-datadef-6896">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>1 Saldo på gevinst- og tapskonto pr. 31.12.2006 overført fra forrige  års gevinst- og tapskonto</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Til denne posten overføres saldo på gevinst- og tapskonto pr 31.  desember 2006. Positivt beløp (+) er gevinst og negativt beløp (÷) er  et tap.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>1 Saldo på gevinst- og tapskonto pr. 31.12.2006 overført frå gevinst-  og tapskonto siste år</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Til denne posten fører ein saldo på gevinst og tapskontoen pr. 31.  desember 2006. Positivt beløp (+) er vinst, og negativt beløp (÷) er  tap.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute fixed="5336" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstTapskontoSaldonummer-datadef-28165">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">9</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Heltall15-repformat-79">
+            <xs:attribute fixed="28165" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Heltall15-repformat-79">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">79</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:integer">
+        <xs:totalDigits value="15"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="GevinstTapskontoAntall-datadef-1740">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">10</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Heltall5-repformat-64">
+            <xs:attribute fixed="1740" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Heltall5-repformat-64">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">64</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:integer">
+        <xs:totalDigits value="5"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="GevinstTapskontoSaldoInngaende-datadef-6896">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">11</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="6896" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopHeltall15-repformat-37">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">37</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:integer">
+        <xs:totalDigits value="15"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="GevinstMvSomSkalTilleggesGevinstOgTapskontoForFjoraret-grp-1576">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Gevinst</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Gevinster</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="GevinstTapskontoDriftsmidlerIkkeAvskrivbareGevinst-datadef-1741">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>2 Årets gevinst ved realisasjon/uttak av driftsmidler som ikke kan  avskrives etter reglene i skatteloven § 14-40 flg.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Her føres gevinst ved realisasjon/uttak av driftsmidler som ikke kan  avskrives etter reglene i skatteloven § 14-40 flg. Gevinst- og  tapskontoen skal ikke anvendes ved realisasjon av verdipapirer,  fordringer og
+                                    andre finanseiendeler. Gevinst ved realisasjon av  kontrakt om kjøp av driftsmiddel skal heller ikke føres her, men tas  til inntekt i sin helhet i realisasjonsåret.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>2 Gevinst i året ved realisasjon/uttak av driftsmiddel som ikkje kan  avskrivast etter reglane i skattelova § 14-40 flg.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Her skal gevinst førast ved realisasjon/uttak av driftsmiddel som  ikkje kan avskrivast etter reglane i skattelova § 14-40. Gevinst- og  tapskontoen skal ikkje nyttast ved realisasjon av verdipapir, krav og  andre
+                                    finanseigedelar. Gevinst ved realisasjon av kontrakt om kjøp av  driftsmiddel skal heller ikkje førast her, men takast til inntekt  fullt ut i realisasjonsåret.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="GevinstTapskontoDriftsmidlerRealisasjonGevinst-datadef-1742">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>3 Årets gevinst ved realisasjon/uttak av driftsmidler i saldogruppe  e-i</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Her føres gevinst ved realisasjon/uttak av driftsmidler i saldogruppe  e-i. Det er adgang til å inntektsføre hele eller deler av  salgssummen, eventuelt erstatningen mv. direkte i realisasjonsåret.  Beløpet hentes
+                                    normalt fra avskrivingsskjemaet post 109. Ved  realisasjon av forretningsbygg ervervet før 1.1.1984 må gevinst/tap  fra post 109 i avskrivingsskjemaet korrigeres med nedre grense for  avskrivning.  </p>
+                  <p>Tilskudd som er gitt til investering i distriktene etter forskrift  gitt av Kongen, og som ikke skal tilbakebetales, skal regnes som en  del av salgssummen, eventuelt erstatningen mv. ved realisasjon av
+                                    driftsmidlet innen fem år etter at det ble ervervet.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Jf. avskrivingsskjemaet post 109</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>3 Gevinst i året ved realisasjon/uttak av driftsmiddel i saldogruppe  e-i</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Her fører ein gevinst ved realisasjon/uttak av driftsmiddel i  saldogruppene e-i. Det er høve til å inntektsføre heile eller delar  av salssummen, eventuelt erstatninga m.m., direkte i  realisasjonsåret. Beløpet
+                                    blir normalt henta frå avskrivingsskjemaet  post 109. Ved realisasjon av forretningsbygg skaffa før 1.1.1984 må  gevinsten/tapet i post 109 i avskrivingsskjemaet korrigerast med  nedre grense for avskriving.  </p>
+                  <p>Tilskot som er gjeve til investering i distrikta etter forskrift gitt  av Kongen, og som ikkje skal betalast tilbake, skal reknast som ein  del av salssummen, eventuelt erstatninga m.m., ved realisasjon av
+                                    driftsmidlet innan fem år etter at det blei tileigna.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Jf. avskrivingsskjemaet post 109</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="GevinstTapskontoForretningsverdiNegativSaldo-datadef-1743">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>4 Negativ saldo oppstått i 2007 i saldogruppe b forretningsverdi  (goodwill)</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Her føres negativ saldo oppstått i inntektsåret på saldogruppe b.  Dette gjelder ved realisasjon av både ervervet og opparbeidet  forretningsverdi.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>4 Negativ saldo oppstått i 2007 i saldogruppe b forretningsverdi  (goodwill)</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Her fører ein negativ saldo oppstått i inntektsåret på saldogruppe b.  Dette gjeld ved realisasjon av både tileigna og opparbeidd  forretningsverdi.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="GevinstTapskontoBuskapRealisasjonGevinst-datadef-1744">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>5 Gevinst ved realisasjon av hel buskap på gårdsbruk ved opphør av  driftsgren</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Gevinst oppstått ved realisasjon av samtlige dyr som er knyttet  direkte til en driftsgren, f.eks. melkekyr ved opphør av  melkeproduksjon, kan overføres gevinst- og tapskonto. Forutsetningen  er at skattyter
+                                    fortsetter jordbruksnæringen. Skattyter kan om han  ønsker det føre gevinsten som vanlig driftsinntekt i året.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>5 Gevinst ved realisasjon av heil buskap på gardsbruk når ein sluttar  med ei driftsgrein</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Gevinst oppstått ved realisasjon av alle dyra som er knytta direkte  til ei driftsgrein, t.d. mjølkekyr når ein sluttar med  mjølkeproduksjon, kan overførast gevinst- og tapskonto. Det er ein  føresetnad at
+                                    skattytar sjølv held fram med jordbruksnæringa.  Skattytar kan, om han vil det, føre gevinsten direkte som  driftsinntekt i realisasjonsåret.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AvsetningerAndreBetingetSkattefrie-datadef-14844">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>6 Andre betinget skattefrie avsetninger som skal føres på gevinst- og  tapskonto</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Foretaket kan kreve betinget skattefritak for gevinst etter ufrivillig  realisasjon av driftsmidler i saldogruppe e, f, g og h. Vilkårene for  å kunne kreve betinget skattefritak er nærmere regulert av  skatteloven
+                                    § 14-70. Er ikke nytt driftsmiddel ervervet innen  tidsfristen, føres 80 % av den avsatte gevinsten inn på gevinst- og  tapskontoen i inntektsåret fristen utløp. Resterende 20 % av ikke  reinvestert gevinst
+                                    inntektsføres direkte i inntektsåret fristen  utløp. Fristen for å oppfylle vilkårene for betinget skattefritak er  forlenget fra 1 til 3 år. Forlengelsen skjedde med virkning for  ufrivillige realisasjoner i 2006
+                                    eller seinere år. Det er derfor ikke  aktuelt å  </p>
+                  <p>bruke post 6 for inntektsåret 2007.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>6 Andre vilkårsbundne skattefrie avsetjingar som skal førast på  gevinst- og tapskonto</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Føretaket kan krevje vilkårsbunde skattefritak for gevinst etter  ufrivilleg realisasjon av driftsmiddel i saldogruppe e, f, g og h.  Vilkåra for å kunne krevje vilkårsbunde skattefritak er nærare  regulert av
+                                    skattelova § 14-70. Har ikkje føretaket skaffa seg nytt  driftsmiddel innan tidsfristen, fører ein 80 % av den avsette  </p>
+                  <p>gevinst inn på gevinst- og tapskontoen i inntektsåret fristen utlaup.  Resterande 20 % av gevinst som ikkje er reinvestert, fører ein  direkte til inntekt i inntektsåret fristen utlaup.  </p>
+                  <p>Fristen for å innfri vilkåra for vilkårsbunde skattefritak er forlenga  frå 1 til 3 år. Forlenginga skjedde med verknad frå ufrivillege  realisasjonar i 2006 eller seinare år. Det er difor ikkje aktuelt  å  </p>
+                  <p>bruke post 6 for inntektsåret 2007.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="GevinstTapskontoGevinster-datadef-6899">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>7 Sum postene 2-6</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Her summeres alle poster som skal tillegges gevinst- og tapskontoen i  2007.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>7 Sum postane 2-6</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Her skal ein summere alle postane som skal leggjast til gevinst- og  tapskontoen i 2007.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="GevinstTapskontoSaldoForTap-datadef-6900">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>8 Sum post 1 + post 7</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>I denne posten skal beløpet i post 7 legges til saldoen pr. 31.12.2006  i post 1.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>8 Sum post 1 + post 7</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>I denne posten skal beløpet i post 8 leggjast til saldoen pr.  31.12.2006 i post 1.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute fixed="1576" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstTapskontoDriftsmidlerIkkeAvskrivbareGevinst-datadef-1741">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">12</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="PosHeltall15-repformat-237">
+            <xs:attribute fixed="1741" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="PosHeltall15-repformat-237">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">237</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:positiveInteger">
+        <xs:totalDigits value="15"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="GevinstTapskontoDriftsmidlerRealisasjonGevinst-datadef-1742">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">13</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="PosHeltall15-repformat-237">
+            <xs:attribute fixed="1742" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstTapskontoForretningsverdiNegativSaldo-datadef-1743">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">14</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="PosHeltall15-repformat-237">
+            <xs:attribute fixed="1743" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstTapskontoBuskapRealisasjonGevinst-datadef-1744">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">15</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="PosHeltall15-repformat-237">
+            <xs:attribute fixed="1744" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AvsetningerAndreBetingetSkattefrie-datadef-14844">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Andre betinget skattefrie avsetninger</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">16</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="PosHeltall15-repformat-237">
+            <xs:attribute fixed="14844" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstTapskontoGevinster-datadef-6899">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">17</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="6899" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstTapskontoSaldoForTap-datadef-6900">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">18</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="6900" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="TapMvSomSkalFradrasPaGevinstOgTapskontoForFjoraret-grp-1578">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Tap</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Tap</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="GevinstTapskontoDriftsmidlerIkkeAvskrivbareTap-datadef-1745">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>9 Årets tap ved realisasjon/uttak av driftsmidler som ikke kan  avskrives etter reglene i skatteloven § 14-40 flg.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Her føres tap ved realisasjon av ikke-avskrivbare driftsmidler. For  øvrig vises det til rettledningens  post 2.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>9 Tap i året ved realisasjon av driftsmiddel som ikkje kan avskrivast  etter reglane i skattelova § 14-40 flg.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Her fører ein tap ved realisasjon av driftsmiddel som ikkje kan  avskrivast etter reglane i skattelova § 14-40 flg. Ein viser elles  til rettleiinga til post 2.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="GevinstTapskontoDriftsmidlerRealisasjonTap-datadef-6901">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>10 Årets tap ved realisasjon/uttak av driftsmidler i saldogruppe e-i</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Tap ved realisasjon av driftsmidler i saldogruppene e-i skal føres  her. Det er ikke adgang til å føre tapet direkte til fradrag i  realisasjonsåret. For øvrig vises det til rettledningens post 3.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Jf. avskrivingsskjema post 109</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>10 Tap i året ved realisasjon av driftsmiddel i saldogruppe e-i</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Tap ved realisasjon av driftsmiddel i saldogruppene e-i skal førast  her. Det er ikkje høve til å føre tapet direkte til frådrag i  realisasjonsåret. Ein viser elles til rettleiinga til  post 3.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Jf. avskrivingsskjema post 109</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="GevinstTapskontoRealisertEiendelVerdiDifferanse-datadef-1746">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>11 Differanse mellom deltakers andel av oppregulert verdi og bokført  skattemessig verdi per 31.12.91 på eiendel som et deltakerliknet  selskap har realisert</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Deltaker som ved overgangen til nettoligning har rett til  oppregulering av inngangsverdien på eiendel som tilhører selskapet,  kan på det tidspunkt selskapet realiserer eiendelen kreve fradrag for  differansen
+                                    mellom sin andel av den oppregulerte inngangsverdi og sin  skattemessig bokførte verdi på eiendelen pr. 31. desember 1991.  Fradraget gis ikke direkte i realisasjonsåret, men ved at beløpet  føres pådeltakerens
+                                    gevinst- og tapskonto. Har selskapsandelen  skiftet eier etter 31.12.1991 følger retten til oppregulering med  selskapsandelen.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>11 Differanse mellom ein deltakar sin del av oppregulert verdi og  bokført skattemessig verdi pr. 31.12.91 på eigedel som eit  deltakarlikna selskap har realisert</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Deltakar som ved overgangen til nettolikning har rett til  oppregulering av inngangsverdien på eigedel som høyrer til selskapet,  kan på det tidspunktet selskapet realiserer eigedelen, krevje frådrag  for
+                                    differansen mellom sin del av den oppregulerte inngangsverdien og  sin skattemessig bokførte verdi på eigedelen pr. 31. desember 1991.  Frådraget blir ikkje gitt direkte i realisasjonsåret, men ved at  </p>
+                  <p>deltakaren fører beløpet på sin gevinst- og tapskonto. Har  selskapsparten skifta eigar etter 31.12.1991 følgjer retten til  oppregulering med selskapsparten.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="GevinstTapskontoDeltakerlignetSelskapRealisertEiendelAndel-datadef-1747">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>12 Deltakers andel av gevinst vedr. realisasjon av eiendel fra  deltakerliknet selskap når deltaker oppfyller betingelsene for  skattefrihet etter sktl. § 9-3 (2-6)</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Dersom et deltakerlignet selskap realiserer en eiendel med gevinst  hvor en deltaker etter overgangsreglene oppfyller kravene til  skattefritak etter skatteloven § 9-3 (2-6), kan deltakeren kreve  fradrag for den
+                                    del av gevinsten som faller på hans andel av  </p>
+                  <p>resultatet i selskapet. Fradraget gis ved at beløpet overføres til  deltakerens egen gevinst- og tapskonto. Har selskapsandelen skiftet  eier etter 31.12.1991 følger retten til kompenserende fradrag med  selskapsandelen.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>12 Deltakars del av gevinst vedk. realisasjon av eigedel frå  deltakarlikna selskap når deltakaren oppfyller vilkåra for  skattefritak etter sktl. § 9-3 (2-6)</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Dersom eit deltakarlikna selskap realiserer ein eigedel med gevinst og  ein deltakar etter overgangsreglane oppfyller krava til  skattefritak  </p>
+                  <p>etter skattelova § 9-3 (2-6), kan deltakaren krevje frådrag for den  delen av gevinsten som fell på hans del av resultatet i selskapet.  Frådraget blir gitt ved at beløpet blir overført til deltakaren sin  eigen
+                                    gevinst- og tapskonto. Har selskapsandelen skiftet eier etter  31.12.1991 følger retten til kompenserende fradrag med  selskapsandelen.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="GevinstTapskontoTap-datadef-6902">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>13 Sum postene 9-12</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Her summeres alle poster som skal fradras gevinst- og tapskontoen før  en kommer fram til grunnlaget for inntekts- eller fradragsføring.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>13 Sum postane 9-12</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Her skal ein summere alle postane som skal trekkjast frå på gevinst-  og tapskontoen før ein kjem fram til grunnlaget for inntekts- eller  frådragsføring.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute fixed="1578" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstTapskontoDriftsmidlerIkkeAvskrivbareTap-datadef-1745">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">19</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="PosHeltall15-repformat-237">
+            <xs:attribute fixed="1745" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstTapskontoDriftsmidlerRealisasjonTap-datadef-6901">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">20</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="PosHeltall15-repformat-237">
+            <xs:attribute fixed="6901" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstTapskontoRealisertEiendelVerdiDifferanse-datadef-1746">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">21</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="PosHeltall15-repformat-237">
+            <xs:attribute fixed="1746" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstTapskontoDeltakerlignetSelskapRealisertEiendelAndel-datadef-1747">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">22</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="PosHeltall15-repformat-237">
+            <xs:attribute fixed="1747" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstTapskontoTap-datadef-6902">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">23</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="6902" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GrunnlagOgSaldo-grp-2862">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Grunnlag og saldo</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Grunnlag og saldo</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="GevinstTapskontoInntektFradragGrunnlag-datadef-6903">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>14 Grunnlag for årets inntekts-/fradragsføring</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Her føres beløpet i post 8 fratrukket beløpet i post 13. Differansen  utgjør grunnlaget for årets inntekts- eller fradragsføring på  gevinst- og tapskonto.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Post 8 - post 13</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>14 Grunnlag for inntekts-/frådragsføring i året</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Her fører ein beløpet i post 8 fråtrekt beløpet i post 13. Differansen  utgjer grunnlaget for den inntekts- eller frådragsføring som skal  gjerast for 2006.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Post 8 - post 13</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="GevinstTapskontoInntektArets-datadef-6904">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>15a Minimum 20% til inntekt</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Dersom grunnlaget i post 14 er positivt skal saldoen reduseres med  minst 20% (inntektsføres). Er grunnlaget i post 14 negativt, kan  saldoen reduseres med inntil 20% (kostnadsføres). Dersom grunnlaget i  post 14 er
+                                    negativt med et beløp som er mindre enn kr 15.000, kan  </p>
+                  <p>imidlertid beløpet kostnadsføres i sin helhet. Dersom grunnlaget i  post 14 er positivt med et beløp som er mindre enn kr 15.000, skal  beløpet inntektsføres i sin helhet.Ved dødsfall i året må positiv  saldo på
+                                    gevinst- og tapskonto tas til inntekt i dødsåret.  </p>
+                  <p>Negativ saldo må føres til fradrag i dødsåret. Dette gjelder  imidlertid ikke så langt gjenlevende ektefelle i uskifte eller  enearving overtar boet udelt, og trer inn i avdødes rettigheter og  plikter etter
+                                    skatteloven § 14-40 flg.  </p>
+                  <p/>
+                  <p>Se rettledningen for mer informasjon</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Eventuelt restbeløp under kr 15 000 til inntekt.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>15a Minimum 20% til inntekt</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Dersom grunnlaget i post 14 er positivt skal saldoen reduserast med  minst 20% (inntektsføring). Er grunnlaget i post 14 negativt, kan  saldoen bli redusert med inntil 20% (frådragsføring).Dersom  grunnlaget i post
+                                    14 er negativt med eit beløp som er mindre enn kr  15 000, kan likevel beløpet trekkjast frå fullt ut. Dersom grunnlaget  i post 14 er positivt med eit beløp som er mindre enn kr 15 000, skal  beløpet
+                                    inntektsførast fullt ut. Ved dødsfall i året må positiv saldo  på gevinst- og tapskontoen førast som inntekt i dødsåret. Negativ  saldo må førast til frådrag i dødsåret. Dette gjeld likevel ikkje så  lenge
+                                    attlevande ektefelle i uskifte eller einearving tek over buet  udelt, og trer inn i rettar og plikter etter skattelova § 14-40  flg.  </p>
+                  <p/>
+                  <p>Se rettleiinga for mer informasjon</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Eventuelt restbeløp under kr 15 000 til inntekt</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="GevinstTapskontoFradragArets-datadef-21982">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>15b Maksimum 20% til fradrag</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Dersom grunnlaget i post 14 er positivt skal saldoen reduseres med  minst 20% (inntektsføres). Er grunnlaget i post 14 negativt, kan  saldoen reduseres med inntil 20% (kostnadsføres). Dersom grunnlaget i  post 14 er
+                                    negativt med et beløp som er mindre enn kr 15.000, kan  </p>
+                  <p>imidlertid beløpet kostnadsføres i sin helhet. Dersom grunnlaget i  post 14 er positivt med et beløp som er mindre enn kr 15.000, skal  beløpet inntektsføres i sin helhet.Ved dødsfall i året må positiv  saldo på
+                                    gevinst- og tapskonto tas til inntekt i dødsåret.  </p>
+                  <p>Negativ saldo må føres til fradrag i dødsåret. Dette gjelder  imidlertid ikke så langt gjenlevende ektefelle i uskifte eller  enearving overtar boet udelt, og trer inn i avdødes rettigheter og  plikter etter
+                                    skatteloven § 14-40 flg.  </p>
+                  <p/>
+                  <p>Se rettledningen for mer informasjon</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Eventuelt restbeløp under kr 15 000 til fradrag</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>15b Maksimum 20% til frådrag</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Dersom grunnlaget i post 14 er positivt skal saldoen reduserast med  minst 20% (inntektsføring). Er grunnlaget i post 14 negativt, kan  saldoen bli redusert med inntil 20% (frådragsføring).Dersom  grunnlaget i post
+                                    14 er negativt med eit beløp som er mindre enn kr  15 000, kan likevel beløpet trekkjast frå fullt ut. Dersom grunnlaget  i post 14 er positivt med eit beløp som er mindre enn kr 15 000, skal  beløpet
+                                    inntektsførast fullt ut. Ved dødsfall i året må positiv saldo  på gevinst- og tapskontoen førast som inntekt i dødsåret. Negativ  saldo må førast til frådrag i dødsåret. Dette gjeld likevel ikkje så  lenge
+                                    attlevande ektefelle i uskifte eller einearving tek over buet  udelt, og trer inn i rettar og plikter etter skattelova § 14-40  flg.  </p>
+                  <p/>
+                  <p>Se rettleiinga for mer informasjon</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Eventuelt restbeløp under kr 15 000 til frådrag</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="GevinstTapskontoNaringSaldo-datadef-7963">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>16 Saldo gevinst- og tapskonto 31.12.2007</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>For å se hvordan post 16 beregnes se hjelpetekst under post 15a eller  15 b.  </p>
+                  <p/>
+                  <p>Beløpet i denne posten skal overføres til kolonne II i post 51 i  skjemaet Spesifikasjon av forskjeller mellom regnskapsmessige og  skattemessige verdier (RF-1217). Skattytere som skal levere  Næringsoppgave 1
+                                    overfører beløpet til post 2096 i næringsoppgaven  hvis det er positivt eller post 1299 hvis det er negativt.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Overføres til post 51 i kolonne II i skjema for Spesifikasjon av  forskjeller... (RF-1217) eller side 3 i Næringsoppgave 1</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>16 Saldo gevinst- og tapskonto 31.12.2007</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>For å sjå korleis post 16 bereknes sjå hjelpetekst under post 15a  eller 15 b.  </p>
+                  <p/>
+                  <p>Beløpet i denne posten skal overførast til kolonne II i post 51 i  skjemaet Spesifikasjon av skilnader mellom rekneskapsmessige og  skattemessige verdiar (RF-1217). Skattytarar som skal levere  Næringsoppgåve 1
+                                    førar beløpet i post 2096 i næringsoppgåva dersom  det er eit positivt tal eller post 1299 dersom det er negativt.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Skal overførast til post 51 i kolonne II i skjema for Spesifikasjon av  skilnader... (RF-1217) eller side 3 i Næringsoppgåve 1</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="GevinstTapskontoNaringSaldoOverfortSelvangivelse-datadef-23633">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>17a Er beløpet i post 15a/15b overført direkte til selvangivelsen, og  ikke via næringsoppgaven?</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Personlig skattyter skal overføre inntekten i post 15a eller fradraget  i post 15b direkte til selvangivelsen hvis næringsvirksomheten  </p>
+                  <p>er opphørt og skattyteren ikke leverer næringsoppgave for 2007. Er det  svart ja i post 17a må ogs post 17b besvares.  Inntekt fra post 15a  overføres til post 3.1.12 i selvangivelsen. Fradrag fra post 15b på
+                                    gevinst- og tapskontoen overføres til post 3.3.7 i selvangivelsen.  </p>
+                  <p/>
+                  <p>I andre tilfeller komer beløpet fra post 15 til inntekt eller fradrag  i næringsoppgaven.  </p>
+                  <p/>
+                  <p>Leverer foretaket næringsoppgave 2 (RF-1167) - se rettledning til post  16.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>17a Er beløpet i post 15a/15b overført direkte til sjølvmeldinga, og  ikkje via næringsoppgåva?</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Personleg skattytar overfører inntekta i post 15a eller frådraget i  post 15b direkte til sjølvmeldinga dersom næringsverksemde er  </p>
+                  <p>opphørt og skattytaren ikkje leverer næringsoppgåve for 2007. Det same  gjeld inntekt eller frådrag på gevinst- og tapskonto som skuldast  realisasjon av eigedel som tidlegare vart saldoavskrive i saldogruppe  e, f,
+                                    g, h eller i, men ikkje var driftsmiddel i næringsverksemda.  Knytar gevinstog tapskontoen seg til at den personlege skattytaren  er/var deltakar i eit deltakarlikna selskap, overfører ho/han  inntekta/frådraget
+                                    frå post 15 direkte til sjølvmeldinga, dersom  </p>
+                  <p>skattytaren ikkje åtte selskapsparten som ledd i næringsverksemd.  </p>
+                  <p>Inntekt frå post 15a overfører ein til post 3.1.12 i sjølvmeldinga.  Frådrag frå post 15b på gevinst- og tapskontoen overfører ein til  </p>
+                  <p>post 3.3.7 i sjølvmeldinga.  </p>
+                  <p/>
+                  <p>Sjå elles rettleiinga til post 16.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="GevinstTapskontoEnk-datadef-28166">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>17 b Knytter gevinst og tapene seg til egen næring?</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Dette kontrollspørsmålet skal besvares hvis skattyteren har svart ja  på spørsmålet i post 17a.  </p>
+                  <p/>
+                  <p>Normalt fastsettes det personinntekt av inntekt fra post 15a selv om  ikke skattyteren leverer næringsoppgave. Unntak gjelder dersom  eiendelene ikke var driftsmiddel i virksomhet</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>17 b Knytter gevinst og tapene seg til egen næring?</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Skattytaren skal svara på dette kontrollspørsmålet dersom ho/han har  svart ja på spørsmålet i post 17a.  </p>
+                  <p/>
+                  <p>Normalt fastsettes det personinntekt av inntekt frå post 15a sjølv om  ikkje skattytaren leverer næringsoppgåve. Unntak gjeld dersom  eiendelane ikkje var driftsmiddel i virksomhet  </p>
+                  <p/>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="GevinstTapskontoTypeNaring-datadef-28266">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>17c Skriver gevinst og tapskontoen seg fra skogbruk, jordbruk fiskeri  etc.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Er det svart ja i post 17a og 17b skal det oppgis om gevinstene/tapene  har oppstått i avviklet primærnæring eller familiebarnehage. I såfall  skal inntekten fra post 15a overføres til post 1.6.1 i selvangivelsen  i
+                                    tillegg til post 3.1.12. Inntekt fra annen type virksomhet  overføres til post 1.6.2 i tillegg til post 3.1.12</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>17c Skriv gevinst og tapskontoen seg frå skogbruk, jordbruk fiskeri  etc.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Er det svart ja i post 17a og 17b skal det oppgis om gevinstene/tapene  har oppstått i avviklet primærnæring eller familiebarnehage. I såfall  skal inntekten fra post 15a overføres til post 1.6.1 i selvangivelsen  i
+                                    tillegg til post 3.1.12. Inntekt fra annen type virksomhet  overføres til post 1.6.2 i tillegg til post 3.1.12</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute fixed="2862" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstTapskontoInntektFradragGrunnlag-datadef-6903">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">24</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="6903" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstTapskontoInntektArets-datadef-6904">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">25</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="6904" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstTapskontoFradragArets-datadef-21982">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">26</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="21982" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstTapskontoNaringSaldo-datadef-7963">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">27</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="7963" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstTapskontoNaringSaldoOverfortSelvangivelse-datadef-23633">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">28</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+            <xs:attribute fixed="23633" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg2JaNei-repformat-4">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">4</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="3"/>
+        <xs:enumeration value="Ja">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                <p>Yes</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Ja</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Ja</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Nei">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                <p>No</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Nei</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Nei</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="GevinstTapskontoEnk-datadef-28166">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">30</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+            <xs:attribute fixed="28166" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstTapskontoTypeNaring-datadef-28266">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">29</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+            <xs:attribute fixed="28266" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+</SchemaDefinition>

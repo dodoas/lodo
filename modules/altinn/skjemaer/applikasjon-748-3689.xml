@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1231: Spesifikasjon av formue/gjeld og inntekt/fradrag tilknyttet utlandet</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-748-3690.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-1057/Avgiver-grp-389/OppgavegiverNavn-datadef-68" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-1057/Avgiver-grp-389/OppgavegiverFodselsnummer-datadef-26" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1231 Spesifikasjon av innskudd i utenlandsk bank mv. og BSU-sparing  i annen EØS-stat 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Skattytere som har eller i løpet av året har hatt konto i utenlandsk  bank som ikke er knytta til næringsverksemd, har plikt til å fylle ut  dette skjemaet som vedlegg til sjølvmeldinga.  </p>
+                <p/>
+                <p>Årsoppgave fra spareinstitusjon må vedlegges dette skjema.  Skjema må  leveres hvert år fra og med opprettelse av konto til og med det år  konto blir slettet.  Det året bustadsparekonto opprettes eller  overføres fra en
+                    spareinstitusjon til en annen, skal også  BSU-kontrakt vedlegges.  </p>
+                <p/>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. Nov 1994, jf. likningsloven § 4-4 nr. 7.  </p>
+                <p/>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1231.  </p>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjema, RF-1231, helt eller delvis bli  benyttet også av andre offentlige organer som har hjemmel til å  innhente de samme
+                    opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt. samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Vedlegg til selvangivelsen for 2005</p>
+            </xforms:hint>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1231 Spesifikasjon av innskott i utenlandsk bank o.l. og  BSU-sparing i annan EØS-stat 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Skattytarar som har eller har hatt konto i utenlandsk bank som ikkje  er tilknytta næringsverksemd, har plikt til å fylle ut dette skjemaet  som vedlegg til sjølvmeldinga.  </p>
+                <p/>
+                <p>Årsoppgave fra spareinstitusjon må vedlegge dette skjema.  Skjema må  leverast kvart år frå og med oppretting av konto til og med det år  konto blir sletta.  Det året boligsparekonto opprettast eller  overførast frå ein
+                    spreinstitusjon til ein anna, skal også  BSU-kontrakt leggast ved.  </p>
+                <p/>
+                <p>Fastsett av Skattedirektoratet med heimel i Finansdepartementet sitt  delegeringsvedtak av 28. Nov 1994, jf. likningslova § 4-4 nr. 7.  </p>
+                <p/>
+                <p>Andre offentlege organ som bruker opplysningar i RF-1231.  </p>
+                <p>For å samordna og forenkla oppgåveinnleveringa frå næringslivet, kan  opplysningar som blir gitt i dette skjema, RF-1231, heilt eller  delvis bli nytta også av andre offentlege organ som har heimel til å  innhente dei same
+                    opplysningane, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysningar om evt. samordning kan ein få ved å vende seg til  Oppgåveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NON">
+                <p>Vedlegg til sjølvmeldinga for 2005</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-1057">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-1057/Avgiver-grp-389">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Avgiver</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Avgivar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1057/Avgiver-grp-389/OppgavegiverNavn-datadef-68">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1057/Avgiver-grp-389/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/InnskuddIUtenlandskeBankerMv-grp-390">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Innskudd i utenlandske banker mv.</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Her spesifiseres innskudd i utenlandske banker mv.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Innskott i utanlandske bankar o.l.</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Her spesifiserast inskott i utanlandske bankar o.l.</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_InnskuddIUtenlandskeBankerMv-grp-403" nodeset="/Skjema/InnskuddIUtenlandskeBankerMv-grp-390/InnskuddIUtenlandskeBankerMv-grp-403">
+                    <xforms:group ref="/Skjema/InnskuddIUtenlandskeBankerMv-grp-390/InnskuddIUtenlandskeBankerMv-grp-403">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Innskudd i utenlandske banker mv.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Innskott i utanlandske bankar o.l.</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/InnskuddIUtenlandskeBankerMv-grp-390/InnskuddIUtenlandskeBankerMv-grp-403/BankMvUtlandNavnSpesifisertBankMv-datadef-8080">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bankens, institusjonens navn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Namnet til banken, institusjonen</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InnskuddIUtenlandskeBankerMv-grp-390/InnskuddIUtenlandskeBankerMv-grp-403/KontohaverUtlandKontonummerSpesifisertBankMv-datadef-8081">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kontonummer</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kontonummer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InnskuddIUtenlandskeBankerMv-grp-390/InnskuddIUtenlandskeBankerMv-grp-403/KontohaverUtlandSpesifisertBankMv-datadef-8082">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Navnet som kontoen lyder på</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Namnet som kontoen lyder på</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InnskuddIUtenlandskeBankerMv-grp-390/InnskuddIUtenlandskeBankerMv-grp-403/BankinnskuddMvUtlandValutaFjoraretSpesifisertBankMv-datadef-8083">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Innestående pr. 01.01 i inntektsåret i NOK</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Er kontoen opprettet i løpet av året, oppgis innestående ved kontoens  opprettelse.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inneståande pr. 01.01 i inntektsåret i NOK</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Er kontoen oppretta i inntektsåret, skal ein gje opp inneståande ved  opprettinga av kontoen.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InnskuddIUtenlandskeBankerMv-grp-390/InnskuddIUtenlandskeBankerMv-grp-403/BankinnskuddMvUtlandSpesifisertBankMv-datadef-8085">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Innestående pr. 01.01 i året etter inntektsåret NOK</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Summen av alle konti blir overført til siste side i skjemaet  </p>
+                                <p/>
+                                <p>Er kontoen avsluttet i løpet av året, oppgis innestående ved kontoens  avslutning, men beløpet skal ikke tas med i den sum som overføres til  post 4.1.9.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inneståande pr. 01.01 i året etter inntektsåret i NOK</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Summen av alle konti blir overført til siste side i skjemaet  </p>
+                                <p/>
+                                <p>Er kontoen avslutta i inntektsåret, skal ein gi opp inneståande ved  avslutning av kontoen, men beløpet skal ikkje takast med i den summen  som skal førast over til post 4.1.9</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InnskuddIUtenlandskeBankerMv-grp-390/InnskuddIUtenlandskeBankerMv-grp-403/ValutakursSpesifisertBankMv-datadef-5761">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Valutakurs som er brukt ved omregning av innestående</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever tre desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Valutakurs som er nytta ved omrekning av inneståande</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev tre desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InnskuddIUtenlandskeBankerMv-grp-390/InnskuddIUtenlandskeBankerMv-grp-403/RenteinntekterMvUtlandBankinnskuddMvSpesifisertBankMv-datadef-8087">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Renter, avkastning i NOK</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Summen av alle konti blir overført til siste side i skjemaet</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Renter, avkasting i NOK</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Summen av alle konti blir overført til siste side i skjemaet</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InnskuddIUtenlandskeBankerMv-grp-390/InnskuddIUtenlandskeBankerMv-grp-403/ValutakursRenterOmregningSpesifisertBankMv-datadef-21990">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Valutakurs som er brukt ved omregning av renter, avkastning</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever tre desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Valutakurs som er nytta ved omrekning av renter,avkastning</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev tre desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InnskuddIUtenlandskeBankerMv-grp-390/InnskuddIUtenlandskeBankerMv-grp-403/SkattetrekkUtlandRenteavkastningSpesifisertBankMv-datadef-8089">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Trukket skatt i NOK</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Summen av alle konti blir overført til siste side i skjemaet</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>III Trekt skatt i NOK</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Summen av alle konti blir overført til siste side i skjemaet</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/BSUSparingIAnnenEOSStat-grp-4937">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>BSU sparing i annen EØS stat</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>BSU sparing i anna EØS stat</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/BSUSparingIAnnenEOSStat-grp-4937/BankMvBSUEOSStatNavn-datadef-21991">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Bankens, institusjonens navn</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Bankens, institusjonens namn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BSUSparingIAnnenEOSStat-grp-4937/KontohaverBSUEOSStatKontonummer-datadef-21992">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kontonummer</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kontonummer</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BSUSparingIAnnenEOSStat-grp-4937/KontohaverBSUEOSStatNavn-datadef-21993">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Navnet som kontoen lyder på</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Namnet som kontoen lyder på</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BSUSparingIAnnenEOSStat-grp-4937/BankinnskuddMvBSUEOSStatValutaFjoraret-datadef-21994">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>I Innestående pr 01.01 i inntektsåret NOK</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>I Inneståande pr 01.01 i inntektsåret i NOK</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BSUSparingIAnnenEOSStat-grp-4937/BankinnskuddMvBSUEOSStatBelop-datadef-21995">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Innestående pr 01.01 i året etter inntektsåret i NOK</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Summen blir overført til siste side i skjemaet</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Inneståande pr 01.01 i året etter inntektsåret i NOK</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Summen blir overført til siste side i skjemaet</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BSUSparingIAnnenEOSStat-grp-4937/ValutakursBSUEOSStat-datadef-21996">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Valutakurs som er brukt ved omregning av innestående</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever tre desimaler</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Valutakurs som er nytta ved omrekning av innestående</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev tre desimalar</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BSUSparingIAnnenEOSStat-grp-4937/RenteinntekterMvBSUEOSStatBelop-datadef-21997">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Renter, avkastning i NOK</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Renter, avkastning i NOK</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BSUSparingIAnnenEOSStat-grp-4937/ValutakursRenterOmregningBSUEOSStatBelop-datadef-21998">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Valutakurs som er brukt ved omregning av renter, avkastning</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever tre desimaler</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Valutakurs som er nytta ved omrekning av renter, avkastning</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev tre desimalar</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BSUSparingIAnnenEOSStat-grp-4937/SkattetrekkBSUEOSStatRenteavkastningBelop-datadef-21999">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Trukket skatt i NOK</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Summen blir overført til siste side i skjemaet</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Trukket skatt i NOK</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Summen blir overført til siste side i skjemaet</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BSUSparingIAnnenEOSStat-grp-4937/SparebelopInnbetaltBSUEOSStat-datadef-22000">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Innbetalt sparebeløp i inntektsåret</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Overføres selvangivelsen post 1.5.1</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Innbetalt sparebeløp i inntektsåret</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Overførast til sjølmeldinga post 1.5.1</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BSUSparingIAnnenEOSStat-grp-4937/UttakBoligformalBSUEOSStatBelop-datadef-22001">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Uttak til boligformål iht. BSU kontrakt foretatt i 2005 i NOK</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Uttak til bustadsformål iht. BSU kontrakt foreteken i inntektsåret i  NOK</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BSUSparingIAnnenEOSStat-grp-4937/UttakAnnetFormalBSUEOSStatBelop-datadef-22002">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Uttak til annet formål foretatt i inntektsåret i NOK</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Uttak til annet formål foreteken i inntektsåret i NOK</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/IIISumForAlleKontiInklusiveBSUKonto-grp-4972">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Sum alle konti (inklusive BSU konto)</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Sum alle konti (inklusive BSU konto)</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/IIISumForAlleKontiInklusiveBSUKonto-grp-4972/BankinnskuddMvUtlandSkattemessig-datadef-8090">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum innestående pr.01.01 i året etter inntektsåret i NOK (overføres  til selvangivelsen under post 4.1.9)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Beløpet som fremkommer er summen av inntastede verdier fra tidligere  sider</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>I Sum inneståande pr.01.01 i året etter inntektsåret i NOK (overførast  til sjølvmeldinga post 4.1.9)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Beløpet som kjem fram her er summen av inntastede verdiar frå  tidligare sider</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/IIISumForAlleKontiInklusiveBSUKonto-grp-4972/RenteavkastningMvUtlandBankinnskuddMv-datadef-8091">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum renter, avkastning pr 01.01 i året etter inntektsåret i NOK  (overføres selvangivelsen under post 3.1.6)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Beløpet som fremkommer er summen av inntastede verdier fra tidligere  sider</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum renter, avkastning pr 01.01 i året etter inntektsåret i NOK  (overførast sjølvmeldinga post 3.1.6)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Beløpet som kjem fram her er summen av inntastede verdiar frå  tidligare sider</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/IIISumForAlleKontiInklusiveBSUKonto-grp-4972/SkattetrekkUtlandRenteavkastning-datadef-8092">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum trukket i skatt i NOK</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Beløpet som fremkommer er summen av inntastede verdier fra tidligere  sider</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum trekt skatt i NOK</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Beløpet som kjem fram her er summen av inntastede verdiar frå  tidligare sider</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

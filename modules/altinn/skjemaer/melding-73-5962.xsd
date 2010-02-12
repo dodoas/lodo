@@ -1,0 +1,2938 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--title='RF-1213: Oppgave for beregning næringsinnt for lottfiskere, særfr fisk fangst' lang='NOB'-->
+    <xs:element name="Skjema">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>RF-1213 Oppgave for beregning av næringsinntekt for lottfiskere og  særskilt fradrag innen fiske og fangst 2006</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. nov. 1994, jf. likningsloven § 4-4 nr. 7.  </p>
+                    <p/>
+                    <p>Det vises til særskilt rettledning som er utarbeidet til hjelp ved  utfylling av dette skjemaet (RF-1214).  </p>
+                    <p/>
+                    <p>Skjemaets del A Beregning av næringsinntekt for lottfiskere skal  benyttes av alle lottakere som ikke eier båt og/eller bruk  (ikke-regnskapspliktige fiskere, også kalt prosentfiskere). Dessuten  skal del A også fylles ut av
+                        deltaker i deltakerlignet selskap som  eier båt, og hvor deltakeren har deltatt i fiske med denne båten.  </p>
+                    <p/>
+                    <p>Skjemaets del B Oversikt over driftstid i fiske og fangst og del C  Beregning av særskilt fradrag skal fylles ut av alle som krever  særskilt fradrag innen fiske og fangst. Særskilt fradrag gis både til  regnskapspliktige
+                        fiskere, lottfiskere og lønns-/hyremottakere.  </p>
+                    <p/>
+                    <p>Melding fra oppgaveregisteret  </p>
+                    <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i RF-1213 (Oppgave for beregning av  næringsinntekt for lottfiskere og særskilt fradrag innen fiske og  fangst) i medhold av lov om
+                        Oppgaveregisteret §§ 5 og 6, helt eller  delvis bli benyttet også av andre offentlige organer som har hjemmel  til å innhente de samme opplysningene. Opplysninger om evt.  samordning kan fås ved henvendelse til
+                        Oppgaveregisteret på telefon  75 00 75 00, eller Skattedirektoratet på telefon 22 07 70 00.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Vedlegg til selvangivelsen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>RF-1213 Oppgåve for utrekning av næringsinntekt for lottfiskarar og  særskilt frådrag innanfor fiske og fangst 2006</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Fastsett av Skattedirektoratet med heimel i Finansdepartementet sitt  delegeringsvedtak av 28. nov. 1994, jf. likningslova § 4-4 nr. 7.  </p>
+                    <p/>
+                    <p>Det vises til særskilt rettleiing som er utarbeida til hjelp ved  utfyllinga av dette skjemaet (RF-1214).  </p>
+                    <p/>
+                    <p>Del A i skjemaet Utrekning av næringsinntekt for lottfiskarar skal  nyttast av alle lottakarar som ikkje eig båt og/eller bruk  (ikkje-rekneskapspliktige fiskarar, også kalt prosentfiskarar). Del A  skal også fyllast ut av
+                        deltakar i deltakarlikna selskap som eig båt,  der deltakaren har teke del i fiske med denne båten.  </p>
+                    <p/>
+                    <p>Del B Oversikt over driftstid i fiske og fangst og del C Utrekning av  særskilt frådrag i skjemaet skal fyllast ut av alle som krev særskilt  frådrag innan fiske og fangst. Både rekneskapspliktige fiskarar,  lottfiskarar og
+                        lønns-/hyremottakarar kan få særskilt frådrag.  </p>
+                    <p/>
+                    <p>Melding frå oppgåveregisteret  </p>
+                    <p>For å samordna og forenkla oppgåveinnleveringa frå næringslivet, kan  opplysningar som vert avgjeve i RF-1213 (Oppgåve for utrekning av  næringsinntekt for lottfiskarar og særskilt frådrag innen fiske og  fangst) i medhald av
+                        lov om Oppgåveregisteret §§ 5 og 6 heilt eller  delvis bli nytta også av andre offentlige organ som har heimel til å  innhente dei same opplysingar. Opplysingar om evt. samordning kan ein  få ved å henvende seg til
+                        Oppgåveregisteret på telefon 75 00 75 00,  eller Skattedirektoratet på telefon 22 07 70 00.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                    <p>Vedlegg til sjølvmeldinga</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GenerellInformasjon-grp-1058"/>
+                <xs:element minOccurs="0" ref="NaringsinntektForLottfiskere-grp-440"/>
+                <xs:element minOccurs="0" ref="BeregnetLottinntekt-grp-5334"/>
+                <xs:element minOccurs="0" ref="DriftstidIFiskeOgFangst-grp-441"/>
+                <xs:element minOccurs="0" ref="SarskiltFradragForEnefiskere-grp-442"/>
+                <xs:element minOccurs="0" ref="SarskilteFradragLottLonnsOgEllerHyremottakere-grp-443"/>
+                <xs:element minOccurs="0" ref="SarskiltFradragFellesposter-grp-445"/>
+            </xs:sequence>
+            <xs:attribute fixed="73" name="skjemanummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="5962" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="RF-1213" name="blankettnummer" type="xs:string" use="optional"/>
+            <xs:attribute fixed="Oppgave for beregning næringsinnt for lottfiskere, særfr fisk fangst" name="tittel" type="xs:string" use="optional"/>
+            <xs:attribute fixed="438" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+            <xs:attribute name="etatid" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="974761076">
+                            <xs:annotation>
+                                <xs:documentation>SKATTEDIREKTORATET</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:anyAttribute/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GenerellInformasjon-grp-1058">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Innledning</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Innleiing</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Avgiver-grp-439"/>
+            </xs:sequence>
+            <xs:attribute fixed="1058" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Avgiver-grp-439">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Avgiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Avgivar</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="OppgavegiverNavn-datadef-68">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverFodselsnummer-datadef-26">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Fødselsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Fødselsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetOrganisasjonsnummer-datadef-18">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverPostadresse-datadef-2442">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverPostnummer-datadef-6676">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverPoststed-datadef-6677">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Poststed</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Poststad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverTelefonnummer-datadef-620">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Telefonnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Telefonnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="439" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OppgavegiverNavn-datadef-68">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Navn på oppgavegiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="DEF">
+                    <p>Namn på oppgåvegjevar</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">1</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="68" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst175-repformat-8">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="175"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverFodselsnummer-datadef-26">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Fødselsnummer til oppgavegiveren</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">2</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst1111Modulus11-repformat-18">
+                    <xs:attribute fixed="26" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst1111Modulus11-repformat-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">18</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="11"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetOrganisasjonsnummer-datadef-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummeret til enheten</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Organisasjonsnummer til årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="18" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst99Modulus11-repformat-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">1</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverPostadresse-datadef-2442">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst105-repformat-9">
+                    <xs:attribute fixed="2442" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst105-repformat-9">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="105"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverPostnummer-datadef-6676">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Postnummer til oppgavegiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">5</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="6676" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst44BareTall-repformat-10">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">10</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+                    <p>Enter positive integer with four digits</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Feltet krever positivt heltall med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Feltet krev positivt heiltal med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="4"/>
+            <xs:pattern value="[0-9]{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverPoststed-datadef-6677">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Poststed til oppgavegiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="6677" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst35-repformat-3">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="35"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverTelefonnummer-datadef-620">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Telefonnummer til oppgavegiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">7</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="620" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="NaringsinntektForLottfiskere-grp-440">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>A. Beregning av næringsinntekt for lottfiskere</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Viktig: Dersom en del av lottinntektene er opptjent av deltaker i  ansvarlig selskap, må dette skilles ut og leveres i eget skjema  RF-1213.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>A. Utrekning av næringsinntekt for lottfiskarar</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                    <p>Viktig: Dersom ein del av lottinntektene er opptente av deltakar i  ansvarleg selskap, må dette skiljast ut og leverast i eige skjema  RF-1213.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="999" minOccurs="0" ref="LottinntekterUtbetaltFra-grp-2642"/>
+                <xs:element minOccurs="0" ref="InntektLottfiske-datadef-19431">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="440" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LottinntekterUtbetaltFra-grp-2642">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>101 Lottinntekter</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Her føres mottatte lottinntekter inkl minstelott, spesifisert med den  enkelte oppdragsgivers navn.  </p>
+                    <p>Inntekter ved salg av tang og tare tas ikke med her. Inntekt fra slik  virksomhet føres i selvangivelsens post 2.7.6 eller evt. egen  næringsoppgave.  </p>
+                    <p>Mottatte lønns- og hyreinntekter skal ikke tas med her ved beregning  av næringsinntekten, men føres direkte i selvangivelsen post  2.1.1.  </p>
+                    <p>Sykepenger mottatt fra folketrygden som erstatter arbeidsinntekt i  fiske, skal ikke tas med ved beregningen av næringsinntekten, men  føres direkte i selvangivelsen i postene 1.6.3 og 2.7.13. Det samme  gjelder fødselspenger
+                        etter folketrygdloven kapittel 14.  </p>
+                    <p>Dagpenger mottatt under arbeidsløyse som fisker tas heller ikke med,  men føres direkte i selvangivelsen post 2.1.7.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>(kode 446 på lønns- og trekkoppgaven) utbetalt fra:</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>101 Lottinntektar</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Her skal mottekne lottinntekter førast, spesifisert med namnet på kvar  oppdragsgivar.  </p>
+                    <p>Inntekter ved sal av tang og tare skal ikkje takast med her.  Næringsinntekt frå slik verksemd skal førast i sjølvmeldinga post  2.7.6, eller til eiga næringsoppgåve.  </p>
+                    <p>Mottekne lønns- og hyreinntekter skal ikkje takast med her ved  utrekning av næringsinntekta, men førast direkte i sjølvmeldinga post  2.1.1.  </p>
+                    <p>Mottekne sjukepengar frå folketrygda som kjem i staden for  arbeidsinntekt i fiske, skal ikkje takast med her, men skal førast  direkte i sjølvmeldinga i postane 1.6.3 og 2.7.13. Det same gjeld  fødselspengar etter
+                        folketrygdlova kapittel 14.  </p>
+                    <p>Dagpengar mottekne under arbeidsløyse som fiskar skal heller ikkje  takast med, men skal førast direkte i sjølvmeldinga post 2.1.7.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                    <p>(kode 446 på løns- og trekkoppgåva) utbetalt frå:</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="UtbetalerNavnSpesifisertUtbetaler-datadef-19451">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn på høvedsmann/oppdragsgiver/utbetaler</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namnn på høvedsmann/oppdragsgivar/utbetalar</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="UtbetalerAdresseSpesifisertUtbetaler-datadef-19438">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="UtbetalerPostnummerSpesifisertUtbetaler-datadef-19439">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="UtbetalerPoststedSpesifisertUtbetaler-datadef-19440">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Poststed</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Poststad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="UtbetalerTidsromSpesifisertUtbetaler-datadef-19441">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>For tidsrom, fra-til</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>For tidsrom, frå-til</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="InntektLottfiskeSpesifisertUtbetaler-datadef-19442">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Inntekt, hele kroner</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Inntekt, heile kroner</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2642" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UtbetalerNavnSpesifisertUtbetaler-datadef-19451">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="19451" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UtbetalerAdresseSpesifisertUtbetaler-datadef-19438">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="19438" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UtbetalerPostnummerSpesifisertUtbetaler-datadef-19439">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">10</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="19439" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UtbetalerPoststedSpesifisertUtbetaler-datadef-19440">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">11</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="19440" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UtbetalerTidsromSpesifisertUtbetaler-datadef-19441">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">12</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="19441" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntektLottfiskeSpesifisertUtbetaler-datadef-19442">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">13</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="19442" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopHeltall15-repformat-37">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">37</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="InntektLottfiske-datadef-19431">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">14</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="19431" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="BeregnetLottinntekt-grp-5334">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Beregnet lottinntekt</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Viktig: Dersom en del av lottinntektene er opptjent av deltaker i  ansvarlig selskap, må dette skilles ut og leveres i eget skjema  RF-1213.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Berekna lottinntekt</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                    <p>Viktig: Dersom ein del av lottinntektane er opptent av deltakar i  ansvarleg selskap, må dette skiljast ut og leverast i eige skjema  RF-1213.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="UttakFisk-datadef-19432">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>102 Uttak av fisk</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Uttak oppføres med kr 600 pr husstandsmedlem. For barn under 10 år  reduseres satsen til det halve, jf Skattedirektoratets  takseringsregler § 3-2-3.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Dersom dette ikke er innberettet på lønns- og trekkoppgaven</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>102 Uttak av fisk</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Uttak skal førast opp med kr 600 pr. medlem i husstanden. For barn  under 10 år skal satsen reduserast til det halve, jf  Skattedirektoratet sine takseringsreglar § 3-2-3.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Dersom dette ikkje er lønnsmeldt på lønns- og trekkoppgåva</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="MerverdiavgiftRefundert-datadef-19433">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>103 Refundert merverdiavgift for lottfiskere med redskapshold</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres refundert merverdiavgift av eget redskap som nevnt i post  111.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Se rettledningen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>103 Refundert meirverdiavgift for lottfiskarar som held reiskap sjølve</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her fører ein refundert meirverdiavgift av eigne reiskapar som nemnt i  post 111.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Sjå rettleiinga</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="InntekterAndreSkattemessig-datadef-19436">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>109 Andre inntekter</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>109 Andre inntekter</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="InntektRefusjonMvFiskeriForFradrag-datadef-19443">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>110 Sum inntekter</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>110 Sum inntekter</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="UtgifterRedskap-datadef-19444">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>111 Utgifter til egne redskaper</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres utgifter til redskap (inkl merverdiavgift) som lottfiskerne  holder selv, og som dekkes av lottinntekten. Mottatt refundert avgift  for lottfiskere med redskapshold inntektsføres i post 103.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>111 Utgifter til eigne reiskaper</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her fører ein utgifter til reiskapar inkl meirverdiavgift som  lottfiskaren held sjølv, og som skal dekkjast av lottinntekta.  Motteken refundert avgift for lottfiskarar som held reiskap sjølv,  skal inntektsførast
+                                    i post 103.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="UtgifterSmaDager-datadef-19445">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>112 Småutgifter, antall dager</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Lottakere, som av hensyn til arbeidet må bo utenfor hjemmet, har krav  på fradrag for småutgifter med kr 40 pr. døgn under forutsetning av  at de dekker utgiftene selv, jf Skattedirektoratets takseringsregler  §
+                                    1-3-7.  </p>
+                                <p>Dette gjelder også deltaker i deltakerlignet selskap når deltakeren er  aktivt med i selskapets fiske/fangst.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>112 Småutgifter, talet på dagar</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Lottakarar, som av omsyn til arbeidet må bu utanfor heimen, har krav  på frådrag for småutgifter med kr 40 pr. døgn under føresetnad av at  dei dekkjer utgiftene sjølve, jf Skattedirektoratet sine  takseringsreglar
+                                    § 1-3-7. Dette gjeld også deltakar i deltakarlikna  selskap når deltakaren tek aktivt del i fisket/fangsten til  selskapet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="UtgifterSmaSats-datadef-19446">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Sats</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Sats</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="UtgifterSma-datadef-19447">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="UtgifterSjohyreMv-datadef-19448">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>113 Sjøhyre, støvler og hansker</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Dersom ikke annet kan dokumenteres, kan lottaker som driver  helårsfiske, trekke fra kr 2 200 for merutgifter til sjøhyre mv.  under forutsetning av at han dekker utgiftene selv. Sesongfiskere kan  kreve fradag med
+                                    kr 1 500, jf Skattedirektoratets takseringsregler §  2-3-7.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>113 Sjøhyre, støvlar og hanskar</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Dersom ikkje noko anna kan dokumenterast, kan lottakar som driv  heilårsfiske, trekkje frå kr 2 200 for meirutgifter til sjøhyre m.m.  dersom han dekkjer utgiftene sjølv. Sesongfiskarar kan krevje frådrag  med kr 1
+                                    500, jf Skattedirektoratet sine takseringsreglar § 2-3-7.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="UtgifterAndreLottfiske-datadef-19449">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>119 Andre utgifter, skal spesifiseres i eget vedlegg</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>De enkelte utgiftene skal spesifiseres i eget vedlegg. Her føres  eventuelle lønninger, hyrer o.l. (inkl arbeidsgiveravgift) som er  dekket av egen mannslott, og som ikke er tatt med i fellesutgiftene  ved
+                                    delingsfangst. Her føres også eventuelle utgifter til kost som  lottfiskeren dekker selv, og som ikke er fratrukket som  fellesutgifter. Utgiftene må kunne dokumenteres.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>119 Andre utgifter, skal spesifiserast i eige vedlegg</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Dei einskilde utgiftene skal spesifiserast i eige vedlegg. Her skal  førast eventuell lønn, hyre o.l. (medrekna arbeidsgivaravgift) som er  dekte av eigen mannslott, og som ikkje er tekne med i fellesutgiftene  ved
+                                    delingsfangst. Her skal også førast eventuelle utgifter til kost  som lottfiskaren dekkjer sjølv, og som ikkje er trekt frå som  fellesutgifter. Utgiftene må kunne dokumenterast.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="UtgifterLottfiske-datadef-19450">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="InntekterFiskeriSkattemessig-datadef-19435">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>120 Beregnet inntekt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Lottfiskere får tilsendt forhåndsutfylt selvangivelse. Personlig  næringsinntekt vil være forhåndsutfylt under post 1.6.1 (fastsettelse  av personinntekt) og under post 2.7.3 (fastsettelse av alminnelig  inntekt) i
+                                    selvangivelsen. Beløpene under disse postene vil  imidlertid være brutto innberettet lottinntekt. Lottaker må selv  korrigere det forhåndsutfylte beløpet i selvangivelsens post 1.6.1 og  post 2.7.3. slik at dette
+                                    samsvarer med næringsinntekt i post 120 i  RF-1213.  </p>
+                                <p/>
+                                <p>Hvordan behandles næringsinntekten (lotten)?  </p>
+                                <p/>
+                                <p>Tilfelle 1:  </p>
+                                <p>&lt;&lt;Vanlig>> lottmottaker:  </p>
+                                <p>(Mottatt lott fra en eller flere høvedsmenn)  </p>
+                                <p>Lotten behandles skattemessig som ordinær næringsinntekt. Beløpet i  post 120 i RF-1213 føres videre direkte til 1.6.1 og 2.7.3 i  selvangivelsen.  </p>
+                                <p/>
+                                <p>Tilfelle 2:  </p>
+                                <p>Lott utbetalt til deltaker i deltakerlignet selskap:  </p>
+                                <p>Beløpet i post 120 i RF-1213 føres over i post 102c i RF-1221 og  behandles likt med arbeidsgodtgjørelse (både i forhold til  alm.inntekt og personinntekt). Husk å oppgi org.nr for ANS-et  (KS-et).  </p>
+                                <p/>
+                                <p>Tilfelle 3:  </p>
+                                <p>Dersom skattyter både har &lt;&lt;vanlig lott>> (tilfelle 1) og lott fra  deltakerlignet selskap (tilfelle 2) må det leveres to lottskjemaer  (RF-1213). Husk å oppgi org.nr. for ANS-et (KS-et).  </p>
+                                <p/>
+                                <p>Tilfelle 4:  </p>
+                                <p>Andel av overskudd/underskudd i ANS/KS:  </p>
+                                <p>Føres i post 102a i RF-1221 og videre til alm.inntekt post 102f. Evt.  uttak/utdeling fra selskapet utgjør et eget skattegrunnlag som kommer  i tillegg. I slike tilfelle skal del A i RF-1213 ikke benyttes.  </p>
+                                <p/>
+                                <p>Tilfelle 5:  </p>
+                                <p>Regnskapspliktig fisker som i tillegg mottar lott fra høvedsmann:  </p>
+                                <p>Lotten tas inn i næringsoppgavens post 3900 og inngår som en del av  skattyters ordinære næringsinntekt. Kostnader (evt. etter sats)  knyttet til lottinntekten føres i post 7700 (Annen kostnad,  fradragsberettiget).
+                                    Beregnet alminnelig inntekt/personinntekt  overføres selvangivelsens post 2.7.3/1.6.1.  </p>
+                                <p>I slike tilfelle skal del A i RF-1213 ikke benyttes.  </p>
+                                <p/>
+                                <p>Tilfelle 6:  </p>
+                                <p>Regnskapspliktig fisker som i tillegg mottar lott som deltaker i  deltakerlignet selskap:  </p>
+                                <p>Som i tilfelle 2, hva lotten angår. I tillegg må det leveres egen  næringsoppgave for enkeltpersonforetaket.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>120 Utrekna inntekt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Lottfiskarar får tilsendt førehandsutfylt sjølvmelding. Personleg  næringsinntekt vil være førehandsutfylt under post 1.6.1 (fastsetjing  av personinntekt) og under post 2.7.3 (fastsetjing av allmenn  inntekt) i
+                                    sjølvmeldinga. Beløpa under desse postane vil imidlertid  være brutto innberetta lottinntekt. Lottakar må sjølv korrigere det  førehandsutfylte beløpet i sjølvmeldinga sin post 1.6.1 og 2.7.3 slik  at dette
+                                    samsvarar med næringsinntekt i post 120 i RF-1213.  </p>
+                                <p/>
+                                <p>Korleis skal næringsinntekta (lotten) behandlast?  </p>
+                                <p/>
+                                <p>Tilfelle 1:  </p>
+                                <p>&lt;&lt;Vanleg>> lottmottaker:  </p>
+                                <p>(Motteken lott frå ein eller fleire høvedsmenn)  </p>
+                                <p>Lotten skal behandlast som vanleg næringsinntekt. Beløpet i post 120 i  RF-1213 skal førast direkte til 1.6.1 og 2.7.3 i sjølvmeldinga.  </p>
+                                <p/>
+                                <p>Tilfelle 2:  </p>
+                                <p>Lott utbetalt til deltakar i deltakarlikna selskap:  </p>
+                                <p>Beløpet i post 120 i RF-1213 skal førast over til post 102c i RF-1221  og skal behandlast på same måte som arbeidsgodtgjersle (både i høve  til almenn inntekt og personinntekt). Hugs å oppgje org.nr for ANS-et
+                                    (KS-et).  </p>
+                                <p/>
+                                <p>Tilfelle 3:  </p>
+                                <p>Dersom skattytar både har &lt;&lt;vanleg>> lott (tilfelle 1) og lott frå  deltakarlikna selskap (tilfelle 2) må det leverast to lottskjema  (RF-1213). Hugs å oppgje org.nr for ANS-et (KS-et).  </p>
+                                <p/>
+                                <p>Tilfelle 4:  </p>
+                                <p>Del av overskot/underskot i ANS/KS:  </p>
+                                <p>Beløpet skal førast inn i post 102 a i RF-1221 og vidare til almenn  inntekt i post 102f. Evt. uttak/utdeling utgjer eit eige  skattegrunnlag som kjem i tillegg. I slike tilfelle skal del A i  RF-1213 ikkje nyttast.  </p>
+                                <p/>
+                                <p>Tilfelle 5:  </p>
+                                <p>Rekneskapspliktig fiskar som i tillegg mottek lott fra høvedsmann:  </p>
+                                <p>Lotten skal takast inn i næringsoppgåva sin post 3900 og er ein del av  skattytaren sin ordiære næringsinntekt. Kostnader (evt. etter sats)  som er knytt til lottinntekta, skal førast i post 7700 (Annan kostnad  med
+                                    frådragsrett). Utrekna almenn inntekt7personinntekt skal førast  over til sjølvmeldinga sin post 2.7.3/1.6.1.  </p>
+                                <p>I slike tilfelle skal del A i RF-1213 ikkje nyttast.  </p>
+                                <p/>
+                                <p>Tilfelle 6:  </p>
+                                <p>Rekneskapspliktig fiskar som i tillegg mottek lott som deltakar i  deltakerlikna selskap:  </p>
+                                <p>Som tilfelle 2, kva gjeld lotten. I tillegg må det leverast eiga  næringsoppgåve for einskildpesonforetaket.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="InntekterLottfiskeANS-datadef-22331">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>121 Er lottinntektene i post 120 fra ansvarlig selskap?</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Dersom inntekten i post 120 kommer ANS som du selv er medeier i, skal  beløpet føres i post 102C i deltakeroppgaven. Er beløpet annen  lottinntekt, skal dette føres i post 1.6.1 og 2.7.3 i selvangivelsen  (RF-1027)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>121 Kjem lottinntekta i post 120 frå ansvarleg selskap?</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Dersom inntekta i post 120 kjem frå ANS som du sjølv er medeigar i,  skal beløpet førast i post 102C i deltakeroppgåva. Er beløpet annan  lottinntekt, skal dette førast i post 1.6.7 og 2.7.3 i sjølvmeldinga  (RF-1027)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="InntekterLottfiskeANSOrganisasjonsnummer-datadef-23638">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Dersom &lt;&lt;ja>> oppgi organisasjonsnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Dersom &lt;&lt;ja>> gi opp organisasjonsnummeret</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5334" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UttakFisk-datadef-19432">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">15</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="19432" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MerverdiavgiftRefundert-datadef-19433">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">16</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="19433" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntekterAndreSkattemessig-datadef-19436">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">17</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="19436" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntektRefusjonMvFiskeriForFradrag-datadef-19443">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">18</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="19443" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UtgifterRedskap-datadef-19444">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">19</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="19444" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UtgifterSmaDager-datadef-19445">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p/>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">20</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="PosHeltall3Max366-repformat-241">
+                    <xs:attribute fixed="19445" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="PosHeltall3Max366-repformat-241">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">241</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:positiveInteger">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="366"/>
+            <xs:totalDigits value="3"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="UtgifterSmaSats-datadef-19446">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">21</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="PosHeltall2Max40-repformat-299">
+                    <xs:attribute fixed="19446" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="PosHeltall2Max40-repformat-299">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">299</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:positiveInteger">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="40"/>
+            <xs:totalDigits value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="UtgifterSma-datadef-19447">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">22</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="19447" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UtgifterSjohyreMv-datadef-19448">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">23</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="19448" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UtgifterAndreLottfiske-datadef-19449">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">24</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="19449" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UtgifterLottfiske-datadef-19450">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">25</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="19450" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntekterFiskeriSkattemessig-datadef-19435">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">26</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="19435" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntekterLottfiskeANS-datadef-22331">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Lottinntekter fra ANS</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">27</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+                    <xs:attribute fixed="22331" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg2JaNei-repformat-4">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="3"/>
+            <xs:enumeration value="Ja">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Yes</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Ja</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Ja</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Nei">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>No</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Nei</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Nei</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="InntekterLottfiskeANSOrganisasjonsnummer-datadef-23638">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummer til ansvalig selskap som lottinntekter kommer fra</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">28</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="23638" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftstidIFiskeOgFangst-grp-441">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>B. Oversikt over driftstid i fiske og fangst</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Denne delen av skjemaet skal fylles ut av alle som krever særskilt  fradrag innen fiske og fangst.  </p>
+                    <p>I henhold til skatteloven § 6-60 og Finansdepartementets forskrift til  skatteloven FSFIN § 6-60-1, er det en forutsetning for rett til  særskilt fradrag at skattyteren personlig har drevet eller deltatt i  fiske eller fangst
+                        på havet eller langs kysten som full  beskjeftigelse i til sammen minst 130 dager av inntektsåret.  </p>
+                    <p>Med full beskjeftigelse menes at vedkommende disse 130 dagene i det  vesentlige av tiden har hatt full beskjeftigelse med fiske og/eller  fangst.  </p>
+                    <p>Skattytere som gjennom hele året bare har hatt fiske som bierverv, kan  således ikke kreve særskilt fradrag. Det gis f eks ikke fradrag til  kilenotfiskere/krokgarnfiskere som samtidig med fisket også driver  gårdsbruk.  </p>
+                    <p>Tidsrom hvor fartøyet er tatt ut av fiske for å utføre frakt- og/eller  slepeoppdrag skal, med unntak av tilfeldige kortere oppdrag, ikke  telle med ved beregningen. Perioder med fangststopp skal ikke telle  med ved
+                        beregningen. Det skal heller ikke perioder med arbeidsløyse  som fisker.  </p>
+                    <p>Fiskere som på grunn av kvotereguleringer bare drar ut på fiske  enkelte dager i en periode, anses som fullbeskjeftiget med fiske i  dette tidsrommet forutsatt at fiske er eneste inntektsgivende  beskjeftigelse i perioden, og
+                        at en viss regularitet i fisket kan  dokumenteres.  </p>
+                    <p>Reisedager ved på- og avmønstringer på fiske- og fangstfartøyer regnes  med. Båteiere/høvedsmenn får medregnet den tid som går med til å  hente eller frakte hjem mannskap og redskaper.  </p>
+                    <p>Landligge som skyldes dårlig vær må også regnes med i forhold til  bestemmelsen om særskilt fradrag. Også tid som går med til kortere  uforutsette reparasjonsopphold (akutte rparasjoner) mens båten er på  fiske, kan regnes med.  </p>
+                    <p>Har fiskeren vært sykepermittert, skal denne tiden regnes med i  130-dagersperioden. Tid hvor fiskeren har mottatt fødselspenger etter  folketrygdloven kapittel 14, skal også regnes med.  </p>
+                    <p>Det skal fylles ut én linje for hver tur.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>B. Oversikt over driftstid i fiske og fangst</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Denne delen av skjemaet skal fyllast ut av alle som krev særskilt  frådrag innan fiske og fangst.  </p>
+                    <p>Etter skattelova § 6-60 og forskrift til skattelova FSFIN § 6-60, er  det ein føresetnad for rett til særskilt frådrag at skattytaren  personleg har drive eller delteke i fiske eller fangst på havet eller  ved kysten som
+                        fulltidsverksemd i til saman minst 130 dagar av  inntektsåret.  </p>
+                    <p>Med fulltidsverksemd meiner ein at skattytaren desse 130 dagane i det  vesentlege av tida har vore fullt sysselsett med fiske og/eller  fangst.  </p>
+                    <p>Skattytarar som gjennom heile året berre har drive fiske som biyrke,  kan såleis ikkje krevje særskilt frådrag. Det skal t d ikkje gis  frådrag til kilenot-fiskarar/krokgarnfiskarar som samstundes med  fisket driv gardsbruk.  </p>
+                    <p>Tidsrom der fartøyet er teke ut av fisket for å gjere frakt- og/eller  slepeoppdrag skal, bortsett frå tilfeldige kortare oppdrag, ikkje  reknast med ved utrekninga. Det skal heller ikkje periodar med  arbeidsløyse som fiskar.
+                        Periodar med fangststopp skal heller ikkje  reknast med.  </p>
+                    <p>Fiskarar som på grunn av kvotereguleringar berre dreg ut på fiske  einskilde dagar i ein periode, skal reknast som fullt sysselsette med  fiske i dette tidsrommet dersom fisket er einaste inntektsgivande  verksemd i perioden,
+                        og fiskaren kan dokumentere ein viss regularitet  i fisket.  </p>
+                    <p>Reisedagar ved på og avmønstring på fiske- og fangstfartøy skal  reknast med. Båteigarar/ høvedsmenn reknar med den tida som går med  til å hente eller frakte heim mannskap og reiskap.  </p>
+                    <p>Landligge som har si årsak i dårleg vær må og reknast med i høve til  reglane om særskilt frådrag. Også tid som går med til kortare  uforutsette reparasjonsopphold (akutte reparasjonar) mens båten er på  fiske, kan reknast med.  </p>
+                    <p>Har fiskaren vore sjukepermittert, skal denne tida reknast med i  130-dagarsperioden. Tid kor fiskaren har motteke fødselspengar etter  folketrygdlova kapittel 14, skal også reknast med.  </p>
+                    <p>Det skal fyllast ut ei linje for kvar tur.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="99" minOccurs="0" ref="OversiktOverDriftstidIFiskeOgFagst-grp-2745"/>
+            </xs:sequence>
+            <xs:attribute fixed="441" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OversiktOverDriftstidIFiskeOgFagst-grp-2745">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>B. Oversikt over driftstid i fiske og fangst</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>B. Oversikt over driftstid i fiske og fangst</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="OppdragsgiverNavnSpesifisertOppdragsgiver-datadef-19437">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Oppdragsgivers navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Oppdragsgivar sitt namn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftStartSpesifisertOppdragsgiver-datadef-19452">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Fra</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Stått om bord</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Frå</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Stått om bord</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftSluttSpesifisertOppdragsgiver-datadef-19453">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Til</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Til</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FiskeType-datadef-19434">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Hvilket fiske som er drevet</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Kva slags fiske som er drive</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2745" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OppdragsgiverNavnSpesifisertOppdragsgiver-datadef-19437">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">29</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="19437" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftStartSpesifisertOppdragsgiver-datadef-19452">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">30</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Dato-repformat-5">
+                    <xs:attribute fixed="19452" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Dato-repformat-5">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">5</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:date"/>
+    </xs:simpleType>
+    <xs:element name="DriftSluttSpesifisertOppdragsgiver-datadef-19453">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">31</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Dato-repformat-5">
+                    <xs:attribute fixed="19453" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FiskeType-datadef-19434">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">32</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="19434" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SarskiltFradragForEnefiskere-grp-442">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>C. Beregning av særskilt fradrag for enefiskere</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Det er en forutsetning for rett til særskilt fradrag at skattyteren  har hatt fullbeskjeftigelse med fiske og/eller fangst på havet eller  langs kysten i til sammen minst 130 dager i inntektsåret, se  rettledningen til del B.  </p>
+                    <p/>
+                    <p>Avsnitt 1:  </p>
+                    <p>For enefiskere  </p>
+                    <p>Dette avsnittet fylles kun ut av skattytere som har inntekter av  enefiske. Hvorvidt enefisket har vært drevet hele eller bare deler av  året, er uten betydning. Har enefiskeren deler av året drevet fiske i  lag med andre, skal
+                        han for slike lottinntekter fylle ut avsnitt 2.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>C. Utrekning av særskilt frådrag for einefiskarar</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Det er ein føresetnad for rett til særskilt frådrag at skattytaren  personleg har drive eller delteke i fiske eller fangst på havet som  fulltidsverksemd i til saman minst 130 dagar i inntektsåret, sjå  rettleiinga til del B.  </p>
+                    <p/>
+                    <p>Avsnitt 1.  </p>
+                    <p>For einefiskarar  </p>
+                    <p>Dette avsnittet skal berre fyllast ut av skattytarar som har inntekter  av einefiske. Det har ikkje noko å seie om fisket har vore drive  aleine heile eller berre delar av året. Har einefiskaren delar av  året drive fiske i lag
+                        med andre, skal han for slike lottinntekter  fylle ut avsnitt 2.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GrunnlagForSarskiltFradrag-grp-3341"/>
+                <xs:element minOccurs="0" ref="FradragFor-grp-2746"/>
+                <xs:element minOccurs="0" ref="DriftsutgifterEnefiske-datadef-8309">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>230 Andel av sum kostnader i post 225 som gjelder enefiske</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Dersom kostnadene summert i post 225 refererer seg til både enefiske  og fellesfiske, vil utgiftene måtte fordeles tilsvarende, dvs etter  forholdet mellom post 205 Inntekter av enefiske og post 204 Reduksjon  for
+                                    fangstinntekter og offentlige tilskudd ved fellesfiske. Beløpet  utregnet i post 230 skal ikke overstige inntekter av enefiske ført i  post 205.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>230 Del av sum kostnader i post 225 som gjeld einefiske</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Dersom kostnadene summert i post 225 gjeld både einefiske og felles-  fiske, må utgiftene fordelast tilsvarande, dvs. etter forholdet  mellom post 205 Inntekter av einefiske og post 204 Reduksjon for
+                                    fangstinntekter og offentlege tilskott ved fellesfiske. Beløpet  utrekna i post 230 skal ikkje overstige inntekter av einefiske ført i  post 205.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="InntektBeregnetEnefiske-datadef-8310">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>240 Sum overføres til post 271</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>240 Sum, skal overførast til post 271</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="442" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GrunnlagForSarskiltFradrag-grp-3341">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Grunnlag for særskilt fradrag</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Hele kroner</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Grunnlag for særskilt frådrag</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                    <p>Heile kroner</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FangstinntekterOffentligeTilskudd-datadef-8307">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>201 Fangstinntekter, pristilskudd mv. fra næringsoppgaven post  3000/3100/3200</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres alle fangstinntekter inkl pristilskudd som er ført i postene  3000/3100/3200 i næringsoppgaven. Føringstilskudd føres også her.  Andre tilskudd som ikke kan anses som inntekt av fiske eller fangst,  føres
+                                    ikke her. Dette gjelder f.eks. likviditetstilskudd og  investeringstilskudd.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>201 Fangstinntekter, pristilskott o.a. frå næringsoppgåva post  3000/3100/3200</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her skal førast alle fangstinntekter inkl pristilskott som er førte i  postane 3000/3100/3200 i næringsoppgåva. Føringstilskott skal også  førast her. Andre tilskott som ikkje kan sjåast som inntekt av fiske  eller
+                                    fangst, skal ikkje førast her. Dette gjeld t.d.  likviditetstilskott og investeringstilskott.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="MinstelottEnefiske-datadef-1899">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>202 Garantilott (minstelott) ved enefiske</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres minstelott/garantilott som gjelder enefiske.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>202 Garantilott (minstelott) ved einefiske</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her skal minstelott/garantilott som gjeld einefiske førast.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FangstinntekterMinstelottMv-datadef-8308">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>203 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>203 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FangstinntekterOffentligeTilskuddFellesfiske-datadef-1900">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>204 Reduksjon for fangstinntekter og offentlige tilskudd ved  fellesfiske</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Brutto fangstinntekter og offentlige tilskudd som er ført i post 201  ovenfor, vil ofte inkludere både inntekter av enefiske og fiske som  har vært drevet i lag med andre. Her i post 204 føres derfor til  fradrag
+                                    alle brutto fangstinntekter og tilskudd inkl uttak av fisk,  som har vært gjenstand for deling med andre (inkludert den delen som  faller på han som ellers driver enefiske). Lottinntekten fra  delingsfangsten føres
+                                    i avsnitt 2, post 241.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>204 Reduksjon for fangstinntekter og offentlege tilskott ved  fellesfiske</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Brutto fangstinntekter og offentlege tilskott som er førte i post 201  ovanfor, vil ofte omfatte både einefiske og fiske i lag med andre.  Her i post 204 skal difor alle brutto fangstinntekter og offentlege
+                                    tilskott inkl uttak av fisk som har vore delt med andre, førast til  frådrag (inkludert den delen som fell på han som ellers driv  eienfiske). Lottinntekta frå delingsfangsten skal førast i avsnitt 2,  post 241.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="InntekterEnefiske-datadef-1901">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>205 Inntekter av enefiske (post 203-post 204)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>205 Inntekter av einefiske (post 203-post 204)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="3341" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FangstinntekterOffentligeTilskudd-datadef-8307">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">33</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="8307" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MinstelottEnefiske-datadef-1899">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">34</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="1899" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FangstinntekterMinstelottMv-datadef-8308">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">35</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="8308" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FangstinntekterOffentligeTilskuddFellesfiske-datadef-1900">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">36</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="1900" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntekterEnefiske-datadef-1901">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">37</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="1901" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FradragFor-grp-2746">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Fradrag for</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Frådrag for</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="AvgifterProduktavgift-datadef-16916">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>211 Produktavgift</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres produktavgift som er ført i næringsoppgaven post 3300.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>211 Produktavgift</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her fører ein produktavgift som er ført i næringsoppgåva post 3300.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DrivstoffMvFiske-datadef-15605">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>212 Drivstoff, bensin, olje ol.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres kostnader i forbindelse med fiske som er kostnadsført i  næringsoppgaven. Samsvarende poster i næringsoppgaven er angitt i  parentes.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>212 Drivstoff, bensin, olje o.l.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her fører ein kostnader i samband med fiske som er kostnadsførte i  næringsoppgåva. Samsvarande postar i næringsoppgåva er oppgitt i  parentes.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="VedlikeholdBatUtstyrMvFiske-datadef-15583">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>213 Vedlikehold båt/utstyr/redskap</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>213 Vedlikehald båt/utstyr/reiskap</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftskostnaderRedskapFiske-datadef-15607">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>214 Kjøp av redskap</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>214 Kjøp av reiskap</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="LeiekostnaderBatMvFiske-datadef-15606">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>215 Kostnader ved leie av båt/redskap</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>215 Kostnader ved leige av båt/reiskap</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="TransportmidlerForsikringAvgifterSkattemessig-datadef-7420">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>216 Forsikring av båt/redskap</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>216 Trygging av båt/reiskap</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftskostnaderRegnskapsforerTelefonPortoBilSkattemessig-datadef-11642">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>217 Kostnader til regnskapsfører, telefon, porto og bilkostnader</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Kostnadene i post 217 skal spesifiseres i eget vedlegg.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>217 Kostnadar til rekneskapsførar, telefon, porto og bilkostnadar</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Kostnadene i post 217 skal spesifiserast i eige vedlegg.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftskostnaderAndreFiske-datadef-15584">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>218 Andre driftskostnader, herunder proviant og dagligvarer (skal  spesifiseres)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>218 Andre driftskostnadar, medrekna proviant og daglegvarer (skal  spesifiserast)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsmidlerSaldoavskrivning-datadef-8314">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>219 Saldoavskrivninger fra saldoskjema post 110</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>219 Saldoavskrivningar frå saldoskjema post 110</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DriftsutgifterFiske-datadef-8315">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>225 Sum kostnader (postene 211 til 219)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>225 Sum kostnadar (postane 211 til 219)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2746" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AvgifterProduktavgift-datadef-16916">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">38</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="16916" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DrivstoffMvFiske-datadef-15605">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Drivstoff, bensin, olje o.l. i fiske</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">39</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="15605" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="VedlikeholdBatUtstyrMvFiske-datadef-15583">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Vedlikehold av båt/redskap/utstyr fiske</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">40</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="15583" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftskostnaderRedskapFiske-datadef-15607">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Kjøp av redskap i fiske</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">41</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="15607" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LeiekostnaderBatMvFiske-datadef-15606">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Kostnader ved leie båt/redskap i fiske</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">42</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="15606" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="TransportmidlerForsikringAvgifterSkattemessig-datadef-7420">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">43</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="7420" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftskostnaderRegnskapsforerTelefonPortoBilSkattemessig-datadef-11642">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">44</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="11642" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftskostnaderAndreFiske-datadef-15584">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Andre driftskostnader i fiske</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">45</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="15584" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsmidlerSaldoavskrivning-datadef-8314">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">46</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="8314" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsutgifterFiske-datadef-8315">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">47</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="8315" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriftsutgifterEnefiske-datadef-8309">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">48</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="8309" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntektBeregnetEnefiske-datadef-8310">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">49</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="8310" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SarskilteFradragLottLonnsOgEllerHyremottakere-grp-443">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Beregning av særskilt fradrag for lott-, lønns- og/eller hyremottaker</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Avsnitt 2.  </p>
+                    <p/>
+                    <p>For lott-, lønns- og/eller hyremottakere  </p>
+                    <p/>
+                    <p>Dette avsnittet benyttes av alle som for noen del av inntektsåret har  hatt slik arbeidsinntekt fra fiske.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Utrekning av særskilt frådrag for lott-, lønns- og/eller hyremottakar</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Avsnitt 2.  </p>
+                    <p>for lott-, lønns- og/eller hyremottakarar  </p>
+                    <p/>
+                    <p>Dette avsnittet skal nyttast av alle som for nokon del av inntektsåret  har hatt slik arbeidsinntekt frå fiske.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GrunnlagForSarskiltFradrag-grp-2647"/>
+            </xs:sequence>
+            <xs:attribute fixed="443" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GrunnlagForSarskiltFradrag-grp-2647">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Grunnlag for særskilt fradrag</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Hele kroner</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Grunnlag for særskild frådrag</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                    <p>Heile kroner</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="MinstelottDelingsfangst-datadef-1903">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>241 Mannslotter og garantilott (minstelott) ved delingsfangst, evt.  redskapslott (kode 446 på lønns- og trekkoppgaven)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres alle lottinntekter/garantilott fra fiske som er drevet i lag  med andre, inkludert fordel ved eget uttak av fisk. Eiers/medeiers  mannslott skal spesifiseres i eget vedlegg.  </p>
+                                <p>Beløpet skal ikke omfatte inntekt av frakt, slep, berging o.l. og  heller ikke inntekt ved salg av tang og tare. Lottinntekter av arbeid  på land med f.eks egning av liner, sløying av fisk, reparasjon av
+                                    båt/redskap osv skal bare medtas dersom mottakeren er en såkalt  landmann som tilhører det faste mannskapet, og som utenom  line-fiskesesongen deltar om bord i fiskebåten på vanlig måte sammen  med resten av
+                                    mannskapet. En forutsetning for særskilt fradrag er  imidlertid at vedkommende hele året sett under ett er med om bord og  deltar i fisket i større utstrekning enn han er på land og utfører  arbeid som landmann for båtlaget.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>241 Mannslottar og garantilott (minstelott) ved delingsfangst, ev.  reiskapslott (kode 446 på løns- og trekkoppgåva)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her fører ein alle lottinntekter samt minstelott/ garantilott frå  fiske som er drive i lag med andre, medrekna fordel ved eige uttak av  fisk. Eigar/medeigar sin mannslott skal spesifiserast i eige  vedlegg.  </p>
+                                <p>Beløpet skal ikkje omfatte inntekt ved frakt, slep, berging o.l. og  heller ikkje inntekt ved sal av tang og tare. Lottinntekter av arbeid  på land med t.d. egning av liner, sløying av fisk, reparasjon av
+                                    båt/reiskap osb, skal berre takast med såframt mottakaren er ein  såkalla landmann som høyrer til det faste mannskapet, og som utanom  linefiskesesongen tek del i arbeidet om bord i fiskebåten på vanleg  måte saman
+                                    med resten av mannskapet. Ein føresetnad for særskilt  frådrag er i alle høve at vedkomande heile året sett under eitt er  med om bord og tek del i fisket i større utstrekning enn han er på  land og arbeider som
+                                    landmann for båtlaget.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkipperlotterBaslotterDriverlotter-datadef-1904">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>242 Skipper-, bas- og driverlotter</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Skipperlott til reder tas bare med her når rederen deltar aktivt i  fisket. Beløpet skal ikke omfatte inntekt ved frakt, slep, berging o  l og heller ikke inntekt ved salg av tang og tare.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>242 Skipper-, bas- og drivarlottar</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Skipperlott til reiar skal berre takast med her når reiaren tek aktivt  del i fisket. Beløpet skal ikkje omfatte inntekt ved frakt, slep,  berging o l, og heller ikkje inntekt ved sal av tang og tare.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="LonnHyreAktivtFiske-datadef-1905">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>243 Fast lønn/hyre ved aktiv deltakelse i fiske (kode 144 på lønns- og  trekkoppgaven), samt fordel ved eget uttak av fisk</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Beløpet skal inkludere fordel ved eget uttak av fisk.  </p>
+                                <p>Lønn/hyre under avspasering på land skal tas med i den utstrekning  denne er betaling for allerede utført arbeid under fiske om bord i  båten. Lønn for arbeid på land med f eks egning av liner, sløying av  fisk,
+                                    reparasjon av båt/redskap osv tas ikke med. Det samme gjelder  inntekt ved frakt, slep, berging o l, og inntekt ved salg av tang og  tare.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>243 Fast løn/hyre ved aktiv deltaking i fiske (kode 144 på løns- og  trekkoppgåva), og fordel ved eige uttak av fisk</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Beløpet skal inkludere fordel ved eige uttak av fisk.  </p>
+                                <p>Lønn/hyre under avspasering på land skal berre takast med dersom dette  er betaling for arbeid som allereie er gjort under fiske om bord i  båten. Løn for arbeid på land med t d egning av liner, sløying av  fisk,
+                                    reparasjon av båt/ reiskap osb skal ikkje takast med. Det same  gjeld inntekt ved frakt, slep, berging o l og inntekt ved sal av tang  og tare.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="TilskuddIkkeInnberettet-datadef-1906">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>244 Diverse tilskudd som ikke er innberettet på lønns- og  trekkoppgaven, og som ikke er tatt med som delingsfangst</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres mottatte tilskudd som ikke er tatt hensyn til ved  delingsfangst.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>244 Ymse tilskott som ikkje er lønnsmelde på lønns- og trekkoppgåva og  ikkje er tekne med som delingsfangst</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her fører ein mottekne tilskott som ikkje er teke omsyn til ved  delingsfangst.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FradragFor-grp-2645"/>
+                <xs:element minOccurs="0" ref="InntekterLottLonnHyremottaker-datadef-8311">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>250 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>250 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="UtgifterLottLonnHyremottaker-datadef-8312">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>260 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>260 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="InntekterBeregnetLottLonnHyremottaker-datadef-8313">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>270 Sum overføres til post 272</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>270 Sum skal overførast til post 272</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2647" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MinstelottDelingsfangst-datadef-1903">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Mannslotter og garantilott (minstelott) ved delingsfangst</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">50</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="1903" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkipperlotterBaslotterDriverlotter-datadef-1904">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">51</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="1904" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LonnHyreAktivtFiske-datadef-1905">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">52</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="1905" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="TilskuddIkkeInnberettet-datadef-1906">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">53</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="1906" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FradragFor-grp-2645">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Fradrag for</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Frådrag for</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="LonnskostnaderFiske-datadef-15603">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>251 Lønninger, hyrer ol.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her tas med de lønninger og hyrer som er dekket av egen mannslott, og  som ikke er tatt med i fellesutgiftene ved delingsfangst.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>251 Lønn, hyre ol.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her fører ein lønn og hyre som er dekte av eigen mannslott, og som  ikkje er tekne med i fellesutgiftene ved delingsfangst.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ArbeidsgiveravgiftFiske-datadef-15604">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>252 Arbeidsgiveravgift til folketrygden</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her tas med den arbeidsgiveravgiften som refererer seg til  utbetalingene som er ført i post 251</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>252 Arbeidsgivaravgift til folketrygda</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her fører ein arbeidsgivaravgift som gjeld utbetalingane som er førte  i post 251.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="Kostutgifter-datadef-1907">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>254 Kostutgifter som ikke inngår i fellesutgiftene</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres kostutgifter som ikke er ført til fradrag som fellesutgifter  før deling av fellesfangst.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>254 Kostutgifter som ikkje inngår i fellesutgiftene</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Her fører ein kostutgifter som ikkje er førte til frådrag som  fellesutgifter for deling av fellesfangst.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2645" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LonnskostnaderFiske-datadef-15603">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Lønninger, hyrer o.l i fiske</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">55</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="15603" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ArbeidsgiveravgiftFiske-datadef-15604">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Arbeidsgiveravgift i fiske</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">56</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="15604" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Kostutgifter-datadef-1907">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">57</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="1907" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntekterLottLonnHyremottaker-datadef-8311">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">54</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="8311" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UtgifterLottLonnHyremottaker-datadef-8312">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">58</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="8312" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntekterBeregnetLottLonnHyremottaker-datadef-8313">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">59</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="8313" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SarskiltFradragFellesposter-grp-445">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Fellesposter og beregning av særskilt fradrag</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Fellespostar og utrekning av særskilt frådrag</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="InntektBeregnetEnefiskePositiv-datadef-22295">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>271 Overført fra post 240</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>271 Overført frå post 240</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SykepengerLottfisker-datadef-15572">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>274 Sykepenger som fisker. Lønnsinnberettet på kode 146 for fisker som  bare har hyre og på kode 448 når sykepenger erstatter næringsinntekt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Avsnitt 3.  </p>
+                                <p/>
+                                <p>Fellesposter for beregning av særskilt fradrag.  </p>
+                                <p/>
+                                <p>Her føres sykepenger mv. når disse erstatter arbeidsinntekt av  fiske.  </p>
+                                <p>I denne posten føres også fødselspenger etter folketrygdloven kapittel  14 som erstatter arbeidsinntekt av fiske.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>274 Sjukepengar som fiskar. Lønnsmeldt på kode 146 for fiskar som  berre har hyre, og på kode 448 når sjukepengar erstattar  næringsinntekt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Avsnitt 3.  </p>
+                                <p/>
+                                <p>fellespostar for utrekning av særskild frådrag.  </p>
+                                <p/>
+                                <p>Her fører ein mottekne sjukepengar m.m. når desse kjem i staden for  arbeidsinntekt av fiske. I denne posten skal ein også føre  fødselspengar etter folketrygdlova kapittel 14 som erstattar  arbeidsinntekt av fiske.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SarfradragGrunnlag-datadef-1908">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>290 Grunnlag for beregning av særskilt fradrag innen fiske og fangst</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>290 Grunnlag for utrekning av særskilt frådrag innanfor fiske og  fangst</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FradragSarskiltFiskeMv-datadef-1353">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>300 Særskilt fradrag med inntil 30% av beløpet i post 290, maks kr.  80.000 (overf. til selvangivelsen post 3.2.14)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>300 Særskilt frådrag med inntil 30 % av beløpet i post 290, maks kr.  80.000 (skal overførast til sjølvmeldinga post 3.2.14)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="445" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntektBeregnetEnefiskePositiv-datadef-22295">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">60</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22295" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SykepengerLottfisker-datadef-15572">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Sykepenger som lottfisker</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">61</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="15572" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SarfradragGrunnlag-datadef-1908">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">62</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="1908" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FradragSarskiltFiskeMv-datadef-1353">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">63</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall5Max80000-repformat-294">
+                    <xs:attribute fixed="1353" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Heltall5Max80000-repformat-294">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">294</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Maks fradrag er 80 000 kroner</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Maks frådrag er 80 000 kroner</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="80000"/>
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

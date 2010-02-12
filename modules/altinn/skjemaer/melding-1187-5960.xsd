@@ -1,0 +1,2381 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--title='RF-1016: Skogskjema' lang='NOB'-->
+    <xs:element name="Skjema">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>RF-1016  Skogskjema</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Opplysninger for beregning av formuesverdi på skogeiendommer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>RF-1016  Skogskjema</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                    <p>Opplysningar for utrekning av formuesverdi på skogeigedommar</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GenerellInformasjon-grp-5677"/>
+                <xs:element minOccurs="0" ref="AvkastningssoneOgKorrigering-grp-6698"/>
+                <xs:element minOccurs="0" ref="TilvekstOgBeregningAvFormuesverdi-grp-6609"/>
+                <xs:element minOccurs="0" ref="AndreFormuesverdierKnyttetTilSkogeiendommen-grp-6613"/>
+                <xs:element minOccurs="0" ref="KravOmFordelingAvOkningISkogformuen-grp-6615"/>
+            </xs:sequence>
+            <xs:attribute fixed="1187" name="skjemanummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="5960" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="RF-1016" name="blankettnummer" type="xs:string" use="optional"/>
+            <xs:attribute fixed="Skogskjema" name="tittel" type="xs:string" use="optional"/>
+            <xs:attribute fixed="5676" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+            <xs:attribute name="etatid" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="974761076">
+                            <xs:annotation>
+                                <xs:documentation>SKATTEDIREKTORATET</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:anyAttribute/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GenerellInformasjon-grp-5677">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Generell informasjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Formuesverdien på særskilt lignede skogeiendommer skal revideres i  forbindelse med likningen for 2006. Forrige revisjon ble foretatt i  1989. Revisjonen vil bli foretatt i henhold til forskrift fra  Skattedirektoratet.
+                        Skjemaet skal leveres sammen med selvangivelsen  enten dette skjer på papir eller elektronisk. Det er viktig at navn  og fødselsnummer/organisasjonsnummer for henholdsvis  enkeltpersonforetak og selskap blir riktig utfyllt. Du
+                        må svare på  spørsmålet om du eier  skogeiendommen ved utgangen av året.  Opplysninger om gårdsnummer, bruksnummer, kommunenummer og  kommunenavn er alle opplysninger som er helt nødvendige for den  elektroniske behandlingen
+                        og må fylles ut nøyaktig.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Generell informasjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Formuesverdien på særskilt likna skogeigedommar skal reviderast i  samband med likninga for 2006. Førre revisjon vart gjennomført i  1989. Revisjonen vil bli gjennomført i samsvar med forskrift xxxx frå  Skattedirektoratet.  </p>
+                    <p/>
+                    <p>Skjemaet skal leverast saman med sjølvmeldinga, anten dette skjer på  papir eller elektronisk.  </p>
+                    <p/>
+                    <p>Det er viktig at namn og fødselsnummer/organisasjonsnummer for  høvesvis enkeltpersonføretak og selskap blir utfylte riktig.  </p>
+                    <p/>
+                    <p>Du må svare på spørsmålet om du eig skogeigedommen ved utgangen av  året.  </p>
+                    <p/>
+                    <p>Opplysningar om gardsnummer, bruksnummer, kommunenummer og kommunenamn  er alle opplysningar som er heilt nødvendige for den elektroniske  behandlinga, og må fyllast ut nøyaktig.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Enkeltpersonforetak-grp-6696"/>
+                <xs:element minOccurs="0" ref="Selskap-grp-6605"/>
+                <xs:element minOccurs="0" ref="Kontaktperson-grp-6697"/>
+                <xs:element minOccurs="0" ref="Eiendom-grp-6606"/>
+            </xs:sequence>
+            <xs:attribute fixed="5677" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Enkeltpersonforetak-grp-6696">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Enkeltpersonforetak</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Enkeltpersonføretak</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="OppgavegiverNavn-datadef-68">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>For enkelpersonforetak</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>For enkelpersonføretak</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverFodselsnummer-datadef-26">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Fødselsnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Fødselsnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="6696" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OppgavegiverNavn-datadef-68">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Navn på oppgavegiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="DEF">
+                    <p>Namn på oppgåvegjevar</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">1</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="68" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst175-repformat-8">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="175"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverFodselsnummer-datadef-26">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Fødselsnummer til oppgavegiveren</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">2</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst1111Modulus11-repformat-18">
+                    <xs:attribute fixed="26" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst1111Modulus11-repformat-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">18</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="11"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="Selskap-grp-6605">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Selskap</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Selskap</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="EnhetNavn-datadef-1">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Virksomhetens navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>for selskaper</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namnet til verksemda</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>for selskap</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetOrganisasjonsnummer-datadef-18">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>for selskap</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>for selskap</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="6605" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EnhetNavn-datadef-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Navn på juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Navn på årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="1" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EnhetOrganisasjonsnummer-datadef-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummeret til enheten</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Organisasjonsnummer til årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="18" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst99Modulus11-repformat-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">1</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="Kontaktperson-grp-6697">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Kontaktperson</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Kontaktperson</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="KontaktpersonNavn-datadef-2">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Henvendelse rettes til</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Henvendelse rettes til</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KontaktpersonTelefonnummer-datadef-3">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Telefonnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Telefonnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="6697" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KontaktpersonNavn-datadef-2">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">45</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst150-repformat-13">
+                    <xs:attribute fixed="2" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst150-repformat-13">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">13</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="150"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="KontaktpersonTelefonnummer-datadef-3">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Kontaktpersonens telefonnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">46</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst13-repformat-12">
+                    <xs:attribute fixed="3" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst13-repformat-12">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">12</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="13"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="Eiendom-grp-6606">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Eiendom</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Eigedom</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="SkogSalgHeleEiendommen-datadef-24985">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Eier du fortsatt skog ved utgangen av året?</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Eig du framleis skog ved utgangen av året?</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogeiendomGardsnummer-datadef-24986">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Gårdsnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Gårdsnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogeiendomBruksnummer-datadef-24987">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Bruksnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Bruksnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogeiendomKommunenummer-datadef-24972">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Kommunenummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Kommunenummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogeiendomKommune-datadef-24988">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Kommunenavn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Kommunenamn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="6606" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogSalgHeleEiendommen-datadef-24985">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">5</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+                    <xs:attribute fixed="24985" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg2JaNei-repformat-4">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="3"/>
+            <xs:enumeration value="Ja">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Yes</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Ja</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Ja</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Nei">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>No</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Nei</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Nei</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="SkogeiendomGardsnummer-datadef-24986">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst5BareTall-repformat-248">
+                    <xs:attribute fixed="24986" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst5BareTall-repformat-248">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">248</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="5"/>
+            <xs:pattern value="[0-9]{1,5}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="SkogeiendomBruksnummer-datadef-24987">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">7</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst4BareTall-repformat-249">
+                    <xs:attribute fixed="24987" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst4BareTall-repformat-249">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">249</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="4"/>
+            <xs:pattern value="[0-9]{1,4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="SkogeiendomKommunenummer-datadef-24972">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Kommunenummeret til kommunen hvor skogeiendom ligger</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="24972" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst44BareTall-repformat-10">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">10</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+                    <p>Enter positive integer with four digits</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Feltet krever positivt heltall med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Feltet krev positivt heiltal med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="4"/>
+            <xs:pattern value="[0-9]{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="SkogeiendomKommune-datadef-24988">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="24988" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst35-repformat-3">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="35"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="AvkastningssoneOgKorrigering-grp-6698">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>I Avkastningssone</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>I Avkastningssone</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Avkastningssone-grp-6608"/>
+                <xs:element minOccurs="0" ref="KorrigeringForHoyeDriftskostnader-grp-6607"/>
+            </xs:sequence>
+            <xs:attribute fixed="6698" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Avkastningssone-grp-6608">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Avkastningssone</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>De sonebetegnelser som skal settes i &lt;&lt;sonerubrikkene>>, står i  kommunetabellen bak i rettledningen. Ved hver kommune er oppgitt en  bokstav for prissone og et tall for kostnadssjablong. Bokstaven og  tallet for den
+                        kommunen skogeiendommen ligger i, føres i rubrikken.  Eks.: Skogen ligger i Seljord. Det som da ifølge tabellen skal føres  i rubrikkene, er B i prisrubrikken og 3 i kostnadsrubrikken.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Betegnelser for prissone og kostnadssjablong</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Avkastningssone</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Dei sonenemningane som skal setjast i sonerubrikkane, står i  kommunetabellen bak i rettleiinga. Ved kvar kommune er det oppgitt  ein bokstav for prissone og eit tal for kostnadssjablong. Bokstaven  og talet for den kommunen
+                        skogeigedommen ligg i, skal førast i  rubrikkane. Eks.: Skogen ligg i Seljord. Det som då ifølgje tabellen  skal førast i rubrikkane, er B i prisrubrikken og 3 i  kostnadsrubrikken.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                    <p>Betegnelsar for prissone og kostnadssjablong</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="SkogSone-datadef-24973">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Prissone</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Prissone</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogKostnadssjablon-datadef-27528">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Kostnadssjablong</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Kostnadssjablong</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="6608" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogSone-datadef-24973">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">10</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg3ABC-repformat-455">
+                    <xs:attribute fixed="24973" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg3ABC-repformat-455">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">455</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="1"/>
+            <xs:enumeration value="A">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>A</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>A</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="B">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>B</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>B</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="C">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>C</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>C</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="SkogKostnadssjablon-datadef-27528">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">11</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg3123-repformat-725">
+                    <xs:attribute fixed="27528" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg3123-repformat-725">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">725</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="1"/>
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>1</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>1</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>2</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>2</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="3">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>3</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>3</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="KorrigeringForHoyeDriftskostnader-grp-6607">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>II Korrigering for høye driftskostnader</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>De kostnadssjablongene som er satt for hver kommune, bygger på  gjennomsnittstall. Noen eiendommer vil av forskjellige grunner være  av en slik karakter at totale kostnader per utdrevet kubikk er  vesentlig høyere enn
+                        kostnadssjablongen som er angitt i  kommunetabellen. I dette feltet er det mulig å korrigere den  kommunesjablongen som du har ført opp i felt I, og som i  kommunetabellen er angitt i kroner.  </p>
+                    <p/>
+                    <p>Det er en forutsetning for å kreve korrigering at det kan dokumenteres  at de faktiske kostnadene per utdrevet kubikk er minst kr 13 høyere  enn den sjablongkostnaden som er angitt i kommunetabellen. Er dette  vilkåret
+                        oppfyllt, føres sonebetegnelsen opp med et høyere tall for  kostnad. Eks.: En skogeier i Trysil har i felt I ført B i  prisrubrikken og 1 i kostnadsrubrikken (hentet fra kommunetabellen).  Ett-tallet betyr at sjablongkostnaden
+                        for Trysil er kr 185 per  kubikk. Skogeieren mener å kunne dokumentere at kostnadene hos ham  utgjør ca. kr 200 per kubikk, og det er kr 15 høyere enn  sjablongkostnaden, kr 185. Han vil derfor korrigere. Han fører da opp
+                        sonebetegnelsen 2 i rubrikken for kostnadssjablong i felt II. Det vil  automatisk føre til at ved formuesberegningen av hans eiendom, vil  det bli lagt til grunn en kostnadssjablong på kr 220 per kubikk.  </p>
+                    <p/>
+                    <p>I det åpne feltet angis det hvilken dokumentasjon som ligger til grunn  og som likningskontoret på oppfordring kan få tilsendt. Eksempler på  dokumentasjon kan være regnskapsutdrag fra de senere årene som viser  kostnader per
+                        kubikk utdrevet virke. Dersom det ikke er foretatt  avvirkning på en del år, kan man få en uttalelse fra den lokale  skogforvaltningen om at eiendommen har så vanskelige driftsforhold at  det sannsynliggjør et kostnadsnivå som
+                        oppfyller vilkåret for  korreksjon.  </p>
+                    <p/>
+                    <p>Eiendommer som ligger i kostnadssone 1 (kr 185 per kubikk), og som har  ekstremt høye kostnader, høyere enn kr 38 over sjablongen (dvs. kr.  223 eller høyere per kubikk) kan, dersom kostnadene kan dokumenteres,  korrigeres opp
+                        i kostnadssone 3. De som har eiendommer i kommuner med  kostnadssone 3 (dvs. sjablongkostnad på kr 235), og som hevder å å ha  en vesentlig høyere kostnad, kan ikke foreta korrigering. Det antas  at eiendommer med kostnader på
+                        dette nivået hovedsaklig består av  arealer som ikke er økonomisk drivbare.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>II Korrigering for høge driftskostnader</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Dei kostnadssjablongane som er sette for kvar kommune, byggjer på  gjennomsnittstal. Nokre eigedommar er av forskjellige grunnar av ein  slik karakter at totale kostnader per utdriven m³ er vesentleg høgare  enn den
+                        kostnadssjablongen som er oppgitt i kommunetabellen. I dette  feltet er det mogleg å korrigere den kommunesjablongen som du har  ført opp i felt I, og som i kommunetabellen er oppgitt i kroner.  </p>
+                    <p/>
+                    <p>Det er ein føresetnad for å krevje korrigering at det kan  dokumenterast at dei faktiske kostnadene per utdriven m³ er minst kr  13 høgare enn den sjablongkostnaden som er oppgitt i kommunetabellen.  Er dette vilkåret oppfylt,
+                        skal sonenemninga førast opp med eit  høgare tal for kostnad. Eks.: Ein skogeigar i Trysil har i felt I  ført B i prisrubrikken og 1 i kostnadsrubrikken (henta frå  kommunetabellen). Eitt-talet betyr at sjablongkostnaden for
+                        Trysil er  kr 185 per m³. Skogeigaren meiner å kunne dokumentere at kostnadene  hos han utgjer ca. kr 200 per m³, og det er kr 15 høgare enn  sjablongkostnaden, kr 185. Han vil derfor korrigere. Han fører då opp  sonenemninga
+                        2 i rubrikken for kostnadssjablong i felt II. Det vil  automatisk føre til at ved formuesutrekninga av hans eigedom vil det  bli lagt til grunn ein kostnadssjablong på kr 220 per m³.  </p>
+                    <p/>
+                    <p>I det opne feltet gir du opp kva for dokumentasjon som ligg til grunn,  og som likningskontoret på oppfordring kan få tilsendt. Eksempel på  dokumentasjon kan vere rekneskapsutdrag frå dei siste åra som viser  kostnadene per m³
+                        utdrive virke. Dersom det ikkje er gjennomført  avverking på ein del år, kan ein få ei fråsegn frå den lokale  skogforvaltninga om at eigedommen har så vanskelege driftsforhold at  det sannsynleggjer eit kostnadsnivå som
+                        oppfyller vilkåret for  korreksjon.  </p>
+                    <p/>
+                    <p>Eigedommar som ligg i kostnadssone 1 (kr 185 per m³), og som har  ekstremt høge kostnader, høgare enn kr 38 over sjablongen (dvs. kr  223 eller høgare per m³), kan, dersom kostnadene kan dokumenterast,  korrigerast opp i
+                        kostnadssone 3. Dei som har eigedommar i kommunar  med kostnadssone 3 (dvs. sjablongkostnad på kr 235), og som hevdar å  ha ein vesentleg høgare kostnad, kan ikkje gjere korrigering. Ein går  ut frå at eigedommar med kostnader
+                        på dette nivået hovudsakleg består  av areal som ikkje er økonomisk drivverdige.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="SkogSpesielleDriftsforholdVerdireduserendeSone-datadef-24983">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Korrigering kan kun foretas dersom dokumenterbare  gjennomsnittskostnader per kubikk er vesentlig høyere enn de som er  lagt inn i den avkastningssonen som gjelder for kommunen. Se  rettledningen. Kostnadssjablongen
+                                    endres til:</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Korrigering kan berre gjerast dersom dokumenterbare  gjennomsnittskostnader per kubikk er vesentlig høgare enn dei som er  lagde inn i den avkastningssona som gjeld for kommunen. Sjå  rettleiinga. Kostnadssjablongen
+                                    skal endrast til:</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogSpesielleDriftsforholdVerdireduserendeForklaring-datadef-24984">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Kort begrunnelse for at driftskostnadene pr. kubikk antas å være  vesentlig høyere enn sjablongkostnaden for kommunen:</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Kort grunngiving for at driftskostnadene pr. kubikk er rekna for å  vere høgare enn sjablongkostnaden for kommunen:</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="6607" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogSpesielleDriftsforholdVerdireduserendeSone-datadef-24983">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">12</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg3123-repformat-725">
+                    <xs:attribute fixed="24983" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogSpesielleDriftsforholdVerdireduserendeForklaring-datadef-24984">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">13</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst1000-repformat-77">
+                    <xs:attribute fixed="24984" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst1000-repformat-77">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">77</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="1000"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="TilvekstOgBeregningAvFormuesverdi-grp-6609">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>III Opplysninger om tilveksten i økonomisk drivverdig skog</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>III Opplysningar om tilveksten i økonomisk drivverdig skog</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="OpplysningerOmTilvekstenIOkonomiskDriverdigSkog-grp-6610"/>
+                <xs:element minOccurs="0" ref="SkogArealDekar-datadef-25037">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogTilvekst-datadef-24982">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="BeregningAvFormuesverdiPaDenOkonomiskDrivverdigeSkogen-grp-6611"/>
+                <xs:element minOccurs="0" ref="KorrigeringForUnormalHoyAndelUngskog-grp-6612"/>
+            </xs:sequence>
+            <xs:attribute fixed="6609" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OpplysningerOmTilvekstenIOkonomiskDriverdigSkog-grp-6610">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>III Opplysninger om tilveksten i økonomisk drivverdig skog</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>I felt III beregnes den totale tilveksten på de økonomisk drivbare  arealene. For hver av de bonitetene som er angitt i skjemaet, føres  tilhørende areal i dekar. De som har skogbruks-/driftsplan vil kunne  hente opplysninger i
+                        denne. De som ikke har sådan plan eller av andre  grunner er usikre på arealfordelingen, kan ta kontakt med den lokale  skogforvaltningen i kommunen og få veiledning der.  </p>
+                    <p>Arealet i hver bonitetsklasse multipliseres med den sjablongtilveksten  som er fortrykt i skjemaet, og resultatet føres ut i kolonnen  &lt;&lt;Tilvekst i kubikk>>.  </p>
+                    <p>Både kolonnen &lt;&lt;Areal i dekar>> og &lt;&lt;Tilvekst i kubikk>> summeres.  Sistnevnte viser den totale tilveksten på eiendommens økonomisk  drivverdige arealer.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>III Opplysningar om tilveksten i økonomisk drivverdig skog</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>I felt III reknar du ut den totale tilveksten på dei økonomisk  drivverdige areala. For kvar av dei bonitetane som er oppgitt i  skjemaet, fører du tilhøyrande areal i dekar. Dei som har  skogbruks-/driftsplan, kan hente
+                        opplysningane i denne. Dei som ikkje  har ein slik plan, eller av andre grunner er usikre på  arealfordelinga, kan ta kontakt med den lokale skogforvaltninga i  kommunen og få rettleiing der.  </p>
+                    <p/>
+                    <p>Arealet i kvar bonitetsklasse skal multipliserast med den  sjablongtilveksten som er fortrykt i skjemaet, og resultatet skal  førast ut i kolonnen Tilvekst i m³.  </p>
+                    <p/>
+                    <p>Både kolonnen Areal i dekar og Tilvekst i m³ skal summerast. Det  sistnemnde viser den totale tilveksten på økonomisk drivverdige areal  på eigedommen.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="ArealIDa-grp-5679"/>
+                <xs:element minOccurs="0" ref="TilvekstIKbm-grp-5680"/>
+            </xs:sequence>
+            <xs:attribute fixed="6610" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ArealIDa-grp-5679">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Areal i da</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Areal i da</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="SkogBonitetSvartHoyAreal-datadef-24974">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Super bonitet 0,7 kbm pr da</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Super bonitet 0,7 kbm pr da</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogBonitetHoyAreal-datadef-24976">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Høy bonitet 0,4 kbm pr da</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Høg bonitet 0,4 kbm pr da</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogBonitetMiddelsAreal-datadef-24978">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Middels bonitet 0,25 kbm pr da</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Middels bonitet 0,25 kbm pr da</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogBonitetLavAreal-datadef-24980">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Lav bonitet 0,08 kbm pr da</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Låg bonitet 0,08 kbm pr da</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5679" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogBonitetSvartHoyAreal-datadef-24974">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">14</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="24974" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Heltall15-repformat-79">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">79</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="SkogBonitetHoyAreal-datadef-24976">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">16</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="24976" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogBonitetMiddelsAreal-datadef-24978">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">18</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="24978" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogBonitetLavAreal-datadef-24980">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">20</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="24980" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="TilvekstIKbm-grp-5680">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Tilvekst i kbm</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Tilvekst i kbm</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="SkogBonitetSvartHoyTilvekst-datadef-24975">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Super bonitet 0,7 kbm pr da</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Super bonitet 0,7 kbm pr da</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogBonitetHoyTilvekst-datadef-24977">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Høy bonitet 0,4 kbm pr da</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Høg bonitet 0,4 kbm pr da</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogBonitetMiddelsTilvekst-datadef-24979">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Middels bonitet 0,25 kbm pr da</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Middels bonitet 0,25 kbm pr da</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogBonitetLavTilvekst-datadef-24981">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Lav bonitet 0,08 kbm pr da</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Låg bonitet 0,08 kbm pr da</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5680" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogBonitetSvartHoyTilvekst-datadef-24975">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">15</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="24975" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogBonitetHoyTilvekst-datadef-24977">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">17</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="24977" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogBonitetMiddelsTilvekst-datadef-24979">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">19</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="24979" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogBonitetLavTilvekst-datadef-24981">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">21</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="24981" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogArealDekar-datadef-25037">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">22</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="25037" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogTilvekst-datadef-24982">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">23</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="24982" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="BeregningAvFormuesverdiPaDenOkonomiskDrivverdigeSkogen-grp-6611">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>IV Beregning av formuesverdi på den økonomisk drivverdige skogen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Her foretas beregningen av formuesverdien på den del av skogeiendommen  som er økonomisk drivverdig. Tilveksten, som hentes fra sum i felt  III, multipliseres med den avkastningsverdien som svarer til angitt  prissone og
+                        kostnadssjablong i felt I. OBS! De som har foretatt  korreksjon, må nytte kostnadssjablongen fra felt II.  </p>
+                    <p>Avkastningsverdiene for de forskjellige sonene er gjengitt  nedenfor:  </p>
+                    <p/>
+                    <p>A1 - kr 130  </p>
+                    <p>A2 - kr 105  </p>
+                    <p>A3 - kr  80  </p>
+                    <p>B1 - kr 115  </p>
+                    <p>B2 - kr  90  </p>
+                    <p>B3 - kr  65  </p>
+                    <p>C1 - kr  75  </p>
+                    <p>C2 - kr  50  </p>
+                    <p>C3 - kr  25  </p>
+                    <p/>
+                    <p>Den totale avkastningsverdien multipliseres så med skogfaktoren som er  8, og resultatet er den endelige formuesverdien dersom ikke skogen  har en unormal hogstklasse.  </p>
+                    <p>Har skogen en unormal hogstklassefordeling, som kan dokumenteres  gjennom skogbruks-/driftsplan eller av lokal skogmyndighet, nyttes  rubrikkene for reduksjon av den beregnede formuesverdien. Utgjør  ungskogen (hogstklasse 1, 2
+                        og 3) mer enn 70% av arealet, men mindre  enn 85%, reduseres formuesverdien med 15%. Utgjør arealet med ungskog  mer enn 85% av det økonomisk drivbare arealet, reduseres  formuesverdien med 25%.  </p>
+                    <p>Den endelig beregnede formuesverdien føres ned på linjen for sum  formuesverdi. Drives skogen som enkeltpersonforetak, føres beløpet  til ny post 4.3.4 i selvangivelsen. ANS/DA (skogsameie) fører beløpet  i selskapsoppgaven.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>IV Utrekning av formuesverdi på den økonomisk drivverdige skogen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Her reknar du ut formuesverdien på den delen av skogeigedommen som er  økonomisk drivverdig.  </p>
+                    <p/>
+                    <p>Tilveksten, som du hentar frå sum i felt III, skal multipliserast med  den avkastningsverdien som svarer til oppgitt prissone og  kostnadssjablong i felt I. OBS! Dei som har gjort korreksjon, må  nytte kostnadssjablongen frå
+                        felt II.  </p>
+                    <p/>
+                    <p>Avkastningsverdiane for dei forskjellige sonene er oppgitt  nedanfor:  </p>
+                    <p/>
+                    <p>A1 ? kr 130  </p>
+                    <p>A2 ? kr 105  </p>
+                    <p>A3 ? kr 80  </p>
+                    <p>B1 ? kr 115  </p>
+                    <p>B2 ? kr 90  </p>
+                    <p>B3 ? kr 65  </p>
+                    <p>C1 ? kr 75  </p>
+                    <p>C2 ? kr 50  </p>
+                    <p>C3 ? kr 25  </p>
+                    <p/>
+                    <p>Den totale avkastningsverdien skal så multipliserast med skogfaktoren,  som er 8, og resultatet er den endelege formuesverdien dersom ikkje  skogen har ei unormal hogstklassefordeling.  </p>
+                    <p/>
+                    <p>Har skogen ei unormal hogstklassefordeling, som kan dokumenterast  gjennom skogbruks-/driftsplan eller av lokal skogforvaltning, nyttar  du rubrikkane for reduksjon av den utrekna formuesverdien. Utgjer  ungskogen (hogstklasse
+                        1, 2 og 3) meir enn 70 % av arealet, men  mindre enn 85 %, skal formuesverdien reduserast med 15 %. Utgjer  arealet med ungskog meir enn 85 % av det økonomisk drivverdige  arealet, skal formuesverdien reduserast med 25 %.  </p>
+                    <p/>
+                    <p>Den endeleg utrekna formuesverdien skal førast ned på linja for sum  formuesverdi. Blir skogen driven som enkeltpersonføretak, skal  beløpet førast til ny post 4.3.4 i sjølvmeldinga. Selskap  (ANS/DA/skogsameige) fører beløpet
+                        i selskapsoppgåva.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="SkogAvkastningsverdiPerKubikkmeter-datadef-27405">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Avkastningsverdi per kubikk</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Avkastningsverdi per kubikk</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogTilvekstverdi-datadef-27406">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Tilvekstverdi</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Tilvekstverdi</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogFormuesverdiBrutto-datadef-27407">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Formuesverdi</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Formuesverdi</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="6611" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogAvkastningsverdiPerKubikkmeter-datadef-27405">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">24</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="27405" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopHeltall15-repformat-37">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">37</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="SkogTilvekstverdi-datadef-27406">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">25</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="27406" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogFormuesverdiBrutto-datadef-27407">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">26</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="27407" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KorrigeringForUnormalHoyAndelUngskog-grp-6612">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Korrigering for unormal høy andel ungskog</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Korrigering for unormalt høg prosentandel av ungskog</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="SkogUngskog70EllerMerVerdikorrigering-datadef-27408">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>- 15%</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Ungskogen (hogstklasse 1, 2 og 3) utgjør 70% eller mer av eiendommens  økonomisk drivbare areal</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>- 15%</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Ungskogen (hogstklasse 1, 2 og 3) utgjer 70% eller meir av det  økonomisk drivverdige arealet på eigedommen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogUngskog85EllerMerVerdikorrigering-datadef-27409">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>- 25%</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Ungskogen (hogstklasse 1, 2 og 3) utgjør 85% eller mer av eiendommens  økonomisk drivbare areal</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>- 25%</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Ungskogen (hogstklasse 1, 2 og 3) utgjer 85% eller meir av det  økonomisk drivverdige arealet på eigedommen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogOkonomiskDrivverdigFormuesverdi-datadef-27410">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Sum formuesverdi økonomisk drivverdig skog</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>overføres selvangivelsen/selskapsoppgaven</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Sum formuesverdi økonomisk drivverdig skog</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>skal overførast til sjølvmeldinga/selskapsoppgåva</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="6612" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogUngskog70EllerMerVerdikorrigering-datadef-27408">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">27</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="27408" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogUngskog85EllerMerVerdikorrigering-datadef-27409">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">28</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="27409" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogOkonomiskDrivverdigFormuesverdi-datadef-27410">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">29</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="27410" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AndreFormuesverdierKnyttetTilSkogeiendommen-grp-6613">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>V Andre formuesverdier knyttet til skogeiendommen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Disse formuesverdiene har inntil nå vært spesifisert på de manuelt  utfylte skogkortene som er oppbevart på likningskontorene. På  skogkortet er disse verdiene summert sammen med avkastningsverdien,  og de inngår således i den
+                        totale skogformuen som er oppgitt for  2005.  </p>
+                    <p>Fra og med 2006 skal formuesverdien på den økonomisk drivverdige  skogeiendommen og formuesverdien på andre formuesverdier beregnes  hver for seg, og de skal føres i selvangivelse/selskapsoppgave i  forskjellige poster.  </p>
+                    <p>I første linje i felt V beregnes formuesverdien av jaktrettigheter som  utnyttes av skogeieren selv. Det beregnes ikke formuesverdi dersom  det ikke er gitt fellingstillatelse på minst ett dyr på eiendommen.  Antall
+                        fellingstillatelser multipliseres med verdiene for fordel av  egen utnyttet jaktrett som framgår av Takseringsreglene 2006 §  3-2-5.  </p>
+                    <p>På linjene nedenfor føres kapitalisert formuesverdi på andre  formuesgoder knyttet til skogeiendommen. Eksempler på dette er  utleide jaktrettigheter og bortfestede tomter. Beregningen av  formuesverdiene skjer ved at brutto
+                        leie-/festeinntekter fra de  utleide rettighetene som framgår av næringsoppgaven, multipliseres  med en &lt;&lt;netto>> kapitaliseringsfaktor som for 2006 er satt til ?.  Summen av andre formuesverdier føres for
+                        enkeltpersonforetak i  selvangivelsen post 4.5.4. Selskaper (ANS/DA/skogsameie) fører  beløpet i selskapsoppgaven.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>V Andre formuesverdiar knytte til skogeigedommen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Desse formuesverdiane har inntil no vore spesifiserte på dei manuelt  utfylte skogkorta som er oppbevarte på likningskontora. På skogkortet  er desse verdiane summerte saman med avkastningsverdien, og dei  inngår såleis i den
+                        totale skogformuen som er oppgitt for 2005.  </p>
+                    <p/>
+                    <p>Frå og med 2006 skal formuesverdien på den økonomisk drivverdige  skogeigedommen og formuesverdien på andre formuesverdiar reknast ut  kvar for seg, og dei skal førast i sjølvmelding/selskapsoppgåve i  forskjellige postar.  </p>
+                    <p/>
+                    <p>I første linje i felt V reknar du ut formuesverdien av jaktrettar som  blir utnytta av skogeigaren sjølv. Det skal ikkje reknast ut  formuesverdi dersom det ikkje er gitt fellingsløyve på minst eitt dyr  på eigedommen. Talet på
+                        fellingsløyve skal multipliserast med  verdiane for fordel av eigen utnytta jaktrett som går fram av  Takseringsreglane 2006 § 3-2-5.  </p>
+                    <p/>
+                    <p>På linjene nedanfor fører du kapitalisert formuesverdi på andre  formuesgode som er knytte til skogeigedommen. Eksempel på dette er  utleigde jaktrettar og bortfesta tomter. Utrekninga av  formuesverdiane skjer ved at brutto
+                        leige-/festeinntekter frå dei  utleigde rettane som går fram av næringsoppgåva, blir multipliserte  med ein netto kapitaliseringsfaktor som for 2006 er sett til ???.  </p>
+                    <p/>
+                    <p>Summen av andre formuesverdiar skal for enkeltpersonføretak førast i  sjølvmeldinga post 4.5.4. Selskap (ANS/DA/skogsameige) fører beløpet  i selskapsoppgåva.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="SkogJaktretterBenyttetAvSkogeierAntall-datadef-27411">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Jaktretter nyttet av skogeieren selv - antall fellingstillatelser</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Jaktretter nytta av skogeigaren sjølv - kor mange fellingsløyve</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogJaktretterTakstsats-datadef-27412">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Sats etter takseringsreglene</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Sats etter takseringsreglane</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogJaktretterTakseringsverdi-datadef-27413">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Takseringsverdi</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Takseringsverdi</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element maxOccurs="100" minOccurs="0" ref="AndreUtleideRettigheter-grp-6614"/>
+                <xs:element minOccurs="0" ref="SkogAndreFormuesverdier-datadef-27418">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Sum andre formuesverdier</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>(overføres selvangivelsen post 4.5.4)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Sum andre formuesverdiar</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>skal overførast til sjølvmeldinga/selskapsoppgåva</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="6613" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogJaktretterBenyttetAvSkogeierAntall-datadef-27411">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">30</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="27411" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogJaktretterTakstsats-datadef-27412">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">31</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="27412" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogJaktretterTakseringsverdi-datadef-27413">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">32</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="27413" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AndreUtleideRettigheter-grp-6614">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Andre utleide rettigheter</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Andre utleigde rettar</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="SkogAndreUtleideRettigheter-datadef-27414">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Andre utleide rettigheter</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Andre utleigde rettar</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogAndreUtleideRettigheterBruttoLeieinntekter-datadef-27415">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Brutto leieinntekter</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Brutto leigeinntekter</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogAndreUtleideRettigheterFormuesverdi-datadef-27417">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Takseringsverdi</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Takseringsverdi</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="6614" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogAndreUtleideRettigheter-datadef-27414">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">33</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="27414" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogAndreUtleideRettigheterBruttoLeieinntekter-datadef-27415">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">34</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="27415" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogAndreUtleideRettigheterFormuesverdi-datadef-27417">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">35</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="27417" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogAndreFormuesverdier-datadef-27418">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">36</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="27418" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KravOmFordelingAvOkningISkogformuen-grp-6615">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>VI Krav om fordeling av økning i skogformuen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Skulle revisjonen av formuesverdiene på skogeiendommer medføre en  betydelig økning i skogformuen, kan formuesøkningen fordeles over tre  år. For at slik fordeling kan kreves må følgende fire vilkår være  oppfyllt:  </p>
+                    <p>Økningen i skogformue fra 2005 til 2006 må være minst kr 500 000.  </p>
+                    <p>Økningen i skogformue fra 2005 til 2006 må utgjøre minst 25%.  </p>
+                    <p>Den totale nettoformuen i 2005 må ha vært positiv.  </p>
+                    <p>Den totale nettoformuen i 2006 (per 1. jan 2007) må være kr. 500 000  høyere enn den totale nettoformuen i 2005.  </p>
+                    <p/>
+                    <p>I post A føres den nye formuesverdien på skogen fra felt IV med  tillegg av eventuelt andre formuesverdier fra felt V.  </p>
+                    <p>I post B føres formuesverdien på skogen fra 2005. Denne hentes fra  selvangivelsen 2005.  </p>
+                    <p>Post C vil vise økningen i formuesverdien fra 2005 til 2006. Denne må  være på kr. 500 000 eller høyere for at fordeling kan kreves.  </p>
+                    <p>I post D beregnes økningen i %. Denne må være minst 25% for at  fordeling kan kreves.  </p>
+                    <p>I post E føres den totale nettoformuen for 2006. Denne må være over kr  500 000. I post F føres den totale nettoformuen for 2005. Denne må  være positiv. I post G fremkommer økningen i total nettoformue fra  2005 til 2006.
+                        Denne må være minst kr 500 000 for at fordeling kan  kreves.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>VI Krav om fordeling av auke i skogformuen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Skulle revisjonen av formuesverdiane på skogeigedommar medføre ein  kraftig auke i skogformuen, kan formuesauken fordelast over tre år.  For at slik fordeling kan krevjast, må desse fire vilkåra vere  oppfylte:  </p>
+                    <p/>
+                    <p>Auken i skogformue frå 2005 til 2006 må vere minst kr 500 000.  </p>
+                    <p>Auken i skogformue frå 2005 til 2006 må utgjere minst 25 %.  </p>
+                    <p>Den totale nettoformuen i 2005 må ha vore positiv.  </p>
+                    <p>Den totale nettoformuen i 2006 (per 1. jan 2007) må vere kr 500 000  høgare enn den totale nettoformuen i 2005.  </p>
+                    <p/>
+                    <p>I post A fører du den nye formuesverdien på skogen frå felt IV med  tillegg av eventuelt andre formuesverdiar frå felt V.  </p>
+                    <p>I post B fører du formuesverdien på skogen frå 2005. Denne skal  hentast frå sjølvmeldinga 2005.  </p>
+                    <p>Post C viser auken i formuesverdien frå 2005 til 2006. Denne må vere  på kr 500 000 eller høgare for at fordeling kan krevjast.  </p>
+                    <p>I post D blir auken utrekna i %. Denne må vere minst 25 % for at  fordeling kan krevjast.  </p>
+                    <p/>
+                    <p>I post E fører du den totale nettoformuen for 2006. Denne må vere over  kr 500 000.  </p>
+                    <p>I post F fører du den totale nettoformuen for 2005. Denne må vere  positiv.  </p>
+                    <p>I post G kjem auken i total nettoformue frå 2005 til 2006 fram. Denne  må vere minst kr 500 000 for at fordeling kan krevjast.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="SkogFormuesverdi-datadef-27419">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>A) Skogformue 2006</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Sum formuesverdi økonomisk drivverdig skog og sum andre formuesverdier  knyttet til skogeiendommen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>A) Skogformue 2006</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Sum formuesverdi økonomisk drivverdig skog og sum andre formuesverdiar  knytte til skogeigedommen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogFormuesverdiFjoraret-datadef-27420">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>B) Skogformue 2005 - hentes fra selvangivelsen 2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>B) Skogformue 2005 - henta frå sjølvmeldinga 2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogFormuesverdiAretsVerdiendring-datadef-27421">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>C) Økning i skogformue fra 2005 til 2006</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>C) Auke i skogformue fra 2005 til 2006</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogFormuesverdiAretsVerdiendringProsent-datadef-27422">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>D) Økning i prosent:</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>C x 100 / B</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>D) Auke i prosent:</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>C x 100 / B</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogeiendomNettoverdi-datadef-27526">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>E) Nettoformue for 2006 - hentes fra selvangivelsen 2006</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>E) Nettoformue frå 2006 - henta frå sjølvmeldinga 2006</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogeiendomNettoverdiFjoraret-datadef-27423">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>F) Nettoformue for 2005 - hentes fra selvangivelsen 2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>F) Nettoformue for 2005 - henta frå sjølvmeldinga 2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogeiendomNettoverdiAretsVerdiendring-datadef-27527">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>G) Økning i nettoformue fra 2005 til 2006</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>G) Auke i nettoformue frå 2005 til 2006</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkogFormuesokningKrevesFordelt-datadef-27424">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Kreves formuesøkningen fordelt?</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>For å kunne kreve fordeling må:  </p>
+                                <p>1) Tallet i linje E være positivt  </p>
+                                <p>2) Tallet i linje C være 500.000 eller større  </p>
+                                <p>3) Prosenten i linje D være 25 eller høyere</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Krev du at formuesauken blir fordelt?</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>For å kunne krevje fordeling må:  </p>
+                                <p>1) Talet i linje E være positivt  </p>
+                                <p>2) Talet i linje C være 500.000 eller større  </p>
+                                <p>3) Prosenten i linje D være 25 eller høgare</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="6615" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogFormuesverdi-datadef-27419">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">37</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="27419" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogFormuesverdiFjoraret-datadef-27420">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">38</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="27420" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogFormuesverdiAretsVerdiendring-datadef-27421">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">39</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="27421" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogFormuesverdiAretsVerdiendringProsent-datadef-27422">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">40</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Desimal51Desimal-repformat-93">
+                    <xs:attribute fixed="27422" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Desimal51Desimal-repformat-93">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">93</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Feltet krever en desimal</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Feltet krev ein desimal</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="5"/>
+            <xs:pattern value="-{0,1}[0-9]{1,}\.[0-9]{1}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="SkogeiendomNettoverdi-datadef-27526">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">41</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="27526" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogeiendomNettoverdiFjoraret-datadef-27423">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">42</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="27423" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogeiendomNettoverdiAretsVerdiendring-datadef-27527">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">43</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="27527" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkogFormuesokningKrevesFordelt-datadef-27424">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">44</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+                    <xs:attribute fixed="27424" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

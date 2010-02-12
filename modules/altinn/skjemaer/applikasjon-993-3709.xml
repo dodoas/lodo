@@ -1,0 +1,874 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1400: Melding til folkeregisteret om flytting</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-993-3710.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5179/RegistrerteOpplysninger-grp-5185/OppgavegiverNavn-datadef-68"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5179/RegistrerteOpplysninger-grp-5185/PersonKommunenummer-datadef-23055"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5179/RegistrerteOpplysninger-grp-5185/PersonKommune-datadef-23056"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5179/RegistrerteOpplysninger-grp-5185/PersonGateVei-datadef-21458"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5179/RegistrerteOpplysninger-grp-5185/PersonHusnummer-datadef-21459"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5179/RegistrerteOpplysninger-grp-5185/PersonHusbokstav-datadef-21460"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5179/RegistrerteOpplysninger-grp-5185/PersonEiendomNavn-datadef-21461"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5179/RegistrerteOpplysninger-grp-5185/PersonPostnummer-datadef-16774"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5179/RegistrerteOpplysninger-grp-5185/PersonPoststed-datadef-16775"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-5179/TypeFlyttingOgFlyttedato-grp-5186/PersonFlyttingType-datadef-21469" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-5179/TypeFlyttingOgFlyttedato-grp-5186/PersonFlyttedato-datadef-21468" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/PersonerSomFlytter-grp-5182/FolgendePersonerMelderFlytting-grp-5183/PersonFodselsnummer-datadef-21488"/>
+            <xforms:bind readOnly="true" ref="/Skjema/PersonerSomFlytter-grp-5182/FolgendePersonerMelderFlytting-grp-5183/PersonEtternavn-datadef-21489"/>
+            <xforms:bind readOnly="true" ref="/Skjema/PersonerSomFlytter-grp-5182/FolgendePersonerMelderFlytting-grp-5183/PersonFornavn-datadef-21490"/>
+            <xforms:bind readOnly="true" ref="/Skjema/PersonerSomFlytter-grp-5182/FolgendePersonerMelderFlytting-grp-5183/PersonMellomnavn-datadef-21491"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1400 Melding til folkeregisteret om flytting innenlands</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Plikten til å melde flytting  </p>
+                <p>Alle som flytter, plikter å gi melding til folkeregisteret i  innflyttingskommunen innen åtte dager etter at flyttingen fant  sted.  </p>
+                <p>Det er straffbart dersom man unnlater å melde flytting til  folkeregisteret. Det samme gjelder dersom man gir uriktige  opplysninger.  </p>
+                <p/>
+                <p>Utdrag av de viktigste bostedsreglene  </p>
+                <p>- En person skal som hovedregel registreres som bosatt der han  regelmessig tar sin døgnhvile.  </p>
+                <p>- Ektefeller regnes som bosatt der de har felles hjem, selv om en av  dem har sin virksomhet i en annen kommune og derfor i lengre tid må  oppholde seg i denne.  </p>
+                <p>- En person som skiftevis tar sin døgnhvile på to eller flere steder,  regnes normalt som bosatt i den kommunen hvor den overveiende  døgnhvile tas. For enslige pendlere gjelder særlige regler. Nærmere  opplysninger gis av
+                    folkeregisteret.  </p>
+                <p>- En enslig skoleelev/student skal som hovedregel velge registrering  på studiested eller hjemsted.  </p>
+                <p/>
+                <p>Klageadgang  </p>
+                <p>Folkeregisterets registrering av flyttingen er et enkeltvedtak som kan  påklages til fylkesskattekontoret (for Oslo er det Sentralkontoret  for folkeregistrering). Klagen skal sendes via folkeregisteret innen  tre uker fra den dato
+                    man mottar kvittering for at flyttingen er  registrert.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1400 Melding til folkeregisteret om flytting innanlands</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Plikta til å melde flytting  </p>
+                <p>Alle som flytter, pliktar å gi melding til folkeregisteret i  innflyttingskommunen innan åtte dagar etter at flyttinga skjedde.  </p>
+                <p>Det er straffbart dersom ein let vere å melde flytting til  folkeregisteret. Det same gjeld dersom ein gir uriktige  opplysningar.  </p>
+                <p/>
+                <p>Utdrag av dei viktigaste bustadreglane  </p>
+                <p>- Ein person skal som hovudregel vere registrert som busett der han  til vanleg tek døgnkvila si.  </p>
+                <p>- Ektepar vert rekna som busett der den felles heimen ligg, sjølv om  ein av dei har verksemda si i ein annan kommune og derfor i lengre  tid må opphalde seg der.  </p>
+                <p>- Ein person som tek døgnvkila si skiftevis på to eller fleire stader,  blir normalt rekna som busett i den kommunen han tek mesteparten av  døgnkvila si. For einslege pendlarar gjeld særskilde reglar. Nærare  opplysningar blir
+                    gitt folkeregisteret.  </p>
+                <p>- Ein einsleg skoleelev/student skal som hovudregel velje registrering  på studiestaden eller heimstaden.  </p>
+                <p/>
+                <p>Klagerett  </p>
+                <p>Registreringa av flyttinga i folkeregisteret er eit enkeltvedtak som  kan klagast inn for fylkesskattekontoret (for Oslo er det  Sentralkontoret for folkeregistrering). Klagen må sendast om  folkeregisteret innan tre veker frå den
+                    datoen ein mottar kvittering  for at flyttinga er registrert.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-5179">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-5179/RegistrerteOpplysninger-grp-5185">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Følgende opplysninger er registrert i folkeregisteret</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Desse opplysningane er registrerte i folkeregisteret</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5179/RegistrerteOpplysninger-grp-5185/OppgavegiverNavn-datadef-68">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5179/RegistrerteOpplysninger-grp-5185/PersonKommunenummer-datadef-23055">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5179/RegistrerteOpplysninger-grp-5185/PersonKommune-datadef-23056">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bostedskommune</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Bustadkommune</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5179/RegistrerteOpplysninger-grp-5185/PersonGateVei-datadef-21458">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5179/RegistrerteOpplysninger-grp-5185/PersonHusnummer-datadef-21459">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5179/RegistrerteOpplysninger-grp-5185/PersonHusbokstav-datadef-21460">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5179/RegistrerteOpplysninger-grp-5185/PersonEiendomNavn-datadef-21461">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5179/RegistrerteOpplysninger-grp-5185/PersonPostnummer-datadef-16774">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5179/RegistrerteOpplysninger-grp-5185/PersonPoststed-datadef-16775">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-5179/TypeFlyttingOgFlyttedato-grp-5186">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Type flytting og flyttedato</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Type flytting og flyttedato</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-5179/TypeFlyttingOgFlyttedato-grp-5186/PersonFlyttingType-datadef-21469">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Innen nåværende kommune</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Innan kommunen</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Til annen kommune</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Til annan kommune</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Meldingen gjelder flytting</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Meldinga gjeld flytting</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5179/TypeFlyttingOgFlyttedato-grp-5186/PersonKommunenummerEndring-datadef-21481">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5179/TypeFlyttingOgFlyttedato-grp-5186/PersonKommuneEndring-datadef-21480">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommune</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Ved flytting til annen kommune, må kommunens navn oppgis.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kommune</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Ved flytting til annan kommune må ein gi opp namnet på kommunen.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5179/TypeFlyttingOgFlyttedato-grp-5186/PersonFlyttedato-datadef-21468">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Flyttedato</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Hvis flyttedato er fram i tid, vil flyttingen ikke bli registrert i  folkeregisteret før den har funnet sted.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Må alltid fylles ut</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Flyttedato</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Dersom flyttedato er fram i tid, vil flyttinga ikkje bli registrert  før ein har flytt.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Må alltid fyllast ut</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/NyBostedsadresse-grp-5180">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Ny bostedsadresse</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Bostedsadressen man flytter til. Man skal fylle ut enten gateadresse  eller stedsadresse, ikke begge.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Enten gateadresse eller stedsadresse skal fylles ut, ikke begge</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Ny bustadadresse</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Bustadadressa ein flytter til. Ein skal fylle ut anten gateadresse  eller stadnamn, ikkje begge.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NON">
+                    <p>Anten gateadresse eller stadnamn skal fyllast ut, ikkje begge</p>
+                </xforms:hint>
+                <xforms:group ref="/Skjema/NyBostedsadresse-grp-5180/Gateadresse-grp-5189">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgi ny gateadresse for bosted</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Skal fylles ut hvis stedet har en gateadresse. Gate-/veinavn og  husnummer må oppgis. Hvis det er en bokstav i tilknytning til  husnummeret, skal denne oppgis i feltet Husbokstav. I tillegg skal  postnr. og poststed alltid
+                            fylles ut.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Gi opp ny gateadresse for bustad</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Skal fyllast ut dersom staden har ei gateadresse. Gate-/vegnamn og  husnummer må givast opp. Dersom det er ein bokstav i tilknyting til  husnummeret, skal denne givast opp i feltet Husbokstav. I tillegg  skal postnr. og
+                            poststad alltid fyllast ut.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/NyBostedsadresse-grp-5180/Gateadresse-grp-5189/PersonGateVeiEndring-datadef-21471">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Gate-/veinavn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Gate-/vegnamn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/NyBostedsadresse-grp-5180/Gateadresse-grp-5189/PersonGatekodeEndring-datadef-21470">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/NyBostedsadresse-grp-5180/Gateadresse-grp-5189/PersonHusnummerEndring-datadef-21472">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Husnr.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Bokstaver i tilknytning til husnummeret oppgis i feltet Husbokstav.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Husnr.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Bokstavar i tilknyting til husnummeret skal givast opp i feltet  Husbokstav.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/NyBostedsadresse-grp-5180/Gateadresse-grp-5189/PersonHusbokstavEndring-datadef-21473">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Husbokstav</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Husbokstav fylles ut hvis det er en bokstav i tilknytning til  husnummeret.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Husbokstav</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Husbokstav skal fyllast ut dersom det er ein bokstav i tilknyting til  husnummeret.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/NyBostedsadresse-grp-5180/Gateadresse-grp-5189/PersonBolignummerEndring-datadef-21479">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bolignr.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Hvis det er et hus med flere leiligheter, skal bolignummer oppgis som  en del av bostedsadressen. I hus med flere leiligheter skal hver  leilighet ha fått tildelt et adressemerke hvor bolignummeret står.  Dette
+                                adressemerket skal være festet i dørkarmen. Bolignummeret  består av fem tegn, én bokstav og 4 siffer. Bokstaven H står for  hovedetasje, U for underetasje, K for kjelleretasje og L for  loftsetasje. De to første
+                                tallene sier hvilken etasje inngangen til  leiligheten ligger i og de to siste tallene viser leilighetens nummer  i etasjen. Hvis det ikke er noe adressemerke i dørkarmen, kan huseier  eller gårdsbestyrer muligens gi
+                                opplysning om bolignummeret.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>H/U/K/L og 4 siffer</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Bustadnr.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Dersom det er eit hus med fleire leilegheiter, skal bustadnummeret  givast opp som ein del av bustadadressa. I hus med fleire  leilegheiter skal kvar leilegheit ha fått tildelt eit adressemerke  der bustadnummeret står.
+                                Dette adressemerket skal vere festa i  dørkarmen. Bustadnummeret består av fem teikn, éin bokstav og 4  siffer. Bokstaven H står for hovudetasje, U for underetasje, K for  kjellaretasje og L for loftsetasje. Dei to
+                                første tala seier kva for  etasje inngangen til leilegheita ligg i, og dei to siste tala viser  leilegheitsnummeret i etasjen. Dersom det ikkje er noko adressemerke  i dørkarmen, kan huseigar eller gardsstyrar kanskje
+                                gi opplysning om  bustadnummeret.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>H/U/K/L og 4 siffer</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/NyBostedsadresse-grp-5180/Gateadresse-grp-5189/PersonPostnummerEndring-datadef-21482">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/NyBostedsadresse-grp-5180/Gateadresse-grp-5189/PersonPoststedEndring-datadef-21483">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/NyBostedsadresse-grp-5180/Stedsadresse-grp-5190">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgi ny stedsadresse for bosted</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Stedsadresse skal kun fylles ut hvis det ikke er gateadresse på  stedet. For stedsadresser må alltid gårds- og bruksnummer oppgis.  </p>
+                        <p>Alle grunneiendommer i Norge har et gårds- og bruksnummer. I de  tilfellene eiendommen ikke har gateadresse, brukes gårds-, bruks- og  eventuelt festenummer samt et eventuelt undernummer som  adresseidentifikasjon. Gårds-
+                            og bruksnummer tildeles av kommunen og  framgår bl.a. av skjøtet på eiendommen. I tillegg skal postnr. og  poststed alltid fylles ut.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Gi opp nytt stadnamn for bustad</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Stadnamn skal berre fyllast ut dersom det ikkje er gateadresse på  staden. For stadnamn må ein alltid gi opp gards- og bruksnummer. Alle  grunneigedommar i Noreg har eit gards- og bruksnummer. I dei tilfella  eigedomen
+                            ikkje har gateadresse, bruker ein gards-, bruks- og  eventuelt festenummer og eit eventuelt undernummer som  adresseidentifikasjon. Gards- og bruksnummer blir tildelt av kommunen  og går fram m.a. av skøytet på eigedommen.
+                            I tillegg skal postnr. og  poststad alltid fyllast ut.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/NyBostedsadresse-grp-5180/Stedsadresse-grp-5190/PersonEiendomNavnEndring-datadef-21474">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Stedsnavn</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Evt. navn på eiendom</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Stadnamn</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Evt. namn på eigedommen</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/NyBostedsadresse-grp-5180/Stedsadresse-grp-5190/PersonEiendomGardsnummerEndring-datadef-21475">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Gårdsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Gårdsnr. kan ikke starte med null (feltet skal ikke ha ledende nuller)</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Gardsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Gardsnr. kan ikkje starte med null (feltet skal ikkje ha leiande  nullar)</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/NyBostedsadresse-grp-5180/Stedsadresse-grp-5190/PersonEiendomBruksnummerEndring-datadef-21476">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bruksnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Bruksnr. kan ikke starte med null (feltet skal ikke ha ledende nuller)</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Bruksnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Bruksnr. kan ikkje starte med null (feltet skal ikkje ha leiande  nullar)</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/NyBostedsadresse-grp-5180/Stedsadresse-grp-5190/PersonEiendomFestenummerEndring-datadef-21477">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Festenr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Festenr. kan ikke starte med null (feltet skal ikke ha ledende nuller)</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Festenr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Festenr. kan ikkje starte med null (feltet skal ikkje ha leiande  nullar)</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/NyBostedsadresse-grp-5180/Stedsadresse-grp-5190/PersonEiendomUndernummerEndring-datadef-21478">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Undernr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Undernr. kan ikke starte med null (feltet skal ikke ha ledende nuller)</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Undernr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Undernr. kan ikkje starte med null (feltet skal ikkje ha leiande  nullar)</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Postadresse-grp-5181">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Postadresse</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Man skal her angi hvilken postadresse man ønsker at skatteetaten skal  benytte. Det kan være bostedsadressen, eventuelt med en tilleggslinje  (f.eks. c/o-adresse) eller en annen adresse (f.eks. postboksadresse  eller firmaadresse).</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Postadresse</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Her skal ein gi opp kva for ei postadresse ein ønskjer at skatteetaten  skal bruke. Det kan vere bustadadresse, eventuelt med ei  tilleggslinje (f.eks. c/o-adresse) eller ei anna adresse (f.eks.  postboksadresse eller firmaadresse).</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/Postadresse-grp-5181/PersonTilleggsadresse-datadef-23057">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Tilleggslinje til bostedsadressen</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>F.eks. c/o-adresse</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Tilleggslinje til bustadadressa</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>F.eks. c/o-adresse</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:group ref="/Skjema/Postadresse-grp-5181/NorskPostadresse-grp-5192">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Norsk postadresse</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Postadressen må være fullstendig, dvs. den må alltid inneholde postnr.  og poststed.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>F.eks. postboksadresse</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Norsk postadresse</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Postadressa må vere fullstendig, dvs. ho må alltid innehalde postnr.  og poststad.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>F.eks. postboksadresse</p>
+                    </xforms:hint>
+                    <xforms:repeat id="repeat_PersonPostadresse-grp-5257" nodeset="/Skjema/Postadresse-grp-5181/NorskPostadresse-grp-5192/PersonPostadresse-grp-5257">
+                        <xforms:group ref="/Skjema/Postadresse-grp-5181/NorskPostadresse-grp-5192/PersonPostadresse-grp-5257">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:input ref="/Skjema/Postadresse-grp-5181/NorskPostadresse-grp-5192/PersonPostadresse-grp-5257/PersonPostadresse-datadef-23058">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Adresse</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Adresse</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:repeat>
+                    <xforms:input ref="/Skjema/Postadresse-grp-5181/NorskPostadresse-grp-5192/PersonPostadressePostnummer-datadef-23059">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Postadresse-grp-5181/NorskPostadresse-grp-5192/PersonPostadressePoststed-datadef-23060">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Postadresse-grp-5181/UtenlandskPostadresse-grp-5193">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Utenlandsk postadresse</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Postadressen må være fullstendig, dvs. at for postadresser i utlandet  må land også oppgis.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Utanlandsk postadresse</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Postadressa må vere fullstendig, dvs. at for postadresser i utlandet  må land og givast opp.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/Postadresse-grp-5181/UtenlandskPostadresse-grp-5193/PersonPostadresseLand-datadef-23061">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Land</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Land må alltid fylles ut for utenlandske postadresser.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Land</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Land må alltid fyllast ut for utanlandske postadresser.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Postadresse-grp-5181/UtenlandskPostadresse-grp-5193/PersonAdresseLandkode-datadef-21493">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/PersonerSomFlytter-grp-5182">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Personer som flytter</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Personer som ikke er preutfylt kan legges til</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Personar som flytter</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NON">
+                    <p>Personar som ikkje er preutfylte kan føyast til</p>
+                </xforms:hint>
+                <xforms:repeat id="repeat_FolgendePersonerMelderFlytting-grp-5183" nodeset="/Skjema/PersonerSomFlytter-grp-5182/FolgendePersonerMelderFlytting-grp-5183">
+                    <xforms:group ref="/Skjema/PersonerSomFlytter-grp-5182/FolgendePersonerMelderFlytting-grp-5183">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Følgende personer melder flytting</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Desse personane melder flytting</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/PersonerSomFlytter-grp-5182/FolgendePersonerMelderFlytting-grp-5183/PersonFodselsnummer-datadef-21488">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fødselsnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fødselsnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/PersonerSomFlytter-grp-5182/FolgendePersonerMelderFlytting-grp-5183/PersonEtternavn-datadef-21489">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Etternavn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Etternamn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/PersonerSomFlytter-grp-5182/FolgendePersonerMelderFlytting-grp-5183/PersonFornavn-datadef-21490">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fornavn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fornamn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/PersonerSomFlytter-grp-5182/FolgendePersonerMelderFlytting-grp-5183/PersonMellomnavn-datadef-21491">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Mellomnavn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Mellomnamn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/PersonerSomFlytter-grp-5182/FolgendePersonerMelderFlytting-grp-5183/PersonSivilstand-datadef-21492">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>1</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ugift</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Ugift</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>2</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Gift</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Gift</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>3</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Enke/enkemann</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Enkje/enkjemann</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>4</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Skilt</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Skilt</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>5</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Separert</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Separert</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>6</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Registrert partner</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Registrert partner</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>7</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Separert partner</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Separert partner</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>8</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Skilt partner</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Skilt partner</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>9</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Gjenlevende partner</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Gjenlevande partner</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sivilstand</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Sivilstand er preutfylt med det som er registrert i folkeregisteret.  Dersom sivilstand ikke stemmer med det som er registrert, skal ny  status oppgis.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sivilstand</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Sivilstand er preutfylt med det som er registrert i folkeregisteret.  Dersom sivilstand ikkje stemmer med det som er registrert, skal ny  status givast opp.</p>
+                            </xforms:help>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/PersonerSomFlytter-grp-5182/FolgendePersonerMelderFlytting-grp-5183/PersonYrke-datadef-21495">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Yrke/beskjeftigelse</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>For personer over 18 år skal yrke/beskjeftigelse etter flytting  oppgis. Eksempler på yrke/beskjeftigelse er snekker, tannlege,  student, kontorsansatt, hjemmeværende og pensjonist.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Yrke/sysselsetjing</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>For personar over 18 år skal yrke/sysselsetjing etter flytting givast  opp. Døme på yrke/sysselsetjing er snikkar, tannlege, student,  kontortilsett, heimeverande og pensjonist.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/PersonerSomFlytter-grp-5182/FolgendePersonerMelderFlytting-grp-5183/PersonArbeidsgiver-datadef-21496">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Arbeidsgiver</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Yrkesaktive skal her oppgi arbeidsgivers navn.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Arbeidsgivar</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Yrkesaktive skal her gi opp arbeidsgivars namn.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/PersonerSomFlytter-grp-5182/FolgendePersonerMelderFlytting-grp-5183/PersonArbeidskommune-datadef-23062">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Arb.kommune</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Yrkesaktive skal her oppgi i hvilken kommune de har sitt arbeidssted.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Arb.kommune</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Yrkesaktive skal her gi opp i kva for kommune dei har arbeidsstaden  sin.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/PersonerSomFlytter-grp-5182/FolgendePersonerMelderFlytting-grp-5183/PersonArbeidskommuneKommunenummer-datadef-23063">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter positive integer with four digits</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever positivt heltall med fire siffer</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev positivt heiltal med fire siffer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Kontaktinformasjon-grp-5184">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Kontaktinformasjon</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Preutfylte telefonnr. og e-postadresser er hentet fra melders profil i  Altinn. Dersom preutfylt kontaktinformasjon ikke er korrekt, bør  korrekte opplysninger oppgis.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Kontaktinformasjon</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Preutfylte telefonnr. og e-postadresser er henta frå meldars profil i  Altinn. Dersom preutfylt kontaktinformasjon ikkje er korrekt, bør  korrekte opplysningar givast opp.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/Kontaktinformasjon-grp-5184/KontaktpersonTelefonnummer-datadef-3">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Telefon privat</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Telefon privat</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Kontaktinformasjon-grp-5184/KontaktpersonTelefonnummerArbeid-datadef-23065">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Telefon arbeid</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Telefon arbeid</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Kontaktinformasjon-grp-5184/KontaktpersonMobiltelefonnummer-datadef-7626">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Telefon mobil</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Telefon mobil</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Kontaktinformasjon-grp-5184/KontaktpersonEPost-datadef-23064">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>E-postadresse</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>E-postadresse</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

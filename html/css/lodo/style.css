@@ -1,0 +1,111 @@
+#beholder {
+    background-color: #fff;
+    background-image: url('/lodo/kalkulator.jpg');
+    background-position: 250px 80px;
+    background-repeat: no-repeat;
+    font: x-small verdana,sans-serif; 
+	width: 741px;
+	margin: 10px auto 10px auto;
+	border: 1px solid #acacae;
+}
+
+#topp {
+    background-color: #fff;
+    background-image: url('/lodo/topp.jpg');
+    background-position: top right;
+    background-repeat: no-repeat; 
+    height: 82px;
+}
+
+#innhold {
+	background-color: transparent;
+	padding: 20 25px 25 25px;
+	margin: 0 20px 0 180px;
+}
+
+#side-a {
+	background-color: transparent;
+	float: left;
+	width: 180px;
+	margin-right: 5px;
+	padding: 5px;
+}
+
+#meny {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+#bunn {
+	background-color: #F5F5F5;
+	clear: both;
+    font-size: x-small;
+    color: #666;
+    text-align: center;
+}
+
+#menyliste {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+#menyliste li {
+    background-color: #f5f5f5;
+    list-style-type: none;
+    border: 1px solid #acacae;
+    margin-top: 3px;
+    margin-left: 5px;
+}
+
+#menyliste a {
+    background-color: transparent;
+    padding: 5px; 
+    color: #666;
+    display: block;
+    text-decoration: none;
+ }
+
+#menyliste a:hover {
+    background-color: #dcdcdc;
+    color: #000;
+    padding: 5px;
+    text-decoration: none;
+}
+
+img.logo {
+    padding-left: 5px;
+    margin-left: 5px;
+}
+
+h1 { 
+    color: #834E00;
+}
+
+h3 {
+    color: #666;
+    font-size: small;
+}
+
+a {
+    color: #c88825;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a:hover {
+    color: #502200;
+    background-color: transparent;
+}
+
+form {
+    padding-left: 5px;
+}
+
+input {
+    border: 1px solid #c88825;
+}
+

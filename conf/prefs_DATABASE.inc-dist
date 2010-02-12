@@ -1,0 +1,119 @@
+<?
+##################################################################
+# Based on EasyComposer technology
+# Copyright Thomas Ekdahl, 2004, thomas@ekdahl.no, http://www.ekdahl.no/
+# All variables should be upper case
+
+##################################################################
+#Database communication - this must be right for anything to work
+#This is an array so it is easy to add connections to other databases
+$_SETUP['DB_TYPE']['0']         = "mysqli";          #Database type
+$_SETUP['DB_NAME']['0']         = "INTERN";         #Default database to use
+$_SETUP['DB_USER']['0']         = "root";           #User in database
+$_SETUP['DB_PASSWORD']['0']     = "";               #Password to user in database
+$_SETUP['DB_SERVER']['0']       = "localhost";      #Server where the database is
+$_SETUP['DB_START']['0']        = 0;                #Default start row
+$_SETUP['DB_OFFSET']['0']       = 30;               #Defines how many rows to display at once
+$_SETUP['DB_LIMIT']['0']        = 50;               #Defines max number of rows to get
+$_SETUP['DB_ALLOW']['0']        = "(Active = '1' AND ValidFrom <= NOW() AND ValidTo >= NOW())"; #Define the criterias for an article beeing published
+
+##################################################################
+#Basic setup information
+$_SETUP['COMPANY_ID']       = 1;                                    #CompanyID
+$_SETUP['SLASH']            = "/";
+$_SETUP['HOME_DIR']         = "/var/www/html/www.lodo.no";                      #Path to installation directory fopr cvs checkout
+$_SETUP['DOWNLOAD_DIR']     = "$_SETUP[HOME_DIR]/html/download";
+$_SETUP['MEDIABANK_DIR']    = $_SETUP['HOME_DIR'].$_SETUP['SLASH']."html".$_SETUP['SLASH']."auto".$_SETUP['SLASH']."mediastorage".$_SETUP['SLASH'];
+$_SETUP['XML_VERSION']      = "";
+$_SETUP['CSS']              = "/css/default";                       #Possible to have complet path
+$_SETUP['LANGUAGE']         = "no";
+$_lib['sess']->dispatch         = "index.php?";
+
+##################################################################
+#HTML Headers
+$_SETUP['XML']              = "<?xml version=\"1.0\" encoding=\"iso-8859-1\"?>";
+$_SETUP['DOCTYPE']          = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">";
+$_SETUP['HTML']             = "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"no\">";
+
+##################################################################
+#Frame control
+$_SETUP['INTERFACE']        = "lib";             #login interface
+$_SETUP['FIRSTPAGE']        = "login_screen";    #login template
+$_SETUP['MAINFRAME']        = "lodo.main";
+$_SETUP['LEFTFRAME']        = "internett.left";
+$_SETUP['TOPFRAME']         = "internett.login";
+
+$_SETUP['LOGIN_INTERFACE']  = "lodo"; #Interface the user gets after login in
+$_SETUP['LOGIN_FIRSTPAGE']  = "lodo.main"; #use lib.frame for frameset
+
+$_SETUP['LOGIN']['EXTRANETT']['FIRSTPAGE']    = "extranett.index2";
+$_SETUP['LOGIN']['EXTRANETT']['MAINFRAME']    = "extranett.main";
+$_SETUP['LOGIN']['EXTRANETT']['LEFTFRAME']    = "extranett.left";
+$_SETUP['LOGIN']['EXTRANETT']['TOPFRAME']     = "extranett.login";
+
+$_SETUP['LOGIN']['INTRANETT']['FIRSTPAGE']    = "intranett.index2"; #lib frame uses this for mainpage
+$_SETUP['LOGIN']['INTRANETT']['MAINFRAME']    = "sla.list";         #index2 uses this for mainpage
+$_SETUP['LOGIN']['INTRANETT']['LEFTFRAME']    = "intranett.left";
+$_SETUP['LOGIN']['INTRANETT']['TOPFRAME']     = "lib.navigation";
+
+$_SETUP['LOGIN']['TECHNICAL']['FIRSTPAGE']    = "technical.index2";
+$_SETUP['LOGIN']['TECHNICAL']['MAINFRAME']    = "technical.main";
+$_SETUP['LOGIN']['TECHNICAL']['LEFTFRAME']    = "technical.left";
+$_SETUP['LOGIN']['TECHNICAL']['TOPFRAME']     = "technical.login";
+
+$_SETUP['LOGIN']['SHOP']['FIRSTPAGE']         = "shop.index2";
+$_SETUP['LOGIN']['SHOP']['MAINFRAME']         = "shop.main";
+$_SETUP['LOGIN']['SHOP']['LEFTFRAME']         = "shop.left";
+$_SETUP['LOGIN']['SHOP']['TOPFRAME']          = "shop.login";
+
+$_SETUP['LOGIN']['LODO']['FIRSTPAGE']         = "lodo.index2";
+$_SETUP['LOGIN']['LODO']['MAINFRAME']         = "lodo.main";
+$_SETUP['LOGIN']['LODO']['LEFTFRAME']         = "lodo.left";
+$_SETUP['LOGIN']['LODO']['TOPFRAME']          = "lodo.login";
+
+$_SETUP['LOGIN']['INTERNETT']['FIRSTPAGE']    = "internett.index2";
+$_SETUP['LOGIN']['INTERNETT']['MAINFRAME']    = "internett.main";
+$_SETUP['LOGIN']['INTERNETT']['LEFTFRAME']    = "internett.left";
+$_SETUP['LOGIN']['INTERNETT']['TOPFRAME']     = "internett.login";
+
+$_SETUP['LOGIN']['KINDERGARTEN']['FIRSTPAGE'] = "kindergarten.index2";
+$_SETUP['LOGIN']['KINDERGARTEN']['MAINFRAME'] = "kindergarten.main";
+$_SETUP['LOGIN']['KINDERGARTEN']['LEFTFRAME'] = "kindergarten.left";
+$_SETUP['LOGIN']['KINDERGARTEN']['TOPFRAME']  = "kindergarten.login";
+
+$_SETUP['LOGIN']['COLLECTOR']['FIRSTPAGE']    = "collector.index";
+$_SETUP['LOGIN']['COLLECTOR']['MAINFRAME']    = "collector.main";
+$_SETUP['LOGIN']['COLLECTOR']['LEFTFRAME']    = "collector.left";
+$_SETUP['LOGIN']['COLLECTOR']['TOPFRAME']     = "collector.login";
+
+##################################################################
+#Set default debug level
+$_SETUP['DEBUG']  = true;  #Debug level
+
+##################################################################
+#Publish settings
+$_SETUP['TEMPLATE_DIR']     =   "$_SETUP[HOME_DIR]/html/template"; #Default template dir
+#This should be used on all queries in all modules
+
+##################################################################
+#Max size on http uploaded images
+$_SETUP['FILE_MAX_HEIGHT']  = "900";            #Max height for picture
+$_SETUP['FILE_MAX_WIDTH']   = "900";            #Max width for picture
+
+##################################################################
+#Security level
+$_SETUP['SECURITY']['ROLE']             = false; #Turns on and off role control checks
+$_SETUP['SECURITY']['SESSION']          = true;  #Check ip number, browser, protocol to cookies - hash
+$_SETUP['SECURITY']['SESSIONTIMEOUT']   = 3600;  #Login timeout value
+$_SETUP['SECURITY']['INTRANETT']        = true;
+$_SETUP['SECURITY']['LODO']             = true;
+
+##################################################################
+#Server admin url
+$_SETUP['SERVER_ADMIN']     = "http://" . $_SERVER['HTTP_HOST'] . "/"; #SERVER_NAME
+$_SETUP['SERVER_ADMIN_SSL']   = "https://" . $_SERVER['HTTP_HOST'] . "/"; #SERVER_NAME
+
+##################################################################
+#Logging
+$_SETUP['LOG']['DIRECTORY']             = "/var/log"; #Where to log to file
+?>

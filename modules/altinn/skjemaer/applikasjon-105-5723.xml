@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1241: Oppgave over betaling for pass og stell av barn</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-105-5724.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-4896/OppgaveEndringsoppgave-datadef-21819" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-4896/Inntektsar-datadef-692" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4896/Oppgavegiver-grp-4897/RapporteringsenhetOrganisasjonsnummer-datadef-21772" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4896/Oppgavegiver-grp-4897/RapporteringsenhetNavn-datadef-21771"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4896/Oppgavegiver-grp-4897/RapporteringsenhetAdresse-datadef-21773"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4896/Oppgavegiver-grp-4897/RapporteringsenhetPostnummer-datadef-21774"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4896/Oppgavegiver-grp-4897/RapporteringsenhetPoststed-datadef-21775"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1241 Oppgave over betaling for pass og stell av barn</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Det er offentlig eide barnehager (herunder barneparker) og offentlig  organiserte skolefritidsordninger som i følge loven er pliktige til å  levere oppgaver over pass og stell av barn. Normalt vil det være  kommunen som er
+                    oppgavepliktig. Der en kommune administrerer  innlevering ved flere bydeler, er kommunen i prinsippet den  oppgavepliktige. Med offentlig organisert skolefritidsordning menes  ordninger som drives og/eller administreres av
+                    kommunen.  </p>
+                <p/>
+                <p>Oppgaveplikten følger av ligningsloven § 6-6 bokstav e, jf. § 6-16  bokstav c og forskrift av 18. november 1994.  </p>
+                <p/>
+                <p>Private barnehager og skolefritidsordninger kan etter forskriften  levere oppgaver over pass og stell av barn, men det er da en  forutsetning at vilkårene i forskriften blir fulgt. Innrapporteringen  fra de private barnehagene gjør
+                    at flere foreldre/foresatte får  forhåndsutfylt foreldrefradraget sammen med de øvrige poster på  selvangivelsen. Flest mulig barnehager må derfor forsøke å levere  oppgaver over flest mulig betalere i barnehagen.  </p>
+                <p/>
+                <p>For mer informasjon, se rettledning for utfylling og innlevering av  likningsoppgaver fra barnehager/skolefritidsordninger over pass og  stell av barn, SKD 59/00.  </p>
+                <p/>
+                <p>Opplysninger om ev. innlevering av likningsoppgaver over pass og stell  barn kan fås ved henvendelse til Skattedirektoratet på telefon 22 07  70 00.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1241 Oppgåve over betaling for pass og stell av barn</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Det er offentleg eigde barnehagar (mellom anna barneparkar) og  offentleg organiserte skulefritidsordningar som ifølgje lova er  pliktige til å levere oppgåver over pass og stell av barn. Normalt  vil det vere kommunen som er
+                    oppgåvepliktig. Der ein kommune  administrerer innlevering ved fleire bydelar, er kommunen i  prinsippet den oppgåvepliktige. Med offentleg organisert  skulefritidsordning meiner vi ordningar som blir drivne og/eller
+                    administrerte av kommunen.  </p>
+                <p/>
+                <p>Oppgåveplikta følgjer av likningslova § 6-6 bokstav e, jf. § 6-16  bokstav c og forskrift av 18. november 1994.  </p>
+                <p/>
+                <p>Private barnehagar og skulefritidsordningar kan etter forskrifta  levere oppgåver over pass og stell av barn, men det er då ein  føresetnad at vilkåra i forskrifta blir følgde. Innrapporteringa frå  dei private barnehagane gjer at
+                    fleire foreldre/føresette får  førehandsutfylt foreldrefrådraget saman med dei andre postane på  sjølvmeldinga. Flest mogleg barnehagar må derfor prøve å levere  oppgåver over flest mogleg betalarar i barnehagen.  </p>
+                <p/>
+                <p>For meir informasjon, sjå rettleiinga for utfylling og innlevering av  likningsoppgåver frå barnehagar/skulefritidsordningar over pass og  stell av barn, SKD 59/00.  </p>
+                <p/>
+                <p>Opplysningar om eventuell innlevering av likningsoppgåver over pass og  stell barn kan du få hos Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-4896">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-4896/OppgaveEndringsoppgave-datadef-21819">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ordinæroppgave</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ordinæroppgåve</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Endringsoppgave</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Endringsoppgåve</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgavetype</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Ordinæroppgaver  </p>
+                        <p>Ordinæroppgaver er alle oppgaveleveranser som ikke er  endringsoppgaver. Det kan være flere ordinæroppgaver. Beløpet oppgis  i hele kroner.  </p>
+                        <p/>
+                        <p>Endringsoppgaver  </p>
+                        <p>Endringsoppgaver er oppgaver som endrer ordinæroppgaver. Det kan være  flere endringsoppgaver.  </p>
+                        <p/>
+                        <p>Beløpet på endringsoppgaver skal kun bestå av differansen mellom  korrekt beløp og tidligere innrapporterte beløp. Reduksjon eller  annullering av tidligere innrapportert beløp merkes med negativt (-)  fortegn foran
+                            endringsbeløpet. Beløpet oppgis i hele kroner.  </p>
+                        <p/>
+                        <p>Sum endringsoppgave og ordinæroppgave kan totalt ikke bli mindre enn  0.  </p>
+                        <p/>
+                        <p>På endringsoppgaver må fødsels- eller organisasjonsnummer være  identisk med tidligere innrapportert oppgave.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Oppgåvetype</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Ordinæroppgåver  </p>
+                        <p>Ordinæroppgåver er alle oppgåveleveransar som ikkje er  endringsoppgåver. Det kan vere fleire oppgåveleveransar. Gi opp  beløpet i heile kroner.  </p>
+                        <p/>
+                        <p>Endringsoppgåver  </p>
+                        <p>Endringsoppgåver er oppgåver som endrar ordinæroppgåver. Det kan vere  fleire endringsoppgåver.  </p>
+                        <p/>
+                        <p>Beløpet på endringsoppgåver skal berre bestå av differansen mellom  korrekt beløp og tidlegare innrapporterte beløp. Reduksjon eller  annullering av tidlegare innrapportert beløp skal merkjast med  negativt (-) forteikn
+                            framfor endringsbeløpet. Beløpet skal givast  opp i heile kroner.  </p>
+                        <p/>
+                        <p>Sum endringsoppgåve og ordinæroppgåve kan totalt ikkje bli mindre enn  0.  </p>
+                        <p/>
+                        <p>På endringsoppgåver må fødsels- eller organisasjonsnummer vere  identisk med tidlegare innrapportert oppgåve.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-4896/Inntektsar-datadef-692">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Inntektsår</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Det kan kun leveres likningsoppgaver for forrige inntektssår, dvs  totalt innbetalt beløp for hver enkelt betaler pr. 31.12. året før  innrapporteringsåret.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Inntektsår</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Det kan berre leverast likningsoppgåver for førre inntektssår, dvs  totalt innbetalt beløp for kvar enkelt betalar pr. 31.12. året før  innrapporteringsåret.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-4896/Oppgavegiver-grp-4897">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgavegiver</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Opplysninger om oppgavegiver er hentet fra Enhetsregisteret.  Eventuelle endringer i disse opplysningene kan bare gjøres via  henvendelse til Enhetsregisteret.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Oppgåvegivar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Opplysningar om oppgåvegivar er henta frå Einingsregisteret.  Eventuelle endringar i desse opplysningane kan berre gjerast ved å ta  kontakt med Einingsregisteret.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4896/Oppgavegiver-grp-4897/RapporteringsenhetOrganisasjonsnummer-datadef-21772">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Org.nr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Org.nr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4896/Oppgavegiver-grp-4897/RapporteringsenhetNavn-datadef-21771">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4896/Oppgavegiver-grp-4897/RapporteringsenhetAdresse-datadef-21773">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4896/Oppgavegiver-grp-4897/RapporteringsenhetPostnummer-datadef-21774">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4896/Oppgavegiver-grp-4897/RapporteringsenhetPoststed-datadef-21775">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Betalere-grp-4900">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Betalere</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Betalare</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_OversiktOverBetalere-grp-4899" nodeset="/Skjema/Betalere-grp-4900/OversiktOverBetalere-grp-4899">
+                    <xforms:group ref="/Skjema/Betalere-grp-4900/OversiktOverBetalere-grp-4899">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Oversikt over betalere</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Oversikt over betalare</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Betalere-grp-4900/OversiktOverBetalere-grp-4899/BetalerFodselsnummer-datadef-2305">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>F.nr.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Ved registrering av betaler skal det kun fylles ut ett fødselsnummer  eller organisasjonsnummer pr. betaler. Det er ingen mulighet til å  registrere både fødselsnummer og organisasjonsnummer for en og samme
+                                    betaler.  </p>
+                                <p>Dersom fødselsnummer eller organisasjonsnummer ikke er angitt, vil  eventuelt andre opplysninger om betaler (f.eks. navn, adresse, beløp  mv.) ikke bli registrert hos Skattedirektoratet.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>11 siffer</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>F.nr.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Ved registrering av betalar skal det berre fyllast ut eitt  fødselsnummer eller organisasjonsnummer pr. betalar. Det er ikkje  høve til å registrere både fødselsnummer og organisasjonsnummer for  ein og same
+                                    betalar.  </p>
+                                <p>Dersom fødselsnummer eller organisasjonsnummer ikkje er oppgitt, vil  eventuelt andre opplysningar om betalar (f.eks. namn, adresse, beløp  oa.) ikkje bli registrerte hos Skattedirektoratet.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>11 siffer</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Betalere-grp-4900/OversiktOverBetalere-grp-4899/BetalerOrganisasjonsnummer-datadef-21820">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Org.nr.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Org.nr.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Betalere-grp-4900/OversiktOverBetalere-grp-4899/BetalerNavn-datadef-2303">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Navn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Namn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Betalere-grp-4900/OversiktOverBetalere-grp-4899/BetalerAdresse-datadef-2304">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Adresse</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Adresse</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Betalere-grp-4900/OversiktOverBetalere-grp-4899/BetalerPostnummer-datadef-11795">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Postnr.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Postnr.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Betalere-grp-4900/OversiktOverBetalere-grp-4899/BetalerPoststed-datadef-11796">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Poststed</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Poststad</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Betalere-grp-4900/OversiktOverBetalere-grp-4899/BetalingBelop-datadef-2307">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Betalt beløp</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Beløpet oppgis i hele kroner</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Betalt beløp</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Gje opp beløpet i heile kroner</p>
+                            </xforms:hint>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/Betalere-grp-4900/BetalingTotal-datadef-21821">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Totalt betalt beløp</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Det totale beløpet viser summen av alle oppgitte beløp, uavhengig av  hvilke andre felt som er fylt ut pr. betaler.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Totalt betalt beløp</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Det totale beløpet viser summen av alle oppgitte beløp, uavhengig av  kva for andre felt som er fylte ut pr. betalar.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Betalere-grp-4900/BetalerAntall-datadef-21822">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Totalt antall betalere</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Totalt antall betalere utgjør antall rader der det er oppgitt  informasjon om betaler, uavhengig av hvilke felt som er utfylt.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Totalt tal betalare</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Kor mange betalarar det er i alt, går fram av talet på rader der det  er oppgitt informasjon om betalar, uavhengig av kva for felt som er  utfylte.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

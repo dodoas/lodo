@@ -1,0 +1,44 @@
+<?
+class language {
+  var $_language;
+  var $_action;
+
+  #language
+  function language($args) {
+    global $_SETUP;
+    $this->_action = $args['action'];
+    require_once  "$_SETUP[HOME_DIR]/code/lib/lang/" . $args['language'] . ".inc";
+  }
+
+function s($args) {
+   global $_form3, $_dbh, $_dsn, $_sess;
+   #TODO: if edit, return with form element
+   if($this->_action == 'edit' and !isset($args['static'])) {
+     if($this->_language[$args[id]]) {
+       $args['table'] = 'language';
+       $args['field'] = strtoupper($_sess->language);
+       #find pk in db
+       $query         = "select LanguageID from language where LanguageName = '$args[id]'";
+       $row           = $_lib['db']->get_row(array('query' => $query));
+       $args['pk'] 	  = $row->LanguageID;
+       if($args['pk']) {
+         #print "field: $args[field], pk: $args[pk], query: $query<br>";
+         $args['value'] = $this->_language[$args['id']];
+         return $_form3->text($args);
+       } else {
+         return "Missing language string from language table: $args[id]";
+       }
+     } else {
+       return "";
+     }
+     
+   } else {
+     if($this->_language[$args['id']]) {
+       return $this->_language[$args['id']];
+     } else {
+       return "Missing language string: $args[id]";
+     }
+   }
+  }
+}
+?>

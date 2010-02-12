@@ -1,0 +1,1194 @@
+<?
+#should split to factory pattern with incoming and outgoing invoices.
+includelogic('invoice/invoice');
+
+class lodo_fakturabank_fakturabank {
+    #private $host           = 'fakturabank.cavatina.no';
+    private $host           = 'fakturabank.no';
+    #private $protocol       = 'http';
+    private $protocol       = 'https';
+    private $username       = '';
+    private $password       = '';
+    private $login          = false;
+    private $timeout        = 30; 
+    private $retrievestatus = '';
+    private $credentials    = '';
+    private $OrgNumber      = '';
+    public  $startexectime  = '';
+    public  $stopexectime   = '';
+    public  $diffexectime   = '';
+    public  $error          = '';
+    public  $success        = false;
+    private $ArrayTag       = array(
+                                 'Invoice'          => true,
+                                 'cac:InvoiceLine'  => true,
+                                 'InvoiceLine'      => true,
+                                 'TaxSubtotal'      => true
+                                );
+
+    function __construct() {
+        global $_lib;
+        $this->startexectime  = microtime();
+
+        $this->username         = $_lib['sess']->get_person('FakturabankUsername');
+        $this->password         = $_lib['sess']->get_person('FakturabankPassword');
+        $this->retrievestatus   = $_lib['setup']->get_value('fakturabank.status');
+
+        if(is_array($args)) {
+            foreach($args as $key => $value) {
+                $this->{$key} = $value;
+            }
+        }
+
+        if(!$this->username || !$this->username) {
+            $_lib['message']->add("Fakturabank brukernavn og passord er ikke definert p&aring; brukeren din");
+        } else {
+            $this->login = true;
+        }
+
+        $old_pattern    = array("/[^0-9]/", "/_+/", "/_$/");
+        $new_pattern    = array("", "", "");
+        $this->OrgNumber= strtolower(preg_replace($old_pattern, $new_pattern , $_lib['sess']->get_companydef('OrgNumber'))); 
+
+        $this->credentials = "$this->username:$this->password";
+    }
+
+    function __destruct() {
+        $this->stopexectime   = microtime();
+        $this->diffexectime   = $this->stopexectime - $this->startexectime;
+    }
+    
+    ####################################################################################################
+    #Get a list of all outgoing invoices from fakturabank
+    public function outgoing() {
+        global $_lib;
+        #https://fakturabank.no/invoices/outgoing.xml?orgnr=981951271
+
+        $page       = "invoices/outgoing.xml";
+        $params     = "?orgnr=$this->OrgNumber";
+        $params     .= "&supplier_status=created"; #Only retrieve with status 'created'
+        $params     .= "&order=invoiceno";
+        
+        $url    = "$this->protocol://$this->host/$page$params";
+        $_lib['sess']->debug($url);
+
+        $invoicesO = $this->retrieve($page, $url);
+        return $this->validate_outgoing($invoicesO);
+    }
+
+    ####################################################################################################
+    #Get a list of all incoming invoices from fakturabank
+    public function incoming() {
+        global $_lib;
+        #https://fakturabank.no/invoices?orgnr=981951271
+
+        $page       = "invoices";
+        $params     = "?orgnr=" . $this->OrgNumber . '&order=issue_date';
+        if($this->retrievestatus) $params .= '&customer_status=' . $this->retrievestatus;
+        $url    = "$this->protocol://$this->host/$page$params";
+        $_lib['message']->add($url);
+
+        $invoicesO = $this->retrieve($page, $url);
+        return $this->validate_incoming($invoicesO);
+    }
+    
+    ####################################################################################################
+    #READ XML    
+    private function retrieve($page, $url) {
+        global $_lib;
+
+        if(!$this->login) return false;
+        
+        $headers = array(
+            "GET ".$page." HTTP/1.0",
+            "Content-type: text/xml;charset=\"utf-8\"",
+            "Accept: application/xml",
+            "Cache-Control: no-cache",
+            "Pragma: no-cache",
+            "SOAPAction: \"run\"",
+            "Authorization: Basic " . base64_encode($this->credentials)
+        );
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        #curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->timeout);
+
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1); #Is this safe?
+        #curl_setopt($ch, CURLOPT_CAINFO, "path:/ca-bundle.crt"); 
+
+        $xml_data           = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            $_lib['message']->add("Nettverkskobling til Fakturabank ikke OK");
+            $_lib['message']->add("Error: " . curl_error($ch));
+        } else {
+            $_lib['message']->add("Nettverkskobling til Fakturabank OK");
+        }
+        curl_close($ch);
+        
+        $size = strlen($xml_data);
+
+        if(substr($xml_data,0,9) != '<Invoices') {
+
+            $_lib['message']->add($xml_data);
+
+        } else {
+    
+            if($size) {
+                includelogic('xmldomtoobject/xmldomtoobject');
+                $domtoobject = new empatix_framework_logic_xmldomtoobject(array('arrayTags' => $this->ArrayTag));
+                #print "\n<hr>$xml_data\n<hr>";
+                $invoiceO    = $domtoobject->convert($xml_data);
+    
+            } else {
+                $_lib['message']->add("XML Dokument tomt - pr&oslash;v igjen: $url");            
+            }
+        }
+        return $invoiceO;
+    }
+    
+    ################################################################################################
+    # Sets the given status and comment on an invoice in Fakturabank with a given internal FakturabankID
+    #input: id (FakturabankI internal ID, status[registered], comment (without & signs)
+    #outoupt: changed status event in Fakturabank
+    private function setEvent($id, $status, $comment) {
+        global $_lib;
+        $retstatus = true;
+        
+        ############################################################################################
+        #Make Event XML
+        $dom            = new DOMDocument( "1.0", "UTF-8" );
+        $dom_event      = $dom->createElement('event');
+        $dom_name       = $dom->createElement('name', $status);
+        $dom_comment    = $dom->createElement('comment', $comment);
+        $dom_company    = $dom->createElement('company');
+        $dom_identifier = $dom->createElement('identifier', $this->OrgNumber);
+
+        $dom_company->appendChild($dom_identifier);
+        $dom_event->appendChild($dom_name);
+        $dom_event->appendChild($dom_comment);
+        $dom_event->appendChild($dom_company);
+        $dom->appendChild($dom_event);
+        $xml = $dom->saveXML();        
+
+        ############################################################################################
+        #Set event status on fakturabank server
+        $page   = "invoices/$id/events";
+        $url    = "$this->protocol://$this->host/$page";
+
+        #print("setEvent: $url: $xml");
+
+        $headers = array(
+            "GET " . $page . " HTTP/1.0",
+            "Content-type: text/xml;charset=\"utf-8\"",
+            "Accept: application/xml",
+            "Cache-Control: no-cache",
+            "Pragma: no-cache",
+            "SOAPAction: \"run\"",
+            "Authorization: Basic " . base64_encode($this->credentials)
+        );
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
+        #curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->timeout);
+
+        $returndata = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            $_lib['message']->add("Error: " . curl_error($ch));
+            $retstatus = false;
+        } else {
+            #$_lib['message']->add("Satt event: $returndata");
+        }
+        curl_close($ch);
+        return $retstatus;
+    }
+
+    ################################################################################################
+    #validate - update Accountplans and statuses - ready for journaling flag.
+    private function validate_outgoing($invoicesO) {
+        global $_lib, $accounting;
+        
+        foreach($invoicesO->Invoice as &$InvoiceO) {
+
+            $i++;
+            if (!($i % 2)) {
+                $InvoiceO->Class = "r1";
+            } else {
+                $InvoiceO->Class = "r0";
+            }
+
+            #New variables we add in this process
+            $InvoiceO->Status        = '';
+            $InvoiceO->Journal       = true;
+            $InvoiceO->Journaled     = false;
+            $InvoiceO->JournalID     = $InvoiceO->ID;
+            $InvoiceO->VoucherType   = 'S';
+            $InvoiceO->AccountPlanID = 0;
+            $InvoiceO->MotkontoAccountPlanID = 0;
+            $InvoiceO->Period        = substr($InvoiceO->IssueDate, 0, 7);
+
+            $urlH = explode('/', $InvoiceO->UBLExtensions->UBLExtension->ExtensionContent->URL);
+            $InvoiceO->FakturabankID = $urlH[4]; #Last element is the internalID.
+
+            #Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to oly look in the correct records? No?
+            list($account, $SchemeID)  = $this->find_reskontro($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID, 'customer');
+            if($account) {
+                $InvoiceO->AccountPlanID   = $account->AccountPlanID;
+                
+                if(!$accounting->is_valid_accountperiod($InvoiceO->Period, $_lib['sess']->get_person('AccessLevel'))) {
+                    #Finne siste og f¿rste Œpne periode kunne v¾rt i et eget accountperiod objekt.
+        
+                    $PeriodOld         = $InvoiceO->Period;
+                    $InvoiceO->Period  = $accounting->get_first_open_accountingperiod();
+                    $InvoiceO->Status .= 'Perioden ' . $PeriodOld . ' er lukket endrer til ' . $InvoiceO->Period . '. ';
+                }
+    
+                #Check that we have not journaled the same invoices earlier.
+                #JournalID = Invoice number on outgoing invoices.
+                $query          = "select * from invoiceout where InvoiceID='" . $InvoiceO->ID . "'";
+                #print "$query<br>\n";
+                $voucherexists  = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
+                if($voucherexists) {
+                    $InvoiceO->Status     .= "Faktura er lastet ned";
+                    $InvoiceO->Journal     = false;
+                    $InvoiceO->Journaled   = true;
+                    $InvoiceO->Class       = 'green';
+                } else {
+                
+                    foreach($InvoiceO->InvoiceLine as &$line) {
+                    
+                        if($line->TaxTotal->TaxSubtotal[0]->TaxableAmount > 0) {
+                            #It has to be an amount to be checked - all zero lines will not be imported later.
+                            $query          = "select * from product where ProductNumber='" . $line->Item->SellersItemIdentification->ID . "' and Active=1";
+                            #print "$query<br>\n";
+                            $productexists  = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
+                            if($productexists) {
+                                if($productexists->AccountPlanID) {
+                                    $line->Item->SellersItemIdentification->ProductID = $productexists->ProductID;
+    
+                                } else {
+                                    $InvoiceO->Status     .= "Konto ikke satt p&aring; produkt: " . $line->Item->SellersItemIdentification->ID;
+                                    $InvoiceO->Journal     = false;
+                                    $InvoiceO->Class       = 'red';
+                                }
+                            } else {
+                                $InvoiceO->Status     .= "Produktnr: " . $line->Item->SellersItemIdentification->ID . " eksisterer ikke";
+                                #$InvoiceO->Journal     = false;
+                                #$InvoiceO->Class       = 'red';                        
+                                #print "$InvoiceO->Status<br>\n";
+                            }
+                        }
+                        #Vi kunne ha auto opprettet produkter ogsŒ.....
+                    }
+                }
+
+                if($InvoiceO->Journal) {
+                    $InvoiceO->Status   .= "Klar til bilagsf&oslash;ring basert p&aring: SchemeID: $SchemeID";
+                }
+            } else {
+                $InvoiceO->Status     .= "Finner ikke kunde basert pŒ PartyIdentification: " . $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
+                $InvoiceO->Journal = false;
+                $InvoiceO->Class   = 'red';
+            }
+        }
+        return $invoicesO;
+    }
+
+    ################################################################################################
+    #validate - update Accountplans and statuses - ready for journaling flag.
+    private function validate_incoming($invoicesO) {
+        global $_lib, $accounting;
+        
+        $VoucherType = 'U';
+        
+        #Estimate which journal ids will be used
+        list($JournalID, $tmp) = $accounting->get_next_available_journalid(array('available' => true, 'update' => false, 'type' => $VoucherType, 'reuse' => false, 'from' => 'Fakturabank estimate'));
+	/* Cleanup error message -eirhje 29.01.10 */
+       if(isset($invoicesO->Invoice)) 
+        foreach($invoicesO->Invoice as &$InvoiceO) {
+
+            $i++;
+            if (!($i % 2)) {
+                $InvoiceO->Class = "r1";
+            } else {
+                $InvoiceO->Class = "r0";
+            }
+
+            #New variables we add in this process
+            $InvoiceO->Status        = '';
+            $InvoiceO->Journal       = true;
+            $InvoiceO->JournalID     = 0;
+            $InvoiceO->AccountPlanID = 0;
+            $InvoiceO->MotkontoAccountPlanID = 0;
+            $InvoiceO->Period        = substr($InvoiceO->IssueDate, 0, 7);
+            $InvoiceO->VoucherType   = $VoucherType;
+            
+            #Retrieve Project and Department
+            if($InvoiceO->AccountingCost) {
+                $AccountingCostH = explode('&', $InvoiceO->AccountingCost);
+                #print_r($AccountingCostH);
+                foreach($AccountingCostH as $pair) {
+                    list($key, $value) = explode('=', $pair);  
+                    if($key && $value) {
+                        if($key == 'department')
+                            $InvoiceO->Department = $value;
+                        if($key == 'project')
+                            $InvoiceO->Project = $value;
+                        if($key == 'reisegarantifondet')
+                            $value = strtolower($value);
+                            if($value ==  1 || $value ==  'yes' || $value == 'ja') {
+                                $value = 1;
+                            } else {
+                                $value = 0;
+                            }
+                            $InvoiceO->Reisegarantifond = $value;
+                    }
+                }
+            }
+
+            $urlH = explode('/', $InvoiceO->UBLExtensions->UBLExtension->ExtensionContent->URL);
+            $InvoiceO->FakturabankID = $urlH[4]; #Last element is the internalID.
+            #Cleaning after prior developer -eirhje 23.01.10
+            #print "URL: " . $InvoiceO->UBLExtensions->UBLExtension->ExtensionContent->URL . "<br>\n";
+            #print "FB ID:   $InvoiceO->FakturabankID<br>\n";
+
+            #Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to oly look in the correct records? No?
+            list($account, $SchemeID)  = $this->find_reskontro($InvoiceO->AccountingSupplierParty->Party->PartyIdentification->ID, 'supplier');
+            if($account) {
+                $InvoiceO->AccountPlanID   = $account->AccountPlanID;
+
+                #Check if this invoice exists
+                $query          = "select * from invoicein where SupplierAccountPlanID='" . $InvoiceO->AccountPlanID . "' and InvoiceNumber='" . $InvoiceO->ID . "'";
+                #print "$query<br>\n";
+                $invoiceexists  = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
+                if($invoiceexists) {
+                    $InvoiceO->Journal = false;
+                    $InvoiceO->Class   = 'red';
+                    $InvoiceO->Status .= 'Faktura er allerede lastet ned';
+                }
+    
+                if($account->EnableMotkontoResultat && $account->MotkontoResultat1) {
+                    $InvoiceO->MotkontoAccountPlanID   = $account->MotkontoResultat1;
+                } elseif($account->EnableMotkontoBalanse && $account->MotkontoBalanse1) {
+                    $InvoiceO->MotkontoAccountPlanID   = $account->MotkontoBalanse1;
+                }
+                    
+                if(!$InvoiceO->MotkontoAccountPlanID) {
+                    $InvoiceO->Status .= 'Motkonto resultat/balanse ikke satt for konto ' . $InvoiceO->AccountPlanID . '. ';
+                    $InvoiceO->Journal = false;
+                    $InvoiceO->Class   = 'red';
+                }
+    
+                if(!$accounting->is_valid_accountperiod($InvoiceO->Period, $_lib['sess']->get_person('AccessLevel'))) {
+                    #Finne siste og f¿rste Œpne periode kunne v¾rt i et eget accountperiod objekt.
+        
+                    $PeriodOld         = $InvoiceO->Period;
+                    $InvoiceO->Period  = $accounting->get_first_open_accountingperiod();
+                    $InvoiceO->Status .= 'Perioden ' . $PeriodOld . ' er lukket endrer til ' . $InvoiceO->Period . '. ';
+                }
+        
+                #Check that we have not journaled the same invoices earlier. C
+                $query          = "select * from invoicein where SupplierAccountPlanID='" . $InvoiceO->AccountPlanID . "' and InvoiceNumber='" . $InvoiceO->ID . "' and Active=1";
+                #print "$query<br>\n";
+                $voucherexists  = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
+                if($voucherexists) {
+                    $InvoiceO->Status     .= "Faktura er lastet ned";
+                    $InvoiceO->Journal     = false;
+    
+                    if($voucherexists->JournalID) {
+                        $InvoiceO->JournalID   = $voucherexists->JournalID;
+                        $InvoiceO->Journaled   = true;
+
+                    } else {
+                        $InvoiceO->JournalID   = $JournalID;
+                        $JournalID++;
+                    }
+                    $InvoiceO->Class       = 'green';
+                } else {
+                    #Just estimate which journal ID's we are going to use
+                    $InvoiceO->JournalID   = $JournalID;
+                    $JournalID++;
+                }
+                                
+                if($InvoiceO->Journal) {
+                    $InvoiceO->Status   .= "Klar til bilagsf&oslash;ring basert p&aring: SchemeID: $SchemeID";
+                }
+
+                #$this->registerincoming($InvoiceO);
+            } else {
+                $InvoiceO->Status   .= "Finner ikke leverand&oslash;r basert p&aring; PartyIdentification: " . $InvoiceO->AccountingSupplierParty->Party->PartyIdentification->ID;
+                $InvoiceO->Journal = false;
+                $InvoiceO->Class   = 'red';
+            }
+        }
+        return $invoicesO;
+    }
+
+    ################################################################################################
+    # Try to find the reskontro in the following sequenze: OrgNumber, E-Mail, Phone, AccountPlanID/Customer number
+    # It will be possible to add a lot of mappings here - but it will be a lot of manuell adminsitration to get it working
+    private function find_reskontro($PartyIdentification, $type) {
+        global $_lib;
+        
+        if($PartyIdentification) {
+        
+            $SequenceH = array(
+                'OrgNumber'                 => 1,
+                'IBAN'                      => 2,
+                'DomesticBankAccount'       => 3,
+                'Email'                     => 4,
+                'Mobile'                    => 5,
+                'Phone'                     => 6,
+                'CustomerNumber'            => 7,
+                'AccountPlanID'             => 8,
+                'AccountName'               => 9,
+            );
+    
+            foreach($SequenceH as $key => $value) {
+        
+                #We should look at SchemeID - but the parser does not give us the scheme id - so we look in the preferred sequence until we find an account.
+                $query                  = "select * from accountplan where $key like '%" . $PartyIdentification . "%' and $key <> '' and $key is not null and AccountPlanType='$type'";
+                #print "$query<br>\n";
+                $account                = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));   
+                if($account) {
+                    $SchemeID  = $key;
+                    #print "Fant den med $SchemeID: $PartyIdentification<br />\n";
+                    break;
+                }
+            }
+        }
+        #Forutsatt antall bare 1.
+
+        return array($account, $SchemeID);
+    }
+
+    #Only fo adding new customers at this point in time.
+    public function addmissingaccountplan() {
+        global $_lib;
+        $invoicesO  = $this->outgoing();
+        $count      = 0;
+    
+        foreach($invoicesO->Invoice as $InvoiceO) {
+
+            #check if exists first
+            if($this->find_reskontro($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID, 'customer')) {
+                $dataH = array();
+                
+                if($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID > 10000) {
+                    #Vi burde visst SchemeID - slik at vi kan bestemme om kontoplan skal telles automatisk eller ikke > 10000 pga norsk kontoplan
+
+                    #Vi mŒ uansett sjekke at den foreslŒtte kontoplanen ikke eksiterer fra f¿r.
+
+                    $dataH['AccountPlanID']     = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
+                    $dataH['OrgNumber']         = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID; #We dont know SchemID because of parser limitations
+                    $dataH['AccountName']       = $InvoiceO->AccountingCustomerParty->Party->PartyName->Name;
+                    $dataH['AccountPlanType']   = 'customer';
+
+                    $dataH['Address']           = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName;
+                    $dataH['City']              = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->CityName;
+                    $dataH['ZipCode']           = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->PostalZone;
+
+                    #$dataH['IAddress']          = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName;
+                    #$dataH['ICity']             = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->CityName;
+                    #$dataH['IZipCode']          = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->PostalZone;
+
+                    $dataH['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
+                    $dataH['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');
+                    $dataH['UpdatedByPersonID'] = $_lib['sess']->get_person('PersonID');
+                    $dataH['Active']            = 1;
+
+                    #creditdays
+                    $dataH['EnableCredit']      = 1;
+                    $dataH['CreditDays']        = $_lib['date']->dateDiff($InvoiceO->PaymentMeans->PaymentDueDate, $InvoiceO->IssueDate);
+
+                    #Credit/debit color and text
+                    $dataH['debittext']         = 'Salg';
+                    $dataH['credittext']        = 'Betaling';
+                    $dataH['DebitColor']        = 'debitblue';
+                    $dataH['CreditColor']       = 'creditred';
+    
+                    #burde kj¿rt oppslag fra brreg samtidig med denne registreringen, men vi fŒr ganske mye info fra fakturaen
+                    #Kan vi sette en default motkonto som vil v¾re "grei???"
+                    #Vi mŒ kopiere defaultdata fra mor kategorien til denne - mŒ sentralisere opprettelse av kontoplaner i eget objekt
+                    #print_r($dataH);
+                    $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'accountplan', 'action' => 'auto', 'debug' => false));
+                    #exit;
+                    $count++;
+                } else {
+                    $_lib['message']->add("Reskontro med nummer lavere enn 10.000 mŒ opprettes manuelt: " . $InvoiceO->AccountingSupplierParty->Party->PartyIdentification->ID);
+                }
+            }
+        }
+        $_lib['message']->add("$count kontoplaner automatisk opprettet - motkonto m&aring; settes manuelt");
+    }
+
+    public function incomingaddmissingaccountplan() {
+
+        $invoicesO = $this->outgoing();
+
+        foreach($invoicesO->Invoice as $InvoiceO) {
+
+            #check if exists first
+            $dataH = array();
+            $dataH['AccountPlanID']         = $InvoiceO->AccountingCustomerParty->Party->PartyName->Name;
+            $dataH['DomesticBankAccount']   = $InvoiceO->BankAccount;
+            $dataH['AccountPlanName']       = $InvoiceO->AccountingSupplierParty->Party->PartyName->Name;
+
+            $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'accountplan', 'debug' => false));
+        }
+    }
+
+
+    ################################################################################################
+    public function registerincoming() {
+        global $_lib, $accounting;
+
+        $invoicesO = $this->incoming();
+
+        foreach($invoicesO->Invoice as &$InvoiceO) {
+        
+            #If all essential data quality is ok - download the invoice
+            if($InvoiceO->Journal) {
+                $dataH = array();
+                $dataH['SupplierAccountPlanID'] = $InvoiceO->AccountPlanID;
+                $dataH['InvoiceNumber']         = $InvoiceO->ID;
+                $dataH['ExternalID']            = $InvoiceO->FakturabankID;
+                $dataH['FakturabankID']         = $InvoiceO->FakturabankID;
+                $dataH['Period']                = $InvoiceO->Period;
+                $dataH['InvoiceDate']           = $InvoiceO->IssueDate;
+                $dataH['Department']            = $InvoiceO->Department;
+                $dataH['Project']               = $InvoiceO->Project;
+                $dataH['isReisegarantifond']    = $InvoiceO->Reisegarantifond;
+                $dataH['VoucherType']           = 'U';
+
+                $dataH['DueDate']               = $InvoiceO->PaymentMeans->PaymentDueDate;
+                $dataH['TotalCustPrice']        = $InvoiceO->LegalMonetaryTotal->PayableAmount; #If negative this is probably a credit note
+
+                $dataH['SupplierBankAccount']   = $InvoiceO->PaymentMeans->PayeeFinancialAccount->ID;
+                $dataH['CustomerBankAccount']   = $_lib['sess']->get_companydef('BankAccount');
+
+                $old_pattern    = array("/[^0-9]/");
+                $new_pattern    = array("");
+                $dataH['SupplierBankAccount'] = strtolower(preg_replace($old_pattern, $new_pattern, $dataH['SupplierBankAccount'])); 
+                $dataH['CustomerBankAccount'] = strtolower(preg_replace($old_pattern, $new_pattern, $dataH['CustomerBankAccount'])); 
+
+                if(!$dataH['SupplierBankAccount']) {
+                    #If BankAccount is not given in incoming invoice, copy it from Supplier Accountplan.
+                    $supplier                       = $accounting->get_accountplan_object($InvoiceO->AccountPlanID);
+                    $dataH['SupplierBankAccount']   = $supplier->DomesticBankAccount;
+                } else {
+
+                    if($dataH['SupplierBankAccount']) {
+                        $supplierH = array();
+                        $supplierH['AccountPlanID']         = $dataH['SupplierAccountPlanID'];
+                        $supplierH['DomesticBankAccount']   = $dataH['SupplierBankAccount'];
+                        $_lib['storage']->store_record(array('data' => $supplierH, 'table' => 'accountplan', 'debug' => true));
+                    }
+                }
+
+                $old_pattern                        = array("/[^0-9]/");
+                $new_pattern                        = array("");
+                $dataH['CustomerAccountPlanID']     = strtolower(preg_replace($old_pattern, $new_pattern , $_lib['sess']->get_companydef('OrgNumber'))); 
+
+                $dataH['InsertedByPersonID']    = $_lib['sess']->get_person('PersonID');
+                $dataH['InsertedDateTime']      = $_lib['sess']->get_session('Datetime');
+                $dataH['UpdatedByPersonID']     = $_lib['sess']->get_person('PersonID');
+
+                $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
+                $dataH['FakturabankDateTime']   = $_lib['sess']->get_session('Datetime');
+
+                $dataH['Active']                = 1;
+                $dataH['RemittanceStatus']      = 'recieved';
+                $dataH['RemittanceAmount']      = $dataH['TotalCustPrice']; #We suggest to pay the entire invoice by default
+
+                $dataH['IName']                  = $InvoiceO->AccountingSupplierParty->Party->PartyName->Name;        
+                $dataH['IAddress']               = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName;
+                $dataH['ICity']                  = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->CityName;
+                $dataH['IZipCode']               = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone;
+
+                $dataH['DName']                  = $InvoiceO->AccountingSupplierParty->Party->PartyName->Name;        
+                $dataH['DAddress']               = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName;
+                $dataH['DCity']                  = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->CityName;
+                $dataH['DZipCode']               = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone;
+    
+                #Only real KID can be registered in the KID field
+                if($InvoiceO->PaymentMeans->InstructionNote == 'KID' && $InvoiceO->PaymentMeans->InstructionID) {
+                    $dataH['KID']  = $InvoiceO->PaymentMeans->InstructionID; #KID
+                } 
+                $ID = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoicein', 'debug' => true));
+
+                foreach($InvoiceO->InvoiceLine as $line) {
+                
+                    #print_r($line);
+                
+                    #preprocess price/quantity - because inconsistent data can appear
+                    if($line->Price->BaseQuantity && $line->Price->PriceAmount) {
+                        if($line->TaxTotal->TaxSubtotal[0]->TaxableAmount) {
+                            if($line->Price->BaseQuantity * $line->Price->PriceAmount == $line->TaxTotal->TaxSubtotal[0]->TaxableAmount) {
+                                $Quantity   = $line->Price->BaseQuantity;
+                                $CustPrice  = $line->Price->PriceAmount;
+                            } else {
+                                $Quantity   = 1;
+                                $CustPrice  = $line->TaxTotal->TaxSubtotal[0]->TaxableAmount;
+                            }
+                        } else {
+                            $Quantity   = 1;
+                            $CustPrice  = $line->TaxTotal->TaxSubtotal[0]->TaxableAmount;                            
+                        }
+                    } else {
+                        $Quantity   = 1;
+                        $CustPrice  = $line->TaxTotal->TaxSubtotal[0]->TaxableAmount;                    
+                    }
+ 
+                    if($CustPrice != 0) {
+                        $LineNum += 10;
+                        $datalineH                      = array();
+                        $datalineH['ID']                = $ID;
+                        $datalineH['AccountPlanID']     = $InvoiceO->MotkontoAccountPlanID;
+                        $datalineH['LineNum']           = $LineNum;
+                        $datalineH['ProductName']       = $line->Item->Name;
+                        $datalineH['ProductNumber']     = $line->Item->SellersItemIdentification->ID;
+                        $datalineH['Comment']           = $line->Item->Description;
+                        $datalineH['QuantityOrdered']   = $Quantity;
+                        $datalineH['QuantityDelivered'] = $Quantity;
+                        $datalineH['UnitCostPrice']     = $CustPrice;
+                        $datalineH['UnitCustPrice']     = $CustPrice;
+                        $datalineH['UnitCostPriceCurrencyID'] = 'NOK';
+                        $datalineH['UnitCustPriceCurrencyID'] = 'NOK';
+    
+                        $datalineH['TaxAmount']         = $line->TaxTotal->TaxSubtotal[0]->TaxAmount;
+                        $datalineH['Vat']               = $line->TaxTotal->TaxSubtotal[0]->Percent;
+                        #$datalineH['VatID']             = $line->Price->PriceAmount; #Denne mŒ nok mappes
+    
+                        $datalineH['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
+                        $datalineH['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');
+                        $datalineH['UpdatedByPersonID'] = $_lib['sess']->get_person('PersonID');
+    
+                        $_lib['storage']->store_record(array('data' => $datalineH, 'table' => 'invoiceinline', 'debug' => false));
+                    }
+                }
+
+                #Set status in fakturabank
+                $comment = "Lodo PHP Invoicein ID: " . $ID . " registered " . $_lib['sess']->get_session('Datetime');
+                $this->setEvent($InvoiceO->FakturabankID, 'registered', $comment);
+
+            } else {
+                #print "Faktura finnes: " . $InvoiceO->AccountPlanID . "', InvoiceID='" . $InvoiceO->ID . "<br>\n";
+            }
+        }
+    }
+
+    public function registeroutgoing() {
+        global $_lib;
+
+        $invoicesO = $this->outgoing();
+
+        foreach($invoicesO->Invoice as &$InvoiceO) {
+    
+            if($InvoiceO->Journal) {
+    
+                #Check if this invoice exists
+                $query          = "select * from invoiceout where InvoiceID='" . $InvoiceO->ID . "'";
+                #print "$query<br>\n";
+                $invoiceexists  = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
+        
+                #If it does not exist - insert it into incoming invoices table - ready for remittance
+                if(!$invoiceexists) {
+
+                    $dataH = array();
+                    $dataH['CustomerAccountPlanID'] = $InvoiceO->AccountPlanID;
+                    $dataH['InvoiceID']             = $InvoiceO->ID;
+                    $dataH['JournalID']             = $InvoiceO->ID;
+                    $dataH['ExternalID']            = $InvoiceO->FakturabankID;
+                    $dataH['FakturabankID']         = $InvoiceO->FakturabankID;
+                    $dataH['Period']                = $InvoiceO->Period;
+                    $dataH['InvoiceDate']           = $InvoiceO->IssueDate;
+                    $dataH['DueDate']               = $InvoiceO->PaymentMeans->PaymentDueDate;
+                    $dataH['TotalCustPrice']        = $InvoiceO->LegalMonetaryTotal->PayableAmount; #If negative this is probably a credit note
+                    $dataH['InsertedByPersonID']    = $_lib['sess']->get_person('PersonID');
+                    $dataH['InsertedDateTime']      = $_lib['sess']->get_session('Datetime');
+                    $dataH['UpdatedByPersonID']     = $_lib['sess']->get_person('PersonID');
+                    $dataH['Active']                = 1;
+                    $dataH['FromCompanyID']         = 1;
+                    $dataH['SupplierAccountPlanID'] = 1;
+                    
+                    $dataH['IName']                  = $InvoiceO->AccountingCustomerParty->Party->PartyName->Name;        
+                    $dataH['IAddress']               = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName;
+                    $dataH['ICity']                  = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->CityName;
+                    $dataH['IZipCode']               = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->PostalZone;
+
+                    $dataH['DName']                  = $InvoiceO->AccountingCustomerParty->Party->PartyName->Name;        
+                    $dataH['DAddress']               = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName;
+                    $dataH['DCity']                  = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->CityName;
+                    $dataH['DZipCode']               = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->PostalZone;
+        
+                    if($InvoiceO->PaymentMeans->InstructionNote == 'KID' && $InvoiceO->PaymentMeans->InstructionID) {
+                        $dataH['KID']  = $InvoiceO->PaymentMeans->InstructionID; #KID
+                    }
+                    $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoiceout', 'debug' => false));
+    
+                    #MŒ sjekke at produktnummer stemmer og matcher
+                    foreach($InvoiceO->InvoiceLine as $line) {
+
+                        #preprocess price/quantity - because inconsistent data can appear
+                        if($line->Price->BaseQuantity && $line->Price->PriceAmount) {
+                            if($line->TaxTotal->TaxSubtotal[0]->TaxableAmount) {
+                                if($line->Price->BaseQuantity * $line->Price->PriceAmount == $line->TaxTotal->TaxSubtotal[0]->TaxableAmount) {
+                                    $Quantity   = $line->Price->BaseQuantity;
+                                    $CustPrice  = $line->Price->PriceAmount;
+                                } else {
+                                    $Quantity   = 1;
+                                    $CustPrice  = $line->TaxTotal->TaxSubtotal[0]->TaxableAmount;
+                                }
+                            } else {
+                                $Quantity   = 1;
+                                $CustPrice  = $line->TaxTotal->TaxSubtotal[0]->TaxableAmount;                            
+                            }
+                        } else {
+                            $Quantity   = 1;
+                            $CustPrice  = $line->TaxTotal->TaxSubtotal[0]->TaxableAmount;
+                        }
+                    
+                        if($CustPrice != 0) {
+                            $LineNum += 10;
+                            $datalineH                      = array();
+                            $datalineH['InvoiceID']         = $InvoiceO->ID;
+                            $datalineH['LineNum']           = $LineNum;
+                            $datalineH['ProductID']         = $line->Item->SellersItemIdentification->ProductID;
+                            $datalineH['ProductName']       = $line->Item->Name;
+                            $datalineH['ProductNumber']     = $line->Item->SellersItemIdentification->ID;
+                            $datalineH['Comment']           = $line->Item->Description;
+                            $datalineH['QuantityOrdered']   = $Quantity;
+                            $datalineH['QuantityDelivered'] = $Quantity;
+                            $datalineH['UnitCostPrice']     = $CustPrice;
+                            $datalineH['UnitCustPrice']     = $CustPrice;
+                            $datalineH['UnitCostPriceCurrencyID'] = 'NOK';
+                            $datalineH['UnitCustPriceCurrencyID'] = 'NOK';
+        
+                            $datalineH['TaxAmount']         = $line->TaxTotal->TaxSubtotal[0]->TaxAmount;
+                            $datalineH['Vat']               = $line->TaxTotal->TaxSubtotal[0]->Percent;
+                            #$datalineH['VatID']             = $line->Price->VatID; #Denne mŒ nok mappes
+        
+                            $datalineH['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
+                            $datalineH['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');
+                            $datalineH['UpdatedByPersonID'] = $_lib['sess']->get_person('PersonID');
+        
+                            $_lib['storage']->store_record(array('data' => $datalineH, 'table' => 'invoiceoutline', 'debug' => false));
+                        }
+                    }
+    
+                    #Set status in fakturabank
+                    $comment = "Lodo PHP Invoiceout ID: " . $InvoiceO->ID . " registered " . $_lib['sess']->get_session('Datetime');
+                    $this->setEvent($InvoiceO->FakturabankID, 'registered', $comment);
+    
+                } else {
+                    #print "Faktura finnes: " . $InvoiceO->AccountPlanID . "', InvoiceID='" . $InvoiceO->ID . "<br>\n";
+                }
+                
+                $invoice = new invoice(array('CustomerAccountPlanID' => $dataH['CustomerAccountPlanID'], 'VoucherType' => 'S', 'InvoiceID' => $dataH['InvoiceID']));
+                $invoice->init(array());
+                $invoice->journal();
+            }
+        }
+    }
+    
+    ################################################################################################
+    public function hash_to_xml($InvoiceO) {
+        global $_lib;
+
+        $xml = "<" . "?xml version=\"1.0\" encoding=\"UTF-8\"?" . "><Invoice xmlns:qdt=\"urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2\" xmlns:ccts=\"urn:oasis:names:specification:ubl:schema:xsd:CoreComponentParameters-2\" xmlns:stat=\"urn:oasis:names:specification:ubl:schema:xsd:DocumentStatusCode-1.0\" xmlns:cbc=\"urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2\" xmlns:cac=\"urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2\" xmlns:udt=\"urn:un:unece:uncefact:data:draft:UnqualifiedDataTypesSchemaModule:2\" xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2\"></Invoice>";
+        
+        $doc = new DOMDocument();
+        $doc->formatOutput  = true;
+        $doc->loadXML($xml);
+
+        $invoices = $doc->getElementsByTagNameNS('urn:oasis:names:specification:ubl:schema:xsd:Invoice-2', 'Invoice');
+
+        foreach($invoices as $invoice) {
+            #print_r($invoice);
+        }
+
+        $cbc = $doc->createElement('cbc:UBLVersionID', '2.0');
+        $invoice->appendChild($cbc);
+
+        $cbc = $doc->createElement('cbc:CustomizationID', 'urn:fakturabank.no:ubl-2.0-customizations:Invoice');
+        $invoice->appendChild($cbc);
+
+        $cbc = $doc->createElement('cbc:ProfileID', 'Invoice');
+        $invoice->appendChild($cbc);
+
+        $cbc = $doc->createElement('cbc:ID', $InvoiceO->ID);
+        $invoice->appendChild($cbc);
+
+        $cbc = $doc->createElement('cbc:IssueDate', $InvoiceO->IssueDate);
+        $invoice->appendChild($cbc);
+
+        $cbc = $doc->createElement('cbc:DocumentCurrencyCode', $InvoiceO->DocumentCurrencyCode);
+        $invoice->appendChild($cbc);
+
+        ############################################################################################
+        #AccountingSupplierParty
+        $supplier = $doc->createElement('cac:AccountingSupplierParty');
+            $cacparty = $doc->createElement('cac:Party');
+            
+                $cbc = $doc->createElement('cbc:WebsiteURI', $InvoiceO->AccountingSupplierParty->Party->WebsiteURI);
+                $cacparty->appendChild($cbc);
+            
+                $identification = $doc->createElement('cac:PartyIdentification');
+                    $cbc = $doc->createElement('cbc:ID', $InvoiceO->AccountingSupplierParty->Party->PartyIdentification->ID);
+                    $cbc->setAttribute('schemeID', 'NO:ORGNR');
+                    $identification->appendChild($cbc);
+                $cacparty->appendChild($identification);
+
+                $name = $doc->createElement('cac:PartyName');
+
+                    $cbc = $doc->createElement('cbc:Name', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PartyName->Name));
+                    $name->appendChild($cbc);
+
+                $cacparty->appendChild($name);
+
+                $adress = $doc->createElement('cac:PostalAddress', '');
+                
+                    $cbc = $doc->createElement('cbc:StreetName', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName));
+                    $adress->appendChild($cbc);
+    
+                    $cbc = $doc->createElement('cbc:BuildingNumber', $InvoiceO->AccountingSupplierParty->Party->PostalAddress->BuildingNumber);
+                    $adress->appendChild($cbc);
+    
+                    $cbc = $doc->createElement('cbc:CityName', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PostalAddress->CityName));
+                    $adress->appendChild($cbc);
+    
+                    $cbc = $doc->createElement('cbc:PostalZone', $InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone);
+                    $adress->appendChild($cbc);
+    
+                    $country = $doc->createElement('cac:Country');
+
+                        $cbc = $doc->createElement('cbc:IdentificationCode', $InvoiceO->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode);
+                        $country->appendChild($cbc);
+
+                    $adress->appendChild($country);
+
+                $cacparty->appendChild($adress);
+            
+            $supplier->appendChild($cacparty);
+
+        $invoice->appendChild($supplier);
+
+
+        ############################################################################################
+        #AccountingCustomerParty
+        $customer = $doc->createElement('cac:AccountingCustomerParty');
+            $cacparty = $doc->createElement('cac:Party');
+            
+                $cbc = $doc->createElement('cbc:WebsiteURI', $InvoiceO->AccountingCustomerParty->Party->WebsiteURI);
+                $cacparty->appendChild($cbc);
+            
+                $identification = $doc->createElement('cac:PartyIdentification');
+                    $cbc = $doc->createElement('cbc:ID', $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID);
+                    $cbc->setAttribute('schemeID', 'NO:ORGNR');
+                    $identification->appendChild($cbc);
+                $cacparty->appendChild($identification);
+
+                $name = $doc->createElement('cac:PartyName');
+
+                    $cbc = $doc->createElement('cbc:Name', $InvoiceO->AccountingCustomerParty->Party->PartyName->Name);
+                    $name->appendChild($cbc);
+
+                $cacparty->appendChild($name);
+                
+                $adress = $doc->createElement('cac:PostalAddress');
+                
+                    $cbc = $doc->createElement('cbc:StreetName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName));
+                    $adress->appendChild($cbc);
+
+                    $cbc = $doc->createElement('cbc:BuildingNumber', $InvoiceO->AccountingCustomerParty->Party->PostalAddress->BuildingNumber);
+                    $adress->appendChild($cbc);
+    
+                    $cbc = $doc->createElement('cbc:CityName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->CityName));
+                    $adress->appendChild($cbc);
+    
+                    $cbc = $doc->createElement('cbc:PostalZone', $InvoiceO->AccountingCustomerParty->Party->PostalAddress->PostalZone);
+                    $adress->appendChild($cbc);
+    
+                    $country = $doc->createElement('cac:Country');
+
+                        $cbc = $doc->createElement('cbc:IdentificationCode', $InvoiceO->AccountingCustomerParty->Party->PostalAddress->Country->IdentificationCode);
+                        $country->appendChild($cbc);
+
+                    $adress->appendChild($country);
+
+                $cacparty->appendChild($adress);
+            
+            $customer->appendChild($cacparty);
+
+        $invoice->appendChild($customer);
+
+        ############################################################################################
+        $paymentmeans = $doc->createElement('cac:PaymentMeans');
+    
+            $cbc = $doc->createElement('cbc:PaymentMeansCode', $InvoiceO->PaymentMeans->PaymentMeansCode);
+            $cbc->setAttribute('listSchemeURI', 'urn:www.nesubl.eu:codelist:gc:PaymentMeansCode:2007.1');
+            $cbc->setAttribute('listID', 'Payment Means');
+            $paymentmeans->appendChild($cbc);
+    
+            $cbc = $doc->createElement('cbc:PaymentDueDate', $InvoiceO->PaymentMeans->PaymentDueDate);
+            $paymentmeans->appendChild($cbc);
+
+            #KID number
+            $cbc = $doc->createElement('cbc:InstructionID', $InvoiceO->PaymentMeans->InstructionID);
+            $paymentmeans->appendChild($cbc);
+
+            #KID (text)
+            $cbc = $doc->createElement('cbc:InstructionNote', $InvoiceO->PaymentMeans->InstructionNote);
+            $paymentmeans->appendChild($cbc);
+
+            $financialaccount = $doc->createElement('cac:PayeeFinancialAccount');
+
+                $cbc = $doc->createElement('cbc:ID', $InvoiceO->PaymentMeans->PayeeFinancialAccount->ID);
+                $financialaccount->appendChild($cbc);
+                
+                $cbc = $doc->createElement('cbc:Name', $InvoiceO->PaymentMeans->PayeeFinancialAccount->Name);
+                $financialaccount->appendChild($cbc);
+                        
+            $paymentmeans->appendChild($financialaccount);
+
+        $invoice->appendChild($paymentmeans);
+
+        ############################################################################################
+        #TaxTotal
+        $tax = $doc->createElement('cac:TaxTotal');
+            
+            $cbc = $doc->createElement('cbc:TaxAmount', $InvoiceO->TaxTotal['TaxAmount']);
+            $cbc->setAttribute('currencyID', 'NOK');
+            $tax->appendChild($cbc);
+
+        #print_r($invoiceH);
+        #print "<h1>TAX hash</h1>";
+        #print_r($invoiceH['TaxTotal']);
+
+        if(is_array($InvoiceO->TaxTotal)) {
+            foreach($InvoiceO->TaxTotal as $VatPercent => $Vat) {
+                if(is_numeric($VatPercent)) {
+                    $subtotal = $doc->createElement('cac:TaxSubtotal');
+                        $cbc = $doc->createElement('cbc:TaxableAmount', $Vat->TaxSubtotal->TaxableAmount);
+                        $cbc->setAttribute('currencyID', 'NOK');
+                        $subtotal->appendChild($cbc);
+        
+                        $cbc = $doc->createElement('cbc:TaxAmount', $Vat->TaxSubtotal->TaxAmount);
+                        $cbc->setAttribute('currencyID', 'NOK');
+                        $subtotal->appendChild($cbc);
+        
+                        $category = $doc->createElement('cac:TaxCategory');
+        
+                            $cbc = $doc->createElement('cbc:ID', $Vat->TaxSubtotal->TaxCategory->ID);
+                            $category->appendChild($cbc);
+        
+                            $cbc = $doc->createElement('cbc:Percent', $Vat->TaxSubtotal->TaxCategory->Percent);
+                            $category->appendChild($cbc);
+        
+                            $scheme = $doc->createElement('cac:TaxScheme');
+                                
+                                $cbc = $doc->createElement('cbc:ID', $Vat->TaxSubtotal->TaxCategory->TaxScheme->ID);
+                                $scheme->appendChild($cbc);
+                            
+                            $category->appendChild($scheme);
+        
+                        $subtotal->appendChild($category);
+        
+                    $tax->appendChild($subtotal);
+                }
+            }   
+            $invoice->appendChild($tax);
+        } else {
+            print "TAX info mangler<br>\n";
+        }
+
+        ############################################################################################
+        #LegalMonetaryTotal
+        $monetary = $doc->createElement('cac:LegalMonetaryTotal');
+            
+            $cbc = $doc->createElement('cbc:TaxExclusiveAmount', $InvoiceO->LegalMonetaryTotal->TaxExclusiveAmount);
+            $cbc->setAttribute('currencyID', 'NOK');
+            $monetary->appendChild($cbc);
+
+            $cbc = $doc->createElement('cbc:PayableAmount', $InvoiceO->LegalMonetaryTotal->PayableAmount);
+            $cbc->setAttribute('currencyID', 'NOK');
+            $monetary->appendChild($cbc);
+            
+        $invoice->appendChild($monetary);
+
+        ############################################################################################
+        #InvoiceLine (loop)
+        if(count($InvoiceO->InvoiceLine)) {
+            foreach($InvoiceO->InvoiceLine as $id => $line) {
+    
+                $invoiceline = $doc->createElement('cac:InvoiceLine');
+    
+                    $cbc = $doc->createElement('cbc:ID', $line->ID);
+                    $invoiceline->appendChild($cbc);
+    
+                    $cbc = $doc->createElement('cbc:LineExtensionAmount', $line->LineExtensionAmount);
+                    $cbc->setAttribute('currencyID', 'NOK');
+                    $invoiceline->appendChild($cbc);
+    
+                    $total = $doc->createElement('cac:TaxTotal');
+    
+                        $cbc = $doc->createElement('cbc:TaxAmount', $line->TaxTotal->TaxAmount);
+                        $cbc->setAttribute('currencyID', 'NOK');
+    
+                        $total->appendChild($cbc);
+    
+                        $subtotal = $doc->createElement('cac:TaxSubtotal');
+                            $cbc  = $doc->createElement('cbc:TaxableAmount', $line->TaxTotal->TaxSubtotal->TaxableAmount);
+                            $cbc->setAttribute('currencyID', 'NOK');
+                            $subtotal->appendChild($cbc);
+                            $cbc  = $doc->createElement('cbc:TaxAmount',     $line->TaxTotal->TaxSubtotal->TaxAmount);
+                            $subtotal->appendChild($cbc);
+                            $cbc->setAttribute('currencyID', 'NOK');
+                            $cbc  = $doc->createElement('cbc:Percent',       $line->TaxTotal->TaxSubtotal->Percent);
+                            $subtotal->appendChild($cbc);
+    
+                            $taxcategory = $doc->createElement('cac:TaxCategory');
+                                $taxscheme = $doc->createElement('cac:TaxScheme');
+                                    $cbc = $doc->createElement('cbc:ID',       $line->TaxTotal->TaxSubtotal->TaxCategory->TaxScheme->ID);
+                                    $taxscheme->appendChild($cbc);
+    
+                                $taxcategory->appendChild($taxscheme);
+    
+                            $subtotal->appendChild($taxcategory);
+                            
+                        $total->appendChild($subtotal);
+        
+                    $invoiceline->appendChild($total);
+        
+                    $item = $doc->createElement('cac:Item');
+        
+                        if($line->Item->Description) {
+                            $cbc = $doc->createElement('cbc:Description', utf8_encode($line->Item->Description));
+                            $item->appendChild($cbc);
+                        }
+
+                        $cbc = $doc->createElement('cbc:Name', utf8_encode($line->Item->Name));
+                        $item->appendChild($cbc);
+    
+                        #Productnumber
+                        $SellersItemIdentification = $doc->createElement('cac:SellersItemIdentification');
+                            $cbc = $doc->createElement('cbc:ID', $line->Item->SellersItemIdentification->ID);
+                            $SellersItemIdentification->appendChild($cbc);
+                        $item->appendChild($SellersItemIdentification);
+        
+                        #Add UNSPSC
+                        if($line->Item->CommodityClassification->UNSPSC->ItemClassificationCode) {
+                            $CommodityClassification = $doc->createElement('cac:CommodityClassification');
+        
+                                $ItemClassificationCode = $doc->createElement('cbc:ItemClassificationCode', $line->Item->CommodityClassification->UNSPSC->ItemClassificationCode);
+                                $ItemClassificationCode->setAttribute('listName', 'UNSPSC');
+                                $ItemClassificationCode->setAttribute('listVersionID', '7.0401');
+        
+                                $CommodityClassification->appendChild($ItemClassificationCode);
+                            $item->appendChild($CommodityClassification);
+                        }
+
+                    $invoiceline->appendChild($item);
+                
+                    #Price            
+                    $price = $doc->createElement('cac:Price');
+        
+                        $cbc = $doc->createElement('cbc:PriceAmount', $line->Price->PriceAmount);
+                        $cbc->setAttribute('currencyID', 'NOK');
+                        $price->appendChild($cbc);
+        
+                        $cbc = $doc->createElement('cbc:BaseQuantity', $line->Price->BaseQuantity);
+                        $cbc->setAttribute('unitCode', 'HUR');
+                        $price->appendChild($cbc);
+        
+                    $invoiceline->appendChild($price);
+        
+                $invoice->appendChild($invoiceline);
+            }
+        } else {
+            $_lib['message']->add('ERROR: Ingen fakturalinjer funnet');
+        }
+
+        ############################################################################################        
+        $xml = $doc->saveXML();
+        return $xml;
+    }
+
+    ####################################################################################################
+    #WRITE XML
+    function write($InvoiceO) {
+        global $_lib;
+
+        #$_lib['message']->add("FB->write()");
+
+        #print_r($InvoiceH);
+
+        $xml = $this->hash_to_xml($InvoiceO);
+        #$_lib['message']->add("FB->write1()");
+        
+        #print "<br>\n<br>\n$xml\n<br>\n<br>";
+        
+        $page = "/invoices";
+        $url  = "$this->protocol://$this->host$page";
+        
+        $headers = array(
+            "POST ".$page." HTTP/1.0",
+            "Content-type: text/xml;charset=\"utf-8\"",
+            "Accept: application/xml",
+            "Cache-Control: no-cache",
+            "Pragma: no-cache",
+            "SOAPAction: \"run\"",
+            "Content-length: ".strlen($xml),
+            "Authorization: Basic " . base64_encode($this->credentials)
+        );
+        
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_USERAGENT, $defined_vars['HTTP_USER_AGENT']);
+        curl_setopt($ch, CURLOPT_HEADER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+        // Apply the XML to our curl call
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $xml); 
+        
+        $data = curl_exec($ch); 
+        #$_lib['message']->add("FB->write()->exec()");
+        
+        if (curl_errno($ch)) {
+            $_lib['message']->add("Error: opprette faktura: " . curl_error($ch));
+        } else {
+            // Show me the result
+            $_lib['message']->add(microtime() . " Opprettet faktura: $i");
+            $_lib['message']->add("<pre>$data</pre>");
+            #print_r(curl_getinfo($ch));
+            $this->success  = true;
+        }
+       
+        curl_close($ch);
+        return $this->success;
+    }
+}
+
+####################################################################################################
+#STATISTICS
+
+#print "\n\nVeldig bra<br>\nExectid: $diffexectime\n\n";
+#print "starttime:     $starttime\n";
+#print "startexectime: $startexectime\n";
+#print "startexectime: $stopexectime\n";
+#print "stoptime :     $stoptime\n";
+?>

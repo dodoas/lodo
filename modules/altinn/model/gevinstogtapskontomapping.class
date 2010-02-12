@@ -1,0 +1,119 @@
+<?php
+class GevinstOgTapskontoMapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+           			$this->ORID[$item] = $v;
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+            	$item = $this->Account[$a];
+            	$this->ORID[$item] = $v;
+	            return 1;
+    	    }
+       	}
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+	{	$this->addMapping('D1', 'EnhetNavn-datadef-1', 'VName');
+		$this->addMapping('D26', 'OppgavegiverFodselsnummer-datadef-26', 'SocialSecurityID');
+		$this->addMapping('D15', 'EnhetAdresse-datadef-15', 'VAddress');
+		$this->addMapping('D18', 'EnhetOrganisasjonsnummer-datadef-18', 'OrgNumber');
+		$this->addMapping('D6673', 'EnhetPostnummer-datadef-6673', 'VZipCode');
+		$this->addMapping('D6674', 'EnhetPoststed-datadef-6674', 'VCity');
+		$this->addMapping('D17', 'EnhetKommunenummer-datadef-17', 'CompanyMunicipality');
+		$this->addMapping('D15506', 'EnhetKommuneNavn-datadef-15506', 'CompanyMunicipalityName');
+		$this->addMapping('D280', 'RegnskapsforerNavn-datadef-280', 'FVName');
+		$this->addMapping('D281', 'RegnskapsforerAdresse-datadef-281', 'FVAddress');
+		$this->addMapping('D6678', 'RegnskapsforerPostnummer-datadef-6678', 'FVZipCode');
+		$this->addMapping('D6679', 'RegnskapsforerPoststed-datadef-6679', 'FVCity');
+		$this->addMapping('D1740', 'GevinstTapskontoAntall-datadef-1740', 'GevinstTapskontoAntall');
+		$this->addMapping('D6896', 'GevinstTapskontoSaldoInngaende-datadef-6896', '1');
+		$this->addMapping('D1741', 'GevinstTapskontoDriftsmidlerIkkeAvskrivbareGevinst-datadef-1741', '2');
+		$this->addMapping('D1742', 'GevinstTapskontoDriftsmidlerRealisasjonGevinst-datadef-1742', '3');
+		$this->addMapping('D1743', 'GevinstTapskontoForretningsverdiNegativSaldo-datadef-1743', '4');
+		$this->addMapping('D1744', 'GevinstTapskontoBuskapRealisasjonGevinst-datadef-1744', '5');
+		$this->addMapping('D14844', 'AvsetningerAndreBetingetSkattefrie-datadef-14844', '6');
+		$this->addMapping('D6899', 'GevinstTapskontoGevinster-datadef-6899', '7');
+		$this->addMapping('D6900', 'GevinstTapskontoSaldoForTap-datadef-6900', '8');
+		$this->addMapping('D1745', 'GevinstTapskontoDriftsmidlerIkkeAvskrivbareTap-datadef-1745', '9');
+		$this->addMapping('D6901', 'GevinstTapskontoDriftsmidlerRealisasjonTap-datadef-6901', '10');
+		$this->addMapping('D1746', 'GevinstTapskontoRealisertEiendelVerdiDifferanse-datadef-1746', '11');
+		$this->addMapping('D1747', 'GevinstTapskontoDeltakerlignetSelskapRealisertEiendelAndel-datadef-1747', '12');
+		$this->addMapping('D6902', 'GevinstTapskontoTap-datadef-6902', '13');
+		$this->addMapping('D6903', 'GevinstTapskontoInntektFradragGrunnlag-datadef-6903', '14');
+		$this->addMapping('D6904', 'GevinstTapskontoInntektArets-datadef-6904', '15a');
+		$this->addMapping('D21982', 'GevinstTapskontoFradragArets-datadef-21982', '15b');
+		$this->addMapping('D7963', 'GevinstTapskontoNaringSaldo-datadef-7963', '16');
+		
+	}
+ }
+?>

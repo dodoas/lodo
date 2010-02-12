@@ -1,0 +1,148 @@
+<?php
+/* copy right
+ * Created on 09.jun.2005
+ * by Anh Le
+ * 
+ * Tilleggsskjema for drosje- og lastebiln�ringen
+ */
+class Tilleggsskjema2Mapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+           			$this->ORID[$item] = $v;
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+            	$item = $this->Account[$a];
+            	$this->ORID[$item] = $v;
+	            return 1;
+    	    }
+       	}
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+	{	$this->addMapping('D1', 'EnhetNavn-datadef-1', 'VName');
+		$this->addMapping('D26', 'OppgavegiverFodselsnummer-datadef-26', 'SocialSecurityID');
+		$this->addMapping('D15', 'EnhetAdresse-datadef-15', 'VAddress');
+		$this->addMapping('D18', 'EnhetOrganisasjonsnummer-datadef-18', 'OrgNumber');
+		$this->addMapping('D6673', 'EnhetPostnummer-datadef-6673', 'VZipCode');
+		$this->addMapping('D6674', 'EnhetPoststed-datadef-6674', 'VCity');
+		$this->addMapping('D1862', 'LoyvenummerSpesifisertLoyve-datadef-1862', '1');
+		$this->addMapping('D7955', 'BilRegistreringsnummerSpesifisertLoyve-datadef-7955', '2');
+		$this->addMapping('D7956', 'BilRegistreringsdatoSpesifisertLoyve-datadef-7956', '3a');
+		$this->addMapping('D1863', 'BilInnkjopsdatoSpesifisertLoyve-datadef-1863', '3b');
+		$this->addMapping('D1864', 'BilDriftTidsromSpesifisertLoyve-datadef-1864', '4');
+		$this->addMapping('D7957', 'BilMerkeTypeSpesifisertLoyve-datadef-7957', '5');
+		$this->addMapping('D7958', 'BilKilometerstandSpesifisertLoyve-datadef-7958', '6');
+		$this->addMapping('D7950', 'BilKilometerstandFjoraretSpesifisertLoyve-datadef-7950', '7');
+		$this->addMapping('D7959', 'BilKjorelengdeSpesifisertLoyve-datadef-7959', '8');
+		$this->addMapping('D1865', 'BilKjorelengdeNaringSpesifisertLoyve-datadef-1865', '9');
+		$this->addMapping('D1866', 'BilDrivstoffSpesifisertLoyve-datadef-1866', '10');
+		$this->addMapping('D1867', 'LastebilVektSpesifisertLoyve-datadef-1867', '11');
+		$this->addMapping('D1868', 'BilkostnaderDrivstoffSpesifisertLoyve-datadef-1868', '12');
+		$this->addMapping('D1869', 'BilkostnaderSmoreoljeSpesifisertLoyve-datadef-1869', '13');
+		$this->addMapping('D1870', 'BilkostnaderVedlikeholdReparasjonerSpesifisertLoyve-datadef-1870', '14');
+		$this->addMapping('D1871', 'BilkostnaderForsikringAvgifterSpesifisertLoyve-datadef-1871', '15');
+		$this->addMapping('D1872', 'BilkostnaderLeasingleieSpesifisertLoyve-datadef-1872', '16');
+		$this->addMapping('D7960', 'BilkostnaderSpesifisertLoyve-datadef-7960', '17');
+		$this->addMapping('D1873', 'KjoreinntekterKredittSpesifisertLoyve-datadef-1873', '18a');
+		$this->addMapping('D1874', 'KjoreinntekterKredittVentetidSpesifisertLoyve-datadef-1874', '18b');
+		$this->addMapping('D1875', 'KjoreinntekterKredittSkolebarnkjoringSpesifisertLoyve-datadef-1875', '18c');
+		$this->addMapping('D1876', 'SkolebarnkjoringKilometerSpesifisertLoyve-datadef-1876', '18d');
+		$this->addMapping('D1877', 'KjoreinntekterKontantSpesifisertLoyve-datadef-1877', '19');
+		$this->addMapping('D1878', 'TaksameterTypeSpesifisertLoyve-datadef-1878', '20');
+		$this->addMapping('D1879', 'TaksameterBesatteKilometerSpesifisertLoyve-datadef-1879', '21');
+		$this->addMapping('D1880', 'InnberetningStandardfordelArbeidsgiversBilSpesifisertLoyve-datadef-1880', 'Innberettet');
+		$this->addMapping('D1881', 'LoyveUtleidSpesifisertLoyve-datadef-1881', 'Utleid');
+		$this->addMapping('D1882', 'GarasjeleieBeregnet-datadef-1882', 'GarasjeleieBeregnet');
+		$this->addMapping('D1883', 'Garasjeleie-datadef-1883', 'GarasjeleieBeloep');
+		$this->addMapping('D1884', 'KontorleieBeregnet-datadef-1884', 'KontoleieBeregnet');
+		$this->addMapping('D1885', 'Kontorleie-datadef-1885', 'KontoleieBeloep');
+		$this->addMapping('D19403', 'DrosjevirksomhetDriftssted-datadef-19403', 'VirksomhetDriftsted');
+		$this->addMapping('D1887', 'DriftsstedBoligAvstand-datadef-1887', 'DriftsstedBoligAvstand');
+		$this->addMapping('D1888', 'LeietakerLoyvenummerSpesifisertLoyve-datadef-1888', 'LeietakerLoyvenummer');
+		$this->addMapping('D1889', 'LeietakerNavnSpesifisertLoyve-datadef-1889', 'LeietakerNavn');
+		$this->addMapping('D1890', 'LeietakerAdresseSpesifisertLoyve-datadef-1890', 'LeietakerAdresse');
+		$this->addMapping('D7951', 'LeietakerPostnummerSpesifisertLoyve-datadef-7951', 'LeietakerPostnummer');
+		$this->addMapping('D7952', 'LeietakerPoststedSpesifisertLoyve-datadef-7952', 'LeietakerPoststed');
+		$this->addMapping('D1891', 'LeietakerFodselsnummerSpesifisertLoyve-datadef-1891', 'LeietakerFodselsnummer');
+		$this->addMapping('D1892', 'LeietakerPrivatBrukLoyvenummerSpesifisertLoyve-datadef-1892', 'LeietakerPrivatBrukLoyvenummer');
+		$this->addMapping('D1893', 'LeietakerPrivatBrukNavnSpesifisertLoyve-datadef-1893', 'LeietakerPrivatBrukLoyvenummer');
+		$this->addMapping('D1894', 'LeietakerPrivatBrukAdresseSpesifisertLoyve-datadef-1894', 'LeietakerPrivatBrukAdresse');
+		$this->addMapping('D7953', 'LeietakerPrivatBrukPostnummerSpesifisertLoyve-datadef-7953', 'LeietakerPrivatBrukPostnummer');
+		$this->addMapping('D7954', 'LeietakerPrivatBrukPoststedSpesifisertLoyve-datadef-7954', 'LeietakerPrivatBrukPoststed');
+		$this->addMapping('D1895', 'LeietakerPrivatBrukFodselsnummerSpesifisertLoyve-datadef-1895', 'LeietakerPrivatBrukFodselsnummer');
+
+        
+        
+	}
+ }
+?>

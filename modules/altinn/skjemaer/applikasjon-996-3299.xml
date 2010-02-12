@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">KT-0101: Alminnelig melding av foretakssammenslutning</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-996-3300.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/Melder-grp-4507/Melder-grp-4508/Foretaksopplysninger-grp-4509/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind ref="/Skjema/Melder-grp-4507/Melder-grp-4508/Foretaksopplysninger-grp-4509/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind ref="/Skjema/Melder-grp-4507/Melder-grp-4508/Foretaksopplysninger-grp-4509/EnhetPostnummer-datadef-6673" required="true"/>
+            <xforms:bind ref="/Skjema/Melder-grp-4507/Melder-grp-4508/Foretaksopplysninger-grp-4509/EnhetPoststed-datadef-6674" required="true"/>
+            <xforms:bind ref="/Skjema/Melder-grp-4507/Melder-grp-4508/OmsetningOgDriftsresultat-grp-4511/Omsetning-datadef-320" required="true"/>
+            <xforms:bind ref="/Skjema/Melder-grp-4507/Melder-grp-4508/OmsetningOgDriftsresultat-grp-4511/Driftsresultat-datadef-146" required="true"/>
+            <xforms:bind ref="/Skjema/ForetakssammenslutningensArt-grp-4874/SammenslutningArt-datadef-21701" required="true"/>
+            <xforms:bind ref="/Skjema/ForetakenesStrukturOgVirksomhetsomrader-grp-4519/FusjonForetakStrukturVirksomhet-datadef-21568" required="true"/>
+            <xforms:bind ref="/Skjema/Offentlighet-grp-4522/FusjonOffentlighetEnighet-datadef-21587" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>Alminnelig melding av foretakssammenslutning</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Hensikten med en alminnelig melding er å gi Konkurransetilsynet  informasjon om foretakssammenslutningen slik at tilsynet kan vurdere  om det skal gis pålegg om fullstendig melding med tanke på en  grundigere vurdering av saken.
+                    Reglene om alminnelig melding av  foretakssammenslutninger er å finne i konkurranseloven § 18 første,  annet og sjette ledd og i forskrift om melding av  foretakssammenslutninger §§ 1 til 3 og 6. Konkurransetilsynet har  dessuten
+                    gitt retningslinjer for alminnelig melding av  foretakssammenslutning. Se www.konkurransetilsynet.no for mer  informasjon om loven, forskriften og retningslinjene.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/Melder-grp-4507">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>1. Melder(e)</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Partene i fusjonen eller den eller de som varig overtar kontroll over  ett eller flere andre foretak</p>
+                </xforms:hint>
+                <xforms:group ref="/Skjema/Melder-grp-4507/Melder-grp-4508">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.1 Melder</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Skal alltid fylles ut. Dersom det er mer enn en melder, skal en av  melderne oppgis som hovedmelder. Hovedmelder inngir meldingen på  vegne av samtlige meldere.</p>
+                    </xforms:hint>
+                    <xforms:group ref="/Skjema/Melder-grp-4507/Melder-grp-4508/Foretaksopplysninger-grp-4509">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Foretaksopplysninger</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Melder-grp-4507/Melder-grp-4508/Foretaksopplysninger-grp-4509/EnhetNavn-datadef-1">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Navn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Melder-grp-4507/Melder-grp-4508/Foretaksopplysninger-grp-4509/EnhetOrganisasjonsnummer-datadef-18">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Org.nr.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Melder-grp-4507/Melder-grp-4508/Foretaksopplysninger-grp-4509/EnhetAdresse-datadef-15">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Adresse</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Melder-grp-4507/Melder-grp-4508/Foretaksopplysninger-grp-4509/EnhetPostnummer-datadef-6673">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Postnummer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Melder-grp-4507/Melder-grp-4508/Foretaksopplysninger-grp-4509/EnhetPoststed-datadef-6674">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Poststed</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Melder-grp-4507/Melder-grp-4508/Foretaksopplysninger-grp-4509/EnhetTelefonnummer-datadef-755">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Telefonnummer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Melder-grp-4507/Melder-grp-4508/Foretaksopplysninger-grp-4509/EnhetTelefaksnummer-datadef-1816">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Telefaks</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Melder-grp-4507/Melder-grp-4508/Foretaksopplysninger-grp-4509/EnhetEPost-datadef-21591">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>E-post</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/Melder-grp-4507/Melder-grp-4508/RepresentantKontaktperson-grp-4510">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kontaktperson/representant</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Melder-grp-4507/Melder-grp-4508/RepresentantKontaktperson-grp-4510/KontaktpersonNavn-datadef-2">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Navn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Melder-grp-4507/Melder-grp-4508/RepresentantKontaktperson-grp-4510/KontaktpersonStilling-datadef-4871">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Stilling</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Melder-grp-4507/Melder-grp-4508/RepresentantKontaktperson-grp-4510/KontaktpersonAdresse-datadef-2751">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Adresse</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Melder-grp-4507/Melder-grp-4508/RepresentantKontaktperson-grp-4510/KontaktpersonPostnummer-datadef-10441">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Postnummer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Melder-grp-4507/Melder-grp-4508/RepresentantKontaktperson-grp-4510/KontaktpersonPoststed-datadef-10442">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Poststed</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Melder-grp-4507/Melder-grp-4508/RepresentantKontaktperson-grp-4510/KontaktpersonTelefonnummer-datadef-3">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Telefonnummer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Melder-grp-4507/Melder-grp-4508/RepresentantKontaktperson-grp-4510/KontaktpersonTelefaxnummer-datadef-324">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Telefaks</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Melder-grp-4507/Melder-grp-4508/RepresentantKontaktperson-grp-4510/KontaktpersonEPost-datadef-2876">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>E-post</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/Melder-grp-4507/Melder-grp-4508/OmsetningOgDriftsresultat-grp-4511">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Omsetning og driftsresultat</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Melder-grp-4507/Melder-grp-4508/OmsetningOgDriftsresultat-grp-4511/Omsetning-datadef-320">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Omsetning</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Omsetningen fra forrige regnskapsår skal oppgis. Ved erverv av  kontroll skal omsetningen til alle foretak i samme konsern som  foretaket som erverver kontroll tas med. Transaksjoner mellom foretak  i samme konsern
+                                    skal i så fall trekkes fra.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>I tusen kroner</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Melder-grp-4507/Melder-grp-4508/OmsetningOgDriftsresultat-grp-4511/Driftsresultat-datadef-146">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Driftsresultat</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Driftsresultatet fra forrige regnskapsår skal oppgis. Ved erverv av  kontroll skal driftsresultatet til alle foretak i samme konsern som  foretaket som erverver kontroll tas med. Transaksjoner mellom foretak  i
+                                    samme konsern skal i så fall trekkes fra.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>I tusen kroner</p>
+                            </xforms:hint>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.2 Annen melder</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Fylles ut ved fusjon eller når det er mer enn ett foretak som overtar  kontroll.</p>
+                    </xforms:hint>
+                    <xforms:repeat id="repeat_AnnenMelder-grp-4513" nodeset="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513">
+                        <xforms:group ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1.2 Annen melder</p>
+                            </xforms:caption>
+                            <xforms:input ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513/FusjonspartNavn-datadef-21540">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Navn</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513/FusjonspartOrganisasjonsnummer-datadef-21541">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Org.nr.</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513/FusjonspartAdresse-datadef-21542">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Adresse</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513/FusjonspartPostnummer-datadef-21543">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Postnummer</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513/FusjonspartPoststed-datadef-21544">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Poststed</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513/FusjonspartTelefonnummer-datadef-21545">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Telefonnummer</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513/FusjonspartTelefaxnummer-datadef-21546">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Telefaks</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513/FusjonspartEPost-datadef-21547">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>E-post</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513/KontaktpersonFusjonspartNavn-datadef-21548">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Navn</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513/KontaktpersonFusjonspartStilling-datadef-21549">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Stilling</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513/KontaktpersonFusjonspartAdresse-datadef-21550">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Adresse</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513/KontaktpersonFusjonspartPostnummer-datadef-21551">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Postnummer</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513/KontaktpersonFusjonspartPoststed-datadef-21552">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Poststed</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513/KontaktpersonFusjonspartTelefonnummer-datadef-21553">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Telefonnummer</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513/KontaktpersonFusjonspartTelefaxnummer-datadef-21554">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Telefaks</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513/KontaktpersonFusjonspartEPost-datadef-21555">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>E-post</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513/FusjonspartOmsetning-datadef-21556">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Omsetning</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Omsetningen fra forrige regnskapsår skal oppgis. Ved erverv av  kontroll skal omsetningen til alle foretak i samme konsern som  foretaket som erverver kontroll tas med. Transaksjoner mellom foretak  i samme
+                                        konsern skal i så fall trekkes fra.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>I tusen kroner</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Melder-grp-4507/AnnenMelder-grp-4512/AnnenMelder-grp-4513/FusjonspartDriftsresultat-datadef-21557">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Driftsresultat</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Driftsresultatet fra forrige regnskapsår skal oppgis. Ved erverv av  kontroll skal driftsresultatet til alle foretak i samme konsern som  foretaket som erverver kontroll tas med. Transaksjoner mellom foretak  i
+                                        samme konsern skal i så fall trekkes fra.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>I tusen kroner</p>
+                                </xforms:hint>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:repeat>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OvrigeInvolverteForetak-grp-4516">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>2. Øvrige involverte foretak</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Foretak som det overtas kontroll over.</p>
+                </xforms:hint>
+                <xforms:repeat id="repeat_OvrigeInvolverteForetak-grp-4517" nodeset="/Skjema/OvrigeInvolverteForetak-grp-4516/OvrigeInvolverteForetak-grp-4517">
+                    <xforms:group ref="/Skjema/OvrigeInvolverteForetak-grp-4516/OvrigeInvolverteForetak-grp-4517">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.1 Øvrige involverte foretak</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Øvrige involverte foretak er andre involverte foretak enn melder(ne).  Som regel vil det være snakk om de foretak som det overtas kontroll  over, for eksempel et selskap som blir kjøpt opp. Selgeren av et  foretak er
+                                ikke et involvert foretak. I en fusjon vil det som regel  ikke være noen involverte foretak utover partene i fusjonen (partene  i fusjonen vil være meldere).</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/OvrigeInvolverteForetak-grp-4516/OvrigeInvolverteForetak-grp-4517/FusjonAndreForetakNavn-datadef-21558">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Navn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OvrigeInvolverteForetak-grp-4516/OvrigeInvolverteForetak-grp-4517/FusjonAndreForetakOrganisasjonsnummer-datadef-21559">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Org.nr.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OvrigeInvolverteForetak-grp-4516/OvrigeInvolverteForetak-grp-4517/FusjonAndreForetakOmsetning-datadef-21566">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Omsetning</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Omsetningen fra forrige regnskapsår skal oppgis. Ved erverv av  kontroll skal omsetningen til alle foretak i samme konsern som  foretaket som erverver kontroll tas med. Transaksjoner mellom foretak  i samme konsern
+                                    skal i så fall trekkes fra.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>I tusen kroner</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OvrigeInvolverteForetak-grp-4516/OvrigeInvolverteForetak-grp-4517/FusjonAndreForetakDriftsresultat-datadef-21567">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Driftsresultat</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Driftsresultatet fra forrige regnskapsår skal oppgis. Ved erverv av  kontroll skal driftsresultatet til alle foretak i samme konsern som  foretaket som erverver kontroll tas med. Transaksjoner mellom foretak  i
+                                    samme konsern skal i så fall trekkes fra.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>I tusen kroner</p>
+                            </xforms:hint>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/ForetakssammenslutningensArt-grp-4874">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>3. Foretakssammenslutningens art</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/ForetakssammenslutningensArt-grp-4874/SammenslutningArt-datadef-21701">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Fusjon</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fusjon</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Oppkjøp</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Oppkjøp</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Annet</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Annet</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Angi hvilken type foretakssammenslutning det dreier seg om</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/ForetakssammenslutningensArt-grp-4874/SammenslutningSpesifisering-datadef-21702">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Spesifiser annet</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/ForetakenesStrukturOgVirksomhetsomrader-grp-4519">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>4. Foretakenes struktur og virksomhetsområder</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/ForetakenesStrukturOgVirksomhetsomrader-grp-4519/FusjonForetakStrukturVirksomhet-datadef-21568">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Beskrivelse av de involverte foretakenes (foretakene fra punkt 1 og 2)  juridiske og organisatoriske struktur, og deres virksomhetsområder.  Beskrivelsen skal blant annet inneholde en kort omtale av foretak i  samme
+                            konsern. Som en del av beskrivelsen kan foretakene velge å  legge ved avtalen som ligger til grunn for foretakssammenslutningen.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Med involverte foretak menes det foretak som er gjenstand for  transaksjonen, og de foretak som overtar kontroll over det. Dersom  det bare erverves kontroll over en del av et foretak, er det bare den  ervervede delen som
+                            skal regnes som et involvert foretak. Selgeren av  et foretak eller deler av et foretak er ikke et involvert foretak. I  en fusjon vil de fusjonerende selskaper være de involverte  foretakene.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>5. Markeder som berøres av foretakssammenslutningen</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_MarkederSomBeroresAvForetakssammenslutningen-grp-4521" nodeset="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521">
+                    <xforms:group ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5. Markeder som berøres av foretakssammenslutningen</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Opplysninger om markeder hvor to eller flere av de involverte  foretakene har overlappende virksomhet, og hvor den samlede  markedsandelen som følge av foretaks- sammenslutningen blir på over  20 prosent. Virksomhet i
+                                det aktuelle markedet som utøves av andre  foretak i samme konsern som det eller de foretak som overtar kontroll  skal regnes med for vedkommende foretak. Det er kun markeder i Norge,  eller markeder som Norge er en
+                                del av, som skal beskrives.  </p>
+                            <p/>
+                            <p>Det holder å oppgi navnet på varen/tjenesten dersom dette er  tilstrekkelig presist. Angi i hvilke geografiske områder  varene/tjenestene selges. Oppgi de involverte foretakenes samlede  markedsandel i markedene. For
+                                hvert av markedene skal de involverte  foretakenes fem viktigste konkurrenter, kunder og leverandører  oppgis.</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521/KonkurransedetaljerVarerTjenester-datadef-21569">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Vare/tjeneste</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Det skal gis opplysninger om de varer og tjenester hvor de involverte  foretakene har overlappende virksomhet, og hvor foretakene som følge  av foretaks- sammenslutningen får en markedsandel på over 20 prosent.  Det
+                                    holder å oppgi navnet på varen/tjenesten dersom dette er  tilstrekkelig presist.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521/KonkurransedetaljerGeografiskOmrade-datadef-21570">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Geografisk(e) område(r)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Det skal her angis i hvilke geografiske områder den enkelte  vare/tjeneste selges. Dersom varen/tjenesten selges i flere områder,  for eksempel i Nord-Norge og på Vestlandet, skal dette oppgis. Selges
+                                    varen/tjenesten i hele Norge, er det tilstrekkelig å oppgi Norge som  det geografiske område hvor varen/tjenesten selges.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521/KonkurransedetaljerMarkedsandel-datadef-21571">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>De involverte foretakenes markedsandel</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her skal meldernes vurdering av de involverte foretakenes samlede  markedsandel oppgis for hver enkelt vare/tjeneste, og for hvert  geografiske område som er oppgitt.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521/KonkurransedetajerKonkurrent1-datadef-21572">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521/KonkurransedetaljerKonkurrent2-datadef-21573">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521/KonkurransedetaljerKonkurrent3-datadef-21574">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521/KonkurransedetaljerKonkurrent4-datadef-21575">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521/KonkurransedetaljerKonkurrent5-datadef-21576">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>5</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521/KonkurransedetaljerKunde1-datadef-21577">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521/KonkurransedetaljerKunde2-datadef-21578">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521/KonkurransedetaljerKunde3-datadef-21579">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521/KonkurransedetaljerKunde4-datadef-21580">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521/KonkurransedetaljerKunde5-datadef-21581">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>5</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521/KonkurransedetaljerLeverandor1-datadef-21582">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521/KonkurransedetaljerLeverandor2-datadef-21583">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521/KonkurransedetaljerLeverandor3-datadef-21584">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521/KonkurransedetaljerLeverandor4-datadef-21585">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MarkederSomBeroresAvForetakssammenslutningen-grp-4520/MarkederSomBeroresAvForetakssammenslutningen-grp-4521/KonkurransedetaljerLeverandor5-datadef-21586">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>5</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Arsberetningerogregnskap-grp-4760">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>6. Årsberetning og årsregnskap</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Arsberetningerogregnskap-grp-4760/Arsberetning-grp-4882">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>6.1 Årsberetning</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Dersom årsberetningen til et involvert foretak ikke er offentlig  tilgjengelig (for eksempel i Regnskapsregisteret i Brønnøysund eller  på foretakets hjemmeside), skal den vedlegges meldingen. Det samme  gjelder for foretak
+                            i samme konsern som det eller de foretak som  overtar kontroll.</p>
+                    </xforms:hint>
+                    <xforms:selectOne ref="/Skjema/Arsberetningerogregnskap-grp-4760/Arsberetning-grp-4882/ArsberetningOffentlig-datadef-21620">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Finnes årsberetningen for alle involverte foretak offentlig  tilgjengelig?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Arsberetningerogregnskap-grp-4760/Arsregnskap-grp-4883">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>6.2 Årsregnskap</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Dersom årsregnskapet til et involvert foretak ikke er offentlig  tilgjengelig (for eksempel i Regnskapsregisteret i Brønnøysund eller  på foretakets hjemmeside), skal det vedlegges meldingen. Det samme  gjelder for foretak
+                            i samme konsern som det eller de foretak som  overtar kontroll.</p>
+                    </xforms:hint>
+                    <xforms:selectOne ref="/Skjema/Arsberetningerogregnskap-grp-4760/Arsregnskap-grp-4883/ArsregnskapOffentlig-datadef-21719">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Finnes årsregnskapet for alle involverte foretak offentlig  tilgjengelig?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/AndreOpplysninger-grp-4523">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>7. Andre opplysninger</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/AndreOpplysninger-grp-4523/FusjonOpplysningerAndre-datadef-21589">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Eventuelle andre opplysninger som melder(ne) mener kan være av  betydning for Konkurransetilsynets vurdering av om det skal pålegges  fullstendig melding.</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Ikke påkrevd å fylle ut</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Offentlighet-grp-4522">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>8. Offentlighet</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/Offentlighet-grp-4522/FusjonOffentlighetEnighet-datadef-21587">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Informasjon om de involverte foretakenes markedsandeler og  konkurrenter, kunder og leverandører i punkt 5 vil i utgangspunktet  bli behandlet som ikke offentlig informasjon. For øvrig vil  informasjon gitt i meldingen bli
+                            behandlet som offentlig informasjon.  Er melder(ne) enige i dette?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/Offentlighet-grp-4522/FusjonOffentlighetSpesifisering-datadef-21588">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Angi nærmere hva melder(ne) mener skal unntas offentlighet.</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

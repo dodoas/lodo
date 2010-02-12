@@ -1,0 +1,1848 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1147: Fradrag i norsk skatt for skatt betalt i utlandet pers. næringsdriv.</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-618-5924.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-333/Avgiver-grp-2349/OppgavegiverNavn-datadef-68" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-333/Avgiver-grp-2349/OppgavegiverFodselsnummer-datadef-26" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-333/Avgiver-grp-2349/OppgavegiverAdresse-datadef-69"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-333/Avgiver-grp-2349/OppgavegiverPostnummer-datadef-6676"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-333/Avgiver-grp-2349/OppgavegiverPoststed-datadef-6677"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1147 Fradrag i norsk skatt for skatt betalt i utlandet  (kreditfradrag) for lønnsmottakere, pensjonister og personlig  næringsdrivende 2006</p>
+            </xforms:caption>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1147 Frådrag i norsk skatt for skatt betalt i utlandet  (kreditfrådrag) for lønnsmottakarar, pensjonistar og personleg  næringsdrivande 2006</p>
+            </xforms:caption>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-333">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Innleding</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>De alminnelige kreditbestemmelser er inntatt i lov av 26. mars 1999 nr  14 om skatt av formue og inntekt (skatteloven) § 16-20 flg. og  Finansdepartementets forskrift av 19. november 1999 nr. 1158 til  utfylling og
+                        gjennomføring mv. av skatteloven § 16-28 om fradrag i  norsk skatt for skatt betalt i utlandet og dokumentasjonsplikt.  Reglene gjelder også kreditfradrag etter skatteavtale.  Skjemaet  gjelder ikke krav om kreditfradrag etter
+                        skatteloven § 16-30.  </p>
+                    <p>Kreditfradrag kan kreves av personer som anses skattemessig bosatt i  Norge etter norsk intern rett og eventuell skatteavtale. Dersom en  inntekts- eller formuespost som har kilde i utlandet skattlegges både  i Norge og i
+                        utlandet, kan det kreves fradrag i norsk utlignet skatt  for den skatt som er betalt i utlandet. Når beskatningen er  gjennomført i et land som Norge har skatteavtale med og inntekten  omfattes av avtalen, kan det bare gis
+                        kreditfradrag når det følger av  skatteavtalen at inntekten/formuen kan beskattes i det annet land og  at Norge skal gi fradrag for den utenlandske skatten i norsk utlignet  skatt.  </p>
+                    <p>Når det gis godtgjørelsesfradrag i skatt av utbytte fra selskap i  annen EØS-stat, kan det ikke kreves kreditfradrag for utenlandsk  skatt på det samme utbyttet.  </p>
+                    <p>Personer som i tillegg til inntekter som er omfattet av kreditmetoden  har inntekter som omfattes av den alternative fordelingsmetoden  og/eller fordelingsmetoden med progresjonsforbehold, skal fylle ut  både skjemaet RF-1147
+                        og skjemaet Nedsettelse av inntektsskatt på  lønn og pensjon (RF-1150). Det samme gjelder personer som i tillegg  til inntekter som er omfattet av kreditmetoden har hatt lønnsinntekt  opptjent under arbeidsopphold i utlandet
+                        med varighet på mer enn 12  måneder og som krever nedsettelse av skatt. For nærmere informasjon,  se tilleggsinformasjon til selvangivelsen Utland.  </p>
+                    <p>Kreditfradraget er begrenset til det laveste av den beregnede norske  skatten på den samlede utenlandsinntekt og/eller utenlandsformue  (beregnet maksimalt kreditfradrag), og det beløp som faktisk er  betalt i skatt i utlandet
+                        samme inntektsår som inntekten/ formuen er  skattepliktig i Norge.  </p>
+                    <p>Kreditfradrag for utenlandsk kildeskatt på utbytte, renter og royalty  er begrenset til den skatt som kildelandet kan kreve etter  skatteavtalen med Norge. Hvis den kildeskatt som er trukket,  overstiger den skatt som kan
+                        kreves etter skatteavtalen, må det søkes  refusjon av den overskytende kildeskatt i utbetalingslandet.  Kreditfradrag for utenlandsk inntektsskatt avregnes mot norsk skatt  på personinntekt og/eller alminnelig inntekt avhengig
+                        av hvilket  skattegrunnlag den utenlandske inntekten inngår i. Kreditfradrag for  utenlandsk formuesskatt avregnes mot norsk formuesskatt. Det gis ikke  kreditfradrag i trygdeavgift.  </p>
+                    <p>Fastsettelse av kreditfradrag skjer maskinelt i forbindelse med  ligningsbehandlingen. Beregningen av det maksimale kreditfradraget  forutsetter at inntekter, kostnader, formue og gjeld fordeles mellom  Norge og utlandet.  </p>
+                    <p>For mer informasjon, se rettledningen.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Innleiing</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Dei allmenne reglane om kreditfrådrag er tekne inn i lov av 26. mars  1999 nr 14 om skatt av formue og inntekt (skattelova) § 16-20 flg. og  Finansdepartementet si forskrift av 19. november 1999 nr. 1158 til  utfylling og
+                        gjennomføring m.m. av skattelova § 16-28 om frådrag i  norsk skatt for skatt betalt i utlandet og om dokumentasjonsplikt.  Reglane gjeld også kreditfrådrag etter skatteavtale.  Skjemaet gjeld  ikkje krav om kreditfrådrag etter
+                        skattelava § 16-30.  </p>
+                    <p>Kreditfrådrag kan krevjast av skattytarar som etter skattereglane er  busette i Noreg etter norsk intern rett og eventuell skatteavtale.  Dersom ein inntekts- eller formuespost, som har kjelde i utlandet,  vert skattlagd både i
+                        Noreg og i utlandet, kan ein krevje frådrag i  norsk utlikna skatt for skatt som er betalt i utlandet. Når  skattlegginga er gjennomført i eit land som Noreg har skatteavtale  med og inntekta er omfatta av avtalen, kan det
+                        berre givast  kreditfrådrag når det følgjer av skatteavtalen at inntekta/formuen  kan skattleggjast i det andre landet, og at Noreg skal gi frådrag for  den utanlandske skatten i den utlikna skatten her i landet.  </p>
+                    <p>Når det blir gitt godtgjerslefrådrag i skatt av utbytte frå selskap i  annan EØS-stat, kan det ikkje krevast kreditfrådrag for utanlandsk  skatt på det same utbyttet.  </p>
+                    <p>Personer som i tillegg til inntekter som kjem inn under kreditmetoden  har inntekter som er omfatta av den alternative fordelingsmetoden  og/eller fordelingsmetoden med progresjonsforbehold, skal fylle ut  både skjema RF-1147
+                        og skjema Nedsetting av inntektsskatt på løn og  pensjon (RF-1150). Det same gjeld personer som i tillegg til  inntekter som kjem inn under kreditmetoden har hatt lønsinntekt tent  opp under arbeidsopphald i utlandet som har
+                        vart meir enn 12 månader  og som krev nedsetjing av skatt. For nærare informasjon, sjå  tilleggsinformasjon til sjølvmeldinga Utland.  </p>
+                    <p>Kreditfrådraget er avgrensa til det lågaste av utrekna norsk skatt på  samla utanlandsinntekt og/eller utanlandsformue (utrekna maksimalt  kreditfrådrag), og den summen som faktisk er betalt i skatt til  utlandet same
+                        inntektsår som inntekta/formuen er skattepliktig i  Noreg.  </p>
+                    <p>Kreditfrådrag for utanlandsk kjeldeskatt på utbytte, renter og royalty  er avgrensa til den skatten som kjeldelandet kan krevje etter  skatteavtalen med Noreg. Dersom den kjeldeskatten som er trekt, er  større enn den skatten
+                        som kan krevjast etter skatteavtalen, må ein  søkje refusjon av den overskytande kjeldeskatten i  utbetalingslandet.  </p>
+                    <p>Kreditfrådrag for utanlandsk inntektsskatt blir avrekna mot norsk  skatt på personinntekt og/eller allmenn inntekt avhengig av kva for  eit skattegrunnlag den utanlandske inntekta går inn i. Kreditfrådrag  for utanlandsk
+                        formuesskatt blir avrekna mot norsk formuesskatt. Det  blir ikkje gitt kreditfrådrag i trygdeavgifta.  </p>
+                    <p>Fastsetjing av kreditfrådrag skjer maskinelt i samband med  likningsbehandlinga. Utrekninga av det maksimale kreditfrådraget  føreset at inntekter, kostnader, formue og gjeld blir fordelte mellom  Noreg og utlandet.  </p>
+                    <p>For mer informasjon, sjå rettleiinga.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-333/Avgiver-grp-2349">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Avgiver</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Avgivar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-333/Avgiver-grp-2349/OppgavegiverNavn-datadef-68">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-333/Avgiver-grp-2349/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-333/Avgiver-grp-2349/OppgavegiverAdresse-datadef-69">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-333/Avgiver-grp-2349/OppgavegiverPostnummer-datadef-6676">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-333/Avgiver-grp-2349/OppgavegiverPoststed-datadef-6677">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/ENSpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2350">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>I Krav om fradrag for betalt inntektsskatt i utlandet</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>I del I spesifiseres betalt inntektsskatt i utlandet og hvilken del av  de inntekter og kostnader som er ført i selvangivelsen og  næringsoppgaven som har tilknytning til utlandet. Med  utenlandsinntekt menes inntekt med kilde
+                        i utlandet som er  skattepliktig i Norge etter norsk intern rett og eventuell  skatteavtale, og som beskattes i utlandet. Inntekt som etter  skatteavtale unntas fra norsk beskatning fordi fordelingsmetoden  legges til grunn,
+                        medregnes ikke i utenlandsinntekten, selv om  inntekten skattlegges i utlandet.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>I Krav om frådrag for betalt inntektsskatt i utlandet</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>I del I spesifiserer ein betalt inntektsskatt i utlandet, og kva for  del av inntektene og kostnadene som er førte i sjølvmeldinga og  næringsoppgåva, som er knytte til utlandet. Med utenlandsinntekt er  det meint inntekt med
+                        kjelde i utlandet som er skattepliktig til  Noreg etter norsk intern rett og eventuell skatteavtale, og som blir  skattlagd i utlandet. Inntekt som etter skatteavtale er halden  utanfor norsk skattlegging fordi
+                        fordelingsmetoden er lagd til grunn,  blir ikkje rekna med i utenlandsinntekta, jamvel om inntekta blir  skattlagd i utlandet.</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_SpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2749" nodeset="/Skjema/ENSpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2350/SpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2749">
+                    <xforms:group ref="/Skjema/ENSpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2350/SpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2749">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1 Spesifikasjon av betalt inntektsskatt i utlandet</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her spesifiseres betalt inntektsskatt i utlandet. (Spesifikasjon av  betalt formuesskatt i utlandet gjøres i post 6 i del II.) Det skal  gis opplysninger om i hvilket land skatten er utlignet og betalt, hva  slags type
+                                inntekt og skatteart det er, skattens størrelse i  utenlandsk valuta, hvilken valutakurs som er benyttet ved omregning  til norske kroner og skattebeløpets størrelse i norske kroner. Om  dokumentasjon av betalt skatt
+                                og omregning av valuta, se  rettledningen.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>1 Spesifikasjon av betalt inntektsskatt i utlandet</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her spesifiserer ein betalt inntektsskatt i utlandet. (Formuesskatt  som er betalt i utlandet, skal ein spesifisere i post 6 i del II.)  Her skal ein gi opplysningar om i kva for land skatten er utlikna og  betalt, kva
+                                type inntekt og skatt det gjeld, skatten i utanlandsk  valuta, kva for type valuta, valutakursen som er nytta ved omrekning  til norske kroner, og skatten i norske kroner. Om dokumentasjon av  betalt skatt og omrekning
+                                av valuta, sjå rettleiinga.</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/ENSpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2350/SpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2749/InntektsskattLandSpesifisertLand-datadef-5757">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Land</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Land</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/ENSpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2350/SpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2749/InntektTypeSpesifisertLand-datadef-5758">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Type inntekt</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Type inntekt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/ENSpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2350/SpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2749/InntektsskattUtlandArtSpesifisertLand-datadef-5759">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Skatteart</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Skatteart</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/ENSpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2350/SpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2749/InntektsskattUtlandUtenlandskValutaSpesifisertLand-datadef-7739">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beløp</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Beløp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/ENSpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2350/SpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2749/InntektsskattUtlandValutaSpesifisertLand-datadef-14170">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Valuta</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Valuta</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/ENSpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2350/SpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2749/InntektsskattUtlandValutakursSpesifisertLand-datadef-14171">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kurs</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever tre desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kurs</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev tre desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/ENSpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2350/SpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2749/InntektsskattUtlandNOKSpesifisertLand-datadef-5760">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beløp i NOK</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Beløp i NOK</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/ENSpesifikasjonAvBetaltInntektsskattIUtlandet-grp-2350/InntektsskattUtland-datadef-5762">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Samlet skatt på inntekt betalt i utlandet som det kreves fradrag for i  norsk skatt</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Samla skatt på inntekt betalt i utlandet som ein krev frådrag for i  norsk skatt</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>2 Inntekter direkte tilordnet utlandet</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Inntektsposter skal tilordnes utenlandsinntekten etter den såkalte  direkte fordelingsmetoden, dvs. at inntekten skal henføres til  utenlandsinntekten eller den norske inntekten etter hvor den  rettmessig er oppebåret. I
+                        postene 2.1 til 2.5 føres de inntekter som  skal henføres til utlandet.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>2 Inntekter direkte tilordna utlandet</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Inntektspostar skal tilordnast utanlandsinntekta etter den såkalla  direkte fordelingsmetoden, dvs. at inntekta skal reknast til  utanlandsinntekta eller den norske inntekta etter kvar inntekta  rettmessig er opptent. I postane
+                        2.1 til 2.5 skal ein føre inntekter  som skal reknast til utlandet.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOENBeregnetPersoninntektOgGodtgjorelse-grp-2361">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.1 Beregnet personinntekt og godtgjørelse for arbeid knyttet til  virksomhet i utlandet</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Inkl. i post nr.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.1 Utrekna personinntekt og godtgjering for arbeid knytt til verksemd  i utlandet</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Inkl. i post nr.</p>
+                    </xforms:hint>
+                    <xforms:group ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOENBeregnetPersoninntektOgGodtgjorelse-grp-2361/BelopINOK-grp-4241">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beløp i NOK</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Beløp i NOK</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOENBeregnetPersoninntektOgGodtgjorelse-grp-2361/BelopINOK-grp-4241/PersoninntektDeltakerlignetSelskapEnkeltmannsforetakUtland-datadef-14172">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2.1.1 Beregnet personinntekt fra enkeltpersonforetak</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres den del av beregnet personinntekt i selvangivelsen post 1.6  som skal henføres til utlandet og som er tilordnet eier av  enkeltpersonforetak.  </p>
+                                <p>For eier av enkeltpersonforetak fordeles beregnet personinntekt i post  1.22 i &lt;&lt;Skjema for beregning av personinntekt>> (RF-1224)  forholdsmessig mellom post 9930 i næringsoppgave 1 eller post 0999 i
+                                    næringsoppgave 2 og post 4 i &lt;&lt;Tilleggsskjema til RF-1145 og RF-1147  om kreditfradrag>> (RF-1149).</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>1.6</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>2.1.1 Utrekna personinntekt frå enkeltpersonføretak</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her fører ein den delen av utrekna personinntekt i sjølvmeldinga post  1.6 som skal reknast til utlandet, og som er tilordna eigar av  enkeltpersonføretak.  </p>
+                                <p>For eigar av enkeltpersonføretak skal utrekna personinntekt i post  1.22 i &lt;&lt;Skjema for utrekning av personinntekt>> (RF-1224) fordelast  etter forholdet mellom post 9930 i næringsoppgåve 1 eller post 0999 i
+                                    næringsoppgåve 2 og post 4 i &lt;&lt;Tilleggsskjema til RF-1145 og RF-1147  om kreditfrådrag>> (RF-1149).</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>1.6</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOENBeregnetPersoninntektOgGodtgjorelse-grp-2361/BelopINOK-grp-4241/PersoninntektGodtgjorelseDeltakerlignetSelskapUtland-datadef-5763">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2.1.2 Godtgjørelse for arbeid til deltaker i deltakerliknet selskap</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres den andel av godtgjørelse for arbeid i deltakeroppgaven post  104 a til deltaker i deltakerlignet selskap som skal henføres til  utlandet. Arbeidsgodtgjørelse skal også føres i post 5.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>1.6/1.7</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>2.1.2 Godtgjering for arbeid til deltakar i deltakarlikna selskap</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her fører ein den delen av godtgjeringa i deltakaroppgåva post 104 a  til deltakar i deltakarlikna selskap som skal reknast til utlandet.  Arbeidsgodtgjeringa skal også førast i post 5.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>1.6/1.7</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOENBeregnetPersoninntektOgGodtgjorelse-grp-2361/BelopINOK-grp-4241/PersoninntektGodtgjorelseUtlandDirekte-datadef-5776">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2.1.3 Sum</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Beløpet i post 2.1.3 inngår i den personinntekt som skal tilordnes  utlandet og som vil bli tatt med i beregningen av det maksimale  kreditfradraget i toppskatt. Post 2.1.3 skal ikke summeres med  postene nedenfor.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>2.1.3 Sum</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Beløpet i post 2.1.3 går inn i den personinntekta som skal tilordnast  utlandet og som blir teke med i utrekninga av det maksimale  kreditfrådraget i toppskatten. Ein skal ikkje summere post 2.1.3 med  postane nedanfor.</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+                <xforms:group ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTOArbeidsinntekterMvOpptjentIUtlandet-grp-2445">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.2 Arbeidsinntekter mv. opptjent i utlandet</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.2 Arbeidsinntekter o.a. opptente i utlandet</p>
+                    </xforms:caption>
+                    <xforms:repeat id="repeat_TOTOENLonnMv-grp-2750" nodeset="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTOArbeidsinntekterMvOpptjentIUtlandet-grp-2445/TOTOENLonnMv-grp-2750">
+                        <xforms:group ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTOArbeidsinntekterMvOpptjentIUtlandet-grp-2445/TOTOENLonnMv-grp-2750">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2.2.1 Lønn mv.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres lønn, honorarer, naturalytelser og annen godtgjørelse  mottatt for arbeid utført i utlandet som er ført i selvangivelsen  post 2.1. og som omfattes av kreditmetoden.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Inkl. i post nr.</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>2.2.1 Lønn m.m.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her fører ein lønn, honorar, naturalytingar og anna godtgjering som er  motteken for arbeid utført i utlandet, når godtgjeringa er ført i  sjølvmeldinga post 2.1 og kjem inn under kreditmetoden.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Inkl. i post nr.</p>
+                            </xforms:hint>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTOArbeidsinntekterMvOpptjentIUtlandet-grp-2445/TOTOENLonnMv-grp-2750/LonnMvUtlandBeskrivelseSpesifisertLonnMv-datadef-7767">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Type lønn</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>2.1.6</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Type lønn</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>2.1.6</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTOArbeidsinntekterMvOpptjentIUtlandet-grp-2445/TOTOENLonnMv-grp-2750/LonnMvUtlandUtenlandskValutaSpesifisertLonnMv-datadef-7768">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Beløp</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Beløp</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTOArbeidsinntekterMvOpptjentIUtlandet-grp-2445/TOTOENLonnMv-grp-2750/LonnMvUtlandValutaTypeSpesifisertLonnMv-datadef-7769">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Valuta</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Valuta</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTOArbeidsinntekterMvOpptjentIUtlandet-grp-2445/TOTOENLonnMv-grp-2750/LonnMvUtlandValutakursSpesifisertLonnMv-datadef-14173">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Kurs</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feltet krever tre desimaler</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Kurs</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Feltet krev tre desimalar</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTOArbeidsinntekterMvOpptjentIUtlandet-grp-2445/TOTOENLonnMv-grp-2750/LonnMvUtlandNOKSpesifisertLonnMv-datadef-7770">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Beløp i NOK</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Beløp i NOK</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:repeat>
+                    <xforms:group ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTOArbeidsinntekterMvOpptjentIUtlandet-grp-2445/TOTOTOPensjonerTrygdeytelserMv-grp-2751">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.2.2 Pensjoner, trygdeytelser mv.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres brutto pensjonsinntekt og trygdeytelser fra utlandet som er  tatt med i selvangivelsen post 2.2. Dersom pensjonen mv. kommer fra  et annet nordisk land, skal den ikke føres her, men i skjemaet
+                                &lt;&lt;Nedsettelse av inntektsskatt på lønn og pensjon>> (RF-1150).</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Inkl. i post nr.</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>2.2.2 Pensjoner, trygdeytingar o.a</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her fører ein brutto pensjonsinntekt og trygdeytingar frå utlandet som  er tekne med i sjølvmeldinga post 2.2. Dersom pensjonen o.a. kjem frå  eit anna nordisk land, skal den ikkje førast her, men i skjema
+                                &lt;&lt;Nedsetting av inntektsskatt på løn og pensjon>> (RF-1150).</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Inkl. i post nr.</p>
+                        </xforms:hint>
+                        <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTOArbeidsinntekterMvOpptjentIUtlandet-grp-2445/TOTOTOPensjonerTrygdeytelserMv-grp-2751/PensjonerUtlandUtenlandskValuta-datadef-7771">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beløp</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>2.2.</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Beløp</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>2.2.</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTOArbeidsinntekterMvOpptjentIUtlandet-grp-2445/TOTOTOPensjonerTrygdeytelserMv-grp-2751/PensjonerUtlandValutaType-datadef-14174">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Valuta</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Valuta</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTOArbeidsinntekterMvOpptjentIUtlandet-grp-2445/TOTOTOPensjonerTrygdeytelserMv-grp-2751/PensjonerUtlandValutakurs-datadef-14175">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kurs</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever tre desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kurs</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev tre desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTOArbeidsinntekterMvOpptjentIUtlandet-grp-2445/TOTOTOPensjonerTrygdeytelserMv-grp-2751/PensjonerUtlandNOK-datadef-7772">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beløp i NOK</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Beløp i NOK</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTOArbeidsinntekterMvOpptjentIUtlandet-grp-2445/ArbeidsinntekterMvUtlandDirekte-datadef-7773">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.2.3 Sum</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>2.2.3 Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTREMottatteBidragMv-grp-2446">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.3 Mottatte bidrag mv.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres mottatte bidrag, livrenter utenfor arbeidsforhold mv. som er  ført i post 2.6 i selvangivelsen. Eventuell etterlønn og etterpensjon  skal føres i post 2.2.1 og 2.2.2 i skjemaet.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.3 Mottekne bidrag o.a.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein mottekne bidrag, livrenter utanfor arbeidsforhold o.a.  som er førte i post 2.6 i sjølvmeldinga. Eventuell etterlønn og  etterpensjon skal ein føre i postane 2.2.1 og 2.2.2 i skjemaet.</p>
+                    </xforms:help>
+                    <xforms:repeat id="repeat_MottatteBidragMv-grp-2752" nodeset="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTREMottatteBidragMv-grp-2446/MottatteBidragMv-grp-2752">
+                        <xforms:group ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTREMottatteBidragMv-grp-2446/MottatteBidragMv-grp-2752">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2.3 Mottatte bidrag mv.</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Inkludert i post nr.</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>2.3 Mottekne bidrag o.a.</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Inkludert i post nr.</p>
+                            </xforms:hint>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTREMottatteBidragMv-grp-2446/MottatteBidragMv-grp-2752/BidragMvMottattUtlandBeskrivelseSpesifisertBidragMv-datadef-7774">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Type bidrag</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>2.6</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Type bidrag</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>2.6</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTREMottatteBidragMv-grp-2446/MottatteBidragMv-grp-2752/BidragMvMottattUtlandUtenlandskValutaSpesifisertBidragMv-datadef-7775">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Beløp</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Beløp</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTREMottatteBidragMv-grp-2446/MottatteBidragMv-grp-2752/BidragMvValutaTypeSpesifisertBidragMv-datadef-7776">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Valuta</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Valuta</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTREMottatteBidragMv-grp-2446/MottatteBidragMv-grp-2752/BidragMvMottattUtlandValutakursSpesifisertBidragMv-datadef-14176">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Kurs</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feltet krever tre desimaler</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Kurs</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Feltet krev tre desimalar</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTREMottatteBidragMv-grp-2446/MottatteBidragMv-grp-2752/BidragMvMottattUtlandNOKSpesifisertBidragMv-datadef-7777">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Beløp i NOK</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Beløp i NOK</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:repeat>
+                    <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOTREMottatteBidragMv-grp-2446/BidragMvMottattUtlandDirekte-datadef-7778">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.3.1 Sum</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>2.3.1 Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFIREAndreUtenlandsinntekter-grp-2447">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.4 Andre utenlandsinntekter</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.4 Anna utanlandsinntekt</p>
+                    </xforms:caption>
+                    <xforms:repeat id="repeat_TOFIREENAksjeutbytte-grp-2753" nodeset="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFIREAndreUtenlandsinntekter-grp-2447/TOFIREENAksjeutbytte-grp-2753">
+                        <xforms:group ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFIREAndreUtenlandsinntekter-grp-2447/TOFIREENAksjeutbytte-grp-2753">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2.4.1 Aksjeutbytte</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres aksjeutbytte fra utenlandske selskaper som er ført i  selvangivelsen post 3.1.7. Også utbytte som det blir gitt  skjermingsfradrag for skal føres opp med brutto utbytte.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Inkludert i post nr.</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>2.4.1 Aksjeutbytte</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her fører ein aksjeutbytte frå utanlandsk selskap som er ført i  sjølvmeldinga post 3.1.7. Også utbytte som det blir gitt  skjermingsfrådrag for skal førast opp med brutto utbytte.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Inkludert i post nr.</p>
+                            </xforms:hint>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFIREAndreUtenlandsinntekter-grp-2447/TOFIREENAksjeutbytte-grp-2753/AksjeutbytteUtenlandskeSelskaperUtenlandskValutaSpesifisert-datadef-26140">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Beløp</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>3.1.7</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Beløp</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>3.1.7</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFIREAndreUtenlandsinntekter-grp-2447/TOFIREENAksjeutbytte-grp-2753/AksjeutbytteUtenlandskeSelskaperValutaTypeSpesifisert-datadef-26141">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Valuta</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Valuta</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFIREAndreUtenlandsinntekter-grp-2447/TOFIREENAksjeutbytte-grp-2753/AksjeutbytteUtenlandskeSelskaperValutakursSpesifisert-datadef-26142">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Kurs</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feltet krever tre desimaler</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Kurs</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Feltet krev tre desimalar</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFIREAndreUtenlandsinntekter-grp-2447/TOFIREENAksjeutbytte-grp-2753/AksjeutbytteUtlandetSkattemessigSpesifisert-datadef-26143">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Beløp i NOK</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Beløp i NOK</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:repeat>
+                    <xforms:repeat id="repeat_TOFIRETOAnnenKapitalinntekt-grp-2754" nodeset="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFIREAndreUtenlandsinntekter-grp-2447/TOFIRETOAnnenKapitalinntekt-grp-2754">
+                        <xforms:group ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFIREAndreUtenlandsinntekter-grp-2447/TOFIRETOAnnenKapitalinntekt-grp-2754">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2.4.2 Annen kapitalinntekt</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres f.eks. skattepliktig gevinst ved realisasjon av aksjer i  utenlandske selskaper, fordel ved bruk av egen bolig i utlandet,  utleie av fast eiendom i utlandet, gevinst ved realisasjon av bolig-  og
+                                    fritidseiendom i utlandet mv. Spesifiser hva inntekten gjelder, og  i hvilken post i selvangivelsen inntekten er ført.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Inkludert i post nr.</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>2.4.2 Anna kapitalinntekt</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her fører ein t.d. skattepliktig gevinst ved realisasjon av aksjar i  utanlandsk selskap, fordel av å nytte eigen bustad i utlandet,  utleige av fast eigedom i utlandet, gevinst ved realisasjon av  bustad- og
+                                    fritidseigedom i utlandet o.a. Spesifiser kva inntekta  gjeld, og i kva for post i sjølvmeldinga inntekta er ført.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Inkludert i post nr.</p>
+                            </xforms:hint>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFIREAndreUtenlandsinntekter-grp-2447/TOFIRETOAnnenKapitalinntekt-grp-2754/KapitalinntektAnnenUtlandSpesifisertKapitalinntek-datadef-7781">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Beløp</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Beløp</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFIREAndreUtenlandsinntekter-grp-2447/TOFIRETOAnnenKapitalinntekt-grp-2754/KapitalinntektAnnenValutaTypeSpesifisertKapitalinntekt-datadef-7782">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Valuta</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Valuta</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFIREAndreUtenlandsinntekter-grp-2447/TOFIRETOAnnenKapitalinntekt-grp-2754/KapitalinntektAnnenValutakursSpesifisertKapitalinntekt-datadef-14178">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Kurs</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feltet krever tre desimaler</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Kurs</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Feltet krev tre desimalar</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFIREAndreUtenlandsinntekter-grp-2447/TOFIRETOAnnenKapitalinntekt-grp-2754/KapitalinntektAnnenSelvangivelsePostreferanse-datadef-19967">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Inkl. i post nr.</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Inkl. i post nr.</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFIREAndreUtenlandsinntekter-grp-2447/TOFIRETOAnnenKapitalinntekt-grp-2754/KapitalinntektAnnenUtlandNOKSpesifisertKapitalinntekt-datadef-7783">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Beløp i NOK</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Beløp i NOK</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFIREAndreUtenlandsinntekter-grp-2447/TOFIRETOAnnenKapitalinntekt-grp-2754/KapitalinntektAnnenUtlandSpesifisertKapitalinntekt-datadef-20170">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Type kapitalinntekt</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Type kapitalinntekt</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:repeat>
+                    <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFIREAndreUtenlandsinntekter-grp-2447/InntekterAnnenUtlandDirekte-datadef-7785">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.4.3 Sum</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Sum av post 2.4.1 og 2.4.2</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>2.4.3 Sum</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Sum av postane 2.4.1 og 2.4.2</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFEMNettoNaringsinntektUnderskuddIEnmannsforetak-grp-2448">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.5 Netto næringsinntekt/underskudd i enkeltpersonforetak</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres næringsinntekt/ underskudd i enkeltmannssforetak som kan  henføres til utlandet, overført fra post 4 i &lt;&lt;Tilleggsskjema til  RF-1145 og RF-1147 om kreditfradrag>> (RF-1149). Er det flere  næringsinntekter,
+                            skal disse oppgis hver for seg i post 2.5.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Overført fra tilleggsskjema RF-1149 eller fra eget ark. Inkludert i  post nr.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.5 Netto næringsinntekt/ underskott i enkeltpersonføretak</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein næringsinntekt/underskott i enkeltpersonføretak som kan  knytast til utlandet, overført frå post 4 i &lt;&lt;Tilleggsskjema til  RF-1145 og RF-1147 om kreditfrådrag>> (RF-1149). Er det fleire
+                            næringsinntekter, skal ein føre dei kvar for seg i post 2.5.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Overført frå tillegsskjema RF-1149 post 4 eller frå eiget ark.  Inkludert i post nr.</p>
+                    </xforms:hint>
+                    <xforms:repeat id="repeat_NettoNaringsinntektUnderskuddIEnmannsforetak-grp-3068" nodeset="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFEMNettoNaringsinntektUnderskuddIEnmannsforetak-grp-2448/NettoNaringsinntektUnderskuddIEnmannsforetak-grp-3068">
+                        <xforms:group ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFEMNettoNaringsinntektUnderskuddIEnmannsforetak-grp-2448/NettoNaringsinntektUnderskuddIEnmannsforetak-grp-3068">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2.5 Netto næringsinntekt/underskudd i enkeltpersonforetak</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Inkludert i post nr.</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>2.5 Netto næringsinntekt/underskott i enkeltpersonføretak</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Inkludert i post nr.</p>
+                            </xforms:hint>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFEMNettoNaringsinntektUnderskuddIEnmannsforetak-grp-2448/NettoNaringsinntektUnderskuddIEnmannsforetak-grp-3068/ResultatUtlandBeskrivelseSpesifisertResultat-datadef-20439">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Netto næringsinntekt/underskudd i enmannsforetak</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Overført fra tilleggsskjema RF-1149 post 4 eller fra vedlegg</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Netto næringsinntekt/underskott i einmannsføretak</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Ført over frå tilleggsskjema RF-1149 post 4 eller frå vedlegg</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFEMNettoNaringsinntektUnderskuddIEnmannsforetak-grp-2448/NettoNaringsinntektUnderskuddIEnmannsforetak-grp-3068/ResultatUtlandSpesifisertResultat-datadef-20441">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Beløp i NOK</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>2.7/3.2.19</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Beløp i NOK</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>2.7/3.2.19</p>
+                                </xforms:hint>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:repeat>
+                    <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFEMNettoNaringsinntektUnderskuddIEnmannsforetak-grp-2448/ArsresultatUtlandDirekte-datadef-7788">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.5.1 Sum</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>2.7/3.2.19</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>2.5.1 Sum</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>2.7/3.2.19</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TOInntekterDirekteTilordnetUtlandet-grp-335/TOFEMNettoNaringsinntektUnderskuddIEnmannsforetak-grp-2448/InntekterUtlandDirekteEnmannsforetak-datadef-7789">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Sum post 2.2, 2.3, 2.4, 2.5</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Sum post 2.2, 2.3, 2.4, 2.5</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/TREKostnaderDirekteTilordnetUtlandet-grp-338">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>3 Kostnader direkte tilordnet utlandet</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>I postene 3.1 og 3.2 føres kostnader som er direkte knyttet til  inntekt opptjent i utlandet. Dette kalles den direkte  tilordningsmetode. At en kostnad kan direkte tilordnes en inntekt  innebærer at kostnaden har vært
+                        nødvendig for å erverve inntekten.  Slike kostnader skal komme til fradrag i utenlandsinntekten.  </p>
+                    <p>Er kostnaden direkte knyttet til inntekt både i utlandet og Norge, som  f.eks. minstefradrag, skal fradraget fordeles forholdsmessig mellom  utenlandsinntekten og inntekten i Norge, se rettledningen til post  3.1. For andre
+                        kostnader, som f.eks. merkostnader ved å bo utenfor  hjemmet, må det vurderes om disse knytter seg til inntekten i  utlandet, den norske inntekten eller samlet inntekt.  Hvis kostnaden  ikke knytter seg direkte til inntekten i
+                        Norge eller utlandet, skal  den fordeles forholdsmessig mellom nettoinntekten i Norge og i  utlandet, se rettledningen til post 4.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>3 Kostnader direkte tilordna utlandet</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>I postane 3.1 og 3.2 skal ein føre kostnader som er direkte knytt til  inntekt opptent i utlandet.  Dette blir kalla den direkte  tilordningsmetoden. At ein kostnad kan knytast direkte til ei inntekt  inneber at kostnaden har
+                        vært nødvendig for å erverve inntekta. Slike  kostnader skal kome til frådrag i utanlandsinntekta.  </p>
+                    <p>Er kostnaden direkte knytt til inntekt både i utlandet og i Noreg, som  for eksempel minstefrådrag, skal frådraget fordelast forholdsmessig  mellom utanlandsinntekta og inntekta i Noreg, sjå rettleiinga til  post 3.1.  For
+                        andre kostnader, som  for eksempel meirkostnader ved å  bu utanfor heimen, må det vurderast om desse knyter seg direkte til  inntekta i  utlandet, den norske inntekta eller samla inntekt.  Hvis  kostnaden ikkje knyter seg
+                        direkte til inntekta i Noreg eller  utlandet, skal den fordelast forholdsmessig mellom nettoinntekta i  Noreg og i utlandet, sjå rettleiinga til post 4.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/TREKostnaderDirekteTilordnetUtlandet-grp-338/TREENMinstefradrag-grp-2363">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.1 Minstefradrag</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>I denne posten skal en finne ut hvor stor del av minstefradraget som  skal trekkes fra i utenlandsinntekten.  Minstefradraget skal fordeles  forholdsmessig mellom utenlandsinntekten og inntekten i Norge.  Minstefradraget
+                            fremgår av post 3.2.1 i selvangivelsen.  Beløpet  finner en ved å multiplisere minstefradraget med utenlandsinntekten i  post 2.2.3 og dele denne med summen av selvangivelsens poster 2.1,  2.2, 2.6.1 og 2.6.3.  Husk at
+                            eventuelle rettelser på selvangivelsen  må foretas før utregningen i skjemaets post 3.1 finner sted.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>3.1 Minstefrådrag</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>I denne posten skal ein finne ut kor stor del av minstefrådraget som  skal trekkast frå i utanlandsinntekta.  Minstefrådraget skal fordeles  forholdsmessig mellom utanlandsinntekta og inntekta i Noreg.  Minstefrådraget
+                            fremgår av post 3.2.1 i sjølvmeldinga. Beløpet finn  ein ved å multiplisere minstefrådraget med utanlandsinntekta i post  2.2.3 og dele denne med summen av postane 2.1, 2.2, 2.6.1 og 2.6.3 i  sjølvmeldinga. Hugs at
+                            eventuelle rettingar på sjølvmeldinga må  gjerast før utrekninga i post 3.1 i skjemaet.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/TREKostnaderDirekteTilordnetUtlandet-grp-338/TREENMinstefradrag-grp-2363/MinstefradragEgenInntekt-datadef-2696">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Selvangivelsen post 3.2.1</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Maks fradrag er 61 100 kroner</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 3.2.1 i sjølvmeldinga</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Maks frådrag er 61 100 kroner</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TREKostnaderDirekteTilordnetUtlandet-grp-338/TREENMinstefradrag-grp-2363/InntektEgenMinstefradragBeregningsgrunnlag-datadef-7790">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Egen inntekt i selvangivelsen post 2.1 + 2.2 + 2.6.1 + 2.6.3</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Eiga inntekt i postane 2.1 + 2.2 + 2.6.1 + 2.6.3 i sjølvmeldinga</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TREKostnaderDirekteTilordnetUtlandet-grp-338/TREENMinstefradrag-grp-2363/MinstefradragUtlandDirekte-datadef-5764">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.1 Minstefradrag</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Feltet beregnes på følgende måte: Selvangivelsens post 3.2.1  multiplisert med skjemaets post 2.2.3. Summen divideres med egen  inntekt i selvangivelsen post 2.1, 2.2, 2.6.1, 2.6.3</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.1 Minstefrådrag</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Feltet beregnes på følgende måte: Selvangivelsens post 3.2.1  multiplisert med skjemaets post 2.2.3. Summen divideres med egen  inntekt i selvangivelsen post 2.1, 2.2, 2.6.1, 2.6.3</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/TREKostnaderDirekteTilordnetUtlandet-grp-338/InntektNettoUtlandEtterMinstefradrag-datadef-7791">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:repeat id="repeat_TRETOAndreKostnader-grp-2369" nodeset="/Skjema/TREKostnaderDirekteTilordnetUtlandet-grp-338/TRETOAndreKostnader-grp-2369">
+                    <xforms:group ref="/Skjema/TREKostnaderDirekteTilordnetUtlandet-grp-338/TRETOAndreKostnader-grp-2369">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.2 Andre kostnader</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>I denne posten oppgis andre kostnader som kan knyttes direkte til  utenlandsinntekten.  Eksempler på slike kostnader kan være virkelige  kostnader vedrørende tjenesten, kostnader til reise mellom hjem og  arbeidssted,
+                                merkostnader ved å bo utenfor hjemmet, herunder  besøksreiser til hjemmet, premie til tjenestepensjonsforsikring,  fagforeningskontingent eller sjømannsfradrag. Særfradrag for uførhet  etter skatteloven § 6-81 annet og
+                                tredje ledd skal helt ut knyttes  til den utenlandske inntekten når uførepensjonen kommer fra en  utenlandsk utbetaler. Særfradrag som knytter seg til en norsk  uførepensjon skal ikke tas med i skjemaet. Angi hvilken
+                                type kostnad  det gjelder, samt i hvilken post i selvangivelsen kostnaden er  ført.  </p>
+                            <p>Hvis det kreves standardfradrag for utenlandsk arbeidstaker  (selvangivelsens post 3.3.7) skal dette fordeles forholdsmessig  mellom lønnsinntekt i utlandet og lønnsinntekt i Norge.  Dette  beregnes ved å multiplisere
+                                beløpet for standardfradrag med  lønnsinntekt opptjent i utlandet og dividere med samlet lønnsinntekt  opptjent i utlandet og dividere med samlet lønnsinntekt (summen av  norsk og utenlandsk lønn slik:  </p>
+                            <p>standardfradrag x lønnsinntekt i utlandet/samlet lønnsinntekt.  </p>
+                            <p>Når det kreves standardfradrag vil de fleste andre fradrag utenom  minstefradraget falle bort, se tilleggsinformasjon til selvangivelsen  Utland.  De fradragene som faller bort skal ikke tas med i dette  skjemaet.  </p>
+                            <p>Fremførbare underskudd i næring skal fordeles etter den direkte  tilordningsmetoden og tilordnes utlandet dersom underskuddet i sin  tid rettmessig oppstod der.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Inkludert i post nr.</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.2 Andre kostnader</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>I denne posten skal ein gje opp andre kostnader som kan knytast  direkte til utanlandsinntekta.  Eksempler på slike kostnader kan være  verkelege kostnader som gjeld tenesta, kostnader til reise mellom  heim og
+                                arbeidsstad, meirkostnader ved å bu utanfor heimen herunder  besøksreiser til heimen, premie til tenestepensjonsforsikring,  fagforeiningskontingent eller sjømannsfrådrag. Særfrådrag for  uførleik etter skattelova §
+                                6-81 andre og tredje ledd skal heilt ut  knytast til den utanlandske inntekta når uførepensjonen kjem frå ein  utanlandsk betalar. Særfrådrag som knyter seg til ein norsk  uførepensjon skal ikkje takast med på
+                                skjemaet. Gi opp kva for type  kostnad det gjeld, og i kva for post i sjølvmeldinga kostnaden er  ført.  </p>
+                            <p>Dersom det blir kravd standardfrådrag for utanlandsk arbeidstaker  (sjølvmeldinga post 3.3.7) skal dette fordelast forholdsmessig mellom  lønsinntekt i utlandet og lønnsinntekt i Noreg. Dette beløpet finn  ein ved å
+                                multiplisere beløpet for standardfrådrag med lønnsinntekt  opptent i utlandet og dividere med samla lønnsinntekt (Summen av  norsk og utanlandsk lønn) slik:  </p>
+                            <p>standardfrådrag x lønnsinntekt i utlandet/ samla lønnsinntekt.  </p>
+                            <p>Når det blir kravd standardfrådrag vil dei fleste andre frådrag utanom  minstefrådraget falle bort, sjå tilleggsinformasjon til sjølvmeldinga  Utland.  Dei frådraga som fell bort skal ikkje takast med i dette  skjemaet.  </p>
+                            <p>Fremførbare underskott i næring skal fordelast etter den direkte  tilordningsmetoden tilordnast utlandet dersom underskottet i si tid  rettmessig oppstod der.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Inkludert i post nr.</p>
+                        </xforms:hint>
+                        <xforms:input ref="/Skjema/TREKostnaderDirekteTilordnetUtlandet-grp-338/TRETOAndreKostnader-grp-2369/UtgifterAndreUtlandDirekteBeskrivelseSpesifisertUtgift-datadef-7792">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Type kostnad</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Type kostnad</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/TREKostnaderDirekteTilordnetUtlandet-grp-338/TRETOAndreKostnader-grp-2369/UtgifterAndreUtlandDirektePosthenvisningSpesifisertUtgift-datadef-7793">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Inkl i post nr.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inkl i post nr.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/TREKostnaderDirekteTilordnetUtlandet-grp-338/TRETOAndreKostnader-grp-2369/UtgifterAndreUtlandDirekteSpesifisertUtgift-datadef-7794">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beløp i NOK</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Beløp i NOK</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/TREKostnaderDirekteTilordnetUtlandet-grp-338/UtgifterAndreUtlandDirekte-datadef-5767">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum andre kostnader</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum andre kostnader</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/TREKostnaderDirekteTilordnetUtlandet-grp-338/InntektNettoUtlandForFradragIndirekteMetode-datadef-7795">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.3 Netto inntekt i utlandet før fradrag for kostnader som fordeles  etter den indirekte metode</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Beløpet i sumpost 3.3 er nettoinntekten som skal legges til grunn i  post 4 ved fordeling av kostnader som ikke kan tilordnes en bestemt  inntekt.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Post 3.3 er sum inntekter overført fra forrige side minus post 3.1 og  3.2</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>3.3 Netto inntekt i utlandet før frådrag for kostnader som blir  fordelte etter den indirekte metoden</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Beløpet i post 3.3 er nettoinntekta som skal leggast til grunn i post  4 ved fordeling av kostnader som ikkje kan knytast til ei bestemt  inntekt.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Post 3.3 er sum inntekter overført frå forrige side minus post 3.1 og  3.2</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/FIREKostnaderTilordnetUtlandetEtterDenIndirekteMetode-grp-2451">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>4 Kostnader tilordnet utlandet etter den indirekte metode</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Hvis kostnaden ikke kan tilordnes en bestemt inntekt, må fradraget  fordeles forholdsmessig mellom nettoinntekt i Norge og i utlandet.  Utregningen gjennomføres ved å multiplisere kostnadene med samlet  nettoinntekt i skjemaets
+                        post 3.3 og dele med korrigert nettoinntekt.  Når en skal finne korrigert nettoinntekt tas det utgangspunkt i  beløpet sum grunnlag for inntektsskatt som fremgår i selvangivelsen.  Dette er nettoinntekten.  Har en foretatt
+                        rettelser på  selvangivelsen, skal en legge til grunn den nettoinntekt en har  kommet frem til etter at rettelsene er hensyntatt.  Nettoinntekten  skal også omfatte utenlandsinntekten.  Nettoinntekten må så  korrigeres.  Dette
+                        gjøres ved at samtlige kostnader som ikke kan  tilordnes en bestemt inntekt tillegges nettoinnten. (Når  &lt;&lt;Selvangivelsen for næringsdrivende mv>> leveres, vil beløpet det  skal divideres med fremgå av selvangivelsen
+                        post 3.6 tillagt samtlige  kostnader som ikke kan tilordnes en bestemt inntekt.)  </p>
+                    <p>Dersom korrigert nettoinntekt er negativ eller mindre enn  utenlandsinntekten, for eksempel på grunn av underskudd i norsk  inntekt, skal hele kostnadsbeløpet fordeles til den utenlandske  inntekten.  </p>
+                    <p>For andre kostnader enn gjeldsrenter kan likningskontoret unntaksvis  gi tillatelse til at andre fordelingsnøkler benyttes.  Det må da  vedlegges dokumentasjon for at fordeling etter en annen  fordelingsnøkkel gir et rimelig
+                        resultat i samsvar med alminnelige  aksepterte forretningsmessige og bedriftsøkonomiske prinsipper, samt  at denne fordelingen anvendes konsekvent.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Inkludert i post nr.</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>4 Kostnader tilordna utlandet etter den indirekte metode</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Dersom kostnaden ikkje kan knytast til ei bestemt inntekt, må  frådraget fordelast forholdsmessig mellom nettoinntekt i Noreg og i  utlandet.  Utrekninga gjer ein ved å multiplisere kostnaden med samla  nettoinntekt i skjemaet
+                        post 3.3 og dele med korrigert  nettoinntekt.  </p>
+                    <p/>
+                    <p>Når ein skal finne korrigert nettoinntekt må ein ta utgangspunkt i  beløpet sum grunnlag for inntektsskatt som fremgår på sjølvmeldinga.  Dette er nettoinntekta.  Har ein gjort rettingar på sjølvmeldinga,  skal ein legge til
+                        grunn den nettoinntekta ein har kome fram til  etter at rettinga er gjennomført.  Nettoinntekta skal også omfatte  utanlandsinntekta.  </p>
+                    <p/>
+                    <p>Deretter må nettoinntekta korrigerast.  Dette gjer ein ved at samtlege  kostnadar som ikkje kan knytast til ei bestemt inntekt blir lagt til  nettoinntekta. (Når ein nyttar &lt;&lt;Sjølvmelding for næringsdrivande  mv>>, vil
+                        beløpet det skal dividerast med framgå av sjølvmeldinga  post 3.6 tillagt samtlege kostnader som ikkje kan knytast til ei  bestemt inntekt.)  </p>
+                    <p>Dersom korrigert nettoinntekt er negativ eller mindre enn  utanlandsinntekta, for eksempel på grunn av underskott i norsk  inntekt, skal heile kostnadsbeløpet fordelast til den utanlandska  inntekta.  </p>
+                    <p>For andre kostnadar enn gjeldsrenter kan likningskontoret unntaksvis  gje lov til at ein nyttar andre fordelingsnøklar.  Det må då leggast  ved dokumentasjon som viser at fordeling etter ein annen  fordelingsnøkkel gir eit
+                        rimelig resultat i samsvar med alminnelig  aksepterte forretningsmessige og bedriftsøkonomiske prinsipp og at  denne fordelinga blir nytta konsekvent.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NON">
+                    <p>Inkludert i post nr.</p>
+                </xforms:hint>
+                <xforms:group ref="/Skjema/FIREKostnaderTilordnetUtlandetEtterDenIndirekteMetode-grp-2451/FIREENRentekostnader-grp-2755">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.1 Rentekostnader</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres fordelingen av rentekostnadene. Rentekostnader skal alltid  fordeles mellom norsk og utenlandsk inntekt. Ektefeller kan velge  hvem av dem som skal kreve fradrag for rentekostnader. Summen av  beløpene i
+                            selvangivelsens poster 3.3.1 og 3.3.2 tilsvarer de totale  rentekostnader. Disse kostnadene multipliseres med skjemaet post 3.3  og deles på korrigert nettoinntekt.  </p>
+                        <p>Kostnad x skjemaets post 3.3/Korrigert nettoinntekt  </p>
+                        <p>(Når &lt;&lt;Selvangivelse for næringsdrivende mv.>> leveres, vil beløpet  det skal divideres med fremgå av selvangivelsen post 3.6, tillagt  samtlige kostnader som ikke kan tilordnes en bestemt inntekt).</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>4.1 Rentekostnader</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein rentekostnadene. Rentekostnader skal alltid fordelast  mellom norsk og utanlandsk inntekt. Ektefellar kan velje kven av dei  som skal krevje frådrag for rentekostnader.  </p>
+                        <p>Summen av beløpa i postane 3.3.1 og 3.3.2 i sjølvmeldinga tilsvarer  dei totale rentekostnadene. Desse kostnadene skal multipliserast med  post 3.3 i skjemaet og delast på korrigert nettoinntekt.  </p>
+                        <p>Kostnad x skjemaet post 3.3/Korrigert nettoinntekt.  </p>
+                        <p>(Når ein nyttar &lt;&lt;Sjølvmelding for næringsdrivande mv.>>, går beløpet  det skal dividerast med fram av sjølvmeldinga post 3.6, tillagt alle  kostnader som ikkje kan knytast til ei bestemt inntekt.)</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/FIREKostnaderTilordnetUtlandetEtterDenIndirekteMetode-grp-2451/FIREENRentekostnader-grp-2755/RenteutgifterKorrigert-datadef-7749">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Selvangivelsen post 3.3.1 + 3.3.2</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 3.3.1 + 3.3.2 i sjølvmeldinga</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FIREKostnaderTilordnetUtlandetEtterDenIndirekteMetode-grp-2451/FIREENRentekostnader-grp-2755/InntektNettoKorrigert-datadef-7748">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Korrigert nettoinntekt</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Korrigert nettoinntekt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/FIREKostnaderTilordnetUtlandetEtterDenIndirekteMetode-grp-2451/RenteutgifterUtlandIndirekteMetode-datadef-5765">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.1 Sum</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>4.1 Sum</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:repeat id="repeat_FIRETOAndreKostnader-grp-2452" nodeset="/Skjema/FIREKostnaderTilordnetUtlandetEtterDenIndirekteMetode-grp-2451/FIRETOAndreKostnader-grp-2452">
+                    <xforms:group ref="/Skjema/FIREKostnaderTilordnetUtlandetEtterDenIndirekteMetode-grp-2451/FIRETOAndreKostnader-grp-2452">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4.2 Andre kostnader</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres andre kostnader enn gjeldsrenter som ikke kan tilordnes en  bestemt inntekt, som f.eks. innbetaling til individuell  pensjonsavtale, underholdsbidrag, foreldrefradrag, særfradrag for  forsørgelse, særfradrag
+                                for store sykdomskostnader eller særfradrag  for alder etter fylte 70 år.  </p>
+                            <p>Angi hvilken kostnad det gjelder samt i hvilken post i selvangivelsen  kostnaden er ført.  Disse kostnadene skal fordeles forholdsmessig  mellom nettoinntekten i Norge og i utlandet, på samme måte som  rentekostnadene,
+                                se rettledning til post 4.1.  Dersom en annen  fordelingsnøkkel blir benyttet skal dette angis på skjemaet, og  dokumentasjon som nevnt under rettledning til post 4 vedlegges.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>4.2 Andre kostnader</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her fører ein andre kostnader enn gjeldsrenter som ikkje kan knytast  til ei bestemt inntekt, t.d. innbetaling til individuell  pensjonsavtale, underhaldsbidrag, foreldrefrådrag, særfrådrag for  forsørging, særfrådrag
+                                for store sjukdomskostnader eller særfrådrag  for alder etter fylte 70 år. Gi opp kva for kostnad det gjeld og i  kva for post i sjølvmeldinga kostnaden er ført.  Kostnadene skal  fordelast forholdsmessig mellom
+                                nettoinntekta i Noreg og i utlandet,  på same måte som for rentekostnadene, sjå rettleiing til post 4.1.  Dersom ein annan fordelingsnøkkel blir nytta, skal dette opplysast i  skjemaet, og dokumentasjon slik det er
+                                nemnt under rettleiinga til  post 4 skal leggjast ved.</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/FIREKostnaderTilordnetUtlandetEtterDenIndirekteMetode-grp-2451/FIRETOAndreKostnader-grp-2452/UtgifterAndreUtlandIndirekteBeskrivelseSpesifisertUtgift-datadef-7754">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Type kostnad</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Type kostnad</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FIREKostnaderTilordnetUtlandetEtterDenIndirekteMetode-grp-2451/FIRETOAndreKostnader-grp-2452/UtgifterAndreUtlandIndirektePosthenvisningSpesifisertUtgift-datadef-7756">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Inkl. i post nr.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inkl. i post nr.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FIREKostnaderTilordnetUtlandetEtterDenIndirekteMetode-grp-2451/FIRETOAndreKostnader-grp-2452/UtgifterAndreUtlandIndirekteBelopSpesifisertUtgift-datadef-22007">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kostnad</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kostnad</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FIREKostnaderTilordnetUtlandetEtterDenIndirekteMetode-grp-2451/FIRETOAndreKostnader-grp-2452/InntektNettoKorrigert-datadef-24254">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Korrigert nettoinntekt</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Korrigert nettoinntekt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FIREKostnaderTilordnetUtlandetEtterDenIndirekteMetode-grp-2451/FIRETOAndreKostnader-grp-2452/UtgiftAndreUtlandIndirekteFordelingsnokkelSpesifisert-datadef-24253">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fordelingsnøkkel</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Skal kun fylles ut dersom en velger å ikke bruke standard  fordelingsnøkkel som utreknes i oppstillingen over. Dette gjelder  spesielt andre kostnader enn gjeldsrenter. Det må da vedlegges  dokumentasjon for den
+                                    alternative fordelingen</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fordelingsnøkkel</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Skal kun fyllast ut dersom ein ikke ønsker å bruke standard  fordelingsnøkkel som utreknes i oppstillingen over. Dette gjeld  spesielt andre kostnadar enn gjeldsrenter. Det må vedleggast  dokumentasjon for den
+                                    alternative fordelingen</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FIREKostnaderTilordnetUtlandetEtterDenIndirekteMetode-grp-2451/FIRETOAndreKostnader-grp-2452/UtgifterAndreUtlandIndirekteSpesifisertUtgift-datadef-7757">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beløp i NOK</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Posten beregnes på følgende måte: Kostnad multiplisert med post 3.3.  Summen av dette divideres med korrigert nettoinntekt.  </p>
+                                <p/>
+                                <p>Hvis du har fylt ut feltet for egen fordelingsnøkkel blir dette feltet  beregnet ved å ta kostnad multiplisert med fordelingsnøkkel. Se  hjelpetekst for feltet fordelingsnøkkel</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Beløp i NOK</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Posten beregnes på følgende måte: Kostnad multiplisert med post 3.3.  Summen av dette divideres med korrigert nettoinntekt.  </p>
+                                <p/>
+                                <p>Hvis du har fylt ut feltet for egen fordelingsnøkkel blir dette feltet  beregnet ved å ta kostnad multiplisert med fordelingsnøkkel. Se  hjelpetekst for feltet fordelingsnøkkel</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/FIREKostnaderTilordnetUtlandetEtterDenIndirekteMetode-grp-2451/UtgifterAndreUtlandIndirekte-datadef-5766">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.3 Sum</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>4.3 Sum</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/FEMNettoNaringsinntektUnderskuddFraDeltakerliknetSelskap-grp-343">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>5 Netto næringsinntekt/underskudd fra deltakerliknet selskap</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Her fører deltaker i deltakerlignet selskap sin andel av selskapets  næringsinntekt eller underskudd som kan henføres til utlandet.  Selskapet kan opplyse om beløpet.  </p>
+                    <p>Den andel av arbeidsgodtgjørelsen som skal henføres til utlandet, skal  også føres her.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Inkludert i post nr.</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>5 Netto næringsinntekt/underskott frå deltakarlikna selskap</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Her fører deltakar i deltakarlikna selskap sin andel av selskapet si  næringsinntekt eller underskott som kan knytast til utlandet.  Selskapet kan opplyse om beløpet.  </p>
+                    <p>Den delen av arbeidsgodtgjersle som skal knytast til utlandet, skal og  førast her.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NON">
+                    <p>Inkludert i post nr.</p>
+                </xforms:hint>
+                <xforms:group ref="/Skjema/FEMNettoNaringsinntektUnderskuddFraDeltakerliknetSelskap-grp-343/FEMENNettoNaringsinntektFraDeltakerliknetSelskap-grp-2756">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.1 Deltakers andel av netto næringsinntekt</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Inkl. i post nr.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>5.1 Deltakar sin del av netto næringsinntekt</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Inkl. i post nr.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/FEMNettoNaringsinntektUnderskuddFraDeltakerliknetSelskap-grp-343/FEMENNettoNaringsinntektFraDeltakerliknetSelskap-grp-2756/OverskuddAndelUtlandDeltakerlignetSelskapBeskrivelse-datadef-14179">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beskrivelse</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>2.7</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Beskrivelse</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>2.7</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FEMNettoNaringsinntektUnderskuddFraDeltakerliknetSelskap-grp-343/FEMENNettoNaringsinntektFraDeltakerliknetSelskap-grp-2756/OverskuddAndelUtlandDeltakerlignetSelskap-datadef-7796">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beløp i NOK</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Beløp i NOK</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/FEMNettoNaringsinntektUnderskuddFraDeltakerliknetSelskap-grp-343/FEMTONettoUnderskuddFraDeltakerliknetSelskap-grp-2758">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.1 Deltakers andel av netto underskudd i næring</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Inkl. i post nr.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>5.1 Deltakar sin del av netto underskott i næring</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Inkl. i post nr.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/FEMNettoNaringsinntektUnderskuddFraDeltakerliknetSelskap-grp-343/FEMTONettoUnderskuddFraDeltakerliknetSelskap-grp-2758/UnderskuddAndelUtlandDeltakerlignetSelskapBeskrivelse-datadef-14180">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beskrivelse</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>3.2.19</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Beskrivelse</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>3.2.19</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FEMNettoNaringsinntektUnderskuddFraDeltakerliknetSelskap-grp-343/FEMTONettoUnderskuddFraDeltakerliknetSelskap-grp-2758/UnderskuddAndelUtlandDeltakerlignetSelskap-datadef-7797">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beløp i NOK</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Beløp i NOK</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/FEMNettoNaringsinntektUnderskuddFraDeltakerliknetSelskap-grp-343/InntektNettoUtland-datadef-7759">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.2 Sum</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Netto inntekt i utlandet.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>5.2 Sum</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Netto inntekt i utlandet.</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SEKSSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2351">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>II Krav om fradrag for betalt formuesskatt i utlandet</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>I del II spesifiseres betalt formuesskatt i utlandet og hvilken del av  formuen og gjelden som er ført i selvangivelsen/ næringsoppgaven som  er i/har tilknytning til utlandet.  Med utenlandsformue menes  formuesobjekter i
+                        utlandet som er skattepliktige i Norge etter norsk  intern rett og eventuell skatteavtale, og som beskattes i utlandet.  Verdien av formuesobjekter i utlandet er den samme verdien som er  brukt ved ligningen i Norge.  Formue
+                        som unntas fra norsk beskatning  fordi fordelingsmetoden legges til grunn, regnes ikke med i  utenlandsformuen, selv om formuen beskattes i utlandet.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>II Krav om frådrag for betalt formuesskatt i utlandet</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>I del II skal ein spesifisere formuesskatt som er betalt i utlandet og  kva for del av formue og gjelda som er ført i sjølvmeldinga/  næringsoppgåva som er i/har tilknytning til utlandet. Med  utenlandsformue meiner ein
+                        formuesobjekt i utlandet som er  skattepliktige i Noreg etter norsk intern rett og eventuell  skatteavtale, og som blir skattlagt i utlandet. Verdien av  formuesobjekt i utlandet er den same som er brukt ved likninga i  Noreg.
+                        Formue som blir unnateke frå norsk skattlegging fordi  fordelingsmetoden blir lagt til grunn, reknast ikkje med i  utanlandsformua sjøl om formua blir skattlagt i utlandet.</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_SEKSENSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2759" nodeset="/Skjema/SEKSSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2351/SEKSENSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2759">
+                    <xforms:group ref="/Skjema/SEKSSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2351/SEKSENSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2759">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6 Spesifikasjon av betalt formuesskatt i utlandet</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her spesifiseres betalt formuesskatt i utlandet. (Spesifikasjon av  betalt inntektsskatt i utlandet gjøres i post 1 i del I.)  </p>
+                            <p>Det skal gis opplysninger om i hvilket land skatten er utlignet og  betalt, hva slags type formue og skatteart det er, skattens størrelse  i utenlandsk valuta, valuta, hvilken valutakurs som er benyttet ved  omregningen
+                                til norske kroner og skattebeløpets størrelse i norske  kroner.  </p>
+                            <p>Om dokumentasjon for betalt skatt og omregning av valuta, se ovenfor  under innledningen.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>6 Spesifikasjon av betalt formuesskatt i utlandet</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her skal ein spesifisere formuesskatt som er betalt i utlandet.  (Spesifikasjon av betalt inntektsskatt i utlandet gjer ein i post 1 i  del I.)  </p>
+                            <p>Ein skal gi opplysningar om i kva for land skatten er utlikna og  betalt, kva for type formue og skatteart det er, skattebeløpet i  utanlandsk valuta, kva for type valuta, valutakursen som er nytta ved  omrekninga til
+                                norske kroner, og skattebeløpet i norske kroner.  </p>
+                            <p>Om dokumentasjon for betalt skatt og omrekning av valuta, sjå ovanfor  i innleiinga.</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/SEKSSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2351/SEKSENSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2759/FormueLandSpesifisertLand-datadef-5778">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Land</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Land</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SEKSSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2351/SEKSENSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2759/FormueTypeSpesifisertLand-datadef-5770">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Type formue</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Type formue</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SEKSSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2351/SEKSENSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2759/FormuesskattUtlandArtSpesifisertLand-datadef-5771">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Skatteart</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Skatteart</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SEKSSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2351/SEKSENSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2759/FormuesskattUtlandUtenlandskValutaSpesifisertLand-datadef-7760">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beløp</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Beløp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SEKSSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2351/SEKSENSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2759/FormuesskattUtlandValutaSpesifisertLand-datadef-14168">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Valuta</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Valuta</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SEKSSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2351/SEKSENSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2759/FormuesskattUtlandValutakursSpesifisertLand-datadef-14169">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kurs</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever tre desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kurs</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev tre desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SEKSSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2351/SEKSENSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2759/FormuesskattUtlandNOKSpesifisertLand-datadef-5772">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beløp i NOK</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Beløp i NOK</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/SEKSSpesifikasjonAvBetaltFormuesskattIUtlandet-grp-2351/FormuesskattUtland-datadef-5773">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Samlet skatt på formue betalt i utlandet som det kreves fradrag for i  norsk skatt</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Samla skatt på formue betalt i utlandet som ein krev frådrag for i  norsk skatt</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SJUFormueGjeldIUtlandet-grp-346">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>7 Formue/gjeld i utlandet</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>7 Formue/gjeld i utlandet</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_SJUENFormueSkattlagtIUtlandet-grp-2357" nodeset="/Skjema/SJUFormueGjeldIUtlandet-grp-346/SJUENFormueSkattlagtIUtlandet-grp-2357">
+                    <xforms:group ref="/Skjema/SJUFormueGjeldIUtlandet-grp-346/SJUENFormueSkattlagtIUtlandet-grp-2357">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>7.1 Formue skattlagt i utlandet</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres formue som er skattlagt i utlandet og ført i selvangivelsen  post 4.6.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Inkl. i post nr.</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>7.1 Formue skattlagd i utlandet</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her fører ein formue som er skattlagd i utlandet og ført i  sjølvmeldinga post 4.6.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Inkl. i post nr.</p>
+                        </xforms:hint>
+                        <xforms:input ref="/Skjema/SJUFormueGjeldIUtlandet-grp-346/SJUENFormueSkattlagtIUtlandet-grp-2357/FormueUtlandBeskrivelseSpesifisertFormue-datadef-7761">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Type formue</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>4.6</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Type formue</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>4.6</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SJUFormueGjeldIUtlandet-grp-346/SJUENFormueSkattlagtIUtlandet-grp-2357/FormueUtlandSpesifisertFormue-datadef-7763">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beløp i NOK</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Beløp i NOK</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/SJUFormueGjeldIUtlandet-grp-346/FormueUtland-datadef-2717">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>7.2 Sum</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Beløpet i sumpost 7.2 skal legges til grunn ved fordeling av gjeld i  post 7.3.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>7.2 Sum</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Beløpet i sumpost 7.2 skal leggjest til grunn ved fordeling av gjeld i  post 7.3.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:group ref="/Skjema/SJUFormueGjeldIUtlandet-grp-346/SJUTREGjeld-grp-2358">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>7.3 Gjeld</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>I denne posten føres all gjeld ført i &lt;&lt;Selvangivelse for  næringsdrivende mv.>> post 4.8.4.  Gjelden skal fordeles  forholdsmessig mellom utenlandsformuen og norsk formue.  </p>
+                        <p>Gjelden multipliseres med utenlands bruttoformue i skjemaets sumpost  7.2 og divideres med sum brutto formue i selvangivelsen etter  eventuelle rettelser.  (Når &lt;&lt;Selvangivelse for næringsdrivende mv.>>  leveres, vil
+                            beløpet som det skal divideres med fremgå av  selvangivelsen post 4.7.)</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>7.3 Gjeld</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>I denne posten skal ein føre all gjeld som er ført i &lt;&lt;Sjølvmelding  for næringsdrivende mv.>> post 4.8.4.  Gjelda skal fordelast  forholdsmessig mellom formue i utlandet og norsk formue.  </p>
+                        <p>Gjelda skal multipliserast med utanlandsk bruttoformue i skjemaet post  7.2 og dividerast med sum brutto formue i sjølvmeldinga etter  eventuelle rettingar.  </p>
+                        <p>(Når ein nyttar &lt;&lt;Sjølvmelding for næringsdrivande mv.>>, går beløpet  det skal dividerast med, fram av sjølvmeldinga post 4.7.)</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/SJUFormueGjeldIUtlandet-grp-346/SJUTREGjeld-grp-2358/GjeldPersonligeSkattemessig-datadef-10087">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Selvangivelsens post 4.8.4</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Post 4.8.4 i sjølvmeldinga</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SJUFormueGjeldIUtlandet-grp-346/SJUTREGjeld-grp-2358/FormueBruttoSkattemessig-datadef-1118">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum bruttoformue</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum bruttoformue</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/SJUFormueGjeldIUtlandet-grp-346/GjeldUtlandBeregnet-datadef-7764">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>7.3 Gjeld</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>7.3 Gjeld</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:group ref="/Skjema/SJUFormueGjeldIUtlandet-grp-346/SJUFIREDeltakersAndelAvFormueIDeltakerliknetSelskap-grp-2359">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>7.4 Deltakers andel av formue i deltakerliknet selskap</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her fører deltaker i deltakerlignet selskap sin andel av selskapets  formue og gjeld som kan henføres til utlandet. Selskapet kan opplyse  om beløpet.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Inkl. i post nr.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>7.4 Deltakaren sin formue i deltakarlikna selskap</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører deltakar i deltakarlikna selskap sin del av formue og gjeld  i selskapet som kan knytast til utlandet. Selskapet kan opplyse om  beløpet.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Inkl. i post nr.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/SJUFormueGjeldIUtlandet-grp-346/SJUFIREDeltakersAndelAvFormueIDeltakerliknetSelskap-grp-2359/FormueUtlandDeltakerlignetSelskapAndelBeskrivelse-datadef-14181">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beskrivelse</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>4.5.4</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Beskrivelse</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>4.5.4</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SJUFormueGjeldIUtlandet-grp-346/SJUFIREDeltakersAndelAvFormueIDeltakerliknetSelskap-grp-2359/FormueUtlandDeltakerlignetSelskapAndel-datadef-5777">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beløp i NOK</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Beløp i NOK</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SJUFormueGjeldIUtlandet-grp-346/SJUFIREDeltakersAndelAvGjeldIDeltakerliknetSelskap-grp-2760">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>7.4 Deltakers andel av gjeld i deltakerliknet selskap</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her fører deltaker i deltakerlignet selskap sin andel av selskapets  gjeld som kan henføres til utlandet. Selskapet kan opplyse om  beløpet.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Inkl. i post nr.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>7.4 Deltakaren sin del av gjeld i deltakerlikna selskap</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører deltakar i deltakarlikna selskap sin del av gjeld i  selskapet som kan knytast til utlandet. Selskapet kan opplyse om  beløpet.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Inkl. i post nr.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/SJUFormueGjeldIUtlandet-grp-346/SJUFIREDeltakersAndelAvGjeldIDeltakerliknetSelskap-grp-2760/GjeldUtlandDeltakerlignetSelskapAndelBeskrivelse-datadef-14182">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beskrivelse</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>4.8.1/ 4.8.3</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Beskrivelse</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>4.8.1/ 4.8.3</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SJUFormueGjeldIUtlandet-grp-346/SJUFIREDeltakersAndelAvGjeldIDeltakerliknetSelskap-grp-2760/GjeldUtlandDeltakerlignetSelskapAndel-datadef-7833">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beløp i NOK</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Beløp i NOK</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/SJUFormueGjeldIUtlandet-grp-346/FormueNettoUtland-datadef-5774">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Sum av post 7.2, 7.3, og 7.4</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Sum av post 7.2, 7.3 og 7.4</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/ATTEFremforbartKreditfradragIInntekt-grp-349">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>III Opplysninger om fremførbart kreditfradrag</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Her skal det gis opplysninger om fremføring av kreditfradrag fra  tidligere år som det nå kreves fradrag for.  </p>
+                    <p>Når det fastsatte kreditfradraget ikke kan trekkes fra fullt ut på  grunn av andre skattefradrag, vil det overskytende kunne fremføres  til fradrag i skatt i de inntil ti påfølgende årene.  Årets  kreditfradrag kommer til
+                        fradrag i utlignet skatt før et fremførbart  kreditfradrag.  Det gis bare fradrag for fremførbart kreditfradrag  innenfor rammen av beregnet maksimalt kreditfradrag for det aktuelle  inntektsår.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>III Opplysningar om framførbart kreditfrådrag</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Her skal ein gje opplysningar om framføring av kreditfrådrag frå  tidligare år som det nå blir krevd frådrag for.  </p>
+                    <p>Når det fastsette kreditfrådraget ikkje kan trekkjast frå fullt ut på  grunn av andre skattefrådrag, vil det overskytande kunne framføres  til frådrag i skatt i dei inntil ti påfølgjande inntektsåra.  Årets  kreditfradrag kjem
+                        til frådrag i utlikna skatt før eit eventuelt  framførbart kreditfrådrag.  Det blir berre gitt frådrag for  framførbart kreditfrådrag innanfor ramme av utrekna maksimalt  kreditfrådrag for det aktuelle inntektsår.</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_ATTEENFremforbartKreditfradragIInntekt-grp-2761" nodeset="/Skjema/ATTEFremforbartKreditfradragIInntekt-grp-349/ATTEENFremforbartKreditfradragIInntekt-grp-2761">
+                    <xforms:group ref="/Skjema/ATTEFremforbartKreditfradragIInntekt-grp-349/ATTEENFremforbartKreditfradragIInntekt-grp-2761">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>8.1 Fremførbart kreditfradrag i inntekt</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>8.1 Kreditfrådrag i inntekt som kan framførast</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/ATTEFremforbartKreditfradragIInntekt-grp-349/ATTEENFremforbartKreditfradragIInntekt-grp-2761/InntektsarSpesifisert-datadef-7798">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Inntektsår</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inntektsår</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/ATTEFremforbartKreditfradragIInntekt-grp-349/ATTEENFremforbartKreditfradragIInntekt-grp-2761/KreditfradragFremforingSpesifisertInntektsar-datadef-5775">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beløp til framføring</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Beløp til framføring</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

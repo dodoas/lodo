@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RA-0182-2: Skjema for føring av egenmeldt sykefravær</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-857-3518.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInfo-grp-3798/OppgavePeriode-datadef-5660" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInfo-grp-3798/OppgaveAr-datadef-11236" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInfo-grp-3798/FristForInnsending-grp-53/OppgaveInnsendelseFrist-datadef-16296"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInfo-grp-3798/Foretaksopplysninger-grp-47/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInfo-grp-3798/Foretaksopplysninger-grp-47/EnhetPostadresse-datadef-14"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInfo-grp-3798/Foretaksopplysninger-grp-47/EnhetPostnummer-datadef-6673"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInfo-grp-3798/Foretaksopplysninger-grp-47/EnhetPoststed-datadef-6674"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInfo-grp-3798/Foretaksopplysninger-grp-47/EnhetOrganisasjonsnummer-datadef-18"/>
+            <xforms:bind ref="/Skjema/GenerellInfo-grp-3798/Kontaktperson-grp-3799/KontaktpersonNavn-datadef-2" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInfo-grp-3798/Kontaktperson-grp-3799/KontaktpersonTelefonnummer-datadef-3" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInfo-grp-3798/BedriftOrganisasjonsnummer-datadef-19"/>
+            <xforms:bind ref="/Skjema/SpmISykefra-grp-72/SykefravarEgenmeldingsperiodeUtvidet-datadef-15718" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneI-grp-2301/TilbakerapportertSykefravarFjoraret-datadef-17827"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneI-grp-2301/SykefravarEgenmeldtLandstallFjoraret-datadef-16297"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneI-grp-2301/BedriftFravarNaringsgruppe-datadef-16299"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneI-grp-2301/FravarEgenmeldtNaringFjoraret-datadef-16300"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneI-grp-2301/FravarEgenmeldtBedriftFjoraret-datadef-16302"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneII-grp-2302/TilbakerapportertSykefravarPeriode-datadef-17826"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneII-grp-2302/SykefravarEgenmeldtPeriodeLandstall-datadef-16298"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneII-grp-2302/FravarEgenmeldtNaringPeriode-datadef-16301"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneII-grp-2302/FravarEgenmeldtBedriftPeriode-datadef-16303"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Tilbakerapp-grp-209/TilbakerappLegemeldt-grp-3746/kolonneI-grp-2303/FravarLegemeldtLandstallFjoraret-datadef-16304"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Tilbakerapp-grp-209/TilbakerappLegemeldt-grp-3746/kolonneI-grp-2303/FravarLegemeldtNaringFjoraret-datadef-16306"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Tilbakerapp-grp-209/TilbakerappLegemeldt-grp-3746/kolonneI-grp-2303/FravarLegemeldtBedriftFjoraret-datadef-16308"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Tilbakerapp-grp-209/TilbakerappLegemeldt-grp-3746/kolonneII-grp-2304/FravarLegemeldtLandstallPeriode-datadef-16305"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Tilbakerapp-grp-209/TilbakerappLegemeldt-grp-3746/kolonneII-grp-2304/FravarLegemeldtNaringPeriode-datadef-16307"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Tilbakerapp-grp-209/TilbakerappLegemeldt-grp-3746/kolonneII-grp-2304/FravarLegemeldtBedriftPeriode-datadef-16309"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RA-0182-2. Skjema for føring av egenmeldt sykefravær. (Foretak)</p>
+            </xforms:caption>
+            <xforms:caption brreg:lang="NON">
+                <p>RA-0182-2. Skjema for føring av eigenmeldt sjukefråvær. (Foretak)</p>
+            </xforms:caption>
+            <xforms:group ref="/Skjema/GenerellInfo-grp-3798">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/GenerellInfo-grp-3798/OppgavePeriode-datadef-5660">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgaveperiode</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Oppgåveperiode</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GenerellInfo-grp-3798/OppgaveAr-datadef-11236">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>. kvartal</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>. kvartal</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:group ref="/Skjema/GenerellInfo-grp-3798/FristForInnsending-grp-53">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-3798/FristForInnsending-grp-53/OppgaveInnsendelseFrist-datadef-16296">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Frist for innsending</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Frist for innsending</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInfo-grp-3798/Foretaksopplysninger-grp-47">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Foretaksopplysninger</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Føretaksopplysningar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-3798/Foretaksopplysninger-grp-47/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-3798/Foretaksopplysninger-grp-47/EnhetPostadresse-datadef-14">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postadresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-3798/Foretaksopplysninger-grp-47/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-3798/Foretaksopplysninger-grp-47/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-3798/Foretaksopplysninger-grp-47/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer, foretak</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Juridisk enhet</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnummer, føretak</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Juridisk eining</p>
+                        </xforms:help>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-3798/Foretaksopplysninger-grp-47/Sysselsatte-datadef-30">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall ansatte i foretaket</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p/>
+                            <p>Antall ansatte i foretaket det rapporteres sykefravær for.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Kontroller at informasjonen stemmer. Feltet er redigerbart.</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Talet på tilsette i føretaket</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Talet på tilsette det rapporterast sjukefråvær for.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Kontroller at informasjonen stemmar. Feltet er redigerbart.</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInfo-grp-3798/Kontaktperson-grp-3799">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kontaktperson</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kontaktperson</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-3798/Kontaktperson-grp-3799/KontaktpersonNavn-datadef-2">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-3798/Kontaktperson-grp-3799/KontaktpersonTelefonnummer-datadef-3">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefon</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Telefon</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-3798/Kontaktperson-grp-3799/KontaktpersonTelefaxnummer-datadef-324">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefaks</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Telefaks</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-3798/Kontaktperson-grp-3799/KontaktpersonEPost-datadef-2876">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>E-postadresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>E-postadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/GenerellInfo-grp-3798/BedriftOrganisasjonsnummer-datadef-19">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Organisasjonsnummer, bedrift</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Bedrift er en lokal bransjeenhet.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Organisasjonsnummer, bedrift</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Bedrift er ein lokal bransje eining.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SpmISykefra-grp-72">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Har foretaket gitt anledning til utvidet egenmeldingsperiode utover 3  sammenhengende kalenderdager i kvartalet?</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Har føretaket gitt høve til utvida eigenmeldingsperiode på meir enn 3  samanhengande kalenderdagar i kvartalet?</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/SpmISykefra-grp-72/SykefravarEgenmeldingsperiodeUtvidet-datadef-15718">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                </xforms:selectOne>
+                <xforms:group ref="/Skjema/SpmISykefra-grp-72/Egenmeldingsperiode-grp-198">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Hvor lang egenmeldingsperiode kan gis ?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kor lang eigenmeldingsperiode kan dykk gi ?</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SpmISykefra-grp-72/Egenmeldingsperiode-grp-198/SykefravarEgenmeldingsperiodeUtvidetAntallDager-datadef-15719">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall kalenderdager</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Talet på kalenderdager</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SpmIISykefra-grp-82">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Egenmeldt sykefravær i løpet av kvartalet for foretaket</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Fravær pga. sykt barn holdes utenfor. Dersom forataket ikke har hatt  egenmeldt sykefravær i det aktuelle kvartalet, skal skjemaet likevel  sendes inn. Før da opp 0 i en kolonne.</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Eigenmeldt sjukefråvær i løpet av kvartalet for føretaket</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NON">
+                    <p>Fråvær pga. sjukt barn skal ikkje takast med. Dersom føretaket ikkje  har hatt eigenmeldt sjukefråvær i kvartalet, skal skjemaet sendast  inn likevel. Før da opp 0 i ein kolonne.</p>
+                </xforms:hint>
+                <xforms:group ref="/Skjema/SpmIISykefra-grp-82/SpmIIAntallPersEgMeldt-grp-153">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall personer med egenmeldt sykefravær</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres opp det samlede antall personer som har hatt ett eller flere  egenmeldte sykefravær i løpet av kvartalet. Personer som har hatt  flere slike sykefraværstilfeller telles bare én gang.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Talet på personar med eigenmeldt sjukefråvær</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein opp det samla talet på tilsette som har hatt eitt eller  fleire eigenmeldte sjukefråvær i kvartalet. Personar som har hatt  fleire slike sjukefråværstilfelle, skal reknast berre éin gong.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/SpmIISykefra-grp-82/SpmIIAntallPersEgMeldt-grp-153/SykefravarEgenmeldtMenn-datadef-15720">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Menn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Menn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpmIISykefra-grp-82/SpmIIAntallPersEgMeldt-grp-153/SykefravarEgenmeldtKvinner-datadef-15721">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kvinner</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kvinner</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpmIISykefra-grp-82/SpmIIAntallPersEgMeldt-grp-153/SykefravarEgenmeldt-datadef-15722">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Totalt</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Totalt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SpmIISykefra-grp-82/SpmIIAntEgMTilfeller-grp-154">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall egenmeldte sykefraværstilfeller</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres opp det totale antall egenmeldinger i kvartalet, dvs.  sykefraværstilfeller. Ett sykefraværstilfelle defineres som én eller  flere sammenhengende kalenderdager med sykdom. Har en ansatt flere  egenmeldte
+                            sykefraværstilfeller i kvartalet, føres følgelig alle  egenmeldingene opp. Deltidsarbeidende som ikke jobber daglig, skal  regnes som ett sammenhengende sykefraværstilfelle fra den første  sykefraværsdagen til vedkommende
+                            er tilbake på jobb igjen.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Talet på eigenmeldte sjukefråværstilfelle</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein opp det totale talet på eigenmeldingar i kvartalet, dvs.  sjukefråværstilfelle. Eit sjukefråværstilfelle definerast som ein  eller fleire samanhengande kalenderdagar med sjukdom. Har ein tilsett  fleire
+                            eigenmeldte sjukefråværstilfelle i kvartalet, fører ein  følgjeleg opp alle eigenmeldingar. Deltidsarbeidande som ikkje  arbeidar dagleg, skal reknast som eit samanhengande  sjukefråværstilfelle frå den første
+                            sjukefråværsdagen til han eller  ho er på jobb att.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/SpmIISykefra-grp-82/SpmIIAntEgMTilfeller-grp-154/SykefravarEgenmeldtTilfellerMenn-datadef-15723">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Menn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Menn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpmIISykefra-grp-82/SpmIIAntEgMTilfeller-grp-154/SykefravarEgenmeldtTilfellerKvinner-datadef-15724">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kvinner</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kvinner</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpmIISykefra-grp-82/SpmIIAntEgMTilfeller-grp-154/SykefravarEgenmeldtTilfeller-datadef-15725">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>I alt</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>I alt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SpmIISykefra-grp-82/SpmIIAntEgMDager-grp-155">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall egenmeldte sykefraværsdager</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her oppgis det samlede antall sykefraværsdager som alle egenmeldte  sykefraværstilfeller utgjør i perioden. Det er kun normalarbeidsdager  som her skal regnes med som sykefraværsdager. Dvs. at generelle  fridager og
+                            helgedager i sykefraværsperioden skal holdes utenfor. Har  man vært fraværende under en halv dag, telles ikke denne dagen med.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Talet på eigenmeldte sjukefråværsdagar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein opp det samla talet på sjukefråværsdagar som alle  eigenmeldte sjukefråværstilfella utgjer i perioden. Det er berre  normalarbeidsdagane som her skal reknast med som sjukefråvær.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/SpmIISykefra-grp-82/SpmIIAntEgMDager-grp-155/SykefravarEgenmeldtDagerMenn-datadef-15726">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Menn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Menn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpmIISykefra-grp-82/SpmIIAntEgMDager-grp-155/SykefravarEgenmeldtDagerKvinner-datadef-15727">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kvinner</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kvinner</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpmIISykefra-grp-82/SpmIIAntEgMDager-grp-155/SykefravarEgenmeldtDager-datadef-15728">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>I alt</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>I alt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SpmIISykefra-grp-82/SpmIIAntDagsverk-grp-156">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall egenmeldte sykefraværsdagsverk</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres opp det samlede antall dagsverk som bortfaller pga.  egenmeldt sykefravær. Dagsverk med sykefravær beregnes ved å ta  utgangspunkt i antall sykefraværsdager og korrigere for  stillingsandel dersom det dreier seg
+                            om deltidsansatte. (Hvis  stillingsandelen er varierende for enkelte ansatte, kan det brukes et  anslag for gjennomsnittlig stillingsandel). For heltidsansatte blir  antall sykefraværsdagsverk og sykefraværsdager det
+                            samme.  </p>
+                        <p/>
+                        <p>Formelen for dagsverk med sykefravær blir som følger:  </p>
+                        <p>Antall sykefraværsdager * Stillingsdel = Dagsverk med sykefravær.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Talet på dagsverk med eigenmeldt sjukefråvær</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein opp det samla talet på dagsverk som fell bort på grunn  av eigenmeldt sjukefråvær. Sjukefråværsdagsverk vert rekna ut ved å  ta utgangspunkt i talet på sjukefråværsdagar og korrigere for  stillingsdelen dersom
+                            det gjeld deltidstilsette. (Dersom  stillingsdelen er varierande for einskilde tilsette, kan det brukast  eit overslag for gjennomsnittleg stillingsdel). For heiltidstilsette  vert talet på sjukefråværsdagsverk og
+                            sjukefråværsdagar det same.  </p>
+                        <p/>
+                        <p>Formelen for dagsverk med sjukefråvær blir følgjande:  </p>
+                        <p>Talet på sjukefråværsdagar * Stillingsdel = Dagsverk med sjukefråvær.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/SpmIISykefra-grp-82/SpmIIAntDagsverk-grp-156/SykefravarEgenmeldtDagsverkMenn-datadef-15729">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Menn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Menn</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt tall med en desimal</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt tal med ein desimal</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpmIISykefra-grp-82/SpmIIAntDagsverk-grp-156/SykefravarEgenmeldtDagsverkKvinner-datadef-15730">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kvinner</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kvinner</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt tall med en desimal</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt tal med ein desimal</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpmIISykefra-grp-82/SpmIIAntDagsverk-grp-156/SykefravarEgenmeldtDagsverk-datadef-15731">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>I alt</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>I alt</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt tall med en desimal</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt tal med ein desimal</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Tilbakerapp-grp-209">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Tilbakerapportering av sykefraværsprosenter</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Tilbakerapportering av sjukefråværsprosentar</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Egenmeldt sykefravær</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Eigenmeldt sjukefråvær</p>
+                    </xforms:caption>
+                    <xforms:group ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneI-grp-2301">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>kolonne I (år t-I)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>kolonne II (år t-I)</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneI-grp-2301/TilbakerapportertSykefravarFjoraret-datadef-17827">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1. kvartal 2003</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>1. kvartal 2003</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneI-grp-2301/SykefravarEgenmeldtLandstallFjoraret-datadef-16297">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Hele landet</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Heile landet</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet må være mellom 0 og 100, med en desimal</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet må vere mellom 0 og 100, med ein desimal</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneI-grp-2301/BedriftFravarNaringsgruppe-datadef-16299">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneI-grp-2301/FravarEgenmeldtNaringFjoraret-datadef-16300">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Næringsgruppe</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Næringsgruppe</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet må være mellom 0 og 100, med en desimal</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet må vere mellom 0 og 100, med ein desimal</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneI-grp-2301/FravarEgenmeldtBedriftFjoraret-datadef-16302">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Eget foretak</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Eige føretak</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet må være mellom 0 og 100, med en desimal</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet må vere mellom 0 og 100, med ein desimal</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneII-grp-2302">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>kolonne II (år t)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>kolonne I (år t)</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneII-grp-2302/TilbakerapportertSykefravarPeriode-datadef-17826">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1. kvartal 2004</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>1. kvartal 2004</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneII-grp-2302/SykefravarEgenmeldtPeriodeLandstall-datadef-16298">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Hele landet</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Heile landet</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet må være mellom 0 og 100, med en desimal</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet må vere mellom 0 og 100, med ein desimal</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneII-grp-2302/FravarEgenmeldtNaringPeriode-datadef-16301">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Næringsgruppe</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Næringsgruppe</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet må være mellom 0 og 100, med en desimal</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet må vere mellom 0 og 100, med ein desimal</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Tilbakerapp-grp-209/TilbakerappEgenmeldt-grp-3747/kolonneII-grp-2302/FravarEgenmeldtBedriftPeriode-datadef-16303">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Eget foretak</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Eige føretak</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet må være mellom 0 og 100, med en desimal</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet må vere mellom 0 og 100, med ein desimal</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Tilbakerapp-grp-209/TilbakerappLegemeldt-grp-3746">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Legemeldt sykefravær</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Legemeldt sjukefråvær</p>
+                    </xforms:caption>
+                    <xforms:group ref="/Skjema/Tilbakerapp-grp-209/TilbakerappLegemeldt-grp-3746/kolonneI-grp-2303">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>kolonne I (år t-I)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>kolonne I (år t-I)</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Tilbakerapp-grp-209/TilbakerappLegemeldt-grp-3746/kolonneI-grp-2303/FravarLegemeldtLandstallFjoraret-datadef-16304">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Hele landet</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Heile landet</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet må være mellom 0 og 100, med en desimal</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet må vere mellom 0 og 100, med ein desimal</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Tilbakerapp-grp-209/TilbakerappLegemeldt-grp-3746/kolonneI-grp-2303/FravarLegemeldtNaringFjoraret-datadef-16306">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Næringsgruppe</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Næringsgruppe</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet må være mellom 0 og 100, med en desimal</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet må vere mellom 0 og 100, med ein desimal</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Tilbakerapp-grp-209/TilbakerappLegemeldt-grp-3746/kolonneI-grp-2303/FravarLegemeldtBedriftFjoraret-datadef-16308">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Eget foretak</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Eige føretak</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet må være mellom 0 og 100, med en desimal</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet må vere mellom 0 og 100, med ein desimal</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/Tilbakerapp-grp-209/TilbakerappLegemeldt-grp-3746/kolonneII-grp-2304">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>kolonne II (år t)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>kolonne II (år t)</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Tilbakerapp-grp-209/TilbakerappLegemeldt-grp-3746/kolonneII-grp-2304/FravarLegemeldtLandstallPeriode-datadef-16305">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Hele landet</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Heile landet</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet må være mellom 0 og 100, med en desimal</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet må vere mellom 0 og 100, med ein desimal</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Tilbakerapp-grp-209/TilbakerappLegemeldt-grp-3746/kolonneII-grp-2304/FravarLegemeldtNaringPeriode-datadef-16307">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Næringsgruppe</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Næringsgruppe</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet må være mellom 0 og 100, med en desimal</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet må vere mellom 0 og 100, med ein desimal</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Tilbakerapp-grp-209/TilbakerappLegemeldt-grp-3746/kolonneII-grp-2304/FravarLegemeldtBedriftPeriode-datadef-16309">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Eget foretak</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Eige føretak</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet må være mellom 0 og 100, med en desimal</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet må vere mellom 0 og 100, med ein desimal</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/AnnenInfo-grp-207">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Eventuell annen informasjon</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Alle tilbakemeldinger om skjemaet mottas med takk.</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Eventuell annan informasjon</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NON">
+                    <p>Vi er takksame alle tilbakemeldingar.</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/AnnenInfo-grp-207/Tilleggsopplysninger-datadef-7683">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

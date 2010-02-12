@@ -1,0 +1,1125 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1052: Avstemming av egenkapitalen mv.</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-754-4496.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-2134/Avgiver-grp-128/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2134/Avgiver-grp-128/OppgavegiverFodselsnummer-datadef-26"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1052 Avstemming av egenkapital mv. for 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Skjemaet RF-1052 i avstemming av egenkapitalen, skal fylles ut av  foretak som er pliktige til å bruke næringsoppgave 2, 3 eller 4 eller  frivillig bruker næringsoppgave 2.  </p>
+                <p/>
+                <p>Foretak som går over fra å ha begrenset regnskapsplikt i 2004 til full  regnskapsplikt i 2005. Disse foretakene vil ikke ha noen inngående  regnskapsmessig egenkapital. Egenkapital pr. 31.12. forrige år settes  til 0.  </p>
+                <p>Ved omarbeidelse av balanse fra skattemessig verdier til  regnskapsmessige verdier, skal hele den regnskapsmessige egenkapital  som fremkommer, føres i post 204 innskudd eiendeler.  </p>
+                <p/>
+                <p>Fastsatt av skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. november, jf. ligningsloven § 4-4 nr.7.  </p>
+                <p/>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skje-maet, RF-1052B, helt eller delvis  bli benyttet også av andre offentlige organer som har hjemmel til å  innhente de samme
+                    opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt. samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Skjemaet er pliktig vedlegg til næringsoppgave 2, RF-1167  næringsoppgave 3, RF-1170 og næringsoppgave 4, RF-1173</p>
+            </xforms:hint>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1052 Avstemming av eigenkapital m.m. for 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Skjemaet RF-1052 Avstemming av eigenkapitalen, skal fyllast ut av  føretak som er pliktige til å bruke næringsoppgåve 2, 3 eller 4 eller  friviljug brukar næringsoppgåve 2.  </p>
+                <p/>
+                <p>Føretak som går over fra å ha avgrensa rekneskapsplikt i 2004 til full  rekneskapsplikt i 2005. Slike føretak vil ikkje ha nokon inngåande  rekneskapsmessig eigenkapital. Eigenkapital pr. 31.12. siste året  vert å setje til 0.  </p>
+                <p>Ved omarbeiding av balansen frå skattemessige verdiar til  rekneskapsmessige verdiar, skal heile summen av den rekneskapsmessige  eigenkapitalen førast i post 204 innskot eigneluter.  </p>
+                <p/>
+                <p>Fastsett av Skattedirektoratet med heimel i Finansdepartementet sitt  delegeringsvedtak av 24. oktober 1991, jf. Ligningslova §§ 6-11 og  6-16b.  </p>
+                <p/>
+                <p>Andre offentlege organ sin bruk av opplysningar i RF-1052. For å  samordna og forenkla oppgåveinnleveringa  frå næringslivet, kan  opplysningar som vart avgjeve i dette skjemaet, RF-1052, heilt eller  delvis bli nytta også av andre
+                    offentlege organ som har heimel til å  innhente dei same opplysningane, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysningar om evt. Samordning kan ein få ved å vende seg til  Oppgåveregisteret på telefon 75 00 75 00, eller
+                    Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NON">
+                <p>Skjemaet er pliktig vedlegg til næringsoppgåve 2, RF-1167, 3,  (RF-1170) og 4, (RF-1173)</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-2134">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2134/Avgiver-grp-128">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Avgiver</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Avgivar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2134/Avgiver-grp-128/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2134/Avgiver-grp-128/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2134/Avgiver-grp-128/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2134/Avgiver-grp-128/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2134/Avgiver-grp-128/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2134/Avgiver-grp-128/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2134/Regnskapsforer-grp-130">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Regnskapsfører</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Rekneskapsførar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2134/Regnskapsforer-grp-130/RegnskapsforerNavn-datadef-280">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2134/Regnskapsforer-grp-130/RegnskapsforerOrganisasjonsnummer-datadef-3651">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Prinsippendringer-grp-5374">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Prinsippendringer jf. post 100B</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Prinsippendringer jf. post 100B</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_PrinsippendringerSpesifisert-grp-5375" nodeset="/Skjema/Prinsippendringer-grp-5374/PrinsippendringerSpesifisert-grp-5375">
+                    <xforms:group ref="/Skjema/Prinsippendringer-grp-5374/PrinsippendringerSpesifisert-grp-5375">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Prinsippendringer spesifisert jf. post 100B</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Prinsippendringer spesifisert jf. post 100B</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Prinsippendringer-grp-5374/PrinsippendringerSpesifisert-grp-5375/NaringsoppgavePostNummer-datadef-23846">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Postnr. i næringsoppgaven</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Postnr. i næringsoppgåva</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Prinsippendringer-grp-5374/PrinsippendringerSpesifisert-grp-5375/PrinsippendringVerdiForKorrigeringSpesifisertPost-datadef-23839">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beløp pr 31.12 forrige år</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Beløp pr 31.12 forrige år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Prinsippendringer-grp-5374/PrinsippendringerSpesifisert-grp-5375/PrinsipperingerEndringsbelopSpesifisertPost-datadef-23840">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Endring</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Endring</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Prinsippendringer-grp-5374/PrinsippendringerSpesifisert-grp-5375/PrinsippendringVerdiEtterKorrigeringSpesifisertPost-datadef-23842">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ny verdi pr 01.01</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Prinsippendringer-grp-5374/PrinsippendringerSpesifisert-grp-5375/PrinsippendringUtsattSkattSpesifisertPost-datadef-23844">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utsatt skatt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/Prinsippendringer-grp-5374/PrinsippendringVerdiForKorrigering-datadef-23838">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum beløp pr 31.12 forrige år</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum beløp pr 31.12 forrige år</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Prinsippendringer-grp-5374/PrinsippendringerEgenkapitalen-datadef-8681">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum endringer</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom selskapet har endret regnskapsprinsipp, herunder overgang til  IFRS, skal sum prinsippendringer som er ført direkte mot  egenkapitalen føres her. Her skal føres netto prinsippendringer etter  fradrag for utsatt
+                            skatt/utsatt skattefordel.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum endringer</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dersom selskapet har endra rekneskapsprinsipp, herunder overgang til  IFRS, skal summen av prinsippendringar som er førte direkte mot  eigenkapitalen førast her. Det er netto prinsippendringar etter  frådrag for utsett
+                            skatt/utsett skattefordel som skal førast her.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Prinsippendringer-grp-5374/PrinsippendringVerdiEtterKorrigering-datadef-23841">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum beløp ny verdi pr 01.01</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum beløp ny verdi pr 01.01</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Prinsippendringer-grp-5374/PrinsippendringUtsattSkatt-datadef-23843">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum utsatt skatt</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum utsatt skatt</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/AvstemmingAvEgenkapital-grp-131">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Avstemming av egenkapital</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Avstemming av eigenkapital</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/AvstemmingAvEgenkapital-grp-131/EgenkapitalASMvFjoraret-datadef-17491">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>100A Egenkapital 31.12 forrige år</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>100A Eigenkapital 31.12 førre år</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AvstemmingAvEgenkapital-grp-131/PrinsippendringerEgenkapitalAvstemning-datadef-25047">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>100B Prinsippendringer</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>100B Prinsippendringer</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AvstemmingAvEgenkapital-grp-131/EgenkapitalASMvKorrigertForPrinsippendringerInngaendeVerdi-datadef-23845">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>100C Egenkapital 01.01</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kan være positiv eller negativ</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>100C Eigenkapital 01.01</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Kan være positiv eller negativ</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AvstemmingAvEgenkapital-grp-131/ArsresultatASMv-datadef-17492">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>101 Årsresultat</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kan være positiv eller negativ</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>101 Årsresultat</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Kan være positiv eller negativ</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AvstemmingAvEgenkapital-grp-131/UtbytteASMvAvsatt-datadef-17493">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>102 Avsatt utbytte o.l./forventet utbytte oppgitt i noter</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres avsatt utbytte ol./forventet utbytte oppgitt i noter. For  samvirkeforetak skal renter på grunnfondsbevis og kjøpsutbytte føres  her.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>102 Avsett utbytte o.l./forventet utbytte oppgitt i noter</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein utbytte som er avsett/forventa utbytte oppgitt i noter  For samvirkeføretak skal renter på grunnfondsbevis og kjøpeutbyte  førast her.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AvstemmingAvEgenkapital-grp-131/KonsernbidragASMvMottatt-datadef-17494">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>103 Mottatt konsernbidrag</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres mottatt konsernbidrag som er ført mot egenkapitalen.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>103 Motteke konsernbidrag</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein mottekne konsernbidrag som er ført mot eigenkapitalen.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AvstemmingAvEgenkapital-grp-131/KonsernbidragASMvAvgitt-datadef-17495">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>104 Avgitt konsernbidrag</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres avgitt konsernbidrag som er ført mot egenkapitalen.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>104 Ytte konsernbidrag</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein konsernbidrag som er ytte og som er ført mot  eigenkapitalen.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AvstemmingAvEgenkapital-grp-131/Kontantinnskudd-datadef-11307">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>105 Kontantinnskudd</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>105 Kontantinnskot</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AvstemmingAvEgenkapital-grp-131/Tingsinnskudd-datadef-11308">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>106 Tingsinnskudd</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres verdi på tingsinnskudd. Ved nystiftelse av selskap eller  forhøyelse av aksjekapital i eksisterende selskap, er det  gjenstandens verdi som føres opp i post 106 tingsinnskudd. Ved  omdannelse fra
+                            enkeltmannsforetak / deltakerlignede selskaper føres  den samlede verdi på innskuddet opp i post for tingsinnskudd. Ved  innfusjonering av selskap(er) er det den samlede regnskapsmessig  endring av selskapets egenkapital
+                            som følge av fusjonen som skal  føres i post for tingsinnskudd.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>106 Tingsinnskot</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein verdien på tingsinnskot. Ved nystifting av selskap eller  høgding av aksjekapitalen i eksisterende selskap, er det verdien på  gjenstanden som skal førast opp i post 106 tingsinnskot. Ved  omdanning frå
+                            einmannsføretak/ deltakarlikna selskap skal den samla  verdien på innskotet førast opp i posten for tingsinnskot. Ved  innfusjonering av selskap er det den samla rekneskapsmessige endringa  av selskapet sin eigenkapital
+                            som følgje av fusjonen som skal førast  i posten for tingsinnskot.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AvstemmingAvEgenkapital-grp-131/AksjekapitalNedsettelseKontanter-datadef-11309">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>107 Nedsettelse av aksjekapital - kontanter</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres det beløp som utbetales aksjonærene ved nedsettelse av  aksjekapitalen. Hvis nedsettingsbeløpet ikke er utbetalt til  aksjonærene, men brukt til dekning av tap, skal det føres opp 0 i  beløpsfeltet. Ved
+                            utfisjonering av selskap(er), er det den samlede  regnskapsmessig endring av selskapets egenkapital som følge av  utfisjoneringen som skal føres opp som beløp i posten for nedsetting.  Hvis selskapet eier egne aksjer og de
+                            slettes, skal det ikke føres  opp noe beløp her.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>107 Nedsetjing av aksjekapital - kontantar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein beløpet som blir utbetalt til aksjonærane ved nedsetjing  av aksjekapitalen. Dersom nedsetjingsbeløpet ikkje er utbetalt til  aksjonærane, men brukt til å dekkje tap, skal det førast kroner 0 i  beløpsfeltet.
+                            Ved utfisjonering av selskap, er det den samla  rekneskapsmessige endringa av selskapet sin eigenkapital som følgje  av utfisjoneringa som skal førast opp som beløp i posten for  nedsetjing.  </p>
+                        <p>Dersom selskapet eig eigne aksjar og dei vert sletta, skal det ikkje  førast opp noko beløp her.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AvstemmingAvEgenkapital-grp-131/AksjekapitalNedsettelseEiendelerAndre-datadef-11310">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>108 Nedsettelse av aksjekapital - andre eiendeler</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>108 Nedsetjing av aksjekapital - andre eigedelar</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AvstemmingAvEgenkapital-grp-131/GjeldEttergivelse-datadef-11311">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>110 Gjeldsettergivelse</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Hvis selskapet har fått ettergitt gjeld, skal det beløp som endres fra  gjeld til egenkapital føres opp her, når gjeldsettergivelsen ikke er  ført over resultatet.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>110 Gjeldsettergjeving</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dersom selskapet har fått ettergitt gjeld, skal beløpet som vert endra  frå gjeld til eigenkapital førast opp her, når gjeldsettergjevinga  ikkje er ført over resultatet.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AvstemmingAvEgenkapital-grp-131/AksjerEgneKjop-datadef-11312">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>111 Kjøp av egne aksjer</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres det beløp som selskapet har betalt ved kjøp av egne aksjer i  inntektsåret.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>111 Kjøp av eigne aksjar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein beløpet som selskapet har betalt ved kjøp av eigne  aksjar i inntektsåret.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AvstemmingAvEgenkapital-grp-131/AksjerEgneSalg-datadef-11313">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>112 Salg av egne aksjer</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Ved salg av egne aksjer i inntektsåret, skal salgssummen føres opp her  under forutsetning av at salget er gjennomført som en  egenkapitaltransaksjon. Hvis egne aksjer amortiseres (slettes), skal  det ikke føres opp noe
+                            beløp her.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>112 Sal av eigne aksjar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Ved sal av eigne aksjar i inntektsåret, skal salssummen førast opp her  under føresetnad av at salet er gjennomført som ein  eigenkapitaltransaksjon.  </p>
+                        <p>Dersom eigne aksjer vert amortiserte (sletta), skal det ikkje førast  opp noko beløp her.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AvstemmingAvEgenkapital-grp-131/AksjekapitalGjeldKonvertert-datadef-17422">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>114 Gjeld konvertert til aksjekapital</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres økningen i aksjekapitalen som skyldes konvertering av gjeld.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>114 Gjeld konvertert til aksjekapital</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her skal ein føra auking i aksjekapitalen som skuldast konvertering av  gjeld.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AvstemmingAvEgenkapital-grp-131/UtbytteAvsattUtdeltDifferanse-datadef-19807">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>115 Differanse mellom avsatt utbytte ved årsoppgjøret i 2004 og utdelt  utbytte i 2005</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Ved vurderingen av hva som er besluttet utdelt utbytte, skal  skattelovens utbyttebegrep legges til grunn. Som utbytte regnes også  utbetaling av tidligere fondsemitert aksjekapital.  </p>
+                        <p/>
+                        <p>Kan være positiv eller negativ</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>115 Differanse mellom avsett utbytte ved årsoppgjeret i 2004 og utdelt  utbytte i 2005</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Ved vurderingen av kva som er beslutta utdelt utbytte, skal skattelova  sitt utbyttebegrep leggjast til grunn. Som utbytte reknes også  utbetaling av tidlegare fondsemitert aksjekapital.  </p>
+                        <p/>
+                        <p>Kan være positiv eller negativ</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AvstemmingAvEgenkapital-grp-131/EgenkapitalEndringerAndre-datadef-11314">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>116 Andre endringer</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Eventuelle andre endringer i egenkapitalen som ikke kan føres på noen  av de ovennevnte postene, skal føres her, f.eks. ikke  fradragsberettigede gaver.  </p>
+                        <p/>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>116 Andre endringar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Eventuelle andre endringar i eigenkapitalen som ikkje høver på nokon  av dei ovanfor nemnde postane, skal førast her, til dømes ikkje  frådragsberettigede gåver.  </p>
+                        <p/>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AvstemmingAvEgenkapital-grp-131/FondVerdiendringerAretsEndring-datadef-22248">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>117 Fond for urealisterte gevinster som ikke er resultatført</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres urealiserte gevinster som skal føres direkte mot EK. Økning  positivt beløp, reduksjon negativt fortegn.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>117 Fond for urealisterte gevinster som ikkje er resultatførde</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein urealiserte gevinstar som skal førast direkte mot EK.  Auke positivt beløp, reduksjon negativt forteiken.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AvstemmingAvEgenkapital-grp-131/EgenkapitalAvstemt-datadef-13548">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>150 Egenkapital 31.12</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>150 Eigenkapital 31.12</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/AndreOpplysninger-grp-134">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Andre opplysninger</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Andre opplysningar</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/AndreOpplysninger-grp-134/AksjerMvAntall-datadef-1125">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>200 Antall aksjer pr. 31.12</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>200 Antall aksjer pr. 31.12</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AndreOpplysninger-grp-134/AksjerMvPalydende-datadef-11315">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:alert brreg:lang="EN">
+                        <p>Enter nummer with two fraction digits</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>201 Pålydende for hver aksje (part), grunnfondsbevis pr. 31.12</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever to desimaler</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>201 Pålydende for kvar aksje (part), grunnfondsbevis pr. 31.12</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev to desimalar</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AndreOpplysninger-grp-134/AksjerAntallOmsatt-datadef-11316">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>202 Antall aksjer som er omsatt etter aksjeeierbok/aksjeeierregisteret</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>202 Antall aksjer som er omsett etter  aksjeeigarboka/aksjeeigaregisteret</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/AndreOpplysninger-grp-134/AksjerFordeltSplitt-datadef-11317">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>203 Er aksjekapitalen i løpet av 2005 blitt fordelt på et større  antall aksjer uten at aksjekapitalen er blitt endret (splitt)</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Splitt</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>203 Er aksjekapitalen i løpet av 2005 blitt fordelt på meir aksjer  utan at aksjekapitalen er blitt endra (splitt)</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Splitt</p>
+                    </xforms:hint>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/AndreOpplysninger-grp-134/AksjerFordeltSpleis-datadef-11318">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>204 Er aksjekapitalen i løpet av 2005 blitt fordelt på et mindre  antall aksjer uten at aksjekapitalen er blitt endret (spleis)</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Spleis</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>204 Er aksjekapitalen i løpet av 2005 blitt fordelt på mindre aksjer  utan at aksjekapitalen er blitt endra (spleis)</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Spleis</p>
+                    </xforms:hint>
+                </xforms:selectOne>
+                <xforms:selectMany ref="/Skjema/AndreOpplysninger-grp-134/AksjekapitalForhoyelseFondsemisjon-datadef-19459">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>økning_av_pålydende</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Økning av pålydende</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Auking av pålydande</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>utstedelse_av_fondsaksjer</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utstedelse av fondsaksjer</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Utsteding av fondsaksjar</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>205 Dersom aksjekapitalen er forhøyet ved fondsemisjon, kryss av for  hvordan forhøyelsen er foretatt</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>205 Dersom aksjekapitalen er forhøgd ved fondsemisjon, kryss av for  korleis auken er foretatt</p>
+                    </xforms:caption>
+                </xforms:selectMany>
+                <xforms:selectMany ref="/Skjema/AndreOpplysninger-grp-134/AksjekapitalNedsettelseType-datadef-19460">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>reduksjon_av_pålydende</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Reduksjon av pålydende</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Reduksjon av pålydande</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>innløsning_av_aksjer</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Innløsning av aksjer</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Innløysing av aksjar</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>206 Dersom aksjekapitalen er satt ned siste inntektsår, kryss av for  hvordan nedsettelsen er foretatt</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>206 Dersom aksjekapitalen er sett ned siste inntektsår, kryss av for  korleis nedsetting er gjort</p>
+                    </xforms:caption>
+                </xforms:selectMany>
+                <xforms:group ref="/Skjema/AndreOpplysninger-grp-134/InnbetaltAksjekapital-grp-790">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>207 Skattemessig innbetalt aksjekapital</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres innbetalt aksjekapital tillagt overkurs ved nytegning, jf.  sktl. § 10-11 (selv om overkursen helt eller delvis er brukt til å  dekke stiftelseskostnader). Hensikten med posten er å holde orden på  hva som er
+                            innbetalt aksjekapital i forhold til  utbyttebeskatningsreglene og beregning av korreksjonsinntekt, jf.  sktl. 10-5, 2 ledd. Videre er hensikten å holde orden på opprinnelig  innbetalt aksjekapital i forbindelse med
+                            reglene ved realisasjon av  aksjer.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Inkl. overkurs</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>207 Skattemessig innbetalt aksjekapital</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her skal ein føra innbetalt aksjekapital tillagt overkurs ved  nytegning, jf. sktl. § 10-11(selv om overkursen helt eller delvis er  brukt til å dekke stiftelseskostnader). Meininga med posten er å  holda orden på kva som
+                            er innbetalt aksjekapital i høve til  utbyttebeskatningsreglane og berekning av korreksjonsinntekt, jf.  sktl. 10-5, 2 ledd. Vidare er hensikten å halde orden på opprinneleg  innbetalt aksjekapital i samanheng med reglane
+                            ved realisasjon av  aksjar.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Medrekna overkurs</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/AndreOpplysninger-grp-134/InnbetaltAksjekapital-grp-790/AksjekapitalInnbetaltFjoraret-datadef-19980">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Pr. 01.01</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Pr. 01.01</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Pr. 01.01</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AndreOpplysninger-grp-134/InnbetaltAksjekapital-grp-790/AksjekapitalInnbetaltOkning-datadef-11319">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Økning</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Auking</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AndreOpplysninger-grp-134/InnbetaltAksjekapital-grp-790/AksjekapitalInnbetaltNedgang-datadef-11320">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Nedgang</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Nedgang</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AndreOpplysninger-grp-134/InnbetaltAksjekapital-grp-790/AksjekapitalInnbetaltOverkurs-datadef-19979">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Pr. 31.12</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Pr. 31.12</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SpesifikasjonAvPrivatkontoForEnkeltmannsforetakOgDeltakerliknend-grp-136">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Privatkonto</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Her skal det settes opp en nærmere spesifikasjon av privatkonto. Her  føres eierens uttak og private kostnader ført i virksomhetens  regnskap. For deltakerliknede selskaper er det sum alle deltakernes  privatkontoer som skal
+                        føres her.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Privatkonto</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Her skal det setjast opp ein nærare spesifikasjon av privatkontoen.  Eigaren sine uttak og private kostnader som er førte i rekneskapen  til verksemda, skal ein føre her. For deltakarlikna selskap er det  summen av alle
+                        deltakarane sine privatkontoar som skal førast her.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/SpesifikasjonAvPrivatkontoForEnkeltmannsforetakOgDeltakerliknend-grp-136/PrivatkontoKontantuttak-datadef-291">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>400 Kontantuttak</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>400 Kontantuttak</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SpesifikasjonAvPrivatkontoForEnkeltmannsforetakOgDeltakerliknend-grp-136/PrivatkontoUttakDriftsmidler-datadef-6935">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>401 Uttak av driftsmidler</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>401 Uttak av driftsmiddel</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SpesifikasjonAvPrivatkontoForEnkeltmannsforetakOgDeltakerliknend-grp-136/PrivatkontoUttakVarerTjenester-datadef-294">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>402 Uttak av varer og tjenester</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>402 Uttak av varer og tenester</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SpesifikasjonAvPrivatkontoForEnkeltmannsforetakOgDeltakerliknend-grp-136/PrivatkontoNaringsbyggEgenBolig-datadef-295">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>403 Bolig i næringsbygg</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>403 Bustad i næringsbygg</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SpesifikasjonAvPrivatkontoForEnkeltmannsforetakOgDeltakerliknend-grp-136/PrivatkontoLysVarme-datadef-296">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>404 Lys og varme privat</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>404 Lys og varme privat</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SpesifikasjonAvPrivatkontoForEnkeltmannsforetakOgDeltakerliknend-grp-136/PrivatkontoTelefonkostnader-datadef-297">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>405 Private telefonkostnader</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>405 Private telefonkostnadar</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SpesifikasjonAvPrivatkontoForEnkeltmannsforetakOgDeltakerliknend-grp-136/PrivatkontoDiverse-datadef-298">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>406 Diverse andre private kostnader</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>406 Diverse andre private kostnadar</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SpesifikasjonAvPrivatkontoForEnkeltmannsforetakOgDeltakerliknend-grp-136/PrivatkontoSkatter-datadef-292">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>407 Skatter</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>407 Skattar</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SpesifikasjonAvPrivatkontoForEnkeltmannsforetakOgDeltakerliknend-grp-136/PrivatkontoNaringsbil-datadef-6937">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>408 Privat bruk av næringsbil</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>408 Privat bruk av næringsbil</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SpesifikasjonAvPrivatkontoForEnkeltmannsforetakOgDeltakerliknend-grp-136/PrivatkontoSykeUlykkesforsikringPremie-datadef-11323">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>409 Premie til egen syke- og ulykkesforsikring</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>409 Premie til eigen sjuke- og ulykkesforsikring</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SpesifikasjonAvPrivatkontoForEnkeltmannsforetakOgDeltakerliknend-grp-136/PrivatkontoSykepengerTilleggstrygd-datadef-6936">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>410 Premie til tilleggstrygd for sykepenger</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>410 Premie til tilleggstrygd for sjukepengar</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SpesifikasjonAvPrivatkontoForEnkeltmannsforetakOgDeltakerliknend-grp-136/Privatkonto-datadef-7354">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>450 Sum privatkonto</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Overføres til post 302</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>450 Sum privatkonto</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Overførast til post 302</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/EnkeltmannsforetakOgDeltakerliknendeSelskap-grp-135">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Spesifikasjon av egenkapital</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Spesifikasjon av eigenkapital</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/EnkeltmannsforetakOgDeltakerliknendeSelskap-grp-135/EgenkapitalEnkeltmannsforetakFjoraret-datadef-14125">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>300 Egenkapital 31.12 forrige år</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Ved overgang fra næringsoppgave 2 skal post 300 ikke benyttes. Den  regnskapsmessige egenkapitalen ved omgjøring av balansen skal gis opp  i post 303 og/eller post 304.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>300 Eigenkapital 31.12 førre år</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Ved overgang frå næringsoppgåve 1 til næringsoppgave 2 skal post 300  ikkje nyttast. Den rekneskapsmessige eigenkapital ved opparbeiding av  balansen skal gjes opp i post 303 og/eller post 304.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/EnkeltmannsforetakOgDeltakerliknendeSelskap-grp-135/ArsresultatEnkeltmannsforetak-datadef-14126">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>301 Årsresultat</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Post 9200 i RF-1167</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>301 Årsresultat</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Post 9200 i RF-1167</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/EnkeltmannsforetakOgDeltakerliknendeSelskap-grp-135/InnskuddKontanter-datadef-11321">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>303 Innskudd kontanter</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres innskudd kontanter (post 203) og verdi på tingsinnskudd  (post 204 fra eieren/deltakerne som er ført direkte mot  egenkapitalen).  </p>
+                        <p>Spesielt for deltakerliknede selskaper: Ved omdannelse fra  enmannsforetak til deltakerliknede selskaper føres den samlede verdi  på innskuddet opp i post for tingsinnskudd.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>303 Innskot kontantar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein innskot av kontantar (post 203) og verdi på tingsinnskot  (post 204 frå eigaren/deltakarane som er ført direkte mot  eigenkapitalen).  </p>
+                        <p>Spesielt for deltakarlikna selskap:  </p>
+                        <p>Ved omdanning frå einmannsføretak til deltakarlikna selskap skal samla  verdi på innskotet førast opp i posten for tingsinnskot.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/EnkeltmannsforetakOgDeltakerliknendeSelskap-grp-135/InnskuddEiendeler-datadef-11322">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>304 Innskudd eiendeler</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>304 Innskot eigedelar</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/EnkeltmannsforetakOgDeltakerliknendeSelskap-grp-135/BilPrivatkjoring-datadef-7592">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>305 Fradragsførte kostnader etter sats ved bruk av privat bil i næring</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom det er kostnadsført i resultatregnskapet for yrkesbruk av  privat bil etter sats, skal beløpet føres her.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>305 Frådragsførde kostnader etter sats ved bruk av privat bil i næring</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dersom det i resultatrekneskapen er kostnadsført for yrkesbruk av  privat bil etter sats, skal beløpet førast her.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/EnkeltmannsforetakOgDeltakerliknendeSelskap-grp-135/PrinsippendringerEgenkapitalEnkeltmannsforetak-datadef-14167">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>306 Prinsippendringer</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom foretaket har endret regnskapsprinsipp, skal sum  prinsippendringer som er ført direkte mot egenkapitalen føres her.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>306 Prinsippendringar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dersom føretaket har endra rekneskapsprinsipp, skal summen av  prinsippendringar som er førte direkte mot eigenkapitalen førast her.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/EnkeltmannsforetakOgDeltakerliknendeSelskap-grp-135/EgenkapitalKorreksjoner-datadef-14112">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>307 Andre egenkapitalkorreksjoner</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres andre egenkapitalkorreksjoner som ikke kan føres ovenfor.  Som eksempel på andre egenkapitalkorreksjoner kan nevnes; Hvis det er  kostnadsført fradrag for hjemmekontor etter standardbeløp i  resultatregnskapet,
+                            skal samme beløpet føres her.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>307 Andre eigenkapitalkorreksjonar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her skal ein føre andre eigenkapitalkorreksjonar som ikkje høver  ovanfor. Som eksempel på andre eigenkapitalkorreksjonar kan nemnast;  Dersom frådrag for heimekontor er kostnadsført etter standardbeløp i
+                            resultatrekneskapen, skal ein føre same beløpet her.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/EnkeltmannsforetakOgDeltakerliknendeSelskap-grp-135/EgenkapitalEnkeltmannsforetakAvstemt-datadef-14127">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>350 Egenkapital 31.12</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>350 Eigenkapital 31.12</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

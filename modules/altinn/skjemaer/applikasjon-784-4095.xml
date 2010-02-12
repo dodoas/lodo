@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1075: Oppgave over leietaker/leieformidler vedrørende fast eiendom</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-784-4096.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1075 Oppgave fra leietaker/leieformidler vedrørende fast eiendom  2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Oppgaveplikten påhviler den som har leiet fast eiendom som ikke  utelukkende skal tjene hans eget boligbehov og den som mot  godtgjøring har formidlet leie av fast eiendom. Oppgavepliktens  omfang følger av ligningsloven § 6-8 nr.
+                    1 og 2 og forskrift fastsatt  av Skattedirektoratet 3. desember 1985 nr. 2072, jf. Sk nr. 17/1985.  Oppgaven leveres til likningskontoret for den kommune hvor eiendommen  ligger innen 31. januar året etter at leien er
+                    påløpt/betalt av  leietaker/eller året etter at kontrakten er inngått av leieformidler.  Påløpt leie er leie opptjent siste år, uavhengig av når leien etter  avtalen skal betales eller om den faktisk er betalt.  </p>
+                <p>For eventuelle tilleggsopplysninger benytt eget vedlegg.  </p>
+                <p/>
+                <p>Fastsatt av Skattedirektoratet etter ligningsloven § 6-8 nr. 1 og 2  med hjemmel i Finansdepartementets delegeringsvedtak av 5. mars 1984,  jf. ligningsloven 6-16.  </p>
+                <p/>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1075.  </p>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjemaet, RF-1075, helt eller delvis  bli benyttet også av andre offentlige organer som har hjemmel til å  innhente de samme
+                    opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt. samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/LikningskontorKommune-grp-4417">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Likningskontor kommune</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/LikningskontorKommune-grp-4417/LigningskontorKommuneUtlei-datadef-15615">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Til likningskontoret for</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Kommune</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OpplysningerFraLeietaker-grp-2622">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Opplysninger fra leietaker</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Leietaker-grp-2623">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Leietaker</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Leietaker-grp-2623/OppgavegiverNavn-datadef-68">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Leietaker-grp-2623/OppgavegiverAdresse-datadef-69">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Leietaker-grp-2623/OppgavegiverPostnummer-datadef-6676">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Leietaker-grp-2623/OppgavegiverPoststed-datadef-6677">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Utleier-grp-2626">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Utleier</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Utleier-grp-2626/UtleierNavn-datadef-4988">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Utleier-grp-2626/UtleierAdresse-datadef-11898">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Utleier-grp-2626/UtleierPostnummer-datadef-11899">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Utleier-grp-2626/UtleierPoststed-datadef-11900">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Utleier-grp-2626/UtleierFodselsnummer-datadef-14817">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Utleiers fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(kan utelates i oppgave etter forskriften § 2 nr. 1 bokstav a.)</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Utleier-grp-2626/UtleierOrganisasjonsnummer-datadef-19900">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(kan unnlates i oppgave etter forskrift § 2 nr. 1 bokstav a.)</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Eiendommen-grp-2627">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Eiendommen</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Eiendommen-grp-2627/EiendomAdresseLeietaker-datadef-15585">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Eiendommen-grp-2627/EiendomPostnummerLeietaker-datadef-19901">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Eiendommen-grp-2627/EiendomPoststedLeietaker-datadef-19902">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Eiendommen-grp-2627/EiendomGardsnummerLeietaker-datadef-15588">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Gårdsnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Eiendommen-grp-2627/EiendomBruksnummerLeietaker-datadef-15589">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bruksnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Eiendommen-grp-2627/EiendomSeksjonsnummerLeietaker-datadef-15587">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Seksjonsnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Leieforhold-grp-2625">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Leieforhold</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Leieforhold-grp-2625/UtleieInntektsar-datadef-14818">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Inntektsår</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Leieforhold-grp-2625/EiendomLeietidStartdato-datadef-22372">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fra og med dato</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Leieforhold-grp-2625/EiendomLeietidSluttdato-datadef-22373">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Til og med dato</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Leieforhold-grp-2625/EiendomLeieBetalt-datadef-11895">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Betalt leie siste år</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Ta også med leie betalt av andre</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Leieforhold-grp-2625/EiendomLeiePalopt-datadef-11896">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Påløpt leie siste år</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Ta også med påløpt leie som skal betales av andre</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Leieforhold-grp-2625/EiendomLeieAndelBeskrivelse-datadef-11897">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Hvor stor eller hvilken nærmere angitt del av eiendommen er leiet?</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeietaker-grp-2622/Leieforhold-grp-2625/EiendomUtleiBrukBeskrivelse-datadef-11901">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Hva benyttes den leide eiendommen til?</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OpplysningerFraLeieformidler-grp-1074">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Opplysninger fra leieformidler</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Leieformidler-grp-2629">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Leieformidler</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Leieformidler-grp-2629/LeieformidlerNavn-datadef-14386">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Leieformidler-grp-2629/LeieformidlerAdresse-datadef-14387">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Leieformidler-grp-2629/LeieformidlerPostnummer-datadef-14388">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Leieformidler-grp-2629/LeieformidlerPoststed-datadef-14389">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Utleier-grp-2632">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Utleier</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Utleier-grp-2632/UtleierNavnLeieformidler-datadef-14391">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Utleier-grp-2632/UtleierAdresseLeieformidler-datadef-14392">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Utleier-grp-2632/UtleierPostnummerLeieformidler-datadef-14393">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Utleier-grp-2632/UtleierPoststedLeieformidler-datadef-14394">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Utleier-grp-2632/UtleierFodselsnummerLeieformidler-datadef-14395">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Utleier-grp-2632/UtleierOrganisasjonsnummerLeieformidler-datadef-19652">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Org.nr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Eiendommen-grp-2630">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Eiendommen</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Eiendommen-grp-2630/EiendomAdresseLeieformidler-datadef-14397">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Eiendommen-grp-2630/EiendomPostnummerLeieformidler-datadef-14398">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Eiendommen-grp-2630/EiendomPoststedLeieformidler-datadef-14399">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Eiendommen-grp-2630/EiendomGardsnummerLeieformidler-datadef-14400">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Gårdsnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Eiendommen-grp-2630/EiendomBruksnummerLeieformidler-datadef-14401">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bruksnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Eiendommen-grp-2630/EiendomSeksjonsnummerLeieformidler-datadef-14402">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Seksjonsnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Leieforhold-grp-2631">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Leieforhold</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Leieforhold-grp-2631/InntektsarLeieformidler-datadef-19421">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Inntektsår</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:repeat id="repeat_Leieforhold-grp-4418" nodeset="/Skjema/OpplysningerFraLeieformidler-grp-1074/Leieforhold-grp-2631/Leieforhold-grp-4418">
+                        <xforms:group ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Leieforhold-grp-2631/Leieforhold-grp-4418">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Leieforhold</p>
+                            </xforms:caption>
+                            <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Leieforhold-grp-2631/Leieforhold-grp-4418/EiendomLeieperiodeAvtalt-datadef-14403">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Avtalt leieperiode</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Fra/til</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Leieforhold-grp-2631/Leieforhold-grp-4418/EiendomLeieAvtalt-datadef-11902">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Avtalt leie</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Leieforhold-grp-2631/Leieforhold-grp-4418/EiendomLeieBetaltFormidlet-datadef-14404">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Betalt/formidlet leie</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/OpplysningerFraLeieformidler-grp-1074/Leieforhold-grp-2631/Leieforhold-grp-4418/EiendomLeiePaloptLeieformidler-datadef-14405">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Påløpt leie siste år</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:repeat>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

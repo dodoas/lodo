@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">SF-1000: Registrering av områder med forurenset vann</brreg:tittel>
+    <brreg:hode>
+        <xforms:model><!--INSTANCE HOLDER: Instansen kan plasseres her!--><xforms:schema xlink:href="melding-874-40.xsd"/><!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!--><xforms:bind ref="/Skjema/Rolle-grp-563/OppgavegiverRolle-datadef-4206" required="true"/>
+            <xforms:bind ref="/Skjema/Rolle-grp-563/OppgavegiverFornavn-datadef-12993" required="true"/>
+            <xforms:bind ref="/Skjema/Rolle-grp-563/OppgavegiverEtternavn-datadef-8770" required="true"/>
+            <xforms:bind ref="/Skjema/Rolle-grp-563/OppgavegiverAdresse-datadef-69" required="true"/>
+            <xforms:bind ref="/Skjema/Rolle-grp-563/OppgavegiverPostnummer-datadef-6676" required="true"/>
+            <xforms:bind ref="/Skjema/Rolle-grp-563/OppgavegiverPoststed-datadef-6677" required="true"/>
+            <xforms:bind ref="/Skjema/Rolle-grp-563/OppgavegiverTelefonnummer-datadef-620" required="true"/>
+            <xforms:bind ref="/Skjema/Beliggenhet-grp-564/OmradeForurensetGrunnFylke-datadef-16957" required="true"/>
+            <xforms:bind ref="/Skjema/Beliggenhet-grp-564/OmradeForurensetGrunnKommune-datadef-16958" required="true"/>
+            <xforms:bind ref="/Skjema/Beliggenhet-grp-564/OmradeForurensetGrunnNavn-datadef-16959" required="true"/>
+            <xforms:bind ref="/Skjema/Beliggenhet-grp-564/BeliggenhetPaKart-grp-817" required="true"/>
+            <xforms:bind ref="/Skjema/Beliggenhet-grp-564/BeliggenhetPaKart-grp-817/KartBeliggenhet-datadef-17124" required="true"/>
+            <xforms:bind ref="/Skjema/Beliggenhet-grp-564/OmradeForurensetGrunnArealbruksrestriksjoner-datadef-16967" required="true"/>
+            <xforms:bind ref="/Skjema/Beliggenhet-grp-564/Arealstorrelse-grp-818/OmradeForurensetGrunnAreal-datadef-16968" required="true"/>
+            <xforms:bind ref="/Skjema/Forurensning-grp-795/TypeOmrade-grp-815/OmradeForurensetGrunnType-datadef-16970" required="true"/>
+            <xforms:bind ref="/Skjema/Forurensning-grp-795/ForurensningType-datadef-16972" required="true"/>
+            <xforms:bind ref="/Skjema/AndreForhold-grp-806/ForurensningAnsvarlig-datadef-16975" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:group ref="/Skjema/Rolle-grp-563">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:selectOne ref="/Skjema/Rolle-grp-563/OppgavegiverRolle-datadef-4206">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Grunneier på eiendommen</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Grunneigar på eigedomen</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bedrift/tiltakshaver</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Bedrift/tiltakshavar</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>3</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Både grunneier og bedrift/tiltakshaver</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Både grunneigar og bedrift/tiltakshavar</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>4</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Konsulent</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Konsulent</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>5</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Annet</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Anna</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Hva er din rolle i forhold til området du skal registrere med  forurenset grunn.</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/Rolle-grp-563/OppgavegiverFornavn-datadef-12993">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Fornavn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Rolle-grp-563/OppgavegiverEtternavn-datadef-8770">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Etternavn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Rolle-grp-563/OppgavegiverAdresse-datadef-69">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Adresse</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Rolle-grp-563/OppgavegiverPostnummer-datadef-6676">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Postnummer</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Rolle-grp-563/OppgavegiverPoststed-datadef-6677">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Poststed</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Rolle-grp-563/OppgavegiverTelefonnummer-datadef-620">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Telefonnummer</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Rolle-grp-563/OppgavegiverMobiltelefonnummer-datadef-8822">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Mobilnummer</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Rolle-grp-563/OppgavegiverEPost-datadef-15482">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>E-post</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Beliggenhet-grp-564">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Hvor ligger området du vil registrere med forurenset grunn</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/Beliggenhet-grp-564/OmradeForurensetGrunnFylke-datadef-16957">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Finnmark</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Troms</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>3</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nordland</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>4</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nordtrøndelag</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>5</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sørtrøndelag</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>6</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Møre og romsdal</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>7</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sogn og fjordane</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>8</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Hordaland</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>9</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Rogaland</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>10</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Vestagder</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>11</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Østagder</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>12</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Telemark</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>13</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Akershus</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>14</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Oslo</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>15</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Østfold</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>16</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Vestfold</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>17</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Hedmark</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>18</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Oppland</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>19</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Buskerud</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Fylke</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/Beliggenhet-grp-564/OmradeForurensetGrunnKommune-datadef-16958">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kommune</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Beliggenhet-grp-564/OmradeForurensetGrunnNavn-datadef-16959">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Navn på området</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Beliggenhet-grp-564/OmradeForurensetGrunnAdresse-datadef-16960">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Adresse for området</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Beliggenhet-grp-564/OmradeForurensetGrunnPostnummer-datadef-16961">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Postnummer</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Beliggenhet-grp-564/OmradeForurensetGrunnPoststed-datadef-16962">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Poststed</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Beliggenhet-grp-564/OmradeForurensetGrunnGardsnummer-datadef-16963">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Gårdsnummer (Gnr)</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Beliggenhet-grp-564/OmradeForurensetGrunnBruksnummer-datadef-16964">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Bruksnummer (Bnr)</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Beliggenhet-grp-564/OmradeForurensetGrunnSeksjonsnummer-datadef-16965">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Seksjonsnummer</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:repeat id="repeat_AndreBerorte-grp-816" nodeset="/Skjema/Beliggenhet-grp-564/AndreBerorte-grp-816">
+                    <xforms:group ref="/Skjema/Beliggenhet-grp-564/AndreBerorte-grp-816">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Hvis du vet om det er flere gnr/bnr/snr som er berørt av  forurensningen, før dem inn her:</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Beliggenhet-grp-564/AndreBerorte-grp-816/OmradeForurensetGrunnGardsnummer-datadef-16963">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Gårdsnummer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Beliggenhet-grp-564/AndreBerorte-grp-816/OmradeForurensetGrunnBruksnummer-datadef-16964">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bruksnummer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Beliggenhet-grp-564/AndreBerorte-grp-816/OmradeForurensetGrunnSeksjonsnummer-datadef-16965">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Seksjonsnummer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:group ref="/Skjema/Beliggenhet-grp-564/BeliggenhetPaKart-grp-817">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Nytt kartvindu åpnes med inngitt fylke og kommune (Kommunekart), samt  tekstboks med forklaring.</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Beliggenhet-grp-564/BeliggenhetPaKart-grp-817/KartBeliggenhet-datadef-17124">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Skriftlig forklaring på beliggenhet.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:selectOne ref="/Skjema/Beliggenhet-grp-564/OmradeForurensetGrunnArealbruksrestriksjoner-datadef-16967">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>0</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kjenner du til om det er arealbruksrestriksjoner på området?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:group ref="/Skjema/Beliggenhet-grp-564/Arealstorrelse-grp-818">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:selectOne ref="/Skjema/Beliggenhet-grp-564/Arealstorrelse-grp-818/OmradeForurensetGrunnAreal-datadef-16968">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1-10 m2</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>1-10 m2</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>11-100 m2</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>11-100 m2</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>3</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Større enn 101 m2</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Større enn 101 m2</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>4</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Jeg vet eksakt størrelse</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Eg veit den eksakte storleiken</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>5</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Vet ikke</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Veit ikkje</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Hvor stort er arealet på området som er forurenset?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/Beliggenhet-grp-564/Arealstorrelse-grp-818/OmradeForurensetGrunnAreal-datadef-16969">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Jeg vet eksakt størrelse.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Forurensning-grp-795">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:group ref="/Skjema/Forurensning-grp-795/TypeOmrade-grp-815">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:selectOne ref="/Skjema/Forurensning-grp-795/TypeOmrade-grp-815/OmradeForurensetGrunnType-datadef-16970">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Søppelfylling eller dumpeplass</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Søppelfylling eller dumpeplass</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Område hvor forurensning har trengt ned i grunnen</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Område kor forureining har trengd ned i grunnen</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>3</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Annet</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Anna</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Hva slags type område er det snakk om?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/Forurensning-grp-795/TypeOmrade-grp-815/OmradeForurensetGrunnTypeAnnet-datadef-16971">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Annet</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:selectMany ref="/Skjema/Forurensning-grp-795/ForurensningType-datadef-16972">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Metallforbindelser</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Metall sambindingar</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Alifatiske hydrokarboner (olje)</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Alifatiske hydrokarboner (olje)</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>3</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Aromatiske hydrokarboner (PAH)</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Aromatiske hydrokarboner (PAH)</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>4</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Aromatiske hydrokarboner (BTEX)</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Aromatiske hydrokarboner (BTEX)</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>5</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Klororganiske forbindelser (PCB)</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Klororganiske forbindelser (PCB)</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>6</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Andre klororganiske forbindelser</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Andre klororganiske forbindelser</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>7</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Andre</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Andre</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>8</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Vet ikke</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Veit ikkje</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Hva slags forurensning dreier det seg om?</p>
+                    </xforms:caption>
+                </xforms:selectMany>
+                <xforms:input ref="/Skjema/Forurensning-grp-795/ForurensningAnalyserFjerning-datadef-16973">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Har du flere opplysninger om analyseresultater av forurensningen eller  at forurensningen er fjernet?</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Forurensning-grp-795/ForurensningUndersokelserRapporter-datadef-16974">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kjenner du til om det finnes data/undersøkelser/rapporter om området?</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/AndreForhold-grp-806">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:selectOne ref="/Skjema/AndreForhold-grp-806/ForurensningAnsvarlig-datadef-16975">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>0</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kjenner du til bedrifter/virksomheter som kan være ansvarlig for  forurensningen?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/AndreForhold-grp-806/ForurensningAnsvarligNavn-datadef-16976">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Navn på bedrift/virksomhet</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AndreForhold-grp-806/ForurensningAnsvarligOrganisasjonsnummer-datadef-16977">
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Organsisasjonsnummer</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AndreForhold-grp-806/ForurensningAnsvarligBransje-datadef-16978">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Bransje</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AndreForhold-grp-806/ForurensningAnsvarligAdresse-datadef-16979">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Adresse</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AndreForhold-grp-806/ForurensningAnsvarligPostnummer-datadef-16980">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Postnummer</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AndreForhold-grp-806/ForurensningAnsvarligPoststed-datadef-16981">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Poststed</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:input ref="/Skjema/Tilleggsopplysninger-datadef-7683">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Andre opplysninger/kommentarer</p>
+                </xforms:caption>
+            </xforms:input>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

@@ -1,0 +1,177 @@
+<?
+
+#Usage
+# newLonnOgTrekkOppgaver(array('fromPeriod'=>'2004-01', 'toPeriod'=>'2004-12'))
+#Ikke periode 13???);
+#
+
+class LonnOgTrekkOppgaver
+{
+    var $_report;
+    var $_altinnMapping;
+    var $_generalReport;
+    var $_comanyInfo;
+
+    var $_sumLine;
+    var $_sumPart;
+    var $_sumGroup;
+    var $_sumTotal;
+    var $_total;
+
+    var $_fromPeriod;
+    var $_toPeriod;
+    var $_thisYear;
+    var $_lastYear;
+    var $_enableLastYear;
+
+    ############################################################################
+    function LonnOgTrekkOppgaver($args)
+    {
+        global $_SETUP, $_date, $_lib;
+        require_once $_SETUP['HOME_DIR']."/code/lodo/lib/altinnmapping.class";
+        includelogic('report/general');
+        includelogic('company/companyinfo');
+
+        $this->_enableLastYear = $args['enableLastYear'] = 1;
+        $this->_report         = $args['report'];
+
+		//Init the mapping list for this report
+        $this->_altinnMapping  = new AltinnMapping($this->_report);
+        
+        //Get the inforamtion of the company
+        $this->_comanyInfo     = new ComanyInfo(array());
+        $args['company_type']=  $this->_comanyInfo->ShareValue+$this->_comanyInfo->ShareNumber;
+        
+        //Generate the report
+        $this->_generalReport  = new GeneralReport(array($args));
+
+		//
+        $this->_fromPeriod     = $args['fromPeriod'];
+        $this->_toPeriod       = $args['toPeriod'];
+        $this->_thisYear       = $_lib['date']->get_this_year($args['fromPeriod']);
+        $this->_lastYear       = $this->_thisYear--;
+
+        //$this->_altinnMapping->Selvangivelse2Mapping();
+        $this->BuildCompanyInfo();
+        list($this->_sumLine, $this->_sumPart, $this->_sumGroup, $this->_sumTotal, $this->_total) = $this->_generalReport->GetReport($args);
+        
+        
+        //Start the mapping process by assocating the values to the right
+        //ORID
+        $this->InsertMapping();
+        
+        
+        //Start the special calculation for this report
+        //$this->setAccount('2.10', $this->getAccount('D2.9')+$this->getAccount('F2.9'));
+    }
+
+    ############################################################################
+    function BuildCompanyInfo()
+    {
+        $this->setAccount('VName',       $this->_comanyInfo->CustomerCompany->VName);
+        $this->setAccount('VAddress',    $this->_comanyInfo->CustomerCompany->VAddress);
+        $this->setAccount('VZipCode',    $this->_comanyInfo->CustomerCompany->VZipCode);
+        $this->setAccount('VCity',       $this->_comanyInfo->CustomerCompany->VCity);
+        $this->setAccount('OrgNumber',   $this->_comanyInfo->CustomerCompany->OrgNumber2);
+        //$this->setAccount('Category', "01 AKSJESELSKAP");
+        $this->setAccount('CompanyMunicipality', $this->_comanyInfo->CustomerCompany->CompanyMunicipality);
+        $this->setAccount('SocialSecurityID',   str_replace(".", "", str_replace("-", "", str_replace(" ", "", $this->_comanyInfo->CustomerPerson->SocialSecurityID))));
+        
+        $this->setAccount('SkatteAAr', 2004);
+
+        $this->setAccount('FVName',      $this->_comanyInfo->RegnskapCompany->VName);
+        $this->setAccount('FVAddress',   $this->_comanyInfo->RegnskapCompany->VAddress);
+        $this->setAccount('FVZipCode',   $this->_comanyInfo->RegnskapCompany->VZipCode);
+        $this->setAccount('FVCity',      $this->_comanyInfo->RegnskapCompany->VCity);
+       
+    }
+    
+
+   ##############################################################
+    function InsertMapping()
+    {
+        foreach($this->_sumPart as $lineID => $yearHash)
+        {
+            if($lineID != 0)
+            {
+                foreach($yearHash as $year => $valueHash)
+                {
+                    $retval = 1;
+                    $retval = $this->setAccount($lineID, $valueHash['saldo']);
+
+                    if($retval == 0)
+                    {
+                        print "Sjekk konto ".$this->_generalReport->GetAccountByLine($lineID)." - linjenr $lineID i rapporten finnes ikke i altinn skjemaet<br />";
+                    }
+                }
+            }
+        }
+
+        foreach($this->_sumGroup as $lineID => $yearHash)
+        {
+            if($lineID != 0)
+            {
+                foreach($yearHash as $year => $valueHash)
+                {
+                    $retval = 1;
+                    $retval = $this->setAccount($lineID, $valueHash['saldo']);
+
+                    if($retval == 0)
+                    {
+                        print "Sjekk konto ".$this->_generalReport->GetAccountByLine($lineID)." - linjenr $lineID i rapporten finnes ikke i altinn skjemaet<br />";
+                    }
+                }
+            }
+        }
+    }//insertMapping
+
+
+    function IsFoundedThisYear($FoundedDate)
+    {
+        global $_date, $_lib;
+        $foundedYear = $_lib['date']->get_this_year($FoundedDate);
+        if($foundedYear < $this->_thisYear)
+        {
+            return '';
+        }
+        else
+        {
+            return $FoundedDate;
+        }
+    }
+
+    ##############################################################
+    #funksjoner mot mapping object
+    function addMapping($o, $h, $a)
+    {
+        $this->_altinnMapping->addMapping($o, $h, $a);
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->_altinnMapping->setOrid($o, $v);
+    }
+
+    function setAccount($a, $v)
+    {
+        $retval = $this->_altinnMapping->setAccount($a, $v);
+        return $retval;
+    }
+    
+    function getAccount($a)
+    {
+        return $this->_altinnMapping->getAccount($a);
+       
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->_altinnMapping->setHuman($h, $v);
+    }
+
+    function getOridArray()
+    {
+        return $this->_altinnMapping->getOridArray();
+    }
+}
+?>

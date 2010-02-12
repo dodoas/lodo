@@ -1,0 +1,1034 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--title='RF-1053: Fradrag i skatt for kostnader til forsknings- og utviklingsprosjekter' lang='NOB'-->
+    <xs:element name="Skjema">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>RF-1053 Fradrag i skatt for kostnader til forsknings- og  utviklingsprosjekter (FoU) 2006</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Skjemaet skal fylles ut av alle skattytere som krever fradrag i skatt  for kostnader til godkjent forsknings- og utviklingsprosjekt og som  tilfredsstiller kravene i skatteloven § 16-40 samt  Finansdepartementets forskrift til
+                        utfylling og gjennomføring mv. av  skatteloven (FSFIN) §§16-40-1 til 16-40-10.  </p>
+                    <p>Fradraget i skatt gis med henholdsvis 18% eller 20% av kostnadene.  Foretak som ikke tilfredsstiller vilkårene i EFTAs overvåkingsorgan  (ESA) definisjon av SMB (små og mellomstore bedrifter), har krav på  fradrag med 18%.
+                        Foretak som  tilfredsstiller vilkårene, har krav på  fradrag med 20%.  </p>
+                    <p/>
+                    <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. november 1994, jf. ligningsloven § 4-4 nr.  7.  </p>
+                    <p/>
+                    <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjema, RF-1053, helt eller delvis bli  benyttet også av andre offentlige organer som har hjemmel til å  innhente de samme
+                        opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt. samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller hos  Skattedirektoratet på telefon 22 07 70 00.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>Vedlegg til selvangivelsen. Skjemaet skal kun fylles ut av skattytere  som oppfyller vilkårene for skattefradrag i sktl § 16-40</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GenerellInformasjon-grp-2228"/>
+                <xs:element minOccurs="0" ref="KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229"/>
+            </xs:sequence>
+            <xs:attribute fixed="866" name="skjemanummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="5526" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="RF-1053" name="blankettnummer" type="xs:string" use="optional"/>
+            <xs:attribute fixed="Fradrag i skatt for kostnader til forsknings- og utviklingsprosjekter" name="tittel" type="xs:string" use="optional"/>
+            <xs:attribute fixed="2227" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+            <xs:attribute name="etatid" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="974761076">
+                            <xs:annotation>
+                                <xs:documentation>SKATTEDIREKTORATET</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:anyAttribute/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GenerellInformasjon-grp-2228">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Generell informasjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Avgiver-grp-2230"/>
+                <xs:element minOccurs="0" ref="Revisor-grp-2231"/>
+            </xs:sequence>
+            <xs:attribute fixed="2228" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Avgiver-grp-2230">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Avgiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="EnhetNavn-datadef-1">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetOrganisasjonsnummer-datadef-18">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverFodselsnummer-datadef-26">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Fødselsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="EnhetESAVilkarStorrelse-datadef-17413">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>101 Tilfredsstiller foretaket vilkårene i ESAs definisjon av SMB?</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Som SMB regnes virksomheter som:  </p>
+                                <p>-har færre enn 250 ansatte, og  </p>
+                                <p>-har en årlig salgsinntekt som ikke overstiger 40 millioner euro eller  en årlig balansesum som ikke overstiger 27 millioner euro, og  </p>
+                                <p>-oppfyller uavhengighetskravet som nevnt nedenfor.  </p>
+                                <p/>
+                                <p>Virksomheten anses ikke som uavhengig dersom 25 prosent eller mer av  kapitalen eller stemmerettighetene er eid av ett eller flere foretak  som ikke oppfyller de ovennevnte vilkår (SMB-kravene). Begrensningen  kan
+                                    overskrides dersom virksomheten er eid av offentlige  investeringsselskaper, venture-selskaper eller institusjonelle  investorer forutsatt at disse ikke har kontroll over virksomheten  enten individuelt eller
+                                    samlet. Det samme gjelder hvor kapitalen er  spredd på en slik måte at det er umulig å avgjøre hvem som  kontrollerer denne, og virksomheten erklærer at den ikke er eid med  25% eller mer av et eller flere
+                                    selskaper i fellesskap som faller  utenfor ovennevnte definisjon av SMB.  </p>
+                                <p>Ved avgjørelsen av om kravet til salgsinntekt eller balansesum er  oppfylt legges virksomhetens siste godkjente årsregnskap til grunn.  For nystartet virksomhet hvor det ennå ikke foreligger godkjent  årsregnskap,
+                                    legges det til grunn et pålitelig anslag fastsatt i  løpet av året.  </p>
+                                <p>Ved avgjørelsen av om kravet med hensyn til antall ansatte er oppfylt,  legges gjennomsnittlig antall årsverk i virksomheten i siste  avsluttede regnskapsår til grunn. Ved omregning fra euro til norske  kroner
+                                    legges det til grunn den omregningskurs som fastsettes av ESA  ved starten av hvert nytt kalenderår i henhold til kap. 33.1 i ESAs  retningslinjer for statsstøtte. Omregningskursen ligger på
+                                    http://www.eftasurv.int/fieldsofwork/ fieldstateaid/dbaFile791.html.  For deltakerlignede selskaper (ansvarlige selskap, kommandittselskap,  selskap med delt ansvar) er det selskapet, og ikke den enkelte  deltaker,
+                                    vilkårene knytter seg til. Det er imidlertid den enkelte  deltaker som skal levere RF-1053 og som har krav på skattefradraget.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Små og mellomstore bedrifter. Ja (20%) Nei (18%)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2230" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EnhetNavn-datadef-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Navn på juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Navn på årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">1</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="1" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst175-repformat-8">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="175"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetOrganisasjonsnummer-datadef-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummeret til enheten</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Organisasjonsnummer til årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">2</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="18" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst99Modulus11-repformat-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">1</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverFodselsnummer-datadef-26">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Fødselsnummer til oppgavegiveren</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst1111Modulus11-repformat-18">
+                    <xs:attribute fixed="26" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst1111Modulus11-repformat-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">18</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="11"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetESAVilkarStorrelse-datadef-17413">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Angivelse av hvorvidt enheten tilfredsstiller vilkårene i ESAs definisjon av SMB (små og mellomstore bedrifter).</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+                    <xs:attribute fixed="17413" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg2JaNei-repformat-4">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="3"/>
+            <xs:enumeration value="Ja">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Yes</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Ja</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Ja</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Nei">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>No</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Nei</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Nei</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="Revisor-grp-2231">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Revisors attestasjon av kostnader og bekreftelse av opplysninger om  offentlig støtte</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>jf. forskriftens § 16-40-6</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="RevisorNavn-datadef-1937">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RevisorOrganisasjonsnummer-datadef-1938">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="2231" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RevisorNavn-datadef-1937">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Revisor sitt navn</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">19</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="1937" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RevisorOrganisasjonsnummer-datadef-1938">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Revisor sitt organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">20</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="1938" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Kostnader til forsknings- og utviklingsprosjekter</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="99" minOccurs="0" ref="KostnaderTilForskningsOgUtviklingsprosjekter-grp-3683"/>
+                <xs:element minOccurs="0" ref="KostnaderFoU-datadef-17419">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KostnaderFoUInnkjopt-datadef-17420">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>205 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KostnaderFoUUlonnetArbeid-datadef-24109">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>206 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ProsjektOffentligStotteAnnenStotte-datadef-24110">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>208 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="beregningSkattefradrag-grp-5417"/>
+            </xs:sequence>
+            <xs:attribute fixed="2229" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KostnaderTilForskningsOgUtviklingsprosjekter-grp-3683">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>200 Kostnader til forsknings- og utviklingsprosjekter</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="FoUProsjektEgenutfortProsjektnummerSpesProsje-datadef-16476">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>201 Prosjektnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Hvert prosjekt som godkjennes av Norges forskningsråd tildeles et  prosjektnummer. Dette nummeret oppgis i denne posten.  Prosjektnummeret fremgår bl.a. av Forskningsrådets godkjenningsbrev.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FoUProsjektKategoriSpesifisertProsjekt-datadef-17414">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>202 Kategori</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her oppgis om prosjektet er definert som forskning (F) (dvs.  Industriell forskning) eller utvikling (U) (dvs. Prekompetitiv  utviklingsarbeid) i henhold til kapittel 14.5 i retningslinjene for  statsstøtte fastsatt
+                                    av ESA. Kategorien angis i Forskningsrådets  godkjenningsbrev.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="FoUProsjektEgenutfortProsjektandelSpesProsjek-datadef-16478">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>203 Prosjektandel  </p>
+                                <p>Hvis det dreier seg om et samarbeids prosjekt med andre foretak, oppgi  andel av prosjektet i prosent</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Fradrag i skatt kan også gis ved samarbeidsprosjekter mellom flere  skattytere når prosjektet er godkjent av Norges forskningsråd.  Kostnadsrammen gjelder da pr. prosjekt fordelt på deltakerne etter  deltakerandel.
+                                    Dersom det foreligger samarbeidsprosjekt skal  skattyters andel av prosjektet oppgis i prosent.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                                <p>Oppgi prosentandel med 2 desimaler</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KostnaderFoUSpesifisertProsjekt-datadef-17415">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>204 Totale FoU kostnader inkl. ev. &lt;&lt;kostnader>> knyttet til ulønnet  arbeidsinnsats som ikke omfattes av den ordinære skattefunnordningen  og som tas med i søknad til forskningsrådet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Revisors bekreftelse av opplysningene i RF-1053 forutsettes  gjennomført i henhold til god revisjonsskikk og RS 800 (Revisors  uttalelser ved revisjonsoppdrag med spesielle formål). Kostnadene må  kunne dokumenteres
+                                    med et prosjektregnskap som viser medgåtte timer  for eget FoU-personale (dvs. prosjektleder, vitenskapelig og teknisk  personell) fordelt pr person pr. dag og andre prosjektrelaterte  kostnader. Prosjektregnskapet
+                                    skal på oppfordring fremlegges for  ligningsmyndighetene.  </p>
+                                <p/>
+                                <p>Totale FoU-kostnader  </p>
+                                <p>Kostnadene til forskning og utvikling (fradragsgrunnlagets størrelse)  beregnes i sin helhet etter Norges forskningsråds regler for  brukerstyrte prosjekter. I tillegg er det et vilkår at kostnadene må  være direkte
+                                    tilknyttet det godkjente prosjektet, og kostnadene må  etter sin art være fradragsberettiget etter sktl kap. 6.Det gis  imidlertid tilskudd knyttet til ulønnet arbeidsinnsats som ikke  omfattes av den ordinære
+                                    Skattefunn-ordningen. Disse kostnadene skal  føres opp i post 204, og skilles ut i post 206.  </p>
+                                <p>Kostnader pådratt før godkjennelse av prosjekt inngår når de er  pådratt i det inntektsår godkjennelsen ble gitt. Kostnader som er  pådratt i tidligere år inngår derfor ikke.  </p>
+                                <p>Kostnadene må være attestert av revisor. Dette gjelder også for  skattytere som ikke har revisjonsplikt. Kostnader som  forskningsinstitusjoner har hatt i tilknytning til  forskningstjenester som omsettes
+                                    (oppdragsforskning) inngår ikke i  prosjektkostnadene.  </p>
+                                <p>Norges forskningsråds regler for brukerstyrte prosjekter (kostnadene  skal beregnes etter disse reglene):  </p>
+                                <p>Forskningsrådet beregner kostnadene til brukerstyrte FoU-prosjekter  fordelt på følgende kategorier (avgifter som blir refundert eller  avregnet, inngår ikke i prosjektkostnadene):  </p>
+                                <p>- Personal- og indirekte kostnader  </p>
+                                <p>- Innkjøp av FoU-tjenester godkjent av Norges forskningsråd  </p>
+                                <p>- Utstyr  </p>
+                                <p>- Andre driftskostnader  </p>
+                                <p>Se rettledningen.  </p>
+                                <p/>
+                                <p>Kostnadsrammer. Se rettledningen.  </p>
+                                <p>Spesielt om deltakerlignede selskaper: Se rettledningen  </p>
+                                <p>Spesielt om samarbeidsprosjekter: Se rettledningen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KostnaderFoUInnkjoptSpesifisertProsjekt-datadef-17416">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>205 Herav kostnader til innkjøpt FoU, utført av godkjent  forskningsinstitusjon</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Revisors bekreftelse av opplysningene i RF-1053 forutsettes  gjennomført i henhold til god revisjonsskikk og RS 800 (Revisors  uttalelser ved revisjonsoppdrag med spesielle formål). Kostnadene må  kunne dokumenteres
+                                    med et prosjektregnskap som viser medgåtte timer  for eget FoU-personale (dvs. prosjektleder, vitenskapelig og teknisk  personell) fordelt pr person pr. dag og andre prosjektrelaterte  kostnader. Prosjektregnskapet
+                                    skal på oppfordring fremlegges for  ligningsmyndighetene.  </p>
+                                <p/>
+                                <p>Kostnadene som oppgis i post 205 inngår i de totale FoU-kostnadene som  er oppgitt i post 204. Posten skal bare omfatte innkjøpte  FoU-tjenester fra FoU-institusjoner som er godkjent av Norges  forskningsråd. Liste
+                                    over godkjente FoU-institusjoner ligger på http:  //www.skattefunn.no.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Se liste på www.skattefunn.no</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KostnaderFoUUlonnetArbeidSpesifisertProsjekt-datadef-24107">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>206 Herav &lt;&lt;kostnader>> knyttet til ulønnet arbeidsinnsats som ikke  omfattes av den ordinære skattefunnordningen og som administreres og  utbetales av forskningsrådet</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Ulønnet arbeidsinnsats inngår ikke i grunnalget for beregning av  skattefradrag iht. den ordinære Skattefunn-ordningen. Det er  imidlertid opprettet en rammestyrt tilskuddsordning for slik ulønnet  arbeidsinnsats.
+                                    Tilskuddet utgjør 20% (SMB) ev. 18% (ikke SMB) av  &lt;&lt;kostnadsgrunnlaget>>. Ved beregning av &lt;&lt;kostnadsgrunnlaget>>, som  ikke kan overstige 2. mill. kr, benyttes en timesats på kr. 500 pr.  time. Denne
+                                    ordningen administreres fullt ut av forskningsrådet.  Ordningen må godkjennes av ESA før den trer i kraft, og slik  godkjennelse foreligger ikke ved ferdigstillelsen av skjemaet.  Skattyter skal inkludere
+                                    &lt;&lt;kostnadene>> for ulønnet arbeidsinnsats i  post 204 og spesifisere disse i post 206. Ved beregning av sum  grunnlag for beregning av skattefradrag i post 211, må &lt;&lt;kostnadene>>  knyttet til ulønnet
+                                    arbeidsinnsats trekkes fra.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Se rettledningen</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ProsjektStatsstotteSkattefradragReduksjonSpesifisertProsjekt-datadef-17418">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>207 Hvis prosjektet mottar annen off. støtte; oppgi dette beløpet her.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>I henhold til forskriftens § 16-40-6 femte ledd skal det fremgå av  revisorbekreftet dokument at summen av den offentlige støtten til  prosjektet ikke overskrider høyeste tillatte samlet støtte i henhold  til
+                                    kapittel 14.5 i retningslinjene for statsstøtte fastsatt av  ESA.  </p>
+                                <p/>
+                                <p>Hva regnes som offentlig støtte?  </p>
+                                <p>Offentlig støtte omfatter finansiell bistand til prosjektet fra  offentlige virkemidler (SND, Forskningsrådet, kommunale-  /fylkeskommunale næringsfond eller lignende) knyttet til aktiviteter  som er utført i
+                                    inntektsåret. Støtte fra Den Europeiske Union (inkl.  EUs rammeprogram) betraktes som offentlig støtte. Offentlige  virksomheters kjøp av tjenester eller produkter (for eksempel den  offentlige etats andel av
+                                    FoU-kontrakt) medregnes ikke. Støtte som  utbetales i inntektsåret, men som dreier seg om tidligere utførte  aktiviteter medregnes ikke. Kontroll av offentlig støtteandel må  gjennomføres for hvert enkelt prosjekt.
+                                    Grensene for statsstøtte  beregnes etter ESAs retningslinjer brutto (før skatt). Når støtte gis  i form av et skattefradrag innebærer dette nettostøtte siden  skattefradraget ikke anses som skattepliktig
+                                    virksomhetsinntekt, jf.  sktl § 5-31 bokstav c. Skattefradraget må således regnes om til et  bruttobeløp når man skal vurdere om den samlede offentlige støtten  ligger innenfor retningslinjene. Dette gjelder også
+                                    tilskuddet som  ytes for ulønnet arbeidsinnsats. For etterskuddspliktige skattytere  som svarer skatt av alminnelig inntekt, dvs. 28%, innebærer dette at  skattefradraget må ligge innenfor: Maksimalt skattefradrag
+                                    = (Post  204 x Maksimal støtteandel iflg. tabell - Annen offentlig støtte) x  0,72. For skattytere som har skattesats som er høyere enn 28% må den  aktuelle skattesatsen benyttes ved omregningen. Sone A, B og C er
+                                    beskrevet i Virkeområdet for distriktspolitiske virkemidler. Link til  Virkeområde for de distriktspolitiske virkemidlene ligger på http:  //www.skattefunn.no.  </p>
+                                <p>Dersom prosjektet inneholder internasjonalt samarbeid innen  EØS-området og/eller EUs rammeprogram, kan den offentlige  støtteandelen i noen tilfelle økes utover ovennevnte satser. Den  offentlige støtten kan
+                                    imidlertid ikke overstige 75% for industriell  forskning eller 50% for Prekompetiv utvikling. Nærmere om dette i  kapittel 14.5 i retningslinjene for statsstøtte som ligger på http:  //www.skattefunn.no.  </p>
+                                <p>Dersom beregnet skattefradrag, inkl. støtte for ulønnet arbeidsinns,  for prosjektet (post 209 x 20% resp. 18%) blir høyere enn maksimalt  skattefradrag etter ovenstående formel, overskrider den offentlige  støtten
+                                    den tillatte samlede støtten etter retningslinjenes kap. 14.5  og post 208 må fylles ut.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Støtte for ulønnet arbeidsinnsats (post 206) oppgis ikke her</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ProsjektOffentligStotteAnnenStotteSpesifisertProsjekt-datadef-24108">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>208 Hvis summen av støtte ikke ligger innenfor tillatte samlede  støtteandel, oppgi hvilket beløp skattefradraget må reduseres med for  å ligge innenfor statsstøttereglene</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>For at samlet offentlig støtte til prosjektet skal ligge innenfor det  tillatte etter kapittel 14.5 i retningslinjene for statsstøtte  fastsatt av ESA, må skattefradraget, inkl. støtte for ulønnet  arbeidsinnsats,
+                                    reduseres med differansen mellom Beregnet  skattefradrag (Post 209 x 20 % resp. 18 %) og Maksimalt skattefradrag  etter formelen i Post 207.  </p>
+                                <p>Se tabell over maksimal offentlig støtteandel iht. retningslinjene for  statsstøtte fastsatt av ESA. Ved internasjonalt samarbeid kan  grensene i enkelte tilfeller overskrides, se rettledningen.  </p>
+                                <p>Et eks. med følgende tall kan illustrere beregningen: Et AS (SMB) har  totale FoU-kostnader til egenutført prekompetiv utvikling, ført i  post 204 på 5.600.000, maksimal støtteandel blir da iht. tabellen  35%.
+                                    Samtidig mottar prosjektet annen off. støtte på 1.200.000.  Maksimalt skattefradrag, inkl. støtte til ulønnet arbeidsinnsats,  blir da: (5.600.000 x 35% - 1.200.000) x 0,72 = 547.200. For at  samlet offentlig
+                                    støtte til prosjektet skal ligge innenfor det  tillatte, må skattefradraget reduseres med differansen mellom  Beregnet skattefradrag inkl. støtte for ulønnet arbeidsinnsats (Post  209 x 20% resp. 18%) og Maksimalt
+                                    skattefradrag etter formelen  ovenfor. I eks. må skattefradraget reduseres med: (4.000.000 x 20%) =  800.000 - 547.200 = 252.800. Se rettledningen for mer informasjon.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="3683" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FoUProsjektEgenutfortProsjektnummerSpesProsje-datadef-16476">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Prosjektnummer på egenutført forsknings- og utviklingsprosjekt (FoU)</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">5</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst15-repformat-61">
+                    <xs:attribute fixed="16476" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst15-repformat-61">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">61</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="FoUProsjektKategoriSpesifisertProsjekt-datadef-17414">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Angivelse av kategori vedrørende forskning og utviklingsarbeid</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg2FElU-repformat-139">
+                    <xs:attribute fixed="17414" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg2FElU-repformat-139">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">139</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="1"/>
+            <xs:enumeration value="F">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Forskning</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Forskning</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="U">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Utvikling</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Utvikling</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="FoUProsjektEgenutfortProsjektandelSpesProsjek-datadef-16478">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Angi eventuelt prosjektandel i prosent på egenutført forsknings- og utviklingsprosjekt (FoU)</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">7</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Desimal72Desimaler-repformat-91">
+                    <xs:attribute fixed="16478" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Desimal72Desimaler-repformat-91">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">91</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Feltet krever to desimaler</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Feltet krev to desimalar</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:decimal">
+            <xs:totalDigits value="7"/>
+            <xs:pattern value="-{0,1}[0-9]{1,}\.[0-9]{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="KostnaderFoUSpesifisertProsjekt-datadef-17415">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="17415" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopHeltall15-repformat-37">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">37</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="KostnaderFoUInnkjoptSpesifisertProsjekt-datadef-17416">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Kostnader til innkjøpt FoU utført av godkjent forskningsinstitusjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="17416" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KostnaderFoUUlonnetArbeidSpesifisertProsjekt-datadef-24107">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Prosjektets kostnader knyttet til ulønnet arbeidsinnsats som ikke omfattes av den ordinære skattefunn-ordningen og som administreres av forskningsrådet.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">10</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24107" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ProsjektStatsstotteSkattefradragReduksjonSpesifisertProsjekt-datadef-17418">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Angivelse av hvilket beløp skattefradraget må reduseres med for å være innenfor statsstøttereglene</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">12</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="17418" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ProsjektOffentligStotteAnnenStotteSpesifisertProsjekt-datadef-24108">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">11</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24108" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KostnaderFoU-datadef-17419">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Totale FoU-kostnader</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">13</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="17419" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KostnaderFoUInnkjopt-datadef-17420">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Totale kostnader til innkjøpt FoU utført av godkjent forskningsinstitusjon</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">14</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="17420" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KostnaderFoUUlonnetArbeid-datadef-24109">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Samlede kostnader knyttet til ulønnet arbeidsinnsats som ikke omfattes av den ordinære skattefunn-ordningen og som administreres av forskningsrådet.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">15</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24109" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ProsjektOffentligStotteAnnenStotte-datadef-24110">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">16</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24110" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="beregningSkattefradrag-grp-5417">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Beregning av skattefradrag</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="KostnaderFoUMaksbegrensning-datadef-24111">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>209 Sum post 204 ovenfor, begrenset oppad til maksgrensen på 4 ev. 8  mill</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Se rettledningen til post 204 under overskriften: Kostnadsrammer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="SkattefradragFoUBeregningsgrunnlag-datadef-24112">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>211 Sum grunnlag for beregning av skattefradrag</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Ev. reduksjon av fradraget med beløp fra post 208 foretas av  skattemyndighetene.  </p>
+                                <p/>
+                                <p>Utfylling av likningspapirer.  </p>
+                                <p>Følgende retningslinjer kan være til hjelp vede utfylling av  likningspapirene:  </p>
+                                <p>Dersom tilskuddet er regnskapsført som kostnadsreduksjon, føres totalt  tilskudd i posten Andre fradrag på side 4 i næringsoppgaven, og det  gis opplysning om hva det gjelder i eget vedlegg.  </p>
+                                <p/>
+                                <p>Dersom tilskuddet er nettoført i balansen, altså ført som reduksjon i  investeringens verdi, føres full kostpris på det investerte som  tilgang i avskrivningsskjemaet, uten reduksjon med tilskuddsbeløpet.  I tillegg
+                                    oppføres det totale tilskuddet under Andre fradrag på side  4 i næringsoppgaven (det første året), og det gis opplysninger om hva  det gjelder i eget vedlegg.  </p>
+                                <p>Når tilskuddet er bruttoført i balansen, oppføres tilskuddsposten på  gjeldssiden i midlertidig forskjell skjema (regnskapsmessig  gjeldspost, men ikke skattemessig). I tillegg oppføres det totale  tilskuddet under
+                                    Andre fradrag på side 4 i næringsoppgaven (det  første året), og det gis opplysninger om hva det gjelder i eget  vedlegg.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5417" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KostnaderFoUMaksbegrensning-datadef-24111">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">17</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24111" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SkattefradragFoUBeregningsgrunnlag-datadef-24112">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">18</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24112" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

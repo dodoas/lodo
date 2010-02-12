@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1001: Aksjonærbeskatningen - Formular nr. 2</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-100-4176.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/Selskap-grp-368/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Selskap-grp-368/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Selskap-grp-368/EnhetAdresse-datadef-15"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Selskap-grp-368/EnhetPostnummer-datadef-6673"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Selskap-grp-368/EnhetPoststed-datadef-6674"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="EN">
+                <p>RF-1001 Information of holders of fundshares etc. - Formula no. 2 -  2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="EN">
+                <p>The assessment value per fundshare is the value per 1. January 2005.  The assessment value per primary capital certificate is 65% of the  value per 1. January 2006.  </p>
+                <p/>
+                <p>Approved by the Directorate of Taxes pursuant to section 5-2 of the  Assessment Act and to decision of delegation made by the Ministry of  Finance on 28th November 1994, cf. Assessment Act sections 6-11 and  6-16 b.  </p>
+                <p/>
+                <p>Other public authorities use of information in RF-1045. In order to  coordinate and simplify the reporting obligations business and  industry have, the information which is stated in the Extract of  Accounts, RF-1045, can also
+                    wholly or partly be used by other public  authorities that are entitled to collect the same information, cf.  The Act regarding the Register of Business Reporting Obligations  section 5 and 6. Information regarding a possible
+                    coordination can be  obtained from the Central Coordination Register for Legal Entities  (Tel. +47 75 00 00) or from the Directorate of Taxes (Tel. +47 22 07  70 00)</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="EN">
+                <p>Declaration with reference to holders of fundshares and primary  capital certificates in Norwegian equity funds etc per 1. January  2006, as well as dividends etc paid in the preceding year.</p>
+            </xforms:hint>
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1001 Opplysninger om andelseiere i aksjefond mv - Formular nr. 2 -  Inntektsåret 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Ligningsverdi per andel er 65% av andelsveriden 1. januar i  ligningsåret.  grunnfondsbevis verdsettes til 65% av kursverdien 1.  januar i ligningsåret.  Er kursen ikke notert eller kjent, settes  verdien til 65% av den antatte
+                    salgsverdien.  </p>
+                <p/>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. november 1994, jf. ligningsloven §§ 6-11 og  6-16 b.  </p>
+                <p/>
+                <p>Formularet fylles ut av foretaket i tilfeller der opplysningene ikke  blir gitt via VPS, og sendes likningskontoret innen utgangen av  mars.  </p>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1001  </p>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjemaet, RF-1001, helt eller delvis  bli benyttet også av andre offentlige organer som har hjemmel til å  innhente de samme
+                    opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt. samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Oppgave over andelseiere i aksjefond og innehavere av grunnfondsbevis  i norske  foretak pr. 1. januar 2006, og utbetalt utbytte med mer i  det forløpne år.</p>
+            </xforms:hint>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1001 Opplysningar om partseigarar i aksjefond mm - Formular nr. 2 -  Inntektsåret 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Likningsverdi per part er 65% av verdien av parten 1. januar i  likningsåret.  Verdien av grunnfondsbevis er 65% av kursverdien 1.  januar i likningsåret.  Er kursen ikkje notert eller kjend, skal  verdien vere 65% av truleg
+                    salsverdi.  </p>
+                <p/>
+                <p>Fastsett av Skattedirektoratet med heimel i Finansdepartementet sitt  delegeringsvedtak av 28. november 1994, jf. ligningslova §§ 6-11 og  6-16 b.  </p>
+                <p/>
+                <p>Andre offentlege organ sin bruk av opplysningar i RF-1001. For å  samordna og forenkla oppgåveinnleveringa  frå næringslivet, kan  opplysningar som vart avgjeve i dette skjemaet, RF-1001, heilt eller  delvis bli nytta også av andre
+                    offentlege organ som har heimel til å  innhente dei same opplysningane, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysningar om evt. Samordning kan ein få ved å vende seg til  Oppgåveregisteret på telefon 75 00 75 00, eller
+                    Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NON">
+                <p>Oppgåve over partseigarar i aksjefond og eigarar av grunnfondsbevis i  norske  foretak pr. 1. januar 2006, og utbetalt utbytte med meir i  året som gjekk.</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-2705">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="EN">
+                    <p>General information</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2705/Aksjonaren-grp-2253">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Information about the owner etc</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Opplysninger om eieren mv</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Opplysningar om eigaren mm</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2705/Aksjonaren-grp-2253/AksjonarNavn-datadef-1153">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Name</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2705/Aksjonaren-grp-2253/AksjonarAdresse-datadef-1154">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Address</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2705/Aksjonaren-grp-2253/AksjonarPostnummer-datadef-7598">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Postal code</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2705/Aksjonaren-grp-2253/AksjonarPoststed-datadef-7599">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>City</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2705/Aksjonaren-grp-2253/AksjonarNasjonalitet-datadef-3523">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Country</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Land</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Land</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2705/Aksjonaren-grp-2253/AksjonarKommune-datadef-1155">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Municipality of residence</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bostedskommune</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Bustadskommune</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2705/Aksjonaren-grp-2253/AksjonarFodselsnummer-datadef-1156">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Social security number</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2705/Aksjonaren-grp-2253/AksjonarOrganisasjonsnummer-datadef-7597">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Org.nr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Org.nr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Org.no.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/AksjerMv-grp-3052">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="EN">
+                    <p>Information about fundshares etc</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Opplysninger om andeler mv</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Opplysningar om partar mm</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/AksjerMv-grp-3052/AksjerMv-grp-365">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Information about fundshares etc</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Opplysninger om andeler mv</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Opplysningar om partar mm</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/AksjerMv-grp-3052/AksjerMv-grp-365/AksjonarAksjerMvAntall-datadef-2294">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Number of fundshares etc per 01.01.2006</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall andeler mv pr. 01.01.2006</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kor mange partar mm pr. 01.01.2006</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerMv-grp-3052/AksjerMv-grp-365/AksjeMvPalydende-datadef-1126">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Nominal value of each primary capital certificate per 01.01.2006</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter number with two fraction digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Pålydende pr. grunnfondsbevis pr. 01.01.2006</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever to desimaler</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kva grunnfondsbeviset lyder på pr. 01.01.2006</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev to desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerMv-grp-3052/AksjerMv-grp-365/AksjeMvLigningsverdi-datadef-2276">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Tax assessment value of each fundshare etc</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="EN">
+                            <p>The assessment value per fundshare is the value per 1. January 2005.  The assessment value per primary capital certificate is 65 percent of  the value per 1 January 2005.</p>
+                        </xforms:help>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter number with two fraction digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Likningsverdi pr. andel mv.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Ligningsverdi per andel er andelsverdien 1. januar i ligningsåret.  Grunnfondsbevis verdsettes til 65 prosent av kursverdien 1. januar i  ligningsåret. Er kursen ikke notert eller kjent, settes verdien til  65 prosent
+                                av den antatte salgsverdien.</p>
+                        </xforms:help>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever to desimaler</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Likningsverdi pr. part m.m.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Likningsverdi per part er verdien av parten 1. januar i likningsåret.  Verdien av grunnfondsbevis er 65 prosent av kursverdien 1. januar i  likningsåret. Er kursen ikkje notert eller kjend, skal verdien vere  65 prosent
+                                av truleg salsverdi.</p>
+                        </xforms:help>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev to desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/AksjerMv-grp-3052/UtbytteTilNorskAksjonar-grp-4179">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Utbytte til norsk aksjonær</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Utbytte til norsk aksjonær</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/AksjerMv-grp-3052/UtbytteTilNorskAksjonar-grp-4179/UtbytteRenterNorskAksjonar-datadef-2278">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Dividends etc, to Norwegian holder of fundshares</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Annet utbytte mv, til norsk andelseier</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Anna utbyte mm, til norsk partseigar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/AksjerMv-grp-3052/UtbytteTilUtenlandskAksjonar-grp-3811">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Utbytte til utenlandsk aksjonær</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Utbytte til utanlandsk aksjonær</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/AksjerMv-grp-3052/UtbytteTilUtenlandskAksjonar-grp-3811/UtbytteRenterUtenlandskAksjonar-datadef-2279">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Dividend etc to foreign holder of fundshares</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Utbytte mv til utenlandsk andelseier</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Utbyte mm til utanlandsk partseigar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerMv-grp-3052/UtbytteTilUtenlandskAksjonar-grp-3811/KildeskattProsentSpesifisert-datadef-19978">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Rate of tax withheld at source</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="EN">
+                            <p>For foreign owners only</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive number with two fraction digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Herav trukket i kildeskatt</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Fylles bare ut for utenlandske eiere</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt tall med to desimaler</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Av dette trekt i kjeldeskatt</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Vert berre fylt ut for utanlandske eigarar</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt tal med to desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Selskap-grp-368">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="EN">
+                    <p>Equality fund etc</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Selskap</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Selskap</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Selskap-grp-368/EnhetNavn-datadef-1">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Navn</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Name</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Namn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Selskap-grp-368/EnhetOrganisasjonsnummer-datadef-18">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Org.nr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Org.nr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Org.no.</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Selskap-grp-368/EnhetAdresse-datadef-15">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Address</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Adresse</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Adresse</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Selskap-grp-368/EnhetPostnummer-datadef-6673">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Postal code</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="EN">
+                        <p>Enter positive integer with four digits</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Postnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever positivt heltall med fire siffer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Postnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev positivt heiltal med fire siffer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Selskap-grp-368/EnhetPoststed-datadef-6674">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>City</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Poststed</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Poststad</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

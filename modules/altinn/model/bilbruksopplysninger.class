@@ -1,0 +1,370 @@
+<?
+
+#Usage
+# new BilBruksOpplysninger(array('fromPeriod'=>'2004-01', 'toPeriod'=>'2004-12'))
+#Ikke periode 13???);
+#
+
+class BilBruksOpplysninger
+{
+	var $db;
+	
+    var $_report;
+    var $_altinnMapping;
+    var $_generalReport;
+    var $_comanyInfo;
+
+    var $_sumLine;
+    var $_sumPart;
+    var $_sumGroup;
+    var $_sumTotal;
+    var $_total;
+    
+    var $AKSJESELSKAP=1;
+    var $SELVSTENDIGNAERINGSDRIVENDE=2;
+    
+    var $COMPANY_TYPE=1;
+    
+    var $_departments=array();
+
+    var $_fromPeriod;
+    var $_toPeriod;
+    var $_thisYear;
+    var $_lastYear;
+    var $_enableLastYear;
+
+    ############################################################################
+    function BilBruksOpplysninger($args)
+    {
+        global $_SETUP, $_date, $_lib;
+        require_once $_SETUP['HOME_DIR']."/code/lodo/lib/altinnmapping.class";
+        includelogic('report/general');
+        includelogic('company/companyinfo');
+
+		$this->db = $args['db'];
+			
+        $this->_enableLastYear = $args['enableLastYear'] = 1;
+        $this->_report         = $args['report'];
+
+        $this->_altinnMapping  = new AltinnMapping($this->_report);
+        $this->_generalReport  = new GeneralReport($args);
+        $this->_comanyInfo     = new ComanyInfo(array());
+        
+        $args['company_type']=  $this->_comanyInfo->CustomerCompany->ShareValue
+                               +$this->_comanyInfo->CustomerCompany->ShareNumber;
+        
+        if ($args['company_type']>0) {
+        	$this->COMPANY_TYPE=$this->AKSJESELSKAP;
+        }else $this->COMPANY_TYPE=$this->SELVSTENDIGNAERINGSDRIVENDE;
+        
+
+        $this->_fromPeriod     = $args['fromPeriod'];
+        $this->_toPeriod       = $args['toPeriod'];
+       
+        $this->_thisYear       = $_lib['date']->get_this_year($args['fromPeriod']);
+        //print("this year: ".$this->_thisYear);
+        $this->_lastYear       = $this->_thisYear-1;
+        //print("this year: ".$this->_thisYear);
+        
+        $this->result($this->_toPeriod, $this->_thisYear);
+        //$this->balance($this->_toPeriod, $this->_thisYear);
+
+        //$this->_altinnMapping->Selvangivelse2Mapping();
+        $this->BuildCompanyInfo();
+        list($this->_sumLine, $this->_sumPart, $this->_sumGroup, $this->_sumTotal, $this->_total) = $this->_generalReport->GetReport($args);
+        $this->InsertMapping();
+    }
+
+    ############################################################################
+    function BuildCompanyInfo()
+    {
+        $this->setAccount('VName',       $this->_comanyInfo->CustomerCompany->VName);
+        $this->setAccount('VAddress',    $this->_comanyInfo->CustomerCompany->VAddress);
+        $this->setAccount('VZipCode',    $this->_comanyInfo->CustomerCompany->VZipCode);
+        $this->setAccount('VCity',       $this->_comanyInfo->CustomerCompany->VCity);
+        //$this->setAccount('OrgNumber',   $this->_comanyInfo->CustomerCompany->OrgNumber);
+        $this->setAccount('OrgNumber', str_replace(" ", "", $this->_comanyInfo->CustomerCompany->OrgNumber2));
+        $this->setAccount('Category', "01 AKSJESELSKAP");
+        $this->setAccount('CompanyMunicipality', $this->_comanyInfo->CustomerCompany->CompanyMunicipality);
+        
+        //If this a hold share company then don't use the social security number'
+        if ($this->COMPANY_TYPE!=$this->AKSJESELSKAP)
+            $this->setAccount('SocialSecurityID',   str_replace(".", "", str_replace("-", "", str_replace(" ", "", $this->_comanyInfo->CustomerPerson->SocialSecurityID))));
+
+        $this->setAccount('FOrgNumber', str_replace(" ", "", $this->_comanyInfo->RegnskapCompany->OrgNumber2));
+        $this->setAccount('FVName',      $this->_comanyInfo->RegnskapCompany->VName);
+        $this->setAccount('FVAddress',   $this->_comanyInfo->RegnskapCompany->VAddress);
+        $this->setAccount('FVZipCode',   $this->_comanyInfo->RegnskapCompany->VZipCode);
+        $this->setAccount('FVCity',      $this->_comanyInfo->RegnskapCompany->VCity);
+        
+        //$this->setAccount('Inntektsar', '2004');
+        
+        $this->setAccount('1', $this->_sumPart['1'][$ThisYear]['saldo']);
+
+    }
+
+    ##############################################################
+    function InsertMapping()
+    {
+        foreach($this->_sumPart as $lineID => $yearHash)
+        {
+            if($lineID != 0)
+            {
+                foreach($yearHash as $year => $valueHash)
+                {
+                    $retval = 1;
+                    $retval = $this->setAccount($lineID, $valueHash['saldo']);
+
+                    if($retval == 0)
+                    {
+                        print "Sjekk konto ".$this->_generalReport->GetAccountByLine($lineID)." - linjenr $lineID i rapporten finnes ikke i altinn skjemaet<br />";
+                    }
+                }
+            }
+        }
+
+        foreach($this->_sumGroup as $lineID => $yearHash)
+        {
+            if($lineID != 0)
+            {
+                foreach($yearHash as $year => $valueHash)
+                {
+                    $retval = 1;
+                    $retval = $this->setAccount($lineID, $valueHash['saldo']);
+
+                    if($retval == 0)
+                    {
+                        print "Sjekk konto ".$this->_generalReport->GetAccountByLine($lineID)." - linjenr $lineID i rapporten finnes ikke i altinn skjemaet<br />";
+                    }
+                }
+            }
+        }
+    }//insertMapping
+
+    function IsFoundedThisYear($FoundedDate)
+    {
+        global $_date, $_lib;
+        $foundedYear = $_lib['date']->get_this_year($FoundedDate);
+        if($foundedYear < $this->_thisYear)
+        {
+            return '';
+        }
+        else
+        {
+            return $FoundedDate;
+        }
+    }
+
+    ##############################################################
+    #funksjoner mot mapping object
+    function addMapping($o, $h, $a)
+    {
+        $this->_altinnMapping->addMapping($o, $h, $a);
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->_altinnMapping->setOrid($o, $v);
+    }
+
+    function setAccount($a, $v)
+    {
+        $retval = $this->_altinnMapping->setAccount($a, $v);
+        return $retval;
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->_altinnMapping->setHuman($h, $v);
+    }
+
+    function getOridArray()
+    {
+        return $this->_altinnMapping->getOridArray();
+    }
+    
+    ############################################################################
+    function result($ToPeriod, $Year)
+    {	global $_sess, $_dbh, $_dsn, $_date, $_lib;
+    	
+    	//$year = $_lib['date']->get_this_year($ToPeriod);
+    	
+    	$sqlStr = 'SELECT CompanyDepartmentID, DepartmentName, Active,' .
+    			' km0101, km3112 FROM `companydepartment` ORDER BY CompanyDepartmentID';
+		$rs = $this->db->Query( $sqlStr );
+		
+		while ($row = $this->db->NextRow( $rs )) {
+				
+	        $query_report_resultat  = "
+	            SELECT
+	            	A.DepartmentID,
+	            	D.DepartmentName,
+	            	D.km0101,
+	            	D.km3112,
+	                A.AccountName,
+	                A.AccountPlanID,
+	                A.Report{$this->_report}Line as Line,
+	                sum(AmountIn) as AmountIn, sum(AmountOut) as AmountOut
+	                
+	            FROM
+	                voucher as V,
+	                accountplan as A,
+	                companydepartment as D
+	            WHERE
+	                V.VoucherPeriod >= '$FromPeriod' and
+	                V.VoucherPeriod <= '$ToPeriod' and
+	                A.AccountPlanType='result' and
+	                A.AccountPlanID=V.AccountPlanID and
+	                A.DepartmentID=D.CompanyDepartmentID and
+	                D.Active > 0 AND A.DepartmentID=". $row['CompanyDepartmentID']. 
+	            "  GROUP BY A.AccountPlanID 
+	            ORDER BY Line ASC
+	        ";
+	        
+	        //print "<h2>Result Year: $Year</h2>$query_report_resultat<br>";
+	        
+	        $this->_reportResultHash = $_dbh[$_dsn]->get_hashhash(array('query'=>$query_report_resultat, 'key'=>'DepartmentID'));
+	
+	        $oldLine = -1;
+	        foreach($this->_reportResultHash as $DepartmentID => $reportHash)
+	        {
+	            if($oldLine != -1 and $oldLine != $reportHash['Line'])
+	            {
+	                $oldLine = $reportHash['Line'];
+	                if(!isset($this->_sumPart[$oldLine][$Year]['saldo']))
+	                    $this->_sumPart[$oldLine][$Year]['saldo'] = 0;
+	
+	                if(!isset($this->_sumPart[$oldLine][$Year]['in']))
+	                    $this->_sumPart[$oldLine][$Year]['in'] = 0;
+	
+	                if(!isset($this->_sumPart[$oldLine][$Year]['out']))
+	                    $this->_sumPart[$oldLine][$Year]['out'] = 0;
+	            }
+	            if($oldLine == -1)
+	            {
+	                $oldLine = $reportHash['Line'];
+	            }
+	
+	            if(strlen($reportHash['AccountName']) > 0)
+	            {
+	                $this->_sumLine[$oldLine][$AccountPlanID]['name']       =  $reportHash['AccountName'];
+	            }
+	            $this->_sumLine[$oldLine][$AccountPlanID][$Year]['in']      =  $reportHash['AmountIn'];
+	            $this->_sumLine[$oldLine][$AccountPlanID][$Year]['out']     =  $reportHash['AmountOut'];
+	            $this->_sumLine[$oldLine][$AccountPlanID][$Year]['saldo']   =  $reportHash['AmountIn'] - $reportHash['AmountOut'];
+	            $this->_sumPart[$oldLine][$Year]['in']                      += $reportHash['AmountIn'];
+	            $this->_sumPart[$oldLine][$Year]['out']                     += $reportHash['AmountOut'];
+	            $this->_sumPart[$oldLine][$Year]['saldo']                   += $reportHash['AmountIn'] - $reportHash['AmountOut'];
+	            $this->_sumTotal[$Year]['in']                               += $reportHash['AmountIn'];
+	            $this->_sumTotal[$Year]['out']                              += $reportHash['AmountOut'];
+	            $this->_sumTotal[$Year]['saldo']                            += $reportHash['AmountIn'] - $reportHash['AmountOut'];
+	            
+	            //$this->sumGroupLogic_($oldLine, $Year, $reportHash);
+	            
+	            //$this->_departments[$row['CompanyDepartmentID']]=array('_sumPart'=>$this->_sumPart, 
+                  //                   '_sumGroup'=>$this->_sumGroup, '_sumTotal'=>$this->_sumTotal, 
+                    //                  '_total'=>$this->_total, '_sumLine'=>$this->_sumLine);
+	       
+	    	}//foreach
+	    	
+	    	
+	    	$this->balance($ToPeriod, $Year, $row['CompanyDepartmentID']);
+    		
+		}//while
+		
+    }//result
+    
+    
+     ############################################################################
+    function balance($ToPeriod, $Year, $DepartmentID)
+    {
+        global $_sess, $_dbh, $_dsn, $_date, $_lib;
+        
+        //$year = $_lib['date']->get_this_year($ToPeriod);
+        
+        //$sqlStr = 'SELECT CompanyDepartmentID, DepartmentName, Active, ".' .
+    	//		' km0101, km3112 FROM `companydepartment` ORDER BY CompanyDepartmentID';
+		//$rs = $this->db->Query( $sqlStr );
+
+        //while ($row = $this->db->NextRow( $rs )) {
+	        $query_report_balanse  = "
+	        SELECT
+	          D.CompanyDepartmentID,
+	          D.DepartmentName,
+	          D.km0101,
+	          D.km3112,
+	          A.AccountName,
+	          A.AccountPlanID,
+	          A.Report{$this->_report}Line as Line,
+	          sum(AmountIn) as AmountIn,
+	          sum(AmountOut) as AmountOut
+	        FROM
+	          voucher as V,
+	          accountplan as A,
+	          companydepartment as D
+	        WHERE
+	          V.VoucherPeriod <= '$ToPeriod' and
+	          A.AccountPlanID = 'balance' and
+	          A.AccountPlanID=V.AccountPlanID and
+	          A.DepartmentID=D.CompanyDepartmentID AND
+	          D.Active > 0 and A.DepartmentID=". $DepartmentID . 
+	        " GROUP BY D.CompanyDepartmentID
+	        ORDER BY Line asc
+	        ";
+	
+	        #A.Report{$this->_report}Line >= 1000 and
+	        #A.Report{$this->_report}Line < 3000 and
+	
+	        //print "<h2>Balanse: $Year</h2>$query_report_balanse<br>";
+	        $this->_reportBalanceHash = $_dbh[$_dsn]->get_hashhash(array('query'=>$query_report_balanse, 'key'=>'DepartmentID'));
+	
+	        $oldLine = -1;
+	        foreach($this->_reportBalanceHash as $DepartmentID => $reportHash)
+	        {
+	            if($oldLine != -1 and $oldLine != $reportHash['Line'])
+	            {
+	                $oldLine = $reportHash['Line'];
+	                if(!isset($this->_sumPart[$oldLine][$Year]['saldo']))
+	                    $this->_sumPart[$oldLine][$Year]['saldo'] = 0;
+	
+	                if(!isset($this->_sumPart[$oldLine][$Year]['in']))
+	                    $this->_sumPart[$oldLine][$Year]['in'] = 0;
+	
+	                if(!isset($this->_sumPart[$oldLine][$Year]['out']))
+	                    $this->_sumPart[$oldLine][$Year]['out'] = 0;
+	            }
+	            if($oldLine == -1)
+	            {
+	                $oldLine = $reportHash['Line'];
+	            }
+	
+	            if(strlen($reportHash['AccountName']) > 0)
+	            {
+	                $this->_sumLine[$oldLine][$AccountPlanID]['name']       =  $reportHash['AccountName'];
+	            }
+	            $this->_sumLine[$oldLine][$AccountPlanID][$Year]['in']      =  $reportHash['AmountIn'];
+	            $this->_sumLine[$oldLine][$AccountPlanID][$Year]['out']     =  $reportHash['AmountOut'];
+	            $this->_sumLine[$oldLine][$AccountPlanID][$Year]['saldo']   =  $reportHash['AmountIn'] - $reportHash['AmountOut'];
+	            $this->_sumPart[$oldLine][$Year]['in']                      += $reportHash['AmountIn'];
+	            $this->_sumPart[$oldLine][$Year]['out']                     += $reportHash['AmountOut'];
+	            $this->_sumPart[$oldLine][$Year]['saldo']                   += $reportHash['AmountIn'] - $reportHash['AmountOut'];
+	            $this->_sumTotal[$Year]['in']                               += $reportHash['AmountIn'];
+	            $this->_sumTotal[$Year]['out']                              += $reportHash['AmountOut'];
+	            $this->_sumTotal[$Year]['saldo']                            += $reportHash['AmountIn'] - $reportHash['AmountOut'];
+	
+	            //$this->sumGroupLogic($oldLine, $Year, $reportHash);
+	        }//foreach
+	        
+	        
+	        $this->_Total = $this->_sumTotal[$Year]['saldo'];
+	        
+	        $this->_departments[$row['CompanyDepartmentID']]=array('_sumPart'=>$this->_sumPart, 
+                                     '_sumGroup'=>$this->_sumGroup, '_sumTotal'=>$this->_sumTotal, 
+                                      '_total'=>$this->_total, '_sumLine'=>$this->_sumLine);
+        //}//while
+
+       
+    }//function balance
+
+}
+?>

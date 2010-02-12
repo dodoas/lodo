@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1140: Sameiers andeler av boligsameiets likningsmessige beløp</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1275-5722.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/OpplysningerOppgavegiver-grp-6320/OpplysningerOppgavegiver-grp-6321/RapporteringsenhetNavn-datadef-21771"/>
+            <xforms:bind readOnly="true" ref="/Skjema/OpplysningerOppgavegiver-grp-6320/OpplysningerOppgavegiver-grp-6321/RapporteringsenhetOrganisasjonsnummer-datadef-21772"/>
+            <xforms:bind readOnly="true" ref="/Skjema/OpplysningerOppgavegiver-grp-6320/OpplysningerOppgavegiver-grp-6321/VirksomhetAdresse-datadef-25453"/>
+            <xforms:bind readOnly="true" ref="/Skjema/OpplysningerOppgavegiver-grp-6320/OpplysningerOppgavegiver-grp-6321/RapporteringsenhetPostnummer-datadef-21774"/>
+            <xforms:bind readOnly="true" ref="/Skjema/OpplysningerOppgavegiver-grp-6320/OpplysningerOppgavegiver-grp-6321/RapporteringsenhetPoststed-datadef-21775"/>
+            <xforms:bind ref="/Skjema/OpplysningerOppgavegiver-grp-6320/OpplysningerOppgavegiver-grp-6321/OppgaveType-datadef-23782" required="true"/>
+            <xforms:bind ref="/Skjema/OpplysningerOppgavegiver-grp-6320/OpplysningerOppgavegiver-grp-6321/Inntektsar-datadef-692" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1140 Sameiers andeler av boligsameiets likningsmessige beløp</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Oppgaveplikten følger av ligningsloven § 6-6 bokstav d, jf. § 6-16  bokstav c og forskrift av 13. juli 1995 nr. 685. I følge lov om  eierseksjoner av 23. mai 1997 nr. 31 (eierseksjonsloven) § 11 skal  sameier med ni eller flere
+                    seksjoner registreres i  Foretaksregisteret. Sameier med åtte eller færre seksjoner kan  registreres i Foretaksregisteret. Boligsameier som er registrert i  Foretaksregisteret skal også være registrert i Enhetsregisteret.  </p>
+                <p/>
+                <p>For mer informasjon, se Rettledning for boligsameie:  www.skatteetaten.no.  </p>
+                <p/>
+                <p>Spørsmål om innlevering av likningsoppgaver kan retets til  Skattedirektoratet på e-post:  systemforv.grunnlagsdata@skatteetaten.no eller telefon 22 07 75 00  (Kontor for oppgavekvalitet).</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1140 Sameigars del av likningsmessige beløp for bustadsameiget</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Oppgåveplikta følgjer av likningslova § 6-6 bokstav d, jf. § 6-16  bokstav c og forskrift av 13. juli 1995 nr. 685. Ifølgje lov om  eigarseksjonar av 23. mai 1997 nr. 31 (eigarseksjonslova) § 11 skal  sameigar med ni eller fleire
+                    seksjonar registrerast i  Føretaksregisteret. Sameigar med åtte eller færre seksjonar kan  registrerast i Føretaksregisteret. Bustadsameigar som er er  registrert i Føretaksregisteret, skal også vere registrert i
+                    Einingsregisteret.  </p>
+                <p/>
+                <p>For meir informasjon, sjå Rettleiing for bustadsameige:  www.skatteetaten.no.  </p>
+                <p/>
+                <p>Spørsmål om innlevering av likningsoppgåver kan rettast til  Skattedirektoratet på e-post:  systemforv.grunnlagsdata@skatteetaten.no eller telefon 22 07 75 00  (Kontor for oppgåvekvalitet).</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/OpplysningerOppgavegiver-grp-6320">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Opplysninger om oppgavegiver</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Opplysningar om oppgåvegjevar</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/OpplysningerOppgavegiver-grp-6320/OpplysningerOppgavegiver-grp-6321">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Opplysninger om oppgavegiver</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Opplysninger om oppgavegivers organisasjonsnummer og navn er hentet  fra Enhetsregisteret. Hvis du vil forandre noe i disse opplysningene,  må du kontakte Brønnøysundregistrene.  </p>
+                        <p/>
+                        <p>Opplysninger om oppgavegivers telefonnummer og adresse er hentet fra  Oppgaveregisteret. Hvis du vil forandre på noe i disse opplysningene,  må du kontakte Skattedirektoratet.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Opplysningar om oppgåvegjevar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Opplysningar om oppgåvegjevaren sitt organisasjonsnummer og namn er  henta frå Einingsregisteret. Viss du vil endre noko i desse  opplysningane, må du kontakte Brønnøysundregistra.  </p>
+                        <p/>
+                        <p>Opplysningar om oppgåvegjevaren sitt telefonnummer og adresse er henta  frå Oppgåveregisteret. Viss du vil forandre noko i desse  opplysningane, må du kontakte Skattedirektoratet.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/OpplysningerOppgavegiver-grp-6320/OpplysningerOppgavegiver-grp-6321/RapporteringsenhetNavn-datadef-21771">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOppgavegiver-grp-6320/OpplysningerOppgavegiver-grp-6321/RapporteringsenhetOrganisasjonsnummer-datadef-21772">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Oppgavegivernr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Oppgåvegjevarnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOppgavegiver-grp-6320/OpplysningerOppgavegiver-grp-6321/VirksomhetAdresse-datadef-25453">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOppgavegiver-grp-6320/OpplysningerOppgavegiver-grp-6321/RapporteringsenhetPostnummer-datadef-21774">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOppgavegiver-grp-6320/OpplysningerOppgavegiver-grp-6321/RapporteringsenhetPoststed-datadef-21775">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOppgavegiver-grp-6320/OpplysningerOppgavegiver-grp-6321/OppgavegiverTelefonnummer-datadef-620">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefonnr.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Opplysninger om oppgavegivers telefonnummer er hentet fra  Oppgaveregisteret. Hvis du vil forandre noe, må du kontakte  Skattedirektoratet.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Telefonnr.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Opplysningar om oppgåvegjevaren sitt telefonnummer er henta frå  Oppgåveregisteret. Viss du vil forandre noko, må du kontakte  Skattedirektoratet.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:selectOne ref="/Skjema/OpplysningerOppgavegiver-grp-6320/OpplysningerOppgavegiver-grp-6321/OppgaveType-datadef-23782">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>New information</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ordinæroppgave</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ordinæroppgåve</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Change to already sent information</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Endringsoppgave</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Endringsoppgåve</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Oppgavetype</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Ordinæroppgaver er førstegangsoppgaver som blir innrapportert. Det kan  være flere ordinæroppgaver. Beløpet oppgis i hele kroner.  </p>
+                            <p/>
+                            <p>Endringsoppgaver er oppgaver som endrer ordinæroppgaver. Det kan være  flere endringsoppgaver. Beløpet på endringsoppgaver skal kun bestå av  differansen mellom korrekt beløp og tidligere innrapporterte beløp.
+                                Reduksjon eller annulering av tidligere innrapporterte beløp merkes  med negativt (-) fortegn foran endringsbeløpet. Beløpet oppgis i hele  kroner. Sum endringsoppgave og ordinæroppgave kan totalt ikek bli  mindre enn
+                                0. På endringsoppgaver må fødsels- eller  organisasjonsnummer være identisk med tidligere innrapporterte  oppgaver. Dette gjelder også eiertid og seksjonsnummer.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Oppgåvetype</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Ordinæroppgåver er førstegangsoppgåver som blir innrapporterte. Det  kan vere fleire ordinæroppgåver. Beløpet skal oppgjevast i heile  kroner.  </p>
+                            <p/>
+                            <p>Endringsoppgåver er oppgåver som endrar ordinæroppgåver. Det kan vere  fleire endringsoppgåver. Beløpet på endringsoppgåver skal berre bestå  av differansen mellom korrekt beløp og tidlegare innrapporterte  beløp.
+                                Reduksjon eller annulering av tidlegare innrapporterte beløp  skal merkjast med negativt (-) forteikn framfor endringsbeløpet.  Beløpet skal oppgjevast i heile kroner. Sum endringsoppgåve og  ordinæroppgåve kan totalt
+                                ikkje bli mindre enn 0. På endringsoppgåver  må fødsels- eller organisajonsnummer vere identisk med tidlegare  innrapporterte oppgåver. Dette gjeld også eigartid og seksjonsnummer.</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/OpplysningerOppgavegiver-grp-6320/OpplysningerOppgavegiver-grp-6321/Inntektsar-datadef-692">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Inntektsår</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Det skal kun leveres likningsoppgaver for forrige inntektsår, dvs.  totalt innbetalt beløp for hver enkelt andelshaver pr. 31.12.</p>
+                        </xforms:help>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Inntektsår må fylles ut.</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Inntektsår</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Det skal berre leverast likningsoppgåver for føregåande inntektsår,  dvs. totalt innbetalt beløp for kvar einskild luteigar per. 31.12.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/OpplysningerOppgavegiver-grp-6320/BelopOppgavegiver-grp-6322">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Beløp fra oppgavegiver</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Det totale beløpet viser summen av alle oppgitte sameiere, uavhengig  av hvilke andre felt som er utfyllt pr. sameier. Beløpet oppgis i  hele kroner.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Beløp frå oppgåvegjevar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Det totale beløpet viser summen av alle oppgitte sameigarar, uavhengig  av kva for andre felt som er utfylte per sameigar. Beløpet skal  oppgjevast i heile kroner.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/OpplysningerOppgavegiver-grp-6320/BelopOppgavegiver-grp-6322/InntektBoligsameie-datadef-26224">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Total inntekt</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Totalt beløp</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOppgavegiver-grp-6320/BelopOppgavegiver-grp-6322/KostnaderBoligsameie-datadef-26225">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kostnader</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kostnadar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOppgavegiver-grp-6320/BelopOppgavegiver-grp-6322/FormueBoligsameie-datadef-26226">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Formue</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Formue</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOppgavegiver-grp-6320/BelopOppgavegiver-grp-6322/GjeldBoligsameie-datadef-26227">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Gjeld</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Gjeld</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/OpplysningerOppgavegiver-grp-6320/OppgaveVedleggAntall-datadef-16544">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Totalt antall oppgaver</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Totalt antall sameiere utgjør antall rader der det er oppgitt  informasjon om sameier, uavhengig av hvilke felt som er utfyllt.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Totalt tal på sameigarar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Totalt tal på sameigarar utgjer talet på rader der det er oppgitt  informasjon om sameigar, uavhengig av kva felt som er utfylte.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OpplysningerSameier-grp-6323">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Opplysninger om sameier</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Opplysningar om sameigar</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_SameierOpplysninger-grp-6382" nodeset="/Skjema/OpplysningerSameier-grp-6323/SameierOpplysninger-grp-6382">
+                    <xforms:group ref="/Skjema/OpplysningerSameier-grp-6323/SameierOpplysninger-grp-6382">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Opplysninger om sameier</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Opplysningar om sameigar</p>
+                        </xforms:caption>
+                        <xforms:group ref="/Skjema/OpplysningerSameier-grp-6323/SameierOpplysninger-grp-6382/OpplysningerSameier-grp-6324">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Opplysninger om sameier</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Opplysningar om sameigar</p>
+                            </xforms:caption>
+                            <xforms:input ref="/Skjema/OpplysningerSameier-grp-6323/SameierOpplysninger-grp-6382/OpplysningerSameier-grp-6324/SameierNavn-datadef-3629">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Navn</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Namn</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/OpplysningerSameier-grp-6323/SameierOpplysninger-grp-6382/OpplysningerSameier-grp-6324/SameierOrganisasjonsnummer-datadef-3649">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Organisasjonsnr.</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Ved registrering av sameier skal det kun fylles ut ett fødsels- eller  organisasjonsnummer pr. betaler. Hvis fødsels- eller  organisasjonsnummer ikke er oppgitt kan ikke andre opplysninger om  betaler (f.eks.
+                                        navn, adresse, beløp mv.) bli registrert hos  Skattedirektoratet.</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Ugyldig organisasjonsnummer</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Organisasjonsnr.</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Ved registrering av sameige skal det berre fyllast ut eitt fødsels-  eller organisasjonsnummer per betalar. Viss fødsels- eller  organisasjonsnummer ikkje er oppgitt, kan ikkje andre opplysningar om  betalaren
+                                        (t.d. namn, adresse, beløp osb.) registrerast hos  Skattedirektoratet.</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Ugyldig organisasjonsnummer</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/OpplysningerSameier-grp-6323/SameierOpplysninger-grp-6382/OpplysningerSameier-grp-6324/SameierAdresse-datadef-3630">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Adresse</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Adresse</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/OpplysningerSameier-grp-6323/SameierOpplysninger-grp-6382/OpplysningerSameier-grp-6324/SameierFodselsnummer-datadef-3628">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <brreg:kontroll type="Modulus 11"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Fødselsnr.</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Ved registrering av sameier skal det kun fylles ut ett fødsels- eller  organisasjonsnummer pr. betaler. Hvis fødsels- eller  organisasjonsnummer ikke er oppgitt kan ikke andre opplysninger om  betaler (f.eks.
+                                        navn, adresse, beløp mv.) bli registrert hos  Skattedirektoratet.</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Ugyldig fødselsnummer</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Fødselsnr.</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Ved registrering av sameige skal det berre fyllast ut eitt fødsels-  eller organisasjonsnummer per betalar. Viss fødsels- eller  organisasjonsnummer ikkje er oppgitt, kan ikkje andre opplysningar om  betalaren
+                                        (t.d. namn, adresse, beløp osb.) registrerast hos  Skattedirektoratet.</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Ugyldig fødselsnummer</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/OpplysningerSameier-grp-6323/SameierOpplysninger-grp-6382/OpplysningerSameier-grp-6324/SameierPostnummer-datadef-11376">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:alert brreg:lang="EN">
+                                    <p>Enter positive integer with four digits</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Postnr.</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feltet krever positivt heltall med fire siffer</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Postnr.</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Feltet krev positivt heiltal med fire siffer</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/OpplysningerSameier-grp-6323/SameierOpplysninger-grp-6382/OpplysningerSameier-grp-6324/SameierPoststed-datadef-11377">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Poststed</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Poststed</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/OpplysningerSameier-grp-6323/SameierOpplysninger-grp-6382/OpplysningerSameier-grp-6324/SameierLandkode-datadef-26228">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Landkode</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Nytt for inntektsåret 2006 er innføring av landkode på sameier.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Landkode</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Nytt for inntektsåret 2006 er innføring av landkode på sameigar.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/OpplysningerSameier-grp-6323/SameierOpplysninger-grp-6382/OpplysningerSameier-grp-6324/EiendomSeksjonnummer-datadef-26861">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Seksjonsnr.</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Seksjonsnr.</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/OpplysningerSameier-grp-6323/SameierOpplysninger-grp-6382/OpplysningerSameier-grp-6324/EiendomSeksjonEiertidFra-datadef-26229">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Dato fra</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Dato frå</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/OpplysningerSameier-grp-6323/SameierOpplysninger-grp-6382/OpplysningerSameier-grp-6324/EiendomSeksjonEiertidTil-datadef-26230">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Dato til</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Dato til</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                        <xforms:group ref="/Skjema/OpplysningerSameier-grp-6323/SameierOpplysninger-grp-6382/BelopSameier-grp-6325">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beløp for sameier</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Beløp for sameigar</p>
+                            </xforms:caption>
+                            <xforms:input ref="/Skjema/OpplysningerSameier-grp-6323/SameierOpplysninger-grp-6382/BelopSameier-grp-6325/InntektSameierAndel-datadef-26231">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Andel inntekter</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Her føres sameiers andel av sameiets felles skattepliktige inntekter.  Dette kan f.eks. være:  </p>
+                                    <p>Renteinntekter  </p>
+                                    <p>Gevinster ved realisasjon av sameiets eiendeler, eiendommer,  anleggsmidler e.l.  </p>
+                                    <p>Nettoinntekt ved utleie av seksjon eid av sameiet.  </p>
+                                    <p/>
+                                    <p>Eksempel på inntekt som ikke skal fordeles på sameierne: Husleie  innbetalt fra sameierne.  </p>
+                                    <p>Beløpet oppgis i hele kroner. For videre veiledning se Rettledning for  boligsameie www.skatteetaten.no/likningsoppgaver.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Del av inntekter</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Her fører du sameigaren sin del av sameiget sine felles skattepliktige  inntekter. Dette kan t.d. vere:  </p>
+                                    <p>Renteinntekter  </p>
+                                    <p>Vinstar ved realisasjon av sameiget sine eignelutar, eigedomar,  anleggsmiddel e.l.  </p>
+                                    <p>Nettoinntekt ved utleige av seksjon som er eigd av sameiget.  </p>
+                                    <p/>
+                                    <p>Døme på inntekt som ikkje skal fordelast på sameigarane: Husleige  innbetalt frå sameigarane.  </p>
+                                    <p>Beløpet skal oppgjevast i heile kroner.  </p>
+                                    <p>For vidare rettleiing, sjå Rettleiing for bustadsameige  www.skatteetaten.no/likningsoppgåver.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/OpplysningerSameier-grp-6323/SameierOpplysninger-grp-6382/BelopSameier-grp-6325/UtgifterSameierAndel-datadef-26232">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Andel utgifter</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Her føres sameiers andel av boligselskapets felles fradragsberettigede  kostnader. Dette kan f.eks. være:  </p>
+                                    <p>Rentekostnader  </p>
+                                    <p>Tap ved realisasjon av sameiets eiendeler, eiendommer, anleggsmidler  e.l.  </p>
+                                    <p/>
+                                    <p>Eksempler på kostnader som ikke skal fordeles på sameierne:  </p>
+                                    <p>Husleie belalt av sameierne  </p>
+                                    <p>Kostnader til forretningsfører, revisjon o.l.  </p>
+                                    <p>Lønn til vaktmester  </p>
+                                    <p>Vedlikeholdskostnader  </p>
+                                    <p>Kommunale avgifter  </p>
+                                    <p>Forsikringer  </p>
+                                    <p/>
+                                    <p>Beløpet oppgis i hele kroner.  </p>
+                                    <p>For videre veiledning se Rettledning for boligsameie  </p>
+                                    <p>www.skatteetaten.no/likningsoppgaver.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Del av utgifter</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Her fører du sameiget sin del av bustadsameiget sine felles kostnader  som gir rett til frådrag. Dette kan t.d. vere:  </p>
+                                    <p>Rentekostnader  </p>
+                                    <p>Tap ved realisasjon av sameiget sine eignelutar, eigedomar,  anleggsmiddel e.l.  </p>
+                                    <p/>
+                                    <p>Døme på kostnader som ikkje skal fordelast på sameigarane:  </p>
+                                    <p>Husleige betalt av sameigarane  </p>
+                                    <p>Kostnader til forretningsførar, revisjon o.l.  </p>
+                                    <p>Løn til vaktmeister  </p>
+                                    <p>Vedlikehaldskostnader  </p>
+                                    <p>Kommunale avgifter  </p>
+                                    <p>Forsikringar  </p>
+                                    <p/>
+                                    <p>Beløpet skal oppgjevast i heile kroner. For vidare rettleiing sjå  Rettleiing for bustadsameige www.skatteetaten.no/likningsoppgåver.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/OpplysningerSameier-grp-6323/SameierOpplysninger-grp-6382/BelopSameier-grp-6325/FormueSameierAndel-datadef-26233">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Andel formue</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Her føres sameiers andel av boligselskapets samlede eiendeler, som  kontanter, bank- og postgiroinnskudd, utestående fordringer (herunder  husleie) og forskutteringer mv. (for eksempel forskuddsbetalt
+                                        forsikringspremie), aksjer, andeler og anleggsmidler som ikke inngår  i eiendommens lignignsverdi. Seksjon i sameiet som sameiet selv eier  og hvor lignignsverdien ikke er fordelt på de øvrige seksjonene skal
+                                        tas med som formue på seksjonseierne.  </p>
+                                    <p>Det presiseres at påløpne renter som ikke har forfalt til betaling  ikke skal anses som skattepliktig formue.  </p>
+                                    <p/>
+                                    <p>Beløpet oppgis i hele kroner. For videre veiledning se Rettledning for  boligsameie www.skattetaten.no/likningsoppgaver.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Del av formue</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Her fører du sameigaren sin del av bustadsameiget sine samla  eignelutar, som kontantar, bank- og postgiroinnskot, uteståande  fordringar (mellom anna husleige) og forskotteringar mm. (til dømes
+                                        forsikringspremie betalt på førehand), aksjar, lutar og anleggsmiddel  som ikkje inngår i eigedomen sin likningsverdi. Seksjonar i sameiget  som sameiget sjølv eig, og der likningsverdien ikkje er fordelt på de
+                                        andre seksjonane, skal takast med som formue på seksjonseigarane.  </p>
+                                    <p>Det må presiserast at påløpne renter som ikkje har forfalle til  betaling, ikkje skal reknast som skattemessig formue.  </p>
+                                    <p/>
+                                    <p>Beløpet skal oppgjevast i heile kroner. For vidare rettleiing, sjå  Rettleiing for bustadsameige www.skatteetaten.no/likningsoppgåver.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/OpplysningerSameier-grp-6323/SameierOpplysninger-grp-6382/BelopSameier-grp-6325/GjeldSameierAndel-datadef-26234">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Andel gjeld</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Her føres sameiers andel av boligsameiets gjeld, f.eks. pantelån i  Husbanken og/eller andre banker, samt leverandørgjeld, kassakreditt,  skyldig skattetrekk og påløpne renter.  </p>
+                                    <p>Det presiseres at påløpne renter som ikke har forfalt til betaling  ikke anses som skattemessig gjeld.  </p>
+                                    <p/>
+                                    <p>Beløpet oppgis i hele kroner. For videre veiledning se Rettledning for  boligsameie www.skatteetaten.no/likningsoppgaver.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Del av gjeld</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Her fører du sameigaren sin del av bustadsameiget si gjeld, t.d.  pantelån i Husbanken og/eller andre bankar, og leverandørgjeld,  kassakreditt, skuldig skattetrekk og påløpte renter.  </p>
+                                    <p>Det må presiserast at påløpte renter som ikkje har forfalle til  betaling ikkje skal reknast som skattemessig gjeld.  </p>
+                                    <p/>
+                                    <p>Beløpet skal oppgjevast i heile kroner. For vidare rettleiing sjå  Rettleiing for bustadsameige www.skatteetaten.no/likningsoppgåver.</p>
+                                </xforms:help>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

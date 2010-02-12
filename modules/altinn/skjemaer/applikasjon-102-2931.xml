@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1207: Aksjonærbidrag - opplysninger om innbetalt bidrag</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-102-2932.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-2621/Aksjonar-grp-356/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2621/Aksjonar-grp-356/OppgavegiverFodselsnummer-datadef-26"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1207 Aksjonærbidrag 2004</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Skjemaet fylles ut av aksjeselskaper og allmennaksjeselskap som er  registrert etter skatteloven § 10-25. Selskapet beholder ett  eksemplar. De øvrige to oversendes  aksjonæren innen 20. januar 2004  hvorav det ene eksemplaret
+                    vedlegges aksjonærens selvangivelse.  </p>
+                <p/>
+                <p>Særlige opplysninger  </p>
+                <p>I tilfelle overdragelse av aksjer kan kjøperen kreve fradrag for  aksjonærbidrag innbetalt av ham i den utstrekning bidrag ikke er  innbetalt av selgeren før salgstidspunktet. Dersom aksjer er  overdratt/ervervet i løpet av 2003
+                    eller 2004 må det opplyses om  kjøper/selgers navn, adresse, fødselsnummer/ organisasjonsnummer,  salgstidspunkt samt antall som er overdratt/ervervet. Det må videre  opplyses om hvor stort bidrag som er innbetalt av henholdsvis
+                    kjøper  og selger til dekning av selskapets underskudd i 2003, og tidspunktet  for innbetalingen. Slike opplysninger skal gis i eget vedlegg.  </p>
+                <p/>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i forskrift av 22. nov.  1999 nr. 1160 § 10-20-2. Lov/forskrifter er inntatt på baksiden av  skjemaet.  </p>
+                <p/>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1207.  </p>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i Aksjonærbidrag 2004, RF-1207, helt eller  delvis bli benyttet også av andre offentlige organer som har hjemmel  til å innhente de samme
+                    opplysningene, jf. lov om Oppgaveregisteret  §§ 5 og 6. Opplysninger om evt. samordning kan fås ved henvendelse  til Oppgaveregisteret på telefon 75 00 75 00, eller  Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Opplysninger om innbetalt bidrag</p>
+            </xforms:hint>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1207 Aksjonærbidrag 2004</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Skjemaet skal fyllast ut av aksjeselskap eller allmennaksjeselskap som  er registret etter skattelova § 10-25. Selskapet skal ha eitt  eksemplar. Dei to andre skal sendast til aksjonæren innan 20. januar  2004 der det eine
+                    eksemplaret skal leggjast ved sjølvmeldinga til  aksjonæren  </p>
+                <p/>
+                <p>Særlege opplysningar  </p>
+                <p>I tilfelle nokre av aksjane har skifta eigar kan kjøparen krevje  frådrag for aksjonærbidrag som han har betalt inn i den mon seljaren  ikkje har betalt inn bidrag før salstidspunktet. Dersom det er  overdrege/skaffa aksjar i 2003
+                    eller 2004 må namn, adresse og  fødselsnummer/organisasjonsnummer til kjøpar/seljar gis opp, like  eins salstidspunktet og kor mange aksjar som er overdrege/skaffa. Det  må vidare gis opplysningar om kor stort bidrag kjøpar og
+                    seljar kvar  for seg har betalt inn til dekning av selskapet sitt underskott i  2003, og tidspunktet for innbetalinga. Slike opplysningar skal gis på  eiget vedlegg.  </p>
+                <p/>
+                <p>Fastsett av skattedirektoratet med heimel i forskrift  </p>
+                <p>av 22 nov. 1999 nr 1160 § 10-20-2. Lov/forskrifter er teke inn på  baksida av skjemaet.  </p>
+                <p/>
+                <p>Andre offentlege organ sin bruk av opplysingar i RF-1207.  </p>
+                <p>For å samordna og forenkla oppgåveinnleveringa frå næringslivet, kan  opplysingar som vert avgjeve i Aksjonærbidrag - 2004, RF-1207, heilt  eller delvis bli nytta også av andre offentlege organ som har heimel  til å innhente dei
+                    same opplysingar, jf. lov om Oppgåveregisteret §§  5 og 6. Opplysingar om evt. samordning kan ein få ved å vende seg til  Oppgåveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NON">
+                <p>Opplysningar om innbetalt bidrag</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-2621">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2621/Aksjonar-grp-356">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Aksjonær</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Aksjonær</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2621/Aksjonar-grp-356/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2621/Aksjonar-grp-356/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2621/Aksjonar-grp-356/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2621/Aksjonar-grp-356/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2621/Aksjonar-grp-356/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2621/Aksjonar-grp-356/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2621/Aksjeselskap-grp-2624">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Aksjeselskap</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Aksjeselskap</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2621/Aksjeselskap-grp-2624/AksjeselskapNavn-datadef-3528">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2621/Aksjeselskap-grp-2624/AksjeselskapAdresse-datadef-18064">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2621/Aksjeselskap-grp-2624/AksjeselskapPostnummer-datadef-18065">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2621/Aksjeselskap-grp-2624/AksjeselskapPoststed-datadef-18066">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2621/Aksjeselskap-grp-2624/AksjeselskapOrganisasjonsnummer-datadef-18067">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2621/Aksjeselskap-grp-2624/AksjeselskapStiftelsesar-datadef-22205">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Stiftelsesår</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Stiftelsesår</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/AksjeselskapOgAksjonarensForhold-grp-359">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Aksjeselskap og aksjonærens forhold</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Opplysningar om aksjeselskapet og aksjonæren</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/AksjeselskapOgAksjonarensForhold-grp-359/OpplysningerOmAksjeselskapetIFjor-grp-2628">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1 Opplysninger om aksjeselskapet pr. 31/12-2003</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1 Opplysningar om aksjeselskapet pr. 31/12-2003</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/AksjeselskapOgAksjonarensForhold-grp-359/OpplysningerOmAksjeselskapetIFjor-grp-2628/AksjekapitalAksjeselskapFjoraret-datadef-15581">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>a. Aksjeselskapets aksjekapital</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>a. Aksjekapitalen til selskapet</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjeselskapOgAksjonarensForhold-grp-359/OpplysningerOmAksjeselskapetIFjor-grp-2628/AksjerAntallFjoraret-datadef-11994">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>b. Samlet antall aksjer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>b. Samla tal på aksjar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjeselskapOgAksjonarensForhold-grp-359/OpplysningerOmAksjeselskapetIFjor-grp-2628/AksjePalydendeFjoraret-datadef-11992">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>c. Pålydende for hver aksje</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>c. Pålydande for kvar aksje</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjeselskapOgAksjonarensForhold-grp-359/OpplysningerOmAksjeselskapetIFjor-grp-2628/UnderskuddTilFordelingFjoraret-datadef-11995">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>d. Underskudd i 2003 til fordeling på aksjonærenene i kr</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>d. Underskott i 2003 til fordeling på aksjonærane i kr</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/AksjeselskapOgAksjonarensForhold-grp-359/AksjonarensForhold-grp-361">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2 Opplysninger om aksjonærens forhold</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2 Opplysningar om aksjonæren</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/AksjeselskapOgAksjonarensForhold-grp-359/AksjonarensForhold-grp-361/AksjonarEierandel-datadef-2300">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>a. Aksjonærens andel av aksjekapitalen i prosent</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>a. Aksjonærens sin del av aksjekapitalen i prosent</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter number with three fraction digits</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever tre desimaler</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev tre desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjeselskapOgAksjonarensForhold-grp-359/AksjonarensForhold-grp-361/AksjonarAksjerAntall-datadef-18068">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>b. Aksjonærens antall aksjer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>b. Talet på aksjar som tilhøyrer aksjonæren</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjeselskapOgAksjonarensForhold-grp-359/AksjonarensForhold-grp-361/AksjonarUnderskuddAndelFjoraret-datadef-11996">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>c. Aksjonærens andel av underskudd i 2003 i kr</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>c. Aksjonærens sin del av underskott 2003 i kr</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/InnbetaltBidrag-grp-362">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>3 Innbetalt bidrag</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>3 Innbetalt bidrag</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/InnbetaltBidrag-grp-362/AksjonarbidragInnbetaltFjoraret-datadef-8511">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>a Bidrag betalt av aksjonæren i 2003</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>a Bidrag betalt av aksjonæren i 2003</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/InnbetaltBidrag-grp-362/AksjonarbidragInnbetaltInntektsaret-datadef-8512">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>b Bidrag betalt av aksjonæren i 2004</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>b Bidrag betalt av aksjonæren i 2004</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/InnbetaltBidrag-grp-362/AksjonarbidragInnbetalt-datadef-2296">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>c Sum bidrag</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>c Sum bidrag</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/InnbetaltBidrag-grp-362/AksjonarbidragIkkeFradragsberettiget-datadef-8513">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>d Innbetalt bidrag som overstiger aksjonærens andel av underskuddet i  2003</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>d Innbetalt bidrag som overstig aksjonærens andel av underskottet i  2003</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/InnbetaltBidrag-grp-362/AksjonarbidragYtet-datadef-14862">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>e Fradragsberettiget bidrag for aksjonæren i 2004</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>For personlige skattytere føres fradragsberettiget bidrag i  selvangivelsen, post 3.3.7. For aksjeselskap føres fradragsberettiget  bidrag i Selvangivelse for aksjeselskap mv., post 251</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>e Bidrag som aksjonæren kan få fradrag for i 2004</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>For personlege skattytarar skal ein føre bidrag som kan dragast frå i  sjølvmeldinga, post 3.3.7. For aksjeselskap skal ein føre bidrag som  kan dragast frå i Sjølvmeldinga for aksjeselskap mv., Post 251</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1115: Søknad om utsatt frist for levering av selvangivelsen - private</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1156-6100.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/soknad-grp-5663/skattyterinformasjon-grp-5664/OppgavegiverNavn-datadef-68" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/soknad-grp-5663/skattyterinformasjon-grp-5664/OppgavegiverFodselsnummer-datadef-26" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/soknad-grp-5663/skattyterinformasjon-grp-5664/OppgavegiverPostadresse-datadef-2442"/>
+            <xforms:bind readOnly="true" ref="/Skjema/soknad-grp-5663/skattyterinformasjon-grp-5664/OppgavegiverPostnummer-datadef-6676"/>
+            <xforms:bind readOnly="true" ref="/Skjema/soknad-grp-5663/skattyterinformasjon-grp-5664/OppgavegiverPoststed-datadef-6677"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1115 Lønnstakere/pensjonisters søknad om utsatt frist for levering  av selvangivelsen for inntektsåret 2006</p>
+            </xforms:caption>
+            <xforms:hint brreg:lang="NOB">
+                <p>Skjemaet sendes inn av lønnstakere og pensjonister. Næringsdrivende  skal bruke RF-1114.  </p>
+                <p/>
+                <p>Utsettele av leveringsfristen fører til at du ikke får skatteoppgjør  før til høsten.</p>
+            </xforms:hint>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1115 Lønstakarars/pensjonistars søknad om utsetjing av frist for  levering av sjølvmeldinga for inntektsåret 2006</p>
+            </xforms:caption>
+            <xforms:hint brreg:lang="NON">
+                <p>Skjemaet skal sendast inn av lønnstakarar og pensjonistar.  Næringsdrivande skal bruke RF-1114.  </p>
+                <p/>
+                <p>Utsett leveringsfrist fører til at du får skatteoppgjeret til hausten.</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/soknad-grp-5663">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Søknad om utsatt frist</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Søknad om utsett frist</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/soknad-grp-5663/skattyterinformasjon-grp-5664">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:input ref="/Skjema/soknad-grp-5663/skattyterinformasjon-grp-5664/OppgavegiverNavn-datadef-68">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/soknad-grp-5663/skattyterinformasjon-grp-5664/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/soknad-grp-5663/skattyterinformasjon-grp-5664/OppgavegiverPostadresse-datadef-2442">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/soknad-grp-5663/skattyterinformasjon-grp-5664/OppgavegiverPostnummer-datadef-6676">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/soknad-grp-5663/skattyterinformasjon-grp-5664/OppgavegiverPoststed-datadef-6677">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/soknad-grp-5663/Kontaktperson-grp-5665">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kontaktinformasjon</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Legg inn kontaktopplysninger slik at likningskontoret kan ta kontakt  ved behandlingen av søknaden.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kontaktinformasjon</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Legg ved kontaktopplysningar slik at likningskontoret kan ta kontakt  når det skal behandle søknaden</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/soknad-grp-5663/Kontaktperson-grp-5665/KontaktpersonNavn-datadef-2">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/soknad-grp-5663/Kontaktperson-grp-5665/KontaktpersonEPost-datadef-27688">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>E-postadresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>E-postadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/soknad-grp-5663/soknaden-grp-5666">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Søknadsinformasjon</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Søker du om utsettelse ut over 31.05.2007, blir søknaden behandlet av  likningskontoret. Du får brev fra likningskontoret når søknaden er  ferdigbehandlet.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Foreligger det særlige grunner (f. eks. sykdom, uventet reisefravær  e.l.)som gjør det vanskelig å levere selvangivelsen i tide, vil  vilkårene for å innvilge utsettelse være til stede. Leveringsfristen  vil da normalt bli
+                            utsatt til 31.05.2007. I særlige tilfeller kan  søknad om lengre utsettelse innvilges.  </p>
+                        <p/>
+                        <p>Utsatt leveringsfrist fører til at du får skatteoppgjøret først til  høsten.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Søknadsinformasjon</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Søkjer du om lengre utsetjing enn 31.05.2007, blir søknaden behandla  av likningskontoret. Du får brev frå likningskontoret når søknaden er  ferdigbehandla.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Føreligg det særlige grunnar (t.d. sjukdom, uventa reisefråvær m.m.)  som gjer det vanskeleg å levere sjølvmeldinga i tide, er vilkåra for  å innvilge utsetjing normalt oppfylde. Ny leveringsfrist blir  31.05.2007. I
+                            særlige høve kan du søke om lengre utsetjing.  </p>
+                        <p/>
+                        <p>Utsett leveringsfrist fører til at du får skatteoppgjeret først til  hausten.</p>
+                    </xforms:hint>
+                    <xforms:selectOne ref="/Skjema/soknad-grp-5663/soknaden-grp-5666/SoknadLeveringsfristUtsettelse-datadef-24891">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Utsettelse til 31.05.07</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Utsetjing til 31.05.07</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Utsettelse etter 31.05.07</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Utsetjing etter 31.05.07</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Det søkes om utsettelse til</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Det blir søkt om utsetjing til</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/soknad-grp-5663/soknaden-grp-5666/LeveringsfristSoknadUtsettelseForespurtDato-datadef-24522">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Dato</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Oppgi dato dersom du søker lenger utsettelse enn 31.5.2007.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Dato</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Gi opp dato dersom du søkjer om utsetjing ut over 31.05.2007.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/soknad-grp-5663/soknaden-grp-5666/LeveringsfristSoknadUtsettelseBegrunnelse-datadef-24524">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Begrunnelse</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Søker du om utsettelse til 31.5.2007, skal søknaden ikke begrunnes.  Søker du om lenger utsettelse, må søknaden begrunnes.  </p>
+                            <p/>
+                            <p>Likningskontoret tar kontakt dersom det trenger dokumentasjon.  </p>
+                            <p/>
+                            <p>NB! Inneholder begrunnelsen sensitive personopplysninger (f. eks. om  sykdom), må den sendes i brev til likningskontoret. Opplys i feltet  for begrunnelse at begrunnelsen er sendt i brev.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Inneholder begrunnelsen sensitive personopplysninger (f. eks. om  sykdom) må den sendes i brev til likningskontoret.</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Grunngiving</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Søkjer du om utsetjing til 31.05.2007, skal du ikkje grunngi søknaden.  Søkjer du om lengre utsetjing, må du grunngi søknaden.  </p>
+                            <p/>
+                            <p>Likningskontoret tek kontakt om det treng dokumentasjon.  </p>
+                            <p/>
+                            <p>NB! Innheheld grunngjevinga sensitive personopplysningar (til dømes om  sjukdom), må du sende ho i brev til likningskontoret. Opplys i feltet  for grunngiving at grunngivinga blir send i brev.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Inneheld grunngivinga sensitive personopplysningar (til dømes om  sjukdom) må du sende ho i brev til likningskontoret.</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

@@ -1,0 +1,185 @@
+<?
+
+#Usage
+# new SelvangivelseASKalk(array('sumPart'=>$_sumPart, 'sumGroup'=>$_sumGroup))
+#Ikke periode 13???);
+#
+
+class SelvangivelseASKalk
+{
+    var $_sumPart;
+    var $_sumGroup;
+   
+
+    ############################################################################
+    function SelvangivelseASKalk($args)
+    {	
+       
+    }
+    
+
+    ############################################################################
+    function calculate($ThisYear, $sumPart, $sumGroup, $_shareNumber)
+    {   $this->_sumGroup = $sumGroup;
+    	$this->_sumPart  = $sumPart;
+    	
+         #For report 4
+            
+        $this->_sumPart['223'][$ThisYear]['saldo']=$this->_sumPart['380'][$ThisYear]['saldo'];
+
+        if($this->_sumPart['201'][$ThisYear]['saldo'] > 0)
+        {
+           //** Underskudd
+          $this->_sumPart['222'][$ThisYear]['saldo']  =  $this->_sumPart['201'][$ThisYear]['saldo'];
+          $this->_sumGroup['230'][$ThisYear]['saldo'] +=  $this->_sumPart['222'][$ThisYear]['saldo']; #Mulig logisk feil her
+          //$this->_sumGroup['220'][$ThisYear]['saldo'] -= $this->_sumPart['201'][$ThisYear]['saldo'];
+          $this->_sumGroup['201'][$ThisYear]['saldo']=0;
+          
+        }elseif ($this->_sumPart['201'][$ThisYear]['saldo'] < 0){
+        	
+        	//Overskudd
+        	$this->_sumPart['201'][$ThisYear]['saldo']=-$this->_sumPart['201'][$ThisYear]['saldo'];
+            $this->_sumGroup['220'][$ThisYear]['saldo'] += $this->_sumPart['201'][$ThisYear]['saldo'];
+        }
+      
+
+        $this->_sumPart['231'][$ThisYear]['saldo']     = $this->_sumGroup['220'][$ThisYear]['saldo']  - $this->_sumGroup['230'][$ThisYear]['saldo'];
+
+        $this->_sumGroup['240'][$ThisYear]['saldo']    = $this->_sumPart['231'][$ThisYear]['saldo']   - $this->_sumPart['232'][$ThisYear]['saldo'] 
+                                                         + $this->_sumPart['233'][$ThisYear]['saldo'];
+
+        $this->_sumGroup['260'][$ThisYear]['saldo']    = $this->_sumGroup['240'][$ThisYear]['saldo']  - $this->_sumPart['251'][$ThisYear]['saldo'] - $this->_sumPart['252'][$ThisYear]['saldo'];
+
+		//$this->_sumPart['301t1'][$ThisYear]['saldo']= abs ($this->_sumPart['301t1'][$ThisYear]['saldo']);
+		//$this->_sumPart['301t2'][$ThisYear]['saldo']= abs ($this->_sumPart['301t2'][$ThisYear]['saldo']);
+		
+		##Sum av aksjekapital og overkurs
+		//$this->_sumPart['301'][$ThisYear]['saldo']     = $this->_sumPart['301t1'][$ThisYear]['saldo']+$this->_sumPart['301t2'][$ThisYear]['saldo'];
+		$this->_sumPart['301'][$ThisYear]['saldo'] =  abs($this->_sumPart['301'][$ThisYear]['saldo']);
+		$this->_sumPart['305a'][$ThisYear]['saldo']   = $this->_sumPart['303'][$ThisYear]['saldo']-$this->_sumPart['304'][$ThisYear]['saldo'];
+		$this->_sumPart['305b'][$ThisYear]['saldo']   *= 0.72;
+		
+        $this->_sumPart['310'][$ThisYear]['saldo']    = $this->_sumPart['301'][$ThisYear]['saldo']   + $this->_sumPart['305b'][$ThisYear]['saldo'] + $this->_sumPart['306'][$ThisYear]['saldo'];
+
+        $this->_sumPart['330'][$ThisYear]['saldo']    = $this->_sumPart['310'][$ThisYear]['saldo']  - $this->_sumPart['320'][$ThisYear]['saldo'];
+
+        $this->_sumPart['340'][$ThisYear]['saldo']    = $this->_sumPart['330'][$ThisYear]['saldo']  - $this->_sumPart['335'][$ThisYear]['saldo'];
+        
+        if ($this->_sumPart['340'][$ThisYear]['saldo']>0){
+        	$this->_sumPart['350a'][$ThisYear]['saldo']=$this->_sumPart['335'][$ThisYear]['saldo'];
+        }else $this->_sumPart['350a'][$ThisYear]['saldo']=$this->_sumPart['330'][$ThisYear]['saldo'];
+        
+        
+        $this->_sumPart['350b'][$ThisYear]['saldo']    = $this->_sumPart['350a'][$ThisYear]['saldo']/0.72;
+        
+        if ($this->_sumGroup['330'][$ThisYear]['saldo'] < 0) {
+        	
+        	//Føres med positiv fortegn
+        	$this->_sumPart['360a'][$ThisYear]['saldo'] = -$this->_sumGroup['330'][$ThisYear]['saldo'];
+        	$this->_sumPart['360b'][$ThisYear]['saldo'] =$this->_sumPart['360a'][$ThisYear]['saldo']/ 0.72;
+        }  
+
+        $this->_sumGroup['370'][$ThisYear]['saldo']    = $this->_sumPart['360b'][$ThisYear]['saldo']   - $this->_sumPart['365'][$ThisYear]['saldo'];
+        
+        if ($this->_sumGroup['370'][$ThisYear]['saldo']<0){
+        	$this->_sumPart['380'][$ThisYear]['saldo']=$this->_sumPart['360b'][$ThisYear]['saldo'];
+        } else $this->_sumPart['380'][$ThisYear]['saldo']  = $this->_sumGroup['370'][$ThisYear]['saldo'];
+        
+        $this->_sumGroup['420'][$ThisYear]['saldo']   += $this->_sumPart['401a'][$ThisYear]['saldo'];
+       
+		$this->_sumGroup['430'][$ThisYear]['saldo']     = $this->_sumGroup['420'][$ThisYear]['saldo']+$this->_sumPart['421'][$ThisYear]['saldo']+
+		                                                  $this->_sumPart['422b'][$ThisYear]['saldo'];
+		
+		##Gjeld
+		$this->_sumPart['440'][$ThisYear]['saldo']=abs($this->_sumPart['440'][$ThisYear]['saldo']);
+		
+		##Sum nettoinntekter
+		$this->_sumGroup['450'][$ThisYear]['saldo']    = $this->_sumGroup['430'][$ThisYear]['saldo'] - $this->_sumPart['440'][$ThisYear]['saldo'];
+		
+        $this->_sumPart['460'][$ThisYear]['saldo']     = $this->_sumGroup['420'][$ThisYear]['saldo'];
+        
+        $this->_sumGroup['470'][$ThisYear]['saldo']     += $this->_sumPart['460'][$ThisYear]['saldo'];
+
+        $this->_sumPart['475'][$ThisYear]['saldo']     = $this->_sumPart['440'][$ThisYear]['saldo'];
+
+        $this->_sumGroup['480'][$ThisYear]['saldo']    = $this->_sumGroup['470'][$ThisYear]['saldo'] - $this->_sumPart['475'][$ThisYear]['saldo'];
+
+        //$this->_sumPart['485a'][$ThisYear]['saldo']   = $_lib['sess']->get_companydef('ShareNumber');
+        $this->_sumPart['485a'][$ThisYear]['saldo']   =$_shareNumber;
+
+		if ($this->_sumGroup['480'][$ThisYear]['saldo']>0 && $this->_sumPart['485a'][$ThisYear]['saldo'] > 0)
+        	$this->_sumPart['485b'][$ThisYear]['saldo']   = round($this->_sumGroup['480'][$ThisYear]['saldo'] / $this->_sumPart['485a'][$ThisYear]['saldo']);
+        else $this->_sumPart['485b'][$ThisYear]['saldo']=0;
+        //settype($this->_sumPart['485b'][$ThisYear]['saldo'], "integer");
+        //$this->_sumPart['485b'][$ThisYear]['saldo'] +=0;
+		
+		// The post. 485 and 490 >=1000 are valid values and will accepted by Altinn system
+		// Otherwise they are invalid
+		if ($this->_sumPart['485b'][$ThisYear]['saldo']>0)
+        	$this->_sumPart['490'][$ThisYear]['saldo']    = round($this->_sumPart['485b'][$ThisYear]['saldo'] * 0.65);
+         else $this->_sumPart['490'][$ThisYear]['saldo']=0;
+        //settype($this->_sumPart['490'][$ThisYear]['saldo'], "integer");
+        
+        
+        
+           
+    }//function headLodic
+    
+    
+    ############################################################################
+    function sumGroupLogic($Line, $Year, $reportHash, $sumGroup){
+    	 
+    	$this->_sumGroup = $sumGroup;
+    	
+            if($Line == "202" || $Line == "206" || $Line == "207" || $Line == "208" || $Line == "209b" || $Line == "210")
+            {
+                $this->sumGroup('220', $Year, $reportHash);
+            }
+            elseif($Line == "222" || $Line == "223" || $Line == "224b" || $Line == "225")
+            {
+                $this->sumGroup('230', $Year, $reportHash);
+            }
+            elseif($Line == "261" || $Line == "262" || $Line == "263" || $Line == "264")
+            {
+                $this->sumGroup('265', $Year, $reportHash);
+            }
+            elseif($Line == "402a" || $Line == "402b" || $Line == "402c" || 
+                    $Line == "403" || $Line == "404" || $Line == "405" || $Line == "406" 
+                    || $Line == "407" || $Line == "408" || $Line == "409f" || $Line == "410" || 
+                    $Line == "411" || $Line == "412")
+            {   //print("sumGroup 420: ". $sumGroup['420'][$Year]['saldo']);
+                $this->sumGroup('420', $Year, $reportHash);
+            }
+            elseif($Line == "420" || $Line == "421" || $Line == "422b")
+            {
+                //$this->sumGroup('430', $Year, $reportHash);
+            }
+            elseif($Line == "461" || $Line == "462" || $Line == "463")
+            {
+                $this->sumGroup('470', $Year, $reportHash);
+            }
+    	
+    	
+    }
+
+   
+     ############################################################################
+    function sumGroup($LineNum, $Year, $reportHash)
+    {
+        $this->_sumGroup[$LineNum][$Year]['in']     += $reportHash['AmountIn'];
+        $this->_sumGroup[$LineNum][$Year]['out']    += $reportHash['AmountOut'];
+        $this->_sumGroup[$LineNum][$Year]['saldo']  += $reportHash['AmountIn'] - $reportHash['AmountOut'];
+        
+    }
+    
+    function getSumPart(){
+   		return $this->_sumPart;	
+    }
+    
+    function getSumGroup(){
+   		return $this->_sumGroup;	
+    }
+    
+
+}
+?>

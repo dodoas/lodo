@@ -1,0 +1,132 @@
+<?php
+class RealisasjonAvAksjeOppgaveMapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+        //print ("Accouint: ". $a . "khlk: ". $h);
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+           			$this->ORID[$item] = $v;
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+            	$item = $this->Account[$a];
+            	$this->ORID[$item] = $v;
+	            return 1;
+    	    }
+       	}
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+	{   $this->addMapping('D1', 'EnhetNavn-datadef-1', 'VName');
+		$this->addMapping('D26', 'OppgavegiverFodselsnummer-datadef-26', '');
+		$this->addMapping('D18', 'EnhetOrganisasjonsnummer-datadef-18', 'OrgNumber');
+		$this->addMapping('D15', 'EnhetAdresse-datadef-15', 'VAddress');
+		$this->addMapping('D6673', 'EnhetPostnummer-datadef-6673', 'VZipCode');
+		$this->addMapping('D6674', 'EnhetPoststed-datadef-6674', 'VCity');
+		$this->addMapping('D7617', 'EnhetNavnSpesifisertSelskap-datadef-7617', '');
+		$this->addMapping('D7618', 'EnhetOrganisasjonsnummerSpesifisertSelskap-datadef-7618', '');
+		$this->addMapping('D19400', 'AksjerMvTypeSpesifisertSelskap-datadef-19400', '');
+		$this->addMapping('D19401', 'AksjeBorsnotertIkkeBorsnotertSpesifisertSelskap-datadef-19401', '');
+		$this->addMapping('D1181', 'AksjerMvErvervsdatoSpesifisertSelskap-datadef-1181', '');
+		$this->addMapping('D1827', 'AksjerMvErvervsmateSpesifisertSelskap-datadef-1827', '');
+		$this->addMapping('D1821', 'AksjerMvRealisasjonDato-datadef-1821', '');
+		$this->addMapping('D7620', 'AksjerMvPalydendeSpesifisertSelskap-datadef-7620', '');
+		$this->addMapping('D7621', 'AksjerMvRealisasjonAntallSpesifisertSelskap-datadef-7621', '');
+		$this->addMapping('D5827', 'AksjerMvRealisasjonsvederlagSpesifisertSelskap-datadef-5827', '');
+		$this->addMapping('D1822', 'AksjerMvInngangsverdiSpesifisertSelskap-datadef-1822', '');
+		$this->addMapping('D1823', 'AksjerMvInngangsverdiTypeSpesifisertSelskap-datadef-1823', '');
+		$this->addMapping('D1828', 'AksjerMvInngangsverdiJusteringsfaktorSpesifisertSelskap-datadef-1828', '');
+		$this->addMapping('D7623', 'RISKBelopEiertidOppsummertPositivSpesifisertSelskap-datadef-7623', '');
+		$this->addMapping('D11279', 'RISKBelopEiertidOppsummertNegativSpesifisertSelskap-datadef-11279', '');
+		$this->addMapping('D1829', 'RealisasjonsRISKJusteringsfaktorSpesifisertSelskap-datadef-1829', '');
+		$this->addMapping('D1830', 'AksjerMvInngangsverdiKorrigeringFradragSpesifisertSelskap-datadef-1830', '');
+		$this->addMapping('D11280', 'AksjerMvInngangsverdiKorrigeringIkkeFradragSpesifisertSelsk-datadef-11280', '');
+		$this->addMapping('D1824', 'AksjekapitalTilbakebetaltSpesifisertSelskap-datadef-1824', '');
+		$this->addMapping('D7612', 'AksjerMvInngangsverdiNegativSaldoSpesifisertSelskap-datadef-7612', '');
+		$this->addMapping('D1825', 'AksjerMvInngangsverdiKorrigertSpesifisertSelskap-datadef-1825', '');
+		$this->addMapping('D11281', 'AksjerMvInngangsverdiKorrigertPositivSpesifisertSelskap-datadef-11281', '');
+		$this->addMapping('D11282', 'AksjerMvInngangsverdiKorrigertNegativSpesifisertSelskap-datadef-11282', '');
+		$this->addMapping('D14083', 'AksjerMvRealisasjonGevinstTapSpesifisertSelskap-datadef-14083', '');
+		$this->addMapping('D11731', 'AksjerMvSkattemessigVerdiSpesifisertSelskap-datadef-11731', '');
+		$this->addMapping('D1178', 'AksjerMvKostprisHistoriskSpesifisertSelskap-datadef-1178', '');
+		$this->addMapping('D7614', 'AksjerMvTapSpesifisertSelskap-datadef-7614', '');
+		$this->addMapping('D22206', 'AksjerMvOppregulertInngangsverdiSpesifisertSelskap-datadef-22206', '');
+		$this->addMapping('D14122', 'AksjerMvFormuesverdiKostprisSpesifisertSelskap-datadef-14122', '');
+		$this->addMapping('D7672', 'AksjerMvVerdiBeregnetSpesifisertSelskap-datadef-7672', '');
+		$this->addMapping('D7673', 'AksjerMvTapSkattSpesifisertSelskap-datadef-7673', '');
+		$this->addMapping('D7615', 'AksjerMvGevinstSkattBrutto-datadef-7615', '');
+		$this->addMapping('D7616', 'AksjerMvTapSkattBrutto-datadef-7616', '');
+		$this->addMapping('D1826', 'AksjerMvOmkostninger-datadef-1826', '');
+		$this->addMapping('D14084', 'AksjerMvRealisasjonGevinstTapSkatt-datadef-14084', '');
+		
+      
+	}
+ }
+?>

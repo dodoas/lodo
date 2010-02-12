@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1053: Fradrag i skatt for kostnader til forsknings- og utviklingsprosjekter</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-866-5526.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-2228/Avgiver-grp-2230/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2228/Avgiver-grp-2230/OppgavegiverFodselsnummer-datadef-26"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-2228/Avgiver-grp-2230/EnhetESAVilkarStorrelse-datadef-17413" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1053 Fradrag i skatt for kostnader til forsknings- og  utviklingsprosjekter (FoU) 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Skjemaet skal fylles ut av alle skattytere som krever fradrag i skatt  for kostnader til godkjent forsknings- og utviklingsprosjekt og som  tilfredsstiller kravene i skatteloven § 16-40 samt  Finansdepartementets forskrift til
+                    utfylling og gjennomføring mv. av  skatteloven (FSFIN) §§16-40-1 til 16-40-10.  </p>
+                <p>Fradraget i skatt gis med henholdsvis 18% eller 20% av kostnadene.  Foretak som ikke tilfredsstiller vilkårene i EFTAs overvåkingsorgan  (ESA) definisjon av SMB (små og mellomstore bedrifter), har krav på  fradrag med 18%. Foretak
+                    som  tilfredsstiller vilkårene, har krav på  fradrag med 20%.  </p>
+                <p/>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. november 1994, jf. ligningsloven § 4-4 nr.  7.  </p>
+                <p/>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjema, RF-1053, helt eller delvis bli  benyttet også av andre offentlige organer som har hjemmel til å  innhente de samme
+                    opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt. samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller hos  Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Vedlegg til selvangivelsen. Skjemaet skal kun fylles ut av skattytere  som oppfyller vilkårene for skattefradrag i sktl § 16-40</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-2228">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2228/Avgiver-grp-2230">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Avgiver</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2228/Avgiver-grp-2230/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2228/Avgiver-grp-2230/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2228/Avgiver-grp-2230/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-2228/Avgiver-grp-2230/EnhetESAVilkarStorrelse-datadef-17413">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>101 Tilfredsstiller foretaket vilkårene i ESAs definisjon av SMB?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Som SMB regnes virksomheter som:  </p>
+                            <p>-har færre enn 250 ansatte, og  </p>
+                            <p>-har en årlig salgsinntekt som ikke overstiger 40 millioner euro eller  en årlig balansesum som ikke overstiger 27 millioner euro, og  </p>
+                            <p>-oppfyller uavhengighetskravet som nevnt nedenfor.  </p>
+                            <p/>
+                            <p>Virksomheten anses ikke som uavhengig dersom 25 prosent eller mer av  kapitalen eller stemmerettighetene er eid av ett eller flere foretak  som ikke oppfyller de ovennevnte vilkår (SMB-kravene). Begrensningen  kan
+                                overskrides dersom virksomheten er eid av offentlige  investeringsselskaper, venture-selskaper eller institusjonelle  investorer forutsatt at disse ikke har kontroll over virksomheten  enten individuelt eller samlet.
+                                Det samme gjelder hvor kapitalen er  spredd på en slik måte at det er umulig å avgjøre hvem som  kontrollerer denne, og virksomheten erklærer at den ikke er eid med  25% eller mer av et eller flere selskaper i
+                                fellesskap som faller  utenfor ovennevnte definisjon av SMB.  </p>
+                            <p>Ved avgjørelsen av om kravet til salgsinntekt eller balansesum er  oppfylt legges virksomhetens siste godkjente årsregnskap til grunn.  For nystartet virksomhet hvor det ennå ikke foreligger godkjent  årsregnskap,
+                                legges det til grunn et pålitelig anslag fastsatt i  løpet av året.  </p>
+                            <p>Ved avgjørelsen av om kravet med hensyn til antall ansatte er oppfylt,  legges gjennomsnittlig antall årsverk i virksomheten i siste  avsluttede regnskapsår til grunn. Ved omregning fra euro til norske  kroner legges
+                                det til grunn den omregningskurs som fastsettes av ESA  ved starten av hvert nytt kalenderår i henhold til kap. 33.1 i ESAs  retningslinjer for statsstøtte. Omregningskursen ligger på
+                                http://www.eftasurv.int/fieldsofwork/ fieldstateaid/dbaFile791.html.  For deltakerlignede selskaper (ansvarlige selskap, kommandittselskap,  selskap med delt ansvar) er det selskapet, og ikke den enkelte  deltaker,
+                                vilkårene knytter seg til. Det er imidlertid den enkelte  deltaker som skal levere RF-1053 og som har krav på skattefradraget.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Små og mellomstore bedrifter. Ja (20%) Nei (18%)</p>
+                        </xforms:hint>
+                    </xforms:selectOne>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2228/Revisor-grp-2231">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Revisors attestasjon av kostnader og bekreftelse av opplysninger om  offentlig støtte</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>jf. forskriftens § 16-40-6</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2228/Revisor-grp-2231/RevisorNavn-datadef-1937">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2228/Revisor-grp-2231/RevisorOrganisasjonsnummer-datadef-1938">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Kostnader til forsknings- og utviklingsprosjekter</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_KostnaderTilForskningsOgUtviklingsprosjekter-grp-3683" nodeset="/Skjema/KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229/KostnaderTilForskningsOgUtviklingsprosjekter-grp-3683">
+                    <xforms:group ref="/Skjema/KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229/KostnaderTilForskningsOgUtviklingsprosjekter-grp-3683">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>200 Kostnader til forsknings- og utviklingsprosjekter</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229/KostnaderTilForskningsOgUtviklingsprosjekter-grp-3683/FoUProsjektEgenutfortProsjektnummerSpesProsje-datadef-16476">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>201 Prosjektnummer</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Hvert prosjekt som godkjennes av Norges forskningsråd tildeles et  prosjektnummer. Dette nummeret oppgis i denne posten.  Prosjektnummeret fremgår bl.a. av Forskningsrådets godkjenningsbrev.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229/KostnaderTilForskningsOgUtviklingsprosjekter-grp-3683/FoUProsjektKategoriSpesifisertProsjekt-datadef-17414">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>F</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Forskning</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Forskning</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>U</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Utvikling</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Utvikling</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>202 Kategori</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her oppgis om prosjektet er definert som forskning (F) (dvs.  Industriell forskning) eller utvikling (U) (dvs. Prekompetitiv  utviklingsarbeid) i henhold til kapittel 14.5 i retningslinjene for  statsstøtte fastsatt
+                                    av ESA. Kategorien angis i Forskningsrådets  godkjenningsbrev.</p>
+                            </xforms:help>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229/KostnaderTilForskningsOgUtviklingsprosjekter-grp-3683/FoUProsjektEgenutfortProsjektandelSpesProsjek-datadef-16478">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>203 Prosjektandel  </p>
+                                <p>Hvis det dreier seg om et samarbeids prosjekt med andre foretak, oppgi  andel av prosjektet i prosent</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Fradrag i skatt kan også gis ved samarbeidsprosjekter mellom flere  skattytere når prosjektet er godkjent av Norges forskningsråd.  Kostnadsrammen gjelder da pr. prosjekt fordelt på deltakerne etter  deltakerandel.
+                                    Dersom det foreligger samarbeidsprosjekt skal  skattyters andel av prosjektet oppgis i prosent.</p>
+                            </xforms:help>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Oppgi prosentandel med 2 desimaler</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229/KostnaderTilForskningsOgUtviklingsprosjekter-grp-3683/KostnaderFoUSpesifisertProsjekt-datadef-17415">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>204 Totale FoU kostnader inkl. ev. &lt;&lt;kostnader>> knyttet til ulønnet  arbeidsinnsats som ikke omfattes av den ordinære skattefunnordningen  og som tas med i søknad til forskningsrådet.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Revisors bekreftelse av opplysningene i RF-1053 forutsettes  gjennomført i henhold til god revisjonsskikk og RS 800 (Revisors  uttalelser ved revisjonsoppdrag med spesielle formål). Kostnadene må  kunne dokumenteres
+                                    med et prosjektregnskap som viser medgåtte timer  for eget FoU-personale (dvs. prosjektleder, vitenskapelig og teknisk  personell) fordelt pr person pr. dag og andre prosjektrelaterte  kostnader. Prosjektregnskapet
+                                    skal på oppfordring fremlegges for  ligningsmyndighetene.  </p>
+                                <p/>
+                                <p>Totale FoU-kostnader  </p>
+                                <p>Kostnadene til forskning og utvikling (fradragsgrunnlagets størrelse)  beregnes i sin helhet etter Norges forskningsråds regler for  brukerstyrte prosjekter. I tillegg er det et vilkår at kostnadene må  være direkte
+                                    tilknyttet det godkjente prosjektet, og kostnadene må  etter sin art være fradragsberettiget etter sktl kap. 6.Det gis  imidlertid tilskudd knyttet til ulønnet arbeidsinnsats som ikke  omfattes av den ordinære
+                                    Skattefunn-ordningen. Disse kostnadene skal  føres opp i post 204, og skilles ut i post 206.  </p>
+                                <p>Kostnader pådratt før godkjennelse av prosjekt inngår når de er  pådratt i det inntektsår godkjennelsen ble gitt. Kostnader som er  pådratt i tidligere år inngår derfor ikke.  </p>
+                                <p>Kostnadene må være attestert av revisor. Dette gjelder også for  skattytere som ikke har revisjonsplikt. Kostnader som  forskningsinstitusjoner har hatt i tilknytning til  forskningstjenester som omsettes
+                                    (oppdragsforskning) inngår ikke i  prosjektkostnadene.  </p>
+                                <p>Norges forskningsråds regler for brukerstyrte prosjekter (kostnadene  skal beregnes etter disse reglene):  </p>
+                                <p>Forskningsrådet beregner kostnadene til brukerstyrte FoU-prosjekter  fordelt på følgende kategorier (avgifter som blir refundert eller  avregnet, inngår ikke i prosjektkostnadene):  </p>
+                                <p>- Personal- og indirekte kostnader  </p>
+                                <p>- Innkjøp av FoU-tjenester godkjent av Norges forskningsråd  </p>
+                                <p>- Utstyr  </p>
+                                <p>- Andre driftskostnader  </p>
+                                <p>Se rettledningen.  </p>
+                                <p/>
+                                <p>Kostnadsrammer. Se rettledningen.  </p>
+                                <p>Spesielt om deltakerlignede selskaper: Se rettledningen  </p>
+                                <p>Spesielt om samarbeidsprosjekter: Se rettledningen</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229/KostnaderTilForskningsOgUtviklingsprosjekter-grp-3683/KostnaderFoUInnkjoptSpesifisertProsjekt-datadef-17416">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>205 Herav kostnader til innkjøpt FoU, utført av godkjent  forskningsinstitusjon</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Revisors bekreftelse av opplysningene i RF-1053 forutsettes  gjennomført i henhold til god revisjonsskikk og RS 800 (Revisors  uttalelser ved revisjonsoppdrag med spesielle formål). Kostnadene må  kunne dokumenteres
+                                    med et prosjektregnskap som viser medgåtte timer  for eget FoU-personale (dvs. prosjektleder, vitenskapelig og teknisk  personell) fordelt pr person pr. dag og andre prosjektrelaterte  kostnader. Prosjektregnskapet
+                                    skal på oppfordring fremlegges for  ligningsmyndighetene.  </p>
+                                <p/>
+                                <p>Kostnadene som oppgis i post 205 inngår i de totale FoU-kostnadene som  er oppgitt i post 204. Posten skal bare omfatte innkjøpte  FoU-tjenester fra FoU-institusjoner som er godkjent av Norges  forskningsråd. Liste
+                                    over godkjente FoU-institusjoner ligger på http:  //www.skattefunn.no.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Se liste på www.skattefunn.no</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229/KostnaderTilForskningsOgUtviklingsprosjekter-grp-3683/KostnaderFoUUlonnetArbeidSpesifisertProsjekt-datadef-24107">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>206 Herav &lt;&lt;kostnader>> knyttet til ulønnet arbeidsinnsats som ikke  omfattes av den ordinære skattefunnordningen og som administreres og  utbetales av forskningsrådet</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Ulønnet arbeidsinnsats inngår ikke i grunnalget for beregning av  skattefradrag iht. den ordinære Skattefunn-ordningen. Det er  imidlertid opprettet en rammestyrt tilskuddsordning for slik ulønnet  arbeidsinnsats.
+                                    Tilskuddet utgjør 20% (SMB) ev. 18% (ikke SMB) av  &lt;&lt;kostnadsgrunnlaget>>. Ved beregning av &lt;&lt;kostnadsgrunnlaget>>, som  ikke kan overstige 2. mill. kr, benyttes en timesats på kr. 500 pr.  time. Denne
+                                    ordningen administreres fullt ut av forskningsrådet.  Ordningen må godkjennes av ESA før den trer i kraft, og slik  godkjennelse foreligger ikke ved ferdigstillelsen av skjemaet.  Skattyter skal inkludere
+                                    &lt;&lt;kostnadene>> for ulønnet arbeidsinnsats i  post 204 og spesifisere disse i post 206. Ved beregning av sum  grunnlag for beregning av skattefradrag i post 211, må &lt;&lt;kostnadene>>  knyttet til ulønnet
+                                    arbeidsinnsats trekkes fra.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Se rettledningen</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229/KostnaderTilForskningsOgUtviklingsprosjekter-grp-3683/ProsjektStatsstotteSkattefradragReduksjonSpesifisertProsjekt-datadef-17418">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>207 Hvis prosjektet mottar annen off. støtte; oppgi dette beløpet her.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>I henhold til forskriftens § 16-40-6 femte ledd skal det fremgå av  revisorbekreftet dokument at summen av den offentlige støtten til  prosjektet ikke overskrider høyeste tillatte samlet støtte i henhold  til
+                                    kapittel 14.5 i retningslinjene for statsstøtte fastsatt av  ESA.  </p>
+                                <p/>
+                                <p>Hva regnes som offentlig støtte?  </p>
+                                <p>Offentlig støtte omfatter finansiell bistand til prosjektet fra  offentlige virkemidler (SND, Forskningsrådet, kommunale-  /fylkeskommunale næringsfond eller lignende) knyttet til aktiviteter  som er utført i
+                                    inntektsåret. Støtte fra Den Europeiske Union (inkl.  EUs rammeprogram) betraktes som offentlig støtte. Offentlige  virksomheters kjøp av tjenester eller produkter (for eksempel den  offentlige etats andel av
+                                    FoU-kontrakt) medregnes ikke. Støtte som  utbetales i inntektsåret, men som dreier seg om tidligere utførte  aktiviteter medregnes ikke. Kontroll av offentlig støtteandel må  gjennomføres for hvert enkelt prosjekt.
+                                    Grensene for statsstøtte  beregnes etter ESAs retningslinjer brutto (før skatt). Når støtte gis  i form av et skattefradrag innebærer dette nettostøtte siden  skattefradraget ikke anses som skattepliktig
+                                    virksomhetsinntekt, jf.  sktl § 5-31 bokstav c. Skattefradraget må således regnes om til et  bruttobeløp når man skal vurdere om den samlede offentlige støtten  ligger innenfor retningslinjene. Dette gjelder også
+                                    tilskuddet som  ytes for ulønnet arbeidsinnsats. For etterskuddspliktige skattytere  som svarer skatt av alminnelig inntekt, dvs. 28%, innebærer dette at  skattefradraget må ligge innenfor: Maksimalt skattefradrag
+                                    = (Post  204 x Maksimal støtteandel iflg. tabell - Annen offentlig støtte) x  0,72. For skattytere som har skattesats som er høyere enn 28% må den  aktuelle skattesatsen benyttes ved omregningen. Sone A, B og C er
+                                    beskrevet i Virkeområdet for distriktspolitiske virkemidler. Link til  Virkeområde for de distriktspolitiske virkemidlene ligger på http:  //www.skattefunn.no.  </p>
+                                <p>Dersom prosjektet inneholder internasjonalt samarbeid innen  EØS-området og/eller EUs rammeprogram, kan den offentlige  støtteandelen i noen tilfelle økes utover ovennevnte satser. Den  offentlige støtten kan
+                                    imidlertid ikke overstige 75% for industriell  forskning eller 50% for Prekompetiv utvikling. Nærmere om dette i  kapittel 14.5 i retningslinjene for statsstøtte som ligger på http:  //www.skattefunn.no.  </p>
+                                <p>Dersom beregnet skattefradrag, inkl. støtte for ulønnet arbeidsinns,  for prosjektet (post 209 x 20% resp. 18%) blir høyere enn maksimalt  skattefradrag etter ovenstående formel, overskrider den offentlige  støtten
+                                    den tillatte samlede støtten etter retningslinjenes kap. 14.5  og post 208 må fylles ut.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Støtte for ulønnet arbeidsinnsats (post 206) oppgis ikke her</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229/KostnaderTilForskningsOgUtviklingsprosjekter-grp-3683/ProsjektOffentligStotteAnnenStotteSpesifisertProsjekt-datadef-24108">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>208 Hvis summen av støtte ikke ligger innenfor tillatte samlede  støtteandel, oppgi hvilket beløp skattefradraget må reduseres med for  å ligge innenfor statsstøttereglene</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>For at samlet offentlig støtte til prosjektet skal ligge innenfor det  tillatte etter kapittel 14.5 i retningslinjene for statsstøtte  fastsatt av ESA, må skattefradraget, inkl. støtte for ulønnet  arbeidsinnsats,
+                                    reduseres med differansen mellom Beregnet  skattefradrag (Post 209 x 20 % resp. 18 %) og Maksimalt skattefradrag  etter formelen i Post 207.  </p>
+                                <p>Se tabell over maksimal offentlig støtteandel iht. retningslinjene for  statsstøtte fastsatt av ESA. Ved internasjonalt samarbeid kan  grensene i enkelte tilfeller overskrides, se rettledningen.  </p>
+                                <p>Et eks. med følgende tall kan illustrere beregningen: Et AS (SMB) har  totale FoU-kostnader til egenutført prekompetiv utvikling, ført i  post 204 på 5.600.000, maksimal støtteandel blir da iht. tabellen  35%.
+                                    Samtidig mottar prosjektet annen off. støtte på 1.200.000.  Maksimalt skattefradrag, inkl. støtte til ulønnet arbeidsinnsats,  blir da: (5.600.000 x 35% - 1.200.000) x 0,72 = 547.200. For at  samlet offentlig
+                                    støtte til prosjektet skal ligge innenfor det  tillatte, må skattefradraget reduseres med differansen mellom  Beregnet skattefradrag inkl. støtte for ulønnet arbeidsinnsats (Post  209 x 20% resp. 18%) og Maksimalt
+                                    skattefradrag etter formelen  ovenfor. I eks. må skattefradraget reduseres med: (4.000.000 x 20%) =  800.000 - 547.200 = 252.800. Se rettledningen for mer informasjon.</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229/KostnaderFoU-datadef-17419">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229/KostnaderFoUInnkjopt-datadef-17420">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>205 Sum</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229/KostnaderFoUUlonnetArbeid-datadef-24109">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>206 Sum</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229/ProsjektOffentligStotteAnnenStotte-datadef-24110">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>208 Sum</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:group ref="/Skjema/KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229/beregningSkattefradrag-grp-5417">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Beregning av skattefradrag</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229/beregningSkattefradrag-grp-5417/KostnaderFoUMaksbegrensning-datadef-24111">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>209 Sum post 204 ovenfor, begrenset oppad til maksgrensen på 4 ev. 8  mill</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Se rettledningen til post 204 under overskriften: Kostnadsrammer</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/KostnaderTilForskningsOgUtviklingsprosjekter-grp-2229/beregningSkattefradrag-grp-5417/SkattefradragFoUBeregningsgrunnlag-datadef-24112">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>211 Sum grunnlag for beregning av skattefradrag</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Ev. reduksjon av fradraget med beløp fra post 208 foretas av  skattemyndighetene.  </p>
+                            <p/>
+                            <p>Utfylling av likningspapirer.  </p>
+                            <p>Følgende retningslinjer kan være til hjelp vede utfylling av  likningspapirene:  </p>
+                            <p>Dersom tilskuddet er regnskapsført som kostnadsreduksjon, føres totalt  tilskudd i posten Andre fradrag på side 4 i næringsoppgaven, og det  gis opplysning om hva det gjelder i eget vedlegg.  </p>
+                            <p/>
+                            <p>Dersom tilskuddet er nettoført i balansen, altså ført som reduksjon i  investeringens verdi, føres full kostpris på det investerte som  tilgang i avskrivningsskjemaet, uten reduksjon med tilskuddsbeløpet.  I tillegg
+                                oppføres det totale tilskuddet under Andre fradrag på side  4 i næringsoppgaven (det første året), og det gis opplysninger om hva  det gjelder i eget vedlegg.  </p>
+                            <p>Når tilskuddet er bruttoført i balansen, oppføres tilskuddsposten på  gjeldssiden i midlertidig forskjell skjema (regnskapsmessig  gjeldspost, men ikke skattemessig). I tillegg oppføres det totale  tilskuddet under
+                                Andre fradrag på side 4 i næringsoppgaven (det  første året), og det gis opplysninger om hva det gjelder i eget  vedlegg.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

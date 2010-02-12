@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1152: Avskrivningsgrunnlag og beregning av årlige avskrivninger mv kraftverk</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-644-5476.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-2490/Selskap-grp-410/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-2490/Kraftanlegg-grp-2491/AnleggNavn-datadef-2547" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1152 Avskrivningsgrunnlag og beregning av årlige avskrivninger mv.  for særskilte driftsmidler og påkostninger i kraftanlegg 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Dette skjemaet gjelder bare for driftsmidler som avskrives lineært  etter skatteloven § 18-6 og for påkostninger på slike driftsmidler.  Det skal fylles ut ett skjema for hvert driftsmiddel og for hver  påkostning. Dammer,
+                    tunneller, rørgater (eksl. rør) kraftstasjoner  (inkl. atkomsttunneler) avskrives over 67 år. Maskinteknisk  utrustning i kraftstasjon, herunder turbiner, generatorer, rør,  foring i sjakt/tunnel, luker, rister etc. avskrives over
+                    40 år.  </p>
+                <p/>
+                <p>Generelt:  </p>
+                <p>Skjemaet skal fylles ut og leveres som vedlegg til selvangivelsen for  alle skattytere som krever fradrag for lineære avskrivninger på  særskilte driftsmidler i kraftanlegg, og for skattytere som krever  fradrag for avskrivninger
+                    på påkostninger på driftsmidler som skal  avskrives lineært.  </p>
+                <p>Driftsmidler i kraftanlegg som skal avskrives lineært er regnet opp i  skatteloven § 18-6. Slike driftsmidler skal avskrives lineært med  inntil angitt andel av anskaffelsesverdi som årlig avskrivningsbeløp  over angitt levetid,
+                    jf. skatteloven § 18-6 nr. 1:  </p>
+                <p/>
+                <p>1. Dammer, tunneler, rørgater (ekskl. rør), kraftstasjoner  </p>
+                <p>(inkl. adkomsttunneler): årlige avskrivninger over 67 år.  </p>
+                <p>2. Maskinteknisk utrustning i kraftstasjon, generatorer, rør, foring  i  </p>
+                <p>sjakt/tunnel, luker, rister, etc.: årlige avskrivninger over 40 år.  </p>
+                <p>Driftsmidler i kraftanlegg som hjemfaller til staten kan avskrives med  en høyere sats i den grad det er nødvendig for at driftsmidlene skal  være helt avskrevet ved konsesjonstidens utløp. Avskrivningene skal i  så fall foretas
+                    med like store beløp fra ervervsåret eller det år  avskrivningene endres, frem til tidspunktet for hjemfall.  </p>
+                <p>Det skal føres egen konto for hvert enkelt driftsmiddel. Påkostning på  driftsmiddel skal også føres på egen konto. Påkostninger på  driftsmiddel avskrives over en like lang periode som angitt for  vedkommende driftsmiddel.  </p>
+                <p>Særlig om bruken av fortegn i skjema  </p>
+                <p>I utgangspunktet skal alle tall innrapporteres uten fortegn når det  klart fremgår av ledeteksten om tallet skal tillegges eller trekkes  fra i forhold til den sammenheng det føres inn i. Det skal altså ikke  brukes minustegn når
+                    teksten forteller at det dreier seg om  kostnader, underskudd, mv., og tilsvarende ingen plusstegn ved  inntekter, overskudd mv. Et unntak fra dette kan illustreres ved  følgende eksempel  </p>
+                <p/>
+                <p>En utleieaktivitet har i inntektsåret gitt større utgifter enn  inntekter:  </p>
+                <p>Inntekter  30.000  </p>
+                <p>utgifter  35.000  </p>
+                <p>underskudd - 5.000  </p>
+                <p/>
+                <p>For å føre dette underskuddet på 5 000 kroner inn i en post med  ledetekst Inntekt ved utleie må beløpet settes med negativt fortegn  for å kunne trekkes fra - det er jo en kostnad (det motsatte av  ledeteksten) og ikke en inntekt.  </p>
+                <p>Dersom et felt har forhåndstrykt fortegn (positivt eller negativt)  skal tallet som innrapporteres  være uten fortegn. Fortegn brukes kun  i de tilfeller man ønsker å innrapportere et beløp med omvendt  fortegn av det som er
+                    forhåndstrykt.  </p>
+                <p>I sum og resultatfelter brukes alltid minustegn når summen er  negativ.  </p>
+                <p/>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i ligningsloven § 4-4 nr. 7  og Finansdepartementets delegeringsvedtak av 28. november 1994, nr.  1064.  </p>
+                <p/>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1152. For å  samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjema, RF-1152, helt eller delvis bli  benyttet også av andre
+                    offentlige organer som har hjemmel til å  innhente de samme opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om ev. samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller
+                    Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Beskatning av kraftforetak etter skatteloven kapittel 18  </p>
+                <p>Fastsatt av Skattedirektoratet for inntektsåret 2006</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-2490">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2490/Selskap-grp-410">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Selskap</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2490/Selskap-grp-410/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2490/Selskap-grp-410/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2490/Selskap-grp-410/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2490/Selskap-grp-410/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2490/Selskap-grp-410/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2490/Selskap-grp-410/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2490/Kraftanlegg-grp-2491">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kraftanlegg</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2490/Kraftanlegg-grp-2491/AnleggLopenummer-datadef-19639">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Løpenr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2490/Kraftanlegg-grp-2491/AnleggNavn-datadef-2547">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2490/Kraftanlegg-grp-2491/AnleggKommune-datadef-2759">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommune</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2490/Kraftanlegg-grp-2491/KraftverkMerkeytelse-datadef-5929">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Den samlede, påstemplede merkeytelsen i kVA</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2490/Regnskapsforer-grp-4045">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Regnskapsfører</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2490/Regnskapsforer-grp-4045/RegnskapsforerNavn-datadef-280">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2490/Regnskapsforer-grp-4045/RegnskapsforerAdresse-datadef-281">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2490/Regnskapsforer-grp-4045/RegnskapsforerPostnummer-datadef-6678">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2490/Regnskapsforer-grp-4045/RegnskapsforerPoststed-datadef-6679">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Beregning av årlig avskrivning og gevinst/tap</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Beregning av avskrivning og gevinst/tap</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/DriftsmidlerPakostningskontonummer-datadef-19474">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Driftsmiddel/påkostningskontonr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/DriftsmidlerType-datadef-2792">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Angivelse av type driftsmiddel som  </p>
+                            <p>avskrivningen/påkostningen gjelder</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/DriftsmidlerInnkjopsar-datadef-19429">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Anskaffelsesår/påkostningsår</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:group ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/VedBeregningAvArligeAvskrivninger-grp-3793">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>I. Ved beregning av årlige avskrivninger</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/VedBeregningAvArligeAvskrivninger-grp-3793/DriftsmidlerGjenanskaffelsesverdi-datadef-5918">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>11 Avskrivningsgrunnlag: Gjenskaffelsesverdi jf RF-1152 post 11 for  1997</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Hovedregelen er at gjenanskaffelsesverdien danner grunnlaget for  inngangsverdien for fysiske avskrivbare driftsmidler som er særskilte  for kraftanlegg. Gjenanskaffelsesverdien beregnes av Norges  vassdrags- og
+                                    energidirektoratet (NVE) på grunnlag av tekniske data  om kraftanlegget og NVEs kostnadsgrunnlag for vannkraftanlegg.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/VedBeregningAvArligeAvskrivninger-grp-3793/DriftsmidlerKostpris-datadef-5822">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>12 Avskrivningsgrunnlag: Historisk kostpris, jf. RF-1152 post 12</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Inngangsverdien kunne alternativt beregnes ved å ta utgangspunkt i  driftsmidlenes anskaffelsesverdi (historisk kostpris).  </p>
+                                <p>Ved påkostning føres påkostningsbeløpet her. Dette danner grunnlag for  avskrivning vedrørende påkostningen.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/VedBeregningAvArligeAvskrivninger-grp-3793/DriftsmiddelKraftanleggInngangsverdi-datadef-14864">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>13 Skattemessig verdi på driftsmidler pr. 31. desember 2005</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Skattemessig verdi pr. 31. desember 2005 overføres fra post 17 i  RF-1152 for 2005. Beløpet i denne posten føres også i skjema  Spesifikasjon av forskjeller..., RF-1217, post 2 kolonne I.  </p>
+                                <p>Ved gevinst-/tapsberegning ved realisasjon føres den skattemessige  verdien i kolonne II som inngangsverdi ved gevinst-/tapsberegning</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Jf. RF-1152 post 17 for 2005. Beløpet i denne posten føres også i  RF-1217 Spesifikasjon av forskjeller... i post 2 kolonne I.</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/VedBeregningAvArligeAvskrivninger-grp-3793/DriftsmidlerKjop-datadef-1504">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>14 Nyanskaffelser/påkostning i 2006: Kostpris</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Driftsmiddel ervervet i 2006 føres opp her med kostpris. Dersom et  nyervervet driftsmiddel realiseres i inntektsåret, må kostpris føres  i kolonne II som inngangsverdi ved gevinst-/tapsberegning.  </p>
+                                <p>Påkostninger i 2006 føres også her.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/VedBeregningAvArligeAvskrivninger-grp-3793/DriftsmidlerAvskrivningLineartInngaendeKraftanlegg-datadef-14866">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>15 Grunnlag for lineær avskrivning</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Grunnlaget for avskrivning føres opp her. Dette kan være beløpet i  post 11 gjenanskaffelsesverdien, beløpet i post 12 historisk kostpris  eller beløpet i post 14 kostpris ved nyanskaffelser. Dersom skjemaet  er
+                                    benyttet for påkostning er påkostningsbeløpet i post 14  avskrivningsgrunnlag.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/VedBeregningAvArligeAvskrivninger-grp-3793/AvskrivningerOrdinareKraftanlegg-datadef-14865">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>16 Avskrivningsbeløp</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Ved lineære avskrivninger skal avskrivningsgrunnlaget, jf. post 15,  fordeles likt over driftsmidlets skattemessige levetid, jf. Generelt  ovenfor. Ved lineære avskrivninger gis det også fradrag for deler av  året -
+                                    365 deler.  </p>
+                                <p>Ved realisasjon av driftsmidler skal avskrivninger frem til  realisasjonstidspunktet redusere inngangsverdien, jf. kolonne II.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/VedBeregningAvArligeAvskrivninger-grp-3793/DriftsmidlerKraftanlegg-datadef-14863">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>17 Skattemessig verdi pr. 31. desember 2006.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Skattemessig verdi pr 31. desember 2006 fremkommer ved at skattemessig  verdi pr. 31. desember 2005 (beløpet i post 13), eller kostpris for  nyanskaffelser ev. påkostninger i 2006 (post 14) fratrekkes  inntektsårets
+                                    lineære avskrivning (beløpet i post 16). Beløpet i  denne posten føres også i Spesifikasjon av forskjeller...., RF-1217,  post 2 kolonne II</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Beløpet i denne posten føres i post 2 kolonne II i RF-1217  Spesifikasjon av forskjeller....</p>
+                            </xforms:hint>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/VedGevinstTapsberegning-grp-3794">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>II. Ved gevinst- /tapsberegning</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/VedGevinstTapsberegning-grp-3794/DriftsmidlerRealisasjonsvederlag-datadef-359">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>10 Vederlag ved realisasjon</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Ved realisasjon av driftmidlet skal realisasjonsvederlaget føres inn i  kolonne II.Beløpet danner utgangsverdien ved gevinst-  /tapsberegningen.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/VedGevinstTapsberegning-grp-3794/DriftsmiddelKraftanleggBeregningGevinstTapInngangsverdi-datadef-23089">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>13 Skattemessig verdi på driftsmidler pr 31.12.2005</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Jf. RF-1152 post 17 for 2005. Beløpet i denne posten føres også i  RF-1217 Spesifikasjon av forskjeller... i post 2 kolonne I.</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/VedGevinstTapsberegning-grp-3794/KraftanleggNyanskaffelsePakostningBeregningGevinstTapKostpris-datadef-23090">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>14 Nyanskaffelser/påkostninger i 2006: Kostpris</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/VedGevinstTapsberegning-grp-3794/KraftanleggGevinstTapInngangsverdiNyanskaffelsePakostning-datadef-23092">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>14 Nyanskaffelser/påkostning i 2006: kostpris</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/VedGevinstTapsberegning-grp-3794/AvskrivningerKraftanleggBeregningGevinstTap-datadef-23091">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>16 Avskrivningsbeløp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/VedGevinstTapsberegning-grp-3794/PakostningerMv-datadef-9177">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>18 Påkostning føres i denne posten kun ved gevinst/tapsberegning</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Det skal føres et eget skjema for påkostninger. Ved realisasjon av  driftsmiddel som nevnt i skatteloven § 18-6 nr. 1, skal påkostningen  på vedkommende driftsmiddel tas med som en del av inngangsverdien ved
+                                    beregning av gevinst/tap. Den skattemessige verdien på påkostningen  føres da inn i kolonne II. Det må opplyses om hvilket kontonummer  påkostningen har.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/VedGevinstTapsberegning-grp-3794/DriftsmiddelUtgangsverdiSkattemessig-datadef-11760">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>18 Påkostning føres i denne posten kun ved gevinst/tapsberegning</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Det skal føres et eget skjema for påkostninger. Ved realisasjon av  driftsmiddel som nevnt i skatelovens §18-6 nr. 1, skal påkostningen  på vedkommende driftsmiddel tas med som en del av inngangsverdien ved
+                                    beregning av gevinst/tap. Den skattemessige verdien påpåkostningen  føres da inn i kolonne II. Det må opplyses om hvilket kontonummer  påkostningen har.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/BeregningAvAvskrivningOgGevinstTap-grp-3507/BeregningAvAvskrivningOgGevinstTap-grp-3795/VedGevinstTapsberegning-grp-3794/DriftsmiddelRealisasjonGevinst-datadef-10370">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>19 Gevinst/tap ved realisasjon</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Gevinst eller tap ved realisasjon av driftsmiddel fremkommer ved at  beløpet i post 10 fratrekkes beløpene i post 13, 14, og 18, mens  avskrivningsbeløpet i post 16 må legges til.  </p>
+                                <p>Ved realisasjon skal det foretas gevinst-/ tapsberegning på skjemaet.  Ved realisasjon av driftsmidler mv. gjelder bestemmelsene for  driftsmidler som angitt i skatteloven § 14-41 første ledd e-i, jf. §  14-44
+                                    tilsvarende.  </p>
+                                <p>Gevinst ved samlet realisasjon av særskilte driftsmidler i kraftanlegg  som nevnt i § 18-6 første ledd og fallrettigheter eller andel i slike  er unntatt fra skatteplikt dersom overtaker viderefører de
+                                    skattemessige verdiene og ervervstidspunktene for eiendeler,  rettigheter og forpliktelser som overføres.</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

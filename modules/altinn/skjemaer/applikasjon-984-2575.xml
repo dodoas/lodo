@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RA-0532-A: Undersøkelse om utenriksøkonomi - årsrapportering</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-984-2576.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4491/OppgavePeriode-datadef-21619"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4491/OppgaveInnsendelseFrist-datadef-16296"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4491/Enhet-grp-4492/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4491/Enhet-grp-4492/EnhetOrganisasjonsnummer-datadef-18"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4491/Enhet-grp-4492/EnhetAdresse-datadef-15"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4491/Enhet-grp-4492/EnhetPostnummer-datadef-6673"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4491/Enhet-grp-4492/EnhetPoststed-datadef-6674"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-4491/Kontaktperson-grp-4493/KontaktpersonNavn-datadef-2" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-4491/Kontaktperson-grp-4493/KontaktpersonTelefonnummer-datadef-3" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RA-0532-A. Rapportering om utenriksøkonomi. Årsrapportering</p>
+            </xforms:caption>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-4491">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Innsending av fil som er laget fra Excel-skjemaet gjøres ved å klikke  på arkfanen vedlegg til venstre.  </p>
+                    <p>Rapporten skal gjelde den norske delen av den juridiske personen, dvs.  den juridiske personen eksk. eventuelle filialer i utlandet.  </p>
+                    <p>Rapporten skal inneholde tall for hittil i år. Kontroller om tallene  avser riktig periode.</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-4491/OppgavePeriode-datadef-21619">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Rapporteringsperiode:</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-4491/OppgaveInnsendelseFrist-datadef-16296">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Innsendelsesfrist:</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-4491/Enhet-grp-4492">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Rapporteringsenhet</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Rett eventuelle feil i boksene nedenfor.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4491/Enhet-grp-4492/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4491/Enhet-grp-4492/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>null</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>null</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4491/Enhet-grp-4492/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4491/Enhet-grp-4492/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>null</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>null</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>null</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4491/Enhet-grp-4492/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-4491/Kontaktperson-grp-4493">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kontaktperson</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Oppgi alltid navn på kontaktperson som SSB kan kontakte.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4491/Kontaktperson-grp-4493/KontaktpersonNavn-datadef-2">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4491/Kontaktperson-grp-4493/KontaktpersonTelefonnummer-datadef-3">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefonnummer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4491/Kontaktperson-grp-4493/KontaktpersonTelefaxnummer-datadef-324">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefaks</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4491/Kontaktperson-grp-4493/KontaktpersonEPost-datadef-2876">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kontaktpersonens epostadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4491/Kontaktperson-grp-4493/EnhetEPost-datadef-5963">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Rapporteringsenhetens E-post</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Husk vedlegg før innsending. Gå til arkfanen vedlegg oppe til venstre  i bildet. Legg til vedlegget. Send data.</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

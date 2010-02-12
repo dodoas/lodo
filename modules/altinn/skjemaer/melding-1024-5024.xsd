@@ -1,0 +1,1268 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--title='RF-1208: Hjelpeberegninger til overgangsregel C og D for inntektsåret 2005' lang='NOB'-->
+    <xs:element name="Skjema">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>RF-1208  Hjelpeberegninger til overgangsregel C og D for inntektsåret  2005</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Del 1 skal benyttes av alle aksjeselskap og allmennaksjeselskap med  skattefri gevinst ved realisasjon av aksjer mv i 2004.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Generell-grp-5143"/>
+                <xs:element minOccurs="0" ref="OvergangsregelC-grp-5603"/>
+                <xs:element minOccurs="0" ref="HjelpeberegningForPost113-grp-5606"/>
+                <xs:element minOccurs="0" ref="OvergangsregelD-grp-5145"/>
+            </xs:sequence>
+            <xs:attribute fixed="1024" name="skjemanummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="5024" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="RF-1208" name="blankettnummer" type="xs:string" use="optional"/>
+            <xs:attribute fixed="Hjelpeberegninger til overgangsregel C og D for inntektsåret 2005" name="tittel" type="xs:string" use="optional"/>
+            <xs:attribute fixed="5142" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+            <xs:attribute name="etatid" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="974761076">
+                            <xs:annotation>
+                                <xs:documentation>SKATTEDIREKTORATET</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:anyAttribute/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Generell-grp-5143">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Generell</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="EnhetNavn-datadef-1">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetOrganisasjonsnummer-datadef-18">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnummer</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5143" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EnhetNavn-datadef-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Navn på juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Navn på årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">1</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="1" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst175-repformat-8">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="175"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetOrganisasjonsnummer-datadef-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummeret til enheten</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Organisasjonsnummer til årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">2</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="18" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst99Modulus11-repformat-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">1</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OvergangsregelC-grp-5603">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Beregning av skattepliktig inntekt etter overgangsregel C</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Aksjeselskap og allmennaksjeselskap som har alminnelig skatteplikt til  Norge, skal foreta inntektsføring i 2005 etter overgangsregel C når  selskapets generalforsamling i inntektsåret 2005 har truffet  beslutning om utdeling
+                        av ubeskattet inntekt, som nedenfor bestemt.  Overgangsregelen skal, så langt den passer, også gjelde for likestilt  selskap og sammenslutning som nevnt i skatteloven § 2-2 første ledd  b-e.  </p>
+                    <p/>
+                    <p>Inntektsføring skal foretas når det oppstår underdekning ved at  selskapets egenkapital i hht balansen i årsoppgjøret for 2004 (med  visse korreksjoner jfr brev FIN 04.03.05) er lavere enn summen av:  </p>
+                    <p>A Innbetalt aksjekapital herunder overkurs, og en beregnet  egenkapitalandel av netto positive midlertidige forskjeller mellom de  verdier som fremkommer i balansen i årsoppgjøret og selskapets  skattemessige verdier.  Ved
+                        beregningen etter første punktum gjelder  annet til fjerde punktum i skatteloven § 10-5 annet ledd og  overgangsregel D tilsvarende.  </p>
+                    <p>B Netto gevinst, etter fradrag for tap, som er innvunnet etter 25.  mars 2004 og som ville vært skattepliktig etter de regler som gjaldt  25. mars 2004, i den utstrekning gevinst ikke skattlegges og tap ikke  kommer til fradrag
+                        etter skatteloven § 2-38.  Netto gevinst etter  første punktum beregnes etter de regler som gjaldt 25. mars 2004.  Beløpet som fastsettes etter første og annet punktum, skal reduseres  med skatten på det beløpet som er
+                        inntektsført etter denne  overgangsregel.  </p>
+                    <p/>
+                    <p>Inntektsføring skal bare foretas så langt underdekningen skyldes:  </p>
+                    <p>A. selskapet har avsatt til utbytte i selskapets årsoppgjør 2004  eller  </p>
+                    <p>B. selskapet har gitt konsernbidrag med virkning for inntektsåret 2004  som overstiger selskapets alminnelige inntekt i 2004 eller  </p>
+                    <p>C. selskapet i 2005 har besluttet å dele ut utbytte, jf. skatteloven §  10-11, som overstiger avsetningen til utbytte i årsregnskapet for  2004 eller  </p>
+                    <p>D. selskapet i 2005 har besluttet å dele ut mer enn aksjens  forholdsmessige andel av innbetalt aksjekapital, herunder overkurs,  ved nedsettelse av aksjekapitalen med innløsning av enkeltaksje.  </p>
+                    <p/>
+                    <p>Inntekten settes til et bruttobeløp som, etter at beregnet skatt av  bruttobeløpet er trukket fra, tilsvarer det utbyttet eller  konsernbidraget som er avsatt eller utdelt ut over grensen etter  annet ledd, jf. tredje ledd.
+                        Inntekten skal likevel settes ned i  samsvar med bestemmelsene i femte og sjette ledd.  </p>
+                    <p/>
+                    <p>Inntekten reduseres med korreksjonsinntekt som selskapet må  inntektsføre i 2004 og 2005 på grunn av utdelinger som selskapets  generalforsamling har besluttet i 2005.  </p>
+                    <p/>
+                    <p>Inntekten som fremkommer etter fjerde og femte ledd, reduseres  forholdsmessig med andelen av den samlede utdeling, jf. tredje ledd,  som tilfaller aksjonærer som ikke har rett til godtgjørelse etter  skatteloven § 10-12 for
+                        det mottatte beløp.  Det skal likevel ikke  foretas inntektsreduksjon ved utdeling til aksjonær som nevnt i  foregående punktum, i den utstrekning slik aksjonær lar inntekten  strømme gjennom ett eller flere ledd i en
+                        eierkjede, og inntekten i  2005 innvinnes som utbytte av aksjonærer som har rett til  godtgjørelse etter skatteloven § 10-12 for det mottatte beløp.  </p>
+                    <p/>
+                    <p>Departementet kan i forskrift gi nærmere regler til utfylling og  gjennomføring av denne overgangsregel.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="AksjekapitalOverkursGjenvarende-datadef-24480">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>101 Skattemessig innbetalt aksjekapital inklusive overkurs som  fremdeles er i behold i selskapet</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres innbetalt aksjekapital inkludert overkurs redusert med  eventuelle utgifter som er ført mot overkursfond, f.eks.  stiftelsesutgifter.  Som innbetalt aksjekapital inkl. overkurs,  regnes bare det som er i
+                                    behold i selskapet.  Aksjekapital og  overkurs som er anvendt til dekning av tap eller tilbakebetalt til  aksjonærene skal derfor ikke medtas i denne posten.  </p>
+                                <p>Har selskapet nedskrevet aksjekapital, herunder overkurs, som tapt,  men senere forhøyet aksjekapitalen uten nytegning, vil  kapitalforhøyelsen regnes som innbetalt aksjekapital så lenge den  ligger innenfor den
+                                    opprinnelige innbetalte aksjekapital.  I  mellomliggende periode regnes innbetalt aksjekapital til den delen  som er i behold.  Det skal ses bort fra aksjekapital, herunder  overkurs, som skriver seg fra
+                                    oppskrivning uten innbetaling, selv om  oppskrivningen gjelder beløp som er skattlagt etter tidligere  selskapsskatteloven § 1-6.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Beløpet i denne poster tilsvarer beløpet som skal føres i post 150 for  beregning av eventuell korreksjonsinntekt.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="PositiveMidlertidigeForskjeller-grp-5604"/>
+                <xs:element minOccurs="0" ref="NegativeMidlertidigeForskjeller-grp-5605"/>
+                <xs:element minOccurs="0" ref="ForskjellerAksjerOvergangsregelDFjoraret-datadef-24486">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>104 Midlertidige forskjeller på aksjer jf. overgangsregel D for 2004  (RF-1208)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres forskjeller (iht overgangsregel D til sktl § 2-38) mellom  regnskapsmessig og skattemessig verdi på aksjer mv. som omfattes av  fritaksmetoden.  Beløpet hentes fra skjemaet Samleoppgave for  realisasjoner
+                                    av aksjer mv og hjelpeberegninger til overgangsregel B  og D, samt underlag for overgangsregel C i skattereformen,  RF-1208/2004, post 14.  Vær oppmerksom på at det ved beregningen av  skattemessig verdi ikke skal
+                                    tas hensyn til RISK.  Beløpet skal tas  med uten reduksjon for skatt.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ForskjellerAksjerNettoFratrukketSkatteeffektFjoraret-datadef-24485">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>105 Sum midlertidige forskjeller</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres summen av beløpene i post 102, 103 og 104, som da utgjør  netto midlertidige forskjeller, også hensyntatt overgangsregel D.  Dersom beløpet i post 105 blir negativt, skal beløpet som føres i den  høyre
+                                    kolonne være 0.  Det er således forskjell mellom fremgangsmåten  for beregning av netto midlertidig forskjell som skal medtas ved  beregning av inntekt etter overgangsregel C og tilsvarende ved  beregning av
+                                    korreksjonsinntekt i selvangivelsen post 301 - 350.  I  hht overgangsregel C medtas kun positive midlertidige forskjeller ved  beregning av egenkapitalkravet (post 108).  I selvangivelsen post 301  - 350 medtas
+                                    også netto negative midlertidige forskjeller.  Forskjellen skyldes at ved beregning av korreksjonsinntekt i  selvangivelsen foreligger en reverseringsadgang i de tilfeller det  tidligere år er beregnet positiv korreksjonsinntekt.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ForskjellerAksjerPositivNettoFratrukketSkatteeffektFjoraret-datadef-25069">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>105 Sum midlertidige forskjeller (positivt)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="AksjekapitalOverkursGjenvarendeJustertMidlertidigeForskjeller-datadef-24487">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>106 Sum postene 101 og 105</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres summen av post 101 og post 105.  Dette beløpet vil tilsvare  beløpet som skal føres i post 155 nedenfor.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GevinstAksjer260304311204NettoMinusSkatt-datadef-24488">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>107 Netto gevinst etter 25.03.2004 minus skatt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres netto gevinst, etter fradrag for tap, som er innvunnet etter  25. mars 2004 og som ville vært skattepliktig etter de regler som  gjaldt 25. mars 2004, i den utstrekning gevinst ikke skattlegges og  tap
+                                    ikke kommer til fradrag etter skatteloven § 2-38.  Netto gevinst  etter første punktum beregnes etter de regler som gjaldt 25. mars  2004, jf. overgangsregel C (2)b.  Beløpet kan hentes fra RF-1208/2004
+                                    (overgangsregel B) linje 413.  Det gjøres fradrag for utsatt skatt  som selskapet har avsatt ved årsoppgjøret for 2004 på grunn av  beregnet inntektsføring etter overgangsregel C, jf Ot.prp nr 1  2004-2005 side
+                                    103.  Også gevinster i 2005 som foranlediger utdeling  av utbytte i 2005 skal medregnes.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                                <p>Her føres netto gevinst, etter fradrag for tap, som er innvunnet etter  25. mars 2004 og som ville vært skattepliktig etter de regler som  gjaldt 25. mars 2004, i den utstrekning gevinst ikke skattlegges og  tap
+                                    ikke kommer til fradrag etter skatteloven § 2-38.  Netto gevinst  etter første punktum beregnes etter de regler som gjaldt 25. mars  2004, jfr overgangsregel C (2) b.  Beløpet kan hentes fra  RF-1208/2004
+                                    (overgangsregel B) linje 413.  Det gjøres fradrag for  utsatt skatt som selskapet har avsatt ved årsoppgjøret for 2004 på  grunn av beregnet inntektsføring etter overgangsregel C, jf Ot.prp.  nr 1 2004-2005 side
+                                    103.  Også gevinster i 2005 som foranlediger av  utbytte i 2005 skal medregnes.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="AksjekapitalOverkursGjenvarendeJustertOvergangsregelC-datadef-24489">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>108 Sum postene 106 og 107</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Denne summen utgjør kravet til egenkapital etter overgangsregel C(2).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EgenkapitalFjoraretMinusAretsEkstraordinartUtbytte-datadef-24490">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>109 Egenkapital i balansen for 2004 overført fra næringsoppgaven  redusert med ekstraordinært utbytte mv. i 2005</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Sum egenkapital i balansen hentes fra post 9450 i næringsoppgave 2,  post 5000 i næringsoppgave 3 og post 9350 i næringsoppgave 4.  Denne  summen skal reduseres med eventuelt besluttet utdelt utbytte i 2005  som
+                                    overstiger avsetningen til utbytte i årsregnskapet for 2004  og/eller selskapet i 2005 har besluttet å dele ut mer enn aksjens  forholdsmessige andel av innbetalt aksjekapital, herunder overkurs,  ved nedsettelse
+                                    av aksjekapitalen med innløsning av enkeltaksje,  eller endret beslutning om utdeling av konsernbidrag, jf. uttalelse  FIN 04. mars 2005.  </p>
+                                <p/>
+                                <p>Sum egenkapital sammenholdes så med summen av skattlagt kapital,  egenkapitaldelen av netto positive midlertidige forskjeller i  selskapet, midlertidig forskjell etter overgangsregel D og netto  skattefri gevinst
+                                    som fremkommer i post 108.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="DifferanseEgenkapitalBeregningOvergangsregelC-datadef-24491">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>110 Ved underdekning vil det fremkomme en positiv differanse her.  Beløpet overføres til post 112 venstre felt. Dersom beløpet skal i  denne posten er negativt, skal  post 111 til 116 ikke fylles ut.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Ved underdekning vil det framkomme en positiv differanse her.  Dersom  egenkapitalen i selskapet post 109, er mindre enn summen i post 108,  vil det fremkomme en positiv differanse her.  I den utstrekning en  slik
+                                    positiv differanse skyldes at det er avsatt utbytte mv. (se post  111), vil utbytteavsetning mv bli rammet av overgangsregel C.  </p>
+                                <p>Dersom beløpet i post 110 er mindre eller lik utbytte mv i post 111,  overføres beløpet i post 110 til post 112.  Dersom beløpet i post 110  er større enn utbytte mv i post 111, overføres beløpet i post 111 til
+                                    post 112.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Dersom det fremkommer en negativ differanse her, vil utbytte mv ikke  medføre inntekt etter overgangsregel C.  Resten av skjemaets del 1  skal derfor ikke benyttes.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="UnderdekningEgenkapitalBeregningOvergangsregelC-datadef-24492">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>111 utdelt utbytte  </p>
+                                <p>Hvis post 110 er større enn post 111, overfør post 111 til post 112  venstre felt.  Dersom beløpet i denne posten er negativt, skal post  111 til 116 ikke fylles ut.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres:  </p>
+                                <p>a avsatt utbytte i selskapets årsoppgjør for 2004  </p>
+                                <p>b avgitt konsernbidrag med virkning for inntektsåret 2004, som  overstiger selskapets alminnelige inntekt i 2004  </p>
+                                <p>c besluttet utdelt utbytte jfr skatteloven § 10-11, som overstiger  avsetningen til utbytte i årsregnskapet for 2004  </p>
+                                <p>d besluttet utdelt i 2005 mer enn aksjens forholdsmessige andel av  innbetalt aksjekapital, herunder overkurs, ved nedsettelse av  aksjekapitalen med innløsning av enkeltaksje.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="InntektBeregnetOvergangsregelCBeregningsgrunnlag-datadef-24493">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>112 Beregnet inntekt, underdekning iht post 111</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Underdekningen som fremkommer i post 110 føres i det venstre feltet  for å divideres med 0,72 slik at det beløp som skal inntektsføres for  skatteberegning fremkommer og føres i det høyre feltet, jfr.
+                                    overgangsregel C(4).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="InntektBeregnetOvergangsregelCBeregningsgrunnlagSkattejustert-datadef-24494">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>: 0,72</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres differansen mellom inntekt beregnet i post 112 og beregnet  korreksjonsinntekt oppført i post 113.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="InntektBeregnetOvergangsregelC-datadef-24496">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>114 Sum inntekt etter overgangsregel C</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres differansen mellom inntekt beregnet i post 112 og beregnet  korreksjonsinntekt oppført i post 113.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="UtdelingSelskapsaksjonarerAndel-datadef-24497">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>115 Andel av samlet utdeling som tilfaller selskapsaksjonær (legg ved  beregning ved gjennomstrømming)</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres den andelen av inntekten beregnet i post 114, som tilfaller  selskapsaksjonærer.  </p>
+                                <p>Selskap som har realisert aksjer mv med skattefri gevinst i 2004,  plikter å beregne skatt også når utbytte strømmer gjennom andre  selskap og (til slutt) tilfaller personlige aksjonærer i 2005.  Andelen av
+                                    aksjeutbytte som tilfaller selskapsaksjonærer som lar  inntekten strømme gjennom ett eller flere ledd i en eierkjede slik at  inntekten i 2005 innvinnes som utbytte av aksjonærer som har rett til  godtgjørelse
+                                    etter skatteloven § 10-12 for det mottatte utbytte, skal  derfor ikke medregnes her, jfr. overgangsregel C(6).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="InntektsforingOvergangsregelC-datadef-23933">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>116 Beløp til inntektsføring - Beløpet overføres til post 208 i  RF-1028</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres den andelen av inntekten beregnet i post 116, som tilfaller  personlige aksjonærer i 2005.  denne andelen kan enten tilfalle  personlige aksjonærer i selskapet eller personlige aksjonærer etter
+                                    gjennomstrømming i en eierkjede.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5603" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjekapitalOverkursGjenvarende-datadef-24480">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Skattemessig innbetalt aksjekapital inklusive overkurs som fremdeles er i behold i selskapet.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24480" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopHeltall15-repformat-37">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">37</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="PositiveMidlertidigeForskjeller-grp-5604">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>102</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="ForskjellerAksjerPositiveFjoraret-datadef-24481">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>102 Sum positive midlertidige forskjeller 31.12.2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres sum positive midlertidige forskjeller pr 31.12.  Beløpet  multipliseres med 0,72 for å få fram egenkapitalandelen av  forskjellene.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ForskjellerAksjerPositiveFratrukketSkatteeffektFjoraret-datadef-24482">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>x 0,72</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Beløpet som skal føres her, er sum negative midlertidige forskjeller  pr. 31.12.  Beløpet multipliseres med 0,72 for å få frem  egenkaptalandelen av forskjellene.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5604" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ForskjellerAksjerPositiveFjoraret-datadef-24481">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Sum positive midlertidige forskjeller på aksjer for fjoråret.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24481" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ForskjellerAksjerPositiveFratrukketSkatteeffektFjoraret-datadef-24482">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Sum positive midlertidige forskjeller på aksjer for fjoråret fratrukket skatteeffekt.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">5</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24482" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="NegativeMidlertidigeForskjeller-grp-5605">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>103</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="ForskjellerAksjerNegativeFjoraret-datadef-24483">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>103 Sum negative midlertidige forskjeller 31.12.2004</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ForskjellerAksjerNegativeFratrukketSkatteeffektFjoraret-datadef-24484">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>x 0,72</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5605" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ForskjellerAksjerNegativeFjoraret-datadef-24483">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Sum negative midlertidige forskjeller på aksjer for fjoråret.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24483" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ForskjellerAksjerNegativeFratrukketSkatteeffektFjoraret-datadef-24484">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Sum negative midlertidige forskjeller på aksjer for fjoråret fratrukket skatteeffekt.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">7</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24484" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ForskjellerAksjerOvergangsregelDFjoraret-datadef-24486">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Midlertidige forskjeller på aksjer jf. overgangsregel D.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24486" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ForskjellerAksjerNettoFratrukketSkatteeffektFjoraret-datadef-24485">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Netto midlertidige forskjeller på aksjer for fjoråret fratrukket skatteeffekt og midlertidige forskjeller jf overgangsregel D.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24485" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ForskjellerAksjerPositivNettoFratrukketSkatteeffektFjoraret-datadef-25069">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Netto positiv midlertidige forskjeller på aksjer for fjoråret fratrukket skatteeffekt og midlertidige forskjeller jf overgangsregel D.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">10</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="25069" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjekapitalOverkursGjenvarendeJustertMidlertidigeForskjeller-datadef-24487">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Skattemessig innbetalt aksjekapital inklusive overkurs som fremdeles er i behold i selskapet justert for midlertidige forskjeller i aksjeverdier.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">11</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24487" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GevinstAksjer260304311204NettoMinusSkatt-datadef-24488">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Netto gevinst i perioden 26.03.2004-31.12.2004 minus skatt.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">12</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24488" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjekapitalOverkursGjenvarendeJustertOvergangsregelC-datadef-24489">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Mellomsummering vedr. beregning etter overgangsregel C</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">13</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24489" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EgenkapitalFjoraretMinusAretsEkstraordinartUtbytte-datadef-24490">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Egenkapital i balansen for fjoråret redusert med årets ekstraordinære utbytte.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">14</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24490" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DifferanseEgenkapitalBeregningOvergangsregelC-datadef-24491">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>&quot;Differanse&quot; i egenkapitalberegninger vedrørende beregning overgangsregel C.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">15</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24491" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UnderdekningEgenkapitalBeregningOvergangsregelC-datadef-24492">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>&quot;Underdekning&quot; i egenkapitalberegninger vedrørende beregning overgangsregel C.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">16</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24492" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntektBeregnetOvergangsregelCBeregningsgrunnlag-datadef-24493">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Beregningsgrunnlag for beregning av skattepliktig inntekt etter overgangsregel C</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">17</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24493" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntektBeregnetOvergangsregelCBeregningsgrunnlagSkattejustert-datadef-24494">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Skattejustert beregningsgrunnlag for beregning av skattepliktig inntekt etter overgangsregel C</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">18</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24494" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntektBeregnetOvergangsregelC-datadef-24496">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Sum inntekt etter overgangsregel C</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">19</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24496" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="UtdelingSelskapsaksjonarerAndel-datadef-24497">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Andel av samlet utdeling som tilfaller selskapsaksjonærene.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">20</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24497" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InntektsforingOvergangsregelC-datadef-23933">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">21</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="23933" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="HjelpeberegningForPost113-grp-5606">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Hjelpeberegning for post 113 - Beregnet korreksjonsinntekt 2004 med  tillegg av ekstrautdelinger i 2005</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Selskaper som har alminnelig skatteplikt til Norge for hele sitt  overskudd, skal inntektsføre en korreksjonsinntekt dersom selskapet  har utdelt ubeskattet kapital (dvs midlertidige positive forskjeller)  eller har foretatt
+                        avsetning til slik utdeling.  Den beregning som er  foretatt under postene 101 til 113, vil også omfatte slik inntekt som  skal beskattes som korreksjonsinntekt.  Skattepliktig inntekt i hht  overgangsregel C er endelig for
+                        selskapet, mens korreksjonsinntekt er  en reversibel inntekt.  Denne ulikheten medfører at det er viktig å  avgrense skattepliktig inntekt etter overgangsregel C ved å skille ut  den delen av utdeling av ikke beskattet inntekt
+                        som ikke skriver seg  fra skattefrie aksjegevinster, dvs skille ut korreksjonsinntekt etter  sktl § 10-5.  Hjelpeberegning for utskillelse av korreksjonsinntekt  for å avgrense inntektsføring etter overgangsregel C foretas i
+                        postene 150 til 160.  </p>
+                    <p/>
+                    <p>OBS:  </p>
+                    <p>Ovenstående hjelpeberegning for korreksjonsinntekt skal gjennomføres  med de samme forutsetninger som beregning av egenkapitalkravet i  overgangsregel C(2).  Dette kan medføre at beregning av  korreksjonsinntekt med det formål
+                        å isolere eventuell utdeling av  skattefri aksjegevinst, kan avvike fra årets beregning av  korreksjonsinntekt i selvangivelsen postene 301 til 350.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="DifferanseEgenkapitalHjelpeberegningOvergangsregelC-datadef-24500">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>157 Ved underdekning vil det fremkomme en positiv differanse her.  Beløpet overføres til post 160. Dersom beløpet i denne posten er  negativt, skal post 160 ikke fylles ut</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Dersom egenkapitalen i selskapet er mindre enn summen i post 155, vil  det fremkomme en positiv differanse her.  I den utstrekning en slik  positiv differanse skyldes at det er avsatt utbytte mv., vil
+                                    utbytteavsetningen mv. være foretatt av ikke skattlagt kapital.  </p>
+                                <p>Dersom det oppstår en negativ differanse her, er egenkapitalen i  balansen større enn kravet etter skatteloven § 10-5.  Avsetning til  utbytte mv. vil da ikke være foretatt av ubeskattet kapital, og  betingelsene
+                                    for beregning av korreksjonsinntekt vil ikke være til  stede.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KorreksjonsinntektBeregningOvergangsregelCBeregningsgrunnlag-datadef-24501">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>160 Beregnet korreksjonsinntekt. Overføres til post 113</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="KorreksjonsinntektBeregningOvergangsregelC-datadef-24495">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>: 0,72</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5606" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DifferanseEgenkapitalHjelpeberegningOvergangsregelC-datadef-24500">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>&quot;Differanse&quot; i egenkapitalberegninger vedrørende hjelpeberegning overgangsregel C.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">22</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24500" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KorreksjonsinntektBeregningOvergangsregelCBeregningsgrunnlag-datadef-24501">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Beregningsgrunnlag for korreksjonsinntekt ved overgangsregel C</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">23</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24501" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KorreksjonsinntektBeregningOvergangsregelC-datadef-24495">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Korreksjonsinntekt ved beregning av skattepliktig inntekt etter overgangsregel C</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">24</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="24495" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OvergangsregelD-grp-5145">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Overgangsregel D. Midlertidige forskjeller mellom skattemessige og  regnskapsmessige verdier på aksjer som påvirker beregning av  korreksjonsinntekt</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Forskjeller mellom skattemessige og regnskapsmessige verdier på aksjer  har inntil innføring av fritaksmetoden vært behandlet som  midlertidige forskjeller (RF-1217 post 111 - 113).  </p>
+                    <p/>
+                    <p>For aksjer som omfattes av fritaksmetoden fom  </p>
+                    <p>26. mars 2004, bortfaller slike forskjeller på aksjer  </p>
+                    <p>og skal derfor ikke lenger medtas i RF 1217.  </p>
+                    <p/>
+                    <p>Forskjeller mellom skattemessig og  </p>
+                    <p>regnskapsmessige verdier for aksjer som omfattes  </p>
+                    <p>av fritaksmetoden, skal imidlertid i hht  </p>
+                    <p>overgangsregel D inngå i beregning av  </p>
+                    <p>korreksjonsinntekt, jfr sktl § 10-5 annet ledd. Det  </p>
+                    <p>skal i denne forbindelse ikke gjøres fradrag for en  </p>
+                    <p>beregnet skatteforpliktelse knyttet til differansen  </p>
+                    <p>mellom skattemessige og regnskapsmessige  </p>
+                    <p>verdier for akjer som omfattes av fritaksmetoden  </p>
+                    <p>jfr § 10-5 annet ledd annet punktum.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="AksjerMvRegnskapsmessigVerdiOvergangsregelD-datadef-22528">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>170 Aksjer regnskapsmessig verdi</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres den regnskapsmessige verdi pr  </p>
+                                <p>31.12.2005 på aksjer som omfattes av  </p>
+                                <p>fritaksmetoden</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="AksjerMvSkattemessigVerdiOvergangsregelD-datadef-22529">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>171 Aksjer skattemessig verdi</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres den skattemessige verdi pr  </p>
+                                <p>31.12.2005 på aksjer som omfattes av  </p>
+                                <p>fritaksmetoden.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="Sum-grp-5146"/>
+            </xs:sequence>
+            <xs:attribute fixed="5145" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvRegnskapsmessigVerdiOvergangsregelD-datadef-22528">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Aksjer regnskapsmessig verdi vedrørende overgangsregel D</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">25</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22528" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvSkattemessigVerdiOvergangsregelD-datadef-22529">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Aksjer skattemessig verdi vedrørende overgangsregel D</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">26</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22529" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Sum-grp-5146">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>514 Sum</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                    <p>(positivt beløp overføres til positive forskjeller og negativt beløp  overføres til negative forskjeller) Overføres til RF-1028 post 306</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="AksjerMvDifferanseRegnskapSkattOvergangsregelD-datadef-22530">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>172 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres differanse mellom den regnskapsmessige verdi i post 12 og  den skattemessige verdi i post 13. Positiv differanse føres til  RF-1028 (selvangivelsen) post 306 med positivt fortegn. Negativ  differanse føres
+                                    til samme sted med negativt fortegn.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="PositiveForskjeller-grp-5147"/>
+                <xs:element minOccurs="0" ref="NegativeForskjeller-grp-5148"/>
+            </xs:sequence>
+            <xs:attribute fixed="5146" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvDifferanseRegnskapSkattOvergangsregelD-datadef-22530">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Differanse mellom regnskapsmessig og skattemessig verdi på aksjer vedrørende overgangsregel D</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">27</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22530" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="PositiveForskjeller-grp-5147">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Positive forskjeller pr 31.12</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="ForskjellerPermanentePositiveAksjer-datadef-22523">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>172 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres differansen mellom den regnskapsmessige verdi i post 170 og  den skattemessige verdi i post 171.  Positiv differanse føres til  RF-1028 (selvangivelsen) post 306 med positivt fortegn.  Negativ  differanse
+                                    føres til samme sted med negativt fortegn.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5147" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ForskjellerPermanentePositiveAksjer-datadef-22523">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Permanente positive forskjeller på aksjer.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">28</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22523" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="NegativeForskjeller-grp-5148">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Negative forskjeller pr 31.12</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="ForskjellerPermanenteNegativeAksjer-datadef-22524">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>172 Sum</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Her føres differansen mellom den regnskapsmessige verdi i post 170 og  den skattemessige verdi i post 171.  Positiv differanse føres til  RF-1028 (selvangivelsen) post 306 med positivt fortegn.  Negativ  differanse
+                                    føres til samme sted med negativt fortegn.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5148" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ForskjellerPermanenteNegativeAksjer-datadef-22524">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Permanente negative forskjeller på aksjer.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">29</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="22524" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">FD-0001: Månedsrapport biomasse og lakselus</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-894-3630.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/Selskapsinformasjon-grp-5107/OppgaveManedsrapportering-datadef-21814" required="true"/>
+            <xforms:bind ref="/Skjema/Selskapsinformasjon-grp-5107/OppgaveAr-datadef-11236" required="true"/>
+            <xforms:bind ref="/Skjema/Selskapsinformasjon-grp-5107/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind ref="/Skjema/Selskapsinformasjon-grp-5107/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind ref="/Skjema/Selskapsinformasjon-grp-5107/LokalitetNummer-datadef-2908" required="true"/>
+            <xforms:bind ref="/Skjema/Selskapsinformasjon-grp-5107/LokalitetNavn-datadef-4932" required="true"/>
+            <xforms:bind ref="/Skjema/Lakselus-grp-5114/OppdrettLakselusSjotemperatur-datadef-17889" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>Månedsrapport biomasse og lakselus</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Innrapporteringen tar utgangspunkt i bestemmelser som er angitt i  forskrift om drift av akvakulturanlegg fastsatt 22.12.2004, ofte  omtalt som driftsforskriften og forskriften om bekjempelse av  lakselus, ofte omtalt som
+                    lakselusforskriften.  </p>
+                <p>Overordnet hjemmel for innrapporteringen er lov av 14. juni 1985 nr 68  om oppdrett av fisk, skalldyr m.v. (oppdrettsloven), lov av 19.  desember 2003 nr 124 om matproduksjon og mattrygghet m.v. (matloven)  og lov av 20. desember
+                    1974 nr 73 om dyrevern (dyrevernloven). I  tillegg benyttes hjemmel i lov av 13. mars 1981 nr 6 om vern mot  forurensninger og avfall (forurensningsloven) §§ 11 særskilt  tillatelse til forurensende tiltak og 16 vilkår i
+                    tillatelse som  krever opplysninger om miljø og utslipp til oppdrettsvirksomhet.  Vilkår om miljørapportering inngår i utslippstillatelser.  </p>
+                <p>Med elektronisk innrapportering av månedsrapporten for biomasse og  lakselus vil relevante opplysninger videreformidles til  Fiskeridirektoratet, Mattilsynet og Statens forurensningstilsyn med  hjemlene som nevnt ovenfor.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/Selskapsinformasjon-grp-5107">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Selskapsinformasjon</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/Selskapsinformasjon-grp-5107/OppgaveManedsrapportering-datadef-21814">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Januar</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Februar</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>3</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Mars</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>4</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>April</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>5</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Mai</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>6</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Juni</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>7</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Juli</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>8</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>August</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>9</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>September</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>10</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Oktober</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>11</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>November</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>12</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Desember</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Måned</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Velg måned det skal rapporteres for.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/Selskapsinformasjon-grp-5107/OppgaveAr-datadef-11236">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>År</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Velg år det skal rapporteres for.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Selskapsinformasjon-grp-5107/EnhetOrganisasjonsnummer-datadef-18">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Organisasjonsnummer</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Selskapets organisasjonsnummer (9 siffer).</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Selskapsinformasjon-grp-5107/EnhetNavn-datadef-1">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Organisasjonsnavn</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Selskapets navn.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Selskapsinformasjon-grp-5107/LokalitetNummer-datadef-2908">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Lokalitetsnummer</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Lokalitetens nummer (5 siffer).  </p>
+                        <p>Du finner oversikt over lokaliteter på Fiskeridirektoratets websider  www.fiskeridir.no.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Lokalitetsnummer skal være 5 siffer.</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Selskapsinformasjon-grp-5107/LokalitetNavn-datadef-4932">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Lokalitetsnavn</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Lokalitetens navn.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Lakselus-grp-5114">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Lakselus</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Ved sjøtemperatur lik eller over 4 ° skal forekomst av lus  rapporteres. Vær oppmerksom på forskjellen mellom å ikke fylle ut et  felt (blank) og 0 (null). Blank betyr at det ikke er gjennomført  lusetelling, null betyr at
+                        lusetelling er gjennomført og at det ikke  er funnet lus. Du finner retningslinjer for telling av lakselus på  Mattilsynets websider www.mattilsynet.no.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/Lakselus-grp-5114/OppdrettLakselusSjotemperatur-datadef-17889">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sjøtemperatur</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Gjennomsnittlig sjøtemperatur i måneden det rapporteres for, målt ved  3 meters dyp.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Grader</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Lakselus-grp-5114/OppdrettLakselusHunnVoksenAntall-datadef-17890">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Voksne hunnlus</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Antall kjønnsmodne hunnlus med eller uten eggstrenger.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Antall</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Lakselus-grp-5114/OppdrettLakselusBevegeligeAntall-datadef-17891">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Bevegelige lus</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Antall voksen hannlus og halvvoksne (preadulte) stadier.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Antall</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Lakselus-grp-5114/OppdrettLakselusBehandlingerSisteManed-datadef-17892">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Behandlinger siste måned</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Antall behandlinger siste måned. Er det gått mer enn 14 dager siden  forrige behandling ble på begynt, regnes dette som ny behandling.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Antall</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/Lakselus-grp-5114/OppdrettLakselusBrukAvLeppefisk-datadef-17893">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Bruk av leppefisk</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Velg ja eller nei.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Ja/Nei</p>
+                    </xforms:hint>
+                </xforms:selectOne>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Biomasse-grp-5127">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Biomasse</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_Biomasse-grp-5115" nodeset="/Skjema/Biomasse-grp-5127/Biomasse-grp-5115">
+                    <xforms:group ref="/Skjema/Biomasse-grp-5127/Biomasse-grp-5115">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Biomasse</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Ved utfylling av en rad (merd), må følgende 7 felter fylles ut:  </p>
+                            <p>MerdID, Merdvolum, Fiskeart, Årsklasse, Beholdning, Snittvekt og  Fôrforbruk.  </p>
+                            <p>Ved uttak av fisk må i TILLEGG følgende 3 felter fylles ut:  </p>
+                            <p>Uttak antall, Uttak kilo og Spesifikasjon.</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/Biomasse-grp-5127/Biomasse-grp-5115/OppdrettMerdNummer-datadef-17894">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>MerdID</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Merdnummer må være det samme som brukes i driftsjournalen.  </p>
+                                <p>Dersom det skjer endringer for en merd i løpet av en måned, slik at  denne f.eks skifter fiskeart eller årsklasse, kan samme merd føres  opp på flere linjer. (Ved samlokalisering og rapportering for flere
+                                    organisasjoner, skal merdnummer være knyttet til innehaver av  tillatelsen.)</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Biomasse-grp-5127/Biomasse-grp-5115/OppdrettMerdVolumReelt-datadef-17900">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Merdvolum</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Volum for hver merd i m3 = Merdens overflate * faktisk dybde (fra  hovedtelne til bunntelne).</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>m3</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/Biomasse-grp-5127/Biomasse-grp-5115/OppdrettFiskArt-datadef-17895">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>071101</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Laks</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>071401</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ørret</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fiskeart</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Velg laks eller ørret.</p>
+                            </xforms:help>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/Biomasse-grp-5127/Biomasse-grp-5115/OppdrettFiskArsklasse-datadef-17896">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Årsklasse</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Året fisken ble satt i sjøen.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>År</p>
+                            </xforms:hint>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Årsklasse kan ikke være eldre enn 9 år.</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Biomasse-grp-5127/Biomasse-grp-5115/OppdrettFiskUtsattSisteManedAntall-datadef-17897">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utsatt</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Antall fisk som er blitt satt ut på lokaliteten i måneden det  rapporteres for.  </p>
+                                <p>Det skal ikke bare registrere utsett av smolt, men også utsett av  større fisk som er flyttet fra annen lokalitet. Ved mottak av fisk  fra annen lokalitet kommenteres dette i kommentarfeltet med  opplysningen om
+                                    hvilken lokalitet fisken kommer fra.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Antall</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Biomasse-grp-5127/Biomasse-grp-5115/OppdrettFiskBeholdningAntall-datadef-17901">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beholdning</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Antall fisk ved slutten av måneden det rapporteres for.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Antall</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Biomasse-grp-5127/Biomasse-grp-5115/OppdrettFiskBeholdningSnittvekt-datadef-17902">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Snittvekt</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Snittvekt for fiskebeholdningen ved slutten av måneden det rapporteres  for.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Gram</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Biomasse-grp-5127/Biomasse-grp-5115/OppdrettFôrForbruk-datadef-17904">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Forforbruk</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Fôrforbruk i måneden det rapporteres for.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Kilo</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Biomasse-grp-5127/Biomasse-grp-5115/OppdrettFiskTapDodAntall-datadef-17903">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Død</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Antall døde fisk som er tatt opp av merden.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Antall</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Biomasse-grp-5127/Biomasse-grp-5115/OppdrettFiskTapUtkastAntall-datadef-22410">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utkast</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Antall fisk oppgitt fra slakteri som utkast.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Antall</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Biomasse-grp-5127/Biomasse-grp-5115/OppdrettFiskTapRomtAntall-datadef-22411">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Rømt</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Antall fisk som har rømt fra merden.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Antall</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Biomasse-grp-5127/Biomasse-grp-5115/OppdrettFiskTapAnnetAntall-datadef-22412">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Uforklarlig</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Antall fisk som er tapt som følge av predatorer, tyveri, og andre  uforklarlige årsaker.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Antall</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Biomasse-grp-5127/Biomasse-grp-5115/OppdrettFiskUttakAntall-datadef-17905">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Uttak</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Antall fisk som er tatt ut i måneden det rapporteres for.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Antall</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Biomasse-grp-5127/Biomasse-grp-5115/OppdrettFiskUttakKilo-datadef-17906">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Uttak</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Totalt kilo (ikke snittvekt) som er tatt ut i måneden det rapporteres  for.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Kilo</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/Biomasse-grp-5127/Biomasse-grp-5115/OppdrettFiskUttakTilstand-datadef-22409">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>1</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Sløyd  </p>
+                                        <p/>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>2</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Hodekappet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>3</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Rund</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>4</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Solgt</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>5</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Flyttet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Spesifikasjon</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Velg riktig spesifikasjon av uttak.</p>
+                            </xforms:help>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/Biomasse-grp-5127/Biomasse-grp-5115/OppdrettFiskTellefeilAntall-datadef-17908">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Tellefeil</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Justering av antall fisk i henhold til opprinnelig utsett.  </p>
+                                <p>Eksempel: Dersom sortering / utslakting viser et høyere antall fisk  enn opprinnelig registrert ved utsett, skal differansen føres inn som  et positivt tall. Motsatt ved et lavere antall fisk, skal differansen
+                                    føres som et negativt tall.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Antall</p>
+                            </xforms:hint>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Annet-grp-5116">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Annet</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/Annet-grp-5116/OppdrettFôrType-datadef-22990">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Tørrfôr</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Mykfôr</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>3</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Våtfôr</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Fôrtype</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Velg fôrtype som er benyttet. Hvis det er benyttet forskjellige  fôrtyper på lokaliteten, skal det kommenteres i kommentarfeltet.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/Annet-grp-5116/OppdrettLokalitetBrakklagtDato-datadef-22992">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Brakklagt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dato lokaliteten ble tømt for fisk (fylles kun ut når lokaliteten  tømmes for fisk).  </p>
+                        <p>Ved endring av dato for brakklegging må ny søknad sendes til  Fiskeridirektoratet.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Dato</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Annet-grp-5116/OppdrettFiskFlyttetTilLokalitetsnummer-datadef-22991">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Flyttet til</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Ved flytting av fisk til en eller flere nye lokalitet, skal  lokalitetsnummer registres her. Ved flytting til flere lokaliteter  registreres numrene med kommaseparasjon. Eksempel: 10061, 12425, ?</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Lokalitetsnummer</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Annet-grp-5116/OppdrettTilleggsopplysninger-datadef-17909">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kommentarer</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her noteres opplysninger som ikke fanges opp av de andre feltene.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Annet-grp-5116/FagsystemType-datadef-22685">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Skal ikke vises på web</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Navn på fagsystem som sender inn informasjon.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

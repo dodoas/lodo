@@ -1,0 +1,217 @@
+<?php
+class ForskjellerRegnskapOgSkatteMapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+           			$this->ORID[$item] = $v;
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+            	$item = $this->Account[$a];
+            	$this->ORID[$item] = $v;
+	            return 1;
+    	    }
+       	}
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+	{
+        $this->addMapping('D1', 'EnhetNavn-datadef-1', 'VName');
+		$this->addMapping('D26', 'OppgavegiverFodselsnummer-datadef-26', 'SocialSecurityID');
+		$this->addMapping('D15', 'EnhetAdresse-datadef-15', 'VAddress');
+		$this->addMapping('D18', 'EnhetOrganisasjonsnummer-datadef-18', 'OrgNumber');
+		$this->addMapping('D6673', 'EnhetPostnummer-datadef-6673', 'VZipCode');
+		$this->addMapping('D6674', 'EnhetPoststed-datadef-6674', 'VCity');
+		$this->addMapping('D280', 'RegnskapsforerNavn-datadef-280', 'FVName');
+		$this->addMapping('D281', 'RegnskapsforerAdresse-datadef-281', 'FVAddress');
+		$this->addMapping('D6678', 'RegnskapsforerPostnummer-datadef-6678', 'FVZipCode');
+		$this->addMapping('D6679', 'RegnskapsforerPoststed-datadef-6679', 'FVCity');
+		$this->addMapping('D3651', 'RegnskapsforerOrganisasjonsnummer-datadef-3651', 'FOrgNumber');
+		$this->addMapping('D7202', 'DriftsmidlerFjoraret-datadef-7202', 'F1');
+		$this->addMapping('D7203', 'DriftsmidlerSkattemessigFjoraret-datadef-7203', 'F2');
+		$this->addMapping('D7204', 'ForskjellerDriftsmidlerFjoraret-datadef-7204', 'F3');
+		$this->addMapping('D1100', 'Driftsmidler-datadef-1100', 'D1');
+		$this->addMapping('D2203', 'DriftsmidlerSkattemessig-datadef-2203', 'D2');
+		$this->addMapping('D7205', 'ForskjellerDriftsmidler-datadef-7205', 'D3');
+		$this->addMapping('D7206', 'ForskjellerEndringDriftsmidler-datadef-7206', 'SUM3');
+		$this->addMapping('D7207', 'FordringerGjeldLangsiktigUtenlandskValutaFjoraret-datadef-7207', 'F11');
+		$this->addMapping('D7208', 'FordringerGjeldLangsiktigValutaSkattemessigFjoraret-datadef-7208', 'F12');
+		$this->addMapping('D7209', 'ForskjellerFordringerGjeldLangsiktigFjoraret-datadef-7209', 'F13');
+		$this->addMapping('D2201', 'FordringerGjeldLangsiktigUtenlandskValuta-datadef-2201', 'D11');
+		$this->addMapping('D2202', 'FordringerGjeldLangsiktigUtenlandskValutaSkattemessig-datadef-2202', 'D12');
+		$this->addMapping('D7210', 'ForskjellerFordringerGjeldLangsiktig-datadef-7210', 'D13');
+		$this->addMapping('D7211', 'ForskjellerEndringFordringerGjeldLangsiktig-datadef-7211', 'SUM13');
+		$this->addMapping('D7212', 'TilvirkningskontraktOpptjentInntektFjoraret-datadef-7212', 'F21');
+		$this->addMapping('D7213', 'TilvirkningskontraktOpptjentInntektSkattemessigFjoraret-datadef-7213', 'F22');
+		$this->addMapping('D7214', 'ForskjellerTilvirkningskontraktOpptjentInntektFjoraret-datadef-7214', 'F23');
+		$this->addMapping('D2199', 'TilvirkningskontraktOpptjentInntekt-datadef-2199', 'D21');
+		$this->addMapping('D2200', 'TilvirkningskontraktOpptjentInntektSkattemessig-datadef-2200', 'D22');
+		$this->addMapping('D7215', 'ForskjellerTilvirkningskontraktOpptjentInntekt-datadef-7215', 'D23');
+		$this->addMapping('D7216', 'ForskjellerEndringTilvirkningskontraktOpptjentInntekt-datadef-7216', 'SUM23');
+		$this->addMapping('D22160', 'LagerbeholdningRegnskapsmessigForskjellerFjoraret-datadef-22160', 'F31');
+		$this->addMapping('D22161', 'LagerbeholdningSkattemessigForskjellerFjoraret-datadef-22161', 'F32');
+		$this->addMapping('D7218', 'ForskjellerLagerbeholdningFjoraret-datadef-7218', 'F33');
+		$this->addMapping('D16542', 'LagerbeholdningRegnskapsmessigForskjeller-datadef-16542', 'D31');
+		$this->addMapping('D16541', 'LagerbeholdningSkattemessigForskjeller-datadef-16541', 'D32');
+		$this->addMapping('D7219', 'ForskjellerLagerbeholdning-datadef-7219', 'D33');
+		$this->addMapping('D7220', 'ForskjellerEndringLagerbeholdning-datadef-7220', 'SUM33');
+		$this->addMapping('D16538', 'FordringerKunderRegnskapsmessigFjoraret-datadef-16538', 'F41');
+		$this->addMapping('D7221', 'FordringerAndreFjoraret-datadef-7221', 'F42');
+		$this->addMapping('D16539', 'FordringerKunderSkattemessigFjoraret-datadef-16539', 'F43');
+		$this->addMapping('D7222', 'ForskjellerFordringerFjoraret-datadef-7222', 'F44');
+		$this->addMapping('D16051', 'FordringerKunderForskjeller-datadef-16051', 'D41');
+		$this->addMapping('D16532', 'FordringerForskjeller-datadef-16532', 'D42');
+		$this->addMapping('D11094', 'FordringerAndre-datadef-11094', 'D43');
+		$this->addMapping('D7223', 'ForskjellerFordringer-datadef-7223', 'D44');
+		$this->addMapping('D7224', 'ForskjellerEndringFordringer-datadef-7224', 'SUM44');
+		$this->addMapping('D20244', 'LeasingobjektRegnskapsmessigFjoraret-datadef-20244', 'F46');
+		$this->addMapping('D20246', 'LeasinggjeldRegnskapsmessigFjoraret-datadef-20246', 'F47');
+		$this->addMapping('D20248', 'ForskjellerLeasingobjektGjeldFjoraret-datadef-20248', 'F48');
+		$this->addMapping('D20245', 'LeasingobjektRegnskapsmessig-datadef-20245', 'D46');
+		$this->addMapping('D20247', 'LeasinggjeldRegnskapsmessig-datadef-20247', 'D47');
+		$this->addMapping('D20249', 'ForskjellerLeasingobjektGjeld-datadef-20249', 'D48');
+		$this->addMapping('D20250', 'ForskjellerEndringerLeasingobjektGjeld-datadef-20250', 'SUM48');
+		$this->addMapping('D7225', 'GevinstTapskontoSaldoFjoraret-datadef-7225', 'F51');
+		$this->addMapping('D7227', 'AvsetningerBetingetSkattefrieFjoraret-datadef-7227', 'F52');
+		$this->addMapping('D6684', 'DriftsinntekterUopptjentFjoraret-datadef-6684', 'F53');
+		$this->addMapping('D7230', 'AvsetningerForpliktelserFjoraret-datadef-7230', 'F54');
+		$this->addMapping('D7233', 'AvsetningerTapKontrakterMvFjoraret-datadef-7233', 'F70');
+		$this->addMapping('D7235', 'UtbytteAvsattInntektsfortFjoraret-datadef-7235', 'F71');
+		$this->addMapping('D20144', 'PensjonsforpliktelseNettoFjoraret-datadef-20144', 'F72');
+		$this->addMapping('D20147', 'PensjonsmidlerInnskuddFondNettoFjoraret-datadef-20147', 'F73');
+		$this->addMapping('D7240', 'AvsetningerPensjonspremiefondSkattemessigFjoraret-datadef-7240', 'F74');
+		$this->addMapping('D22044', 'ForpliktelserOvertatteFjoraret-datadef-22044', 'F81');
+		$this->addMapping('D1019', 'GevinstTapskontoSaldo-datadef-1019', 'D51');
+		$this->addMapping('D1020', 'AvsetningerBetingetSkattefrie-datadef-1020', 'D52');
+		$this->addMapping('D6683', 'DriftsinntekterUopptjent-datadef-6683', 'D53');
+		$this->addMapping('D7231', 'AvsetningerForpliktelser-datadef-7231', 'D54');
+		$this->addMapping('D2204', 'AvsetningerTapKontrakterMv-datadef-2204', 'D70');
+		$this->addMapping('D7236', 'UtbytteAvsattInntektsfort-datadef-7236', 'D71');
+		$this->addMapping('D20145', 'PensjonsforpliktelseNetto-datadef-20145', 'D72');
+		$this->addMapping('D20148', 'PensjonsmidlerInnskuddFondNetto-datadef-20148', 'D73');
+		$this->addMapping('D2207', 'AvsetningerPremiePremiefondSkattemessig-datadef-2207', 'D74');
+		$this->addMapping('D22045', 'ForpliktelserOvertatte-datadef-22045', 'D81');
+		$this->addMapping('D7226', 'GevinstTapskontoSaldoEndring-datadef-7226', 'SUM51');
+		$this->addMapping('D7228', 'AvsetningerBetingetSkattefrieEndring-datadef-7228', 'SUM52');
+		$this->addMapping('D7229', 'DriftsinntekterUopptjentEndring-datadef-7229', 'SUM53');
+		$this->addMapping('D7232', 'AvsetningerForpliktelserEndring-datadef-7232', 'SUM54');
+		$this->addMapping('D7234', 'AvsetningerTapKontrakterMvEndring-datadef-7234', 'SUM70');
+		$this->addMapping('D7237', 'UtbytteAvsattInntektsfortEndring-datadef-7237', 'SUM71');
+		$this->addMapping('D20146', 'PensjonsforpliktelseNettoEndring-datadef-20146', 'SUM72');
+		$this->addMapping('D20149', 'PensjonsmidlerInnskuddFondNettoEndring-datadef-20149', 'SUM74');
+		$this->addMapping('D7241', 'AvsetningerPensjonspremiefondSkattemessigEndring-datadef-7241', 'SUM73');
+		$this->addMapping('D7248', 'EiendelBalansefortVirkeligDifferanse-datadef-7248', 'D91');
+		$this->addMapping('D7249', 'EiendelOverdragelseSkattefriGevinst-datadef-7249', 'D93');
+		$this->addMapping('D7250', 'EiendelOverforingInngangsverdiVederlagDifferanse-datadef-7250', 'D94');
+		$this->addMapping('D262', 'EndringSkattemessigRegnskapsmessig-datadef-262', 'SUM100');
+		$this->addMapping('D22046', 'ForpliktelserOvertatteEndring-datadef-22046', 'SUM81');
+		$this->addMapping('D22040', 'ForskjellerAndreSpesifisertBeskrivelse-datadef-22040', 'B82');
+		$this->addMapping('D22041', 'ForskjellerAndreSpesifisertFjoraret-datadef-22041', 'F82');
+		$this->addMapping('D22042', 'ForskjellerAndreSpesifisert-datadef-22042', 'D82');
+		$this->addMapping('D22043', 'ForskjellerAndreSpesifisertEndring-datadef-22043', 'SUM82');
+		$this->addMapping('D6693', 'AksjerMvFjoraret-datadef-6693', 'F111');
+		$this->addMapping('D7195', 'AksjerMvSkattemessigVerdiFjoraret-datadef-7195', 'F112');
+		$this->addMapping('D7251', 'ForskjellerAksjerMvFjoraret-datadef-7251', 'F113');
+		$this->addMapping('D22769', 'AksjerMvRegnskapsmessigVerdi-datadef-22769', 'D111');
+		$this->addMapping('D19469', 'AksjerMvSkattemessigVerdiForskjeller-datadef-19469', 'D112');
+		$this->addMapping('D7252', 'ForskjellerAksjerMv-datadef-7252', 'D113');
+		$this->addMapping('D6694', 'AndelerDeltakerlignedeSelskaperFjoraret-datadef-6694', 'F121');
+		$this->addMapping('D7196', 'AndelerDeltakerlignedeSelskaperSkattemessigFjoraret-datadef-7196', 'F122');
+		$this->addMapping('D7253', 'ForskjellerAndelerDeltakerlignedeSelskaperFjoraret-datadef-7253', 'F123');
+		$this->addMapping('D195', 'AndelerDeltakerlignedeSelskaper-datadef-195', 'D121');
+		$this->addMapping('D1015', 'AndelerDeltakerlignedeSelskaperSkattemessigVerdi-datadef-1015', 'D122');
+		$this->addMapping('D7254', 'ForskjellerAndelerDeltakerlignedeSelskaper-datadef-7254', 'D123');
+		$this->addMapping('D7255', 'UnderskuddFramforbartSkattemessigFjoraret-datadef-7255', 'F130');
+		$this->addMapping('D7256', 'EiendelerRealisasjonGevinstLatentSkattemessigFjoraret-datadef-7256', 'F135');
+		$this->addMapping('D7258', 'GodtgjorelseOmregnetUbenyttetFjoraret-datadef-7258', 'F140');
+		$this->addMapping('D7259', 'KorreksjonsinntektAkkumulertFremfortFjoraret-datadef-7259', 'F145');
+		$this->addMapping('D14278', 'ForskjellerAndreUtsattSkattSkattefordelFjoraret-datadef-14278', 'F150');
+		$this->addMapping('D14859', 'UnderskuddFramforbartAkkumulert-datadef-14859', 'D130');
+		$this->addMapping('D7257', 'EiendelerRealisasjonGevinstLatentSkattemessig-datadef-7257', 'D135');
+		$this->addMapping('D7199', 'GodtgjorelseOmregnetUbenyttet-datadef-7199', 'D140');
+		$this->addMapping('D1105', 'ForskjellerNegative-datadef-1105', 'D145');
+		$this->addMapping('D2220', 'KorreksjonsinntektFramforbar-datadef-2220', 'D150');
+		$this->addMapping('D1098', 'Korreksjonsinntekt-datadef-1098', 'D160');
+		$this->addMapping('D11700', 'ForskjellerAndreUtsattSkattSkattefordel-datadef-11700', 'D165');
+		$this->addMapping('D7263', 'ForskjellerPositiveFjoraret-datadef-7263', 'F170');
+		$this->addMapping('D7260', 'ForskjellerNegativeInkludertKorreksjonsinntektFjoraret-datadef-7260', 'F180');
+		$this->addMapping('D7261', 'ForskjellerNegativAndelUtlignbareFjoraret-datadef-7261', 'F181a');
+		$this->addMapping('D11256', 'GrunnlagUtsattSkattSkattefordelFjoraret-datadef-11256', 'F182');
+		$this->addMapping('D1106', 'ForskjellerPositive-datadef-1106', 'D170');
+		$this->addMapping('D7264', 'ForskjellerNegativInkludertKorreksjonsinntekt-datadef-7264', 'D180');
+		$this->addMapping('D7262', 'ForskjellerNegativAndelUtlignbare-datadef-7262', 'D181a');
+		$this->addMapping('D22859', 'InntektsforingOvergangsregelC-datadef-22859', 'D181b');
+		$this->addMapping('D11257', 'GrunnlagUtsattSkattSkattefordel-datadef-11257', 'D182');
+
+        
+	}
+ }
+?>

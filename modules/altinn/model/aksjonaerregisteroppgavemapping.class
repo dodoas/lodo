@@ -1,0 +1,142 @@
+<?php
+class AksjonaerRegisterOppgaveMapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+        //print ("Accouint: ". $a . "khlk: ". $h);
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+           			$this->ORID[$item] = $v;
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+            	$item = $this->Account[$a];
+            	$this->ORID[$item] = $v;
+	            return 1;
+    	    }
+       	}
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+	{   $this->addMapping('D18', 'EnhetOrganisasjonsnummer-datadef-18', 'OrgNumber');
+		$this->addMapping('D17659', 'AksjeType-datadef-17659', '');
+		$this->addMapping('D17513', 'EnhetISINNummer-datadef-17513', 'ISINNumber');
+		$this->addMapping('D1126', 'AksjeMvPalydende-datadef-1126', 'Share');
+		$this->addMapping('D1156', 'AksjonarFodselsnummer-datadef-1156', 'ShareholderSocialSecurityID');
+		$this->addMapping('D7597', 'AksjonarOrganisasjonsnummer-datadef-7597', 'ShareholderOrgNumber');
+		$this->addMapping('D1153', 'AksjonarNavn-datadef-1153', 'ShareholderName');
+		$this->addMapping('D17740', 'AksjonarLandkode-datadef-17740', 'ShareholderCountry');
+		$this->addMapping('D1154', 'AksjonarAdresse-datadef-1154', 'ShareholderAddress');
+		$this->addMapping('D7598', 'AksjonarPostnummer-datadef-7598', 'ShareholderZipCode');
+		$this->addMapping('D7599', 'AksjonarPoststed-datadef-7599', 'ShareholderCity');
+		$this->addMapping('D11994', 'AksjerAntallFjoraret-datadef-11994', '');
+		$this->addMapping('D17741', 'AksjonarAksjerAntall-datadef-17741', '');
+		$this->addMapping('D147', 'Aksjeutbytte-datadef-147', '');
+		$this->addMapping('D17742', 'AksjerUtbytteAntall-datadef-17742', '');
+		$this->addMapping('D17769', 'AksjerUtbytteTidspunkt-datadef-17769', '');
+		$this->addMapping('D2280', 'KildeskattProsent-datadef-2280', '');
+		$this->addMapping('D17743', 'Kildeskatt-datadef-17743', '');
+		$this->addMapping('D17744', 'KildeskattLandkode-datadef-17744', '');
+		$this->addMapping('D12153', 'AksjerKjopAntall-datadef-12153', '');
+		$this->addMapping('D17745', 'AksjeErvervType-datadef-17745', '');
+		$this->addMapping('D17746', 'AksjerErvervsdato-datadef-17746', '');
+		$this->addMapping('D17636', 'AksjeAnskaffelsesverdi-datadef-17636', '');
+		$this->addMapping('D17748', 'AksjerTilgangFondsemisjonMvAntall-datadef-17748', '');
+		$this->addMapping('D17749', 'AksjerTilgangFondsemisjonMvType-datadef-17749', '');
+		$this->addMapping('D17750', 'AksjerTilgangFondsemisjonMvTidspunkt-datadef-17750', '');
+		$this->addMapping('D17683', 'EnhetOverdragendeFondsemisjonMvOrganisasjonsnummer-datadef-17683', '');
+		$this->addMapping('D17684', 'AksjerNyutstedteFondsemisjonMvISIN-datadef-17684', '');
+		$this->addMapping('D19905', 'AksjerNyutstedteFondsemisjonMvAksjetype-datadef-19905', '');
+		$this->addMapping('D17751', 'AksjerFondsemisjonPalydende-datadef-17751', '');
+		$this->addMapping('D17752', 'AksjerArvMvOmsattAntall-datadef-17752', '');
+		$this->addMapping('D17753', 'AksjerArvMvOmsattType-datadef-17753', '');
+		$this->addMapping('D17754', 'AksjerArvMvOmsattTidspunkt-datadef-17754', '');
+		$this->addMapping('D17755', 'AksjerArvMvOmsatt-datadef-17755', '');
+		$this->addMapping('D17757', 'AksjerSpleisMvAvgangAntall-datadef-17757', '');
+		$this->addMapping('D17758', 'AksjerSpleisMvType-datadef-17758', '');
+		$this->addMapping('D17759', 'AksjerSpleisMvTidspunkt-datadef-17759', '');
+		$this->addMapping('D17699', 'EnhetOvertakendeFisjonOrganisasjonsnummer-datadef-17699', '');
+		$this->addMapping('D17700', 'AksjerSpleisMvOvetakendeISIN-datadef-17700', '');
+		$this->addMapping('D19906', 'AksjerSpleisMvOvertakendeAksjetype-datadef-19906', '');
+		$this->addMapping('D17760', 'AksjerSpleisMvPalydende-datadef-17760', '');
+		$this->addMapping('D17761', 'AksjekapitalNedsettelseTilbakebetalt-datadef-17761', '');
+		$this->addMapping('D17762', 'AksjePalydendeRedusert-datadef-17762', '');
+		$this->addMapping('D17763', 'AksjeTilbakebetaltTidspunkt-datadef-17763', '');
+		$this->addMapping('D17764', 'AksjekapitalNedsettelse-datadef-17764', '');
+		$this->addMapping('D17765', 'OverkursTilbakebetalt-datadef-17765', '');
+		$this->addMapping('D17766', 'OverkursTilbakebetaltTidspunkt-datadef-17766', '');
+		$this->addMapping('D22073', 'AksjekapitalNyemisjonForhoyelseAksjonar-datadef-22073', '');
+		$this->addMapping('D22074', 'AksjeNyemisjonPalydendeForhoyelseAksjonar-datadef-22074', '');
+		$this->addMapping('D22075', 'AksjeNyemisjonTidspunktAksjonar-datadef-22075', '');
+		$this->addMapping('D22076', 'AksjeOverkursForhoyelseAksjonar-datadef-22076', '');
+		
+        
+	}
+ }
+?>

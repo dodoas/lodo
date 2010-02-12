@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">XX-0000: Testskjema for Altinnløsning</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1080-6052.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/Sporvalgsside-grp-5423/Morselskap-datadef-4168" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5424/OppgavegiverFodselsnummer-datadef-26" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5424/OppgavegiverNavn-datadef-68" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5424/OppgavegiverPostadresse-datadef-2442" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5424/OppgavegiverPostnummer-datadef-6676" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5424/OppgavegiverPoststed-datadef-6677" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>XX-0000 Norske folks røykevaner</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Skjemaet har som formål å avdekke folks røykevaner i Norge</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>Skjemaet har som formål å avdekke folks røykevaner i Norge</p>
+            </xforms:caption>
+            <xforms:group ref="/Skjema/Sporvalgsside-grp-5423">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Utfylling av skjema</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Dette er spørsmål som vil avklare hvilke deler av skjemaet du skal  fylle ut. Velg riktig alternativ for deg og klikk på Neste knappen.</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Utfylling av skjema</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NON">
+                    <p>Dette er spørsmål som vil avklare hvilke deler av skjemaet du skal  fylle ut. Velg riktig alternativ for deg og klikk på Neste knappen.</p>
+                </xforms:hint>
+                <xforms:selectOne ref="/Skjema/Sporvalgsside-grp-5423/Morselskap-datadef-4168">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Er du røyker?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Redusert husleie og et gjensidig godt &lt;i>tillitsforhold&lt;/i> preger  &lt;b>samarbeidet&lt;/b> mellom Br&amp;oslash;nn&amp;oslash;ysundregistrene og  huseier S&amp;oslash;ren Nielsen AS. Nå er avtalen p&amp;aring;
+                            plass.  </p>
+                        <p>&lt;a href=http://www.vg.no>Les mer i VG&lt;/a>  </p>
+                        <p/>
+                        <p>TEST for MARKUS:  </p>
+                        <p>&lt;a hrefhttp://www.vg.no>lenke til vg&lt;/a>  </p>
+                        <p/>
+                        <p>Test nr 2 for Markus:  </p>
+                        <p> (tast ved siden av æ)  </p>
+                        <p>` (shift + tast ved siden av +)  </p>
+                        <p>´ (AltGr+ tast ved siden av +)  </p>
+                        <p>| (tast ved siden av 1)  </p>
+                        <p/>
+                        <p>Test nr 3 for Markus:  </p>
+                        <p>&lt;a href=|http://www.vg.no|>lenke til vg&lt;/a>  </p>
+                        <p>&lt;a href=|http://www.vg.no~%&amp;;?#|>lenke til vg&lt;/a></p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Er du røyker?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Med røyker menes en person som røyker ferdigrøyk eller rulling på  jevnlig basis (gjenomsnittlig 1 eller flere røyk pr dag)</p>
+                    </xforms:help>
+                </xforms:selectOne>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Innledning-grp-5424">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Innledning-grp-5424/OppgavegiverFodselsnummer-datadef-26">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <brreg:kontroll type="Modulus 11"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Fødselsnr</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig fødselsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Fødselsnr</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig fødselsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Innledning-grp-5424/OppgavegiverNavn-datadef-68">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Navn</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Navn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Innledning-grp-5424/OppgavegiverPostadresse-datadef-2442">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Adresse</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Adresse</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Innledning-grp-5424/OppgavegiverPostnummer-datadef-6676">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:alert brreg:lang="EN">
+                        <p>Enter positive integer with four digits</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Postnr</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever positivt heltall med fire siffer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Postnr</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev positivt heiltal med fire siffer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Innledning-grp-5424/OppgavegiverPoststed-datadef-6677">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sted</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sted</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Roykevaner-grp-5425">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Røykevaner</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Røykevaner</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Roykevaner-grp-5425/KildeskattProsent-datadef-2280">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall ferdigrøyk pr dag</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Antall ferdigrøyk pr dag</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:group ref="/Skjema/Roykevaner-grp-5425/GruppeNiva3-grp-5834">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Gruppe nivå 3</p>
+                    </xforms:caption>
+                    <xforms:group ref="/Skjema/Roykevaner-grp-5425/GruppeNiva3-grp-5834/GruppeNiva4-grp-5835">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Gruppe nivå 4</p>
+                        </xforms:caption>
+                        <xforms:selectOne ref="/Skjema/Roykevaner-grp-5425/GruppeNiva3-grp-5834/GruppeNiva4-grp-5835/LonnBarnEktefelle-datadef-19409">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>Barn</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Barn</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Barn</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Ektefelle</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ektefelle</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Ektefelle  </p>
+                                        <p/>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Oppgi andre i familien som røyker</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Oppgi andre i familien som røyker</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/Roykevaner-grp-5425/GruppeNiva3-grp-5834/GruppeNiva4-grp-5835/FradragSykeUlykkesforsikring-datadef-20974">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Antall rullings pr. dag</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Antall rullings pr. dag</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Roykeplaner-grp-5426">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Røykeplaner</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Røykeplanar</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/Roykeplaner-grp-5426/ForeldreEktefolk-datadef-19170">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Frister det å begynne?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Frister det å begynne?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/Roykeplaner-grp-5426/BedriftStartDato-datadef-647">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Når vil du begynne?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Når vil du begynne?</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:repeat id="repeat_VennerSomRoyker-grp-5427" nodeset="/Skjema/Roykeplaner-grp-5426/VennerSomRoyker-grp-5427">
+                    <xforms:group ref="/Skjema/Roykeplaner-grp-5426/VennerSomRoyker-grp-5427">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Angi venner og bekjente som røyker i smug</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Angi venner og bekjente som røyker i smug</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Roykeplaner-grp-5426/VennerSomRoyker-grp-5427/KjoperNavn-datadef-2536">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Navn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Navn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Roykeplaner-grp-5426/VennerSomRoyker-grp-5427/KjoperAdresse-datadef-3448">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Adresse</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Adresse</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

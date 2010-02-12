@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1118: Skjema for rapportering av oljesalg og beregning av normprisinntekt</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-869-3154.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3913/Enhet-grp-3921/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3913/Enhet-grp-3921/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3913/Enhet-grp-3921/EnhetAdresse-datadef-15"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3913/Enhet-grp-3921/EnhetPostnummer-datadef-6673"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3913/Enhet-grp-3921/EnhetPoststed-datadef-6674"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1118 Skjema for rapportering av oljesalg og beregning  normprisinntekt 2004</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Skjema for rapportering av oljesalg og beregning av normprisinntekt  skal også benyttes ved salg fra felt uten normpris. Ved justeringer  som ikke fanges opp av skjemaets Feltoversikt, må det gis  tilleggsopplysninger om de
+                    aktuelle forhold.  </p>
+                <p/>
+                <p>Skjema for rapportering av oljesalg og beregning av normprisinntekt er  pliktig vedlegg til selvangivelse for selskap som er  særskattepliktige etter petroleumskatteloven § 5. Skjemaet skal også  benyttes ved salg fra felt uten
+                    normpris. Skjemaets tabell 2 fylles  ut for hvert enkelt felt med opplysninger om hvert enkelt salg.  Selskap som deltar på flere felt fører summene for året over i tabell  1. Ved justeringer som ikke fanges opp av tabell 2, må
+                    det gis  tilleggsopplysninger om de aktuelle forhold. Skjemaet kan fåes i  flere eksemplarer, og i elektronisk format, ved henvendelse til  Oljeskattekontoret.  </p>
+                <p/>
+                <p>Ved levering av skjema via Altinn, må det fylles ut ett eksemplar av  skjema per felt. Tabell 1 skal ikke summeres, dette vil bli håndtert  i mottakene saksbehandlingssystem.  </p>
+                <p/>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. november 1994, jf. ligningsloven § 4-4 nr.  7.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Vedlegg til næringsoppgave/selvangivelse</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-3913">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-3913/Skjema-grp-3920">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Skjema</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3913/Skjema-grp-3920/SkjemaSide-datadef-11674">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Skjema nr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3913/Skjema-grp-3920/SkjemaSiderTotalt-datadef-16474">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>av totalt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-3913/Enhet-grp-3921">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Enhet</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3913/Enhet-grp-3921/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3913/Enhet-grp-3921/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3913/Enhet-grp-3921/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Nærings-(kontor-)adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3913/Enhet-grp-3921/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3913/Enhet-grp-3921/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Tabell 1: Samletabell for selskaper som deltar på flere felt</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Ved levering av skjema via Altinn, må det fylles ut ett eksemplar av  skjema per felt. Tabell 1 skal ikke summeres, dette vil bli håndtert  i mottakene saksbehandlingssystem.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/SelskaperSomDeltarPaFlereFelt-grp-3915">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:input ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/SelskaperSomDeltarPaFlereFelt-grp-3915/OljefeltNavnSpesifisertFelt-datadef-16680">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Felt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/SelskaperSomDeltarPaFlereFelt-grp-3915/EnhetSalgKvantumFatSpesifisertOljefelt-datadef-16681">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3 Kvantum (fat)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/SelskaperSomDeltarPaFlereFelt-grp-3915/EnhetSlagKorreksjonerSalgBokfortSpesifisertOljefelt-datadef-16683">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>9A Bokført salg (NOK) ex.kval.komp in cash</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/SelskaperSomDeltarPaFlereFelt-grp-3915/EnhetKvalitetskompMottattSalgBokfortSpesOljefelt-datadef-16685">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>9B Kvalitetskompensasjon in cash (NOK)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/SelskaperSomDeltarPaFlereFelt-grp-3915/EnhetSalgOmregnetSpesifisertOljefelt-datadef-16687">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>10 Omregnet salg (NOK)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/SelskaperSomDeltarPaFlereFelt-grp-3915/EnhetNormprisinntektSpesifisertOljefelt-datadef-16689">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>11 Normprisinntekt (NOK)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/SelskaperSomDeltarPaFlereFelt-grp-3915/EnhetValutatilleggSpesifisetOljefelt-datadef-16691">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>12 Valutatillegg/(-fradrag)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/SelskaperSomDeltarPaFlereFelt-grp-3915/EnhetNormpristilleggSpesifisertOljefelt-datadef-16693">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>13 Normpristillegg/(-fradrag)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/SelskaperSomDeltarPaFlereFelt-grp-3915/FraktkostnaderMvSpesifisertFelt-datadef-20001">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>14A Fraktkostnader mv.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/SelskaperSomDeltarPaFlereFelt-grp-3915/SalgsprovisjonerRabatterMvSpesifisertFelt-datadef-20002">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>14B Salgsprovisjoner og rabatter mv.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/Sum-grp-4292">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/Sum-grp-4292/EnhetSalgKvantumFat-datadef-16682">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3 Kvantum (fat)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/Sum-grp-4292/EnhetSlagKorreksjonerSalgBokfort-datadef-16684">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>9A Bokført salg (NOK) ex.kval.komp in cash</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/Sum-grp-4292/EnhetKvalitetskompensasjonMottattSalgBokfort-datadef-16686">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>9B Kvalitetskompensasjon in cash (NOK)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/Sum-grp-4292/EnhetSalgOmregnet-datadef-16688">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>10 Omregnet salg (NOK)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/Sum-grp-4292/EnhetNormprisinntekt-datadef-16690">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>11 Normprisinntekt (NOK)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/Sum-grp-4292/EnhetValutatillegg-datadef-16692">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>12 Valutatillegg/(-fradrag)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/Sum-grp-4292/EnhetNormpristilleggSpesifisertOljefelt-datadef-16694">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>13 Normpristillegg/(-fradrag)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/Sum-grp-4292/FraktkostnaderMv-datadef-20003">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>14A Fraktkostnader mv.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SelskaperSomDeltarPaFlereFelt-grp-3936/Sum-grp-4292/SalgsprovisjonerRabatterMv-datadef-20004">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>14B Salgsprovisjoner og rabatter mv.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Feltoversikt-grp-3918">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Tabell 2: Feltoversikt</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Fylles ut for hvert salg og hvert felt.  </p>
+                    <p/>
+                    <p>Deltar selskapet på flere felt, overføres til tabell 1 sum for  kolonnene 3, 10, 11, 12 og 13 for hvert felt. For kolonne 9 overføres  bokført salg eksklusiv kvalitetskompensasjon in cash (9A) og bokført  kvalitetskompensasjon
+                        in cash (9B) separat. For kolonne 14 overføres  fraktkostnader mv. (14A) og salgsprovisjoner og rabatter mv. (14B),  separat.</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/Feltoversikt-grp-3918/OljefeltNavn-datadef-4249">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Felt</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:group ref="/Skjema/Feltoversikt-grp-3918/BokfortSalg-grp-3922">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>9 Bokført sakg (NOK)</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Feltoversikt-grp-3918/BokfortSalg-grp-3922/OljefeltKvalitetskompensasjonMottattKorreksjonSalgBokfort-datadef-16648">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Korreksjoner i regnskapet for 2004 av mottatt (betalt)  kvalitetskompensasjon in cash for 2003</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Feltoversikt-grp-3918/BokfortSalg-grp-3922/OljefeltRegnskapKorreksjonNormprisSalgBokfort-datadef-16653">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Korreksjoner når salg bokført i 2003 i regnskapet for 2004 er justert  til normpris</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Feltoversikt-grp-3918/BokfortSalg-grp-3922/OljefeltRegnskapKorreksjonNormpriskursSalgBokfort-datadef-16655">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Korreksjoner når salg bokført i 2003 i regnskapet for 2004 er justert  til normpriskurs</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Feltoversikt-grp-3918/Valutatillegg-grp-3923">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>12 Valutatillegg/(-fradrag) (9-10)</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Valutatillegg-grp-3923/OljefeltRegnskapKorreksjonNormpriskursValutatillegg-datadef-16656">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Korreksjoner når salg bokført i 2003 i regnskapet for 2004 er justert  til normpriskurs</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Feltoversikt-grp-3918/Normpristillegg-grp-3924">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>13 Normpristillegg/(-fradrag) (11-9)</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Normpristillegg-grp-3924/OljefeltRegnskapKorreksjonNormprisNormpristillegg-datadef-16654">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Korreksjoner når salg bokført i 2003 i regnskapet for 2004 er justert  til normpris</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Normpristillegg-grp-3924/OljefeltRegnskapKorreksjonNormpriskursNormpristillegg-datadef-16657">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Korreksjoner når salg bokført i 2003 i regnskapet for 2004 er justert  til normpriskurs</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:repeat id="repeat_Feltoversikt-grp-3928" nodeset="/Skjema/Feltoversikt-grp-3918/Feltoversikt-grp-3928">
+                    <xforms:group ref="/Skjema/Feltoversikt-grp-3918/Feltoversikt-grp-3928">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Feltoversikt</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Beholdning av petroleum  </p>
+                            <p>Hvis den skattepliktige ved årets utgang har beholdninger av petroleum  som skal vurderes til normpris (jf. petrsktl § 3 a og  normprisforskriftens § 6) føres kvantum opp i kolonne 3.  Den  regnskapsmessige
+                                beholdningsverdien føres opp i kolonne 9 og omregnes  eventuelt i kolonne 10.  Normprisverdien føres opp i kolonne 11.  Øvrige kolonner gis tilsvarende anvendelse.  </p>
+                            <p/>
+                            <p>Salg fra felt uten normpris  </p>
+                            <p>Skjemaet skal også benyttes ved salg fra felt uten normpris.  I slike  tilfeller benyttes for tabell 2 kolonne 1 til 6 og kolonne 9.  Videre  benyttes kolonne 14A ved overdragelse av petroleum mellom  virksomheter med
+                                fast tilknytning til hverandre (jf. petrsktl § 3e).  Sum for hver enkelt kolonne overføres til tabell 1 (tilsvarende som  for normprisregulerte salg).</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Feltoversikt-grp-3928/OljefeltLeveringsdatoSpesifisertSalg-datadef-16658">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1 Leveringsdato</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Med leveringsdato menes den dato da petroleumen passerte det  leveringssted som er forutsatt i det enkelte normprisvedtak  (normprispunktet). Hvis innlastingen skjer over flere dager anses den  dag innlastingen er
+                                    fullført som leveringsdato.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Feltoversikt-grp-3928/OljefeltCargonummerSpesifisertSalg-datadef-16659">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2 Cargo nr.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her oppgis samme cargo nr. som i salgsrapportene.  </p>
+                                <p/>
+                                <p>Ved salg fra felt uten normpris oppgis i kolonne 2 foruten cargo nr.  også en bokstav-kode in eller ex for å markere hvorvidt salget har  skjedd internt (til beslektet selskap) eller eksternt (til ubeslektet  selskap).</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Feltoversikt-grp-3928/OljefeltKvantumFatSpesifisertSalg-datadef-16660">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3 Kvantum (fat)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Kvantum oppgis i den enhet som er lagt til grunn ved  normprisfastsettelsen (fat) og i det antall som passerer  normprispunktet.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Feltoversikt-grp-3928/OljefeltKredittidSpesifisertSalg-datadef-16661">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4 Kredittid</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her oppgis faktisk kredittid, som regnes fra leveringsdato til  betaling skjer. Er kredittiden lengre enn forutsatt i  normprisvedtaket får det betydning for beregning av normprisen (jf.  merknadene til kolonne 8).</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Feltoversikt-grp-3928/OljefeltLeveringsvilkarSpesifisertSalg-datadef-16662">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>5 Leveringsvilkår</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her oppgis utelukkende leveringsvilkår (fob, cf, cif eller franco).</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Feltoversikt-grp-3928/OljefeltFatPrisUSDSpesifisertSalg-datadef-16663">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>6 Pris pr.fat (USD)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Som regel avtales prisen i amerikanske dollar (USD). Når det er  tilfellet skal prisen i USD/fat basert på avtalte leveringsvilkår  oppgis her.  </p>
+                                <p>Avtales f.eks levering på cif-vilkår, oppgis cif-pris. Avtales prisen  i annen valuta, skal kolonnen ikke benyttes.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Feltoversikt-grp-3928/OljefeltNormpriskursSpesifisertSalg-datadef-16664">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>7 Normpriskurs</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Når faktisk salg i USD som en fast ordning bokføres eller omregnes til  normpriskurs, skal normpriskursen (NOK/USD) oppgis her.  </p>
+                                <p>For øvrig skal kolonnen ikke benyttes.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Feltoversikt-grp-3928/OljefeltNormprisSpesifisertSalg-datadef-16665">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>8 Normpris (NOK)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her oppgis i utgangspunktet endelig normpris i NOK for aktuell  leveringsdato og normprisområde.  </p>
+                                <p>Er det imidlertid for det enkelte salg innrømmet lengre kredittid enn  den som er lagt til grunn ved normprisfastsettelsen, skal den  fastsatte normpris økes med 0,036% for hver overskytende dag. I så  fall oppgis
+                                    den regulerte normpris.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Feltoversikt-grp-3928/OljefeltSalgBokfortSpesifisertSalg-datadef-16666">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>9 Bokført salg (NOK)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her oppgis bokført verdi av salget. Dette innebærer at når salget er  avtalt på bestemte vilkår oppgis bokført verdi basert på disse  vilkår. Avtales f.eks levering på cif-vilkår, oppgis bokført  cif-verdi. Dette
+                                    innebærer videre at når prisen er avtalt i  utenlandsk valuta omregnes den til norske kroner i samsvar med  bokføringskursen (standardkurs, transaksjonsdagens kurs  evt.normpriskurs). Som salg regnes i denne
+                                    forbindelse også intern  omsetning (petroleum uttatt til egen bruk i annen virksomhet).  </p>
+                                <p>Når salg er avtalt til normpris, benyttes normalt en foreløpig  salgspris da normpris først blir kjent i ettertid. Når normprisen  blir kjent, utstedes justeringsfaktura. Tilsvarende gjelder for felt  hvor det først
+                                    fastsettes foreløpig normpris og salg er avtalt til  endelig normpris.  </p>
+                                <p>For mer informasjon se rettledningen.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Feltoversikt-grp-3928/OljefeltSalgOmregnetSpesifisertSalg-datadef-16667">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>10 Omregnet salg (NOK)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>For å unngå mulig dobbeltbeskatning av agioelementer som følge av  forskjell mellom normpriskurs og bokføringskurs (jf. Mobildommen av  24. februar 1989), er det under denne kolonne anledning til å omregne  det
+                                    faktiske salget i USD til normpriskurs når dette er et endelig  valg i en fast ordning. Omregning til normpriskurs tillates  imidlertid ikke i de tilfeller der petroleum overdras til annen enhet  innen samme
+                                    juridiske selskap.  </p>
+                                <p>Normpriskurs er den kurs Petroleumsprisrådet benytter når det med  utgangspunkt i prisen på petroleum i USD fastsetter normprisen i NOK.  Omregnet salg beregnes slik at det kvantum som har passert  normprispunktet,
+                                    anses solgt til normpriskurs (kolonne 3 x kolonne 6  x kolonne 7).  </p>
+                                <p>Hvis bokføring skjer til normpriskurs, vil omregnet salg tilsvare  bokført salg, eventuelt med unntak for 4.kvartal (jf. merknadene til  kolonne 9).  </p>
+                                <p>Ved annet salg enn salg i USD, skal kolonnen ikke benyttes.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Feltoversikt-grp-3928/OljefeltNormprisinntektSpesisfisertSalg-datadef-16668">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>11 Normprisinntekt (NOK)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Normprisinntekt beregnes slik at det kvantum som har passert  normprispunktet, anses solgt til normpris i NOK (kolonne 3 x kolonne  8).  </p>
+                                <p>Hvis salg skjer til normpris og bokføring skjer til normpriskurs, vil  normprisinntekt tilsvare bokført salg, eventuelt med unntak for  4.kvartal (jf. merknadene til kolonne 9).</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Feltoversikt-grp-3928/OljefeltValutatilleggSpesifisertSalg-datadef-16669">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>12 Valutatillegg/(-fradrag)(9-10)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her fremkommer valutadifferansen for det enkelte salg, dvs.  differansen mellom bokført salg og omregnet salg (kolonne 9 ? kolonne  10)). Videre fremkommer justeringer som følge av bokførte  valutakorreksjoner (jf.
+                                    merknadene til kolonne 9).  </p>
+                                <p>Summen av de beløp som fremkommer i denne kolonne medtas med samme  fortegn i næringsoppgaven s.4 som en korreksjon for ligningsformål av  selskapets bokførte agioelementer. Se for øvrig merknadene til  kolonne 9 og 10.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Feltoversikt-grp-3928/OljefeltNormpristilleggSpesifisertSalg-datadef-16670">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>13 Normpristillegg/(-fradrag)(11-9)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her fremkommer normprisdifferansen for det enkelte salg, dvs.  differansen mellom normprisinntekt og bokført salg (kolonne  11-kolonne 9). Videre fremkommer korreksjoner som følgeav bokførte  justeringsfakturaer
+                                    samt justeringer som følge av bokførte  valutakorreksjoner (jf. merknadene til kolonne 9).  </p>
+                                <p>Summen av de beløp som fremkommer i denne kolonne skal i alminnelighet  tilsvare det beløp som for ligningsformål skal korrigere selskapets  bokførte salgsinntekt. Beløpet medtas med samme fortegn i
+                                    næringsoppgaven. Se for øvrig merknadene til kolonne 9 og 11.  </p>
+                                <p>Hvis den skattepliktige tar ut olje til egen bruk i annen virksomhet,  får normprisdifferansen kun betydning for fordeling av selskapets  samlede inntekt mellom sokkel og land.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Feltoversikt-grp-3928/FraktkostnaderMvSpesifisertSalg-datadef-20005">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>14 Ikke fradragsber. fraktkostnader</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Fraktkostnader mv. pr. salg, kol. 14A</p>
+                            </xforms:hint>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/Feltoversikt-grp-3918/OljefeltKvalitetskompensasjonMottatTeessideSalgBokfort-datadef-16672">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Mottatt (betalt) kvalitetskompensasjon in cash for 2004</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Gjelder felt løftet i Teesside</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Feltoversikt-grp-3918/FraktkostnaderMvAndre-datadef-20006">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Fraktkostnader mv. ikke henførbare til det enkelte salg</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>I kolonne 14A oppgis kostnader som ikke er forutsatt dekket av  normprisen. Slike kostnader vil være frakt- og forsikringskostnader  (herunder demurrage eller excess field time) når normprisen  fastsettes fob. Videre nevnes
+                            lagringskostnader etter det forutsatte  leveringssted. Kostnadene oppgis så langt mulig for det enkelte salg.  Frakt-, forsikring- og lagringskostnader som ikke kan henføres til  det enkelte salg, oppgis samlet for feltet
+                            på egen linje nederst i  kolonne 14A. Dette vil for eksempel gjelde excess field time belastet  gjennom fellesregnskap. Summen av de beløp som fremkommer i kolonne  14A medtas i næringsoppgaven.  </p>
+                        <p>Salgsprovisjoner eller kostnader ved overdragelse av petroleum mellom  virksomheter med fast tilknytning til hverandre, være kostnader som  skal tillegges inntekten for skatteformål (jf.petrsktl § 3 e). Dette  gjelder både
+                            for normprisregulerte og ikke normprisregulerte salg.  For normprisregulerte salg vil også kostnader og provisjoner som har  karakter av en rabatt til kjøper (handling fee, marketing fee,  trading cost mv.) være kostnader
+                            som skal tillegges inntekten for  skatteformål. Dette gjelder både ved salg til beslektet og ubeslektet  kjøper. Kostnadene oppgis samlet for feltet i kolonne 14B nederst i  tabell 2. Summen av de beløp som fremkommer i
+                            kolonne 14B medtas i  næringsoppgaven.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Kol. 14A</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:group ref="/Skjema/Feltoversikt-grp-3918/Sum-grp-4293">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Sum-grp-4293/OljefeltSalgKvantumFat-datadef-16671">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3 Kvantum (fat)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Sum-grp-4293/OljefeltSalgKorreksjonerMvSalgBokfort-datadef-16673">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>9 Bokført salg (NOK)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Sum-grp-4293/OljefeltSalgOmregnet-datadef-16674">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>10 Omregnet salg (NOK)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Sum-grp-4293/OljefeltNormprisinntekt-datadef-16675">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>11 Normprisinntekt (NOK)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Sum-grp-4293/OljefeltValutatillegg-datadef-16676">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>12 Valutatillegg/(-fradrag)(9-10)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Sum-grp-4293/OljefeltNormpristillegg-datadef-16677">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>13 Normpristillegg/(-fradrag)(11-9)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Feltoversikt-grp-3918/Sum-grp-4293/FraktkostnaderMvFelt-datadef-20007">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>14 Ikke fradragsber. kostnader</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Fraktkostnader mv. pr. salg, kol. 14A</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/Feltoversikt-grp-3918/OljefeltSlagKorreksjonerSalgBokfort-datadef-16678">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Herav bokført salg i 2004 eksklusiv mottatt (betalt)  kvalitetskompensasjon in cash</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Kol. 9A</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Feltoversikt-grp-3918/OljefeltKvalitetskompensasjonMottattSalgBokfort-datadef-16679">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Herav mottatt (betalt) kvalitetskompensasjon in cash bokført i 2004</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Kol. 9B</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Feltoversikt-grp-3918/SalgsprovisjonerRabatterMvFelt-datadef-20008">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Salgsprovisjoner og rabatter mv. samlet for feltet</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Kol. 14B</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

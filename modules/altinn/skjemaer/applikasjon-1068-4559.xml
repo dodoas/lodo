@@ -1,0 +1,2431 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">KRT-1003: Rapportering fra utstederforetak ved Oslo Børs</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1068-4560.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/Foretaksinformasjon-grp-5358/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Foretaksinformasjon-grp-5358/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Foretaksinformasjon-grp-5358/EnhetAdresse-datadef-15"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Foretaksinformasjon-grp-5358/EnhetPostnummer-datadef-6673"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Foretaksinformasjon-grp-5358/EnhetPoststed-datadef-6674"/>
+            <xforms:bind ref="/Skjema/Foretaksinformasjon-grp-5358/EnhetBransje-datadef-23719" required="true"/>
+            <xforms:bind ref="/Skjema/Foretaksinformasjon-grp-5358/EnhetVerdipapirutstederUtstedertype-datadef-23720" required="true"/>
+            <xforms:bind ref="/Skjema/Foretaksinformasjon-grp-5358/RapportKvartalAr-datadef-18965" required="true"/>
+            <xforms:bind ref="/Skjema/Foretaksinformasjon-grp-5358/RegnskapAr-datadef-17102" required="true"/>
+            <xforms:bind ref="/Skjema/Foretaksinformasjon-grp-5358/EnhetKonsernregnskap-datadef-23722" required="true"/>
+            <xforms:bind ref="/Skjema/Foretaksinformasjon-grp-5358/Organisasjonsforhold-grp-5359/EnhetEtiskeRetningslinjerOffentliggjorte-datadef-23725" required="true"/>
+            <xforms:bind ref="/Skjema/Foretaksinformasjon-grp-5358/Organisasjonsforhold-grp-5359/EnhetStyrelederToppledelseEkstraordinartSkifteSisteTreAr-datadef-23726" required="true"/>
+            <xforms:bind ref="/Skjema/Foretaksinformasjon-grp-5358/Organisasjonsforhold-grp-5359/EnhetRevisjonskomiteRapporteringTilStyret-datadef-23727" required="true"/>
+            <xforms:bind ref="/Skjema/Foretaksinformasjon-grp-5358/Organisasjonsforhold-grp-5359/EnhetInternrevisjonRapporteringTilStyret-datadef-23728" required="true"/>
+            <xforms:bind ref="/Skjema/Foretaksinformasjon-grp-5358/Organisasjonsforhold-grp-5359/EnhetEksternRevisorSkifteSisteToAr-datadef-23729" required="true"/>
+            <xforms:bind ref="/Skjema/Foretaksinformasjon-grp-5358/Organisasjonsforhold-grp-5359/InsentivordningAksjebasert-datadef-23730" required="true"/>
+            <xforms:bind ref="/Skjema/Resultatposter-grp-5360/KontaktsbasertInntektUtgift-datadef-23731" required="true"/>
+            <xforms:bind ref="/Skjema/Resultatposter-grp-5360/ResultatposterSpesielle-datadef-23734" required="true"/>
+            <xforms:bind ref="/Skjema/Resultatposter-grp-5360/KontantstromOperasjonelleDriftsaktiviteterOverstigerArsresultat-datadef-23739" required="true"/>
+            <xforms:bind ref="/Skjema/Resultatposter-grp-5360/KontantstromOperasjDriftInvestingerOverstigerArsresultat-datadef-23740" required="true"/>
+            <xforms:bind ref="/Skjema/Resultatposter-grp-5360/SegmentresultatNegativSisteToAr-datadef-23743" required="true"/>
+            <xforms:bind ref="/Skjema/Resultatposter-grp-5360/ArsresultatNegativSisteToAr-datadef-23744" required="true"/>
+            <xforms:bind ref="/Skjema/Resultatposter-grp-5360/Nedskrivinger-grp-5361/Nedskrivninger-datadef-23745" required="true"/>
+            <xforms:bind ref="/Skjema/Resultatposter-grp-5360/Nedskrivinger-grp-5361/VerdsettelsePrisBok1-datadef-23746" required="true"/>
+            <xforms:bind ref="/Skjema/MarkedsverdibaserteEiendeler-grp-5363/FinansielleInstrumenter-datadef-23750" required="true"/>
+            <xforms:bind ref="/Skjema/MarkedsverdibaserteEiendeler-grp-5363/EiendelMarkedsverdibasertUtoverFinansielleEiendeler-datadef-23755" required="true"/>
+            <xforms:bind ref="/Skjema/ImmatrielleEiendeler-grp-5364/EiendelerImmaterielleAndre-datadef-23758" required="true"/>
+            <xforms:bind ref="/Skjema/ImmatrielleEiendeler-grp-5364/UtsattSkattefordel-datadef-23761" required="true"/>
+            <xforms:bind ref="/Skjema/KortsiktigeForpliktelserOgAvsetninger-grp-5365/AvsetningerForpliktelserKortsiktig10AvEgenkapital-datadef-23764" required="true"/>
+            <xforms:bind ref="/Skjema/KortsiktigeForpliktelserOgAvsetninger-grp-5365/Restruktureringsavsetninger-grp-5366/EnhetToppledelseSkiftet-datadef-23766" required="true"/>
+            <xforms:bind ref="/Skjema/KortsiktigeForpliktelserOgAvsetninger-grp-5365/Restruktureringsavsetninger-grp-5366/AvsetningRestrukturering-datadef-23767" required="true"/>
+            <xforms:bind ref="/Skjema/KortsiktigeForpliktelserOgAvsetninger-grp-5365/BalanseforteUtviklingsutgifter-grp-5367/UtviklingskostnaderBalanseforte-datadef-23772" required="true"/>
+            <xforms:bind ref="/Skjema/EgenkapitalOgAndreForhold-grp-5368/EgenkapitalAndel10-datadef-23775" required="true"/>
+            <xforms:bind ref="/Skjema/EgenkapitalOgAndreForhold-grp-5368/EgenkapitalKorrigertNegativ-datadef-23776" required="true"/>
+            <xforms:bind ref="/Skjema/EgenkapitalOgAndreForhold-grp-5368/AndreForhold-grp-5369/RegnskapsprinsippEndringSisteTreAr-datadef-23777" required="true"/>
+            <xforms:bind ref="/Skjema/EgenkapitalOgAndreForhold-grp-5368/AndreForhold-grp-5369/LanebetingelserBruddDispensasjon-datadef-23778" required="true"/>
+            <xforms:bind ref="/Skjema/EgenkapitalOgAndreForhold-grp-5368/AndreForhold-grp-5369/Inntektsvekst25SisteAr50TreSisteAr-datadef-23779" required="true"/>
+            <xforms:bind ref="/Skjema/EgenkapitalOgAndreForhold-grp-5368/AndreForhold-grp-5369/SkattesakerVesentligeTapteSisteToAr-datadef-23780" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>KRT-1003 Rapportering fra utstederforetak ved Oslo Børs</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Skjemaet skal besvares av norskregistrerte foretak ved Oslo Børs som  utsteder aksjer, obligasjoner og/eller grunnfondsbevis.  </p>
+                <p/>
+                <p>Dersom foretaket er konsern eller del av et konsern, skal konsernet  legges til grunn for valg av svaralternativ.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>KRT-1003 Rapportering frå utskrivarføretak ved Oslo Børs</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Norskregistrerte føretak ved Oslo Børs som skriv ut aksjar,  obligasjonar og/eller grunnfondsbevis, skal svare på skjemaet.  </p>
+                <p/>
+                <p>Dersom føretaket er eit konsern eller ein del av eit konsern, skal  konsernet leggjast til grunn når ein vel svaralternativ.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/Foretaksinformasjon-grp-5358">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>1. Foretaksinformasjon</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Dersom annet ikke er angitt skal alle svar basere seg på regnskapstall  fra perioden det rapporteres for.</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>1. Føretaksinformasjon</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NON">
+                    <p>Dersom ikkje anna er oppgitt, skal alle svara basere seg på  rekneskapstal frå perioden det blir rapportert for.</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/Foretaksinformasjon-grp-5358/EnhetOrganisasjonsnummer-datadef-18">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.01 Organisasjonsnummer</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1.01 Organisasjonsnummer</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Foretaksinformasjon-grp-5358/EnhetNavn-datadef-1">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.02 Navn</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1.02 Namn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Foretaksinformasjon-grp-5358/EnhetAdresse-datadef-15">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.03 Adresse</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1.03 Adresse</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Foretaksinformasjon-grp-5358/EnhetPostnummer-datadef-6673">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:alert brreg:lang="EN">
+                        <p>Enter positive integer with four digits</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.04 Postnummer</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever positivt heltall med fire siffer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1.04 Postnummer</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev positivt heiltal med fire siffer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Foretaksinformasjon-grp-5358/EnhetPoststed-datadef-6674">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.05 Poststed</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1.05 Poststad</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/Foretaksinformasjon-grp-5358/EnhetBransje-datadef-23719">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>energi</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Energi</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Energi</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>finans</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Finans</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Finans</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>forbruksvare</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Forbruksvare</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Forbruksvare</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>forsyning</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Forsyning</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Forsyning</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>helse</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Helse</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Helse</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>industri</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Industri</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Industri</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>IT</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>IT</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>IT</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>konsumvarer</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Konsumvarer</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Konsumvarer</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>material</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Material</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Materiale</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>telekom</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Telekom</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Telekom</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.06 Bransje/sektor</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Velg den av sektorene som foretaket tilhører. Listen over sektorer er  hentet fra Oslo Børs.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>1.06 Bransje/sektor må velges.</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1.06 Bransje/sektor</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Vel den sektoren som føretaket høyrer til. Lista over sektorar er  henta frå Oslo Børs.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectMany ref="/Skjema/Foretaksinformasjon-grp-5358/EnhetVerdipapirutstederUtstedertype-datadef-23720">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Aksjeutsteder</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Aksjeutsteder</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Aksjeutskrivar</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Obligasjonsutsteder</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Obligasjonsutsteder</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Obligasjonsutskrivar</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Grunnfondsbevisutsteder</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Grunnfondsbevisutsteder</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Grunnfondsbevisutskrivar</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.07 Utstedertype</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Velg en eller flere av utstedertype(ne) aksjeutsteder,  obligasjonsutsteder og grunnfondsbevisutsteder ut fra hvilke(n)  type(r) verdipapirer foretaket er notert med på Oslo Børs</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>1.07 Minst ett av feltene må krysses av.</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1.07 Utskrivartype</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Vel éin eller fleire av utskrivartypane aksjeutskrivar,  obligasjonsutskrivar og grunnfondsbevisutskrivar etter kva type  verdipapir føretaket er notert med på Oslo Børs.</p>
+                    </xforms:help>
+                </xforms:selectMany>
+                <xforms:input ref="/Skjema/Foretaksinformasjon-grp-5358/KontaktpersonNavn-datadef-23307">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.08 Kontaktperson</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1.08 Kontaktperson</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Foretaksinformasjon-grp-5358/KontaktpersonEPost-datadef-2876">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.09 Kontaktpersonens epostadresse</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1.09 E-postadressa til kontaktpersonen</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/Foretaksinformasjon-grp-5358/RapportKvartalAr-datadef-18965">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1._kvartal</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1. kvartal</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>1. kvartal</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2._kvartal</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2. kvartal</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>2. kvartal</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>3._kvartal</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3. kvartal</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>3. kvartal</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>4._kvartal</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4. kvartal</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>4. kvartal</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>årsregnskap</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Årsregnskap</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Årsrekneskap</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.10 Rapporteringsperiode</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Velg riktig rapporteringsperiode. Det kan velges mellom 1. kvartal, 2.  kvartal, 3. kvartal, 4. kvartal / foreløpig årsregnskap eller  årsregnskap.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>1.10 Periode/kvartal må velges</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1.10 Rapporteringsperiode</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Vel rett rapporteringsperiode. Du kan velje mellom 1. kvartal,  2. kvartal, 3. kvartal, 4. kvartal / førebels årsrekneskap eller  årsrekneskap.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/Foretaksinformasjon-grp-5358/RegnskapAr-datadef-17102">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <brreg:kontroll type="1980&lt;=årstall&lt;=året i år"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.11 Regnskapsår</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Oppgi regnskapsår knyttet til rapporteringsperioden i spørsmål 1.10.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1.11 Rekneskapsår</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgi rekneskapsår knytt til rapporteringsperioden i spørsmål 1.10.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/Foretaksinformasjon-grp-5358/EnhetKonsernregnskap-datadef-23722">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.12 Avlegger foretaket konsernregnskap?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Oppgi om foretaket er del av et konsern.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>1.12: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1.12 Legg føretaket fram konsernrekneskap?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Opplys om føretaket er del av eit konsern.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/Foretaksinformasjon-grp-5358/EnhetBorsnotertOBXIndeksutvalg-datadef-23723">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.13 Oppgi om foretaket har vært inkludert i OBX-utvalget på Oslo Børs  i rapporteringsperioden.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kredittilsynet ønsker her svar på om foretaket er inkludert i  OBX-utvalget på Oslo Børs. Se nettstedet til Oslo Børs dersom du er i  tvil.Spørsmålet skal også besvares av utstedere av grunnfondsbevis.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>1.13: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1.13 Har føretaket vore inkludert i OBX-utvalet på Oslo Børs i  rapporteringsperioden?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her ønskjer Kredittilsynet å få svar på om føretaket er inkludert i  OBX-utvalet på Oslo Børs. Sjå nettstaden til Oslo Børs dersom du er i  tvil.Også dei som skriv ut grunnfondsbevis, skal svare på spørsmålet.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Sjå: http://www.oslobors.no/ob/aarsstatistikk_aksjer. Vel år, deretter  Kursendring - vinnarar og taparar, Inklusive utbytte (xls).</p>
+                    </xforms:hint>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/Foretaksinformasjon-grp-5358/EnhetAksjerStorstKursoppgangKursnedgang-datadef-23724">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.14 Oppgi om foretaket har vært blant de 10 aksjene med størst  kursoppgang eller sterkest kursnedgang på Oslo Børs i  rapporteringsperioden.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kredittilsynet ønsker her svar på om utstederforetaket har vært listet  på Oslo Børs liste over 10 på topp eller 10 på bunn, i løpet av  rapporteringsperioden. Se nettstedet til Oslo Børs dersom du er i  tvil. Her listes de
+                            ti fremste selskapene på vinner- og taperlisten  (kursmessig) for henholdsvis valgt måned og hittil i år  Spørsmålet  skal også besvares av utstedere av grunnfondsbevis.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Se: http://www.oslobors.no/ob/aarsstatistikk_aksjer. Velg år, deretter  Kursendring - vinnere og tapere Inklusive utbytte (xls)</p>
+                    </xforms:hint>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>1.14: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1.14 Har føretaket vore blant dei ti aksjane med størst kursoppgang  eller sterkast kursnedgang på Oslo Børs i rapporteringsperioden?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her ønskjer Kredittilsynet å få svar på om utskrivarføretaket har vore  på Ti på topp- eller Ti på botnen-listene til Oslo Børs i  rapporteringsperioden. Sjå nettstaden til Oslo Børs dersom du er i  tvil. Her blir dei ti
+                            fremste selskapa på vinnar- og taparlista  (kursmessig) for høvesvis vald månad og hittil i år lista opp. Også  dei som skriv ut grunnfondsbevis, skal svare på spørsmålet.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Sjå: http://www.oslobors.no/ob/aarsstatistikk_aksjer. Vel år, deretter  Kursendring - vinnarar og taparar. Inklusive utbytte (xls).</p>
+                    </xforms:hint>
+                </xforms:selectOne>
+                <xforms:group ref="/Skjema/Foretaksinformasjon-grp-5358/Organisasjonsforhold-grp-5359">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.15 Organisasjonsforhold</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1.15 Organisasjonsforhold</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/Foretaksinformasjon-grp-5358/Organisasjonsforhold-grp-5359/EnhetEtiskeRetningslinjerOffentliggjorte-datadef-23725">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1.15.01 Foreligger offentliggjorte etiske retningslinjer?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Med dette menes etiske retningslinjer som er offentlig tilgjengelig.</p>
+                        </xforms:help>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>1.14.01: Enten ja eller nei må velges.</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>1.15.01 Finst det offentleggjorde etiske retningslinjer?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Med dette meiner vi etiske retningslinjer som er offentleg  tilgjengelege.</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/Foretaksinformasjon-grp-5358/Organisasjonsforhold-grp-5359/EnhetStyrelederToppledelseEkstraordinartSkifteSisteTreAr-datadef-23726">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1.15.02 Er det gjennomført ekstraordinært skifte av styreleder  og/eller toppleder i løpet av de siste tre år?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Med toppleder forstås konsernsjef, CEO, president, adm. dir. eller  tilsvarende.</p>
+                        </xforms:help>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>1.14.02: Enten ja eller nei må velges.</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>1.15.02 Er det gjennomført eit ekstraordinært byte av styreleiar  og/eller toppleiar dei siste tre åra?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Med toppleiar meiner vi konsernsjef, CEO, president, adm.dir. eller  tilsvarande.</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/Foretaksinformasjon-grp-5358/Organisasjonsforhold-grp-5359/EnhetRevisjonskomiteRapporteringTilStyret-datadef-23727">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1.15.03 Har foretaket revisjonskomité som rapporterer til styret?</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>1.14.03: Enten ja eller nei må velges.</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>1.15.03 Har føretaket ein revisjonskomité som rapporterer til styret?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/Foretaksinformasjon-grp-5358/Organisasjonsforhold-grp-5359/EnhetInternrevisjonRapporteringTilStyret-datadef-23728">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1.15.04 Har foretaket internrevisjon som avgir sine rapporter til  styret?</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>1.14.04: Enten ja eller nei må velges.</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>1.15.04 Har føretaket internrevisjon som gir rapportar til styret?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/Foretaksinformasjon-grp-5358/Organisasjonsforhold-grp-5359/EnhetEksternRevisorSkifteSisteToAr-datadef-23729">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1.15.05 Har foretaket skiftet ekstern revisor i løpet av de siste to  år?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Med skifte av eksternrevisor menes eventuelt skifte av  revisjonsselskap.</p>
+                        </xforms:help>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>1.14.05: Enten ja eller nei må velges.</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>1.15.05 Har føretaket bytt ekstern revisor dei siste to åra?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Med skifte av eksternrevisor meiner vi eventuelt skifte av  revisjonsselskap.</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/Foretaksinformasjon-grp-5358/Organisasjonsforhold-grp-5359/InsentivordningAksjebasert-datadef-23730">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1.15.06 Foreligger det aksjebaserte insentivordninger i foretaket?</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>1.14.06: Enten ja eller nei må velges.</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>1.15.06 Finst det aksjebaserte insentivordningar i føretaket?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Resultatposter-grp-5360">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>2. Resultatposter</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>2. Resultatpostar</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/Resultatposter-grp-5360/KontaktsbasertInntektUtgift-datadef-23731">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.01 Har foretaket kontraktsbaserte inntekter og utgifter?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kontraktsbaserte inntekter og utgifter er definert som regnskapsføring  av anleggskontrakter, vedlikehold- og serviceavtaler mv.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>2.01: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.01 Har føretaket kontraktsbaserte inntekter og utgifter?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Kontraktsbaserte inntekter og utgifter er definerte som  rekneskapsføring av anleggskontraktar, vedlikehalds- og  serviceavtalar etc.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/Resultatposter-grp-5360/KontaktsbasertInntekt25-datadef-23732">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.02 Utgjør innregning av kontraktsbaserte inntekter mer enn 25 % av  samlede driftsinntekter?</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>2.02: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.02 Utgjer innrekninga av dei kontraktsbaserte inntektene meir enn  25 % av dei samla driftsinntektene?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/Resultatposter-grp-5360/KontaktsbasertInntekt50-datadef-23733">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.03 Utgjør innregning av kontraktsbaserte inntekter mer enn 50 % av  samlede driftsinntekter?</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>2.03: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.03 Utgjer innrekninga av dei kontraktsbaserte inntektene meir enn  50 % av dei samla driftsinntektene?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/Resultatposter-grp-5360/ResultatposterSpesielle-datadef-23734">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.04 Har foretaket spesielle resultatposter?</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Spesielle resultatposter er poster som det ihht. IAS 1.86 og 1.87 er  knyttet spesielle opplysningsplikter til, se forskriftstekst på  http://www.lovdata.no/for/sf/fd/xd-20041217-1852.html.</p>
+                    </xforms:hint>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>2.04: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.04 Har føretaket spesielle resultatpostar?</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Spesielle resultatpostar er postar som det i samsvar med IAS 1.86 og  1.87 er knytt spesielle opplysningsplikter til, sjå forskriftstekst  på http://www.lovdata.no/for/sf/fd/xd-20041217-1852.html.</p>
+                    </xforms:hint>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/Resultatposter-grp-5360/InntekterGevinsterSpesielle25-datadef-23735">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.05 Utgjør spesielle inntekts- og/eller gevinstposter mer enn 25 % av  samlede inntekter?</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>2.05: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.05 Utgjer spesielle inntekts- og/eller gevinstpostar meir enn 25 %  av dei samla inntektene?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/Resultatposter-grp-5360/InntekterGevinsterSpesielle50-datadef-23736">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.06 Utgjør spesielle inntekts- og/eller gevinstposter mer enn 50 % av  samlede inntekter?</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>2.06: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.06 Utgjer spesielle inntekts- og/eller gevinstpostar meir enn 50 %  av dei samla inntektene?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/Resultatposter-grp-5360/ResultatForSkattSpesiellePoster5-datadef-23737">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.07 Utgjør slike spesielle poster mer enn 5 % av resultat før skatt?</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>2.07: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.07 Utgjer slike spesielle postar meir enn 5 % av resultatet før  skatt?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/Resultatposter-grp-5360/ResultatForSkattSpesiellePoster25-datadef-23738">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.08 Utgjør slike spesielle poster mer enn 25 % av resultat før skatt?</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>2.08: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.08 Utgjer slike spesielle postar meir enn 25 % av resultatet før  skatt?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/Resultatposter-grp-5360/KontantstromOperasjonelleDriftsaktiviteterOverstigerArsresultat-datadef-23739">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.09 Overstiger kontantstrøm fra operasjonelle driftsaktiviteter  årsresultatet de siste to år?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Med to siste år menes de to årene forut for perioden det rapporteres  for.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>2.09: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.09 Overstig kontantstraumen frå operasjonelle driftsaktivitetar  årsresultatet dei siste to åra?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Med to siste år meiner vi dei to åra før perioden det blir rapportert  for.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/Resultatposter-grp-5360/KontantstromOperasjDriftInvestingerOverstigerArsresultat-datadef-23740">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.10 Overstiger kontantstrøm fra operasjonelle- og  investeringsaktiviteter årsresultatet de siste to år?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Med to siste år menes de to årene forut for perioden det rapporteres  for.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>2.10: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.10 Overstig kontantstraumen frå operasjonelle aktivitetar og  investeringsaktivitetar årsresultatet dei siste to åra?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Med to siste år meiner vi dei to åra før perioden det blir rapportert  for.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/Resultatposter-grp-5360/DriftsresultatKonsernNegativSisteToAr-datadef-23741">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.11 Har konsernet rapportert negativt driftsresultat i løpet av de  siste to år?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Også delårsrapportene skal inngå i svargrunnlaget.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>2.11: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.11 Har konsernet rapportert negativt driftsresultat dei siste to  åra?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Delårsrapportane skal òg vere med i svargrunnlaget.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/Resultatposter-grp-5360/DriftsresultatNegativSisteToAr-datadef-23742">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.12 Har selskapet rapportert negativt driftsresultat i løpet av de  siste to år?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Med selskaper menes her foretak som ikke er en del av et konsern, og  dermed ikke avlegger konsernregnskap. Også delårsrapportene skal  inngå i svargrunnlaget.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>2.12: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.12 Har selskapet rapportert negativt driftsresultat dei siste to  åra?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Med selskap meiner vi her føretak som ikkje er ein del av eit konsern,  og som dermed ikkje legg fram konsernrekneskap. Delårsrapportane skal  òg vere med i svargrunnlaget.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/Resultatposter-grp-5360/SegmentresultatNegativSisteToAr-datadef-23743">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.13 Foreligger det negativt segmentresultat i minst ett av segmentene  i løpet av de siste to år?</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>2.13: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.13 Er det negativt segmentresultat i minst eitt av segmenta dei  siste to åra?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/Resultatposter-grp-5360/ArsresultatNegativSisteToAr-datadef-23744">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.14 Foreligger det negativt årsresultat i løpet av de siste to år?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom foretaket er konsern eller del av et konsern skal årsresultatet  for konsernet legges til grunn for valg av svaralternativ.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>2.14: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.14 Er det negativt årsresultat i løpet av dei siste to åra?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dersom føretaket er eit konsern eller ein del av eit konsern, skal  konsernet leggjast til grunn når du vel svaralternativ.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:group ref="/Skjema/Resultatposter-grp-5360/Nedskrivinger-grp-5361">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.15 Nedskrivinger</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.15 Nedskrivingar</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/Resultatposter-grp-5360/Nedskrivinger-grp-5361/Nedskrivninger-datadef-23745">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.15.01 Har foretaket gjennomført nedskrivinger?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>2.15.01 Har føretaket gjennomført nedskrivingar?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/Resultatposter-grp-5360/Nedskrivinger-grp-5361/VerdsettelsePrisBok1-datadef-23746">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.15.02 Er P/B (price/book) større enn 1?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Spørsmålet skal besvares ut fra status ved utløpet av  rapporteringsperioden, det vil si per 31.12 / utløpet av perioden det  rapporteres for.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>2.15.02 Er P/B (price/book) større enn 1?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Spørsmålet skal svarast på ut frå status ved utløpet av  rapporteringsperioden, det vil seie per 31.12 / utløpet av perioden  det blir rapportert for.</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/Resultatposter-grp-5360/Nedskrivinger-grp-5361/Nedskrivninger5ResultatForSkatt-datadef-23747">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.15.03 Utgjør nedskrivinger mer enn 5 % av resultat før skatt?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>2.15.03 Utgjer nedskrivingane meir enn 5 % av resultat før skatt?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/Resultatposter-grp-5360/Nedskrivinger-grp-5361/Nedskrivninger25ResultatForSkatt-datadef-23748">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.15.04 Utgjør nedskrivinger mer enn 25 % av resultat før skatt?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>2.15.04 Utgjer nedskrivingane meir enn 25 % av resultat før skatt?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/Resultatposter-grp-5360/Nedskrivinger-grp-5361/NedskrivningerNegativtResultatForSkatt-datadef-23749">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.15.05 Medfører nedskrivinger at resultat før skatt blir negativt?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>2.15.05 Fører nedskrivingane til at resultat før skatt blir negativt?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/MarkedsverdibaserteEiendeler-grp-5363">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>3. Markedsverdibaserte eiendeler</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>3. Marknadsverdibaserte eigedelar</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/MarkedsverdibaserteEiendeler-grp-5363/FinansielleInstrumenter-datadef-23750">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.01 Eier foretaket finansielle instrumenter?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>IAS 32.11 definerer et finansielt instrument til å være enhver  kontrakt som fører til både en finansiell eiendel for ett foretak og  en finansiell forpliktelse eller et egenkapitalinstrument for et  annet foretak.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>3.01 Eig føretaket finansielle instrument?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>IAS 32.11 definerer eit finansielt instrument til å vere alle  kontraktar som fører til både ein finansiell eigedel for eitt føretak  og ei finansiell plikt eller eit eigenkapitalinstrument for eit anna  føretak.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/MarkedsverdibaserteEiendeler-grp-5363/SikringsbokforingFinansielleInstrumenter-datadef-23751">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.02 Gjennomfører foretaket sikringsbokføring?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>3.02 Gjennomfører føretaket sikringsbokføring?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/MarkedsverdibaserteEiendeler-grp-5363/FinansielleInstrumenterUnoterteEidUtstedt-datadef-23752">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.03 Eier eller utsteder foretaket unoterte finansielle instrumenter?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>3.03 Eig eller skriv føretaket ut unoterte finansielle instrument?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/MarkedsverdibaserteEiendeler-grp-5363/GevinstTapFinansielleInstrumenter5ResultatForSkatt-datadef-23753">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.04 Utgjør resultatførte gevinster/tap på finansielle instrumenter  mer enn 5 % av resultat før skatt?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Skal forstås som netto gevinster/tap.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>3.04 Utgjer resultatførte gevinstar/tap på finansielle instrument meir  enn 5 % av resultatet før skatt?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Skal forståast som netto gevinstar/tap.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/MarkedsverdibaserteEiendeler-grp-5363/GevinstTapFinansielleInstrumenter25ResultatForSkatt-datadef-23754">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.05 Utgjør resultatførte gevinster/tap på finansielle instrumenter  mer enn 25 % av resultat før skatt?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Skal forstås som netto gevinster/tap.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>3.05 Utgjer resultatførte gevinstar/tap på finansielle instrument meir  enn 25 % av resultatet før skatt?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Skal forståast som netto gevinstar/tap.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/MarkedsverdibaserteEiendeler-grp-5363/EiendelMarkedsverdibasertUtoverFinansielleEiendeler-datadef-23755">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.06 Har foretaket markedsverdibaserte eiendeler utover finansielle  eiendeler?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Markedsverdibaserte eiendeler utover finansielle eiendeler er definert  som eiendeler målt til virkelig verdi, som investeringseiendommer,  biologiske eiendeler mv.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>3.06 Har føretaket marknadsverdibaserte eigedelar utover finansielle  eigedelar?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Marknadsverdibaserte eigedelar utover finansielle eigedelar er  definerte som eigedelar som er målte til verkeleg verdi, som  investeringseigedommar, biologiske eigedelar etc.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/MarkedsverdibaserteEiendeler-grp-5363/EiendelMarkedsverdibasertUtoverFinansielleEiendeler10EK-datadef-23756">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.07 Utgjør markedsverdibaserte eiendeler utover finansielle eiendeler  mer enn 10 % av egenkapitalen?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>3.07 Utgjer marknadsverdibaserte eigedelar utover finansielle  eigedelar meir enn 10 % av eigenkapitalen?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/MarkedsverdibaserteEiendeler-grp-5363/EiendelMarkedsverdibasertUtoverFinansielleEiendeler50EK-datadef-23757">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.08 Utgjør markedsverdibaserte eiendeler utover finansielle eiendeler  mer enn 50 % av egenkapitalen?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>3.08 Utgjer marknadsverdibaserte eigedelar utover finansielle  eigedelar meir enn 50 % av eigenkapitalen?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+            </xforms:group>
+            <xforms:group ref="/Skjema/ImmatrielleEiendeler-grp-5364">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>4. Immaterielle eiendeler</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>4. Immaterielle eigedelar</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/ImmatrielleEiendeler-grp-5364/EiendelerImmaterielleAndre-datadef-23758">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.01 Har foretaket andre immaterielle eiendeler enn utsatt  skattefordel?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>4.01 Har føretaket andre immaterielle eigedelar enn utsett  skattefordel?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/ImmatrielleEiendeler-grp-5364/EiendelerImmaterielle10AvEgenkapital-datadef-23759">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.02 Utgjør immaterielle eiendeler, utsatt skattefordel og goodwill  mer enn 10 % av egenkapitalen?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>4.02 Utgjer immaterielle eigedelar, utsett skattefordel og goodwill  meir enn 10 % av eigenkapitalen?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/ImmatrielleEiendeler-grp-5364/EiendelerImmaterielle50AvEgenkapital-datadef-23760">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.03 Utgjør immaterielle eiendeler, utsatt skattefordel og goodwill  mer enn 50 % av egenkapitalen?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>4.03 Utgjer immaterielle eigedelar, utsett skattefordel og goodwill  meir enn 50 % av eigenkapitalen?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/ImmatrielleEiendeler-grp-5364/UtsattSkattefordel-datadef-23761">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.04 Har foretaket utsatt skattefordel?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>4.04 Har føretaket utsett skattefordel?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/ImmatrielleEiendeler-grp-5364/UtsattSkattefordelResultateffekt5ResultatForSkatt-datadef-23762">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.05 Utgjør økning i utsatt skattefordel mer enn 5 % av resultat før  skatt?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>4.05 Utgjer auke i utsett skattefordel meir enn 5 % av resultat før  skatt?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/ImmatrielleEiendeler-grp-5364/UtsattSkattefordelResultateffekt25ResultatForSkatt-datadef-23763">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.06 Utgjør økning i utsatt skattefordel mer enn 25 % av resultat før  skatt?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>4.06 Utgjer auke i utsett skattefordel meir enn 25 % av resultat før  skatt?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+            </xforms:group>
+            <xforms:group ref="/Skjema/KortsiktigeForpliktelserOgAvsetninger-grp-5365">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>5. Kortsiktige forpliktelser og avsetninger</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>5. Kortsiktige plikter og avsetnader</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/KortsiktigeForpliktelserOgAvsetninger-grp-5365/AvsetningerForpliktelserKortsiktig10AvEgenkapital-datadef-23764">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.01 Utgjør kortsiktige forpliktelser (gjeld) og avsetninger mer enn  10 % av egenkapitalen?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>5.01 Utgjer kortsiktige plikter (gjeld) og avsetnader meir enn 10 % av  eigenkapitalen?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/KortsiktigeForpliktelserOgAvsetninger-grp-5365/AvsetningerForpliktelserKortsiktig50AvEgenkapital-datadef-23765">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.02 Utgjør kortsiktige forpliktelser og avsetninger mer enn 50 % av  egenkapitalen?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>5.02 Utgjer kortsiktige plikter og avsetnader meir enn 50 % av  eigenkapitalen?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:group ref="/Skjema/KortsiktigeForpliktelserOgAvsetninger-grp-5365/Restruktureringsavsetninger-grp-5366">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.03 Restruktureringsavsetninger</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>5.03 Restruktureringsavsetnader</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/KortsiktigeForpliktelserOgAvsetninger-grp-5365/Restruktureringsavsetninger-grp-5366/EnhetToppledelseSkiftet-datadef-23766">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.03.01 Har det vært gjennomført skifte av toppleder i perioden det  rapporteres for?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Med toppleder forstås konsernsjef, CEO, president, adm. dir. eller  tilsvarende.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>5.03.01 Har det vore gjennomført byte av toppleiar i perioden det blir  rapportert for?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Med toppleiar meiner vi konsernsjef, CEO, president, adm.dir. eller  tilsvarande.</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/KortsiktigeForpliktelserOgAvsetninger-grp-5365/Restruktureringsavsetninger-grp-5366/AvsetningRestrukturering-datadef-23767">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.03.02 Er det foretatt restruktureringsavsetninger?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>5.03.02 Er det gjort restruktureringsavsetnader?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/KortsiktigeForpliktelserOgAvsetninger-grp-5365/Restruktureringsavsetninger-grp-5366/AvsetningRestrukturering5ResultatForSkatt-datadef-23768">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.03.03 Utgjør restruktureringsavsetninger mer enn 5 % av resultat før  skatt?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Spørsmålet skal besvares ut fra status ved utløpet av  rapporteringsperioden, det vil si per 31.12 / utløpet av perioden det  rapporteres for.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>5.03.03 Utgjer restruktureringsavsetnadene meir enn 5 % av resultat  før skatt?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Spørsmålet skal svarast på ut frå status ved utløpet av  rapporteringsperioden, det vil seie per 31.12 / utløpet av perioden  det blir rapportert for.</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/KortsiktigeForpliktelserOgAvsetninger-grp-5365/Restruktureringsavsetninger-grp-5366/AvsetningRestrukturering25ResultatForSkatt-datadef-23769">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.03.04 Utgjør restruktureringsavsetninger mer enn 25 % av resultat  før skatt?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>5.03.04 Utgjer restruktureringsavsetnadene meir enn 25 % av resultat  før skatt?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/KortsiktigeForpliktelserOgAvsetninger-grp-5365/Restruktureringsavsetninger-grp-5366/AvsetningRestrukturering10AvEgenkapital-datadef-23770">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.03.05 Utgjør restruktureringsavsetninger mer enn 10 % av  egenkapitalen?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>5.03.05 Utgjer restruktureringsavsetnadene meir enn 10 % av  eigenkapitalen?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/KortsiktigeForpliktelserOgAvsetninger-grp-5365/Restruktureringsavsetninger-grp-5366/AvsetningRestrukturering50AvEgenkapital-datadef-23771">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.03.06 Utgjør restruktureringsavsetninger mer enn 50 % av  egenkapitalen?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>5.03.06 Utgjer restruktureringsavsetnadene meir enn 50 % av  eigenkapitalen?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+                <xforms:group ref="/Skjema/KortsiktigeForpliktelserOgAvsetninger-grp-5365/BalanseforteUtviklingsutgifter-grp-5367">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.04 Balanseførte utviklingsutgifter</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>5.04 Balanseførte utviklingsutgifter</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/KortsiktigeForpliktelserOgAvsetninger-grp-5365/BalanseforteUtviklingsutgifter-grp-5367/UtviklingskostnaderBalanseforte-datadef-23772">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.04.01 Har foretaket balanseførte utviklingsutgifter?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>5.04.01 Har føretaket balanseførte utviklingsutgifter?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/KortsiktigeForpliktelserOgAvsetninger-grp-5365/BalanseforteUtviklingsutgifter-grp-5367/UtviklingskostnaderBalanseforte10AvEgenkapital-datadef-23773">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.04.02 Utgjør balanseførte utviklingsutgifter mer enn 10 % av  egenkapitalen?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>5.04.02 Utgjer dei balanseførte utviklingsutgiftene meir enn 10 % av  eigenkapitalen?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/KortsiktigeForpliktelserOgAvsetninger-grp-5365/BalanseforteUtviklingsutgifter-grp-5367/UtviklingskostnaderBalanseforte50AvEgenkapital-datadef-23774">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.04.03 Utgjør balanseførte utviklingsutgifter mer enn 50 % av  egenkapitalen?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>5.04.03 Utgjer dei balanseførte utviklingsutgiftene meir enn 50 % av  eigenkapitalen?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/EgenkapitalOgAndreForhold-grp-5368">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>6. Egenkapital og andre forhold</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>6. Eigenkapital og andre forhold</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/EgenkapitalOgAndreForhold-grp-5368/EgenkapitalAndel10-datadef-23775">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>6.01 Er egenkapitalandelen på under 10 %?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>6.01 Er eigenkapitaldelen på under 10 %?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/EgenkapitalOgAndreForhold-grp-5368/EgenkapitalKorrigertNegativ-datadef-23776">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>6.02 Er korrigert egenkapital negativ?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Med korrigert egenkapital menes egenkapital med fradrag av  immaterielle eiendeler og utsatt skattefordel.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>6.02 Er korrigert eigenkapital negativ?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Med korrigert eigenkapital meiner vi eigenkapital med frådrag av  immaterielle eigedelar og utsett skattefordel.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:group ref="/Skjema/EgenkapitalOgAndreForhold-grp-5368/AndreForhold-grp-5369">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>6.03 Andre forhold</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>6.03 Andre forhold</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/EgenkapitalOgAndreForhold-grp-5368/AndreForhold-grp-5369/RegnskapsprinsippEndringSisteTreAr-datadef-23777">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6.03.01 Er det gjennomført endringer av regnskapsprinsipp i løpet av  de siste tre år?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dette omfatter ikke endringer av regnskapsprinsipp som følge av  overgang til IFRS (International Financial Reporting Standards).</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>6.03.01 Er det gjort endringar i rekneskapsprinsippa dei siste tre  åra?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Det gjeld ikkje endringar av rekneskapsprinsipp som følgje av overgang  til IFRS (International Financial Reporting Standards).</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/EgenkapitalOgAndreForhold-grp-5368/AndreForhold-grp-5369/LanebetingelserBruddDispensasjon-datadef-23778">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6.03.02 Foreligger det brudd på eller dispensasjon fra lånebetingelser  (covenants)?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>6.03.02 Er det brot på eller dispensasjon frå lånevilkåra (covenants)?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/EgenkapitalOgAndreForhold-grp-5368/AndreForhold-grp-5369/Inntektsvekst25SisteAr50TreSisteAr-datadef-23779">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6.03.03 Overstiger veksten i samlede inntekter 25 % av siste års  inntekter eller mer enn 50 % av de siste tre års inntekter?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Med samlede inntekter forstås foretakets totale inntekter. Med tre  siste år menes de tre årene forut for perioden det rapporteres for.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>6.03.03 Er veksten i dei samla inntektene større enn 25 % av  inntektene det siste året eller meir enn 50 % av inntektene dei siste  tre åra?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Med samla inntekter meiner vi dei totale inntektene til føretaket. Med  tre siste år meiner vi dei tre åra før perioden det blir rapportert  for.</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/EgenkapitalOgAndreForhold-grp-5368/AndreForhold-grp-5369/SkattesakerVesentligeTapteSisteToAr-datadef-23780">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6.03.04 Har foretaket tapt vesentlige skattesaker i løpet av de siste  to år?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Med vesentlig menes om utsteder har opplyst om forholdet i noter eller  annen tilleggsinformasjon i års-/delårsregnskapet.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>6.03.04 Har føretaket tapt vesentlege skattesaker dei siste to åra?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Med vesentleg meiner vi om utskrivaren har opplyst om forholdet i  merknader eller annan tilleggsinformasjon i års-/delårsrekneskapen.</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

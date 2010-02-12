@@ -1,0 +1,2235 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<SchemaDefinition>
+  <xs:schema xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+<!--title='RF-1061: Oppgave over realisasjon av aksjer mv' lang='NOB'-->
+    <xs:element name="Skjema">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>RF-1061 Oppgave over realisasjon av aksjer mv. 2007</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+            <p>Oppgaven skal leveres av skattytere eller deltakerliknede selskaper  som har solgt eller realisert aksjer mv på annet vis i løpet av 2007  med skattepliktig gevinst eller fradragsberettiget tap. Det er  likevel omfattende
+                        unntak fra denne oppgaveplikten. Se mer om  unntakene nedenfor.  </p>
+            <p>Skattytere og deltakerliknede selskaper som har mottatt RF-1088  &lt;&lt;Oppgaver over aksjer og grunnfondsbevis&gt;&gt; fra Skatteetatens  aksjonærregister med opplysninger om de realiserte aksjene, skal ikke  spesifisere
+                        gevinsten/tapet på RF-1061.  </p>
+            <p>Gevinst eller tap etter realisasjon av andel i verdipapirfond  (aksjefond eller obligasjonsfond), skal bare spesifiseres på RF-1061  hvis skattyteren ikke har mottatt oppgave med opplysninger som  verdipapirfondet har sendt til
+                        Skatteetaten. (Opplysningene gis i  medhold av forskrift av 22.12.2003 nr. 1779 om levering av  kontrolloppgave fra forvaltningsselskaper og verdipapirregistere til  ligningsmyndighetene).  </p>
+            <p/>
+            <p>Med virkning fra 2004 ble det innført en såkalt &lt;&lt;fritaksmetode &gt;&gt;,  som innebærer at aksjeeiende selskap som hovedregel skal fritas for  beskatning av gevinst og utbytte på aksjer mv. Tilsvarende vil det  ikke være
+                        fradragsrett for tap ved realisasjon av aksjer mv. Ved  skattefri gevinst eller ikke fradragsberettiget tap ved realisasjon  av aksjer skal RF-1061 ikke fylles ut. Fritaksmetoden er nærmere  forklart nedenfor.  </p>
+            <p/>
+            <p>Med virkning fra 2006 er det innført nye lempeligere skatteregler for  deltakerliknede selskap som realiserer aksjer og andre verdipapir.  Det deltakerliknede selskap skal likevel føre RF-1061 og de andre  realisasjonsoppgavene
+                        på tilsvarende vis som personlige skattytere  som har realisert aksjer mv. Den delen av gevinsten/tapet som ikke  skal tilordnes deltakeren som andel av overskudd eller underskudd i  selskapet, tilbakeføres på selskapsoppgaven
+                        og/eller  deltakeroppgaven.</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>RF-1061 Oppgåve over realisasjon av aksjar o.l. 2007</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+            <p>Kven skal levere RF-1061?  </p>
+            <p>Oppgava skal leverast av skattytarar eller deltakarlikna selskap som  har selt eller realisert aksjar o.l. på anna vis i løpet av  2007 med  skattepliktig gevinst eller fradragsgodkjent tap. Det er likevel  omfattande unntak
+                        frå denne oppgaveplikta. Sjå meir om unntaka  nedenfor.  </p>
+            <p/>
+            <p>Skattytarar og deltakerlikna selskap som har motteke &lt;&lt;RF-1088 Oppgåve  over aksjar og grunnfondsbevis&gt;&gt; frå Skatteetatens aksjonærregister    </p>
+            <p>med opplysninger om dei realiserte aksjane, skal ikkje spesifisera  gevinsten/tapet på RF-1061.  </p>
+            <p/>
+            <p>Gevinst eller tap etter realisasjon av part i verdipapirfond  (aksjefond eller obligasjonsfond), spesifiserer ein berre på RF-1061  dersom skattytaren ikkje har motteke oppgåve med opplysningar som  verdipapirfondet har sendt
+                        til Skatteetaten. (Opplysningane blir gitt  i medhald av forskrift av 22.12.2003 nr. 1779 om levering av  kontrolloppgave fra forvaltningsselskaper og verdipapirregistere til  ligningsmyndighetene).  </p>
+            <p/>
+            <p>Med verknad frå 2004 ble det innført ein såkalla &lt;&lt;fritaksmetode&gt;&gt;.  Den går ut på at selskap som er aksjonærar, som hovudregel ikkje blir  skattlagde for gevinstar og utbytte på aksjar o.l. Dei har heller  ikkje rett på
+                        frådrag for tap ved realisasjon av aksjar o.l. Ved  skattefri gevinst eller ikke frådragsgodkjend tap ved realisasjon av  aksjar o.l. skal RF-1061 ikkje fyllast ut. Fritaksmetoden er nærare  forklart nedenfor.  </p>
+            <p/>
+            <p>Med verknad frå 2006 er det innført nye lempeligare skattereglar for  dei deltakarlikna selskapa som realiserar aksje eller anna  verdipapir. Det deltakarlikna selskapet skal likevel føre RF-1061 og  dei andre
+                        realisasjonsoppgåvene på same sett som personlege  skattytarar som har realisert aksjar o.a. Den delen av  gevinsten/tapet som selskapet ikkje skal tilordne deltakaren som del  av overskott eller underskott i selskapet,
+                        tilbakefører ein i  selskapsoppgåva og/eller deltakeroppgåva.</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="GenerellInformasjon-grp-827"/>
+          <xs:element minOccurs="0" ref="RealisasjonAvAksjer-grp-3721"/>
+          <xs:element minOccurs="0" ref="Samleoppgave-grp-831"/>
+        </xs:sequence>
+        <xs:attribute fixed="70" name="skjemanummer" type="xs:integer" use="required"/>
+        <xs:attribute fixed="7254" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+        <xs:attribute fixed="RF-1061" name="blankettnummer" type="xs:string" use="optional"/>
+        <xs:attribute fixed="Oppgave over realisasjon av aksjer mv" name="tittel" type="xs:string" use="optional"/>
+        <xs:attribute fixed="29" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+        <xs:attribute name="etatid" use="optional">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="974761076">
+                <xs:annotation>
+                  <xs:documentation>SKATTEDIREKTORATET</xs:documentation>
+                </xs:annotation>
+              </xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+        <xs:anyAttribute/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GenerellInformasjon-grp-827">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Innledning</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+            <p>Hvor skal oppgaven leveres?  </p>
+            <p>Personlige skattytere som er skattepliktig til flere kommuner, leverer  oppgaven sammen med selvangivelsen til ligningskontoret i  bostedskommunen. Aksjeselskaper/almennaksjeselskaper og andre  upersonlige skattytere leverer
+                        RF-1061 sammen med selvengivelsen til  ligningskontoret i hovedkontorkommunen, eventuelt  Sentralskatttekontoret for storbedrifter. Tilsvarende sender  deltakerlignede selskaper inn RF-1061 sammen med selskapsoppgaven.</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Innleiing</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+            <p>Kvar skal oppgåva leverast?  </p>
+            <p>Personlege skattytarar som er skattepliktige i fleire kommunar,  leverer oppgåva saman med sjølvmeldinga til likningskontoret i  bustadskommunen. Aksjeselskap/almennaksjeselskap og andre upersonlege  skattytarar leverer RF-1061
+                        samen med sjølvmeldinga til  likningskontoret for kommunen der hovudkontoret ligg, eventuelt  Sentralskattekontoret for storbedrifter. Tilsvarande sender  deltakerlikna selskap inn RF-1061 samen med selskapsoppgåva.</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="Avgiver-grp-100"/>
+        </xs:sequence>
+        <xs:attribute fixed="827" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="Avgiver-grp-100">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Skattyter</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Skattytar</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="EnhetNavn-datadef-1">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Navn</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Namn</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="OppgavegiverFodselsnummer-datadef-26">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Fødselsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Fødselsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="EnhetOrganisasjonsnummer-datadef-18">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Organisasjonsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Organisasjonsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="EnhetAdresse-datadef-15">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Adresse</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Adresse</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="EnhetPostnummer-datadef-6673">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Postnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Postnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="EnhetPoststed-datadef-6674">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Poststed</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Poststad</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute fixed="100" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="EnhetNavn-datadef-1">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Navn på juridisk enhet</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Navn på årsregnskapets eier</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">1</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst175-repformat-8">
+            <xs:attribute fixed="1" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst175-repformat-8">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">8</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="175"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverFodselsnummer-datadef-26">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Fødselsnummer til oppgavegiveren</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">2</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst1111Modulus11-repformat-18">
+            <xs:attribute fixed="26" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst1111Modulus11-repformat-18">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">18</brreg:info>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+            <p>Ugyldig fødselsnummer</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+            <p>Ugyldig fødselsnummer</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:length value="11"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetOrganisasjonsnummer-datadef-18">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Organisasjonsnummeret til enheten</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Organisasjonsnummer til årsregnskapets eier</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">3</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst99Modulus11-repformat-1">
+            <xs:attribute fixed="18" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst99Modulus11-repformat-1">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">1</brreg:info>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+            <p>Ugyldig organisasjonsnummer</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+            <p>Ugyldig organisasjonsnummer</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:length value="9"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetAdresse-datadef-15">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Forretningsadresse til juridisk enhet</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">4</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst105-repformat-9">
+            <xs:attribute fixed="15" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst105-repformat-9">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">9</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="105"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetPostnummer-datadef-6673">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Postnummer i forretningsadressen til juridisk enhet</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">5</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst44BareTall-repformat-10">
+            <xs:attribute fixed="6673" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst44BareTall-repformat-10">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">10</brreg:info>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+            <p>Enter positive integer with four digits</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+            <p>Feltet krever positivt heltall med fire siffer</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+            <p>Feltet krev positivt heiltal med fire siffer</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:length value="4"/>
+        <xs:pattern value="[0-9]{4}"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetPoststed-datadef-6674">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Poststed i forretningsadressen til juridisk enhet</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">6</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="6674" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst35-repformat-3">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">3</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="35"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="RealisasjonAvAksjer-grp-3721">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Realisasjoner</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+            <p>Hva forstås med realisasjon av aksjer?  </p>
+            <p>Reglene om beskatning av aksjegevinster mv. finnes i skatteloven §§  10-30 til 10-37. Overgangsreglene i forbindelse med skattereformen  1992 er tatt inn i skatteloven § 19-2. Likestilt med aksjer er  fondsaksjer, andeler i
+                        verdipapirfond (aksje- og obligasjonsfond mv.)  og grunnfondsbevis. Det samme gjelder tegningsrettigheter og  tildelingsbevis i norske og utenlandske selskaper. Unntatt er aksjer  i boligselskaper som nevnt i skatteloven §
+                        7-3.  </p>
+            <p/>
+            <p>Med realisasjon av aksjer forstås normalt salg av aksjene. Som  realisasjon regnes bl.a. salg og innløsning av andeler i  verdipapirfond, samt innlevering av aksjer ved likvidasjon av  selskap, f.eks. i forbindelse med konkurs.
+                        Som realisasjon regnes  normalt ikke rene gaveoverføringer eller overføringer mellom  ektefeller.  </p>
+            <p/>
+            <p>Gevinst ved realisasjon av aksjer er i utgangspunktet skattepliktig  som alminnelig inntekt. Dersom aksjene realiseres med tap, kan tapet  føres til fradrag i alminnelig inntekt.</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Realisasjonar</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+            <p>Kva forstår ein med realisasjon av aksjar?  </p>
+            <p>Reglane om skattlegging av aksjevinstar o.l. kan ein finne i  skatteloven §§ 10-30 til 10-37. Overgangsreglane i samband med  skattereforma 1992 er tekne inn i skatteloven § 19-2. Inn under dei  same reglane som gjeld for
+                        aksjar, kjem fondsaksjar, partar i  verdipapirfond (aksje- og obligasjonsfond) og grunnfondsbevis. Det  same gjeld teikningsrettar og tildelingsbevis i norske og utanlandske  selskap. Reglane gjeld ikkje for aksjar i
+                        bustadselskap som nemnde i  skatteloven § 7-3.  </p>
+            <p/>
+            <p>Med realisasjon av aksjar forstår ein normalt sal av aksjane. Som  realisasjon reknar ein m.a.salg og innløysing av aksjar og partar i  verdipapirfond, samt innlevering av aksjane ved likvidasjon av  selskap, t.d. ved konkurs.
+                        Som realisasjon reknar ein normalt ikkje  reine gåveoverføringar og overføringar mellom ektemakar.  </p>
+            <p/>
+            <p>Vinst ved realisasjon av aksjar er skattepliktig som almenn inntekt.  Blir aksjane realisert med tap, kan tapet normalt førast til frådrag  i almenn inntekt.</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element maxOccurs="999" minOccurs="0" ref="RealisasjonAvEnAksje-grp-4413"/>
+        </xs:sequence>
+        <xs:attribute fixed="3721" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="RealisasjonAvEnAksje-grp-4413">
+      <xs:annotation/>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="Aksjeinformasjon-grp-4175"/>
+          <xs:element minOccurs="0" ref="BeregningAvGevinstTap-grp-828"/>
+          <xs:element minOccurs="0" ref="BeregningAvMaksimaltTapsfradrag-grp-4166"/>
+        </xs:sequence>
+        <xs:attribute fixed="4413" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="Aksjeinformasjon-grp-4175">
+      <xs:annotation/>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="EnhetNavnSpesifisertSelskap-datadef-7617">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>101 Selskapets navn</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>101 Namnet til selskapet</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="EnhetOrganisasjonsnummerSpesifisertSelskap-datadef-7618">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>102 Selskapets organisasjonsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Selskapets organisasjonsnummer fremkommer på oppgaven fra  Verdipapirsentralen (VPS). For norske selskaper som ikke er  tilknyttet VPS, må organisasjonsnummer innhentes fra selskapet.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>102 Selskapets organisasjonsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Organisasjonsnummeret til selskapet går fram av oppgåva frå  Verdipapirsentralen (VPS). For norske selskap som ikkje er knytte til  VPS, må organisasjonsnummer innhentast frå selskapet.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvTypeSpesifisertSelskap-datadef-19400">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>103 Hva slags type verdipapir</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>I rubrikk 1 oppgis hva slags type verdipapir som er realisert: aksje,  fondsaksje, tegningsrett, andel i verdipapirfond (aksje- og  obligasjonsfond), grunnfondsbevis mv.  </p>
+                  <p>I rubrikk 2 oppgis om aksjene er børsnoterte eller ikke-børsnoterte på  realisasjonstidspunktet. Tilhører aksjen en egen aksjeklasse, skal  denne oppgis (ISIN-nummer).</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>103 Kva type verdipapir</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>I rubrikk 1 skal ein gi opp kva type verdipapir som er realiserte:  aksje, fondsaksje, teikningsrett, partar i verdipapirfond (aksje- og  obligasjonsfond), og grunnfondsbevis. I rubrikk 2 skal ein gi  opplysningar
+                                    om aksjane er børsnoterte eller ikkje på  realisasjonstidspunktet. Tilhøyrer aksjen ein eigen aksjeklasse, skal  dette givast opp (ISIN-nummer).</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjeBorsnotertIkkeBorsnotertSpesifisertSelskap-datadef-19401">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Her oppgis om aksjene er børsnoterte eller ikke børsnoterte på  realisasjonstidspunktet.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>I rubrikk 2 skal eien gi opplysningar om aksjane er børsnoterte eller  ikkje-børsnoterte på realisasjonstidspunktet.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvErvervsdatoSpesifisertSelskap-datadef-1181">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>104 År og dato for erverv og ervervsmåte</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>I rubrikk 3 skal det gis opplysninger om opprinnelig ervervsmåte:  kjøp, arv, gave, splitt/spleis, fusjon/fisjon, nytegning eller  fondsemisjon.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>104 År og dato for tileigning og tileigningsmåte</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>I rubrikk 3 skal ein gje opplysningar om opphavleg tileigningsmåte:  kjøp, arv, gåve, splitt/spleis, fusjon/fisjon, nyteikning eller  fondsemisjon.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvErvervsmateSpesifisertSelskap-datadef-1827">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>104 Opplysninger om opprinnelig ervervsmåte</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Her skal det gis opplysninger om opprinnelig ervervsmåte: kjøp, arv,  gave, splitt/spleis/ fusjon/fisjon, nytegning eller fondsemisjon.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>104 Opplysningar om opphavleg tileigningsmåte</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Her skal ein gi opplysningar om opphavleg tileigningsmåte: kjøp, arv,  gåve, splitt/spleis/fusjon/fisjon, nytekning eller fondsemisjon.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvRealisasjonDato-datadef-1821">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>105 År og dato for realisasjon</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>105 År og dato for realisasjon</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvPalydendeSpesifisertSelskap-datadef-7620">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>106 Pålydende pr. aksje/andel</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>106 Pålydande pr. aksje/part</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvRealisasjonAntallSpesifisertSelskap-datadef-7621">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>107 Antall realiserte aksjer mv.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>107 Talet på realiserte aksjar o.l.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute fixed="4175" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="EnhetNavnSpesifisertSelskap-datadef-7617">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">7</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst175-repformat-8">
+            <xs:attribute fixed="7617" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="EnhetOrganisasjonsnummerSpesifisertSelskap-datadef-7618">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">8</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst99Modulus11-repformat-1">
+            <xs:attribute fixed="7618" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvTypeSpesifisertSelskap-datadef-19400">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Aksje, fondsaksje, tegningsrett, andel i fond, grunnfondsbevis mv</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">9</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="KodelisteEttValg6Aksjetyper-repformat-55">
+            <xs:attribute fixed="19400" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg6Aksjetyper-repformat-55">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">55</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="25"/>
+        <xs:enumeration value="A">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Aksje</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Aksje</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="F">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Fondsaksje</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Fondsaksje</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="AIV">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Andel i verdipapirfond</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Andel i verdipapirfond</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="G">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Grunnfondsbevis</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Grunnfondsbevis</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Te">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Tegningsrett</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Tegningsrett</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Ti">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Tildelingsbevis</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Tildelingsbevis</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="AksjeBorsnotertIkkeBorsnotertSpesifisertSelskap-datadef-19401">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">10</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="KodelisteEttValg2Aksjetyper-repformat-56">
+            <xs:attribute fixed="19401" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg2Aksjetyper-repformat-56">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">56</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="25"/>
+        <xs:enumeration value="B">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Børsnotert aksje</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Børsnotert aksje</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="IB">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Ikke-børsnotert aksje</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Ikkje-børsnotert aksje</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="AksjerMvErvervsdatoSpesifisertSelskap-datadef-1181">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">11</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Dato-repformat-5">
+            <xs:attribute fixed="1181" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Dato-repformat-5">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">5</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:date"/>
+    </xs:simpleType>
+    <xs:element name="AksjerMvErvervsmateSpesifisertSelskap-datadef-1827">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">12</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="KodelisteEttValg9Aksjer-repformat-57">
+            <xs:attribute fixed="1827" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg9Aksjer-repformat-57">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">57</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="15"/>
+        <xs:enumeration value="K">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Kjøp</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Kjøp</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="A">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Arv</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Arv</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="G">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Gave</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Gåve</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="FU">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Fusjon</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Fusjon</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="FI">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Fisjon</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Fisjon</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="ST">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Splitt</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Splitt</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="SS">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Spleis</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Spleis</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="FE">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Fondsemisjon</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Fondsemisjon</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="N">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Nytegning</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Nyteikning</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="AksjerMvRealisasjonDato-datadef-1821">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">13</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Dato-repformat-5">
+            <xs:attribute fixed="1821" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvPalydendeSpesifisertSelskap-datadef-7620">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">14</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopDesimal152Desimaler-repformat-146">
+            <xs:attribute fixed="7620" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopDesimal152Desimaler-repformat-146">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">146</brreg:info>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+            <p>Enter number with two fraction digits</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+            <p>Feltet krever to desimaler</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+            <p>Feltet krev to desimalar</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:decimal">
+        <xs:totalDigits value="15"/>
+        <xs:pattern value="-{0,1}[0-9]{1,}\.[0-9]{2}"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="AksjerMvRealisasjonAntallSpesifisertSelskap-datadef-7621">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">15</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopDesimal153Desimaler-repformat-142">
+            <xs:attribute fixed="7621" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopDesimal153Desimaler-repformat-142">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">142</brreg:info>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+            <p>Feltet krever tre desimaler</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+            <p>Feltet krev tre desimalar</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:decimal">
+        <xs:totalDigits value="15"/>
+        <xs:pattern value="-{0,1}[0-9]{1,}\.[0-9]{3}"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="BeregningAvGevinstTap-grp-828">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+            <p>GEVINSTBEREGNINGEN  </p>
+            <p>Gevinst/tap fremkommer normalt som differansen mellom  realisasjonsvederlag og inngangsverdi. Inngangsverdien vil være  anskaffelsesverdien inklusive ervervskostnader, for eksempel  kostnader til megler. Ved erverv av aksjen mv
+                        før 1. januar 2006 skal  inngangsverdien i tillegg reguleres med RISK-beløp.  </p>
+            <p/>
+            <p>Ved salg mot delvis vederlag (gavesalg), er det ingen fradragsrett for  gaveelementet ved transaksjonen (differansen mellom omsetningsverdien  og det lavere vederlaget).  </p>
+            <p/>
+            <p>Det skal fylles ut en kolonne i oppgaven for hver transaksjon. Dersom  det er mer hensiktsmessig, kan samtlige salg av aksjer i ett selskap  samles i en kolonne. Forutsetningen er at dette gir samme  skattemessige resultat som
+                        om transaksjonene var ført hver for seg.  Ved salg av aksjer i samme selskap hvor aksjene er ervervet ved  forskjellige tidspunkt, må det normalt føres separate kolonner pga  ulike inngangsverdier og skjermingsfradrag.  </p>
+            <p/>
+            <p>Hvis de solgte aksjene er ervervet på forskjellige tidspunkt, anses de  aksjer som er først ervervet som først realisert (FIFU-prinsippet).  Aksjer ervervet før 1.1.1992 anses i denne sammenheng å være ervervet  1.1.1992.
+                        Fondsaksjer anses ervervet på det tidspunkt selskapet  fattet vedtak om fondsemisjonen.  </p>
+            <p/>
+            <p>Eksempel på utfylling av skjema - se rettledningen.</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+            <p>GEVINSTUTREKNINGA  </p>
+            <p>Gevinst/tap kjem normalt fram som differansen mellom  realisasjonsvederlaget og inngangsverdien. Inngangsverdien vil vere  kostnaden ved å skaffe aksjen, inklusive kostnader ved ervervet, til  dømes kostnader til meklar. Er
+                        aksjen o.a. skaffa før 1. januar 2006  skal inngangsverdien i tillegg  regulerast med eit RISK-beløp..  </p>
+            <p/>
+            <p>Ved sal mot delvis vederlag (gåvesal) er det ingen frådragsrett for  gåveelementet ved transaksjonen (differansen mellom omsetningsverdien  og det lågare vederlaget.)  </p>
+            <p/>
+            <p>Det skal fyllast ut ein kolonne i oppgåva for kvar transaksjon. Dersom  det er meir tenleg, kan alle sal av aksjar i eitt selskap samlast i  ein kolonne. Føresetnaden er då at dette gir same skattemessig  resultat som om
+                        transaksjonane vart førte kvar for seg. Dersom ein  skal realisere aksjar i same selskapet, og desse aksjane er skaffa  ved ulike tidspunkt, må det til vanleg førast separate kolonnar pga.  ulike inngangsverdiar og
+                        skjermingsfrådrag.  </p>
+            <p/>
+            <p>Er dei selde aksjane skaffa på ulike tidspunkt, blir dei aksjane som  først blei skaffa, rekna som først realiserte (FIFU-prinsippet).  Aksjar som er skaffa før 1.1.1992, blir i denne samanhengen sedde på  som skaffa 1.1.1992.
+                        Fondsaksjar blir rekna som skaffa på det  tidspunktet selskapet gjorde vedtak om fondsemisjonen.  </p>
+            <p/>
+            <p>Døme på korleis skjemaet skal fyllast ut - sjå rettleiinga.</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="AksjerMvRealisasjonsvederlagSpesifisertSelskap-datadef-5827">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>201 Realisasjonsvederlag fratrukket omkostninger</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Her oppgis størrelsen på vederlaget ved realisasjonen. Kostnader ved  realisasjonen reduserer utgangsverdien for aksjen, og kommer til  fradrag i gevinst-/tapsutregningen etter skattepliktige  realisasjoner. Derfor
+                                    skal samlet brutto vederlag oppgis fratrukket  omkostninger i forbindelse med realisasjonen.  </p>
+                  <p>Ved salg mot delvis vederlag (gavesalg), er det ingen fradragsrett for  gaveelementet ved transaksjonen (differansen mellom omsetningsverdien  og det lavere vederlaget). I disse tilfellene er det  omsetningsverdien
+                                    som skal føres opp under post 201.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Som realisasjonsvederlag regnes salgssum, eventuelt tillagt andre  ytelser i forbindelse med overdragelsen</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>201 Realisasjonsvederlag med frådrag for omkostningar</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Her gir ein opp kor stort vederlag ein har fått ved realisasjonen.  Kostnadar ved realisasjonen reduserer  utgangsverdien for aksjen, og  kjem til frådrag i gevinst-/tapsutrekninga etter skattepliktige
+                                    realisasjonar. Derfor er det samla brutto vederlaget på aksjane som  skal givast opp, fråtrekt kostnader knytte til realisasjonen.  </p>
+                  <p/>
+                  <p>Ved sal mot delvis vederlag (gåvesal) er det ikkje frådragsrett for  gåveelementet ved transaksjonen (skilnaden mellom omsetnadsverdien og  det lågare vederlaget). I desse høva oppgjer ein omsetnadsverdien i  post 201.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Som realisasjonsvederlag reknar ein salgssum, eventuelt tillagt andre  ytingar i samband med overdraginga</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvInngangsverdiSpesifisertSelskap-datadef-1822">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>202 Inngangsverdi inkl. omkostninger.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Her oppgis aksjenes inngangsverdi, normalt kjøpesummen inklusive  kostnader knyttet til ervervet f.eks. megleromkostninger mv. For  aksjer ervervet før 1. januar 2006 skal inngangsverdien i tillegg  være regulert
+                                    med RISK-beløp. Er aksjen ervervet i 2006 eller  tidligere er det verdien i feltet Skjermingsgrunnlag i oversikt over  fastsatt anskaffelsesverdi for aksjer du eide 31.12.2006, som ble  sendt ut høsten 2007, som
+                                    skal føres her. Hvis likningskontoret i  forbindelse med likningsbehandlingen ikke har kommet frem til en  annen verdi vil beløpet også fremkomme av post 110 i fjorårets skjema  (RF-1059).  </p>
+                  <p>For ikke-børsnoterte aksjer mv som kunne vært solgt skattefritt pr.  1.1.1992 kan det benyttes alternative inngangsverdier ved  gevinstberegningen, uavhengig av den verdi som er benyttet ved  beregning av
+                                    skjermingsfradraget. I skatteloven § 19-2, annet ledd  bokstav a er det gitt bestemmelser som begrenser adgangen til å kreve  fradrag for tap som oppstår som følge av at inngangsverdien enten er  oppregulert til
+                                    godkjent takst eller til forholdsmessig andel av  selskapets regnskapsmessige egenkapital.  </p>
+                  <p>Se nærmere om dette i rettledningen.  </p>
+                  <p>Rettledningen tar også for seg:  </p>
+                  <p>Aksjer anskaffet i arbeidsforhold til underpris  </p>
+                  <p>Arv og gaveoverføringer  </p>
+                  <p>Stiftelse og kapitalutvidelse  </p>
+                  <p>Skattefri omdanning  </p>
+                  <p>Fusjon/fisjon/splitt/spleis  </p>
+                  <p>Fondsemisjon</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>202 Inngangsverdi inkl. omkostninger.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Generelt  </p>
+                  <p>Her gir ein opp inngangsverdien for aksjen, normalt kjøpesummen  inklusiv kostnadar for å skaffe aksjen, til dømes meklarkostnader  o.a. For aksjer erverva før 1. januar 2006 skal inngangsverdien i  tillegg være
+                                    regulert med RISK-beløp. Er aksjen erverva i 2006 eller  tidlegere er det verdien i feltet Skjermingsgrunnlag i oversikt over  fastsett anskaffingsverdi for aksjer du eide 31.12.2006, som ble  sendt ut høsten 2007,
+                                    som skal førast her. Hvis likningskontoret i  forbindelse med likningsbehandlinga ikkje har kommet fram til ein  annan verdi vil beløpet også framkomme av post 110 i førrige års  skjema (RF-1059).  </p>
+                  <p>For ikkje-børsnoterte aksjar o.l. som kunne vært selt skattefritt per  1.1.1992 kan ein bruke alternative inngangsverdier ved  gevinstberekninga, uavhengig av den verdi som er benytta ved  berekning av
+                                    skjermingsfrådraget. I skatteloven § 19-2, anna ledd  bokstav a er det gjeve bestemmelser som begrensar adgangen til å  krevje frådrag for tap som oppstår som følge av at inngangsverdien  enten er oppregulert til
+                                    godkjend takst eller til forhaldsmessig del  av selskapets rekneskapsmessige eigenkapital.  </p>
+                  <p>Sjå nærmere om dette i rettledningen.  </p>
+                  <p>Rettleiinga tek også for seg:  </p>
+                  <p>Aksjar anskaffa i arbeidsforhald til underpris  </p>
+                  <p>Arv og gaveoverføringar  </p>
+                  <p>Stiftelse og kapitalutvidelse  </p>
+                  <p>Skattefri omdanning  </p>
+                  <p>Fusjon/fisjon/splitt/spleis  </p>
+                  <p>Fondsemisjon</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvInngangsverdiJusteringsfaktorSpesifisertSelskap-datadef-1828">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>202 Inngangsverdi, justeringsfaktor</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>I tilfeller hvor det i 2007 er ervervet aksjer ved fondsemisjon eller  hvor det i i løpet av 2007 har skjedd en endring i forholdet mellom  antall aksjer/andeler og de underliggende verdier i selskapet (f.eks.
+                                    splitt/spleis/fusjon/fisjon), må den fastsatte inngangsverdien  omfordeles. Til hjelp for denne omfordelingen skal det beregnes en  justeringsfaktor. Denne skal oppgis i felt 4. Se rettledningen  hvordan denne beregnes.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>202 Inngangsverdi, justeringsfaktor</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>I dei tilfella der aksjane i 2007 er skaffa ved fondsemisjon eller der  det i laupet av 2007 har skjedd ei endring i forhaldet mellom antal  aksjar/delar og dei underliggjande verdiar i selskapet (til dømes
+                                    splitt/spleis/fusjon/fisjon) må den fastsette inngangsverdien  omfordelast. Til hjelp for denne omfordelingen skal det bereknast ein  justeringsfaktor. Denne skal førast i felt 4. Sjå nærare om dette i  rettleiiinga.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjekapitalTilbakebetaltSpesifisertSelskap-datadef-1824">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>203 Tilbakebetalt aksjekapital i 2007</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Nedsettelse av selskapets aksjekapital i 2007 med reduksjon av  aksjenes pålydende og tilbakebetaling til aksjonærene, skal redusere  aksjenes inngangsverdi fra det tidspunkt beløpet er tilbakebetalt.  Tilsvarende
+                                    gjelder for tilbakebetaling av innbetalt overkurs.  Utbetaling til aksjonærene av fondsemittert aksjekapital behandles  som utbytte og skal ikke føres opp i denne posten.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>203 Tilbakebetalt aksjekapital i 2007</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Nedsetjing av aksjekapitalen i selskapet i 2007 med reduksjon av  aksjane sitt pålydande og tilbakebetaling til aksjonærane skal  redusere inngangsverdien for aksjane frå det tidspunktet beløpet er  betalt tilbake.
+                                    Tilsvarande gjeld for tilbakebetaling av innbetalt  overkurs. Utbetaling til aksjonærane av fondsemittert aksjekapital  blir behandla som utbytte og skal ikkje førast opp i denne posten.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvInngangsverdiOkningPalydendeSpesifisertSelskap-datadef-28305">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>204 Innbetalt ved økning av pålydende i 2007</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Forhøyelse av selskapets aksjekapital ved innbetaling og oppskriving  av pålydende på eksisterende aksjer, medfører en forhøyelse av  inngangsverdien på aksjene med det innbetalte beløp.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>204 Innbetalt ved auke av pålydande i 2007</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Auking av selskapets aksjekapital ved innbetaling og oppskriving av  pålydende på eksisterande aksjar, fører til ei auke av  inngangsverdien på aksjane med det innbetalte beløp.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvInngangsverdiNegativSaldoSpesifisertSelskap-datadef-7612">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>206 Negativ saldo/avsatt gevinst</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Skattyter som hadde gjenværende negativ saldo etablert i inntektsåret  1991 eller et tidligere inntektsår i medhold av dagjeldende skattelov  av 18. august 1911 nr. 8 § 44 A-6 første og annet ledd, kunne anvende
+                                    deler av saldomassen til blant annet erverv av aksjer og  grunnfondsbevis i banker mv. og aksjer i børsnoterte selskaper som  driver norsk landbasert virksomhet, jf. regler i tidligere  overgangslov av 20. juli
+                                    1991 nr. 54 § 44 A.  </p>
+                  <p/>
+                  <p>Ved realisasjon av aksje, andel eller grunnfondsbevis som er ervervet  etter de nevnte reglene, kommer 70 prosent av det investerte beløpet  til fradrag i inngangsverdien på de ervervede aksjene mv. Ble aksjene  mv.
+                                    tegnet i selskap som i 1992 var skattepliktig til en kommune i  Nord-Norge eller til Namdalen, jf. tidligere lov av 19. juni 1969 nr.  72 om særlige skatteregler til fremme av distriktsutbygging § 10  første ledd
+                                    annet punktum, kommer 50 prosent av det investerte  beløpet til fradrag i inngangsverdien på de ervervede aksjene mv.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Denne posten kommer kun til anvendelse for de som har ervervet de  solgte verdipapirene ved bruk av negativ saldo/avsatt gevinst</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>206 Negativ saldo/avsatt gevinst</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Skattytar som hadde rest på negativ saldo etablert i inntektsåret 1991  eller eit tidlegare inntektsår med heimel i dågjeldande skattelov av  18. august 1911 nr. 8 § 44 A-6 første og andre ledd, kunne bruke  delar
+                                    av saldomassen til mellom anna å skaffe aksjar og  grunnfondsbevis i bankar o.l. og aksjar i børsnoterte selskap som  driv norsk landbasert næring, jf. reglar i tidlegare overgangslov av  20. juli 1991 nr. 54 § 44
+                                    A.  </p>
+                  <p/>
+                  <p>Ved realisasjon av aksje, part eller grunnfondsbevis som er skaffa  etter dei nemnde reglane, kjem 70 prosent av det aksjen o.l. kosta,  til reduksjon i inngangsverdien på aksjane o.l. For aksjar o.l. som  er teikna
+                                    i selskap som i 1992 var skattepliktig til ein kommune i  Nord-Noreg eller Namdalen, jf. tidlegare lov av 19. juni 1969 nr. 72  om særlege skattereglar til fremme av distriktsutbygging § 10 første  ledd andre
+                                    punktum, kjem 50 prosent av det aksjen o.l. kosta, til  reduksjon i inngangsverdien på aksjane o.l.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Denne posten er berre aktuell for dei som har nytta negativ  saldo/avsett gevinst då dei skaffa seg verdipapira som no er  realisert</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvInngangsverdiKorrigertSpesifisertSelskap-datadef-1825">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>207 Korrigert inngangsverdi</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>207 Korrigert inngangsverdi</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvInngangsverdiKorrigertPositivSpesifisertSelskap-datadef-11281">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>207 Korrigert inngangsverdi</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>207 Korrigert inngangsverdi</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvInngangsverdiKorrigertNegativSpesifisertSelskap-datadef-11282">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>207 Korrigert inngangsverdi</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>207 Korrigert inngangsverdi</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvForelopigGevinstMellomsummering-datadef-28306">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>208 Foreløpig gevinst/tap</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Dersom aksjen mv. er realisert med gevinst vil eventuell ubenyttet  skjermingsfradrag fra 2006 kunne redusere den skattepliktige  gevinsten. Ubenyttet skjermingsfradrag til fremføring vil foreligge  dersom det ikke
+                                    ble mottatt utbytte på aksjene i 2006, eller dersom  utbytte var lavere enn skjermingsfradraget for inntektsåret 2006.  </p>
+                  <p>Merk at det kun gis fradrag for skjermingsfradrag inntil skattepliktig  gevinst er lik null.  Tap som skyldes selve skjermingsfradraget er  ikke fradragsberettiget.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>208 Førebels gevinst/tap</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Dersom aksjen mv. er realisert med gevinst vil eventuell ubenyttet  skjermingsfrådrag fra 2006 kunne redusere den skattepliktige  gevinsten. Ubrukt skjermingsfrådrag til fremføring ligg føre dersom  det ikkje vart
+                                    motteke utbytte på aksjene i 2006, eller dersom  utbytte var lågere enn skjermingsfrådraget for inntektsåret 2006.  Ubrukt skjerming kan ikkje auke øke det frådragsgodkjende tapet. Er  aksjen ol. realisert med tap,
+                                    skal beløpet førast direkte ned til  post 211.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvSkjermingsfradragUbenyttetBelopPerAksje-datadef-29499">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>209 Ubenyttet skjerming per aksje/andel</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>209 Ubrukt skjerming per aksje/part</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvSkjermingsfradragUbenyttetBelopTotalt-datadef-28308">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>210 Ubenyttet skjerming totalt (post 209 x post 107)</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Her skal ubenyttet skjermingsfradrag fra 2006 (post 209) multipliseres  med antall realiserte aksjer mv. (post 107).</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>210 Ubenytta skjerming totalt (post 209 x post 107)</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Her skal ubenytta skjermingsfrådrag frå 2006 (post 209) multipliserast  med antall realiserte aksjar oa. (post 107).</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvRealisasjonGevinstTapSpesifisertSelskap-datadef-14083">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>211 Gevinst/tap som overføres post 301/302</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Skattytere skal overføre positivt beløp (gevinst) til post 301.  Negativt beløp (tap) overføres post 302. Hvor det er benyttet de  oppregulerte inngangsverdiene «godkjent takst» eller «regnskapsmessig  egenkapital»
+                                    og det foreligger tap, skal postene 220-234 fylles ut. I  disse tilfellene er det eventuelt negativt beløp i post 234 som skal  overføres post 302, ikke negativt beløp i post 211.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>211 Vinst/tap som skal overførast post 301/302</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Skattytar skal overføre positivt beløp (vinst) til post 301. Negativt  beløp (tap) fører ein over til post 302.  </p>
+                  <p>Der det er nytta dei oppregulerte inngangsverdiane godkjend takst  eller rekneskapsmessig eigenkapital og det blir tap, skal ein fylle  ut postane 220-234. I desse tilfella er det eventuelt negativt beløp  i post
+                                    234 som skal førast over til post 302, ikkje det negative  beløpet i post 211.  Er korrigert inngangsverdi negativ, skal beløpet  førast i feltet med pluss-forteikn.  Er beløpet positivt, skal  beløpet førast i
+                                    feltet med minus-forteikn</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute fixed="828" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvRealisasjonsvederlagSpesifisertSelskap-datadef-5827">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">16</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="5827" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopHeltall15-repformat-37">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">37</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:integer">
+        <xs:totalDigits value="15"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="AksjerMvInngangsverdiSpesifisertSelskap-datadef-1822">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">17</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="1822" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvInngangsverdiJusteringsfaktorSpesifisertSelskap-datadef-1828">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">18</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Desimal155Desimaler-repformat-92">
+            <xs:attribute fixed="1828" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Desimal155Desimaler-repformat-92">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">92</brreg:info>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+            <p>Feltet krever fem desimaler</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+            <p>Feltet krev fem desimalar</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:decimal">
+        <xs:totalDigits value="15"/>
+        <xs:pattern value="-{0,1}[0-9]{1,}\.[0-9]{5}"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="AksjekapitalTilbakebetaltSpesifisertSelskap-datadef-1824">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">19</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="1824" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvInngangsverdiOkningPalydendeSpesifisertSelskap-datadef-28305">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Innbetalt ved økning av pålydende</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">20</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="28305" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvInngangsverdiNegativSaldoSpesifisertSelskap-datadef-7612">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">21</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="7612" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvInngangsverdiKorrigertSpesifisertSelskap-datadef-1825">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">22</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="1825" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvInngangsverdiKorrigertPositivSpesifisertSelskap-datadef-11281">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">23</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="11281" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvInngangsverdiKorrigertNegativSpesifisertSelskap-datadef-11282">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">24</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="11282" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvForelopigGevinstMellomsummering-datadef-28306">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">25</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="28306" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvSkjermingsfradragUbenyttetBelopPerAksje-datadef-29499">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">26</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopDesimal1505Desimaler-repformat-556">
+            <xs:attribute fixed="29499" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopDesimal1505Desimaler-repformat-556">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">556</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:decimal">
+        <xs:totalDigits value="15"/>
+        <xs:pattern value="-{0,1}[0-9]{1,}(\.[0-9]{1,5}){0,1}"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="AksjerMvSkjermingsfradragUbenyttetBelopTotalt-datadef-28308">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">27</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="28308" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvRealisasjonGevinstTapSpesifisertSelskap-datadef-14083">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">28</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="14083" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="BeregningAvMaksimaltTapsfradrag-grp-4166">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Beregning av maksimalt tapsfradrag</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Utrekning av maksimalt frådrag for tap</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="SkattemessigFormuesverdiOgHistoriskKostpris-grp-4167"/>
+          <xs:element minOccurs="0" ref="BeregningAvMaksimaltTapsfradrag-grp-4168"/>
+        </xs:sequence>
+        <xs:attribute fixed="4166" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="SkattemessigFormuesverdiOgHistoriskKostpris-grp-4167">
+      <xs:annotation/>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="AksjerMvSkattemessigVerdiSpesifisertSelskap-datadef-11731">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>220 Skattemessig formuesverdi</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>I forbindelse med skattereformen ble det for ikke-børsnoterte aksjer  gitt anledning til å oppregulere inngangsverdien til såkalt  skattemessig formuesverdi pr. 01.01.1992. Denne  oppreguleringsadgangen ble gitt de
+                                    som kunne solgt aksjene  skattefritt pr. 1.1.1992 (krav om 3 års eiertid).</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>220 Skattemessig formuesverdi</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>I samband med skattereforma blei det for ikkje-børsnoterte aksjar gitt  høve til å regulere opp inngangsverdien til såkalla skattemessig  formuesverdi pr. 1.1.1992. Dette høvet til regulere opp gjeld berre  for dei
+                                    som kunne seld aksjane skattefritt pr. 1.1.1992 (krav om  minst 3 års eigartid).</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvKostprisHistoriskSpesifisertSelskap-datadef-1178">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>221 Historisk kostpris</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Med historisk kostpris forstås normalt aksjenes opprinnelige  anskaffelsesverdi. Se nærmere om dette under post 202.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>221 Historisk kostpris</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Med historisk kostpris forstår ein i normalt verdien på aksjen da den  blei skaffa. Sjå meir om dette under post 202.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute fixed="4167" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvSkattemessigVerdiSpesifisertSelskap-datadef-11731">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">29</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="11731" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvKostprisHistoriskSpesifisertSelskap-datadef-1178">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">30</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="1178" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="BeregningAvMaksimaltTapsfradrag-grp-4168">
+      <xs:annotation/>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="AksjerMvTapSpesifisertSelskap-datadef-7614">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>230 Tap, overført fra post 208</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>230 Tap, overført frå post 208</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvOppregulertInngangsverdiSpesifisertSelskap-datadef-22206">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>231 Oppregulert inngangsverdi</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Beløpet hentes fra post 202</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>231 Oppregulert inngangsverdi</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Beløpet hentes frå post 202</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvFormuesverdiKostprisSpesifisertSelskap-datadef-14122">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>232 Skattemessig formuesverdi/historisk kostpris</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>I denne posten føres det høyeste av beløpene i postene 220/221.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>De høyeste av beløpene i post 220/221</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>232 Skattemessig formuesverdi/historisk kostpris</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>I denne posten føres det høyeste av beløpene i postene 220/221.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>De høyeste av beløpene i post 220/221</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvVerdiBeregnetSpesifisertSelskap-datadef-7672">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>233 Sum</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>233 Sum</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvTapSkattSpesifisertSelskap-datadef-7673">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>234 Tap (negativt beløp) skal overføres post 302</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Positivt beløp i denne posten betyr at det ikke foreligger  fradragsrett for tap. Dersom det fremkommer et negativt beløp i denne  posten, skal dette overføres post 302. Beløpet som fremkommer i denne  posten skal
+                                    ikke gi høyere tapsfradrag enn det beløp som fremkommer i  post 211.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Positivt beløp i denne posten betyr at det ikke foreligger  fradragsrett for tap.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>234 Tap (negativt beløp) skal overføres post 302</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Eit positivt beløp i denne posten viser at det ikkje er frådragsrett  for tap. Dersom det blir eit negativt beløp i denne posten, skal det  førast over til post 302. Beløpet i denne posten skal ikkje gi høgare
+                                    frådrag for tap enn beløpet i post 211.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Positivt beløp i denne posten betyr at det ikkje ligg føre  frådragsrett for tap.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute fixed="4168" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvTapSpesifisertSelskap-datadef-7614">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">31</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="7614" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvOppregulertInngangsverdiSpesifisertSelskap-datadef-22206">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">32</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="22206" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvFormuesverdiKostprisSpesifisertSelskap-datadef-14122">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">33</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="14122" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvVerdiBeregnetSpesifisertSelskap-datadef-7672">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">34</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="7672" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvTapSkattSpesifisertSelskap-datadef-7673">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">35</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="7673" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="Samleoppgave-grp-831">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Sum gevinst/tap</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Sum gevinst/tap</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="AksjerMvGevinstSkattBrutto-datadef-7615">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>301 Sum gevinst</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Her fremkommer samtlige gevinster som er ført i post 211 (sum alle  kolonner).</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Her fører en samlet gevinst for alle realisasjoner</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>301 Sum gevinst</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Her kjem alle vinstar som er førte i post 211 (sum alle kolonnar) fram</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Her fører ein samla vinst for alle realisasjonar</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="AksjerMvTapSkattBrutto-datadef-7616">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>302 Sum tap</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Her fremkommer samtlige tap som er ført i post 211 (sum alle  kolonner), eventuelt post 234 for de som har benyttet de oppregulerte  inngangsverdiene godkjent takst eller regnskapsmessig egenkapital.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Her fører en samlet tap for alle realisasjoner</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>302 Sum tap</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Her kjem alle tap som er førte i post 211 (sum alle kolonnar) fram,  eventuelt post 234 for dei som har nytta dei oppregulerte  inngangsverdiane godkjent takst eller rekneskapsmessig eigenkapital.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Her fører ein samla tap for alle realisasjonar</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element ref="AksjerMvRealisasjonGevinstTapSkatt-datadef-14084">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>304 Netto</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Personlig skattyter  </p>
+                  <p>Nettobeløpet som fremkommer overføres til post 3.1.10 i selvangivelsen  (gevinst) eller post 3.3.10 (tap).  </p>
+                  <p/>
+                  <p>Aksjeselskaper, andre etterskuddspliktige skattytere og  deltakerliknede selskaper.  </p>
+                  <p>Beløpet fra post 304 legges sammen med tilsvarende gevinster/tap fra  oppgaven over aksjer og grunnfondsbevis fra Skatteetatens  aksjonærregister, og gevinster/tap på mottatte oppgaver fra  verdipapirfond. Har
+                                    selskapet begrenset regnskapsplikt overføreres  summen til henholdsvis post 8095 eller 8195 i næringsoppgave 1  (RF-1175). Andre selskaper bruker  post 0700 og 0850 i næringsoppgave  2 (RF-1167), post 7100 og 7350
+                                    i næringsoppgave 3 (RF-1170), eller  post 6100 og 6350 i næringsoppgave 4 (RF-1173).</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Beløpet overføres selvangivelsens post 3.1.10 (gevinst) eller post  3.3.10 (tap).</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>304 Netto</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Personleg skattytar  </p>
+                  <p>Nettobeløpet som kjem fram her, fører ein over til post 3.1.10  (gevinst) eller post 3.3.10 (tap) i sjølvmeldinga.  </p>
+                  <p/>
+                  <p>Aksjeselskap, andre etterskottspliktige skattytarar og deltakarlikna  selskap.  </p>
+                  <p>Ein legg saman beløpet frå post 304 med tilsvarande vinstar/tap frå  oppgåva over aksjar og grunnfondsbevis frå Skatteetaten sitt  aksjonærregister, og vinstar/tap på oppgåve motteken frå  verdipapirfond. Har
+                                    selskapet avgrensa plikt til å føre rekneskap  skal ein overføre summen til post 8095 eller 8195 i næringsoppgåve 1  (RF-1175). Andre selskap bruker post 0700 og 0850 i næringsoppgåve 2  (RF 1167), post 7100 og
+                                    7350 i næringsoppgåve 3 (RF 1170), eller post  6100 og 6350 i næringsoppgåve 4 (RF 1173).</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Beløpet skal overførast post 3.1.10 (gevinst) eller post 3.3.10 (tap)  i sjølvmeldinga.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute fixed="831" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvGevinstSkattBrutto-datadef-7615">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">36</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="7615" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvTapSkattBrutto-datadef-7616">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">37</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="7616" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AksjerMvRealisasjonGevinstTapSkatt-datadef-14084">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">38</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="14084" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+</SchemaDefinition>

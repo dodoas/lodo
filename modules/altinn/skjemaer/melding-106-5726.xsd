@@ -1,0 +1,2309 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--title='RF-1243: Oppgave over gave til institusjon som forestår vitenskaplig forskning' lang='NOB'-->
+    <xs:element name="Skjema">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                    <p>RF-1243 Donations to voluntary organisations/scientific research</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>RF-1243 Oppgave over gaver til visse frivillige  organisasjoner/vitenskapelig forskning</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Oppgave over gaver til frivillige organisasjoner / vitenskapelig  forskning  </p>
+                    <p/>
+                    <p/>
+                    <p>Hvor finner jeg skjema i Altinn  </p>
+                    <p>Etter at du har logget deg inn, finner du oppgaven i Tjenester/Nytt  skjema.  </p>
+                    <p>Hvem skal levere  </p>
+                    <p>Alle som er godkjent under ordningene for:  </p>
+                    <p>? tilskudd til vitenskapelig forskning eller yrkesopplæring  </p>
+                    <p>? gaver til visse frivillige organisasjoner, tros- eller  livssynssamfunn  </p>
+                    <p/>
+                    <p>Rollekrav for å fylle ut og sende inn skjema  </p>
+                    <p>For å fylle ut dette skjema i Altinn må du inneha rollen  Utfyller/innsender. Dersom du både ønsker å fylle ut og signere/sende  inn skjema må du i tillegg ha rollen Utfyller/signerer SKD.  </p>
+                    <p>Det er forhåndstildelt roller til innehaver, daglig leder, styreleder,  styremedlem og deltager i virksomheter, samt eventuelt  regnskapsfører, revisor og norsk representant for utenlandsk selskap  som er registrert i
+                        Enhetsregisteret på virksomheten. Revisor og  styremedlem i AS har kun forhåndstildelt rolle for utfylling.  </p>
+                    <p>Dersom du ikke har fått en forhåndstildelt rolle, må du be en av  personene som nevnt over delegere en rolle til deg.  </p>
+                    <p>Innsendingsfrekvens  </p>
+                    <p>Årlig.  </p>
+                    <p>Innleveringsfrist  </p>
+                    <p>20. januar:  </p>
+                    <p>Innleveringsfrist for ordinære oppgaver.  </p>
+                    <p/>
+                    <p>Merk: Oppgaver som leveres etter 20. januar året etter inntektsåret er  for sent levert, og oppgavegiver kan ilegges gebyr.  </p>
+                    <p/>
+                    <p>1. mars:  </p>
+                    <p>Innleveringsfrist for evt. endringsoppgaver for å få disse med på  forhåndsutfylt selvangivelse.  </p>
+                    <p/>
+                    <p>Merk: Endringer etter denne dato kommer ikke automatisk med på  selvangivelsen eller skatteoppgjøret.  </p>
+                    <p/>
+                    <p>24. april:  </p>
+                    <p>Innleveringsfrist for evt. endringsoppgaver.  </p>
+                    <p>Merk: Skattyter må selv korrigere selvangivelsen.  </p>
+                    <p/>
+                    <p>24. juni:  </p>
+                    <p>Innleveringsfrist for evt. endringsoppgaver.  </p>
+                    <p>Merk: Skattyter må ta kontakt med sitt likningskontor for eventuelle  endringer i selvangivelsen.  </p>
+                    <p/>
+                    <p>20. oktober:  </p>
+                    <p>Siste innleveringsfrist for innsending av endringsoppgaver på  maskinlesbart medium.  </p>
+                    <p/>
+                    <p>Om skjema  </p>
+                    <p>Oppgaveplikten består av ett skjema ? RF-1243 Oppgave over gaver til  frivillige organisasjoner / vitenskapelig forskning.  </p>
+                    <p>Oppgaveplikt for mottatte gaver til visse frivillige organisasjoner er  regulert i forskrift av 8. september 2000 nr. 901 om levering av  likningsoppgaver over gaver til visse frivillige organisasjoner, med  hjemmel i
+                        ligningsloven § 6-6 bokstav g, jf. ligningsloven § 6-16  bokstav c.  </p>
+                    <p>Oppgaveplikt for mottatte tilskudd til vitenskapelig forskning eller  yrkesopplæring er regulert i forskrift av 18. november 1994 nr. 1016  om levering av likningsoppgaver over tilskudd til vitenskapelig  forskning og
+                        yrkesopplæring, med hjemmel i ligningsloven § 6-6  bokstav d, jf. § 6-16 bokstav c.  </p>
+                    <p>Integrasjon mot bedriftssystem  </p>
+                    <p>Nei.  </p>
+                    <p>Skjemaeier/Innkrever  </p>
+                    <p>Skatteetaten.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>RF-1243 Oppgåve over gåver til visse frivillige  organisasjonar/vitenskapleg forskning</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Innledning-grp-5344"/>
+                <xs:element minOccurs="0" ref="Givere-grp-5347"/>
+                <xs:element minOccurs="0" ref="Tilskuddsyter-grp-5350"/>
+            </xs:sequence>
+            <xs:attribute fixed="106" name="skjemanummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="5726" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="RF-1243" name="blankettnummer" type="xs:string" use="optional"/>
+            <xs:attribute fixed="Oppgave over gave til institusjon som forestår vitenskaplig forskning" name="tittel" type="xs:string" use="optional"/>
+            <xs:attribute fixed="5275" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+            <xs:attribute name="etatid" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="974761076">
+                            <xs:annotation>
+                                <xs:documentation>SKATTEDIREKTORATET</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:anyAttribute/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Innledning-grp-5344">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                    <p>Initiation</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Innledning</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Innleiing</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="OppgaveType-datadef-23782">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Contents of form</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                                <p>New information  </p>
+                                <p>New information is all return submissions that are not changes to  already sent information. New information may be sent in in several  submissions. The amount should be stated in whole kroner (NOK).  </p>
+                                <p/>
+                                <p>Changes to already sent information  </p>
+                                <p>Changes to already sent information may be sent in in several  submissions.  </p>
+                                <p/>
+                                <p>The amount stated in these returns should consist only of the  difference between the correct amount and the amount reported  earlier. Reduction or cancellation of amounts reported earlier should  be shown with a
+                                    minus sign (-) in front of the amount shown as an  amendment. The amount should be stated in whole kroner (NOK).  </p>
+                                <p/>
+                                <p>The total sum of changed return and original return may not be less  than 0.  </p>
+                                <p/>
+                                <p>The personal identity or organisation number must be identical with  that stated on the return submitted earlier.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Oppgavetype</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Ordinæroppgave  </p>
+                                <p>Ordinæroppgaver er alle oppgaveleveranser som ikke er  endringsoppgaver. Det kan leveres flere ordinæroppgaver. Beløpet  oppgis i hele kroner.  </p>
+                                <p/>
+                                <p>Endringsoppgave  </p>
+                                <p>Endringsoppgaver er oppgaver som endrer ordinæroppgaver. Det kan  leveres flere endringsoppgaver.  </p>
+                                <p/>
+                                <p>Beløpet på endringsoppgaver skal kun bestå av differansen mellom  korrekt beløp og tidligere innrapporterte beløp. Reduksjon eller  annullering av tidligere innrapportert beløp merkes med negativt  fortegn (-) foran
+                                    endringsbeløpet. Beløpet oppgis i hele kroner.  </p>
+                                <p/>
+                                <p>Sum endringsoppgave og ordinæroppgave kan totalt ikke bli mindre enn  0.  </p>
+                                <p/>
+                                <p>På endringsoppgaver må fødsels- eller organisasjonsnummer være  identisk med tidligere innrapportert oppgave.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Oppgåvetype</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Ordinæroppgåve  </p>
+                                <p>Ordinæroppgåver er alle oppgåveleveransar som ikkje er  endringsoppgåver. Det kan leverast fleire ordinæroppgåver. Gi opp  beløpet i heile kroner.  </p>
+                                <p/>
+                                <p>Endringsoppgåve  </p>
+                                <p>Endringsoppgåver er oppgåver som endrar ordinæroppgåver. Det kan  leverast fleire endringsoppgåver.  </p>
+                                <p/>
+                                <p>Beløpet på endringsoppgåver skal berre bestå av differansen mellom  korrekt beløp og tidlegare innrapporterte beløp. Reduksjon eller  annullering av tidlegare innrapportert beløp skal merkjast med  negativt forteikn
+                                    (-) framfor endringsbeløpet. Gi opp beløpet i heile  kroner.  </p>
+                                <p/>
+                                <p>Sum endringsoppgåve og ordinæroppgåve kan totalt ikkje bli mindre enn  0.  </p>
+                                <p/>
+                                <p>På endringsoppgåver må fødsels- eller organisasjonsnummer vere  identiske med tidlegare innrapportert oppgåve</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="Inntektsar-datadef-692">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Tax year</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                                <p>Returns may only be submitted for the previous tax year, that is to  say the total amount paid for each individual donor as at 31st  December the year before that in which the return is submitted.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Inntektsår</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Det kan kun leveres likningsoppgaver for forrige inntektsår, dvs.  totalt innbetalt beløp for hver enkelt giver/tilskuddsyter pr. 31.12.  året før innrapporteringsåret.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Inntektsår</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Det kan berre leverast likningsoppgåver for førre inntektsår, dvs.  totalt innbetalt beløp for kvar enkelt givar/tilskottsytar pr. 31.12.  året før innrapporteringsåret.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="Oppgavegiver-grp-5345"/>
+                <xs:element minOccurs="0" ref="Registreringsenhet-grp-5346"/>
+                <xs:element minOccurs="0" ref="OppgaveTilskuddGave-datadef-24314">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Information concerning</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                                <p>Donations to scientific research or vocational training  </p>
+                                <p>Institutions which conduct scientific research or vocational training,  and which have been approved under the tax deduction scheme or the  Taxation Act section 6-42, should submit a tax return for  contributions to
+                                    scientific research or vocational training.  </p>
+                                <p>The requirement to file a return is in consequence of the Tax  Assessment Act sections 6-6 d and 6-16 c and also the regulation of  18th November 1994.  </p>
+                                <p>For more information, see the guidelines for completing and submitting  tax returns for contributions to scientific research or vocational  training on the Norwegian Tax Administration`s website:
+                                    www.skatteetaten.no  </p>
+                                <p>Questions regarding the submission of tax returns may be sent to the  Directorate of Taxes by e-mail:  systemforv.grunnlagsdata@skatteetaten.no or telephone (+47) 22 07 70  00 (Data Quality Division - Kontor for
+                                    oppgavekvalitet).  </p>
+                                <p/>
+                                <p>Donations to certain voluntary organisations  </p>
+                                <p>Voluntary organisations as well as religious and ethical communities  that have been approved under the tax deduction scheme or the  Taxation Act section 6-50 should submit tax returns on donations to  certain
+                                    voluntary organisations.  </p>
+                                <p>The requirement to file a return is in consequence of the Tax  Assessment Act sections 6-6 g and 6-16 c and also the regulation of  18th November 1994.  </p>
+                                <p>For more information, see the guidelines for completing and submitting  tax returns for donations to certain voluntary organisations on the  Norwegian Tax Administration`s website: www.skatteetaten.no  </p>
+                                <p>Questions regarding the submission of tax returns may be sent to the  Directorate of Taxes by e-mail:  systemforv.grunnlagsdata@skatteetaten.no or telephone (+47) 22 07 70  00 (Data Quality Division - Kontor for oppgavekvalitet).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Oppgaver for</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Tilskudd til vitenskapelig forskning eller yrkesopplæring  </p>
+                                <p>Institusjoner som forestår vitenskapelig forskning eller  yrkesopplæring, og er godkjent under skattefradragsordningen etter  skatteloven § 6-42, skal levere likningsoppgaver over tilskudd til  vitenskapelig
+                                    forskning eller yrkesopplæring.  </p>
+                                <p>Oppgaveplikten følger av ligningsloven § 6-6 bokstav d, jf. § 6-16  bokstav c og forskrift av 18. november 1994.  </p>
+                                <p>For mer informasjon, se rettledning for utfylling og innlevering av  likningsoppgaver over tilskudd til vitenskapelig forskning og  yrkesopplæring på skatteetatens nettsider: www.skatteetaten.no  </p>
+                                <p>Spørsmål om innlevering av likningsoppgaver kan rettes til  Skattedirektoratet på e-post:  systemforv.grunnlagsdata@skatteetaten.no eller telefon 22 07 70 00  (Kontor for oppgavekvalitet).  </p>
+                                <p/>
+                                <p>Gaver til visse frivillige organisasjoner  </p>
+                                <p>Frivillige organisasjoner samt tros- og livssynssamfunn som er  godkjent under skattefradragsordningen etter skatteloven § 6-50, skal  levere likningsoppgaver over gaver til visse frivillige  organisasjoner.  </p>
+                                <p>Oppgaveplikten følger av ligningsloven § 6-6 bokstav g, jf. § 6-16  bokstav c og forskrift av 18. november 1994.  </p>
+                                <p>For mer informasjon, se rettledning for utfylling og innlevering av  likningsoppgaver over gaver til visse frivillige organisasjoner på  skatteetatens nettsider: www.skatteetaten.no  </p>
+                                <p>Spørsmål om innlevering av likningsoppgaver kan rettes til  Skattedirektoratet på e-post:  systemforv.grunnlagsdata@skatteetaten.no eller telefon 22 07 70 00  (Kontor for oppgavekvalitet).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Oppgåver for</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Tilskott til vitskapleg forsking eller yrkesopplæring  </p>
+                                <p>Institusjonar som står for vitskapleg forsking eller yrkesopplæring,  og er godkjende under skattefrådragsordninga etter skattelova § 6-42,  skal levere likningsoppgåver over tilskott til vitskapleg forsking  eller
+                                    yrkesopplæring.  </p>
+                                <p>Oppgåveplikta følgjer av likningslova § 6-6 bokstav d, jf. § 6-16  bokstav c og forskrift av 18. november 1994.  </p>
+                                <p>For meir informasjon, sjå rettleiing for utfylling og innlevering av  likningsoppgåver over tilskott til vitskapleg forsking og  yrkesopplæring på skatteetatens nettsider: www.skatteetaten.no  </p>
+                                <p>Spørsmål om innlevering av likningsoppgåver kan rettast til  Skattedirektoratet på e-post:  systemforv.grunnlagsdata@skatteetaten.no eller telefon 22 07 70 00  (Kontor for oppgåvekvalitet).  </p>
+                                <p/>
+                                <p>Gåver til visse frivillige organisasjonar  </p>
+                                <p>Frivillige organisasjonar og trus- og livssynssamfunn som er godkjende  under skattefrådragsordninga etter skattelova § 6-50, skal levere  likningsoppgåver over gåver til visse frivillige organisasjonar.  </p>
+                                <p>Oppgåveplikta følgjer av likningslova § 6-6 bokstav g, jf. § 6-16  bokstav c og forskrift av 18. november 1994.  </p>
+                                <p>For meir informasjon, sjå rettleiing for utfylling og innlevering av  likningsoppgåver over gåver til visse frivillige organisasjonar på  skatteetatens nettsider: www.skatteetaten.no  </p>
+                                <p>Spørsmål om innlevering av likningsoppgåver kan rettast til  Skattedirektoratet på e-post:  systemforv.grunnlagsdata@skatteetaten.no eller telefon 22 07 70 00  (Kontor for oppgåvekvalitet).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5344" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OppgaveType-datadef-23782">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Oppgavetype som benyttes.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">2</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg2Oppgavetype-repformat-389">
+                    <xs:attribute fixed="23782" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg2Oppgavetype-repformat-389">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">389</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="20"/>
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>New information</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Ordinæroppgave</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Ordinæroppgåve</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Change to already sent information</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Endringsoppgave</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Endringsoppgåve</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="Inntektsar-datadef-692">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Ar44-repformat-6">
+                    <xs:attribute fixed="692" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Ar44-repformat-6">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:gYear"/>
+    </xs:simpleType>
+    <xs:element name="Oppgavegiver-grp-5345">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                    <p>The organisation for which you are reporting</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                    <p>Information about the organisation completing the return is taken from  the Central Coordinating Register for Legal Entities. If you wish to  amend any of this information, you must contact the Central  Coordinating Register
+                        for Legal Entities.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Oppgavegiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Opplysninger om oppgavegiver er hentet fra Enhetsregisteret. Hvis du  vil forandre noe i disse opplysningene, må du kontakte  Enhetsregisteret.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Oppgåvegivar</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Opplysningar om oppgåvegivar er henta frå Einingsregisteret. Dersom du  vil endre noko i desse opplysningane, må du kontakte  Einingsregisteret.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="OrganisasjonType-datadef-23783">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Type of organisation</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                                <p>Voluntary organisation  </p>
+                                <p>An organisation approved under the scheme for tax deduction for  monetary gifts to certain voluntary organisations, in accordance with  section 6-50 of the Taxation Act.  </p>
+                                <p/>
+                                <p>Religious or ethical communities  </p>
+                                <p>Religious or ethical communities approved under the scheme for tax  deduction for monetary gifts to certain voluntary organisations,  without nationwide coverage, but which must be connected to a  registered legal
+                                    entity, through which they must register gifts  received, in accordance with section 6-50 of the Taxation Act,  article two, point three.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonstype</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Frivillig organisasjon  </p>
+                                <p>Organisasjon som er godkjent under ordningen skattefradrag for  pengegave til visse frivillige organisasjoner, jf. skatteloven §  6-50.  </p>
+                                <p/>
+                                <p>Trossamfunn eller livssynssamfunn  </p>
+                                <p>Tros- og livssynssamfunn som er godkjent under ordningen med  skattefradrag for pengegave til visse frivillige organisasjoner, uten  nasjonalt omfang, men som må være tilknyttet en registreringsenhet og  registrere
+                                    mottatte gaver der, jf. skatteloven § 6-50 annet ledd  tredje punktum.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Type organisasjon</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Frivillig organisasjon  </p>
+                                <p>Organisasjon som er godkjend under ordninga skattefrådrag for  pengegåve til visse frivillige organisasjonar, jf. skattelova § 6-50.    </p>
+                                <p/>
+                                <p>Trussamfunn eller livssynssamfunn  </p>
+                                <p>Trus- og livssynssamfunn som er godkjende under ordninga med  skattefrådrag for pengegåve til visse frivillige organisasjonar, utan  nasjonalt omfang, men som må vere tilknytte ei registreringseining og  registrere
+                                    mottekne gåver der, jf. skattelova § 6-50 andre ledd  tredje punktum.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetOrganisasjonsnummer-datadef-18">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Norwegian organisation number</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+                                <p>Invalid organisation number</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetNavn-datadef-1">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Name</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                                <p>Information about the organisation completing the statement should be  filled in here.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Informasjon om oppgåvegivar skal fyllast ut her.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetAdresse-datadef-15">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Address</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetPostnummer-datadef-6673">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Zip code</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="EnhetPoststed-datadef-6674">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Town/district</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Poststed</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Poststad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="EnhetTelefonnummer-datadef-755">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Phone number</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Telefonnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Telefonnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5345" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OrganisasjonType-datadef-23783">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Type organisasjon.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg2Organisasjonstype-repformat-390">
+                    <xs:attribute fixed="23783" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg2Organisasjonstype-repformat-390">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">390</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="50"/>
+            <xs:enumeration value="F">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Voluntary Organisation</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Frivillig organisasjon</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Frivillig organisasjon</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="T">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Religious or Humanist Community</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Trossamfunn eller livssynssamfunn</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Trussamfunn eller livssynssamfunn</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetOrganisasjonsnummer-datadef-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummeret til enheten</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Organisasjonsnummer til årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">5</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="18" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst99Modulus11-repformat-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">1</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetNavn-datadef-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Navn på juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Navn på årsregnskapets eier</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="1" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst175-repformat-8">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="175"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetAdresse-datadef-15">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Forretningsadresse til juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">7</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst105-repformat-9">
+                    <xs:attribute fixed="15" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst105-repformat-9">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="105"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetPostnummer-datadef-6673">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Postnummer i forretningsadressen til juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="6673" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst44BareTall-repformat-10">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">10</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+                    <p>Enter positive integer with four digits</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Feltet krever positivt heltall med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Feltet krev positivt heiltal med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="4"/>
+            <xs:pattern value="[0-9]{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetPoststed-datadef-6674">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Poststed i forretningsadressen til juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="6674" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst35-repformat-3">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="35"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetTelefonnummer-datadef-755">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Telefonnummer til juridisk enhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">10</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst13-repformat-12">
+                    <xs:attribute fixed="755" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst13-repformat-12">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">12</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="13"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="Registreringsenhet-grp-5346">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                    <p>The registered legal entity</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                    <p>Religious or ethical communities that do not have a nationwide  coverage should be connected to a registered legal entity, through  which they must register gifts received. The registered legal entity  should report such gifts
+                        received to the taxation authorities on  behalf of the individual religious or ethical community.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Registreringsenhet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Trossamfunn eller livssynssamfunn som ikke har nasjonalt omfang, skal  være tilknyttet en registreringsenhet og registrere mottatte gaver  der. Registreringsenheten skal innrapportere mottatte gaver til  skattemyndighetene på
+                        vegne av det enkelte tros- eller  livssynssamfunn.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Registreringseining</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Trussamfunn eller livssynssamfunn som ikkje har nasjonalt omfang, skal  vere tilknytte ei registreringseining og registrere mottekne gåver  der. Registreringseininga skal innrapportere mottekne gåver til  skattemyndigheitene på
+                        vegner av kvart enkelt trus- eller  livssynssamfunn.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="RapporteringsenhetOrganisasjonsnummer-datadef-21772">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Invalid organisation number</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RapporteringsenhetNavn-datadef-21771">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Name</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RapporteringsenhetAdresse-datadef-21773">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Address</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RapporteringsenhetPostnummer-datadef-21774">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Zip code</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RapporteringsenhetPoststed-datadef-21775">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Town/District</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Poststed</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Poststad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="RapporteringsenhetTelefonnummer-datadef-23784">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Phone number</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Telefonnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Telefonnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5346" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RapporteringsenhetOrganisasjonsnummer-datadef-21772">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummer til juridisk enhet eller underliggende bedrift.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">11</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="21772" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RapporteringsenhetNavn-datadef-21771">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Navn på juridisk enhet eller underliggende bedrift.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">12</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="21771" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RapporteringsenhetAdresse-datadef-21773">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Adresse til juridisk enhet eller underliggende bedrift.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">13</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst105-repformat-9">
+                    <xs:attribute fixed="21773" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RapporteringsenhetPostnummer-datadef-21774">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Postnummer til juridisk enhet eller underliggende bedrift.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">14</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="21774" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RapporteringsenhetPoststed-datadef-21775">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Poststed til juridisk enhet eller underliggende bedrift.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">15</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="21775" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RapporteringsenhetTelefonnummer-datadef-23784">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Telefonnummer til juridisk enhet eller underliggende bedrift.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">16</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst15-repformat-61">
+                    <xs:attribute fixed="23784" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst15-repformat-61">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">61</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgaveTilskuddGave-datadef-24314">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Gjelder rapporteringen tilskudd til vitenskapelig forskning eller yrkesopplæring, eller gaver til visse frivillige organisasjoner, tros- eller livssynsamfunn</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">1</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg2TilskuddGave-repformat-427">
+                    <xs:attribute fixed="24314" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg2TilskuddGave-repformat-427">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">427</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="75"/>
+            <xs:enumeration value="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Donations to scientific research or vocational training</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Tilskudd til vitenskapelig forskning eller yrkesopplæring</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Tilskott til vitskapeleg forskning eller yrkesopplæring</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="2">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Donations to certain voluntary organisations, religious or ethical communities</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Gaver til visse frivillige organisasjoner, tros- eller livssynssamfunn</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Gåver til visse frivillige organisasjonar, trus- eller livssynssamfunn</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="Givere-grp-5347">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                    <p>Donors</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                    <p>Donations to certain voluntary organisations  </p>
+                    <p/>
+                    <p>Voluntary organisations as well as religious and ethical communities  that have been approved under the tax deduction scheme or the  Taxation Act section 6-50 should submit tax returns on gifts to  certain voluntary
+                        organisations.  </p>
+                    <p/>
+                    <p>The requirement to file a return is in consequence of the Tax  Assessment Act sections 6-6 g and 6-16 c and also the regulation of  18th November 1994.  </p>
+                    <p/>
+                    <p>For more information, see the guidelines for completing and submitting  tax returns for donations to certain voluntary organisations on the  Norwegian Tax Administration`s website: www.skatteetaten.no  </p>
+                    <p/>
+                    <p>Questions regarding the submission of tax returns may be sent to the  Directorate of Taxes by e-mail:  systemforv.grunnlagsdata@skatteetaten.no or telephone (+47) 22 07 70  00 (Data Quality Division - Kontor for oppgavekvalitet).</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Givere</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Info om skjema gaver til visse frivillige organisasjoner  </p>
+                    <p>Frivillige organisasjoner samt tros- og livssynssamfunn som er  godkjent under skattefradragsordningen etter skatteloven § 6-50, skal  levere likningsoppgaver over gaver til visse frivillige  organisasjoner.  </p>
+                    <p/>
+                    <p>Oppgaveplikten følger av ligningsloven § 6-6 bokstav g, jf. § 6-16  bokstav c og forskrift av 18. november 1994.  </p>
+                    <p/>
+                    <p>For mer informasjon, se rettledning for utfylling og innlevering av  likningsoppgaver over gaver til visse frivillige organisasjoner på  skatteetatens nettsider: www.skatteetaten.no  </p>
+                    <p/>
+                    <p>Spørsmål om innlevering av likningsoppgaver kan rettes til  Skattedirektoratet på e-post:  systemforv.grunnlagsdata@skatteetaten.no eller telefon 22 07 70 00  (Kontor for oppgavekvalitet).</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Givarar</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Info om skjema gåver til visse frivillige organisasjonar  </p>
+                    <p>Frivillige organisasjonar og trus- og livssynssamfunn som er godkjende  under skattefrådragsordninga etter skattelova § 6-50, skal levere  likningsoppgåver over gåver til visse frivillige organisasjonar.  </p>
+                    <p/>
+                    <p>Oppgåveplikta følgjer av likningslova § 6-6 bokstav g, jf. § 6-16  bokstav c og forskrift av 18. november 1994.  </p>
+                    <p/>
+                    <p>For meir informasjon, sjå rettleiing for utfylling og innlevering av  likningsoppgåver over gåver til visse frivillige organisasjonar på  skatteetatens nettsider: www.skatteetaten.no  </p>
+                    <p/>
+                    <p>Spørsmål om innlevering av likningsoppgåver kan rettast til  Skattedirektoratet på e-post:  systemforv.grunnlagsdata@skatteetaten.no eller telefon 22 07 70 00  (Kontor for oppgåvekvalitet).</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="5000" minOccurs="0" ref="OversiktOverGivere-grp-5348"/>
+                <xs:element minOccurs="0" ref="GivereBelopTotalt-datadef-23788">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Total amount of gift</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                                <p>The total amount shows the sum of all stated donations, regardless of  which other fields may have been completed for donor.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Totalbeløp</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Det totale beløpet viser summen av alle oppgitte gaver, uavhengig av  hvilke andre felt som er fylt ut pr. giver/tilskuddsyter.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Totalt betalt gåvebeløp</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Det totale beløpet viser summen av alle oppgitte gåver, uavhengig av  kva for andre felt som er fylte ut pr. givar.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GivereAntall-datadef-23789">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Total number of donors</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                                <p>The total number of donors/contributors shows the total number of rows  in which information about donors/contributors has been stated,  regardless of which fields have been completed.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Antall givere</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Totalt antall givere utgjør antall rader der det er oppgitt  informasjon om giver, uavhengig av hvilke felt som er utfylt.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Totalt tal på givarar</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Totalt tal på givarar/tilskottsytarar utgjer talet på rader der det er  oppgitt informasjon om givar/tilskottsytar, uavhengig av kva for felt  som er utfylt.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5347" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OversiktOverGivere-grp-5348">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                    <p>List of donors</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Oversikt over givere</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Oversikt over givarar</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GiverFodselsnummer-datadef-2310">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Norwegian personal identity number.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                                <p>When registering payers, only one personal identity or organisation  number per payer should be entered. It is not possible to register  both a personal identity and an organisation number for the same  payer.  </p>
+                                <p/>
+                                <p>If no personal identity or organisation number is given, no other  information about the payer (such as name, address, amount etc.) can  be registered with the Directorate of Taxes.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+                                <p>Invalid personal identity number</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Fødselsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Ved registrering av betaler skal det kun fylles ut ett fødselsnummer  eller organisasjonsnummer pr. betaler. Det er ingen mulighet til å  registrere både fødselsnummer og organisasjonsnummer for en og samme
+                                    betaler.  </p>
+                                <p/>
+                                <p>Dersom fødselsnummer eller organisasjonsnummer ikke er oppgitt, kan  ikke andre opplysninger om betaler (f.eks. navn, adresse, beløp mv.)  bli registrert hos Skattedirektoratet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Fødselsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Ved registrering av betalar skal det berre fyllast ut eitt  fødselsnummer eller  organisasjonsnummer pr. betalar. Det er ikkje  høve til å registrere både fødselsnummer og organisasjonsnummer for  ein og same
+                                    betalar.  </p>
+                                <p/>
+                                <p>Dersom fødselsnummer eller organisasjonsnummer ikkje er oppgitt, kan  ikkje andre opplysningar om betalar (f.eks. namn, adresse, beløp  o.a.) bli registrerte hos Skattedirektoratet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GiverOrganisasjonsnummer-datadef-23785">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Norwegian organisation number</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                                <p>When registering payers, only one personal identity or organisation  number per payer should be entered. It is not possible to register  both a personal identity and an organisation number for the same  payer.  </p>
+                                <p/>
+                                <p>If no personal identity or organisation number is given, no other  information about the payer (such as name, address, amount etc.) can  be registered with the Directorate of Taxes.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+                                <p>Invalid Norwegian organisation number</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Org.nr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Ved registrering av betaler skal det kun fylles ut ett fødselsnummer  eller organisasjonsnummer pr. betaler. Det er ingen mulighet til å  registrere både fødselsnummer og organisasjonsnummer for en og samme
+                                    betaler.  </p>
+                                <p/>
+                                <p>Dersom fødselsnummer eller organisasjonsnummer ikke er oppgitt, kan  ikke andre opplysninger om betaler (f.eks. navn, adresse, beløp mv.)  bli registrert hos Skattedirektoratet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Org.nr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Ved registrering av betalar skal det berre fyllast ut eitt  fødselsnummer eller  organisasjonsnummer pr. betalar. Det er ikkje  høve til å registrere både fødselsnummer og organisasjonsnummer for  ein og same
+                                    betalar.  </p>
+                                <p/>
+                                <p>Dersom fødselsnummer eller organisasjonsnummer ikkje er oppgitt, kan  ikkje andre opplysningar om betalar (f.eks. namn, adresse, beløp  o.a.) bli registrerte hos Skattedirektoratet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GiverNavn-datadef-2308">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Name</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GiverAdresse-datadef-2309">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Address</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GiverPostnummer-datadef-23786">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Zip code</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GiverPoststed-datadef-23787">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Town/district</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Poststed</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Poststad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GiverGaveBelop-datadef-2311">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Amount</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5348" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GiverFodselsnummer-datadef-2310">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Givers fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">17</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst1111Modulus11-repformat-18">
+                    <xs:attribute fixed="2310" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst1111Modulus11-repformat-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">18</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="11"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="GiverOrganisasjonsnummer-datadef-23785">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Givers organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">18</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="23785" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GiverNavn-datadef-2308">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Givers fornavn</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">19</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="2308" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GiverAdresse-datadef-2309">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Givers adresse</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">20</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="2309" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GiverPostnummer-datadef-23786">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Givers postnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">21</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="23786" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GiverPoststed-datadef-23787">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Givers poststed</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">22</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="23787" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GiverGaveBelop-datadef-2311">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Givers gavebeløp</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">23</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="2311" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Heltall15-repformat-79">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">79</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="GivereBelopTotalt-datadef-23788">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Totale gavebeløp fra giverene.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">24</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall15-repformat-37">
+                    <xs:attribute fixed="23788" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopHeltall15-repformat-37">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">37</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="GivereAntall-datadef-23789">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Antall givere.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">25</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="23789" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Tilskuddsyter-grp-5350">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                    <p>Donor</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                    <p>Donations to scientific research or vocational training  </p>
+                    <p>Institutions which conduct scientific research or vocational training,  and which have been approved under the tax deduction scheme or the  Taxation Act section 6-42, should submit a tax return for donations  to scientific
+                        research or vocational training.  </p>
+                    <p/>
+                    <p>The requirement to file a return is in consequence of the Tax  Assessment Act sections 6-6 d and 6-16 c and also the regulation of  18th November 1994.  </p>
+                    <p/>
+                    <p>For more information, see the guidelines for completing and submitting  tax returns for donations to scientific research or vocational  training on the Norwegian Tax Administration`s website:  www.skatteetaten.no  </p>
+                    <p/>
+                    <p>Questions regarding the submission of tax returns may be sent to the  Directorate of Taxes by e-mail:  systemforv.grunnlagsdata@skatteetaten.no or telephone (+47) 22 07 70  00 (Data Quality Division - Kontor for oppgavekvalitet).</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Tilskuddsyter</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Info om skjema tilskudd til vitenskapelig forskning eller  yrkesopplæring  </p>
+                    <p/>
+                    <p>Institusjoner som forestår vitenskapelig forskning eller  yrkesopplæring, og er godkjent under skattefradragsordningen etter  skatteloven § 6-42, skal levere likningsoppgaver over tilskudd til  vitenskapelig forskning eller
+                        yrkesopplæring.  </p>
+                    <p/>
+                    <p>Oppgaveplikten følger av ligningsloven § 6-6 bokstav d, jf. § 6-16  bokstav c og forskrift av 18. november 1994.  </p>
+                    <p/>
+                    <p>For mer informasjon, se rettledning for utfylling og innlevering av  likningsoppgaver over tilskudd til vitenskapelig forskning og  yrkesopplæring på skatteetatens nettsider: www.skatteetaten.no  </p>
+                    <p/>
+                    <p>Spørsmål om innlevering av likningsoppgaver kan rettes til  Skattedirektoratet på e-post:  systemforv.grunnlagsdata@skatteetaten.no eller telefon 22 07 70 00  (Kontor for oppgavekvalitet).</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Tilskotsyter</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Info om skjema tilskudd til vitenskapelig forskning eller  yrkesopplæring.  </p>
+                    <p/>
+                    <p>Institusjoner som forestår vitenskapelig forskning eller  yrkesopplæring, og er godkjent under skattefradragsordningen etter  skatteloven § 6-42, skal levere likningsoppgaver over tilskudd til  vitenskapelig forskning eller
+                        yrkesopplæring.  </p>
+                    <p/>
+                    <p>Oppgaveplikten følger av ligningsloven § 6-6 bokstav d, jf. § 6-16  bokstav c og forskrift av 18. november 1994.  </p>
+                    <p/>
+                    <p>For mer informasjon, se rettledning for utfylling og innlevering av  likningsoppgaver over tilskudd til vitenskapelig forskning og  yrkesopplæring på skatteetatens nettsider: www.skatteetaten.no  </p>
+                    <p/>
+                    <p>Spørsmål om innlevering av likningsoppgaver kan rettes til  Skattedirektoratet på e-post:  systemforv.grunnlagsdata@skatteetaten.no eller telefon 22 07 70 00  (Kontor for oppgavekvalitet).</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="5000" minOccurs="0" ref="OversiktOverTilskuddsytere-grp-5351"/>
+                <xs:element minOccurs="0" ref="GivereTilskuddTotalt-datadef-23797">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Total donated amount</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                                <p>The total amount shows the sum of all stated donations, regardless of  which other fields may have been completed for donor.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Totalt beløp</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Det totale beløpet viser summen av alle oppgitte beløp, uavhengig av  hvilke andre felt som er fylt ut pr. giver/tilskuddsyter.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Totalt betalt tilskottsbeløp</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Det totale beløpet viser summen av alle oppgitte tilskottsbeløp,  uavhengig av kva for andre felt som er fylte ut pr. tilskottsytar.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GivereAntall-datadef-23798">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Total number of donors</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                                <p>The total number of donors shows the total number of rows in which  information about donors has been stated, regardless of which fields  have been completed.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Antall tilskuddsytere</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Totalt antall tilskuddsytere utgjør antall rader der det er oppgitt  informasjon om tilskuddsyter, uavhengig av hvilke felt som er utfylt.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Totalt tal på tilskottsytarar</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Totalt tal på tilskottsytarar utgjer talet på rader der det er oppgitt  informasjon om tilskottsytar, uavhengig av kva for felt som er  utfylt.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5350" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OversiktOverTilskuddsytere-grp-5351">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                    <p>List of donors</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Oversikt over tilskuddsytere</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Oversikt over tilskotsytere</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="GiverTilskuddFodselsnummer-datadef-23790">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Norwegian personal identity number</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                                <p>When registering donors, only one personal identity or organisation  number per donor should be entered. It is not possible to register  both a personal identity and an organisation number for the same  donor.  </p>
+                                <p/>
+                                <p>If no personal identity or organisation number is given, no other  information about the donor (such as name, address, amount etc.) can  be registered with the Directorate of Taxes.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+                                <p>Invalid Norwegian personal identity number</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Fødselsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Ved registrering av betaler skal det kun fylles ut ett fødselsnummer  eller organisasjonsnummer pr. betaler. Det er ingen mulighet til å  registrere både fødselsnummer og organisasjonsnummer for en og samme
+                                    betaler.  </p>
+                                <p/>
+                                <p>Dersom fødselsnummer eller organisasjonsnummer ikke er oppgitt, kan  ikke andre opplysninger om betaler (f.eks. navn, adresse, beløp mv.)  bli registrert hos Skattedirektoratet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Fødselsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Ved registrering av betalar skal det berre fyllast ut eitt  fødselsnummer eller  organisasjonsnummer pr. betalar. Det er ikkje  høve til å registrere både fødselsnummer og organisasjonsnummer for  ein og same
+                                    betalar.  </p>
+                                <p/>
+                                <p>Dersom fødselsnummer eller organisasjonsnummer ikkje er oppgitt, kan  ikkje andre opplysningar om betalar (f.eks. namn, adresse, beløp  o.a.) bli registrerte hos Skattedirektoratet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GiverTilskuddOrganisasjonsnummer-datadef-23791">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Norwegian organisation number</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="HJELP">
+                                <p>When registering donors, only one personal identity or organisation  number per donor should be entered. It is not possible to register  both a personal identity and an organisation number for the same  donor.  </p>
+                                <p/>
+                                <p>If no personal identity or organisation number is given, no other  information about the donor (such as name, address, amount etc.) can  be registered with the Directorate of Taxes.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+                                <p>Invalid Norwegian organisation number</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Org.nr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Ved registrering av betaler skal det kun fylles ut ett fødselsnummer  eller organisasjonsnummer pr. betaler. Det er ingen mulighet til å  registrere både fødselsnummer og organisasjonsnummer for en og samme
+                                    betaler.  </p>
+                                <p/>
+                                <p>Dersom fødselsnummer eller organisasjonsnummer ikke er oppgitt, kan  ikke andre opplysninger om betaler (f.eks. navn, adresse, beløp mv.)  bli registrert hos Skattedirektoratet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Org.nr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Ved registrering av betalar skal det berre fyllast ut eitt  fødselsnummer eller  organisasjonsnummer pr. betalar. Det er ikkje  høve til å registrere både fødselsnummer og organisasjonsnummer for  ein og same
+                                    betalar.  </p>
+                                <p/>
+                                <p>Dersom fødselsnummer eller organisasjonsnummer ikkje er oppgitt, kan  ikkje andre opplysningar om betalar (f.eks. namn, adresse, beløp  o.a.) bli registrerte hos Skattedirektoratet.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GiverTilskuddNavn-datadef-23792">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Name</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GiverTilskuddAdresse-datadef-23793">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Address</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GiverTilskuddPostnummer-datadef-23794">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Zip code</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GiverTilskuddPoststed-datadef-23795">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Town/district</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Poststed</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Poststad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="GiverTilskuddBelop-datadef-23796">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                                <p>Amount</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5351" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GiverTilskuddFodselsnummer-datadef-23790">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tilskuddsgivers fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">26</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst1111Modulus11-repformat-18">
+                    <xs:attribute fixed="23790" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GiverTilskuddOrganisasjonsnummer-datadef-23791">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tilskuddsgivers organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">27</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="23791" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GiverTilskuddNavn-datadef-23792">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tilskuddsgivers navn.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">28</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="23792" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GiverTilskuddAdresse-datadef-23793">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tilskuddsgivers adresse</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">29</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="23793" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GiverTilskuddPostnummer-datadef-23794">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tilskuddsgivers postnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">30</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="23794" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GiverTilskuddPoststed-datadef-23795">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tilskuddsgivers poststed</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">31</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="23795" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GiverTilskuddBelop-datadef-23796">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tilskuddsgivers tilskuddsbeløp</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">32</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="23796" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GivereTilskuddTotalt-datadef-23797">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Totalt tilskudd fra giverene</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">33</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="23797" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GivereAntall-datadef-23798">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Totalt antall givere</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">34</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall15-repformat-79">
+                    <xs:attribute fixed="23798" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

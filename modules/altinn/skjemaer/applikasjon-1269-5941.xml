@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RR-0005: Årsregnskap for Livsforsikring</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1269-5942.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-6545/Enheten-grp-6546" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-6545/Enheten-grp-6546/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-6545/Enheten-grp-6546/EnhetOrganisasjonsform-datadef-756" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-6545/Enheten-grp-6546/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-6545/Regnskapsar-grp-6547" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-6545/Regnskapsar-grp-6547/RegnskapAr-datadef-17102" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-6545/Regnskapsar-grp-6547/RegnskapStartdato-datadef-17103" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-6545/Regnskapsar-grp-6547/RegnskapAvslutningsdato-datadef-17104" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-6545/Konsern-grp-6548" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-6545/Konsern-grp-6548/Morselskap-datadef-4168" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-6545/Regnskapsprinsipper-grp-6549" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-6545/Regnskapsprinsipper-grp-6549/RegnskapsregleneSmaForetak-datadef-8079" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-6545/Regnskapsprinsipper-grp-6549/RegnskapsoppsettIFRS-datadef-25021" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-6545/Fastsettelse-grp-6550" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-6545/Fastsettelse-grp-6550/RegnskapFastsettelseDato-datadef-17105" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-6545/Fastsettelse-grp-6550/StyremedlemNavnSpesifisertStyremedlem-datadef-19023" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RR-0005 Årsregnskap for livsforsikring</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Oppstillingsplanene er utarbeidet på bakgrunn av gjeldende  regnskapslov.  </p>
+                <p>De fleste organisasjonsformer kan levere årsregnskapet sitt på en av  disse, men det finnes en del unntak.  </p>
+                <p>Innsendingspliktige som ikke har mulighet til å sende inn sitt  årsregnskap på valgte oppstillingsplan, må derfor fortsatt sende inn  årsregnskap med vedlegg på papir til Regnskapsregisteret.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Alle regnskapstall må legges i vedleggsskjema, som legges til under  Vedlegg. Vedleggsskjema for selskapsregnskapet må alltid legges ved.  Dersom konsernregnskap også skal sendes inn, legger du til  ytterligere ett vedleggsskjema.
+                    På vedleggsskjemaets første side må  det angis om tallene gjelder for selskapsregnskapet eller  konsernregnskapet.</p>
+            </xforms:hint>
+            <xforms:caption brreg:lang="NON">
+                <p>RR-0005 Årsrekneskap for livsforsikring</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Oppstillingsplanane er utarbeidde på bakgrunn av den gjeldande  rekneskapslova.  </p>
+                <p>Dei fleste organisasjonsformene kan levere årsrekneskapen sin på ein  av desse, men det finst ein del unnatak.  </p>
+                <p>Innsendingspliktige som ikkje har moglegheit til å sende inn  årsrekneskapen sin på den oppstillingsplanen dei har valt, må derfor  framleis sende inn årsrekneskapen med vedlegg på papir til  Rekneskapsregisteret.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NON">
+                <p>Alle rekneskapstall må leggjast i vedleggsskjema, som leggjast til  under Vedlegg. Vedleggsskjema for selskapsrekneskapen må alltid  leggjast ved. Om konsernrekneskap også skal sendast inn, leggjer dykk  til ytterligare eitt
+                    vedleggsskjema. På vedleggsskjemaet si første  side må dykk oppgje om tallene gjeld for selskapsrekneskapen eller  konsernrekneskapen.</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-6545">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-6545/Enheten-grp-6546">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Enheten</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Eininga</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-6545/Enheten-grp-6546/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-6545/Enheten-grp-6546/EnhetOrganisasjonsform-datadef-756">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsform</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsform</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-6545/Enheten-grp-6546/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn/Foretaksnavn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn/Føretaksnamn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-6545/Regnskapsar-grp-6547">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Regnskapsår</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Rekneskapsår</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-6545/Regnskapsar-grp-6547/RegnskapAr-datadef-17102">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="1980&lt;=årstall&lt;=året i år"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Regnskapsår</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Rekneskapsår</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-6545/Regnskapsar-grp-6547/RegnskapStartdato-datadef-17103">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="1980-01-01&lt;=yyyy&lt;=d.d."/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Årsregnskapets startdato</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Årsrekneskapens startdato</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-6545/Regnskapsar-grp-6547/RegnskapAvslutningsdato-datadef-17104">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="1980-01-01&lt;=yyyy&lt;=d.d. Perioden startdato (orid = 17103) - sluttdato (orid = 17104) kan ikke være lengre enn 18 måneder."/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Årsregnskapets sluttdato</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Årsrekneskapens avsluttingsdato</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-6545/Konsern-grp-6548">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Konsern</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Konsern</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-6545/Konsern-grp-6548/Morselskap-datadef-4168">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Morselskap i konsern</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Morselskap i konsern</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-6545/Konsern-grp-6548/KonsernregnskapVedlegg-datadef-25943">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Skal konsernregnskap legges ved?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Skal konsernrekneskap leggjast ved?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-6545/Regnskapsprinsipper-grp-6549">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Regnskapsprinsipper</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Rekneskapsprinsipper</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-6545/Regnskapsprinsipper-grp-6549/RegnskapsregleneSmaForetak-datadef-8079">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Følges regnskapsreglene for små foretak?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Følgjer selskapet rekneskapsreglane for små føretak?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-6545/Regnskapsprinsipper-grp-6549/RegnskapsoppsettIFRS-datadef-25021">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>N</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Regnskapslovens alminnelige regler</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Rekneskapslova sine alminnelege reglar</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>J</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>IFRS</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>IFRS</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Hvilke regler er benyttet ved utarbeidelsen av årsregnskapet til  selskapet?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kva reglar er nytta ved utarbeidinga av årsrekneskapen til selskapet?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-6545/Regnskapsprinsipper-grp-6549/RegnskapsoppsettKonsernIFRS-datadef-25944">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>N</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Regnskapslovens alminnelige regler</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Rekneskapslova sine alminnelege reglar</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>J</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>IFRS</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>IFRS</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Hvilke regler er benyttet ved utarbeidelsen av årsregnskapet til  konsernet?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kva reglar er nytta ved utarbeidinga av årsrekneskapen til konsernet?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-6545/Fastsettelse-grp-6550">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Bekreftelse på at årsregnskapet er fastsatt av kompetent organ</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Stadfesting på at årsrekneskapen er fastsett av kompetent organ</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-6545/Fastsettelse-grp-6550/RegnskapFastsettelseDato-datadef-17105">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Årsregnskapets sluttdato (orid= 17104)&lt;=yyyy&lt;=dagens dato"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Dato for fastsettelse av årsregnskapet</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Dato for fastsetting av årsrekneskapen</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-6545/Fastsettelse-grp-6550/StyremedlemNavnSpesifisertStyremedlem-datadef-19023">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn på representant for selskapet, som bekrefter at årsregnskapet er  fastsatt av kompetent organ</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn på representant for selskapet, som stadfestar at årsrekneskapen  er fastsett av kompetent organ</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:repeat id="repeat_EPostadresser-grp-6551" nodeset="/Skjema/GenerellInformasjon-grp-6545/EPostadresser-grp-6551">
+                    <xforms:group ref="/Skjema/GenerellInformasjon-grp-6545/EPostadresser-grp-6551">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>E-postadresser</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>E-postadresser</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/GenerellInformasjon-grp-6545/EPostadresser-grp-6551/KontaktpersonEPost-datadef-19022">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>E-post adresser for tilbakemelding fra Regnskapsregisteret</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>E-post adresser for tilbakemelding frå Rekneskapsregisteret</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

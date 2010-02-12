@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1062: Oppgjørsblankett for veldedig/allmennyttige institusjon/organisasjon</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1076-6076.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5436/Avgiver-grp-5437/RapporteringsenhetOrganisasjonsnummer-datadef-21772"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5436/Avgiver-grp-5437/RapporteringsenhetNavn-datadef-21771"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5436/Avgiver-grp-5437/RapporteringsenhetAdresse-datadef-21773"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5436/Avgiver-grp-5437/RapporteringsenhetPostnummer-datadef-21774"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5436/Avgiver-grp-5437/RapporteringsenhetPoststed-datadef-21775"/>
+            <xforms:bind ref="/Skjema/Innledning-grp-5436/Avgiver-grp-5437/SkatteoppkreverKommuneNummer-datadef-16513" required="true"/>
+            <xforms:bind ref="/Skjema/Innledning-grp-5436/DatoForLonnsutbetaling-grp-5807/LonnUtbetalingsdato-datadef-23884" required="true"/>
+            <xforms:bind ref="/Skjema/Arbeidstaker-grp-5684/OpplysningerOmArbeidstaker-grp-5685/AnsattFodselsnummer-datadef-1224" required="true"/>
+            <xforms:bind ref="/Skjema/Arbeidstaker-grp-5684/OpplysningerOmArbeidstaker-grp-5685/AnsattNavn-datadef-1223" required="true"/>
+            <xforms:bind ref="/Skjema/Arbeidstaker-grp-5684/OpplysningerOmArbeidstaker-grp-5685/AnsattPostnummer-datadef-8466" required="true"/>
+            <xforms:bind ref="/Skjema/Arbeidstaker-grp-5684/OpplysningerOmArbeidstaker-grp-5685/AnsattPoststed-datadef-23162" required="true"/>
+            <xforms:bind ref="/Skjema/Arbeidstaker-grp-5684/OpplysningerOmArbeidstaker-grp-5685/AnsattSkattekortkommune-datadef-25099" required="true"/>
+            <xforms:bind ref="/Skjema/Arbeidstaker-grp-5684/TidsromOgArbeidetsArt-grp-5686/ArbeidBeskrivelse-datadef-24002" required="true"/>
+            <xforms:bind ref="/Skjema/Arbeidstaker-grp-5684/TidsromOgArbeidetsArt-grp-5686/ArbeidsforholdStartdato-datadef-23170" required="true"/>
+            <xforms:bind ref="/Skjema/Arbeidstaker-grp-5684/TidsromOgArbeidetsArt-grp-5686/ArbeidsforholdSluttdato-datadef-23171" required="true"/>
+            <xforms:bind ref="/Skjema/Arbeidstaker-grp-5684/TidsromOgArbeidetsArt-grp-5686/ArbeidsforholdAvsluttet-datadef-23886" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1062 Oppgjørsblankett for veldedig eller allmennyttig institusjon  eller organisasjon - 2007</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Denne ordningen kan bare brukes av veldedige eller allmennyttige  organisasjoner, og bare for lønnsutgifter som ikke inngår i  næringsvirksomhet.  </p>
+                <p/>
+                <p>Ordningen kan benyttes når samlede lønnsutbetalinger for slik arbeide  ikke ventes å overstige kr 300.000 i løpet av året, og bare for  lønnsutbetalinger opp til kr 30.000 per ansatt. Hvis samlede  lønnsutgifter overstiger nevnte
+                    grenser, må det betales  arbeidsgiveravgift.  </p>
+                <p/>
+                <p>Når skjemaet er innsendt og forskuddstrekket betalt, har institusjonen  eller organisasjonen som arbeidsgiver oppfylt sine plikter overfor  skattemyndighetene. Skjemaet må fylles ut og sendes inn ved hver  lønnsutbetaling.  </p>
+                <p/>
+                <p>Arbeidstaker skal ha en utskrift av skjemaet. Utskriften gjelder som  lønnsslipp, som kvittering for foretatt forskuddstrekk og som  lønnsoppgave. Arbeidstakeren må  oppbevare skjemaet til bruk ved  årets selvangivelse.  </p>
+                <p/>
+                <p>Lønn som ikke overstiger kr 2.000 fra èn arbeidsgiver når denne er en  skattefri institusjon eller organisasjon i løpet av samme inntektsår  er skattefri. Dette gjelder dersom det samlede omfanget av slikt  arbeid ikke tilsier at
+                    det er næringsvirksomhet.  </p>
+                <p/>
+                <p>Feriepenger og sykepenger:  </p>
+                <p>I visse tilfeller kan det være plikt til å å utbetale feriepenger  eller sykepenger til en arbeidstaker. For mer informasjon kan du  kontakte det lokale arbeidstilsynet (feriepenger) eller  trygdekontoret (sykepenger).  </p>
+                <p/>
+                <p>Arbeidsgivere må innenfor samme inntektsår og for alle arbeidstakere  velge enten denne oppgjørsordningen eller den ordningen som gjelder  for vanlige arbeidsgivere.  </p>
+                <p/>
+                <p>For mer informasjon, se brosjyren:  Skatt for ideelle organisasjoner  og institusjoner, eller kontakt skatteoppkreveren.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1062 Oppgjersblankett for velgjerande eller allmennyttig  institusjon eller organisasjon - 2007</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Denne ordninga kan berre nyttast av velgjerande eller allmennyttige  institusjonar eller organisasjonar, og berre for lønsutgifter som  ikkje går inn under næringsverksemd.  </p>
+                <p/>
+                <p>Ordninga kan nyttast når samla lønsutbetalingar for slikt arbeid ikkje  kan ventast å overstige kr 300.000 i året, og berre for  lønsutbetalingar opp til kr 30.000 for kvar tilsett. Hvis samla  lønsutbetalingar overstig nevnte
+                    grenser, må ein betale  arbeidsgivaravgift.  </p>
+                <p/>
+                <p>Når skjemaet er fylt ut og sendt inn og forskottstrekk er betalt, har  institusjonen eller organisasjonen som arbeidsgjevar oppfylt sine  plikter overfor skattestyresmaktene. Skjemaet må utfyllast ved kvar  lønsutbetaling.  </p>
+                <p/>
+                <p>Arbeidstakaren skal ha ein utskrift av skjemaet. Utskrifta gjeld som  lønsslipp, som kvittering for gjennomført forskottstrekk og som  lønsoppgåve. Arbeidstakaren må ta vare på skjemaet til bruk i samband  med sjølvmeldinga for
+                    året.  </p>
+                <p/>
+                <p>Løn som ikkje overstig kr 2.000 frå ein arbeidsgivar når denne er ein  skattefri institusjon eller organisasjon i same inntektsår er  skattefri. Dette gjeld hvis det samla omfanget av slikt arbeid ikkje  tilseier at det er
+                    næringsverksemd.  </p>
+                <p/>
+                <p>Feriepenger og sykepenger:  </p>
+                <p>I visse høve kan det vere plikt til å utbetale feriepenger eller  sjukepenger til ein arbeidstakar. For meir informasjon kan du  kontakte det lokale arbeidstilsynet (feriepenger) eller  trygdekontoret (sjukepenger).  </p>
+                <p/>
+                <p>Arbeidsgivare må innanfor same inntektsår og for alle arbeidstakarar  velgje anten denne oppgjersordninga eller den ordninga som gjeld for  vanlege arbeidsgivarar.  </p>
+                <p/>
+                <p>For nærare opplysningar, sjå brosjyra: Skatt for ideelle  organisasjonar og institusjonar</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/Innledning-grp-5436">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Innleiing</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Innledning-grp-5436/Avgiver-grp-5437">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Arbeidsgiver</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Opplysningene er hentet fra Enhetsregisteret. Hvis det er feil eller  mangler i opplysningene, må dette rettes i Enhetsregisteret. Ikke  vent med å sende oppgaven til feilene er rettet. Vi får rettingene  automatisk.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Arbeidsgivar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Opplysningane er hentet frå Einingsregisteret. Viss det er feil eller  manglar i opplysningane, må dette rettast i Einingsregisteret. Ikkje  vent med å sende oppgåva til feila er retta. Vi får rettingane  automatisk.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/Innledning-grp-5436/Avgiver-grp-5437/RapporteringsenhetOrganisasjonsnummer-datadef-21772">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5436/Avgiver-grp-5437/RapporteringsenhetNavn-datadef-21771">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5436/Avgiver-grp-5437/RapporteringsenhetAdresse-datadef-21773">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5436/Avgiver-grp-5437/RapporteringsenhetPostnummer-datadef-21774">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5436/Avgiver-grp-5437/RapporteringsenhetPoststed-datadef-21775">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sted</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Stad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5436/Avgiver-grp-5437/SkatteoppkreverKommuneNummer-datadef-16513">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Til skatteoppkreveren i</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dette er skatteoppkreveren i den kommune institusjonen eller  organisasjonen driver sin virksomhet eller har sitt kontor (selv om  arbeidstakeren har en annen skattekommune).</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Kontorkommunen til arbeidsgiver</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Til skatteoppkrevjaren i</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Dette er skatteoppkrevjaren i den kommune institusjonen eller  organisasjonen driv sin verksemd eller har sitt kontor (sjølv om  arbeidstakaren har ein annan skattekommune).</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Arbeidsgivar sin kontorkommune</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Innledning-grp-5436/DatoForLonnsutbetaling-grp-5807">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Dato for lønnsutbetaling</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Dato for betaling av løn</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Innledning-grp-5436/DatoForLonnsutbetaling-grp-5807/LonnUtbetalingsdato-datadef-23884">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Dato</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Dato</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Arbeidstaker-grp-5684">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Arbeidstaker</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Arbeidstakar</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Arbeidstaker-grp-5684/OpplysningerOmArbeidstaker-grp-5685">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Opplysninger om arbeidstaker</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Alle opplysningene her kan hentes fra arbeidstakerens skattekort.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Se skattekortet</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Opplysningar om arbeidstakar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Alle opplysningane her kan hentast inn frå arbeidstakaren sitt  skattekort</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Sjå skattekortet</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/Arbeidstaker-grp-5684/OpplysningerOmArbeidstaker-grp-5685/AnsattFodselsnummer-datadef-1224">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Arbeidstaker-grp-5684/OpplysningerOmArbeidstaker-grp-5685/AnsattNavn-datadef-1223">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Arbeidstaker-grp-5684/OpplysningerOmArbeidstaker-grp-5685/AnsattAdresse-datadef-23161">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Arbeidstaker-grp-5684/OpplysningerOmArbeidstaker-grp-5685/AnsattPostnummer-datadef-8466">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Arbeidstaker-grp-5684/OpplysningerOmArbeidstaker-grp-5685/AnsattPoststed-datadef-23162">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sted</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Stad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Arbeidstaker-grp-5684/OpplysningerOmArbeidstaker-grp-5685/AnsattSkattekortkommune-datadef-25099">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Skattekommune</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Skattekommune</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Arbeidstaker-grp-5684/TidsromOgArbeidetsArt-grp-5686">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Tidsrom og type arbeid</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Tidsrom og type arbeid</p>
+                    </xforms:caption>
+                    <xforms:selectMany ref="/Skjema/Arbeidstaker-grp-5684/TidsromOgArbeidetsArt-grp-5686/ArbeidBeskrivelse-datadef-24002">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>BY</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Bygningsarbeid</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Byggnadsarbeid</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>FO</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Foredrag</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Foredrag</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>HA</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Hagearbeid</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Hagearbeid</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>KO</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Kontorarbeid</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Kontorarbeid</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>MA</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Malearbeid</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Malearbeid</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>VA</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Renhold</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Reinhald</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>AN</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Annet</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Anna</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Type arbeid</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Type arbeid</p>
+                        </xforms:caption>
+                    </xforms:selectMany>
+                    <xforms:input ref="/Skjema/Arbeidstaker-grp-5684/TidsromOgArbeidetsArt-grp-5686/ArbeidsforholdStartdato-datadef-23170">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fra dato</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Frå dato</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Arbeidstaker-grp-5684/TidsromOgArbeidetsArt-grp-5686/ArbeidsforholdSluttdato-datadef-23171">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Til dato</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Til dato</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:selectOne ref="/Skjema/Arbeidstaker-grp-5684/TidsromOgArbeidetsArt-grp-5686/ArbeidsforholdAvsluttet-datadef-23886">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Er arbeidsforholdet/oppdraget avsluttet eller ikke?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Er arbeidsforholdet/oppdraget avslutta eller ikkje?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Lonnsopplysninger-grp-5689">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Lønnsopplysninger</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Opplysningar om løn</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Lonnsopplysninger-grp-5689/LonnOgForskuddstrekk-grp-5688">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Lønn og forskuddstrekk</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Løn og forskottstrekk</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5689/LonnOgForskuddstrekk-grp-5688/AnsattLonn-datadef-1226">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Brutto lønn ved arbeid</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Feltet benyttes for all arbeidslønn. Verdi av eventuell fri kost og  losji inkluderes i det oppgitte beløpet etter de satser som er  fastsatt av Skattedirektoratet for det enkelte inntektsår.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>LTO kode 139</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Brutto løn ved arbeid</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Feltet her nyttar ein for all arbeidsløn. Verdi av eventuell fri kost  og losji reknar ein med i det oppgjevne beløpet etter dei satsar som  er fastsett av Skattedirektoratet for det enkelte inntekstår.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>LTO kode 139</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5689/LonnOgForskuddstrekk-grp-5688/AnsattForskuddstrekk-datadef-1333">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Forskuddstrekk</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her fylles ut det forskuddstrekket som er beregnet av brutto lønn, og  som innbetales til skatteoppkreveren.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>LTO kode 950</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Forskottstrekk</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her fyller ein ut det forskottstrekket som er rekna av brutto løn, og  som skal innbetalast til skatteoppkrevjaren.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>LTO kode 950</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5689/LonnOgForskuddstrekk-grp-5688/UtgifterKostLosji-datadef-5677">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Verdi av fri kost og losji medregnet i brutto lønn</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Skattedirektoratet fastsetter satser for det enkelte inntektsår. For  2007 gjelder følgende satser per døgn:  </p>
+                            <p/>
+                            <p>Fritt opphold - kost og losji: kr 99  </p>
+                            <p>Fri kost - alle måltider: kr 71  </p>
+                            <p>Fri kost - to måltider: kr 55  </p>
+                            <p>Fri kost - ett måltid: kr 37  </p>
+                            <p>Fritt losji - ett eller delt rom: kr 28</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Verdi av fri kost og losji rekna med i brutto løn</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Skattedirektoratet fastsett satsar for det enkelte inntekstår. For  2007 gjeld følgande satsar per døger:  </p>
+                            <p/>
+                            <p>Fritt opphald - kost og losji: kr 99  </p>
+                            <p>Fri kost - alle måltider: kr 71  </p>
+                            <p>Fri kost - to måltider: kr 55  </p>
+                            <p>Fri kost - ett måltid: kr 37  </p>
+                            <p>Fritt losji - eit eller delt rom: kr 28</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5689/LonnOgForskuddstrekk-grp-5688/LonnNettoUtbetalt-datadef-23887">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Netto utbetalt</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Netto utbetalt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:repeat id="repeat_AndreYtelser-grp-5690" nodeset="/Skjema/Lonnsopplysninger-grp-5689/LonnOgForskuddstrekk-grp-5688/AndreYtelser-grp-5690">
+                        <xforms:group ref="/Skjema/Lonnsopplysninger-grp-5689/LonnOgForskuddstrekk-grp-5688/AndreYtelser-grp-5690">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Andre ytelser</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres andre ytelser som arbeidstakeren har fått, slik som f.eks.  diettgodtgjørelse, telefongodtgjørelse og lignenede. Om det tas med  diett må det også påføres antall døgn i rubrikken Antall og likeledes  må
+                                    antall kilometer føres opp om det er gitt slik godtgjørelse. Også  andre godtgjørelser kan kreves spesifisert slik.  </p>
+                                <p/>
+                                <p>Kodeoversikt for lønns- og trekkoppgaver finner du på  www.skatteetaten.no</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Andre ytingar</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her fører ein andre ytingar som arbeidstakaren har fått slik som t.d.  diettgodtgjersle, kilometergodtgjersle, telefongodtgjersle og  liknande. Om det vert teke med diett må det også påførast tal døgn i  rubrukka
+                                    Tal og likeeins må tal kilometer førast opp dersom det er  gjeve slik godtgjersle. Også andre godtgjersler kan krevjast  spesifisert slik.  </p>
+                                <p/>
+                                <p>Du finn Kodeoversikt for lønns- og trekkoppgaver på  www.skatteetaten.no</p>
+                            </xforms:help>
+                            <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5689/LonnOgForskuddstrekk-grp-5688/AndreYtelser-grp-5690/LonnsoppgavekodeKodenummer-datadef-23934">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>LTO kode</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>LTO kode</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5689/LonnOgForskuddstrekk-grp-5688/AndreYtelser-grp-5690/LonnTypeYtelse-datadef-23935">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Type ytelse</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Kva slag</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5689/LonnOgForskuddstrekk-grp-5688/AndreYtelser-grp-5690/LonnsoppgaveSpesifisertLonnsoppgavekodeBelop-datadef-23936">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Beløp</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Beløp</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Lonnsopplysninger-grp-5689/LonnOgForskuddstrekk-grp-5688/AndreYtelser-grp-5690/LonnsoppgaveSpesifisertLonnsoppgavekodeAntall-datadef-23937">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Antall</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Tal</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:repeat>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

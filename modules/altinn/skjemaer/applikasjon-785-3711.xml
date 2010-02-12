@@ -1,0 +1,928 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1142: Egenoppgave vedr fritidsbolig eller tomt utenfor bostedskommunen</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-785-3712.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2089/Avgiver-grp-2090/OppgavegiverNavn-datadef-68"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2089/Avgiver-grp-2090/OppgavegiverPostadresse-datadef-2442"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2089/Avgiver-grp-2090/OppgavegiverPostnummer-datadef-6676"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2089/Avgiver-grp-2090/OppgavegiverPoststed-datadef-6677"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2089/Avgiver-grp-2090/OppgavegiverFodselsnummer-datadef-26"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1142 Egenoppgave vedr. fritidsbolig eller tomt utenfor  bostedskommunen 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Egenoppgaven leveres innen selvangivelsesfristen til likningskontoret  for den kommunen hvor fritidsboligen eller tomten ligger. Har du  behov for utsettelse, må du sende særskilt søknad til dette  likningskontoret. Du har samme
+                    ansvar for innholdet av egenoppgaven  som for andre opplysninger til likningsmyndighetene. Til  likningskontoret for bostedskommunen skal du som vanlig levere  selvangivelse. I denne skal du også ta med eiendom mv. i annen
+                    kommune.  </p>
+                <p/>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1142.  </p>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis RF-1142, helt eller delvis bli benyttet også  av andre offentlige organer som har hjemmel til å innhente de samme  opplysningene, jf. lov
+                    om Oppgaveregisteret §§ 5 og 6. Opplysningene  om evt. samordning kan fås ved henvendelse til Oppgaveregisteret på  telefon 75 00 75 00, eller Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Skjema er til bruk ved overtakelse, overdragelse, utleie, nybygging,  påkostning mv. av slik eiendom når skattyteren ikke plikter å sende  selvangivelse til eiendomskommunen</p>
+            </xforms:hint>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1142 Eigenoppgåve om fritidsbustad eller tomt utanfor  bustadkommunen 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Eigenoppgåva skal leverast innan fristen for sjølvmeldinga på  likningskontoret for den kommunen hvor fritidsbustaden eller tomta  ligg. Dersom du treng utsetjing, må du sende søknad til dette  likningskontoret. Du har same ansvar
+                    for innhaldet av eigenoppgåva  som for andre opplysningar til likningsmaktene. Du skal som vanleg  sende sjølvmeldinga til likningskontoret for bustadskommunen. I denne  skal du også ta med eigedom m.m. i anna kommune.  </p>
+                <p/>
+                <p>Andre offentlege organer sitt bruk av opplysningar i RF-1142.  </p>
+                <p>For å samordne og forenkle oppgåveinnleveringa frå næringslivet, kan  opplysningar som vert avgjeve i RF-1142, heilt eller delvis bli nytta  også av andre offentlege organ som har heimel til å innhente dei same  opplysningar, jf.
+                    lov om Oppgaveregisteret §§ 5 og 6. Opplysningar om  evt. samordning kan ein få ved å vende til Oppgåveregisteret på  telefon 75 00 75 00, eller Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NON">
+                <p>Skjema skal nyttast ved overtaking, overdraging, utleige, nybygging,  påkostnad m.m. av slik eigedom når skattytaren ikkje pliktar å sende  sjølvmelding til kommunen eigedomen ligg i</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-2089">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>1 Generell informasjon</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Egenoppgaven gjelder opplysninger om fritidsbolig (hytte, landsted  mv.) som ikke regnes som utleieeiendom og tomt som ikke gir inntekt,  når slik eiendom ligger utenfor skattyterens bostedskommune.  Selvangivelsesplikten til
+                        eiendomskommunen er i alminnelighet  bortfalt i disse tilfeller, men ved visse disposisjoner mv. over  eiendommen kan egenoppgave brukes til å gi opplysninger dit.  Foretrekker du å gi opplysningene i vanlig brev e.l. kan du
+                        gjøre  det, men du må da gi så fullstendige opplysninger som mulig,  tilsvarende de som kreves i egenoppgaven.  </p>
+                    <p>Skattyter som leier ut tomt, eller leier ut fritidsbolig i så stort  omfang at utleieinntekten skal skattlegges, skal sende årsoppgjør for  utleie mv. av fast eiendom (RF-1189) til likningskontoret for  eiendomskommunen.
+                        Næringsdrivende sender selvangivelse for  næringsdrivende mv. på vanlig måte. Ved begrenset utleie av  fritidsbolig, se under punkt 6.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>1 Generell informasjon</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Eigenoppgåva gjeld opplysningar om fritidsbustad (hytte, feriestad  m.m.) som ikkje reknas som utleigeeigendom, og tomt som ikkje gjev  inntekt, når eigedomen ligg utanfor bustadkommunen til skattytaren.  Plikta til å sende
+                        sjølvmelding til eigedomskommunen fell til vanleg  bort i slike høve, men ved visse disposisjonar m.m. over eigedomen  kan eigenoppgåva nyttast til å gje opplysningar dit. Du kan gje  opplysningane i vanleg brev e.l. dersom du
+                        ynskjer det, men pass då  på å gje så fullstendige opplysningar som mogleg, slik det er kravd i  eigenoppgåva.  </p>
+                    <p>Skattytar som leiger ut tomt eller leiger ut fritidsbustad i eit slikt  omfang at utleigeinntekten skal skattlegjast, skal sende  årsoppgjersskjema for utleige av fast eigedom (RF-1189) til  likningskontoret for
+                        eigedomskommunen. Næringsdrivande sender  sjølvmelding m.m. på vanleg måte. Ved avgrensa utleige av  fritidsbustad, sjå under punkt 6.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2089/Avgiver-grp-2090">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Avgiver</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Avgivar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2089/Avgiver-grp-2090/OppgavegiverNavn-datadef-68">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2089/Avgiver-grp-2090/LigningskontorFritidsboligKommunenummer-datadef-14816">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Til likningskontoret for</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Eiendomskommunen</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Til likningskontoret for</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Eigedomskommunen</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2089/Avgiver-grp-2090/Inntektsar-datadef-692">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Inntektsår</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Inntektsår</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2089/Avgiver-grp-2090/OppgavegiverPostadresse-datadef-2442">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Nåværende adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Noverande adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2089/Avgiver-grp-2090/OppgavegiverPostnummer-datadef-6676">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2089/Avgiver-grp-2090/OppgavegiverPoststed-datadef-6677">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2089/Avgiver-grp-2090/OppgavegiverKommune-datadef-619">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bostedskommune</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Bustadkommune</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2089/Avgiver-grp-2090/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>11 siffer</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>11 siffer</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2089/Eiendom-grp-2091">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Eiendom</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Eigedom</p>
+                    </xforms:caption>
+                    <xforms:selectMany ref="/Skjema/GenerellInformasjon-grp-2089/Eiendom-grp-2091/EgenoppgaveType-datadef-19475">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Kjøp</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Kjøp/overtakelse</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Kjøp/overtaking</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Salg</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Salg/overdragelse</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Sal/overdraging</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nybygg</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nybygg</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nybygg</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Påbygging</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Påbygging/ombygging/påkostning</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Påbygging/ombygging/påkostnad</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Tomtefeste</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Tomtefeste</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Tomtefeste</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Utleie</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Utleie/annet</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Utleige/anna</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Egenoppgaven gjelder</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Eigenoppgåva gjeld</p>
+                        </xforms:caption>
+                    </xforms:selectMany>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2089/Eiendom-grp-2091/EiendomFritidsboligNavn-datadef-14815">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Eiendommens navn</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Evt. adresse</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namnet på eigedomen</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Evt. adresse</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2089/Eiendom-grp-2091/EiendomGardsnummerFritidsboligMv-datadef-15596">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Gårdsnr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Gardsnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2089/Eiendom-grp-2091/EiendomBruksnummerFritidsboligMv-datadef-15597">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bruksnr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Bruksnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2089/Eiendom-grp-2091/EiendomFestenummer-datadef-5575">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Evt. festenr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Evt. festenr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/KjopSalgEllerAnnenOverforing-grp-2092">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>2. Kjøp/salg eller annen overføring</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Oppgaven gir grunnlag for å registrere eierskiftet og inngangsverdi  (kostpris)/utgangsverdi (salgsum). Her føres personalia til den du  har overtatt eiedommen fra eller overdratt den til i løpet av  inntektsåret.
+                        Eiendomsstørrelsen angis skjønnsmessig hvis det ikke  foreligger nøyaktig oppmåling. Under Andre opplysninger kan du oppgi  om det dreier seg om delvis overføring, eventuelt frasalg (i tilfelle  hvor stor andel), hvordan
+                        kjøpesummen gjøres opp, samt beregning av  skattepliktig gevinst/fradragsberettiget tap, herunder eventuelt  eier- og brukstid mv. Omfatter overtakelsen fritidsbolig på festet  tomt, skal overtaker også krysse av for tomtefest
+                        og fylle ut feltene  der.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>2. Kjøp/sal eller anna overføring</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Oppgåva gjer grunnlag for å registrere eigarskiftet og inngangsverdi  (kostpris)/vederlaget (salgssum). Før opp personalia til den du har  teke over eigendomen frå eller overdrege den til i inntektsåret. Gje  opp kor stor
+                        eigedomen er. Bruk skjøn dersom nøyaktig oppmåling ikkje  ligg føre. Under Andre opplysningar kan du gje opp om det er tale om  delvis overføring, eventuelt fråsal og i tilfelle kor stor del,  korleis kjøpesummen blir gjort
+                        opp og utrekning av skattepliktig  vinst/tap som gir rett til frådrag, eventuelt eigar- og brukstid m.m.  Dersom overtakinga gjeld fritidsbustad på festa tomt, skal den som  tek over også krysse av for tomtefest og fylle ut
+                        feltene der.</p>
+                </xforms:help>
+                <xforms:selectOne ref="/Skjema/KjopSalgEllerAnnenOverforing-grp-2092/EiendomFritidsboligTomtSelgerKjoper-datadef-19422">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Overtatt_fra</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Overtatt fra</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Overteken frå</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Overdratt_til</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Overdratt til</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Overdregen til</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Eiendommen er</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Eigedomen er</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/KjopSalgEllerAnnenOverforing-grp-2092/EiendomFritidsboligTomtSelgerKjoperNavn-datadef-11904">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Navn</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Namn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KjopSalgEllerAnnenOverforing-grp-2092/EiendomFritidsboligTomtSelgerKjoperAdresse-datadef-11905">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Adresse</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Adresse</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KjopSalgEllerAnnenOverforing-grp-2092/EiendomFritidsboligTomtSelgerKjoperPostnummer-datadef-11906">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:alert brreg:lang="EN">
+                        <p>Enter positive integer with four digits</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Postnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever positivt heltall med fire siffer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Postnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev positivt heiltal med fire siffer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KjopSalgEllerAnnenOverforing-grp-2092/EiendomFritidsboligTomtSelgerKjoperPoststed-datadef-11907">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Poststed</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Poststad</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KjopSalgEllerAnnenOverforing-grp-2092/EiendomFritidsboligTomtSelgerKjoperFodselnummer-datadef-19650">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <brreg:kontroll type="Modulus 11"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Fødselsnr.</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Fødselsnr. oppgis hvis mulig</p>
+                    </xforms:hint>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig fødselsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Fødselsnr.</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Fødselsnr. om det er moglig å gje det opp</p>
+                    </xforms:hint>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig fødselsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KjopSalgEllerAnnenOverforing-grp-2092/EiendomFritidsboligTomtSelgerKjoperOrganisasjonsnummer-datadef-21965">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Org.nummer</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Org.nummer, oppgis hvis mulig</p>
+                    </xforms:hint>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Org.nummer</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Org.nummer, om det er moglig å gje opp</p>
+                    </xforms:hint>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KjopSalgEllerAnnenOverforing-grp-2092/EiendomTomtHytteFeriested-datadef-11909">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Eiendommens art</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Tomt, hytte, landsted</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kva slag eigedom</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Tomt, hytte, feriestad</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KjopSalgEllerAnnenOverforing-grp-2092/EiendomFritidsboligTomtSalgKjopDato-datadef-11910">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Dato for overføring</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Datoen for overføringa</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KjopSalgEllerAnnenOverforing-grp-2092/EiendomFritidsboligTomtSalgKjopPrisVerdiArveavgiftsgrunnlag-datadef-11911">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Pris, overføringsverdi, arveavgiftsgrunnlag</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Kr</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Pris, overføringsverdi, arveavgiftsgrunnlag</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Kr</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KjopSalgEllerAnnenOverforing-grp-2092/EiendomFritidsboligTomtSalgKjopKostnaderAndre-datadef-11912">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Øvrige omkostninger kr</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Kr</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kostnader elles kr</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Kr</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KjopSalgEllerAnnenOverforing-grp-2092/EiendomTomtAreal-datadef-11913">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Tomteareal</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>da</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Tomteareal</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>da</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KjopSalgEllerAnnenOverforing-grp-2092/EiendomFritidsboligBoareal-datadef-11914">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Boligareal</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>m2</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Bustadareal</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>m2</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KjopSalgEllerAnnenOverforing-grp-2092/EiendomFritidsboligTomtSelgerKjoperSlektskap-datadef-11915">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Evt. slektskap med overtaker/overdrager</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Evt. skyldskap med overtakaren/overdragaren</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KjopSalgEllerAnnenOverforing-grp-2092/TilleggsopplysningerFritidsbolig-datadef-14113">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Andre opplysninger</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Andre opplysningar</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Nybygging-grp-2102">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>3. Nybygging</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Opplysninger om nybygging gir grunnlag for fastsettelse av  likningsverdi av fritidsboligen. Verdi av eget arbeid anslås  skjønnsmessig i forhold til den kostnadsbesparelse det har medført.  Brannforsikringssum oppgis i
+                        tilfelle bare for bygget, ikke for innbo  mv. (som isteden evt. føres i selvangivelsen til bostedskommunen). Er  det ikke tidligere sendt opplysninger om erverv av tomten, må du også  krysse av for kjøp/overtakelse og fylle ut
+                        vedrørende denne. Er  tomten festet skal du også krysse av for tomtefest og fylle ut for  det.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>3. Nybygging</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Opplysningar om nybygging gjev grunnlag for å fastsetje likningsverdi  av fritidsbustad. Verdi av eige arbeid skal reknast etter skjøn i  høve til dei kostnadene ein har spart med det. Branntrygdesummen som  du fører opp, skal
+                        berre gjelde bygningen, ikkje innbu m.m. (som i  staden skal førast i sjølvmeldinga til bustadkommunen). Dersom du  ikkje har sendt opplysningar tidlegare om at du har overteke tomta,  må du også krysse av for kjøp/oertaktin
+                        og fylle ut for det. Dersom  tomta er festa skal du også krysse av for tomtefeste og fylle ut for  det.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/Nybygging-grp-2102/EiendomFritidsboligNybyggGrunnflateBrutto-datadef-11916">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Byggets grunnflate</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>m2 brutto</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Grunnflata av bygget</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>m2 brutto</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Nybygging-grp-2102/EiendomFritidsboligNybyggEtasjer-datadef-11917">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Etasjer</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Etasjar</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Nybygging-grp-2102/EiendomFritidsboligNybyggKjellerAreal-datadef-11918">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kjeller</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>m2</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kjellar</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>m2</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Nybygging-grp-2102/EiendomFritidsboligNybyggRomAntall-datadef-11919">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall rom inkl. kjøkken</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kor mange rom inkl. kjøkken</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Nybygging-grp-2102/EiendomFritidsboligNybyggBadWcAntall-datadef-11920">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Bad/WC</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Antall</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Bad/WC</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Kor mange</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Nybygging-grp-2102/EiendomFritidsboligNybyggUthusGarasjerAreal-datadef-11921">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Uthus/garasje</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>m2</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Uthus/garasje</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>m2</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Nybygging-grp-2102/EiendomFritidsboligNybyggKostnaderTotale-datadef-11922">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Alle kostnader frem til 31.12</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Også tidl. års kostnader</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Alle kostnader fram til 31.12</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Også kostnader frå tidl. år</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/Nybygging-grp-2102/EiendomFritidsboligNybyggTomtType-datadef-19423">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Selveiertomt</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Selveier</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sjøleigar</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Festet</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Festet (bygslet)</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Festa (bygsla)</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Tomta er</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Tomta er</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:group ref="/Skjema/Nybygging-grp-2102/TilleggForVerdiAvEgetArbeid-grp-4153">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Tillegg for verdi av eget arbeid</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Tillegg for verdi av eige arbeid</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Nybygging-grp-2102/TilleggForVerdiAvEgetArbeid-grp-4153/EiendomFritidsboligNybyggEgetArbeidTimer-datadef-11924">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall timer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kor mange timar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Nybygging-grp-2102/TilleggForVerdiAvEgetArbeid-grp-4153/EiendomFritidsboligNybyggEgetArbeidVerdi-datadef-11925">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ca.</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Kr</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Om lag</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Kr</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/Nybygging-grp-2102/EiendomFritidsboligNybyggBrannforsikring-datadef-11926">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Byggets brannforsikringssum i kr</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Branntrygdesum for bustaden i kr</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Nybygging-grp-2102/EiendomFritidsboligNybyggIbruktagelseDato-datadef-11927">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Bygget tatt i bruk</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Dato</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Bustaden er teken i bruk</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Dato</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/PabygingOmbyggingPakostning-grp-2103">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>4. Påbygging/ombygging/påkostning</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Her gis en nærmere beskrivelse som kan danne grunnlag for vurdering av  om likningsverdien på eiendommen bør endres eventuell endring av  likningsverdi på eiendommen. Også påkostning på tomt, f.eks. til veg,  kloakkanlegg mv.
+                        skal oppgis. Oppgi når arbeidet ble ferdig. Dreier  det seg om ubetydelige verdiendringer, behøver ikke oppgaven sendes.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>4. Påbygging/ombygging/påkostnad</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Gje ei nærare utgreiing som kan nyttast som grunnlag for vurdering av  om takstverdien på eigedomen bør endras. Du skal også gje opp  påkostnad på tomt, t.d. til veg, kloakkanlegg m.m. Gje også opp når  arbeidet vart ferdig. Du
+                        treng ikkje å sende oppgåve når det berre er  små endringar i verdien.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/PabygingOmbyggingPakostning-grp-2103/EiendomFritidsboligPabyggMvBeskrivelse-datadef-11928">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Påbygging/ombygging/påkostning består i</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Påbygging/ombygging/påkostnad gjeld</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/PabygingOmbyggingPakostning-grp-2103/EiendomFritidsboligPabyggMvKostnadTotal-datadef-11929">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Samlet kostnad kr</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Samla kostnad kr</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:group ref="/Skjema/PabygingOmbyggingPakostning-grp-2103/TilleggForVerdiAvEgetArbeid-grp-4039">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Tillegg for verdi av eget arbeid</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Tillegg for verdi av eige arbeid</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/PabygingOmbyggingPakostning-grp-2103/TilleggForVerdiAvEgetArbeid-grp-4039/EiendomFritidsboligPabyggMvEgetArbeidTimer-datadef-11930">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall timer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kor mange timar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/PabygingOmbyggingPakostning-grp-2103/TilleggForVerdiAvEgetArbeid-grp-4039/EiendomFritidsboligPabyggMvEgetArbeidVerdi-datadef-11931">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ca. kr</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Om lag kr</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/TomtefesteBygsling-grp-2104">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>5. Tomtefeste/bygsling</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>5. Tomtefeste/bygsling</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/TomtefesteBygsling-grp-2104/EiendomTomtefesteBygslingGrunneierNavn-datadef-11932">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Grunneiers navn</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Namnet til grunneigaren</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/TomtefesteBygsling-grp-2104/EiendomTomtefesteBygslingGrunneierAdresse-datadef-11933">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Adresse</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Adresse</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/TomtefesteBygsling-grp-2104/EiendomTomtefesteBygslingGrunneierPostnummer-datadef-11934">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:alert brreg:lang="EN">
+                        <p>Enter positive integer with four digits</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Postnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever positivt heltall med fire siffer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Postnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev positivt heiltal med fire siffer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/TomtefesteBygsling-grp-2104/EiendomTomtefesteBygslingGrunneierPoststed-datadef-11935">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Poststed</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Poststad</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/TomtefesteBygsling-grp-2104/EiendomTomtefesteAvgift-datadef-11936">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Årlig festeavgift kr</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Festeavgift for året kr</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/TomtefesteBygsling-grp-2104/EiendomFesteavgiftUtlopstid-datadef-11937">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Festeavgiften gjelder uendret frem til (dato)</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Festeavgifta gjeld uendra fram til (dato)</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/UtleieOgAnnet-grp-2105">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>6. Utleie og annet</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Ved begrenset utleie (utover kr10 000) av fritidsbolig oppgis hele  leieinntekten og tidsrommet for utleien. En del av leieinntekten er  skattefri (om leieinntekt av fritidseiendom se rettledning til  selvangivelsen). Til
+                        gjengjeld gis det ikke fradrag for faktiske  kostnader. Dersom eiendommen reegnes som utleieeiendom og  fritidseiendom, skal denne blanketten ikke brukes. I stedet skal du  sende årsoppgjørsskjema for utleie mv. av fast
+                        eiendom (RF-1189) til  likningskontoret for eiendomskommunen. Dette felt kan ellers brukes  for å opplyse om andre forhold som kan påvirke verdien av eiendomen  (bortsett fra generelle endringer i prisnivået for fast eiendom).
+                        Et  eksempel er brannskade. Ubetydelige endringer behøver ikke meldes.  Likningskontoret kan gi nærmere veiledning.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>(ved utleie oppgis leieinntekt og tidsrom for utleien. Se felt 6 på  baksiden.)</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>6. Utleige og anna</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Ved avgrensa utleige (utover kr10 000) av fritidsbustad gjev ein opp  heile leigeinntekta og tidsrommet for utleiga. Ein del av  leigeinntekta er skattefri (sjå om leigeinntekt av fritidsbustad i  rettleiinga for utfylling av
+                        sjølvmeldinga). Du får til gjengjeld  ikkje frådrag for faktiske kostnader. Skal eigedomen ikkje reknast  som fritidseigedom, men som utleigeeigendom, skal denne blanketten  ikkje nyttast. I staden skal du sende
+                        årsoppgjersskjema for utleige  av fast eigedom (RF-1189) til likningskontoret for kommunen  eigedommen ligg i. Dette feltet kan du elles nytte til å opplyse om  andre tilhøve som kan verke inn på verdien av eigedomen (hugs å
+                        sjå  bort frå generelle endringar i prisnivået for fast eigedom). Eit døme  er brannskade. Små endringar i verdien treng ein ikkje melde frå om.  Likningskontoret kan gje nærare rettleiing.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NON">
+                    <p>(ved utleige gjev ein opp leigeinntekt og tidsrom for utleiga. Sjå  felt 6 på baksida.)</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/UtleieOgAnnet-grp-2105/EiendomFritidsboligUtleieMvBeskrivelse-datadef-11938">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Opplysninger</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Opplysningar</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

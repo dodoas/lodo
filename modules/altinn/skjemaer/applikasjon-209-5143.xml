@@ -1,0 +1,991 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1160: Særskilt oppgaveplikt for lønn til barn fra foreldres bedrift mv.</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-209-5144.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-2526/Arbeidsgiver-grp-2527/EnhetPostnummer-datadef-6673" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-2526/Arbeidsgiver-grp-2527/EnhetPoststed-datadef-6674" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2526/Arbeidsgiver-grp-2527/OppgavegiverFodselsnummer-datadef-26"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1160 Særskilt oppgaveplikt for lønn til barn fra foreldres bedrift  mv. 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Særskilt oppgaveplikt for lønn til barn fra foreldres bedrift mv. i  henhold til forskrift av 23. desember 1983, nr. 1840. Denne oppgaven  skal inngis uoppfordret for vedkommende år i tillegg til pliktig  ordinær lønnsinnberetning.  </p>
+                <p/>
+                <p>Rettledning  </p>
+                <p>1. Denne oppgaven skal omfatte:  </p>
+                <p>a. For selvstendig næringsdrivende (ansvarlig enmannsforetak):  Lønn  og annen godtgjørelse til innehaverens barn.  </p>
+                <p>b.  I selskap med høyst 5 fullt ansvarlige personlige deltakere:  Lønn  og annen godtgjørelse til deltakernes ektefeller og barn.  </p>
+                <p>c.  I aksjeselskaper og andre skattepliktige foretak:  Lønn eller  annen godtgjørelse til aksjonærenes ektefeller og barn.  </p>
+                <p/>
+                <p>2.  Plikt til å levere denne oppgaven påhviler:  </p>
+                <p>a.  For selvstendige næringsdrivende (ansvarlig enmannsforetak):  Innehaveren av foretaket.  </p>
+                <p>b.  I selskap med høyst 5 fullt ansvarlige personlige deltakere: Den  deltaker hvis ektefelle eller barn har fått utbetalt lønn eller annen  arbeidsgodtgjørelse.  </p>
+                <p>c.  I aksjeselskap og andre skattepliktige foretak: Den daglige leder  av virksomheten, eller hvis det ikke er noen slik leder, styrets  formann.  </p>
+                <p/>
+                <p>Oppgaven skal innleveres sammen med selvangivelsen.  </p>
+                <p/>
+                <p>3. Oppgave over utbetaling til barn skal bare gis når vedkommende barn  ikke har arbeidet i full stilling i bedriften, f.eks. hjemmeværende  barn som er under utdannelse, i militærtjeneste ol. Nærmere  opplysninger skal også gis
+                    for barn med egen husholdning som har  arbeidet i virksomheten i ferier ol. Har barnet vært  korttidsbeskjeftiget en del av året og heldagsbeskjeftiget resten av  året, f.eks. etter endt utdannelse, er det for siste tidsrom
+                    tilstrekkelig å opplyse at barnet har arbeidet i fulldags  stilling.  </p>
+                <p/>
+                <p>4. I aksjeselskap mv (1 c ovenfor) foreligger oppgaveplikt bare for  utbetaling til barn og ektefelle av aksjonær som eier mer enn 50 pst  av aksjene (andelene) i selskapet alene eller sammen med en person  som han er i slekt eller
+                    svogerskap med i opp- eller nedstigende  linje eller sidelinje så nær som onkel eller tante. Har begge  ektefeller aksjer (andeler) i selskapet og begge har fått lønn fra  selskapet skal oppgaven omfatte den laveste inntekten.  </p>
+                <p/>
+                <p>5. Ligningsmyndighetene kan kreve denne oppgave innlevert også i andre  tilfeller enn de som er angitt ovenfor, jf. ligningsloven § 6-2 nr.  4a og §4 i forskrift om særskilt oppgaveplikt for lønn til barn fra  foreldres bedrift
+                    mv., gitt i kgl. res. av 23. desember 1983.  </p>
+                <p/>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. november 1994, jf. ligningsloven § 4-4 nr.  7.  </p>
+                <p/>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1160  </p>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjemaet, RF-1160, helt eller delvis  bli benyttet også av andre offentlige organer som har hjemmel til å  innhente de samme
+                    opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt. samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1160 Særskild oppgåveplikt for lønn til barn frå foreldra si  verksemd o.a. 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Særskild oppgåveplikt for lønn til barn frå foreldra si verksemd o.a i  samsvar med forskrift av 23. desember 1983, nr. 1840. Denne oppgåva  leverast ukravd for vedkomande år i tillegg til ubedd vanleg  lønnsmelding o.a.  </p>
+                <p/>
+                <p>Rettleiing  </p>
+                <p>1. Denne oppgåva skal omfatte:  </p>
+                <p>a.  For sjølvstendig næringsdrivande (einmannsføretak): Lønn og anna  godtgjerning til innehavaren sine barn.  </p>
+                <p>b.  I selskap med høgst fem fullt ansvarlege personlege partshavarar:  Lønn og anna godtgjering til aksjonæren sin ektefelle og barn.  </p>
+                <p>c.  I aksjeselskapar og andre skattepliktige føretak: Lønn eller anna  godtgjering til aksjonærenes ektefeller og barn.  </p>
+                <p/>
+                <p>2.  Plikt til å levere denne oppgåva har:  </p>
+                <p>a.  For sjølvstendige næringsdrivande (einmannsføretak): Innehavaren  av føretaket.  </p>
+                <p>b.  I selskap med høgst fem fullt ansvarlege personlege partshavarar:  Den partshavaren som har ektefelle eller barn som har fått utbetalt  lønn eller anna arbeidsgodtgjering.  </p>
+                <p>c.   I aksjeselskap og andre skattepliktige føretak: Den daglege  leiaren av verksemda, eller om det ikkje er nokon slik leiar,  formannen i styret  </p>
+                <p/>
+                <p>Oppgåva skal leverast saman med sjølvmeldinga.  </p>
+                <p/>
+                <p>3. Oppgåve over utbetaling til barn skal berre givast når vedkomande  barn ikkje har arbeid i full stilling i verksemda, t.d. heimeverande  barn som er under utdanning, i millitærteneste t.d. Nærmare  opplysningar skal óg givast
+                    for barn med eige hushald som har arbeidd  i verksemda i feriar eller liknande. Har barnet vore i korttidsarbeid  i ein del av året og i heildagsarbeid resten av året, t.d. etter  avslutta utdanning, er det for det siste
+                    tidsrommet nok å opplyse at  barnet har arbeidd i fulldags stilling.  </p>
+                <p/>
+                <p>4. I aksjeselskap o.a. (1 c ovanfor) gjeld oppgåveplikta berre for  utbetaling til barn og ektefelle av aksjonær som eig meir enn 50 pst  av aksjane (lutene) i selskapet åleine eller saman med person som han  er i slekt eller
+                    svogerskap med opp- eller nedstigande linje eller  sidelinje så nær som onkel eller tante. Har begge ektefellane aksjar  (luter) i selskapet og begge har fått lønn frå selskapet skal oppgåva  berre omfatte den lågaste inntekta.  </p>
+                <p/>
+                <p>5. Likningstyremaktene kan krevje denne oppgåva innlevert også i andre  tilfelle enn dei som er nemde ovanfor, jf. likningslova § 6-2 nr. 4a  og §4 i forskrift om særskild oppgåveplikt for lønn til barn frå  foreldra si verksemd
+                    o.a., gitt i kgl. res. av 23. desember 1983.  </p>
+                <p/>
+                <p/>
+                <p>Fastsett av Skattedirektoratet med heimel i Finansdepartementet sitt  delegeringsvedtak av 28. november 1994, jf. likningslova § 4-4 nr.  7.  </p>
+                <p/>
+                <p>Andre offentlege organs bruk av opplysningar i RF-1160  </p>
+                <p>For å samordne og forenkle oppgåveinnleveringa frå næringslivet, kan  opplysningar som blir gitt i dette skjemaet, RF-1160, heilt eller  delvis brukast også av andre offentlege organ som har heimel til å  hente dei same
+                    opplysningar, jf. lov om Oppgåveregisteret §§ 5 og 6.  Opplysningar om ev. samordning kan ein få ved å kontakte  Oppgåveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.  </p>
+                <p/>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-2526">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2526/Likningskontor-grp-464">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Likningskontor</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Likningskontor</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2526/Likningskontor-grp-464/LigningskontorKommuneForeldre-datadef-15616">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Til likningskontoret for (kommune)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Til likningskontoret for (kommune)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2526/Likningskontor-grp-464/Inntektsar-datadef-692">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Inntektsår</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Inntektsår</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2526/Arbeidsgiver-grp-2527">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Arbeidsgiver</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Arbeidsgivar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2526/Arbeidsgiver-grp-2527/ArbeidsgiverBarnNavn-datadef-15505">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Arbeidsgivers/Oppdragsgivers navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn på arbeidsgivar/oppdragsgivar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2526/Arbeidsgiver-grp-2527/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2526/Arbeidsgiver-grp-2527/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2526/Arbeidsgiver-grp-2527/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2526/Arbeidsgiver-grp-2527/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2526/Arbeidsgiver-grp-2527/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2526/Arbeidsgiver-grp-2527/EnhetTelefonnummer-datadef-755">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Arbeidsgivers tlf.nr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Arbeidsgivars tlf.nr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-2526/Arbeidsgiver-grp-2527/LonnBarnEktefelle-datadef-19409">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Barn</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Barn</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Barn</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Ektefelle</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ektefelle</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ektefelle  </p>
+                                    <p/>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Utbetaling av lønn mv. til</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Utbetaling av lønn o.a. til</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>set kryss</p>
+                        </xforms:hint>
+                    </xforms:selectOne>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2526/Lonnstaker-grp-2528">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Lønnstaker</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Lønnstakar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2526/Lonnstaker-grp-2528/AnsattNavn-datadef-1223">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Lønnstakerens (mottakerens) navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namnet på lønnstakar (mottakar)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2526/Lonnstaker-grp-2528/AnsattAdresse-datadef-1230">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2526/Lonnstaker-grp-2528/AnsattPostnummer-datadef-8466">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2526/Lonnstaker-grp-2528/AnsattPoststed-datadef-8467">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2526/Lonnstaker-grp-2528/AnsattFodselsnummer-datadef-1224">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2526/Lonnstaker-grp-2528/AnsattSkattekommune-datadef-1231">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Skattekommune</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Skattekommune</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Spesifikasjon over utbetalingen</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Spesifikasjon over utbetalinga</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Januar-grp-2529">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Januar</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Januar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Januar-grp-2529/ArbeidArtJanuar-datadef-13907">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Arbeidets art</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kva slag arbeid</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Januar-grp-2529/TimeverkAntallJanuar-datadef-13919">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall timer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kor mange timar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Januar-grp-2529/LonnssatsBeregnetJanuar-datadef-13931">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beregnet lønnssats (time, dag, uke, md, mv)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Rekna lønssats (time, dag, veke, md, m.m.)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Februar-grp-2530">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Februar</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Februar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Februar-grp-2530/ArbeidArtFebruar-datadef-13908">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Arbeidets art</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kva slag arbeid</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Februar-grp-2530/TimeverkAntallFebruar-datadef-13920">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall timer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kor mange timar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Februar-grp-2530/LonnssatsBeregnetFebruar-datadef-13932">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beregnet lønnssats (time, dag, uke, md, mv)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Beregnet lønssats (time, dag, veke, md, m.m.)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Mars-grp-2531">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Mars</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Mars</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Mars-grp-2531/ArbeidArtMars-datadef-13909">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Arbeidets art</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kva slag arbeid</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Mars-grp-2531/TimeverkAntallMars-datadef-13921">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall timer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kor mange timar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Mars-grp-2531/LonnssatsBeregnetMars-datadef-13933">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beregnet lønnssats (time, dag, uke, md, mv)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Rekna lønssats (time, dag, veke, md, m.m.)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/April-grp-2532">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>April</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>April</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/April-grp-2532/ArbeidArtApril-datadef-13910">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Arbeidets art</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kva slag arbeid</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/April-grp-2532/TimeverkAntallApril-datadef-13922">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall timer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kor mange timar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/April-grp-2532/LonnssatsBeregnetApril-datadef-13934">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beregnet lønnssats (time, dag, uke, md, mv)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Rekna lønssats (time, dag, veke, md, m.m.)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Mai-grp-2533">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Mai</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Mai</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Mai-grp-2533/ArbeidArtMai-datadef-13911">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Arbeidets art</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kva slag arbeid</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Mai-grp-2533/TimeverkAntallMai-datadef-13923">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall timer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kor mange timar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Mai-grp-2533/LonnssatsBeregnetMai-datadef-13935">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beregnet lønnssats (time, dag, uke, md, mv)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Rekna lønssats (time, dag, veke, md, m.m.)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Juni-grp-2534">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Juni</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Juni</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Juni-grp-2534/ArbeidArtJuni-datadef-13912">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Arbeidets art</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kva slag arbeid</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Juni-grp-2534/TimeverkAntallJuni-datadef-13924">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall timer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kor mange timar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Juni-grp-2534/LonnssatsBeregnetJuni-datadef-13936">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beregnet lønnssats (time, dag, uke, md, mv)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Rekna lønssats (time, dag, veke, md, m.m.)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Juli-grp-2535">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Juli</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Juli</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Juli-grp-2535/ArbeidArtJuli-datadef-13913">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Arbeidets art</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kva slag arbeid</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Juli-grp-2535/TimeverkAntallJuli-datadef-13925">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall timer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kor mange timar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Juli-grp-2535/LonnssatsBeregnetJuli-datadef-13937">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beregnet lønnssats (time, dag, uke, md, mv)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Rekna lønssats (time, dag, veke, md, m.m.)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/August-grp-2536">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>August</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>August</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/August-grp-2536/ArbeidArtAugust-datadef-13914">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Arbeidets art</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kva slag arbeid</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/August-grp-2536/TimeverkAntallAugust-datadef-13926">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall timer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kor mange timar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/August-grp-2536/LonnssatsBeregnetAugust-datadef-13938">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beregnet lønnssats (time, dag, uke, md, mv)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Rekna lønssats (time, dag, veke, md, m.m.)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/September-grp-2537">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>September</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>September</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/September-grp-2537/ArbeidArtSeptember-datadef-13915">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Arbeidets art</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kva slag arbeid</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/September-grp-2537/TimeverkAntallSeptember-datadef-13927">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall timer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kor mange timar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/September-grp-2537/LonnssatsBeregnetSeptember-datadef-13939">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beregnet lønnssats (time, dag, uke, md, mv)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Rekna lønssats (time, dag, veke, md, m.m.)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Oktober-grp-2538">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oktober</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Oktober</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Oktober-grp-2538/ArbeidArtOktober-datadef-13916">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Arbeidets art</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kva slag arbeid</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Oktober-grp-2538/TimeverkAntallOktober-datadef-13928">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall timer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kor mange timar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Oktober-grp-2538/LonnssatsBeregnetOktober-datadef-13940">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beregnet lønnssats (time, dag, uke, md, mv)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Rekna lønssats (time, dag, veke, md, m.m.)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/November-grp-2539">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>November</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>November</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/November-grp-2539/ArbeidArtNovember-datadef-13917">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Arbeidets art</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kva slag arbeid</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/November-grp-2539/TimeverkAntallNovember-datadef-13929">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall timer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kor mange timar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/November-grp-2539/LonnssatsBeregnetNovember-datadef-13941">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beregnet lønnssats (time, dag, uke, md, mv)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Rekna lønssats (time, dag, veke, md, m.m.)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Desember-grp-2540">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Desember</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Desember</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Desember-grp-2540/ArbeidArtDesember-datadef-13918">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Arbeidets art</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kva slag arbeid</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Desember-grp-2540/TimeverkAntallDesember-datadef-13930">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall timer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kor mange timar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/Desember-grp-2540/LonnssatsBeregnetDesember-datadef-13942">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beregnet lønnssats (time, dag, uke, md, mv)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Rekna lønssats (time, dag, veke, md, m.m.)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:selectOne ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/LonnUtbetaltBokfortFortlopende-datadef-2922">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Er lønnen utbetalt og bokført fortløpende i året?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Er lønna utbetalt og bokført etter kvart i året?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/SpesifikasjonOverUtbetalingen-grp-467/ArbeidsgiveravgiftBetalt-datadef-2923">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Er arbeidsgiveravgift betalt til fastsatt tid?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Er arbeidsgivaravgift betalt til fastsett tid?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OpplysningerOmBarnetsSkolegangFeriefravarMv-grp-468">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Opplysninger om barnets skolegang, feriefravær mv.</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Opplysningar om skulegangen til barnet, feriefråvær o.a.</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/OpplysningerOmBarnetsSkolegangFeriefravarMv-grp-468/BarnSkole-datadef-8471">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Har barnet gått på skole i inntektsåret?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Har barnet gått på skule i inntektsåret?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:group ref="/Skjema/OpplysningerOmBarnetsSkolegangFeriefravarMv-grp-468/TidsromSkolegang-grp-2541">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Hvis ja, oppgi tidsrom for skolegang</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Dersom ja, gi opp tidsrom for skulegang</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/OpplysningerOmBarnetsSkolegangFeriefravarMv-grp-468/TidsromSkolegang-grp-2541/BarnSkolegangStartdato-datadef-13944">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Dato fra</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Dato frå</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmBarnetsSkolegangFeriefravarMv-grp-468/TidsromSkolegang-grp-2541/BarnSkoleSluttdato-datadef-13945">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Dato til</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Dato til</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:selectOne ref="/Skjema/OpplysningerOmBarnetsSkolegangFeriefravarMv-grp-468/BarnBortreist-datadef-8472">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Har barnet vært bortreist på ferie eller av andre grunner i  inntektsåret?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Har barnet vore bortreist på ferie eller av andre grunnar i  inntektsåret?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:group ref="/Skjema/OpplysningerOmBarnetsSkolegangFeriefravarMv-grp-468/TidsromFravar-grp-2542">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Tidsrom for fravær</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Tidsrom for fråvær</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/OpplysningerOmBarnetsSkolegangFeriefravarMv-grp-468/TidsromFravar-grp-2542/BarnFerieStartdato-datadef-13946">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Dato fra</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Dato frå</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmBarnetsSkolegangFeriefravarMv-grp-468/TidsromFravar-grp-2542/BarnFerieSluttdato-datadef-13947">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Dato til</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Dato til</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/OpplysningerOmBarnetsSkolegangFeriefravarMv-grp-468/TilleggsopplysningerBarn-datadef-15507">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Andre opplysninger</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Andre opplysningar</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

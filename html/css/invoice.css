@@ -1,0 +1,53 @@
+/*
+# $Id: invoice.css,v 1.2 2005/01/30 12:35:04 thomasek Exp $ invoice.css,v 1.1.1.1 2001/11/08 18:14:05 thomasek Exp $
+# Based on EasyComposer technology
+# Copyright Thomas Ekdahl, 1994-2005, thomas@ekdahl.no, http://www.ekdahl.no
+*/
+
+/* BODY and .ecbody are identical except for background color. .ecbody must be present in the TD tag  */
+BODY 		{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt; line-height: 15pt; background: #EFEAD6; color: #666666; }
+.ecbody 	{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt; line-height: 15pt; color: #666666; }
+.ecsmall 	{ font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt; line-height: 13pt; color: #666666; }
+
+
+/* paragraph attributes */
+H1, H2, H3, H4, H5, H6, P, UL, OL, DIR, MENU, DIV, DT, DD, ADDRESS, BLOCKQUOTE, PRE, HR, FORM, DL { display: block; } 
+
+B, STRONG, I, EM, CITE, VAR, TT, CODE, KBD, SAMP, IMG, SPAN { display: inline; }
+
+ADDRESS { margin-left: 60px; }
+
+BLOCKQUOTE { margin-left: 60px; }
+
+H1 { font-size: 16pt; color: #000000; font-family: Verdana, Arial, Helvetica, sans-serif}
+H2 { font-size: 12pt; color: #000000; font-family: Verdana, Arial, Helvetica, sans-serif}
+H3 { font-size: 12pt; color: #FFFFFF; font-family: Verdana, Arial, Helvetica, sans-serif}
+H4 { font-size: 19pt; color: #000000; font-family: Verdana, Arial, Helvetica, sans-serif}
+
+B, STRONG { font-weight: 700 }
+
+I, CITE, VAR, ADDRESS { font-style: italic }
+
+EM { font-style: normal; color: #FF66OO; }   /* <EM> turns orange */
+B EM { font-style: bold; color: #666699; }  /* <EM> turns blue */
+
+PRE, TT, CODE, KBD, SAMP { font-family: courier, monospace; }
+
+PRE { white-space: pre; }
+
+/* list-items */
+UL, DIR { list-style-type: square; }
+
+OL { list-style-type: decimal; }
+
+/* link styles */
+a:active 	{  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8pt; text-decoration: underline;}
+a:hover 	{  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8pt; text-decoration: underline;}
+a:link 		{  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8pt; text-decoration: underline;}
+H6 { font-style: normal;  } 
+H6 { font-weight: normal;  ; color: #000000} 
+H5 { font-weight: normal;  ; color: #000000} 
+H4 { font-weight: normal;  ; color: #000000} 
+H1 { font-weight: normal;  } 
+a:visited {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8pt; text-decoration: underline}
+.hvitLink {  font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 8pt; font-weight: normal; color: #FFFFFF}

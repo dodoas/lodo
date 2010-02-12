@@ -1,0 +1,299 @@
+<?
+require_once 'momsoppgavemapping.class';
+require_once 'selvangivelsenaeringsdrivendemapping.class';
+require_once 'selvangivelseaksjeselskapmapping.class';
+require_once 'naeringsoppgave1mapping.class';
+require_once 'naeringsoppgave2mapping.class';
+require_once 'personinntektmapping.class';
+require_once 'avskrivningermapping.class';
+require_once 'bilbruksopplysningermapping.class';
+require_once 'forskjellerregnskapogskattemapping.class';
+require_once 'tilleggsskjema1mapping.class';
+require_once 'tilleggsskjema2mapping.class';
+require_once 'riskberegningmapping.class';
+require_once 'gevinstogtapskontomapping.class';
+require_once 'selskapsoppgavemapping.class';
+require_once 'deltakerensoppgavemapping.class';
+require_once 'terminoppgavemapping.class';
+require_once 'lonnogtrekkoppgavemapping.class';
+require_once 'aksjonaerregisteroppgavemapping.class';
+require_once 'spekavinntektogfradragutlandetmapping.class';
+require_once 'registrerteoginnberettedemapping.class';
+require_once 'aarsoppgavemapping.class';
+require_once 'realisasjonavaksjeoppgavemapping.class';
+require_once 'oppstillingsplansmastoreselskapermapping.class';
+
+
+
+
+class AltinnMapping
+{
+    var $ORID;
+    var $Human;
+    var $Account;
+    
+    var $OmsetningsOppgaveMapping;
+    var $SelvangivelseNrMapping;
+    var $SelvangivelseASMapping;
+    var $Naeringsoppgave1Mapping;
+    var $Naeringsoppgave2Mapping;
+    var $PersonIntektMapping;
+    var $AvskrivningerMapping;
+    var $BilbruksOpplysningerMapping;
+    var $ForskjellerRegnskapOgSkatteMapping;
+    var $Tilleggsskjema1Mapping;
+    var $EgenkapitalAvstemmingMapping;
+    var $Tilleggsskjema2Mapping;
+    var $GevinstOgTapskontoMapping;
+    var $RISKBeregningMapping;
+    var $TerminOppgaveMapping;
+    var $DeltakerensOppgaveMapping;
+    var $SelskapsOppgaveMapping;
+    var $LonnOgTrekkOppgaverMapping;
+    var $AksjonaerRegisterOppgaveMapping;
+    var $RegistrerteOgInnberettedeMapping;
+    var $SpekAvInntektOgFradragUtlandetMapping;
+    var $RealisasjonAvAksjeOppgaveMapping;
+    var $AArsoppgaveMapping;
+    var $OppstillingsPlanMapping;
+    
+    
+
+    function AltinnMapping($report)
+    {
+    	
+    	switch ($report) { 
+    		case 1 ://(RF-0002) Alminnelig omsetningsoppgave (MOMSoppgave)
+        	    $this->OmsetningsOppgaveMapping = new MOMSOppgaveMapping();
+            	$this->OmsetningsOppgaveMapping->mapping();
+            	$this->Human=$this->OmsetningsOppgaveMapping->getHumanArray();
+            	$this->Account=$this->OmsetningsOppgaveMapping->getAccount();
+            	$this->ORID=$this->OmsetningsOppgaveMapping->getOridArray();
+        		break;
+        	case 2 ://(RF-1027) Selvangivelse for næringsdrivende
+        	    $this->SelvangivelseNrMapping = new SelvangivelseNrMapping();
+            	$this->SelvangivelseNrMapping->mapping();
+            	$this->Human=$this->SelvangivelseNrMapping->getHumanArray();
+            	$this->Account=$this->SelvangivelseNrMapping->getAccount();
+            	$this->ORID=$this->SelvangivelseNrMapping->getOridArray();
+        		break;
+            case 3: //(RF-1175) Næringsoppgave for næringsdrivende
+                $this->Naeringsoppgave1Mapping = new Naeringsoppgave1Mapping();
+            	$this->Naeringsoppgave1Mapping->mapping();
+            	$this->Human=$this->Naeringsoppgave1Mapping->getHumanArray();
+            	$this->Account=$this->Naeringsoppgave1Mapping->getAccount();
+            	$this->ORID=$this->Naeringsoppgave1Mapping->getOridArray();
+        		break;
+            case 4: //(RF-1028) Selvangivelse for aksjeselskap
+                $this->SelvangivelseASMapping = new SelvangivelseASMapping();
+            	$this->SelvangivelseASMapping->mapping();
+            	$this->Human=$this->SelvangivelseASMapping->getHumanArray();
+            	$this->Account=$this->SelvangivelseASMapping->getAccount();
+            	$this->ORID=$this->SelvangivelseASMapping->getOridArray();
+                break;
+            case 5: //(RF-1167) Næringsoppgave for aksjeselskap
+                $this->Naeringsoppgave2Mapping = new Naeringsoppgave2Mapping();
+            	$this->Naeringsoppgave2Mapping->mapping();
+            	$this->Human=$this->Naeringsoppgave2Mapping->getHumanArray();
+            	$this->Account=$this->Naeringsoppgave2Mapping->getAccount();
+            	$this->ORID=$this->Naeringsoppgave2Mapping->getOridArray();
+                break;
+            case 6://(RF-1224) Skjema for beregning av personinntekt
+            case 66:
+            	$this->PersonIntektMapping = new PersonInntektMapping();
+            	$this->PersonIntektMapping->mapping();
+            	$this->Human=$this->PersonIntektMapping->getHumanArray();
+            	$this->Account=$this->PersonIntektMapping->getAccount();
+            	$this->ORID=$this->PersonIntektMapping->getOridArray();
+            	
+            	//print ("person inntekt: ". $this->Account['D1.12']);
+            	break;
+        	case 7://(RF-1084) Avskrivningsskjema for saldo og lineære
+            	$this->AvskrivningerMapping = new AvskrivningerMapping();
+            	$this->AvskrivningerMapping->mapping();
+            	$this->Human=$this->AvskrivningerMapping->getHumanArray();
+            	$this->Account=$this->AvskrivningerMapping->getAccount();
+            	$this->ORID=$this->AvskrivningerMapping->getOridArray();
+            	
+                break;
+            case 8://(RF-1125)Opplysninger om bruk av bil
+                $this->BilbruksOpplysningerMapping = new BilbruksOpplysningerMapping();
+            	$this->BilbruksOpplysningerMapping->mapping();
+            	$this->Human=$this->BilbruksOpplysningerMapping->getHumanArray();
+            	$this->Account=$this->BilbruksOpplysningerMapping->getAccount();
+            	$this->ORID=$this->BilbruksOpplysningerMapping->getOridArray();
+                
+                break;
+            case 9://(RF-1217) Forskjeller mellon regnskap- og skatte verdier
+                printf("Altinnmaping");
+                $this->ForskjellerRegnskapOgSkatteMapping = new ForskjellerRegnskapOgSkatteMapping();
+            	$this->ForskjellerRegnskapOgSkatteMapping->mapping();
+            	$this->Human=$this->ForskjellerRegnskapOgSkatteMapping->getHumanArray();
+            	$this->Account=$this->ForskjellerRegnskapOgSkatteMapping->getAccount();
+            	//$this->ORID=$this->ForskjellerRegnskapOgSkatteMapping->getOridArray();
+            	break;
+            case 10://(RF-1122)Tilleggsskjema for overnattings- og serveringssteder (Øl, vin og brennevin)
+                $this->Tilleggsskjema1Mapping = new Tilleggsskjema1Mapping();
+            	$this->Tilleggsskjema1Mapping->mapping();
+            	$this->Human=$this->Tilleggsskjema1Mapping->getHumanArray();
+            	$this->Account=$this->Tilleggsskjema1Mapping->getAccount();
+            	$this->ORID=$this->Tilleggsskjema1Mapping->getOridArray();
+            	break;
+            case 11://(RF-1052) Avstemming av egenkapital
+                $this->EgenkapitalAvstemmingMapping = new EgenkapitalAvstemmingMapping();
+            	$this->EgenkapitalAvstemmingMapping->mapping();
+            	$this->Human=$this->EgenkapitalAvstemmingMapping->getHumanArray();
+            	$this->Account=$this->EgenkapitalAvstemmingMapping->getAccount();
+            	$this->ORID=$this->EgenkapitalAvstemmingMapping->getOridArray();
+            	break;
+            case 12://(RF-1223) Tilleggsskjema for drosje og lastebilnæring
+                 $this->Tilleggsskjema2Mapping = new Tilleggsskjema2Mapping();
+            	$this->Tilleggsskjema2Mapping->mapping();
+            	$this->Human=$this->Tilleggsskjema2Mapping->getHumanArray();
+            	$this->Account=$this->Tilleggsskjema2Mapping->getAccount();
+            	$this->ORID=$this->Tilleggsskjema2Mapping->getOridArray();
+                break;
+            case 13://(RF-1219) Gevinst og tapskonto
+                $this->GevinstOgTapskontoMapping = new GevinstOgTapskontoMapping();
+            	$this->GevinstOgTapskontoMapping->mapping();
+            	$this->Human=$this->GevinstOgTapskontoMapping->getHumanArray();
+            	$this->Account=$this->GevinstOgTapskontoMapping->getAccount();
+            	$this->ORID=$this->GevinstOgTapskontoMapping->getOridArray();
+            	break;
+            case 14://(RF-1061) Oppgave over realisasjon av aksje mv
+                $this->RealisasjonAvAksjeOppgaveMapping = new RealisasjonAvAksjeOppgaveMapping();
+            	$this->RealisasjonAvAksjeOppgaveMapping->mapping();
+            	$this->Human=$this->RealisasjonAvAksjeOppgaveMapping->getHumanArray();
+            	$this->Account=$this->RealisasjonAvAksjeOppgaveMapping->getAccount();
+            	$this->ORID=$this->RealisasjonAvAksjeOppgaveMapping->getOridArray();
+            	break;
+            case 15://Beregning av RISK
+                $this->RISKBeregningMapping = new RISKBeregningMapping();
+            	$this->RISKBeregningMapping->mapping();
+            	$this->Human=$this->RISKBeregningMapping->getHumanArray();
+            	$this->Account=$this->RISKBeregningMapping->getAccount();
+            	$this->ORID=$this->RISKBeregningMapping->getOridArray();
+            	break;
+            case 16://(RF-1215)Selskapoppgave for ansvarlig selskap
+            	$this->SelskapsOppgaveMapping = new SelskapsOppgaveMapping();
+            	$this->SelskapsOppgaveMapping->mapping();
+            	$this->Human=$this->SelskapsOppgaveMapping->getHumanArray();
+            	$this->Account=$this->SelskapsOppgaveMapping->getAccount();
+            	$this->ORID=$this->SelskapsOppgaveMapping->getOridArray();
+                break;
+            case 17://(RF-1221)Delatkerens oppgave over formue og inntekt i ANS mv
+                $this->DeltakerensOppgaveMapping = new DeltakerensOppgaveMapping();
+            	$this->DeltakerensOppgaveMapping->mapping();
+            	$this->Human=$this->DeltakerensOppgaveMapping->getHumanArray();
+            	$this->Account=$this->DeltakerensOppgaveMapping->getAccount();
+            	$this->ORID=$this->DeltakerensOppgaveMapping->getOridArray();
+            	break;
+            case 18://(RF-1037) Terminoppgave for arbeidsgiveravgift og forskuddstrekk
+                $this->TerminOppgaveMapping = new TerminOppgaveMapping();
+            	$this->TerminOppgaveMapping->mapping();
+            	$this->Human=$this->TerminOppgaveMapping->getHumanArray();
+            	$this->Account=$this->TerminOppgaveMapping->getAccount();
+            	$this->ORID=$this->TerminOppgaveMapping->getOridArray();
+            	break;
+            case 19://(RF-1015) Årsoppgave for arbeidsgiveravgift - Følgeskriv til lønns - og trekkoppgave
+                $this->AArsoppgaveMapping = new AArsoppgaveMapping();
+            	$this->AArsoppgaveMapping->mapping();
+            	$this->Human=$this->AArsoppgaveMapping->getHumanArray();
+            	$this->Account=$this->AArsoppgaveMapping->getAccount();
+            	$this->ORID=$this->AArsoppgaveMapping->getOridArray();
+            	break;
+            case 20:// (RF-1231B) Spesifikasjon av innskudd i utenlandsk bank mv. og USB-sparing
+		             // i annen EØS-stat
+		        $this->SpekAvInntektOgFradragUtlandetMapping = new SpekAvInntektOgFradragUtlandetMapping();
+            	$this->SpekAvInntektOgFradragUtlandetMapping->mapping();
+            	$this->Human=$this->SpekAvInntektOgFradragUtlandetMapping->getHumanArray();
+            	$this->Account=$this->SpekAvInntektOgFradragUtlandetMapping->getAccount();
+            	$this->ORID=$this->SpekAvInntektOgFradragUtlandetMapping->getOridArray();
+                break;
+            case 21://(RF-1022)Kontroll over registrerte og innberettede beløp for 2004
+                $this->RegistrerteOgInnberettedeMapping = new RegistrerteOgInnberettedeMapping();
+            	$this->RegistrerteOgInnberettedeMapping->mapping();
+            	$this->Human=$this->RegistrerteOgInnberettedeMapping->getHumanArray();
+            	$this->Account=$this->RegistrerteOgInnberettedeMapping->getAccount();
+            	$this->ORID=$this->RegistrerteOgInnberettedeMapping->getOridArray();
+                
+            	break;
+            case 22://(RF-1086) Aksjonærregister oppgaven
+                $this->AksjonaerRegisterOppgaveMapping = new AksjonaerRegisterOppgaveMapping();
+            	$this->AksjonaerRegisterOppgaveMapping->mapping();
+            	$this->Human=$this->AksjonaerRegisterOppgaveMapping->getHumanArray();
+            	$this->Account=$this->AksjonaerRegisterOppgaveMapping->getAccount();
+            	$this->ORID=$this->AksjonaerRegisterOppgaveMapping->getOridArray();
+            	break;        
+             case 23://(RR-0002) Oppstillingsplan for små, store og øvrige selskaper
+                $this->OppstillingsPlanMapping = new OppstillingsPlanMapping();
+            	$this->OppstillingsPlanMapping->mapping();
+            	$this->Human=$this->OppstillingsPlanMapping->getHumanArray();
+            	$this->Account=$this->OppstillingsPlanMapping->getAccount();
+            	$this->ORID=$this->OppstillingsPlanMapping->getOridArray();
+                break;
+            default: break;
+    	}
+        
+    }
+
+    function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a] = $o;
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+        if($this->Account[$a] == '')
+        {
+            $this->ORID['FEIL: '.$a] = $v;
+            return 0;
+        }
+        else
+        {
+            $this->ORID[$this->Account[$a]] = $v;
+            return 1;
+        }
+    }
+    
+    function getAccount($a)
+    {
+       return $this->Account[$a];
+        
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+   
+    
+
+}
+?>

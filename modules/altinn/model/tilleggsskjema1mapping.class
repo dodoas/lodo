@@ -1,0 +1,186 @@
+<?php
+/* copy right
+ * Created on 09.jun.2005
+ * by Anh Le
+ * 
+ * Tilleggsskjema for overnattings- og serveringssteder som serverer
+ * �l, vin og brennevin
+ */
+class Tilleggsskjema1Mapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+           			$this->ORID[$item] = $v;
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+            	$item = $this->Account[$a];
+            	$this->ORID[$item] = $v;
+	            return 1;
+    	    }
+       	}
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+	{	$this->addMapping('D1', 'EnhetNavn-datadef-1', 'VName');
+		$this->addMapping('D26', 'OppgavegiverFodselsnummer-datadef-26', 'SocialSecurityID');
+		$this->addMapping('D18', 'EnhetOrganisasjonsnummer-datadef-18', 'OrgNumber');
+		$this->addMapping('D23040', 'ServeringsstedAdresse-datadef-23040', 'ServeringsstedAdresse');
+		$this->addMapping('D6673', 'EnhetPostnummer-datadef-6673', 'VZipCode');
+		$this->addMapping('D6674', 'EnhetPoststed-datadef-6674', 'VCity');
+		$this->addMapping('D8160', 'LagerbeholdningMatvarerFjoraret-datadef-8160', '1.1a');
+		$this->addMapping('D8161', 'VarekjopMatvarer-datadef-8161', '1.1b');
+		$this->addMapping('D8162', 'LagerbeholdningMatvarer-datadef-8162', '1.1c');
+		$this->addMapping('D8163', 'InntakskostMatvarerSolgte-datadef-8163', '1.1d');
+		$this->addMapping('D8164', 'SalgMatvarer-datadef-8164', '1.1e');
+		$this->addMapping('D1913', 'FortjenesteMatvarerBrutto-datadef-1913', '1.1f');
+		$this->addMapping('D8165', 'LagerbeholdningTobakkSigaretterMvFjoraret-datadef-8165', '1.2a');
+		$this->addMapping('D8166', 'VarekjopTobakkSigaretterMv-datadef-8166', '1.2b');
+		$this->addMapping('D8167', 'LagerbeholdningTobakkSigaretterMv-datadef-8167', '1.2c');
+		$this->addMapping('D8168', 'InntakskostTobakkSigaretterMvSolgte-datadef-8168', '1.2d');
+		$this->addMapping('D8169', 'SalgTobakkSigaretterMv-datadef-8169', '1.2e');
+		$this->addMapping('D8170', 'FortjenesteTobakkSigaretterMvBrutto-datadef-8170', '1.2f');
+		$this->addMapping('D8171', 'LagerbeholdningKaffeTeFjoraret-datadef-8171', '1.3a');
+		$this->addMapping('D8172', 'VarekjopKaffeTe-datadef-8172', '1.3b');
+		$this->addMapping('D8173', 'LagerbeholdningKaffeTe-datadef-8173', '1.3c');
+		$this->addMapping('D8174', 'InntakskostKaffeTeSolgte-datadef-8174', '1.3d');
+		$this->addMapping('D8175', 'SalgKaffeTe-datadef-8175', '1.3e');
+		$this->addMapping('D8176', 'FortjenesteKaffeTeBrutto-datadef-8176', '1.3f');
+		$this->addMapping('D8177', 'LagerbeholdningMineralvannFjoraret-datadef-8177', '1.4a');
+		$this->addMapping('D8178', 'VarekjopMineralvann-datadef-8178', '1.4');
+		$this->addMapping('D8179', 'LagerbeholdningMineralvann-datadef-8179', '1.4');
+		$this->addMapping('D8180', 'InntakskostMineralvannSolgte-datadef-8180', '1.4');
+		$this->addMapping('D8181', 'SalgMineralvann-datadef-8181', '1.4');
+		$this->addMapping('D8182', 'FortjenesteMineralvannBrutto-datadef-8182', '1.4');
+		$this->addMapping('D19672', 'LagerbeholdningRusbrusCiderFjoraret-datadef-19672', '1.5');
+		$this->addMapping('D19673', 'VarekjopRusbrusCider-datadef-19673', '1.5');
+		$this->addMapping('D19674', 'LagerbeholdningRusbrusCider-datadef-19674', '1.5');
+		$this->addMapping('D19675', 'InntakskostRusbrusCiderSolgte-datadef-19675', '1.5');
+		$this->addMapping('D19676', 'SalgRusbrusCider-datadef-19676', '1.5');
+		$this->addMapping('D19677', 'FortjenesteRusbrusCiderBrutto-datadef-19677', '1.5');
+		$this->addMapping('D8183', 'LagerbeholdningOlFjoraret-datadef-8183', '1.6');
+		$this->addMapping('D8184', 'VarekjopOl-datadef-8184', '1.6');
+		$this->addMapping('D8185', 'LagerbeholdningOl-datadef-8185', '1.6');
+		$this->addMapping('D8186', 'InntakskostOlSolgte-datadef-8186', '1.6');
+		$this->addMapping('D8187', 'SalgOl-datadef-8187', '1.6');
+		$this->addMapping('D8188', 'FortjenesteOlBrutto-datadef-8188', '1.6');
+		$this->addMapping('D8189', 'LagerbeholdningVinFjoraret-datadef-8189', '1.7');
+		$this->addMapping('D8190', 'VarekjopVin-datadef-8190', '1.7');
+		$this->addMapping('D8191', 'LagerbeholdningVin-datadef-8191', '1.7');
+		$this->addMapping('D8192', 'InntakskostVinSolgte-datadef-8192', '1.7');
+		$this->addMapping('D8193', 'SalgVin-datadef-8193', '1.7');
+		$this->addMapping('D8194', 'FortjenesteVinBrutto-datadef-8194', '1.7');
+		$this->addMapping('D8195', 'LagerbeholdningBrennevinFjoraret-datadef-8195', '1.8');
+		$this->addMapping('D8196', 'VarekjopBrennevin-datadef-8196', '1.8');
+		$this->addMapping('D8197', 'LagerbeholdningBrennevin-datadef-8197', '1.8');
+		$this->addMapping('D8198', 'InntakskostBrennevinSolgte-datadef-8198', '1.8');
+		$this->addMapping('D8199', 'SalgBrennevin-datadef-8199', '1.8');
+		$this->addMapping('D8200', 'FortjenesteBrennevinBrutto-datadef-8200', '1.8');
+		$this->addMapping('D8201', 'LagerbeholdningVarerAndreFjoraret-datadef-8201', '1.9');
+		$this->addMapping('D8202', 'VarekjopVarerAndre-datadef-8202', '1.9');
+		$this->addMapping('D8203', 'LagerbeholdningVarerAndre-datadef-8203', '1.9');
+		$this->addMapping('D8204', 'InntakskostVarerAndreSolgte-datadef-8204', '1.9');
+		$this->addMapping('D8205', 'SalgVarerAndre-datadef-8205', '1.9');
+		$this->addMapping('D8206', 'FortjenesteVarerAndreBrutto-datadef-8206', '1.9');
+		$this->addMapping('D8207', 'LagerbeholdningFjoraretSkattemessig-datadef-8207', '1.10');
+		$this->addMapping('D8208', 'Varekjop-datadef-8208', '1.10');
+		$this->addMapping('D1909', 'LagerbeholdningSkattemessig-datadef-1909', '1.10');
+		$this->addMapping('D1910', 'InntakskostVarerSolgte-datadef-1910', '1.10');
+		$this->addMapping('D1911', 'SalgVarer-datadef-1911', '1.10');
+		$this->addMapping('D1912', 'FortjenesteBrutto-datadef-1912', '1.10');
+		$this->addMapping('D764', 'OmsetningLosji-datadef-764', '2.1');
+		$this->addMapping('D1933', 'Garderobeinntekter-datadef-1933', '2.2');
+		$this->addMapping('D1935', 'CoverChargeAvgiftspliktig-datadef-1935', '2.3a');
+		$this->addMapping('D8221', 'CoverChargeAvgiftsfri-datadef-8221', '2.3b');
+		$this->addMapping('D1928', 'Spilleautomater-datadef-1928', 'SpilleautomaterILokalene');
+		$this->addMapping('D1929', 'SpilleautomaterEierNavn-datadef-1929', 'AutomaterEierNavn');
+		$this->addMapping('D1930', 'SpilleautomaterEierAdresse-datadef-1930', 'AutomaterEierAddresse');
+		$this->addMapping('D8209', 'SpilleautomaterEierPostnummer-datadef-8209', 'AutomaterEierPostnummer');
+		$this->addMapping('D8210', 'SpilleautomaterEierPoststed-datadef-8210', 'AutomaterEierPoststed');
+		$this->addMapping('D1931', 'SpilleautomaterInntektProsent-datadef-1931', 'AutomaterInntektProsent');
+		$this->addMapping('D1932', 'OmsetningSpilleautomater-datadef-1932', 'OmsetningSpilleautomater');
+		$this->addMapping('D1914', 'FriKostAnsatte-datadef-1914', 'FriKostAnsatte');
+		$this->addMapping('D1915', 'FriKostAntall-datadef-1915', 'FriKostAntall');
+		$this->addMapping('D1916', 'FriKostPersonalkontoUttaksverdi-datadef-1916', 'Uttaksverdi');
+		$this->addMapping('D1917', 'FriKostSkattedirektoratetsTakseringsregler-datadef-1917', 'EtterTakseringsregler');
+		$this->addMapping('D1918', 'FriKostPaslag-datadef-1918', 'FriKostPaaslagIProsent');
+		$this->addMapping('D1919', 'UttakVarerOmsetningsverdi-datadef-1919', 'UttakVarerOmsetningsverdi');
+		$this->addMapping('D1920', 'UttakVarerPaslag-datadef-1920', 'UttakVarerPaaslag');
+		$this->addMapping('D1921', 'UttakVarerInntektsfort-datadef-1921', 'UttakVarerInntektsfort');
+		$this->addMapping('D1922', 'UttakVarerRegistrert-datadef-1922', 'UttakVarerRegistrert');
+		$this->addMapping('D1923', 'UttakVarer-datadef-1923', 'UttakVarer');
+		$this->addMapping('D1924', 'UttakRepresentasjonOmsetningsverdi-datadef-1924', 'UttakRepresentasjonOmsetningsverdi');
+		$this->addMapping('D1925', 'UttakRepresentasjonPaslag-datadef-1925', 'UttakRepresentasjonPaslag');
+		$this->addMapping('D1926', 'UttakRepresentasjon-datadef-1926', 'UttakRepresentasjon');
+			  
+	}
+ }
+?>

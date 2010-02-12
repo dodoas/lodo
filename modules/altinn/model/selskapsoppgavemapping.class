@@ -1,0 +1,204 @@
+<?php
+class SelskapsOppgaveMapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+        //print ("Accouint: ". $a . "khlk: ". $h);
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+           			$this->ORID[$item] = $v;
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+            	$item = $this->Account[$a];
+            	$this->ORID[$item] = $v;
+	            return 1;
+    	    }
+       	}
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+		
+	{  
+       $this->addMapping('D1', 'EnhetNavn-datadef-1', 'VName');
+		$this->addMapping('D15', 'EnhetAdresse-datadef-15', 'VAddress');
+		$this->addMapping('D6673', 'EnhetPostnummer-datadef-6673', 'VZipCode');
+		$this->addMapping('D6674', 'EnhetPoststed-datadef-6674', 'VCity');
+		$this->addMapping('D755', 'EnhetTelefonnummer-datadef-755', 'PhoneWork');
+		$this->addMapping('D18', 'EnhetOrganisasjonsnummer-datadef-18', 'OrgNumber');
+		$this->addMapping('D29', 'EnhetKommune-datadef-29', 'CompanyMunicipality');
+		$this->addMapping('D2888', 'EnhetSkattekommune-datadef-2888', 'CompanyMunicipality');
+		$this->addMapping('D756', 'EnhetOrganisasjonsform-datadef-756', 'Category');
+		$this->addMapping('D1022', 'DeltakereAntall-datadef-1022', 'NumberOfParticipants');
+		$this->addMapping('D19851', 'KonsernspissNorskOrganisasjonsnummer-datadef-19851', '');
+		$this->addMapping('D13943', 'EnhetSignaturNavn-datadef-13943', '');
+		$this->addMapping('D18070', 'EnhetKommunenummerDLS-datadef-18070', '');
+		$this->addMapping('D280', 'RegnskapsforerNavn-datadef-280', 'FVName');
+		$this->addMapping('D281', 'RegnskapsforerAdresse-datadef-281', 'FVAddress');
+		$this->addMapping('D6678', 'RegnskapsforerPostnummer-datadef-6678', 'FVZipCode');
+		$this->addMapping('D6679', 'RegnskapsforerPoststed-datadef-6679', 'FVCity');
+		$this->addMapping('D3647', 'DeltakerFodselsnummer-datadef-3647', 'SocialSecurityID');
+		$this->addMapping('D3648', 'DeltakerOrganisasjonsnummer-datadef-3648', '');
+		$this->addMapping('D1025', 'DeltakerNavn-datadef-1025', 'Name');
+		$this->addMapping('D13804', 'DeltakerKommuneSpesifisertKommune-datadef-13804', '');
+		$this->addMapping('D17172', 'DeltakerEierandelFjoraretSpesifisertDeltaker-datadef-17172', '');
+		$this->addMapping('D7948', 'DeltakerEierandelSpesifisertDeltaker-datadef-7948', '');
+		$this->addMapping('D22070', 'AksjonarDeltakerLikningSkatteloven810Spesifisert-datadef-22070', '');
+		$this->addMapping('D14366', 'AndelErvervetSpesifisertDeltaker-datadef-14366', '');
+		$this->addMapping('D14365', 'AndelRealisertSpesifisertDeltaker-datadef-14365', '');
+		$this->addMapping('D19958', 'DetakereEierandelerFjoraretKontrollsum-datadef-19958', '');
+		$this->addMapping('D19959', 'DeltakereEierandelerKontrollsum-datadef-19959', '');
+		$this->addMapping('D1030', 'KontormaskinerMvSkattemessigVerdi-datadef-1030', '');
+		$this->addMapping('D1032', 'ForretningsverdiErvervetSkattemessigVerdi-datadef-1032', '');
+		$this->addMapping('D1033', 'VogntogLastebilerVarebilerMvSkattemessigVerdi-datadef-1033', '');
+		$this->addMapping('D1035', 'PersonbilerTraktorerMaskinerMvSkattemessigVerdi-datadef-1035', '');
+		$this->addMapping('D1037', 'SkipFartoyerRiggerMvSkattemessigVerdi-datadef-1037', '');
+		$this->addMapping('D1039', 'FlyHelikopterSkattemessigVerdi-datadef-1039', '');
+		$this->addMapping('D115', 'LagerbeholdningSkattemessig-datadef-115', '');
+		$this->addMapping('D287', 'FordringerSkattemessig-datadef-287', '');
+		$this->addMapping('D1052', 'BankinnskuddKontantbeholdningSkattemessigVerdi-datadef-1052', '');
+		$this->addMapping('D1014', 'AksjerMvSkattemessigVerdi-datadef-1014', '');
+		$this->addMapping('D1015', 'AndelerDeltakerlignedeSelskaperSkattemessigVerdi-datadef-1015', '');
+		$this->addMapping('D7308', 'GevinstTapskontoNegativ-datadef-7308', '');
+		$this->addMapping('D7321', 'GevinstTapskontoPositiv-datadef-7321', '');
+		$this->addMapping('D1057', 'GevinsterAndreBetingetSkattefrie-datadef-1057', '');
+		$this->addMapping('D1059', 'PosisjonerAndreSkattemessige-datadef-1059', '');
+		$this->addMapping('D1060', 'OmvurderingskontoValuta-datadef-1060', '');
+		$this->addMapping('D1061', 'EiendelerSkattemessige-datadef-1061', '');
+		$this->addMapping('D10090', 'GjeldAnsvarligeSkattemessig-datadef-10090', '');
+		$this->addMapping('D1065', 'EgenkapitalSkattemessig-datadef-1065', '');
+		$this->addMapping('D1031', 'KontormaskinerMvLigningsmessigFormuesverdi-datadef-1031', '');
+		$this->addMapping('D1034', 'VogntogLastebilerVarebilerMvLigningsmessigFormuesverdi-datadef-1034', '');
+		$this->addMapping('D1036', 'PersonbilerTraktorerMaskinerMvLigningsmessigFormuesverdi-datadef-1036', '');
+		$this->addMapping('D1038', 'SkipFartoyerRiggerMvLigningsmessigFormuesverdi-datadef-1038', '');
+		$this->addMapping('D1040', 'FlyHelikopterLigningsmessigFormuesverdi-datadef-1040', '');
+		$this->addMapping('D1050', 'LagerbeholdningLigningsmessigFormuesverdi-datadef-1050', '');
+		$this->addMapping('D1051', 'FordringerLigningsmessigFormuesverdi-datadef-1051', '');
+		$this->addMapping('D1053', 'BankinnskuddKontantbeholdningLigningsmessigFormuesverdi-datadef-1053', '');
+		$this->addMapping('D1054', 'AksjerMvLigningsmessigFormuesverdi-datadef-1054', '');
+		$this->addMapping('D1016', 'AndelerDeltakerlignedeSelskaperLigningsmessigFormuesverdi-datadef-1016', '');
+		$this->addMapping('D1062', 'FormuesverdiBruttoLigningsmessig-datadef-1062', '');
+		$this->addMapping('D1063', 'GjeldLigningsmessig-datadef-1063', '');
+		$this->addMapping('D1066', 'FormuesverdiNettoLigningsmessig-datadef-1066', '');
+		$this->addMapping('D13822', 'LandbruksbyggSkattemessigVerdi-datadef-13822', '');
+		$this->addMapping('D13823', 'LandbruksbyggLigningsmessigFormuesverdi-datadef-13823', '');
+		$this->addMapping('D13824', 'LandbruksbyggKommune-datadef-13824', '');
+		$this->addMapping('D1041', 'ByggAnleggSkattemessigVerdi-datadef-1041', '');
+		$this->addMapping('D1042', 'ByggAnleggLigningsmessigFormuesverdi-datadef-1042', '');
+		$this->addMapping('D1043', 'ByggAnleggKommune-datadef-1043', '');
+		$this->addMapping('D1044', 'ForretningsbyggSkattemessigVerdi-datadef-1044', '');
+		$this->addMapping('D1045', 'ForretningsbyggLigningsmessigFormuesverdi-datadef-1045', '');
+		$this->addMapping('D1046', 'ForretningsbyggKommune-datadef-1046', '');
+		$this->addMapping('D1047', 'TomterSkattemessigVerdi-datadef-1047', '');
+		$this->addMapping('D1048', 'TomterLigningsmessigFormuesverdi-datadef-1048', '');
+		$this->addMapping('D1049', 'TomterKommune-datadef-1049', '');
+		$this->addMapping('D1055', 'FormuesposterAndreSkattemessigVerdi-datadef-1055', '');
+		$this->addMapping('D1056', 'FormuesposterAndreLigningsmessigFormuesverdi-datadef-1056', '');
+		$this->addMapping('D7298', 'ResultatNaring-datadef-7298', '');
+		$this->addMapping('D11239', 'AksjeutbytteNorskeSelskaperSkattemessigFullGodtgjorelse-datadef-11239', '');
+		$this->addMapping('D7841', 'ResultatDeltakerlignetSelskapSkattemessig-datadef-7841', '');
+		$this->addMapping('D22353', 'AksjerMvRealisasjonGevinstTapSelskapet-datadef-22353', '');
+		$this->addMapping('D11802', 'FinansinntekterSkattemessig-datadef-11802', '');
+		$this->addMapping('D2044', 'GevinstTapskontoInntektsfort-datadef-2044', '');
+		$this->addMapping('D12761', 'InntektInntreden-datadef-12761', '');
+		$this->addMapping('D5857', 'Tonnasjeskatt-datadef-5857', '');
+		$this->addMapping('D22332', 'InntektGevinstSkatteloven238-datadef-22332', '');
+		$this->addMapping('D13867', 'InntektStedbundet-datadef-13867', '');
+		$this->addMapping('D13806', 'Fordelingsfradrag-datadef-13806', '');
+		$this->addMapping('D17034', 'EiendomNaringAnnenKommuneKommunenummerSpesifisertEiendomMv-datadef-17034', '');
+		$this->addMapping('D13808', 'InntektNaringFordeltSpesifisertKommune-datadef-13808', '');
+		$this->addMapping('D13810', 'FordelingsfradragFordeltSpesifisertKommune-datadef-13810', '');
+		$this->addMapping('D13812', 'ResultatDeltakerlignetSelskapNettoFordeltSpesifisertKommune-datadef-13812', '');
+		$this->addMapping('D13814', 'FormuesverdiBruttoFordeltSpesifisertKommune-datadef-13814', '');
+		$this->addMapping('D13816', 'GjeldFordeltSpesifisertKommune-datadef-13816', '');
+		$this->addMapping('D13818', 'FormuesverdiNettoFordeltSpesifisertKommune-datadef-13818', '');
+		$this->addMapping('D13864', 'DeltakerNavnFordelingFormueSpesifisertDeltaker-datadef-13864', '');
+		$this->addMapping('D17363', 'DeltakerFodselsnummerOrganisasjonsnummerSpesifisertDeltaker-datadef-17363', '');
+		$this->addMapping('D1073', 'FormueNettoEierandelSpesifisertDeltaker-datadef-1073', '');
+		$this->addMapping('D3066', 'EgenkapitalkontoSpesifisertDeltaker-datadef-3066', '');
+		$this->addMapping('D3067', 'EgenkapitalSpesifisertDeltaker-datadef-3067', '');
+		$this->addMapping('D3068', 'FormueNettoAndelKorrigertSpesifisertDeltaker-datadef-3068', '');
+		$this->addMapping('D8327', 'Egenkapitalkonti-datadef-8327', '');
+		$this->addMapping('D16175', 'EgenkapitalSkjev-datadef-16175', '');
+		$this->addMapping('D13865', 'FormueNettoKorrigert-datadef-13865', '');
+		$this->addMapping('D1023', 'Delingsforetak-datadef-1023', '');
+		$this->addMapping('D19410', 'EnhetNaring-datadef-19410', '');
+		$this->addMapping('D17000', 'EnhetLiberaltYrke-datadef-17000', '');
+		$this->addMapping('D17171', 'EnhetFormueVirksomhetFlereKommuner-datadef-17171', '');
+		$this->addMapping('D5651', 'FusjonFisjon-datadef-5651', '');
+		$this->addMapping('D13819', 'EnhetStiftetOmdannelse-datadef-13819', '');
+		$this->addMapping('D13820', 'FormueInntektFordelt-datadef-13820', '');
+		$this->addMapping('D13821', 'TransaksjonerMellomDeltakerSelskap-datadef-13821', '');
+		$this->addMapping('D17175', 'DeltagerNaturalytelser-datadef-17175', '');
+		$this->addMapping('D22062', 'DeltakerRederiSkatteloven810-datadef-22062', '');
+       
+        
+	}
+ }
+?>

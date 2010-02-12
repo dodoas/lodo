@@ -1,0 +1,365 @@
+<?php
+class SelvangivelseASMapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+        //print ("Accouint: ". $a . "khlk: ". $h);
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+           			$this->ORID[$item] = $v;
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+            	$item = $this->Account[$a];
+            	$this->ORID[$item] = $v;
+	            return 1;
+    	    }
+       	}
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+	{   
+		$this->addMapping('D1', 'EnhetNavn-datadef-1', 'VName');
+		$this->addMapping('D2', 'KontaktpersonNavn-datadef-2', 'ContactName');
+        $this->addMapping('D15', 'EnhetAdresse-datadef-15', 'VAddress');
+        $this->addMapping('D6673', 'EnhetPostnummer-datadef-6673', 'VZipCode');
+        $this->addMapping('D6674', 'EnhetPoststed-datadef-6674', 'VCity');
+        $this->addMapping('D756', 'EnhetOrganisasjonsform-datadef-756', 'Category');
+        $this->addMapping('D18', 'EnhetOrganisasjonsnummer-datadef-18', 'OrgNumber');
+        $this->addMapping('D29', 'EnhetKommune-datadef-29', 'CompanyMunicipality');
+        $this->addMapping('D17132', 'ForhandsligningOnske-datadef-17132', 'PreLikning');
+        $this->addMapping('D19679', 'ForhandsligningAr-datadef-19679', 'PreYear');
+        $this->addMapping('D6680', 'Kreditfradrag-datadef-6680', 'Kreditfradrag');
+        $this->addMapping('D19784', 'SkattInnbetaltTilbakebetalingKontonummer-datadef-19784', '');
+        $this->addMapping('D280', 'RegnskapsforerNavn-datadef-280', 'FVName');
+        $this->addMapping('D281', 'RegnskapsforerAdresse-datadef-281', 'FVAddress');
+        $this->addMapping('D6678', 'RegnskapsforerPostnummer-datadef-6678', 'FVZipCode');
+        $this->addMapping('D6679', 'RegnskapsforerPoststed-datadef-6679', 'FVCity');
+        $this->addMapping('D13943', 'EnhetSignaturNavn-datadef-13943', '');
+        $this->addMapping('D6849', 'EnhetHovedkontorKommuneEndring-datadef-6849', '');
+        $this->addMapping('D5909', 'EnhetHovedkontorFlyttetDato-datadef-5909', '');
+        $this->addMapping('D2210', 'EnhetBorsnotert-datadef-2210', 'IsExchange');
+        $this->addMapping('D19540', 'EnhetStiftelsesdato-datadef-19540', 'FoundedDate');
+        $this->addMapping('D2228', 'EnhetOmdannelseENKANSKS-datadef-2228', 'OmdannelseENKANSKS');
+        $this->addMapping('D5905', 'EnhetOmdannelseSkattefri-datadef-5905', 'OmdannelseSkattefri');
+        $this->addMapping('D5910', 'EnhetStiftetFisjon-datadef-5910', 'StiftetFisjon');
+        $this->addMapping('D1996', 'EnhetOverdragendeInnfusjonerteOrganisasjonsnummer-datadef-1996', '');
+        $this->addMapping('D1994', 'EnhetOverdragendeInnfusjonerteNavn-datadef-1994', '');
+        $this->addMapping('D2009', 'EnhetOvertakendeUtfisjonerteOrganisasjonsnummer-datadef-2009', '');
+        $this->addMapping('D2008', 'EnhetOvertakendeUtfisjonerteNavn-datadef-2008', '');
+        $this->addMapping('D5906', 'FisjonFusjonSkattefri-datadef-5906', 'FusjonSkattefri');
+        $this->addMapping('D7674', 'EiendelerOverforingerSkattefrie-datadef-7674', 'OverforingerSkattefrie');
+        $this->addMapping('D19851', 'KonsernspissNorskOrganisasjonsnummer-datadef-19851', '');
+        $this->addMapping('D22078', 'SelskapLigningSkattelov810-datadef-22078', 'LigningSkattelov810');
+        $this->addMapping('D11299', 'UtlanSelskap-datadef-11299', 'UtlanSelskap');
+        $this->addMapping('D11300', 'RenterUtlanSelskap-datadef-11300', '');
+        $this->addMapping('D11301', 'UtleieFormuesgjenstanderSelskap-datadef-11301', 'UtleieFormuesgjenstander');
+        $this->addMapping('D11302', 'SalgUttakFormuesgjenstanderMvSelskap-datadef-11302', 'SalgUttakFormuesgjenstander');
+        $this->addMapping('D11303', 'UtlanAksjonar-datadef-11303', '');
+        $this->addMapping('D11304', 'RenterUtlanAksjonar-datadef-11304', '');
+        $this->addMapping('D11305', 'UtleieFormuesgjenstandAksjonar-datadef-11305', 'UtleieFormuesgjenstand');
+        $this->addMapping('D11306', 'SalgFormuesgjenstanderAksjonar-datadef-11306', 'SalgFormuesgjenstander');
+        $this->addMapping('D13969', 'UtbytteUtdeltBesluttet-datadef-13969', '');
+        $this->addMapping('D19852', 'AkjonarLaneopptakSikkerhetsstillelse-datadef-19852', 'AkjonarLaneopptak');
+        $this->addMapping('D19853', 'AksjonarLaneopptakSikkerhetstillelseTilsvarendeVerdi-datadef-19853', 'AksjonarLaneopptak');
+        $this->addMapping('D22153', 'OmsetningSamvirkeforetakMedlemmerEgetLag-datadef-22153', '');
+        $this->addMapping('D22154', 'KjopsutbytteSamvirkeforetakAvsattMedlemmerEgetLag-datadef-22154', '');
+        $this->addMapping('D22156', 'OmsetningSamvirkeforetakMedlemmerAndreLag-datadef-22156', '');
+        $this->addMapping('D22155', 'KjopsutbytteSamvirkeforetakAvsattMedlemmerAndreLag-datadef-22155', '');
+        $this->addMapping('D22152', 'OmsetningSamvirkeforetak-datadef-22152', '');
+        $this->addMapping('D22157', 'OmsetningSamvirkeforetakMedlemmerEgetLagProsentandel-datadef-22157', '');
+        $this->addMapping('D1080', 'InntektNaring-datadef-1080', '201');
+        $this->addMapping('D6854', 'InntekterFastEiendomNettoSkattemessig-datadef-6854', '202');
+        $this->addMapping('D1109', 'AksjeutbytteUtenlandskeSelskaperSkattemessig-datadef-1109', '206');
+        $this->addMapping('D6855', 'KonsernbidragMottattSkattemessig-datadef-6855', '207');
+        $this->addMapping('D2234', 'AksjonarbidragMottattSkattemessig-datadef-2234', '208');
+        $this->addMapping('D13970', 'InntekterAndreSkattemessigBeskrivelseSpesifisert-datadef-13970', '209a');
+        $this->addMapping('D14214', 'InntekterAndreSkattemessigSpesifisert-datadef-14214', '209b');
+        $this->addMapping('D22079', 'OverskuddKontinentalsokkel-datadef-22079', '210');
+        $this->addMapping('D6856', 'InntektSkattbarBrutto-datadef-6856', '220');
+        $this->addMapping('D1225', 'UnderskuddNaring-datadef-1225', '222');
+        $this->addMapping('D6876', 'KorreksjonsinntektFramfortTilFradrag-datadef-6876', '223');
+        $this->addMapping('D13971', 'NaringsinntektFradragAnnetBeskrivelse-datadef-13971', '224a');
+        $this->addMapping('D14825', 'FradragAndreNaringsinntekt-datadef-14825', '224b');
+        $this->addMapping('D22080', 'UnderskuddKontinentalsokkel-datadef-22080', '225');
+        $this->addMapping('D10084', 'NaringsinntektFradragInntekt-datadef-10084', '230');
+        $this->addMapping('D6859', 'InntektForFradragUnderskudd-datadef-6859', '231');
+        $this->addMapping('D13972', 'UnderskuddFramforbartAnvendelseBegrenset-datadef-13972', '232');
+        $this->addMapping('D22158', 'AndelskapitalFelleseidSamvirkeTilleggIkkeFradragsrett-datadef-22158', '233');
+        $this->addMapping('D6860', 'InntektForFradragBidrag-datadef-6860', '240');
+        $this->addMapping('D1151', 'AksjonarbidragFradragsberettiget-datadef-1151', '251');
+        $this->addMapping('D1152', 'KonsernbidragFradragsberettiget-datadef-1152', '252');
+        $this->addMapping('D6688', 'InntektSkattbarNetto-datadef-6688', '260');
+        $this->addMapping('D22098', 'FinansinntektNettoPositiv-datadef-22098', '261');
+        $this->addMapping('D5873', 'UtbytteSkattepliktig-datadef-5873', '262');
+        $this->addMapping('D13678', 'GevinstTapskontoRederiInntektsfort-datadef-13678', '263');
+        $this->addMapping('D12761', 'InntektInntreden-datadef-12761', '264');
+        $this->addMapping('D2720', 'InntektAlminnelig-datadef-2720', '265');
+        $this->addMapping('D5857', 'Tonnasjeskatt-datadef-5857', '270');
+        $this->addMapping('D13973', 'KorreksjonsinntektFramfort1994-datadef-13973', '');
+        $this->addMapping('D13974', 'KorreksjonsinntektFramfort1995-datadef-13974', '');
+        $this->addMapping('D13975', 'KorreksjonsinntektFramfort1996-datadef-13975', '');
+        $this->addMapping('D13976', 'KorreksjonsinntektFramfort1997-datadef-13976', '');
+        $this->addMapping('D13977', 'KorreksjonsinntektFramfort1998-datadef-13977', '');
+        $this->addMapping('D13978', 'KorreksjonsinntektFramfort1999-datadef-13978', '');
+        $this->addMapping('D13979', 'KorreksjonsinntektFramfort2000-datadef-13979', '');
+        $this->addMapping('D17136', 'KorreksjonsinntektFramfort2001-datadef-17136', '');
+        $this->addMapping('D19854', 'KorreksjonsinntektFramfort2002-datadef-19854', '');
+        $this->addMapping('D22081', 'KorreksjonsinntektFramfort2003-datadef-22081', '');
+        $this->addMapping('D1104', 'KorreksjonsinntektFramfort-datadef-1104', '');
+        $this->addMapping('D13980', 'KorreksjonsinntektAnvendelse1994-datadef-13980', '');
+        $this->addMapping('D13981', 'KorreksjonsinntektAnvendelse1995-datadef-13981', '');
+        $this->addMapping('D13982', 'KorreksjonsinntektAnvendelse1996-datadef-13982', '');
+        $this->addMapping('D13983', 'KorreksjonsinntektAnvendelse1997-datadef-13983', '');
+        $this->addMapping('D13984', 'KorreksjonsinntektAnvendelse1998-datadef-13984', '');
+        $this->addMapping('D13985', 'KorreksjonsinntektAnvendelse1999-datadef-13985', '');
+        $this->addMapping('D13986', 'KorreksjonsinntektAnvendelse2000-datadef-13986', '');
+        $this->addMapping('D17137', 'KorreksjonsinntektAnvendelse2001-datadef-17137', '');
+        $this->addMapping('D19855', 'KorreksjonsinntektAnvendelse2002-datadef-19855', '');
+        $this->addMapping('D22082', 'KorreksjonsinntektAnvendelse2003-datadef-22082', '');
+        $this->addMapping('D7678', 'KorreksjonsinntektAnvendelse-datadef-7678', '');
+        $this->addMapping('D13987', 'KorreksjonsinntektFramforbar1994-datadef-13987', '');
+        $this->addMapping('D13988', 'KorreksjonsinntektFramforbar1995-datadef-13988', '');
+        $this->addMapping('D13989', 'KorreksjonsinntektFramforbar1996-datadef-13989', '');
+        $this->addMapping('D13990', 'KorreksjonsinntektFramforbar1997-datadef-13990', '');
+        $this->addMapping('D13991', 'KorreksjonsinntektFramforbar1998-datadef-13991', '');
+        $this->addMapping('D13992', 'KorreksjonsinntektFramforbar1999-datadef-13992', '');
+        $this->addMapping('D13993', 'KorreksjonsinntektFramforbar2000-datadef-13993', '');
+        $this->addMapping('D17138', 'KorreksjonsinntektFramforbar2001-datadef-17138', '');
+        $this->addMapping('D19856', 'KorreksjonsinntektFramforbart2002-datadef-19856', '');
+        $this->addMapping('D22083', 'KorreksjonsinntektFramforbart2003-datadef-22083', '');
+        $this->addMapping('D2220', 'KorreksjonsinntektFramforbar-datadef-2220', '');
+        $this->addMapping('D13996', 'SkattefradragFramfort1994-datadef-13996', '');
+        $this->addMapping('D13997', 'SkattefradragFramfort1995-datadef-13997', '');
+        $this->addMapping('D13998', 'SkattefradragFramfort1996-datadef-13998', '');
+        $this->addMapping('D13999', 'SkattefradragFramfort1997-datadef-13999', '');
+        $this->addMapping('D14000', 'SkattefradragFramfort1998-datadef-14000', '');
+        $this->addMapping('D14001', 'SkattefradragFramfort1999-datadef-14001', '');
+        $this->addMapping('D14002', 'SkattefradragFramfort2000-datadef-14002', '');
+        $this->addMapping('D17139', 'SkattefradragFramfort2001-datadef-17139', '');
+        $this->addMapping('D19857', 'SkattefradragFramfort2002-datadef-19857', '');
+        $this->addMapping('D22084', 'SkattefradragFramfort2003-datadef-22084', '');
+        $this->addMapping('D6867', 'SkattefradragFramfort-datadef-6867', '');
+        $this->addMapping('D14005', 'SkattefradragAnvendelse1994-datadef-14005', '');
+        $this->addMapping('D14006', 'SkattefradragAnvendelse1995-datadef-14006', '');
+        $this->addMapping('D14007', 'SkattefradragAnvendelse1996-datadef-14007', '');
+        $this->addMapping('D14008', 'SkattefradragAnvendelse1997-datadef-14008', '');
+        $this->addMapping('D14009', 'SkattefradragAnvendelse1998-datadef-14009', '');
+        $this->addMapping('D14010', 'SkattefradragAnvendelse1999-datadef-14010', '');
+        $this->addMapping('D14011', 'SkattefradragAnvendelse2000-datadef-14011', '');
+        $this->addMapping('D17140', 'SkattefradragAnvendelse2001-datadef-17140', '');
+        $this->addMapping('D19858', 'SkattefradragAnvendelse2002-datadef-19858', '');
+        $this->addMapping('D22085', 'SkattefradragAnvendelse2003-datadef-22085', '');
+        $this->addMapping('D7679', 'SkattefradragAnvendelse-datadef-7679', '');
+        $this->addMapping('D14015', 'SkattefradragFramforbart1995-datadef-14015', '');
+        $this->addMapping('D14016', 'SkattefradragFramforbart1996-datadef-14016', '');
+        $this->addMapping('D14017', 'SkattefradragFramforbart1997-datadef-14017', '');
+        $this->addMapping('D14018', 'SkattefradragFramforbart1998-datadef-14018', '');
+        $this->addMapping('D14019', 'SkattefradragFramforbart1999-datadef-14019', '');
+        $this->addMapping('D14020', 'SkattefradragFramforbart2000-datadef-14020', '');
+        $this->addMapping('D17141', 'SkattefradragFramforbart2001-datadef-17141', '');
+        $this->addMapping('D19859', 'SkattefradragFramforbart2002-datadef-19859', '');
+        $this->addMapping('D22086', 'SkattefradragFramforbart2003-datadef-22086', '');
+        $this->addMapping('D6868', 'SkattefradragFramforbart-datadef-6868', '');
+        $this->addMapping('D15512', 'AksjekapitalOverkurs-datadef-15512', '301');
+        $this->addMapping('D1106', 'ForskjellerPositive-datadef-1106', '303');
+        $this->addMapping('D10071', 'ForskjellerNegativeTillagtKorreksjonsinntekt-datadef-10071', '304');
+        $this->addMapping('D6869', 'ForskjellerPositiveNetto-datadef-6869', '305a');
+        $this->addMapping('D2219', 'EgenkapitalandelMidlertidigeForskjeller-datadef-2219', '305b');
+        $this->addMapping('D22477', 'ForskjellerPermanenteAksjer-datadef-22477', '306');
+        $this->addMapping('D6870', 'KorreksjonsinntektEgenkapitalBeskattet-datadef-6870', '310');
+        $this->addMapping('D19456', 'EgenkapitalASMv-datadef-19456', '320');
+        $this->addMapping('D6871', 'KorreksjonsinntektEgenkapitalBeskattetNetto-datadef-6871', '330');
+        $this->addMapping('D6872', 'UtbytteKonsernbidragSkattemessig-datadef-6872', '335');
+        $this->addMapping('D6873', 'KorreksjonsinntektUnderdekningOverdekning-datadef-6873', '340');
+        $this->addMapping('D14022', 'KorreksjonsinntektGrunnlag-datadef-14022', '350');
+        $this->addMapping('D1098', 'Korreksjonsinntekt-datadef-1098', '360');
+        $this->addMapping('D14023', 'KorreksjonsinntektOverdekning-datadef-14023', '365');
+        $this->addMapping('D6874', 'KorreksjonsinntektBeregnetBeskattetBrutto-datadef-6874', '370');
+        $this->addMapping('D6875', 'KorreksjonsinntektBeregnetBeskattetDifferanse-datadef-6875', '380');
+        $this->addMapping('D22861', 'KorreksjonsinntektFramfortBegrenset-datadef-22861', '385');
+        $this->addMapping('D6667', 'NaturressursskattUbenyttet-datadef-6667', '386');
+        $this->addMapping('D1074', 'Personinntekt-datadef-1074', '390a');
+        $this->addMapping('D1072', 'LiberaltYrke-datadef-1072', '390b');
+        $this->addMapping('D1176', 'RISK-datadef-1176', '395');
+        $this->addMapping('D14027', 'UnderskuddFramfort1994-datadef-14027', '');
+        $this->addMapping('D14028', 'UnderskuddFramfort1995-datadef-14028', '');
+        $this->addMapping('D14029', 'UnderskuddFramfort1996-datadef-14029', '');
+        $this->addMapping('D14030', 'UnderskuddFramfort1997-datadef-14030', '');
+        $this->addMapping('D14031', 'UnderskuddFramfort1998-datadef-14031', '');
+        $this->addMapping('D14032', 'UnderskuddFramfort1999-datadef-14032', '');
+        $this->addMapping('D14033', 'UnderskuddFramfort2000-datadef-14033', '');
+        $this->addMapping('D17142', 'UnderskuddFramfort2001-datadef-17142', '');
+        $this->addMapping('D19860', 'UnderskuddFramfort2002-datadef-19860', '');
+        $this->addMapping('D22087', 'UnderskuddFramfort2003-datadef-22087', '');
+        $this->addMapping('D14829', 'UnderskuddUbenyttetAksjeselskapMv-datadef-14829', '');
+        $this->addMapping('D14037', 'UnderskuddAnvendelse1994-datadef-14037', '');
+        $this->addMapping('D14038', 'UnderskuddAnvendelse1995-datadef-14038', '');
+        $this->addMapping('D14039', 'UnderskuddAnvendelse1996-datadef-14039', '');
+        $this->addMapping('D14040', 'UnderskuddAnvendelse1997-datadef-14040', '');
+        $this->addMapping('D14041', 'UnderskuddAnvendelse1998-datadef-14041', '');
+        $this->addMapping('D14042', 'UnderskuddAnvendelse1999-datadef-14042', '');
+        $this->addMapping('D14043', 'UnderskuddAnvendelse2000-datadef-14043', '');
+        $this->addMapping('D17143', 'UnderskuddAnvendelse2001-datadef-17143', '');
+        $this->addMapping('D19861', 'UnderskuddAnvendelse2002-datadef-19861', '');
+        $this->addMapping('D22088', 'UnderskuddAnvendelse2003-datadef-22088', '');
+        $this->addMapping('D14826', 'UnderskuddFremforbartAksjeselskapMv-datadef-14826', '');
+        $this->addMapping('D14047', 'UnderskuddFramforbart1995-datadef-14047', '');
+        $this->addMapping('D14048', 'UnderskuddFramforbart1996-datadef-14048', '');
+        $this->addMapping('D14049', 'UnderskuddFramforbart1997-datadef-14049', '');
+        $this->addMapping('D14050', 'UnderskuddFramforbart1998-datadef-14050', '');
+        $this->addMapping('D14051', 'UnderskuddFramforbart1999-datadef-14051', '');
+        $this->addMapping('D14052', 'UnderskuddFramforbart2000-datadef-14052', '');
+        $this->addMapping('D17144', 'UnderskuddFramforbart2001-datadef-17144', '');
+        $this->addMapping('D19862', 'UnderskuddFramforbart2002-datadef-19862', '');
+        $this->addMapping('D22089', 'UnderskuddFramforbart2003-datadef-22089', '');
+        $this->addMapping('D7680', 'UnderskuddTidligereArTilFremforing-datadef-7680', '');
+        $this->addMapping('D6881', 'UnderskuddUbenyttetSkattemessig-datadef-6881', '');
+        $this->addMapping('D1159', 'UnderskuddTilFramforing-datadef-1159', '');
+        $this->addMapping('D14054', 'GodtgjorelseFramfort1994-datadef-14054', '');
+        $this->addMapping('D14055', 'GodtgjorelseFramfort1995-datadef-14055', '');
+        $this->addMapping('D14056', 'GodtgjorelseFramfort1996-datadef-14056', '');
+        $this->addMapping('D14057', 'GodtgjorelseFramfort1997-datadef-14057', '');
+        $this->addMapping('D14058', 'GodtgjorelseFramfort1998-datadef-14058', '');
+        $this->addMapping('D14059', 'GodtgjorelseFramfort1999-datadef-14059', '');
+        $this->addMapping('D14060', 'GodtgjorelseFramfort2000-datadef-14060', '');
+        $this->addMapping('D17145', 'GodtgjorelseFramfort2001-datadef-17145', '');
+        $this->addMapping('D19863', 'GodtgjorelseFramfort2002-datadef-19863', '');
+        $this->addMapping('D22090', 'GodtgjorelseFramfort2003-datadef-22090', '');
+        $this->addMapping('D6885', 'GodtgjorelseFramfort-datadef-6885', '');
+        $this->addMapping('D14062', 'GodtgjorelseAnvendelse1994-datadef-14062', '');
+        $this->addMapping('D14063', 'GodtgjorelseAnvendelse1995-datadef-14063', '');
+        $this->addMapping('D14064', 'GodtgjorelseAnvendelse1996-datadef-14064', '');
+        $this->addMapping('D14065', 'GodtgjorelseAnvendelse1997-datadef-14065', '');
+        $this->addMapping('D14066', 'GodtgjorelseAnvendelse1998-datadef-14066', '');
+        $this->addMapping('D14067', 'GodtgjorelseAnvendelse1999-datadef-14067', '');
+        $this->addMapping('D14068', 'GodtgjorelseAnvendelse2000-datadef-14068', '');
+        $this->addMapping('D17146', 'GodtgjorelseAnvendelse2001-datadef-17146', '');
+        $this->addMapping('D19864', 'GodtgjorelseAnvendelse2002-datadef-19864', '');
+        $this->addMapping('D22091', 'GodtgjorelseAnvendelse2003-datadef-22091', '');
+        $this->addMapping('D14071', 'GodtgjorelseFramforbar1995-datadef-14071', '');
+        $this->addMapping('D14072', 'GodtgjorelseFramforbar1996-datadef-14072', '');
+        $this->addMapping('D14073', 'GodtgjorelseFramforbar1997-datadef-14073', '');
+        $this->addMapping('D14074', 'GodtgjorelseFramforbar1998-datadef-14074', '');
+        $this->addMapping('D14075', 'GodtgjorelseFramforbar1999-datadef-14075', '');
+        $this->addMapping('D14076', 'GodtgjorelseFramforbar2000-datadef-14076', '');
+        $this->addMapping('D17147', 'GodtgjorelseFramforbar2001-datadef-17147', '');
+        $this->addMapping('D19865', 'GodtgjorelsenFramforbart2002-datadef-19865', '');
+        $this->addMapping('D22092', 'GodtgjorelseFramforbart2003-datadef-22092', '');
+        $this->addMapping('D2018', 'EiendomTypeSpesifisertEiendom-datadef-2018', '');
+        $this->addMapping('D6843', 'EiendomAdresseSpesifisertEiendom-datadef-6843', '');
+        $this->addMapping('D11756', 'EiendomGardsnummerSpesifisertEiendom-datadef-11756', '');
+        $this->addMapping('D11757', 'EiendomBruksnummerSpesifisertEiendom-datadef-11757', '');
+        $this->addMapping('D17038', 'EiendomKommunenummerSpesifisertEiendom-datadef-17038', '');
+        $this->addMapping('D1113', 'EiendomSkattemessigSpesifisertEiendom-datadef-1113', '');
+        $this->addMapping('D22093', 'EiendomLigningsverdiSumEiendommer-datadef-22093', '401a');
+        $this->addMapping('D22094', 'EiendomUtlandTypeSpesifisertEiendom-datadef-22094', '');
+        $this->addMapping('D22095', 'EiendomUtlandAdresseSpesifisertEiendom-datadef-22095', '');
+        $this->addMapping('D22096', 'EiendomUtlandLandSpesifisertEiendom-datadef-22096', '');
+        $this->addMapping('D22097', 'EiendomUtlandLigningsverdiSpesifisertEiendom-datadef-22097', '');
+        $this->addMapping('D22099', 'EiendomUtlandLigningsverdiSumEiendommer-datadef-22099', '401b');
+        $this->addMapping('D1114', 'DriftslosoreSkattemessig-datadef-1114', '402a');
+        $this->addMapping('D1179', 'BuskapSkattemessig-datadef-1179', '402b');
+        $this->addMapping('D16530', 'LagerbeholdningAksjeselskapMv-datadef-16530', '402c');
+        $this->addMapping('D6692', 'FartoySkattemessig-datadef-6692', '403');
+        $this->addMapping('D2024', 'DriftsmidlerIkkeAvskrivbareSkattemessig-datadef-2024', '404');
+        $this->addMapping('D14828', 'FritidsbatLystyacht-datadef-14828', '405');
+        $this->addMapping('D6886', 'FordringerUtestaendeSkattemessig-datadef-6886', '406');
+        $this->addMapping('D2224', 'PantobligasjonerGjeldsbrevSkattemessig-datadef-2224', '407');
+        $this->addMapping('D187', 'BankinnskuddPostgiroinnskudd-datadef-187', '408');
+        $this->addMapping('D14077', 'IhendehaverobligasjonerAntallSpesifisert-datadef-14077', '409a');
+        $this->addMapping('D14078', 'IhendehaverobligasjonerPalydendeSpesifisert-datadef-14078', '409b');
+        $this->addMapping('D14079', 'IhendehaverobligasjonerArSpesifisert-datadef-14079', '409c');
+        $this->addMapping('D14080', 'IhendehaverobligasjonerKursSpesifisert-datadef-14080', '409d');
+        $this->addMapping('D6887', 'IhendehaverobligasjonerSkattemessigSpesifisert-datadef-6887', '409e');
+        $this->addMapping('D22100', 'IhendehaverobligasjonerSkattemessigSum-datadef-22100', '409f');
+        $this->addMapping('D84', 'Kontanter-datadef-84', '410');
+        $this->addMapping('D1115', 'LivsforsikringspoliserSkattemessig-datadef-1115', '411');
+        $this->addMapping('D1116', 'FormueAnnenSkattemessig-datadef-1116', '412');
+        $this->addMapping('D6889', 'FormueBruttoUtenAndelerMvSkattemessig-datadef-6889', '420');
+        $this->addMapping('D2226', 'AksjerMvNorskeSelskaperLigningsmessigVerdi-datadef-2226', '421');
+        $this->addMapping('D14082', 'AksjerMvUtenlandskeSelskaperBeskrivelseLigningSpesifisert-datadef-14082', '422a');
+        $this->addMapping('D2227', 'AksjerMvUtenlandskeSelskaperLigningsmessigVerdiSpesifisert-datadef-2227', '422b');
+        $this->addMapping('D10082', 'FormueBruttoUpersonligeSkattemessig-datadef-10082', '430');
+        $this->addMapping('D10088', 'GjeldUpersonligeSkattemessig-datadef-10088', '440');
+        $this->addMapping('D10083', 'FormueNettoUpersonligeSkattemessig-datadef-10083', '450');
+        $this->addMapping('D22995', 'FormueBruttoUtenAndelerMvSkattemessigIkkeBorsnotert-datadef-22995', '460');
+        $this->addMapping('D2231', 'AksjerMvNorskeSelskaperSkattemessig-datadef-2231', '461');
+        $this->addMapping('D2232', 'AksjerMvUtenlandskeSelskaperSkattemessig-datadef-2232', '462');
+        $this->addMapping('D6890', 'SelskapsformueUtland-datadef-6890', '463');
+        $this->addMapping('D6891', 'FormueBruttoIkkeBorsnoterte-datadef-6891', '470');
+        $this->addMapping('D22996', 'GjeldSkattemessigIkkeBorsnotert-datadef-22996', '475');
+        $this->addMapping('D6892', 'FormueNettoIkkeBorsnoterte-datadef-6892', '480');
+        $this->addMapping('D16534', 'AksjerMvASAntall-datadef-16534', '485a');
+        $this->addMapping('D6893', 'AksjeVerdiBeregnetSkattemessig-datadef-6893', '485b');
+        $this->addMapping('D6894', 'AksjerFormuesverdiSkattemessig-datadef-6894', '490');
+        
+	}
+ }
+?>

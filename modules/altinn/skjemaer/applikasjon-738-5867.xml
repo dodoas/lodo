@@ -1,0 +1,1203 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1189: Årsoppgjør for utleie av fast eiendom</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-738-5868.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-959/Avgiver-grp-231/OppgavegiverNavn-datadef-68" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-959/Avgiver-grp-231/OppgavegiverFodselsnummer-datadef-26"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-959/Avgiver-grp-231/EnhetOrganisasjonsnummer-datadef-18"/>
+            <xforms:bind ref="/Skjema/Eiendom-grp-2168/OpplysningerOmEiendomen-grp-5333/EiendomKommuneNummer-datadef-23" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1189 Årsoppgjør for utleie mv. av fast eiendom 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Hvem skal levere skjemaet  </p>
+                <p>Skjemaet skal leveres av alle som leier ut fast eiendom, når  eiendommen skal regnskapsliknes, jf. skatteloven § 7-2. Videre skal  skjemaet benyttes når eieren yter føderåd i form av borett utenom  jord- og skogbruk. Utleier av
+                    egen bolig som ikke skal  regnskapsliknes skal ikke levere skjemaet. Næringsdrivende skal  levere skjemaet dersom utleien drives utenom næringsvirksomhet, slik  at den ikke er tatt med i næringsoppgave. Er du i tvil om du plikter
+                    å levere skjemaet, kontakt likningskontoret.  </p>
+                <p/>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. november 1994, jf. ligningsloven § 4-4 nr.  7.  </p>
+                <p/>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1189B. For å  samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysningene som avgis i Årsoppgjør for utleie mv. av fast eiendom,  RF-1189B, helt eller delvis
+                    bli benyttet også av andre offentlige  organer som har hjemmel til å innhente de samme opplysningene, jf.  lov om Oppgaveregisteret §§ 5 og 6. Opplysninger om ev. samordning  kan fås ved henvendelse til Oppgaveregisteret på
+                    telefon 75 00 75 00,  eller Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1189 Årsoppgjer for utleige o.a. av fast eigedom 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Skjemaet skal leverast av alle som leiger ut fast eigedom, når  eigedommen skal rekneskapsliknast, jf. skattelova § 7-2. Vidare skal  skjemaet brukast når eigaren yter føderåd i form av burett utanom  jord- og skogbruk. Utleigar av
+                    eigen bustad som ikkje skal  rekneskapsliknast, skal ikkje levere skjemaet. Næringsdrivande skal  levere skjemaet dersom utleiga blir driven utanom næringsverksemd,  slik at ho ikkje er teken med i næringsoppgåve. Er du i tvil om
+                    du  pliktar til å levere skjemaet, kontakt likningskontoret.  </p>
+                <p/>
+                <p/>
+                <p>Fastsett av Skattedirektoratet med heimel i Finansdepartementet sitt  delegeringsvedtak av 28. november 1994, jf. ligningslova § 4-4 nr.  7.  </p>
+                <p>Andre offentlege organers bruk av opplysningar i RF-1189N. For å  samordne og forenkle oppgåveinnleveringa frå næringslivet, kan  opplysningar som vert avgjeve i Årsoppgjer for utleige o.a. av fast  eigedom, RF-1189N, heilt eller
+                    delvis bli nytta også av andre  offentlege organ som har heimel til å innhente dei same  opplysningane, jf. lov om Oppgåveregisteret §§ 5 og 6. Opplysningar  om ev. samordning kan ein få ved å vende seg til Oppgåveregisteret på
+                    telefon 75 00 75 00, eller Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-959">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-959/Avgiver-grp-231">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Avgiver</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Avgivar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-959/Avgiver-grp-231/OppgavegiverNavn-datadef-68">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-959/Avgiver-grp-231/Inntektsar-datadef-692">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Inntektsår</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Inntektsår</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-959/Avgiver-grp-231/OppgavegiverAdresse-datadef-69">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Nåværende gateadresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Noverande gateadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-959/Avgiver-grp-231/OppgavegiverPostnummer-datadef-6676">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-959/Avgiver-grp-231/OppgavegiverPoststed-datadef-6677">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-959/Avgiver-grp-231/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-959/Avgiver-grp-231/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Org.nr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Eiendom-grp-2168">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Eiendom</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Eigedom</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Eiendom-grp-2168/OpplysningerOmEiendomen-grp-5333">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Opplysninger om eiendommen som blir utleid</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Opplysningar om eigendomen som blir utleigd</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Eiendom-grp-2168/OpplysningerOmEiendomen-grp-5333/EiendomAdresse-datadef-2019">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Gateadresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Gateadressa til eigedommen</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Eiendom-grp-2168/OpplysningerOmEiendomen-grp-5333/EiendomGardsnummer-datadef-8069">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Gårdsnr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Gardsnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Eiendom-grp-2168/OpplysningerOmEiendomen-grp-5333/EiendomBruksnummer-datadef-8070">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bruksnr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Bruksnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Eiendom-grp-2168/OpplysningerOmEiendomen-grp-5333/EiendomSeksjonsnummer-datadef-7843">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Seksjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Seksjonsnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Eiendom-grp-2168/OpplysningerOmEiendomen-grp-5333/BoligselskapNavn-datadef-6829">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Boligselskapets navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn på bustadselskapet</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Eiendom-grp-2168/OpplysningerOmEiendomen-grp-5333/EiendomKommuneNummer-datadef-23">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommune</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Skjemaet skal leveres til kommunen som eiendommen ligger i</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kommune</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Skjemaet skal leverast til kommuna eigedomen ligg i</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/InntekterUtleieverdi-grp-960">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Inntekter</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Inntekter ved utleie er skattepliktig for det året de opptjenes,  uavhengig av når leien etter avtalen skal betales eller faktisk blir  betalt. Dette innebærer at påløpt husleie i året skal føres til  inntekt, selv om
+                        betalingen ikke er mottatt i vedkommende år. Dersom  beløpet i disse tilfellene ikke blir betalt, se post 2.5.  Forskuddsbetalt leie skal ikke oppgis som inntekt før leien er  opptjent, det vil si det år leien gjelder for.
+                        Fordel ved at eier  delvis bruker regnskapsliknet boligeiendom som egen bolig er ikke  skattepliktig inntekt.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Inntekter</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Inntekter ved utleige er skattepliktig for det året dei blir opptente,  uavhengig av når leiga etter avtalen skal betalast eller faktisk blir  betalt. Dette inneber at oppsamla husleige i året skal førast til  inntekt sjølv om
+                        betalinga ikkje er motteken i det aktuelle året.  Dersom beløpet i desse tilfellene ikkje blir betalt, sjå post 2.5.  Forskuddsbetalt leige skal ikkje givast opp som inntekt før leiga er  opptent, det vil seie det året leiga
+                        gjeld for. Fordel ved at eigar  delvis bruker regnskapslikna bustadeiegedom som eigen bustad er ikkje  skattepliktig inntekt.</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_Utleie-grp-4939" nodeset="/Skjema/InntekterUtleieverdi-grp-960/Utleie-grp-4939">
+                    <xforms:group ref="/Skjema/InntekterUtleieverdi-grp-960/Utleie-grp-4939">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1.1 Utleie</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres leieinntekt påløpt i inntektsåret</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>1.1 Utleige</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her fører du leigeinntekt som er oppsamla i inntektsåret</p>
+                        </xforms:help>
+                        <xforms:selectOne ref="/Skjema/InntekterUtleieverdi-grp-960/Utleie-grp-4939/EiendomUtleieTypeSpesifisertEiendom-datadef-22008">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>bolig</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Bolig</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Bustad</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>fritidseiendom</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fritidseiendom</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Fritidseigedom</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>industri</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Industri</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Industri</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>forretning</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Forretning</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Forretning</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>tomt</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Tomt</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Tomt</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>annet</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Annet</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Anna</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Type eiendom</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Type eigedom</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/InntekterUtleieverdi-grp-960/Utleie-grp-4939/LeietakerNavnSpesifisertLeietaker-datadef-22009">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Leietakers navn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Namn på leigetakar</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntekterUtleieverdi-grp-960/Utleie-grp-4939/UtleieEtasjeSpesifisertEiendom-datadef-22010">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Etasje</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Etasje</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntekterUtleieverdi-grp-960/Utleie-grp-4939/UtleieArealSpesifisertEiendom-datadef-22011">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Antall kvm</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kor mange kvm</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntekterUtleieverdi-grp-960/Utleie-grp-4939/UtleieFraDatoSpesifisertEiendom-datadef-22012">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fra dato</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Frå dato</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntekterUtleieverdi-grp-960/Utleie-grp-4939/UtleieTilDatoSpesifisertEiendom-datadef-22013">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Til dato</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Til dato</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/InntekterUtleieverdi-grp-960/Utleie-grp-4939/UtleieInntektSpesifisertEiendom-datadef-22014">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beløp</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Beløp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:group ref="/Skjema/InntekterUtleieverdi-grp-960/Kar-grp-4942">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.2 Kår</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kår: Utleieverdi av bolig hvor fri borett for bestemt(e) person(er) er  påheftet eiendommen (føderåd). Brutto føderådsytelse føres til  fradrag i post 3.3.3 i selvangivelsen.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1.2 Kår</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Kår: Utleigeverdi av bustad der fri burett for bestemt(e) person(ar)  er påhefta eigedomen (føderåd). Brutto føderådsyting skal førast til  frådrag i post 3.3.3 i sjølvmeldinga.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/InntekterUtleieverdi-grp-960/Kar-grp-4942/EgenleieKarNavn-datadef-22021">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InntekterUtleieverdi-grp-960/Kar-grp-4942/EgenleieKarEtasje-datadef-22022">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Etasje</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Etasje</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InntekterUtleieverdi-grp-960/Kar-grp-4942/EgenleieKarAreal-datadef-22023">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall kvm</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kor mange kvm</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InntekterUtleieverdi-grp-960/Kar-grp-4942/EgenleieKarFraDato-datadef-22024">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fra dato</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Frå dato</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InntekterUtleieverdi-grp-960/Kar-grp-4942/EgenleieKarInntekt-datadef-22026">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beløp</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Beløp</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/InntekterUtleieverdi-grp-960/VedlikeholdskostnaderMvLeietakere-datadef-22032">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.3 Refusjon fra leietakere for vedlikeholdskostnader mv.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom leietakeren har refundert vedlikeholdskostnader som inngår i  kostnadene som er oppført i skjemaet, skal mottatt beløp føres her.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1.3 Refusjon frå leigetakarar for vedlikehaldskostnader o.a.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dersom leigetakaren har refundert vedlikehaldskostnader som inngår i  kostnadene som er oppførte i skjemaet, skal motteke beløp førast her.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/InntekterUtleieverdi-grp-960/InntekterAndre-datadef-22101">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.4 Andre inntekter</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Leier du ut en leilighet i boligsameie, skal du føre opp din andel av  sameiets inntekt her. Merk at denne inntekten ikke skal føres  særskilt i selvangivelsen.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1.4 Andre inntekter</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Leiger du ut ei leilegheit i bustadsameige, skal du føre opp din del  av sameigeinntekta her. Merk at denne inntekta ikkje skal førast  særskilt i sjølvmeldinga.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/InntekterUtleieverdi-grp-960/BruttoinntektUtleieMv-datadef-22033">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.5 Samlet bruttoinntekt</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>1.5 Samla bruttoinntekt</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Kostnader-grp-236">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Kostnader</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Kostnadene skal føres til fradrag i det år betalingsforpliktelsen er  pådratt uavhengig av om kostnadene faktisk er betalt før årsskiftet.  Verken avtalt forfallstid eller tidspunkt for faktisk betaling har  således betydning
+                        for når utgiften skal komme til fradrag.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Kostnader må kunne dokumenteres/sannsynliggjøres med kvittering o.l.  etter forespørsel fra likningskontoret.</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Kostnader</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Kostnader skal førast til frådrag i det året betalingsplikta er  påkomen, uavhengig av når kostnadene skal betalast eller faktisk blir  betalte. Verken avtala forfallstid eller tidspunkt for faktisk  betaling har såleis noko å
+                        seie for når kostnaden skal kome til  frådrag.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NON">
+                    <p>Kostnader må kunne dokumenterast/sannsynliggjerast med kvittering o.l.  etter forespørsel frå likningskontoret.</p>
+                </xforms:hint>
+                <xforms:group ref="/Skjema/Kostnader-grp-236/Festeavgift-grp-5281">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.1 Festeavgift grunnleie, påløpt leiekostnad til boligselskap mv.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her oppgis festeavgift eller annen leiekostnad pådratt i inntektsåret.  Dersom eieren selv benytter en del av boligen som egen bolig må  kostnadene fordeles på henholdsvis den skattefrie og den  skattepliktige delen av boligen</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.1 Festeavgift (grunnleige), oppsamla leigekostnad til bustadsselskap  o.a.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her gir du opp festeavgift eller annan leigekostnad som er pådregen i  inntektsåret. Dersom eigaren sjølv benyttar ein del av bustaden som  eigen bustad må kostnadane fordelast på høvesvis den skattefrie og  den
+                            skattepliktige delen av bustaden.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/Kostnader-grp-236/Festeavgift-grp-5281/Festeavgift-datadef-7885">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Samlet beløp (medregnet mva.)</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Grunnleie</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Samla beløp (medrekna mva.)</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Grunnleige</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Kostnader-grp-236/Festeavgift-grp-5281/FesteavgiftFradragsbrettiget-datadef-23634">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Herav fradragsberettiget kostnad</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Av dette kostnad som kan trekkjast frå</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Kostnader-grp-236/KommunaleAvgifter-grp-5282">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.2 Kommunale avgifter (inkl. ev. eiendomsskatt) og forsikringspremier  for eiendommen</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres kommunale avgifter som renovasjon og vann- og kloakkavgift.  Videre føres forsikringspremier for eiendommen her. Eventuell  eiendomsskatt føres også her. Dersom eieren selv benytter en del av  boligen som egen
+                            bolig må kostnadene fordeles på henholdsvis den  skattefrie og den skattepliktige delen av boligen. Skatt på formue og  inntekt er derimot ikke fradragsberettiget.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.2 Kommunale avgifter (inkl. ev. eigedomsskatt) og forsikringspremiar  for eigedommen</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører du kommunale avgifter som renovasjon og vass- og  kloakkavgifter. Vidare fører du forsikringspremiar for eigedommen  her. Eventuell eigedomsskatt skal og førast her. Dersom eigaren sjølv  nyttar ein del av
+                            bustaden som eigen bustad må kostnadane fordelast  på høvesvis den skattefrie og den skattepliktige delen av boligen.  Skatt på formue og inntekt er derimot ikkje frådragsgodkjend.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/Kostnader-grp-236/KommunaleAvgifter-grp-5282/AvgifterEiendomKommunale-datadef-7886">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Samlet beløp (medregnet mva.)</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Inkl. ev. eiendomsskatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Samla beløp (medrekna mva.)</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Inkl. ev. eigedomsskatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Kostnader-grp-236/KommunaleAvgifter-grp-5282/AvgifterEiendomKommunaleFradragsberretiget-datadef-23635">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Herav fradragsberettiget kostnad</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Av dette kostnader som kan trekkjast frå</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Kostnader-grp-236/Lonnskostnader-grp-5283">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.3 Utbetalt Lønn:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres eventuell utbetalt lønn, for eksempel til vaktmester,  bestyrer, forretningsfører og lignende. Dersom eieren selv benytter  en del av boligen som egen bolig og det ikke kan avgjøres hvilken del  av boligen
+                            lønnskostnadene knytter seg til, må kostnadene fordeles på  heholdsvis den skattefrie og den skattepliktige delen av boligen  etter utleieverdi.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.3 Utbetalt Lønn:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører du eventuell utbetalt lønn, for eksempel til vaktmeister,  styrar, forretningsførar og liknande. Dersom eigaren sjølv bruker ein  del av bustaden som eigen bustad og det ikkje kan avgjerast kva for  del av
+                            bustaden lønnskostnadane knyttar seg til, må kostnadane  fordelast på høvesvis den skattefrie og den skattepliktige delen av  bustaden etter utleigeverdi.</p>
+                    </xforms:help>
+                    <xforms:selectOne ref="/Skjema/Kostnader-grp-236/Lonnskostnader-grp-5283/LonnsoppgaveInnsendt-datadef-7908">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Er det sendt lønns- og trekkoppgave for beløpet?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Er det sendt lønns- og trekkoppgåve for beløpet?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/Kostnader-grp-236/Lonnskostnader-grp-5283/DriftsutgifterVaktmesterBestyrerDisponentForretningsforer-datadef-7889">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Samlet beløp (medregnet mva.)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Samla beløp (medrekna mva.)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Kostnader-grp-236/Lonnskostnader-grp-5283/DriftsutgifterVaktmesterBestyrerDisponentMvFradragsberretiget-datadef-23636">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Herav fradragsberettiget kostnad</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Av dette kostnad som kan trekkjast frå</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/Kostnader-grp-236/DriftsutgifterEiendomAvgifterLonnSkattemessig-datadef-23637">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kostnader til fradrag</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kostnader til frådrag</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:group ref="/Skjema/Kostnader-grp-236/VedlikeholdPakostningerForandringerMv-grp-3488">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Vedlikehold mv.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Vedlikeholdskostnader påløpt i året, det vil si kostnader til å føre  eiendommen tilbake til den stand den tidligere har vært i, kan føres  til fradrag. Dersom eieren selv benytter en del av boligen som egen  bolig og det
+                            ikke kan avgjøres hvilken del av boligen  vedlikeholdskostnadene knytter seg til må kostnadene fordeles på  henholdsvis den skattefrie og den skattepliktige delen av boligen  etter utleieverdi. Påkostninger kan ikke
+                            fradras her, men kan trekkes  fra som en del av inngangsverdien av eiendommen ved beregning av  eventuell skattepliktig gevinst eller fradragsberettiget tap ved salg  av eiendommen. Som påkostninger regnes kostnader til å
+                            føre  eiendommen til en bedre stand enn den tidligere har vært i, for  eksempel tilbygg, modernisering eller rene endringer.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Vedlikehald, påkostnader, endringar o.a.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Vedlikehaldskostnader som er oppsamla i året, det vil seie kostnader  til å føre eigendommen tilbake til den stand han tidlegare har vore  i, kan førast til frådrag. Dersom eigaren sjølv nyttar ein del av  bustaden som
+                            eigen bolig og det ikkje kan avgjerast kva for del av  bustaden vedlikehaldskostnadene knyter seg til må kostnadene  fordelast på høvesvis den skattefrie og den skattepliktige delen av  boligen etter utleigeverdi.
+                            Påkostnader kan ikkje trekkjast frå her,  men kan trekkjast frå som ein del av inngangsverdien av eigedommen  ved utrekning av eventuell skattepliktig gevinst eller  frådragsgodkjent tap ved sal av eigedommen. Som
+                            påkostnader reknar  ein kostnader til å føre eigendommen til ein betre eller annan stand  enn han tidlegare har vore i, for eksempel tilbygg, modernisering  eller reine endringar.</p>
+                    </xforms:help>
+                    <xforms:repeat id="repeat_VedlikeholdMv-grp-237" nodeset="/Skjema/Kostnader-grp-236/VedlikeholdPakostningerForandringerMv-grp-3488/VedlikeholdMv-grp-237">
+                        <xforms:group ref="/Skjema/Kostnader-grp-236/VedlikeholdPakostningerForandringerMv-grp-3488/VedlikeholdMv-grp-237">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Vedlikehold, påkostninger, forandringer mv.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Vedlikehald, påkostnader, endringar o.a.</p>
+                            </xforms:caption>
+                            <xforms:input ref="/Skjema/Kostnader-grp-236/VedlikeholdPakostningerForandringerMv-grp-3488/VedlikeholdMv-grp-237/EiendomVedlikeholdBeskrivelseSpesifisert-datadef-7898">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Hva slags?</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Spesifiser hva som gjelder utleiedel og hva som gjelder eventuell egen  boligdel</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Kva slags?</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Spesifiser kva som gjeld utleigedel, og kva som eventuelt gjeld eigen  bustaddel.</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kostnader-grp-236/VedlikeholdPakostningerForandringerMv-grp-3488/VedlikeholdMv-grp-237/OppdragstakerNavnSpesifisertVedlikehold-datadef-7899">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Arbeidet er utført av/materialene er levert av - Navn</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Arbeidet er utført av/materialane er leverte av- namn</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Arbeidet er utført av/materialene er leverte av</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kostnader-grp-236/VedlikeholdPakostningerForandringerMv-grp-3488/VedlikeholdMv-grp-237/OppdragstakerAdresseSpesifisertVedlikehold-datadef-7900">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Adresse</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Adresse</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kostnader-grp-236/VedlikeholdPakostningerForandringerMv-grp-3488/VedlikeholdMv-grp-237/OppdragstakerPostnummerSpesifisertVedlikehold-datadef-7901">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:alert brreg:lang="EN">
+                                    <p>Enter positive integer with four digits</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Postnr.</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feltet krever positivt heltall med fire siffer</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Postnr.</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Feltet krev positivt heiltal med fire siffer</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kostnader-grp-236/VedlikeholdPakostningerForandringerMv-grp-3488/VedlikeholdMv-grp-237/OppdragstakerPoststedSpesifisertVedlikehold-datadef-7902">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Poststed</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Poststad</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kostnader-grp-236/VedlikeholdPakostningerForandringerMv-grp-3488/VedlikeholdMv-grp-237/EiendomVedlikeholdDatoSpesifisert-datadef-7903">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Dato</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Påløpt</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Dato</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Oppsamla</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kostnader-grp-236/VedlikeholdPakostningerForandringerMv-grp-3488/VedlikeholdMv-grp-237/DriftsutgifterEiendomSpesifisertVedlikeholdPakostningerMv-datadef-7904">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Samlet beløp (medregnet mva)</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Samla beløp (medrekna mva.)</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kostnader-grp-236/VedlikeholdPakostningerForandringerMv-grp-3488/VedlikeholdMv-grp-237/DriftsutgifterEiendomVedlikeholdFradragsberettigetSpesifisert-datadef-7905">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Herav fradrags-berettiget vedlikehold</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Av det frådragsgodkjent vedlikehald</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:repeat>
+                    <xforms:input ref="/Skjema/Kostnader-grp-236/VedlikeholdPakostningerForandringerMv-grp-3488/DriftsutgifterEiendomVedlikeholdFradragsberettiget-datadef-7906">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Kostnader-grp-236/VedlikeholdPakostningerForandringerMv-grp-3488/DriftsutgifterEiendomVedlikeholdReduksjon-datadef-7907">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Reduksjon når utleieinntekt fra boligen tidligere har vært  prosentliknet og/eller fritaksliknet</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>For boliger som leies ut, innrømmes som hovedregel fradrag for alle  vedlikeholdskostnader. Unntak fra denne regel gjelder dersom du er  blitt prosentliknet og/eller fritaksliknet for boligeiendommen i  løpet av de
+                                foregående 5 år. I disse tilfeller innfømmes fullt  fradrag for vedlikeholdskostnader inntil kr 10 000. For den delen av  vedlikeholdskostnadene som overstiger kr 10 000, reduseres fradraget  med 10 % for hvert av de
+                                foregående 5 år som du er blitt  prosentliknet og/eller fritaksliknet for boligen. Er du i tvil, spør  likningskontoret.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Reduksjon når utleigeinntekt frå bustaden tidlegare har vore  prosentlikna og/eller fritakslikna</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>For bustader som blir leigde ut, blir det som hovudregel gitt frådrag  for alle vedlikeholdskostnader.Det er unntak frå denne regelen dersom  du har vorte prosentlikna og/eller fritakslikna for bustadeigedommen  i løpet
+                                av dei føregåande 5 åra. I slike tilfelle blir det gitt fullt  frådrag for vedlikehaldskostnader inntil kr 10 000. For den delen av  vedlikehaldskostnadene som går over kr 10 000, blir frådraget  redusert med 10 % for
+                                kvart av dei føregåande fem åra som du har  vorte prosentlikna og/eller fritakslikna for bustaden. Er du i tvil,  spør likningskontoret.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Kostnader-grp-236/VedlikeholdPakostningerForandringerMv-grp-3488/DriftsutgifterEiendomVedlikeholdSkattemessig-datadef-7890">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.4 Vedlikeholdskostnader som kan trekkes fra</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>2.4 Vedlikehaldskostnader som kan trekkjast frå</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/Kostnader-grp-236/DriftsutgifterUtleieTap-datadef-7892">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.5 Konstatert tap av inntekt ved utleie</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Konstatert tap av inntekt ved utleie. Det foreligger fradragsrett for  endelig konstatert tap av inntekt ved utleie når denne tidligere har  vært skattlagt som inntekt. Tapet anses endelig konstatert:  </p>
+                        <p>- når det har vært foretatt tvangsinndriving eller inkasso som har  vært forgjeves, eller  </p>
+                        <p>- offentlig gjeldsmegling, konkurs, likvidasjons- eller  </p>
+                        <p>- avviklingsbehandling i skyldnerens bo gjør det klart at bomidlene  ikke gir eller vil gi dekning av fordringen eller,  </p>
+                        <p>- når fordringen ellers må anses som klart uerholdelig.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.5 Konstatert tap av inntekt ved utleige</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Konstatert tap av inntekt ved utleige. Det er frådragsrett for endeleg  konstatert tap av inntekt ved utleige når denne tidlegare har vore  skattlagd som inntekt. Tapet blir rekna for endeleg konstatert:  </p>
+                        <p>- når det er gjennomført tvangsinndriving eller inkasso som har vore  forgjeves, eller  </p>
+                        <p>- offentleg gjeldsforhandling, konkurs, likvidasjons- eller  avviklingsbehandling i buet til skyldnaren gjer det klårt at  bumidlane ikkje dekker eller kjem til å dekkje fordringa eller  </p>
+                        <p>- når fordringa elles må reknast som uoppnåelig.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Kostnader-grp-236/BygningUtleieAvskrivningBelop-datadef-22034">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.6 Avskrivning av bygning</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Avskrivning av bygning. Gjelder ikke tomt eller boligeiendom.  Saldoskjema er pliktig vedlegg når avskrivning kreves (RF-1084).</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.6 Avskrivningar av bygning</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Avskrivning av bygning. Gjeld ikkje tomt eller bustadeigedom.  Saldoskjema er pliktig vedlegg når det blir kravd avskriving  (RF-1084).</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:group ref="/Skjema/Kostnader-grp-236/AndreKostnader-grp-971">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.7 Andre kostnader (spesifisert), herunder avskrivninger av innbo</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Andre kostnader. Dersom leien er inkludert lys, brensel, renhold mv.  føres kostnadene til dette her. Ved utleie av møblert bolig ved  korttidsleie, hvor eieren selv bruker innboet før og etter  utleieperioden, kan det
+                            kreves fradrag for slit og elde av møbler  fastsatt til 15% av brutto leieinntekter. Denne regelen skal normalt  ikke benyttes når utleieperioden er over tre år. Ved langtidsutleie  kan utleide møbler med kostpris under
+                            15000 fradragsføres direkte.Er  kostprisen for møbler og inventar kr 15000 eller høyere, kan det  foretas saldoavskrivninger (saldogruppe d, avskrivningssats 20%).  Saldoskjema (RF-1084) må da vedlegges. Du kan også kreve
+                            avstandsfradrag etter faste satser for kostnader forbundet med reiser  som er utført i tilknytning til utleien, for eksempel ved visninger,  vedlikehold og tilsyn. Kontakt likningskontoret vedrørende hvilken  sats som skal
+                            benyttes. Hvis du leier ut en leilighet i et  boligsameie, skal du føre opp din andel av sameiets kostnader her.  Merk at dette fradraget ikke skal føres særskilt i selvangivelsen.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.7 Andre kostnader (spesifisert), under det avskrivingar av innbu</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Andre kostnader. Dersom leiga er inkludert lys, brensel, reinhald  o.a., skal kostnadene til dette førast her. Ved utleige av møblert  bustad ved korttidsleige, der eigaren sjølv bruker innbuet før og  etter
+                            utleigeperioden, kan det krevjast frådrag for slit og elde av  møblar, fastsett til 15% av brutto utleigeinntekter. Denne regelen  skal normalt ikkje nyttast når utleigeperioden er over tre år. Ved  langtidsutleige kan
+                            utleigde møblar med kostpris under kr 15 000  frådragsførast direkte. Er kostprisen for møblar og inventar kr 15  000 eller høgare, kan møblar og inventar saldoavskrivast (saldogruppe  d, avkskrivningssats 20%).
+                            Saldoskjema (RF-1084) må da leggjast ved.  Du kan og krevje avstandsfrådrag etter faste satsar for kostnader i  samband med reiser som er utførte i tilknytning til utleiga, til  dømes ved visingar, vedlikehald og tilsyn.
+                            Kontakt likningskontoret  om kva sats som skal brukast. Dersom du leiger ut ei leilegheit i eit  bustadsameige, skal du føre opp din del av sameigekostnadene her.  Merk at dette frådraget ikkje skal førast særskilt i sjølvmeldinga.</p>
+                    </xforms:help>
+                    <xforms:repeat id="repeat_AndreKostnaderSpesifisert-grp-4944" nodeset="/Skjema/Kostnader-grp-236/AndreKostnader-grp-971/AndreKostnaderSpesifisert-grp-4944">
+                        <xforms:group ref="/Skjema/Kostnader-grp-236/AndreKostnader-grp-971/AndreKostnaderSpesifisert-grp-4944">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2.7 Andre kostnader, spesifisert</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>2.7 Andre kostnader, spesifisert</p>
+                            </xforms:caption>
+                            <xforms:input ref="/Skjema/Kostnader-grp-236/AndreKostnader-grp-971/AndreKostnaderSpesifisert-grp-4944/DriftsutgifterAndreBeskrivelseSpesifisert-datadef-7894">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Andre kostnader</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Spesifiser</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Andre kostnader</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Spesifiser</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Kostnader-grp-236/AndreKostnader-grp-971/AndreKostnaderSpesifisert-grp-4944/DriftsutgifterAndreSpesifisert-datadef-10069">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Beløp</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Beløp</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:repeat>
+                    <xforms:input ref="/Skjema/Kostnader-grp-236/AndreKostnader-grp-971/DriftsutgifterLysBrenselRenholdEgenBoligdel-datadef-7896">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.8 Kostnader til egen boligdel, strøm, oppvarming, renhold mv.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom kostnadene ført i post 2.7 også omfatter lys, brensel, renhold  mv, av bolig som eieren selv bruker, må den del av kostnadene som  vedrører denne boligen tilbakeføres her.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>2.8 Kostnader til eigen bustaddel, straum, oppvarming, reinhald o.a.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Dersom kostnadane som blir førte i post 2.7, også omfatter lys,  brensel, reinhald o.a., av bustad som eigaren sjøl bruker, må den  delen av kostnadane som heng saman med denne bustaden, tilbakeførast  her.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Kostnader-grp-236/AndreKostnader-grp-971/DriftsutgifterEgenBoligdel-datadef-22102">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.8 Sum</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Sum andre kostnader etter fradrag for kostnader til egen boligdel</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>2.8 Sum</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Sum andre kostnadar etter frådrag for kostnadar til eigen boligdel</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/Kostnader-grp-236/UtgifterFastEiendom-datadef-7918">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.9 Sum kostnader</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.9 Sum kostnader</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Nettoinntekt-grp-4945">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Nettoinntekt</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Renter av gjeld skal ikke trekkes fra her</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Nettoinntekt</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NON">
+                    <p>Renter av gjeld skal ikkje trekkast frå her</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/Nettoinntekt-grp-4945/LeieinntekterNettoOverskudd-datadef-7897">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Overskudd</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Overføres til selvangivelsen post 2.8.4</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Overskott</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Beløpet skal overførast til sjølvmeldinga.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Nettoinntekt-grp-4945/LeieinntekterNettoUnderskudd-datadef-14188">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Underskudd</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Overføres til selvangivelsen post 3.3.10</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Underskott</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Beløpet skal overførast til sjølvmeldinga post 3.3.10</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Kontrollsporsmal-grp-239">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>3 Kontrollspørsmål</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>3 Kontrollspørsmål</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Kontrollsporsmal-grp-239/OmfatterKostnadeneNoeAvFolgende-grp-2330">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Omfatter kostnadene noe av følgende:</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Omfatter kostnadene noko av følgjande:</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/Kontrollsporsmal-grp-239/OmfatterKostnadeneNoeAvFolgende-grp-2330/UtgifterSkattFormueInntekt-datadef-7911">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.1 Skatter på formue og inntekt</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.1 Skattar på formue og inntekt</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/Kontrollsporsmal-grp-239/OmfatterKostnadeneNoeAvFolgende-grp-2330/UtgifterSkatterFormueInntektBelop-datadef-7912">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ev. beløp</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Ev. sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:selectOne ref="/Skjema/Kontrollsporsmal-grp-239/OmfatterKostnadeneNoeAvFolgende-grp-2330/UtgifterGodtgjoringHuseierMv-datadef-7913">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.2 Godtgjøring til huseier, ektefelle eller barn som liknes sammen  med huseier</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.2 Godtgjering til huseigar, ektefelle eller barn som blir likna  saman med huseigar</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/Kontrollsporsmal-grp-239/OmfatterKostnadeneNoeAvFolgende-grp-2330/UtgifterGodtgjoringHuseierMvBelop-datadef-7914">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ev. beløp</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Ev. sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:selectOne ref="/Skjema/Kontrollsporsmal-grp-239/OmfatterKostnadeneNoeAvFolgende-grp-2330/UtgifterKontingentHuseierforeninger-datadef-7915">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.3 Kontingent til huseierforening eller andre foreninger</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.3 Kontingent til huseigarforeining eller andre foreiningar</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/Kontrollsporsmal-grp-239/OmfatterKostnadeneNoeAvFolgende-grp-2330/UtgifterKontingentHuseierforeningerBelop-datadef-7916">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ev. beløp</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Ev. sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

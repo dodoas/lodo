@@ -1,0 +1,1933 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">MT-0001: Melding til ØKOKRIM</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-268-3966.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/OpplysningerOmMelder-grp-5247/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/OpplysningerOmMelder-grp-5247/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind ref="/Skjema/OpplysningerOmMelder-grp-5247/InnsenderHvitvaskingAnsvarlig-datadef-23093" required="true"/>
+            <xforms:bind ref="/Skjema/OpplysningerOmMelder-grp-5247/EnhetVirksomhetsomrade-datadef-2327" required="true"/>
+            <xforms:bind ref="/Skjema/OpplysningerOmMelder-grp-5247/MeldingReferansenummer-datadef-23094" required="true"/>
+            <xforms:bind ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/TransaksjonReferanse-datadef-4431" required="true"/>
+            <xforms:bind ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/TransaksjonDato-datadef-3233" required="true"/>
+            <xforms:bind ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/TransaksjonType-datadef-3232" required="true"/>
+            <xforms:bind ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/TransaksjonGjennomfortJaNei-datadef-23121" required="true"/>
+            <xforms:bind ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/TransaksjonTerrormistanke-datadef-23320" required="true"/>
+            <xforms:bind ref="/Skjema/Grunnlag-grp-5256" required="true"/>
+            <xforms:bind ref="/Skjema/Grunnlag-grp-5256/TransaksjonGrunnlagMelding-datadef-23128" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>Melding om Mistenkelig Transaksjon (MT-melding).</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Rapportering av Mistenkelige Transaksjoner er pålagt virksomheter og  juridiske personer i henhold til Lov om tiltak mot hvitvasking av  utbytte fra straffbare handlinger mv. (Hvitvaskingsloven) §4 av  20.6.03.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Felter merket (*) må fylles ut.</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/OpplysningerOmMelder-grp-5247">
+                <brreg:sensitivitet type="Mindre sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>1. Melder</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Melder = rapporteringpliktig iht. Hvitvaskingsloven.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Felter merket (*) er obligatoriske.</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/OpplysningerOmMelder-grp-5247/EnhetNavn-datadef-1">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.1 Navn på melder/rapporteringspliktig</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Enhetens navn i følge Brønnøysundregisteret.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmMelder-grp-5247/EnhetOrganisasjonsnummer-datadef-18">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.2 Organisasjonsnummer til melder</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Organisasjonsnummeret i følge Brønnøysundregistrene.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>9 siffer</p>
+                    </xforms:hint>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmMelder-grp-5247/InnsenderHvitvaskingAnsvarlig-datadef-23093">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.3 Navn på hvitvaskingsansvarlig (*)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Ved ikke oppnevnt hvitvaskingsansvarlig (iht. Hvitvaskingsloven), er  daglig leder eller tilsvarende definert som dette.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmMelder-grp-5247/KontaktpersonNavn-datadef-23307">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.4 Navn på kontaktperson</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Navn på kontaktperson hvis annen enn Hvitvaskingsansvarlig, jfr. pkt.  1.3.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmMelder-grp-5247/InnsenderKontaktpersonTelefonnummer-datadef-23568">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.5 Telefonnummer</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Telefonnummer til hvitvaskingsansvarlig eller kontaktperson.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmMelder-grp-5247/InnsenderKontaktpersonEPost-datadef-23569">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.6 E-post</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>E-postadresse til hvitvaskingsansvarlig eller kontaktperson.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/OpplysningerOmMelder-grp-5247/EnhetVirksomhetsomrade-datadef-2327">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>ADVOKATER</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Advokater m.fl.</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>BANKER</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Banker</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>E_PENGEFORETAK</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>e-pengeforetak</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>GJENSTANDER</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Forhandlere av gjenstander</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>FORSIKRINGSSELSKAP</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Forsikringsselskap</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>MEGLERE</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Meglere</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>PENSJONSKASSER</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Pensjonskasser</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>POSTOPERATORER</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Postoperatører</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>REGNSKAPSFORERE</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Regnskapsførere</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>REVISORER</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Revisorer</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>VERDIPAPIRFORETAK</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Verdipapirforetak mv.</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>BETALINGSFORMIDLING</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Virksomhet for betalingsformidling</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>ANDRE</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Andre jf. HV-loven §4</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.7 Virksomhetsområde melder, hovedgruppe (*)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Melder = rapporteringpliktig iht. Hvitvaskingsloven.  </p>
+                        <p/>
+                        <p>Velg hvilken hovedgruppe foretaket sorterer under, (iht.  Hvitvaskingsloven §4), f.eks, bank, megler.  </p>
+                        <p/>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/OpplysningerOmMelder-grp-5247/EnhetVirksomhetsomradeUndergruppe-datadef-23308">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>FORRETNINGSBANKER</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Forretningsbanker</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>SPAREBANKER</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sparebanker</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>NORGES_BANK</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Norges Bank</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>ANDRE_BANKER</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Andre banker</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>AKSJEMEGLERE</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Aksjemeglere</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>EIENDOMSMEGLERE_OG_BOLIGBYGGELAG</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Eiendomsmeglere og boligbyggelag</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>FORSIKRINGSMEGLERE</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Forsikringsmeglere</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>PROSJEKTMEGLERE</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Prosjektmeglere</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>VALUTAMEGLERE</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Valutameglere</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>FONDSMEGLERE</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fondsmeglere</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>ANDRE_MEGLERE</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Andre meglere</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>VERDIPAPIRFORETAK</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Verdipapirforetak</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>FORVALTNINGSSELSKAPER_FOR_VERDIPAPIRFOND</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Forvaltningsselskaper for verdipapirfond</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>VERDIPAPIRREGISTRE</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Verdipapirregistre</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>ANDRE_VERDIPAPIRFORETAK</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Andre verdipapirforetak</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>SKADEFORSIKRINGSSELSKAP</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Skadeforsikringsselskap</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>LIVSFORSIKRINGSSELSKAP</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Livsforsikringsselskap</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>PENSJONSKASSER</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Pensjonskasser</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>POSTOPERATORER</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Postoperatører</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>REVISORER</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Revisorer</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>REGNSKAPSFORERE</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Regnskapsførere</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>ADVOKATER</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Advokater m.fl.</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>ANTIKVITETSFORHANDLERE</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Antikvitetsforhandlere</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>GULLSMEDER</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Gullsmeder</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>BILFORHANDLERE</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bilforhandlere</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>ANDRE_FORHANDLERE</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Andre forhandlere</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>ANDRE</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Andre jf. HV-loven §4  </p>
+                                <p/>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>AUKSJONSFORRETNINGER</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Auksjonsforretninger</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.8 Virksomhetsområde melder, undergruppe (*)</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/OpplysningerOmMelder-grp-5247/MeldingReferansenummer-datadef-23094">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.9 Referansenummer for meldingen (*)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Hver melding skal ha et eget unikt referansenummer.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>2. Implisert</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Med implisert menes hovedpersonen eller - foretak/organisasjon i  tilknytning til den/de mistenkelige transaksjonen(e).  </p>
+                    <p/>
+                    <p>Det skal bare registreres en implisert pr. melding. Dersom det er  usikkerhet om hvem som er hovedperson eller - foretak/organisasjon  avgjøres det ved skjønn.  </p>
+                    <p/>
+                    <p>Eventuelle andre personer tilknyttet meldingen, registreres på side 4,  under pkt. 4.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>På denne siden registreres implisert person/foretak.</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/PersonFornavn-datadef-21490">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.1 Fornavn</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Registrer eventuelle mellomnavn etter fornavn.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/PersonEtternavn-datadef-21489">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.2 Etternavn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/PersonFodselsnummer-datadef-21488">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <brreg:kontroll type="Modulus 11"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.3 Fødselsnummer/D-nummer</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>11 siffer</p>
+                    </xforms:hint>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig fødselsnummer</p>
+                    </xforms:alert>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig fødselsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/PersonImplisertFodselsdato-datadef-23321">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.4 Fødselsdato</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Registrer fødselsdato, dd.mm.åååå, dersom ikke hele fødselsnummeret er  kjent.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>dd.mm.åååå</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/PersonImplisertIdRef-datadef-23322">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.5 Id-referense</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Registrer type- og kontrollnummer til eventuelle  identifikasjonspapirer impliserte har forevist.  </p>
+                        <p/>
+                        <p>F.eks. pass Gambia A126453XC34526</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/PersonImplisertKjonn-datadef-23098">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Mann</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Mann</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Kvinne</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kvinne</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Ukjent</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ukjent</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.6 Kjønn</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/PersonImplisertNasjonalitet-datadef-23099">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.7 Statborgerskap</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/PersonImplisertTelefonnummer-datadef-23351">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.8 Telefonnummer</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Husk prefiks ved utenlandske nummer.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/PersonImplisertPostadresse-datadef-23324">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.9 Post-/bostedsadresse</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/PersonImplisertPostadressePostnummer-datadef-23325">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.10 Postnummer</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/PersonImplisertPostadressePoststed-datadef-23326">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.11 Poststed</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/PersonImplisertPostadresseLand-datadef-23327">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.12 Land</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/PersonImplisertBesoksadresse-datadef-23100">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.13 Besøksadresse</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Registrer eventuelt adressen hvor vedkommende oppholder seg, dersom  denne er annen enn postadressen.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/PersonImplisertBesoksadressePostnummer-datadef-23101">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:alert brreg:lang="EN">
+                        <p>Enter positive integer with four digits</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.14 Postnummer, besøksadresse</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever positivt heltall med fire siffer</p>
+                    </xforms:alert>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev positivt heiltal med fire siffer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/PersonImplisertBesoksadressePoststed-datadef-23102">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.15 Poststed, besøksadresse</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/PersonImplisertBesoksadresseLand-datadef-23328">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.16 Land, besøksadresse</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/ForetakImplisertNavn-datadef-23329">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.17 Navn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/ForetakImplisertOrganisasjonsnummer-datadef-23330">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.18 Organisasjonsummer</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Hvis kjent. Kun norsk.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>9 siffer</p>
+                    </xforms:hint>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/ForetakImplisertAdresse-datadef-23331">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.19 Adresse</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/ForetakImplisertPostnummer-datadef-23332">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.20 Postnummer</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/ForetakImplisertPoststed-datadef-23333">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.21 Poststed</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/ForetakImplisertLand-datadef-23334">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.22 Land</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/ForetakImplisertBesoksadresse-datadef-23335">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.23 Besøksadresse</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Registrer eventuelt adressen hvor foretaket har kontor, dersom denne  er annen enn postadressen.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/ForetakImplisertBesoksadressePostnummer-datadef-23336">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.24 Postnummer, besøksadresse</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/ForetakImplisertBesoksadressePoststed-datadef-23337">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.25 Poststed, besøksadresse</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/ForetakImplisertBesoksadresseLand-datadef-23338">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.26 Land, besøksadresse</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Landet besøksadressen refererer seg til, dersom annet enn postadresse</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmImpliserteITransaksjonenEne-grp-5248/ForetakImplisertReferansenummer-datadef-23339">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.27 Knytning til tidligere referansenummer</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom impliserte tidligere er rapporert, registrer deres siste  referansenummer på tidligere melding.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>3. Transaksjon(er), opplysninger om mistenkelig(e) -</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>På denne siden registreres den/de mistenkelige transaksjonen(e).  </p>
+                    <p>Felter merket (*) er obligatoriske.  </p>
+                    <p>Hvis du vil registrere flere, velg rett tabell fra menyen Tabeller som  du finner øverst til venstre.</p>
+                </xforms:hint>
+                <xforms:repeat id="repeat_OpplysningerOmTransaksjonEne-grp-5264" nodeset="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264">
+                    <xforms:group ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3. Transaksjon(er), opplysninger om mistenkelig(e)-</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>På denne siden registreres den/de mistenkelige transaksjonene.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Felter merket (*) er obligatoriske.  </p>
+                            <p>Hvis du vil registrere flere, velg rett tabell fra menyen Tabeller som  du finner øverst til venstre.  </p>
+                            <p>Lagre knappen må benyttes mellom hver transaksjon.</p>
+                        </xforms:hint>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/TransaksjonReferanse-datadef-4431">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.1 Transaksjon referanse (*)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Hver transaksjon skal tildeles et eget unikt egendefinert referansenr.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Unik referanse</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/TransaksjonDato-datadef-3233">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.2 Transaksjon dato (*)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Dato for (gjennomført) transaksjon. Dersom transaksjonen kun er  forsøkt gjennomført skal dato for dette registreres.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>dd.mm.åååå</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/TransaksjonSted-datadef-3234">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.3 Transaksjon sted</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Hvor skjedde transaksjonen, beskriv kort i fritekst.  </p>
+                                <p>Eks.: - Filial sentrum, skranke 4  </p>
+                                <p>      - Hovedkontor, Kirkegaten 56,  </p>
+                                <p>      - I forretningen,  </p>
+                                <p>      osv.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>By, adr., filialnavn, mv.</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/TransaksjonType-datadef-3232">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>KONTANT_INNSKUDD</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Kontant innskudd</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>KONTANT_UTTAK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Kontant uttak</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>KJOP</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Kjøp</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>LAN</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Lån</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>OVERFORSEL</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Overførsel</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>SALG</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Salg</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>VEKSLING_VALUTA</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Veksling/valuta</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>ANNET</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Annet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.4 Transaksjon type, hovedgruppe (*)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Type transaksjon er inndelt i hoved- og undergruppe. Velg først riktig  hovedgruppe- og deretter undergruppe fra liste.</p>
+                            </xforms:help>
+                        </xforms:selectOne>
+                        <xforms:selectOne ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/TransaksjonUndergruppe-datadef-23309">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>BANKBOKS</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Bankboks</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>APNING_AV_KONTO</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Åpning av konto</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>GARANTI</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Garanti</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>KAUSJONIST</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Kausjonist</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>FORESPORSEL</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Forespørsel</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>ENDRING_AV_KUNDEOPPLYSNINGER</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Endring av kundeopplysninger</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>BRUK_AV_BETALINGSKORT</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Bruk av betalingskort</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>ANNET</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Annet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>NOK_TIL_NOK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>NOK til NOK</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>NOK_TIL_UTENL_VALUTA</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>NOK til utenl.valuta</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>UTENL_VALUTA_TIL_NOK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Utenl.valuta til NOK</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>GAMLE_SEDLER</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Gamle sedler</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>VEKSLING_VALUTA_ANNET</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Veksling/valuta - annet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>TIL_UTLAND</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Til utland</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>FRA_UTLAND</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fra utland</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>MONEYGRAM</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Moneygram</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>OVERFORSEL_ANNET</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Overførsel - annet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>NEDBETALING_UTENOM_TERMIN</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nedbetaling utenom termin</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>NEDBETALING</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nedbetaling</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>FORESPORSEL_LAN</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Forespørsel lån</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>UTBETALING_AV_LAN</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Utbetaling av lån</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>LAN_ANNET</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Lån - annet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>BANKREMISSER</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Bankremisser</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>REISESJEKKER</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Reisesjekker</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>VARER_TJENESTER</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Varer/tjenester</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>AKSJER</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Aksjer</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>FOND</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fond</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>FORSIKRING</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Forsikring</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>KJOP_SALG_ANNET</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Kjøp/salg - annet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>AUTOMAT_INNSKUDD</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Automat innskudd</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>NATTSAFE</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nattsafe</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>BANKREMISSE_INNSKUDD</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Bankremisse innskudd</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>SJEKK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Sjekk</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>BETALING_GIRO_NORGE</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Betaling giro Norge</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>BETALING_GIRO_UTLAND</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Betaling giro Utland</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>KONTANT_INNSKUDD</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Kontant innskudd</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>KONTANT_UTTAK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Kontant uttak</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>AUTOMAT_UTTAK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Automat uttak</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>BANKREMISSE_UTTAK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Bankremisse uttak</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>INNENLANDS_DEBET</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Innenlands debet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>INNENLANDS_KREDIT</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Innenlands kredit</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.5 Transaksjon type, undergruppe (*)</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:selectOne ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/TransaksjonValutaFra-datadef-23130">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>NOK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>NOK - Norske kroner</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>SEK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>SEK - Svenske kroner</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>DKK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>DKK - Danske kroner</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>EUR</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>EUR - Euro</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>USD</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>USD - Amerikanske dollar</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>GBP</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>GBP - Britiske pund</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>CHF</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>CHF - Sveitsiske franc</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>THB</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>THB - Thailandske baht</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>PKR</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>PKR - Pakistanske rupi</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Annen</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Annen</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.6 Valuta</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Velg valutatype. Her skal det registreres i hvilken valuta den  mistenkelige transaksjonen er.</p>
+                            </xforms:help>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/TransaksjonBelop-datadef-4426">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.7 Transaksjon beløp</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>xxxxxx,xx</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/KontonummerTransaksjonAvsender-datadef-23345">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll for kontonummer"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.8 Kontonummer A, Implisert</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her registreres det kontonummeret som er knyttet til Impliserte i den  mistenkelige transaksjonen.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>11 siffer</p>
+                            </xforms:hint>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig kontonummer</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig kontonummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/PersonKontoEierforhold-datadef-23348">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>AKSJONAR_EIER</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Aksjonær/eier</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>DAGLIG_LEDER_ADM_DIR</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Daglig leder/adm.dir</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>DELT_ANSVAR</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Delt ansvar</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>DISPONENT_KONTO_ALENE</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Disponent konto alene</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>DISPONENT_KONTO_GRUPPE</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Diponent konto gruppe</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>FULLMAKT</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fullmakt</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>KONTAKTPERSON</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Kontaktperson</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>KONTOINNEHAVER</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Kontoinnehaver</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>PROKURA</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Prokura</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>REGNSKAPSFORER</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Regnskapsfører</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>REVISOR</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Revisor</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>STYREMEDLEM</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Styremedlem</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>STYRELEDER</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Styreleder</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>TIDLIGERE_STYREVERV_DAGLIG_LEDER</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Tidligere styreverv/daglig leder</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>TILSKRIVER_FOR_KONTO</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Tilskriver for konto</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>VARAMEDLEM_STYRET</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Varamedlem styret</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.9 Implisertes rolle til konto A</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:selectOne ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/TransaksjonValutaTil-datadef-23131">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>NOK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>NOK - Norske kroner</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>SEK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>SEK - Svenske kroner</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>DKK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>DKK - Danske kroner</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>EUR</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>EUR - Euro</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>USD</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>USD - Amerikanske dollar</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>GBP</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>GBP - Britiske pund</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>CHF</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>CHF - Sveitsiske franc</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>THB</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>THB - Thailandske baht</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>PKR</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>PKR - Pakistanske rupi</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Annen</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Annen</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.10 Valuta</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Velg valuta.  </p>
+                                <p>Dersom det er snakk om veksling, registrer hvilken valuta den  mistenkelige transaksjonen veksles til.</p>
+                            </xforms:help>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/TransaksjonBelopTil-datadef-23118">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.11 Transaksjon, beløp</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Dersom det er snakk om veksling, registrer det utenlandske beløpet det  veksles til.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>xxxxxx,xx</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/KontonummerTransaksjonMottaker-datadef-23346">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.12 Kontonummer B</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Mottakers/avsenders kontonummer.  </p>
+                                <p>Dersom det er snakk om overføring av penger, registrer det  kontonummeret det overføres TIL, eventuelt FRA, dersom dette er  kjent.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Max 30 tegn</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/MottakerTransaksjonNavn-datadef-23123">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.13 Fornavn, mottaker</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/MottakerTransaksjonEtternavn-datadef-23116">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.14 Etternavn, mottaker</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/TransaksjonMottakerFodselsnummer-datadef-23124">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <brreg:kontroll type="Modulus 11"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.15 Fødselsnummer/D-nummer, mottaker</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>D-nummer er gitt til personer i påvente av eventuelt norsk  fødselsnummer.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>11 siffer</p>
+                            </xforms:hint>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/MottakerTransaksjonFodselsdato-datadef-23310">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.16 Fødselsdato, mottaker</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Registrer mottakers fødselsdato dersom fødselsnummer ikke er kjent</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Ved ukjent f.nr.</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/MottakerTransaksjonIdReferanse-datadef-23311">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.17 Id-referanse, mottaker</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her registreres identifikasjonsdokumentets navn og kontrollnummer.  Eks.: bankkort NHU 233</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>F.eks. pass/førerkort - nr.</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/MottakerTransaksjonAdresse-datadef-23312">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.18 Adresse, mottaker</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/MottakerTransaksjonPostnummer-datadef-23313">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.19 Postnummer, mottaker</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/MottakerTransaksjonPoststed-datadef-23314">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.20 Poststed, mottaker</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/MottakerTransaksjonLand-datadef-23126">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.21 Land, mottaker</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/ForetakMottakerTransaksjonNavn-datadef-23315">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.22 Navn, mottaker</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/ForetakMottakerTransaksjonOrganisasjonsnummer-datadef-23125">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.23 Organisasjonsnummer, mottaker</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>9 siffer</p>
+                            </xforms:hint>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/ForetakMottakerTransaksjonAdresse-datadef-23316">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.24 Adresse, mottaker</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/ForetakMottakerTransaksjonAdressePostnummer-datadef-23317">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.25 Postnummer, mottaker</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Registrer mottakers postnummer til oppgitte adresse.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/ForetakMottakerTransaksjonAdressePoststed-datadef-23318">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.26 Poststed, mottaker</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/ForetakMottakerTransaksjonLand-datadef-23319">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.27 Land, mottaker</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/TransaksjonBeskrivelse-datadef-23119">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.28 Beskrivelse av transaksjonen</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Beskriv transaksjonen dersom det ikke er pengebeløp/valuta  involvert.  </p>
+                                <p/>
+                                <p>Vedrørende definisjon av transaksjon se hvitvaskingsloven m.forskrift,  Kredittilsynets rundskriv 9/2004, eventuelt bransjens retningslinjer.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/TransaksjonGjennomfortJaNei-datadef-23121">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>Ja</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Yes</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Nei</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>No</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.29 Er transaksjonen gjennomført? (*)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Hvitvaskingsloven §9. Om gjennomføring av mistenkelige  transaksjoner:  </p>
+                                <p/>
+                                <p>Rapporteringspliktige skal ikke gjennomføre transaksjoner som medfører  undersøkelsesplikt, før ØKOKRIM er underrettet. ØKOKRIM kan i særlige  tilfeller gi pålegg om ikke å gjennomføre en slik transaksjon.
+                                    Transaksjonen kan likevel gjennomføres før ØKOKRIM er underrettet,  dersom det ikke er mulig å la være å gjennomføre den, eller dersom  unnlatelse av å gjennomføre transaksjonen ville vanskeliggjøre
+                                    etterforskningen. I så fall skal ØKOKRIM underrettes umiddelbart  etter at transaksjonen er gjennomført.</p>
+                            </xforms:help>
+                        </xforms:selectOne>
+                        <xforms:selectOne ref="/Skjema/OpplysningerOmTransaksjonenEne-grp-5249/OpplysningerOmTransaksjonEne-grp-5264/TransaksjonTerrormistanke-datadef-23320">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>Ja</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Yes</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Nei</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>No</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.30 Er det mistanke om finansiering av terrorisme? (*)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Hvitvaskingsloven §7 pålegger rapporteringspliktige ved mistanke om  forhold som rammes av str.l. §147a eller § 147 b å foreta nærmere  undersøkelser for å få bekreftet eller avkreftet mistanken.  </p>
+                                <p/>
+                                <p>§147 a beskriver en rekke forhold som ansees som terrorhandlinger og  som §147 b beskriver som straffbare å bidra til finansiering av.  </p>
+                                <p/>
+                                <p>Et viktig poeng i denne sammenheng er å fokusere mere på midlenes bruk  enn opprinnelse.  </p>
+                                <p/>
+                                <p>Det er distribuert en rekke lister over personer/organsisasjoner som  kan settes i forbindelse med terrorhandlinger og som  rapporteringspliktige er pålagt å følge.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Jfr. Str.l. §§147a og 147b.</p>
+                            </xforms:hint>
+                        </xforms:selectOne>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/TilknyttedePersoner-grp-5250">
+                <brreg:sensitivitet type="Mindre sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>4. Tilknyttet person(er)</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Registrer eventuell(e) person(er) tilknyttet impliserte i forbindelse  med den/de mistenkelige transaksjonen(e), samt hvilken rolle den/de  har til denne.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Hvis du vil registrere flere, velg rett tabell fra menyen Tabeller som  du finner øverst til venstre.</p>
+                </xforms:hint>
+                <xforms:repeat id="repeat_TilknyttedePersoner-grp-5265" nodeset="/Skjema/TilknyttedePersoner-grp-5250/TilknyttedePersoner-grp-5265">
+                    <xforms:group ref="/Skjema/TilknyttedePersoner-grp-5250/TilknyttedePersoner-grp-5265">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4. Tilknyttet person(er)</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Registrer eventuell(e) person(er) tilknyttet impliserte i forbindelse  med den/de mistenkelige transaksjonen(e), samt hvilken rolle den/de  har til denne.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Hvis du vil registrere flere, velg rett tabell fra menyen Tabeller som  du finner øverst til venstre.  </p>
+                            <p>Lagre knappen må benyttes mellom hver person.</p>
+                        </xforms:hint>
+                        <xforms:input ref="/Skjema/TilknyttedePersoner-grp-5250/TilknyttedePersoner-grp-5265/PersonForetakImplisertFornavn-datadef-23340">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4.1 Fornavn</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Fornavn på eventuelle personer tilknyttet den impliserte i forbindelse  med transaksjon(ene).</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/TilknyttedePersoner-grp-5250/TilknyttedePersoner-grp-5265/PersonForetakImplisertEtternavn-datadef-23341">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4.2 Etternavn</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Etternavn på eventuelle personer tilknyttet den impliserte i  forbindelse med transaksjon(ene).</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/TilknyttedePersoner-grp-5250/TilknyttedePersoner-grp-5265/PersonForetakImplisertFodselsnummer-datadef-23342">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <brreg:kontroll type="Modulus 11"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4.3 Fødselsnummer/D-nummer</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Fødselsnummer på eventuelle personer tilknyttet den impliserte i  forbindelse med transaksjon(ene). 11 siffer.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>11 siffer</p>
+                            </xforms:hint>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/TilknyttedePersoner-grp-5250/TilknyttedePersoner-grp-5265/PersonForetakImplisertFodselsdato-datadef-23343">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4.4 Fødselsdato</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Registrer fødselsdato hvis ikke fullt fødselsnummer er kjent.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>dd.mm.åååå</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/TilknyttedePersoner-grp-5250/TilknyttedePersoner-grp-5265/PersonForetakImplisertIdRef-datadef-23344">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4.5 Id-referanse</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Type- og kontrollnummer til eventuelle identifikasjonspapirer  impliserte har forevist.  </p>
+                                <p/>
+                                <p>F.eks. pass Gambia A126453XC34526</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/TilknyttedePersoner-grp-5250/TilknyttedePersoner-grp-5265/PersonForetakImplisertTelefonnummer-datadef-23347">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4.6 Telefonnummer</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Prefix ved utenlandske nummer.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:selectMany ref="/Skjema/TilknyttedePersoner-grp-5250/TilknyttedePersoner-grp-5265/PersonForetakImplisertKontoEierforhold-datadef-23349">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>AKSJONAR_EIER</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Aksjonær/eier</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>ANNEN_FAMILIE</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Annen familie</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>ANNEN_TILKNYTNING_TIL_IMPLISERTE</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Annen tilknytning til impliserte</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>BEKJENTSKAP</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Bekjentskap</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>DAGLIG_LEDER_ADM_DIR</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Daglig leder/adm.dir</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>DELT_ANSVAR</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Delt ansvar</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>DISPONENT_KONTO_ALENE</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Disponent konto alene</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>DISPONENT_KONTO_GRUPPE</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Disponent konto m.fl.</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>EKTEFELLE_SAMBOER_PARTNER</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ektefelle/Samboer/Partner</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>INNEHAVER</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Innehaver</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>KAUSJONIST</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Kausjonist</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>KONTAKTPERSON</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Kontaktperson</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>KONTOINNEHAVER</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Kontoinnehaver</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>KUNDE</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Kunde</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>PROKURA</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Prokura</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>REGNSKAPSFORER</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Regnskapsfører</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>REVISOR</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Revisor</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>STYREMEDLEM</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Styremedlem</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>STYRETS_LEDER</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Styreleder</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>TIDLIGERE_STYREVERV_DAGLIG_LEDER</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Tidligere styreverv/daglig leder</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>TILSKRIVER_FOR_KONTO</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Tilskriver for konto</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>VARAMEDLEM_STYRET</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Varamedlem styret</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4.7 Rolle</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Registrer hvilken rolle eventuelle tilknyttede personer har til  impliserte, i forbindelse med den/de mistenkelige  transaksjonen(ene).  </p>
+                                <p/>
+                                <p>Du kan velge en eller flere indikasjoner.</p>
+                            </xforms:help>
+                        </xforms:selectMany>
+                        <xforms:input ref="/Skjema/TilknyttedePersoner-grp-5250/TilknyttedePersoner-grp-5265/KontonummerForetakImplisertTilknyttet-datadef-23350">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4.8 Kontonummer: Tilknyttet person -> implisert</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Registrer eventuelt det kontonummeret som binder den/de tilknyttede  personen(ene) og impliserte sammen.  </p>
+                                <p/>
+                                <p>Eksempel kan være hvor flere personer er involvert og man er usikker  på hvem som er implisert eller at en aktuell person har  disposisjonsrett til en av implisertes konti.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Skrives uten mellomrom, punktum eller komma.</p>
+                            </xforms:hint>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Grunnlag-grp-5256">
+                <brreg:sensitivitet type="Mindre sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>5. Grunnlag</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Beskriv grunnlaget for mistanken om mistenkelig transaksjon.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Felter merket (*) er obligatoriske.</p>
+                </xforms:hint>
+                <xforms:selectMany ref="/Skjema/Grunnlag-grp-5256/TransaksjonGrunnlagMelding-datadef-23128">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>BLANDING_AV_PERSON_FIRMA_TRANSAKSJONER</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Blanding av person-/firmatransaksjoner</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>DESTINASJON</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Destinasjon</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>DOKUMENTASJON</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Dokumentasjon</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>FN_LISTE</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>FN-lister (eller andre tilsvarende lister)</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>IMPLISERT_IDENTITET</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Implisertes identitet</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>KONTANTE_TRANSAKSJONER</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kontante transaksjoner</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>MELDT_TIDLIGERE</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Meldt tidligere</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>MIDLENES_OPPRINNELSE</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Midlenes opprinnelse</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>MOTTAKERS_IDENTITET</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Mottakers identitet</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>IMPLISERTES_OPPFORSEL</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Implisertes oppførsel</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>OVERFORSEL_AV_MIDLER_TIL_FRA_UTLANDET</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Overførsel av midler til/fra utlandet</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>UNORMAL_AKTIVITET_PA_KONTO</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Unormal aktivitet på konto</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>UNORMAL_BRUK_AV_BANKKORT_SMARTKORT_EL</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Unormal bruk av bankkort/smartkort el.</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>ANNET</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Annet</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.1 Beskrivelse av mistanken (*)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Du kan velge en eller flere indikasjoner.  </p>
+                        <p/>
+                        <p>Det er viktig at mistanken blir dokumentert, enten i fritekst (pkt.  5.2) og/eller ved hjelp av vedlegg.</p>
+                    </xforms:help>
+                </xforms:selectMany>
+                <xforms:input ref="/Skjema/Grunnlag-grp-5256/TransaksjonMistankeBeskrivelse-datadef-23129">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.2 Utfyllende beskrivelse</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Beskrivelse av hendelsen og andre forhold som danner grunnlag for  meldingen, dersom pkt. 5.1 ikke er dekkende.  </p>
+                        <p/>
+                        <p>Det er viktig at mistanken blir dokumentert, enten i fritekst (under  dette punkt) og/eller ved hjelp av vedlegg.  </p>
+                        <p/>
+                        <p>Vedlegg legges ved meldingen ved hjelp av link i venstre marg i  skjemaet.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Max. 4000 tegn, (tilsvarer ca. 1/2 A4 side).</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

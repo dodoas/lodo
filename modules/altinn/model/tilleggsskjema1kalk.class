@@ -1,0 +1,114 @@
+<?
+
+#Usage
+# new Tilleggsskjema2Kalk(array('sumPart'=>$_sumPart, 'sumGroup'=>$_sumGroup))
+#Ikke periode 13???);
+#
+
+class Tilleggsskjema2Kalk
+{
+    var $_sumPart;
+    var $_sumGroup;
+   
+
+    ############################################################################
+    function Tilleggsskjema2Kalk($args)
+    {	
+       
+    }
+    
+
+    ############################################################################
+    function calculate($ThisYear, $_sumPart, $_sumGroup)
+    {   $this->_sumGroup = $_sumGroup;
+    	$this->_sumPart  = $_sumPart;
+    	
+        $this->_sumPart['1.10a'][$ThisYear]['saldo']=$this->_sumPart['1.1a'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.2a'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.3a'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.4a'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.5a'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.6a'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.7a'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.8a'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.9a'][$ThisYear]['saldo'];
+        $this->_sumPart['1.10b'][$ThisYear]['saldo']=$this->_sumPart['1.1b'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.2b'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.3b'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.4b'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.5b'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.6b'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.7b'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.8b'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.9b'][$ThisYear]['saldo'];
+                                                 
+       $this->_sumPart['1.10c'][$ThisYear]['saldo']=$this->_sumPart['1.1c'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.2c'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.3c'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.4c'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.5c'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.6c'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.7c'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.8c'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.9c'][$ThisYear]['saldo'];
+                                                 
+       $this->_sumPart['1.10d'][$ThisYear]['saldo']=$this->_sumPart['1.1d'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.2d'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.3d'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.4d'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.5d'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.6d'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.7d'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.8d'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.9d'][$ThisYear]['saldo'];
+                                                 
+      $this->_sumPart['1.10e'][$ThisYear]['saldo']=$this->_sumPart['1.1e'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.2e'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.3e'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.4e'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.5e'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.6e'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.7e'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.8e'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.9e'][$ThisYear]['saldo'];
+                                                 
+      $this->_sumPart['1.10f'][$ThisYear]['saldo']=$this->_sumPart['1.1f'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.2f'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.3f'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.4f'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.5f'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.6f'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.7f'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.8f'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['1.9f'][$ThisYear]['saldo'];
+
+    }//function headLodic
+    
+    
+    ############################################################################
+    function sumGroupLogic($Line, $Year, $reportHash, $sumGroup){
+    	 $this->_sumGroup=$sumGroup;
+    	 
+  
+    }
+
+   
+     ############################################################################
+    function sumGroup($LineNum, $Year, $reportHash)
+    {
+        $this->_sumGroup[$LineNum][$Year]['in']     += $reportHash['AmountIn'];
+        $this->_sumGroup[$LineNum][$Year]['out']    += $reportHash['AmountOut'];
+        $this->_sumGroup[$LineNum][$Year]['saldo']  += $reportHash['AmountIn'] - $reportHash['AmountOut'];
+    }
+    
+    function getSumPart(){
+   		return $this->_sumPart;	
+    }
+    
+    function getSumGroup(){
+   		return $this->_sumGroup;	
+    }
+    
+
+}
+?>

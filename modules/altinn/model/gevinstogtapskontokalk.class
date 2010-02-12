@@ -1,0 +1,60 @@
+<?
+
+#Usage
+# new GevinstOgTapskontoKalk(array('sumPart'=>$_sumPart, 'sumGroup'=>$_sumGroup))
+#Ikke periode 13???);
+#
+
+class GevinstOgTapskontoKalk
+{
+    var $_sumPart;
+    var $_sumGroup;
+   
+
+    ############################################################################
+    function GevinstOgTapskontoKalk($args)
+    {	
+       
+    }
+    
+
+    
+    /*
+     * function: 	calculate
+     * desciption:  
+     * args:  		none
+     * return:      none
+     */
+    function calculate() {
+    	
+    	
+    }//function calculate
+    
+    
+ 
+    function sumGroupLogic($Line, $Year, $reportHash, $sumGroup){
+    	$this->_sumGroup=$sumGroup;
+    	
+    	
+    }
+
+   
+    
+    function sumGroup($LineNum, $Year, $reportHash)
+    {
+        $this->_sumGroup[$LineNum][$Year]['in']     += $reportHash['AmountIn'];
+        $this->_sumGroup[$LineNum][$Year]['out']    += $reportHash['AmountOut'];
+        $this->_sumGroup[$LineNum][$Year]['saldo']  += $reportHash['AmountIn'] - $reportHash['AmountOut'];
+    }
+    
+    function getSumPart(){
+   		return $this->_sumPart;	
+    }
+    
+    function getSumGroup(){
+   		return $this->_sumGroup;	
+    }
+    
+
+}
+?>

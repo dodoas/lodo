@@ -1,0 +1,92 @@
+<?
+
+#Usage
+# new SelvangivelseNrKalk(array('sumPart'=>$_sumPart, 'sumGroup'=>$_sumGroup))
+#Ikke periode 13???);
+#
+
+class SelvangivelseNrKalk
+{
+    var $_sumPart;
+    var $_sumGroup;
+   
+
+    ############################################################################
+    function SelvangivelseNrKalk($args)
+    {	
+       
+    }
+    
+
+    ############################################################################
+    function calculate($ThisYear, $sumPart, $sumGroup)
+    {   $this->_sumGroup = $sumGroup;
+    	$this->_sumPart  = $sumPart;
+	
+        if($this->_sumPart['4.1.2a'][$ThisYear]['saldo'] <= 3000)
+        {
+            $this->_sumPart['4.1.2b'][$ThisYear]['saldo'] = 0;
+        }
+        else
+        {
+            $this->_sumPart['4.1.2b'][$ThisYear]['saldo'] =  $this->_sumPart['4.1.2a'][$ThisYear]['saldo'] - 3000;
+            $this->_sumPart['4.1.3'][$ThisYear]['saldo'] = $this->_sumPart['4.1.2b'][$ThisYear]['saldo'];
+        }
+
+        if($this->_sumGroup['2.7.5'][$ThisYear]['saldo'] > 0)
+        {
+            $this->_sumGroup['3.2.19f'][$ThisYear]['saldo'] = abs ($this->_sumGroup['2.7.5'][$ThisYear]['saldo']);
+            $this->_sumPart['3.2.19d'][$ThisYear]['saldo'] =  abs ($this->_sumPart['2.7.4'][$ThisYear]['saldo']);
+
+            unset($this->_sumGroup['2.7.5'][$ThisYear]['saldo']);
+            unset($this->_sumPart['2.7.4'][$ThisYear]['saldo']);
+        }
+        
+        $this->_sumPart['2.7.1'][$ThisYear]['saldo']= abs($this->_sumPart['2.7.1'][$ThisYear]['saldo']);
+    	$this->_sumPart['2.7.2'][$ThisYear]['saldo']= abs($this->_sumPart['2.7.2'][$ThisYear]['saldo']);
+    	$this->_sumPart['2.7.3'][$ThisYear]['saldo']= abs($this->_sumPart['2.7.3'][$ThisYear]['saldo']);
+    	$this->_sumPart['2.7.4'][$ThisYear]['saldo']= abs($this->_sumPart['2.7.4'][$ThisYear]['saldo']);
+    	$this->_sumGroup['2.7.5'][$ThisYear]['saldo']= abs($this->_sumGroup['2.7.5'][$ThisYear]['saldo']);
+
+    	$this->_sumPart['3.1.1b'][$ThisYear]['saldo']= -($this->_sumPart['3.1.1b'][$ThisYear]['saldo']);
+
+    }//function calculate
+    
+    
+    ############################################################################
+    function sumGroupLogic($Line, $Year, $reportHash, $sumGroup){
+    	 $this->_sumGroup=$sumGroup;
+    	 
+    	 // if($Line >= 271 and $Line < 275)
+            if($Line == "2.7.1" || $Line == "2.7.2" || $Line == "2.7.3" || $Line == "2.7.4")
+            {
+                $this->sumGroup('2.7.5', $Year, $reportHash);
+            }
+            // elseif($Line >= 441 and $Line < 445)
+            elseif($Line == "4.4.1" || $Line == "4.4.2" || $Line == "4.4.3" || $Line == "4.4.4")
+            {
+                $this->sumGroup('4.4.5', $Year, $reportHash);
+            }
+           
+    }
+
+   
+     ############################################################################
+    function sumGroup($LineNum, $Year, $reportHash)
+    {
+        $this->_sumGroup[$LineNum][$Year]['in']     += $reportHash['AmountIn'];
+        $this->_sumGroup[$LineNum][$Year]['out']    += $reportHash['AmountOut'];
+        $this->_sumGroup[$LineNum][$Year]['saldo']  += $reportHash['AmountIn'] - $reportHash['AmountOut'];
+    }
+    
+    function getSumPart(){
+   		return $this->_sumPart;	
+    }
+    
+    function getSumGroup(){
+   		return $this->_sumGroup;	
+    }
+    
+
+}
+?>

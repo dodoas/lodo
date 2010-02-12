@@ -1,0 +1,1704 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1242: Næringsoppgave for billedkunstnere</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-61-5914.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-1088/Avgiver-grp-1081/OppgavegiverNavn-datadef-68" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-1088/Avgiver-grp-1081/OppgavegiverFodselsnummer-datadef-26" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1242 Næringsoppgave for billedkunstnere 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Skal bare brukes av billedkunstnere som ikke er fullt  regnskapspliktige etter lov om årsregnskap mv. av 17. juli 1998 §1-2  første ledd.  </p>
+                <p/>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. nov. 1994, jf. ligningsloven § 4-4 nr. 7.  </p>
+                <p/>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1242  </p>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i Næringsoppgave for billedkunstnere 2003,  RF-1242, helt eller delvis bli benyttet også av andre offentlige  organer som har hjemmel til
+                    å innhente de samme opplysningene, jf.  lov om Oppgaveregisteret §§ 5 og 6. Opplysninger om evt. samordning  kan fås ved henvendelse til Oppgaveregisteret på telefon 75 00 75 00,  eller Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1242 Næringsoppgåve for biletkunstnarar 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Dette skjemaet skal berre nyttast av biletkunstnarar som ikkje har  full rekneskapsplikt etter lov om årsrekneskap m.m. av 17. juli 1998  §1-2 første leddet.  </p>
+                <p/>
+                <p>Fastsett av Skattedirektoratet med heimel i Finansdepartementet sitt  delegeringsvedtak.  </p>
+                <p/>
+                <p>Andre offentlege organ sin bruk av opplysningar i RF-1242. For å  samordna og forenkla oppgåveinnleveringa frå næringslivet, kan  opplysningar som vert avgjeve i Næringsoppgåve for biletkunstnarar  2003, RF-1242, heilt eller delvis
+                    bli nytta også av andre offentlege  organ som har heimel til å innhente dei same opplysningar, jf. lov om  Oppgåveregisteret §§ 5 og 6. Opplysningar om evt. samordning kan ein  få ved å vende seg til Oppgåveregisteret på telefon
+                    75 00 75 00,  eller Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-1088">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-1088/Avgiver-grp-1081">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Avgiver</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Avgivar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1088/Avgiver-grp-1081/OppgavegiverNavn-datadef-68">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1088/Avgiver-grp-1081/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1088/Avgiver-grp-1081/OppgavegiverAdresse-datadef-69">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1088/Avgiver-grp-1081/OppgavegiverPostnummer-datadef-6676">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1088/Avgiver-grp-1081/OppgavegiverPoststed-datadef-6677">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1088/Avgiver-grp-1081/EnhetTelefonnummer-datadef-755">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefon</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Telefon</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-1088/Regnskapsforer-grp-1122">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Regnskapsfører</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Rekneskapsførar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1088/Regnskapsforer-grp-1122/RegnskapsforerNavn-datadef-280">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1088/Regnskapsforer-grp-1122/RegnskapsforerAdresse-datadef-281">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1088/Regnskapsforer-grp-1122/RegnskapsforerPostnummer-datadef-6678">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1088/Regnskapsforer-grp-1122/RegnskapsforerPoststed-datadef-6679">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Tilleggsopplysninger-grp-1089">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Tilleggsopplysninger</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>I feltet Tilleggsopplysninger som må gis må det først gis opplysninger  om hvor stor del av telefonutgiftene som etter skattyters eget skjønn  gjelder privat bruk og som således ikke er fradragsberettiget som  næringsutgift.
+                        Dersom skattyter har eget telefonabonnement i  atelieret i tillegg til privatabonnement, må også antatt privat bruk  av næringstelefonen holdes utenfor ved fradragsføringen i post  2.27.  </p>
+                    <p>Dersom atelier og bolig er i samme bygg, skal det gis opplysninger om  samlet husleie, eventuelt ligningsverdi mv.  </p>
+                    <p>Dersom regnskapsførte utgifter også inneholder utgifter til  anskaffelser som er nyttiggjort i forbindelse med arbeid som  lønnstaker, skal det oppgis hvilke utgifter dette gjelder.  </p>
+                    <p>Nederst er det et større felt hvor det kan gis opplysninger som kan  være av betydning for ligningskontorets behandling av  næringsoppgaven.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Tilleggsopplysningar</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>I feltet Tilleggsopplysningar som må givast må ein først gi  opplysningar om kor stor del av telefonutgiftene som ut frå  skattytarens eige skjønn gjeld privat bruk. Desse utgiftene kan ikkje  dragast frå som næringsutgift.
+                        Dersom skattytaren har eige  telefonabonnement i atelieret i tillegg til privatabonnementet, må  også den mogelege private bruken av næringstelefonen haldast utanfor  når ein fører opp frådraga i post 2.27.  </p>
+                    <p>Dersom atelieret og bustaden ligg i same bygget, skal ein gi  opplysningar om samla husleige, eventuelt likningsverdi m.m.  </p>
+                    <p>Dersom rekneskapsførde utgifter også inneheld utlegg til kjøp som ein  også har gjort seg nytte av i samband med arbeidet som lønnstakar,  skal ein oppgi kva for utgifter dette gjeld.  </p>
+                    <p>Nedst er det eit større felt der ein kan gi opplysningar som kan ha  noko å seie for likningskontoret når det skal behandle  næringsoppgåva.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/Tilleggsopplysninger-grp-1089/FordelingAvHusleieMv-grp-1083">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Fordeling av husleie mv. mellom atelier og privatbolig</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Fordeling av husleige m.m. mellom atelier og privat bustad</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Tilleggsopplysninger-grp-1089/FordelingAvHusleieMv-grp-1083/HusleieStromMv-datadef-1716">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Samlet husleie, strøm mv.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Samla husleige, straum m.m.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Tilleggsopplysninger-grp-1089/FordelingAvHusleieMv-grp-1083/BoligLigningsverdi-datadef-1228">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Likningverdi av egen bolig</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Likningsverdi av eigen bustad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/Tilleggsopplysninger-grp-1089/Leieinntekter-datadef-890">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Husleieinntekt for eventuelt utleid del av egen bolig</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Husleigeinntekt for eventuelt utleigd del av eigen bustad</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Tilleggsopplysninger-grp-1089/BoligAreal-datadef-1351">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Boligens totale areal</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Det totale areal av bustaden</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Tilleggsopplysninger-grp-1089/BoligNaringsareal-datadef-1717">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Herav til næring</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Del nytta til næring</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Tilleggsopplysninger-grp-1089/RomNaring-datadef-1718">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall rom i næring</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Talet på rom til næring</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/Tilleggsopplysninger-grp-1089/UtgifterRegnskapsfortTilknyttetLonnsinntekt-datadef-11997">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Inneholder de regnskapsførte utgifter også utgifter tilknyttet  lønnsinntekt som er ført direkte i Selvangivelse for næringsdrivende  mv.?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Inneheld dei rekneskapsførde utgiftene også utgifter tilknytt  lønsinntekter som er førde direkte i Sjølvmelding for næringsdrivande  m.m.?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/Tilleggsopplysninger-grp-1089/InntekterUtgiftsfortBilledkunstnere-datadef-11998">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgi hvilke utgifter</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Gi opp kva for utgifter det gjeld</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Tilleggsopplysninger-grp-1089/LigningBilledkunstnereTilleggsopplysninger-datadef-11999">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Andre tilleggsopplysninger</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Her kan det gis tilleggsopplysninger som skattyter mener kan være av  betydning ved likningen</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Andre tilleggsopplysningar</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Her kan ein komme med  tilleggsopplysningar som skattytaren meiner kan  ha noko å seie for likninga</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/ResultatregnskapInntekter-grp-1090">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Resultatregnskap - Inntekter</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Statens garantiinntekt, statens arbeidsstipend, samt annen  lønnsinntekt, skal ikke tas med som inntekt i næringsoppgaven, men  føres rett i selvangivelsen post 2.1.1.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Resultatrekneskap - Inntekter</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Statens garantiinntekt, statens arbeidsstipend, samt anna  lønnsinntekt, skal ikkje takast med som inntekt i næringsoppgåva, men  førast beint inn i Sjølvmelding for næringsdrivande m.m. post 2.1.1.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/ResultatregnskapInntekter-grp-1090/SalgsinntekterAtelier-datadef-1719">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.01 Salg fra atelier</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Eventuelle inntekter av byttehandler settes opp til antatt verdi av  den innbyttede vare. Vær oppmerksom på at for kunstverk som gis som  gaver, f.eks. til familie eller veldedige formål, vil det normalt  etter skatteloven
+                            § 5-1 (1) være skatteplikt for salgsverdien.  Materialer eller produksjonsomkostninger skal i slike tilfeller også  føres som utgift på vanlig måte.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Privat salg</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.01 Sal frå atelier</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Eventuelle inntekter av bytehandlar skal setjast opp til den pårekna  verdien av den vara ein har bytt til seg. Ver merksam på at for  kunstverk som er gåver, t.d. til familie eller velgjerdsføremål, er  ein etter § 5-1 (1)
+                            i skattelova pliktig til å betale skatt av  salsverdien. Materialar eller produksjonskostnader skal også ved  slike høve førast som utgift på vanleg måte.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Privat sal</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapInntekter-grp-1090/SalgsinntekterUtstillingerKommisjonssalgOl-datadef-1720">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.02 Salg fra utstillinger, kommisjonssalg o.l.</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.02 Sal frå utstillingar, kommisjonssal o.l.</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapInntekter-grp-1090/SalgsinntekterAnnet-datadef-1124">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.03 Andre salgsinntekter</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Salg av utstyr, materialer o.l. føres her. For utstyr som avskrives,  kan inngangsverdien (kostprisen) nedskrives på saldo i den  utstrekning en ikke ønsker å ta vederlaget til inntekt i salgsåret.  Se rettledningen til
+                            post 106 i avskrivningsskjemaet.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.03 Andre salsinntekter</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Sal av utstyr, materialar o.l. skal førast opp her. For utstyr som  skal skrivast av, kan inngangsverdien (kostprisen) skrivast ned på  saldo i den grad ein ikkje vil ta vederlaget til inntekt i salsåret.  Sjå rettleiinga
+                            til post 5 i saldoskjemaet.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapInntekter-grp-1090/Utstillingsvederlag-datadef-1721">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.04 Utstillingsvederlag</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.04 Utstillingsvederlag</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapInntekter-grp-1090/StipendPriserReisetilskuddKonkurransepremier-datadef-1722">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.05 Stipend, priser, reisetilskudd, konkurransepremier</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres de samlede inntekter av stipend, priser, reisetilskudd og  konkurransepremier. Garantiinntekt og statens arbeidsstipend føres  imidlertid direkte i selvangivelsen som lønnsinntekt. Dessuten er en  rekke priser og
+                            stipend unntatt fra skatteplikt. De viktigste er de  fleste utdanningsstipend, kunstnerlønn fra Stortinget, Norsk  Kulturråds æres- og kulturpriser, kommunale og fylkeskommunale æres-  og kulturpriser. Informasjon om dette
+                            kan innhentes i NBK.  </p>
+                        <p>De stipend som gis med det formål å dekke nærmere spesifiserte  utgifter, bør det føres eget regnskap for. Her brukes nettometoden,  det vil si at det er bare et eventuelt overskudd som er skattepliktig  inntekt.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.05 Stipend, prisar, reisetilskott, konkurransepremiar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein opp dei samla inntektene av stipend, prisar,  reisetilskott og konkurransepremiar som ein har hatt, bortsett frå  garantiinntekt og statens arbeidsstipend, som ein fører direkte inn i  sjølvmeldinga som
+                            lønnsinntekt. Dessutan er ei rad med prisar og  stipend fritekne frå skatteplikt. Dei viktigaste her er dei fleste  utdanningsstipend, kunstnarlønn frå Stortinget, Norsk Kulturråd sine  æres- og kulturprisar, kommunale og
+                            fylkeskommunale æres- og  kulturprisar. Informasjon om dette kan ein få ved å vende seg til  NBK.  </p>
+                        <p>Dei stipenda som skal dekkje nærmare spesifiserte utgifter bør det  førast eigen rekneskap for. Her kan ein bruke nettometoden det vil  seie at det berre er eit eventuelt overskott som er skattepliktig  inntekt.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapInntekter-grp-1090/InntekterKunstneriskeOppdragKonsulentvirksomhet-datadef-1723">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.06 Inntekter fra kunstneriske oppdrag og konsulentvirksomhet</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her er det i dag varierende praksis for utbetalingsformen. Enkelte  oppdragsgivere skiller honorar til kunstneren og  produksjonsomkostningene. Hvis produksjonsomkostningene dekkes  direkte av oppdragsgiver og ikke tas med
+                            på utgiftssiden, skal bare  nettohonoraret tas med her. I enkelte tilfelle innberetter  oppdragsgiver honoraret som lønn. I så fall føres inntektene direkte  i post 2.1.1 i selvangivelsen, og ikke i næringsoppgaven.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.06 Inntekter frå kunstnarlege oppdrag og konsulentverksemd</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her er det i dag varierande praksis for utbetalingsforma. Somme  oppdragsgivarar skil honoraret til kunstnaren og  produksjonskostnadene frå ein annan. Dersom oppdragsgivaren dekkjer  produksjonskostnadene direkte, og dei
+                            ikkje blir tekne med på  utgiftssida skal berre nettohonoraret takast med her. I somme høve  melder oppdragsgivaren honoraret inn som lønn. I så fall fører ein  inntektene direkte inn i post 2.1.1 i Sjølvmelding for
+                            næringsdrivande m.m., og ikkje i næringsoppgåva.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapInntekter-grp-1090/InntekterKunstneriskVirksomhetAnnet-datadef-1724">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.07 Andre inntekter fra kunstnerisk virksomhet</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Eventuelle bidrag for konkurransedeltakelse o.l. føres opp her.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.07 Andre inntekter frå kunstnarleg verksemd</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Eventuelle tilskott frå deltaking i konkurransar o.l. skal førast opp  her.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapInntekter-grp-1090/InntekterAndre-datadef-323">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.08 Andre inntekter</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres andre inntekter som også inngår i beregningen av  personinntekt. Dette kan være inntektsføring av negativ saldo i  saldogruppe a, c eller d, salgssum på avskrivbare driftsmidler i  saldogruppe a, c eller d som
+                            skattyter ikke velger å nedskrive på  saldo, utleieinntekter i næringsbygg mv.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Inntektsføring av negativ saldo/salgssum på avskrivbare driftsmidler  som ikke nedskrives på saldo.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.08 Andre inntekter</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein opp andre inntekter som også skal takast med når  personinntekta blir rekna ut. Dette kan vere inntektsføring av  negativ saldo i saldogruppe a, c eller d, salssum på avskrivbare  driftsmiddel i saldogruppe a,
+                            c eller d som skattytaren ikkje vil  skrive ned på saldoen, utleigeinntekter i næringsbygg m.m.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Inntektsføring av negativ saldo/salssum på avskrivbare driftsmiddel  som ikkje blir nedskrivne på saldo</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapInntekter-grp-1090/Inntekter-datadef-373">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.10 Sum inntekter</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.10 Sum inntekter</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/ResultatregnskapKostnader-grp-2738">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Resultatregnskap - Kostnader</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Det skal foreligge bilag for samtlige utgifter.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Resultatrekneskap - Kostnader</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Det skal vere bilag for alle utgiftene.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/VarekostnadBilledkunstner-datadef-15515">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.11 Kjøp av varer/materialer</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her medtas samtlige kostnader til varer/materialer som inngår i  tilvirkningen av kunstverk, herunder rammer, sokler mv. Det er årets  innkjøp av varer som skal framgå av denne posten. Det skal ikke tas  hensyn til
+                            verdiendringer i beholdningen av varer på lager.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.11 Kjøp av varer/material</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her tek ein med alle kostnader som ein har hatt til varer/materialar  som går med til å lage eit kunstverk, medrekna rammer, soklar m.m.  Det er innkjøpet av varer i dette året som skal gå fram av denne  posten. Ein skal
+                            ikkje ta omsyn til verdiendringar i det varelageret  som ein sit inne med.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/Lonnskostnader-datadef-81">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.12 Lønnskostnader, feriepenger, honorarer o.l.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>I denne posten føres enhver form for lønn i tjenesteforhold. Beløpet  som føres her er innberetningspliktig dersom utbetalingene til en  person overstiger kr 1 000 i løpet av året. Utbetaling til  selvstendig
+                            næringsdrivende skal ikke føres her.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.12 Lønskostnader, feriepengar, honorar o.l.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>I denne posten skal ein føre opp alle former for lønn i  tenestesamanheng. Det beløpet ein fører opp her, er ein pliktig til å  lønnsmelde, dersom utbetalingane går over kr 1000 i året. Utbetaling  til dei som er
+                            sjølvstendig næringsdrivande skal ikkje takast med  her.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/Arbeidsgiveravgift-datadef-104">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.13 Arbeidsgiveravgift</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>I denne posten føres arbeidsgiveravgiften vedrørende årets  lønnskostnader.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.13 Arbeidsgivaravgift</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>I denne posten fører ein opp den arbeidsgivaravgifta som følgjer av  lønnskostnadene i dette året.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/FagligBistandLeidHjelp-datadef-1725">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.14 Kostnader til faglig bistand og leid hjelp</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kunstnere som benytter modell, eller har behov for assistanse av  konsulenter, håndverkere osv i forbindelse med teknisk utføring,  transport o.l., har fradragsrett for utgifter i forbindelse med  dette. Vær oppmerksom på
+                            at dersom mottakeren av honoraret ikke  utfører arbeidet som ledd i selvstendig næringsvirksomhet, må post  2.12 benyttes og arbeidsgiveravgift må betales.  </p>
+                        <p>Ved utbetalinger til selvstendig næringsdrivende skal det ikke foretas  skattetrekk eller innbetales arbeidsgiveravgift av beløpet. Det er  heller ikke plikt til å levere lønns- og trekkoppgave dersom denne  driver sin
+                            næringsvirksomhet fra fast forretningssted i Norge.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.14 Kostnader til fagleg støtte og leigd hjelp</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Kunstnarar som gjer bruk av modell eller har bruk for assistanse av  konsulentar, handverkarar osb. i samband med teknisk utføring,  transport o.l., har frådragsrett for utgifter i samband med dette.  Ver merksam på at
+                            dersom mottakaren av honoraret ikkje utfører  arbeidet som eit ledd i sjølvstendig næringsverksemd, må post 2.12  nyttast og arbeidsgivaravgift betalast.  </p>
+                        <p>Når ein betaler ut pengar til ein som er sjølvstendig næringsdrivande,  skal det ikkje trekkjast frå skatt eller betalast inn  arbeidsgivaravgift av beløpet. Det er heller ikkje plikt til å levere  lønns- og trekkoppgåve
+                            for utbetaling til sjølvstendig  næringsdrivande dersom vedkommande driv forretningsverksemda si frå  ein fast forretningsstad i Noreg.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/Produksjonsbistand-datadef-1726">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.15 Kostnader til produksjonsbistand</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Assistanse til produksjon, trykking, støping, innramming o.l. vil  vanligvis være ytet av skattytere som er selvstendig næringsdrivende.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.15 Kostnader til produksjonshjelp</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Assistanse ved produksjon, trykking, støyping, innramming o.l. er til  vanleg gitt av skattytarar som er sjølvstendig næringsdrivande.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/FotograferingDokumentasjon-datadef-1727">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.16 Fotografering, dokumentasjon av utført arbeid</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Teknisk utstyr til fotografering, eventuell fremkalling og  forstørring, føres under post 2.18 dersom kostprisen for den enkelte  gjenstand er under kr 15 000. Forbruksvarer som film, papir,  fremkallings- og
+                            kopieringstjenester samt bistand fra profesjonelle  fotografer, føres her.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.16 Fotografering, dokumentasjon av utført arbeid</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Teknisk utstyr til fotografering, eventuell framkalling og forstørring  skal førast inn under post 2.18 dersom kostprisen for kvar einskild  ting er under kr 15 000. Forbruksvarer som film, papir, framkalling-  og
+                            kopieringstenester og hjelp frå profesjonelle fotografar, skal  førast opp her.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/FremmedeTjenester-datadef-106">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.17 Andre fremmede tjenester</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres kostnader til ekstern regnskapsfører, advokatbistand mv.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Regnskapsfører, advokat mv.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.17 Andre framande tenester</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein opp kostnader til ekstern rekneskapsførar, advokathjelp  m.m.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Rekneskapsførar, advokat m.m.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/DriftsmaterialerIkkeAktivert-datadef-129">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.18 Inventar, utstyr, verktøy og tekniske hjelpemidler som ikke skal  gjøres til gjenstand for avskrivning</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres verktøy, presser og andre tekniske hjelpemidler som  fotoutstyr o l. Verktøy for varig bruk, men som koster mindre enn kr  15 000, kan utgiftsføres i kjøpsåret. Kostprisen kan også fordeles  gjennom avskrivning.
+                            Verktøy som koster mer enn kr 15 000, skal  saldoavskrives på saldogruppe d med inntil  20 % av gjenstående verdi  hvert år. Kontormaskiner som skrivemaskiner, kopimaskiner og PC,  saldoavskrives med en sats på inntil  30
+                            %. Avskrivningsgrunnlag  under kr 15 000 kan utgiftsføres direkte.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Kostpris under kr 15 000</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.18 Inventar, utstyr, verktøy og tekniske hjelpemiddel som ikkje skal  avskrivast</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein opp verktøy, presser osb, men også andre tekniske  hjelpemiddel som fotoutstyr o.l. Verktøy til varig bruk, og som  kostar mindre enn kr 15 000, kan utgiftsførast i det same året som  dei blir kjøpte.
+                            Kostprisen kan også fordelast gjennom avskriving.  Verktøy som kostar meir enn kr 15 000, skal avskrivast på saldoen på  saldogruppe d med opptil  20 prosent av den verdien som står att for  kvart år. Avskrivingsgrunnlag
+                            som ligg under kr 15 000, kan  utgiftsførast direkte. Kontormaskiner som skrivemaskiner,  kopimaskiner og PC skal skrivast av på saldoen med ein sats på opptil  30 prosent.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Kostpris under kr 15 000</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/VedlikeholdLokaler-datadef-12000">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.19 Vedlikehold av lokaler</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres kostnader til vedlikehold av lokaler. Dette gjelder  kostnader som pådras til å holde lokalene i den stand de opprinnelig  var. Påkostninger som f.eks. nye installasjoner, utvidelser osv.,  skal aktiveres
+                            uavhengig av beløpets størrelse, og eventuelt  avskrives dersom betingelsene for avskrivning er til stede. Dersom  skattyter har bolig i næringsbygg, skal vedlikeholdskostnadene  vedrørende boligdelen føres i post 2.72.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Om vedlikehold egen boligdel, se post 2.72</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.19 Vedlikehald av lokale</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein opp kostnader til vedlikehald av lokale. Dette gjeld  kostnader som ein får ved å halde lokala i den stand som dei  opphavleg var i. Påkostnader som t.d. nye installasjonar, utvidingar  og liknande skal
+                            aktiverast uavhengig av kor stort beløpet er. Slike  kostnader skal eventuelt skrivast av dersom vilkåra for avskriving er  til stades. Dersom ein skattytar har bustad i sjølve næringsbygget,  skal vedlikehaldskostnadene
+                            for bustaddelen førast på post 2.72.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Om vedlikehald av eigen bustad, sjå post 2.72</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:group ref="/Skjema/ResultatregnskapKostnader-grp-2738/AndreKostnaderTilLokaler-grp-1107">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.20 Andre kostnader til lokaler</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom arbeidslokale leies, føres leiekostnaden i post a. Brukes deler  av leid bolig som arbeidslokale, skal andel av leie som gjelder  arbeidslokalene føres her. Feltet Tilleggsopplysninger som må gis, må  fylles ut slik
+                            at det framgår hvordan leien er beregnet.  </p>
+                        <p>Har De atelier i egen bygning (næringsbygg), kan kjøpesummen/  byggesummen for hele bygningen avskrives fullt ut. Har De atelier i  samme bygning som egen bolig, kan inngangsverdien  (kjøpesummen/byggesummen) for
+                            atelierdelen avskrives dersom atelier/  næringslokaler utgjør den største delen av huset (regnet etter  leieverdi). Vedlikeholds- og driftsomkostninger på hele eiendommen  vil da være fradragsberettiget ved
+                            inntektsligningen. Boligen skal da  bruttolignes. Det vil si at brutto utleieverdi (tilsvarende den  inntekt De ville fått ved utleie til andre) skal inntektsføres. Dette  er en kapitalinntekt og skal føres i post 2.71.
+                            Den andelen av  vedlikeholds- og driftsomkostninger som gjelder boligdelen skal ikke  føres i post 2.20, men føres i post 2.72.  </p>
+                        <p>Har De felles bolig og atelier i egen eiendom og boligdelen er størst  (boligeiendom), kan fradrag for utgifter vedrørende næringslokalene  gis etter 3 alternativer:  </p>
+                        <p>1) Det innrømmes fradrag med kr 1 350,-.  </p>
+                        <p>2) Det gis fradrag med 6,5 % av den del av ligningsverdien som faller  på næringsdelen.  </p>
+                        <p>3) Det gis fradrag med 5 % av ligningsverdien på samme måte som under  pkt 2 med tillegg av faktiske utgifter av den art som ikke går inn i  prosentligningen, eksempelvis utgifter til lys, varme mv.  </p>
+                        <p>Utgiftene må sannsynliggjøres. Atelierets andel av ligningsverdien  fastsettes skjønnsmessig. Fordeling skjer i prinsippet på grunnlaget  av utleieverdien. Prosentfradraget etter nr 2 og 3 føres i post c,  mens lys, varme
+                            mv føres i post b. Eventuelt fradrag etter nr 1 føres  i post a.  </p>
+                        <p/>
+                        <p>Innredning:  </p>
+                        <p>I tillegg til fradrag for utgiftene til lokaler, kan De også trekke  fra utgifter til innredning o.l. For separat atelier eller felles  bolig/atelier hvor atelier utgjør den største delen, vil normalt alle  utgiftene til
+                            innredning av næringsdelen være fradragsberettigede. I  andre tilfeller er det utgifter som er spesielt knyttet til  næringslokalene, eller merutgifter ved dyrere installasjoner som  skyldes næringsvirksomheten (f.eks.
+                            opplegg for 3- faset strøm) som  vil være fradragsberettiget.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.20 Andre kostnader til lokaler</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dersom ein må leige arbeidslokale, fører ein desse leigekostnadene i  post a. Om ein bruker deler av ein leigd bustad til arbeidslokale,  skal den delen av leiga som gjeld arbeidslokala førast her. Feltet
+                            Tilleggsopplysningar som må gis, må fyllast ut slik at det går fram  korleis leiga er rekna ut.  </p>
+                        <p>Har ein atelier i sin eigen bygning (næringsbygg), kan  kjøpesummen/-byggjesummen for heile bygningen skrivast av fullt ut.  Har ein atelier i same bygningen som bustaden er, kan inngangsverdien  (kjøpesummen/byggjesummen)
+                            for atelierdelen skrivast av dersom  atelieret/næringslokala utgjer den største delen av huset (rekna  etter leigeverdien). Vedlikehalds- og driftskostnader på heile  eigedommen kan ein da trekkje frå ved inntektslikninga.
+                            Bustaden skal  da bruttoliknast. Det vil seie at brutto utleigeverdi (som svarer til  den inntekta ein kunne ha fått ved å leige ut til andre) skal  inntektsførast. Dette er ei kapitalinntekt og skal da førast på post
+                            2.71. Den delen av vedlikehalds- og driftskostnadene som gjeld  bustaddelen, skal ikkje førast på post 2.20, men på post 2.72.  </p>
+                        <p>Har ein felles bustad og atelier på sin eigen eigedom og bustaddelen  er størst (bustadeigedom), kan frådrag for utgifter til næringslokala  gis etter 3 alternativ:  </p>
+                        <p>1) Ein får eit frådrag på kr 1 350.  </p>
+                        <p>2)  Ein får eit frådrag på 6,5 prosent av den delen av likningsverdien  som fell på næringsdelen.  </p>
+                        <p>3)  Ein får eit frådrag på 5 prosent av likningsverdien på same måten  som under pkt 2, med eit tillegg av faktiske utgifter av det slaget  som ikkje går inn i prosentlikninga, til dømes utgifter til lys,  varme m.m. Desse
+                            utgiftene må det gjerast greie for.  </p>
+                        <p/>
+                        <p>Kor stor del av likningsverdien som fell på atelieret, blir fastsett  etter skjønn. Fordelinga skjer i prinsippet på grunnlag av  utleigeverdien. Prosentfrådraget etter nr 2 og 3 skal førast opp i  post c, mens lys og varme
+                            m.m. skal førast opp i post b. Eit  eventuelt frådrag etter nr 1 skal førast i post a.  </p>
+                        <p>Innreiing:  </p>
+                        <p>I tillegg til frådrag for utgiftene til lokale, kan ein også trekkje  frå utgifter til innreiing o.l. Har ein eit utskilt atelier eller  felles bustad/atelier der atelieret utgjer den største delen, kan ein  til vanleg få
+                            frådrag for alle utgiftene til innreiinga av  næringsdelen. I andre tilfelle er det utgifter som er særskilt knytte  til næringslokala, eller meirutgifter ved dyrare installasjonar som  kjem av næringsverksemda (t.d. ved
+                            opplegg for 3-fasa straum) som ein  har krav på frådrag for.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/AndreKostnaderTilLokaler-grp-1107/LeiekostnaderAtelier-datadef-1728">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>a) Leie for atelier</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>a) Leige for atelier</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/AndreKostnaderTilLokaler-grp-1107/LysVarmeVannRenovasjon-datadef-127">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>b) Lys, varme mv.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>b) Lys, varme m.m.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/AndreKostnaderTilLokaler-grp-1107/KostnaderAtelierEgenBolig-datadef-1729">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>c) Atelier i egen privatbolig</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>c) Atelier i eigen privatbustad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/Fraktkostnader-datadef-1468">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.21 Fraktkostnader</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>All frakt av materialer og ferdige verk føres her. Likevel føres  kjøring med privatbil under post 2.65. Forsikringer som inngår i  fraktoppgjøret medtas her, mens eventuelle andre forsikringskostnader  føres under post 2.28.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.21 Fraktkostnader</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>All frakt av materialar og ferdige verk skal førast her. Likevel må  ein føre køyring med privatbil under post 2.65. Forsikringar som er  ein del av fraktoppgjeret skal takast med her, mens eventuelle andre
+                            forsikringskostnader skal førast under post 2.28.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/Utstillingskostnader-datadef-1730">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.22 Utstillingsutgifter</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Utstillingsavgift er mer vanlig ute i Europa, men vil også forekomme  enkelte steder her i landet. Dersom kontingent til regionale  kunstnerorganisasjoner er en forutsetning for å få anledning til å  delta på utstillinger,
+                            vil beløpet kunne føres som utstillingsutgift.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.22 Utstillingsavgifter</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Ordninga med utstillingsavgifter er meir vanleg ute i Europa, men kan  også finnast på somme stader her i landet. Dersom kontingenten til  regionale kunstnarorganisasjonar er ein føresetnad for å få høve til  å delta på
+                            utstillingar, kan beløpet førast opp som ein  utstillingskostnad.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/KostnaderUtstillingVisning-datadef-1731">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.23 Andre utstillings- og visningskostnader</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.23 Andre utstillings- og framvisningskostnader</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/MoterKursStudiereiser-datadef-1732">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.24 Faglige møter, kurs og studiereiser</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Reiser som er foretatt med henblikk på direkte arbeidsresultater, som  f eks reiser for å male eller ta skisser til bruk i den videre  arbeidsprosess, føres her. Likeledes reiser i forbindelse med egne  utstillinger. Slike
+                            reiser er fullt ut fradragsberettigede.  </p>
+                        <p>Når det gjelder studiereiser, må det sondres mellom reiser som  skattyter foretar med sikte på videre utdannelse og studiereiser som  skattyter foretar for å holde seg á jour med utviklingen innen sitt  yrke. Utgifter til
+                            studiereiser av den førstnevnte kategori antas i  alminnelighet ikke å være fradragsberettiget. Utgifter til  studiereiser som er nødvendig for at skattyteren skal kunne følge med  i utviklingen innen sitt yrke, antas
+                            derimot å kunne kreves  fratrukket inntekten ved ligningen. På samme måte som når det gjelder  utgifter til faglitteratur, antar en at det ikke kan oppstilles som  noen betingelse for fradrag at utgiftene står direkte i
+                            forbindelse  med vedkommendes inntekter samme år. Det er viktig å oppgi  reisemål/reiseområde samt antall fraværsdøgn. Reiseutgifter  utgiftsføres med faktiske utgifter i følge regnskapsbilag. Dersom  reise er foretatt med
+                            egen bil, fradragsføres bilbruken etter de  vanlige regler, se nedenfor under rettledningen til post 2.30.  Utgifter til kost og losji utgiftsføres med reelle utgifter ifølge  regnskapsbilag. Dersom post 2.24 inneholder
+                            betydelige  enkeltkostnader, må det gis en nærmere spesifikasjon av kostnadene i  spesifikasjonsfeltet i næringsoppgaven.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.24 Faglege møte, kurs og studiereiser</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Reiser som ein gjer med tanke på direkte arbeidsresultat, slik som  reiser for å måle eller ta skisser til bruk den vidare  arbeidsprosessen, skal førast opp her. Likeins gjeld dette reiseri  samband med eigne utstillingar.
+                            Slike reiser har ein krav på frådrag  for fullt ut.  </p>
+                        <p>Når det gjeld studiereiser, må ein skilje mellom reiser som ein  skattytar gjer med sikte på vidare utdanning og studiereiser som han  gjer for å halde seg àjour med utviklinga innanfor yrket sitt.  Utgifter til
+                            studiereiser av det første slaget reknar ein til vanleg  med at ein ikkje har krav på frådrag for. Utgifter til studiereiser  som krevst for at skattytaren skal kunne følgje med i utviklinga  innanfor yrket sitt, reknar
+                            ein derimot med at ein kan trekkje frå på  inntekta si ved likninga. På same måten som når det gjeld utgifter  til faglitteratur, går ein ut frå at det ikkje kan setjast opp noko  vilkår for frådrag at utgiftene står
+                            beinveges i samband med dei  inntektene vedkommande har hatt i det same året. Det er viktig å gi  opp reisemålet/ reiseområdet attåt talet på kor mange fråværsdøgn det  dreier seg om. Reiseutgiftene skal utgiftsførast med
+                            dei faktiske  utgiftene som følgjer av rekneskapsbilag. Dersom ein har reist med  sin eigen bil, fører ein bilbruken til frådrag etter dei vanlege  reglane. Sjå nedanfor under rettleiinga til post 2.30 om dette.  Utgifter
+                            til kost og losji utgiftsfører ein med reelle utgifter ut  frå rekneskapsbilag. Dersom post 2.24 inneheld store  einskildkostnader, må ein gi ei nærmare utgreiing om desse kostnadene  i spesifikasjonsfeltet i næringsoppgåva.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/Kontingenter-datadef-1733">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.25 Kontingent</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kontingent til landsomfattende yrkes- og næringsorganisasjoner (som  NBK og de landsomfattende fagtekniske organisasjoner) kan  fradragsføres med til sammen inntil kr 1.100.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.25 Kontingentar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Kontingentar til landsomfattande yrkes- og næringsorganisasjonar (som  NBK og dei landsomfattande fagteknisk organisasjonane) kan førast til  frådrag med til saman opptil kr  1.100.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/Faglitteratur-datadef-1734">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.26 Faglitteratur</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Utgiftene til faglitteratur må regnskapsføres etter bilag. Utgiftene  er fradragsberettiget når anskaffelsen er nødvendig for at skattyter  skal kunne følge med i utviklingen innen sitt yrke.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.26 Faglitteratur</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Utgiftene til faglitteratur må rekneskapsførast etter bilag. Desse  utgiftene kan ein få frådrag for når innkjøpet er nødvendig for at  skattytaren skal kunne følgje med i utviklinga innanfor yrket sitt.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/Telefon-datadef-1735">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.27 Elektronisk kommunikasjon i næring</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom det er felles telefon for privat bruk og næringen, må det  foretas en skjønnsmessig fordeling av telefonkostnadene ut fra hvor  stor andel av bruken som antas å gjelde næringsvirksomheten.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.27 Elektronisk kommunikasjon i næring</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dersom ein har felles telefon for privat bruk og til næringsverksemda,  må ein dele opp telefonkostnadene etter skjønn, alt etter kor stor  del av bruken som gjeld næringsverksemda.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/KontorrekvisitaMv-datadef-131">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.28 Porto, annonser, kontorrekvisita og forsikringer</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Forsikringspremiene skal gjelde de forsikringer som har med den  kunstneriske aktivitet å gjøre, f.eks egen forsikring av verk i og  utenfor atelier o.l. samt forsikring av næringsbygg. Påse at  forsikringsutgiftene
+                            vedrørende næringsbygg ikke tas med i post 2.20.  Livsforsikringer mv. holdes utenfor. Forsikringspremie vedrørende  boligdel i næringsbygg føres i post 2.72.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.28 Porto, annonsar, kontorutstyr og forsikringar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Forsikringspremiane skal gjelde dei forsikringane som har med den  kunstnarlege aktiviteten å gjere. Det kan t.d. gjelde eiga forsikring  av verk som ein har i og utanfor atelier o.l., samt forsikring av  næringsbygg. Ein
+                            må passe på at forsikringsutgiftene ved næringsbygg  ikkje blir tekne med i post 2.20. Livsforsikring m.m. skal haldast  utanfor. Forsikringspremien ved bustaddelen i eit næringsbygg skal  førast i post 2.72.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/AvskrivningerOrdinareSkattemessig-datadef-7398">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.29 Skattemessige avskrivninger</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Se redegjørelse nedenfor under beregning av avskrivningene i  forbindelse med utfylling av postene 3.01 - 3.03 i næringsoppgaven.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.29 Skatteavskrivningar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Sjå utgreiinga nedanfor under utrekning av avskrivingane i samband med  utfylling av postane 3.01 - 3.03 i næringsoppgåva.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/KostnaderYrkesbil-datadef-1737">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.30 Drivstoff, vedlikehold, forsikringspremie, avgifter og  garasjeleie for yrkesbil</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>For bil som utelukkende brukes i næring (yrkesbil), kan samtlige  kostnader fradragsføres. Det bør føres kjørebok gjennom hele året.  Driftsutgiftene skal overføres til skjema RF-1125 Opplysninger om  bruk av bil. Skjemaet
+                            skal vedlegges Selvangivelse for  næringsdrivende mv. Innkjøpsprisen utgiftsføres gjennom  saldoavskrivning. Årets avskrivning føres i næringsoppgaven post  2.29. Avskrivningsskjema må leveres. Dersom det gjelder en
+                            varebil,  skal denne avskrives på saldogruppe c med inntil 20% pr år.  Personbiler avskrives i saldogruppe d med inntil  20% årlig  avskrivning.  </p>
+                        <p>Brukes bilen både til kjøring i næring og til privatkjøring, kan den  anses som yrkesbil dersom kjøring i næring utgjør mer enn 6 000 km pr  år, eller dersom bilen er nødvendig i næringen for å frakte verktøy,  ferdige verk
+                            e.l. og yrkesbruken utgjør den overveiende del av den  totale bruken. Betraktes bilen som yrkesbil, gis det rett til fradrag  for faktiske utgifter og avskrivning som ovenfor, men den del av  kostnadene som faller på den
+                            private bruken skal tilbakeføres som  ikke-fradragsberettigede kostnader. Den private bruken skal alltid  fastsettes til 13 000 km pr år selv om den faktiske privatkjøring  utgjør mer eller mindre enn 13 000 km. Det beløp
+                            som skal  tilbakeføres framkommer ved at 13 000 km multipliseres med en  kilometersats som fastsettes ut fra bilens listepris som ny. I  tillegg kommer kjøring mellom hjem og arbeidssted hvor de første 4  000 kilometer
+                            skal tilbakeføres etter samme satser.  </p>
+                        <p>Overskytende antall kilometer mellom hjem og arbeidssted skal  tilbakeføres etter fradragssatsen som gjelder for daglig reise mellom  hjem og fast arbeidssted (arbeidsreise).  </p>
+                        <p>Denne satsen er kr 1,40 pr kilometer for inntektsåret 2003.  </p>
+                        <p>Tilbakeføringen for privat bruk av næringsbil skal likevel ikke  overstige 75% av de samlede bilkostnader. Med samlede bilkostnader  menes faktiske driftskostnader tillagt 10% av bilens listepris som  ny. Er bilen over 10
+                            år gammel faller 10%-tillegget bort.  </p>
+                        <p/>
+                        <p>Antall km multipliseres i år 2003 med følgende satser som er basert på  bilens opprinnelige listepris som ny:  </p>
+                        <p>Til og med kr   75 000 kr 2,85 pr km  </p>
+                        <p>kr   75 001-kr 100 000 kr 3,45 pr km  </p>
+                        <p>kr 100 001-kr 150 000 kr 4,05 pr km  </p>
+                        <p>kr 150 001-kr 200 000 kr 4,70 pr km  </p>
+                        <p>kr 200 001-kr 250 000 kr 5,55 pr km  </p>
+                        <p>kr 250 001-kr 300 000 kr 6,40 pr km  </p>
+                        <p>over kr 300 000 kr 7,00 pr km  </p>
+                        <p>Når bilens listepris som ny + ekstrautstyr overstiger kr 450 000, skal  inntektsføringen økes med 10% av den delen av listeprisen som  overstiger kr 450 000.  </p>
+                        <p>Den som bruker privatbil under 6 000 km årlig i næringen kan kreve  fradrag for det faktiske antall kilometer som er kjørt i næring etter  en kilometersats. For 2003 er satsen kr 3,00. Post 2.65 skal da  benyttes. Det er i
+                            utgangspunktet ikke plikt til å levere bilskjema  (RF-1125) Det bør føres kjørebok. Dersom kjørebok mangler, må antall  kilometer kjørt i næring fastsettes skjønnsmessig. De som krever  fradrag etter kilometersats, kan
+                            ikke samtidig føre faktiske  bilutgifter til fradrag i regnskapet.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Skjemaet Opplysninger om bruk av bil (RF-1125) må vedlegges</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.30 Drivstoff, vedlikehald, forsikringspremie, avgifter og  garasjeleige for yrkesbil</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Ein kan trekkje frå alle kostnadene for biler som ein berre bruker i  næringsverksemda (yrkesbil). Ein bør føre køyrebok for heile året.  Driftsutgiftene skal overførast til skjema RF-1125 Opplysningar om  bruk av bil.
+                            Dette skjemaet skal leggjast ved sjølvmeldinga.  Innkjøpsprisen skal utgiftsførast gjennom avskriving på saldoen.  Avskrivinga dette året skal førast på post 2.29 i næringsoppgåva. Ein  må også levere avskrivingsskjcma.
+                            Dersom det gjeld ein varebil, skal  han skrivast av på saldogruppe c med inntil 20 % saldoavskriving for  kvart år. Personbilar skal skrivast av i saldogruppe d med ei  avskriving av saldoen på inntil 20 % i året.  </p>
+                        <p>Dersom ein nyttar bilen både til køyring i næring og til privat bruk,  kan ein rekne han for yrkesbil dersom næringskøyringa utgjer meir enn  6 000 km i året. Det same gjeld dersom bilen trengst i næringa for å  frakte
+                            verktøy, ferdige verk e.l. og yrkesbruken utgjer den største  delen av den totale bilbruken. Om ein reknar bilen for yrkesbil, har  ein rett på frådrag for faktiske utgifter og avskriving slik det er  sagt ovanfor. Den
+                            delen av kostnadene som fell på den private bruken,  skal likevel tilbakeførast som kostnader som ein ikkje har rett på  frådrag for. Den private bruken skal alltid fastsetjast til 13 000 km  i året, sjølv om den faktiske
+                            privatkøyringa utgjer meir eller mindre  enn 13 000 km. Det beløpet som skal tilbakeførast, får ein fram ved  at 13 000 km blir multiplisert med ein kilometersats som blir  fastsett ut frå den listeprisen bilen hadde da
+                            han var ny. I tillegg  kjem køyring mellom heimen og arbeidsstaden, der dei første 4 000  kilometerane skal tilbakeførast etter dei same satsane.  </p>
+                        <p>Overskytande tal på kilometer mellom heim og arbeidsstad skal  tilbakeførast etter den frådragssatsen som gjeld for dagleg reise  mellom heim og fast arbeidstad (arbeidsreise). Denne satsen er på kr  1,40 pr kilometer for
+                            2003. Tilbakeføringa for privat bruk av  næringsbil skal likevel ikkje gå over 75 % av dei samla  bilkostnadene. Med samla bilkostnader meiner ein dei faktiske  driftsutgifter pluss 10 % av listeprisen på bilen som ny. Er
+                            bilen  meir enn 10 år gammal, fell tillegget på 10 % bort. Kilometertalet  skal i 2003 multipliserast med desse satsane som byggjer på bilens  opphavlege listepris som ny:  </p>
+                        <p>Til og med kr 75 000 kr 2,85 pr km  </p>
+                        <p>kr 75 001-kr 100 000 kr 3,45 pr km  </p>
+                        <p>kr 100 001-kr 150 000 kr 4,05 pr km  </p>
+                        <p>kr 150 001-kr 200 000 kr 4,70 pr km  </p>
+                        <p>kr 200 001-kr 250 000 kr 5,55 pr km  </p>
+                        <p>kr 250 001-kr 300 000 kr 6,40 pr km  </p>
+                        <p>over kr 300 000 kr 7,00 pr km  </p>
+                        <p> Om bilens opphavlege listepris som ny + ekstrautstyr overstig kr 450  000, skal inntektsføringa aukast med 10 % av den del som overstig kr  450 000.  </p>
+                        <p>Den som nyttar privatbil i næringa og køyrer mindre enn 6 000 km kvart  år, kan krevje frådrag for det faktiske kilometertalet han har køyrt  i næringa etter ein kilometersats. For meir informasjon sjå  rettleiinga.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Skjemaet Opplysningar om bruk av bil (RF-1125) må leggjast ved</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/DriftskostnaderAndre-datadef-82">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.31 Andre driftskostnader</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres andre kostnader som ikke kan henføres til noen av postene  ovenfor. Dersom denne posten brukes, må det under Andre  tilleggsopplysninger eller på eget ark spesifiseres hvilke kostnader  som er ført her.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Må spesifiseres i eget vedlegg</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.31 Andre driftskostnader</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein opp andre kostnader som ikkje kan leggjast inn i nokon  av dei postane som finst ovanfor. Dersom ein bruker denne posten, må  ein gi ein spesifikasjon av kva for kostnader ein har ført opp her.  Desse
+                            opplysningane skriv ein da opp under Andre tilleggsopplysningar   eller på eige vedlegg.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Må spesifiserast i eige vedlegg</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/Driftskostnader-datadef-83">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.40 Sum kostnader til fradrag</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.40 Sum kostnader til frådrag</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ResultatregnskapKostnader-grp-2738/MoterKursStudiereiserSpesifisering-datadef-12004">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Spesifikasjon av post 2.24</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Inneholder post 2.24 betydelige enkeltposter, må utgiftene  spesifiseres her</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Spesifikasjon av post 2.24</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dersom post 2.24 inneheld store og viktige einskildpostar, må  utgiftene spesifiserast her</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/BeregningAvNaringsinntekt-grp-1115">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Beregning av næringsinntekt</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Beløp i hele kroner</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Utrekning av næringsinntekt</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NON">
+                    <p>Beløp i heile kroner</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/BeregningAvNaringsinntekt-grp-1115/Driftsresultat-datadef-146">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.50 Driftsresultat</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her framkommer det regnskapsmessige driftsresultatet før  kapitalinntekter/- kapitalkostnader og andre korreksjonsposter.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Post 2.10 - post 2.40.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.50 Driftsresultat</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her kjem driftsresultatet i rekneskapen fram før  kapitalinntekter/kapitalkostnader og andre korreksjonspostar er  trekte frå eller lagde til.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Post 2.10 - post 2.40.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvNaringsinntekt-grp-1115/NaringsbilPrivatBruk-datadef-1738">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.60 Privat bruk av yrkesbil</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her skal den private andel av kostnadene vedrørende yrkesbil føres.  Denne posten brukes bare i de tilfellene hvor bil er godkjent som  driftsmiddel i næring og hvor de faktiske bilkostnadene føres i  regnskapet. Når det
+                            gjelder beregningen av den private andelen, viser  vi til rettledningen til post 2.30.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.60 Privat bruk av yrkesbil</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her skal ein føre opp den private delen av dei kostnadene ein har ved  å bruke yrkesbil. Denne posten nyttar ein berre i dei høve der bilen  er godkjend som driftsmiddel i næring og der dei faktiske  bilkostnadene blir
+                            førte opp i rekneskapen. Når det gjeld utrekninga  av den private del som driftsmiddel i ei næring, viser ein til  rettleiinga til post 2.30.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvNaringsinntekt-grp-1115/DriftsutgifterPrivatbilBilledkunstnere-datadef-15872">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.65 Bruk av privatbil i næring</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Når bilen ikke behandles som yrkesbil (gjelder biler som også brukes  privat og som ikke brukes mer enn 6 000 kilometer i året til  yrkeskjøring), skal det gis fradrag for den faktiske yrkesbruken  etter en kilometersats.
+                            For 2003 er satsen kr 3,00, se også siste  avsnitt i rettledningen til post 2.30.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.65 Bruk av privatbil i næring</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Når bilen ikkje skal behandlast som yrkesbil (gjelder også biler som  nyttast privat og som ikkje nyttast meir enn 6000 km i året til  yrkeskøyring), skal det gis frådrag for den faktiske bruken i yrket  etter ein
+                            kilometersats. For 2003 er satsen kr.3,00. Sjå også siste  avsnittet i rettleiinga til post 2.30.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvNaringsinntekt-grp-1115/NaringsinntektKorrigertSkattemessig-datadef-1220">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.70 Resultat før kapitalinntekter-/kostnader</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.70 Resultat før kapitalinntekter-/kostnader</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvNaringsinntekt-grp-1115/GevinstTapskontoBilledkunstInntektsfortFradragsfort-datadef-13700">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.73 Inntekts-/fradragsført fra gevinst- og tapskonto</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>I denne posten føres beløp som hentes fra skjemaet Gevinst- og  tapskonto (RF-1219). Dette kan f eks gjelde gevinst/tap ved  realisasjon av driftsmidler som ikke kan avskrives eller driftsmidler  i saldogruppe e-i.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.73 Inntekt-/frådragsføring frå vinst- og tapskonto</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>I denne posten fører ein opp beløp som er henta frå skjemaet Vinst- og  tapskonto (RF-1219). Dette kan t.d. gjelde vinst/tap ved realisasjon  av driftsmiddel som ikkje kan skrivast av eller driftsmiddel i  saldogruppe e-i.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningAvNaringsinntekt-grp-1115/ResultatNaringBilledkunstnere-datadef-13701">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.90 Næringsinntekt/-underskudd overføres til selvangivelsen post  2.7.4/3.2.19f Beløpet overføres også til post 1.1. i &lt;&lt;Skjema for  beregning av personinntekt>>(RF-1224)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Beløpene i postene 2.71, 2.72 og 2.73 legges til/trekkes fra beløpet i  post 2.70. Resultatet føres i post 2.90 hvor  næringsinntekten/underskuddet framkommer. En positiv næringsinntekt  føres så over til selvangivelsen
+                            post 2.7.4. Underskudd føres til  selvangivelsen post 3.2.17. Beløpet skal også overføres til post 1.1  i Skjema for beregning av personinntekten.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.90 Næringsinntekt/-underskott skal overførast til sjølmeldinga post  2.7.4/3.2.19f Dette beløpet skal også overførast til post 1.1. i  &lt;&lt;Skjema for utrekning av personinntekt>>(RF-1224)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Beløpa i postane 2.71, 2.72 og 2.73 skal leggjast til/trekkjast frå  beløpet i post 2.70. Resultatet skal førast opp i post 2.90 der  næringsinntekta/underskottet kjem fram. Ei positiv næringsinntekt  fører ein over til
+                            post 2.7.4 i sjølvmeldinga. Underskottet fører ein  over til post 3.2.17 i sjølvmeldinga. Beløpet skal også førast over  til post 1.1 i Skjema for utrekning av personinntekt (RF-1224) som  grunnlag for utrekning av personinntekt.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/EiendelerOgGjeldINaring-grp-1117">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Eiendeler og gjeld i næring</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Under postene formue og gjeld i Selvangivelse for næringsdrivende mv,  har en også plikt til å oppgi eiendeler og gjeld fra  næringsvirksomheten. For å få en samlet oversikt over de poster som  berører næringen, og for å få
+                        samlet avskrivningsberegningene, er det  laget en egen oppstilling for disse poster i næringsoppgaven, De  enkelte poster skal overføres slik som anvist. Selve sluttsummen for  Netto formue i næringen skal ikke overføres til
+                        Selvangivelse for  næringsdrivende mv. Da det ikke foreligger noen plikt til å verdsette  varer på lager, jf. forskriften § 3, skal varelageret ikke føres opp  her. Varelageret skal heller ikke føres opp som formue i
+                        Selvangivelse for næringsdrivende mv.  </p>
+                    <p>Beregning av avskrivningene  </p>
+                    <p>Hva som kan/skal avskrives, avskrivningsgrunnlag og avskrivningssatser  er angitt foran i rettledningen til næringsoppgavens poster 2.20  (atelier), 2.18 (verktøy, teknisk utstyr) og 2.30 (bil).  </p>
+                    <p>Kombinert produksjons- og forretningslokale vil etter forholdene ofte  falle inn under gruppen forretningsbygg (post 3.03).  Avskrivningssatsen vil da være 2 %.  </p>
+                    <p>Dersom bygget hovedsakelig blir benyttet som produksjonslokale, vil  det kunne avskrives på saldogruppe for bygg og anlegg med 4 % årlig  saldoavskrivning (post 3.02). Har bygget en så enkel konstruksjon at  det må anses å ha
+                        en brukstid på ikke over 20 år fra oppføringen, kan  saldoen avskrives med inntil 8 prosent.  </p>
+                    <p>Kort om hva avskrivning er  </p>
+                    <p>Når en kjøper et driftsmiddel med en kostpris som overstiger kr 15  000, og som antas å ha en levetid på mer enn 3 år, kan en ikke trekke  fra hele utgiften i regnskapet i anskaffelsesåret. Kostprisen må  fordeles over flere år
+                        gjennom avskrivninger.  </p>
+                    <p>Avskrivningene skal skje etter saldometoden. Dette innebærer at  avskrivningen hvert år regnes av den nedskrevne verdi av driftsmidler  som er anskaffet i tidligere år, og med tillegg av kostpris for  innkjøp i siste år. Hvis
+                        en kjøper nye driftsmidler, legges disse til  saldoen på vedkommende saldogruppe. I næringsoppgaven post 3.01 -  3.03 oppgis bare årets avskrivninger og nedskrevet verdi (saldo) ved  årets utløp. I tillegg til denne
+                        oppstillingen, skal  Avskrivningsskjema (RF-1084) fylles ut og leveres som vedlegg til  næringsoppgaven. For mer informasjon om avskrivningsreglene og  behandlingen av salgssum for avskrivbare driftsmidler, vises til
+                        rettledningen på avskrivningsskjemaet.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Avskrivningsskjema (RF-1084) skal benyttes til spesifisering.</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Eigedelar og gjeld i næring</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Under postane formue og gjeld i sjølvmeldinga har ein også plikt til å  gi opp eigedelar og gjeld frå næringsverksemda si. For å få ei samla  oversikt over dei postane som har med næringa å gjere, og for å få  alle
+                        avskrivingsutrekningane på ein plass, er det laga ei eiga  oppstilling for desse postane i næringsoppgåva. Kvar einskild post  skal førast over slik det er forklart. Sjølve sluttsummen for Netto  formue i næringa skal ikkje
+                        førast over til sjølvmeldinga. Da det  ikkje finst noka plikt til å verdsetje varer som ligg på lager, jf. §  3 i forskrifta, skal varelageret ikkje førast opp her. Varelageret  skal heller ikkje førast opp som formue i
+                        sjølvmeldinga.  </p>
+                    <p>Utrekning av avskrivingane  </p>
+                    <p>Kva som kan/skal skrivast av, avskrivingsgrunnlag og avskrivingssatsar  står det meir om fremst i rettleiinga til postane 2.20 (atelier),  2.18 (verktøy, teknisk utstyr) og 2.30 (bil) i næringsoppgåva.  </p>
+                    <p>Eit kombinert produksjons- og forretningslokale vil etter tilhøva ofte  falle inn under gruppa forretningsbygg (post 3.03). Avskrivingssatsen  er da 2 %.  </p>
+                    <p>Dersom bygget i hovudsak blir nytta som produksjonslokale, kan ein  skrive bygget av på saldogruppa for bygg og anlegg med 4 %  saldoavskriving (post 3.02). Har bygget ein så enkel konstruksjon at  det ikkje vil ha ei levetid
+                        på over 20 år frå oppføringa, kan ein  skrive av saldo for bygget med inntil 8%.  </p>
+                    <p>Kort om kva avskriving er for noko  </p>
+                    <p>Når ein t.d. kjøper eit driftsmiddel med ein kostpris som er høgare  enn kr 15 000, og som ein reknar med har ei levetid på meir enn 3 år,  kan ein ikkje trekkje frå heile utgifta i rekneskapen for sjølve  kjøpsåret. Kostprisen
+                        må fordelast over fleire år gjennom  avskrivingar.  </p>
+                    <p>Avskrivingane skal skje etter saldometoden. Dette inneber at  avskrivinga kvart år skal reknast av den nedskrivne verdien av  driftsmiddel som er kjøpte inn i tidlegare år, og med tillegg av  kostpris for innkjøp i siste året.
+                        Dersom ein kjøper nye  driftsmiddel, legg ein dei til saldoen på vedkomande saldogruppe. I  næringsoppgåva post 3.01 - 3.03 gir ein berre opp avskrivingane i  dette året og den nedskrivne verdien (saldo) ved utgangen av året.
+                        I  tillegg til denne oppstillinga skal Avskrivingsskjema (RF-1084)  fyllast ut og leverast som vedlegg til næringsoppgåva. Treng ein meir  informasjon om avskrivingsreglane og behandlinga av salssummen for  avskrivbare
+                        driftsmiddel, viser ein til rettleiinga på  avskrivingsskjemaet.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NON">
+                    <p>Ein må nytte avskrivningsskjema (RF-1084) til spesifikasjon.</p>
+                </xforms:hint>
+                <xforms:group ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/AretsSaldoavskrivninger-grp-2740">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Årets saldoavskrivninger</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Avskrivningsskj. RF-1084, post 110</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Saldoavskrivingar i år</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Avskrivningsskj. RF-1084, post 110</p>
+                    </xforms:hint>
+                    <xforms:group ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/AretsSaldoavskrivninger-grp-2740/Driftslosore-grp-3639">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.01 Driftsløsøre</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.01 Driftslausøyre</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/AretsSaldoavskrivninger-grp-2740/Driftslosore-grp-3639/KontormaskinerMvAvskrivningSkattemessig-datadef-12001">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kontormaskiner - Saldogruppe a, 30%</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kontormaskiner - Saldogruppe a, 30%</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/AretsSaldoavskrivninger-grp-2740/Driftslosore-grp-3639/VogntogLastebilerVarebilerMvAvskrivningSkattemessig-datadef-12002">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebiler, lastebiler mv. - Saldogruppe c, 20%</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varebilar, lastebilar m.m. - Saldogruppe c, 20%</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/AretsSaldoavskrivninger-grp-2740/Driftslosore-grp-3639/PersonbilerMaskinerInventarMvAvskrivningSkattemessig-datadef-1713">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Inventar, verktøy, personbil mv. - Saldogruppe d, 20%</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inventar, verktøy, personbil m.m. - Saldogruppe d, 20%</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:input ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/AretsSaldoavskrivninger-grp-2740/ByggAnleggAvskrivningSkattemessig-datadef-12003">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.02 Atelierbygg - Saldogruppe g, 4% ev 8%</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Bygg og anlegg</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.02 Atelierbygg - Saldogruppe g, 4% ev 8%</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Bygg og anlegg</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/AretsSaldoavskrivninger-grp-2740/ForretningsbyggAvskrivningSkattemessig-datadef-1714">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.03 Atelierbygg - Saldogruppe h, 2%</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Forretningsbygg</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.03 Atelierbygg - Saldogruppe h, 2%</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Forretningsbygg</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/AretsSaldoavskrivninger-grp-2740/DriftsmidlerSaldoavskrivningBilledkunstnere-datadef-15873">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.04 Sum</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Overførest til post 2.29</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.04 Sum</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Overførast til post 2.29</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/NedskrevetVerdiFjoraret-grp-2741">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Nedskrevet verdi pr. 31.12</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Avskrivningsskj. RF-1084, post 111</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Nedskriven verdi pr. 31.12</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Avskrivningsskj. RF-1084, post 111</p>
+                    </xforms:hint>
+                    <xforms:group ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/NedskrevetVerdiFjoraret-grp-2741/Driftslosore-grp-3640">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.01 Driftsløsøre</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.01 Driftslausøyre</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/NedskrevetVerdiFjoraret-grp-2741/Driftslosore-grp-3640/KontormaskinerMvSkattemessigVerdi-datadef-1030">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kontormaskiner - Saldogruppe a, 30%</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kontormaskinar - Saldogruppe a, 30%</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/NedskrevetVerdiFjoraret-grp-2741/Driftslosore-grp-3640/VogntogLastebilerVarebilerMvSkattemessigVerdi-datadef-1033">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Varebiler, lastebiler mv. - Saldogruppe c, 20%</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Varebilar, lastebilar m.m. - Saldogruppe c, 20%</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/NedskrevetVerdiFjoraret-grp-2741/Driftslosore-grp-3640/PersonbilerTraktorerMaskinerMvSkattemessigVerdi-datadef-1035">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Inventar, verktøy, personbil mv. - Saldogruppe d, 15%</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inventar, verktøy, personbil m.m. - Saldogruppe d, 15%</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:input ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/NedskrevetVerdiFjoraret-grp-2741/ByggAnleggSkattemessigVerdi-datadef-1041">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.02 Atelierbygg - Saldogruppe h, 4% ev 8%</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Bygg og anlegg</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.02 Atelierbygg - Saldogruppe h, 4% ev 8%</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Bygg og anlegg</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/NedskrevetVerdiFjoraret-grp-2741/ForretningsbyggSkattemessigVerdi-datadef-1044">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.03 Atelierbygg - Saldogruppe i, 2%</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Forretningsbygg</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.03 Atelierbygg - Saldogruppe i, 2%</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Forretningsbygg</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/NedskrevetVerdiFjoraret-grp-2741/DriftsmidlerBilledkunstnere-datadef-15560">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.04 Sum</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.04 Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/Belop-grp-3638">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Beløp pr. 31.12</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Beløp pr. 31.12</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/Belop-grp-3638/FordringerUtestaendeBilledkunstnere-datadef-14879">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.05 Utestående fordringer</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Overføres til post 4.1.6 i Selvangivelse for næringsdrivende mv.</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.05 Uteståande krav</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Overførast til post 4.1.6 i Sjølvmelding for næringsdrivende m.m.</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/Belop-grp-3638/KontanterBankinnskudd-datadef-786">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.06 Likvide midler</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Kontanter, bankinnskudd, postgiro mv., overføres til post 4.1.1. +  4.1.2. i Selvangivelse for næringsdrivende mv.</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.06 Likvide midlar</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Kontantar, bankinnskott, postgiro m.m., overførast til post 4.1.1. +  4.1.2. i Sjølvmelding for næringsdrivande m.m.</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/Belop-grp-3638/EiendelerSkattemessige-datadef-1061">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.07 Sum</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Post 3.04 + 3.05 + 3.06</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.07 Sum</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Post 3.04 + 3.05 + 3.06</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/Belop-grp-3638/GjeldNaringBilledkunstnere-datadef-15874">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.08 Gjeld i næring</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Overføres post 4.8.1 i Selvangivelse for næringsdrivende mv.</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.08 Gjeld i næringa</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Overførast post 4.8.1 i Sjølvmelding for næringsdrivande m.m.</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/EiendelerOgGjeldINaring-grp-1117/Belop-grp-3638/FormuesverdiNettoLigningsmessig-datadef-1066">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.09 Netto formue i næringen</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Post 3.07 - 3.08</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>3.09 Netto formue i næringa</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Post 3.07 - 3.08</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/KunstneriskAktivitet-grp-1120">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Opplysninger om kunstnerisk aktivitet</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Her er det satt av plass til opplysninger om kunstnerisk aktivitet.  Dersom omsetningen er liten og det er svak inntjening/ underskudd,  vil likningskontoret ofte måtte foreta en konkret vurdering av om det  foreligger en
+                        næringsvirksomhet i skattelovens forstand. Dersom  kunstneren fyller ut feltene her, vil dette ofte være til hjelp for  ligningskontoret når næringsvirksomheten skal vurderes. Det er  imidlertid opp til den enkelte om en vil
+                        fylle ut alle eller noen av  disse opplysninger. Dersom feltene her fylles ut, vil dette i mange  tilfeller medføre at ligningskontoret ikke trenger å innhente  tilleggsopplysninger som ellers må innhentes under
+                        ligningsbehandlingen.  </p>
+                    <p>For at den kunstneriske virksomheten skal kunne aksepteres som næring  i skattelovens forstand, må aktiviteten være av en viss varighet og  ha et økonomisk formål. Den kunstneriske aktiviteten må altså være  egnet til å gi
+                        overskudd, selv om den faktisk går med underskudd noen  år. For kunstnere som av spesielle grunner har hatt lav aktivitet (er  i etableringsfasen osv.), anbefales at årsakene til dette noteres  under Særlige opplysninger
+                        (kunstnerisk aktivitet, arbeidsforhold  mv.).</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Opplysningar om kunstnerleg aktivitet</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>I næringsoppgåva er det sett av plass til opplysningar om kunstnarleg  aktivitet. Dersom omsetninga er lita og det er svak  inntening/underskott, må likningskontoret ofte gjere ei konkret  vurdering av om det er snakk om noka
+                        næringsverksemd etter det  skattelova seier. Dersom kunstnaren fyller ut felten her, kan dette  ofte vere til hjelp for likningskontoret når næringsverksemda skal  vurderast. Det er likevel opp til den einskilde om han vil
+                        fylle ut  alle eller berre nokre av desse opplysningane. Dersom felten her blir  fylt ut, kan dette i mange tilfelle føre til at likningskontoret  ikkje treng å hente inn tilleggsopplysningar som elles må skaffast  fram når
+                        dei skal behandle likningsdokumenta.  </p>
+                    <p>Som ein indikasjon på kva som krevst for at den kunstnarlege verksemda  skal kunne godtakast som næring etter skattelova, vil ein vise til  kva det har å seie at ein kan syne fram ein viss aktivitet, at denne  aktiviteten er av
+                        ein viss varig karakter og at han har eit økonomisk  føremål. Den kunstnarlege aktiviteten må altså vere eigna til og ta  sikte på overskott, jamvel om han faktisk går med underskott i ein  del år. For kunstnarar som av
+                        særskilde grunner har hatt låg  aktivitet (er i etableringsfasen osv), rår ein til at årsakene til  dette blir noterte under Særskilde opplysningar (kunstnarleg  aktivitet, arbeidsforhold m.m.).</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/KunstneriskAktivitet-grp-1120/UtdanningKunstnerisk-datadef-12005">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kunstnerisk utdanning</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kunstnarleg utdanning</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KunstneriskAktivitet-grp-1120/BilledkunstnerorganisasjonMedlemskapNavnSpesifisertOrganisasjon-datadef-12006">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Medlem av billedkunstnerorganisasjoner</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Medlem av biletkunstnarorganisasjonar</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:group ref="/Skjema/KunstneriskAktivitet-grp-1120/Utstillinger-grp-1121">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Utstillinger</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Utstillingar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/KunstneriskAktivitet-grp-1120/Utstillinger-grp-1121/UtstillingSeparatBilledkunstSiste10Ar-datadef-12007">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Separatutstillinger siste 10 år</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Antall</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Separatutstillingar siste 10 år</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Tal</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/KunstneriskAktivitet-grp-1120/Utstillinger-grp-1121/UtstillingKollektivBilledkunstSiste10Ar-datadef-12008">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Deltatt i kollektivutstillinger siste 10 år</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Antall</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Har vore med i kollektivutstillingar siste 10 år</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Kor mange</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/KunstneriskAktivitet-grp-1120/Utstillinger-grp-1121/UtstillingSeparatBilledkunst-datadef-12009">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Separatutstillinger i inntektsåret</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Antall</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Separatutstillingar i inntektsåret</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Tal</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/KunstneriskAktivitet-grp-1120/Utstillinger-grp-1121/UtstillingKollektivBilledkunst-datadef-12010">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Deltatt i kollektivutstillinger i inntektsåret</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Antall</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Har vore med i kollektivutstillingar i inntektsåret</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Kor mange</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/KunstneriskAktivitet-grp-1120/Utstillinger-grp-1121/UtstillingKollektivVederlagNavnSpesifisertUtstilling-datadef-12011">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Utstillingsvederlag er utbetalt for følgende kollektivutstillinger</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Utstillingsvederlag er utbetalt for desse kollektivutstillingane</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/KunstneriskAktivitet-grp-1120/Utstillinger-grp-1121/UtstillingSeparatPlanlagtTidsrom-datadef-12012">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Planlagte separatutstillinger</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Tidsrom og sted</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Planlagde separatutstillingar</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Tidsrom og stad</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/KunstneriskAktivitet-grp-1120/KonkurranseBilledkunstSiste10ArAntall-datadef-12014">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Har de siste 10 år deltatt i konkurranser</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Antall</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Har dei siste 10 år vore med i konkurransar</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Kor mange</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KunstneriskAktivitet-grp-1120/BilledkunstSamlingerRepresentert-datadef-12015">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Representert i større samlinger</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Representert i større samlingar</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KunstneriskAktivitet-grp-1120/StipendMottatt-datadef-18076">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Mottatt stipend</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Mottekne stipend</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KunstneriskAktivitet-grp-1120/GarantiinntektKunstnereDato-datadef-12016">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Har hatt statens garantiinntekt for kunstnere</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Fra tidspunkt</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Har hatt statens garantiinntekt for kunstnarar</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Frå tidspunkt</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KunstneriskAktivitet-grp-1120/AktivitetKunstnerisk-datadef-12017">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Særlige opplysninger</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Kunstnerisk aktivitet, arbeidsforhold mv.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Særskilde opplysningar</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Kunstnarleg aktivitet, arbeidsforhold m.m.</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

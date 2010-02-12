@@ -1,0 +1,88 @@
+<?
+
+#Usage
+# new MOMSOppaveKalk(array('sumPart'=>$_sumPart, 'sumGroup'=>$_sumGroup))
+#Ikke periode 13???);
+#
+
+class MOMSOppaveKalk
+{
+    var $_sumPart;
+    var $_sumGroup;
+   
+
+    ############################################################################
+    function MOMSOppaveKalk($args)
+    {	
+       
+    }
+    
+    /*
+     * function: 	calculateNr
+     * desciption:
+     * args:  		$ThisYear
+     * 				$_sumPart
+     *              $_sumGroup
+     * return:      none
+     */
+    function calculateNr($ThisYear, $_sumPart, $_sumGroup){
+    	$this->_sumGroup = $_sumGroup;
+    	$this->_sumPart  = $_sumPart;
+    	
+    	$this->_sumPart['1.1'][$ThisYear]['saldo']=$this->_sumPart['0402'][$ThisYear]['saldo'];
+    	$this->calculate();
+        
+    }
+     /*
+     * function: 	calculateAS
+     * desciption:  
+     * args:  		$ThisYear
+     * 				$_sumPart
+     *              $_sumGroup
+     * return:      none
+     */
+    function calculateAS($ThisYear, $_sumPart, $_sumGroup)
+    {   $this->_sumGroup = $_sumGroup;
+    	$this->_sumPart  = $_sumPart;
+    	
+        $this->_sumPart['1.1'][$ThisYear]['saldo']=$this->_sumPart['0940'][$ThisYear]['saldo'];
+        $this->calculate();
+    	
+    }//function calculateAS
+    
+    /*
+     * function: 	calculate
+     * desciption:  
+     * args:  		none
+     * return:      none
+     */
+    function calculate() {
+    	
+    	
+    }//function calculate
+    
+    
+ 
+    function sumGroupLogic($Line, $Year, $reportHash){
+    }
+
+   
+    
+    function sumGroup($LineNum, $Year, $reportHash)
+    {
+        $this->_sumGroup[$LineNum][$Year]['in']     += $reportHash['AmountIn'];
+        $this->_sumGroup[$LineNum][$Year]['out']    += $reportHash['AmountOut'];
+        $this->_sumGroup[$LineNum][$Year]['saldo']  += $reportHash['AmountIn'] - $reportHash['AmountOut'];
+    }
+    
+    function getSumPart(){
+   		return $this->_sumPart;	
+    }
+    
+    function getSumGroup(){
+   		return $this->_sumGroup;	
+    }
+    
+
+}
+?>

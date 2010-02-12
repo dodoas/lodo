@@ -1,0 +1,130 @@
+<?php
+class MOMSOppgaveMapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+        //print ("Accouint: ". $a . "khlk: ". $h);
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+           			$this->ORID[$item] = $v;
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+            	$item = $this->Account[$a];
+            	$this->ORID[$item] = $v;
+	            return 1;
+    	    }
+       	}
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+	{  
+        $this->addMapping('D21771', 'EnhetBedriftNavn-datadef-21771', 'VName');
+		$this->addMapping('D21773', 'EnhetBedriftAdresse-datadef-21773', 'VAddress');
+		$this->addMapping('D21774', 'EnhetBedriftPostnummer-datadef-21774', 'VZipCode');
+		$this->addMapping('D21775', 'EnhetBedriftPoststed-datadef-21775', 'VCity');
+		$this->addMapping('D5659',  'OppgaveType-datadef-5659', 'OppgaveType');
+		$this->addMapping('D21772', 'EnhetBedriftOrganisasjonsnummer-datadef-21772', 'OrgNumber');
+		$this->addMapping('D21776', 'EnhetBedriftKontonummer-datadef-21776', 'BankAccount');
+		$this->addMapping('D18616', 'KIDnummerOmsetning-datadef-18616', 'KIDnummer');
+		$this->addMapping('D10092', 'TerminType-datadef-10092', 'TerminType');
+		$this->addMapping('D10093', 'Termin-datadef-10093', 'Termin');
+		$this->addMapping('D10094', 'TerminAr-datadef-10094', 'TerminAr');
+		$this->addMapping('D8446',  'OmsetningTermin-datadef-8446', 'D8446');
+		$this->addMapping('D10095', 'OmsetningTerminAvgiftspliktig-datadef-10095', 'D10095');
+		$this->addMapping('D10096', 'OmsetningTerminAvgiftsfri-datadef-10096', 'D10096');
+		$this->addMapping('D10097', 'MerverdiavgiftUtgaendeTerminHoySatsGrunnlag-datadef-10097', 'D10097');
+		$this->addMapping('D20319', 'MerverdiavgiftUtgaendeTerminMiddelsSatsGrunnlag-datadef-20319', 'D20319');
+		$this->addMapping('D14360', 'MerverdiavgiftUtgaendeTerminLavSatsGrunnlag-datadef-14360', 'D14360');
+		$this->addMapping('D14362', 'MerverdiavgiftUtgaendeTjenesterUtlandTerminGrunnlag-datadef-14362', 'D14362');
+		$this->addMapping('D10098', 'MerverdiavgiftUtgaendeTerminHoySatsBeregnet-datadef-10098', 'D10098');
+		$this->addMapping('D20320', 'MerverdiavgiftUtgaendeTerminMiddelsSatsBeregnet-datadef-20320', 'D20320');
+		$this->addMapping('D14361', 'MerverdiavgiftUtgaendeTerminLavSatsBeregnet-datadef-14361', 'D14361');
+		$this->addMapping('D14363', 'MerverdiavgiftUtgaendeTjenesterUtlandTerminBeregnet-datadef-14363', 'D14363');
+		$this->addMapping('D8450',  'MerverdiavgiftInngaendeTerminHoySats-datadef-8450', 'D8450');
+		$this->addMapping('D20322', 'MerverdiavgiftInngaendeTerminMiddelsSats-datadef-20322', 'D20322');
+		$this->addMapping('D14364', 'MerverdiavgiftInngaendeTerminLavSats-datadef-14364', 'D14364');
+		$this->addMapping('D8452',  'AvgiftTerminTilGode-datadef-8452', 'D8452');
+		$this->addMapping('D8453',  'AvgiftTerminABetale-datadef-8453', 'D8453');
+		$this->addMapping('D18615', 'OmsetningTerminForklaring-datadef-18615', 'D18615');
+		$this->addMapping('D18613', 'OmsetningTerminAvgiftspliktigForklaring-datadef-18613', 'D18613');
+		$this->addMapping('D18614', 'OmsetningTerminAvgiftsfriForklaring-datadef-18614', 'D18614');
+		$this->addMapping('D18596', 'MerverdiavgiftUtgaendeTerminHoySatsForklaring-datadef-18596', 'D18596');
+		$this->addMapping('D20321', 'MerverdiavgiftUtgaendeTerminMiddelsSatsForklaring-datadef-20321', 'D20321');
+		$this->addMapping('D18597', 'MerverdiavgiftUtgaendeTerminLavSatsForklaring-datadef-18597', 'D18597');
+		$this->addMapping('D18598', 'MerverdiavgiftUtgaendeTjenesterUtlandTerminForklaring-datadef-18598', 'D18598');
+		$this->addMapping('D19663', 'MerverdiavgiftInngaendeTerminHoySatsForklaring-datadef-19663', 'D19663');
+		$this->addMapping('D20323', 'MerverdiavgiftInngaendeTerminMiddelsSatsForklaring-datadef-20323', 'D20323');
+		$this->addMapping('D19664', 'MerverdiavgiftInngaendeTerminLavSatsForklaring-datadef-19664', 'D19664');
+		$this->addMapping('D8458',  'TilleggsopplysningerForklaringSendt-datadef-8458', 'D8458');
+		$this->addMapping('D19684', 'OmsetningsoppgaverTilleggsopplysninger-datadef-19684', 'D19684');
+       
+	}
+ }
+?>

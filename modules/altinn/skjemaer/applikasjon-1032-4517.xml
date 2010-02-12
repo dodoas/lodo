@@ -1,0 +1,941 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1199: Opplysninger fra oppdragsgiver om oppdragstaker/kontrakter</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1032-4518.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/AvgiverOgMeldingsdata-grp-5207/Avgiver-grp-5211/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind ref="/Skjema/AvgiverOgMeldingsdata-grp-5207/Meldingsdata-grp-5212/Statuskode-datadef-23132" required="true"/>
+            <xforms:bind ref="/Skjema/Oppdragsgiver-grp-5208/OppdragsgiverNavn-datadef-1122" required="true"/>
+            <xforms:bind ref="/Skjema/Oppdragstaker-grp-5209/OppdragstakerNavn-datadef-2112" required="true"/>
+            <xforms:bind ref="/Skjema/Kontraktsopplysninger-grp-5210/Kontrakt-grp-5217/KontraktTidspunktStartdato-datadef-22366" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="EN">
+                <p>RF-1199 Information from principal on contractor/contracts</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="EN">
+                <p>This form is unasked to be completed by all enterprises and public  institutions who engage contractors on an assignment for work to be  performed in Norway or on the Norwegian Continental Shelf, cf. the  Assessment Act section
+                    6-10. The duty to report contracts applies for  both Norwegian and foreign companies. the obligation to give  information does also include work performed in connection with the  main contract and possible subcontracts. It is
+                    emphazized that  contracts for work to be performed on the Norwegian Continental Shelf  applies for both Norwegian and foreign companies. The duty to report  contracts for work to be performed in Norway is limited to  assignments
+                    to foreign residents or companies resident in foreign  countries.  </p>
+                <p>Be aware of the legislation in the VAT Act section 49a, after which  the duty to give information to County Tax Office is fulfilled if the  same information is given to Central Office - Foreign Tax Affairs and  contemporary is
+                    given information concerning the contractors  registrationnumber in the VAT register.  </p>
+                <p>The form is to be forwarded to Central Office - Foreign Tax Affairs  when the contract has been signed or no later then 14 days after the  commencement of the contract work.  </p>
+                <p>Any changes in the initial report must be forwarded to Central Office  - Foreign Tax Affairs.  </p>
+                <p>Negligence of the obligation to give information may result in  sanctions from the Authorities, i.e. enforcement fine, responsibility  for taxes and social security premium as well as fees for late  delivery, cf. the Assessment Act
+                    sections 10-6, 10-7 and 10-8.  </p>
+                <p>You may order futher forms from Central Office - Foreign Tax Affairs  or download the form from our internet page:  http://www.taxadministration.no</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1199 Opplysninger fra oppdragsgiver om oppdragstaker/kontrakter</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Skjemaet skal uoppfordret utfylles av enhver næringsdrivende og  ethvert offentlig organ som gir noen et oppdrag i riket eller på  norsk kontinentalsokkel, jf. ligningsloven § 6-10. Plikten til å gi  opplysninger påhviler både
+                    norske og utenlandske oppdragsgivere.  Opplysningsplikten omfatter også arbeid i tilknytning til  hovedoppdraget og eventuelle underoppdrag. Det presiseres at  opplysningsplikten for oppdrag på kontinentalsokkelen gjelder både
+                    norske og utenlandske oppdragstakere. Opplysningsplikten for oppdrag  i riket er begrenset til å gjelde oppdrag gitt til personer bosatt i  utlandet eller selskaper hjemmehørende i utlandet.  </p>
+                <p>Vi gjør oppmerksom på bestemmelsen i lov om merverdiavgift § 49a,  hvoretter opplysningsplikt til fylkesskattekontoret anses oppfylt  dersom tilsvarende opplysninger er gitt til Sentralskattekontoret for  utenlandssaker og det
+                    samtidig er gitt opplysninger om  oppdragstakerens registreringsnummer i avgiftsmantallet.  </p>
+                <p>Skjemaet skal sendes Sentralskattekontoret for utenlandssaker når  kontrakt er inngått eller senest 14 dager etter at oppdraget er  påbegynt.  </p>
+                <p>Alle forandringer i de innsendte opplysninger må rapporteres uten  opphold til Sentralskattekontoret for utenlandssaker.  </p>
+                <p>Forsømmelse av opplysningsplikten kan medføre sanksjoner fra  myndighetenes side, i form av tvangsmulkt, ansvar for skatter og  avgifter, samt gebyrer, jf. ligningsloven §§ 10-6, 10-7 og 10-8.  </p>
+                <p>Skjemaet kan rekvireres fra Sentralskattekontoret for utenlandssaker  eller lastes ned fra internettsidene: http://www.taxadministration.no</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/AvgiverOgMeldingsdata-grp-5207">
+                <brreg:sensitivitet type="Mindre sensitiv"/>
+                <xforms:caption brreg:lang="EN">
+                    <p>Contributor</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Avgiver</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/AvgiverOgMeldingsdata-grp-5207/Avgiver-grp-5211">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Contributor</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Avgiver</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/AvgiverOgMeldingsdata-grp-5207/Avgiver-grp-5211/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Norwegian organization number</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Organization number not valid</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AvgiverOgMeldingsdata-grp-5207/Avgiver-grp-5211/EnhetTelefonnummer-datadef-755">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Phone number</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefonnummer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AvgiverOgMeldingsdata-grp-5207/Avgiver-grp-5211/EnhetMobiltelefonnummer-datadef-3155">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Mobilephone number</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Mobiltelefonnummer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AvgiverOgMeldingsdata-grp-5207/Avgiver-grp-5211/EnhetEPost-datadef-5963">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>E-mailaddress</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>E-postadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/AvgiverOgMeldingsdata-grp-5207/Meldingsdata-grp-5212">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Type of report</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Meldingstype</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/AvgiverOgMeldingsdata-grp-5207/Meldingsdata-grp-5212/Statuskode-datadef-23132">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>N</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>New</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ny</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>E</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Revised</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Revidert</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Code of report</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="EN">
+                            <p>Please state New if this is a new report, Revised if this is a change  of earlier submitted report</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Statuskode melding</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Ny melding angis med Ny. Endring av tidligere innsendt melding angis  med Revidert</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/AvgiverOgMeldingsdata-grp-5207/Meldingsdata-grp-5212/Meldingsnummer-datadef-23133">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Report number</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="EN">
+                            <p>The reference number (AM-number from the receipt) of the original  report to be changed.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="EN">
+                            <p>The reference number (AM-number from the receipt) of the original  report to be changed</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Meldingsnummer</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Ved endring oppgis AM-nummeret til den opprinnelige meldingen som skal  endres. Referansenummeret fremkommer av kvitteringen fra  innsendelsen.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Ved endring oppgis AM-nummeret til den opprinnelige meldingen som skal  endres</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Oppdragsgiver-grp-5208">
+                <brreg:sensitivitet type="Mindre sensitiv"/>
+                <xforms:caption brreg:lang="EN">
+                    <p>Principal</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="EN">
+                    <p>The entity whom has given the assignment</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Oppdragsgiver</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Den som gir oppdraget.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/Oppdragsgiver-grp-5208/OppdragsgiverOrganisasjonsnummer-datadef-21757">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Norsk organisasjonsnummer</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Norsk organisasjonsnummer 9 sifre - Dersom oppdragsgiver ikke er  tildelt norsk organisasjonsnummer, kan skjemaet likevel innsendes.  Tildeling av norsk organisasjonsnummer skjer ved henvendelse til  Brønnøysundregistrene, http://www.brreg.no</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Norwegian Organization number</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="EN">
+                        <p>Norwegian organization number-9 figures - The report may be filed even  though the principal has not been issued a Norwegian organization  number. A Norwegian organization number is issued by contacting the  Brønnøysund
+                            Central Register, http://www.brreg.no</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="EN">
+                        <p>Organization number not valid</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Oppdragsgiver-grp-5208/OppdragsgiverNavn-datadef-1122">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Name</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Navn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Oppdragsgiver-grp-5208/OppdragsgiverNasjonalitet-datadef-23137">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Nationality/Home country</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Nasjonalitet/Hjemland</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Oppdragsgiver-grp-5208/OppdragsgiverNasjonalitetskode-datadef-23274">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                </xforms:input>
+                <xforms:group ref="/Skjema/Oppdragsgiver-grp-5208/NorskAdresse-grp-5218">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Address in Norway</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="EN">
+                        <p>The report may still be filed even though the principal does not have  an address in Norway. Address abroad must then be given.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Adresse i Norge</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom oppdragsgiver ikke har adresse i Norge, kan skjemaet likevel  innsendes dersom utenlandsk adresse oppgis.</p>
+                    </xforms:help>
+                    <xforms:repeat id="repeat_Adresse-grp-5266" nodeset="/Skjema/Oppdragsgiver-grp-5208/NorskAdresse-grp-5218/Adresse-grp-5266">
+                        <xforms:group ref="/Skjema/Oppdragsgiver-grp-5208/NorskAdresse-grp-5218/Adresse-grp-5266">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:input ref="/Skjema/Oppdragsgiver-grp-5208/NorskAdresse-grp-5218/Adresse-grp-5266/OppdragsgiverAdresse-datadef-1343">
+                                <brreg:sensitivitet type="Mindre sensitiv"/>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Address</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Adresse</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:repeat>
+                    <xforms:input ref="/Skjema/Oppdragsgiver-grp-5208/NorskAdresse-grp-5218/OppdragsgiverPoststed-datadef-23135">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Post office</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Oppdragsgiver-grp-5208/NorskAdresse-grp-5218/OppdragsgiverPostnummer-datadef-23134">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Postal code</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Oppdragsgiver-grp-5208/UtenlandskAdresse-grp-5219">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Address abroad/Home country</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="EN">
+                        <p>The report may still be filed even though the principal does not have  an address abroad. Address in Norway must then be given.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Adresse i utlandet/hjemlandet</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom oppdragsgiver ikke har adresse i utlandet, kan skjemaet likevel  innsendes dersom norsk adresse oppgis.</p>
+                    </xforms:help>
+                    <xforms:repeat id="repeat_Adresse-grp-5267" nodeset="/Skjema/Oppdragsgiver-grp-5208/UtenlandskAdresse-grp-5219/Adresse-grp-5267">
+                        <xforms:group ref="/Skjema/Oppdragsgiver-grp-5208/UtenlandskAdresse-grp-5219/Adresse-grp-5267">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:input ref="/Skjema/Oppdragsgiver-grp-5208/UtenlandskAdresse-grp-5219/Adresse-grp-5267/OppdragsgiverAdresseUtland-datadef-22742">
+                                <brreg:sensitivitet type="Mindre sensitiv"/>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Address</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Adresse</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:repeat>
+                    <xforms:input ref="/Skjema/Oppdragsgiver-grp-5208/UtenlandskAdresse-grp-5219/OppdragsgiverLand-datadef-23136">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Country</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Land</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Oppdragsgiver-grp-5208/UtenlandskAdresse-grp-5219/OppdragsgiverLandkode-datadef-23273">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Country Code</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Landkode</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Oppdragstaker-grp-5209">
+                <brreg:sensitivitet type="Mindre sensitiv"/>
+                <xforms:caption brreg:lang="EN">
+                    <p>Contractor</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Oppdragstaker</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Oppdragstaker-grp-5209/OppdragstakerOrganisasjonsnummer-datadef-22743">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Norsk organisasjonsnummer</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Norsk organisasjonsnummer 9 sifre - Dersom oppdragstaker ikke er  tildelt norsk organisasjonsnummer, kan skjemaet likevel innsendes.  Tildeling av norsk organisasjonsnummer skjer ved henvendelse til  Brønnøysundregistrene, http://www.brreg.no</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Norwegian organization number</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="EN">
+                        <p>Norwegian organization number-9 figures - The report may be filed even  though the contractor has not been issued a Norwegian organization  number. A Norwegian organization number is issued by contacting the  Brønnøysund
+                            Central Register, http://www.brreg.no</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="EN">
+                        <p>Organization number not valid</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Oppdragstaker-grp-5209/OppdragstakerNavn-datadef-2112">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Name</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Navn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Oppdragstaker-grp-5209/OppdragstakerNasjonalitet-datadef-2121">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Nationality/Home country</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Nasjonalitet/Hjemland</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Oppdragstaker-grp-5209/OppdragstakerNasjonalitetskode-datadef-23276">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/Oppdragstaker-grp-5209/OppdragstakerFylke-datadef-22744">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>01</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>ØSTFOLD</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>ØSTFOLD</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>02</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>AKERSHUS</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>AKERSHUS</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>03</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>OSLO</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>OSLO</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>04</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>HEDMARK</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>HEDMARK</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>05</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>OPPLAND</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>OPPLAND</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>06</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>BUSKERUD</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>BUSKERUD</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>07</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>VESTFOLD</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>VESTFOLD</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>08</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>TELEMARK</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>TELEMARK</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>09</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>AUST-AGDER</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>AUST-AGDER</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>10</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>VEST-AGDER</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>VEST-AGDER</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>11</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>ROGALAND</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>ROGALAND</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>12</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>HORDALAND</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>HORDALAND</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>13</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>SOGN OG FJORDANE</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>SOGN OG FJORDANE</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>14</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>MØRE OG ROMSDAL</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>MØRE OG ROMSDAL</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>15</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>SØR-TRØNDELAG</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>SØR-TRØNDELAG</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>16</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>NORD-TRØNDELAG</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>NORD-TRØNDELAG</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>17</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>NORDLAND</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>NORDLAND</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>18</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>TROMS</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>TROMS</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>19</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>FINNMARK</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>FINNMARK</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Registered at County Tax Office in</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Registrert v/Fylkesskattekontoret i</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/Oppdragstaker-grp-5209/OppdragstakerBransje-datadef-23141">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Type of business</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="EN">
+                        <p>Examples: CONSTRUCTION AND ASSEMBLY, IT, HEALTH, CATERING, CLEANING  etc.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Bransje</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Eksempler på dette kan være: BYGG OG MONTERING, IT, HELSE, RESTAURANT,  RENGJØRING med mer.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:group ref="/Skjema/Oppdragstaker-grp-5209/NorskAdresse-grp-5214">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Address in Norway</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="EN">
+                        <p>The report may still be filed even though the contractor does not have  an address in Norway. Address abroad must then be given.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Adresse i Norge</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom oppdragstaker ikke har adresse i Norge, kan skjemaet likevel  innsendes dersom utenlandsk adresse oppgis.</p>
+                    </xforms:help>
+                    <xforms:repeat id="repeat_Adresse-grp-5268" nodeset="/Skjema/Oppdragstaker-grp-5209/NorskAdresse-grp-5214/Adresse-grp-5268">
+                        <xforms:group ref="/Skjema/Oppdragstaker-grp-5209/NorskAdresse-grp-5214/Adresse-grp-5268">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:input ref="/Skjema/Oppdragstaker-grp-5209/NorskAdresse-grp-5214/Adresse-grp-5268/OppdragstakerAdresse-datadef-2113">
+                                <brreg:sensitivitet type="Mindre sensitiv"/>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Address</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Adresse</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:repeat>
+                    <xforms:input ref="/Skjema/Oppdragstaker-grp-5209/NorskAdresse-grp-5214/OppdragstakerPoststed-datadef-23139">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Post office</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Oppdragstaker-grp-5209/NorskAdresse-grp-5214/OppdragstakerPostnummer-datadef-23138">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Postal code</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Oppdragstaker-grp-5209/UtenlandskAdresse-grp-5215">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Address abroad/Home country</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="EN">
+                        <p>The report may still be filed even though the contractor does not have  an address abroad. Address in Norway must then be given.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Adresse i utlandet/hjemlandet</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom oppdragstaker ikke har adresse i utlandet, kan skjemaet likevel  innsendes dersom norsk adresse oppgis.</p>
+                    </xforms:help>
+                    <xforms:repeat id="repeat_Adresse-grp-5269" nodeset="/Skjema/Oppdragstaker-grp-5209/UtenlandskAdresse-grp-5215/Adresse-grp-5269">
+                        <xforms:group ref="/Skjema/Oppdragstaker-grp-5209/UtenlandskAdresse-grp-5215/Adresse-grp-5269">
+                            <brreg:sensitivitet type="Mindre sensitiv"/>
+                            <xforms:input ref="/Skjema/Oppdragstaker-grp-5209/UtenlandskAdresse-grp-5215/Adresse-grp-5269/OppdragstakerAdresseUtland-datadef-22745">
+                                <brreg:sensitivitet type="Mindre sensitiv"/>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Address</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Adresse</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:repeat>
+                    <xforms:input ref="/Skjema/Oppdragstaker-grp-5209/UtenlandskAdresse-grp-5215/OppdragstakerLand-datadef-23140">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Country</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Land</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Oppdragstaker-grp-5209/UtenlandskAdresse-grp-5215/OppdragstakerLandkode-datadef-23275">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Kontraktsopplysninger-grp-5210">
+                <brreg:sensitivitet type="Mindre sensitiv"/>
+                <xforms:caption brreg:lang="EN">
+                    <p>Contract details</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Kontraktsopplysninger</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Kontraktsopplysninger-grp-5210/Arbeidssted-grp-5216">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Worksite</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="EN">
+                        <p>Worksite in Norway and on the Norwegian Continental Shelf</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Arbeidssted</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Arbeidssted i Norge og på norsk kontinentalsokkel</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/Kontraktsopplysninger-grp-5210/Arbeidssted-grp-5216/KontraktArbeidssted-datadef-23142">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Site</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="EN">
+                            <p>Please state worksite/postal address where the assignment is performed</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Stedsnavn</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Stedsnavn/postadresse hvor arbeidet utføres</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Kontraktsopplysninger-grp-5210/Arbeidssted-grp-5216/KontraktArbeidskommune-datadef-23143">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Municipality</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="EN">
+                            <p>Municipality where the work is performed</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommune</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Kommune hvor arbeidet utføres.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Kontraktsopplysninger-grp-5210/Arbeidssted-grp-5216/KontraktArbeidskommunenummer-datadef-23277">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Kontraktsopplysninger-grp-5210/Arbeidssted-grp-5216/KontraktFartoy-datadef-23144">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Vessel</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="EN">
+                            <p>Vessel/offshore installation on The Norwegian Continental Shelf where  work is performed</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fartøy</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Fartøy/oljeinstallasjon på norsk kontinentalsokkel hvor arbeidet  utføres.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Kontraktsopplysninger-grp-5210/Kontrakt-grp-5217">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Details of contract</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kontraktsinnhold</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Kontraktsopplysninger-grp-5210/Kontrakt-grp-5217/HovedoppdragsgiverNavn-datadef-22741">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Name of main principal</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="EN">
+                            <p>Name of entity at the top of the chain of contractors</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Hovedoppdragsgiver</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Navn til foretaket som er øverst i en kontraktskjede</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Kontraktsopplysninger-grp-5210/Kontrakt-grp-5217/KontraktKontraktsbelop-datadef-23147">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Contract amount</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="EN">
+                            <p>Please state agreed amount in the contract between the principal and  the contractor. In this case the amount which concerns work done in  Norway or on the Norwegian Continental Shelf</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kontraktsbeløp</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Avtalt kontraktsbeløp mellom oppdragsgiver og oppdragstaker. Her menes  beløpet som gjelder utført arbeid i Norge eller på norsk  kontinentalsokkel</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Kontraktsopplysninger-grp-5210/Kontrakt-grp-5217/ValutaValutakode-datadef-23148">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Currency</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="EN">
+                            <p>The currency the contract amount is reported</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Valutakode</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>I hvilken valuta er kontraktsbeløpet oppgitt i</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Kontraktsopplysninger-grp-5210/Kontrakt-grp-5217/KontraktType-datadef-2962">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Nature of contract</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="EN">
+                            <p>Please state type of work.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kontrakttype</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Oppgi hvilken type arbeid som utføres.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Kontraktsopplysninger-grp-5210/Kontrakt-grp-5217/HovedkontraktNummer-datadef-22749">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Please state the main contract number if known</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="EN">
+                            <p>Please state main contract number if known.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Hovedkontraktsnummer</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Oppgi hovedkontraktsnummer dersom dette er kjent.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Kontraktsopplysninger-grp-5210/Kontrakt-grp-5217/KontraktTidspunktStartdato-datadef-22366">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Date of start</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="EN">
+                            <p>The assumed start date if the assignment is reported before the work  starts. Changes must then be reported as a revised report</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Startdato</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Antatt startdato oppgis dersom oppdraget rapporteres før arbeidet  starter. Eventuelle endringer må i så fall senere meldes som revidert  melding.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Kontraktsopplysninger-grp-5210/Kontrakt-grp-5217/KontraktTidspunktSluttdato-datadef-22367">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Date of termination</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="EN">
+                            <p>The assumed date of termination may be reported even though the actual  date of termination is not known. Changes must then be reported as a  revised report</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sluttdato</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Antatt sluttdato kan oppgis dersom endelig sluttdato ikke er kjent.  Eventuelle endringer må i så fall senere meldes som revidert melding.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Kontraktsopplysninger-grp-5210/Kontrakt-grp-5217/KontraktArbeidstakere-datadef-23149">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Number of employees working on this assignment</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall arbeidstakere som arbeider på dette oppdraget</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Kontraktsopplysninger-grp-5210/Kontrakt-grp-5217/KontraktMerknader-datadef-23150">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Remarks</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Merknader</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Kontraktsopplysninger-grp-5210/Kontaktperson-grp-5220">
+                    <brreg:sensitivitet type="Mindre sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Name of contact person</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="EN">
+                        <p>Name of contact person at principal who can give further information  about the contract.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kontaktperson</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Navn på kontaktperson hos oppdragsgiver som kan gi ytterligere  opplysninger om kontrakten.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/Kontraktsopplysninger-grp-5210/Kontaktperson-grp-5220/KontraktKontaktpersonEtternavn-datadef-23146">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Surname</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Etternavn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Kontraktsopplysninger-grp-5210/Kontaktperson-grp-5220/KontraktKontaktpersonFornavn-datadef-23145">
+                        <brreg:sensitivitet type="Mindre sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>First name</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fornavn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

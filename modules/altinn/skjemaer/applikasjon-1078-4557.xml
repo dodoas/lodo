@@ -1,0 +1,2244 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">SFT-0002: Rapportering av kvotepliktige utslipp av CO2</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1078-4558.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerelleOpplysninger-grp-5474/Kontaktperson-grp-5475/DriftslederFornavn-datadef-24478" required="true"/>
+            <xforms:bind ref="/Skjema/GenerelleOpplysninger-grp-5474/Kontaktperson-grp-5475/DriftslederEtternavn-datadef-24479" required="true"/>
+            <xforms:bind ref="/Skjema/GenerelleOpplysninger-grp-5474/Kontaktperson-grp-5475/KontaktpersonTelefonnummer-datadef-3" required="true"/>
+            <xforms:bind ref="/Skjema/GenerelleOpplysninger-grp-5474/Kontaktperson-grp-5475/DriftslederEPost-datadef-24315" required="true"/>
+            <xforms:bind ref="/Skjema/GenerelleOpplysninger-grp-5474/OpplysningerOmTillatelsen-grp-5476/UtslippstillatelseKvotepliktigIDKode-datadef-24327" required="true"/>
+            <xforms:bind ref="/Skjema/GenerelleOpplysninger-grp-5474/OpplysningerOmTillatelsen-grp-5476/UtslippstillatelseKvotepliktigDato-datadef-24323" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerelleOpplysninger-grp-5474/OpplysningerOmTillatelsen-grp-5476/BedriftUtslippstillatelseKontrollklasse-datadef-24325"/>
+            <xforms:bind ref="/Skjema/InternKontroll-grp-5516/Malemetode-grp-5660/MalemetodeUtslippEndringTidligereRapportBeskrivelse-datadef-24219" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>Rapportering for bedrifter med kvotepliktige utslipp av CO2</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Egenrapportering for bedrifter med kvotepliktige utslipp av CO2.  </p>
+                <p/>
+                <p>Som følge av lov om kvoteplikt og handel med kvoter for utslipp av  klimagasser (klimakvoteloven), ble det innført et nasjonalt  kvotesystem 1. januar 2005. Klimakvotelovens § 3 angir hvilke utslipp  av karbondioksid (CO2) som
+                    omfattes av kvoteplikten. Alle bedrifter  med kvotepliktige CO2-utslipp må ha særskilt utslippstillatelse.  </p>
+                <p/>
+                <p>I henhold til klimakvotelovens § 16 skal bedrifter med kvotepliktige  CO2-utslipp innen 1. mars hvert år rapportere foregående års  kvotepliktige utslipp av CO2 til SFT. Forskrift om kvoteplikt og  handel med kvoter for utslipp av
+                    klimagasser (klimakvoteforskriften)  gir detaljerte rapporteringsregler for ulike bransjer omfattet av  kvotesystemet.  </p>
+                <p/>
+                <p>SFT kontrollerer og godkjenner den enkelte kvotepliktiges  utslippsrapport. Dersom den kvotepliktige innen 1. april ikke har  rapportert sine utslipp i henhold til rapporteringsreglene, skal den  kvotepliktige suspenderes fra
+                    retten til å overføre kvoter i  kvoteregisteret.  </p>
+                <p/>
+                <p>Innen 1. mai hvert år skal den kvotepliktige overføre et antall kvoter  fra sin konto i Det norske registeret for klimakvoter  (kvoteregisteret) til en nærmere angitt oppgjørskonto. Antall kvoter  som overføres til oppgjør skal
+                    svare til virksomhetens godkjente,  kvotepliktige CO2-utslipp det foregående året.  </p>
+                <p/>
+                <p>Les mer:  </p>
+                <p/>
+                <p>- Klimakvoteloven: http://www.lovdata.no/all/hl-20041217-099.html  </p>
+                <p>- Klimakvoteforskriften:  http://www.lovdata.no/for/sf/md/md-20041223-1851.html</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerelleOpplysninger-grp-5474">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generelle opplysninger</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerelleOpplysninger-grp-5474/Kontaktperson-grp-5475">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Ansvarlig kontaktperson for rapporten</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kontaktpersonen er vedkommende person som har ansvaret for at  bedriften overvåker, beregner og rapporterer sine utslipp i henhold  til kravene i utslippstillatelsen og klimakvoteforskriften. SFT vil  henvende seg til
+                            kontaktpersonen dersom SFTs gjennomgang og kontroll  av rapporten avdekker behov for ytterligere opplysninger eller  avklaringer.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/GenerelleOpplysninger-grp-5474/Kontaktperson-grp-5475/DriftslederFornavn-datadef-24478">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fornavn:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerelleOpplysninger-grp-5474/Kontaktperson-grp-5475/DriftslederEtternavn-datadef-24479">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Etternavn:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerelleOpplysninger-grp-5474/Kontaktperson-grp-5475/KontaktpersonTelefonnummer-datadef-3">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Direkte telefon:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerelleOpplysninger-grp-5474/Kontaktperson-grp-5475/DriftslederEPost-datadef-24315">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>E-post:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerelleOpplysninger-grp-5474/OpplysningerOmTillatelsen-grp-5476">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Opplysninger om tillatelse til kvotepliktige utslipp av CO2</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerelleOpplysninger-grp-5474/OpplysningerOmTillatelsen-grp-5476/UtslippstillatelseKvotepliktigIDKode-datadef-24327">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kvotepliktig ID-kode (NO-120-X-0):</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerelleOpplysninger-grp-5474/OpplysningerOmTillatelsen-grp-5476/UtslippstillatelseKvotepliktigDato-datadef-24323">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Dato for kvotepliktig utslippstillatelse:</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Datoformat er dd.mm.åååå</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerelleOpplysninger-grp-5474/OpplysningerOmTillatelsen-grp-5476/BedriftUtslippstillatelseKontrollklasse-datadef-24325">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kontrollklasse:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:repeat id="repeat_Nose-grp-5596" nodeset="/Skjema/GenerelleOpplysninger-grp-5474/Nose-grp-5596">
+                    <xforms:group ref="/Skjema/GenerelleOpplysninger-grp-5474/Nose-grp-5596">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>NOSE-nummer på kvotepliktig(e)aktivitet(er)</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>I forbindelse med myndighetenes implementering av IPPC-direktivet  innføres standardisert(e) beskrivelse(r)av utslippskilder.  </p>
+                            <p/>
+                            <p>Aktuelle NOSE-nummer på kvotepliktig(e) aktivitet(er) er angitt i  bedriftens særskilte tillatelse til kvotepliktige utslipp av CO2.</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/GenerelleOpplysninger-grp-5474/Nose-grp-5596/BedriftNOSENummer-datadef-24319">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:repeat id="repeat_KategoriForKvotepliktigeAktiviteter-grp-5644" nodeset="/Skjema/GenerelleOpplysninger-grp-5474/KategoriForKvotepliktigeAktiviteter-grp-5644">
+                    <xforms:group ref="/Skjema/GenerelleOpplysninger-grp-5474/KategoriForKvotepliktigeAktiviteter-grp-5644">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kategori for kvotepliktig(e) aktivitet(er)</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Jf. aktiviteter i klimakvoteforskriftens § 1-1</p>
+                        </xforms:hint>
+                        <xforms:input ref="/Skjema/GenerelleOpplysninger-grp-5474/KategoriForKvotepliktigeAktiviteter-grp-5644/NOSEBeskrivelse-datadef-24320">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:group ref="/Skjema/GenerelleOpplysninger-grp-5474/Saksbehandler-grp-5478">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Saksbehandler for forurensningsmyndighetene.</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerelleOpplysninger-grp-5474/Saksbehandler-grp-5478/EtatNavn-datadef-24318">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Etatsnavn:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerelleOpplysninger-grp-5474/Saksbehandler-grp-5478/SaksbehandllerFornavn-datadef-24316">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fornavn:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerelleOpplysninger-grp-5474/Saksbehandler-grp-5478/SaksbehandllerEtternavn-datadef-24317">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Etternavn:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:selectOne ref="/Skjema/GenerelleOpplysninger-grp-5474/UtslippEnergiproduksjonCO2-datadef-24368">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Har bedriften hatt utslipp av CO2 i forbindelse med energiproduksjon  (forbrenning av energivarer som for eksempel olje, kull, gass, etc)?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Rapporteringsplikten gjelder for utslippskilder der den samlede brutto  innfyrte effekten overstiger 20 MW, jamfør § 1-1 a) i kapittel 1 i  klimakvoteforskriften. CO2-utslipp fra energiproduksjon omfatter  blant annet
+                            utslipp fra dampkjel, fyrkjel, turbin, fakkel osv.. Se  punkt B.1.0 i vedlegg 1 til klimakvoteforskriften for oversikt over  utslippskilder. Dersom svaret er nei på dette spørsmålet skal ikke  del 1 av skjemaet fylles ut.
+                            Utfyller kan da se bort fra den delen av  skjema og åpne side.....i skjema i margen på venstre side i  skjermbildet.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/GenerelleOpplysninger-grp-5474/UtslippProsessEnergiproduksjon-datadef-25053">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/UtslippFraEnergiproduksjon-grp-5479">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Del 1. Rapportering av CO2-utslipp fra energiproduksjon.</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_OpplysningerOmUtslippskilderEnergiproduksjon-grp-5481" nodeset="/Skjema/UtslippFraEnergiproduksjon-grp-5479/OpplysningerOmUtslippskilderEnergiproduksjon-grp-5481">
+                    <xforms:group ref="/Skjema/UtslippFraEnergiproduksjon-grp-5479/OpplysningerOmUtslippskilderEnergiproduksjon-grp-5481">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1-1. Utslippskilder, utslippsdata og CO2-utslipp.</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/UtslippFraEnergiproduksjon-grp-5479/OpplysningerOmUtslippskilderEnergiproduksjon-grp-5481/UtslippskildeNummer-datadef-25051">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utslippskildenummer</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Nummereringen skal starte med 1, for deretter å fortsette med nr. 2,  3, 4 osv for hver enkel utslippskilde. Utslippskildenummeret skal  brukes som referanse senere i skjemaet, bl.a. i tabell 1.1.2a). Det  er
+                                    likegyldig hvilket nummer en utslippskilde blir tilegnet, så lenge  utslippskildenummeret brukes konsekvent gjennom hele skjemaet.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/UtslippFraEnergiproduksjon-grp-5479/OpplysningerOmUtslippskilderEnergiproduksjon-grp-5481/UtslippskildeEnergiproduksjonCO2-datadef-24114">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>Dampkjel</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Dampkjel</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Fyrkjel</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fyrkjel</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Turbin</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Turbin</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Forbrenningsovn</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Forbrenningsovn</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Toerkeovn</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Tørkeovn</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Motor</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Motor</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Fakkel</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fakkel</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Cracker</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Cracker</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Vaatvasker</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Våtvasker</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Annet</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Annet utstyr</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utslippskilde</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>En oversikt over utslippskilder finnes i punkt B.1.0 i vedlegg 1 til  klimakvoteforskriften</p>
+                            </xforms:help>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/UtslippFraEnergiproduksjon-grp-5479/OpplysningerOmUtslippskilderEnergiproduksjon-grp-5481/UtslippsskildeInnfyrtKapasitetMW-datadef-24113">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Brutto innfyrt effekt (MW)</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippFraEnergiproduksjon-grp-5479/OpplysningerOmUtslippskilderEnergiproduksjon-grp-5481/UtslippskildeEnergiproduksjonBeskrivelse-datadef-24116">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kort beskrivelse av utslippskilden</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:group ref="/Skjema/UtslippFraEnergiproduksjon-grp-5479/Kontrollsporsmal-grp-5647">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:selectMany ref="/Skjema/UtslippFraEnergiproduksjon-grp-5479/Kontrollsporsmal-grp-5647/VedleggRapportUtslippEnergiproduksjon-datadef-24476">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>ja</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>nei</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kryss av når nærmere opplysninger om utslippsdata og CO2-utslipp fra  hver av utslippskildene er rapportert i tabell 1.1.2a) og lagt ved  skjemaet</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Trykk på knappen Til hovedskjema. Under arkfanen Vedlegg til venstre i  margen finner du hjelp til å legge til filvedlegg.  </p>
+                            <p/>
+                            <p>Tabell 1.1.2a) Utslippsdata og beregnede CO2-utslipp fra  energiproduksjon er lagt i en excel-fil som må lastes ned til egen pc  fra følgende internettadresse:
+                                http://www.sft.no/kvoteregister/co2utslipp_energiproduksjon.xls  </p>
+                            <p/>
+                            <p/>
+                            <p>Tabellen fylles ut og legges ved som et vedlegg til skjemaet. Kolonne  F og G i tabell 1.1.2a) skal ikke fylles ut for CO2-utslipp som er  bestemt ved kontinuerlige målinger. Ytterligere opplysninger om  målingene skal
+                                oppgis i del 1-4.</p>
+                        </xforms:help>
+                    </xforms:selectMany>
+                    <xforms:selectOne ref="/Skjema/UtslippFraEnergiproduksjon-grp-5479/Kontrollsporsmal-grp-5647/UtslippCOCO2OverfortAnnenVirksomhet-datadef-24125">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Har bedriften overført CO-gass eller CO2-gass til en annen virksomhet?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/UtslippFraEnergiproduksjon-grp-5479/Kontrollsporsmal-grp-5647/UtslippCO2MassebalanseBeregning-datadef-24118">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Er bedriftens CO2-utslipp beregnet ved hjelp av massebalanse?</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Dersom bedriften kan dokumentere at utslippstallene blir sikrere ved  en massebalanseberegning, uten å angi utslippene fra de enkelte  utslippskildene, kan dataene rapporteres i tabell 1.1.3.</p>
+                        </xforms:hint>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/UtslippFraEnergiproduksjon-grp-5479/Kontrollsporsmal-grp-5647/UtslippCO2KontinuerligMaling-datadef-24117">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Er CO2-utslippene fra en eller flere utslippskilder bestemt direkte  ved kontinuerlige målinger?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/AnnenVirksomhetEnergiproduksjon-grp-5482">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>CO2 utslipp for gass overført til annen virksomhet</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>(ikke kvotepliktig)</p>
+                </xforms:hint>
+                <xforms:group ref="/Skjema/AnnenVirksomhetEnergiproduksjon-grp-5482/OverforingTilAnnenVirksomhet-grp-5483">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Tabell 1.1.2 b) Beregning av CO2 utslipp for gass overført til annen  virksomhet</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/AnnenVirksomhetEnergiproduksjon-grp-5482/OverforingTilAnnenVirksomhet-grp-5483/GassCOType-datadef-24263">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>CO-gass</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AnnenVirksomhetEnergiproduksjon-grp-5482/OverforingTilAnnenVirksomhet-grp-5483/GassCOOverfortAnnenVirksomhetMengdeSpesifisertGasstype-datadef-24264">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Mengde gass overført (tonn) A</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(tonn/år)</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AnnenVirksomhetEnergiproduksjon-grp-5482/OverforingTilAnnenVirksomhet-grp-5483/GassCOUtslippsfaktor-datadef-24265">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Utslippsfaktor(tonn CO2/tonn) B</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet har format med ett tall før komma og to etter komma</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AnnenVirksomhetEnergiproduksjon-grp-5482/OverforingTilAnnenVirksomhet-grp-5483/GassCOOksidasjonsfaktor-datadef-24266">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Oksidasjons faktor C</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet har format med ett tall før komma og to etter komma</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AnnenVirksomhetEnergiproduksjon-grp-5482/OverforingTilAnnenVirksomhet-grp-5483/GassCOOverfortAnnenVirksomhetMengde-datadef-24267">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>CO2-mengde overført (tonn) A*B*C</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AnnenVirksomhetEnergiproduksjon-grp-5482/OverforingTilAnnenVirksomhet-grp-5483/GassCO2Type-datadef-24268">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>CO2-gass</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AnnenVirksomhetEnergiproduksjon-grp-5482/OverforingTilAnnenVirksomhet-grp-5483/GassCO2OverfortAnnenVirksomhetMengdeSpesifisertGasstype-datadef-24269">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Mengde gass overført (tonn) A</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AnnenVirksomhetEnergiproduksjon-grp-5482/OverforingTilAnnenVirksomhet-grp-5483/GassCO2Utslippsfaktor-datadef-24270">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Utslippsfaktor (tonn CO2/tonn) B</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet har format med ett tall før komma og to etter komma</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AnnenVirksomhetEnergiproduksjon-grp-5482/OverforingTilAnnenVirksomhet-grp-5483/GassCO2Oksidasjonsfaktor-datadef-24271">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Oksidasjonsfaktor C</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet har format med ett tall før komma og to etter komma</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AnnenVirksomhetEnergiproduksjon-grp-5482/OverforingTilAnnenVirksomhet-grp-5483/GassCO2OverfortAnnenVirksomhetMengde-datadef-24272">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>CO2-mengde overført (tonn) A*B*C</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AnnenVirksomhetEnergiproduksjon-grp-5482/OverforingTilAnnenVirksomhet-grp-5483/GassCOCO2OverfortAnnenVirksomhetMengde-datadef-24386">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum mengde gass overført til annen virksomhet (tonn)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/BeregningerMedMassebalanse-grp-5535">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Tabell 1.1.3. Utslippsdata og CO2-utslipp beregnet med massebalanse</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_BeregnetMedMassebalanseTilfortKarbon-grp-5505" nodeset="/Skjema/BeregningerMedMassebalanse-grp-5535/BeregnetMedMassebalanseTilfortKarbon-grp-5505">
+                    <xforms:group ref="/Skjema/BeregningerMedMassebalanse-grp-5535/BeregnetMedMassebalanseTilfortKarbon-grp-5505">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>A.Tilført karbon</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/BeregningerMedMassebalanse-grp-5535/BeregnetMedMassebalanseTilfortKarbon-grp-5505/RavareKarbonholdigEnergiproduksjon-datadef-24131">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Angi type karbonholdig råvare eller energivare</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/BeregningerMedMassebalanse-grp-5535/BeregnetMedMassebalanseTilfortKarbon-grp-5505/UtslippEnergiproduksjonTilfortKarbonTonnSpesKarbonkilde-datadef-24132">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Karboninnhold tonn C/år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/BeregningerMedMassebalanse-grp-5535/BeregnetMedMassebalanseTilfortKarbon-grp-5505/UtslippEnergiproduksjonTilfortKarbonKvotepliktig-datadef-24133">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>Ja</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Yes</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Nei</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>No</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kvotepliktig utslipp? se hjelpeteksten</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Det er ikke kvoteplikt for CO2-utslipp knyttet til brenning av fossilt  brensel ilagt CO2-avgift, kommunalt avfall (når det betales  sluttbehandlingsavgift) og farlig avfall, samt all bruk av bioenergi.  For
+                                    virksomheter som i tillegg har kvotepliktige prosessutslipp, er  CO2-utslipp fra forbrenning av kommunalt avfall og farlig avfall ikke  omfattet av unntaket og skal følgelig rapporteres som kvotepliktige  utslipp.</p>
+                            </xforms:help>
+                        </xforms:selectOne>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:repeat id="repeat_BeregnetMedMassebalanseBundetKarbon-grp-5506" nodeset="/Skjema/BeregningerMedMassebalanse-grp-5535/BeregnetMedMassebalanseBundetKarbon-grp-5506">
+                    <xforms:group ref="/Skjema/BeregningerMedMassebalanse-grp-5535/BeregnetMedMassebalanseBundetKarbon-grp-5506">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>B. Bundet karbon i produkter, biprodukter eller avfall</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/BeregningerMedMassebalanse-grp-5535/BeregnetMedMassebalanseBundetKarbon-grp-5506/RestproduktKarbonholdigEnergiproduksjon-datadef-24135">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Angi type produkt, biprodukt eller avfall</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/BeregningerMedMassebalanse-grp-5535/BeregnetMedMassebalanseBundetKarbon-grp-5506/UtslippEnergiproduksjonBundetKarbonTonnSpesKarbonkilde-datadef-24136">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Karboninnhold tonn C/år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:repeat id="repeat_BeregnetMedMassebalanseKarbonSolgtEllerEksportert-grp-5507" nodeset="/Skjema/BeregningerMedMassebalanse-grp-5535/BeregnetMedMassebalanseKarbonSolgtEllerEksportert-grp-5507">
+                    <xforms:group ref="/Skjema/BeregningerMedMassebalanse-grp-5535/BeregnetMedMassebalanseKarbonSolgtEllerEksportert-grp-5507">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>C. Karbon eksportert eller solgt til andre bedrifter</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/BeregningerMedMassebalanse-grp-5535/BeregnetMedMassebalanseKarbonSolgtEllerEksportert-grp-5507/VareKarbonholdigEksportertEnergiproduksjon-datadef-24138">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Angi type karbonholdig vare eksportert eller solgt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/BeregningerMedMassebalanse-grp-5535/BeregnetMedMassebalanseKarbonSolgtEllerEksportert-grp-5507/UtslippEnergiproduksjonEksportertSolgtKarbonTonnKarbonkilde-datadef-24139">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Karboninnhold tonn C/år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/BeregningerMedMassebalanse-grp-5535/UtslippEnergiproduksjonTilfortKarbonTonn-datadef-24134">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Totalt tilført karbon:</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningerMedMassebalanse-grp-5535/UtslippEnergiproduksjonBundetKarbonTonn-datadef-24137">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Totalt bundet karbon:</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregningerMedMassebalanse-grp-5535/UtslippEnergiproduksjonEksportertSolgtKarbonTonn-datadef-24140">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Totalt eksportert eller solgt karbon tonn C/år:</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:group ref="/Skjema/BeregningerMedMassebalanse-grp-5535/BeregnetMedMassebalanseOppsummering-grp-5508">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppsummering av C02-utslipp beregnet med massebalanse</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/BeregningerMedMassebalanse-grp-5535/BeregnetMedMassebalanseOppsummering-grp-5508/UtslippEnergiproduksjonCO2MassebalanseberegnetTonn-datadef-24141">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>D. CO2-utslipp i alt:</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(A ÷ B ÷ C) * 3,667</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningerMedMassebalanse-grp-5535/BeregnetMedMassebalanseOppsummering-grp-5508/UtslippEnergiCO2IkkeKvotepliktigMassebalanseberegnetTonn-datadef-24142">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>E. Ikke kvotepliktig CO2-utslipp:</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her inkluderes bare mengde tilført karbon som ikke er omfattet av  kvoteplikten, jamfør hjelpetekst til del A av tabellen.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>delta A  * 3,667</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningerMedMassebalanse-grp-5535/BeregnetMedMassebalanseOppsummering-grp-5508/UtslippEnergiCO2KvotepliktigMassebalanseberegnetTonn-datadef-24143">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>F. Kvotepliktig CO2-utslipp:</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>D ÷ E</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/BeregningerMedMassebalanse-grp-5535/MasseberegnetHvorfor-grp-5509">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:input ref="/Skjema/BeregningerMedMassebalanse-grp-5535/MasseberegnetHvorfor-grp-5509/UtslippMassebalanseberegningUtslippsfaktorBeskrivelse-datadef-24145">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Dokumentasjon ved bruk av massebalansemetodikk</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen.  </p>
+                            <p/>
+                            <p>Dersom det er brukt massebalansemetodikk, skal følgende opplysninger  gis:  </p>
+                            <p>- dokumentasjon på at CO2-utslippene blir mer nøyaktig kartlagt med  bruk av en massebalansemetodikk enn ved en utslippskildespesifikk  beregning (jamfør tabell 1.1.2a)  </p>
+                            <p>- beskrivelse av hvordan data om karboninnhold i råvarer, produkter,  biprodukter, energivarer og avfall er innsamlet og eventuelt  bearbeidet. Usikkerhet i beregningene skal kvantifiseres.  </p>
+                            <p>- nedre brennverdi i hver kategori råvare, energivare, produkt,  biprodukt og avfall</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Det er definert i hjelpeteksten hva som skal dokumenteres dersom  massebalansemetodikk er brukt.</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/KontinuerligeMalinger-grp-5500">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>1-2 Kontinuerlige målinger</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Bruk tilsvarende nummerering som i tabell 1.1.1</p>
+                </xforms:hint>
+                <xforms:repeat id="repeat_KvalitativeOpplysninger-grp-5501" nodeset="/Skjema/KontinuerligeMalinger-grp-5500/KvalitativeOpplysninger-grp-5501">
+                    <xforms:group ref="/Skjema/KontinuerligeMalinger-grp-5500/KvalitativeOpplysninger-grp-5501">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:input ref="/Skjema/KontinuerligeMalinger-grp-5500/KvalitativeOpplysninger-grp-5501/UtslippskildeMalingKontinuerligNummer-datadef-25052">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utslippskildenummer</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Bruk tilsvarende nummerering som i tabell 1.1.1</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/KontinuerligeMalinger-grp-5500/KvalitativeOpplysninger-grp-5501/UtslippCO2KontinuerligMalingMalemetodeBeskrivelse-datadef-24166">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Oppgi målestandard, usikkerhet i målingene og hvem målingene er utført  av. Dersom målestandard ikke finnes, skal benyttet målemetode  beskrives.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/KontinuerligeMalinger-grp-5500/KvalitativeOpplysninger-grp-5501/UtslippCO2KontinuerligMalingBegrunnelse-datadef-24167">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Det skal gis en begrunnelse for at kontinuerlige målinger av  CO2-utslipp gir sikrere og mer konsistente utslippsdata enn ved  beregning av utslippene.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen.</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Aktivitetsdata-grp-5485">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>1-3 Aktivitetsdata og oksidasjonsfaktor</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Aktivitetsdata-grp-5485/UtslippMassebalanseberegningAktivitetsdataBeskrivelse-datadef-24144">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Det skal gis en beskrivelse av hvordan aktivitetsdata (energivarer mv)  som har gitt opphav til kvotepliktige CO2-utslipp er innsamlet og  eventuelt bearbeidet. Usikkerhet i beregning av aktivitetsdataene  skal
+                            kvantifiseres. Dersom det er benyttet oksidasjonsfaktor lavere  enn 1 i utslippsberegningene, skal det dokumenteres at dette gir  sikrere og mer nøyaktige utslippstall</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen.  </p>
+                        <p/>
+                        <p/>
+                        <p>Det er bare energivarer som har gitt opphav til kvotepliktige utslipp  som det er påkrevd å gi utfyllende opplysninger om. For eksempel er  oljeprodukter belagt med CO2-avgift ikke omfattet av dette  rapporteringskravet.
+                            Usikkerheten i aktivitetsdata uttrykkes gjerne  som 95% konfidensintervallet rundt den benyttede verdien, og skal  rapporteres i prosent. Usikkerhet inkluderer både systematiske og  tilfeldige faktorer.  </p>
+                        <p>Usikkerhetsberegningen kan for eksempel baseres på opplysninger fra  leverandøren av energivarene. I beregningen må det også inkluderes  usikkerheten knyttet til måleutstyr. Det må tas høyde for den  kumulative effekten av
+                            alle komponentene i målesystemet (eks  bruksbetingelser, usikkerhet knyttet til kalibrering).  </p>
+                        <p>Tabell 2 i EUs Kommisjonsbeslutning om krav til overvåkning og  rapportering av CO2-utslipp (se link på SFTs internettside) gir et  anslag på usikkerhetsnivå for ulike type måleutstyr under stabile  prosessbetingelser.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/UtslippsfaktorerNarmere-grp-5536">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>1-4 Utslippsfaktorer</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Alle spørsmål på denne siden må besvares før utfyllingen kan  fortsette.</p>
+                </xforms:hint>
+                <xforms:selectOne ref="/Skjema/UtslippsfaktorerNarmere-grp-5536/EnergivareKullKoks-datadef-24732">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Er kull og koks benyttet som energivare?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/UtslippsfaktorerNarmere-grp-5536/EnergivareOljeGass-datadef-24733">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Er olje og/eller gass benyttet som energivare?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/UtslippsfaktorerNarmere-grp-5536/EnergivareAvfall-datadef-24734">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Er avfall benyttet  som energivare?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/UtslippsfaktorerNarmere-grp-5536/UtslippsfaktorKullKoksBedriftsspesifikk-datadef-24369">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Er det benyttet bedriftsspesifikke utslippsfaktorer for CO2-avgiftsfri  kull og koks?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/UtslippsfaktorerNarmere-grp-5536/UtslippsfaktorKullKoksStandardUtslippsfaktorCO2Over1000T-datadef-24731">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Er det benyttet standard utslippsfaktorer for kull og koks og  utgjør  CO2-utslippene mer enn 1000 tonn/år?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/UtslippsfaktorerNarmere-grp-5536/UtslippsfaktorOljeBedriftsspesifikk-datadef-24370">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Er CO2-avgiftsfri olje benyttet som energivare?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/UtslippsfaktorerNarmere-grp-5536/UtslippsfaktorGassStandardUtslippsfaktor-datadef-24730">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Er det benyttet standard utslippsfaktor for gass?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/UtslippsfaktorerNarmere-grp-5536/UtslippsfaktorGassBedriftsspesifikk-datadef-24371">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Er gass benyttet som energivare?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/UtslippsfaktorerNarmere-grp-5536/UtslippCO2KvotepliktigProsess-datadef-24373">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Har bedriften hatt kvotepliktige CO2-utslipp fra prosess?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+            </xforms:group>
+            <xforms:group ref="/Skjema/UtslippsfaktorerKullOgKoks-grp-5662">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Opplysninger om CO2-avgiftsfri kull og koks</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_UtslippsfaktorerKullOgKoks-grp-5492" nodeset="/Skjema/UtslippsfaktorerKullOgKoks-grp-5662/UtslippsfaktorerKullOgKoks-grp-5492">
+                    <xforms:group ref="/Skjema/UtslippsfaktorerKullOgKoks-grp-5662/UtslippsfaktorerKullOgKoks-grp-5492">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tabell 1.4.1. Opplysninger om CO2-avgiftsfri kull og koks</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Det skal gis opplysninger om alle kategorier av kull og koks som er  benyttet i rapporteringsåret.</p>
+                        </xforms:hint>
+                        <xforms:selectOne ref="/Skjema/UtslippsfaktorerKullOgKoks-grp-5662/UtslippsfaktorerKullOgKoks-grp-5492/KullType-datadef-24146">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>Kull_Antrasitt</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Kull Antrasitt</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Kullkoks</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Kullkoks</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Petrolkoks</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Petrolkoks</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Annet</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Annet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kategori kull eller koks</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/UtslippsfaktorerKullOgKoks-grp-5662/UtslippsfaktorerKullOgKoks-grp-5492/KullTypeAnnen-datadef-24791">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Spesifiser</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippsfaktorerKullOgKoks-grp-5662/UtslippsfaktorerKullOgKoks-grp-5492/KullKarboninnholdFastForm-datadef-24147">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>C-fix</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippsfaktorerKullOgKoks-grp-5662/UtslippsfaktorerKullOgKoks-grp-5492/KullKarboninnholdFlyktigeBestandeler-datadef-24148">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>C i flyktige bestanddeler</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippsfaktorerKullOgKoks-grp-5662/UtslippsfaktorerKullOgKoks-grp-5492/KullFuktinnhold-datadef-24149">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fuktighet i prosent</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>( i prosent )</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippsfaktorerKullOgKoks-grp-5662/UtslippsfaktorerKullOgKoks-grp-5492/KullAskeinnhold-datadef-24150">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Askeinnhold i prosent</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>(i prosent)</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippsfaktorerKullOgKoks-grp-5662/UtslippsfaktorerKullOgKoks-grp-5492/KullNedreBrennverdi-datadef-24151">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nedre brennverdi (TJ/ktonn)</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>(netto kaloriverdi)</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippsfaktorerKullOgKoks-grp-5662/UtslippsfaktorerKullOgKoks-grp-5492/KullSvovelinnhold-datadef-24152">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Svovelinnhold i prosent</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>(i prosent)</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippsfaktorerKullOgKoks-grp-5662/UtslippsfaktorerKullOgKoks-grp-5492/KullProdusertVare-datadef-24153">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Mengde karbon bundet i produsert vare (tonn)</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippsfaktorerKullOgKoks-grp-5662/UtslippsfaktorerKullOgKoks-grp-5492/KullProdusertVareKarboninnholdTonn-datadef-24154">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Mengde karbon bundet i aske (tonn)</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>(tonn)</p>
+                            </xforms:hint>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/BeskrivelserKullOgKoks-grp-5652">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Opplysninger om CO2-avgiftsfri kull og koks</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/BeskrivelserKullOgKoks-grp-5652/BedriftsspesifikkeUtslippsfaktorerKullOgKoks-grp-5651">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Bedriftsspesifikk utslippsfaktor ved forbrenning av CO2-avgiftsfri  kull og koks</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/BeskrivelserKullOgKoks-grp-5652/BedriftsspesifikkeUtslippsfaktorerKullOgKoks-grp-5651/KullAvgiftsfriBedriftsspesifikkeUtslippsfaktorBegrunnelse-datadef-24735">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Gi en nærmere beskrivelse av hvordan utslippsfaktorene er fremkommet  og en kvalitativ vurdering av usikkerhet i de brukte faktorene.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/BeskrivelserKullOgKoks-grp-5652/StandardUtslippsfaktorerKullOgKoks-grp-5491">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Standard utslippsfaktor ved forbrenning av CO2-avgiftsfri kull og koks</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/BeskrivelserKullOgKoks-grp-5652/StandardUtslippsfaktorerKullOgKoks-grp-5491/KullBeregningStandardUtslippsfaktorBegrunnelse-datadef-24155">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Gi en begrunnelse for at bruk av standard utslippsfaktor gir minst  like nøyaktige utslippsdata som ved bruk av bedriftsspesifikk  utslippsfaktor</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen.  </p>
+                            <p>Standard utslippsfaktorer for kull og koks er gitt i tabell 1 i  vedlegg 1 til klimakvoteforskriften. Disse faktorene reflekterer det  gjennomsnittlige karboninnholdet i kull og koks i Norge.  Karboninnholdet i kull og
+                                koks varierer imidlertid fra bedrift til  bedrift og mellom ulike innkjøpte varepartier. I tillegg dannes en  del aske ved forbrenning av kull og koks, og mengden kan variere med  forbrenningsteknologien. Det er derfor
+                                anbefalt å basere beregningene  på bedriftsspesifikke faktorer og ikke standardfaktorene i tabell 1.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/UtslippsfaktorerOljeOgGass-grp-5537">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Utslippsfaktorer ved forbrenning av olje</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_BedriftsspesifikkeUtslippsfaktorerOlje-grp-5495" nodeset="/Skjema/UtslippsfaktorerOljeOgGass-grp-5537/BedriftsspesifikkeUtslippsfaktorerOlje-grp-5495">
+                    <xforms:group ref="/Skjema/UtslippsfaktorerOljeOgGass-grp-5537/BedriftsspesifikkeUtslippsfaktorerOlje-grp-5495">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tabell 1.4.2.a) Opplysninger om CO2-avgiftsfri olje (og annet flytende  fossilt brensel)</p>
+                        </xforms:caption>
+                        <xforms:selectOne ref="/Skjema/UtslippsfaktorerOljeOgGass-grp-5537/BedriftsspesifikkeUtslippsfaktorerOlje-grp-5495/OljeType-datadef-24156">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>Bensin</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Bensin</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Diesel</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Diesel</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Marin_gassolje</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Marin gassolje</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Fyringsparafin</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fyringsparafin</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Lett_fyringsolje</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Lett fyringsolje  (fyringsolje nr. 1 og nr. 2)</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Tungdestillat</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Tungdestillat/spesialdesillat (fyringsolje nr. 3A og nr. 4A)</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Tung_fyringsolje</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Tung fyringsolje (fyringsolje nr. 5 og nr. 6)</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Annet</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Annet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kategori olje</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/UtslippsfaktorerOljeOgGass-grp-5537/BedriftsspesifikkeUtslippsfaktorerOlje-grp-5495/OljeTypeAnnen-datadef-24792">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Spesifiser</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippsfaktorerOljeOgGass-grp-5537/BedriftsspesifikkeUtslippsfaktorerOlje-grp-5495/OljeKarboninnhold-datadef-24158">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Karboninnhold (prosent)</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>(prosent)</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippsfaktorerOljeOgGass-grp-5537/BedriftsspesifikkeUtslippsfaktorerOlje-grp-5495/OljeNedreBrennverdi-datadef-24160">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nedre brennverdi (TJ/ktonn)</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:group ref="/Skjema/UtslippsfaktorerOljeOgGass-grp-5537/BedriftsspesifikkeUtslippsfaktorerOljeBegrunnelse-grp-5657">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Bedriftsspesifikk utslippsfaktor ved forbrenning av CO2-avgiftsfri  olje</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/UtslippsfaktorerOljeOgGass-grp-5537/BedriftsspesifikkeUtslippsfaktorerOljeBegrunnelse-grp-5657/OljeBedriftsspesifikkUtslippsfaktorBegrunnelse-datadef-24162">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Det skal gis en nærmere beskrivelse av hvordan utslippsfaktorene er  fremkommet og en kvalitativ vurdering av usikkerhet i de brukte  faktorene. Det skal også dokumenteres at utslippsdata blir minst like  nøyaktige som
+                                ved bruk av standard utslippsfaktor.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen.    </p>
+                            <p>Standard utslippsfaktor for ulike oljeprodukter er gitt i tabell 2 i  vedlegg 1 til klimakvoteforskriften. Ved bruk av bedriftsspesifikke  utslippsfaktorer skal det ikke tas hensyn til binding av karbon i  aske etter
+                                forbrenning av olje, unntatt i særskilte tilfeller der det  kan dokumenteres at slik binding utgjør mer enn 1 prosent av  utslippet.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/UtslippsfaktorerGass-grp-5538">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Utslippsfaktorer ved forbrenning av gass</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_BedriftsspesifikkeUtslippsfaktorerGass-grp-5497" nodeset="/Skjema/UtslippsfaktorerGass-grp-5538/BedriftsspesifikkeUtslippsfaktorerGass-grp-5497">
+                    <xforms:group ref="/Skjema/UtslippsfaktorerGass-grp-5538/BedriftsspesifikkeUtslippsfaktorerGass-grp-5497">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tabell 1.4.2.b) Opplysninger om gass.</p>
+                        </xforms:caption>
+                        <xforms:selectOne ref="/Skjema/UtslippsfaktorerGass-grp-5538/BedriftsspesifikkeUtslippsfaktorerGass-grp-5497/GassType-datadef-24157">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>Naturgass</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Naturgass</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>LNG</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>LNG</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>LPG</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>LPG</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Propan</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Propan</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Butan</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Butan</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Propen</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Propen</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>CO_brenngass</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>CO-rik brenngass</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Fakkelgass</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fakkelgass</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Syntesegass</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Syntesegass</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Fyrgass</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fyrgass</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Annet</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Annet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kategori gass</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/UtslippsfaktorerGass-grp-5538/BedriftsspesifikkeUtslippsfaktorerGass-grp-5497/GassTypeAnnen-datadef-24793">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Spesifiser</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippsfaktorerGass-grp-5538/BedriftsspesifikkeUtslippsfaktorerGass-grp-5497/GassKarboninnhold-datadef-24159">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Karboninnhold (prosent)</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>(prosent)</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippsfaktorerGass-grp-5538/BedriftsspesifikkeUtslippsfaktorerGass-grp-5497/GassNedreBrennverdi-datadef-24161">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nedre brennverdi (TJ/ktonn)</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:group ref="/Skjema/UtslippsfaktorerGass-grp-5538/StandardUtslippsfaktorerGass-grp-5496">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Standard utslippsfaktorer ved forbrenning av gass.</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/UtslippsfaktorerGass-grp-5538/StandardUtslippsfaktorerGass-grp-5496/UtslippsfaktorGassStandardUtslippsfaktorOver1000Tonn-datadef-24738">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Dersom CO2-utslippet fra forbrenningen utgjør mer enn 1000 tonn per år  skal det gis en begrunnelse for at bruk av standard utslippsfaktor  gir minst like nøyaktige utslippsdata som ved bruk av  bedriftsspesifikk utslippsfaktor.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen.  </p>
+                            <p>Standard utslippsfaktor for ulike typer gass er gitt i tabell 3 i  vedlegg 1 til klimakvoteforskriften. De reelle utslippsfaktorer  varierer imidlertid fra bedrift til bedrift og fra år til år. Det er  derfor anbefalt å
+                                basere beregningene på bedriftsspesifikke  utslippsfaktorer</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/UtslippsfaktorerGass-grp-5538/BedriftsspesifikkeUtslippsfaktorerGassBegrunnelse-grp-5656">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Bedriftsspesifikk utslippsfaktor ved forbrenning av gass.</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/UtslippsfaktorerGass-grp-5538/BedriftsspesifikkeUtslippsfaktorerGassBegrunnelse-grp-5656/GassBedriftsspesifikkUtslippsfaktorBegrunnelse-datadef-24737">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Det skal gis en nærmere beskrivelse av hvordan utslippsfaktorene er  fremkommet og en kvalitativ vurdering av usikkerhet i de brukte  faktorene.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen  </p>
+                            <p>Bedriftsspesifikke utslippsfaktorer skal baseres på årlig gjennomsnitt  av det faktiske karboninnholdet i gassen som brennes. Det skal  dokumenteres hvordan karboninnholdet i gassen er målt/bestemt.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/UtslippsfaktorerAvfall-grp-5486">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Utslippsfaktor ved forbrenning av avfall</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/UtslippsfaktorerAvfall-grp-5486/UtslippsfaktorBedriftsspesifikkBeregningGjennomsnittKarbon-datadef-24372">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Har bedriften hatt kvotepliktige CO2-utslipp fra forbrenning av  avfall?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:group ref="/Skjema/UtslippsfaktorerAvfall-grp-5486/UtslippsfaktorerAvfall-grp-5499">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:input ref="/Skjema/UtslippsfaktorerAvfall-grp-5486/UtslippsfaktorerAvfall-grp-5499/AvfallsforbrenningBeregningUtslippsfaktorerForklaring-datadef-24164">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Det skal gis en nærmere beskrivelse av hvordan utslippsfaktorene  benyttet i beregningene av kvotepliktige CO2-utslipp fra forbrenning  av avfall er fremkommet og en kvalitativ vurdering av usikkerhet i de  brukte faktorene.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen  </p>
+                            <p>De bedriftsspesifikke utslippsfaktorene kan for eksempel baseres på et  årlig gjennomsnitt av det faktiske karboninnholdet i avfallet.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/RapporteringAvCO2UtslippFraProsess-grp-5511">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Del 2. Prosessutslipp av CO2</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/RapporteringAvCO2UtslippFraProsess-grp-5511/ProsessType-datadef-24374">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Raffinerier</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Raffinerier</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Jern_stal</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Jern/stål</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Sement</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sement</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Kalk_min</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kalk/andre mineralske produkter</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Angi type prosess:</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+            </xforms:group>
+            <xforms:group ref="/Skjema/UtslippFraRaffineri-grp-5649">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>2.1 Rapportering av CO2-utslipp fra raffinerier</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Utslipp av CO2 fra forbrenning av energivarer knyttet til  raffineriproduksjon skal rapporteres i del 1.  </p>
+                    <p>Prosessrelaterte CO2-utslipp fra raffinerier kan omfatte utslipp fra  produksjon av hydrogen, regenerering av katalysator, kalsinering og  andre katalytiske prosesser.</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_UtslippFraRaffinerier-grp-5518" nodeset="/Skjema/UtslippFraRaffineri-grp-5649/UtslippFraRaffinerier-grp-5518">
+                    <xforms:group ref="/Skjema/UtslippFraRaffineri-grp-5649/UtslippFraRaffinerier-grp-5518">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tabell 2.1.1. Utslippskilder og beregninger av CO2-utslipp</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Det årlige utslippet av CO2 fra avbrenning av koks på katalysator fra  katalytisk cracker, kalsinering av koks og svovelgjenvinning skal  beregnes ut fra ligning A:  </p>
+                            <p/>
+                            <p>Tonn CO2 =  ((Nm3 RG per år * volum% CO2 ) / 100 *( molvekt CO2 /  22,4)) / 1000  </p>
+                            <p/>
+                            <p>- RG er mengde røykgass målt kontinuerlig pr. år.  </p>
+                            <p>- Dersom røykgassen er målt i antall kg, skal tetthet på røykgassen  settes til 1,31 kg/Nm3 ved omregning til Nm3.  </p>
+                            <p>- Volumprosent CO2 skal baseres på kontinuerlige målinger.  </p>
+                            <p/>
+                            <p>Utslipp av CO2 fra andre prosesser (herunder branntrening, MEA  behandling av fyrgass, regenerering av katalysator i Powerformer og  CO2 fra råolje) skal beregnes ut fra ligning B:  </p>
+                            <p/>
+                            <p>Tonn CO2 = Sum Aktivitetsdata * Utslippsfaktor * Oksidasjonsfaktor</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/UtslippFraRaffineri-grp-5649/UtslippFraRaffinerier-grp-5518/UtslippskildeRaffineriCO2-datadef-24220">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Type utslippskilde - cracker-anlegg og kalsineringsanlegg</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippFraRaffineri-grp-5649/UtslippFraRaffinerier-grp-5518/UtslippskildeRaffineriBeskrivelse-datadef-24221">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beskrivelse av utslippskilden</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippFraRaffineri-grp-5649/UtslippFraRaffinerier-grp-5518/UtslippRaffineriTorrRoykgassVolumSpesifisertUtslippskilde-datadef-24168">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Mengde (A)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Benevning: Nm3/år</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippFraRaffineri-grp-5649/UtslippFraRaffinerier-grp-5518/UtslippRaffineriTorrRoykgassKarboninnholdSpesUtslippskilde-datadef-24169">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Volum prosent CO2 (B)</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippFraRaffineri-grp-5649/UtslippFraRaffinerier-grp-5518/UtslippRaffineriTorrRoykgassCO2TonnSpesUtslippskilde-datadef-24170">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beregnet CO2-utslipp (C)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Beregningsformel:((A * B ) / 100 *( 44 / 22,4 )) / 1000  </p>
+                                <p/>
+                                <p>Benevning: tonn/år</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippFraRaffineri-grp-5649/UtslippFraRaffinerier-grp-5518/KoksCrackerkatalysatorTonnSpesifisertUtslippskilde-datadef-24171">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Avsatt koks på cracker-katalysator (D)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Skal kun rapporteres som kontrollvariable. Inngår ikke i beregningen  av CO2-utslippene  </p>
+                                <p>Benevning: tonn/år</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippFraRaffineri-grp-5649/UtslippFraRaffinerier-grp-5518/KoksKalsinertTonnSpesifisertUtslippskilde-datadef-24172">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Produsert kalsinert koks (E)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Skal kun rapporteres som kontrollvariable. Inngår ikke i beregningen  av CO2-utslippene.  </p>
+                                <p/>
+                                <p>Benevning: tonn/år</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/UtslippFraRaffineri-grp-5649/UtslippRaffineriTorrRoykgassVolum-datadef-24173">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum mengde tørr røykgass</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/UtslippFraRaffineri-grp-5649/UtslippRaffineriTorrRoykgassCO2Tonn-datadef-24174">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum beregnet CO2-utslipp fra prosess</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/UtslippFraRaffineri-grp-5649/KoksCrackerkatalysatorTonn-datadef-24175">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum avsatt koks på cracker-katalysator</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/UtslippFraRaffineri-grp-5649/KoksKalsinertTonn-datadef-24176">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum produsert kalsinert koks</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/UtslippFraRaffineri-grp-5649/UtslippCO2BeregningLigningB-datadef-24743">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>CO2-utslipp beregnet ved bruk av ligning B (Tonn/år)</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Utslippsdata brukt ved beregning av CO2-utslipp ut fra ligning B skal  beskrives og dokumenteres senere i skjemaet.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/UslippFraRaffineriBeskriveler-grp-5650">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Opplysninger om utslipp fra raffineri</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/UslippFraRaffineriBeskriveler-grp-5650/BeskrivelseLigningA-grp-5519">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Prosessutslipp beregnet ved ligning A</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/UslippFraRaffineriBeskriveler-grp-5650/BeskrivelseLigningA-grp-5519/UtslippRaffineriBeregningerBeskrivelse-datadef-24177">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Det skal oppgis hvilken målestandard som er benyttet ved måling av  mengde tørr røykgass og CO2 i tørr røykgass, samt hvem målingene er  utført av. Dersom målestandard ikke finnes, skal benyttet målemetode  beskrives.
+                                Usikkerhet i målingene skal kvantifiseres.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen.  </p>
+                            <p/>
+                            <p>Usikkerheten uttrykkes gjerne som 95% konfidensintervallet rundt den  benyttede verdien, og skal  rapporteres i prosent. Usikkerhet  inkluderer både systematiske og tilfeldige faktorer. I  usikkerhetsberegningen må det
+                                tas høyde for den kumulative effekten  av alle komponentene i et målesystem (eks bruksbetingelser,  usikkerhet knyttet til kalibrering).  </p>
+                            <p/>
+                            <p/>
+                            <p>Tabell 2 i EUs Kommisjonsbeslutning om krav til overvåkning og  rapportering av CO2-utslipp (se link på SFTs internettside) gir et  anslag på usikkerhetsnivå for ulike type måleutstyr under stabile  prosessbetingelser.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/UslippFraRaffineriBeskriveler-grp-5650/BeskrivelseLigningA-grp-5519/MalestandardCrackerOgKalsineringsanleggDokumentasjon-datadef-24739">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>I tekstboksen skal det beskrives hvordan data om mengde koks på  cracker-katalysator og produsert kalsinert koks er innsamlet og  eventuelt bearbeidet.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/UslippFraRaffineriBeskriveler-grp-5650/BeskrivelseLigningB-grp-5675">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Prosessutslipp beregnet ved ligning B</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/UslippFraRaffineriBeskriveler-grp-5650/BeskrivelseLigningB-grp-5675/UtslippRaffineriCO2KontinuerligeMalingerBegrunnelse-datadef-24740">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>I tekstboksen skal det gis nærmere opplysninger om aktivitetsdata,  utslippsfaktorer og oksidasjonsfaktorer brukt i beregningene, fordelt  på hver enkelt utslippskilde (som oppført i tabell 2.1.1). Som et  minimum skal
+                                følgende opplysninger gis:  </p>
+                            <p/>
+                            <p>Beskrivelse av aktivitetsdataene og hvordan aktivitetsdataene er  innsamlet og eventuelt bearbeidet. Usikkerhet i aktivitetsdataene  skal kvantifiseres. Beskrivelse av hvordan utslippsfaktorene er  fremkommet og en
+                                vurdering av usikkerhet i de brukte faktorene. Det  skal tydelig fremkomme hvilke oksidasjonsfaktorer som er benyttet.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen.  </p>
+                            <p>Usikkerhet i beregningen uttrykkes gjerne som 95% konfidensintervallet  rundt den benyttede verdien, og skal rapporteres i prosent.  Usikkerhet inkluderer både systematiske og tilfeldige faktorer. I
+                                usikkerhetsberegningen må det tas høyde for den kumulative effekten  av alle komponentene i et målesystem (eks bruksbetingelser,  usikkerhet knyttet til kalibrering.  </p>
+                            <p/>
+                            <p/>
+                            <p>Tabell 2 i EUs Kommisjonsbeslutning om krav til overvåkning og  rapportering av CO2-utslipp (se link på SFTs internettside) gir et  anslag på usikkerhetsnivå for ulike type måleutstyr under stabile  prosessbetingelser.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>2.2. Rapportering av CO2-utslipp fra produksjon og bearbeiding av jern  og stål, herunder røsting og sintring.</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Utslipp av CO2 fra forbrenning av energivarer knyttet til produksjon  og bearbeiding av jern og stål skal rapporteres i del 1.  </p>
+                    <p/>
+                    <p>De årlige prosessrelaterte utslippene av CO2 fra produksjon og  bearbeiding av jern og stål skal beregnes ut fra karbonbalansen etter  følgende ligning:  </p>
+                    <p/>
+                    <p>Utslipp CO2 = Sum(tonn C fra karbonmaterialer tilført prosessen ÷ tonn  C bundet i produkter, biprodukter og avfall, ÷ tonn C eksportert  eller solgt som gass til annen virksomhet) * 3,667</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_TilfortKarbon-grp-5526" nodeset="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/TilfortKarbon-grp-5526">
+                    <xforms:group ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/TilfortKarbon-grp-5526">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>A. Tilført karbon</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/TilfortKarbon-grp-5526/RavareKarbonholdigProduksjonJernStal-datadef-24178">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Type karbonholdig råvare</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/TilfortKarbon-grp-5526/RavareKarbonholdigJernStalTonnSpesifisertKarbonkilde-datadef-24179">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Mengde tonn/år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/TilfortKarbon-grp-5526/UtslippJernStalTilfortKarbonTonnSpesifisertKarbonkilde-datadef-24226">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Karboninnhold tonn C/år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/TilfortKarbon-grp-5526/UtslippJernStalTilfortKarbonKvotepliktig-datadef-24180">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>Ja</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Yes</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Nei</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>No</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kvotepliktig utslipp? Ja/Nei</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Det er ikke kvoteplikt for CO2-utslipp knyttet til brenning av fossilt  brensel ilagt CO2-avgift, kommunalt avfall (når det betales  sluttbehandlingsavgift) og farlig avfall, samt all bruk av bioenergi.</p>
+                            </xforms:help>
+                        </xforms:selectOne>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/UtslippJernStalTilfortKarbonTonn-datadef-24181">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum tilført karbon:</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:repeat id="repeat_BundetKarbonIProdukter-grp-5527" nodeset="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/BundetKarbonIProdukter-grp-5527">
+                    <xforms:group ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/BundetKarbonIProdukter-grp-5527">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>B. Bundet karbon i produkter, biprodukter og avfall</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/BundetKarbonIProdukter-grp-5527/RestproduktKarbonholdigProduksjonJernStal-datadef-24182">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Type produkter, biprodukter og avfall</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/BundetKarbonIProdukter-grp-5527/UtslippJernStalBundetKarbonTonnSpesifisertKarbonkilde-datadef-24183">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Karboninnhold tonn C/år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/UtslippJernStalBundetKarbonTonn-datadef-24184">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum bundet karbon:</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:repeat id="repeat_KarbonEksportertEllerSolgt-grp-5528" nodeset="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/KarbonEksportertEllerSolgt-grp-5528">
+                    <xforms:group ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/KarbonEksportertEllerSolgt-grp-5528">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>C. Karbon eksportert eller solgt som gass til andre bedrifter</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/KarbonEksportertEllerSolgt-grp-5528/VareKarbonholdigEksportertProduksjonJernStal-datadef-24185">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Type eksportert gass eller vare</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/KarbonEksportertEllerSolgt-grp-5528/UtslippJernStalEksportertSolgtKarbonTonnSpesKarbonkilde-datadef-24186">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Karboninnhold tonn C/år</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/UtslippJernStalEksportertSolgtKarbonTonn-datadef-24187">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum eksportert/solgt karbon:</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:group ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/OppsumeringAvUtslipp-grp-5529">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppsummering av utslipp</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/OppsumeringAvUtslipp-grp-5529/UtslippJernStalCO2MassebalanseberegnetTonn-datadef-24188">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>D. CO2 utslipp i alt: (A-B-C)*3,667</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/OppsumeringAvUtslipp-grp-5529/UtslippJernStalCO2IkkeKvotepliktigMassebalanseberegnetTonn-datadef-24189">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>E. Ikke kvotepliktig CO2 utslipp: delta A *3,667</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her inkluderes bare mengde tilført karbon som ikke er omfattet av  kvoteplikten, jamfør hjelpetekst til del A. Tilført karbon.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/OppsumeringAvUtslipp-grp-5529/UtslippJernStalCO2KvotepliktigMassebalanseberegnetTonn-datadef-24190">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>F. Kvotepliktig CO2-utslipp: (D-E)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/OppsumeringAvUtslipp-grp-5529/JernStalTonn-datadef-24191">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Produsert mengde jern og stål, tonn pr år</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Skal bare rapporteres som kontrollvariabel. Inngår ikke i beregningen  av CO2-utslippene.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/Beskrivelse-grp-5521">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Tabell 2.2.1. Opplysninger om prosessutslipp av CO2 fra produksjon og  bearbeiding av jern og stål.</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/UtslippKnyttetTilBearbeidingAvJernOgStal-grp-5512/Beskrivelse-grp-5521/UtslippJernStalBeregningerBeskrivelse-datadef-24192">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Det skal beskrives hvordan data om mengde og karboninnhold i råvarer,  produkter, biprodukter og produkter/gasser solgt til andre bedrifter  er innsamlet og eventuelt bearbeidet. Usikkerhet i aktivitetsdataene  skal kvantifiseres.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen.  </p>
+                            <p>Usikkerheten i aktivitetsdata uttrykkes gjerne som 95%  konfidensintervallet rundt den benyttede verdien, og skal rapporteres  i prosent. Usikkerhet inkluderer både systematiske og tilfeldige  faktorer.
+                                Usikkerhetsberegningen kan for eksempel baseres på  opplysninger fra leverandøren av energivarene. I beregningen må det  også inkluderes usikkerheten knyttet til måleutstyr. Det må tas høyde  for den kumulative
+                                effekten av alle komponentene i målesystemet (eks  bruksbetingelser, usikkerhet knyttet til kalibrering).  </p>
+                            <p>Tabell 2 i EUs Kommisjonsbeslutning om krav til overvåkning og  rapportering av CO2-utslipp (se link på SFTs internettside) gir et  anslag på usikkerhetsnivå for ulike type måleutstyr under stabile  prosessbetingelser.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/UtslippKnyttetTilProduksjonAvSement-grp-5513">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>2.3. Rapportering av CO2-utslipp fra produksjon og bearbeiding av  sementklinker.</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Utslipp av CO2 fra forbrenning av energivarer knyttet til produksjon  av sementklinker skal rapporteres i del 1.  </p>
+                    <p>Prosessrelaterte utslipp fra sementproduksjon er knyttet til bruk av  karbonatholdige råvarer i klinkerproduksjonen og kan foregå ved en  eller flere produksjonsenheter ved bedriften.  </p>
+                    <p>Det årlige utslippet av CO2 fra klinkerproduksjon skal beregnes etter  følgende ligning:  </p>
+                    <p/>
+                    <p>Utslipp CO2 = Sum [Aktivitetsdata i * Utslippsfaktor i]  </p>
+                    <p/>
+                    <p>Aktivitetsdata er produksjonsmengde klinker (i tonn). Beregningene  skal være basert på faktisk produksjonsmengde i rapporteringsåret.  </p>
+                    <p>Standard utslippsfaktor skal benyttes, med mindre bedriftsspesifikk  utslippsfaktor gir mer nøyaktig utslippstall.  </p>
+                    <p/>
+                    <p>Standard utslippsfaktorer: Norcem Brevik: 0,520 tonn CO2/tonn klinker,  Norcem Kjøpsvik: 0,541 tonn CO2/tonn klinker, eventuelt andre  sementprodusenter: 0,507 tonn CO2/tonn klinker.</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_ProsessutslippSement-grp-5530" nodeset="/Skjema/UtslippKnyttetTilProduksjonAvSement-grp-5513/ProsessutslippSement-grp-5530">
+                    <xforms:group ref="/Skjema/UtslippKnyttetTilProduksjonAvSement-grp-5513/ProsessutslippSement-grp-5530">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tabell 2.3.1 Opplysninger knyttet til utslippskilder og CO2-utslipp  fra produksjon av klinker</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/UtslippKnyttetTilProduksjonAvSement-grp-5513/ProsessutslippSement-grp-5530/UtslippskildeProduksjonSementklinkerCO2-datadef-24222">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utslippskilde</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippKnyttetTilProduksjonAvSement-grp-5513/ProsessutslippSement-grp-5530/UtslippskildeProduksjonSementklinkerBeskrivelse-datadef-24223">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beskrivelse av utslippskilden</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippKnyttetTilProduksjonAvSement-grp-5513/ProsessutslippSement-grp-5530/SementklinkerTonnSpesifisertUtslippskilde-datadef-24193">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Produsert mengde klinker tonn/år (A)</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>(tonn/år)</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippKnyttetTilProduksjonAvSement-grp-5513/ProsessutslippSement-grp-5530/UtslippsfaktorProduksjonSementklinkerSpesUtslippskilde-datadef-24194">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utslipps faktor tonn CO2 / tonn klinker (B)</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever to desimaler</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet kreve to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippKnyttetTilProduksjonAvSement-grp-5513/ProsessutslippSement-grp-5530/UtslippProduksjonSementklinkerCO2TonnSpesUtslippskilde-datadef-24195">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beregnet CO2-utslipp  </p>
+                                <p>(A * B )tonn/år</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>(tonn/år)</p>
+                            </xforms:hint>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/UtslippKnyttetTilProduksjonAvSement-grp-5513/UtslippProduksjonSementklinkerCO2Tonn-datadef-24198">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum beregnet CO2-utslipp</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/UtslippKnyttetTilProduksjonAvSement-grp-5513/SementklinkerTonn-datadef-24197">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                </xforms:input>
+                <xforms:group ref="/Skjema/UtslippKnyttetTilProduksjonAvSement-grp-5513/Beskrivelse-grp-5522">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Opplysninger om bedriftsspesifikk utslippsfaktor</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom det er benyttet bedriftsspesifikk utslippsfaktor, anbefales det  å beregne denne ut fra følgende formel:  </p>
+                        <p/>
+                        <p>Utslippsfaktor (tonn CO2 / tonn klinker) = ((Prosent glødetap / 100) *  Mengde råmel) / Mengde klinker</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Dersom den bedriftsspesifikke utslippsfaktoren er fremkommet ved å  benytte en annen metode enn formel (9) angitt i del B.5.2 i  klimakvoteforskriften, skal anvendt metode beskrives. Det skal  dokumenteres hvordan
+                            utslippstallene blir mer korrekte ved bruk av  bedriftens anvendte metode. Dokumentasjonen skal gis i et eget  dokument som legges ved skjemaet.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/UtslippKnyttetTilProduksjonAvSement-grp-5513/Beskrivelse-grp-5522/UtslippsfaktorProduksjonSementklinkerGlodetapsprosentRamelmengde-datadef-24741">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>I tekstboksen skal følgende opplysninger knyttet til beregning av  bedriftsspesifikk utslippsfaktor oppgis og dokumenteres: glødetap i  prosent, mengde råmel i tonn.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/UtslippKnyttetTilProduksjonAvSement-grp-5513/OpplysningerOmAktivitetsdata-grp-5533">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Opplysninger om aktivitetsdata</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/UtslippKnyttetTilProduksjonAvSement-grp-5513/OpplysningerOmAktivitetsdata-grp-5533/UtslippProduksjonSementklinkerBeregningerBeskrivelse-datadef-24200">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Det skal gis beskrivelse av hvordan data om produsert mengde klinker  og kjøpt klinker er innsamlet og eventuelt bearbeidet. Usikkerhet i  dataene skal kvantifiseres.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen.  </p>
+                            <p>Usikkerheten i aktivitetsdata uttrykkes gjerne som 95%  konfidensintervallet rundt den benyttede verdien, og skal rapporteres  i prosent. Usikkerhet inkluderer både systematiske og tilfeldige  faktorer. I
+                                usikkerhetsberegningen må det inkluderes usikkerheten  knyttet til måleutstyr. Det må tas høyde for den kumulative effekten  av alle komponentene i målesystemet (eks bruksbetingelser, usikkerhet  knyttet til
+                                kalibrering). Tabell 2 i EUs Kommisjonsbeslutning om krav  til overvåkning og rapportering av CO2-utslipp (se link på SFTs  internettside) gir et anslag på usikkerhetsnivå for ulike type  måleutstyr under stabile prosessbetingelser.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/UtslippFraProduksjonAvKalkOgAndreMineralskeProdukter-grp-5514">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>2.4. Rapportering av CO2-utslipp fra produksjon av kalk og andre  mineralske produkter.</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Utslipp av CO2 fra forbrenning av energivarer knyttet til produksjon  av mineralske produkter eller kalkproduksjon skal rapporteres i del  1.  </p>
+                    <p/>
+                    <p>Prosessrelaterte CO2-utslipp fra produksjon av mineralske produkter  eller kalkproduksjon er knyttet til bruk av karbonatholdige råvarer  og kan foregå ved en eller flere produksjonsenheter ved bedriften.  </p>
+                    <p/>
+                    <p>Det årlige utslippet av CO2 fra produksjon av kalk og andre mineralske  produkter skal beregnes etter følgende ligning:  </p>
+                    <p/>
+                    <p>Utslipp CO2 = Summetegn [Aktivitetsdata i * Utslippsfaktor i ]  </p>
+                    <p>der i er ulike karbonater benyttet som råvare i produksjonen  </p>
+                    <p/>
+                    <p>Som aktivitetsdata brukes mengde i tonn av ulike karbonatholdige  råvarer benyttet i produksjonen. Beregningene skal være basert på  faktisk forbruk.  </p>
+                    <p/>
+                    <p/>
+                    <p>Følgende standard utslippsfaktorer (tonnCO2/tonn) skal benyttes for de  ulike karbonholdige råvarene, med mindre bedriftsspesifikk  utslippsfaktor gir mer nøyaktig utslippstall:  </p>
+                    <p>CaCO3 :0,440, MgCO3: 0,522, Na2CO3: 0,415, BaCO3: 0,223, Karbonater  fra biomasse: 0</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_Prosessutslipp-grp-5532" nodeset="/Skjema/UtslippFraProduksjonAvKalkOgAndreMineralskeProdukter-grp-5514/Prosessutslipp-grp-5532">
+                    <xforms:group ref="/Skjema/UtslippFraProduksjonAvKalkOgAndreMineralskeProdukter-grp-5514/Prosessutslipp-grp-5532">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tabell 2.4.1. Beskrivelse av prosessrelaterte utslippskilder</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/UtslippFraProduksjonAvKalkOgAndreMineralskeProdukter-grp-5514/Prosessutslipp-grp-5532/UtslippskildeProduksjonKalkMvCO2-datadef-24224">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utslippskilde</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtslippFraProduksjonAvKalkOgAndreMineralskeProdukter-grp-5514/Prosessutslipp-grp-5532/UtslippskildeProduksjonKalkMvBeskrivelse-datadef-24225">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beskrivelse av utslippskilden</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:selectMany ref="/Skjema/UtslippFraProduksjonAvKalkOgAndreMineralskeProdukter-grp-5514/VedleggRapportUtslippProduksjonKalkMineral-datadef-24477">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>ja</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>nei</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kryss av når opplysninger om utslippsdata og CO2-utslipp fra hver av  utslippskildene rapportert i tabell 2.4.2 er lagt ved skjemaet</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Trykk på knappen Til hovedskjema. Under arkfanen Vedlegg til venstre i  margen finner du hjelp til å legge til filvedlegg. Tabell 2.4.2  Utslippsdata og beregnede CO2-utslipp fra produksjon av kalk og andre  mineralske
+                            produkter er lagt i en excel-fil som må lastes ned til  egen pc fra  http://www.sft.no/kvoteregister/co2utslipp_mineralskproduksjon.xls  </p>
+                        <p/>
+                        <p>Tabellen fylles ut og legges ved skjemaet.</p>
+                    </xforms:help>
+                </xforms:selectMany>
+                <xforms:group ref="/Skjema/UtslippFraProduksjonAvKalkOgAndreMineralskeProdukter-grp-5514/OpplysningerOmBedriftsspesifikkUtslippsfaktor-grp-5534">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Opplysninger om utslippsfaktor</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/UtslippFraProduksjonAvKalkOgAndreMineralskeProdukter-grp-5514/OpplysningerOmBedriftsspesifikkUtslippsfaktor-grp-5534/UtslippsfaktorProduksjonKalkMvBeskrivelse-datadef-24215">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Dersom det er benyttet bedriftsspesifikke utslippsfaktorer i  beregningene, skal det i tekstboksen under gis en nærmere beskrivelse  av hvordan utslippsfaktoren(e) er fremkommet. I tillegg skal følgende  opplysninger
+                                oppgis og dokumenteres:  </p>
+                            <p>For kalkstein: Andel CaO i produktet (tonn).  </p>
+                            <p>For dolomitt: Andel CaO*MgO i produktet (tonn).</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/UtslippFraProduksjonAvKalkOgAndreMineralskeProdukter-grp-5514/Beskrivelse-grp-5524">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Opplysninger om aktivitetsdata og produksjonsmengde</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/UtslippFraProduksjonAvKalkOgAndreMineralskeProdukter-grp-5514/Beskrivelse-grp-5524/UtslippsfaktorProduksjonKalksteinDolomittBeskrivelse-datadef-24742">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Det skal beskrives hvordan data om forbrukt mengde karbonatholdig  råvare og produsjonsmengde er innsamlet og eventuelt bearbeidet. I  tillegg skal usikkerhet i dataene om forbrukt mengde karbonatholdig  råvare som ikke
+                                stammer fra biomasse kvantifiseres.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen  </p>
+                            <p/>
+                            <p>Usikkerheten i aktivitetsdata uttrykkes gjerne som 95%  konfidensintervallet rundt den benyttede verdien, og skal rapporteres  i prosent. Usikkerhet inkluderer både systematiske og tilfeldige  faktorer. I
+                                usikkerhetsberegningen må det inkluderes usikkerheten  knyttet til måleutstyr. Det må tas høyde for den kumulative effekten  av alle komponentene i målesystemet (eks bruksbetingelser, usikkerhet  knyttet til
+                                kalibrering).  </p>
+                            <p/>
+                            <p/>
+                            <p>Tabell 2 i EUs Kommisjonsbeslutning om krav til overvåkning og  rapportering av CO2-utslipp (se link på SFTs internettside) gir et  anslag på usikkerhetsnivå for ulike type måleutstyr under stabile  prosessbetingelser.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/GenerelleRapporteringskrav-grp-5515">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Del 3. Generelle rapporteringskrav</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerelleRapporteringskrav-grp-5515/EndringerMalemetode-grp-5658">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.1 Endring av metode for kartlegging av utslipp</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerelleRapporteringskrav-grp-5515/EndringerMalemetode-grp-5658/MalemetodeUtslippEndringBeskrivelse-datadef-24216">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Dersom det er foretatt tidsavgrensede eller varige endringer av metode  for kartlegging av de kvotepliktige CO2-utslippene, skal relevante  opplysninger om endringen (deriblant startdato for varig  metodeendring og
+                                start- og sluttdato for midlertidig metodeendring)  samt en begrunnelse for endringen gis i tekstboksen.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerelleRapporteringskrav-grp-5515/AndreOpplysningerEndringer-grp-5659">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.2 Andre opplysninger eller endringer</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerelleRapporteringskrav-grp-5515/AndreOpplysningerEndringer-grp-5659/UtslippsrapportAndreOpplysninger-datadef-24217">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>I tekstboksen kan andre opplysninger eller endringer som kan ha  betydning for CO2-rapporteringen oppgis.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom opplysningene gis i et eget dokument som legges ved skjemaet,  er det tilstrekkelig å henvise til dokumentets navn i tekstboksen.  </p>
+                            <p/>
+                            <p>Her kan det gis opplysninger som kan ha betydning for  CO2-rapporteringen og som ikke er relevant å oppgi andre steder i  rapporten. Det kan for eksempel være opplysninger om uforutsette  hendelser eller
+                                driftsforstyrrelser ved bedriftens anlegg,  utvidelser/innskrenkninger i anleggets kapasitet, anmodning om å  unnta deler av rapporten fra offentligheten. Dersom bedriften ønsker  å unnta deler av rapporten fra
+                                offentligheten, bør det presiseres  hvilke deler som skal ønskes unntatt.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/InternKontroll-grp-5516">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>3.3. Internkontroll</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/InternKontroll-grp-5516/Malemetode-grp-5660">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:input ref="/Skjema/InternKontroll-grp-5516/Malemetode-grp-5660/MalemetodeUtslippEndringTidligereRapportBeskrivelse-datadef-24219">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Følgende opplysninger om bedriftens internkontrollsystem som er  relevant for kvotepliktig CO2-utslipp skal oppgis:  </p>
+                            <p>Prosedyrene bedriften har etablert for frembringelse av rapporterte  utslippsdata, bedriftens system for arkivering av rapporterte data og  nødvendige bakgrunnsdata, bedriftens kvalitetssikrings- og  kontrollsystem for
+                                frembringelse og rapportering av data.  </p>
+                            <p/>
+                            <p>Opplysningene om bedriftens internkontrollsystem skal fremkomme i egne  dokumenter som legges ved rapporten. Dokumentnavne(ne) skrives inn i  tekstfeltet under.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1034: Skjema for fordeling av stedbunden inntekt og formue mellom kommuner</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1023-5464.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-5100/OppgavegiverFodselsnummer-datadef-26" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1034  Skjema for fordeling av stedbunden inntekt og formue mellom  kommuner 2006</p>
+            </xforms:caption>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-5100">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Skattyter</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-5100/OppgavegiverNavn-datadef-68">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Navn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-5100/OppgavegiverFodselsnummer-datadef-26">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <brreg:kontroll type="Modulus 11"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Fødselsnummer</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig fødselsnummer</p>
+                    </xforms:alert>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig fødselsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-5100/KontaktpersonNavn-datadef-2">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>navn</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/FordelingKommuner-grp-5101">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Fordelingstabell alle kommuner</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Total alle kommuner</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/PersoninntektEnkeltmannsforetakFiskeJordbrukSkogbruk-datadef-6716">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1.6.1</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/PersoninntektEnkeltmannsforetakAnnenNaring-datadef-6718">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1.6.2</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/GodtgjorelseDeltakerlignetSelskapFiskeJordbrukSkogbruk-datadef-7198">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1.7.1</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/GodtgjorelseDeltakerlignetSelskapAnnenNaring-datadef-6729">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1.7.2</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/PersoninntektBeregnetDeltakerlignetSelskapAvvikendeRegnskapsar-datadef-26711">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1.8.1</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/InntekterJordbrukGartneriMv-datadef-2211">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.7.1</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/InntekterSkogbruk-datadef-2212">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.7.2</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/InntekterFiskeriSkattemessig-datadef-6681">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.7.3</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/InntekterReindriftSkattemessig-datadef-23974">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.7.4</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/InntekterSkiferbruddSkattemessig-datadef-23976">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.7.5</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/NaringsinntekterAnnenNaring-datadef-22174">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.7.6</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/NaringsinntektPrimarnaringDeltakerlignet-datadef-24012">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.7.7</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/NaringsinntektIkkePrimarnaringDeltakerlignet-datadef-23978">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2.7.8</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/RenteinntekterNaringInnenlandske-datadef-16537">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.1.1</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/RenteinntekterAnnetSum-datadef-22177">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.1.2</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/InntekterAndreSkattemessigSum-datadef-22204">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.1.12</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/ReiseutgifterBeregnet-datadef-6788">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.2.8/9</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/FradragSarskiltFiskeMv-datadef-1353">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.2.14</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Maks fradrag er 80 000 kroner</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Maks frådrag er 80 000 kroner</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/Jordbruksfradrag-datadef-11298">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.2.15</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/Reindriftsfradrag-datadef-19771">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.2.16</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/Skiferfradrag-datadef-19775">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.2.17</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/UnderskuddJordbruk-datadef-22178">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.2.19 a) jordbruk</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/UnderskuddSkogbruk-datadef-22179">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.2.19 b) skog</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/UnderskuddFiske-datadef-21072">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.2.19 c) Fiske</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/UnderskuddReindrift-datadef-23981">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.2.19 d) Reindrift</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/UnderskuddSkiferbrudd-datadef-23983">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.2.19 e) Skiferbrudd</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/UnderskuddAnnenNaring-datadef-22180">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.2.19 f) annen næring</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/UnderskuddPrimarnaringDeltakerlignet-datadef-24013">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.2.19 g) ANS/KS primærnæring</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/UnderskuddIkkePrimarnaringDeltakerlignet-datadef-23985">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.2.19 h)ANS/KS annen næring</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/FastEiendomRealisasjonTapSum-datadef-22183">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.3.6</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/FradragUtgifterAndreSum-datadef-22184">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.3.7</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/UnderskuddEiendomUtenforNaring-datadef-22181">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3.3.12</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/BankinnskuddPostgiroinnskudd-datadef-187">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4.1.1</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/KontanterMvNaringsdrivende-datadef-16536">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4.1.3</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/FordringerObligasjonerMvSum-datadef-22193">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4.1.6</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/BilerMaskinerInventarMv-datadef-6844">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4.4.1</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/BuskapSkattemessig-datadef-1179">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4.4.2</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/LagerbeholdningNaringsdrivendeMv-datadef-16531">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4.4.3</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/FartoySkattemessig-datadef-6692">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4.4.4</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/TotalAlleKommuner-grp-5102/FormueAnnen-datadef-20933">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4.5.4</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:repeat id="repeat_FordelingPrKommune-grp-5103" nodeset="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103">
+                    <xforms:group ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fordeling pr kommune</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/EiendomNaringAnnenKommuneKommunenummerSpesifisertEiendomMv-datadef-17034">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter positive integer with four digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kommune</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever positivt heltall med fire siffer</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev positivt heiltal med fire siffer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/PersoninntektEnkeltmannsforetakFiskeJordSkogbrukSpesKommune-datadef-22442">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1.6.1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/PersoninntektEnkeltmannsforetakAnnenNaringSpesifisertKommune-datadef-22444">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1.6.2</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/GodtgjorelseDeltakerlignetSelskapFiskeJordSkogbrukKommune-datadef-22451">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1.7.1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/PersoninntektDeltakerlignetSelskapAvvikendeRegnskapsarKommune-datadef-26841">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1.8.1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/GodtgjorelseDeltakerlignetSelskapAnnenNaringSpesKommune-datadef-22452">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1.7.2</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/InntekterJordbrukGartneriMvSpesifisertKommune-datadef-22453">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2.7.1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/InntekterSkogbrukSpesifisertKommune-datadef-22454">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2.7.2</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/InntekterFiskeriSkattemessigSpesifisertKommune-datadef-22455">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2.7.3</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/InntekterReindriftSkattemessigSpesifisertKommune-datadef-23975">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2.7.4</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/InntekterSkiferbruddSkattemessigSpesifisertKommune-datadef-23977">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2.7.5</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/NaringsinntekterAnnenNaringSpesifisertKommune-datadef-22456">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2.7.6</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/NaringsinntektPrimarnaringDeltakerlignetSpesifisertKommune-datadef-24018">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2.7.7</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/NaringsinntektANSKSSpesifisertKommune-datadef-23979">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2.7.8</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/RenteinntekterNaringInnenlandskeSpesifisertKommune-datadef-22457">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.1.1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/RenteinntekterAnnetSumSpesifisertKommune-datadef-22458">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.1.2</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/ReiseutgifterBeregnetSpesifisertKommune-datadef-23980">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.2.8/9</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/FradragSarskiltFiskeMvSpesifisertKommune-datadef-22771">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.2.14</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Maks fradrag er 80 000 kroner</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Maks frådrag er 80 000 kroner</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/JordbruksfradragSpesifisertKommune-datadef-22772">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.2.15</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/ReindriftsfradragSpesifisertKommune-datadef-22773">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.2.16</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/SkiferfradragSpesifisertKommune-datadef-22774">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.2.17</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/InntekterAndreSkattemessigSumSpesifisertKommune-datadef-22459">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.1.12</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/UnderskuddJordbrukSpesifisertKommune-datadef-22460">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.2.19 a) Jordbruk</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/UnderskuddSkogbrukSpesifisertKommune-datadef-22461">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.2.19 b) Skog</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/UnderskuddFiskeSpesifisertKommune-datadef-22462">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.2.19 c) Fiske</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/UnderskuddReindirftSpesifisertKommune-datadef-23982">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.2.19 d) Reindrift</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/UnderskuddSkiferbruddSpesifisertKommune-datadef-23984">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.2.19 e) Skiferbrudd</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/UnderskuddAnnenNaringSpesifisertKommune-datadef-22463">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.2.19 f) Annen næring</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/UnderskuddPrimarnaringDeltakerlignetSpesifisertKommune-datadef-24019">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.2.19 g)ANS/KS primærnæring</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/UnderskuddANSKSSpesifisertKommune-datadef-23986">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.2.19 h)ANS/KS Annen næring</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/FastEiendomRealisasjonTapSumSpesifisertKommune-datadef-22465">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.3.6</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/FradragUtgifterAndreSumSpesifisertKommune-datadef-22466">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.3.7</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/BankinnskuddPostgiroinnskuddSpesifisertKommune-datadef-22467">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4.1.1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/UnderskuddEiendomUtenforNaringSpesifisertKommune-datadef-22464">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3.3.12</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/KontanterMvNaringsdrivendeSpesifisertKommune-datadef-22468">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4.1.3</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/FordringerObligasjonerMvSumSpesifisertKommune-datadef-22469">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4.1.6</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/BilerMaskinerInventarMvSpesifisertKommune-datadef-22470">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4.4.1</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/BuskapSkattemessigSpesifisertKommune-datadef-22471">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4.4.2</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/LagerbeholdningNaringsdrivendeMvSpesifisertKommune-datadef-22472">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4.4.3</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/FartoySkattemessigSpesifisertKommune-datadef-22473">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4.4.4</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingKommuner-grp-5101/FordelingPrKommune-grp-5103/FormueAnnenSpesifisertKommune-datadef-22474">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4.5.4</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

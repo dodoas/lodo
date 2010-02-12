@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">NB-0003: Betalingsformidlingsstatistikk</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1123-4576.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/Avgiverinformasjon-grp-5654/EnhetOrganisasjonsnummer-datadef-18"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Avgiverinformasjon-grp-5654/EnhetNavn-datadef-1"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>NB-0003 Betalingsformidlingsstatistikk</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Hvem skal levere:  </p>
+                <p>Forretnings- og sparebanker har ansvar for å levere rapport 1A -  1C.  </p>
+                <p>Utstedere av innenlandske kredittkort skal levere rapport 3A og 3B.    </p>
+                <p>Oljeselskaper skal levere rapport 4A og 4B.  </p>
+                <p/>
+                <p>Innsendingsfrekvens:  </p>
+                <p>Alle A-rapporter (som gjelder antall kort, avtaler, brukersteder,  betalingsterminaler mv) skal leveres en gang pr år. Når det gjelder  de andre rapportene, kan rapportørene velge om dataene skal sendes pr  år, pr kvartal eller pr
+                    måned.  </p>
+                <p/>
+                <p>Tidsfristen for innsendelse av data vil være 20 arbeidsdager etter  statistikkperiodens utløp.  </p>
+                <p/>
+                <p>Om skjema:  </p>
+                <p>Oppgavesettet består av skjema NB-0003, Betalingsformidlingsstatistikk  med XML/SDV-vedlegg. Innholdet i vedlegget er meddelt rapportørene i  kravspesifikasjonen, herunder kodelisten og veiledningen til den  enkelte rapport. Se
+                    Norges Banks internettsider  www.norges-bank.no/stat/rapport.  </p>
+                <p/>
+                <p>Skjemaeier/innkrever:  </p>
+                <p>Norges Bank</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/Avgiverinformasjon-grp-5654">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Innsending av rapporteringsfil i XML/SDV-format gjøres ved å klikke på  arkfanen vedlegg til venstre. Spesifikasjon av rapportene finnes  tilgjengelig på www.norges-bank.no/stat/rapport/. Rapporten skal  inneholde tall for
+                        rapporteringsperioden. Kontroller om tallene er  for riktig periode.</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/Avgiverinformasjon-grp-5654/EnhetOrganisasjonsnummer-datadef-18">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Organisasjonsnummer</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Har du husket vedlegg?</p>
+                    </xforms:hint>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Avgiverinformasjon-grp-5654/EnhetNavn-datadef-1">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Avsender</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

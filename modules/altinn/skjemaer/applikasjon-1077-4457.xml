@@ -1,0 +1,2439 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">HB-9.S.01: Søknad om bostøtte</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1077-4458.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5394/OppgavegiverFodselsnummer-datadef-26"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5394/OppgavegiverNavn-datadef-68"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-5394/OppgavegiverPostnummer-datadef-6676" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-5394/OppgavegiverBostedskommuneKommunenummer-datadef-24021" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-5394/Malform-datadef-24702" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/BoligopplysningerBorettslag-grp-5401/BoligBorettslagNavn-datadef-24228"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>Søknad om bostøtte</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Bostøtte er en statlig økonomisk støtteordning som administreres av  Husbanken og kommunene. Formålet med ordningen er å hjelpe husstander  med lave inntekter og høye boutgifter til å etablere seg og bli  boende i en god bolig.  </p>
+                <p/>
+                <p>Tildelingen av bostøtte er behovsprøvet ut fra forholdet mellom  husstandens boutgifter og samlede inntekter. I tillegg stilles det  visse krav til husstanden og boligen.  </p>
+                <p/>
+                <p>Det er kommunen som er førsteinstans i bostøttebehandlingen og som  skal motta henvendelser, dokumentasjon og generelle spørsmål om  ordningen. I de fleste kommunene er det boligkontoret eller  sosialkontoret som fungerer som
+                    bostøttekontor. I Oslo har alle  bydelene egne bolig-/bostøttekontorer.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>Søknad om bustønad</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Bustønad er ei statleg økonomisk stønadsordning som blir administrert  av Husbanken og kommunane. Formålet med ordninga er å hjelpe  husstandar med låge inntekter og høge buutgifter til å etablere seg  og bli buande i ein god
+                    bustad.  </p>
+                <p/>
+                <p>Tildelinga av bustønad er behovsprøvd ut frå tilhøvet mellom  husstanden sine buutgifter og samla inntekter. I tillegg blir det  stilt visse krav til husstanden og bustaden.  </p>
+                <p/>
+                <p>Det er kommunen som er førsteinstans i bustønadbehandlinga og som skal  motta dokumentasjon og generelle spørsmål om ordninga. I dei fleste  kommunene er det bustadkontoret eller sosialkontoret som fungerer som  bustønadkontor. I
+                    Oslo har alle bydelane eigne  bustad-/bustønadkontor.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/Sporvalgside-grp-5393">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Utfylling av skjema</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Dette er spørsmål som vil avklare hvilke deler av skjemaet du skal  fylle ut. Velg riktig alternativ for deg og klikk på Neste knappen.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Dette er spørsmål som vil avklare hvilke deler av skjemaet du skal  fylle ut. Velg riktig alternativ for deg og klikk på Neste knappen.  De valg du gjør på denne siden kan ikke endres etter at du har gått  til en ny side. Hvis
+                        noe skal endres på denne siden, må du slette  skjemaet og hente et nytt fra Hovedsiden i Altinn.</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Utfylling av skjema</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NON">
+                    <p>Dette er spørsmål som vil avklare kva delar av skjemaet du skal fylla  ut. Velg rett alternativ for deg og klikk på Neste knappen. Dei vala  du gjer på denne sida kan ikkje endrast etter at du har gått til ei  ny side. Dersom
+                        noko skal endrast på denne sida, må du slette  skjemaet og hente eit nytt frå Hovudsida i Altinn.</p>
+                </xforms:hint>
+                <xforms:selectOne ref="/Skjema/Sporvalgside-grp-5393/BoligEierform-datadef-24099">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Eid</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Eid</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Borettslag</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Borettslag</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>3</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Leid</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Leid</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Hvilken eieform har boligen?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Eid bolig er bolig hvor søkeren står som hjemmelshaver (eier) til  boligen. Borettslag er bolig hvor søkeren er andelshaver. Leid bolig  er bolig hvor søkeren leier og har leiekontrakt.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kva eigeform har bustaden?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Eigd bustad er bustad der søkjaren står som heimelshavar (eigar) til  bustaden. Burettslag er bustad der søkjaren er partshavar. Leigd  bustad er bustad der søkjaren leiger og har leigekontrakt.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/Sporvalgside-grp-5393/BoligLan-datadef-24100">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Har du boliglån?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Har du bustadlån?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/Sporvalgside-grp-5393/InntektGrunnlagType-datadef-24101">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ligning</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Likning</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Inntektsnedgang</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inntektsnedgang</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>3</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Inntektsoppgang</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inntektsoppgang</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Hvilken inntektstype ønskes lagt til grunn?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Ligning: husstandens samlede inntekter ifølge siste maskinelt  tilgjengelig ligningsår. Inntektsnedgang: Dersom husstanden har hatt  en vesentlig inntektsnedgang siden ligningsåret, kan en søke om å få  lagt terminens
+                            inntekt til grunn. Inntektsoppgang: Dersom husstanden  har hatt en inntektsøkning siden ligningsåret på mer enn kr 10 000  for hver person over 18 år, skal søknadsårets (beregnete) skattbare  inntekt legges til grunn.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kva inntektstype ønskjer du lagt til grunn?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Likning: den samla inntekta til husstanden etter sist maskinelt  tilgjengelege likningsår. Inntektsnedgang: Dersom husstanden har hatt  ein vesentleg inntektsnedgang sidan likningsåret, kan ein søkje om å  få inntekta i
+                            terminen til grunn. Inntektsoppgang: Dersom husstanden  har hatt ei auke i inntekta sidan likningsåret på meir enn 10 000  kroner for kvar person over 18 år, skal den skattbare inntekta i  søknadsåret leggjast til grunn.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/Sporvalgside-grp-5393/InntektNedgangTrygdOvergang-datadef-24102">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Skyldes nedgangen overgang til trygd?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kryss av for ja dersom årsaken til inntektsnedgangen er overgang til  trygd og trygden utbetales fra Rikstrygdeverket/a-etat.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Er årsak til nedgangen overgang til trygd?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Kryss av for ja dersom årsaka til inntektsnedgangen er overgang til  trygd og trygda blir utbetalt frå Rikstrygdeverket/a-etat.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/Sporvalgside-grp-5393/InntektOppgangFravikes-datadef-24103">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Skal oppgangen fravikes?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kryss av for ja dersom du mener at det er klart urimelig at den  forhøyete inntekten skal legges til grunn.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Skal oppgangen fråvikast?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Kryss av for ja dersom du meiner det er klart urimeleg at den auka  inntekta skal leggjast til grunn.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+            </xforms:group>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-5394">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-5394/OppgavegiverFodselsnummer-datadef-26">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <brreg:kontroll type="Modulus 11"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Fødselsnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig fødselsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Fødselsnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig fødselsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-5394/OppgavegiverNavn-datadef-68">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Navn</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Namn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-5394/OppgavegiverAdresse-datadef-69">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Folkeregistrert adresse pr situasjonsdato</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Situasjonsdato: 1. januar for 1. termin, 1. mai for 2. termin, 1.  september for 3. termin.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Folkeregistrert adresse pr situasjonsdato</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Situasjonsdato: 1. januar for 1. termin, 1. mai for 2. termin, 1.  september for 3. termin.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-5394/OppgavegiverPostnummer-datadef-6676">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:alert brreg:lang="EN">
+                        <p>Enter positive integer with four digits</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Postnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever positivt heltall med fire siffer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Postnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev positivt heiltal med fire siffer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-5394/OppgavegiverPoststed-datadef-6677">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Poststed</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Poststad</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-5394/OppgavegiverKontonummer-datadef-8774">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Bankkontonr.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Søkers bankkontonummer (11 siffer). Gi bostøttekontoret i kommunen  beskjed dersom kontonummeret endres.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Bankkontonr.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Søkjar sitt bankkontonummer (11 siffer). Gje bustønadkontoret i  kommunen beskjed dersom kontonummeret blir endra.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-5394/OppgavegiverTelefonnummerArbeid-datadef-6700">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Telefonnr.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Oppgi et telefonnummer søker kan nås på dagtid.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Telefonnr.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje eit telefonnummer søkjar kan bli nådd på dagtid.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-5394/OppgavegiverEPost-datadef-15482">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>E-post</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Oppgi e-postadresse til søker.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>E-post</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje e-postadresse til søkjar.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-5394/OppgavegiverBostedskommuneKommunenummer-datadef-24021">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:alert brreg:lang="EN">
+                        <p>Enter positive integer with four digits</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Bostedskommune</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Velg den kommunen du bor i.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever positivt heltall med fire siffer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Bustadskommune</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Velj den kommunen du bur i.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev positivt heiltal med fire siffer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-5394/OppgavegiverBydel-datadef-24525">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>0311</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>GAMLE OSLO</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>GAMLE OSLO</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>0312</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>GRÜNERLØKKA</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>GRÜNERLØKKA</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>0313</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>SAGENE</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>SAGENE</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>0314</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>ST. HANSHAUGEN</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>ST. HANSHAUGEN</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>0315</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>FROGNER</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>FROGNER</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>0316</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>ULLERN</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>ULLERN</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>0317</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>VESTRE AKER</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>VESTRE AKER</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>0318</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>NORDRE AKER</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>NORDRE AKER</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>0319</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>BJERKE</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>BJERKE</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>0320</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>GRORUD</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>GRORUD</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>0321</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>STOVNER</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>STOVNER</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>0322</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>ALNA</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>ALNA</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>0323</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>ØSTENSJØ</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>ØSTENSJØ</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>0324</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>NORDSTRAND</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>NORDSTRAND</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>0325</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>SØNDRE NORDSTRAND</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>SØNDRE NORDSTRAND</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Bydel i Oslo</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Velg den bydelen du bor i hvis du bor i Oslo.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Bydel i Oslo</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Velj den bydelen du bur i dersom du bur i Oslo.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-5394/Malform-datadef-24702">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bokmål</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Bokmål</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nynorsk</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nynorsk</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Velg ønsket målform</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Ved å velge én av målformene Bokmål eller Nynorsk vil all informasjon  du videre får tilsendt i form av brev, meldinger o.l. være i den  valgte målformen.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Vel ønskt målform</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Ved å velje ei av målformene Bokmål eller Nynorsk vil all informasjon  du vidare får tilsendt i form av brev, meldingar o.l. vere i den  valde målforma.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-5394/BostottebrevTilsendt-datadef-24020">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Ønsker du å få bostøttebrev tilsendt til altinn?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Velg ja om du vil ha brev tilsendt elektronisk via altinn, og ikke per  post.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Ønskjer du å få bustønadbrev sendt til altinn?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Velj ja om du vil ha tilsendt brev elektronisk via altinn, og ikkje  per post.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-5394/OppgavegiverFlyttet-datadef-24051">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Har du flyttet etter situasjonsdato?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Situasjonsdato: 1. januar for 1. termin, 1. mai for 2. termin, 1.  september for 3. termin</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Har du flytta etter situasjonsdato?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Situasjonsdato: 1. januar for 1. termin, 1. mai for 2. termin, 1.  september for 3. termin.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-5394/Flyttet-grp-5395">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5394/Flyttet-grp-5395/OppgavegiverAdresseEndring-datadef-24052">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Fyll inn adressen du nå bor på.</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Fyll inn adressen du bur på no.</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5394/Flyttet-grp-5395/OppgavegiverPostnummerEndring-datadef-6699">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OpplysningerOmHusstanden-grp-5396">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Opplysninger om husstanden</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Opplysningar om husstanden</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/OpplysningerOmHusstanden-grp-5396/Hovedperson-grp-5397">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Søker</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Søkjar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/OpplysningerOmHusstanden-grp-5396/Hovedperson-grp-5397/OppgavegiverInntektUtland-datadef-24022">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Utenlandsinntekt</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Oppgi utenlandsinntekt som ikke fremkommer fra siste ligning -  omregnet i norske kroner etter kursen ved utgangen av vedkommende år.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Utanlandsinntekt</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Oppgje utanlandsinntekt som ikkje går fram av siste likning - omrekna  til norske kroner etter kursen ved utgangen av vedkomande år.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmHusstanden-grp-5396/Hovedperson-grp-5397/OppgavegiverFormueUtland-datadef-24023">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Utenlandsformue</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Oppgi utenlandsformue som ikke fremkommer fra siste ligning - omregnet  i norske kroner etter kursen ved utgangen av vedkommende år.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Utanlandsformue</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Oppgje utanlandsformue som ikkje går fram av siste likning - omrekna  til norske kroner etter kursen ved utgangen av vedkomande år.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:selectOne ref="/Skjema/OpplysningerOmHusstanden-grp-5396/Hovedperson-grp-5397/OppgavegiverPensjonStonadType-datadef-24024">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>01</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Sosial stønad som eneste inntekt</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>10</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Introduksjonsstønad</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>11</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Offentlig alderspensjon utenom folketrygden</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>12</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Offentlig uførepensjon utenom folketrygden</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>13</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Offentlig etterlattepensjon utenom folketrygden  </p>
+                                    <p/>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>14</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>EØS-alderspensjon</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>15</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>EØS-uføre-/yrkesskadepensjon</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>16</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>EØS-attføring/rehabilitering</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>17</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>EØS-etterlattepensjon</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Pensjon/stønad</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Oppgi ytelser som ikke utbetales fra Rikstrygdeverket eller a-etat,  dvs annen offentlig pensjon samt pensjon fra EØS-land som kan gi  støtteberettigelse. Slike ytelser må dokumenteres. Påfør også om du  har sosial
+                                stønad eller introduksjonsstønad utbetalt, noe som ikke  trenger å dokumenteres.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Pensjon/stønad</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Oppgje ytingar som ikkje blir utbetalte frå Rikstrygdeverket eller  a-etat, dvs. anna offentleg pensjon samt pensjon frå EØS-land som kan  gje rett til stønad. Slike ytingar må dokumenterast. Påfør om du har  sosial
+                                stønad eller introduksjonsstønad utbetalt, noko du ikkje treng  å dokumentere.</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                </xforms:group>
+                <xforms:group ref="/Skjema/OpplysningerOmHusstanden-grp-5396/EktefelleSamboer-grp-5398">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Ektefelle/samboer</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Ektemake/sambuar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/OpplysningerOmHusstanden-grp-5396/EktefelleSamboer-grp-5398/EktefelleSamboerPartnerFodselsnummer-datadef-24025">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Oppgi fødselsnr på ektefelle/samboer, 11 siffer.</p>
+                        </xforms:help>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Oppgje fødselsnr, 11 siffer.</p>
+                        </xforms:help>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmHusstanden-grp-5396/EktefelleSamboer-grp-5398/EktefelleSamboerPartnerFornavn-datadef-24027">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fornavn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fornamn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmHusstanden-grp-5396/EktefelleSamboer-grp-5398/EktefelleSamboerPartnerEtternavn-datadef-24026">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Etternavn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Etternamn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmHusstanden-grp-5396/EktefelleSamboer-grp-5398/EktefelleSamboerPartnerInntektUtland-datadef-24028">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Utenlandsinntekt</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Utanlandsinntekt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmHusstanden-grp-5396/EktefelleSamboer-grp-5398/EktefelleSamboerPartnerFormueUtland-datadef-24029">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Utenlandsformue</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Utanlandsformue</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:selectOne ref="/Skjema/OpplysningerOmHusstanden-grp-5396/EktefelleSamboer-grp-5398/EktefelleSamboerPartnerPensjonStonadType-datadef-24030">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>01</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Sosial stønad som eneste inntekt</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>10</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Introduksjonsstønad</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>11</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Offentlig alderspensjon utenom folketrygden</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>12</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Offentlig uførepensjon utenom folketrygden</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>13</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Offentlig etterlattepensjon utenom folketrygden  </p>
+                                    <p/>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>14</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>EØS-alderspensjon</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>15</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>EØS-uføre-/yrkesskadepensjon</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>16</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>EØS-attføring/rehabilitering</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>17</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>EØS-etterlattepensjon</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Pensjon/stønad</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Pensjon/stønad</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+                <xforms:repeat id="repeat_AndreHusstandsmedlemmer-grp-5399" nodeset="/Skjema/OpplysningerOmHusstanden-grp-5396/AndreHusstandsmedlemmer-grp-5399">
+                    <xforms:group ref="/Skjema/OpplysningerOmHusstanden-grp-5396/AndreHusstandsmedlemmer-grp-5399">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Andre husstandsmedlemmer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Andre husstandsmedlemmer</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/OpplysningerOmHusstanden-grp-5396/AndreHusstandsmedlemmer-grp-5399/HusstandsmedlemOvrigeFodselsnummer-datadef-24031">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <brreg:kontroll type="Modulus 11"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fødselsnr.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Oppgi fødselsnr, 11 siffer.</p>
+                            </xforms:help>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fødselsnr.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Oppgje fødselsnr, 11 siffer.</p>
+                            </xforms:help>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmHusstanden-grp-5396/AndreHusstandsmedlemmer-grp-5399/HusstandsmedlemOvrigeFornavn-datadef-24033">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fornavn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fornamn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmHusstanden-grp-5396/AndreHusstandsmedlemmer-grp-5399/HusstandsmedlemOvrigeEtternavn-datadef-24032">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Etternavn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Etternamn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmHusstanden-grp-5396/AndreHusstandsmedlemmer-grp-5399/HusstandsmedlemOvrigeInntektUtland-datadef-24034">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utenlandsinntekt</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Utanlandsinntekt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmHusstanden-grp-5396/AndreHusstandsmedlemmer-grp-5399/HusstandsmedlemOvrigeFormueUtland-datadef-24035">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utenlandsformue</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Utanlandsformue</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/OpplysningerOmHusstanden-grp-5396/AndreHusstandsmedlemmer-grp-5399/HustandsmedlemOvrigePensjonStonadType-datadef-24036">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>01</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Sosial stønad som eneste inntekt</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>10</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Introduksjonsstønad</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>11</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Offentlig alderspensjon utenom folketrygden</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>12</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Offentlig uførepensjon utenom folketrygden</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>13</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Offentlig etterlattepensjon utenom folketrygden  </p>
+                                        <p/>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>14</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>EØS-alderspensjon</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>15</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>EØS-uføre-/yrkesskadepensjon</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>16</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>EØS-attføring/rehabilitering</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>17</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>EØS-etterlattepensjon</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Pensjon/stønad</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Pensjon/stønad</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/BoligopplysningerEidBolig-grp-5400">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Boligopplysninger Eid bolig</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Bustadopplysningar Eigd bustad</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/BoligopplysningerEidBolig-grp-5400/BoligFunksjonskrav-datadef-24037">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Har boligen eget bad, kjøkken, oppholdsrom, soverom og egen inngang?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kryss av for ja om boligen har eget bad, kjøkken, oppholdsrom, soverom  og egen inngang, samt har minst 40 kvm eget bruksareal.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Har bustaden eige bad, kjøkken, opphaldsrom, soverom og eigen inngang?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Kryss av for ja dersom bustaden har eige bad, kjøken, opphaldsrom,  soverom og eigen inngang, og i tillegg har minst 40 kvm eige  bruksareal.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/BoligopplysningerEidBolig-grp-5400/BoligEidAreal-datadef-24038">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kvadratmeter</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Oppgi boligens bruksareal bortsett fra fellesareal.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kvadratmeter</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje bustaden sitt bruksareal bortsett frå fellesareal.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerEidBolig-grp-5400/BoligEidGardsnummer-datadef-24039">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Gårdsnr</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Oppgi boligens gårdsnummer.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Gardsnr</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje bustaden sitt gardsnummer.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerEidBolig-grp-5400/BoligEidBruksnummer-datadef-24040">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Bruksnr.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Oppgi boligens bruksnummer.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Bruksnr.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje bustaden sitt bruksnummer.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerEidBolig-grp-5400/BoligEidFestenummer-datadef-24041">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Festenr.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>For bolig på festet tomt, oppgi boligens festenummer.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Festenr.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>For bustad på festa tomt, oppgje bustaden sitt festenummer.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerEidBolig-grp-5400/BoligEidSeksjonsnummer-datadef-24042">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Seksjonsnr.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Om du bor i seksjonert bolig, oppgi boligens seksjonsnummer.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Seksjonsnr.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>For seksjonert bustad, oppgje bustaden sitt seksjonsnummer.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerEidBolig-grp-5400/BoligEidEiendomsskatt-datadef-24043">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Eiendomsskatt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Oppgi det årlige beløpet som betales i eiendomsskatt.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Eigedomsskatt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje det årlege beløpet som blir betalt i eigedomsskatt.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerEidBolig-grp-5400/BoligEidFesteavgift-datadef-24044">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Festeavgift</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Oppgi det årlig beløpet som betales i festeavgift.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Festeavgift</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje det årlege beløpet som blir betalt i festeavgift.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerEidBolig-grp-5400/BoligerAntall-datadef-24045">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall boliger</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Oppgi antall boenheter. Dersom du har et hus med sokkelleilighet har  du to boliger.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Bueiningar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje talet på bueiningar. Dersom du har eit hus med sokkelleileghet,  har du to bustader.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerEidBolig-grp-5400/BoligRomAntall-datadef-2674">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall rom totalt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom du eier et hus med flere boliger oppgis her antall rom totalt i  boligene. Oppgi stue(r) og soverom, ikke kjøkken.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Talet på rom totalt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dersom du eig eit hus med fleire bustader, oppgje talet på rom totalt  i bustadene. Oppgje stue(r) og soverom, ikkje kjøken.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerEidBolig-grp-5400/BoligEgenRomAntall-datadef-24046">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall rom i egen bolig</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Antall rom skal være rom i egen bolig, dvs. stue(r),soverom, ikke  kjøkken.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kor mange rom i eigen bustad?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Talet på rom skal vere rom i eigen bustad, dvs. stue(r), soverom,  ikkje kjøken.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerEidBolig-grp-5400/BoligEidUtleieromAntall-datadef-24047">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall utleide rom</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Oppgi antall utleide enkeltrom i egen bolig, dvs utleide stue(r),  soverom, ikke kjøkken.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kor mange utleigde rom?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje talet på utleigde rom i eigen bustad, dvs. utleigde stue(r),  soverom, ikkje kjøken.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerEidBolig-grp-5400/BoligEidByggear-datadef-24048">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Byggeår</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Oppgi årstall da boligen var ferdig bygd, og ble tatt i bruk første  gang.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Byggjeår</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje årstalet bustaden var ferdig bygd og blei teken i bruk første  gong.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerEidBolig-grp-5400/BoligEidKjopsar-datadef-24049">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kjøpsår</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Tast inn kjøpsår for boligen. Angis på formen åååå.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kjøpsår</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje kjøpsår for bustaden. Tast inn på forma åååå.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerEidBolig-grp-5400/BoligEidKjopesumByggesum-datadef-24050">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kjøpe-/byggesum</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Tast inn kjøpesum. Dersom boligen er selvoppført, oppgi byggekostnad.  Opplysningene må dokumenteres. Dersom kjøpesum er null, så tast inn  0.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kjøpe-/byggjesum</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje kjøpesum. Dersom bustaden er sjølvoppført, oppgje  byggjekostnad. Dersom kjøpesummen er null, tast inn 0.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/BoligopplysningerBorettslag-grp-5401">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Boligopplysninger Borettslag</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Bustadopplysningar Burettslag</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/BoligopplysningerBorettslag-grp-5401/BoligBorettslagFunksjonskrav-datadef-24053">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Har boligen eget bad, kjøkken, oppholdsrom, soverom og egen inngang?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kryss av for ja om boligen har eget bad, kjøkken, oppholdsrom, soverom  og egen inngang, samt har minst 40 kvm eget bruksareal.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Har bustaden eige bad, kjøkken, opphaldsrom, soverom og eigen inngang?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Kryss av for ja dersom bustaden har eige bad, kjøken, opphaldsrom,  soverom og eigen inngang, og i tillegg har minst 40 kvm eige  bruksareal.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/BoligopplysningerBorettslag-grp-5401/BoligBorettslagAreal-datadef-24054">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kvadratmeter</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Oppgi boligens bruksareal bortsett fra fellesareal.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kvadratmeter</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje bustaden sitt bruksareal bortsett frå fellesareal.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerBorettslag-grp-5401/BoligBorettslagRomAntall-datadef-24055">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall rom</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Antall rom skal være rom i egen bolig, dvs. stue(r),soverom, ikke  kjøkken.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kor mange rom?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Talet på rom skal vere talet på rom i eigen bustad, dvs. stue(r),  soverom, ikkje kjøken.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerBorettslag-grp-5401/BoligBorettslagUtleieromAntall-datadef-24056">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall utleide rom</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Oppgi antall utleide enkeltrom i egen bolig, dvs utleide stue(r),  soverom, ikke kjøkken.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kor mange utleigde rom?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje talet på utleigde rom i eigen bustad, dvs. utleigde stue(r),  soverom, ikkje kjøken.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerBorettslag-grp-5401/BoligBorettslagByggear-datadef-24057">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Byggeår</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Tast inn årstall da boligen var ferdig bygd, og ble tatt i bruk første  gang.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Byggjeår</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje årstalet bustaden var ferdig bygd, og blei teken i bruk første  gong.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerBorettslag-grp-5401/BoligBorettslagKjopsar-datadef-24058">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kjøpsår</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Tast inn kjøpsår for boligen. Angis på formen åååå.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kjøpsår</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje kjøpsår for bustaden. Tast inn på forma åååå.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerBorettslag-grp-5401/BoligBorettslagKjopesum-datadef-24059">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kjøpesum</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Tast inn kjøpesum. Dersom boligen er selvoppført, oppgi byggekostnad.  Opplysningene må dokumenteres. Dersom kjøpesum er null, så tast inn  0.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kjøpesum</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje kjøpesum. Dersom bustaden er sjølvoppført, oppgje  byggjekostnad. Dersom kjøpesummen er null, tast inn 0.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerBorettslag-grp-5401/BoligBorettslagNavn-datadef-24228">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Borettslag</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Velg borettslaget du bor i ved å trykke på knappen Hent fra register.  Sjekk eventuelt med boligbyggelaget.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Burettslag</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Velj burettslaget du bur i ved å trykke på knappen Hent fra register.  Sjekk eventuelt med bustadbyggjelaget.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerBorettslag-grp-5401/BoligBorettslagtOrganisasjonsnummer-datadef-24248">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Borettslag orgnr</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Borettslag orgnr</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerBorettslag-grp-5401/BoligBorettslagAdresse-datadef-24249">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Borettslag adr</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Borettslag adr</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerBorettslag-grp-5401/BoligBorettslagPostnummer-datadef-24250">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Borettslag postnr</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever positivt heltall</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Borettslag postnr</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev positivt heiltal</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerBorettslag-grp-5401/ForretningsforerOrganisasjonsnummer-datadef-3640">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Forretningsfører orgnr</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Forretningsfører orgnr</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerBorettslag-grp-5401/ForretningsforerNavn-datadef-24251">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Forretningsfører navn</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Forretningsfører navn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerBorettslag-grp-5401/ForretningsforerAdresse-datadef-24252">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Forretningsfører adr</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Forretningsfører adr</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerBorettslag-grp-5401/ForretningsforerPostnummer-datadef-24701">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Postnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever positivt heltall</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Postnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev positivt heiltal</p>
+                    </xforms:alert>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/BoligopplysningerLeidBolig-grp-5402">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Boligopplysninger Leid bolig</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Bustadopplysningar Leigd bustad</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/BoligopplysningerLeidBolig-grp-5402/BoligLeidFunksjonskrav-datadef-24060">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Har boligen eget bad, kjøkken, oppholdsrom, soverom og egen inngang?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kryss av for ja om boligen har eget bad, kjøkken, oppholdsrom, soverom  og egen inngang, samt har minst 40 kvm eget bruksareal.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Har bustaden eige bad, kjøkken, opphaldsrom, soverom og eigen inngang?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Kryss av for ja dersom bustaden har eige bad, kjøken, opphaldsrom,  soverom og eigen inngang, og i tillegg har minst 40 kvm eige  bruksareal.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/BoligopplysningerLeidBolig-grp-5402/BoligLeidAreal-datadef-24061">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kvadratmeter</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Oppgi boligens bruksareal bortsett fra fellesareal.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kvadratmeter</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje bustaden sitt bruksareal bortsett frå fellesareal.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerLeidBolig-grp-5402/BoligLeidRomAntall-datadef-24062">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall rom</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Antall rom skal være rom i egen bolig, dvs. stue(r),soverom, ikke  kjøkken.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kor mange rom?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Talet på rom skal vere talet på rom i eigen bustad, dvs. stue(r),  soverom, ikkje kjøken.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerLeidBolig-grp-5402/BoligLeidUtleieromAntall-datadef-24063">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall utleide rom</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Oppgi antall utleide enkeltrom i egen bolig, dvs utleide stue(r),  soverom, ikke kjøkken.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kor mange utleigde rom?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje talet på utleigde rom i eigen bustad, dvs. utleigde stue(r),  soverom, ikkje kjøken.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerLeidBolig-grp-5402/BoligLeidByggear-datadef-24064">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Byggeår</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Tast inn årstall da boligen var ferdig bygd, og ble tatt i bruk første  gang.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Byggjeår</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje årstalet bustaden var ferdig bygd, og blei teken i bruk første  gong.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerLeidBolig-grp-5402/BoligLeidHusleie-datadef-24066">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Husleie</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Oppgi månedlig husleie, eksklusiv elektrisitet og oppvarming.  Opplysningene må dokumenteres.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Husleige</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje månadleg husleige, eksklusiv elektrisitet og oppvarming.  Opplysningane må dokumenterast.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerLeidBolig-grp-5402/UtleierNavn-datadef-4988">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Utleiers navn</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Hjelpetekst kommer</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Namn til utleigaren</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Hjelpetekst kommer</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BoligopplysningerLeidBolig-grp-5402/UtleierLanenummer-datadef-24067">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Utleiers saks-/lånenr. i Husbanken/Innovasjon Norge</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Oppgi 9-sifret saksnummer i Husbanken. 8-sifret lånenummer i  Innovasjon Norge (tidligere SND/Landbruksbanken).</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Utleigar sitt saks-/lånenr. i Husbanken/Innovasjon Norge</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Oppgje 9-sifra saksnummer i Husbanken. 8-sifra lånenummer i Innovasjon  Norge (tidlegare SND/Landbruksbanken).</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/BoligopplysningerLeidBolig-grp-5402/BoligLeidType-datadef-24068">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>31</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Leid bolig i borettslag</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Leid bolig i borettslag</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>32</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Leid bolig med kommunalt lån</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Leid bolig med kommunalt lån</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>33</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Leid kommunal bolig</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Leid kommunal bolig</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>34</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kommunalt formidlet bolig</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kommunalt formidla bolig</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>40</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Leid husleieregulert bolig</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Leid husleieregulert bolig</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Type leid bolig</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Velg dersom boligen er en av de opplistede boligtypene. For siste  type, leid husleieregulert bolig, er ment leid bolig som tidligere  var underlagt Husleiereguleringsloven (kun Oslo og Trondheim) og der  husstanden var
+                            bosatt i boligen per 31. desember 1999.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Type leigd bustad</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Velj dersom bustaden er ein av dei opplista bustadtypane. For siste  type, leigd husleigeregulert bustad, er det meint leigd bustad som  tidligare var underlagt Husleiereguleringsloven (berre Oslo og  Trondheim) og der
+                            husstanden var busett i bustaden per 31. desember  1999.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OpplysningerOmBoliglan-grp-5403">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Opplysninger om boliglån</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Opplysningar om bustadlån</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_Husbanklan-grp-5405" nodeset="/Skjema/OpplysningerOmBoliglan-grp-5403/Husbanklan-grp-5405">
+                    <xforms:group ref="/Skjema/OpplysningerOmBoliglan-grp-5403/Husbanklan-grp-5405">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Husbanken</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Oppgi boliglån i Husbanken ved saksnummer.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Husbanken</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Oppgje bustadlån i Husbanken ved saksnummer.</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/OpplysningerOmBoliglan-grp-5403/Husbanklan-grp-5405/OppgavegiverSaksnummerSpesifisertBank-datadef-24104">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Saksnr. (9 siffer)</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Saksnr. (9 siffer)</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:repeat id="repeat_InnovasjonNorge-grp-5406" nodeset="/Skjema/OpplysningerOmBoliglan-grp-5403/InnovasjonNorge-grp-5406">
+                    <xforms:group ref="/Skjema/OpplysningerOmBoliglan-grp-5403/InnovasjonNorge-grp-5406">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Innovasjon Norge (tidligere SND/Landbruksbanken)</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Oppgi boliglån i Innovasjon Norge (tidligere SND/Landbruksbanken) ved  lånenummer.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Innovasjon Norge (tidlegare SND/Landbruksbanken)</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Oppgje bustadlån i Innovasjon Norge (tidlegare SND/Landbruksbanken)  ved lånenummer.</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/OpplysningerOmBoliglan-grp-5403/InnovasjonNorge-grp-5406/OppgavegiverSaksnummerLanenummerSpesifisertLangiver-datadef-24105">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Saks-/lånenr. (8siffer)</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Saks-/lånenr. (8siffer)</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:repeat id="repeat_PrivateLan-grp-5404" nodeset="/Skjema/OpplysningerOmBoliglan-grp-5403/PrivateLan-grp-5404">
+                    <xforms:group ref="/Skjema/OpplysningerOmBoliglan-grp-5403/PrivateLan-grp-5404">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Private lån</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Tast inn opprinnelig lånesum. Lånet må være dokumentert og kun være  benyttet til kjøp/ oppføring av bolig.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Private lån</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Oppgje opphavleg lånesum. Lånet må vere dokumentert og berre vere  nytta til kjøp/oppføring av bustaden.</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/OpplysningerOmBoliglan-grp-5403/PrivateLan-grp-5404/LangiverNavn-datadef-2426">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Långivers navn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Namnet til långjevar</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmBoliglan-grp-5403/PrivateLan-grp-5404/LanBelop-datadef-24069">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Lånebeløp</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Lånebeløp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmBoliglan-grp-5403/PrivateLan-grp-5404/LanUtbetaltAr-datadef-24070">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utbetalt (år)</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Utbetalt (år)</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmBoliglan-grp-5403/PrivateLan-grp-5404/LanLopetid-datadef-3230">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Løpetid (antall år)</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Løpetid (talet på år)</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmBoliglan-grp-5403/PrivateLan-grp-5404/LanPeriodeAvdragsfri-datadef-24071">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Avdragsfri periode (år)</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Avdragsfri periode (år)</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmBoliglan-grp-5403/PrivateLan-grp-5404/LanRentesats-datadef-24106">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Rentesats (nominell)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Med rentesats menes dagens rentesats. Rente kan oppgis med inntil tre  desimaler.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Rentesats (nominell)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Med rentesats er det meint rentesatsen i dag. Kan leggast inn med  opptil tre desimalar.</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:group ref="/Skjema/OpplysningerOmBoliglan-grp-5403/KommunaleLan-grp-5621">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kommunale lån</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kommunale lån</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/OpplysningerOmBoliglan-grp-5403/KommunaleLan-grp-5621/LanKommunalt-datadef-24072">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Har du kommunalt lån?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Kryss av for ja dersom det påhviler kommunale lån på boligen.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Har du kommunalt lån?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Kryss av for ja dersom det kviler kommunale lån på bustaden.</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Inntektsnedgang-grp-5407">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Inntektsnedgang - periodens inntekt (4 mnd)</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Alle husstandsmedlemmers brutto inntekt skal oppgis for de fire  månedene bostøtteterminen dekker. Ytelser utbetalt fra  Rikstrygdeverket/a-etat skal ikke oppgis da disse innhentes  maskinelt. Unntak: faktisk utbetalt bidrag må oppgis</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Inntekta i perioden (4 md.)</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Brutto inntekt for alle husstandsmedlemmer skal opplysast for dei fire  månadene. Ytingar utbetalt frå Rikstrygdeverket/a-etat skal ikkje  førast opp då dei blir innhenta maskinelt. Unntak: faktisk utbetalt  bidrag må opplysast.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/Inntektsnedgang-grp-5407/Soker-grp-5408">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Søker</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Søkjar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Inntektsnedgang-grp-5407/Soker-grp-5408/OppgavegiverInntektPensjon-datadef-24073">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Offentlig/ Kommunal/ Privat-pensjon</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Oppgi pensjoner som ikke utbetales fra Rikstrygdeverket/a-etat.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Offentleg/ Kommunal/ Privat-pensjon</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Oppgje pensjonar som ikkje blir utbetalte frå Rikstrygdeverket/a-etat.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Inntektsnedgang-grp-5407/Soker-grp-5408/OppgavegiverInntekt-datadef-24074">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Lønn</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Oppgi brutto lønnsinntekt for terminen.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Løn</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Oppgje brutto lønsinntekt for terminen.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Inntektsnedgang-grp-5407/Soker-grp-5408/OppgavegiverInntektBidrag-datadef-24075">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bidrag</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Oppgi brutto bidrag for terminen.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Bidrag</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Oppgje brutto bidrag for terminen.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Inntektsnedgang-grp-5407/Soker-grp-5408/OppgavegiverInntektStonad-datadef-24079">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sosial stønad</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Oppgi brutto sosial stønad for terminen.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sosial stønad</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Oppgje brutto sosial stønad for terminen.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Inntektsnedgang-grp-5407/Soker-grp-5408/OppgavegiverInntektAndre-datadef-24081">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Andre inntekter</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Oppgi andre inntekter for terminen. Dette kan være studielån,  stipender, utdanningsstønad, avkastning på formue eller lignende.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Andre inntekter</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Oppgje andre inntekter for terminen. Dette kan vere studielån,  stipend, utdanningsstønad, avkastning på formue eller liknande.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Inntektsnedgang-grp-5407/EktefelleSambo-grp-5409">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Ektefelle/samboer</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Ektemake/sambuar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Inntektsnedgang-grp-5407/EktefelleSambo-grp-5409/EktefelleSamboerPartnerInntektPensjon-datadef-24076">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Offentlig/ Kommunal/ Privat-pensjon</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Offentleg/ Kommunal/ Privat-pensjon</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Inntektsnedgang-grp-5407/EktefelleSambo-grp-5409/EktefelleSamboerPartnerInntekt-datadef-24077">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Lønn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Løn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Inntektsnedgang-grp-5407/EktefelleSambo-grp-5409/EktefelleSamboerPartnerInntektBidrag-datadef-24078">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bidrag</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Bidrag</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Inntektsnedgang-grp-5407/EktefelleSambo-grp-5409/EktefelleSamboerPartnerInntektStonad-datadef-24080">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sosial stønad</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sosial stønad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Inntektsnedgang-grp-5407/EktefelleSambo-grp-5409/EktefelleSamboerPartnerInntektAnnen-datadef-24082">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Andre inntekter</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Andre inntekter</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:repeat id="repeat_AndreHusstandsmedlemmer-grp-5410" nodeset="/Skjema/Inntektsnedgang-grp-5407/AndreHusstandsmedlemmer-grp-5410">
+                    <xforms:group ref="/Skjema/Inntektsnedgang-grp-5407/AndreHusstandsmedlemmer-grp-5410">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Andre husstandsmedlemmer</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Hjelpetekst kommer</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Andre husstandsmedlemmer</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Hjelpetekst kommer</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/Inntektsnedgang-grp-5407/AndreHusstandsmedlemmer-grp-5410/HustandsmedlemOvrigeInntektPensjon-datadef-24083">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Offentlig/ Kommunal/ Privat-pensjon</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Offentleg/ Kommunal/ Privat-pensjon</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Inntektsnedgang-grp-5407/AndreHusstandsmedlemmer-grp-5410/HustandsmedlemOvrigeInntekt-datadef-24084">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Lønn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Løn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Inntektsnedgang-grp-5407/AndreHusstandsmedlemmer-grp-5410/HustandsmedlemOvrigeInntektBidrag-datadef-24085">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bidrag</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Bidrag</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Inntektsnedgang-grp-5407/AndreHusstandsmedlemmer-grp-5410/HustandsmedlemOvrigeInntektStonad-datadef-24086">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sosial stønad</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sosial stønad</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Inntektsnedgang-grp-5407/AndreHusstandsmedlemmer-grp-5410/HusstandsmedlemOvrigInntekt-datadef-24087">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Andre inntekter</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Andre inntekter</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Inntektsoppgang-grp-5411">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Inntektsoppgang - forventet årlig inntekt</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Meldeplikt for inntektsøkning gjelder alle personer i husstanden som  har fylt 18 år per 1.1. i det året det søkes bostøtte for og som har  hatt en inntektsøkning på mer enn kr 10 000 siden fjoråret. Det er  brutto skattbar
+                        inntekt for inneværende år som skal beregnes og  meldes inn.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Inntektsoppgang - forventa årleg inntekt</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Meldeplikt for inntektsauke gjeld alle personar i husstanden som har  fylt 18 år per 1.1. i det året det blir søkt om bustønad og som har  hatt ei inntektsauke på meir enn kr 10 000 sidan fjoråret. Det er  brutto skattbar
+                        inntekt for inneverande år som skal utreknast og  meldast inn.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/Inntektsoppgang-grp-5411/Soker-grp-5412">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Søker</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Søkjar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Inntektsoppgang-grp-5411/Soker-grp-5412/OppgavegiverInntektPensjonAnnenForventet-datadef-24088">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Offentlig/ Kommunal/ Privat-pensjon</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Oppgi årlig pensjon/trygd/stønad som ikke utbetales av  Rikstrygdeverket/a-etat.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Offentleg/ Kommunal/ Privat-pensjon</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Oppgje årleg pensjon/trygd/stønad som ikkje blir utbetalt av  Rikstrygdeverket/a-etat.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Inntektsoppgang-grp-5411/Soker-grp-5412/OppgavegiverInntektForventet-datadef-24089">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Lønn</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Oppgi årlig lønnsinntekter, honorarer, feriepenger og lignende.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Løn</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Oppgje årleg lønsinntekt, honorar, feriepengar og liknande.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Inntektsoppgang-grp-5411/Soker-grp-5412/OppgavegiverInntektAndreForventet-datadef-24094">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Andre inntekter</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Oppgi årlig andre inntekter - f.eks inntekter fra kapital og  virksomhet og skattbar utenlandsinntekt.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Andre inntekter</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Oppgje årleg andre inntekter, til dømes inntekter frå kapital og  verksemd og skattbar utanlandsinntekt.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Inntektsoppgang-grp-5411/EktefelleSamboer-grp-5413">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Ektefelle/samboer</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Ektemake/sambuar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Inntektsoppgang-grp-5411/EktefelleSamboer-grp-5413/EktefelleSamboerPartnerInntektPensjonAnnenForventet-datadef-24090">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Offentlig/ Kommunal/ Privat-pensjon</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Offentleg/ Kommunal/ Privat-pensjon</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Inntektsoppgang-grp-5411/EktefelleSamboer-grp-5413/EktefelleSamboerPartnerInntektForventet-datadef-24091">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Lønn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Løn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Inntektsoppgang-grp-5411/EktefelleSamboer-grp-5413/EktefelleSamboerPartnerInntektAndreForventet-datadef-24095">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Andre inntekter</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Andre inntekter</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:repeat id="repeat_AndreHusstandsmedlemmer-grp-5414" nodeset="/Skjema/Inntektsoppgang-grp-5411/AndreHusstandsmedlemmer-grp-5414">
+                    <xforms:group ref="/Skjema/Inntektsoppgang-grp-5411/AndreHusstandsmedlemmer-grp-5414">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Andre husstandsmedlemmer</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Hjelpetekst kommer</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Andre husstandsmedlemmer</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Hjelpetekst kommer</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/Inntektsoppgang-grp-5411/AndreHusstandsmedlemmer-grp-5414/HustandsmedlemOvrigeInntektPensjonAnnenForventet-datadef-24092">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Offentlig/ Kommunal/ Privat-pensjon</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Offentleg/ Kommunal/ Privat-pensjon</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Inntektsoppgang-grp-5411/AndreHusstandsmedlemmer-grp-5414/HusstandsmedlemOvrigeInntektForventet-datadef-24093">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Lønn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Løn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Inntektsoppgang-grp-5411/AndreHusstandsmedlemmer-grp-5414/HustandsmedlemOvrigeInntektAndreForventet-datadef-24096">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Andre inntekter</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Andre inntekter</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/InntektsnedgangArsak-grp-5415">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Årsak til inntektsnedgang</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Beskriv årsaken til husstandens inntektsnedgang. Hva var husstandens  økonomiske situasjon i ligningsåret og hva er situasjonen nå?</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Årsak til inntektsnedgang</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Oppgje årsaka til husstanden sin inntektsnedgang. Kva var den  økonomiske situasjonen i likningsåret og kva er situasjonen no?</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/InntektsnedgangArsak-grp-5415/InntektNedgangArsak-datadef-24097">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Forklar årsaken til inntektsnedgangen og forventet varighet</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Forklar årsaken til inntektsnedgangen og kor lenge den vil vare</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/FritakFraInntektsoppgang-grp-5416">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Fritak fra inntektsoppgang</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Hvis husstanden mener det er klart urimelig at den forhøyete inntekten  skal legges til grunn ved beregning av bostøtte, må det begrunnes.  Eventuell dokumentasjon som understøtter begrunnelsen må sendes  kommunen.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Fritak frå inntektsoppgang</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Dersom husstanden meiner det er klart urimeleg at det auka inntekta  skal leggast til grunn ved utrekninga av bustønad, må dette  grunngjevast. Eventuell dokumentasjon for grunngjevnaden sendast til  kommunen.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/FritakFraInntektsoppgang-grp-5416/InntektOppgangArsak-datadef-24098">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Begrunnelse for at du mener inntektsoppgangen skal fravikes</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Grunngjevnad for at du meiner likning likevel skal leggast til grunn</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

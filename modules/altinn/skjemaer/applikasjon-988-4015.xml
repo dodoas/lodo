@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1030-A: Preutfylt selvangivelse, kontonummer</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-988-4016.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/Kontonummer-grp-4759/OppgavegiverFodselsnummer-datadef-26"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Kontonummer-grp-4759/KontonummerForeslatt-datadef-21335"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1030-A Kontonummerendring</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Dette skjemaet skal kun benyttes av lønnstakere/pensjonister som  ønsker å endre kontonummer eller utbetalingsmåte i forbindelse med  årets selvangivelse.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1030-A Kontonummerendring</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Dette skjemaet skal berre brukast av lønnstakarar/pensjonistar som vil  endre kontonummer eller utbetalingsmåte i samband med sjølvmeldinga  for dette året.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/Kontonummer-grp-4759">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Skjema for endring av kontonummer eller utbetalingsmåte av  tilgodebeløp</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Skjema for endring av kontonummer eller utbetalingsmåte av  tilgodebeløp</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Kontonummer-grp-4759/OppgavegiverFodselsnummer-datadef-26">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <brreg:kontroll type="Modulus 11"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Fnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig fødselsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Fnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig fødselsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Kontonummer-grp-4759/KontonummerForeslatt-datadef-21335">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Forhåndsutfylt kontonr.</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Førhandsutfylt kontonr.</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/Kontonummer-grp-4759/KontonummerUtbetaling-datadef-21334">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kontonr.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kontonr.</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kontonr.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kontonr.</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>3</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kontonr.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kontonr.</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>4</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kontonr.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kontonr.</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>5</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kontonr.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kontonr.</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>6</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kontonr.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kontonr.</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>7</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kontonr.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kontonr.</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>8</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kontonr.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kontonr.</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>10</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Betalingskort</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Betalingskort</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Velg kontonummer eller utbetalingsmåte av tilgodebeløp fra listen</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Vel kontonummer eller utbetalingsmåte av tilgodebeløp frå lista</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

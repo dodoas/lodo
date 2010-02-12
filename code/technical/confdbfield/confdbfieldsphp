@@ -1,0 +1,87 @@
+<?
+# $Id: confdbfieldsphp,v 1.2 2004/08/31 06:40:50 thomasek Exp $ ConfDBFields.php,v 1.2 2001/11/08 18:43:59 thomasek Exp $
+# Based on EasyComposer technology
+# Copyright Thomas Ekdahl, 1994-2003, thomas@ekdahl.no, http://www.ekdahl.no
+
+$db_table  = "ConfDBFields";
+
+session_register("count", "login_id", "login_username", "login_password", "$DB_NAME", "login_timeout", "login_privileges", "login_ip", "login_email", "login_firstname", "login_lastname");
+
+include  "../lib/setup/prefs_$DB_NAME.inc";
+include  "../lib/db/db_$DB_TYPE[0].inc";
+include  "../lib/auth/authentication.inc";
+include  "../lib/form/form_elements.inc";
+include  "ConfDBFields_record.php";
+
+$query = "select * from $db_table where TableName='$TableName'";
+$result = db_query($DB_NAME, $query);
+
+print "$XML_VERSION";; ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Internalsystem - order list</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<meta name="cvs"     		    content="$Id: confdbfieldsphp,v 1.2 2004/08/31 06:40:50 thomasek Exp $">
+	<meta name="author"     		content="Thomas Ekdahl, thomas@ekdahl.no, http://www.ekdahl.no/">
+	<meta name="copyright"     		content="Thomas Ekdahl, 1994-2004">
+	<meta name="technology" 		content="Apache, PHP, MySQL, Perl">
+	<meta name="generator"  		content="BBEdit 7.1">
+	<link rel="stylesheet" 			href = "../<? print "$CSS"; ?>" type="text/css" />
+	<script language="JavaScript" 	src  = "../../lib/js/auto_save.js"></script>
+</head>
+
+<body>	
+<table cellspacing="0">
+<thead>
+<tr>
+  <td colspan="3">Table: <? print "$TableName"; ?>
+
+  <td align="right" colspan="5"> 
+    <form name="menu" action="<? print "$PHP_SELF"; ?>" method="post">
+	<input type="hidden" name="TableName" value="<? print "$TableName"; ?>">	
+    <input type="submit" value="New table field (N)" name="record_new" tabindex="1" accesskey="N">
+	</form>
+
+  <tr> 
+    <td>ID
+    <td>Field name
+    <td>Alias
+    <td>PK
+    <td>DefValue
+    <td>Type
+    <td>InputType
+    <td>DefHeight
+    <td>DefWidth
+    <td>Act
+    <td>Link
+</thead>
+
+<tbody>
+<?
+while($row = db_fetch_object($result)) {
+$i++;
+$form_name = "ConfDBFields_$i";
+if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
+$where     = "ConfDBFieldID=$row->ConfDBFieldID";
+?>  
+	<form name="<? print "$form_name"; ?>" action="<? print "$PHP_SELF"; ?>" method="post">
+	<input type="hidden" name="ConfDBFieldID"	value="<? print $row->ConfDBFieldID; ?>">		
+	<tr class="<? print "$sec_color"; ?>">
+	<td><? print $row->ConfDBFieldID; ?>
+	<td><input type="text" 	name="FieldName" 				value="<? print $row->FieldName; ?>" 			size="20" 			onChange="Auto_Save('<? print "$form_name"; ?>','<? print "$db_table"; ?>','FieldName','<? print $where; ?>','')">	
+	<td><input type="text" 	name="FieldNameAlias"  			value="<? print $row->FieldNameAlias; ?>" 		size="20" 		onChange="Auto_Save('<? print "$form_name"; ?>','<? print "$db_table"; ?>','FieldNameAlias','<? print $where; ?>','')">	
+	<td><? checkbox("PrimaryKey",$row->PrimaryKey, $form_name, $db_table, $where); ?>	
+	<td><input type="text" 	name="DefaultValue" 			value="<? print $row->DefaultValue; ?>" 		size="10" 		onChange="Auto_Save('<? print "$form_name"; ?>','<? print "$db_table"; ?>','DefaultValue','<? print $where; ?>','')">	
+	<td><input type="text" 	name="FieldType" 				value="<? print $row->FieldType; ?>" 			size="13" 	onChange="Auto_Save('<? print "$form_name"; ?>','<? print "$db_table"; ?>','FieldType','<? print $where; ?>','')">	
+	<td><input type="text" 	name="DefaultFieldInputType" 	value="<? print $row->DefaultFieldInputType; ?>" size="10" 	onChange="Auto_Save('<? print "$form_name"; ?>','<? print "$db_table"; ?>','DefaultFieldInputType','<? print $where; ?>','')">	
+	<td><input type="text" 	name="DefaultFieldHeight" 		value="<? print $row->DefaultFieldHeight; ?>" 	size="10" 	onChange="Auto_Save('<? print "$form_name"; ?>','<? print "$db_table"; ?>','DefaultFieldHeight','<? print $where; ?>','')">	
+	<td><input type="text" 	name="DefaultFieldWidth" 		value="<? print $row->DefaultFieldWidth; ?>" 	size="10" 	onChange="Auto_Save('<? print "$form_name"; ?>','<? print "$db_table"; ?>','DefaultFieldWidth','<? print $where; ?>','')">	
+	<td><? checkbox("Active",$row->Active, $form_name, $db_table, $where); ?>
+	<td><input type="text" 	name="DefaultLink" 		        value="<? print $row->DefaultLink; ?>" 	        size="10" 	onChange="Auto_Save('<? print "$form_name"; ?>','<? print "$db_table"; ?>','DefaultLink','<? print $where; ?>','')">	
+	</form>
+<? } ?>
+</tbody>	
+</table>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">SFT-0001: Generell administrativ informasjon om rapporteringspliktige</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1082-4512.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInfo-grp-5542/GenerellInformasjon-grp-5546/EnhetOrganisasjonsnummer-datadef-18"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInfo-grp-5542/GenerellInformasjon-grp-5546/BedriftOrganisasjonsnummer-datadef-19"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInfo-grp-5542/GenerellInformasjon-grp-5546/BedriftNavn-datadef-336" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInfo-grp-5542/GenerellInformasjon-grp-5546/BedriftAdresse-datadef-319"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInfo-grp-5542/GenerellInformasjon-grp-5546/BedriftPostnummer-datadef-8908" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInfo-grp-5542/GenerellInformasjon-grp-5546/BedriftPoststed-datadef-8909" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>Egenrapportering av utslippstall.</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Egenrapportering av utslippstall fra bedrifter med  utslippstillatelse.  </p>
+                <p/>
+                <p>Industribedrifter som driver virksomhet som kan medføre fare for  forurensning, skal ha utslippstillatelse i medhold av lov om vern mot  forurensninger og om avfall (forurensningsloven av 13. mars 1981 nr.  6).  </p>
+                <p/>
+                <p>Alle norske bedrifter i klasse 1, 2 og 3 med utslippstillatelse og  alle bedrifter med særskilte beredskapskrav, skal årlig innen 1. mars  rapportere utslippstall og status for beredskapsutvikling til  forurensningsmyndigheten.  </p>
+                <p/>
+                <p>Egenrapporteringen er en slags miljøselvangivelse for bedrifter med  utslippstillatelse, og som har fått krav om å levere slik  rapportering. Bedriftene skal rapportere om utslipp og avfall fra sin  virksomhet.  </p>
+                <p/>
+                <p>Les mer:  </p>
+                <p/>
+                <p>- Veiledning til bedriftenes egenrapportering til  forurensningsmyndighetene:  http://www.sft.no/publikasjoner/andre/1929/ta1929.pdf  </p>
+                <p>- Forurensningsloven: http://www.lovdata.no/all/hl-19810313-006.html</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInfo-grp-5542">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon om rapporteringspliktige.</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInfo-grp-5542/GenerellInformasjon-grp-5546">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-5542/GenerellInformasjon-grp-5546/OppgaveAr-datadef-11236">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Rapporteringsår:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-5542/GenerellInformasjon-grp-5546/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer til årsregnskapets eier (juridisk enhet):</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-5542/GenerellInformasjon-grp-5546/BedriftOrganisasjonsnummer-datadef-19">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer (bedrift):</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-5542/GenerellInformasjon-grp-5546/BedriftNavn-datadef-336">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bedriftsnavn:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-5542/GenerellInformasjon-grp-5546/BedriftAdresse-datadef-319">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postadresse:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-5542/GenerellInformasjon-grp-5546/BedriftPostnummer-datadef-8908">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer:</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-5542/GenerellInformasjon-grp-5546/BedriftPoststed-datadef-8909">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-5542/GenerellInformasjon-grp-5546/BedriftNACEKode-datadef-6186">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Næringsgrupperingsnummer (NACE):</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Alle bedrifter plasseres i bransjer. Bransjekodene er de samme som  standard for næringsgrupper fra Statistisk sentralbyrå (SSB). De er i  tråd med EUs vedtak vedrørende Nomenclature générale des Activités  economiques
+                                dans les Communautés Européenes (NACE).</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInfo-grp-5542/GenerellInformasjon-grp-5546/BedriftNaring-datadef-52">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beskrivelse av næringsgruppering:</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Alle bedrifter plasseres i bransjer. Bransjekodene er de samme som  standard for næringsgrupper fra Statistisk sentralbyrå (SSB). De er i  tråd med EUs vedtak vedrørende Nomenclature générale des Activités  economiques
+                                dans les Communautés Européenes (NACE). Hver  næringsgrupperingskode har en tilhørende beskrivelse. Denne  beskrivelsen skal angis her.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:selectOne ref="/Skjema/GenerellInfo-grp-5542/GenerellInformasjon-grp-5546/BedriftEMASRegistrert-datadef-23230">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Er bedriften EMAS-registrert?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>EMAS - Eco-Management and Audit Scheme er en frivillig ordning for  miljøregistrering av virksomheter innen EU. Gjennom EØS-avtalen kan  også norske bedrifter delta i ordningen. En EMAS-godkjenning betyr at  bedriften
+                                både overholder og går lenger i sitt miljøarbeid enn det  som er lovfestede miljøkrav.</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/GenerellInfo-grp-5542/GenerellInformasjon-grp-5546/BedriftISO14001Sertifisert-datadef-23231">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Er bedriften ISO-sertifisert?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>ISO står for International Standardization Organisation. Kravene til  ISO 14001 tilsvarer EMAS, med unntak av ekstern rapportering og  registrering.</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/GenerellInfo-grp-5542/GenerellInformasjon-grp-5546/BedriftIPPCDirektiv-datadef-24326">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Er bedriften omfattet av IPPC-direktivet?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>IPPC-direktivet, Council Directive 96/61/EC concerning Integrated  Pollution Prevention and Control.</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

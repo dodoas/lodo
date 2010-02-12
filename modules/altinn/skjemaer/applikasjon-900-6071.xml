@@ -1,0 +1,1123 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1088: Oppgave over aksjer og grunnfondsbevis</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-900-6072.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/Aksjonar-grp-5577/AksjonarFodselsnummer-datadef-1156"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/Aksjonar-grp-5577/EnhetOrganisasjonsnummer-datadef-18"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/Aksjonar-grp-5577/AksjonarNavn-datadef-1153"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/Tilganger2006-grp-6703/VersjonNummerPreutfyltTabelloppsett-datadef-24650"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/Tilganger2006-grp-6703/TransaksjonIdentifikasjonPreutfyltTabelloppsett-datadef-24651"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/Tilganger2006-grp-6703/EierinteresserAksjeselskapNavn-datadef-3528"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/Tilganger2006-grp-6703/EierinteresserAksjeselskapOrganisasjonsnummer-datadef-18067"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/Tilganger2006-grp-6703/EierinteresserAksjeselskapAksjeklasseISINSpesifisertSelskap-datadef-24365"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/Tilganger2006-grp-6703/AksjerTilgangerArets-datadef-27640"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/Tilganger2006-grp-6703/AksjerErvervTypeTabelloppsett-datadef-24425" required="true"/>
+            <xforms:bind ref="/Skjema/Innledning-grp-3348/Tilganger2006-grp-6703/AksjerErvervDatoTabelloppsett-datadef-24424" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704/VersjonNummerPreutfylt-datadef-24648"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704/TransaksjonIdentifikasjonPreutfylt-datadef-24649"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704/EierinteresserAnskaffetForInntektsarASNavn-datadef-27562"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704/EierinteresserAnskaffetForInntektsarASOrganisasjonsnummer-datadef-27563"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704/EierinteresserAnskaffetForInntektsarASAksjeklasseISIN-datadef-27564"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704/AksjerBeholdningFjoraret-datadef-17637"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704/AksjerErvervTypeFjoraret-datadef-27597"/>
+            <xforms:bind ref="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704/AksjerErvervDato-datadef-17610" required="true"/>
+            <xforms:bind ref="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704/AksjeAnskaffelsesverdi-datadef-24403" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705/VersjonNummerPreutfyltTabellRealisasjoner-datadef-27565"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705/TransaksjonIdentifikasjonPreutfyltTabellRealisasjoner-datadef-27566"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705/AksjerRealisertSpesifisertSelskapNavn-datadef-27567"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705/AksjerRealisertSpesifisertSelskapOrganisasjonsnummer-datadef-27568"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705/AksjerRealisertSpesifisertSelskapAksjeklasseISIN-datadef-27569"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705/AksjerRealisertSpesifisertSelskapAntall-datadef-27570"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705/AksjerRealisertSpesifisertSelskapRealisasjonstype-datadef-27572" required="true"/>
+            <xforms:bind ref="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705/AksjerRealisertSpesifisertSelskapRealisasjonstidspunkt-datadef-27571" required="true"/>
+            <xforms:bind ref="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705/AksjerRealisertSpesifisertSelskapRealisasjonsvederlag-datadef-27573" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1088 Oppgave over aksjer og grunnfondsbevis</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>HVA ER RF-1088 OPPGAVE OVER AKSJER OG GRUNNFONDSBEVIS 2006?  </p>
+                <p>RF-1088 Oppgave over aksjer og grunnfondsbevis 2006 er en oppgave  produsert av Aksjonærregisteret, som er Skatteetatens register over  norske aksjeselskaper og aksjonærene i disse. Registeret inneholder  også norske sparebanker
+                    som har utstedt grunnfondsbevis og deres  eiere.  </p>
+                <p/>
+                <p>Oppgaven sendes alle aksjonærer og grunnfondsbeviseiere som i løpet av  2006 har hatt aksjer eller grunnfondsbevis i norske aksjeselskaper  eller sparebanker som omfattes av Skatteetatens aksjonærregister.  Du  får kun tilsendt
+                    oppgave dersom selskapet du eier aksjer eller  grunnfondsbevis i har levert godkjent aksjonærregisteroppgave.  Utenlandske selskaper sender ikke oppgave til Aksjonærregisteret. Vær  oppmerksom på at dette også gjelder utenlandske
+                    selskaper registrert  på Oslo børs.  </p>
+                <p/>
+                <p>Opplysningene i oppgaven er basert på følgende kilder:  </p>
+                <p/>
+                <p>- Verdipapirsentralen (VPS)  </p>
+                <p>- Selskapet  </p>
+                <p>- Din beholdningsoppgave for tidligere år  </p>
+                <p/>
+                <p>Når vi i oppgaven omtaler aksjer gjelder tilsvarende for  grunnfondsbevis.  </p>
+                <p/>
+                <p>Oppgaven erstatter tidligere års RF-1088 Beholdningsoppgaven og  RF-1089 Realisasjonsoppgaven.  </p>
+                <p/>
+                <p>HVORFOR DU HAR FÅTT TILSENDT OPPGAVEN  </p>
+                <p>Oppgaven inneholder opplysninger du trenger for å fylle ut  selvangivelsen, og alle personlige aksjonærer plikter å returnere  oppgaven. Personlige aksjonærer omfatter også personlig  næringsdrivende.  </p>
+                <p/>
+                <p>Med virkning fra 1. januar 2006 er det vedtatt nye regler for  beskatning av utbytte og gevinster på aksjer/grunnfondsbevis for  personlige aksjonærer/grunnfondsbeviseiere. De nye reglene medfører  beskatning av utbytte på aksjer
+                    og skatt på gevinst ved salg av  aksjer utover et skjermingsfradrag.  </p>
+                <p/>
+                <p>For mer informasjon om de nye reglene se artikkel Aksjonærmodellen på  www.skatteetaten.no</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF 1088 Oppgåve over aksjar og grunnfondsbevis</p>
+            </xforms:caption>
+            <xforms:group ref="/Skjema/Innledning-grp-3348">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Kontroll og levering av oppgaven</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>OPPGAVEN I ALTINN  </p>
+                    <p>Den elektroniske utgaven av oppgaven er tilpasset for at du skal kunne  gjøre korrigeringer på en enkel måte. Den inneholder derfor ikke alle  opplysninger du finner i papiroppgaven (f.eks. ligningsverdi). Du har  imidlertid
+                        lesetilgang til en fullstendig oppgave i PDF-format under  valget OM SKJEMA øverst til høyre på siden.  </p>
+                    <p/>
+                    <p>KONTROLL OG LEVERING AV OPPGAVEN  </p>
+                    <p>Oppgaven må kontrolleres. Inneholder den feil eller er ufullstendig,  må du gjøre nødvendige korrigeringer før den kan sendes inn. Fristen  for innsending er den samme som for innsending av selvangivelsen, det  vil for de
+                        fleste si innen 30. april 2007.  </p>
+                    <p/>
+                    <p>OPPDATERT OPPGAVE HVIS DU GJØR ENDRINGER  </p>
+                    <p>Hvis du gjør endringer i oppgaven i Altinn, vil du etter noen dager få  tilgang til en oppdatert oppgave. Denne oppgaven viser omberegnede  verdier slik at du enkelt kan overføre disse til selvangivelsen. Skal  du kunne
+                        nyttiggjøre deg denne tjenesten er det viktig at oppgaven  sendes i god tid før selvangivelsesfristen utløper, slik at du får  tilgang til omberegnede verdier før innleveringsfristen.  </p>
+                    <p/>
+                    <p>Vær oppmerksom på at eventuelle merknader du har gitt i oppgavens side  5, først vil bli vurdert ved saksbehandling av likningskontoret på et  senere tidspunkt. Disse vil derfor ikke være hensyntatt i oppdatert  oppgave. Når
+                        denne oppgaven er tilgjengelig vil du motta varsel via  e-post/sms.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Oppgaven skal sendes inn av alle personlige aksjonærer. Dette gjelder  også selv om du ikke har endringer.  </p>
+                    <p>Har du kontrollert oppgaven og funnet at du ikke har endringer, kan du  velge KONTROLLER nederst på siden for å starte innsending.  </p>
+                    <p/>
+                    <p>Benytt deg av hjelpetekstene under utfyllingen. ? Der finner du nyttig  hjelp og informasjon.</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Kontroll og levering av oppgåva</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Innledning-grp-3348/Aksjonar-grp-5577">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Aksjonæropplysninger</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her vises aksjonærens navn og fødselsnummer (eventuelt  organisasjonsnummer dersom aksjonær er et selskap).  </p>
+                        <p/>
+                        <p>Du kan ikke gjøre endringer på denne siden.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Aksjonæropplysningar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Innledning-grp-3348/Aksjonar-grp-5577/AksjonarFodselsnummer-datadef-1156">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-3348/Aksjonar-grp-5577/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummeret er selskapets identifikasjonsnummer fra  Foretaksregisteret.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:help>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-3348/Aksjonar-grp-5577/AksjonarNavn-datadef-1153">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:repeat id="repeat_Tilganger2006-grp-6703" nodeset="/Skjema/Innledning-grp-3348/Tilganger2006-grp-6703">
+                    <xforms:group ref="/Skjema/Innledning-grp-3348/Tilganger2006-grp-6703">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tilganger 2006</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>I oppgaven vises kun de selskap du eier aksjer eller grunnfondsbevis i  som har levert godkjent aksjonærregisteroppgave. (Det kan være  opplysninger om flere selskap i tabell dersom det ikke er plass på  siden).  </p>
+                            <p/>
+                            <p>Gjør du endringer vil skjermingsgrunnlag/skjermingsfradrag i de fleste  tilfeller bli endret. For å gjøre utfylling av selvnangivelsen  lettere i disse tilfellene gjøres en oppdatert oppgave tilgjengelig.  Du vil bli
+                                varselt via e-post/sms når oppgaven er tilgjengelig. Dette  vil kunne ta noen dager.  </p>
+                            <p/>
+                            <p>Har du i 2006 anskaffet aksjer i selskaper som ikke er med i oppgaven,  må du gi opplysninger om disse i eget skjema, RF-1059 Skjema for  fastsettelse av anskaffelsesverdi (inngangsverdi) og beregning av  skattepliktig
+                                utbytte for aksjer eid ved årets utgang. Skjemaet  finner du på www.skatteetaten.no eller ved henvendelse til ditt  likningskontor.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Her vises kun dine registrerte anskaffelser i 2006. Kontroller  opplysningene og gjør eventuelle rettelser. Du kan kun gjøre  endringer i de hvite feltene. Er feltet allerede utfylt, overskriver  du utfyllingen.
+                                Oppdatert oppgave legges da ut under Mottatt på  Hovedsiden i Altinn. Du får melding på e-post/sms når denne er klar.</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Tilganger 2006</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/Tilganger2006-grp-6703/VersjonNummerPreutfyltTabelloppsett-datadef-24650">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/Tilganger2006-grp-6703/TransaksjonIdentifikasjonPreutfyltTabelloppsett-datadef-24651">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/Tilganger2006-grp-6703/EierinteresserAksjeselskapNavn-datadef-3528">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Navn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Namn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/Tilganger2006-grp-6703/EierinteresserAksjeselskapOrganisasjonsnummer-datadef-18067">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Org.nr</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Organisasjonsnummeret er selskapets identifikasjonsnummer fra  Foretaksregisteret.</p>
+                            </xforms:help>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Org.nr</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/Tilganger2006-grp-6703/EierinteresserAksjeselskapAksjeklasseISINSpesifisertSelskap-datadef-24365">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Aksjeklasse</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her vises hvilken aksjeklasse vi har registrert at dine aksjer  tilhører, eventuelt ISIN-nummer for aksjer registrert i VPS.  </p>
+                                <p/>
+                                <p>Har en aksje både aksjeklasse og ISIN-nummer, vil det være  ISIN-nummeret som vises.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Aksjeklasse</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/Tilganger2006-grp-6703/AksjerTilgangerArets-datadef-27640">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Antall</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her angis antall aksjer/grunnfondsbevis knyttet til de ulike  anskaffelsestidspunktene i 2006.  </p>
+                                <p/>
+                                <p>Det er ikke mulig å endre antall aksjer ved elektronisk innlevering.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Talet på aksjar</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/Innledning-grp-3348/Tilganger2006-grp-6703/AksjerErvervTypeTabelloppsett-datadef-24425">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>K</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Kjøp</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Kjøp</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>A</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Arv uten kontinuitet</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Arv utan kontinuitet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>G</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Gave uten kontinuitet</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Gåve utan kontinuitet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>AK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Avgiftspliktig arv/gave med kontinuitet</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Avgiftspliktig arv/gåve med kontinuitet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>GK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Avgiftsfri arv/gave med kontinuitet</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Avgiftsfri arv/gåve med kontinuitet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>GS</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Gavesalg</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Gåvesal</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>OK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Overføring med skattemessig kontinuitet</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Overføring med skattemessig kontinuitet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>T</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Stiftelse</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Stifting</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>N</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nyemisjon</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nyemisjon</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>NF</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nyemisjon ved konvertering av fordringer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nyemisjon ved konvertering av fordringer</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>NK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nyemisjon ved konsernintern overføring</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nyemisjon ved konsernintern overføring</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>UP</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fusjon skattepliktig</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Fusjon skattepliktig</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>IP</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fisjon skattepliktig</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Fisjon skattepliktig</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>M</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Omdannelse til aksjeselskap</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Omdanning til aksjeselskap</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>UII</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Innløsn. ifm. sk.fri. fusj/fisj.</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Innløsn. ifm. sk.fri. fusj/fisj.</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>O</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Konsernintern overføring</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Konsernintern overføring</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Anskaffelsestype</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Angir hvilken måte aksjene er anskaffet på.  </p>
+                                <p/>
+                                <p>Ved elektronisk innlevering er det ikke mulig å endre  anskaffelsestype.  </p>
+                                <p/>
+                                <p>For aksjer anskaffet i 2006 vil følgende måter kunne være aktuelle:  </p>
+                                <p/>
+                                <p>K- Kjøp  </p>
+                                <p>A - Arv uten kontinuitet  </p>
+                                <p>G - Gave uten kontinuitet  </p>
+                                <p>AK - Avgiftspliktig arv/gave med kontinuitet  </p>
+                                <p>GK - Avgiftsfri arv/gave med kontinuitet  </p>
+                                <p>GS - Gavesalg  </p>
+                                <p>OK - Overføring med skattemessig kontinuitet  </p>
+                                <p>T - Stiftelse  </p>
+                                <p>N - Nyemisjon  </p>
+                                <p>NF - Nyemisjon ved konvertering av fordring  </p>
+                                <p>NK - Nyemisjon ved konsernintern overføring  </p>
+                                <p>UP - Fusjon skattepliktig  </p>
+                                <p>IP - Fisjon skattepliktig  </p>
+                                <p>M - Omdannelse til aksjeselskap  </p>
+                                <p>UII - Innløsning ifm skattefri fusjon/fisjon  </p>
+                                <p>O- Konsernintern overføring</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Anskafingstype</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/Tilganger2006-grp-6703/AksjerErvervDatoTabelloppsett-datadef-24424">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Anskaffelsesdato</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Anskaffelsesdato er tidspunktet da du kjøpte eller på annen måte  mottok aksjene.  </p>
+                                <p/>
+                                <p>Du vil bare kunne endre dato som ikke har bakgrunn i en  selskapshendelse, det vil si i disse tilfeller:  </p>
+                                <p/>
+                                <p>Kjøp  </p>
+                                <p>Arv uten kontinuitet  </p>
+                                <p>Gave uten kontinuitet  </p>
+                                <p>Avgiftspliktig arv/gave med kontinuitet  </p>
+                                <p>Avgiftsfri arv/gave med kontinuitet  </p>
+                                <p>Gavesalg  </p>
+                                <p>Overføring med skattemessig kontinuitet  </p>
+                                <p/>
+                                <p>Har du i 2006 arvet eller fått aksjene og arven eller gaven var  arveavgiftspliktig skal du overta arvelaters eller givers  anskaffelsesdato. Oppgi i disse tilfeller arvelaters/givers  fødselsnummer i merknadsfeltet.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Anskaffingsdato</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/Tilganger2006-grp-6703/AksjeAnskaffelsesverdiTabelloppsett-datadef-24427">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Anskaffelsesverdi</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Beløpet i denne posten er det vi har registrert som din  anskaffelsesverdi inkludert eventuelle anskaffelsesomkostninger.  </p>
+                                <p/>
+                                <p>Dersom aksjen er anskaffet ved  </p>
+                                <p/>
+                                <p>- Avgiftspliktig arv/gave med kontinuitet  </p>
+                                <p>- Avgiftsfri arv/gave med kontinuitet  </p>
+                                <p>- Overføring med skattemessig kontinuitet  </p>
+                                <p/>
+                                <p>skal anskaffelsesverdi ikke oppgis da mottaker i utgangspunktet skal  videreføre arvelater/givers skattemessige verdier.  </p>
+                                <p/>
+                                <p>Har du mottatt ikke-børsnoterte aksjer som var arve eller gave  avgiftspliktige og du valgte å bruke 100 % av selskapets  skattemessige formuesverdi som avgiftsgrunnlag må du gi opplysninger  om dette i
+                                    merknadsfeltet. Riktig anskaffelsesverdi som skal oppgis,  er den laveste verdien av arvelaters anskaffelsesverdi og  arveavgiftsgrunnlaget.  </p>
+                                <p/>
+                                <p>For mer utfyllende informasjon vises det til skjemaets rettledning.  (Kan hentes opp som PDF-fil under valget OM SKJEMA øverst til høyre  på siden).  </p>
+                                <p/>
+                                <p>Har likningskontoret ikke mottatt opplysninger om din  anskaffelsesverdi, er beløpet som fremkommer i posten et forslag fra  likningskontoret til skjønnsfastsettelse av din anskaffelsesverdi.  Anskaffelsesverdien
+                                    vil ved ligningen for inntektsåret 2006 bli  likningsfastsatt med virkning også for fremtidige inntektsår. Dette  innebærer at den verdien som fastsettes vil få betydning for ditt  skjermingsgrunnlag og for
+                                    gevinst-/tapsberegning ved en eventuell  realisasjon av aksjene.  Det er derfor viktig at du kontrollerer  anskaffelsesverdien og eventuelt korrigerer beløpet. Husk at  anskaffelsesverdien skal oppgis per aksje du
+                                    har i beholdning ved  årets utgang.  </p>
+                                <p/>
+                                <p>Er anskaffelsesverdien feil, skriver du inn riktig anskaffelsesverdi  per aksje inkludert anskaffelseskostnader over det beløp som er  forhåndsutfylt. Endrer du anskaffelsesverdien vil dette også medføre  at
+                                    skjermingsgrunnlaget og årets skjermingsfradrag på de aksjer du  har i beholdning ved utgangen av året endres.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Per aksje</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Anskaffingsverdi</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Per aksje</p>
+                            </xforms:hint>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:repeat id="repeat_TilgangerFor2006-grp-6704" nodeset="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704">
+                    <xforms:group ref="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tilganger før 2006</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>I oppgaven vises kun de selskap du eier aksjer eller grunnfondsbevis i  som har levert godkjent aksjonærregisteroppgave. (Det kan være  opplysninger om flere selskap i tabell dersom det ikke er plass på  siden).  </p>
+                            <p/>
+                            <p>Gjør du endringer vil skjermingsgrunnlag/skjermingsfradrag i de fleste  tilfeller bli endret. For å gjøre utfylling av selvnangivelsen  lettere i disse tilfellene gjøres en oppdatert oppgave tilgjengelig.  Du vil bli
+                                varselt via e-post/sms når oppgaven er tilgjengelig. Dette  vil kunne ta noen dager.  </p>
+                            <p/>
+                            <p>Eier du aksjer i selskap som ikke er med i oppgaven, må du gi  opplysninger om disse i eget skjema, RF-1059 Skjema for fastsettelse  av anskaffelsesverdi (inngangsverdi) og beregning av skattepliktig  utbytte for aksjer
+                                eid ved årets utgang. Skjemaet finner du på  www.skatteetaten.no eller ved henvendelse til ditt likningskontor.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Her vises dine registrert anskaffelser før 2006 (som fremdeles i er  behold per 31 12.2005). Kontroller opplysningene og gjør eventuelle  rettelser. Du kan kun gjøre endringer i de hvite feltene. Er feltet  allerede
+                                utfylt, overskriver du utfyllingen. Oppdatert oppgave legges  da ut under Mottatt på Hovedsiden i Altinn. Du får melding på  e-post/sms når denne er klar.  </p>
+                            <p/>
+                            <p>Har du flere anskafflser enn de som vises på siden og eventuelt i  tabell, må dette rapporteres i eget skjema, RF 1059. Se mer om dette  i hjelpeteksten.</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Tilganger før 2006</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704/VersjonNummerPreutfylt-datadef-24648">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704/TransaksjonIdentifikasjonPreutfylt-datadef-24649">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704/EierinteresserAnskaffetForInntektsarASNavn-datadef-27562">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Navn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Namn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704/EierinteresserAnskaffetForInntektsarASOrganisasjonsnummer-datadef-27563">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Organisasjonsnummer</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Organisasjonsnummeret er selskapets identifikasjonsnummer fra  Foretaksregisteret.</p>
+                            </xforms:help>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Organisasjonsnummer</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704/EierinteresserAnskaffetForInntektsarASAksjeklasseISIN-datadef-27564">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Aksjeklasse</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her vises hvilken aksjeklasse vi har registrert at dine aksjer  tilhører, eventuelt ISIN-nummer for aksjer registrert i VPS.  </p>
+                                <p/>
+                                <p>Har en aksje både aksjeklasse og ISIN-nummer, vil det være  ISIN-nummeret som vises.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Aksjeklasse</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704/AksjerBeholdningFjoraret-datadef-17637">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Antall aksjer</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her angis antall aksjer/grunnfondsbevis knyttet til de ulike  anskaffelsestidspunktene til og med 31 12 2005.  </p>
+                                <p/>
+                                <p>Det er ikke mulig å endre antall aksjer ved elektronisk innlevering.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Talet på aksjar</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704/AksjerErvervTypeFjoraret-datadef-27597">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>K</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Kjøp</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Kjøp</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>A</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Arv uten kontinuitet</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Arv utan kontinuitet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>B</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Arv fra Enearving</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Arv fra Enearving</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>H</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Arv fra Ektefelle</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Arv fra Ektefelle</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>G</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Gave uten kontinuitet</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Gåve utan kontinuitet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>KI</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Historisk anskaffelse</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Historisk anskaffing</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>T</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Stiftelse</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Stifting</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>N</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nyemisjon</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nyemisjon</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>NF</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nyemisjon ved konvertering av fordringer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nyemisjon ved konvertering av fordringer</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>NK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nyemisjon ved konsernintern overføring</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nyemisjon ved konsernintern overføring</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>NES</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nyemisjon overgangsregel E</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nyemisjon overgangsregel E</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>UP</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fusjon skattepliktig</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Fusjon skattepliktig</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>IP</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fisjon skattepliktig</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Fisjon skattepliktig</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>M</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Omdannelse til aksjeselskap</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Omdanning til aksjeselskap</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>UII</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Innløsn. ifm. sk.fri. fusj/fisj.</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Innløsn. ifm. sk.fri. fusj/fisj.</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>O</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Konsernintern overføring</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Konsernintern overføring</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Anskaffelsestype</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Angir hvilken måte aksjene er anskaffet på.  </p>
+                                <p/>
+                                <p>Ved elektronisk innlevering er det ikke mulig å endre  anskaffelsestype.  </p>
+                                <p/>
+                                <p>For aksjer anskaffet i 2006 vil følgende måter kunne være aktuelle:  </p>
+                                <p/>
+                                <p>K- Kjøp  </p>
+                                <p>A - Arv uten kontinuitet  </p>
+                                <p>B- Arv fra enearving  </p>
+                                <p>H - Arv fra ektefelle  </p>
+                                <p>G - Gave uten kontinuitet  </p>
+                                <p>KI - Historisk anskaffelse (anskaffelser før 01 01 2003 for aksjer,  anskaffelser før 01 01 2006 for grunnfondsbevis)  </p>
+                                <p>T - Stiftelse  </p>
+                                <p>N - Nyemisjon  </p>
+                                <p>NF - Nyemisjon ved konvertering av fordring  </p>
+                                <p>NK - Nyemisjon ved konsernintern overføring  </p>
+                                <p>NES - Nyemisjon overgangsregel E  </p>
+                                <p>UP - Fusjon skattepliktig  </p>
+                                <p>IP - Fisjon skattepliktig  </p>
+                                <p>M - Omdannelse til aksjeselskap  </p>
+                                <p>UII - Innløsning ifm skattefri fusjon/fisjon  </p>
+                                <p>O- Konsernintern overføring</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Tidligere år</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Anskaffingstype</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Tidligere år</p>
+                            </xforms:hint>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704/AksjerErvervDato-datadef-17610">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Anskaffelsesdato</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Anskaffelsesdato er tidspunktet da du kjøpte eller på annen måte  mottok aksjene.  </p>
+                                <p/>
+                                <p>Du vil bare kunne endre dato som ikke har bakgrunn i en  selskapshendelse, det vil si i disse tilfeller:  </p>
+                                <p/>
+                                <p>Kjøp  </p>
+                                <p>Arv uten kontinuitet  </p>
+                                <p>Arv fra enearving  </p>
+                                <p>Arv fra ektefelle  </p>
+                                <p>Gave uten kontinuitet  </p>
+                                <p>Anskaffet før 01 01 03 (Aksjonærregisterets oppstart)  </p>
+                                <p/>
+                                <p>For aksjer i et selskap som deltok i en fusjon eller fisjon før 2003,  kan oppført anskaffelsesdato i oppgaven være fusjons- eller  fisjonstidspunktet. Retting må i disse tilfeller foretas i  papiroppgaven,
+                                    eventuelt at korrekt dato oppgis i merknadsfeltet. Det  må fremgå tydelig hva endringen gjelder.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Anskaffingsdato</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/TilgangerFor2006-grp-6704/AksjeAnskaffelsesverdi-datadef-24403">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Anskaffelesesverdi</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Beløpet i denne posten er det vi har registrert som din  anskaffelsesverdi inkludert eventuelle anskaffelsesomkostninger.  </p>
+                                <p>Akkumulert RISK er ikke medtatt, og skal heller ikke medtas i dette  feltet som en del av anskaffelsesverdien.  </p>
+                                <p/>
+                                <p>Har likningskontoret ikke mottatt opplysninger om din  anskaffelsesverdi, er beløpet som fremkommer i posten et forslag fra  likningskontoret til skjønnsfastsettelse av din anskaffelsesverdi.  Anskaffelsesverdien
+                                    vil ved ligningen for inntektsåret 2006 bli  likningsfastsatt med virkning også for fremtidige inntektsår. Dette  innebærer at den verdien som fastsettes vil få betydning for ditt  skjermingsgrunnlag og for
+                                    gevinst-/tapsberegning ved en eventuell  realisasjon av aksjene. Det er derfor viktig at du kontrollerer  anskaffelsesverdien og eventuelt korrigerer beløpet. Husk at  anskaffelsesverdien skal oppgis per aksje du
+                                    har i beholdning ved  årets utgang.  </p>
+                                <p/>
+                                <p>Er anskaffelsesverdien feil, skriver du inn riktig anskaffelsesverdi  per aksje inkludert anskaffelseskostnader over det beløp som er  forhåndsutfylt. Endrer du anskaffelsesverdien vil dette også medføre  at
+                                    skjermingsgrunnlaget og årets skjermingsfradrag på de aksjer du  har i beholdning ved utgangen av året endres.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Per aksje</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Anskaffingsverdi</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Per aksje</p>
+                            </xforms:hint>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:repeat id="repeat_Realisasjoner2006-grp-6705" nodeset="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705">
+                    <xforms:group ref="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Realisasjoner/salg 2006</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>For aksjer mv du har realisert i løpet av 2006 og som ikke fremkommer  av denne oppgaven, skal du fylle ut skjema RF-1061.  </p>
+                            <p/>
+                            <p>Har du realisert aksjer/andeler ervervet på forskjellige tidspunkt  anses de aksjer/andeler som er anskaffet først som realisert først  (FIFU-prinsippet).  </p>
+                            <p/>
+                            <p>Har du solgt (eller på annen måte avhendet) en aksjebeholdning som er  anskaffet på ulike tidspunkt (anskaffet i flere omganger), vil  oppgaven vise gevinst-/tapsberegningen fordelt på hver enkelt  anskaffelse på egne
+                                linjer i oppgaven.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Her vises dine registrerte realisasjoner (salg og lignende) i 2006.  Kontroller opplysningene og gjør eventuelle rettelser. Du kan kun  gjøre endringer i de hvite feltene. Er feltet allerede utfylt,  overskriver du
+                                utfyllingen. Har du flere realisasjoner enn de som  vises på siden og eventuelt i tabell, se hjelpeteksten for  fremgangsmåte.</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Realisasjoner/sal 2006</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705/VersjonNummerPreutfyltTabellRealisasjoner-datadef-27565">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705/TransaksjonIdentifikasjonPreutfyltTabellRealisasjoner-datadef-27566">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705/AksjerRealisertSpesifisertSelskapNavn-datadef-27567">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Navn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Namn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705/AksjerRealisertSpesifisertSelskapOrganisasjonsnummer-datadef-27568">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Organisasjonsnummer</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Organisasjonsnummeret er selskapets identifikasjonsnummer fra  Foretaksregisteret.</p>
+                            </xforms:help>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Organisasjonsnummer</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705/AksjerRealisertSpesifisertSelskapAksjeklasseISIN-datadef-27569">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Aksjeklasse</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her vises hvilken aksjeklasse vi har registrert at dine aksjer  tilhører, eventuelt ISIN-nummer for aksjer registrert i VPS.  </p>
+                                <p/>
+                                <p>Har en aksje både aksjeklasse og ISIN-nummer, vil det være  ISIN-nummeret som vises.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Aksjeklasse</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705/AksjerRealisertSpesifisertSelskapAntall-datadef-27570">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Antall realiserte aksjer</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her finner du det antall aksjer som er realisert tilknyttet hvert  enkelt anskaffelsestidspunkt.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Tale på realiserte aksjar</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705/AksjerRealisertSpesifisertSelskapRealisasjonstype-datadef-27572">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>R</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Salg</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Sal</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>A</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Arv uten kontinuitet</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Arv utan kontinuitet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>G</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Gave uten kontinuitet</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Gåve utan kontinuitet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>AK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Avgiftspliktig arv/gave med kontinuitet</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Avgiftspliktig arv/gåve med kontinuitet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>GK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Avgiftsfri arv/gave med kontinuitet</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Avgiftsfri arv/gåve med kontinuitet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>GS</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Gavesalg</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Gåvesal</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>OK</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Overføring med skattemessig kontinutet</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Overføring med skattemessig kontinutet</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>IP</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fisjon skattepliktig</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Fisjon skattepliktig</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>UP</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fusjon skattepliktig</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Fusjon skattepliktig</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>L</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Likvidasjon</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Likvidasjon</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>P</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Partiell likvidasjon</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Partiell likvidasjon</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>O</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Konsernintern overføring</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Konsernintern overføring</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Realisasjonstype</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Måten aksjene er realisert på.  </p>
+                                <p/>
+                                <p>Ved elektronisk innlevering er det ikke mulig å endre  realisasjonstype.  </p>
+                                <p/>
+                                <p>Følgende typer vil kunne være aktuelle:  </p>
+                                <p/>
+                                <p>R - Salg  </p>
+                                <p>A - Arv uten kontinuitet  </p>
+                                <p>G - Gave uten kontinuitet  </p>
+                                <p>AK - Avgiftspliktig arv/gave med kontinuitet  </p>
+                                <p>GK - Avgiftsfri arv/gave med kontinuitet  </p>
+                                <p>GS - Gavesalg  </p>
+                                <p>OK - Overføring med skattemessig kontinuitet  </p>
+                                <p>UP - Fusjon skattepliktig  </p>
+                                <p>IP - Fisjon skattepliktig  </p>
+                                <p>L - Likvidasjon  </p>
+                                <p>P - Partiell likvidasjon  </p>
+                                <p>O- Konsernintern overføring</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Realisasjonstype</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705/AksjerRealisertSpesifisertSelskapRealisasjonstidspunkt-datadef-27571">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Realisasjonsdato</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Realisasjonsdato er tidspunktet da du solgte, ga bort eller på annen  måte overførte aksjene.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Realisasjonsdato</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Innledning-grp-3348/Realisasjoner2006-grp-6705/AksjerRealisertSpesifisertSelskapRealisasjonsvederlag-datadef-27573">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Realisasjonsvederlag</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her vises vederlaget fordelt på hver av de realiserte anskaffelsene  (realisasjonsverderlag per aksje x antall realisert).</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Totalt for alle aksjer</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Realisasjonsvederlag</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Samla vederlag</p>
+                            </xforms:hint>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:group ref="/Skjema/Innledning-grp-3348/Tilleggsopplysninger-grp-6706">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Tilleggsopplysninger</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Merknader blir behandlet av likningskontoret på et senere tidspunkt.  Merknader som vil kunne være av betydning for  skjermingsgrunnlag/skjermingsfradrag vil av den grunn ikke være  hensyntatt i din korrigerte oppgave som
+                            om noen dager legges ut i  altinn. Du bør gi opplysning om at du har gitt slike merknader ved  utfylling av selvangivelsen.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Tilleggsopplysninger</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Innledning-grp-3348/Tilleggsopplysninger-grp-6706/OppgaveAksjerGrunnfondsbevisMerknader-datadef-27574">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Merknader til oppgaven</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Merknader til oppgåva</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

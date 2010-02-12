@@ -1,0 +1,139 @@
+<?php
+class TerminOppgaveMapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+        //print ("Accouint: ". $a . "khlk: ". $h);
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+       			{
+       			   	if (is_array($v)){
+        				for($i=0; $i< count($v); $i++) {
+        					$this->ORID[$item[$i]]=$v[$i];
+        				}
+       			   	}
+        			else
+           				$this->ORID[$item] = $v;
+       			}
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+       			   	if (is_array($v)){
+        				for($i=0; $i< count($v); $i++) {
+        					$this->ORID[$this->Account[$a]][$i]=$v[$i];
+        				}
+       			   	}
+        			else
+        			{
+						$this->ORID[$this->Account[$a]] = $v;
+        			}
+	            return 1;
+    	    }
+       	}
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+		
+	{  
+        $this->addMapping('D11819', 'OppgaveTermin-datadef-11819', 'OppgaveTermin');
+		$this->addMapping('D11236', 'OppgaveAr-datadef-11236', 'OppgaveAAr');
+		$this->addMapping('D16513', 'SkatteoppkreverKommuneNummer-datadef-16513', 'TaxCompanyMunicipality');
+		$this->addMapping('D8486',  'SkatteoppkreverKommuneNavn-datadef-8486', 'TaxCompanyMunicipalityName');
+		$this->addMapping('D21772', 'EnhetBedriftOrganisasjonsnummer-datadef-21772', 'OrgNumber');
+		$this->addMapping('D21771', 'EnhetBedriftNavn-datadef-21771', 'VName');
+		$this->addMapping('D21773', 'EnhetBedriftAdresse-datadef-21773', 'VAddress');
+		$this->addMapping('D21774', 'EnhetBedriftPostnummer-datadef-21774', 'VZipCode');
+		$this->addMapping('D21775', 'EnhetBedriftPoststed-datadef-21775', 'VCity');
+		$this->addMapping('D5133', 'EnhetNACEKode-datadef-5133', 'NaeringsKode');
+		$this->addMapping('D16522', 'ArbeidsgiveravgiftBeregningType-datadef-16522', 'BeregningType');
+		$this->addMapping('D16517', 'ArbeidsgiveravgiftBunnfradrag-datadef-16517', 'Bunnfradrag');
+		$this->addMapping('D5950', 'KommuneNummer-datadef-5950', 'CompanyMunicipality');
+		$this->addMapping('D5932', 'KommuneNavn-datadef-5932', 'CompanyMunicipalityName');
+		$this->addMapping('D3545', 'ArbeidsgiveravgiftSone-datadef-3545', 'Sone');
+		$this->addMapping('D6047', 'ArbeidsgiveravgiftUnder62ArGrunnlagKommune-datadef-6047', 'Under62ArGrunnlag');
+		$this->addMapping('D16509', 'ArbeidsgiveravgiftOver62ArGrunnlagKommune-datadef-16509', 'Over62ArGrunnlag');
+		$this->addMapping('D6046', 'ForskuddstrekkKommune-datadef-6046', 'Forskuddtrekk');
+		$this->addMapping('D16518', 'ArbeidsgiveravgiftUtenlandskGrunnlag-datadef-16518', '3.1a');
+		$this->addMapping('D6049', 'ArbeidsgiveravgiftUtenlandskArbeidstakerBergenet-datadef-6049', '3.1b');
+		$this->addMapping('D16519', 'AnsattUtenlandskManeder-datadef-16519', '3.2a');
+		$this->addMapping('D16520', 'ArbeidsgiveravgiftUtenlandskManedBeregnet-datadef-16520', '3.2b');
+		$this->addMapping('D16521', 'ArbeidsgiveravgiftEkstraGrunnlag-datadef-16521', '3.3a');
+		$this->addMapping('D6050', 'ArbeidsgiveravgiftEkstraBeregnet-datadef-6050', '3.3b');
+		$this->addMapping('D6051', 'ArbeidsgiveravgiftUnder62ArGrunnlag-datadef-6051', 'SumUnder62ArGrunnlag');
+		$this->addMapping('D16510', 'ArbeidsgiveravgiftOver62ArGrunnlag-datadef-16510', 'SumOver62ArGrunnlag');
+		$this->addMapping('D21169', 'ArbeidsgiveravgiftRestFribelop-datadef-21169', 'RestFribelop');
+		$this->addMapping('D223', 'ArbeidsgiveravgiftSkyldig-datadef-223', 'AvgiftSkyldig');
+		$this->addMapping('D16512', 'KIDnummerArbeidsgiveravgift-datadef-16512', 'KIDAvgift');
+		$this->addMapping('D2903', 'Forskuddstrekk-datadef-2903', 'Sum4.0');
+		$this->addMapping('D16511', 'KIDnummerForskuddstrekk-datadef-16511', 'KIDForskuddstrekk');
+        
+	}
+ }
+?>

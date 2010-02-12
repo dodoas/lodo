@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1161: Formuesverdi/eiendomsskattegrunnlag</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-762-4272.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-2496/Selskap-grp-417/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-2496/Kraftanlegget-grp-2499/AnleggNavn-datadef-2547" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1161 Beregning av nåverdi, av fremtidige utskiftningskostnader for  driftsmidler i kraftanlegg som har begrenset levetid - 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Andre offentlige myndigheters bruk av opplysninger i RF-1161  </p>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjema, RF-1161, helt eller delvis bli  benyttet også av andre offentlige organer som har hjemmel til å  innhente de samme
+                    opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om ev. samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller til  Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Kraftanlegg med samlet påstemplet merkeytelse 10 000 kVA eller mer.  </p>
+                <p>Skatteloven § 18-5/eigedomsskattelova § 8</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-2496">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2496/Selskap-grp-417">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Selskap</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2496/Selskap-grp-417/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2496/Selskap-grp-417/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kontoradresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2496/Selskap-grp-417/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2496/Selskap-grp-417/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2496/Selskap-grp-417/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2496/Regnskapsforer-grp-437">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Regnskapsfører</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2496/Regnskapsforer-grp-437/RegnskapsforerNavn-datadef-280">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn  </p>
+                            <p/>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2496/Regnskapsforer-grp-437/RegnskapsforerAdresse-datadef-281">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2496/Regnskapsforer-grp-437/RegnskapsforerPostnummer-datadef-6678">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2496/Regnskapsforer-grp-437/RegnskapsforerPoststed-datadef-6679">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2496/Kraftanlegget-grp-2499">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kraftanlegget</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2496/Kraftanlegget-grp-2499/AnleggLopenummer-datadef-19639">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Løpenummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2496/Kraftanlegget-grp-2499/AnleggNavn-datadef-2547">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2496/Kraftanlegget-grp-2499/AnleggKommune-datadef-2759">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommune</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2496/Kraftanlegget-grp-2499/AnleggKommunenummer-datadef-10352">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommunenr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2496/Kraftanlegget-grp-2499/KraftverkMerkeytelse-datadef-5929">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Samlet påstemplet merkeytelse i kraftverkets generatorer i kVA</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2496/Kraftanlegget-grp-2499/EVerkEierandel-datadef-2056">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Eierandel i kraftverket</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever to desimaler</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev to desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/DriftsmidlerMedAvskrivning-grp-427">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Driftsmidler med avskrivning over 67 år</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_DriftsmidlerMedAvskrivningHoy-grp-2762" nodeset="/Skjema/DriftsmidlerMedAvskrivning-grp-427/DriftsmidlerMedAvskrivningHoy-grp-2762">
+                    <xforms:group ref="/Skjema/DriftsmidlerMedAvskrivning-grp-427/DriftsmidlerMedAvskrivningHoy-grp-2762">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Driftsmidler med avskrivning over 67 år</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/DriftsmidlerMedAvskrivning-grp-427/DriftsmidlerMedAvskrivningHoy-grp-2762/DriftsmidlerAvskrivningstidOver67ArSpesifisertDriftsmiddel-datadef-13287">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Spesifiser</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerMedAvskrivning-grp-427/DriftsmidlerMedAvskrivningHoy-grp-2762/DriftsmidlerAvskrivningstidOver67ArKostnadSpesifisertDrMid-datadef-13288">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Investeringskostnad</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Ved nåverdiberegningen tas det utgangspunkt i investeringskostnaden.  Dette er nærmere regulert i forskrift til skatteloven § 18-5-9.  For  driftsmidler ervervet før 1. januar 1997 settes investeringskostnaden  lik
+                                    den verdien som er lagt til grunn i den skattemessige  åpningsbalansen pr 1. januar 1997, der kroneverdien oppjusteres med  konsumprisindeksen fra 1. januar 1997 til 1. januar 2006.  </p>
+                                <p>For driftsmidler ervervet etter 1. januar 1997 settes  investeringskostnaden lik sist observerte historiske  anskaffelseskostnad for det aktuelle driftsmidlet.  </p>
+                                <p>Anskaffelseskostnaden skal justeres med gjennomsnittlig endring i  konsumprisindeksen i perioden fra anskaffelsesåret til  takseringsåret.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerMedAvskrivning-grp-427/DriftsmidlerMedAvskrivningHoy-grp-2762/DriftsmidlerAvskrivningstidOver67ArLevetidSpesifisertDrfMi-datadef-13289">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Skattemessig levetid</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres den skattemessige levetiden, jf. skatteloven § 18-6 (1) og  forskriften § 18-5.  Skattemessig levertid for de ulike  driftsmiddelgrupper er forhåndsutfylt i skjemaet.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Skattemessig levetid = 67</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerMedAvskrivning-grp-427/DriftsmidlerMedAvskrivningHoy-grp-2762/DriftsmidlerAvskrivningstidOver67ArRestlevetidSpesDrm-datadef-13290">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Gjenstående levetid (>=40)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres gjenstående levertid for de driftsmidler som er i bruk i  kraftanlegget.  Gjenstående levetid skal som hovedregel settes til  skattemessig levetid (kolonne II) redusert med driftsmidlets  alder.  </p>
+                                <p>Likningsmyndighetene kan i særskilte tilfeller, dersom det påvises  tilstrekkelig grunnlag for det, beslutte å fastsette gjenstående  levetid på bakgrunn av befaring etter de ordinære reglene i  ligningsloven.  </p>
+                                <p>Driftsmidler som avskrives etter skatteloven § 18-6(1) a (lineær  avskrivning over 67 år), har en minste gjenstående levetid på 15 år,  jf. skatteloven § 18-5(4) fjerde punktum.  Det vil si at gjenstående  levetid
+                                    aldri kan settes lavere enn hhv. 40 år og 15 år for  driftsmidler i disse gruppene.  Minste gjenstående levetid for  driftsmidler i saldogruppe g og i er 10 år, jf. skatteloven § 18-5(4)  femte punktum.  For de
+                                    øvrige saldogrupper er det ikke fastsatt  minste gjenstående levetid.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerMedAvskrivning-grp-427/DriftsmidlerMedAvskrivningHoy-grp-2762/DriftsmidlerAvskrivningstidOver67ArNVSpesifisertDriftsmidde-datadef-13291">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nåverdi</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>I denne kolonnen vises nåverdien av femtidige utskiftningskostnader  for de enkelte driftsmiddelgrupper i kraftanlegget.  Ved beregningen  av nåverdien benyttes følgende formel:  </p>
+                                <p>       (n-t)  </p>
+                                <p>CO(1+r)  </p>
+                                <p>------------  </p>
+                                <p>     n  </p>
+                                <p>(1+r) -1  </p>
+                                <p>C 0 investeringskostnad (se kolonne 1), r = rente fastsatt i forskrift  med hjemmel i skatteloven § 18-5(9).  Finansdepartementet beregner og  kunngjør renten i januar 2006. n = skattemessig levetid (se kolonne
+                                    II), t = gjenstående levetid (se kolonne III).</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/DriftsmidlerMedAvskrivning-grp-427/DriftsmidlerAvskrivningstidOver67ArNaverdi-datadef-13292">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>17 Sum nåverdi for gruppen</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/DriftsmidlerMedAvskrivning-grp-428">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Driftsmidler med avskrivning over 40 år</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_DriftsmidlerMedAvskrivingLav-grp-2763" nodeset="/Skjema/DriftsmidlerMedAvskrivning-grp-428/DriftsmidlerMedAvskrivingLav-grp-2763">
+                    <xforms:group ref="/Skjema/DriftsmidlerMedAvskrivning-grp-428/DriftsmidlerMedAvskrivingLav-grp-2763">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Driftsmidler med avskrivning over 40 år</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/DriftsmidlerMedAvskrivning-grp-428/DriftsmidlerMedAvskrivingLav-grp-2763/DriftsmidlerAvskrivningstidOver40ArSpesifisertDriftsmiddel-datadef-13293">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Spesifiser</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerMedAvskrivning-grp-428/DriftsmidlerMedAvskrivingLav-grp-2763/DriftsmidlerAvskrivningstidOver40ArKostnadSpesifisertDrm-datadef-13294">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Investeringskostnad</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Ved nåverdiberegningen tas det utgangspunkt i investeringskostnaden.  Dette er nærmere regulert i forskrift til skatteloven § 18-5-9.  For  driftsmidler ervervet før 1. januar 1997 settes investeringskostnaden  lik
+                                    den verdien som er lagt til grunn i den skattemessige  åpningsbalansen pr 1. januar 1997, der kroneverdien oppjusteres med  konsumprisindeksen fra 1. januar 1997 til 1. januar 2006.  </p>
+                                <p>For driftsmidler ervervet etter 1. januar 1997 settes  investeringskostnaden lik sist observerte historiske  anskaffelseskostnad for det aktuelle driftsmidlet.  </p>
+                                <p>Anskaffelseskostnaden skal justeres med gjennomsnittlig endring i  konsumprisindeksen i perioden fra anskaffelsesåret til  takseringsåret.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerMedAvskrivning-grp-428/DriftsmidlerMedAvskrivingLav-grp-2763/DriftsmidlerAvskrivningstidOver40ArLevetidSpesifisertDrm-datadef-13295">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Skattemessig levetid</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres den skattemessige levetiden, jf. skatteloven § 18-6 (1) og  forskriften § 18-5.  Skattemessig levertid for de ulike  driftsmiddelgrupper er forhåndsutfylt i skjemaet.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Skattemessig levetid = 40</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerMedAvskrivning-grp-428/DriftsmidlerMedAvskrivingLav-grp-2763/DriftsmidlerAvskrivningstidOver40ArRestlevetidSpesDriftsmi-datadef-13296">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Gjenstående levetid (>=15)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres gjenstående levertid for de driftsmidler som er i bruk i  kraftanlegget.  Gjenstående levetid skal som hovedregel settes til  skattemessig levetid (kolonne II) redusert med driftsmidlets  alder.  </p>
+                                <p>Likningsmyndighetene kan i særskilte tilfeller, dersom det påvises  tilstrekkelig grunnlag for det, beslutte å fastsette gjenstående  levetid på bakgrunn av befaring etter de ordinære reglene i  ligningsloven.  </p>
+                                <p>Driftsmidler som avskrives etter skatteloven § 18-6(1) a (lineær  avskrivning over 67 år), har en minste gjenstående levetid på 15 år,  jf. skatteloven § 18-5(4) fjerde punktum.  Det vil si at gjenstående  levetid
+                                    aldri kan settes lavere enn hhv. 40 år og 15 år for  driftsmidler i disse gruppene.  Minste gjenstående levetid for  driftsmidler i saldogruppe g og i er 10 år, jf. skatteloven § 18-5(4)  femte punktum.  For de
+                                    øvrige saldogrupper er det ikke fastsatt  minste gjenstående levetid.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerMedAvskrivning-grp-428/DriftsmidlerMedAvskrivingLav-grp-2763/DriftsmidlerAvskrivningstidOver40ArNVSpesifisertDriftsmidde-datadef-13297">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nåverdi</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>I denne kolonnen vises nåverdien av femtidige utskiftningskostnader  for de enkelte driftsmiddelgrupper i kraftanlegget.  Ved beregningen  av nåverdien benyttes følgende formel:  </p>
+                                <p>       (n-t)  </p>
+                                <p>CO(1+r)  </p>
+                                <p>------------  </p>
+                                <p>     n  </p>
+                                <p>(1+r) -1  </p>
+                                <p>C 0 investeringskostnad (se kolonne 1), r = rente fastsatt i forskrift  med hjemmel i skatteloven § 18-5(9).  Finansdepartementet beregner og  kunngjør renten i januar 2006. n = skattemessig levetid (se kolonne
+                                    II), t = gjenstående levetid (se kolonne III).</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/DriftsmidlerMedAvskrivning-grp-428/DriftsmidlerAvskrivningstidOver40ArNaverdi-datadef-13298">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>27 Sum nåverdi for gruppen</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/DriftsmidlerISaldogruppeACOgD-grp-435">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Driftsmidler i saldogruppe a, c og d kan behandles samlet med  skattemessig levetid på 7 år</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_DriftsmidlerISaldogruppeACOgD-grp-2770" nodeset="/Skjema/DriftsmidlerISaldogruppeACOgD-grp-435/DriftsmidlerISaldogruppeACOgD-grp-2770">
+                    <xforms:group ref="/Skjema/DriftsmidlerISaldogruppeACOgD-grp-435/DriftsmidlerISaldogruppeACOgD-grp-2770">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Driftsmidler i saldogruppe a, c og d kan behandles samlet med  skattemessig levetid på 7 år</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeACOgD-grp-435/DriftsmidlerISaldogruppeACOgD-grp-2770/DriftsmidlerSaldogruppeABCDLevetid7ArSpesDriftsmid-datadef-13335">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Spesifiser</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeACOgD-grp-435/DriftsmidlerISaldogruppeACOgD-grp-2770/DriftsmidlerSaldogrABCDLevetid7ArKostnadSpesDriftsmid-datadef-13336">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Investeringskostnad</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Ved nåverdiberegningen tas det utgangspunkt i investeringskostnaden.  Dette er nærmere regulert i forskrift til skatteloven § 18-5-9.  For  driftsmidler ervervet før 1. januar 1997 settes investeringskostnaden  lik
+                                    den verdien som er lagt til grunn i den skattemessige  åpningsbalansen pr 1. januar 1997, der kroneverdien oppjusteres med  konsumprisindeksen fra 1. januar 1997 til 1. januar 2006.  </p>
+                                <p>For driftsmidler ervervet etter 1. januar 1997 settes  investeringskostnaden lik sist observerte historiske  anskaffelseskostnad for det aktuelle driftsmidlet.  </p>
+                                <p>Anskaffelseskostnaden skal justeres med gjennomsnittlig endring i  konsumprisindeksen i perioden fra anskaffelsesåret til  takseringsåret.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeACOgD-grp-435/DriftsmidlerISaldogruppeACOgD-grp-2770/DriftsmidlerSaldogruppeABCDLevetid7ArLevetidSpesDrm-datadef-13337">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Skattemessig levetid</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres den skattemessige levetiden, jf. skatteloven § 18-6 (1) og  forskriften § 18-5.  Skattemessig levertid for de ulike  driftsmiddelgrupper er forhåndsutfylt i skjemaet.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Skattemessig levetid = 7</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeACOgD-grp-435/DriftsmidlerISaldogruppeACOgD-grp-2770/DriftsmidlerSaldogruppeAbcdLevetid7ArRestlevetidSpesDrm-datadef-13338">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Gjenstående levetid</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres gjenstående levertid for de driftsmidler som er i bruk i  kraftanlegget.  Gjenstående levetid skal som hovedregel settes til  skattemessig levetid (kolonne II) redusert med driftsmidlets  alder.  </p>
+                                <p>Likningsmyndighetene kan i særskilte tilfeller, dersom det påvises  tilstrekkelig grunnlag for det, beslutte å fastsette gjenstående  levetid på bakgrunn av befaring etter de ordinære reglene i  ligningsloven.  </p>
+                                <p>Driftsmidler som avskrives etter skatteloven § 18-6(1) a (lineær  avskrivning over 67 år), har en minste gjenstående levetid på 15 år,  jf. skatteloven § 18-5(4) fjerde punktum.  Det vil si at gjenstående  levetid
+                                    aldri kan settes lavere enn hhv. 40 år og 15 år for  driftsmidler i disse gruppene.  Minste gjenstående levetid for  driftsmidler i saldogruppe g og i er 10 år, jf. skatteloven § 18-5(4)  femte punktum.  For de
+                                    øvrige saldogrupper er det ikke fastsatt  minste gjenstående levetid.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeACOgD-grp-435/DriftsmidlerISaldogruppeACOgD-grp-2770/DriftsmidlerSaldogruppeAbcdLevetid7ArNaverdiSpesDrm-datadef-13339">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nåverdi</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>I denne kolonnen vises nåverdien av femtidige utskiftningskostnader  for de enkelte driftsmiddelgrupper i kraftanlegget.  Ved beregningen  av nåverdien benyttes følgende formel:  </p>
+                                <p>       (n-t)  </p>
+                                <p>CO(1+r)  </p>
+                                <p>------------  </p>
+                                <p>     n  </p>
+                                <p>(1+r) -1  </p>
+                                <p>C 0 investeringskostnad (se kolonne 1), r = rente fastsatt i forskrift  med hjemmel i skatteloven § 18-5(9).  Finansdepartementet beregner og  kunngjør renten i januar 2006. n = skattemessig levetid (se kolonne
+                                    II), t = gjenstående levetid (se kolonne III).</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeACOgD-grp-435/DriftsmidlerSaldogruppeAbcdLevetid7ArNaverdi-datadef-13340">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>37 Sum nåverdi for gruppen</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/DriftsmidlerISaldogruppeA-grp-429">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Driftsmidler i saldogruppe a</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_DriftsmidlerISaldogruppeA-grp-2764" nodeset="/Skjema/DriftsmidlerISaldogruppeA-grp-429/DriftsmidlerISaldogruppeA-grp-2764">
+                    <xforms:group ref="/Skjema/DriftsmidlerISaldogruppeA-grp-429/DriftsmidlerISaldogruppeA-grp-2764">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Driftsmidler i saldogruppe a</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeA-grp-429/DriftsmidlerISaldogruppeA-grp-2764/DriftsmidlerSaldogruppeABSpesifisertDriftsmiddel-datadef-13299">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Spesifiser</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeA-grp-429/DriftsmidlerISaldogruppeA-grp-2764/DriftsmidlerSaldogruppeABKostnadSpesifisertDriftsmiddel-datadef-13300">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Investeringskostnad</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Ved nåverdiberegningen tas det utgangspunkt i investeringskostnaden.  Dette er nærmere regulert i forskrift til skatteloven § 18-5-9.  For  driftsmidler ervervet før 1. januar 1997 settes investeringskostnaden  lik
+                                    den verdien som er lagt til grunn i den skattemessige  åpningsbalansen pr 1. januar 1997, der kroneverdien oppjusteres med  konsumprisindeksen fra 1. januar 1997 til 1. januar 2006.  </p>
+                                <p>For driftsmidler ervervet etter 1. januar 1997 settes  investeringskostnaden lik sist observerte historiske  anskaffelseskostnad for det aktuelle driftsmidlet.  </p>
+                                <p>Anskaffelseskostnaden skal justeres med gjennomsnittlig endring i  konsumprisindeksen i perioden fra anskaffelsesåret til  takseringsåret.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeA-grp-429/DriftsmidlerISaldogruppeA-grp-2764/DriftsmidlerSaldogruppeABLevetidSpesifisertDriftsmiddel-datadef-13301">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Skattemessig levetid</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres den skattemessige levetiden, jf. skatteloven § 18-6 (1) og  forskriften § 18-5.  Skattemessig levertid for de ulike  driftsmiddelgrupper er forhåndsutfylt i skjemaet.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Skattemessig levetid = 5</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeA-grp-429/DriftsmidlerISaldogruppeA-grp-2764/DriftsmidlerSaldogruppeABRestlevetidSpesDriftsmiddel-datadef-13302">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Gjenstående levetid</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres gjenstående levertid for de driftsmidler som er i bruk i  kraftanlegget.  Gjenstående levetid skal som hovedregel settes til  skattemessig levetid (kolonne II) redusert med driftsmidlets  alder.  </p>
+                                <p>Likningsmyndighetene kan i særskilte tilfeller, dersom det påvises  tilstrekkelig grunnlag for det, beslutte å fastsette gjenstående  levetid på bakgrunn av befaring etter de ordinære reglene i  ligningsloven.  </p>
+                                <p>Driftsmidler som avskrives etter skatteloven § 18-6(1) a (lineær  avskrivning over 67 år), har en minste gjenstående levetid på 15 år,  jf. skatteloven § 18-5(4) fjerde punktum.  Det vil si at gjenstående  levetid
+                                    aldri kan settes lavere enn hhv. 40 år og 15 år for  driftsmidler i disse gruppene.  Minste gjenstående levetid for  driftsmidler i saldogruppe g og i er 10 år, jf. skatteloven § 18-5(4)  femte punktum.  For de
+                                    øvrige saldogrupper er det ikke fastsatt  minste gjenstående levetid.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeA-grp-429/DriftsmidlerISaldogruppeA-grp-2764/DriftsmidlerSaldogruppeABNVSpesifisertDriftsmiddel-datadef-13303">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nåverdi</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>I denne kolonnen vises nåverdien av femtidige utskiftningskostnader  for de enkelte driftsmiddelgrupper i kraftanlegget.  Ved beregningen  av nåverdien benyttes følgende formel:  </p>
+                                <p>       (n-t)  </p>
+                                <p>CO(1+r)  </p>
+                                <p>------------  </p>
+                                <p>     n  </p>
+                                <p>(1+r) -1  </p>
+                                <p>C 0 investeringskostnad (se kolonne 1), r = rente fastsatt i forskrift  med hjemmel i skatteloven § 18-5(9).  Finansdepartementet beregner og  kunngjør renten i januar 2006. n = skattemessig levetid (se kolonne
+                                    II), t = gjenstående levetid (se kolonne III).</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeA-grp-429/DriftsmidlerSaldogruppeABNaverdi-datadef-13304">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>47 Sum nåverdi for gruppen</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/DriftsmidlerISaldogruppeC-grp-430">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Driftsmidler i saldogruppe c</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_DriftsmidlerISaldogruppeC-grp-2765" nodeset="/Skjema/DriftsmidlerISaldogruppeC-grp-430/DriftsmidlerISaldogruppeC-grp-2765">
+                    <xforms:group ref="/Skjema/DriftsmidlerISaldogruppeC-grp-430/DriftsmidlerISaldogruppeC-grp-2765">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Driftsmidler i saldogruppe c</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeC-grp-430/DriftsmidlerISaldogruppeC-grp-2765/DriftsmidlerSaldogruppeCSpesifisertDriftsmiddel-datadef-13305">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Spesifiser</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeC-grp-430/DriftsmidlerISaldogruppeC-grp-2765/DriftsmidlerSaldogruppeCKostnadSpesifisertDriftsmiddel-datadef-13306">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Investeringskostnad</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Ved nåverdiberegningen tas det utgangspunkt i investeringskostnaden.  Dette er nærmere regulert i forskrift til skatteloven § 18-5-9.  For  driftsmidler ervervet før 1. januar 1997 settes investeringskostnaden  lik
+                                    den verdien som er lagt til grunn i den skattemessige  åpningsbalansen pr 1. januar 1997, der kroneverdien oppjusteres med  konsumprisindeksen fra 1. januar 1997 til 1. januar 2006.  </p>
+                                <p>For driftsmidler ervervet etter 1. januar 1997 settes  investeringskostnaden lik sist observerte historiske  anskaffelseskostnad for det aktuelle driftsmidlet.  </p>
+                                <p>Anskaffelseskostnaden skal justeres med gjennomsnittlig endring i  konsumprisindeksen i perioden fra anskaffelsesåret til  takseringsåret.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeC-grp-430/DriftsmidlerISaldogruppeC-grp-2765/DriftsmidlerSaldogruppeCLevetidSpesifisertDriftsmiddel-datadef-13307">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Skattemessig levetid</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres den skattemessige levetiden, jf. skatteloven § 18-6 (1) og  forskriften § 18-5.  Skattemessig levertid for de ulike  driftsmiddelgrupper er forhåndsutfylt i skjemaet.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Skattemessig levetid = 7</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeC-grp-430/DriftsmidlerISaldogruppeC-grp-2765/DriftsmidlerSaldogruppeCRestlevetidSpesDriftsmiddel-datadef-13308">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Gjenstående levetid</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres gjenstående levertid for de driftsmidler som er i bruk i  kraftanlegget.  Gjenstående levetid skal som hovedregel settes til  skattemessig levetid (kolonne II) redusert med driftsmidlets  alder.  </p>
+                                <p>Likningsmyndighetene kan i særskilte tilfeller, dersom det påvises  tilstrekkelig grunnlag for det, beslutte å fastsette gjenstående  levetid på bakgrunn av befaring etter de ordinære reglene i  ligningsloven.  </p>
+                                <p>Driftsmidler som avskrives etter skatteloven § 18-6(1) a (lineær  avskrivning over 67 år), har en minste gjenstående levetid på 15 år,  jf. skatteloven § 18-5(4) fjerde punktum.  Det vil si at gjenstående  levetid
+                                    aldri kan settes lavere enn hhv. 40 år og 15 år for  driftsmidler i disse gruppene.  Minste gjenstående levetid for  driftsmidler i saldogruppe g og i er 10 år, jf. skatteloven § 18-5(4)  femte punktum.  For de
+                                    øvrige saldogrupper er det ikke fastsatt  minste gjenstående levetid.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeC-grp-430/DriftsmidlerISaldogruppeC-grp-2765/DriftsmidlerSaldogruppeCNVSpesifisertDriftsmiddel-datadef-13309">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nåverdi</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>I denne kolonnen vises nåverdien av femtidige utskiftningskostnader  for de enkelte driftsmiddelgrupper i kraftanlegget.  Ved beregningen  av nåverdien benyttes følgende formel:  </p>
+                                <p>       (n-t)  </p>
+                                <p>CO(1+r)  </p>
+                                <p>------------  </p>
+                                <p>     n  </p>
+                                <p>(1+r) -1  </p>
+                                <p>C 0 investeringskostnad (se kolonne 1), r = rente fastsatt i forskrift  med hjemmel i skatteloven § 18-5(9).  Finansdepartementet beregner og  kunngjør renten i januar 2006. n = skattemessig levetid (se kolonne
+                                    II), t = gjenstående levetid (se kolonne III).</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeC-grp-430/DriftsmidlerSaldogruppeCNaverdi-datadef-13310">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>57 Sum nåverdi for gruppen</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/DriftsmidlerISaldogruppeDOgE-grp-431">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Driftsmidler i saldogruppe d og e</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_DriftsmidlerSaldogruppeDOgE-grp-2766" nodeset="/Skjema/DriftsmidlerISaldogruppeDOgE-grp-431/DriftsmidlerSaldogruppeDOgE-grp-2766">
+                    <xforms:group ref="/Skjema/DriftsmidlerISaldogruppeDOgE-grp-431/DriftsmidlerSaldogruppeDOgE-grp-2766">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Driftsmidler i saldogruppe d og e</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeDOgE-grp-431/DriftsmidlerSaldogruppeDOgE-grp-2766/DriftsmidlerSaldogruppeDESpesifisertDriftsmiddel-datadef-13311">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Spesifiser</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeDOgE-grp-431/DriftsmidlerSaldogruppeDOgE-grp-2766/DriftsmidlerSaldogruppeDEKostnadSpesifisertDriftsmiddel-datadef-13312">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Investeringskostnad</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Ved nåverdiberegningen tas det utgangspunkt i investeringskostnaden.  Dette er nærmere regulert i forskrift til skatteloven § 18-5-9.  For  driftsmidler ervervet før 1. januar 1997 settes investeringskostnaden  lik
+                                    den verdien som er lagt til grunn i den skattemessige  åpningsbalansen pr 1. januar 1997, der kroneverdien oppjusteres med  konsumprisindeksen fra 1. januar 1997 til 1. januar 2006.  </p>
+                                <p>For driftsmidler ervervet etter 1. januar 1997 settes  investeringskostnaden lik sist observerte historiske  anskaffelseskostnad for det aktuelle driftsmidlet.  </p>
+                                <p>Anskaffelseskostnaden skal justeres med gjennomsnittlig endring i  konsumprisindeksen i perioden fra anskaffelsesåret til  takseringsåret.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeDOgE-grp-431/DriftsmidlerSaldogruppeDOgE-grp-2766/DriftsmidlerSaldogruppeDELevetidSpesifisertDriftsmiddel-datadef-13313">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Skattemessig levetid</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres den skattemessige levetiden, jf. skatteloven § 18-6 (1) og  forskriften § 18-5.  Skattemessig levertid for de ulike  driftsmiddelgrupper er forhåndsutfylt i skjemaet.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Skattemessig levetid = 8</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeDOgE-grp-431/DriftsmidlerSaldogruppeDOgE-grp-2766/DriftsmidlerSaldogruppeDERestlevetidSpesDriftsmiddel-datadef-13314">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Gjenstående levetid  </p>
+                                <p/>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres gjenstående levertid for de driftsmidler som er i bruk i  kraftanlegget.  Gjenstående levetid skal som hovedregel settes til  skattemessig levetid (kolonne II) redusert med driftsmidlets  alder.  </p>
+                                <p>Likningsmyndighetene kan i særskilte tilfeller, dersom det påvises  tilstrekkelig grunnlag for det, beslutte å fastsette gjenstående  levetid på bakgrunn av befaring etter de ordinære reglene i  ligningsloven.  </p>
+                                <p>Driftsmidler som avskrives etter skatteloven § 18-6(1) a (lineær  avskrivning over 67 år), har en minste gjenstående levetid på 15 år,  jf. skatteloven § 18-5(4) fjerde punktum.  Det vil si at gjenstående  levetid
+                                    aldri kan settes lavere enn hhv. 40 år og 15 år for  driftsmidler i disse gruppene.  Minste gjenstående levetid for  driftsmidler i saldogruppe g og i er 10 år, jf. skatteloven § 18-5(4)  femte punktum.  For de
+                                    øvrige saldogrupper er det ikke fastsatt  minste gjenstående levetid.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeDOgE-grp-431/DriftsmidlerSaldogruppeDOgE-grp-2766/DriftsmidlerSaldogruppeDENVSpesifisertDriftsmiddel-datadef-13315">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nåverdi</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>I denne kolonnen vises nåverdien av femtidige utskiftningskostnader  for de enkelte driftsmiddelgrupper i kraftanlegget.  Ved beregningen  av nåverdien benyttes følgende formel:  </p>
+                                <p>       (n-t)  </p>
+                                <p>CO(1+r)  </p>
+                                <p>------------  </p>
+                                <p>     n  </p>
+                                <p>(1+r) -1  </p>
+                                <p>C 0 investeringskostnad (se kolonne 1), r = rente fastsatt i forskrift  med hjemmel i skatteloven § 18-5(9).  Finansdepartementet beregner og  kunngjør renten i januar 2006. n = skattemessig levetid (se kolonne
+                                    II), t = gjenstående levetid (se kolonne III).</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeDOgE-grp-431/DriftsmidlerSaldogruppeDENaverdi-datadef-13316">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>67 Sum nåverdi for gruppen</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/DriftsmidlerISaldogruppeFGHOgI-grp-5006">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Driftsmidler i saldogruppe f,g,h og i</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_DriftsmidlerISaldogruppeFGHOgI-grp-5007" nodeset="/Skjema/DriftsmidlerISaldogruppeFGHOgI-grp-5006/DriftsmidlerISaldogruppeFGHOgI-grp-5007">
+                    <xforms:group ref="/Skjema/DriftsmidlerISaldogruppeFGHOgI-grp-5006/DriftsmidlerISaldogruppeFGHOgI-grp-5007">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Driftsmidler i saldogruppe f,g,h og i</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeFGHOgI-grp-5006/DriftsmidlerISaldogruppeFGHOgI-grp-5007/DriftsmidlerSaldogruppeFghiSpesifisertDriftsmiddel-datadef-22288">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Spesifiser</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeFGHOgI-grp-5006/DriftsmidlerISaldogruppeFGHOgI-grp-5007/DriftsmidlerSaldogruppeFghiKostnadSpesifisertDriftsmiddel-datadef-22289">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Investeringskostnad</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Ved nåverdiberegningen tas det utgangspunkt i investeringskostnaden.  Dette er nærmere regulert i forskrift til skatteloven § 18-5-9.  For  driftsmidler ervervet før 1. januar 1997 settes investeringskostnaden  lik
+                                    den verdien som er lagt til grunn i den skattemessige  åpningsbalansen pr 1. januar 1997, der kroneverdien oppjusteres med  konsumprisindeksen fra 1. januar 1997 til 1. januar 2006.  </p>
+                                <p>For driftsmidler ervervet etter 1. januar 1997 settes  investeringskostnaden lik sist observerte historiske  anskaffelseskostnad for det aktuelle driftsmidlet.  </p>
+                                <p>Anskaffelseskostnaden skal justeres med gjennomsnittlig endring i  konsumprisindeksen i perioden fra anskaffelsesåret til  takseringsåret.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeFGHOgI-grp-5006/DriftsmidlerISaldogruppeFGHOgI-grp-5007/DriftsmidlerSaldogruppeFghiLevetidSpesifisertDriftsmiddel-datadef-22290">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Skattemessig levetid</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres den skattemessige levetiden, jf. skatteloven § 18-6 (1) og  forskriften § 18-5.  Skattemessig levertid for de ulike  driftsmiddelgrupper er forhåndsutfylt i skjemaet.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Skattemessig levetid = 14/31/38/67</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeFGHOgI-grp-5006/DriftsmidlerISaldogruppeFGHOgI-grp-5007/DriftsmidlerSaldogruppeFghiRestlevetidSpesifisertDriftsmiddel-datadef-22291">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Gjenstående levetid</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres gjenstående levertid for de driftsmidler som er i bruk i  kraftanlegget.  Gjenstående levetid skal som hovedregel settes til  skattemessig levetid (kolonne II) redusert med driftsmidlets  alder.  </p>
+                                <p>Likningsmyndighetene kan i særskilte tilfeller, dersom det påvises  tilstrekkelig grunnlag for det, beslutte å fastsette gjenstående  levetid på bakgrunn av befaring etter de ordinære reglene i  ligningsloven.  </p>
+                                <p>Driftsmidler som avskrives etter skatteloven § 18-6(1) a (lineær  avskrivning over 67 år), har en minste gjenstående levetid på 15 år,  jf. skatteloven § 18-5(4) fjerde punktum.  Det vil si at gjenstående  levetid
+                                    aldri kan settes lavere enn hhv. 40 år og 15 år for  driftsmidler i disse gruppene.  Minste gjenstående levetid for  driftsmidler i saldogruppe g og i er 10 år, jf. skatteloven § 18-5(4)  femte punktum.  For de
+                                    øvrige saldogrupper er det ikke fastsatt  minste gjenstående levetid.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeFGHOgI-grp-5006/DriftsmidlerISaldogruppeFGHOgI-grp-5007/DriftsmidlerSaldogruppeFghiNaverdiSpesifisertDriftsmiddel-datadef-22292">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nåverdi</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>I denne kolonnen vises nåverdien av femtidige utskiftningskostnader  for de enkelte driftsmiddelgrupper i kraftanlegget.  Ved beregningen  av nåverdien benyttes følgende formel:  </p>
+                                <p>       (n-t)  </p>
+                                <p>CO(1+r)  </p>
+                                <p>------------  </p>
+                                <p>     n  </p>
+                                <p>(1+r) -1  </p>
+                                <p>C 0 investeringskostnad (se kolonne 1), r = rente fastsatt i forskrift  med hjemmel i skatteloven § 18-5(9).  Finansdepartementet beregner og  kunngjør renten i januar 2006. n = skattemessig levetid (se kolonne
+                                    II), t = gjenstående levetid (se kolonne III).</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeFGHOgI-grp-5006/DriftsmidlerSaldogruppeFghiNaverdi-datadef-22293">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>77 Nåverdi for gruppen</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/DriftsmidlerISaldogruppeFGHOgI-grp-5006/Fradrag-datadef-2719">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>80 Sum beregnet fradrag for nåverdien av fremtidige  utskiftningskostnader. Sum av postene 17, 27, 47, 57, 67 og 77. Eller  post 37 i stedet for postene 47, 57 og den andel av post 67 som  saldogruppe d representerer.
+                            Overføres RF-1153 post 361.</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres summen av alle nåverdiberegningene.  Dette beløpet overføres  til RF-1153 post 361, og inngår i beregningen av formuesverdien.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

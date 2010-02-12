@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1206: Oppgave over avgitt og mottatt konsernbidrag</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1022-4424.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1206  Oppgave over avgitt og mottatt konsernbidrag 2005</p>
+            </xforms:caption>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-5085">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Selskap som har avgitt eller mottatt konsernbidrag for inntektsåret  2005 skal fylle ut skjema RF-1206 og legge dette ved selvangivelsen  (RF-1028). Skjemaet er fastsatt i medhold av ligningslovens§ 4-4  nr.5.  </p>
+                    <p/>
+                    <p>Merknader til utfylling av de enkelte poster:  </p>
+                    <p>Innledningsvis fyller skattyter ut sitt navn og organisasjonsnummer.  Totalt avgitt konsernbidrag fra selskapet, henholdsvis mottatt  konsernbidrag (med og uten skattemessig virkning) skal angis i  postene øverst i skjemaet.  </p>
+                    <p>Skjemaet er delt i to - opplysninger om avgitt og mottatt  konsernbidrag.  </p>
+                    <p>Det skal fylles ut organisasjonsnummer og navn på selskap  konsernbidrag er avgitt til/mottatt fra.  </p>
+                    <p>Det må krysses av på spørsmålet om det foreligger  stemmerettsbegrensninger i noen av selskapene. Hvis ja må det gis  nærmere opplysninger om stemmerettsbegrensningene i feltet ved siden  av. I posten gitt til selskap/mottatt
+                        fra selskap skal det gis  opplysninger om hvilket beløp som er ytet, henholdsvis mottatt, i  konsernbidrag. Skill konsernbidrag som er avgitt uten skattemessig  virkning fra konsernbidrag med skattemessig virkning.  </p>
+                    <p>I feltet &lt;&lt;Hvordan er konserntilknytningen mellom giver og mottaker>>  må det fremgå av opplysningene at giver og mottaker er i et slikt  konsernforhold som hjemler konsernbidrag. Det må fremgå av  opplysningene at
+                        konsernbidraget er ytet mellom aksjeselskap eller  likestilte selskap som begge er eiet direkte eller indirekte med mer  enn 90% av konsernspissen. Det nå oppgis opplysninger om selskapets  navn, organisasjonsnummer og
+                        eierandel - det er bare nødvendig å gi  disse opplysningene for selskaper som det må vises til for å vise at  skattekonserntilknytningen tilfredsstiller vilkårene i sktl. § 10-4.  Avslutningsvis skal det også spesifiseres
+                        hvordan bidraget-(ene) er  ført fra andre skjema. Her oppgis RF-nummer på skjemaet, postnummer  samt beløp.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-5085/EnhetNavn-datadef-1">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Navn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-5085/EnhetOrganisasjonsnummer-datadef-18">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Organisasjonsnummer</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-5085/KonsernbidragAvgitt-datadef-2632">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Totalt avgitt konsernbidrag fra selskapet med og uten skattemessig  virkning</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-5085/KonsernbidragMottatt-datadef-2209">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Totalt mottatt konservbidrag fra alle selskap med og uten skattemessig  virkning</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-5085/Konsernspiss-grp-5613">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Konsernspiss</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5085/Konsernspiss-grp-5613/KonsernspissNorskOrganisasjonsnummerKonsernbidragoppgave-datadef-24518">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5085/Konsernspiss-grp-5613/KonsernspissNorskNavnKonsernbidragsoppgave-datadef-24519">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/AvgittKonsernbidrag-grp-5086">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Avgitt konsernbidrag</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_UdeltTilSelskap-grp-5087" nodeset="/Skjema/AvgittKonsernbidrag-grp-5086/UdeltTilSelskap-grp-5087">
+                    <xforms:group ref="/Skjema/AvgittKonsernbidrag-grp-5086/UdeltTilSelskap-grp-5087">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Utdelt til selskap</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/AvgittKonsernbidrag-grp-5086/UdeltTilSelskap-grp-5087/MottakerKonsernbidragOrganisasjonsnummer-datadef-22374">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Organisasjonsnummer</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AvgittKonsernbidrag-grp-5086/UdeltTilSelskap-grp-5087/MottakerKonsernbidragNavn-datadef-22375">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Navn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/AvgittKonsernbidrag-grp-5086/UdeltTilSelskap-grp-5087/MottakerKonsernbidragStemmerettsbegrensninger-datadef-22376">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>Ja</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Yes</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Nei</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>No</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Stemmerettsbegrensninger</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/AvgittKonsernbidrag-grp-5086/UdeltTilSelskap-grp-5087/MottakerKonsernbidragStemmerettsbegrensningerBeskrivelse-datadef-22377">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Derson ja gi opplysninger</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AvgittKonsernbidrag-grp-5086/UdeltTilSelskap-grp-5087/KonsernbidragMedSkattemessigVirkningAvgitt-datadef-22378">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utdeling til selskapet med skattemessig virkning</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AvgittKonsernbidrag-grp-5086/UdeltTilSelskap-grp-5087/KonsernbidragUtenSkattemessigVirkningAvgitt-datadef-22379">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utdeling til selskapet uten skattemessig virkning</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:repeat id="repeat_ForingAvKonsernbidragetISkjemaene-grp-5089" nodeset="/Skjema/AvgittKonsernbidrag-grp-5086/ForingAvKonsernbidragetISkjemaene-grp-5089">
+                    <xforms:group ref="/Skjema/AvgittKonsernbidrag-grp-5086/ForingAvKonsernbidragetISkjemaene-grp-5089">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Hvordan er konsernbidraget ført i skjemaene?</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Her gis opplysninger om føringene i skjemaene med skjema (RF-nummer),  postnummer og beløp</p>
+                        </xforms:hint>
+                        <xforms:input ref="/Skjema/AvgittKonsernbidrag-grp-5086/ForingAvKonsernbidragetISkjemaene-grp-5089/KonsernbidragAvgittSpesifisertSkjemaSkjemanummer-datadef-24890">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Skjema (RF-nummer)</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AvgittKonsernbidrag-grp-5086/ForingAvKonsernbidragetISkjemaene-grp-5089/KonsernbidragAvgittSpesifisertSkjemaSkjemapostnummer-datadef-24889">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Postnummer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AvgittKonsernbidrag-grp-5086/ForingAvKonsernbidragetISkjemaene-grp-5089/KonsernbidragAvgittSpesifisertSkjemaBelop-datadef-24888">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beløp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/MottattKonsernbidrag-grp-5090">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Mottatt konsernbidrag</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Skatteplikt for morselskapet  </p>
+                    <p>Konsernbidrag anses som skattepliktig inntekt for mottakende selskap.  Den del av konsernbidraget som giverselskapet ikke får fradrag for  fordi det overstiger den ellers skattepliktige alminnelige inntekt,  er ikke
+                        skattepliktig for mottakerselskapet. Bidraget anses som  skattepliktig inntekt samme inntektsår som det er fradragsberettiget  for giverselskapet.</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_MottattFraSelskap-grp-5091" nodeset="/Skjema/MottattKonsernbidrag-grp-5090/MottattFraSelskap-grp-5091">
+                    <xforms:group ref="/Skjema/MottattKonsernbidrag-grp-5090/MottattFraSelskap-grp-5091">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Mottatt fra selskap</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/MottattKonsernbidrag-grp-5090/MottattFraSelskap-grp-5091/AvgiverKonsernbidragOrganisasjonsnummer-datadef-22391">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Organisasjonsnummer</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MottattKonsernbidrag-grp-5090/MottattFraSelskap-grp-5091/AvgiverKonsernbidragNavn-datadef-22392">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Navn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/MottattKonsernbidrag-grp-5090/MottattFraSelskap-grp-5091/AvgiverKonsernbidragStemmerettsbegrensninger-datadef-22393">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>Ja</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Yes</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Nei</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>No</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Stemmerettsbegrensninger</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/MottattKonsernbidrag-grp-5090/MottattFraSelskap-grp-5091/AvgiverKonsernbidragStemmerettsbegrensningerBeskrivelse-datadef-22394">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Dersom ja gi opplysninger</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MottattKonsernbidrag-grp-5090/MottattFraSelskap-grp-5091/KonsernbidragMedSkattemessigVirkningMottatt-datadef-22395">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utdeling fra selskapet med skattemessig virkning</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MottattKonsernbidrag-grp-5090/MottattFraSelskap-grp-5091/KonsernbidragUtenSkattemessigVirkningMottatt-datadef-22396">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utdeling fra selskapet uten skattemessig virkning</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:repeat id="repeat_ForingISkjemaene-grp-5093" nodeset="/Skjema/MottattKonsernbidrag-grp-5090/ForingISkjemaene-grp-5093">
+                    <xforms:group ref="/Skjema/MottattKonsernbidrag-grp-5090/ForingISkjemaene-grp-5093">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Hvordan er konsernbidraget ført i skjemaene?</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Her gis opplysninger om føringen i skjemaene med skjema (RF-nummer),  postnummer og beløp.</p>
+                        </xforms:hint>
+                        <xforms:input ref="/Skjema/MottattKonsernbidrag-grp-5090/ForingISkjemaene-grp-5093/KonsernbidragMotattSpesifisertSkjemaSkjemanummer-datadef-24887">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Skjema (RF-nummer)</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MottattKonsernbidrag-grp-5090/ForingISkjemaene-grp-5093/KonsernbidragMottattSpesifisertSkjemaSkjemapostnummer-datadef-24886">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Postnummer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/MottattKonsernbidrag-grp-5090/ForingISkjemaene-grp-5093/KonsernbidragMottattSpesifisertSkjemaBelop-datadef-24885">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beløp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

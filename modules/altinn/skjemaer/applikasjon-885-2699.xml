@@ -1,0 +1,1018 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RA-0384-JB: Lønnsstatistikk for ansatte i finanstjenester per 1. september</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-885-2700.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/Enhet-grp-1730"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/Enhet-grp-1730/OppgaveInnsendelseFrist-datadef-16296"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/Enhet-grp-1730/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/Enhet-grp-1730/EnhetOrganisasjonsnummer-datadef-18"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/Enhet-grp-1730/EnhetAdresse-datadef-15"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/Enhet-grp-1730/EnhetPostnummer-datadef-6673"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/Enhet-grp-1730/EnhetPoststed-datadef-6674"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/Bedrift-grp-1739"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/Bedrift-grp-1739/BedriftNavn-datadef-336"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/Bedrift-grp-1739/BedriftOrganisasjonsnummer-datadef-19"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/Bedrift-grp-1739/BedriftAvdeling-datadef-15448"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/Bedrift-grp-1739/BedriftAdresse-datadef-319"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/Bedrift-grp-1739/BedriftPostnummer-datadef-8908"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/Bedrift-grp-1739/BedriftPoststed-datadef-8909"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/FasteOpplysninger-grp-1742/KommuneNummer-datadef-5950"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/FasteOpplysninger-grp-1742/BedriftNACEKode-datadef-6186"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/FasteOpplysninger-grp-1742/BedriftSysselsatte-datadef-16294"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/FasteOpplysninger-grp-1742/BedriftAntall-datadef-8587"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/FasteOpplysninger-grp-1742/BedriftType-datadef-13220"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/FasteOpplysninger-grp-1742/EnhetArbeidsgiverforeningKode-datadef-16507"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/FasteOpplysninger-grp-1742/Malform-datadef-2736" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2072/FasteOpplysninger-grp-1742/SkjemaLeveringsform-datadef-16508"/>
+            <xforms:bind ref="/Skjema/LonnsopplysningerJJBJF-grp-2254/Individopplysninger-grp-2255/AnsattFodselsnummerSpesifisertAnsatt-datadef-11821" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RA-0384-JB. Lønnsstatistikk for ansatte per 1. september</p>
+            </xforms:caption>
+            <xforms:caption brreg:lang="NON">
+                <p>RA-0384-JB. Lønnsstatistikk for tilsette per 1. september</p>
+            </xforms:caption>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-2072">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2072/Enhet-grp-1730">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Enhet</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Eining</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/Enhet-grp-1730/OppgaveInnsendelseFrist-datadef-16296">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Innsendelsesfrist</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Innsendingsfrist</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/Enhet-grp-1730/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/Enhet-grp-1730/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Enhetens organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnummeret til eininga</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/Enhet-grp-1730/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/Enhet-grp-1730/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/Enhet-grp-1730/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2072/Bedrift-grp-1739">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Bedrift</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Bedrift</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/Bedrift-grp-1739/BedriftNavn-datadef-336">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/Bedrift-grp-1739/BedriftOrganisasjonsnummer-datadef-19">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bedriftens organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Bedrifta sitt organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/Bedrift-grp-1739/BedriftAvdeling-datadef-15448">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Avdeling</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Avdeling</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/Bedrift-grp-1739/BedriftAdresse-datadef-319">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/Bedrift-grp-1739/BedriftPostnummer-datadef-8908">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/Bedrift-grp-1739/BedriftPoststed-datadef-8909">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2072/OffisiellEPost-grp-1748">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Foretakets offisielle e-postadresse</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Føretaket si offisielle e-postadresse</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/OffisiellEPost-grp-1748/EnhetEPost-datadef-5963">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Foretakets offisielle e-postadresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Ver vennleg å fylle inn føretaket si offisielle e-postadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2072/Kontaktperson-grp-1752">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Forespørsler fra Statistisk sentralbyrå kan rettes til</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Spørsmål frå Statistisk sentralbyrå kan rettast til</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/Kontaktperson-grp-1752/KontaktpersonNavn-datadef-2">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/Kontaktperson-grp-1752/KontaktpersonTelefonnummer-datadef-3">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefon</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Telefon</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/Kontaktperson-grp-1752/KontaktpersonTelefaxnummer-datadef-324">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefaks</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Telefaks</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/Kontaktperson-grp-1752/KontaktpersonEPost-datadef-2876">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>E-postadresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>E-postadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2072/FasteOpplysninger-grp-1742">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Faste opplysninger</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Faste opplysingar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/FasteOpplysninger-grp-1742/KommuneNummer-datadef-5950">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommunenummer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kommunenummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/FasteOpplysninger-grp-1742/BedriftNACEKode-datadef-6186">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bedriftens NACE-kode</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Bedrifta sin NACE-kode</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/FasteOpplysninger-grp-1742/BedriftSysselsatte-datadef-16294">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall sysselsatte i bedriften</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Talet på sysselsette i bedrifta</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/FasteOpplysninger-grp-1742/BedriftAntall-datadef-8587">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall bedrifter</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Talet på bedrifter</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/FasteOpplysninger-grp-1742/BedriftType-datadef-13220">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bedriftstype</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Type bedrift</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/FasteOpplysninger-grp-1742/EnhetArbeidsgiverforeningKode-datadef-16507">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Medlemskap i arbeidsgiverforening. Kode</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Medlemskap i arbeidsgivarforeining. Kode</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-2072/FasteOpplysninger-grp-1742/Malform-datadef-2736">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Bokmål</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Bokmål</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Bokmål</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nynorsk</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nynorsk</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nynorsk</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Målform</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Målform</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2072/FasteOpplysninger-grp-1742/SkjemaLeveringsform-datadef-16508">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Leveringsform</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Leveringsform</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Bedriftsinformasjon-grp-4031">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Bedriftsinformasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Informasjon om bedrifta</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Bedriftsinformasjon-grp-4031/Naring-grp-1749">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Næring</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Korriger forhåndsutfylte næringsopplysninger hvis de ikke stemmer</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Næring</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Rett opp førehandsutfylte næringsopplysningar om dei ikkje stemmer</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/Bedriftsinformasjon-grp-4031/Naring-grp-1749/BedriftNaring-datadef-52">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bedriftens næring</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Bedrifta si næring</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Bedriftsinformasjon-grp-4031/BedriftensTilstand-grp-4029">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:selectOne ref="/Skjema/Bedriftsinformasjon-grp-4031/BedriftensTilstand-grp-4029/BedriftTilstand-datadef-424">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>i_vanlig_drift</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>I vanlig drift</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>I vanleg drift</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>ingen_ansatte</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ingen ansatte</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Inga tilsette</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>midlertidig_ute_av_drift</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Midlertidig ute av drift</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Førebels ute av drift</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>nedlagt</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nedlagt</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nedlagt</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>solgt</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Solgt</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Seld</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bedriftens tilstand</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Dersom bedriften er nedlagt/solgt gi melding til  Brønnøysundregistrene.</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Tilstanden til bedrifta</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Dersom bedrifta er nedlagd/seld gi melding til Brønnøysundregistrene.</p>
+                        </xforms:hint>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/Bedriftsinformasjon-grp-4031/BedriftensTilstand-grp-4029/BedriftOpphorDato-datadef-67">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Nedlagt.Dato</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Nedlagd.Dato</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Bedriftsinformasjon-grp-4031/BedriftensTilstand-grp-4029/BedriftNyEierDato-datadef-334">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Solgt/overdratt til ny eier (gjelder ikke aksjesalg). Dato</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Seld/overdregen til ny eigar (gjeld ikkje aksjesal). Dato</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Bedriftsinformasjon-grp-4031/BedriftensTilstand-grp-4029/BedriftNyEierNavn-datadef-55">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn på ny eier</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namnet på den nye eigaren</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Bedriftsinformasjon-grp-4031/BedriftensTilstand-grp-4029/BedriftNyEierAdresse-datadef-56">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ny adresse til bedriften</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Den nye adressa til bedrifta</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Bedriftsinformasjon-grp-4031/BedriftensTilstand-grp-4029/BedriftNyEierPostnummer-datadef-11344">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Bedriftsinformasjon-grp-4031/BedriftensTilstand-grp-4029/BedriftNyEierPoststed-datadef-11345">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Bedriftsinformasjon-grp-4031/BedriftensTilstand-grp-4029/BedriftNavnNy-datadef-58">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Nytt navn på bedriften</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Det nye namnet på bedrifta</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Bedriftsinformasjon-grp-4031/MedlemskapIArbeidsgiverforening-grp-1751">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:selectOne ref="/Skjema/Bedriftsinformasjon-grp-4031/MedlemskapIArbeidsgiverforening-grp-1751/ArbeidsgiverforeningMedlemskap-datadef-59">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>0700</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Handels- og Servicenæringens Hovedorganisasjon (HSH)</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Handels- og Servicenæringens Hovedorganisasjon (HSH)</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>0300</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Samvirkeforetakenes Forhandlingsorganisasjon (SamFo)</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Samvirkeforetakenes Forhandlingsorganisasjon (SamFo)</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>1000</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Finansnæringens Arbeidsgiverforening (FA)</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Finansnæringens Arbeidsgiverforening (FA)</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>1100</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Norges Arbeidsgiverforening for Virksomheter med Offentlig tilknytning (NAVO)</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Norges Arbeidsgiverforening for Virksomheter med Offentlig tilknytning (NAVO)</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>0100</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Næringslivets Hovedorganisasjon (NHO)</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Næringslivets Hovedorganisasjon (NHO)</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>0900</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ingen arbeidsgiverforening</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Inga arbeidsgivarforeining</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>0400</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Annen arbeidsgiverforening</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Anna arbeidsgivarforeining</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Medlemskap</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Medlemskap</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/Bedriftsinformasjon-grp-4031/MedlemskapIArbeidsgiverforening-grp-1751/ArbeidsgiverforeningNavn-datadef-4300">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Før opp navnet på annen arbeidsgiverforening</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Før opp namnet på anna arbeidsgivarforeining</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:repeat id="repeat_LonnsopplysningerJJBJF-grp-2254" nodeset="/Skjema/LonnsopplysningerJJBJF-grp-2254">
+                <xforms:group ref="/Skjema/LonnsopplysningerJJBJF-grp-2254">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Lønnsopplysninger</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Lønnsopplysingar</p>
+                    </xforms:caption>
+                    <xforms:group ref="/Skjema/LonnsopplysningerJJBJF-grp-2254/Individopplysninger-grp-2255">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Individopplysninger</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Individopplysingar</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/LonnsopplysningerJJBJF-grp-2254/Individopplysninger-grp-2255/AnsattFodselsnummerSpesifisertAnsatt-datadef-11821">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <brreg:kontroll type="Modulus 11"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fødselsnummer</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Fødselsnummer på 11 siffer må oppgis nøyaktig for alle ansatte</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fødselsnummer</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Fødselsnummer på 11 siffer må førast opp nøyaktig for alle tilsette</p>
+                            </xforms:help>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/LonnsopplysningerJJBJF-grp-2254/Individopplysninger-grp-2255/AnsattYrkesbetegnelseSpesifisertAnsatt-datadef-16491">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Yrkesbetegnelse</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Oppgi den ansattes yrkesbetegnelse</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Yrkesnamn</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Namn på yrke for den tilsette skal førast her</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/LonnsopplysningerJJBJF-grp-2254/Individopplysninger-grp-2255/AnsattYrkeskodeSpesifisertAnsatt-datadef-16492">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Yrkeskode</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>På http://www.ssb.no/emner/06/yrke finner du et hjelpemiddel for å  finne riktig yrkeskode</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Yrkeskode</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>På http://www.ssb.no/emner/06/yrke finner du et hjelpemiddel for å  finne riktig yrkeskode</p>
+                            </xforms:help>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter positive integer with four digits</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever positivt heltall med fire siffer</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev positivt heiltal med fire siffer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/LonnsopplysningerJJBJF-grp-2254/Individopplysninger-grp-2255/AnsattArbeidstidUkeSpesifisertAnsatt-datadef-16493">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Avtalt arbeidstid per uke i timer</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Oppgi avtalt normal arbeidstid pr. uke fratrukket spisepauser. For  arbeidstakere som har ulik arbeidstid fra uke til uke, beregnes  gjennomsnittlig timetall per uke for hele perioden eller  gjennomsnittlig
+                                    arbeidstid som ligger til grunn for siste  lønnsutbetaling.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Oppgis med en desimal</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Avtalt arbeidstid per veke i timar</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Oppgi avtalt normal arbeidstid per veke fråtrekt matpausar. For  arbeidstakarar som har ulik arbeidstid frå veke til veke, blir det å  rekne ut gjennomsnittleg timetal per veke for heile perioden eller
+                                    gjennomsnittleg arbeidstid som ligg til grunn for den siste  lønnsutbetalinga.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Gis opp med ein desimal</p>
+                            </xforms:hint>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever positivt tall med en desimal</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev positivt tal med ein desimal</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/LonnsopplysningerJJBJF-grp-2254/Per1September-grp-4918">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Per 1. september</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Per 1. september</p>
+                        </xforms:caption>
+                        <xforms:selectOne ref="/Skjema/LonnsopplysningerJJBJF-grp-2254/Per1September-grp-4918/AnsattAvlonningPeriodeSpesifisertAnsatt-datadef-16494">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>1</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Månedslønn, 12 ganger i året</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Månadslønn, 12 gonger i året</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>2</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>14 dagers lønn</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>14 dagers lønn</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>3</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Lønn hver uke</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Lønn kvar veke</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>4</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Månedslønn, 12 og en halv ganger i året</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Månadslønn, 12 og ein halv gonger i året</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>5</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Månedslønn 13 ganger i året</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Månadslønn 13 gonger i året</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>6</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Timelønn</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Timelønn</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>7</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Provisjons- og prosentlønn</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Provisjons- og prosentlønn</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Avlønningsperiode</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Oppgi lønnstakerens avlønningsperiode for regulativlønn/avtalt lønn</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Lønnsperiode for regulativlønn/avtalt lønn</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Oppgi lønnsperioden til lønnstakaren</p>
+                            </xforms:help>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/LonnsopplysningerJJBJF-grp-2254/Per1September-grp-4918/AnsattLonnMvSistePeriodeSpesifisertAnsatt-datadef-16495">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Lønn, (time- eller fastlønn, jf. avlønningsperiode).</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Oppgi fast avtalt månedslønn, 14-dagerslønn, ukelønn eller avtalt  utbetalt timelønn per tellingstidspunkt. Eventuelle  kompetanse-/kvalifikasjons- og personlige tillegg skal inkluderes.  Beløpet skal oppgis
+                                    eksklusive skift-, snuss- og offshore tillegg ol.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Oppgis med én desimal.</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Lønn, (time- eller fastlønn, jf. lønnsperiode).</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Gi opp fast avtalt månadslønn, 14-dagarslønn, vekelønn eller timelønn  per teljetidspunkt. Kompetanse-/kvalifikasjons- og personlege tillegg  skal også førast her.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Gis opp med ein desimal.</p>
+                            </xforms:hint>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever positivt tall med en desimal</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev positivt tal med ein desimal</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/LonnsopplysningerJJBJF-grp-2254/HittilIAr-grp-4919">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Hittil i år</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Hittil i år</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/LonnsopplysningerJJBJF-grp-2254/HittilIAr-grp-4919/AnsattLonnTilleggUregelmessigeHittilSpesifisertAnsatt-datadef-16496">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Uregelmessige tillegg</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Oppgi uregelmessige tillegg hittil i år, opptjent i arbeidstida, både  i og utenfor bedriften.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Uregelmessige tillegg</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Gi opp uregelmessige tillegg hittil i år, tent opp i arbeidstida, både  i og utanfor bedrifta.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/LonnsopplysningerJJBJF-grp-2254/HittilIAr-grp-4919/AnsattLonnBonusProvisjonMvHittilSpesifisertAnsatt-datadef-16497">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bonus, provisjon o.l.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Oppgi bonus, provisjon, produksjonstillegg, gratialer, tantieme o.l.  som er utbetalt hittil i år.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Bonus, provisjon o.l.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Gi opp bonus, provisjon etc. som er utbetalt hittil i år.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/LonnsopplysningerJJBJF-grp-2254/HittilIAr-grp-4919/AnsattLonnOvertidHittilSpesifisertAnsatt-datadef-16499">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Overtidsbetaling</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Oppgi samlet overtidsutbetaling hittil i år (timesats +  overtidstillegg)</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Overtidsbetaling</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Gi opp samla overtidsbetaling hittil i år (timesats + overtidstillegg)</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/LonnsopplysningerJJBJF-grp-2254/HittilIAr-grp-4919/AnsattOvertidstimerHittilSpesifisertAnsatt-datadef-16500">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Overtidstimer</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Oppgi samlet antall overtidstimer hittil i år. Det skal være samsvar  mellom antall overtidstimer og overtidsutbetalinger. Avspaserte timer  ekskluderes.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Overtidstimar</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Gi opp samla tal på overtidstimar hittil i år. Det skal være samsvar  mellom talet på overtidstimar og overtidsbetaling. Avspaserte timar  ekskluderast.</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/LonnsopplysningerJJBJF-grp-2254/Annet-grp-4920">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Annet</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Annet</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/LonnsopplysningerJJBJF-grp-2254/Annet-grp-4920/AnsattLonnBonusProvisjonMvKvartalSpesifisertAnsatt-datadef-16498">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Bonus, provisjon o.l. utbetalt 4. kvartal foregående år (1. oktober -  31. desember)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Lønnselementer som ble utbetalt i 4. kvartal foregående år skal  innberettes. Dette gjelder bonus, produksjonstillegg, gratialer,  overskuddsdeling, provisjon, tantieme o.l.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Bonus, provisjon o.l. utbetalt 4. kvartal førre året (1. oktober - 31.  desember)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Gi opp bonus, provisjon osv. som er utbetalt i 4. kvartal førre året.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/LonnsopplysningerJJBJF-grp-2254/Annet-grp-4920/AnsattTiltredelseDatoSpesifisertAnsatt-datadef-16528">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ansettelsesdato etter 1. januar foregående år</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Gi opp md. år.</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Tilsetjingsdato etter 1. januar førre året</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Gi opp md. år.</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/LonnsopplysningerJJBJF-grp-2254/Annet-grp-4920/AnsattLonnstrinnSpesifisertAnsatt-datadef-16503">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Lønnstrinn per 1. september</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Oppgis for ansatte i finanstjenester</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Lønnstrinn per 1. september</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Gis opp for tilsette i finanstenester</p>
+                            </xforms:hint>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+            </xforms:repeat>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

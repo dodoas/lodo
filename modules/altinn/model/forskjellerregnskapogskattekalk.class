@@ -1,0 +1,74 @@
+<?
+
+#Usage
+# new ForskjellerRegnskapOgSkatteKalk(array('sumPart'=>$_sumPart, 'sumGroup'=>$_sumGroup))
+#Ikke periode 13???);
+#
+
+class ForskjellerRegnskapOgSkatteKalk
+{
+    var $_sumPart;
+    var $_sumGroup;
+   
+
+    ############################################################################
+    function ForskjellerRegnskapOgSkatteKalk($args)
+    {	
+       
+    }
+    
+
+    ############################################################################
+    function calculate($ThisYear, $_sumPart, $sumGroup)
+    {   $this->_sumGroup = $sumGroup;
+    	$this->_sumPart  = $sumPart;
+    	
+        $this->_sumPart['13'][$ThisYear]['saldo']=$this->_sumPart['1'][$ThisYear]['saldo']-
+                                                  $this->_sumPart['2'][$ThisYear]['saldo']+
+                                                  $this->_sumPart['3'][$ThisYear]['saldo']+
+                                                  $this->_sumPart['11'][$ThisYear]['saldo']-
+                                                  $this->_sumPart['12'][$ThisYear]['saldo'];
+                                                  
+        $this->_sumPart['23'][$ThisYear]['saldo']=$this->_sumPart['21'][$ThisYear]['saldo']-
+                                                  $this->_sumPart['22'][$ThisYear]['saldo'];
+                                                  
+        $this->_sumPart['33'][$ThisYear]['saldo']=$this->_sumPart['31'][$ThisYear]['saldo']-
+                                                  $this->_sumPart['32'][$ThisYear]['saldo'];
+                                                  
+        $this->_sumPart['44'][$ThisYear]['saldo']=$this->_sumPart['41'][$ThisYear]['saldo']+
+        										  $this->_sumPart['42'][$ThisYear]['saldo']-
+        										  $this->_sumPart['43'][$ThisYear]['saldo'];
+        										  
+        $this->_sumPart['48'][$ThisYear]['saldo']=$this->_sumPart['46'][$ThisYear]['saldo']-
+                                                  $this->_sumPart['47'][$ThisYear]['saldo'];
+
+    }//function headLodic
+    
+    
+    ############################################################################
+    function sumGroupLogic($Line, $Year, $reportHash, $sumGroup){
+    	 $this->_sumGroup=$sumGroup;
+    	 
+  
+    }
+
+   
+     ############################################################################
+    function sumGroup($LineNum, $Year, $reportHash)
+    {
+        $this->_sumGroup[$LineNum][$Year]['in']     += $reportHash['AmountIn'];
+        $this->_sumGroup[$LineNum][$Year]['out']    += $reportHash['AmountOut'];
+        $this->_sumGroup[$LineNum][$Year]['saldo']  += $reportHash['AmountIn'] - $reportHash['AmountOut'];
+    }
+    
+    function getSumPart(){
+   		return $this->_sumPart;	
+    }
+    
+    function getSumGroup(){
+   		return $this->_sumGroup;	
+    }
+    
+
+}
+?>

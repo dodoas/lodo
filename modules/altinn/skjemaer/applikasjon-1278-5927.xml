@@ -1,0 +1,835 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1059: Skjema for fastsettelse av anskaffelsesverdi og skattemessig utbytte</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1278-5928.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-6443/OpplysningerOmSkatteyter-grp-6452/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-6443/OpplysningerOmSkatteyter-grp-6452/OppgavegiverFodselsnummer-datadef-26"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1059 Skjema for fastsettelse av anskaffelsesverdi (inngangsverdi)  og beregning av skattepliktig utbytte for aksjer/andeler eid pr  31.12.2006</p>
+            </xforms:caption>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1059 Skjema for fastsetjing av anskaffelsesverdi (inngangsverdi) og  berekning av skattepliktig utbytte for aksjar/partar eigd pr  31.12.2006</p>
+            </xforms:caption>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-6443">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Skjema skal fylles ut av  </p>
+                    <p>* personlige aksjonærer som eier aksjer i utenlandsk selskap ved utløp  av inntektsåret  </p>
+                    <p>* personlige aksjonærer som eier aksjer i norske selskap ved utløp av  inntektsåret og som ikke har mottatt oppgave fra Aksjonærregisteret  over aksjene.  </p>
+                    <p>* eier av grunnfondsbevis i sparebank ved utløp av inntektsåret som  ikke har mottatt oppgave fra Aksjonærregisteret.  </p>
+                    <p>* personlig andelshaver i norsk eller utenlandsk aksjefond ved utløp  av inntekståret som ikke har mottatt oppgave fra Verdipapirfondet  over opplysninger sendt til Skatteetaten  </p>
+                    <p/>
+                    <p>Med virkning fra 1. januar 2006 er det vedtatt nye regler for  beskatning av utbytte og gevinster på aksjer/andeler for personlige  aksjonærer/andelshavere. De nye reglene medfører beskatning av  utbytte på aksjer/andeler og
+                        skatt på gevinst ved salg av  aksjer/andeler utover et såkalt skjermingsfradrag. Likt med aksjer  regnes her grunnfondsbevis, andeler i gjensidige forsikringsselskap  og aksjefondsandeler.  </p>
+                    <p/>
+                    <p>Skjermingsfradraget viser hvor stort utbytte som kan mottas  skattefritt. Skjermingsfradraget settes til et skjermingsgrunnlag  multiplisert med en skjermingsrente. Skjermingsgrunnlaget vil som  utgangspunkt være det vederlag
+                        aksjonær/andelshaver i sin tid har  gitt for aksjen/andelen (anskaffelsesverdi). Se nærmere om dette  nedenfor under post 108.  </p>
+                    <p/>
+                    <p>I forbindelse med innføring av de nye reglene plikter  aksjonær/andelshaver å gi opplysninger om aksjen/andelens  anskaffelsesverdi til ligningsmyndighetene.  </p>
+                    <p/>
+                    <p>For mer informasjon om de nye reglene se artikkel Aksjonærmodellen på  www.skatteetaten.no.  </p>
+                    <p/>
+                    <p>Det skal bare beregnes skjermingsfradrag for aksjer/andeler eid pr 31.  desember 2006. Det betyr at det ikke skal beregnes skjermingsfradrag  på aksjer/andeler som er realisert i løpet av 2006.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Innleiing</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Skjema skal fylles ut av  </p>
+                    <p>* personlige aksjonærer som eier aksjer i utenlandsk selskap ved utløp  av inntektsåret  </p>
+                    <p>* personlige aksjonærer som eier aksjer i norske selskap ved utløp av  inntektsåret og som ikke har mottatt oppgave fra Aksjonærregisteret  over aksjene.  </p>
+                    <p>* eier av grunnfondsbevis i sparebank ved utløp av inntektsåret som  ikke har mottatt oppgave fra Aksjonærregisteret.  </p>
+                    <p>* personlig andelshaver i norsk eller utenlandsk aksjefond ved utløp  av inntekståret som ikke har mottatt oppgave fra Verdipapirfondet  over opplysninger sendt til Skatteetaten  </p>
+                    <p/>
+                    <p>Med virkning fra 1. januar 2006 er det vedtatt nye regler for  beskatning av utbytte og gevinster på aksjer/andeler for personlige  aksjonærer/andelshavere. De nye reglene medfører beskatning av  utbytte på aksjer/andeler og
+                        skatt på gevinst ved salg av  aksjer/andeler utover et såkalt skjermingsfradrag. Likt med aksjer  regnes her grunnfondsbevis, andeler i gjensidige forsikringsselskap  og aksjefondsandeler.  </p>
+                    <p/>
+                    <p>Skjermingsfradraget viser hvor stort utbytte som kan mottas  skattefritt. Skjermingsfradraget settes til et skjermingsgrunnlag  multiplisert med en skjermingsrente. Skjermingsgrunnlaget vil som  utgangspunkt være det vederlag
+                        aksjonær/andelshaver i sin tid har  gitt for aksjen/andelen (anskaffelsesverdi). Se nærmere om dette  nedenfor under post 108.  </p>
+                    <p/>
+                    <p>I forbindelse med innføring av de nye reglene plikter  aksjonær/andelshaver å gi opplysninger om aksjen/andelens  anskaffelsesverdi til ligningsmyndighetene.  </p>
+                    <p/>
+                    <p>For mer informasjon om de nye reglene se artikkel Aksjonærmodellen på  www.skatteetaten.no.  </p>
+                    <p/>
+                    <p>Det skal bare beregnes skjermingsfradrag for aksjer/andeler eid pr 31.  desember 2006. Det betyr at det ikke skal beregnes skjermingsfradrag  på aksjer/andeler som er realisert i løpet av 2006.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-6443/OpplysningerOmSkatteyter-grp-6452">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Skattyter</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Skattytar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-6443/OpplysningerOmSkatteyter-grp-6452/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Skattyters navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn på skattytar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-6443/OpplysningerOmSkatteyter-grp-6452/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-6443/OpplysningerOmSkatteyter-grp-6452/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-6443/OpplysningerOmSkatteyter-grp-6452/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-6443/OpplysningerOmSkatteyter-grp-6452/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Skjermingsfradrag-grp-6444">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>1) Fastsettelse av anskaffelsesverdi (inngangsverdi) for  aksjer/andeler eid pr 31.12.2006</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Anskaffelsesverdien (inngangsverdien) på alle aksjer/andeler man eier  ved utgangen av 2006 skal ligningsfastsettes i inntektsåret 2006. Den  fastsatte anskaffelsesverdien vil bli benyttet ved beregning av  skjermingsfradrag
+                        fremover i de årene man eier aksjen/andelen, og ved  beregning av gevinst eller tap ved senere realisasjon av  aksjen/andelen. (Unntak gjelder for beregning av gevinst for aksjer  ervervet før 1.1.1989 med alternative
+                        inngangsverdier).  </p>
+                    <p/>
+                    <p>Skjermingsfradrag skal beregnes pr aksje/andel og det må derfor i  utgangspunktet fylles ut en kolonne pr aksje/andel. Dersom flere  aksjer/andeler er ervervet på samme tidspunkt og dermed har samme  anskaffelsesverdi, kan
+                        disse aksjene/andelene føres i samme kolonne,  se nedenfor under post 106.  </p>
+                    <p/>
+                    <p>Har man realisert aksjer/andeler ervervet på forskjellige tidspunkt  anses de aksjer/andeler som er ervervet først som realisert først  (FIFU-prinsippet).  </p>
+                    <p/>
+                    <p>Eksempel:  </p>
+                    <p>Aksjonær ervervet 10 aksjer i selskap A i 1993 og betalte kr 200 pr  aksje. I 1997 ervervet han 10 nye aksjer i samme selskap og betalte  kr 250. I oktober 2006 solgte han 15 av aksjene. Det vil da være de  10 aksjene ervervet
+                        i 1993 som er solgt pluss 5 av aksjene ervervet i  1997. De 5 gjenværende aksjene er ervervet på samme tidspunkt og har  samme anskaffelsesverdi og beregning av skjermingsfradrag for disse  aksjene kan derfor føres i samme
+                        kolonne. Merk at beregningen skal  gjøres pr aksje fra post 201 frem til post 407 hvor skattepliktig  utbytte multipliseres med antall aksjer/andeler.  </p>
+                    <p/>
+                    <p>Eksempel:  </p>
+                    <p>Aksjonær ervervet 10 aksjer i selskap A i 1993 og betalte kr 200 pr  aksje. I 1997 ervervet han 10 nye aksjer i samme selskap og betalte  kr 250. I oktober 2006 solgte han 7 av aksjene. Det vil da være 7 av  de 10 aksjene han
+                        ervervet i 1993 som er solgt. De resterende 3  aksjene er ervervet på samme tidspunkt og har samme anskaffelsesverdi  og beregning av skjermingsfradrag for disse aksjene kan føres i samme  kolonne (kolonne 1). De 10 aksjene
+                        han ervervet i 1997 må føres i en  egen kolonne (kolonne 2), men hele aksjeervervet kan føres samlet i  denne kolonnen siden de er ervervet på samme tidspunkt og har samme  anskaffelsesverdi.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>1) Fastsettelse av anskaffelsesverdi (inngangsverdi) for  aksjer/andeler eid pr 31.12.2006</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Anskaffelsesverdien (inngangsverdien) på alle aksjer/andeler man eier  ved utgangen av 2006 skal ligningsfastsettes i inntektsåret 2006. Den  fastsatte anskaffelsesverdien vil bli benyttet ved beregning av  skjermingsfradrag
+                        fremover i de årene man eier aksjen/andelen, og ved  beregning av gevinst eller tap ved senere realisasjon av  aksjen/andelen. (Unntak gjelder for beregning av gevinst for aksjer  ervervet før 1.1.1989 med alternative
+                        inngangsverdier).  </p>
+                    <p/>
+                    <p>Skjermingsfradrag skal beregnes pr aksje/andel og det må derfor i  utgangspunktet fylles ut en kolonne pr aksje/andel. Dersom flere  aksjer/andeler er ervervet på samme tidspunkt og dermed har samme  anskaffelsesverdi, kan
+                        disse aksjene/andelene føres i samme kolonne,  se nedenfor under post 106.  </p>
+                    <p/>
+                    <p>Har man realisert aksjer/andeler ervervet på forskjellige tidspunkt  anses de aksjer/andeler som er ervervet først som realisert først  (FIFU-prinsippet).  </p>
+                    <p/>
+                    <p>Eksempel:  </p>
+                    <p>Aksjonær ervervet 10 aksjer i selskap A i 1993 og betalte kr 200 pr  aksje. I 1997 ervervet han 10 nye aksjer i samme selskap og betalte  kr 250. I oktober 2006 solgte han 15 av aksjene. Det vil da være de  10 aksjene ervervet
+                        i 1993 som er solgt pluss 5 av aksjene ervervet i  1997. De 5 gjenværende aksjene er ervervet på samme tidspunkt og har  samme anskaffelsesverdi og beregning av skjermingsfradrag for disse  aksjene kan derfor føres i samme
+                        kolonne. Merk at beregningen skal  gjøres pr aksje fra post 201 frem til post 407 hvor skattepliktig  utbytte multipliseres med antall aksjer/andeler.  </p>
+                    <p/>
+                    <p>Eksempel:  </p>
+                    <p>Aksjonær ervervet 10 aksjer i selskap A i 1993 og betalte kr 200 pr  aksje. I 1997 ervervet han 10 nye aksjer i samme selskap og betalte  kr 250. I oktober 2006 solgte han 7 av aksjene. Det vil da være 7 av  de 10 aksjene han
+                        ervervet i 1993 som er solgt. De resterende 3  aksjene er ervervet på samme tidspunkt og har samme anskaffelsesverdi  og beregning av skjermingsfradrag for disse aksjene kan føres i samme  kolonne (kolonne 1). De 10 aksjene
+                        han ervervet i 1997 må føres i en  egen kolonne (kolonne 2), men hele aksjeervervet kan føres samlet i  denne kolonnen siden de er ervervet på samme tidspunkt og har samme  anskaffelsesverdi.</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_BeregningAvSkjerming-grp-6446" nodeset="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446">
+                    <xforms:group ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beregning av skjerming</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Berekning av skjerming</p>
+                        </xforms:caption>
+                        <xforms:group ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/AksjerMedSkjermingsfradrag-grp-6447">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Aksjer det skal utregnes skjermingsgrunnlag for</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Aksjar det skal utreknas skjermingsfradrag for</p>
+                            </xforms:caption>
+                            <xforms:input ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/AksjerMedSkjermingsfradrag-grp-6447/EnhetNavnSkjermingsfradragSpesifisertSelskap-datadef-26770">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>101 Selskapets navn</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>101 Namn på selskapet</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/AksjerMedSkjermingsfradrag-grp-6447/EnhetOrganisasjonsnummerSkjermingsfradragSpesifisertSelskap-datadef-26771">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>102 Selskapets organisasjonsnummer</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>For norske aksjeselskaper/samvirkeforetak føres selskapets  organisasjonsnummer her. For aksjefond skal fondets ISIN nummer  oppgis.</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Ugyldig organisasjonsnummer</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>102 Selskapet sitt organisasjonsnummer</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>For norske aksjeselskaper/samvirkeforetak føres selskapets  organisasjonsnummer her. For aksjefond skal fondets ISIN nummer  oppgis.</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Ugyldig organisasjonsnummer</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/AksjerMedSkjermingsfradrag-grp-6447/EnhetLandSkjermingsfradragSpesifisertSelskap-datadef-27575">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>103 Land selskapet er hjemmehørende i</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>For utenlandsk selskap fører en opp hvilket land selskapet er  hjemmehørende i. Dette vil normalt være der selskapets ledelse og  drift utøves, både formelt og reelt.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>103 Land selskapet høyrer heime i</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>For utenlandsk selskap fører en opp hvilket land selskapet er  hjemmehørende i. Dette vil normalt være der selskapets ledelse og  drift utøves, både formelt og reelt.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:selectOne ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/AksjerMedSkjermingsfradrag-grp-6447/AksjerMvTypeSkjermingsfradragSpesifisertSelskap-datadef-26772">
+                                <xforms:choices>
+                                    <xforms:item>
+                                        <xforms:value>A</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Aksje</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Aksje</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>AIV</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Andel i verdipapirfond</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Andel i verdipapirfond</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>G</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Grunnfondsbevis</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Grunnfondsbevis</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                </xforms:choices>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>104 Hva slags type verdipapir</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>I rubrikk 1 oppgis typen verdipapir: aksje, eller andel i aksjefond. I  rubrikk 2 oppgis om aksjene er børsnoterte eller ikke-børsnoterte.  Bokstavkoden som skal benyttes er angitt i henholdsvis note 1 og 2
+                                        nederst på skjemaet.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>104 Kva slags type verdipapir</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>I rubrikk 1 oppgis typen verdipapir: aksje, eller andel i aksjefond. I  rubrikk 2 oppgis om aksjene er børsnoterte eller ikke-børsnoterte.  Bokstavkoden som skal benyttes er angitt i henholdsvis note 1 og 2
+                                        nederst på skjemaet.</p>
+                                </xforms:help>
+                            </xforms:selectOne>
+                            <xforms:selectOne ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/AksjerMedSkjermingsfradrag-grp-6447/AksjeBorsnoteringSkjermingsfradragSpesifisertSelskap-datadef-26773">
+                                <xforms:choices>
+                                    <xforms:item>
+                                        <xforms:value>B</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Børsnotert aksje</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Børsnotert aksje</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>IB</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Ikke-børnsotert aksje</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Ikkje-børsnotert aksje</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                </xforms:choices>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>104 Hva slags type verdipapir, børsnotert?</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>I rubrikk 1 oppgis typen verdipapir: aksje, eller andel i aksjefond. I  rubrikk 2 oppgis om aksjene er børsnoterte eller ikke-børsnoterte.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>104 Kva slags type verdipapir, børsnotert?</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>I rubrikk 1 oppgis typen verdipapir: aksje, eller andel i aksjefond. I  rubrikk 2 oppgis om aksjene er børsnoterte eller ikke-børsnoterte.</p>
+                                </xforms:help>
+                            </xforms:selectOne>
+                            <xforms:input ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/AksjerMedSkjermingsfradrag-grp-6447/AksjerMvISINNummer-datadef-27576">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>105 ISIN nr</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Tilhører aksjen en egen aksjeklasse skal denne oppgis (ISIN-nummer).</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feil format; skal være på formen NOxxxxxxxxxx</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>105 ISIN nr</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Tilhører aksjen en egen aksjeklasse skal denne oppgis (ISIN-nummer).</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/AksjerMedSkjermingsfradrag-grp-6447/AksjerMvErvervsdatoSkjermingsfradragSpesifisertSelskap-datadef-26774">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>106 Dato</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Ervervstidspunktet skal oppgis på følgende måte: dd.mm.åå. I rubrikk 4  skal det gis opplysninger om opprinnelig ervervsmåte: kjøp, arv,  gave, splitt/spleis/fusjon/fisjon, nytegning eller fondsemisjon.  Hvilke
+                                        bokstavkode som skal benyttes, er angitt i note 3 nederst på  skjemaet.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Se nærmere informasjon i rettledningen</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>106 Dato</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Ervervstidspunktet skal oppgis på følgende måte: dd.mm.åå. I rubrikk 4  skal det gis opplysninger om opprinnelig ervervsmåte: kjøp, arv,  gave, splitt/spleis/fusjon/fisjon, nytegning eller fondsemisjon.  Hvilke
+                                        bokstavkode som skal benyttes, er angitt i note 3 nederst på  skjemaet.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Sjå nærare informasjon i rettleiinga</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:selectOne ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/AksjerMedSkjermingsfradrag-grp-6447/AksjerMvErvervsmateSkjermingsfradragSpesifisertSelskap-datadef-26775">
+                                <xforms:choices>
+                                    <xforms:item>
+                                        <xforms:value>S</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Stiftelse</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Stiftelse</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>K</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Kjøp  </p>
+                                            <p/>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Kjøp</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>A</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Arv</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Arv</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>G</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Gave</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Gåve</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>FU</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Fusjon</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Fusjon</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>FI</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Fisjon</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Fisjon</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>ST</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Splitt</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Splitt</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>SS</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Spleis</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Spleis</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>FE</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Fondsemisjon</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Fondsemisjon</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>N</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Nytegning</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Nyteikning</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                </xforms:choices>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>106 Ervervsmåte</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Se nærmere informasjon i rettledningen</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>106 Ervervsmåte</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Sjå nærare informasjon i rettleiinga</p>
+                                </xforms:hint>
+                            </xforms:selectOne>
+                            <xforms:input ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/AksjerMedSkjermingsfradrag-grp-6447/AksjerMvAntallSkjermingsfradragSpesifisertSelskap-datadef-26776">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>107 Antall aksjer/verdipapirer</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Her føres antall aksjer/verdipapirer som er ervervet på samme  tidspunkt og med samme anskaffelsesverdi som derfor kan føres i samme  kolonne (ikke det totale antallet aksjer/andeler man eier i  selskapet).</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feltet krever tre desimaler</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>107 Antall aksjar/verdipapirer</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Her føres antall aksjer/verdipapirer som er ervervet på samme  tidspunkt og med samme anskaffelsesverdi som derfor kan føres i samme  kolonne (ikke det totale antallet aksjer/andeler man eier i  selskapet).</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Feltet krev tre desimalar</p>
+                                </xforms:alert>
+                            </xforms:input>
+                        </xforms:group>
+                        <xforms:group ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/Skjermingsgrunnlag-grp-6448">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Skjermingsgrunnlag</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Skjermingsgrunnlag</p>
+                            </xforms:caption>
+                            <xforms:input ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/Skjermingsgrunnlag-grp-6448/SkjermingsgrunnlagKostprisPerAksjeSpesifisertSelskap-datadef-26777">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>108 Anskaffelsesverdi inklusive anskaffelseskostnader pr aksje/andel</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Her føres aksjen/andelens anskaffelsesverdi inkludert utgifter som har  direkte sammenheng med ervervet, for eksempel meglerutgifter. Her vil  en kunne ta med 6 desimaler.  </p>
+                                    <p>Ved kjøp vil anskaffelsesverdien være det som er betalt for  aksjen/andelen.  </p>
+                                    <p>Anskaffelsesverdi for aksjer anskaffet i arbeidsforhold til underpris  er aksjens fulle omsetningsverdi på tidspunktet for den ansattes  erverv av aksjen. For eksempel se rettledningen.  </p>
+                                    <p>Anskaffelsesverdien ved arv og gaveoverføringer før inntektsåret 2006  er omsetningsverdien ved dødsfallet eller ervervetidspunktet  begrenset oppad til arveavgiftsverdien dersom overføringen er
+                                        arveavgiftspliktig.  </p>
+                                    <p>For børsnoterte aksjer vil anskaffelsesverdi være børsverdi på  arvetidspunktet/ervervstidspunktet.  </p>
+                                    <p>For ikke-børsnoterte aksjer vil arveavgiftsverdien være enten 100  prosent eller 30 prosent av skattemessig formuesverdi pr 1. januar i  ervervsåret. Skattyters valg av arveavgiftsverdi for ikke-børsnoterte
+                                        aksjer vil her være bestemmende for anskaffelsesverdien.  </p>
+                                    <p>Er aksjen/andelen ervervet ved arv eller gave i 2006 skal mottager  videreføre arvelater/givers skattemessige verdier. Dvs  arving/gavemottager overtar arvelaters anskaffelsesverdi og  RISK-beløp. Dette
+                                        prinsippet betegnes skattemessig kontinuitet.  </p>
+                                    <p>Se eksempel i rettledningen.  </p>
+                                    <p>Ved stiftelse eller kapitalutvidelse vil anskaffelsesverdi være  kapitalinnskuddet knyttet til den enkelte aksje.  </p>
+                                    <p>For aksjer ervervet ved skattefri omdanning er anskaffelsesverdien  basert på kontinuitet og vil også utgjøre skjermingsfradraget.  </p>
+                                    <p>Fusjon/fisjon/splitt/spleis. Se rettledningen.  </p>
+                                    <p>Fondsaksje. Se rettledningen.  </p>
+                                    <p>For ikke-børsnoterte aksjer som kunne ha vært solgt skattefritt i  1992, kan en ved beregning av skjermingsgrunnlaget sette  anskaffelsesverdien til aksjens forholdsmessige andel av skattemessig  formuesverdi,
+                                        eller anskaffelsesverdi, dersom denne kan  dokumenteres.  </p>
+                                    <p>Takstverdien og andel regnskapsmessig verdi kan ikke benyttes.  </p>
+                                    <p/>
+                                    <p>Takstverdier og andel regnskapsmessig verdi kan fortsatt benyttes som  alternativ inngangsverdi ved gevinstberegning ved eventuell  realisasjon. Regelen som avskjærer fradrag for tap når  regnskapsmessig verdi
+                                        eller takstverdi benyttes som alternativ  inngangsverdi fra 1992 opprettholdes.  </p>
+                                    <p>For børsnoterte aksjer ervervet før 1. januar 1989 vil alternativ  anskaffelsesverdi være børskurs i 1992.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>108 Anskaffelsesverdi inklusive anskaffelseskostnader pr aksje/part</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Her føres aksjen/andelens anskaffelsesverdi inkludert utgifter som har  direkte sammenheng med ervervet, for eksempel meglerutgifter. Her vil  en kunne ta med 6 desimaler  </p>
+                                    <p>Ved kjøp vil anskaffelsesverdien være det som er betalt for  aksjen/andelen.  </p>
+                                    <p>Anskaffelsesverdi vil her være aksjens fulle omsetningsverdi på  tidspunktet for den ansattes erverv av aksjen. For eksempel se  rettledningen.  </p>
+                                    <p>Anskaffelsesverdien ved arv og gaveoverføringervil her være  omsetningsverdien ved dødsfallet eller ervervetidspunktet begrenset  oppad til arveavgiftsverdien dersom overføringen er  arveavgiftspliktig.  </p>
+                                    <p>For børsnoterte aksjer vil anskaffelsesverdi være børsverdi på  arvetidspunktet/ervervstidspunktet.  </p>
+                                    <p>For ikke-børsnoterte aksjer vil arveavgiftsverdien være enten 100  prosent eller 30 prosent av skattemessig formuesverdi pr 1. januar i  ervervsåret. Skattyters valg av arveavgiftsverdi for ikke-børsnoterte
+                                        aksjer vil her være bestemmende for anskaffelsesverdien.  </p>
+                                    <p>Er aksjen/andelen ervervet ved arv eller gave i 2006 skal mottager  videreføre arvelater/givers skattemessige verdier. Dvs  arving/gavemottager overtar arvelaters anskaffelsesverdi og  RISK-beløp. Dette
+                                        prinsippet betegnes skattemessig kontinuitet.  </p>
+                                    <p>Se også eksempel i rettledningen.  </p>
+                                    <p>Ved stiftelse eller kapitalutvidelse vil anskaffelsesverdi være  kapitalinnskuddet knyttet til den enkelte aksje.  </p>
+                                    <p>For aksjer ervervet ved skattefri omdanning gjelder det særregler for  fastsettelse av aksjenes anskaffelsesverdi, jf Finansdepartementets  forskrift til skatteloven § 11-20. Anskaffelsesverdien baseres på
+                                        kontinuitet og vil også utgjøre skjermingsgrunnlaget.  </p>
+                                    <p>Fusjon/fisjon/splitt/spleis. Sjå rettleiinga.  </p>
+                                    <p>For ikke-børsnoterte aksjer som kunne ha vært solgt skattefritt i  1992, kan en ved beregning av skjermingsgrunnlaget sette  anskaffelsesverdien til aksjens forholdsmessige andel av skattemessig  formuesverdi,
+                                        eller anskaffelsesverdi, dersom denne kan  dokumenteres.  </p>
+                                    <p>Takstverdien og andel regnskapsmessig verdi kan ikke benyttes.  </p>
+                                    <p>Takstverdier og andel regnskapsmessig verdi kan fortsatt benyttes som  alternativ inngangsverdi ved gevinstberegning ved eventuell  realisasjon. Regelen som avskjærer fradrag for tap når  regnskapsmessig verdi
+                                        eller takstverdi benyttes som alternativ  inngangsverdi fra 1992 opprettholdes.  </p>
+                                    <p>For børsnoterte aksjer ervervet før 1. januar 1989 vil alternativ  anskaffelsesverdi være børskurs i 1992.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/Skjermingsgrunnlag-grp-6448/SkjermingsgrunnlagRISKSamletIEietidSpesifisertSelskap-datadef-26778">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:alert brreg:lang="EN">
+                                    <p>Enter number with two fraction digits</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>109 Risk pr. aksje/andel</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>For aksjer/andel ervervet før 1.1.2006 i selskap hjemmehørende i Norge  skal RISK opptjent til og med 1.1.2006 inngå i skjermingsgrunnlaget.  Akkumulert RISK i eiertiden oppgis her. Dersom aksjen er ervervet
+                                        etter 1.1.2006 ved arv eller gave med skattemessig kontinuitet, skal  mottaker videreføre tidligere eiers RISK.  </p>
+                                    <p/>
+                                    <p>Dersom det i løpet av eiertiden har vært en endring i antall aksjer  eller i aksjekapitalen i selskapet som følge av fondsemisjon, splitt,  spleis, fusjon eller fisjon skal det foretas en omfordeling av
+                                        tidligere fastsatt RISK-beløp. Slik omfordeling skjer etter de samme  prisnipper som ved omfordeling av anskaffelsesverdi. Se nærmere om  dette ovenfor under post 108.</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feltet krever to desimaler</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>109 Risk pr. aksje/part</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>For aksjer/andel ervervet før 1.1.2006 i selskap hjemmehørende i Norge  skal RISK opptjent til og med 1.1.2006 inngå i skjermingsgrunnlaget.  Akkumulert RISK i eiertiden oppgis her. Dersom aksjen er ervervet
+                                        etter 1.1.2006 ved arv eller gave med skattemessig kontinuitet, skal  mottaker videreføre tidligere eiers RISK.  </p>
+                                    <p/>
+                                    <p>Dersom det i løpet av eiertiden har vært en endring i antall aksjer  eller i aksjekapitalen i selskapet som følge av fondsemisjon, splitt,  spleis, fusjon eller fisjon skal det foretas en omfordeling av
+                                        tidligere fastsatt RISK-beløp. Slik omfordeling skjer etter de samme  prisnipper som ved omfordeling av anskaffelsesverdi. Se nærmere om  dette ovenfor under post 108.</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Feltet krev to desimalar</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/Skjermingsgrunnlag-grp-6448/SkjermingsgrunnlagAretsPerAksjeSpesifisertSelskap-datadef-26779">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>110 Årets skjermingsgrunnlag pr aksje/andel</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Årets skjermingsgrunnlaget pr aksje vil være lik summen av post 108 og  109.  </p>
+                                    <p>Dersom aksjen/andelen har negative RISK-verdier kan dette medføre at  skjermingsgrunnlaget blir negativt. Det skal ikke beregnes noe  skjermingsfradrag av det negative skjermingsgrunnlaget. Skjemaet skal
+                                        allikevel fylles ut, men skjermingsfradraget i denne posten settes da  til null.  </p>
+                                    <p/>
+                                    <p>Hvis du kommer i en situasjon hvor inngangsverdien skal økes, for  eksempel ved oppskriving av aksjenes pålydende som følge av  forhøyelse av selskapets aksjekapital ved innbetaling, vil  oppskrivingsbeløpet bli
+                                        tillagt det negative grunnlaget.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>110 Årets skjermingsgrunnlag pr aksje/part</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Årets skjermingsgrunnlaget pr aksje vil være lik summen av post 108 og  109.  </p>
+                                    <p>Dersom aksjen/andelen har negative RISK-verdier kan dette medføre at  skjermingsgrunnlaget blir negativt. Det skal ikke beregnes noe  skjermingsfradrag av det negative skjermingsgrunnlaget. Skjemaet skal
+                                        allikevel fylles ut, men skjermingsfradraget i denne posten settes da  til null.  </p>
+                                    <p/>
+                                    <p>Hvis du kommer i en situasjon hvor inngangsverdien skal økes, for  eksempel ved oppskriving av aksjenes pålydende som følge av  forhøyelse av selskapets aksjekapital ved innbetaling, vil  oppskrivingsbeløpet bli
+                                        tillagt det negative grunnlaget.</p>
+                                </xforms:help>
+                            </xforms:input>
+                        </xforms:group>
+                        <xforms:group ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/BeregningAvSkjermingsfradrag-grp-6449">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2) Beregning av skattepliktig utbytte for aksjer/andeler eid pr  31.12.2006</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Aksjeutbytte som overstiger et fastsatt skjermingsfradrag er  skattepliktig. For aksjer/andeler en har mottatt utbytte på i løpet  av 2006 skal post 401 til post 406 fylles ut.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>2) Berekning av skattepliktig utbytte for aksjar/partar eigd pr  31.12.2006</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Aksjeutbytte som overstiger et fastsatt skjermingsfradrag er  skattepliktig. For aksjer/andeler en har mottatt utbytte på i løpet  av 2006 skal post 401 til post 406 fylles ut.</p>
+                            </xforms:help>
+                            <xforms:input ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/BeregningAvSkjermingsfradrag-grp-6449/SkjermingsfradragAretsPerAksjeSpesifisertSelskap-datadef-26780">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>302 Årets beregnede skjermingsfradrag pr. aksje/andel</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Aksjens skjermingsfradrag settes til aksjens skjermingsgrunnlag (post  110) multiplisert med skjermingsrenten.  </p>
+                                    <p/>
+                                    <p>Eksempel:  </p>
+                                    <p>Skjermingsgrunnlaget i post 110 er lik  </p>
+                                    <p>kr 3 210 og skjermingsrenten er f.eks 1.8%.  </p>
+                                    <p>Kr 3 210 x 1.8:% = kr 57.78  </p>
+                                    <p>Skjermingsfradraget i post 302 vil være  </p>
+                                    <p>kr 57.78 pr aksje.  </p>
+                                    <p>Merk at skjermingsrenten vil bli fastsatt av Finansdepartementet i  januar i året etter inntektsåret, dvs. at skjermingsrenten for 2006  først blir fastsatt i januar 2007. Skjermingsrenten vil publiseres  bl.a.
+                                        på www.skatteetaten.no . Skjermingsrenten fastsettes på  bakgrunn av gjennomsnittlig 3- måneders rente på statskasseveksler  som er en tilnærmet risikofri rente.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>302 Årets utrekna skjermingsfradrag pr aksje/part</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Aksjens skjermingsfradrag settes til aksjens skjermingsgrunnlag (post  110) multiplisert med skjermingsrenten.  </p>
+                                    <p/>
+                                    <p>Eksempel:  </p>
+                                    <p>Skjermingsgrunnlaget i post 110 er lik  </p>
+                                    <p>kr 3 210 og skjermingsrenten er f.eks 1.8%.  </p>
+                                    <p>Kr 3 210 x 1.8:% = kr 57.78  </p>
+                                    <p>Skjermingsfradraget i post 302 vil være  </p>
+                                    <p>kr 57.78 pr aksje.  </p>
+                                    <p>Merk at skjermingsrenten vil bli fastsatt av Finansdepartementet i  januar i året etter inntektsåret, dvs. at skjermingsrenten for 2006  først blir fastsatt i januar 2007. Skjermingsrenten vil publiseres  bl.a.
+                                        på www.skatteetaten.no . Skjermingsrenten fastsettes på  bakgrunn av gjennomsnittlig 3- måneders rente på statskasseveksler  som er en tilnærmet risikofri rente.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/BeregningAvSkjermingsfradrag-grp-6449/SkjermingsrenteBeregningSkjermingsfradragRentesats-datadef-26994">
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>301 Skjermingsgrunnlag (post 110) x skjermingsrente</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feltet krever to desimaler</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>301) Skjermingsgrunnlag (post 110) x skjermingsrente</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Feltet krev to desimalar</p>
+                                </xforms:alert>
+                            </xforms:input>
+                        </xforms:group>
+                        <xforms:group ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/UtbyttePaAksjerEidPr31122006-grp-6450">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utbytte på aksjer/andeler eid pr 31.12.2006</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Utbytte på aksjar/partar eigd pr 31.12.2006</p>
+                            </xforms:caption>
+                            <xforms:input ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/UtbyttePaAksjerEidPr31122006-grp-6450/UtbytteUtbetaltPerAksjeSpesifisertSelskap-datadef-26781">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>401 Utbytte pr aksje/andel</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Mottatt utbytte oppgis her omregnet til NOK.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>401 Utbytte pr aksje/part</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Mottatt utbytte omrekna til NOK gjes opp her.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/UtbyttePaAksjerEidPr31122006-grp-6450/UtbytteBeregningsgrunnlagSkattPerAksjeSpesifisertSelskap-datadef-26782">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>403 Sum</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Her føres sum utbytte minus skjermingsfradraget. Dersom utbytte  overstiger skjermingsfradraget slik at sum beløp er positivt skal  beløpet overføres til post 404 Skattepliktig utbytte pr  aksje/andel.  </p>
+                                    <p/>
+                                    <p>Dersom skjermingsfradraget overstiger utbytte slik at sum beløpet er  negativt skal beløpet overføres til post 405 Ubenyttet  skjermingsfradrag til fremføring pr aksje/andel.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>(positivt beløp overføres post 404, negativt overføres post 405)</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>403 Sum</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Her føres sum utbytte minus skjermingsfradraget. Dersom utbytte  overstiger skjermingsfradraget slik at sum beløp er positivt skal  beløpet overføres til post 404 Skattepliktig utbytte pr  aksje/andel.  </p>
+                                    <p/>
+                                    <p>Dersom skjermingsfradraget overstiger utbytte slik at sum beløpet er  negativt skal beløpet overføres til post 405 Ubenyttet  skjermingsfradrag til fremføring pr aksje/andel.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>(positivt beløp overførast til post 404, negativt overførast til post  405)</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/UtbyttePaAksjerEidPr31122006-grp-6450/UtbytteSkattepliktigPerAksjeSpesifisertSelskap-datadef-26785">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>404 Skattepliktig utbytte pr aksje/andel</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Den del av utbyttet som overstiger skjermingsfradraget vil være  skattepliktig.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>404 Skattepliktig utbytte pr aksje/part</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Den del av utbyttet som overstiger skjermingsfradraget vil være  skattepliktig.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/UtbyttePaAksjerEidPr31122006-grp-6450/SkjermingsfradragFramfortPerAksjeSpesifisertSelskap-datadef-26783">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>405 Ubenyttet skjermingsfradrag til fremføring pr aksje/andel</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Dersom skjermingsfradraget overstiger årets utbytte kan ubenyttet  skjermingsfradrag fremføres til fradrag i senere års utbytte  eventuelt gevinst på samme aksje.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>405 Ubenytta skjermingsfrådrag til framføring pr aksje/part</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Dersom skjermingsfradraget overstiger årets utbytte kan ubenyttet  skjermingsfradrag fremføres til fradrag i senere års utbytte  eventuelt gevinst på samme aksje.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Skjermingsfradrag-grp-6444/BeregningAvSkjerming-grp-6446/UtbyttePaAksjerEidPr31122006-grp-6450/UtbytteSkattepliktigBeregning-datadef-26786">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Ikke sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>406 Skattepliktig utbytte</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Her skal skattepliktig utbytte pr aksje/andel (post 404) multipliseres  med antall aksjer (post 107).</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>post 404 x antall aksjer/andeler i post 107</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>406 Skattepliktig utbytte</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Her skal skattepliktig utbytte pr aksje/andel (post 404) multipliseres  med antall aksjer (post 107).</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>post 404 x antall aksjar/delar i post 107</p>
+                                </xforms:hint>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/Skjermingsfradrag-grp-6444/UtbytteSkattepliktigTotalbelop-datadef-26784">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>407 Sum skattepliktig utbytte</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom en fyller ut flere kolonner eller flere skjemaer skal sum  skattepliktig utbytte fra alle kolonnene/alle skjemaene føres i post  407. Har man flere skjemaer fører man sum skattepliktig utbytte i det  siste skjemaet.
+                            Felt for nummerering av skjemaene er satt inn øverst  på skjema.  </p>
+                        <p/>
+                        <p>Skattepliktig utbytte fra andel i aksjefond overføres post 3.1.6 i  selvangivelsen.  </p>
+                        <p>Skattepliktig utbytte fra aksje i aksjeselskap overføres post 3.1.7  bokstav a) i selvangivelsen.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Overføres post 3.1.7a) i selvangivelsen</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>407 Sum skattepliktig utbytte</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dersom en fyller ut flere kolonner eller flere skjemaer skal sum  skattepliktig utbytte fra alle kolonnene/alle skjemaene føres i post  407. Har man flere skjemaer fører man sum skattepliktig utbytte i det  siste skjemaet.
+                            Felt for nummerering av skjemaene er satt inn øverst  på skjema.  </p>
+                        <p/>
+                        <p>Skattepliktig utbytte fra andel i aksjefond overføres post 3.1.6 i  selvangivelsen.  </p>
+                        <p>Skattepliktig utbytte fra aksje i aksjeselskap overføres post 3.1.7  bokstav a) i selvangivelsen.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Førast over til post 3.1.7a) i sjølvmeldinga</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

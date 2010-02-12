@@ -1,0 +1,121 @@
+<?php
+/* copy right
+ * Created on 09.jun.2005
+ * by Anh Le
+ * 
+ * 
+ */
+class SpekAvInntektOgFradragUtlandetMapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+           			$this->ORID[$item] = $v;
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+            	$item = $this->Account[$a];
+            	$this->ORID[$item] = $v;
+	            return 1;
+    	    }
+       	}
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+	{	$this->addMapping('D68', 'OppgavegiverNavn-datadef-68', 'Name');
+		$this->addMapping('D26', 'OppgavegiverFodselsnummer-datadef-26', 'SocialSecurityID');
+		$this->addMapping('D8080', 'BankMvUtlandNavnSpesifisertBankMv-datadef-8080', '');
+		$this->addMapping('D8081', 'KontohaverUtlandKontonummerSpesifisertBankMv-datadef-8081', '');
+		$this->addMapping('D8082', 'KontohaverUtlandSpesifisertBankMv-datadef-8082', '');
+		$this->addMapping('D8083', 'BankinnskuddMvUtlandValutaFjoraretSpesifisertBankMv-datadef-8083', '');
+		$this->addMapping('D8085', 'BankinnskuddMvUtlandSpesifisertBankMv-datadef-8085', '');
+		$this->addMapping('D5761', 'ValutakursSpesifisertBankMv-datadef-5761', '');
+		$this->addMapping('D8087', 'RenteinntekterMvUtlandBankinnskuddMvSpesifisertBankMv-datadef-8087', '');
+		$this->addMapping('D21990', 'ValutakursRenterOmregningSpesifisertBankMv-datadef-21990', '');
+		$this->addMapping('D8089', 'SkattetrekkUtlandRenteavkastningSpesifisertBankMv-datadef-8089', '');
+		$this->addMapping('D21991', 'BankMvBSUEOSStatNavn-datadef-21991', '');
+		$this->addMapping('D21992', 'KontohaverBSUEOSStatKontonummer-datadef-21992', '');
+		$this->addMapping('D21993', 'KontohaverBSUEOSStatNavn-datadef-21993', '');
+		$this->addMapping('D21994', 'BankinnskuddMvBSUEOSStatValutaFjoraret-datadef-21994', '');
+		$this->addMapping('D21995', 'BankinnskuddMvBSUEOSStatBelop-datadef-21995', '');
+		$this->addMapping('D21996', 'ValutakursBSUEOSStat-datadef-21996', '');
+		$this->addMapping('D21997', 'RenteinntekterMvBSUEOSStatBelop-datadef-21997', '');
+		$this->addMapping('D21998', 'ValutakursRenterOmregningBSUEOSStatBelop-datadef-21998', '');
+		$this->addMapping('D21999', 'SkattetrekkBSUEOSStatRenteavkastningBelop-datadef-21999', '');
+		$this->addMapping('D22000', 'SparebelopInnbetaltBSUEOSStat-datadef-22000', '');
+		$this->addMapping('D22001', 'UttakBoligformalBSUEOSStatBelop-datadef-22001', '');
+		$this->addMapping('D22002', 'UttakAnnetFormalBSUEOSStatBelop-datadef-22002', '');
+		$this->addMapping('D8090', 'BankinnskuddMvUtlandSkattemessig-datadef-8090', '');
+		$this->addMapping('D8091', 'RenteavkastningMvUtlandBankinnskuddMv-datadef-8091', '');
+		$this->addMapping('D8092', 'SkattetrekkUtlandRenteavkastning-datadef-8092', '');
+		
+	}
+ }
+?>

@@ -1,0 +1,1245 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1246: Deltakeres oppgave over formue og inntekt i NOKUS-selskap</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-790-5918.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-2339/Deltaker-grp-2340/OppgavegiverFodselsnummer-datadef-26"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-2339/Selskap-grp-2722/EnhetNavnNOKUSSelskap-datadef-15007" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1246 Deltakerens oppgave over egen formue og inntekt i  norskkontrollert utenlandsk selskap i lavskatteland mv. (NOKUS) 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Fastsatt av Skattedirektoratet for inntektsåret 2005  </p>
+                <p/>
+                <p>Dette er deltakerens egen oppgave over formue og inntekt i NOKUSet.  Skjemaet skal fylles ut av hver enkelt deltaker i selskapet, herunder  NOKUS som er deltaker i annet NOKUS. Det forutsettes at den som er  ansvarlig for
+                    selskapsoppgaven (RF-1245) også forestår utfylling av  postene i dette skjemaet i samarbeid med deltakerne. Deltakeroppgaven  skal leveres som vedlegg til deltakerens egen selvangivelse  (selskapsoppgave) til
+                    likningskontoret/sentralskattekontoret i  bostedskommunen/ kontorkommunen. Deltakeroppgaven skal i  alminnelighet føres i norske kroner. Når et NOKUS er eiet av et annet  NOKUS, skal det sistnevnte selskap behandles som
+                    skattemessig  deltaker. Deltakeroppgave skal i slike tilfeller utferdiges med dette  selskapet som eier, og ikke de norske indirekte eiere. Slike  deltakeroppgaver skal føres i den samme valuta som det direkte eiende  NOKUSet
+                    fører sitt regnskap i.  </p>
+                <p/>
+                <p>Om bruken av fortegn i skjemaet, se rettledningen.  </p>
+                <p/>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1246.  </p>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjemaet, RF-1246, helt eller delvis  bli benyttet også av andre offentlige organer som har hjemmel til å  innhente de samme
+                    opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt. samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-2339">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Dette er deltakerens egen oppgave over formue og inntekt i NOKUSet.  Skjemaet skal fylles ut av hver enkelt deltaker i selskapet, herunder  NOKUS som er deltaker i annet NOKUS.  Det forutsettes at den som som  er ansvarlig for
+                        selskapsoppgaven (RF-1245) også forestår utfylling  av postene i dette skjemaet i samarbeid med deltakerne.  Deltakeroppgaven skal leveres som vedlegg til deltakerens egen  selvangivelse (selskapsoppgave) til
+                        likningskontoret/sentralskattekontoret i bostedskommunen/  kontorkommunen.  Deltakeroppgaven skal i alminnelighet føres i norske  kroner.  Når et NOKUS er eiet av et annet NOKUS, skal det sistnevnte  selskap behandles som
+                        skattemessig deltaker.  Deltakeroppgave skal i  slike tilfeller utfrediges med dette selskapet som eier, og ikke de  norske indirekte eiere.  Slike deltakeroppgaver skal føres i den  samme valuta som det direkte eiende NOKUSet
+                        fører sitt regnskap i.  </p>
+                    <p/>
+                    <p>Opplysninger om deltakeren og selskapet:  </p>
+                    <p>Det skal gis opplysninger om deltakerens navn, adresse og  fødselsnummer/organisasjonsnummer. Videre skal det gis opplysninger  om deltakerens skattekommune, antall aksjer/andeler og pålydende  verdi. Kostpris i norske kroner
+                        etter kursen på kjøpstidspunktet,  andel utbytte, eier- og stemmerettsandel i prosent samt ervervsåret  skal også oppgis. I tillegg skal eierandel og stemmerettsandel  gjennom indirekte eie oppgis. Ved særlig kompliserte
+                        eierforhold bør  det redegjøres for dette i eget vedlegg. Hvor NOKUSet er eiet gjennom  et annet NOKUS, skal slik indirekte eie ikke tas med på skjemaet.  Derimot skal det mellomliggende NOKUS føres som deltaker med sin egen
+                        direkte eierandel på eget RF-1246. Kostprisen for aksjene/andelene  skal i slike tilfeller føres i den valuta som deltaker fører sitt  regnskap i.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2339/Deltaker-grp-2340">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Deltaker</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Deltaker-grp-2340/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Deltaker-grp-2340/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Deltaker-grp-2340/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Deltaker-grp-2340/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Deltaker-grp-2340/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Deltaker-grp-2340/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Deltaker-grp-2340/DeltakerSkattekommuneSpesifisert-datadef-27522">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Skattekommune</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2339/Selskap-grp-2722">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Selskap</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Selskap-grp-2722/EnhetNavnNOKUSSelskap-datadef-15007">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Selskap-grp-2722/EnhetRegistreringslandNOKUSSelskap-datadef-15008">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>NOKUS reg.nr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-2339/Eierforhold-grp-2347">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Eierforhold</p>
+                    </xforms:caption>
+                    <xforms:group ref="/Skjema/GenerellInformasjon-grp-2339/Eierforhold-grp-2347/DirekteEiet-grp-2725">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Direkte eid/kontrollert</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Eierforhold-grp-2347/DirekteEiet-grp-2725/AksjerNOKUSMvDeltakerAndelAntall-datadef-17449">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Antall</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Eierforhold-grp-2347/DirekteEiet-grp-2725/AksjerPalydendeNOKUSMv-datadef-17450">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter number with two fraction digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Pålydende</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever to desimaler</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Eierforhold-grp-2347/DirekteEiet-grp-2725/AksjerKostprisNOKUSMv-datadef-17451">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kostpris</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Eierforhold-grp-2347/DirekteEiet-grp-2725/AksjerNOKUSMvUtbytteDeltakerAndel-datadef-17452">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Andel utbytte</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Eierforhold-grp-2347/DirekteEiet-grp-2725/AksjerNOKUSMvDirekteEieDeltakerEierandel-datadef-17453">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Eierandel %</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever to desimaler</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Eierforhold-grp-2347/DirekteEiet-grp-2725/AksjerNOKUSMvDirekteEieStemmerett-datadef-17454">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Stemmerett %</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever to desimaler</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Eierforhold-grp-2347/DirekteEiet-grp-2725/AksjerNOKUSMvDirekteEietDeltakerErversar-datadef-17455">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ervervsår</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/GenerellInformasjon-grp-2339/Eierforhold-grp-2347/IndirekteEiet-grp-2726">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Indirekte eid/kontrollert</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Eierforhold-grp-2347/IndirekteEiet-grp-2726/AksjerNOKUSMvIndirekteEieEierandel-datadef-17456">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Eierandel %</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever to desimaler</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Eierforhold-grp-2347/IndirekteEiet-grp-2726/AksjerNOKUSMvIndirekteEieStemmerett-datadef-17457">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Stemmerett %</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever to desimaler</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Eierforhold-grp-2347/IndirekteEiet-grp-2726/AksjerNOKUSMvIndirekteEieDeltakerErvervsar-datadef-175">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ervervsår</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-2339/Eierforhold-grp-2347/AksjerNOKUSMvIndirekteEieGjennom-datadef-17459">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Indirekte eid/kontrollert gjennom</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OpplysningerOmAksjenesFormuesverdi-grp-2342">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>I Aksjenes/andelenes formuesverdi</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Andel av formuesverdi overføres fra RF-1245 post 431C eller 432C/432D.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/OpplysningerOmAksjenesFormuesverdi-grp-2342/Formuesverdi-grp-4044">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>101</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Andel av formuesverdi overføres fra fra RF-1245 post 432C eller 432D,  evt. post 431C</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/OpplysningerOmAksjenesFormuesverdi-grp-2342/Formuesverdi-grp-4044/AksjerNOKUSMvDeltakerAndelFormueAntall-datadef-18058">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall aksjer/andeler</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmAksjenesFormuesverdi-grp-2342/Formuesverdi-grp-4044/AksjerNOKUSMvDeltakerFormuesverdi-datadef-20012">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Andel formuesverdi</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Overført fra RF-1245 post 432c eller 432d,evt post 431c</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Fradragsramme-grp-2343">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>II Individuelle poster for deltakere som eide andeler pr 31.12.2002</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Fradragsramme-grp-2343/AksjerNOKUSMvUnderskuddRest-datadef-17466">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>201 Gjenstående underskudd overført fra 2005 RF-1246 post 203</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Eventuell rest underskudd til fremføring fra post 203 i RF-1246 for  inntektsåret 2005 føres her. Individuelle underskudd i post 201 kan  anvendes mot årets overskudd ved føring mot post 202/408.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Fradragsramme-grp-2343/AksjerNOKUSMvUnderskuddFremforbartAnvendelse-datadef-17468">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>202 Anvendt i år overført til post 408</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Post 408</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Fradragsramme-grp-2343/AksjerNOKUSMvUnderskuddRestFremforing-datadef-17469">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>203 Rest til framføring</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SpesifikasjonAvFradragTilFremforing-grp-2344">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>III Underskudd til framføring for inntektsårene 2003 og senere</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_IIIUnderskuddTilFramforing-grp-4357" nodeset="/Skjema/SpesifikasjonAvFradragTilFremforing-grp-2344/IIIUnderskuddTilFramforing-grp-4357">
+                    <xforms:group ref="/Skjema/SpesifikasjonAvFradragTilFremforing-grp-2344/IIIUnderskuddTilFramforing-grp-4357">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>301 Underskudd til framføring for inntektsårene 2003 og senere.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Posten skal inneholde eventuelt underskudd til fremføring overført fra  RF-1246 post 301 for inntektsåret 2004.</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/SpesifikasjonAvFradragTilFremforing-grp-2344/IIIUnderskuddTilFramforing-grp-4357/AksjerNOKUSMvUnderskuddOpparbeidetAr-datadef-22128">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>År</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SpesifikasjonAvFradragTilFremforing-grp-2344/IIIUnderskuddTilFramforing-grp-4357/AksjerNOKUSMvFramfortUnderskuddUbenyttetSpesifisertAr-datadef-22145">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>A Framført ubenyttet underskudd</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SpesifikasjonAvFradragTilFremforing-grp-2344/IIIUnderskuddTilFramforing-grp-4357/AksjerNOKUSMvUnderskuddAnsvendelseInntektsaret-datadef-22107">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>B Benyttet i inntektsåret</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SpesifikasjonAvFradragTilFremforing-grp-2344/IIIUnderskuddTilFramforing-grp-4357/AksjerNOKUSMvFramfortUnderskuddRestSpesifisertAr-datadef-22146">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>C Rest til framføring</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/SpesifikasjonAvFradragTilFremforing-grp-2344/AksjerNOKUSMvUnderskuddFremforbartSum-datadef-22108">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum framført ubenyttet underskudd</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SpesifikasjonAvFradragTilFremforing-grp-2344/AksjerNOKUSMvUnderskuddAnvendelseSum-datadef-22109">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum benyttet i inntektsåret</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SpesifikasjonAvFradragTilFremforing-grp-2344/AksjerNOKUSMvUnderskuddFremforbartRestSum-datadef-22110">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum rest til fremføring</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/BeregningAvResultat-grp-2345">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>IV Beregning av alminnelig inntekt</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Postene skal bare fylles ut av deltakere som lignes ordinært.  Deltakere som lignes etter rederiordningen i sktl. § 8-10 flg. skal i  stedet fylle ut postene under romertall V.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/BeregningAvResultat-grp-2345/OrdinareDeltakere-grp-4981">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>IV Beregning av resultat for deltakere som beskattes Ordinært</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/BeregningAvResultat-grp-2345/OrdinareDeltakere-grp-4981/AksjerNOKUSMvResultatNettoAndel-datadef-17470">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>401 Andel av skattemessig overskudd</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Posten skal bare fylles ut dersom det er beregnet et skattemessig  overskudd i NOKUSet. Deltaker som er aksjeselskap, henter aktuell  andel av skattemessig overskudd i selskapsoppgaven, RF-1245 post  410C, mens
+                                personlig deltaker overfører andel fra post 420C.  </p>
+                            <p>Dersom deltaker er et NOKUS, skal overført beløp omregnes til den  valuta som deltaker fører sitt regnskap i.  </p>
+                            <p>Ved kjøp av aksjer/andeler i løpet av året, skal kjøper ta med hele  årsresultatet for selskapet på grunnlag av eierandelen ved  inntektsårets utgang. Ved indirekte eie skal eierandelen i det  direkte eide selskapet
+                                multipliseres med dette selskapets eierandel i  det indirekte eide NOKUSet for å finne deltakers andel av selskapets  resultat som skal tilordnes ham. Indirekte eie skal bare tas med  dersom andelen eies gjennom et
+                                utenlandsk selskap som ikke er NOKUS.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Fra RF-1245 post 410c</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvResultat-grp-2345/OrdinareDeltakere-grp-4981/AksjerNOKUSMvInntektOverskuddUtbetalt-datadef-17471">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>406 Inntektsføring av utbetalt overskudd mv.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Denne posten er bare aktuell for deltakere som er aksjeselskap mv.  Utdelt utbytte vil ikke være skattepliktig så lenge utbyttet er tatt  fra midler som er opptjent i den perioden selskapet er lignet som  NOKUS. Dette
+                                gjelder selv om utbyttet overstiger den skattemessige  inntekten som deltakerne er skattlagt for. Det vil derfor bare være  utdelt utbytte som er tatt fra midler opptjent før selskapet ble  NOKUS som skal føres her.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Gjelder bare for deltakere som er AS mv.</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvResultat-grp-2345/OrdinareDeltakere-grp-4981/AksjerNOKUSMvUnderskuddFremforbartOrdinarLigning-datadef-22118">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>409 Underskudd til fremføring overført fra post 301</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Eventuelt underskudd til fremføring fremgår av post 301. Beløpet  beregnes til skattemessig overskudd i post 401 (eventuelt etter  fradrag for beløp i 408).</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvResultat-grp-2345/OrdinareDeltakere-grp-4981/AksjerNOKUSMvResultatEtterAnventUnderskudd-datadef-20013">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>410 Sum overskudd/alminnelig inntekt</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Summen av postene 401 til 409 utgjør deltakernes skattepliktige  overskudd fra deltakelsen i NOKUSet. Personlige deltakere overfører  overskuddet til selvangivelsen RF-1027 post 2.7.8. Deltaker som er  aksjeselskap
+                                overfører beløpet til RF-1167 post 0730.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/BeregningAvResultat-grp-2345/DeltakereSomKrever810-grp-4982">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>V Beregning av resultat deltakere som liknes etter sktl. § 8-10</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/BeregningAvResultat-grp-2345/DeltakereSomKrever810-grp-4982/AksjerNOKUSMvFinansinntektLigningSkattelov810-datadef-22112">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>502 Andel finansinntekt fra RF-1245 post 425C</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres deltakers andel av selskapets skattemessige finansinntekt.  Beløpet hentes fra RF-1245 post 425 og fordeles forholdsmessig etter  eierandel. Dersom selskapet har netto finansunderskudd, skal andel av
+                                underskuddet føres i post 301 Underskudd til fremføring.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvResultat-grp-2345/DeltakereSomKrever810-grp-4982/AksjerNOKUSMvUnderskuddFremforbartLigningSkattelov810-datadef-22120">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>504 Underskudd til framføring overført fra post 301</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom deltakeren i tidligere år har finansunderskudd til frmføring  fra deltakelsen i NOKUSet skal slik finansunderskudd overføres fra  post 301.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvResultat-grp-2345/DeltakereSomKrever810-grp-4982/AksjerNOKUSMvResultatSktl810EtterAnvendtUnderskudd-datadef-22122">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>506 Sum finansresultat</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvResultat-grp-2345/DeltakereSomKrever810-grp-4982/AksjerNOKUSMvInntektsforingGevinstTapskontoLigningSktl810-datadef-22114">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>508 Andel inntektsføring fra gevinst og tapskonto RF-1245 post 427C</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres deltakers andel av selskapets inntektsføring fra gevinst- og  tapskonto. Beløpet hentes fra RF-1245 post 427 og beregnes  forholdsmessig etter eierandel. Posten er bare aktuell for deltaker  som på tidspunktet
+                                for inntreden i rederiordningen oppfylte  vilkårenefor inntektsføring fra gevinst og tapskonto i NOKUSet.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Overføres RF-1028 post 263</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvResultat-grp-2345/DeltakereSomKrever810-grp-4982/AksjerNOKUSMvInntektInntredenLigningSkattelov810-datadef-22116">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>510 Andel inntektsføring ved inntreden RF-1245 post 428C</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Posten er bare aktuell for deltaker som har trådt inn i  rederiordningen i inntektsåret, eventuelt deltaker som har ervervet  andelen i NOKUSet etter reglene i sktl. § 11-21 (konserninterne  skattefrie overføringer.
+                                Deltakeren fører opp beregnet andel fra  selskapsoppgaven RF-1245 post 428.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Overføres RF-1028 post 264</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvResultat-grp-2345/DeltakereSomKrever810-grp-4982/AksjerNOKUSMvInntektUtgift238Ligning810-datadef-22336">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>512 Andel inntekter/gevinster og utgifter/tap etter skatteloven § 2-38</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres deltakers andel av selskapets inntekter/gevinster og  utgifter/tap som omfattes av sktl. § 2-38. Beløpet hentes fra RF-1245  post 429 og fordeles forholdsmessig etter eierandel. Beløpet kan være  negativt
+                                eller positivt.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>hentes fra post 429C i RF-1245</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvResultat-grp-2345/DeltakereSomKrever810-grp-4982/AksjerNOKUSMvTonnasjeskattAndelLigningSkattelov810-datadef-22127">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>514 Andel tonnasjeskatt fra RF-1245 post 430</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres deltakers andel av selskapets tonnasjeskatt. Beløpet hentes  fra RF-1245 post 430 og fordeles forholdsmessig etter eierandel.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvResultat-grp-2345/DeltakereSomKrever810-grp-4982/FinansaktivaNOKUSMvDeltakerRederibeskatningAndelProsent-datadef-22337">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter number with three fraction digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>515 Finansaktiva i % av totalkapitalen fra RF-1197 post 424</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres NOKUSets finansaktiva i prosent av totalkapitalen. Tallet  hentes fra RF-1197 post 424. Dersom deltakeren fører andelen i sitt  regnskap etter egenkapitalmetoden eller kostmetoden, skal  forholdstallet
+                                overføres til deltakerens RF-1197 romertall IV for  beregning av deltakerens egen finanskapitalgrad.</p>
+                        </xforms:help>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever tre desimaler</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev tre desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:group ref="/Skjema/BeregningAvResultat-grp-2345/DeltakereSomKrever810-grp-4982/Totalkapital-grp-5058">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>517 Andel totalkapital</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres deltakers andel av selskapets totalkapital pr 1.1 og 31.12 i  inntektsåret. Beløpene hentes fra næringsoppgaven (RF-1267 post 9400)  og omregnes til norske kroner, før beløpene fordeles forholdsmessig  etter
+                                eierandel. Dersom deltaker fører andelen i sitt regnskap etter  kostmetoden, skal beløpene overføres til deltakers RF-1197 post 310  for beregning av deltakers eventuelle inntektstillegg for høy  egenkapital. Dersom
+                                deltakers eierandel har endret seg i løpet av  året, er det den aktuelle eierandelen av totalkapitalen pr. 1.1 og  31.12 som skal føres her.</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/BeregningAvResultat-grp-2345/DeltakereSomKrever810-grp-4982/Totalkapital-grp-5058/TotalkapitalNOKUSMvDeltakerAndelRederibeskatningFjoraret-datadef-22338">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>01.01</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/BeregningAvResultat-grp-2345/DeltakereSomKrever810-grp-4982/Totalkapital-grp-5058/TotalkapitalNOKUSMvDeltakerAndelRederibeskatning-datadef-22339">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>31.12</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/BeregningAvResultat-grp-2345/DeltakereSomKrever810-grp-4982/Gjeld-grp-5059">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>518 Andel gjeld</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres deltakers andel av selskapets gjeld pr. 1.1 og 31.12 i  inntektsåret. Beløpene hentes fra næringsoppgaven (RF-1167 postene  9500 og 9550) og omregnes til norske kroner, før beløpene fordeles  etter eierandel.
+                                Dersom deltaker fører andelen i sitt regnskap etter  egenkapitalmetoden, skal beløpene overføres til deltakers RF-1197  post 315 for beregning av deltakers eventuelle inntektstillegg for  høy egenkapital. Dersom
+                                deltakers eierandel har endret seg i løpet av  året, er det den aktuelle eireandelen av totalkapitalen pr 1.1 og  31.12 som skal føres her.</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/BeregningAvResultat-grp-2345/DeltakereSomKrever810-grp-4982/Gjeld-grp-5059/GjeldNOKUSMvDeltakerAndelRederibeskatningFjoraret-datadef-22340">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>01.01</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/BeregningAvResultat-grp-2345/DeltakereSomKrever810-grp-4982/Gjeld-grp-5059/GjeldNOKUSMvDeltakerAndelRederibeskatning-datadef-22341">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>31.12</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/BeregningAvSkjermingsfradragOgSkattepliktigUtbytte-grp-6668">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>VI Beregning av skjermingsfradrag og skattepliktig utbytte for  personlige deltakere</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Dette avsnittet skal bare fylles ut av personlige deltakere. Slike  deltakere vil ved utbytte fra NOKUSet og ved gevinst ved realisasjon  av aksjene bli beskattet for en inntekt ut over beregnet  skjermingsfradrag på aksjene.
+                        Skjermingsfradraget beregnes på samme  måte som for aksjer i norske selskaper, dvs. ved å multiplisere  skjermingsgrunnlaget med en skjermingsrente. Skjermingsfradraget  tilkommer eieren av aksjen ved utgangen av inntektsåret.  </p>
+                    <p/>
+                    <p>Grunnlaget for beregningen er skattyters kostpris på aksjene,  korrigert for fastsatte RISK-beløp dersom aksjene ble ervervet før  2006.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/BeregningAvSkjermingsfradragOgSkattepliktigUtbytte-grp-6668/Skjermingsgrunnlag-grp-6671">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>600 Kostpris og anskaffelseskostnader ved erverv av aksjer/andeler</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/BeregningAvSkjermingsfradragOgSkattepliktigUtbytte-grp-6668/Skjermingsgrunnlag-grp-6671/AksjerNOKUSMvSkjermingsfradragAntallDeltakeroppgave-datadef-27448">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall aksjer/andeler</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvSkjermingsfradragOgSkattepliktigUtbytte-grp-6668/Skjermingsgrunnlag-grp-6671/AksjerNOKUSMvSkjermingsfradragErvervstidspunktDeltakeroppgave-datadef-27449">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ervervstidspunkt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvSkjermingsfradragOgSkattepliktigUtbytte-grp-6668/Skjermingsgrunnlag-grp-6671/AksjerNOKUSMvSkjermingsfradragKostprisDeltakeroppgave-datadef-27450">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kostpris</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her oppgis historisk kostpris for aksjene, evt. kapitalinnskudd i  selskapet ved stiftelse eller emisjon, samt antall aksjer og  tidspunkt for erverv. Dersom aksjer er ervervet på forskjellige  tidspunkter, må
+                                opplysningene i dette avsnittet (dvs. postene  600-655) fylles ut for hvert enkelt aksjeerverv. Det er deltakerens  aksjer som er eiet pr. 31.12.2006 som skal oppgis. Beløpet overføres  fra post 950.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvSkjermingsfradragOgSkattepliktigUtbytte-grp-6668/Skjermingsgrunnlag-grp-6671/AksjerNOKUSMvSkjermingsfradragSumRISK010106Deltakeroppgave-datadef-27451">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>605 Akkumulert RISK på andelene pr 01.01.2006</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom aksjene er ervervet før 2006, vil det kunne være fastsatt  RISK-beløp på aksjene. Fastsatt RISK på aksjene for samtlige  inntektsår i eiertiden summeres.  Beløpet i posten kan være positivt  eller negativt.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvSkjermingsfradragOgSkattepliktigUtbytte-grp-6668/Skjermingsgrunnlag-grp-6671/AksjerNOKUSMvSkjermingsgrunnlagDeltakeroppgave-datadef-27452">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>615 Skjermingsgrunnlag pr. 31.12.2006</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres summen av postene 600 og 605.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvSkjermingsfradragOgSkattepliktigUtbytte-grp-6668/Skjermingsgrunnlag-grp-6671/AksjerNOKUSMvSkjermingsfradragDeltakeroppgave-datadef-27453">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>620 Årets skjermingsfradrag</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Skjermingsgrunnlaget i post 615 multipliseres med årets  skjermingsrente. Skjermingsrenten blir beregnet og kunngjort av  Finansdepartementet. I tillegg kunngjøres den på www.skatteetaten.no  i januar i året etter inntektsåret.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>skjermingsgrunnlaget fra post 615 x skjermingsrente</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/BeregningAvSkjermingsfradragOgSkattepliktigUtbytte-grp-6668/Utbytte-grp-6672">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:input ref="/Skjema/BeregningAvSkjermingsfradragOgSkattepliktigUtbytte-grp-6668/Utbytte-grp-6672/UtbytteMottattFraNOKUSMvDeltakeroppgave-datadef-27454">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>625 Mottatt skatterettslig utbytte i 2006</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Posten skal inneholde summen av skattepliktige utdelinger fra  NOKUS-selskapet i 2006 knyttet til de aksjer som er ført opp i post  600. Som utdeling regnes vederlagsfri overføring av verdier (penger,  driftsmidler,
+                                løsøre mv.) fra selskapet til aksjonær/deltaker eller  noen som identifiseres med deltakeren. Utdeling av tidligere innskutt  aksjekapital eller overkurs anses ikke som skattepliktig utbytte.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(§ 10-11 nr.2)</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvSkjermingsfradragOgSkattepliktigUtbytte-grp-6668/Utbytte-grp-6672/UtbytteberegningKreditfradragAndelNOKUSMvDeltakeroppgave-datadef-27455">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>630 Andel kredittfradrag etter § 16-20 annet ledd</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>I visse tilfeller vil deltakeren kunne få kreditfradrag i norsk skatt  på overskudd fra NOKUS-selskapet med andel skatt som NOKUSet har  betalt i den stat det er hjemmehørende. Den delen av kreditfradraget  som faller
+                                på det utdelte utbyttet (dvs. på underliggende inntekt som  deles ut som utbytte), skal legges til i post 630.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvSkjermingsfradragOgSkattepliktigUtbytte-grp-6668/Utbytte-grp-6672/UtbytteSkattegrunnlagReduksjonNOKUSMvDeltakeroppgave-datadef-27456">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>635 Reduksjon etter § 10-67 annet ledd</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Summen av beløpene i post 625 og 630 multipliseres med 28 %.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>28% av summen av beløpene i postene 625 og 630</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvSkjermingsfradragOgSkattepliktigUtbytte-grp-6668/Utbytte-grp-6672/UtbytteSkattepliktigNOKUSMvForSkjermingDeltakeroppgave-datadef-27457">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>640 Skattepliktig utbytte før fradrag for skjerming</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres summen av post 625 og 630, med fradrag for beløpet i post  635.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvSkjermingsfradragOgSkattepliktigUtbytte-grp-6668/Utbytte-grp-6672/SkjermingsfradragUtbytteskatteberegningNOKUSMvDeltakeroppgave-datadef-27458">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>645 Årets skjermingsfradrag</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Beløpet overføres fra post 620.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Overføres fra post 620</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BeregningAvSkjermingsfradragOgSkattepliktigUtbytte-grp-6668/Utbytte-grp-6672/UtbytteSkattepliktigNOKUSMvDeltakeroppgave-datadef-27459">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>655 Skattepliktig utbytte</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres beløpet i post 640 med fradrag for beløpet i post 645.  Dersom skjermingsfradraget i post 645 er større enn beløpet i post  640, skal det føres kr 0 i post 655.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/ReguleringAvAksjensInngangsverdi-grp-6669">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>VII Regulering av aksjens inngangsverdi med endring av selskapets  beskattede inntekt</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Dette avsnittet skal bare fylles ut av deltaker som er aksjeselskap  mv. Postene nedenfor fylles ut samlet for de aksjer deltakeren eier i  NOKUS-selskapet.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Kun for deltakere som er AS mv</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/ReguleringAvAksjensInngangsverdi-grp-6669/RISKBeregningAksjerNOKUSMvOverskuddDeltakeroppgave-datadef-27460">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>700 Overskudd fra post 410</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Eventuelt beløp i post 410 i deltakeroppgaven overføres til post 700.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ReguleringAvAksjensInngangsverdi-grp-6669/RISKBeregningAksjerNOKUSSelskapsskattNOKUSetDeltakeroppgave-datadef-27461">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>710 Selskapsskatt betalt av NOKUS-selskapet</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom NOKUS -selskapet har betalt skatt på selskapets overskudd, skal  den andel som faller på deltakerens aksjer føres her. Eventuell  kildeskatt på utbytte utdelt til deltakerne, samt skatt betalt av  deltakerne knyttet
+                            til selskapets overskudd,  skal ikke hensyntas.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ReguleringAvAksjensInngangsverdi-grp-6669/RISKBeregningAksjerNOKUSAvsattUtbytteDeltakeroppgave-datadef-27462">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>720 Andel av avsatt utbytte pr. 31.12.2006</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ReguleringAvAksjensInngangsverdi-grp-6669/RISKBeregningAksjerNOKUSEkstraordinartUtbytteDeltakeroppgave-datadef-27463">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>725 Andel av ekstraordinært utbytte utdelt i 2006</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres forskjellen mellom avsatt utbytte pr. 31.12.2005 og faktisk  utdelt utbytte i 2006.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ReguleringAvAksjensInngangsverdi-grp-6669/RISKBeregningAksjerNOKUSDeltakersAndelDeltakeroppgave-datadef-27464">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>730 Endring i selskapets skattlagte kapital knyttet til deltakernes  andel</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres beløpet i post 700, med fradrag for beløpene i postene 710,  720 og 725.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ReguleringAvAksjensInngangsverdi-grp-6669/RISKAksjerNOKUSDeltakeroppgave-datadef-27465">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>740 Regulering av inngangsverdi pr. aksje</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Beløpet i post 730 divideres på deltakerens aksjer pr. 31.12.2006.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OpplysningerOmRealisasjonMv-grp-2346">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>VIII Opplysninger om realisasjon av aksjer/andeler</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Denne rubrikken skal kun fylles ut av deltaker som har realisert  aksjer/andeler i løpet av inntektsåret. Gevinst ved realisasjon av  aksjer/andeler er skattepliktig som alminnelig inntekt. Tilsvarende  er tap på aksjer/andeler
+                        fradragsberettiget i alminnelig inntekt. For  deltaker som er aksjeselskap mv. er realisasjon av aksjer/andeler i  NOKUS skattefritt dersom NOKUS´et er hjemmehørende i et EØS-land.    </p>
+                    <p>Det er deltakers bostedskommune eller kontorkommune (for selskaper)  som er skattestedet. Gevinst eller tap beregnes som differansen  mellom vederlag og inngangsverdi for aksjene. Som inngangsverdi  regnes også tidligere
+                        fastsatte RISK-beløp i eierperioden frem til og  med inntektsåret 2005. For deltaker/aksjonær som er aksjeselskap mv.  medtas også aksjenes forholdsmessige del av endringer i  NOKUS-selskapets skattlagte kapital fom.
+                        inntektsåret 2006. For  personlig deltaker/aksjonær skal eventuelt ubenyttet  skjermingsfradrag fom. inntektsåret 2006 redusere gevinst ved  realisasjon av aksjer.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/OpplysningerOmRealisasjonMv-grp-2346/ErververAvhender-grp-4360">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Erverver</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Denne rubrikken skal kun fylles ut av deltaker som har realisert eller  ervervet aksjer/andeler i løpet av året.  Gevinst ved realisasjon av  aksjer/andeler er skattepliktig som alminnelig inntekt.  Tilsvarende  er tap på
+                            aksjer/andeler fradragsberettiget i alminnelig inntekt. Det  er deltakers bostedskommune (for selskaper) som er skattestedet.  Gevinst eller tap skal beregnes som differansen mellom vederlag og  kostpris for aksjene.
+                            Korrigert for eventuelt RISK-beløp i perioden.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/OpplysningerOmRealisasjonMv-grp-2346/ErververAvhender-grp-4360/AksjerNOKUSMvAvhenderErververNavn-datadef-17474">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmRealisasjonMv-grp-2346/ErververAvhender-grp-4360/AksjerNOKUSMvAvhenderErververAdresse-datadef-17475">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmRealisasjonMv-grp-2346/ErververAvhender-grp-4360/AksjerNOKUSMvErververAvhenderPostnummer-datadef-17476">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmRealisasjonMv-grp-2346/ErververAvhender-grp-4360/AksjerNOKUSMvErververAvhenderPoststed-datadef-17477">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmRealisasjonMv-grp-2346/ErververAvhender-grp-4360/AksjerNOKUSMvRealisasjonAndel-datadef-17478">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Realisert andel %</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever to desimaler</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev to desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/OpplysningerOmRealisasjonMv-grp-2346/Salg-grp-4361">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Salg</p>
+                    </xforms:caption>
+                    <xforms:group ref="/Skjema/OpplysningerOmRealisasjonMv-grp-2346/Salg-grp-4361/Realisasjonsvederlag-grp-4362">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>800 Realisasjonsvederlag for aksjene/andelene</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres vederlaget for aksjene redusert med eventuelle  salgsomkostninger. Realisasjon i utenlandsk valuta omregnes til  norske kroner på salgstidspunktet. Antall aksjer/andeler skal oppgis.  Dersom deltaker er et
+                                NOKUS som selger aksjer/andeler i et annet  NOKUS, skal salgsvederlaget eventuelt omregnes til den valuta som  deltaker fører sitt regnskap i.</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/OpplysningerOmRealisasjonMv-grp-2346/Salg-grp-4361/Realisasjonsvederlag-grp-4362/AksjerNOKUSMvRealisasjonAntall-datadef-17480">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Antall aksjer/andeler</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmRealisasjonMv-grp-2346/Salg-grp-4361/Realisasjonsvederlag-grp-4362/AksjerNOKUSMvRealisasjonTidspunkt-datadef-20011">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Tidspkt.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmRealisasjonMv-grp-2346/Salg-grp-4361/Realisasjonsvederlag-grp-4362/AksjerNOKUSMvRealisasjonVederlag-datadef-17481">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Vederlag</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres vederlaget for aksjene redusert med eventuelle  salgsomkostninger.  Realisasjon i utenlandsk valuta omregnes til  norske kroner på salgstidspunktet.  Antall aksjer/andeler skal  oppgis. Dersom deltaker er
+                                    et NOKUS som selger aksjer/andeler i et  annet NOKUS, skal kostprisen eventuelt omregnes til den valuta som  deltaker fører sitt regnskap i.</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/OpplysningerOmRealisasjonMv-grp-2346/Salg-grp-4361/KostprisForAksjene-grp-4363">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>810 Kostpris for aksjene/andelene</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres ervervstidspunktet for aksjene/andelene, samt kostprisen  omregnet til norske kroner på ervervstidspunktet. Dersom selskapet  tidligere var direktelignet, skal kostpris på aksjene settes til  deltakers andel
+                                av de skattemessige verdier ved utløpet av 1993.  Dersom deltaker er et NOKUS som selger aksjer/andeler i et annet  NOKUS, skal kostprisen eventuelt omeregnes til den valuta som  deltaker fører sitt regnskap i.</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/OpplysningerOmRealisasjonMv-grp-2346/Salg-grp-4361/KostprisForAksjene-grp-4363/AksjerNOKUSMvRealisasjonErvervstidspunkt-datadef-17482">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ervervstidspunkt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OpplysningerOmRealisasjonMv-grp-2346/Salg-grp-4361/KostprisForAksjene-grp-4363/AksjerNOKUSMvRealisasjonKostpris-datadef-17483">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kostpris</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres ervervstidspunktet for aksjene/andelene, samt kostprisen  omregnet til norske kroner på anskaffelsestidspunktet. Dersom  selskapet tidligere var direktelignet, skal kostpris på aksjene  settes til
+                                    deltakerens andel av de skattemessige verdier ved utløpet  av 1993. Dersom deltaker er et NOKUS som selger aksjer/andeler i et  annet NOKUS, skal kostprisen eventuelt omregnes til den valuta som  deltaker fører
+                                    sitt regnskap i.</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:input ref="/Skjema/OpplysningerOmRealisasjonMv-grp-2346/Salg-grp-4361/AksjerNOKUSMvRISKReguleringEiertid-datadef-17484">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>820 RISK-regulering i eiertiden</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres beregnet RISK fastsatt frem til og med inntektsåret 2005  knyttet til de realiserte aksjer for den periode deltakeren har blitt  skattlagt for det skattemessige resultat fra NOKUS-selskapet. RISK  som skriver
+                                seg fra et NOKUS som eies gjennom et utenlandsk selskap  som ikke er NOKUS, skal hensyntas i gevinstberegningen ved salget av  de direkte eide aksjene i det mellomliggende utenlandske  selskapet.  </p>
+                            <p>Dersom deltakeren som har solgt aksjer er et NOKUS-selskap, skal RISK  som skriver seg fra de realiserte aksjer hensyntas på vanlig måte ved  gevinstoppgjøret, selv om samme RISK er godskrevet/belastet norsk  indirekte
+                                eier. Gevinsten eller tapet vil tilordnes norsk eier som  del av det skattemessige resultat i det direkte eide NOKUS-selskapet.  Selges bare en andel, må det påses at bare en tilsvarende del av  RISK-beløpet påvirker gevinst/tapsberegningen.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmRealisasjonMv-grp-2346/Salg-grp-4361/AksjerNOKUSMvRealisasjonUnderskuddFremforing-datadef-17485">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>830 Fremføring av underskudd fra post 203</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Resultatet av gevinst/tapsberegningen skal alltid reduseres med  eventuelt fremførbart underskudd fra  203, selv om dette medfører  eller øker skattemessig tap. Selges bare en andel av deltakers  aksjer/eierandel i
+                                selskapet, må det påses at bare en tilsvarende del  av underskuddet påvirker gevinst/tapsberegningen. Eventuelt  fremførbart underskudd i post 301 skal ikke tas med i  gevinst/tapsoppgjøret, fordi slikt underskudd ikke
+                                har påvirket  tidligere fastsatt RISK.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Se post 203 og 301, jf. rettledningen</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmRealisasjonMv-grp-2346/Salg-grp-4361/AksjerNOKUSMvRealisasjonGevinstTap-datadef-17486">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>840 Gevinst/tap</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Endelig gevinst/tap for personlig deltaker overføres selvangivelsen  post 3.1.5/3.3.8. Deltaker som er AS, ANS, KS eller NOKUS, overfører  gevinst/tap til næringsoppgaven RF-1167 post 0700 (gevinst) eller  post 0840 (tap).</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Overføres Selvangivelsen, ANS/KS/AS overfører beløpet til  næringsoppgaven</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>IX Ajourhold av inngangsverdi og skjermingsgrunnlag</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/Kostpris-grp-6673">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kostpris</p>
+                    </xforms:caption>
+                    <xforms:group ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/Kostpris-grp-6673/Kostpris-grp-6678">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kostpris</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/Kostpris-grp-6673/Kostpris-grp-6678/AksjerNOKUSKostprisAnskaffelseAretsInngangDeltakeroppgave-datadef-27466">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>900 Kostpris og anskaffelseskostnader pr 01.01.2006</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her oppgis historisk kostpris for aksjene, evt. kapitalinnskudd i  selskapet ved stiftelse eller emisjon, for de aksjer deltaker eide  pr. 1.1.2006.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/Kostpris-grp-6673/Kostpris-grp-6678/AksjerNOKUSKostprisRealiserteDeltakeroppgave-datadef-27468">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>910 Kostpris på realiserte andeler</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her oppgis kostpris på de aksjer som er realisert i løpet av 2006.  Beløpet skal være overensstemmende med beløpet i post 810.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>jf. post 810</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/Kostpris-grp-6673/Kostpris-grp-6678/AksjerNOKUSKostprisNyervervedeDeltakeroppgave-datadef-27470">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>920 Erverv av nye andeler i 2006</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her oppgis samlet kostpris for ervervede aksjer/andeler i 2006.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/Kostpris-grp-6673/Kostpris-grp-6678/AksjerNOKUSKostprisAnnenKapitaltilforselDeltakeroppgave-datadef-27472">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>930 Tilførsel av kapital uten økning av eiendeler</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Dersom deltaker har foretatt innskudd ved oppskriving på eksisterende  aksjer, eller foretatt egenkapitalinnskudd som skal behandles som  kostpris på aksjer, skal dette legges til kostprisen på eksisterende  aksjer.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/Kostpris-grp-6673/Kostpris-grp-6678/AksjerNOKUSKostprisTilbakebetaltKapitalDeltakeroppgave-datadef-27473">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>940 Tilbakebetalt kapital som ikke er skattepliktig</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Ved en selskapsrettslig kapitalnedsettelse, vil den delen av  utbetalingen som består av tidligere innbetalt kapital ikke være  skattepliktig på deltakers hånd. Beløpet skal imidlertid redusere  deltakers
+                                    inngangsverdi på aksjene. Det samme gjelder ved  tilbakebetalinger som er tatt fra fond som inneholder tidligere  innbetalt kapital (overkurs).</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>- som ikke inngår i post 625 -</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/Kostpris-grp-6673/Kostpris-grp-6678/AksjerNOKUSKostprisDeltakeroppgave-datadef-27474">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum kostpris</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Personlige deltakere overfører beløpet til post 600. Dersom personlig  deltaker har aksjer som er ervervet i forskjellige inntektsår/ eller  med ulik kostpris pr. aksje, må post 600 fylles ut for hvert enkelt  aksjeerverv.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Personlige deltakere overfører beløpet til post 600</p>
+                            </xforms:hint>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/Kostpris-grp-6673/Eierandel-grp-6677">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Eierandel i %</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/Kostpris-grp-6673/Eierandel-grp-6677/AksjerNOKUSEierandelAretsInngangDeltakeroppgave-datadef-27467">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>900 Kostpris og anskaffelseskostnader pr 01.01.2006</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>jf. post 605</p>
+                            </xforms:hint>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever to desimaler</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/Kostpris-grp-6673/Eierandel-grp-6677/AksjerNOKUSEierandelRealiserteDeltakeroppgave-datadef-27469">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>910 Kostpris på realiserte andeler</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>jf. post 810</p>
+                            </xforms:hint>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever to desimaler</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/Kostpris-grp-6673/Eierandel-grp-6677/AksjerNOKUSEierandelNyervervedeDeltakeroppgave-datadef-27471">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>920 Erverv av nye andeler i 2006</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever to desimaler</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/Kostpris-grp-6673/Eierandel-grp-6677/AksjerNOKUSEierandelDeltakeroppgave-datadef-27475">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum kostpris</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever to desimaler</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+                <xforms:group ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/RISK-grp-6674">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>RISK</p>
+                    </xforms:caption>
+                    <xforms:group ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/RISK-grp-6674/RISK-grp-6679">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>RISK</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/RISK-grp-6674/RISK-grp-6679/RISKAksjerNOKUSAkkumulertRISKAretsInngangDeltakeroppgave-datadef-27476">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1000 Akkumulert RISK pr. 01.01.2006</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Posten skal inneholde akkumulert RISK i eiertiden for samtlige aksjer  eiet pr. 1.1.2006.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>jf. post 605</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/RISK-grp-6674/RISK-grp-6679/RISKAksjerNOKUSRealiserteAndelerDeltakeroppgave-datadef-27477">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1010 RISK på realiserte eierandeler</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Ved realisasjon skal RISK knyttet til de realiserte aksjer/andeler  føres opp her. Beløpet skal være overensstemmende med beløpet i post  820.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>jf. post 820</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/RISK-grp-6674/RISK-grp-6679/RISKAksjerNOKUSAretsRISKDeltakeroppgave-datadef-27478">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1030 Årets RISK</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Posten skal bare fylles ut av selskapsdeltakere. Beløpet hentes fra  post 730.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>jf. post 730</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/RISK-grp-6674/RISK-grp-6679/RISKAksjerNOKUSAkkumulertRISKDeltakeroppgave-datadef-27479">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>1040 Sum RISK</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres summen  av post 1000 og post 1030, med fradrag for beløp i  post 1010.</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+                <xforms:group ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/UbenyttetSkjermingsfradragTilFremforing-grp-6681">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Ubenyttet skjermingsfradrag til fremføring</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/AjourholdAvInngangsverdiOgSkjermingsgrunnlag-grp-6670/UbenyttetSkjermingsfradragTilFremforing-grp-6681/SkjermingsfradragUbenyttetTilFramforingNOKUSDeltakeroppgave-datadef-27514">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1100 Ubenyttet skjermingsfradrag til fremføring</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Posten skal bare fylles ut av personlige deltakere. Dersom  skjermingsfradraget i post 645 er større enn skattepliktig utbytte i  post 640, har deltakeren et ubenyttet skjermingsfradrag som skal  fremføres til senere
+                                inntektsår. Det fremførte skjermingsfradraget  kan anvendes til å redusere skattepliktig utbytte i et senere  inntektsår, eller til å redusere gevinst ved realisasjon av aksjer.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

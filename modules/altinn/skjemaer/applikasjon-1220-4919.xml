@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RA-0597: Elektronisk innrapportering fra drosjesentraler</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1220-4920.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/EnhetsInformasjon-grp-5839/EnhetsOpplysninger-grp-5840/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/EnhetsInformasjon-grp-5839/EnhetsOpplysninger-grp-5840/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/EnhetsInformasjon-grp-5839/EnhetsOpplysninger-grp-5840/EnhetPostadresse-datadef-14" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/EnhetsInformasjon-grp-5839/EnhetsOpplysninger-grp-5840/EnhetPostnummer-datadef-6673" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/EnhetsInformasjon-grp-5839/EnhetsOpplysninger-grp-5840/EnhetPoststed-datadef-6674" required="true"/>
+            <xforms:bind ref="/Skjema/EnhetsInformasjon-grp-5839/Kontaktperson-grp-5841/KontaktpersonNavn-datadef-2" required="true"/>
+            <xforms:bind ref="/Skjema/EnhetsInformasjon-grp-5839/Oppgaveperiode-grp-5842/RapportAr-datadef-16037" required="true"/>
+            <xforms:bind ref="/Skjema/EnhetsInformasjon-grp-5839/Oppgaveperiode-grp-5842/RapportKvartal-datadef-16038" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RA-0597. Elektronisk rapportering fra Drosjesentraler</p>
+            </xforms:caption>
+            <xforms:hint brreg:lang="NOB">
+                <p>Oppgi informasjon om rapporterende drosjesentral</p>
+            </xforms:hint>
+            <xforms:caption brreg:lang="NON">
+                <p>RA-0597. Elektronisk rapportering fra Drosjesentraler</p>
+            </xforms:caption>
+            <xforms:hint brreg:lang="NON">
+                <p>Oppgje informasjon om rapporterande drosjesentral</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/EnhetsInformasjon-grp-5839">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Enhets informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Einhets informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/EnhetsInformasjon-grp-5839/EnhetsOpplysninger-grp-5840">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Enhets opplysninger</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Einhets opplysningar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/EnhetsInformasjon-grp-5839/EnhetsOpplysninger-grp-5840/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Drosjesentralens organisasjonsnummer:</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnummeret til drosjesentralen:</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/EnhetsInformasjon-grp-5839/EnhetsOpplysninger-grp-5840/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn:</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/EnhetsInformasjon-grp-5839/EnhetsOpplysninger-grp-5840/EnhetPostadresse-datadef-14">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postadresse:</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postadresse:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/EnhetsInformasjon-grp-5839/EnhetsOpplysninger-grp-5840/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer:</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnummer:</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/EnhetsInformasjon-grp-5839/EnhetsOpplysninger-grp-5840/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed:</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/EnhetsInformasjon-grp-5839/Kontaktperson-grp-5841">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kontaktperson</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kontaktperson</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/EnhetsInformasjon-grp-5839/Kontaktperson-grp-5841/KontaktpersonNavn-datadef-2">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn på kontaktperson:</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn på kontaktperson:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/EnhetsInformasjon-grp-5839/Kontaktperson-grp-5841/KontaktpersonTelefonnummer-datadef-3">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefon til kontaktpersonen:</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Telefon til kontaktpersonen:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/EnhetsInformasjon-grp-5839/Kontaktperson-grp-5841/KontaktpersonEPost-datadef-2876">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>E-post adresse til kontaktperson:</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>E-post adresse til kontaktperson:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/EnhetsInformasjon-grp-5839/Oppgaveperiode-grp-5842">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgaveperiode</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Oppgaveperiode</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/EnhetsInformasjon-grp-5839/Oppgaveperiode-grp-5842/RapportAr-datadef-16037">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Rapporteringsår:</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Rapporteringsår:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:selectOne ref="/Skjema/EnhetsInformasjon-grp-5839/Oppgaveperiode-grp-5842/RapportKvartal-datadef-16038">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1. kvartal</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>1. kvartal</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>2. kvartal</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>2. kvartal</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>3</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>3. kvartal</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>3. kvartal</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>4</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>4. kvartal</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>4. kvartal</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>5</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Årsrapportering</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Årsrapportering</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Rapporteringskvartal:</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Rapporteringskvartal:</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/DataFraDrosjesentralen-grp-5843">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Data fra drosjesentralen</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>OBS: For samtlige spørsmål rapporteres det samlet for alle enheter  tilknyttet drosjesentralen:</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Data fra drosjesentralen</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NON">
+                    <p>OBS: For alle spørsmål skal det rapporterast samla for alle einingar  som er tilknytt drosjesentralen:</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/DataFraDrosjesentralen-grp-5843/DrosjeSentralBilerAntall-datadef-25141">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgi antall tilmeldte biler pr. dato i rapporteringskvartalet:</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Oppgi antallet tilmeldte biler i rapporteringsperioden, uansett hvor  lenge tilknytningen har vart</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Oppgje talet på tilmeldte bilar pr. dato i rapporteringskvartalet:</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Oppgje talet på tilmeldte bilar i rapporteringsperioden, uansett kor  lenge tilknytninga har vart</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/DataFraDrosjesentralen-grp-5843/DrosjeSentralLoyvehaverAntall-datadef-25143">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgi tallet på de foretakene/løyveinnehaverne som har utført  transportoppdrag i rapporteringsperioden:</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Oppgje talet på dei føretaka/løyveinnehavarane som har utført  transportoppdrag i rapporteringsperioden:</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/DataFraDrosjesentralen-grp-5843/DrosjeSentralTurerAntall-datadef-25144">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgi antall turer omsatt i alt:</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Oppgi alle turer som er registrert i rapporteringsperioden, uavhengig  av bestillingsform</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Oppgje talet på turar omsett i alt:</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Oppgje alle turar som er registrerte i rapporteringsperioden,  uavhengig av form på bestillinga</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/DataFraDrosjesentralen-grp-5843/DrosjeSentralOmsetning-datadef-25145">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgi omsetning i alt:</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Oppgi inntekter/omsetning i alt eks. mva fra trafikk i kroner for  løyver tilknyttet sentralen i rapporteringsperioden som er registrert  via taksameter uansett betalingsform (kreditt/kontant)</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Oppgje omsetning i alt:</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Oppgje inntekter/omsetning i alt eks. mva frå trafikk i kroner for  løyver tilknytte sentralen i rapporteringsperioden som er registrerte  via taksameter uansett form på betalinga (kreditt/kontant)</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/DataFraDrosjesentralen-grp-5843/DrosjeSentralOpptattTimer-datadef-25146">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgi opptatte biltimer:</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Oppgi antall timer bilen(e) har vært i drift i rapporteringsperioden.  Gjør et anslag hvis nøyaktige opplysninger mangler</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Oppgje opptatte biltimar:</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Oppgje talet på timar bilen(ane) har vore i drift i  rapporteringsperioden. Gjer eit overslag der nøyaktige opplysningar  manglar</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/DataFraDrosjesentralen-grp-5843/DrosjeSentralLedigTimer-datadef-25147">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgi ledige biltimer:</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Oppgi antall timer bilen(e) har vært ledig i rapporteringsperioden.  Gjør et anslag hvis nøyaktige opplysninger mangler</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Oppgje ledige biltimar:</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Oppgje talet på timar bilen(ane) har vore ledige i  rapporteringsperioden. Gjer eit overslag der nøyaktige opplysningar  manglar</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/DataFraDrosjesentralen-grp-5843/DrosjeSentralKilometerIalt-datadef-25148">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgi antall kilometer kjørt i næring i alt:</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Oppgi antall kilometer i rapporteringsperioden som de rapporterte  bilene har kjørt i næring i alt, dvs. både betalte og ikke betalte  kilometer. Gjør et anslag hvis nøyaktige opplysninger mangler</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Oppgje talet på kilometer kjørt i næring i alt:</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Oppgje talet på kilometer i rapporteringsperioden som dei rapporterte  bilane har kjørt i næring i alt, dvs. både betalte og ikkje betalte  kilometer. Gjer eit overslag der nøyaktige opplysningar manglar</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/DataFraDrosjesentralen-grp-5843/DrosjeSentralKilometerPassasjer-datadef-25149">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgi antall kilometer kjørt i næring med passasjerer:</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Oppgi antall besatte/betalte kilometer i rapporteringsperioden. Gjør  et anslag hvis nøyaktige opplysninger mangler</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Oppgje talet på kilometer kjørt i næring med passasjerar:</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Oppgje talet på besette/betalte kilometer i rapporteringsperioden.  Gjer eit overslag der nøyaktige opplysningar manglar</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Kommentarer-grp-5844">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Kommentarer</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Kommentarar</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Kommentarer-grp-5844/Tilleggsopplysninger-datadef-7683">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Har du noen kommentar til spørreskjemaet kan du skrive de her:</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Har du kommentarar til spørjeskjemaet kan du skrive dei her:</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

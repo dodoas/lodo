@@ -1,0 +1,2067 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1086-U: Aksjonærregisteroppgaven - underskjema</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-923-4398.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/Selskapsidentifikasjon-grp-3986/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind ref="/Skjema/Aksjonaropplysninger-grp-3987/AntallAksjerPrAksjonar-grp-3989/AksjerAntallFjoraret-datadef-11994" required="true"/>
+            <xforms:bind ref="/Skjema/Aksjonaropplysninger-grp-3987/AntallAksjerPrAksjonar-grp-3989/AksjonarAksjerAntall-datadef-17741" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1086-U Aksjonærregisteroppgaven 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>For informasjon om utfylling, se rettledningen til RF-1086</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>Aksjonærregisteroppgåva 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>For informasjon om utfylling, sjå rettleiing til RF-1086</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/Selskapsidentifikasjon-grp-3986">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Selskapsidentifikasjon</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Selskapet må identifiseres gjennom organisasjonsnummer. For å sikre  riktig likningsbehandling må aksjeklasse og aksjenes pålydende  oppgis.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Selskapsidentifikasjon</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Selskapet må identifiserast gjennom organisasjonsnummer. For å sikre  riktig likningsbehandling må aksjeklasse og pålydande givast opp.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/Selskapsidentifikasjon-grp-3986/EnhetOrganisasjonsnummer-datadef-18">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Organisasjonsnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Organisasjonsnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/Selskapsidentifikasjon-grp-3986/AksjeType-datadef-17659">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>01</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ordinære aksjer</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ordinære aksjar</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>02</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Preferanseaksjer</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Preferanseaksjar</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>03</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>A-aksjer</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>A-aksjar</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>04</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>B-aksjer</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>B-aksjar</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>05</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>C-aksjer</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>C-aksjar</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>06</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>D-aksjer</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>D-aksjar</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>07</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ekstraordinære aksjer</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ekstraordinære aksjar</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Aksjeklasse</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>jf. aksjeklasse i hovedskjema (RF-1086)</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Aksjeklasse</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>jf. aksjeklasse i hovedskjema (RF-1086)</p>
+                    </xforms:hint>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/Selskapsidentifikasjon-grp-3986/EnhetISINNummer-datadef-17513">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>ISIN</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kun for VPS-registrerte aksjer.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feil format; skal være på formen NOxxxxxxxxxx</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>ISIN</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Berre for selskap registrert i VPS</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feil format; skal være på formen NOxxxxxxxxxx</p>
+                    </xforms:alert>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Aksjonaropplysninger-grp-3987">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Aksjonæropplysninger</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Opplysningene på aksjonærnivå følger som hovedregel samme oppsett som  på selskapsnivå.  </p>
+                    <p>I post 19-21 skal det gis opplysninger  om identifikasjon av  aksjonæren (fødsels-/D-nummer/org.nummer, navn, adresse mv.), antall  aksjer og utdelt utbytte (herav trukket kildeskatt).  </p>
+                    <p>Transaksjonene på aksjonærnivå er splittet opp i aksjer i tilgang i  post 23-24, og aksjer i avgang i post 25-26. I tillegg skal det gis  opplysninger om endringer i aksjekapital og overkurs som gjelder for  den enkelte
+                        aksjonær, post 27-29.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Standardopplysninger (navn, adresse, antall aksjer og utbytte)</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Aksjonæropplysningar</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Opplysningane på aksjonærnivå følgjer som hovudregel same oppsett som  på selskapsnivå.  </p>
+                    <p>I post 19?21 skal det givast opplysningar om identifikasjon av  aksjonæren (fødsels-/D-nummer/org.nummer, namn, adresse o.a.), talet  på aksjar og utdelt utbytte (mellom anna trekt kjeldeskatt).  </p>
+                    <p>Transaksjonane på aksjonærnivå er splitta opp i aksjar i tilgang i  post 23?24, og aksjar i avgang i post 25?26. I tillegg skal det  givast opplysningar om endringar i aksjekapital og overkurs som gjeld  for kvar enkelt
+                        aksjonær, post 27?29.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NON">
+                    <p>Standardopplysningar (namn, adresse, talet på aksjar og utbytte)</p>
+                </xforms:hint>
+                <xforms:group ref="/Skjema/Aksjonaropplysninger-grp-3987/NorskUtenlandskAksjonar-grp-3988">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>19 Norsk/utenlandsk aksjonær</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>- Fysiske personer som er bosatt i Norge skal identifiseres ved  fødselsnummer, navn og adresse.  </p>
+                        <p>- Utenlandske statsborgere som har fått tildelt D-nummer, skal  identifiseres ved dette nummeret.  </p>
+                        <p>- Personer som ikke er bosatt i Norge identifiseres med navn og  adresse, samt landkode. Oversikt over landkoder finnes på  www.skatteetaten.no, eventuelt kan likningskontoret kontaktes.  </p>
+                        <p>- For juridiske personer hjemmehørende i Norge skal  organisasjonsnummer (i tillegg til navn og adresse) som hovedregel  brukes som aksjonæridentitet  </p>
+                        <p>- For deltakerlignede selskaper med organisasjonsnummer skal  aksjonær-  </p>
+                        <p>identiteten i registeret knyttes til det deltakerlignede selskapet og  med bruk av selskapets organisasjonsnummer. Tingsrettslige sameier  som opptrer som sådant utad, er registrerings­pliktige etter  foretaksregisterloven
+                            som næringsdrivende innretning, og vil derfor  være å anse som ansvarlig selskap.  </p>
+                        <p>- Sameier som ikke har organisasjonsnummer. Denne gruppen sameier  omfatter tilfeller hvor flere eier aksjer i fellesskap og hvor dette  legges til grunn også skatterettslig. Sameierne anses skatterettslig  som deleiere i
+                            sameiets eiendeler/aksjer, og blir bruttolignet.  Sameiets aksjebeholdning må registreres på en representant for  sameiet.  </p>
+                        <p>- Andre innretninger som ikke har organisasjonsnummer omfatter bl.a.  innretninger som ikke driver virksomhet og hvor innretningen har  medlemmer av ulike slag; dvs. foreninger, klubber, lag o.l.  Identifikasjon av slike
+                            innretninger vil være avhengig av realiteten  bak den organisasjonsform som er angitt. Er innretningen i realiteten  et sameie vil sameiets aksjeerverv måtte registreres ved  representant. Anses medlemmene ikke å eie
+                            aksjene i fellesskap, fordi  medlemmene har begrenset ansvar ift. innretningen og med rettigheter  begrenset til formuesandeler i eller inntektsandeler av innretningen,  vil innretningen anses som skattemessig eier av
+                            aksjene. Innretningen  må da identifiseres ved hjelp av navn og adresse.  </p>
+                        <p>-Ukjent aksjonær rapporteres som ukjent aksjonær.  </p>
+                        <p/>
+                        <p>Det er viktig å påse at samlet antall aksjer rapporteres på  aksjonærer, kjente og ukjent slik at alle aksjer er fordelt på  aksjonærer. Der dette svikter, vil aksjonærregisteroppgaven feile ved  kvalitetskontrollene, og
+                            selskapet må levere ny oppgave.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Navn, adresse, fødselsnummer, organisasjonsnummer og evt. landkode</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>19 Norsk/utenlandsk aksjonær</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>- Fysiske personar som er busette i Noreg, skal identifiserast ved  fødselsnummer, namn og adresse.  </p>
+                        <p>- Utanlandske statsborgarar som har fått tildelt D-nummer, skal  identifiserast ved dette nummeret.  </p>
+                        <p>- Personar som ikkje er busette i Noreg, skal identifiserast med namn  og adresse, og landkode. Oversikt over landkodar finst på  www.skatteetaten.no, eventuelt kan likningskontoret kontaktast.  </p>
+                        <p>- For juridiske personar som høyrer heime i Noreg, skal  organisasjonsnummer (i tillegg til namn og adresse) som hovudregel  brukast som aksjonæridentitet  </p>
+                        <p/>
+                        <p>- For deltakarlikna selskap med organisasjonsnummer skal aksjonær-  </p>
+                        <p>identiteten i registeret knytast til det deltakarlikna selskapet og  med bruk av organisasjonsnummeret til selskapet. Tingsrettslege  sameige som opptrer som det utetter, er registrerings­pliktige etter
+                            føretaksregisterlova som næringsdrivande innretning, og blir derfor  rekna som ansvarleg selskap.  </p>
+                        <p>- Sameige som ikkje har organisasjonsnummer. Denne gruppa av sameige  omfattar tilfelle der fleire eig aksjar i fellesskap, og der dette  blir lagt til grunn også skatterettsleg. Sameigarane blir  skatterettsleg rekna som
+                            deleigarar i eigedelane/aksjane til  sameiget, og blir bruttolikna. Aksjebehaldninga til sameiget må  registrerast på ein representant for sameiget.  </p>
+                        <p>- Andre innretningar som ikkje har organisasjonsnummer, omfattar m.a.  innretningar som ikkje driv verksemd og der innretninga har medlemmer  av ulike slag; dvs. foreiningar, klubbar, lag o.l. Identifikasjon av  slike
+                            innretningar er avhengig av realiteten bak den  organisasjonsforma som er oppgitt. Er innretninga i realiteten eit  sameige, må aksjeervervet til sameiget registrerast ved representant.  Blir ikkje medlemmene rekna for å
+                            eige aksjane i fellesskap, fordi  medlemmene har avgrensa ansvar i forhold til innretninga og med  rettar som er avgrensa til formuesdelar i eller inntektsdelar av  innretninga, blir innretninga rekna som skattemessig
+                            eigar av  aksjane. Innretninga må då identifiserast ved hjelp av namn og  adresse.  </p>
+                        <p>- Ukjend aksjonær blir rapportert som ukjend aksjonær.  </p>
+                        <p/>
+                        <p>Det er viktig å sjå til at samla aksjetal blir rapportert på  aksjonærar, kjende og ukjende, slik at alle aksjar er fordelte på  aksjonærar. Der dette sviktar, blir det feil i  aksjonærregisteroppgåva ved
+                            kvalitetskontrollane, og selskapet må  levere ny oppgåve.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Namn, adresse, fødselsnummer, organisasjonsnummer og evt. landkode</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/Aksjonaropplysninger-grp-3987/NorskUtenlandskAksjonar-grp-3988/AksjonarFodselsnummer-datadef-1156">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Aksjonæridentifikasjon</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Fødsels-/D-nummer</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Aksjonæridentifikasjon</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Fødsels-/D-nummer</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Aksjonaropplysninger-grp-3987/NorskUtenlandskAksjonar-grp-3988/AksjonarOrganisasjonsnummer-datadef-7597">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Aksjonæridentifikasjon</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Aksjonæridentifikasjon</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Aksjonaropplysninger-grp-3987/NorskUtenlandskAksjonar-grp-3988/AksjonarNavn-datadef-1153">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Aksjonaropplysninger-grp-3987/NorskUtenlandskAksjonar-grp-3988/AksjonarAdresse-datadef-1154">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Aksjonaropplysninger-grp-3987/NorskUtenlandskAksjonar-grp-3988/AksjonarPostnummer-datadef-7598">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Aksjonaropplysninger-grp-3987/NorskUtenlandskAksjonar-grp-3988/AksjonarPoststed-datadef-7599">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Aksjonaropplysninger-grp-3987/NorskUtenlandskAksjonar-grp-3988/AksjonarLandkode-datadef-17740">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Landkode</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Se www.skatteetaten.no - Aksjonærregisteret (snarveier) eller kontakt  likningskontoret.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Benyttes for utenlandske aksjonærer, og når aksjonærens f.nr. eller  org.nr. er ukjent</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Landkode</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Sjå www.skatteetaten.no - Aksjonærregisteret (snarveier) eller kontakt  likningskontoret.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Nyttast for utenlandske aksjonærar, og når aksjonærens f.nr. eller  org.nr. er ukjent</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Aksjonaropplysninger-grp-3987/AntallAksjerPrAksjonar-grp-3989">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>20 Antall aksjer pr. aksjonær</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres opp antall aksjer aksjonæren eier ved utløpet av 2004 og ved  utløpet av 2005.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>20 Talet på aksjar pr. aksjonær</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein opp talet på aksjar aksjonæren eig ved utgangen av 2004  og ved utgangen av 2005.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/Aksjonaropplysninger-grp-3987/AntallAksjerPrAksjonar-grp-3989/AksjerAntallFjoraret-datadef-11994">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall 31.12.2004</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kor mange 31.12.2004</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Aksjonaropplysninger-grp-3987/AntallAksjerPrAksjonar-grp-3989/AksjonarAksjerAntall-datadef-17741">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Antall 31.12.2005</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kor mange 31.12.2005</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Utbytte-grp-3990">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>21 Utbytte</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>21 Utbytte</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_UtdeltUtbyttePrAksjonar-grp-3991" nodeset="/Skjema/Utbytte-grp-3990/UtdeltUtbyttePrAksjonar-grp-3991">
+                    <xforms:group ref="/Skjema/Utbytte-grp-3990/UtdeltUtbyttePrAksjonar-grp-3991">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>21 Utdelt utbytte til aksjonæren for denne aksjeklasse/ISIN  (kildeskatt er relevant for aksjonærer hjemmehørende i utlandet)</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Før opp det totale utbyttet aksjonæren har fått ved den enkelte  utdeling, antall aksjer som ligger til grunn for utdelingen og  tidspunktet for beslutning om utbytte (lik tidspunktet for  generalforsamlingens vedtak.
+                                Se post 8). Opplysningene vil inngå i de  beregninger som foretas for å sikre samsvar mellom det utbytte  aksjonæren mottar og det utbytte som er kommet til fradrag ved  RISK-reguleringen på hans hånd.  </p>
+                            <p>Tilbakebetalt fondsemmitert aksjekapital skal behandles som utbytte og  beløpet medtas her. Se post 8 på selskapsnivå.  </p>
+                            <p>Før opp den kildeskattesats som ligger til grunn ved beskatning av  aksjonær hjemmehørende i utlandet etter sktl. § 10-13. Før opp  beløpet som er trukket i kildeskatt og hvilket land aksjonæren var  bosatt i på det
+                                aktuelle tidspunkt. (Om landkoder, se post 19.)</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>21 Utdelt utbytte pr. aksjonær for denne aksjeklasse/ISIN (kjeldeskatt  er relevant for aksjonærar høyrer heime i utlandet)</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Før opp det totale utbyttet aksjonæren har fått ved kvar enkelt  utdeling, talet på aksjar som ligg til grunn for utdelinga, og  tidspunktet for avgjerd om utbytte (lik tidspunktet for vedtak i  generalforsamlinga, sjå
+                                post 8). Opplysningane inngår i dei  utrekningane som blir gjort for å sikre samsvar mellom det utbyttet  aksjonæren mottek, og det utbyttet som er kome til frådrag ved  RISK-reguleringa på hans hand.  </p>
+                            <p>Tilbakebetalt fondsemittert aksjekapital skal behandlast som utbytte,  og beløpet skal takast med her. Sjå post 8 på selskapsnivå.  </p>
+                            <p>Før opp den kjeldeskattesatsen som ligg til grunn ved skattlegging av  aksjonær som høyrer heime i utlandet etter sktl. § 10-13. Før opp  beløpet som er trekt i kjeldeskatt, og kva for land aksjonæren var  busett i på
+                                det aktuelle tidspunktet. (Om landkodar, sjå post 19.)</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/Utbytte-grp-3990/UtdeltUtbyttePrAksjonar-grp-3991/Aksjeutbytte-datadef-147">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utdelt utbytte</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>totalt</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Utdelt utbytte</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>totalt</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Utbytte-grp-3990/UtdeltUtbyttePrAksjonar-grp-3991/AksjerUtbytteAntall-datadef-17742">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Antall aksjer</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kor mange aksjar</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Utbytte-grp-3990/UtdeltUtbyttePrAksjonar-grp-3991/AksjerUtbytteTidspunkt-datadef-17769">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Tidspunkt</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her skal det legges inn et tidspunkt med format DD.MM.ÅÅÅÅ tt:mm:ss.  Klokkeslett er obligatorisk hvis hendelser, transaksjoner og  utbyttebetalinger har skjedd på samme dag. Dette har betydning for
+                                    oppgaveproduksjonen. Klokkeslett er ikke relevant for alle  oppgavegivere, legg i såfall inn dato og det tilføyes automatisk  standardklokkeslett 12:00:00.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>(DD.MM.ÅÅÅÅ tt:mm:ss)</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Tidspunkt</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her skal det leggjast inn et tidspunkt med format DD.MM.ÅÅÅÅ tt:mm:ss.  Klokkeslett er obligatorisk om hendinga, transaksjonar og  utbyttebetaling har skjedd på samme dag. Dette har betydning for
+                                    oppgåveproduksjonen. Klokkeslett er ikkje relevant for alle  oppgåvegivare, legg i såfall inn dato og det leggjast til automatisk  standardklokkeslett 12:00:00.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>(DD.MM.ÅÅÅÅ tt:mm:ss)</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Utbytte-grp-3990/UtdeltUtbyttePrAksjonar-grp-3991/KildeskattProsent-datadef-2280">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kildeskatt i %</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kjeldeskatt i %</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Utbytte-grp-3990/UtdeltUtbyttePrAksjonar-grp-3991/Kildeskatt-datadef-17743">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter number with two fraction digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kildeskatt i beløp</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever to desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kjeldeskatt i beløp</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Utbytte-grp-3990/UtdeltUtbyttePrAksjonar-grp-3991/KildeskattLandkode-datadef-17744">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kildeskatt landkode</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Se www.skatteetaten.no eller kontakt likningskontoret.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kjeldeskatt landkode</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Sjå www.skatteetaten.no eller kontakt likningskontoret.</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Transaksjoner-grp-3992">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>23 Transaksjoner</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>aksjer i tilgang/avgang 2005 for denne aksjonæren</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>23 Transaksjoner</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NON">
+                    <p>aksjar i tilgang/avgang 2005 for denne aksjonæren</p>
+                </xforms:hint>
+                <xforms:group ref="/Skjema/Transaksjoner-grp-3992/KjopArvGaveStiftelseNyemisjonMv-grp-3993">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kjøp, arv, gave  stiftelse, nyemisjon, konvertering av fordring,  skattepliktig fusjon, skattepliktig fisjon, konsernintern overføring  og omdannelse av enkeltmannsforetakstiftelse eller nyemisjon i hht  overgangsregel E
+                            til sktl § 2-38</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kjøp, arv, gåve, stifting, nyemisjon, konvertering av fordring,  skattepliktig fusjon, skattepliktig fisjon, konsernintern overføring  og omdanning av enkeltmannsføretaksstifting eller nyemisjon i samsvar  med
+                            overgangsregel E til sktl. § 2-38</p>
+                    </xforms:caption>
+                    <xforms:repeat id="repeat_AntallAksjerITilgang-grp-3998" nodeset="/Skjema/Transaksjoner-grp-3992/KjopArvGaveStiftelseNyemisjonMv-grp-3993/AntallAksjerITilgang-grp-3998">
+                        <xforms:group ref="/Skjema/Transaksjoner-grp-3992/KjopArvGaveStiftelseNyemisjonMv-grp-3993/AntallAksjerITilgang-grp-3998">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>23 Antall aksjer i tilgang (nyerverv). Spesifiseres (transaksjonstype)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Opplys om aksjer aksjonæren har ervervet i selskapet i løpet av  inntektsåret. Spesifiser i feltet Transaksjonstype om aksjonæren har  ervervet aksjene ved:  </p>
+                                <p>- kjøp  </p>
+                                <p>- arv  </p>
+                                <p>- gave  </p>
+                                <p>- erverv fra ektefelle (behandles med skattemessig kontinuitet)  </p>
+                                <p>- stiftelse  </p>
+                                <p>- nyemisjon (emisjon ved nytegning)  </p>
+                                <p>- konvertering av fordring  </p>
+                                <p>- fusjon (skattepliktig)  </p>
+                                <p>- fisjon (skattepliktig) - Denne hendelsestypen brukes når det  opprettes et nytt selskap ifm. fisjonen. Likeledes fisjon til  eksisterende selskap (skattepliktig fisjon/fusjon).  </p>
+                                <p>- konsernintern overføring  - utstedelse av aksjer som vederlag for  overførte eiendeler, jf. FIN.dep. forskrift til sktl (FSFIN) §  11-21-7.  </p>
+                                <p>- skattefri omdanning av enkeltmannsforetak/deltakerlignet selskap til  aksjeselskap /allmennaksjeselskap  </p>
+                                <p>stiftelse/nyemisjon med kontinuitet for skattemessige verdier i hht  overgangsregel E til sktl § 2-38  </p>
+                                <p>overføring etter overgangsregel E  </p>
+                                <p/>
+                                <p>Spesifiser hvor mange aksjer som erverves og tidspunkt for  ervervet.Aksjer ervervet ved nytegning anses ervervet når  kapitalforhøyelsen er registrert i Foretaksregisteret. Aksjer  ervervet ved stiftelse anses
+                                    ervervet når selskapet er stiftet.  </p>
+                                <p/>
+                                <p>For aksjer ervervet ved kjøp settes anskaffelsesverdi til vederlag for  aksjeposten. Megleromkostninger ol anses ikke som en del av  anskaffelsesverdien. For aksjer ervervet ved stiftelse, eller ved  senere
+                                    utvidelse av aksjekapitalen, settes anskaffelsesverdien til  innbetalt aksjekapital, herunder innbetalt overkurs. For aksjer som  er ervervet ved arv, settes kostprisen til omsetningsverdien ved  dødsfallet. Er
+                                    ervervet arveavgiftspliktig i Norge, kan kostprisen  ikke settes høyere enn til den verdi som er lagt til grunn for  arveavgiften.  </p>
+                                <p/>
+                                <p>Se post 9 for opplysninger på selskapsnivå.  </p>
+                                <p/>
+                                <p>For utfylling av posten ved overgangsregel E, se rettledningen  RF-1087.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Tisdspunkt for ervervet. Anskaffelsesverdi ved kjøp/arv/gave for hele  aksjeposten. (se post 9)</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>23 Talet på aksjar i tilgang (nyerverv). Spesifiserast  transaksjonstype)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Opplys om aksjar aksjonæren har erverva i selskapet i løpet av  inntektsåret. Spesifiser i feltet Transaksjonstype om aksjonæren har  erverva aksjane ved:  </p>
+                                <p>-kjøp  </p>
+                                <p>-arv  </p>
+                                <p>-gåve  </p>
+                                <p>-erverv frå ektefelle (behandlast med skattemessig kontinuitet)  </p>
+                                <p>-stifting  </p>
+                                <p>-nyemisjon (emisjon ved nyteikning)  </p>
+                                <p>-konvertering av fordring  </p>
+                                <p>-fusjon (skattepliktig)  </p>
+                                <p>-fisjon (skattepliktig) - Denne hendingstypen skal brukast når det  blir oppretta eit nytt selskap i samband med fisjonen. Likeins fisjon  til eksisterande selskap (skattepliktig fisjon/fusjon)  </p>
+                                <p>-konsernintern overføring - utskriving av aksjar som vederlag for  overførte eigedelar, jf. FIN.dep. si forskrift til sktl (FSFIN) §  11-21-7.  </p>
+                                <p>-skattefri omdanning av enkeltmannsføretak/deltakarlikna selskap til  aksjeselskap  </p>
+                                <p>-stifting/nyemisjon med kontinuitet for skattemessige verdiar i  samsvar med overgangsregel E til sktl.§ 2-38  </p>
+                                <p>-overføring etter Overgangsregel E  </p>
+                                <p/>
+                                <p>Spesifiser kor mange aksjar som blir erverva og tidspunkt for  ervervet. Aksjar som er erverva ved nyteikning, blir rekna for  erverva når kapitalforhøginga er registrert i Føretaksregisteret.  Aksjar som er erverva
+                                    ved stifting, blir rekna for erverva når  selskapet er stifta.  </p>
+                                <p/>
+                                <p>For aksjar som er erverva ved kjøp blir kjøpsverdi sett til vederlag  for aksjeposten. Meklarkostnader ol blir ikkje rekna som ein del av  kjøpsverdien. For aksjar som er erverva ved stifting av aksjeselskap,  eller
+                                    ved seinare utviding av aksjekapitalen, blir kjøpsverdien sett  til innbetalt aksjekapital, mellom anna innbetalt overkurs. For  aksjar som er erverva ved arv, setjast kostprisen til  omsetningsverdien ved
+                                    dødsfallet. Er ervervet arveavgiftspliktig i  Noreg, kan kostprisen ikkje setjast høgare enn til den verdien som er  lagd til grunn for arveavgifta.  </p>
+                                <p/>
+                                <p>Sjå post 9 for opplysningar på selskapsnivå.  </p>
+                                <p/>
+                                <p>Sjå rettleiinga RF-1087 for utfylling ved overgangsregel E.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Tisdspunkt for ervervet. kjøpsverdien ved kjøp/arv/gåve for heile  aksjeposten. (se post 9)</p>
+                            </xforms:hint>
+                            <xforms:input ref="/Skjema/Transaksjoner-grp-3992/KjopArvGaveStiftelseNyemisjonMv-grp-3993/AntallAksjerITilgang-grp-3998/AksjerKjopAntall-datadef-12153">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Antall</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Kor Mange</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:selectOne ref="/Skjema/Transaksjoner-grp-3992/KjopArvGaveStiftelseNyemisjonMv-grp-3993/AntallAksjerITilgang-grp-3998/AksjeErvervType-datadef-17745">
+                                <xforms:choices>
+                                    <xforms:item>
+                                        <xforms:value>A</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Arv</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Arv</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>B</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Arv til enearving</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Arv til einearving</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>G</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Gave</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Gåve</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>H</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Erver fra/til ektefelle</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Erver frå/til ektefelle</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>IP</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Fisjon skattepliktig</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Fisjon skattepliktig</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>K</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Kjøp</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Kjøp</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>M</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Omdannelse til aksjeselskap</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Omdanning til aksjeselskap</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>N</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Nyemisjon</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Nyemisjon</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>NK</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Nyemisjon ved konsernintern overføring</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Nyemisjon ved konsernintern overføring</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>NF</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Nyemisjon ved konvertering av fordring</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Nyemisjon ved konvertering av fordring</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>T</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Ved stiftelse</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Ved stifting</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>UP</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Fusjon skattepliktig</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Fusjon skattepliktig</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>OE</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Overføring etter overgangsregel E</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Overføring etter overgangsregel E</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>NE</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Nyemisjon/stiftelse etter overgangsregel E</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Nyemisjon/stiftelse etter overgangsregel E</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                </xforms:choices>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Transaksjonstype</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Transaksjonstype</p>
+                                </xforms:caption>
+                            </xforms:selectOne>
+                            <xforms:input ref="/Skjema/Transaksjoner-grp-3992/KjopArvGaveStiftelseNyemisjonMv-grp-3993/AntallAksjerITilgang-grp-3998/AksjerErvervsdato-datadef-17746">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Tidspunkt</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Her skal det legges inn et tidspunkt med format DD.MM.ÅÅÅÅ tt:mm:ss.  Klokkeslett er obligatorisk hvis hendelser, transaksjoner og  utbyttebetalinger har skjedd på samme dag. Dette har betydning for
+                                        oppgaveproduksjonen. Klokkeslett er ikke relevant for alle  oppgavegivere, legg i såfall inn dato og det tilføyes automatisk  standardklokkeslett 12:00:00.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>(DD.MM.ÅÅÅÅ tt:mm:ss)</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Tidspunkt</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Her skal det leggjast inn et tidspunkt med format DD.MM.ÅÅÅÅ tt:mm:ss.  Klokkeslett er obligatorisk om hendinga, transaksjonar og  utbyttebetaling har skjedd på samme dag. Dette har betydning for
+                                        oppgåveproduksjonen. Klokkeslett er ikkje relevant for alle  oppgåvegivare, legg i såfall inn dato og det leggjast til automatisk  standardklokkeslett 12:00:00.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>(DD.MM.ÅÅÅÅ tt:mm:ss)</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Transaksjoner-grp-3992/KjopArvGaveStiftelseNyemisjonMv-grp-3993/AntallAksjerITilgang-grp-3998/AksjeAnskaffelsesverdi-datadef-17636">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:alert brreg:lang="EN">
+                                    <p>Enter number with two fraction digits</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Anskaffelsesverdi</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feltet krever to desimaler</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Kjøpsverdien</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Feltet krev to desimalar</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Transaksjoner-grp-3992/KjopArvGaveStiftelseNyemisjonMv-grp-3993/AntallAksjerITilgang-grp-3998/AksjonarOvergangsregelEFodselsnummer-datadef-23805">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <brreg:kontroll type="Modulus 11"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Overgangsregel E, avgivers f.nr.</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Ugyldig fødselsnummer</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Overgangsregel E, avgivers f.nr.</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Ugyldig fødselsnummer</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Transaksjoner-grp-3992/KjopArvGaveStiftelseNyemisjonMv-grp-3993/AntallAksjerITilgang-grp-3998/EnhetTingsinnskuddOvergangsregelEOrganisasjonsnummer-datadef-23806">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Overgangsregel E, overf. selskap org.nr.</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Ugyldig organisasjonsnummer</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Overgangsregel E, overf. selskap org.nr.</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Ugyldig organisasjonsnummer</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/Transaksjoner-grp-3992/KjopArvGaveStiftelseNyemisjonMv-grp-3993/AntallAksjerITilgang-grp-3998/KontantinnskuddOvergangsregelRBelop-datadef-23807">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:alert brreg:lang="EN">
+                                    <p>Enter number with two fraction digits</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Kontantinnskudd ifm. overgangsregel E</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feltet krever to desimaler</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Kontantinnskudd ifm. overgangsregel E</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Feltet krev to desimalar</p>
+                                </xforms:alert>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:repeat>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/FondsemisjonSplittSkattefriFusjonFisjonSammenslaingDelingAv-grp-3994">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>24 Fondsemisjon, splitt, skattefri fusjon/fisjon og  sammenslåing/deling av aksjeklasse</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Fondsemisjon, splitt, skattefri fusjon, skattefri fisjon og  sammenslåing/deling av aksjeklasse</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_AntallAksjerITilgangIfmOmfordeling-grp-3999" nodeset="/Skjema/FondsemisjonSplittSkattefriFusjonFisjonSammenslaingDelingAv-grp-3994/AntallAksjerITilgangIfmOmfordeling-grp-3999">
+                    <xforms:group ref="/Skjema/FondsemisjonSplittSkattefriFusjonFisjonSammenslaingDelingAv-grp-3994/AntallAksjerITilgangIfmOmfordeling-grp-3999">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>24 Antall aksjer i tilgang ifm. omfordeling</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Opplys om nyervervede aksjer i selskapet i løpet av inntektsåret  grunnet faktorjusterings-/omfordelingstilfeller. Spesifiser i feltet  Transaksjonstype hva slags hendelse som er årsak til ervervet.  Følgende hendelser
+                                er aktuelle:  </p>
+                            <p/>
+                            <p>- fondsemisjon  </p>
+                            <p>- splitt  </p>
+                            <p>- skattefri fusjon  </p>
+                            <p>- skattefri fisjon  </p>
+                            <p>- sammenslåing/deling av aksjeklasse  </p>
+                            <p/>
+                            <p>Som under post 23 skal det spesifiseres hvor mange aksjer som erverves  og tidspunkt for ervervet. Ved skattefri fusjon/fisjon oppgis  overdragende selskaps organisasjonsnummer, aksjeklasse/-type og  aksjenes pålydende.  </p>
+                            <p/>
+                            <p>Ved sammenslåing/deling av aksjeklasser er postene 10, 12, 24 og 26  aktuelle. I post 10 føres antall nyutstedte aksjer innenfor en  aksjeklasse. Har man f eks endret fra å ha 10 ordinære aksjer til 5  A-aksjer og 5
+                                B-aksjer (deling), må man levere 3  aksjonærregisteroppgaver fordi man har evt avgang/tilgang i tre  forskjellige aksjeklasser. For den ordinære aksjeklassen  innleveres  en oppgave som viser først 5 slettede aksjer i
+                                post 12 (må også føres  på aksjonærnivå i post 26).  Antall slettede vil  da være 5 og antall  etter vil være 5. I feltet ISIN/Aksjeklasse føres opp den aksjeklasse  som de 5 slettede aksjene overføres til – i dette
+                                eksempelet til  A-aksjer. Videre må post 12 fylles ut en gang til for de neste 5  slettede aksjene som går over til å være aksjeklasse B.  Antall  slettede vil da også her være 5 mens antall etter vil være 0. I  feltet
+                                ISIN/aksjeklasse føres aksjeklasse B.  </p>
+                            <p/>
+                            <p>For aksjeklassen A leveres en oppgave som viser  5 nyutstedte A-aksjer  i post 10 (post 24 fylles ut på aksjonærnivå).  I feltet  ISIN/Aksjeklasse fylles inn hvor de nyutstedte aksjene kommer fra – i  dette eksempelet
+                                aksjeklasse ordinære aksjer.Endelig må det leveres  oppgave for aksjeklassen B som da også skal vise 5 nyutstedte aksjer  i post 10 (post 24 fylles ut på aksjonærnivå) og i feltet  ISIN/Aksjeklasse føres ordinære
+                                aksjer.  </p>
+                            <p/>
+                            <p>Prinsippet for føring blir det samme ved sammenslåing som for deling.  Endrer man fra å ha 5 A-aksjer og 5 B-aksjer til 10 ordinære aksjer  må det også leveres 3 aksjonærregisteroppgaver. Oppgaven for  aksjeklassen B
+                                vil da f eks vise  5 slettede aksjer i post 12 (og 5  slettede i post 26 på aksjonærnivå) og i feltet ISIN/Aksjeklasse  føres ordinære aksjer (den aksjeklassen de slettede aksjene går over  til).  </p>
+                            <p/>
+                            <p>Se post 10 for opplysninger på selskapsnivå</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Spesifiseres (transaksjonstype). Tidspunkt for ervervet. Overdragende  selskaps org.nr. ved fisjon og fusjon. (se post 10)</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>24 Talet på aksjar i tilgang i samband med omfordeling</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Opplys om nyerverva aksjar i selskapet i løpet av inntektsåret grunna  faktorjusterings-/omfordelingstilfelle.  </p>
+                            <p>Spesifiser i feltet Transaksjonstype kva slags hending som er årsak  til ervervet. Følgjande hendingar er aktuelle:  </p>
+                            <p>- fondsemisjon  </p>
+                            <p>- splitt  </p>
+                            <p>- skattefri fusjon  </p>
+                            <p>- skattefri fisjon  </p>
+                            <p>- sammenslåing/deling av aksjeklasse  </p>
+                            <p/>
+                            <p>Som under post 23 skal det spesifiserast kor mange aksjar som blir  erverva, og tidspunkt for ervervet. Ved skattefri fusjon/fisjon  oppgir ein organisasjonsnummer til overdragande selskap,  aksjeklasse/-type og aksjane
+                                sitt pålydande.  </p>
+                            <p/>
+                            <p>Ved samanslåing/deling av aksjeklassar er postane 10, 12, 24 og 26  aktuelle. I post 10 fører ein talet på nyutskrivne aksjar innanfor  ein aksjeklasse. Har ein for eksempel endra frå å ha 10 ordinære  aksjar til 5
+                                A-aksjar og 5 B-aksjar (deling), må ein levere 3  aksjonærregisteroppgåver fordi ein har ev. avgang/tilgang i tre  forskjellige aksjeklassar. For den ordinære aksjeklassen  leverer ein  inn oppgåve som viser først 5
+                                sletta aksjar i post 12 (må òg førast  på aksjonærnivå i post 26).  Talet på sletta aksjar er då òg 5, og  talet på aksjar etter blir 5. I feltet ISIN/Aksjeklasse fører ein opp  den aksjeklassen som dei 5 sletta
+                                aksjane blir overførte til – i  dette eksempelet til A-aksjar. Vidare må post 12 fyllast ut ein gong  til for dei neste 5 sletta aksjane som går over til å vere  aksjeklasse B.  Talet på sletta aksjar blir då også her
+                                5, mens talet  på aksjar etter blir 0. I feltet ISIN/aksjeklasse fører ein  aksjeklasse B.  </p>
+                            <p/>
+                            <p>For aksjeklassen A blir det levert ei oppgåve som viser  5 nyutskrivne  A-aksjar i post 10 (post 24 skal fyllast ut på aksjonærnivå).  I  feltet ISIN/Aksjeklasse fyller ein inn kvar dei nyutskrivne aksjane  kjem frå – i
+                                dette eksempelet aksjeklasse ordinære aksjar. Endeleg må  det leverast oppgåve for aksjeklassen B, som då også skal vise 5  nyutskrivne aksjar i post 10 (post 24 skal fyllast ut på  aksjonærnivå), og i feltet
+                                ISIN/Aksjeklasse fører ein ordinære  aksjar.  </p>
+                            <p/>
+                            <p>Prinsippet for føring blir det same ved samanslåing som for deling.  Endrar ein frå å ha 5 A-aksjar og 5 B-aksjar til 10 ordinære aksjar,  må det òg leverast 3 aksjonærregisteroppgåver. Oppgåva for  aksjeklassen B vil
+                                då for eksempel vise 5 sletta aksjar i post 12 (og  5 sletta i post 26 på aksjonærnivå), og i feltet ISIN/Aksjeklasse  fører ein ordinære aksjar (den aksjeklassen dei sletta aksjane går  over til).  </p>
+                            <p/>
+                            <p>Sjå post 10 for opplysningar på selskapsnivå</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Spesifiseras (transaksjonstype). Tidspunkt for ervervet. Overdragande  selskaps org.nr. ved fisjon og fusjon. (se post 10)</p>
+                        </xforms:hint>
+                        <xforms:input ref="/Skjema/FondsemisjonSplittSkattefriFusjonFisjonSammenslaingDelingAv-grp-3994/AntallAksjerITilgangIfmOmfordeling-grp-3999/AksjerTilgangFondsemisjonMvAntall-datadef-17748">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Antall</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kor mange</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/FondsemisjonSplittSkattefriFusjonFisjonSammenslaingDelingAv-grp-3994/AntallAksjerITilgangIfmOmfordeling-grp-3999/AksjerTilgangFondsemisjonMvType-datadef-17749">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>I</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fisjon skattefri</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Fisjon skattefri</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>S</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Splitt</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Splitt</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>U</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fusjon skattefri</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Fusjon skattefri</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>E</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fondsemisjon</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Fondsemisjon</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>SD</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Sammenslåing/deling av aksjeklasse</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Sammenslåing/deling av aksjeklasse</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Transaksjonstype</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Transaksjonstype</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/FondsemisjonSplittSkattefriFusjonFisjonSammenslaingDelingAv-grp-3994/AntallAksjerITilgangIfmOmfordeling-grp-3999/AksjerTilgangFondsemisjonMvTidspunkt-datadef-17750">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Tidspunkt</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her skal det legges inn et tidspunkt med format DD.MM.ÅÅÅÅ tt:mm:ss.  Klokkeslett er obligatorisk hvis hendelser, transaksjoner og  utbyttebetalinger har skjedd på samme dag. Dette har betydning for
+                                    oppgaveproduksjonen. Klokkeslett er ikke relevant for alle  oppgavegivere, legg i såfall inn dato og det tilføyes automatisk  standardklokkeslett 12:00:00.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>(DD.MM.ÅÅÅÅ tt:mm:ss)</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Tidspunkt</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her skal det leggjast inn et tidspunkt med format DD.MM.ÅÅÅÅ tt:mm:ss.  Klokkeslett er obligatorisk om hendinga, transaksjonar og  utbyttebetaling har skjedd på samme dag. Dette har betydning for
+                                    oppgåveproduksjonen. Klokkeslett er ikkje relevant for alle  oppgåvegivare, legg i såfall inn dato og det leggjast til automatisk  standardklokkeslett 12:00:00.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>(DD.MM.ÅÅÅÅ tt:mm:ss)</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FondsemisjonSplittSkattefriFusjonFisjonSammenslaingDelingAv-grp-3994/AntallAksjerITilgangIfmOmfordeling-grp-3999/EnhetOverdragendeFondsemisjonMvOrganisasjonsnummer-datadef-17683">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Overd. selskaps org.nr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Overd. selskaps org.nr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FondsemisjonSplittSkattefriFusjonFisjonSammenslaingDelingAv-grp-3994/AntallAksjerITilgangIfmOmfordeling-grp-3999/AksjerNyutstedteFondsemisjonMvISIN-datadef-17684">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Overd. selskaps ISIN</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feil format; skal være på formen NOxxxxxxxxxx</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Overd. selskaps ISIN</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feil format; skal være på formen NOxxxxxxxxxx</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/FondsemisjonSplittSkattefriFusjonFisjonSammenslaingDelingAv-grp-3994/AntallAksjerITilgangIfmOmfordeling-grp-3999/AksjerNyutstedteFondsemisjonMvAksjetype-datadef-19905">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>01</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ordinære aksjer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Orinære aksjar</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>02</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Preferanse aksjer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Preferanse aksjar</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>03</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>A-aksjer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>A-aksjar</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>04</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>B-aksjer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>B-aksjar</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>05</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>C-aksjer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>C-aksjar</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>06</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>D-aksjer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>D-aksjar</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>07</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ekstraordinære aksjer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Ekstraordnære aksjar</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Overd. selskaps aksjeklasse</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Overd. selskaps aksjeklasse</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/FondsemisjonSplittSkattefriFusjonFisjonSammenslaingDelingAv-grp-3994/AntallAksjerITilgangIfmOmfordeling-grp-3999/AksjerFondsemisjonPalydende-datadef-23968">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter number with six fraction digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Overd. selskaps pålydende</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>(pr. aksje)</p>
+                            </xforms:hint>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever seks desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Overd. selskaps pålydande</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>(pr. aksje)</p>
+                            </xforms:hint>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev seks desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SalgArvGaveLikvidasjonPartiellLikvidasjonMv-grp-3995">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>25 Salg, arv, gave, likvidasjon, partiell likvidasjon, skattepliktig  fusjon/fisjon og konsernintern overføring mv., overføring av aksjer  med kontinuitet etter overgangsregel E til sktl § 2-38</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>25 Sal, arv, gåve, likvidasjon, partiell likvidasjon, skattepliktig  fusjon/fisjon og konsernintern overføring o.a., overføring av aksjar  med kontinuitet etter overgangsregel E til sktl. § 2-38</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_AntallAksjerIAvgang-grp-4002" nodeset="/Skjema/SalgArvGaveLikvidasjonPartiellLikvidasjonMv-grp-3995/AntallAksjerIAvgang-grp-4002">
+                    <xforms:group ref="/Skjema/SalgArvGaveLikvidasjonPartiellLikvidasjonMv-grp-3995/AntallAksjerIAvgang-grp-4002">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>25 Antall aksjer i avgang</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Gi opplysninger om aksjer som aksjonæren har realisert i inntektsåret  (gjelder også for selskapsaksjonærer som faller inn under  fritaksmetoden). Gjelder også slettede aksjer i selskapet i løpet av  inntektsåret som
+                                ikke har bakgrunn i et  faktorjusterings-/omfordelingstilfelle.  </p>
+                            <p>Spesifiser i feltet Transaksjonstype hva slags hendelse som er årsak  til slettelsen eller realisasjonen:  </p>
+                            <p/>
+                            <p>- salg  </p>
+                            <p>- arv  </p>
+                            <p>- gave  </p>
+                            <p>- likvidasjon  </p>
+                            <p>- partiell likvidasjon  </p>
+                            <p>- skattepliktig fusjon  </p>
+                            <p>- skattepliktig fisjon  </p>
+                            <p>- konsernintern overføring  </p>
+                            <p>- overføring av aksjer med kontinuitet for skattemessige verdier i hht  overgangsregel E til sktl § 2-38  </p>
+                            <p/>
+                            <p>Spesifiser hvor mange aksjer som er blitt realisert og tidspunkt for  realisasjonen.  </p>
+                            <p>Posten gjenfinnes ikke på selskapsnivå ved salg, arv eller gave da  denne bare gjelder transaksjoner mellom aksjonærer. Oppgi eventuelt  det vederlag som ble utbetalt ved slettingen av aksjene.  </p>
+                            <p>Det produseres ikke realisasjonsoppgjør ved bruk av overgangsregel E  og ved konsernintern overføring.  </p>
+                            <p/>
+                            <p>Her føres hele aksjebeholdningen som personlig aksjonær overfører i  hht overgangsregel E. I Aksjonærregisteret brukes denne posten  for  overføring av de skattemessige verdiene på de overførte aksjene til  det
+                                selskapet som erverver. Feltet erververs org.nr må derfor fylles  ut. Øvrige felt unntatt vederlag totalt skal fylles ut. .  </p>
+                            <p/>
+                            <p>Se post 11 for opplysninger på selskapsnivå.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Spesifiseres (transaksjonstype). Tidspunkt for avgangen. (se post 11)</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>25 Talet på aksjar i avgang</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Gi opplysningar om aksjar som aksjonæren har realisert i inntektsåret  (gjeld også for selskapsaksjonærar som fell inn under  fritaksmetoden). Gjeld også sletta aksjar i selskapet i løpet av  inntektsåret som ikkje har
+                                bakgrunn i eit  faktorjusterings-/omfordelingstilfelle.  </p>
+                            <p>Spesifiser i feltet Transaksjonstype kva slags hending som er årsak  til slettinga eller realisasjonen:  </p>
+                            <p/>
+                            <p>- sal  </p>
+                            <p>- arv  </p>
+                            <p>- gåve  </p>
+                            <p>- likvidasjon  </p>
+                            <p>- partiell likvidasjon  </p>
+                            <p>- skattepliktig fusjon  </p>
+                            <p>- skattepliktig fisjon  </p>
+                            <p>- konsernintern overføring  </p>
+                            <p>- overføring av aksjar med kontinuitet for skattemessige verdiar i  samsvar med overgangsregel E til sktl. § 2-38  </p>
+                            <p/>
+                            <p>Spesifiser kor mange aksjar som har vorte realiserte, og tidspunkt for  realisasjonen.  </p>
+                            <p>Posten finn ein ikkje att på selskapsnivå ved sal, arv eller gåve,  fordi han gjeld berre transaksjonar mellom aksjonærar. Gi eventuelt  opp det vederlaget som vart utbetalt ved slettinga av aksjane.  </p>
+                            <p>Det blir ikkje produsert realisasjonsoppgjer ved bruk av  overgangsregel E og ved konsernintern overføring.  </p>
+                            <p/>
+                            <p>Her fører ein heile aksjebehaldninga som personleg aksjonær overfører  i samsvar med overgangsregel E. I Aksjonærregisteret blir denne  posten brukt for overføring av dei skattemessige verdiane på dei  overførte aksjane
+                                til det selskapet som kjøper. Feltet kjøpars  org.nr. må derfor fyllast ut. Andre felt bortsett frå vederlag totalt  skal fyllast ut.  </p>
+                            <p/>
+                            <p>Sjå post 11 for opplysningar på selskapsnivå.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Spesifiseres (transaksjonstype). Tidspunkt for avgangen. (sjå post 11)</p>
+                        </xforms:hint>
+                        <xforms:input ref="/Skjema/SalgArvGaveLikvidasjonPartiellLikvidasjonMv-grp-3995/AntallAksjerIAvgang-grp-4002/AksjerArvMvOmsattAntall-datadef-17752">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Antall</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kor mange</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/SalgArvGaveLikvidasjonPartiellLikvidasjonMv-grp-3995/AntallAksjerIAvgang-grp-4002/AksjerArvMvOmsattType-datadef-17753">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>A</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Arv</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Arv</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>B</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Arv til enearving</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Arv til einearving</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>G</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Gave</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Gave</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>H</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Erverv fra/til ektefelle</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Erverv frå/til ektefelle</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>IP</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fisjon skattepliktig</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Fisjon skattepliktig</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>L</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Likvidasjon</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Likvidasjon</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>O</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Konsernintern overføring</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Konsernintern overføring</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>P</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Partiell likvidasjon</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Partiell likvidasjon</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>R</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Salg</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Salg</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>UP</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fusjon skattepliktig</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Fusjon skattepliktig</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>UE</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Avgang egne fusj./fisj.</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Avgang eigne fusj./fisj.</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>UII</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Innløsning ifm. sk. fri. fusj./fisj.</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Innløysing ifm. sk. fri fusj./fisj.</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>W</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Sletting av egne aksjer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Sletting av eigne aksjer</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>OE</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Overføring etter overgangsregel E</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Overføring etter overgangsregel E</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Transaksjonstype</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Transaksjonstype</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/SalgArvGaveLikvidasjonPartiellLikvidasjonMv-grp-3995/AntallAksjerIAvgang-grp-4002/AksjerArvMvOmsattTidspunkt-datadef-17754">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Tidspunkt</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her skal det legges inn et tidspunkt med format DD.MM.ÅÅÅÅ tt:mm:ss.  Klokkeslett er obligatorisk hvis hendelser, transaksjoner og  utbyttebetalinger har skjedd på samme dag. Dette har betydning for
+                                    oppgaveproduksjonen. Klokkeslett er ikke relevant for alle  oppgavegivere, legg i såfall inn dato og det tilføyes automatisk  standardklokkeslett 12:00:00.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>(DD.MM.ÅÅÅÅ tt:mm:ss)</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Tidspunkt</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her skal det leggjast inn et tidspunkt med format DD.MM.ÅÅÅÅ tt:mm:ss.  Klokkeslett er obligatorisk om hendinga, transaksjonar og  utbyttebetaling har skjedd på samme dag. Dette har betydning for
+                                    oppgåveproduksjonen. Klokkeslett er ikkje relevant for alle  oppgåvegivare, legg i såfall inn dato og det leggjast til automatisk  standardklokkeslett 12:00:00.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>(DD.MM.ÅÅÅÅ tt:mm:ss)</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SalgArvGaveLikvidasjonPartiellLikvidasjonMv-grp-3995/AntallAksjerIAvgang-grp-4002/AksjerArvMvOmsatt-datadef-17755">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter number with two fraction digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Vederlag totalt</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever to desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Samla vedelag</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SalgArvGaveLikvidasjonPartiellLikvidasjonMv-grp-3995/AntallAksjerIAvgang-grp-4002/EnhetMottakerTingsinnskuddOvergangsregelEOrganisasjonsnummer-datadef-23808">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Overgangsregel E, erververs org.nr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Overgangsregel E, erververs org.nr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SpleisSkattefriFusjonOgSkattefriFisjon-grp-3996">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>26 Spleis, skattefri fusjon, skattefri fisjon og sammenslåing/deling  av aksjeklasse</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>26 Spleis, skattefri fusjon, skattefri fisjon og sammenslåing/deling  av aksjeklasse</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_AntallAksjerIAvgangIFbmOmfordeling-grp-4003" nodeset="/Skjema/SpleisSkattefriFusjonOgSkattefriFisjon-grp-3996/AntallAksjerIAvgangIFbmOmfordeling-grp-4003">
+                    <xforms:group ref="/Skjema/SpleisSkattefriFusjonOgSkattefriFisjon-grp-3996/AntallAksjerIAvgangIFbmOmfordeling-grp-4003">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>26 Antall aksjer i avgang i fbm. omfordeling</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Opplys om slettede aksjer i selskapet i løpet av inntektsåret grunnet  et faktorjusterings- /omfordelingstilfelle.  </p>
+                            <p>Det skal spesifiseres hva slags transaksjonstype som er årsak til  utstedelsen. Følgende typer er aktuelle:  </p>
+                            <p/>
+                            <p>- spleis  </p>
+                            <p>- skattefri fusjon  </p>
+                            <p>- skattefri fisjon  </p>
+                            <p>- sammenlåing/deling av aksjeklasse  </p>
+                            <p/>
+                            <p>Spesifiser hvor mange aksjer som blir slettet og tidspunkt for  slettingen. Ved skattefri fusjon/fisjon oppgis overtakende selskaps  organisasjonsnummer, aksjeklasse/-type og vederlagsaksjenes  pålydende.  </p>
+                            <p>Ved skattefri fusjon/fisjon hvor utstedende selskap er overtakende  selskaps morselskap (konsernfusjon/-fisjon), skal utstedende selskaps  organisasjonsnummer, aksjeklasse/-type, og pålydende på  vederlagsaksjene
+                                oppgis.  </p>
+                            <p/>
+                            <p>Ved sammenslåing/deling av aksjeklasser er postene 10, 12, 24 og 26  aktuelle. I post 10 føres antall nyutstedte aksjer innenfor en  aksjeklasse. Har man f eks endret fra å ha 10 ordinære aksjer til 5  A-aksjer og 5
+                                B-aksjer ( deling) må man levere 3  aksjonærregisteroppgaver fordi man har evt avgang/tilgang i tre  forskjellige aksjeklasser. For den ordinære aksjeklassen innleveres  en oppgave som viser først 5 slettede aksjer i
+                                post 12 (må også føres  på aksjonærnivå i post 26).  Antall slettede vil  da være 5 og antall  etter vil være 5. I feltet ISIN/Aksjeklasse føres opp den aksjeklasse  som de slettede 5 aksjene overføres til - i dette
+                                eksempelet til  A-aksjer. Videre må post 12 fylles ut en gang til for de neste 5  slettede aksjene som går over til å være aksjeklasse B.  Antall  slettede vil da også her være 5 mens antall etter vil være 0. I  feltet
+                                ISIN/aksjeklasse føres aksjeklasse B.  </p>
+                            <p/>
+                            <p>For aksjeklassen A leveres en oppgave som viser  5 nyutstedte A-aksjer  i post 10 (post 24 fylles ut på aksjonærnivå).  I feltet  ISIN/Aksjeklasse fylles inn hvor de nyutstedte aksjene kommer fra - i  dette eksempelet
+                                aksjeklasse ordinære aksjer.Endelig må det leveres  oppgave for aksjeklassen B som da også skal vise 5 nyutstedte aksjer  i post 10 (post 24 fylles ut på aksjonærnivå) og i feltet  ISIN/Aksjeklasse føres ordinære
+                                aksjer.  </p>
+                            <p/>
+                            <p>Prinsippet for føring blir det samme ved sammenslåing som for deling.  Endrer man fra å ha 5 A-aksjer og 5 B-aksjer til 10 ordinære aksjer  må det også leveres 3 aksjonærregisteroppgaver. Oppgaven for  aksjeklassen B
+                                vil da f eks vise  5 slettede aksjer i post 12 (og 5  slettede i post 26 på aksjonærnivå) og i feltet ISIN/Aksjeklasse  føres ordinære aksjer (den aksjeklassen de slettede aksjene går over  til).  </p>
+                            <p/>
+                            <p>Se post 12 for opplysninger på selskapsnivå.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Spesifisering (transaksjonstype). Tidspunkt for avgangen. Ved  fusjon/fisjon skal det opplyses om det overtakende selskaps org.nr.  mv. (Ved konsernfusjon/-fisjon morselskapets org.nr. mv.)  </p>
+                            <p>(se post 12)</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>26 Talet på aksjar i avgang i samband med omfordeling</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Opplys om sletta aksjar i selskapet i løpet av inntektsåret grunna eit  faktorjusterings- /omfordelingstilfelle.  </p>
+                            <p>Det skal spesifiserast kva slags transaksjonstype som er årsak til  utskrivinga. Følgjande typar er aktuelle:  </p>
+                            <p/>
+                            <p>- spleis  </p>
+                            <p>- skattefri fusjon  </p>
+                            <p>- skattefri fisjon  </p>
+                            <p>- sammenlåing/deling av aksjeklasse  </p>
+                            <p/>
+                            <p>Spesifiser kor mange aksjar som blir sletta, og tidspunkt for  slettinga. Ved skattefri fusjon/fisjon gir ein opp  organisasjonsnummeret til overtakande selskap, aksjeklasse/-type og  vederlagsaksjane sitt pålydande.  </p>
+                            <p>Ved skattefri fusjon/fisjon der utskrivande selskap er overtakande  selskaps morselskap (konsernfusjon/-fisjon), skal utskrivande  selskaps organisasjonsnummer, aksjeklasse/-type, og pålydande på  vederlagsaksjane
+                                givast opp.  </p>
+                            <p/>
+                            <p>Ved samanslåing/deling av aksjeklassar er postane 10, 12, 24 og 26  aktuelle. I post 10 fører ein talet på nyutskrivne aksjar innanfor  ein aksjeklasse. Har ein for eksempel endra frå å ha 10 ordinære  aksjar til 5
+                                A-aksjar og 5 B-aksjar (deling), må ein levere 3  aksjonærregisteroppgåver fordi ein har ev. avgang/tilgang i tre  forskjellige aksjeklassar. For den ordinære aksjeklassen  leverer ein  inn oppgåve som viser først 5
+                                sletta aksjar i post 12 (må òg førast  på aksjonærnivå i post 26).  Talet på sletta aksjar er då òg 5, og  talet på aksjar etter blir 5. I feltet ISIN/Aksjeklasse fører ein opp  den aksjeklassen som dei 5 sletta
+                                aksjane blir overførte til ? i  dette eksempelet til A-aksjar. Vidare må post 12 fyllast ut ein gong  til for dei neste 5 sletta aksjane som går over til å vere  aksjeklasse B.  Talet på sletta aksjar blir då også her
+                                5, mens talet  på aksjar etter blir 0. I feltet ISIN/aksjeklasse fører ein  aksjeklasse B.  </p>
+                            <p/>
+                            <p>For aksjeklassen A blir det levert ei oppgåve som viser  5 nyutskrivne  A-aksjar i post 10 (post 24 skal fyllast ut på aksjonærnivå).  I  feltet ISIN/Aksjeklasse fyller ein inn kvar dei nyutskrivne aksjane  kjem frå ? i
+                                dette eksempelet aksjeklasse ordinære aksjar. Endeleg må  det leverast oppgåve for aksjeklassen B, som då også skal vise 5  nyutskrivne aksjar i post 10 (post 24 skal fyllast ut på  aksjonærnivå), og i feltet
+                                ISIN/Aksjeklasse fører ein ordinære  aksjar.  </p>
+                            <p/>
+                            <p>Prinsippet for føring blir det same ved samanslåing som for deling.  Endrar ein frå å ha 5 A-aksjar og 5 B-aksjar til 10 ordinære aksjar,  må det òg leverast 3 aksjonærregisteroppgåver. Oppgåva for  aksjeklassen B vil
+                                då for eksempel vise 5 sletta aksjar i post 12 (og  5 sletta i post 26 på aksjonærnivå), og i feltet ISIN/Aksjeklasse  fører ein ordinære aksjar (den aksjeklassen dei sletta aksjane går  over til).  </p>
+                            <p/>
+                            <p>Sjå post 12 for opplysningar på selskapsnivå.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Spesifisering (transaksjonstype). Tidspunkt for avgangen. Ved  fusjon/fisjon skal det opplysast om det overtakande selskaps org.nr.  mv. (Ved konsernfusjon/-fisjon morselskapets org.nr. mv.)  </p>
+                            <p>(sjå post 12)</p>
+                        </xforms:hint>
+                        <xforms:input ref="/Skjema/SpleisSkattefriFusjonOgSkattefriFisjon-grp-3996/AntallAksjerIAvgangIFbmOmfordeling-grp-4003/AksjerSpleisMvAvgangAntall-datadef-24007">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter number with six fraction digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Antall</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever seks desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kor mange</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev seks desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/SpleisSkattefriFusjonOgSkattefriFisjon-grp-3996/AntallAksjerIAvgangIFbmOmfordeling-grp-4003/AksjerSpleisMvType-datadef-17758">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>I</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fisjon skattefri</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Fisjon skattefri</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>U</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Fusjon skattefri</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Fusjon skattefri</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>V</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Spleis</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Spleis</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>SD</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Sammenslåing/deling av aksjeklasse</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Sammenslåing/deling av aksjeklasse</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Transaksjonstype</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Transaksjonstype</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/SpleisSkattefriFusjonOgSkattefriFisjon-grp-3996/AntallAksjerIAvgangIFbmOmfordeling-grp-4003/AksjerSpleisMvTidspunkt-datadef-17759">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Tidspunkt</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her skal det legges inn et tidspunkt med format DD.MM.ÅÅÅÅ tt:mm:ss.  Klokkeslett er obligatorisk hvis hendelser, transaksjoner og  utbyttebetalinger har skjedd på samme dag. Dette har betydning for
+                                    oppgaveproduksjonen. Klokkeslett er ikke relevant for alle  oppgavegivere, legg i såfall inn dato og det tilføyes automatisk  standardklokkeslett 12:00:00.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>(DD.MM.ÅÅÅÅ tt:mm:ss)</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Tidspunkt</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her skal det leggjast inn et tidspunkt med format DD.MM.ÅÅÅÅ tt:mm:ss.  Klokkeslett er obligatorisk om hendinga, transaksjonar og  utbyttebetaling har skjedd på samme dag. Dette har betydning for
+                                    oppgåveproduksjonen. Klokkeslett er ikkje relevant for alle  oppgåvegivare, legg i såfall inn dato og det leggjast til automatisk  standardklokkeslett 12:00:00.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>(DD.MM.ÅÅÅÅ tt:mm:ss)</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SpleisSkattefriFusjonOgSkattefriFisjon-grp-3996/AntallAksjerIAvgangIFbmOmfordeling-grp-4003/EnhetOvertakendeFisjonOrganisasjonsnummer-datadef-17699">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Overt. selskaps (evt. morselskap) org.nr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Overt. selskaps (evt. morselskap) org.nr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SpleisSkattefriFusjonOgSkattefriFisjon-grp-3996/AntallAksjerIAvgangIFbmOmfordeling-grp-4003/AksjerSpleisMvOvetakendeISIN-datadef-17700">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Overt. selskaps ISIN</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feil format; skal være på formen NOxxxxxxxxxx</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Overt. selskaps ISIN</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feil format; skal være på formen NOxxxxxxxxxx</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/SpleisSkattefriFusjonOgSkattefriFisjon-grp-3996/AntallAksjerIAvgangIFbmOmfordeling-grp-4003/AksjerSpleisMvOvertakendeAksjetype-datadef-19906">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>01</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ordinære aksjer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Orinære aksjar</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>02</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Preferanse aksjer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Preferanse aksjar</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>03</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>A-aksjer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>A-aksjar</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>04</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>B-aksjer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>B-aksjar</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>05</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>C-aksjer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>C-aksjar</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>06</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>D-aksjer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>D-aksjar</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>07</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ekstraordinære aksjer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Ekstraordnære aksjar</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Overt. selskaps aksjeklasse</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Overt. selskaps aksjeklasse</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/SpleisSkattefriFusjonOgSkattefriFisjon-grp-3996/AntallAksjerIAvgangIFbmOmfordeling-grp-4003/AksjerSpleisMvPalydende-datadef-23969">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter number with six fraction digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Overtakende selskaps pålydende pr. aksje</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever seks desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Overtakande selskaps pålydande pr. aksje</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev seks desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/EndringerIAksjekapitalOgOverkurs-grp-3997">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>27-29 Endringer i aksjekapital/overkurs og fisjon ved nedsettelse av  pålydende</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>27-29 Endringar i aksjekapital/overkurs og fisjon ved nedsetjing av  pålydande</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_TilbakebetaltInnbetaltOgFondsemitertAKVedReduksjonAvPalydende-grp-4000" nodeset="/Skjema/EndringerIAksjekapitalOgOverkurs-grp-3997/TilbakebetaltInnbetaltOgFondsemitertAKVedReduksjonAvPalydende-grp-4000">
+                    <xforms:group ref="/Skjema/EndringerIAksjekapitalOgOverkurs-grp-3997/TilbakebetaltInnbetaltOgFondsemitertAKVedReduksjonAvPalydende-grp-4000">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>27 Tilbakebetalt innbetalt aksjekapital (totalt beløp) og utbetalt  fondsemitert aksjekapital ved reduksjon av pålydende pr. aksje</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Opplys om tilbakebetalt/utbetalt beløp til aksjonæren ved nedsettelse  av aksjekapitalen i selskapet ved reduksjon av pålydende pr. aksje.  Spesifiser på aksjonærnivå om nedsettelsen gjelder innbetalt eller
+                                fondsemittert aksjekapital. Oppgi reduksjon av pålydende pr. aksje og  tidspunktet for nedsettelsen Selskapet kan ikke benytte innbetalt  aksjekapital som utbetaling til aksjonærene før all fondsemittert  aksjekapital
+                                er utbetalt. (Tilbakebetaling av innbetalt aksjekapital  vil automatisk redusere aksjens inngangsverdi.)  </p>
+                            <p>Se post 17 for opplysninger på selskapsnivå. Tilbakebetaling av  fondsemittert kapital anses skatterettslig som utbytte og beløpet  skal derfor også føres i post 21 (og post 8 på selskapsnivå).</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(se post 17)</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>27 Tilbakebetalt innbetalt aksjekapital (totalt beløp) og utbetalt  fondsemitert aksjekapital ved reduksjon av pålydande pr. aksje</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Opplys om tilbakebetalt/utbetalt beløp til aksjonæren ved nedsetjing  av aksjekapitalen i selskapet ved reduksjon av pålydande pr. aksje.  Spesifiser på aksjonærnivå om nedsetjinga gjeld innbetalt eller  fondsemittert
+                                aksjekapital. Gi opp reduksjon av pålydande pr. aksje  og tidspunktet for nedsetjinga. Selskapet kan ikkje bruke innbetalt  aksjekapital som utbetaling til aksjonærane før all fondsemittert  aksjekapital er utbetalt.
+                                (Tilbakebetaling av innbetalt aksjekapital  vil automatisk redusere inngangsverdien til aksjen.)  </p>
+                            <p>Sjå post 17 for opplysningar på selskapsnivå. Tilbakebetaling av  fondsemittert kapital blir skatterettsleg rekna som utbytte, og  beløpet skal derfor også førast i post 21 (og post 8 på  selskapsnivå).</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>(sjp post 17)</p>
+                        </xforms:hint>
+                        <xforms:input ref="/Skjema/EndringerIAksjekapitalOgOverkurs-grp-3997/TilbakebetaltInnbetaltOgFondsemitertAKVedReduksjonAvPalydende-grp-4000/AksjekapitalNedsettelseTilbakebetalt-datadef-17761">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter number with two fraction digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nedsettelse av innbetalt aksjekapital</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever to desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nedsetjing av innbetalt aksjekapital</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/EndringerIAksjekapitalOgOverkurs-grp-3997/TilbakebetaltInnbetaltOgFondsemitertAKVedReduksjonAvPalydende-grp-4000/AksjePalydendeRedusert-datadef-23970">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter number with six fraction digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Reduksjon av pålydende pr. aksje</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever seks desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Reduksjon av pålydande pr. aksje</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev seks desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/EndringerIAksjekapitalOgOverkurs-grp-3997/TilbakebetaltInnbetaltOgFondsemitertAKVedReduksjonAvPalydende-grp-4000/AksjeTilbakebetaltTidspunkt-datadef-17763">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Tidspunkt</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her skal det legges inn et tidspunkt med format DD.MM.ÅÅÅÅ tt:mm:ss.  Klokkeslett er obligatorisk hvis hendelser, transaksjoner og  utbyttebetalinger har skjedd på samme dag. Dette har betydning for
+                                    oppgaveproduksjonen. Klokkeslett er ikke relevant for alle  oppgavegivere, legg i såfall inn dato og det tilføyes automatisk  standardklokkeslett 12:00:00.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>(DD.MM.ÅÅÅÅ tt:mm:ss)</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Tidspunkt</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her skal det leggjast inn et tidspunkt med format DD.MM.ÅÅÅÅ tt:mm:ss.  Klokkeslett er obligatorisk om hendinga, transaksjonar og  utbyttebetaling har skjedd på samme dag. Dette har betydning for
+                                    oppgåveproduksjonen. Klokkeslett er ikkje relevant for alle  oppgåvegivare, legg i såfall inn dato og det leggjast til automatisk  standardklokkeslett 12:00:00.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>(DD.MM.ÅÅÅÅ tt:mm:ss)</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/EndringerIAksjekapitalOgOverkurs-grp-3997/TilbakebetaltInnbetaltOgFondsemitertAKVedReduksjonAvPalydende-grp-4000/AksjekapitalNedsettelse-datadef-17764">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter number with two fraction digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nedsettelse fondsemitert aksjekapital</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever to desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nedsetjing fondsemitert aksjekapital</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:repeat id="repeat_TilbakebetaltTidligereInnbetaltOverkursForAksjen-grp-4001" nodeset="/Skjema/EndringerIAksjekapitalOgOverkurs-grp-3997/TilbakebetaltTidligereInnbetaltOverkursForAksjen-grp-4001">
+                    <xforms:group ref="/Skjema/EndringerIAksjekapitalOgOverkurs-grp-3997/TilbakebetaltTidligereInnbetaltOverkursForAksjen-grp-4001">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>28 Tilbakebetalt tidligere innbetalt overkurs for aksjene</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Opplys om nedsettelse av innbetalt overkurs med tilbakebetaling til  aksjonæren, jf. sktl. § 10-37. Oppgi det totale beløpet aksjonærene  får utbetalt pr. tilbakebetaling, samt tidspunkt for  tilbakebetalingen. Vedr.
+                                tilbakebetaling av overkurs se post 13.  (Tilbakebetaling av innbetalt overkurs vil automatisk redusere  aksjens inngangsverdi.)  Tilbakebetaling av overkurs som ikke er  innbetalt, skal behandles som utbytte og oppgis
+                                i post 21.  </p>
+                            <p>Se post 13 for opplysninger på selskapsnivå.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(se post 13)</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>28 Tilbakebetalt tidlegare innbetalt overkurs for aksjen</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Opplys om nedsetjing av innbetalt overkurs med tilbakebetaling til  aksjonæren, jf. sktl. § 10-37. Gi opp det totale beløpet aksjonærane  får utbetalt pr. tilbakebetaling, og tidspunkt for tilbakebetalinga.  Når det
+                                gjeld tilbakebetaling av overkurs, sjå post 13.  (Tilbakebetaling av innbetalt overkurs reduserer automatisk  inngangsverdien av aksjen.) Tilbakebetaling av overkurs som ikkje er  innbetalt, skal behandlast som utbytte
+                                og givast opp i post 21.  </p>
+                            <p>Sjå post 13 for opplysningar på selskapsnivå.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>(sjå post 13)</p>
+                        </xforms:hint>
+                        <xforms:input ref="/Skjema/EndringerIAksjekapitalOgOverkurs-grp-3997/TilbakebetaltTidligereInnbetaltOverkursForAksjen-grp-4001/OverkursTilbakebetalt-datadef-17765">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter number with two fraction digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nedsettelse av innbetalt overkurs</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever to desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nedsetjing av innbetalt overkurs</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/EndringerIAksjekapitalOgOverkurs-grp-3997/TilbakebetaltTidligereInnbetaltOverkursForAksjen-grp-4001/OverkursTilbakebetaltTidspunkt-datadef-17766">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Tidspunkt</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her skal det legges inn et tidspunkt med format DD.MM.ÅÅÅÅ tt:mm:ss.  Klokkeslett er obligatorisk hvis hendelser, transaksjoner og  utbyttebetalinger har skjedd på samme dag. Dette har betydning for
+                                    oppgaveproduksjonen. Klokkeslett er ikke relevant for alle  oppgavegivere, legg i såfall inn dato og det tilføyes automatisk  standardklokkeslett 12:00:00.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>(DD.MM.ÅÅÅÅ tt:mm:ss)</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Tidspunkt</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her skal det leggjast inn et tidspunkt med format DD.MM.ÅÅÅÅ tt:mm:ss.  Klokkeslett er obligatorisk om hendinga, transaksjonar og  utbyttebetaling har skjedd på samme dag. Dette har betydning for
+                                    oppgåveproduksjonen. Klokkeslett er ikkje relevant for alle  oppgåvegivare, legg i såfall inn dato og det leggjast til automatisk  standardklokkeslett 12:00:00.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>(DD.MM.ÅÅÅÅ tt:mm:ss)</p>
+                            </xforms:hint>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:repeat id="repeat_ForhoyelseAvInnbetaltAksjekapitalVedOkning-grp-4987" nodeset="/Skjema/EndringerIAksjekapitalOgOverkurs-grp-3997/ForhoyelseAvInnbetaltAksjekapitalVedOkning-grp-4987">
+                    <xforms:group ref="/Skjema/EndringerIAksjekapitalOgOverkurs-grp-3997/ForhoyelseAvInnbetaltAksjekapitalVedOkning-grp-4987">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>29 Forhøyelse av aksjekapital ved økning av pålydende pr aksje ifm  nyemisjon. Forhøyelse av overkurs ifm nyemisjon</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Spesifiser forhøyelse av kapital på aksjekapital og overkurs ved  nyemisjon.  </p>
+                            <p/>
+                            <p>Overgangsregel E til sktl § 2-38 - For at aksjonær skal få videreført  sine verdier fra aksjene i overført selskap  må det rapporteres  forhøyelse av aksjekapitalen, økning i pålydende, tidspunktet, krysse  ja i feltet
+                                for om forhøyelsen er foretatt etter overgangsregel E og  oppgi organisasjonsnummer til overført selskap. For nærmere  forklaring på hvordan post 29 skal fylles ut ved overføring av flere  aksjer fra forskjellige
+                                selskaper, se under post 15.  </p>
+                            <p/>
+                            <p>Se post 15 for opplysninger på selskapsnivå.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Oppgi samlet innbetalt beløp som omfattes av nyemisjonen, spesifisert  på innbetalt aksjekapital og innbetalt overkurs (se post 15)</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>29 Forhøging av aksjekapital ved auke av pålydande pr. aksje i samband  med nyemisjon. Forhøging av overkurs i samband med nyemisjon</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Spesifiser forhøging av kapital på aksjekapital og overkurs ved  nyemisjon.  </p>
+                            <p/>
+                            <p>Overgangsregel E til sktl § 2-38 - For at aksjonær skal få vidareført  sine verdiar frå aksjane i overført selskap, må ein rapportere  forhøging av aksjekapitalen, auke i pålydande, tidspunktet, krysse ja  i feltet for
+                                om forhøginga er gjord etter overgangsregel E, og gi opp  organisasjonsnummer til overført selskap. For nærmare forklaring på  korleis post 29 skal fyllast dersom det blir overført fleire aksjar  frå forskjellige
+                                selskap, sjå under post 15.  </p>
+                            <p/>
+                            <p>Sjå post 15 for opplysningar på selskapsnivå.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Oppgi samla innbetalt beløp som omfattast av nyemisjonen, spesifisert  på innbetalt aksjekapital og innbetalt overkurs (sjå post 15)</p>
+                        </xforms:hint>
+                        <xforms:input ref="/Skjema/EndringerIAksjekapitalOgOverkurs-grp-3997/ForhoyelseAvInnbetaltAksjekapitalVedOkning-grp-4987/AksjekapitalNyemisjonForhoyelseAksjonar-datadef-22073">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter number with two fraction digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Forhøyelse av innbetalt aksjekapital</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever to desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Forhøging av innbetalt aksjekapital</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/EndringerIAksjekapitalOgOverkurs-grp-3997/ForhoyelseAvInnbetaltAksjekapitalVedOkning-grp-4987/AksjeNyemisjonPalydendeForhoyelseAksjonar-datadef-23971">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter number with six fraction digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Økning av pålydende pr. aksje</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever seks desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Aukning av pålydande pr. aksje</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev seks desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/EndringerIAksjekapitalOgOverkurs-grp-3997/ForhoyelseAvInnbetaltAksjekapitalVedOkning-grp-4987/AksjeNyemisjonTidspunktAksjonar-datadef-22075">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Tidspunkt</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her skal det legges inn et tidspunkt med format DD.MM.ÅÅÅÅ tt:mm:ss.  Klokkeslett er obligatorisk hvis hendelser, transaksjoner og  utbyttebetalinger har skjedd på samme dag. Dette har betydning for
+                                    oppgaveproduksjonen. Klokkeslett er ikke relevant for alle  oppgavegivere, legg i såfall inn dato og det tilføyes automatisk  standardklokkeslett 12:00:00.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>(DD.MM.ÅÅÅÅ tt:mm:ss)</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Tidspunkt</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her skal det leggjast inn et tidspunkt med format DD.MM.ÅÅÅÅ tt:mm:ss.  Klokkeslett er obligatorisk om hendinga, transaksjonar og  utbyttebetaling har skjedd på samme dag. Dette har betydning for
+                                    oppgåveproduksjonen. Klokkeslett er ikkje relevant for alle  oppgåvegivare, legg i såfall inn dato og det leggjast til automatisk  standardklokkeslett 12:00:00.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>(DD.MM.ÅÅÅÅ tt:mm:ss)</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/EndringerIAksjekapitalOgOverkurs-grp-3997/ForhoyelseAvInnbetaltAksjekapitalVedOkning-grp-4987/AksjeOverkursForhoyelseAksjonar-datadef-22076">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter number with two fraction digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Forhøyelse av innbetalt overkurs</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever to desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Forhøging av innbetalt overkurs</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/EndringerIAksjekapitalOgOverkurs-grp-3997/ForhoyelseAvInnbetaltAksjekapitalVedOkning-grp-4987/AksjekapitalForhoyelseOvergangsregelEAksjonar-datadef-23809">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>Ja</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Yes</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Nei</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>No</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Er forhøyelsen foretatt etter overgangsregel E?</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Er forhøging foretatt etter overgangsregel E?</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/EndringerIAksjekapitalOgOverkurs-grp-3997/ForhoyelseAvInnbetaltAksjekapitalVedOkning-grp-4987/AksjeForhoyelseOvergangsregelEOrganisasjonsnummerAksjonar-datadef-24008">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Dersom ja oppgi overført selskaps org.nr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Dersom ja oppgi overført selskaps org.nr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

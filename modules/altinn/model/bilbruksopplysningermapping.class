@@ -1,0 +1,135 @@
+<?php
+class BilbruksOpplysningerMapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+           			$this->ORID[$item] = $v;
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+            	$item = $this->Account[$a];
+            	$this->ORID[$item] = $v;
+	            return 1;
+    	    }
+       	}
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+	{
+        $this->addMapping('D1', 'EnhetNavn-datadef-1', 'VName');
+		$this->addMapping('D18', 'EnhetOrganisasjonsnummer-datadef-18', 'OrgNumber');
+		$this->addMapping('D26', 'OppgavegiverFodselsnummer-datadef-26', 'SocialSecurityID');
+		$this->addMapping('D692', 'Inntektsar-datadef-692', 'Inntektsar');
+		$this->addMapping('D15',  'EnhetAdresse-datadef-15', 'VAddress');
+		$this->addMapping('D6673', 'EnhetPostnummer-datadef-6673', 'VZipCode');
+		$this->addMapping('D6674', 'EnhetPoststed-datadef-6674', 'VCity');
+		$this->addMapping('D280', 'RegnskapsforerNavn-datadef-280', 'FVName');
+		$this->addMapping('D281', 'RegnskapsforerAdresse-datadef-281', 'FVAddress');
+		$this->addMapping('D6678', 'RegnskapsforerPostnummer-datadef-6678', 'FVZipCode');
+		$this->addMapping('D6679', 'RegnskapsforerPoststed-datadef-6679', 'FVCity');
+		$this->addMapping('D7579', 'BilRegistreringsnummerSpesifisertBil-datadef-7579', '1');
+		$this->addMapping('D7576', 'BilkategoriSpesifisertBil-datadef-7576', '2');
+		$this->addMapping('D7580', 'BilMerkeTypeSpesifisertBil-datadef-7580', '3');
+		$this->addMapping('D7577', 'BilArsmodellSpesifisertBil-datadef-7577', '4');
+		$this->addMapping('D3114', 'BilListeprisSpesifisertBil-datadef-3114', '5');
+		$this->addMapping('D7578', 'DriftskostnaderSpesifisertBil-datadef-7578', '6');
+		$this->addMapping('D7581', 'BilKilometerstandSpesifisertBil-datadef-7581', '7');
+		$this->addMapping('D7582', 'BilKilometerstandFjoraretSpesifisertBil-datadef-7582', '8');
+		$this->addMapping('D3116', 'BilKjorelengdePrivatSpesifisertBil-datadef-3116', '9');
+		$this->addMapping('D7583', 'BilKjorelengdeHjemArbeidSpesifisertBil-datadef-7583', '10');
+		$this->addMapping('D7584', 'BilBruksomradeSpesifisertBil-datadef-7584', '11');
+		$this->addMapping('D19411', 'BilParkeringAdresseSpesifisertBil-datadef-19411', '12a');
+		$this->addMapping('D7667', 'BilParkeringAnnetStedSpesifisertBil-datadef-7667', '12b');
+		
+		$this->addMapping('D7585', 'BilBrukerNavnSpesifisertBil-datadef-7585', '13a');
+		$this->addMapping('D7586', 'BilBrukerFodselsnummerSpesifisertBil-datadef-7586', '13b');
+		$this->addMapping('D7587', 'BilBrukerAdresseSpesifisertBil-datadef-7587', '13c');
+		$this->addMapping('D7588', 'BilBrukerPostnummerSpesifisertBil-datadef-7588', '13d');
+		$this->addMapping('D7589', 'BilBrukerPoststedSpesifisertBil-datadef-7589', '13e');
+		$this->addMapping('D3118', 'BilKjorebokSpesifisertBil-datadef-3118', '14');
+		$this->addMapping('D7596', 'DriftskostnaderDrivstoffSpesifisertBil-datadef-7596', '20');
+		$this->addMapping('D11251', 'DriftskostnaderVedlikeholdSpesifisertBil-datadef-11251', '21');
+		$this->addMapping('D7590', 'DriftskostnaderForsikringAvgifterSpesifisertBil-datadef-7590', '22');
+		$this->addMapping('D11252', 'DriftskostnaderLeasingleieSpesifisertBil-datadef-11252', '23');
+		$this->addMapping('D11249', 'BilkostnaderVerdiforringelseLinearSpesifisertBil-datadef-11249', '24a');
+		$this->addMapping('D11250', 'BilkostnaderTilbakeforingsgrunnlagSamletKostnadSpesifisertBil-datadef-11250', '24b');
+		$this->addMapping('D11253', 'SaldoavskrivningSpesifisertBil-datadef-11253', '25');
+		$this->addMapping('D7591', 'BilkostnaderPrivatTilbakefortSpesifisertBil-datadef-7591', '27');
+		$this->addMapping('D11254', 'DriftskostnaderYrketSpesifisertBil-datadef-11254', '29');
+		$this->addMapping('D3115', 'BilgodtgjorelseMottattSpesifisertBil-datadef-3115', '30');
+		$this->addMapping('D7594', 'DriftskostnaderOverskuddSpesifisertBil-datadef-7594', '40a');
+		$this->addMapping('D7595', 'DriftskostnaderUnderskuddSpesifisertBil-datadef-7595', '40b');
+
+
+        
+	}
+ }
+?>

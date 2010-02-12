@@ -1,0 +1,446 @@
+<?
+
+#Usage
+# new MOMSOppgave(array('fromPeriod'=>'2004-01', 'toPeriod'=>'2004-12'))
+#Ikke periode 13???);
+#
+//require_once "mvaavstemming.class";
+
+class MOMSOppgave
+{
+    var $_report;
+    var $_altinnMapping;
+    var $_generalReport;
+    var $_comanyInfo;
+
+    var $_sumLine;
+    var $_sumPart;
+    var $_sumGroup;
+    var $_sumTotal;
+    var $_total;
+
+    var $_fromPeriod;
+    var $_toPeriod;
+    var $_thisYear;
+    var $_lastYear;
+    var $_enableLastYear;
+    
+    var $_oppgaveType;
+    var $_terminType;
+    var $_termin;
+    var $_terminitem;
+    var $_year;
+    
+    var $months;
+    var $month;
+    var $db;
+    var $mvaSatsTable=array();
+    
+    
+    ############################################################################
+    function MOMSOppgave($args)
+    {
+        global $_SETUP, $_date, $_lib;
+        require_once $_SETUP['HOME_DIR']."/code/lodo/lib/altinnmapping.class";
+        includelogic('report/general');
+        includelogic('company/companyinfo');
+        includelogic('vat/mvaavstemming');
+       
+        $this->_enableLastYear = $args['enableLastYear'] = 1;
+        $this->_report         = $args['report'];
+        $this->_oppgaveType    = $args['oppgaveType']=1;
+        $this->_terminType     = $args['termin'];
+        $this->_terminitem     = $args['terminitem'];
+        $this->_year           = $args['year'];
+        $this->db              = $args['db'];
+        
+        //print "Anh termin".$args['termin']. "<br>\n";
+        //print "Anh terminitem".$args['terminitem']. "<br>\n";
+        //Ingen termin for termintype (3 og 2)
+        if (1){
+        switch ($args['termin']) {
+        	case 1: $this->_fromPeriod=$args['year'].'-01';
+        	        $this->_toPeriod=$args['year'].'-12';
+        	        $this->_termin='011';
+        	        $this->month= 12;
+        	        $this->_terminType=1;
+        	    break;
+        	case 2: switch ($args['terminitem']) {
+        			case 1: $this->_fromPeriod=$args['year'].'-01';
+        	        	$this->_toPeriod=$args['year'].'-06';
+        	        	$this->_termin='024';
+        	        	$this->month= 6;
+        	        	break;
+        	        case 2: $this->_fromPeriod=$args['year'].'-07';
+        	        	$this->_toPeriod=$args['year'].'-12';
+        	        	$this->_termin='024';
+        	        	$this->month= 12;
+        	        	break;
+        			}
+        	    break;
+        	case 3: switch ($args['terminitem']) {
+        			case 1: $this->_fromPeriod=$args['year'].'-01';
+        	        	$this->_toPeriod=$args['year'].'-04';
+        	        	$this->_termin='024';
+        	        	$this->month= 4;
+        	        	break;
+        	        case 2: $this->_fromPeriod=$args['year'].'-05';
+        	        	$this->_toPeriod=$args['year'].'-08';
+        	        	$this->_termin='024';
+        	        	$this->month= 8;
+        	        	break;
+        	        case 3: $this->_fromPeriod=$args['year'].'-09';
+        	        	$this->_toPeriod=$args['year'].'-12';
+        	        	$this->_termin='024';
+        	        	$this->month= 12;
+        	        	break;
+        			}
+        	    break;
+        	case 4:
+        	      switch ($args['terminitem']) {
+        			case 1: $this->_fromPeriod=$args['year'].'-01';
+        	        	$this->_toPeriod=$args['year'].'-03';
+        	        	$this->_termin='013';
+        	        	$this->month= 3;
+        	        	break;
+        	        case 2: $this->_fromPeriod=$args['year'].'-04';
+        	        	$this->_toPeriod=$args['year'].'-06';
+        	        	$this->_termin='023';
+        	        	$this->month= 6;
+        	        	break;
+        	        case 3: $this->_fromPeriod=$args['year'].'-07';
+        	        	$this->_toPeriod=$args['year'].'-09';
+        	        	$this->_termin='033';
+        	        	$this->month= 9;
+        	        	break;
+        	        case 4: $this->_fromPeriod=$args['year'].'-10';
+        	        	$this->_toPeriod=$args['year'].'-012';
+        	        	$this->_termin='043';
+        	        	$this->month= 12;
+        	        	break;
+        			}
+        	    break;
+        	case 6:
+        	       switch ($args['terminitem']) {
+        			case 1: $this->_fromPeriod=$args['year'].'-01';
+        	        	$this->_toPeriod=$args['year'].'-02';
+        	        	$this->_termin='014';
+        	        	//$this->months= array ('1'=>'1', '2'=>'2');
+        	        	$this->month= 2;
+        	        	break;
+        	        case 2: $this->_fromPeriod=$args['year'].'-03';
+        	        	$this->_toPeriod=$args['year'].'-04';
+        	        	$this->_termin='024';
+        	        	//$this->months= array ('1'=>'3', '2'=>'4');
+        	        	$this->month= 4;
+        	        	break;
+        	        case 3: $this->_fromPeriod=$args['year'].'-05';
+        	        	$this->_toPeriod=$args['year'].'-06';
+        	        	$this->_termin='034';
+        	        	//$this->months= array ('1'=>'5', '2'=>'6');
+        	        	$this->month= 6;
+        	        	break;
+        	        case 4: $this->_fromPeriod=$args['year'].'-07';
+        	        	$this->_toPeriod=$args['year'].'-08';
+        	        	$this->_termin='044';
+        	        	//$this->months= array ('1'=>'7', '2'=>'8');
+        	        	$this->month= 8;
+        	        	break;
+        	        case 5: $this->_fromPeriod=$args['year'].'-09';
+        	        	$this->_toPeriod=$args['year'].'-10';
+        	        	$this->_termin='054';
+        	        	//$this->months= array ('1'=>'9', '2'=>'10');
+        	        	$this->month= 10;
+        	        	break;
+        	        case 6: $this->_fromPeriod=$args['year'].'-11';
+        	        	$this->_toPeriod=$args['year'].'-12';
+        	        	$this->_termin='064';
+        	        	//$this->months= array ('1'=>'11', '2'=>'12');
+        	        	$this->month= 12;
+        	        	break;
+        			}
+        			
+        			$this->_terminType=4;
+        	    break;
+        	case 12:switch ($args['terminitem']) {
+        			case 1: $this->_fromPeriod=$args['year'].'-01';
+        	        	$this->_toPeriod=$args['year'].'-01';
+        	        	$this->_termin='015';
+        	        	$this->month= 1;
+        	        	break;
+        	        case 2: $this->_fromPeriod=$args['year'].'-02';
+        	        	$this->_toPeriod=$args['year'].'-02';
+        	        	$this->_termin='025';
+        	        	$this->month= 2;
+        	        	break;
+        	        case 3: $this->_fromPeriod=$args['year'].'-03';
+        	        	$this->_toPeriod=$args['year'].'-03';
+        	        	$this->_termin='035';
+        	        	$this->month= 3;
+        	        	break;
+        	        case 4: $this->_fromPeriod=$args['year'].'-04';
+        	        	$this->_toPeriod=$args['year'].'-04';
+        	        	$this->_termin='045';
+        	        	$this->month= 4;
+        	        	break;
+        	        case 5: $this->_fromPeriod=$args['year'].'-05';
+        	        	$this->_toPeriod=$args['year'].'-05';
+        	        	$this->_termin='055';
+        	        	$this->month= 5;
+        	        	break;
+        	        case 6: $this->_fromPeriod=$args['year'].'-06';
+        	        	$this->_toPeriod=$args['year'].'-06';
+        	        	$this->_termin='065';
+        	        	$this->month= 6;
+        	        	break;
+        	        case 7: $this->_fromPeriod=$args['year'].'-07';
+        	        	$this->_toPeriod=$args['year'].'-07';
+        	        	$this->_termin='075';
+        	        	$this->month= 7;
+        	        	break;
+        	        case 8: $this->_fromPeriod=$args['year'].'-08';
+        	        	$this->_toPeriod=$args['year'].'-08';
+        	        	$this->_termin='085';
+        	        	$this->month= 8;
+        	        	break;
+        	        case 9: $this->_fromPeriod=$args['year'].'-09';
+        	        	$this->_toPeriod=$args['year'].'-09';
+        	        	$this->_termin='095';
+        	        	$this->month= 9;
+        	        	break;
+        	        case 10: $this->_fromPeriod=$args['year'].'-10';
+        	        	$this->_toPeriod=$args['year'].'-10';
+        	        	$this->_termin='105';
+        	        	$this->month= 10;
+        	        	break;
+        	        case 11: $this->_fromPeriod=$args['year'].'-11';
+        	        	$this->_toPeriod=$args['year'].'-11';
+        	        	$this->_termin='115';
+        	        	$this->month= 11;
+        	        	break;
+        	        case 12: $this->_fromPeriod=$args['year'].'-12';
+        	        	$this->_toPeriod=$args['year'].'-12';
+        	        	$this->_termin='125';
+        	        	$this->month= 12;
+        	        	break;
+        			}
+        			$this->_terminType=5;
+        	    break;
+        	    
+        	default: break;
+        }
+        }
+        
+        //print ("Fromperiod:". $this->_fromPeriod. " toPersiod:".$this->_toPeriod . "<br>");
+
+		//Init the mapping list for this report
+        $this->_altinnMapping  = new AltinnMapping($args['report']='2002');
+        
+        print ("Anh year:". $this->_year. " termin:".$this->_termin . " terminttype:".$this->_terminType ."<br>");
+        
+        //Get the inforamtion of the company
+        $this->_comanyInfo     = new ComanyInfo(array());
+        $args['company_type']=  $this->_comanyInfo->ShareValue+$this->_comanyInfo->ShareNumber;
+        
+        //Generate the report
+        //$this->_generalReport  = new GeneralReport(array($args));
+
+		//
+
+        $this->_thisYear       = $_lib['date']->get_this_year($this->_fromPeriod);
+
+        $this->BuildCompanyInfo();
+        $this->avstemming($this->_year);
+        
+        //list($this->_sumLine, $this->_sumPart, $this->_sumGroup, $this->_sumTotal, $this->_total) = $this->_generalReport->GetReport($args);
+        
+        
+        //Start the mapping process by assocating the values to the right
+        //ORID
+        //$this->InsertMapping();
+        
+    }
+
+    ############################################################################
+    function BuildCompanyInfo()
+    {
+        $this->setAccount('VName',       $this->_comanyInfo->CustomerCompany->VName);
+        $this->setAccount('VAddress',    $this->_comanyInfo->CustomerCompany->VAddress);
+        $this->setAccount('VZipCode',    $this->_comanyInfo->CustomerCompany->VZipCode);
+        $this->setAccount('VCity',       $this->_comanyInfo->CustomerCompany->VCity);
+        $this->setAccount('OrgNumber',   $this->_comanyInfo->CustomerCompany->OrgNumber2);
+       
+        $this->setAccount('CompanyMunicipality', $this->_comanyInfo->CustomerCompany->CompanyMunicipality);
+        $this->setAccount('SocialSecurityID',   str_replace(".", "", str_replace("-", "", str_replace(" ", "", $this->_comanyInfo->CustomerPerson->SocialSecurityID))));
+        
+        
+
+        $this->setAccount('FVName',      $this->_comanyInfo->RegnskapCompany->VName);
+        $this->setAccount('FVAddress',   $this->_comanyInfo->RegnskapCompany->VAddress);
+        $this->setAccount('FVZipCode',   $this->_comanyInfo->RegnskapCompany->VZipCode);
+        $this->setAccount('FVCity',      $this->_comanyInfo->RegnskapCompany->VCity);
+        
+        //$this->setAccount('BankAccount', $this->_comanyInfo->CustomerCompany->BankAccount);
+        
+        $this->setAccount('OppgaveType', $this->_oppgaveType);//1-Hovedoppgave, 2-Tilleggsoppgave, 3-Korigertoppgave
+        $this->setAccount('TerminType', $this->_terminType);
+        $this->setAccount('Termin', $this->_termin);
+        $this->setAccount('TerminAr', $this->_year);
+    }
+    
+   ##############################################################
+    function InsertMapping($mvadata=null)
+    {
+        if ($mvadata!=null) {
+        	
+		   
+		    //for ($i=1; $i <= count($this->months); $i++) {
+		    	$mvaUtHighIndex="Grunnlag".sprintf("%01.2f",$this->mvaSatsTable['2701'])."Mva";
+		    	$mvaUtMidIndex="Grunnlag".sprintf("%01.2f",$this->mvaSatsTable['2702'])."Mva";
+		    	$mvaUtLowIndex="Grunnlag".sprintf("%01.2f",$this->mvaSatsTable['2703'])."Mva";
+		    	//print ("Anh Sats: ". "Grunnlag".sprintf("%01.2f",$this->mvaSatsTable['2701'])."Mva");
+		    	//print ("Anh Month: ". $this->months[$i] ."<br>");
+		    	$MVAUtgaendeHoySats = $mvadata[$this->month][$mvaUtHighIndex];
+		    	$MVAUtgaendeMiddelSats = $mvadata[$this->month][$mvaUtMidIndex];
+		    	$MVAUtgaendeLavSats = $mvadata[$this->month][$mvaUtLowIndex];
+		    	
+		    	$mvaUtHighIndex="Out".sprintf("%01.2f",$this->mvaSatsTable['2701'])."Mva";
+		    	$mvaUtMidIndex="Out".sprintf("%01.2f",$this->mvaSatsTable['2702'])."Mva";
+		    	$mvaUtLowIndex="Out".sprintf("%01.2f",$this->mvaSatsTable['2703'])."Mva";
+		    	
+		    	//Utg�ende MVA
+		    	$MVAUtgaendeHoySatsBeregnet = $MVAUtgaendeHoySats* $this->mvaSatsTable['2701'];
+		    	$MVAUtgaendeMiddelSatsBeregnet = $MVAUtgaendeMiddelSats*$this->mvaSatsTable['2702'];
+		    	$MVAUtgaendeLavSatsBeregnet = $MVAUtgaendeLavSats*$this->mvaSatsTable['2703'];
+		    	
+		    	$MVAUtgaendeHoySatsBeregnet = $mvadata[$this->month][$mvaUtHighIndex];
+		    	$MVAUtgaendeMiddelSatsBeregnet = $mvadata[$this->month][$mvaUtMidIndex];
+		    	$MVAUtgaendeLavSatsBeregnet = $mvadata[$this->month][$mvaUtLowIndex];
+		    	
+		    	$OmsetningTotal=$mvadata[$this->month]['TotalOmsettning'];
+		    	$OmsetningAvgiftspliktig=$MVAUtgaendeHoySats+$MVAUtgaendeMiddelSats+$MVAUtgaendeLavSats;
+		    
+		    	$OmsetningAvgiftsfri=$mvadata[$this->month]['FreeOmsettning'];
+		    	
+		    	//Inng�ende MVA
+		    	$mvaInnHighIndex="In".sprintf("%01.2f",$this->mvaSatsTable['2701'])."Mva";
+		    	$mvaInnMidIndex="In".sprintf("%01.2f",$this->mvaSatsTable['2702'])."Mva";
+		    	$mvaInnLowIndex="In".sprintf("%01.2f",$this->mvaSatsTable['2703'])."Mva";
+		    	
+		    	$MVAInngaendeHoySatsBeregnet = $mvadata[$this->month][$mvaInnHighIndex];
+		    	$MVAInngaendeMiddelSatsBeregnet = $mvadata[$this->month][$mvaInnMidIndex];
+		    	$MVAInngaendeLavSatsBeregnet = $mvadata[$this->month][$mvaInnLowIndex];
+		    	
+		    
+	        //$this->setAccount( 'OmsetningTermin', $mvadata[$this->months['1']]->);
+	        $this->setAccount('D8446',  $OmsetningTotal);
+			$this->setAccount('D10095', $OmsetningTotal);
+			$this->setAccount('D10096', $OmsetningAvgiftsfri);
+	        $this->setAccount('D10097', abs($MVAUtgaendeHoySats));
+	        $this->setAccount('D20319', abs($MVAUtgaendeMiddelSats));
+	        $this->setAccount('D14362', abs($MVAUtgaendeLavSats));
+	        
+	        $this->setAccount('D10098', $MVAUtgaendeHoySatsBeregnet);
+			$this->setAccount('D20320', $MVAUtgaendeMiddelSatsBeregnet);
+			$this->setAccount('D14361', $MVAUtgaendeLavSatsBeregnet);
+	        
+	        $this->setAccount('D8450',  abs($MVAInngaendeHoySatsBeregnet));
+			$this->setAccount('D20322', abs($MVAInngaendeMiddelSatsBeregnet));
+			$this->setAccount('D14364', abs($MVAInngaendeLavSatsBeregnet));
+			
+			$sumAvgift=$MVAUtgaendeHoySatsBeregnet+$MVAUtgaendeMiddelSatsBeregnet+$MVAUtgaendeLavSatsBeregnet-
+			           $MVAInngaendeHoySatsBeregnet - $MVAInngaendeMiddelSatsBeregnet - $MVAInngaendeLavSatsBeregnet;
+			           
+			//sum avgift
+			if ($sumAvgift<0)
+        		$this->setAccount('D8452', abs($sumAvgift));
+        	else 
+				$this->setAccount('D8453', abs($sumAvgift));
+				
+        }
+        
+      
+        
+        //print ("Anh MVA hoy:". sprintf("%01.2f", abs($MVAUtgaendeHoySats)) ."<br>");
+        //print ("Anh MVA mid: ". sprintf("%01.2f", abs($MVAUtgaendeMiddelSats)) ."<br>");
+        //print ("Anh MVA lav:". sprintf("%01.2f", abs($MVAUtgaendeLavSats)) ."<br>");
+    }//insertMapping
+    
+    #########################################################
+    function avstemming ($year) {
+    	global $_sess, $_dbh, $_dsn;
+    	
+    	$date = $_lib['sess']->get_session('LoginFormDate');
+		$queryStr  = "SELECT AccountPlanID,Percent,VatID  FROM vat WHERE AccountPlanID>=2701 AND  AccountPlanID<=2704" .
+				" AND ValidFrom <= '$date' AND ValidTo >= '$date' ORDER BY VatID asc";
+		//print "$queryStr <br>\n";
+		$rs = $this->db->Query($queryStr);
+		
+		 while ($row = $this->db->NextRow($rs )) {
+		 	  $this->mvaSatsTable[$row['AccountPlanID']]=$row['Percent'];
+		 	  //print ("Anh account ". $row['AccountPlanID']. $row['Percent']. "<br>");
+		 } 
+    	
+    	$date = $_lib['sess']->get_session('LoginFormDate');
+    	//$MVAAvstemming = new MOMSAvstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $_dsn, 
+            //'_date' => $_date, 'year' => $year, 'fromPeriod'=>$this->_fromPeriod, 'toPeriod'=>$this->_toPeriod));
+            
+        $MVAAvstemming = new  mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $_dsn, 
+            '_date' => $_date, 'year' => $year, 'fromPeriod'=>$this->_fromPeriod, 'toPeriod'=>$this->_toPeriod));
+    	//print_r ($MVAAvstemming->reported);
+    	//print_r ($MVAAvstemming->registered);
+    	
+    	//Insert the data into the mapping list
+    	$this->InsertMapping($MVAAvstemming->reported);
+    }//mvaAvstemming
+
+
+    function IsFoundedThisYear($FoundedDate)
+    {
+        global $_date, $_lib;
+        $foundedYear = $_lib['date']->get_this_year($FoundedDate);
+        if($foundedYear < $this->_thisYear)
+        {
+            return '';
+        }
+        else
+        {
+            return $FoundedDate;
+        }
+    }
+
+    ##############################################################
+    #funksjoner mot mapping object
+    function addMapping($o, $h, $a)
+    {
+        $this->_altinnMapping->addMapping($o, $h, $a);
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->_altinnMapping->setOrid($o, $v);
+    }
+
+    function setAccount($a, $v)
+    {
+        $retval = $this->_altinnMapping->setAccount($a, $v);
+        return $retval;
+    }
+    
+    function getAccount($a)
+    {
+        return $this->_altinnMapping->getAccount($a);
+       
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->_altinnMapping->setHuman($h, $v);
+    }
+
+    function getOridArray()
+    {
+        return $this->_altinnMapping->getOridArray();
+    }
+}
+?>

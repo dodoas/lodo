@@ -1,0 +1,1035 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1016: Skogskjema</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1187-5960.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-5677/Eiendom-grp-6606/SkogSalgHeleEiendommen-datadef-24985" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1016  Skogskjema</p>
+            </xforms:caption>
+            <xforms:hint brreg:lang="NOB">
+                <p>Opplysninger for beregning av formuesverdi på skogeiendommer</p>
+            </xforms:hint>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1016  Skogskjema</p>
+            </xforms:caption>
+            <xforms:hint brreg:lang="NON">
+                <p>Opplysningar for utrekning av formuesverdi på skogeigedommar</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-5677">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Formuesverdien på særskilt lignede skogeiendommer skal revideres i  forbindelse med likningen for 2006. Forrige revisjon ble foretatt i  1989. Revisjonen vil bli foretatt i henhold til forskrift fra  Skattedirektoratet.
+                        Skjemaet skal leveres sammen med selvangivelsen  enten dette skjer på papir eller elektronisk. Det er viktig at navn  og fødselsnummer/organisasjonsnummer for henholdsvis  enkeltpersonforetak og selskap blir riktig utfyllt. Du
+                        må svare på  spørsmålet om du eier  skogeiendommen ved utgangen av året.  Opplysninger om gårdsnummer, bruksnummer, kommunenummer og  kommunenavn er alle opplysninger som er helt nødvendige for den  elektroniske behandlingen
+                        og må fylles ut nøyaktig.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Formuesverdien på særskilt likna skogeigedommar skal reviderast i  samband med likninga for 2006. Førre revisjon vart gjennomført i  1989. Revisjonen vil bli gjennomført i samsvar med forskrift xxxx frå  Skattedirektoratet.  </p>
+                    <p/>
+                    <p>Skjemaet skal leverast saman med sjølvmeldinga, anten dette skjer på  papir eller elektronisk.  </p>
+                    <p/>
+                    <p>Det er viktig at namn og fødselsnummer/organisasjonsnummer for  høvesvis enkeltpersonføretak og selskap blir utfylte riktig.  </p>
+                    <p/>
+                    <p>Du må svare på spørsmålet om du eig skogeigedommen ved utgangen av  året.  </p>
+                    <p/>
+                    <p>Opplysningar om gardsnummer, bruksnummer, kommunenummer og kommunenamn  er alle opplysningar som er heilt nødvendige for den elektroniske  behandlinga, og må fyllast ut nøyaktig.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-5677/Enkeltpersonforetak-grp-6696">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Enkeltpersonforetak</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Enkeltpersonføretak</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5677/Enkeltpersonforetak-grp-6696/OppgavegiverNavn-datadef-68">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>For enkelpersonforetak</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>For enkelpersonføretak</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5677/Enkeltpersonforetak-grp-6696/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-5677/Selskap-grp-6605">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Selskap</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Selskap</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5677/Selskap-grp-6605/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Virksomhetens navn</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>for selskaper</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namnet til verksemda</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>for selskap</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5677/Selskap-grp-6605/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>for selskap</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>for selskap</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-5677/Kontaktperson-grp-6697">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kontaktperson</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kontaktperson</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5677/Kontaktperson-grp-6697/KontaktpersonNavn-datadef-2">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Henvendelse rettes til</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Henvendelse rettes til</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5677/Kontaktperson-grp-6697/KontaktpersonTelefonnummer-datadef-3">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefonnummer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Telefonnummer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-5677/Eiendom-grp-6606">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Eiendom</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Eigedom</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-5677/Eiendom-grp-6606/SkogSalgHeleEiendommen-datadef-24985">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Eier du fortsatt skog ved utgangen av året?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Eig du framleis skog ved utgangen av året?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5677/Eiendom-grp-6606/SkogeiendomGardsnummer-datadef-24986">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Gårdsnummer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Gårdsnummer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5677/Eiendom-grp-6606/SkogeiendomBruksnummer-datadef-24987">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bruksnummer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Bruksnummer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5677/Eiendom-grp-6606/SkogeiendomKommunenummer-datadef-24972">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommunenummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kommunenummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5677/Eiendom-grp-6606/SkogeiendomKommune-datadef-24988">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommunenavn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kommunenamn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/AvkastningssoneOgKorrigering-grp-6698">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>I Avkastningssone</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>I Avkastningssone</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/AvkastningssoneOgKorrigering-grp-6698/Avkastningssone-grp-6608">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Avkastningssone</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>De sonebetegnelser som skal settes i &lt;&lt;sonerubrikkene>>, står i  kommunetabellen bak i rettledningen. Ved hver kommune er oppgitt en  bokstav for prissone og et tall for kostnadssjablong. Bokstaven og  tallet for den
+                            kommunen skogeiendommen ligger i, føres i rubrikken.  Eks.: Skogen ligger i Seljord. Det som da ifølge tabellen skal føres  i rubrikkene, er B i prisrubrikken og 3 i kostnadsrubrikken.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Betegnelser for prissone og kostnadssjablong</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Avkastningssone</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dei sonenemningane som skal setjast i sonerubrikkane, står i  kommunetabellen bak i rettleiinga. Ved kvar kommune er det oppgitt  ein bokstav for prissone og eit tal for kostnadssjablong. Bokstaven  og talet for den
+                            kommunen skogeigedommen ligg i, skal førast i  rubrikkane. Eks.: Skogen ligg i Seljord. Det som då ifølgje tabellen  skal førast i rubrikkane, er B i prisrubrikken og 3 i  kostnadsrubrikken.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Betegnelsar for prissone og kostnadssjablong</p>
+                    </xforms:hint>
+                    <xforms:selectOne ref="/Skjema/AvkastningssoneOgKorrigering-grp-6698/Avkastningssone-grp-6608/SkogSone-datadef-24973">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>A</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>A</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>A</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>B</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>B</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>B</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>C</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>C</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>C</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Prissone</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Prissone</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/AvkastningssoneOgKorrigering-grp-6698/Avkastningssone-grp-6608/SkogKostnadssjablon-datadef-27528">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>1</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>2</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>2</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>3</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>3</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>3</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kostnadssjablong</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kostnadssjablong</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+                <xforms:group ref="/Skjema/AvkastningssoneOgKorrigering-grp-6698/KorrigeringForHoyeDriftskostnader-grp-6607">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>II Korrigering for høye driftskostnader</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>De kostnadssjablongene som er satt for hver kommune, bygger på  gjennomsnittstall. Noen eiendommer vil av forskjellige grunner være  av en slik karakter at totale kostnader per utdrevet kubikk er  vesentlig høyere enn
+                            kostnadssjablongen som er angitt i  kommunetabellen. I dette feltet er det mulig å korrigere den  kommunesjablongen som du har ført opp i felt I, og som i  kommunetabellen er angitt i kroner.  </p>
+                        <p/>
+                        <p>Det er en forutsetning for å kreve korrigering at det kan dokumenteres  at de faktiske kostnadene per utdrevet kubikk er minst kr 13 høyere  enn den sjablongkostnaden som er angitt i kommunetabellen. Er dette  vilkåret
+                            oppfyllt, føres sonebetegnelsen opp med et høyere tall for  kostnad. Eks.: En skogeier i Trysil har i felt I ført B i  prisrubrikken og 1 i kostnadsrubrikken (hentet fra kommunetabellen).  Ett-tallet betyr at
+                            sjablongkostnaden for Trysil er kr 185 per  kubikk. Skogeieren mener å kunne dokumentere at kostnadene hos ham  utgjør ca. kr 200 per kubikk, og det er kr 15 høyere enn  sjablongkostnaden, kr 185. Han vil derfor korrigere.
+                            Han fører da opp  sonebetegnelsen 2 i rubrikken for kostnadssjablong i felt II. Det vil  automatisk føre til at ved formuesberegningen av hans eiendom, vil  det bli lagt til grunn en kostnadssjablong på kr 220 per kubikk.  </p>
+                        <p/>
+                        <p>I det åpne feltet angis det hvilken dokumentasjon som ligger til grunn  og som likningskontoret på oppfordring kan få tilsendt. Eksempler på  dokumentasjon kan være regnskapsutdrag fra de senere årene som viser  kostnader
+                            per kubikk utdrevet virke. Dersom det ikke er foretatt  avvirkning på en del år, kan man få en uttalelse fra den lokale  skogforvaltningen om at eiendommen har så vanskelige driftsforhold at  det sannsynliggjør et
+                            kostnadsnivå som oppfyller vilkåret for  korreksjon.  </p>
+                        <p/>
+                        <p>Eiendommer som ligger i kostnadssone 1 (kr 185 per kubikk), og som har  ekstremt høye kostnader, høyere enn kr 38 over sjablongen (dvs. kr.  223 eller høyere per kubikk) kan, dersom kostnadene kan dokumenteres,  korrigeres
+                            opp i kostnadssone 3. De som har eiendommer i kommuner med  kostnadssone 3 (dvs. sjablongkostnad på kr 235), og som hevder å å ha  en vesentlig høyere kostnad, kan ikke foreta korrigering. Det antas  at eiendommer med
+                            kostnader på dette nivået hovedsaklig består av  arealer som ikke er økonomisk drivbare.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>II Korrigering for høge driftskostnader</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dei kostnadssjablongane som er sette for kvar kommune, byggjer på  gjennomsnittstal. Nokre eigedommar er av forskjellige grunnar av ein  slik karakter at totale kostnader per utdriven m³ er vesentleg høgare  enn den
+                            kostnadssjablongen som er oppgitt i kommunetabellen. I dette  feltet er det mogleg å korrigere den kommunesjablongen som du har  ført opp i felt I, og som i kommunetabellen er oppgitt i kroner.  </p>
+                        <p/>
+                        <p>Det er ein føresetnad for å krevje korrigering at det kan  dokumenterast at dei faktiske kostnadene per utdriven m³ er minst kr  13 høgare enn den sjablongkostnaden som er oppgitt i kommunetabellen.  Er dette vilkåret
+                            oppfylt, skal sonenemninga førast opp med eit  høgare tal for kostnad. Eks.: Ein skogeigar i Trysil har i felt I  ført B i prisrubrikken og 1 i kostnadsrubrikken (henta frå  kommunetabellen). Eitt-talet betyr at
+                            sjablongkostnaden for Trysil er  kr 185 per m³. Skogeigaren meiner å kunne dokumentere at kostnadene  hos han utgjer ca. kr 200 per m³, og det er kr 15 høgare enn  sjablongkostnaden, kr 185. Han vil derfor korrigere. Han
+                            fører då opp  sonenemninga  2 i rubrikken for kostnadssjablong i felt II. Det vil  automatisk føre til at ved formuesutrekninga av hans eigedom vil det  bli lagt til grunn ein kostnadssjablong på kr 220 per m³.  </p>
+                        <p/>
+                        <p>I det opne feltet gir du opp kva for dokumentasjon som ligg til grunn,  og som likningskontoret på oppfordring kan få tilsendt. Eksempel på  dokumentasjon kan vere rekneskapsutdrag frå dei siste åra som viser  kostnadene
+                            per m³ utdrive virke. Dersom det ikkje er gjennomført  avverking på ein del år, kan ein få ei fråsegn frå den lokale  skogforvaltninga om at eigedommen har så vanskelege driftsforhold at  det sannsynleggjer eit
+                            kostnadsnivå som oppfyller vilkåret for  korreksjon.  </p>
+                        <p/>
+                        <p>Eigedommar som ligg i kostnadssone 1 (kr 185 per m³), og som har  ekstremt høge kostnader, høgare enn kr 38 over sjablongen (dvs. kr  223 eller høgare per m³), kan, dersom kostnadene kan dokumenterast,  korrigerast opp i
+                            kostnadssone 3. Dei som har eigedommar i kommunar  med kostnadssone 3 (dvs. sjablongkostnad på kr 235), og som hevdar å  ha ein vesentleg høgare kostnad, kan ikkje gjere korrigering. Ein går  ut frå at eigedommar med
+                            kostnader på dette nivået hovudsakleg består  av areal som ikkje er økonomisk drivverdige.</p>
+                    </xforms:help>
+                    <xforms:selectOne ref="/Skjema/AvkastningssoneOgKorrigering-grp-6698/KorrigeringForHoyeDriftskostnader-grp-6607/SkogSpesielleDriftsforholdVerdireduserendeSone-datadef-24983">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>1</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>2</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>2</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>3</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>3</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>3</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Korrigering kan kun foretas dersom dokumenterbare  gjennomsnittskostnader per kubikk er vesentlig høyere enn de som er  lagt inn i den avkastningssonen som gjelder for kommunen. Se  rettledningen. Kostnadssjablongen
+                                endres til:</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Korrigering kan berre gjerast dersom dokumenterbare  gjennomsnittskostnader per kubikk er vesentlig høgare enn dei som er  lagde inn i den avkastningssona som gjeld for kommunen. Sjå  rettleiinga. Kostnadssjablongen
+                                skal endrast til:</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/AvkastningssoneOgKorrigering-grp-6698/KorrigeringForHoyeDriftskostnader-grp-6607/SkogSpesielleDriftsforholdVerdireduserendeForklaring-datadef-24984">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kort begrunnelse for at driftskostnadene pr. kubikk antas å være  vesentlig høyere enn sjablongkostnaden for kommunen:</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kort grunngiving for at driftskostnadene pr. kubikk er rekna for å  vere høgare enn sjablongkostnaden for kommunen:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>III Opplysninger om tilveksten i økonomisk drivverdig skog</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>III Opplysningar om tilveksten i økonomisk drivverdig skog</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/OpplysningerOmTilvekstenIOkonomiskDriverdigSkog-grp-6610">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>III Opplysninger om tilveksten i økonomisk drivverdig skog</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>I felt III beregnes den totale tilveksten på de økonomisk drivbare  arealene. For hver av de bonitetene som er angitt i skjemaet, føres  tilhørende areal i dekar. De som har skogbruks-/driftsplan vil kunne  hente
+                            opplysninger i denne. De som ikke har sådan plan eller av andre  grunner er usikre på arealfordelingen, kan ta kontakt med den lokale  skogforvaltningen i kommunen og få veiledning der.  </p>
+                        <p>Arealet i hver bonitetsklasse multipliseres med den sjablongtilveksten  som er fortrykt i skjemaet, og resultatet føres ut i kolonnen  &lt;&lt;Tilvekst i kubikk>>.  </p>
+                        <p>Både kolonnen &lt;&lt;Areal i dekar>> og &lt;&lt;Tilvekst i kubikk>> summeres.  Sistnevnte viser den totale tilveksten på eiendommens økonomisk  drivverdige arealer.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>III Opplysningar om tilveksten i økonomisk drivverdig skog</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>I felt III reknar du ut den totale tilveksten på dei økonomisk  drivverdige areala. For kvar av dei bonitetane som er oppgitt i  skjemaet, fører du tilhøyrande areal i dekar. Dei som har  skogbruks-/driftsplan, kan hente
+                            opplysningane i denne. Dei som ikkje  har ein slik plan, eller av andre grunner er usikre på  arealfordelinga, kan ta kontakt med den lokale skogforvaltninga i  kommunen og få rettleiing der.  </p>
+                        <p/>
+                        <p>Arealet i kvar bonitetsklasse skal multipliserast med den  sjablongtilveksten som er fortrykt i skjemaet, og resultatet skal  førast ut i kolonnen Tilvekst i m³.  </p>
+                        <p/>
+                        <p>Både kolonnen Areal i dekar og Tilvekst i m³ skal summerast. Det  sistnemnde viser den totale tilveksten på økonomisk drivverdige areal  på eigedommen.</p>
+                    </xforms:help>
+                    <xforms:group ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/OpplysningerOmTilvekstenIOkonomiskDriverdigSkog-grp-6610/ArealIDa-grp-5679">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Areal i da</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Areal i da</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/OpplysningerOmTilvekstenIOkonomiskDriverdigSkog-grp-6610/ArealIDa-grp-5679/SkogBonitetSvartHoyAreal-datadef-24974">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Super bonitet 0,7 kbm pr da</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Super bonitet 0,7 kbm pr da</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/OpplysningerOmTilvekstenIOkonomiskDriverdigSkog-grp-6610/ArealIDa-grp-5679/SkogBonitetHoyAreal-datadef-24976">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Høy bonitet 0,4 kbm pr da</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Høg bonitet 0,4 kbm pr da</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/OpplysningerOmTilvekstenIOkonomiskDriverdigSkog-grp-6610/ArealIDa-grp-5679/SkogBonitetMiddelsAreal-datadef-24978">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Middels bonitet 0,25 kbm pr da</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Middels bonitet 0,25 kbm pr da</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/OpplysningerOmTilvekstenIOkonomiskDriverdigSkog-grp-6610/ArealIDa-grp-5679/SkogBonitetLavAreal-datadef-24980">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Lav bonitet 0,08 kbm pr da</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Låg bonitet 0,08 kbm pr da</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:group ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/OpplysningerOmTilvekstenIOkonomiskDriverdigSkog-grp-6610/TilvekstIKbm-grp-5680">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tilvekst i kbm</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Tilvekst i kbm</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/OpplysningerOmTilvekstenIOkonomiskDriverdigSkog-grp-6610/TilvekstIKbm-grp-5680/SkogBonitetSvartHoyTilvekst-datadef-24975">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Super bonitet 0,7 kbm pr da</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Super bonitet 0,7 kbm pr da</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/OpplysningerOmTilvekstenIOkonomiskDriverdigSkog-grp-6610/TilvekstIKbm-grp-5680/SkogBonitetHoyTilvekst-datadef-24977">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Høy bonitet 0,4 kbm pr da</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Høg bonitet 0,4 kbm pr da</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/OpplysningerOmTilvekstenIOkonomiskDriverdigSkog-grp-6610/TilvekstIKbm-grp-5680/SkogBonitetMiddelsTilvekst-datadef-24979">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Middels bonitet 0,25 kbm pr da</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Middels bonitet 0,25 kbm pr da</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/OpplysningerOmTilvekstenIOkonomiskDriverdigSkog-grp-6610/TilvekstIKbm-grp-5680/SkogBonitetLavTilvekst-datadef-24981">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Lav bonitet 0,08 kbm pr da</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Låg bonitet 0,08 kbm pr da</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+                <xforms:input ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/SkogArealDekar-datadef-25037">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/SkogTilvekst-datadef-24982">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:group ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/BeregningAvFormuesverdiPaDenOkonomiskDrivverdigeSkogen-grp-6611">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>IV Beregning av formuesverdi på den økonomisk drivverdige skogen</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her foretas beregningen av formuesverdien på den del av skogeiendommen  som er økonomisk drivverdig. Tilveksten, som hentes fra sum i felt  III, multipliseres med den avkastningsverdien som svarer til angitt  prissone og
+                            kostnadssjablong i felt I. OBS! De som har foretatt  korreksjon, må nytte kostnadssjablongen fra felt II.  </p>
+                        <p>Avkastningsverdiene for de forskjellige sonene er gjengitt  nedenfor:  </p>
+                        <p/>
+                        <p>A1 - kr 130  </p>
+                        <p>A2 - kr 105  </p>
+                        <p>A3 - kr  80  </p>
+                        <p>B1 - kr 115  </p>
+                        <p>B2 - kr  90  </p>
+                        <p>B3 - kr  65  </p>
+                        <p>C1 - kr  75  </p>
+                        <p>C2 - kr  50  </p>
+                        <p>C3 - kr  25  </p>
+                        <p/>
+                        <p>Den totale avkastningsverdien multipliseres så med skogfaktoren som er  8, og resultatet er den endelige formuesverdien dersom ikke skogen  har en unormal hogstklasse.  </p>
+                        <p>Har skogen en unormal hogstklassefordeling, som kan dokumenteres  gjennom skogbruks-/driftsplan eller av lokal skogmyndighet, nyttes  rubrikkene for reduksjon av den beregnede formuesverdien. Utgjør  ungskogen (hogstklasse
+                            1, 2 og 3) mer enn 70% av arealet, men mindre  enn 85%, reduseres formuesverdien med 15%. Utgjør arealet med ungskog  mer enn 85% av det økonomisk drivbare arealet, reduseres  formuesverdien med 25%.  </p>
+                        <p>Den endelig beregnede formuesverdien føres ned på linjen for sum  formuesverdi. Drives skogen som enkeltpersonforetak, føres beløpet  til ny post 4.3.4 i selvangivelsen. ANS/DA (skogsameie) fører beløpet  i selskapsoppgaven.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>IV Utrekning av formuesverdi på den økonomisk drivverdige skogen</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her reknar du ut formuesverdien på den delen av skogeigedommen som er  økonomisk drivverdig.  </p>
+                        <p/>
+                        <p>Tilveksten, som du hentar frå sum i felt III, skal multipliserast med  den avkastningsverdien som svarer til oppgitt prissone og  kostnadssjablong i felt I. OBS! Dei som har gjort korreksjon, må  nytte kostnadssjablongen
+                            frå felt II.  </p>
+                        <p/>
+                        <p>Avkastningsverdiane for dei forskjellige sonene er oppgitt  nedanfor:  </p>
+                        <p/>
+                        <p>A1 ? kr 130  </p>
+                        <p>A2 ? kr 105  </p>
+                        <p>A3 ? kr 80  </p>
+                        <p>B1 ? kr 115  </p>
+                        <p>B2 ? kr 90  </p>
+                        <p>B3 ? kr 65  </p>
+                        <p>C1 ? kr 75  </p>
+                        <p>C2 ? kr 50  </p>
+                        <p>C3 ? kr 25  </p>
+                        <p/>
+                        <p>Den totale avkastningsverdien skal så multipliserast med skogfaktoren,  som er 8, og resultatet er den endelege formuesverdien dersom ikkje  skogen har ei unormal hogstklassefordeling.  </p>
+                        <p/>
+                        <p>Har skogen ei unormal hogstklassefordeling, som kan dokumenterast  gjennom skogbruks-/driftsplan eller av lokal skogforvaltning, nyttar  du rubrikkane for reduksjon av den utrekna formuesverdien. Utgjer  ungskogen
+                            (hogstklasse 1, 2 og 3) meir enn 70 % av arealet, men  mindre enn 85 %, skal formuesverdien reduserast med 15 %. Utgjer  arealet med ungskog meir enn 85 % av det økonomisk drivverdige  arealet, skal formuesverdien
+                            reduserast med 25 %.  </p>
+                        <p/>
+                        <p>Den endeleg utrekna formuesverdien skal førast ned på linja for sum  formuesverdi. Blir skogen driven som enkeltpersonføretak, skal  beløpet førast til ny post 4.3.4 i sjølvmeldinga. Selskap  (ANS/DA/skogsameige) fører
+                            beløpet i selskapsoppgåva.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/BeregningAvFormuesverdiPaDenOkonomiskDrivverdigeSkogen-grp-6611/SkogAvkastningsverdiPerKubikkmeter-datadef-27405">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Avkastningsverdi per kubikk</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Avkastningsverdi per kubikk</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/BeregningAvFormuesverdiPaDenOkonomiskDrivverdigeSkogen-grp-6611/SkogTilvekstverdi-datadef-27406">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tilvekstverdi</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Tilvekstverdi</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/BeregningAvFormuesverdiPaDenOkonomiskDrivverdigeSkogen-grp-6611/SkogFormuesverdiBrutto-datadef-27407">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Formuesverdi</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Formuesverdi</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/KorrigeringForUnormalHoyAndelUngskog-grp-6612">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Korrigering for unormal høy andel ungskog</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Korrigering for unormalt høg prosentandel av ungskog</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/KorrigeringForUnormalHoyAndelUngskog-grp-6612/SkogUngskog70EllerMerVerdikorrigering-datadef-27408">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- 15%</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Ungskogen (hogstklasse 1, 2 og 3) utgjør 70% eller mer av eiendommens  økonomisk drivbare areal</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- 15%</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Ungskogen (hogstklasse 1, 2 og 3) utgjer 70% eller meir av det  økonomisk drivverdige arealet på eigedommen</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/KorrigeringForUnormalHoyAndelUngskog-grp-6612/SkogUngskog85EllerMerVerdikorrigering-datadef-27409">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- 25%</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Ungskogen (hogstklasse 1, 2 og 3) utgjør 85% eller mer av eiendommens  økonomisk drivbare areal</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- 25%</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Ungskogen (hogstklasse 1, 2 og 3) utgjer 85% eller meir av det  økonomisk drivverdige arealet på eigedommen</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/TilvekstOgBeregningAvFormuesverdi-grp-6609/KorrigeringForUnormalHoyAndelUngskog-grp-6612/SkogOkonomiskDrivverdigFormuesverdi-datadef-27410">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum formuesverdi økonomisk drivverdig skog</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>overføres selvangivelsen/selskapsoppgaven</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum formuesverdi økonomisk drivverdig skog</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>skal overførast til sjølvmeldinga/selskapsoppgåva</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/AndreFormuesverdierKnyttetTilSkogeiendommen-grp-6613">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>V Andre formuesverdier knyttet til skogeiendommen</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Disse formuesverdiene har inntil nå vært spesifisert på de manuelt  utfylte skogkortene som er oppbevart på likningskontorene. På  skogkortet er disse verdiene summert sammen med avkastningsverdien,  og de inngår således i den
+                        totale skogformuen som er oppgitt for  2005.  </p>
+                    <p>Fra og med 2006 skal formuesverdien på den økonomisk drivverdige  skogeiendommen og formuesverdien på andre formuesverdier beregnes  hver for seg, og de skal føres i selvangivelse/selskapsoppgave i  forskjellige poster.  </p>
+                    <p>I første linje i felt V beregnes formuesverdien av jaktrettigheter som  utnyttes av skogeieren selv. Det beregnes ikke formuesverdi dersom  det ikke er gitt fellingstillatelse på minst ett dyr på eiendommen.  Antall
+                        fellingstillatelser multipliseres med verdiene for fordel av  egen utnyttet jaktrett som framgår av Takseringsreglene 2006 §  3-2-5.  </p>
+                    <p>På linjene nedenfor føres kapitalisert formuesverdi på andre  formuesgoder knyttet til skogeiendommen. Eksempler på dette er  utleide jaktrettigheter og bortfestede tomter. Beregningen av  formuesverdiene skjer ved at brutto
+                        leie-/festeinntekter fra de  utleide rettighetene som framgår av næringsoppgaven, multipliseres  med en &lt;&lt;netto>> kapitaliseringsfaktor som for 2006 er satt til ?.  Summen av andre formuesverdier føres for
+                        enkeltpersonforetak i  selvangivelsen post 4.5.4. Selskaper (ANS/DA/skogsameie) fører  beløpet i selskapsoppgaven.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>V Andre formuesverdiar knytte til skogeigedommen</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Desse formuesverdiane har inntil no vore spesifiserte på dei manuelt  utfylte skogkorta som er oppbevarte på likningskontora. På skogkortet  er desse verdiane summerte saman med avkastningsverdien, og dei  inngår såleis i den
+                        totale skogformuen som er oppgitt for 2005.  </p>
+                    <p/>
+                    <p>Frå og med 2006 skal formuesverdien på den økonomisk drivverdige  skogeigedommen og formuesverdien på andre formuesverdiar reknast ut  kvar for seg, og dei skal førast i sjølvmelding/selskapsoppgåve i  forskjellige postar.  </p>
+                    <p/>
+                    <p>I første linje i felt V reknar du ut formuesverdien av jaktrettar som  blir utnytta av skogeigaren sjølv. Det skal ikkje reknast ut  formuesverdi dersom det ikkje er gitt fellingsløyve på minst eitt dyr  på eigedommen. Talet på
+                        fellingsløyve skal multipliserast med  verdiane for fordel av eigen utnytta jaktrett som går fram av  Takseringsreglane 2006 § 3-2-5.  </p>
+                    <p/>
+                    <p>På linjene nedanfor fører du kapitalisert formuesverdi på andre  formuesgode som er knytte til skogeigedommen. Eksempel på dette er  utleigde jaktrettar og bortfesta tomter. Utrekninga av  formuesverdiane skjer ved at brutto
+                        leige-/festeinntekter frå dei  utleigde rettane som går fram av næringsoppgåva, blir multipliserte  med ein netto kapitaliseringsfaktor som for 2006 er sett til ???.  </p>
+                    <p/>
+                    <p>Summen av andre formuesverdiar skal for enkeltpersonføretak førast i  sjølvmeldinga post 4.5.4. Selskap (ANS/DA/skogsameige) fører beløpet  i selskapsoppgåva.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/AndreFormuesverdierKnyttetTilSkogeiendommen-grp-6613/SkogJaktretterBenyttetAvSkogeierAntall-datadef-27411">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Jaktretter nyttet av skogeieren selv - antall fellingstillatelser</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Jaktretter nytta av skogeigaren sjølv - kor mange fellingsløyve</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AndreFormuesverdierKnyttetTilSkogeiendommen-grp-6613/SkogJaktretterTakstsats-datadef-27412">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sats etter takseringsreglene</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sats etter takseringsreglane</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/AndreFormuesverdierKnyttetTilSkogeiendommen-grp-6613/SkogJaktretterTakseringsverdi-datadef-27413">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Takseringsverdi</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Takseringsverdi</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:repeat id="repeat_AndreUtleideRettigheter-grp-6614" nodeset="/Skjema/AndreFormuesverdierKnyttetTilSkogeiendommen-grp-6613/AndreUtleideRettigheter-grp-6614">
+                    <xforms:group ref="/Skjema/AndreFormuesverdierKnyttetTilSkogeiendommen-grp-6613/AndreUtleideRettigheter-grp-6614">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Andre utleide rettigheter</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Andre utleigde rettar</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/AndreFormuesverdierKnyttetTilSkogeiendommen-grp-6613/AndreUtleideRettigheter-grp-6614/SkogAndreUtleideRettigheter-datadef-27414">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Andre utleide rettigheter</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Andre utleigde rettar</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AndreFormuesverdierKnyttetTilSkogeiendommen-grp-6613/AndreUtleideRettigheter-grp-6614/SkogAndreUtleideRettigheterBruttoLeieinntekter-datadef-27415">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Brutto leieinntekter</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Brutto leigeinntekter</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/AndreFormuesverdierKnyttetTilSkogeiendommen-grp-6613/AndreUtleideRettigheter-grp-6614/SkogAndreUtleideRettigheterFormuesverdi-datadef-27417">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Takseringsverdi</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Takseringsverdi</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/AndreFormuesverdierKnyttetTilSkogeiendommen-grp-6613/SkogAndreFormuesverdier-datadef-27418">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum andre formuesverdier</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>(overføres selvangivelsen post 4.5.4)</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum andre formuesverdiar</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>skal overførast til sjølvmeldinga/selskapsoppgåva</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/KravOmFordelingAvOkningISkogformuen-grp-6615">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>VI Krav om fordeling av økning i skogformuen</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Skulle revisjonen av formuesverdiene på skogeiendommer medføre en  betydelig økning i skogformuen, kan formuesøkningen fordeles over tre  år. For at slik fordeling kan kreves må følgende fire vilkår være  oppfyllt:  </p>
+                    <p>Økningen i skogformue fra 2005 til 2006 må være minst kr 500 000.  </p>
+                    <p>Økningen i skogformue fra 2005 til 2006 må utgjøre minst 25%.  </p>
+                    <p>Den totale nettoformuen i 2005 må ha vært positiv.  </p>
+                    <p>Den totale nettoformuen i 2006 (per 1. jan 2007) må være kr. 500 000  høyere enn den totale nettoformuen i 2005.  </p>
+                    <p/>
+                    <p>I post A føres den nye formuesverdien på skogen fra felt IV med  tillegg av eventuelt andre formuesverdier fra felt V.  </p>
+                    <p>I post B føres formuesverdien på skogen fra 2005. Denne hentes fra  selvangivelsen 2005.  </p>
+                    <p>Post C vil vise økningen i formuesverdien fra 2005 til 2006. Denne må  være på kr. 500 000 eller høyere for at fordeling kan kreves.  </p>
+                    <p>I post D beregnes økningen i %. Denne må være minst 25% for at  fordeling kan kreves.  </p>
+                    <p>I post E føres den totale nettoformuen for 2006. Denne må være over kr  500 000. I post F føres den totale nettoformuen for 2005. Denne må  være positiv. I post G fremkommer økningen i total nettoformue fra  2005 til 2006.
+                        Denne må være minst kr 500 000 for at fordeling kan  kreves.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>VI Krav om fordeling av auke i skogformuen</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Skulle revisjonen av formuesverdiane på skogeigedommar medføre ein  kraftig auke i skogformuen, kan formuesauken fordelast over tre år.  For at slik fordeling kan krevjast, må desse fire vilkåra vere  oppfylte:  </p>
+                    <p/>
+                    <p>Auken i skogformue frå 2005 til 2006 må vere minst kr 500 000.  </p>
+                    <p>Auken i skogformue frå 2005 til 2006 må utgjere minst 25 %.  </p>
+                    <p>Den totale nettoformuen i 2005 må ha vore positiv.  </p>
+                    <p>Den totale nettoformuen i 2006 (per 1. jan 2007) må vere kr 500 000  høgare enn den totale nettoformuen i 2005.  </p>
+                    <p/>
+                    <p>I post A fører du den nye formuesverdien på skogen frå felt IV med  tillegg av eventuelt andre formuesverdiar frå felt V.  </p>
+                    <p>I post B fører du formuesverdien på skogen frå 2005. Denne skal  hentast frå sjølvmeldinga 2005.  </p>
+                    <p>Post C viser auken i formuesverdien frå 2005 til 2006. Denne må vere  på kr 500 000 eller høgare for at fordeling kan krevjast.  </p>
+                    <p>I post D blir auken utrekna i %. Denne må vere minst 25 % for at  fordeling kan krevjast.  </p>
+                    <p/>
+                    <p>I post E fører du den totale nettoformuen for 2006. Denne må vere over  kr 500 000.  </p>
+                    <p>I post F fører du den totale nettoformuen for 2005. Denne må vere  positiv.  </p>
+                    <p>I post G kjem auken i total nettoformue frå 2005 til 2006 fram. Denne  må vere minst kr 500 000 for at fordeling kan krevjast.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/KravOmFordelingAvOkningISkogformuen-grp-6615/SkogFormuesverdi-datadef-27419">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>A) Skogformue 2006</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Sum formuesverdi økonomisk drivverdig skog og sum andre formuesverdier  knyttet til skogeiendommen</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>A) Skogformue 2006</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Sum formuesverdi økonomisk drivverdig skog og sum andre formuesverdiar  knytte til skogeigedommen</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KravOmFordelingAvOkningISkogformuen-grp-6615/SkogFormuesverdiFjoraret-datadef-27420">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>B) Skogformue 2005 - hentes fra selvangivelsen 2005</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>B) Skogformue 2005 - henta frå sjølvmeldinga 2005</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KravOmFordelingAvOkningISkogformuen-grp-6615/SkogFormuesverdiAretsVerdiendring-datadef-27421">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>C) Økning i skogformue fra 2005 til 2006</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>C) Auke i skogformue fra 2005 til 2006</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KravOmFordelingAvOkningISkogformuen-grp-6615/SkogFormuesverdiAretsVerdiendringProsent-datadef-27422">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>D) Økning i prosent:</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>C x 100 / B</p>
+                    </xforms:hint>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever en desimal</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>D) Auke i prosent:</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>C x 100 / B</p>
+                    </xforms:hint>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev ein desimal</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KravOmFordelingAvOkningISkogformuen-grp-6615/SkogeiendomNettoverdi-datadef-27526">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>E) Nettoformue for 2006 - hentes fra selvangivelsen 2006</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>E) Nettoformue frå 2006 - henta frå sjølvmeldinga 2006</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KravOmFordelingAvOkningISkogformuen-grp-6615/SkogeiendomNettoverdiFjoraret-datadef-27423">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>F) Nettoformue for 2005 - hentes fra selvangivelsen 2005</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>F) Nettoformue for 2005 - henta frå sjølvmeldinga 2005</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/KravOmFordelingAvOkningISkogformuen-grp-6615/SkogeiendomNettoverdiAretsVerdiendring-datadef-27527">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>G) Økning i nettoformue fra 2005 til 2006</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>G) Auke i nettoformue frå 2005 til 2006</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/KravOmFordelingAvOkningISkogformuen-grp-6615/SkogFormuesokningKrevesFordelt-datadef-27424">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kreves formuesøkningen fordelt?</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>For å kunne kreve fordeling må:  </p>
+                        <p>1) Tallet i linje E være positivt  </p>
+                        <p>2) Tallet i linje C være 500.000 eller større  </p>
+                        <p>3) Prosenten i linje D være 25 eller høyere</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Krev du at formuesauken blir fordelt?</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>For å kunne krevje fordeling må:  </p>
+                        <p>1) Talet i linje E være positivt  </p>
+                        <p>2) Talet i linje C være 500.000 eller større  </p>
+                        <p>3) Prosenten i linje D være 25 eller høgare</p>
+                    </xforms:hint>
+                </xforms:selectOne>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

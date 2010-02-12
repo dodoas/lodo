@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">NB-0001: Verdipapirstatistikk</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1021-3580.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-5080/OppgavePeriode-datadef-22365" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-5080/FilformatType-datadef-22364" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5080/Rapporteringsenhet-grp-5079/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5080/Rapporteringsenhet-grp-5079/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>NB-0001 Verdipapirstatistikk</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Hvem skal levere  </p>
+                <p>Verdipapirforetak og forvaltningsselskaper for verdipapirfond.  </p>
+                <p/>
+                <p>Innsendingsfrekvens  </p>
+                <p>Verdipapirforetak rapporterer månedlig og forvaltningsselskaper for  verdipapirfond rapporterer kvartalsvis  </p>
+                <p/>
+                <p>Rapporteringsfrist  </p>
+                <p>Frister for månedlig rapportering er senest 5 virkedager etter  utgangen av rapporteringsmåneden.  </p>
+                <p/>
+                <p>Frister for kvartalsvis rapportering er senest 10 virkedager etter  utgangen av kvartalet som rapporteringen gjelder for.  </p>
+                <p/>
+                <p>Om skjema  </p>
+                <p>Oppgaveplikten består av skjema NB-0001, Verdipapirstatistikk med  vedlegg. Innholdet i vedlegget er meddelt rapportørene i eget brev.    </p>
+                <p/>
+                <p>Skjemaeier/innkrever  </p>
+                <p>Norges Bank</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-5080">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-5080/OppgavePeriode-datadef-22365">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgaveperiode</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Med periode menes hvilken måned man ønsker å rapportere på.  </p>
+                        <p>Månedsrapportering: 01.2005, 02.2005 osv  </p>
+                        <p>Kvartalsrapportering: 03.2005, 06.2005 osv</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Du må angi perioden som måned og år, f.eks. 01.2005</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:selectMany ref="/Skjema/GenerellInformasjon-grp-5080/FilformatType-datadef-22364">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>V</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>V</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>F</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>F</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>T</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>T</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>X</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>X</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Format</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Man må oppgi hvilket format filvedlegget har  </p>
+                        <p>V = Andelseieropplysninger fra fondsforvaltningsselskapene  </p>
+                        <p>F = Opplysninger om fond i fond fra fondsforvaltningsselskapene  </p>
+                        <p>T = Depotinformasjon fra verdipapirforetakene  </p>
+                        <p>X = Annet</p>
+                    </xforms:help>
+                </xforms:selectMany>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-5080/Rapporteringsenhet-grp-5079">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Rapporteringsenhet</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5080/Rapporteringsenhet-grp-5079/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5080/Rapporteringsenhet-grp-5079/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

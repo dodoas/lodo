@@ -1,0 +1,851 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RA-0485: Nasjonal og internasjonal lastebiltransport</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-879-5700.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/Enhetsinformasjon-grp-6487/Enhet-grp-6489/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Enhetsinformasjon-grp-6487/Enhet-grp-6489/EnhetAdresse-datadef-15"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Enhetsinformasjon-grp-6487/Enhet-grp-6489/EnhetPostnummer-datadef-6673"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Enhetsinformasjon-grp-6487/Enhet-grp-6489/EnhetPoststed-datadef-6674"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Enhetsinformasjon-grp-6487/Enhet-grp-6489/EnhetOrganisasjonsnummer-datadef-18"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Enhetsinformasjon-grp-6487/Enhet-grp-6489/KommuneNavn-datadef-5932"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RA-0485. Nasjonal og internasjonal lastebiltransport</p>
+            </xforms:caption>
+            <xforms:caption brreg:lang="NON">
+                <p>RA-0485. Nasjonal og internasjonal lastebiltransport</p>
+            </xforms:caption>
+            <xforms:group ref="/Skjema/Enhetsinformasjon-grp-6487">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Enhetsinformasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Einhetsinformasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Enhetsinformasjon-grp-6487/Rapporteringsperiode-grp-6488">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Rapporteringsperiode</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Rapporteringsperiode</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Enhetsinformasjon-grp-6487/Rapporteringsperiode-grp-6488/TellingsperiodeFraDato-datadef-27395">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tellingsperiode fra og med dato</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Tellingsperiode fra og med dato</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Enhetsinformasjon-grp-6487/Rapporteringsperiode-grp-6488/TellingsperiodeTilDato-datadef-27396">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tellingsperiode til og med dato</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Tellingsperiode til og med dato</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Enhetsinformasjon-grp-6487/Enhet-grp-6489">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Enhet</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Einhet</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Enhetsinformasjon-grp-6487/Enhet-grp-6489/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Enhetens navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Einhetens namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Enhetsinformasjon-grp-6487/Enhet-grp-6489/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Enhetsinformasjon-grp-6487/Enhet-grp-6489/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Enhetsinformasjon-grp-6487/Enhet-grp-6489/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Enhetsinformasjon-grp-6487/Enhet-grp-6489/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Enhetsinformasjon-grp-6487/Enhet-grp-6489/KommuneNavn-datadef-5932">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommune</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kommune</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Enhetsinformasjon-grp-6487/Enhet-grp-6489/EnhetEPost-datadef-5963">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Enhetens e-post</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Enhetens e-post</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Enhetsinformasjon-grp-6487/Lastebil-grp-6490">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Lastebil</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Lastebil</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Enhetsinformasjon-grp-6487/Lastebil-grp-6490/LastebilRegistreringsnummer-datadef-21910">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Registreringsnummer</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Registreringsnummer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Kontaktperson-grp-6491">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Kontaktperson</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Kontaktperson</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Kontaktperson-grp-6491/KontaktpersonNavn-datadef-2">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Navn</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Namn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Kontaktperson-grp-6491/KontaktpersonTelefonnummer-datadef-3">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Telefonnummer</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Telefonnummer</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Kontaktperson-grp-6491/KontaktpersonMobiltelefonnummer-datadef-7626">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Mobiltelefonnummer</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Mobiltelefonnummer</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Kontaktperson-grp-6491/KontaktpersonTrefftid-datadef-13552">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Treffes sikrest kl.</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Treffast sikrest kl.</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Kontaktperson-grp-6491/KontaktpersonEPost-datadef-2876">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Epostadresse</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Epostadresse</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Transport-grp-6494">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Transport</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Transport</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Transport-grp-6494/Transportinformasjon-grp-6495">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Transportinformasjon</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Transportinformasjon</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/Transport-grp-6494/Transportinformasjon-grp-6495/TransportmiddelIkkeIBruk-datadef-23574">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>I bruk</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>I bruk</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Solgt</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Solgt</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>3</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Avskiltet</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Avskiltet</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bilens status</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Bilens status</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/Transport-grp-6494/Transportinformasjon-grp-6495/TransportType-datadef-1473">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Leietransport</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Leigetransport</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Egentransport</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Eigentransport</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>0</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ikke rapportert</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ikkje rapportert</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Type transport</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Type transport</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/Transport-grp-6494/Transportinformasjon-grp-6495/Kjorelengde-datadef-1474">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kjørte kilometer hele året</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kjørte kilometer hele året</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Transport-grp-6494/Transportinformasjon-grp-6495/KjorelengdeUtland-datadef-1475">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kilometer kjørt i utlandet hele året</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kilometer kjørt i utlandet hele året</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Transport-grp-6494/Transportinformasjon-grp-6495/KjorelengdeUke-datadef-17113">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kilometer kjørt i rapporteringsperioden</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kilometer kjørt i rapporteringsperioden</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Transport-grp-6494/Transportinformasjon-grp-6495/KjorelengdeUtlandUke-datadef-13551">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kilometer kjørt i utlandet i rapporteringsperioden</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kilometer kjørt i utlandet i rapporteringsperioden</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Transport-grp-6494/Transportinformasjon-grp-6495/TilhengerRegistreringsnummer-datadef-21918">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Registreringsnummer på tilhenger</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Registreringsnummer på tilhenger</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Transport-grp-6494/AnnenTransport-grp-6498">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Annen transport</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Annen transport</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/Transport-grp-6494/AnnenTransport-grp-6498/LastebilKjoringArt-datadef-21914">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Leietransport</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Leigetransport</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Egentransport</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Eigentransport</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>0</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ikke rapportert</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ikkje rapportert</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kjøringens art</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kjøringens art</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/Transport-grp-6494/AnnenTransport-grp-6498/LastebilKjoretoygruppe-datadef-21915">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kjøretøygruppe</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kjøretøygruppe</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Transport-grp-6494/AnnenTransport-grp-6498/LastebilNyttelast-datadef-21912">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Nyttelast</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Nyttelast</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Kjorebok-grp-6492">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Kjørebok</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Kjørebok</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_Sending-grp-6493" nodeset="/Skjema/Kjorebok-grp-6492/Sending-grp-6493">
+                    <xforms:group ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sending</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sending</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493/SendingNummer-datadef-21919">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sending nr.</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Sending nr.</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493/SendingPalastingDato-datadef-17114">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Dato for pålasting</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Dato for pålasting</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493/SendingDistribusjonOppsamling-datadef-17115">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>Ja</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>Yes</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>Nei</xforms:value>
+                                    <xforms:caption brreg:lang="EN">
+                                        <p>No</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Er det en distribusjonsoppsamlingsrunde</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Er det en distribusjonsoppsamlingsrunde</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493/SendingLikeSendinger-datadef-17116">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Oppgi evt. antall like sendinger</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Oppgi evt. antall like sendingar</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493/SendingPalastingssted-datadef-21920">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Pålastingssted</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Pålastingssted</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493/SendingAvlessingssted-datadef-21921">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Avlessingssted</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Avlessingssted</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493/SendingPalastingsstedPostkode-datadef-21922">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Pålastingssted postkode</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Pålastingssted postkode</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493/SendingAvlessingsstedPostkode-datadef-21923">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Avlessingssted postkode</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Avlessingssted postkode</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493/SendingPalastingsstedLand-datadef-21908">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Pålastingssted land</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Pålastingssted land</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493/SendingAvlossingsstedLand-datadef-21907">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Avlessingssted land</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Avlessingssted land</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493/SendingTransportlengde-datadef-1483">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Transportlengde</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Transportlengde</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493/SendingVareslag-datadef-1484">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Vareslag</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Vareslag</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493/SendingGodsADRKlasse-datadef-6564">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>10</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Eksplosive stoffer og gjenstander</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Eksplosive stoffer og gjenstander</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>20</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Gasser, komprimert, flytende eller oppløst under trykk</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Gasser, komprimert, flytende eller oppløst under trykk</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>30</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Brannfarlige væsker</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Brannfarlige væsker</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>41</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Brannfarlige faste stoffer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Brannfarlige faste stoffer</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>42</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Selvantennende stoffer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Selvantennende stoffer</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>43</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Stoffer som utvikler brannfarlige gasser ved kontakt med vann</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Stoffer som utvikler brannfarlige gasser ved kontakt med vann</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>51</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Oksiderende stoffer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Oksiderende stoffer</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>52</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Organiske peroksider</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Organiske peroksider</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>61</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Giftige stoffer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Giftige stoffer</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>62</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Infeksjonsfremmende stoffer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Infeksjonsfremmende stoffer</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>70</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Radioaktive materialer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Radioaktive materialer</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>80</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Etsende stoffer</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Etsende stoffer</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>90</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Forskjellige farlige stoffer og gjenstander</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Forskjellige farlige stoffer og gjenstander</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Farlig gods</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>ADR-klasse for farlig gods</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Farlig gods</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>ADR-klasse for farlig gods</p>
+                            </xforms:help>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493/SendingVekt-datadef-17117">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Lastens vekt</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Lastens vekt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493/SendingLasteromUtnyttet-datadef-6566">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Lasterommets volumutnytting</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Lasterommets volumutnytting</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493/TilhengerSemitrailer-datadef-1486">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>0</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>1</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Er det brukt tilhenger/semitrailer</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Er det brukt tilhenger/semitrailer</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                        <xforms:input ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493/TilhengerSemitrailerNyttelast-datadef-1487">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Semitrailerens nyttelast</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Semitrailerens nyttelast</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493/TilhengerSemitrailerEgenvekt-datadef-21909">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Semitrailerens egenvekt</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Semitrailerens egenvekt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:selectOne ref="/Skjema/Kjorebok-grp-6492/Sending-grp-6493/SendingFergeTog-datadef-1492">
+                            <xforms:choices>
+                                <xforms:item>
+                                    <xforms:value>0</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Nei</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                                <xforms:item>
+                                    <xforms:value>1</xforms:value>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>Ja</p>
+                                    </xforms:caption>
+                                </xforms:item>
+                            </xforms:choices>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Er det brukt ferge eller tog</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Er det brukt ferge eller tog</p>
+                            </xforms:caption>
+                        </xforms:selectOne>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:group ref="/Skjema/Kjorebok-grp-6492/Transittland-grp-6496">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Transittland</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Transittland</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Kjorebok-grp-6492/Transittland-grp-6496/TransportLand-datadef-3156">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Oppgi transittland</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Oppgi transittland</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Tilleggsopplysninger-grp-6497">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Tilleggsopplysninger</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Tilleggsopplysninger</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Tilleggsopplysninger-grp-6497/Tilleggsopplysninger-datadef-7683">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Eventuelle merknader</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Eventuelle merknadar</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

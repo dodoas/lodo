@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RA-0551: Rapportering av kortdata til Statistisk Sentralbyrå og Norges Bank</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1041-3578.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5161/OppgaveInnsendelseFrist-datadef-16296"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5161/Rapporteringsenhet-grp-5162/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5161/Rapporteringsenhet-grp-5162/EnhetOrganisasjonsnummer-datadef-18"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5161/Rapporteringsenhet-grp-5162/EnhetAdresse-datadef-15"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5161/Rapporteringsenhet-grp-5162/EnhetPostnummer-datadef-6673"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-5161/Rapporteringsenhet-grp-5162/EnhetPoststed-datadef-6674"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-5161/Kontaktperson-grp-5164/KontaktpersonNavn-datadef-2" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-5161/Kontaktperson-grp-5164/KontaktpersonTelefonnummer-datadef-3" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RA-0551 Rapportering av kortdata til Statistisk Sentralbyrå og Norges  Bank.</p>
+            </xforms:caption>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-5161">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Rapportering med oppgaveplikt. Innsending av rapporteringsfil i  XML-format gjøres ved å klikke på arkfanen vedlegg til venstre.  Spesifikasjon av rapportene finnes tilgjengelig på:  www.ssb.no\utund\kortdata og
+                        www.norges-bank.no. Rapporten skal  inneholde tall for rapporteringsperioden. Kontroller om tallene er  for riktig periode.</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-5161/OppgaveInnsendelseFrist-datadef-16296">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Innsendingsfrist er 20 arbeidsdager etter rapportperiodens utløp.</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-5161/VelgRapporttypeOgRapporteringsperiode-grp-5165">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Velg rapporttype og rapporteringsperiode</p>
+                    </xforms:caption>
+                    <xforms:selectMany ref="/Skjema/GenerellInformasjon-grp-5161/VelgRapporttypeOgRapporteringsperiode-grp-5165/OppgaveRapportType-datadef-22993">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>K2BC</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Kvartalsrapport 2B og 2C</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Kvartalsrapport 2B og 2C</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>M2BC</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Månedsrapport 2B og 2C (frivillig)</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Månedsrapport 2B og 2C (frivillig)</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2A</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Rapport 2A</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Rapport 2A</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Rapporttype</p>
+                        </xforms:caption>
+                    </xforms:selectMany>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5161/VelgRapporttypeOgRapporteringsperiode-grp-5165/OppgavePeriode-datadef-21619">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Rapporteringsperiode år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-5161/VelgRapporttypeOgRapporteringsperiode-grp-5165/OppgaveKvartalsrapportering-datadef-21813">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1. kvartal</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>2. kvartal</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>3</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>3. kvartal</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>4</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>4. kvartal</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Oppgi rapporteringsperiode for de vedlagte kvartalsdata:</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-5161/VelgRapporttypeOgRapporteringsperiode-grp-5165/OppgaveManedsrapportering-datadef-21814">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Januar</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Februar</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>3</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Mars</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>4</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>April</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>5</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Mai</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>6</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Juni</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>7</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Juli</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>8</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>August</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>9</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>September</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>10</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Oktober</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>11</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>November</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>12</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Desember</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Oppgi rapporteringsperiode for de vedlagte månedsdata:</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-5161/Rapporteringsenhet-grp-5162">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Rapporteringsenhet</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Rett eventuelle feil i boksene nedenfor.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5161/Rapporteringsenhet-grp-5162/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5161/Rapporteringsenhet-grp-5162/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5161/Rapporteringsenhet-grp-5162/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5161/Rapporteringsenhet-grp-5162/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5161/Rapporteringsenhet-grp-5162/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-5161/Kontaktperson-grp-5164">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kontaktperson</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Oppgi alltid navn på kontaktperson som SSB kan kontakte.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5161/Kontaktperson-grp-5164/KontaktpersonNavn-datadef-2">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5161/Kontaktperson-grp-5164/KontaktpersonTelefonnummer-datadef-3">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefonnummer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5161/Kontaktperson-grp-5164/KontaktpersonTelefaxnummer-datadef-324">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefaks</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5161/Kontaktperson-grp-5164/KontaktpersonEPost-datadef-2876">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kontaktpersonens epostadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-5161/Kontaktperson-grp-5164/EnhetEPost-datadef-5963">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Rapporteringsenhetens E-post</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Husk vedlegg før innsending. Gå til arkfanen vedlegg oppe til venstre  i bildet. Legg til vedlegget. Send data.</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

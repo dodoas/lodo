@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-9997-U: Realisasjonsoppgave</brreg:tittel>
+    <brreg:hode>
+        <xforms:model><!--INSTANCE HOLDER: Instansen kan plasseres her!--><xforms:schema xlink:href="melding-925-1064.xsd"/><!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!--><xforms:bind readOnly="true" ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerErvervDato-datadef-17610"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerMvRealisasjonDato-datadef-1821"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerErvervType-datadef-17611"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRealisasjonType-datadef-17612"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerMvRealisasjonAntall-datadef-1177"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRealisasjonVederlag-datadef-17613"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerAnskaffelseVerdi-datadef-17614"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRISKEiertid-datadef-17615"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRealisasjonKorrigeringer-datadef-17616"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRealisasjonUtbytteAnnenAksjonar-datadef-17617"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRealisasjonUtbytteMottattIkkeFradratt-datadef-17618"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRealisasjonGevinstTapSpesifisertDato-datadef-17619"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerErvervOmkostninger-datadef-17620"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRealisasjonOmkostninger-datadef-17621"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Detaljopplysninger-grp-4007/AksjerRealisasjonAktivitet-datadef-18679"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Detaljopplysninger-grp-4007/Fotnoter-grp-4009/AksjerBeholdningFotnoter-datadef-17657"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Detaljopplysninger-grp-4007/AksjerRealisasjonFotnoter-datadef-17625"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:group ref="/Skjema/Detaljopplysninger-grp-4007">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Detaljopplysninger</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_Detaljopplysninger-grp-4008" nodeset="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008">
+                    <xforms:group ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerErvervDato-datadef-17610">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ervervsdato</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerErvervDatoEndring-datadef-18989">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Endring</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerMvRealisasjonDato-datadef-1821">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Realisasjonsdato</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerMvRealisasjonDatoEndring-datadef-18992">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Endring</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerErvervType-datadef-17611">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Type erverv</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRealisasjonType-datadef-17612">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Type realisasjon</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerMvRealisasjonAntall-datadef-1177">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Antall realiserte aksjer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRealisasjonVederlag-datadef-17613">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Realisasjonsvederlag</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRealisasjonVederlagEndringer-datadef-18993">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Endring</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerAnskaffelseVerdi-datadef-17614">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Anskaffelsesverdi</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerAnskaffelseVerdiEndring-datadef-18994">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Endring</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRISKEiertid-datadef-17615">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Sum RISK beløp i eiertiden</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRealisasjonKorrigeringer-datadef-17616">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Diverse korrigeringer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRealisasjonKorrigeringerEndringer-datadef-18995">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Endringer</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRealisasjonUtbytteAnnenAksjonar-datadef-17617">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utbytte utdelt annen aksjonær</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRealisasjonUtbytteAnnenAksjonarEndring-datadef-18996">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Endring</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRealisasjonUtbytteMottattIkkeFradratt-datadef-17618">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Mottatt utbytte ikke fradratt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRealisasjonUtbytteMottattIkkeFradrattEndring-datadef-18997">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Endring</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRealisasjonGevinstTapSpesifisertDato-datadef-17619">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Gevinst/tap</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerErvervOmkostninger-datadef-17620">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Omkostninger v/erverv</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerErvervOmkostningerEndringer-datadef-18998">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Endring</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRealisasjonOmkostninger-datadef-17621">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Omkostninger v/realisasjon</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Detaljopplysninger-grp-4008/AksjerRealisasjonOmkostningerEndringer-datadef-18999">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Endring</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/AksjerRealisasjonAktivitet-datadef-18679">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Aktivitet</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:repeat id="repeat_Fotnoter-grp-4009" nodeset="/Skjema/Detaljopplysninger-grp-4007/Fotnoter-grp-4009">
+                    <xforms:group ref="/Skjema/Detaljopplysninger-grp-4007/Fotnoter-grp-4009">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fotnoter</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/Fotnoter-grp-4009/AksjerBeholdningFotnoter-datadef-17657">
+                            <brreg:preutfyll/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Type erverv og realisasjon</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/Detaljopplysninger-grp-4007/AksjerRealisasjonFotnoter-datadef-17625">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Forklaring til fotnoter</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Type erverv og realisasjon</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

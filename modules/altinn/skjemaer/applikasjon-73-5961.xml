@@ -1,0 +1,1230 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1213: Oppgave for beregning næringsinnt for lottfiskere, særfr fisk fangst</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-73-5962.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-1058/Avgiver-grp-439/OppgavegiverNavn-datadef-68" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-1058/Avgiver-grp-439/OppgavegiverFodselsnummer-datadef-26"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1213 Oppgave for beregning av næringsinntekt for lottfiskere og  særskilt fradrag innen fiske og fangst 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. nov. 1994, jf. likningsloven § 4-4 nr. 7.  </p>
+                <p/>
+                <p>Det vises til særskilt rettledning som er utarbeidet til hjelp ved  utfylling av dette skjemaet (RF-1214).  </p>
+                <p/>
+                <p>Skjemaets del A Beregning av næringsinntekt for lottfiskere skal  benyttes av alle lottakere som ikke eier båt og/eller bruk  (ikke-regnskapspliktige fiskere, også kalt prosentfiskere). Dessuten  skal del A også fylles ut av
+                    deltaker i deltakerlignet selskap som  eier båt, og hvor deltakeren har deltatt i fiske med denne båten.  </p>
+                <p/>
+                <p>Skjemaets del B Oversikt over driftstid i fiske og fangst og del C  Beregning av særskilt fradrag skal fylles ut av alle som krever  særskilt fradrag innen fiske og fangst. Særskilt fradrag gis både til  regnskapspliktige fiskere,
+                    lottfiskere og lønns-/hyremottakere.  </p>
+                <p/>
+                <p>Melding fra oppgaveregisteret  </p>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i RF-1213 (Oppgave for beregning av  næringsinntekt for lottfiskere og særskilt fradrag innen fiske og  fangst) i medhold av lov om
+                    Oppgaveregisteret §§ 5 og 6, helt eller  delvis bli benyttet også av andre offentlige organer som har hjemmel  til å innhente de samme opplysningene. Opplysninger om evt.  samordning kan fås ved henvendelse til Oppgaveregisteret
+                    på telefon  75 00 75 00, eller Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Vedlegg til selvangivelsen</p>
+            </xforms:hint>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1213 Oppgåve for utrekning av næringsinntekt for lottfiskarar og  særskilt frådrag innanfor fiske og fangst 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Fastsett av Skattedirektoratet med heimel i Finansdepartementet sitt  delegeringsvedtak av 28. nov. 1994, jf. likningslova § 4-4 nr. 7.  </p>
+                <p/>
+                <p>Det vises til særskilt rettleiing som er utarbeida til hjelp ved  utfyllinga av dette skjemaet (RF-1214).  </p>
+                <p/>
+                <p>Del A i skjemaet Utrekning av næringsinntekt for lottfiskarar skal  nyttast av alle lottakarar som ikkje eig båt og/eller bruk  (ikkje-rekneskapspliktige fiskarar, også kalt prosentfiskarar). Del A  skal også fyllast ut av deltakar
+                    i deltakarlikna selskap som eig båt,  der deltakaren har teke del i fiske med denne båten.  </p>
+                <p/>
+                <p>Del B Oversikt over driftstid i fiske og fangst og del C Utrekning av  særskilt frådrag i skjemaet skal fyllast ut av alle som krev særskilt  frådrag innan fiske og fangst. Både rekneskapspliktige fiskarar,  lottfiskarar og
+                    lønns-/hyremottakarar kan få særskilt frådrag.  </p>
+                <p/>
+                <p>Melding frå oppgåveregisteret  </p>
+                <p>For å samordna og forenkla oppgåveinnleveringa frå næringslivet, kan  opplysningar som vert avgjeve i RF-1213 (Oppgåve for utrekning av  næringsinntekt for lottfiskarar og særskilt frådrag innen fiske og  fangst) i medhald av lov
+                    om Oppgåveregisteret §§ 5 og 6 heilt eller  delvis bli nytta også av andre offentlige organ som har heimel til å  innhente dei same opplysingar. Opplysingar om evt. samordning kan ein  få ved å henvende seg til Oppgåveregisteret
+                    på telefon 75 00 75 00,  eller Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NON">
+                <p>Vedlegg til sjølvmeldinga</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-1058">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Innleiing</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-1058/Avgiver-grp-439">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Avgiver</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Avgivar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1058/Avgiver-grp-439/OppgavegiverNavn-datadef-68">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1058/Avgiver-grp-439/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1058/Avgiver-grp-439/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1058/Avgiver-grp-439/OppgavegiverPostadresse-datadef-2442">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1058/Avgiver-grp-439/OppgavegiverPostnummer-datadef-6676">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1058/Avgiver-grp-439/OppgavegiverPoststed-datadef-6677">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1058/Avgiver-grp-439/OppgavegiverTelefonnummer-datadef-620">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefonnr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Telefonnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/NaringsinntektForLottfiskere-grp-440">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>A. Beregning av næringsinntekt for lottfiskere</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Viktig: Dersom en del av lottinntektene er opptjent av deltaker i  ansvarlig selskap, må dette skilles ut og leveres i eget skjema  RF-1213.</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>A. Utrekning av næringsinntekt for lottfiskarar</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NON">
+                    <p>Viktig: Dersom ein del av lottinntektene er opptente av deltakar i  ansvarleg selskap, må dette skiljast ut og leverast i eige skjema  RF-1213.</p>
+                </xforms:hint>
+                <xforms:repeat id="repeat_LottinntekterUtbetaltFra-grp-2642" nodeset="/Skjema/NaringsinntektForLottfiskere-grp-440/LottinntekterUtbetaltFra-grp-2642">
+                    <xforms:group ref="/Skjema/NaringsinntektForLottfiskere-grp-440/LottinntekterUtbetaltFra-grp-2642">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>101 Lottinntekter</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres mottatte lottinntekter inkl minstelott, spesifisert med den  enkelte oppdragsgivers navn.  </p>
+                            <p>Inntekter ved salg av tang og tare tas ikke med her. Inntekt fra slik  virksomhet føres i selvangivelsens post 2.7.6 eller evt. egen  næringsoppgave.  </p>
+                            <p>Mottatte lønns- og hyreinntekter skal ikke tas med her ved beregning  av næringsinntekten, men føres direkte i selvangivelsen post  2.1.1.  </p>
+                            <p>Sykepenger mottatt fra folketrygden som erstatter arbeidsinntekt i  fiske, skal ikke tas med ved beregningen av næringsinntekten, men  føres direkte i selvangivelsen i postene 1.6.3 og 2.7.13. Det samme  gjelder
+                                fødselspenger etter folketrygdloven kapittel 14.  </p>
+                            <p>Dagpenger mottatt under arbeidsløyse som fisker tas heller ikke med,  men føres direkte i selvangivelsen post 2.1.7.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(kode 446 på lønns- og trekkoppgaven) utbetalt fra:</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>101 Lottinntektar</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her skal mottekne lottinntekter førast, spesifisert med namnet på kvar  oppdragsgivar.  </p>
+                            <p>Inntekter ved sal av tang og tare skal ikkje takast med her.  Næringsinntekt frå slik verksemd skal førast i sjølvmeldinga post  2.7.6, eller til eiga næringsoppgåve.  </p>
+                            <p>Mottekne lønns- og hyreinntekter skal ikkje takast med her ved  utrekning av næringsinntekta, men førast direkte i sjølvmeldinga post  2.1.1.  </p>
+                            <p>Mottekne sjukepengar frå folketrygda som kjem i staden for  arbeidsinntekt i fiske, skal ikkje takast med her, men skal førast  direkte i sjølvmeldinga i postane 1.6.3 og 2.7.13. Det same gjeld  fødselspengar etter
+                                folketrygdlova kapittel 14.  </p>
+                            <p>Dagpengar mottekne under arbeidsløyse som fiskar skal heller ikkje  takast med, men skal førast direkte i sjølvmeldinga post 2.1.7.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>(kode 446 på løns- og trekkoppgåva) utbetalt frå:</p>
+                        </xforms:hint>
+                        <xforms:input ref="/Skjema/NaringsinntektForLottfiskere-grp-440/LottinntekterUtbetaltFra-grp-2642/UtbetalerNavnSpesifisertUtbetaler-datadef-19451">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Navn på høvedsmann/oppdragsgiver/utbetaler</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Namnn på høvedsmann/oppdragsgivar/utbetalar</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/NaringsinntektForLottfiskere-grp-440/LottinntekterUtbetaltFra-grp-2642/UtbetalerAdresseSpesifisertUtbetaler-datadef-19438">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Adresse</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Adresse</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/NaringsinntektForLottfiskere-grp-440/LottinntekterUtbetaltFra-grp-2642/UtbetalerPostnummerSpesifisertUtbetaler-datadef-19439">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter positive integer with four digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Postnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever positivt heltall med fire siffer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Postnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev positivt heiltal med fire siffer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/NaringsinntektForLottfiskere-grp-440/LottinntekterUtbetaltFra-grp-2642/UtbetalerPoststedSpesifisertUtbetaler-datadef-19440">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Poststed</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Poststad</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/NaringsinntektForLottfiskere-grp-440/LottinntekterUtbetaltFra-grp-2642/UtbetalerTidsromSpesifisertUtbetaler-datadef-19441">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>For tidsrom, fra-til</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>For tidsrom, frå-til</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/NaringsinntektForLottfiskere-grp-440/LottinntekterUtbetaltFra-grp-2642/InntektLottfiskeSpesifisertUtbetaler-datadef-19442">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Inntekt, hele kroner</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Inntekt, heile kroner</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/NaringsinntektForLottfiskere-grp-440/InntektLottfiske-datadef-19431">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/BeregnetLottinntekt-grp-5334">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Beregnet lottinntekt</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Viktig: Dersom en del av lottinntektene er opptjent av deltaker i  ansvarlig selskap, må dette skilles ut og leveres i eget skjema  RF-1213.</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Berekna lottinntekt</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NON">
+                    <p>Viktig: Dersom ein del av lottinntektane er opptent av deltakar i  ansvarleg selskap, må dette skiljast ut og leverast i eige skjema  RF-1213.</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/BeregnetLottinntekt-grp-5334/UttakFisk-datadef-19432">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>102 Uttak av fisk</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Uttak oppføres med kr 600 pr husstandsmedlem. For barn under 10 år  reduseres satsen til det halve, jf Skattedirektoratets  takseringsregler § 3-2-3.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Dersom dette ikke er innberettet på lønns- og trekkoppgaven</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>102 Uttak av fisk</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Uttak skal førast opp med kr 600 pr. medlem i husstanden. For barn  under 10 år skal satsen reduserast til det halve, jf  Skattedirektoratet sine takseringsreglar § 3-2-3.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Dersom dette ikkje er lønnsmeldt på lønns- og trekkoppgåva</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregnetLottinntekt-grp-5334/MerverdiavgiftRefundert-datadef-19433">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>103 Refundert merverdiavgift for lottfiskere med redskapshold</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres refundert merverdiavgift av eget redskap som nevnt i post  111.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Se rettledningen</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>103 Refundert meirverdiavgift for lottfiskarar som held reiskap sjølve</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein refundert meirverdiavgift av eigne reiskapar som nemnt i  post 111.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Sjå rettleiinga</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregnetLottinntekt-grp-5334/InntekterAndreSkattemessig-datadef-19436">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>109 Andre inntekter</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>109 Andre inntekter</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregnetLottinntekt-grp-5334/InntektRefusjonMvFiskeriForFradrag-datadef-19443">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>110 Sum inntekter</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>110 Sum inntekter</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregnetLottinntekt-grp-5334/UtgifterRedskap-datadef-19444">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>111 Utgifter til egne redskaper</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her føres utgifter til redskap (inkl merverdiavgift) som lottfiskerne  holder selv, og som dekkes av lottinntekten. Mottatt refundert avgift  for lottfiskere med redskapshold inntektsføres i post 103.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>111 Utgifter til eigne reiskaper</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein utgifter til reiskapar inkl meirverdiavgift som  lottfiskaren held sjølv, og som skal dekkjast av lottinntekta.  Motteken refundert avgift for lottfiskarar som held reiskap sjølv,  skal inntektsførast i post 103.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregnetLottinntekt-grp-5334/UtgifterSmaDager-datadef-19445">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>112 Småutgifter, antall dager</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Lottakere, som av hensyn til arbeidet må bo utenfor hjemmet, har krav  på fradrag for småutgifter med kr 40 pr. døgn under forutsetning av  at de dekker utgiftene selv, jf Skattedirektoratets takseringsregler  § 1-3-7.  </p>
+                        <p>Dette gjelder også deltaker i deltakerlignet selskap når deltakeren er  aktivt med i selskapets fiske/fangst.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>112 Småutgifter, talet på dagar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Lottakarar, som av omsyn til arbeidet må bu utanfor heimen, har krav  på frådrag for småutgifter med kr 40 pr. døgn under føresetnad av at  dei dekkjer utgiftene sjølve, jf Skattedirektoratet sine  takseringsreglar § 1-3-7.
+                            Dette gjeld også deltakar i deltakarlikna  selskap når deltakaren tek aktivt del i fisket/fangsten til  selskapet.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregnetLottinntekt-grp-5334/UtgifterSmaSats-datadef-19446">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sats</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sats</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregnetLottinntekt-grp-5334/UtgifterSma-datadef-19447">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregnetLottinntekt-grp-5334/UtgifterSjohyreMv-datadef-19448">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>113 Sjøhyre, støvler og hansker</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom ikke annet kan dokumenteres, kan lottaker som driver  helårsfiske, trekke fra kr 2 200 for merutgifter til sjøhyre mv.  under forutsetning av at han dekker utgiftene selv. Sesongfiskere kan  kreve fradag med kr 1
+                            500, jf Skattedirektoratets takseringsregler §  2-3-7.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>113 Sjøhyre, støvlar og hanskar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dersom ikkje noko anna kan dokumenterast, kan lottakar som driv  heilårsfiske, trekkje frå kr 2 200 for meirutgifter til sjøhyre m.m.  dersom han dekkjer utgiftene sjølv. Sesongfiskarar kan krevje frådrag  med kr 1 500, jf
+                            Skattedirektoratet sine takseringsreglar § 2-3-7.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregnetLottinntekt-grp-5334/UtgifterAndreLottfiske-datadef-19449">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>119 Andre utgifter, skal spesifiseres i eget vedlegg</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>De enkelte utgiftene skal spesifiseres i eget vedlegg. Her føres  eventuelle lønninger, hyrer o.l. (inkl arbeidsgiveravgift) som er  dekket av egen mannslott, og som ikke er tatt med i fellesutgiftene  ved delingsfangst.
+                            Her føres også eventuelle utgifter til kost som  lottfiskeren dekker selv, og som ikke er fratrukket som  fellesutgifter. Utgiftene må kunne dokumenteres.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>119 Andre utgifter, skal spesifiserast i eige vedlegg</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dei einskilde utgiftene skal spesifiserast i eige vedlegg. Her skal  førast eventuell lønn, hyre o.l. (medrekna arbeidsgivaravgift) som er  dekte av eigen mannslott, og som ikkje er tekne med i fellesutgiftene  ved
+                            delingsfangst. Her skal også førast eventuelle utgifter til kost  som lottfiskaren dekkjer sjølv, og som ikkje er trekt frå som  fellesutgifter. Utgiftene må kunne dokumenterast.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregnetLottinntekt-grp-5334/UtgifterLottfiske-datadef-19450">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BeregnetLottinntekt-grp-5334/InntekterFiskeriSkattemessig-datadef-19435">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>120 Beregnet inntekt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Lottfiskere får tilsendt forhåndsutfylt selvangivelse. Personlig  næringsinntekt vil være forhåndsutfylt under post 1.6.1 (fastsettelse  av personinntekt) og under post 2.7.3 (fastsettelse av alminnelig  inntekt) i
+                            selvangivelsen. Beløpene under disse postene vil  imidlertid være brutto innberettet lottinntekt. Lottaker må selv  korrigere det forhåndsutfylte beløpet i selvangivelsens post 1.6.1 og  post 2.7.3. slik at dette samsvarer
+                            med næringsinntekt i post 120 i  RF-1213.  </p>
+                        <p/>
+                        <p>Hvordan behandles næringsinntekten (lotten)?  </p>
+                        <p/>
+                        <p>Tilfelle 1:  </p>
+                        <p>&lt;&lt;Vanlig>> lottmottaker:  </p>
+                        <p>(Mottatt lott fra en eller flere høvedsmenn)  </p>
+                        <p>Lotten behandles skattemessig som ordinær næringsinntekt. Beløpet i  post 120 i RF-1213 føres videre direkte til 1.6.1 og 2.7.3 i  selvangivelsen.  </p>
+                        <p/>
+                        <p>Tilfelle 2:  </p>
+                        <p>Lott utbetalt til deltaker i deltakerlignet selskap:  </p>
+                        <p>Beløpet i post 120 i RF-1213 føres over i post 102c i RF-1221 og  behandles likt med arbeidsgodtgjørelse (både i forhold til  alm.inntekt og personinntekt). Husk å oppgi org.nr for ANS-et  (KS-et).  </p>
+                        <p/>
+                        <p>Tilfelle 3:  </p>
+                        <p>Dersom skattyter både har &lt;&lt;vanlig lott>> (tilfelle 1) og lott fra  deltakerlignet selskap (tilfelle 2) må det leveres to lottskjemaer  (RF-1213). Husk å oppgi org.nr. for ANS-et (KS-et).  </p>
+                        <p/>
+                        <p>Tilfelle 4:  </p>
+                        <p>Andel av overskudd/underskudd i ANS/KS:  </p>
+                        <p>Føres i post 102a i RF-1221 og videre til alm.inntekt post 102f. Evt.  uttak/utdeling fra selskapet utgjør et eget skattegrunnlag som kommer  i tillegg. I slike tilfelle skal del A i RF-1213 ikke benyttes.  </p>
+                        <p/>
+                        <p>Tilfelle 5:  </p>
+                        <p>Regnskapspliktig fisker som i tillegg mottar lott fra høvedsmann:  </p>
+                        <p>Lotten tas inn i næringsoppgavens post 3900 og inngår som en del av  skattyters ordinære næringsinntekt. Kostnader (evt. etter sats)  knyttet til lottinntekten føres i post 7700 (Annen kostnad,  fradragsberettiget).
+                            Beregnet alminnelig inntekt/personinntekt  overføres selvangivelsens post 2.7.3/1.6.1.  </p>
+                        <p>I slike tilfelle skal del A i RF-1213 ikke benyttes.  </p>
+                        <p/>
+                        <p>Tilfelle 6:  </p>
+                        <p>Regnskapspliktig fisker som i tillegg mottar lott som deltaker i  deltakerlignet selskap:  </p>
+                        <p>Som i tilfelle 2, hva lotten angår. I tillegg må det leveres egen  næringsoppgave for enkeltpersonforetaket.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>120 Utrekna inntekt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Lottfiskarar får tilsendt førehandsutfylt sjølvmelding. Personleg  næringsinntekt vil være førehandsutfylt under post 1.6.1 (fastsetjing  av personinntekt) og under post 2.7.3 (fastsetjing av allmenn  inntekt) i
+                            sjølvmeldinga. Beløpa under desse postane vil imidlertid  være brutto innberetta lottinntekt. Lottakar må sjølv korrigere det  førehandsutfylte beløpet i sjølvmeldinga sin post 1.6.1 og 2.7.3 slik  at dette samsvarar med
+                            næringsinntekt i post 120 i RF-1213.  </p>
+                        <p/>
+                        <p>Korleis skal næringsinntekta (lotten) behandlast?  </p>
+                        <p/>
+                        <p>Tilfelle 1:  </p>
+                        <p>&lt;&lt;Vanleg>> lottmottaker:  </p>
+                        <p>(Motteken lott frå ein eller fleire høvedsmenn)  </p>
+                        <p>Lotten skal behandlast som vanleg næringsinntekt. Beløpet i post 120 i  RF-1213 skal førast direkte til 1.6.1 og 2.7.3 i sjølvmeldinga.  </p>
+                        <p/>
+                        <p>Tilfelle 2:  </p>
+                        <p>Lott utbetalt til deltakar i deltakarlikna selskap:  </p>
+                        <p>Beløpet i post 120 i RF-1213 skal førast over til post 102c i RF-1221  og skal behandlast på same måte som arbeidsgodtgjersle (både i høve  til almenn inntekt og personinntekt). Hugs å oppgje org.nr for ANS-et  (KS-et).  </p>
+                        <p/>
+                        <p>Tilfelle 3:  </p>
+                        <p>Dersom skattytar både har &lt;&lt;vanleg>> lott (tilfelle 1) og lott frå  deltakarlikna selskap (tilfelle 2) må det leverast to lottskjema  (RF-1213). Hugs å oppgje org.nr for ANS-et (KS-et).  </p>
+                        <p/>
+                        <p>Tilfelle 4:  </p>
+                        <p>Del av overskot/underskot i ANS/KS:  </p>
+                        <p>Beløpet skal førast inn i post 102 a i RF-1221 og vidare til almenn  inntekt i post 102f. Evt. uttak/utdeling utgjer eit eige  skattegrunnlag som kjem i tillegg. I slike tilfelle skal del A i  RF-1213 ikkje nyttast.  </p>
+                        <p/>
+                        <p>Tilfelle 5:  </p>
+                        <p>Rekneskapspliktig fiskar som i tillegg mottek lott fra høvedsmann:  </p>
+                        <p>Lotten skal takast inn i næringsoppgåva sin post 3900 og er ein del av  skattytaren sin ordiære næringsinntekt. Kostnader (evt. etter sats)  som er knytt til lottinntekta, skal førast i post 7700 (Annan kostnad  med
+                            frådragsrett). Utrekna almenn inntekt7personinntekt skal førast  over til sjølvmeldinga sin post 2.7.3/1.6.1.  </p>
+                        <p>I slike tilfelle skal del A i RF-1213 ikkje nyttast.  </p>
+                        <p/>
+                        <p>Tilfelle 6:  </p>
+                        <p>Rekneskapspliktig fiskar som i tillegg mottek lott som deltakar i  deltakerlikna selskap:  </p>
+                        <p>Som tilfelle 2, kva gjeld lotten. I tillegg må det leverast eiga  næringsoppgåve for einskildpesonforetaket.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/BeregnetLottinntekt-grp-5334/InntekterLottfiskeANS-datadef-22331">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>121 Er lottinntektene i post 120 fra ansvarlig selskap?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom inntekten i post 120 kommer ANS som du selv er medeier i, skal  beløpet føres i post 102C i deltakeroppgaven. Er beløpet annen  lottinntekt, skal dette føres i post 1.6.1 og 2.7.3 i selvangivelsen  (RF-1027)</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>121 Kjem lottinntekta i post 120 frå ansvarleg selskap?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dersom inntekta i post 120 kjem frå ANS som du sjølv er medeigar i,  skal beløpet førast i post 102C i deltakeroppgåva. Er beløpet annan  lottinntekt, skal dette førast i post 1.6.7 og 2.7.3 i sjølvmeldinga  (RF-1027)</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/BeregnetLottinntekt-grp-5334/InntekterLottfiskeANSOrganisasjonsnummer-datadef-23638">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Dersom &lt;&lt;ja>> oppgi organisasjonsnummer</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Dersom &lt;&lt;ja>> gi opp organisasjonsnummeret</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/DriftstidIFiskeOgFangst-grp-441">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>B. Oversikt over driftstid i fiske og fangst</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Denne delen av skjemaet skal fylles ut av alle som krever særskilt  fradrag innen fiske og fangst.  </p>
+                    <p>I henhold til skatteloven § 6-60 og Finansdepartementets forskrift til  skatteloven FSFIN § 6-60-1, er det en forutsetning for rett til  særskilt fradrag at skattyteren personlig har drevet eller deltatt i  fiske eller fangst
+                        på havet eller langs kysten som full  beskjeftigelse i til sammen minst 130 dager av inntektsåret.  </p>
+                    <p>Med full beskjeftigelse menes at vedkommende disse 130 dagene i det  vesentlige av tiden har hatt full beskjeftigelse med fiske og/eller  fangst.  </p>
+                    <p>Skattytere som gjennom hele året bare har hatt fiske som bierverv, kan  således ikke kreve særskilt fradrag. Det gis f eks ikke fradrag til  kilenotfiskere/krokgarnfiskere som samtidig med fisket også driver  gårdsbruk.  </p>
+                    <p>Tidsrom hvor fartøyet er tatt ut av fiske for å utføre frakt- og/eller  slepeoppdrag skal, med unntak av tilfeldige kortere oppdrag, ikke  telle med ved beregningen. Perioder med fangststopp skal ikke telle  med ved
+                        beregningen. Det skal heller ikke perioder med arbeidsløyse  som fisker.  </p>
+                    <p>Fiskere som på grunn av kvotereguleringer bare drar ut på fiske  enkelte dager i en periode, anses som fullbeskjeftiget med fiske i  dette tidsrommet forutsatt at fiske er eneste inntektsgivende  beskjeftigelse i perioden, og
+                        at en viss regularitet i fisket kan  dokumenteres.  </p>
+                    <p>Reisedager ved på- og avmønstringer på fiske- og fangstfartøyer regnes  med. Båteiere/høvedsmenn får medregnet den tid som går med til å  hente eller frakte hjem mannskap og redskaper.  </p>
+                    <p>Landligge som skyldes dårlig vær må også regnes med i forhold til  bestemmelsen om særskilt fradrag. Også tid som går med til kortere  uforutsette reparasjonsopphold (akutte rparasjoner) mens båten er på  fiske, kan regnes med.  </p>
+                    <p>Har fiskeren vært sykepermittert, skal denne tiden regnes med i  130-dagersperioden. Tid hvor fiskeren har mottatt fødselspenger etter  folketrygdloven kapittel 14, skal også regnes med.  </p>
+                    <p>Det skal fylles ut én linje for hver tur.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>B. Oversikt over driftstid i fiske og fangst</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Denne delen av skjemaet skal fyllast ut av alle som krev særskilt  frådrag innan fiske og fangst.  </p>
+                    <p>Etter skattelova § 6-60 og forskrift til skattelova FSFIN § 6-60, er  det ein føresetnad for rett til særskilt frådrag at skattytaren  personleg har drive eller delteke i fiske eller fangst på havet eller  ved kysten som
+                        fulltidsverksemd i til saman minst 130 dagar av  inntektsåret.  </p>
+                    <p>Med fulltidsverksemd meiner ein at skattytaren desse 130 dagane i det  vesentlege av tida har vore fullt sysselsett med fiske og/eller  fangst.  </p>
+                    <p>Skattytarar som gjennom heile året berre har drive fiske som biyrke,  kan såleis ikkje krevje særskilt frådrag. Det skal t d ikkje gis  frådrag til kilenot-fiskarar/krokgarnfiskarar som samstundes med  fisket driv gardsbruk.  </p>
+                    <p>Tidsrom der fartøyet er teke ut av fisket for å gjere frakt- og/eller  slepeoppdrag skal, bortsett frå tilfeldige kortare oppdrag, ikkje  reknast med ved utrekninga. Det skal heller ikkje periodar med  arbeidsløyse som fiskar.
+                        Periodar med fangststopp skal heller ikkje  reknast med.  </p>
+                    <p>Fiskarar som på grunn av kvotereguleringar berre dreg ut på fiske  einskilde dagar i ein periode, skal reknast som fullt sysselsette med  fiske i dette tidsrommet dersom fisket er einaste inntektsgivande  verksemd i perioden,
+                        og fiskaren kan dokumentere ein viss regularitet  i fisket.  </p>
+                    <p>Reisedagar ved på og avmønstring på fiske- og fangstfartøy skal  reknast med. Båteigarar/ høvedsmenn reknar med den tida som går med  til å hente eller frakte heim mannskap og reiskap.  </p>
+                    <p>Landligge som har si årsak i dårleg vær må og reknast med i høve til  reglane om særskilt frådrag. Også tid som går med til kortare  uforutsette reparasjonsopphold (akutte reparasjonar) mens båten er på  fiske, kan reknast med.  </p>
+                    <p>Har fiskaren vore sjukepermittert, skal denne tida reknast med i  130-dagarsperioden. Tid kor fiskaren har motteke fødselspengar etter  folketrygdlova kapittel 14, skal også reknast med.  </p>
+                    <p>Det skal fyllast ut ei linje for kvar tur.</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_OversiktOverDriftstidIFiskeOgFagst-grp-2745" nodeset="/Skjema/DriftstidIFiskeOgFangst-grp-441/OversiktOverDriftstidIFiskeOgFagst-grp-2745">
+                    <xforms:group ref="/Skjema/DriftstidIFiskeOgFangst-grp-441/OversiktOverDriftstidIFiskeOgFagst-grp-2745">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>B. Oversikt over driftstid i fiske og fangst</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>B. Oversikt over driftstid i fiske og fangst</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/DriftstidIFiskeOgFangst-grp-441/OversiktOverDriftstidIFiskeOgFagst-grp-2745/OppdragsgiverNavnSpesifisertOppdragsgiver-datadef-19437">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Oppdragsgivers navn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Oppdragsgivar sitt namn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftstidIFiskeOgFangst-grp-441/OversiktOverDriftstidIFiskeOgFagst-grp-2745/DriftStartSpesifisertOppdragsgiver-datadef-19452">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fra</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Stått om bord</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Frå</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Stått om bord</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftstidIFiskeOgFangst-grp-441/OversiktOverDriftstidIFiskeOgFagst-grp-2745/DriftSluttSpesifisertOppdragsgiver-datadef-19453">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Til</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Til</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/DriftstidIFiskeOgFangst-grp-441/OversiktOverDriftstidIFiskeOgFagst-grp-2745/FiskeType-datadef-19434">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Hvilket fiske som er drevet</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Kva slags fiske som er drive</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SarskiltFradragForEnefiskere-grp-442">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>C. Beregning av særskilt fradrag for enefiskere</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Det er en forutsetning for rett til særskilt fradrag at skattyteren  har hatt fullbeskjeftigelse med fiske og/eller fangst på havet eller  langs kysten i til sammen minst 130 dager i inntektsåret, se  rettledningen til del B.  </p>
+                    <p/>
+                    <p>Avsnitt 1:  </p>
+                    <p>For enefiskere  </p>
+                    <p>Dette avsnittet fylles kun ut av skattytere som har inntekter av  enefiske. Hvorvidt enefisket har vært drevet hele eller bare deler av  året, er uten betydning. Har enefiskeren deler av året drevet fiske i  lag med andre, skal
+                        han for slike lottinntekter fylle ut avsnitt 2.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>C. Utrekning av særskilt frådrag for einefiskarar</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Det er ein føresetnad for rett til særskilt frådrag at skattytaren  personleg har drive eller delteke i fiske eller fangst på havet som  fulltidsverksemd i til saman minst 130 dagar i inntektsåret, sjå  rettleiinga til del B.  </p>
+                    <p/>
+                    <p>Avsnitt 1.  </p>
+                    <p>For einefiskarar  </p>
+                    <p>Dette avsnittet skal berre fyllast ut av skattytarar som har inntekter  av einefiske. Det har ikkje noko å seie om fisket har vore drive  aleine heile eller berre delar av året. Har einefiskaren delar av  året drive fiske i lag
+                        med andre, skal han for slike lottinntekter  fylle ut avsnitt 2.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/SarskiltFradragForEnefiskere-grp-442/GrunnlagForSarskiltFradrag-grp-3341">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Grunnlag for særskilt fradrag</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Hele kroner</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Grunnlag for særskilt frådrag</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Heile kroner</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/SarskiltFradragForEnefiskere-grp-442/GrunnlagForSarskiltFradrag-grp-3341/FangstinntekterOffentligeTilskudd-datadef-8307">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>201 Fangstinntekter, pristilskudd mv. fra næringsoppgaven post  3000/3100/3200</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres alle fangstinntekter inkl pristilskudd som er ført i postene  3000/3100/3200 i næringsoppgaven. Føringstilskudd føres også her.  Andre tilskudd som ikke kan anses som inntekt av fiske eller fangst,  føres ikke
+                                her. Dette gjelder f.eks. likviditetstilskudd og  investeringstilskudd.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>201 Fangstinntekter, pristilskott o.a. frå næringsoppgåva post  3000/3100/3200</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her skal førast alle fangstinntekter inkl pristilskott som er førte i  postane 3000/3100/3200 i næringsoppgåva. Føringstilskott skal også  førast her. Andre tilskott som ikkje kan sjåast som inntekt av fiske  eller
+                                fangst, skal ikkje førast her. Dette gjeld t.d.  likviditetstilskott og investeringstilskott.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SarskiltFradragForEnefiskere-grp-442/GrunnlagForSarskiltFradrag-grp-3341/MinstelottEnefiske-datadef-1899">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>202 Garantilott (minstelott) ved enefiske</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres minstelott/garantilott som gjelder enefiske.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>202 Garantilott (minstelott) ved einefiske</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her skal minstelott/garantilott som gjeld einefiske førast.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SarskiltFradragForEnefiskere-grp-442/GrunnlagForSarskiltFradrag-grp-3341/FangstinntekterMinstelottMv-datadef-8308">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>203 Sum</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>203 Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SarskiltFradragForEnefiskere-grp-442/GrunnlagForSarskiltFradrag-grp-3341/FangstinntekterOffentligeTilskuddFellesfiske-datadef-1900">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>204 Reduksjon for fangstinntekter og offentlige tilskudd ved  fellesfiske</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Brutto fangstinntekter og offentlige tilskudd som er ført i post 201  ovenfor, vil ofte inkludere både inntekter av enefiske og fiske som  har vært drevet i lag med andre. Her i post 204 føres derfor til  fradrag alle
+                                brutto fangstinntekter og tilskudd inkl uttak av fisk,  som har vært gjenstand for deling med andre (inkludert den delen som  faller på han som ellers driver enefiske). Lottinntekten fra  delingsfangsten føres i
+                                avsnitt 2, post 241.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>204 Reduksjon for fangstinntekter og offentlege tilskott ved  fellesfiske</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Brutto fangstinntekter og offentlege tilskott som er førte i post 201  ovanfor, vil ofte omfatte både einefiske og fiske i lag med andre.  Her i post 204 skal difor alle brutto fangstinntekter og offentlege  tilskott
+                                inkl uttak av fisk som har vore delt med andre, førast til  frådrag (inkludert den delen som fell på han som ellers driv  eienfiske). Lottinntekta frå delingsfangsten skal førast i avsnitt 2,  post 241.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SarskiltFradragForEnefiskere-grp-442/GrunnlagForSarskiltFradrag-grp-3341/InntekterEnefiske-datadef-1901">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>205 Inntekter av enefiske (post 203-post 204)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>205 Inntekter av einefiske (post 203-post 204)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SarskiltFradragForEnefiskere-grp-442/FradragFor-grp-2746">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Fradrag for</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Frådrag for</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SarskiltFradragForEnefiskere-grp-442/FradragFor-grp-2746/AvgifterProduktavgift-datadef-16916">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>211 Produktavgift</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres produktavgift som er ført i næringsoppgaven post 3300.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>211 Produktavgift</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her fører ein produktavgift som er ført i næringsoppgåva post 3300.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SarskiltFradragForEnefiskere-grp-442/FradragFor-grp-2746/DrivstoffMvFiske-datadef-15605">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>212 Drivstoff, bensin, olje ol.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres kostnader i forbindelse med fiske som er kostnadsført i  næringsoppgaven. Samsvarende poster i næringsoppgaven er angitt i  parentes.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>212 Drivstoff, bensin, olje o.l.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her fører ein kostnader i samband med fiske som er kostnadsførte i  næringsoppgåva. Samsvarande postar i næringsoppgåva er oppgitt i  parentes.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SarskiltFradragForEnefiskere-grp-442/FradragFor-grp-2746/VedlikeholdBatUtstyrMvFiske-datadef-15583">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>213 Vedlikehold båt/utstyr/redskap</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>213 Vedlikehald båt/utstyr/reiskap</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SarskiltFradragForEnefiskere-grp-442/FradragFor-grp-2746/DriftskostnaderRedskapFiske-datadef-15607">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>214 Kjøp av redskap</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>214 Kjøp av reiskap</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SarskiltFradragForEnefiskere-grp-442/FradragFor-grp-2746/LeiekostnaderBatMvFiske-datadef-15606">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>215 Kostnader ved leie av båt/redskap</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>215 Kostnader ved leige av båt/reiskap</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SarskiltFradragForEnefiskere-grp-442/FradragFor-grp-2746/TransportmidlerForsikringAvgifterSkattemessig-datadef-7420">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>216 Forsikring av båt/redskap</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>216 Trygging av båt/reiskap</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SarskiltFradragForEnefiskere-grp-442/FradragFor-grp-2746/DriftskostnaderRegnskapsforerTelefonPortoBilSkattemessig-datadef-11642">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>217 Kostnader til regnskapsfører, telefon, porto og bilkostnader</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Kostnadene i post 217 skal spesifiseres i eget vedlegg.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>217 Kostnadar til rekneskapsførar, telefon, porto og bilkostnadar</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Kostnadene i post 217 skal spesifiserast i eige vedlegg.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SarskiltFradragForEnefiskere-grp-442/FradragFor-grp-2746/DriftskostnaderAndreFiske-datadef-15584">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>218 Andre driftskostnader, herunder proviant og dagligvarer (skal  spesifiseres)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>218 Andre driftskostnadar, medrekna proviant og daglegvarer (skal  spesifiserast)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SarskiltFradragForEnefiskere-grp-442/FradragFor-grp-2746/DriftsmidlerSaldoavskrivning-datadef-8314">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>219 Saldoavskrivninger fra saldoskjema post 110</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>219 Saldoavskrivningar frå saldoskjema post 110</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SarskiltFradragForEnefiskere-grp-442/FradragFor-grp-2746/DriftsutgifterFiske-datadef-8315">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>225 Sum kostnader (postene 211 til 219)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>225 Sum kostnadar (postane 211 til 219)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/SarskiltFradragForEnefiskere-grp-442/DriftsutgifterEnefiske-datadef-8309">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>230 Andel av sum kostnader i post 225 som gjelder enefiske</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dersom kostnadene summert i post 225 refererer seg til både enefiske  og fellesfiske, vil utgiftene måtte fordeles tilsvarende, dvs etter  forholdet mellom post 205 Inntekter av enefiske og post 204 Reduksjon  for
+                            fangstinntekter og offentlige tilskudd ved fellesfiske. Beløpet  utregnet i post 230 skal ikke overstige inntekter av enefiske ført i  post 205.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>230 Del av sum kostnader i post 225 som gjeld einefiske</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Dersom kostnadene summert i post 225 gjeld både einefiske og felles-  fiske, må utgiftene fordelast tilsvarande, dvs. etter forholdet  mellom post 205 Inntekter av einefiske og post 204 Reduksjon for  fangstinntekter og
+                            offentlege tilskott ved fellesfiske. Beløpet  utrekna i post 230 skal ikkje overstige inntekter av einefiske ført i  post 205.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SarskiltFradragForEnefiskere-grp-442/InntektBeregnetEnefiske-datadef-8310">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>240 Sum overføres til post 271</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>240 Sum, skal overførast til post 271</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SarskilteFradragLottLonnsOgEllerHyremottakere-grp-443">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Beregning av særskilt fradrag for lott-, lønns- og/eller hyremottaker</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Avsnitt 2.  </p>
+                    <p/>
+                    <p>For lott-, lønns- og/eller hyremottakere  </p>
+                    <p/>
+                    <p>Dette avsnittet benyttes av alle som for noen del av inntektsåret har  hatt slik arbeidsinntekt fra fiske.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Utrekning av særskilt frådrag for lott-, lønns- og/eller hyremottakar</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Avsnitt 2.  </p>
+                    <p>for lott-, lønns- og/eller hyremottakarar  </p>
+                    <p/>
+                    <p>Dette avsnittet skal nyttast av alle som for nokon del av inntektsåret  har hatt slik arbeidsinntekt frå fiske.</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/SarskilteFradragLottLonnsOgEllerHyremottakere-grp-443/GrunnlagForSarskiltFradrag-grp-2647">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Grunnlag for særskilt fradrag</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Hele kroner</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Grunnlag for særskild frådrag</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Heile kroner</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/SarskilteFradragLottLonnsOgEllerHyremottakere-grp-443/GrunnlagForSarskiltFradrag-grp-2647/MinstelottDelingsfangst-datadef-1903">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>241 Mannslotter og garantilott (minstelott) ved delingsfangst, evt.  redskapslott (kode 446 på lønns- og trekkoppgaven)</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres alle lottinntekter/garantilott fra fiske som er drevet i lag  med andre, inkludert fordel ved eget uttak av fisk. Eiers/medeiers  mannslott skal spesifiseres i eget vedlegg.  </p>
+                            <p>Beløpet skal ikke omfatte inntekt av frakt, slep, berging o.l. og  heller ikke inntekt ved salg av tang og tare. Lottinntekter av arbeid  på land med f.eks egning av liner, sløying av fisk, reparasjon av  båt/redskap
+                                osv skal bare medtas dersom mottakeren er en såkalt  landmann som tilhører det faste mannskapet, og som utenom  line-fiskesesongen deltar om bord i fiskebåten på vanlig måte sammen  med resten av mannskapet. En
+                                forutsetning for særskilt fradrag er  imidlertid at vedkommende hele året sett under ett er med om bord og  deltar i fisket i større utstrekning enn han er på land og utfører  arbeid som landmann for båtlaget.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>241 Mannslottar og garantilott (minstelott) ved delingsfangst, ev.  reiskapslott (kode 446 på løns- og trekkoppgåva)</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her fører ein alle lottinntekter samt minstelott/ garantilott frå  fiske som er drive i lag med andre, medrekna fordel ved eige uttak av  fisk. Eigar/medeigar sin mannslott skal spesifiserast i eige  vedlegg.  </p>
+                            <p>Beløpet skal ikkje omfatte inntekt ved frakt, slep, berging o.l. og  heller ikkje inntekt ved sal av tang og tare. Lottinntekter av arbeid  på land med t.d. egning av liner, sløying av fisk, reparasjon av  båt/reiskap
+                                osb, skal berre takast med såframt mottakaren er ein  såkalla landmann som høyrer til det faste mannskapet, og som utanom  linefiskesesongen tek del i arbeidet om bord i fiskebåten på vanleg  måte saman med resten av
+                                mannskapet. Ein føresetnad for særskilt  frådrag er i alle høve at vedkomande heile året sett under eitt er  med om bord og tek del i fisket i større utstrekning enn han er på  land og arbeider som landmann for båtlaget.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SarskilteFradragLottLonnsOgEllerHyremottakere-grp-443/GrunnlagForSarskiltFradrag-grp-2647/SkipperlotterBaslotterDriverlotter-datadef-1904">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>242 Skipper-, bas- og driverlotter</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Skipperlott til reder tas bare med her når rederen deltar aktivt i  fisket. Beløpet skal ikke omfatte inntekt ved frakt, slep, berging o  l og heller ikke inntekt ved salg av tang og tare.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>242 Skipper-, bas- og drivarlottar</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Skipperlott til reiar skal berre takast med her når reiaren tek aktivt  del i fisket. Beløpet skal ikkje omfatte inntekt ved frakt, slep,  berging o l, og heller ikkje inntekt ved sal av tang og tare.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SarskilteFradragLottLonnsOgEllerHyremottakere-grp-443/GrunnlagForSarskiltFradrag-grp-2647/LonnHyreAktivtFiske-datadef-1905">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>243 Fast lønn/hyre ved aktiv deltakelse i fiske (kode 144 på lønns- og  trekkoppgaven), samt fordel ved eget uttak av fisk</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Beløpet skal inkludere fordel ved eget uttak av fisk.  </p>
+                            <p>Lønn/hyre under avspasering på land skal tas med i den utstrekning  denne er betaling for allerede utført arbeid under fiske om bord i  båten. Lønn for arbeid på land med f eks egning av liner, sløying av  fisk,
+                                reparasjon av båt/redskap osv tas ikke med. Det samme gjelder  inntekt ved frakt, slep, berging o l, og inntekt ved salg av tang og  tare.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>243 Fast løn/hyre ved aktiv deltaking i fiske (kode 144 på løns- og  trekkoppgåva), og fordel ved eige uttak av fisk</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Beløpet skal inkludere fordel ved eige uttak av fisk.  </p>
+                            <p>Lønn/hyre under avspasering på land skal berre takast med dersom dette  er betaling for arbeid som allereie er gjort under fiske om bord i  båten. Løn for arbeid på land med t d egning av liner, sløying av  fisk,
+                                reparasjon av båt/ reiskap osb skal ikkje takast med. Det same  gjeld inntekt ved frakt, slep, berging o l og inntekt ved sal av tang  og tare.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SarskilteFradragLottLonnsOgEllerHyremottakere-grp-443/GrunnlagForSarskiltFradrag-grp-2647/TilskuddIkkeInnberettet-datadef-1906">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>244 Diverse tilskudd som ikke er innberettet på lønns- og  trekkoppgaven, og som ikke er tatt med som delingsfangst</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres mottatte tilskudd som ikke er tatt hensyn til ved  delingsfangst.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>244 Ymse tilskott som ikkje er lønnsmelde på lønns- og trekkoppgåva og  ikkje er tekne med som delingsfangst</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her fører ein mottekne tilskott som ikkje er teke omsyn til ved  delingsfangst.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:group ref="/Skjema/SarskilteFradragLottLonnsOgEllerHyremottakere-grp-443/GrunnlagForSarskiltFradrag-grp-2647/FradragFor-grp-2645">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fradrag for</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Frådrag for</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/SarskilteFradragLottLonnsOgEllerHyremottakere-grp-443/GrunnlagForSarskiltFradrag-grp-2647/FradragFor-grp-2645/LonnskostnaderFiske-datadef-15603">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>251 Lønninger, hyrer ol.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her tas med de lønninger og hyrer som er dekket av egen mannslott, og  som ikke er tatt med i fellesutgiftene ved delingsfangst.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>251 Lønn, hyre ol.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her fører ein lønn og hyre som er dekte av eigen mannslott, og som  ikkje er tekne med i fellesutgiftene ved delingsfangst.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SarskilteFradragLottLonnsOgEllerHyremottakere-grp-443/GrunnlagForSarskiltFradrag-grp-2647/FradragFor-grp-2645/ArbeidsgiveravgiftFiske-datadef-15604">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>252 Arbeidsgiveravgift til folketrygden</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her tas med den arbeidsgiveravgiften som refererer seg til  utbetalingene som er ført i post 251</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>252 Arbeidsgivaravgift til folketrygda</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her fører ein arbeidsgivaravgift som gjeld utbetalingane som er førte  i post 251.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/SarskilteFradragLottLonnsOgEllerHyremottakere-grp-443/GrunnlagForSarskiltFradrag-grp-2647/FradragFor-grp-2645/Kostutgifter-datadef-1907">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>254 Kostutgifter som ikke inngår i fellesutgiftene</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Her føres kostutgifter som ikke er ført til fradrag som fellesutgifter  før deling av fellesfangst.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>254 Kostutgifter som ikkje inngår i fellesutgiftene</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Her fører ein kostutgifter som ikkje er førte til frådrag som  fellesutgifter for deling av fellesfangst.</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                    <xforms:input ref="/Skjema/SarskilteFradragLottLonnsOgEllerHyremottakere-grp-443/GrunnlagForSarskiltFradrag-grp-2647/InntekterLottLonnHyremottaker-datadef-8311">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>250 Sum</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>250 Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SarskilteFradragLottLonnsOgEllerHyremottakere-grp-443/GrunnlagForSarskiltFradrag-grp-2647/UtgifterLottLonnHyremottaker-datadef-8312">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>260 Sum</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>260 Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SarskilteFradragLottLonnsOgEllerHyremottakere-grp-443/GrunnlagForSarskiltFradrag-grp-2647/InntekterBeregnetLottLonnHyremottaker-datadef-8313">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>270 Sum overføres til post 272</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>270 Sum skal overførast til post 272</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SarskiltFradragFellesposter-grp-445">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Fellesposter og beregning av særskilt fradrag</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Fellespostar og utrekning av særskilt frådrag</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/SarskiltFradragFellesposter-grp-445/InntektBeregnetEnefiskePositiv-datadef-22295">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>271 Overført fra post 240</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>271 Overført frå post 240</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SarskiltFradragFellesposter-grp-445/SykepengerLottfisker-datadef-15572">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>274 Sykepenger som fisker. Lønnsinnberettet på kode 146 for fisker som  bare har hyre og på kode 448 når sykepenger erstatter næringsinntekt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Avsnitt 3.  </p>
+                        <p/>
+                        <p>Fellesposter for beregning av særskilt fradrag.  </p>
+                        <p/>
+                        <p>Her føres sykepenger mv. når disse erstatter arbeidsinntekt av  fiske.  </p>
+                        <p>I denne posten føres også fødselspenger etter folketrygdloven kapittel  14 som erstatter arbeidsinntekt av fiske.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>274 Sjukepengar som fiskar. Lønnsmeldt på kode 146 for fiskar som  berre har hyre, og på kode 448 når sjukepengar erstattar  næringsinntekt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Avsnitt 3.  </p>
+                        <p/>
+                        <p>fellespostar for utrekning av særskild frådrag.  </p>
+                        <p/>
+                        <p>Her fører ein mottekne sjukepengar m.m. når desse kjem i staden for  arbeidsinntekt av fiske. I denne posten skal ein også føre  fødselspengar etter folketrygdlova kapittel 14 som erstattar  arbeidsinntekt av fiske.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SarskiltFradragFellesposter-grp-445/SarfradragGrunnlag-datadef-1908">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>290 Grunnlag for beregning av særskilt fradrag innen fiske og fangst</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>290 Grunnlag for utrekning av særskilt frådrag innanfor fiske og  fangst</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SarskiltFradragFellesposter-grp-445/FradragSarskiltFiskeMv-datadef-1353">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>300 Særskilt fradrag med inntil 30% av beløpet i post 290, maks kr.  80.000 (overf. til selvangivelsen post 3.2.14)</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Maks fradrag er 80 000 kroner</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>300 Særskilt frådrag med inntil 30 % av beløpet i post 290, maks kr.  80.000 (skal overførast til sjølvmeldinga post 3.2.14)</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Maks frådrag er 80 000 kroner</p>
+                    </xforms:alert>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

@@ -1,0 +1,1251 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1061: Oppgave over realisasjon av aksjer mv</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-70-3672.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-827/Avgiver-grp-100/OppgavegiverFodselsnummer-datadef-26"/>
+            <xforms:bind ref="/Skjema/Samleoppgave-grp-831/AksjerMvRealisasjonGevinstTapSkatt-datadef-14084" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1061 Oppgave over realisasjon av aksjer mv. 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Oppgaven skal leveres av skattytere som har realisert aksjer mv. i  løpet av 2005, og som ikke har mottatt Realisasjonsoppgave fra  Skatteetatens aksjonærregister. Næringsdrivende skattytere som  leverer selvangivelsen elektronisk
+                    skal likevel alltid bruke RF-1061.  (Opplysninger fra mottatt Realisasjonsoppgave overføres i slike  tilfeller til RF-1061.) Næringsdrivende som leverer selvangivelsen på  papir og skattytere som leverer selvangivelse for
+                    lønnstakere og  pensjonister, skal korrigere mottatt Realisasjonsoppgave, og  returnere den sammen med selvangivelsen.  </p>
+                <p/>
+                <p>Skattytere som har realisert andeler i verdipapirfond (aksje- og  obligasjonsfond) er unntatt fra oppgaveplikten når  Verdipapirsentralen eller selskapet som driver verdipapirforvaltning  har gitt pliktig opplysning om
+                    realisasjonen til  ligningsmyndighetene, og skattyter har mottatt kopi av de innsendte  opplysninger. (Opplysningene gis i medhold av forskrift av 13.12.1995  nr 1090 om levering av kontrolloppgave fra forvaltningsselskaper og
+                    verdipapirsentralen til ligningsmyndighetene.) Unntaket gjelder kun  skattytere som leverer selvangivelse for lønnstakere og  pensjonister.  </p>
+                <p/>
+                <p>Reglene om beskatning av aksjegevinster mv. finnes i skatteloven §§  10-30 til 10-37. Overgangsreglene i forbindelse med skattereformen  mv. er tatt inn i skatteloven § 19-2.  </p>
+                <p>Likestilt med aksjer er fondsaksjer, andeler i verdipapirfond (aksje-  og obligasjonsfond mv.) og grunnfondsbevis. Det samme gjelder  tegningsrettigheter og tildelingsbevis i norske og utenlandske  selskaper. Unntatt er aksjer i
+                    boligselskaper som nevnt i skatteloven  § 7-12.  </p>
+                <p/>
+                <p>Med realisasjon av aksjer forstås normalt salg av aksjene. Som  realisasjon regnes bl.a. også innløsning av andel i verdipapirfond  (aksje- og obligasjonsfond mv.), innlevering av aksjene ved  likvidasjon av selskapet (f.eks.
+                    konkurs) og innløsning av  enkeltaksjer. Som realisasjon regnes normalt ikke rene  gaveoverføringer og overføringer mellom ektefeller.  </p>
+                <p/>
+                <p>Gevinst ved realisasjon av aksjer er skattepliktig som alminnelig  inntekt. Dersom aksjene realiseres med tap, kan tapet føres til  fradrag i alminnelig inntekt.  </p>
+                <p/>
+                <p>Skjemaet er fastsatt av skattedirektoratet med hjemmel i  Finansdepartementets delegeringsvedtak av 28. november 1994, jf.  Ligningsloven §4-3. Skjemaet er pliktig vedlegg til selvangivelsen  for alle som har realisert aksjer mv. i
+                    2005, og som ikke har mottatt  realisasjonsoppgave fra skatteetatens aksjonærregister.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1061 Oppgåve over realisasjon av aksjar m.m. 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Oppgåva skal leverast av skattytarar som har realisert aksjer mm i  løpet av 2005, og som ikkje har motteke Realisasjonsoppgåve frå  Skatteetaten sitt aksjonærregister. Næringsdrivande skattytarar som  leverar sjølvmeldinga
+                    elektronisk skal likevel alltid bruke RF-1061.  (Opplysningar frå motteke Realisasjonsoppgåve overføres i slike  tilfeller til RF-1061.) Næringsdrivande som leverar sjølvmeldinga på  papir og skattytarar som leverar sjølvmelding
+                    for lønnstakarar og  pensjonistar, skal korrigere og supplere motteke Realisasjonsoppgåve,  og returnere den saman med sjølvmeldinga.  </p>
+                <p/>
+                <p>Skattytarar som har realisert partar i verdipapirfond (aksje- og  obligasjonsfond) er unnteke frå oppgåveplikta når Verdipapirsentralen  eller selskapet som driver verdipapirforvaltning har gitt pliktig  opplysing om realisasjonen
+                    til ligningsmyndigheitene, og skattytar  har motteke kopi av dei innsendte opplysningane. (Opplysningane blir  gitt i medhald av § 4 i forskrift av 13.12.1995 nr 1090 om levering  av kontrolloppgåve frå forvaltningsselskaper og
+                    verdipapirsentralen  til ligningsmyndigheitene.) Unntaket gjeld berre skattytarar som  leverar sjølvmelding for lønnstakarar og pensjonistar.  </p>
+                <p/>
+                <p>Reglane om skattlegging av aksjevinstar m.m. kan ein finne i  skattelova §§ 10-30 til 10-37 m.m. Overgangsreglane i samband med  skattereforma er tekne inn i skattelova § 19-2. Inn under dei same  som gjeld for aksjar, kjem
+                    fondsaksjar, partar i verdipapirfond  (aksje- og obligasjonsfond m.m.) og grunnfondsbevis. Det same gjeld  teikningsrettar og tildelingsbevis i norske og utanlandske selskap.  Reglane gjeld ikkje for aksjar i bustadselskap som er
+                    nemnde i § 17-2  i skattelova.  </p>
+                <p/>
+                <p>Med realisasjon av aksjar forstår ein normalt sal av aksjane. Som  realisasjon regnar ein m.a. også innløysing av partar i  verdipapirfond (aksje- og obligasjonsfond m.m.), innlevering av  aksjane ved likvidasjon av selskapet (t.d.
+                    ved konkurs) og innløysing  av einskildaksjar. Som realisasjon regnar ein normalt ikkje reine  gåveoverføringar og overføringar mellom ektemakar.  </p>
+                <p/>
+                <p>Vinst ved realisasjon av aksjar er skattepliktig som allmenn inntekt.  Blir aksjane realiserte med tap, kan tapet normalt førast til frådrag  i allmenn inntekt.  </p>
+                <p/>
+                <p>Fastsett av Skattedirektoratet med heimel i Finansdepartementet sitt  delegeringsvedtak av 24. november 1994, jf. Ligningslova § 4-3 nr. 2.   Skjemaet er pliktig vedlegg for alle som har realisert aksjar m.m. i  2005, og som ikkje
+                    har motteke realisajonsoppgåve frå skatteetatens  aksjonærregister.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-827">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-827/Avgiver-grp-100">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Skattyter</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Skattytar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-827/Avgiver-grp-100/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-827/Avgiver-grp-100/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-827/Avgiver-grp-100/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-827/Avgiver-grp-100/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-827/Avgiver-grp-100/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-827/Avgiver-grp-100/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/RealisasjonAvAksjer-grp-3721">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Realisasjoner</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Gevinst/tap fremkommer normalt som differansen mellom  realisasjonsvederlag og inngangsverdi (anskaffelsesverdi eventuelt  regulert med RISK-beløp mv.). Begge beløp føres opp eksklusiv  omkostninger o.l. Ved salg mot delvis
+                        vederlag (gavesalg), er det  ingen fradragsrett for gaveelementet ved transaksjonen (differansen  mellom omsetningsverdien og det lavere vederlaget).  </p>
+                    <p/>
+                    <p>Samlede utgifter til megler eller lignende ved anskaffelse og  realisasjon av aksjer, føres til fradrag som en egen fradragspost i  realisasjonsåret, jf. oppgavens post 303.  </p>
+                    <p/>
+                    <p>Det skal fylles ut en kolonne i oppgaven for hver transaksjon. Dersom  det er mer hensiktsmessig, kan samtlige salg av aksjer i ett selskap  samles i en kolonne. Forutsetningen er at dette gir samme  skattemessige resultat som
+                        om transaksjonene var ført hver for seg.  Ved salg av aksjer i samme selskap hvor aksjene er ervervet ved  forskjellige tidspunkt, må det normalt føres separate kolonner pga  ulike inngangsverdier og RISK-beløp.  </p>
+                    <p/>
+                    <p>Hvis de solgte aksjene er ervervet på forskjellige tidspunkt, anses de  aksjer som er først ervervet som først realisert (FIFU-prinsippet).  Aksjer ervervet før 1.1.1992 anses i denne sammenheng å være ervervet  1.1.1992.
+                        Fondsaksjer anses ervervet på det tidspunkt selskapet  fattet vedtak om fondsemisjonen.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Realisasjonar</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Vinst/tap kjem normalt fram som differansen mellom  realisasjonsvederlaget og inngangsverdien (kostnaden ved å skaffe  aksjen, eventuelt regulert med eit RISK-beløp m.m.). Begge beløpa  skal førast opp utan kostnader o.l. Ved
+                        sal mot delvis vederlag  (gavesal), er det ingen frådragsrett for gåveelementet ved  transaksjonen (differansen mellom omsetningsverdien og det lågare  vederlaget.  </p>
+                    <p/>
+                    <p>Dei samla utgiftene til meglar eller liknande ved skaffing og  realisasjon av aksjar, skal førast til frådrag som ein særskild  frådragspost i realisasjonsåret, jf. post 303 i skjemaet.  </p>
+                    <p>Det skal fyllast ut ein kolonne i oppgåva for kvar transaksjon. Dersom  det er meir tenleg, kan alle sal av aksjar i eitt selskap samlast i  ein kolonne. Føresetnaden er da at dette gir same skattemessig  resultat som om
+                        transaksjonane blei førte kvar for seg. Dersom ein  skal realisere aksjar i same selskapet, og desse aksjane er skaffa  ved ulike tidspunkt, må det til vanleg førast separate kolonnar pga.  ulike inngangsverdiar og RISK-beløp.  </p>
+                    <p>Er dei selde aksjane skaffa på ulike tidspunkt, blir dei aksjane som  først blei skaffa, rekna som først realiserte (FIFU-prinsippet).  Aksjar som er skaffa før 1.1.1992 blir i denne samanhengen sett på  som skaffa 1.1.1992.
+                        Fondsaksjar blir rekna som skaffa på det  tidspunktet selskapet gjorde vedtak om fondsemisjonen.</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_RealisasjonAvEnAksje-grp-4413" nodeset="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413">
+                    <xforms:group ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:group ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/Aksjeinformasjon-grp-4175">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/Aksjeinformasjon-grp-4175/EnhetNavnSpesifisertSelskap-datadef-7617">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>101 Selskapets navn</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>101 Namnet til selskapet</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/Aksjeinformasjon-grp-4175/EnhetOrganisasjonsnummerSpesifisertSelskap-datadef-7618">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>102 Selskapets organisasjonsnr.</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Selskapets organisasjonsnummer fremkommer på oppgaven fra  Verdipapirsentralen (VPS). For selskaper som ikke er tilknyttet VPS,  må organisasjonsnummer innhentes fra selskapet.</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Ugyldig organisasjonsnummer</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>102 Selskapets organisasjonsnr.</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Organisasjonsnummeret til selskapet går fram av oppgåva frå  Verdipapirsentralen (VPS). For selskap som ikkje er knytte til VPS,  må organisasjonsnummer innhentast frå selskapet.</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Ugyldig organisasjonsnummer</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:selectOne ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/Aksjeinformasjon-grp-4175/AksjerMvTypeSpesifisertSelskap-datadef-19400">
+                                <xforms:choices>
+                                    <xforms:item>
+                                        <xforms:value>A</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Aksje</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Aksje</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>F</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Fondsaksje</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Fondsaksje</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>AIV</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Andel i verdipapirfond</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Andel i verdipapirfond</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>G</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Grunnfondsbevis</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Grunnfondsbevis</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>Te</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Tegningsrett</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Tegningsrett</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>Ti</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Tildelingsbevis</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Tildelingsbevis</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                </xforms:choices>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>103 Hva slags type verdipapir</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Her oppgis hva slags type verdipapir som er realisert: aksje,  fondsaksje, tegningsrett, andel i verdipapirfond (aksje- og  obligasjonsfond), grunnfondsbevis mv.  </p>
+                                    <p>Tilhører aksjen en egen aksjeklasse, skal denne oppgis (ISIN-nummer).</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>103 Kva type verdipapir</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>skal ein gi opp kva type verdipapir som er realiserte: aksje,  fondsaksje, teikningsrett, partar i verdipapirfond (aksje- og  obligasjonsfond) og grunnfondsbevis m.m.  </p>
+                                    <p>Tilhøyrer aksjen ein eigen aksjeklasse, skal dette gis opp  (ISIN-nummer).</p>
+                                </xforms:help>
+                            </xforms:selectOne>
+                            <xforms:selectOne ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/Aksjeinformasjon-grp-4175/AksjeBorsnotertIkkeBorsnotertSpesifisertSelskap-datadef-19401">
+                                <xforms:choices>
+                                    <xforms:item>
+                                        <xforms:value>B</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Børsnotert aksje</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Børsnotert aksje</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>IB</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Ikke-børnsotert aksje</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Ikkje-børsnotert aksje</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                </xforms:choices>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>103 Hva slags type verdipapir</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Her oppgis om aksjene er børsnoterte eller ikke-børsnoterte på  realisasjonstidspunktet.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>103 Kva type verdipapir</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Her skal ein gi opplysningar om aksjane er børsnoterte eller ikkje på  realisasjonstidspunktet.</p>
+                                </xforms:help>
+                            </xforms:selectOne>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/Aksjeinformasjon-grp-4175/AksjerMvErvervsdatoSpesifisertSelskap-datadef-1181">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>104 Dato for erverv</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>104 Dato da aksjane m.m. blei skaffa</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:selectOne ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/Aksjeinformasjon-grp-4175/AksjerMvErvervsmateSpesifisertSelskap-datadef-1827">
+                                <xforms:choices>
+                                    <xforms:item>
+                                        <xforms:value>K</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Kjøp</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Kjøp</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>A</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Arv</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Arv</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>G</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Gave</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Gåve</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>FU</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Fusjon</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Fusjon</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>FI</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Fisjon</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Fisjon</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>ST</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Splitt</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Splitt</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>SS</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Spleis</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Spleis</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>FE</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Fondsemisjon</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Fondsemisjon</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>N</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Nytegning</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Nyteikning</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                </xforms:choices>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>104 Opplysninger om opprinnelig ervervsmåte</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Her skal det gis opplysninger om opprinnelig ervervsmåte: kjøp, arv,  gave, splitt/spleis/ fusjon/fisjon, nytegning eller fondsemisjon.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>104 Opplysningar om opphavleg tileigningsmåte</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Her skal ein gi opplysningar om opphavleg tileigningsmåte: kjøp, arv,  gåve, splitt/spleis/fusjon/fisjon, nytekning eller fondsemisjon.</p>
+                                </xforms:help>
+                            </xforms:selectOne>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/Aksjeinformasjon-grp-4175/AksjerMvRealisasjonDato-datadef-1821">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>105 Dato for realisasjon</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>105 Dato for realisasjon</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/Aksjeinformasjon-grp-4175/AksjerMvPalydendeSpesifisertSelskap-datadef-7620">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:alert brreg:lang="EN">
+                                    <p>Enter number with two fraction digits</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>106 Pålydende pr. aksje/andel</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feltet krever to desimaler</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>106 Pålydande pr. aksje/part</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Feltet krev to desimalar</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/Aksjeinformasjon-grp-4175/AksjerMvRealisasjonAntallSpesifisertSelskap-datadef-7621">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>107 Antall realiserte aksjer mv</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feltet krever tre desimaler</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>107 Talet på realiserte aksjar m.m.</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Feltet krev tre desimalar</p>
+                                </xforms:alert>
+                            </xforms:input>
+                        </xforms:group>
+                        <xforms:group ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvGevinstTap-grp-828">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvGevinstTap-grp-828/AksjerMvRealisasjonsvederlagSpesifisertSelskap-datadef-5827">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>201 Realisasjonsvederlag</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Her oppgis størrelsen på vederlaget ved realisasjonen. Det er aksjenes  samlede brutto vederlag som skal oppgis, megleromkostninger mv. skal  komme til fradrag i post 303.  </p>
+                                    <p>Som realisasjonsvederlag regnes salgssum, eventuelt tillagt andre  ytelser i forbindelse med overdragelsen</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>201 Realisasjonsvederlag</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Her gir ein opp kor stort vederlag ein har fått ved realisasjonen. Det  er det samla brutto vederlaget på aksjane som skal gjevast opp,  meklarkostnader m.m. skal førast til frådrag i post 303.  </p>
+                                    <p>Som realisasjonsvederlag reknar ein salssummen, eventuelt tillagt  andre ytingar i samband med overdraginga</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvGevinstTap-grp-828/AksjerMvInngangsverdiSpesifisertSelskap-datadef-1822">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>202 Inngangsverdi, beløp</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Generelt  </p>
+                                    <p>Her oppgis aksjenes inngangsverdi, normalt kjøpesummen eksklusiv  megleromkostninger mv. Som kjøpesum medregnes kontantvederlag såvel  som verdi av gjeldsovertagelse, naturalytelser, tjenester mv.  </p>
+                                    <p>For aksjer mv. ervervet ved arv, skal inngangsverdien settes til  verdien ved dødsfallet. Er ervervet arveavgiftspliktig, kan  inngangsverdien ikke settes høyere enn til den verdi som er lagt til  grunn for
+                                        arveavgiften.  </p>
+                                    <p>For aksjer mv. mottatt som gave, legges den antatte salgsverdi på  ervervstidspunktet til grunn som inngangsverdi. Er gaven  arveavgiftspliktig, kan inngangsverdien ikke settes høyere enn den  verdi som er lagt
+                                        til grunn for arveavgiften.  </p>
+                                    <p>For aksjer mv. som kunne vært solgt skattefritt pr 1.1.1992 er det  gitt anledning til å benytte oppregulerte inngangsverdier. Se  nedenfor under Oppregulerte inngangsverdier.  </p>
+                                    <p/>
+                                    <p>Oppregulerte inngangsverdier.  </p>
+                                    <p>Dersom fondsandelen kunne vært avhendet skattefritt pr. 1.1.1992, kan  inngangsverdien settes til et gjennomsnitt av fastsatt netto  andelsverdi hver enkelt handelsdag beregnet ved børsslutt i  tidsrommet fra og
+                                        med 1.11.1991 -31.12.1991. Disse verdiene er  fastsatt av vedkommende forvaltningsselskap.  </p>
+                                    <p>Børsnoterte aksjer  </p>
+                                    <p>Realiseres aksjer som pr. 1.1 1992 kunne ha vært avhendet skattefritt,  dvs var eid i mer enn 3 år, kan inngangsverdien settes til et  gjennomsnitt av kursnotert verdi i tidsrommet fra og med 1.11.1991 -
+                                        31.12.1991. Disse verdiene er fastsatt av Oslo Børs og kan fås ved  henvendelse til selskapet. Alternativ inngangsverdi for utenlandsk  notert aksje settes til sist kursnoterte verdi frem til og med
+                                        31.12.1991.  </p>
+                                    <p>Ikke-børsnoterte aksjer  </p>
+                                    <p>For ikke-børsnoterte aksjer er det gitt særlige regler. Dersom slike  aksjer kunne vært avhendet skattefritt pr 1.1.1992, dvs. var eid i  mer enn 3 år, er det adgang til å velge alternative inngangsverdier i
+                                        steden for aksjens anskaffelsesverdi.  </p>
+                                    <p>Ved gevinstberegningen kan følgende inngangsverdier legges til grunn  såfremt verdiene tidligere er godkjent av likningsmyndighetene:  </p>
+                                    <p>- aksjens forholdsmessige andel av selskapets skattemessige  formuesverdi.  </p>
+                                    <p>- aksjens forholdsmessige andel av selskapets regnskapsmessige  egenkapital.  </p>
+                                    <p>- godkjent takst over aksjenes verdi.  </p>
+                                    <p>Disse oppregulerte verdiene er verdi av selskapene pr. 1.1.1992. I  skatteloven § 19-2, annet ledd bokstav a er det gitt bestemmelser som  begrenser adgangen til å kreve fradrag for tap når tapet oppstår som
+                                        følge av at inngangsverdien enten er oppregulert til godkjent takst  eller til «forholdsmessig andel av selskapets regnskapsmessige  egenkapital. For skattytere som har benyttet disse oppregulerte  verdiene, må
+                                        også postene 209 til 215 fylles ut.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>202 Inngangsverdi, beløp</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Generelt  </p>
+                                    <p>Her gir ein opp inngangsverdien for aksjen, normalt kjøpesummen utan  meglerkostnader m.m. Som kjøpesum reknar ein så vel kontantvederlag  som verdien av gjeldsovertaking, naturalytingar, tenester m.m.  </p>
+                                    <p>Er aksjane arva, skal inngangsverdien setjast til verdien ved  dødsfallet. Utløyste overtakinga plikt til å svare arveavgift, kan  inngangsverdien ikkje setjast høgare enn den verdien som er lagt til  grunn for
+                                        arveavgifta.  </p>
+                                    <p>For aksjar m.m. som er mottekne som gåve, skal inngangsverdien setjast  til pårekna verdi ved tidspunktet for overtakinga. Utløyste  overtakinga plikt til å svare arveavgift, kan inngangsverdien ikkje  setjast
+                                        høgare enn verdien som er grunnlaget for arveavgifta.  </p>
+                                    <p>For aksjar m.m. som kunne ha vore selde skattefritt pr. 1.1.1992, er  det gitt høve til å nytte oppregulerte inngangsverdiar. Sjå nedanfor  under Oppregulerte inngangsverdiar.  </p>
+                                    <p>Oppregulerte inngangsverdiar  </p>
+                                    <p>Partar i verdipapirfond (aksje- og obligasjons-fond)  </p>
+                                    <p>Dersom fondsparten kunne ha vore avhenda skattefritt pr. 1.1.1992, set  ein inngangsverdien til eit gjennomsnitt av fastsette nettoverdiar på  parten kvar handelsdag rekna ved børsslutt i tidsrommet frå og med
+                                        1.11.1991 - 31.12.1991. Desse verdiane er fastsette av vedkommande  forvaltningsselskap.  </p>
+                                    <p>Børsnoterte aksjar  </p>
+                                    <p>Realiserer ein aksjar som pr. 1.1.1992 kunne ha vore avhenda  skattefritt, dvs. var ått i meir enn 3 år, kan inngangsverdien  setjast til eit gjennomsnitt av kursnotert verdi i tidsrommet frå og  med 1.11.1991 -
+                                        31.12.1991. Desse verdiane er fastsette av Oslo Børs  og ein kan få dei hjå selskapet. Alternativ inngangsverdi for  utanlandsk notert aksje er siste kursnoterte verdi fram til og med  31.12.1991.  </p>
+                                    <p>Ikkje-børsnoterte aksjar  </p>
+                                    <p>For ikkje-børsnoterte aksjar er det gitt særlege reglar. Dersom slike  aksjar kunne ha blitt avhenda skattefritt pr. 1.1.1992, dvs var ått i  meir enn 3 år, er det høve til å nytte alternative inngangsverdiar i
+                                        staden for kostprisen på aksjen.  </p>
+                                    <p>Ved utrekninga av vinsten kan ein leggje følgjande inngangsverdiar til  grunn dersom desse tidlegare er godkjend av likningsstyresmaktene:  </p>
+                                    <p>- den delen av den skattemessige formuesverdien som fell på aksjen.  </p>
+                                    <p>- den delen av den rekneskapsmessige eigenkapitalen som fell på  aksjen.  </p>
+                                    <p>- godkjend takst over verdien til aksjane.  </p>
+                                    <p>Desse oppregulerte verdiane er verdien av selskapa pr. 1.1.1992. I §  19-2 annet ledd bokstav a i skattelova finst det føresegner som  avgrensar høvet til å krevje frådrag for tap der tapet skriv seg frå
+                                        oppregulering etter godkjent takst eller til del av rekneskapsmessig  eigenkapital i selskapet. For skattytare som har nytta desse  oppregulerte verdiane, må også postane 209 til 205 fyllast ut.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:selectOne ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvGevinstTap-grp-828/AksjerMvInngangsverdiTypeSpesifisertSelskap-datadef-1823">
+                                <xforms:choices>
+                                    <xforms:item>
+                                        <xforms:value>A</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Historisk kostpris</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Historisk kostpris</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>B</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Oppregulert børsnotert aksje</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Oppregulert børsnotert aksje</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>C</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Utenlandsk oppregulert børsnotert aksje</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Utenlandsk oppregulert børsnotert aksje</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>D</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Skattemessig formuesverdi pr. 01.01.92</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Skattemessig formuesverdi pr. 01.01.92</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>E</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Regnskapsmessig egenkapital</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Rekneskapsmessig eigenkapital</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>F</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Takst</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Takst</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>G</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Skattemessig formuesverdi for utenlandske aksjer pr. 01.01.92</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Skattemessig formuesverdi for utanlandske aksjar pr. 01.01.92</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>H</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Utenlandsk selskaps regnskapsmessige egenkapital</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Utanlandsk selskaps rekneskapsmessige eigenkapital</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>I</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Takst av utenlandsk selskap</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Takst av utanlandsk selskap</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                </xforms:choices>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>202 Inngangsverdi, type</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Her skal det angis hvilken inngangsverdi som benyttes.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>202 Inngangsverdi, type</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Her skal ein gi opp kva type inngangsverdi ein nyttar.</p>
+                                </xforms:help>
+                            </xforms:selectOne>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvGevinstTap-grp-828/AksjerMvInngangsverdiJusteringsfaktorSpesifisertSelskap-datadef-1828">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>202 Inngangsverdi, justeringsfaktor</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>I tilfeller hvor det er ervervet aksjer ved fondsemisjon eller hvor  det i aksjonærs eiertid av andre årsaker  (splitt/spleis/fusjon/fisjon) har skjedd en endring i forholdet  mellom antall aksjer/andeler og de
+                                        underliggende verdier i selskapet,  må inngangsverdien omfordeles. Se nærmere om dette nedenfor under  Omfordeling av inngangsverdier. Er det fastsatt justeringsfaktor,  skal denne oppgis. Er det fastsatt flere
+                                        justeringsfaktorer, kan  disse spesifiseres i kronologisk rekkefølge i feltet for  tilleggsopplysninger.  </p>
+                                    <p>Omfordeling av inngangsverdier  </p>
+                                    <p>Fondsaksjer  </p>
+                                    <p>Dette er aksjer som aksjonæren mottar vederlagsfritt i forbindelse med  en fondsemisjon i selskapet. Inngangsverdien settes til en  forholdsmessig del av inngangsverdien på de aksjer som fondsaksjene  knytter
+                                        seg til (stamaksjer). Inngangsverdien på stamaksjene  reduseres tilsvarende. Omfordeling av inngangsverdier skjer på  grunnlag av aksjenes pålydende.  </p>
+                                    <p>Eksempel:  </p>
+                                    <p>Fire aksjer med pålydende kr 1 000 har en inngangsverdi på kr 2 500  pr. stk. Ved fondsemisjonen er det for 4 stamaksjer gitt rett til en  fondsaksje med pålydende kr 1 000.  </p>
+                                    <p>Inngangsverdi fondsaksje: 10 000:5 = kr 2 000  </p>
+                                    <p>Inngangsverdi stamaksjer: (10 000-2 000) : 4 = kr 2 000  </p>
+                                    <p>Aksjer ervervet ved splitt/spleis/fusjon/fisjon I tilfeller hvor det  som følge av splitt/spleis/ fusjon/fisjon har skjedd en endring i  forholdet mellom antall aksjer/andeler og de underliggende verdier i
+                                        selskapet, må inngangsverdien omfordeles. Slik omfordeling kan  normalt foretas etter de samme prinsipper som ved omfordeling av  RISK-beløp. Se nærmere om dette nedenfor under Omfordeling av  RISK-beløp.</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feltet krever fem desimaler</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>202 Inngangsverdi, justeringsfaktor</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>I dei tilfella der aksjane er skaffa ved fondsemisjon eller der det i  aksjonæren si eigartid av andre årsaker (splitt/spleis/fusjon/fisjon)  har skjedd ei endring i forholdet mellom talet på aksjar/partar og
+                                        dei underliggjande verdiane i selskapet, må inngangsverdien  omfordelast. Sjå nærmare om dette nedanfor under Omfordeling av  inngangsverdiar. Er det fastsett justeringsfaktor, skal denne gis  opp. Er det
+                                        fastsett fleire justeringsfaktorar, kan desse  spesifiserast i kronologisk rekkjefølgje i feltet for  tilleggsopplysningar.  </p>
+                                    <p>Omfordeling av inngangsverdiar  </p>
+                                    <p>Fondsaksjar  </p>
+                                    <p>Dette er aksjar som aksjonæren har motteke vederlagsfritt i samband  med ein fondsemisjon i selskapet. Inngangsverdien blir da sett til  ein høveleg del av inngangsverdien på dei aksjane som fondsaksjane  knyter
+                                        seg til (stamaksjar). Inngangsverdien på stamaksjane blir da  redusert tilsvarande. Omfordeling av inngangsverdiar skjer på  grunnlag av pålydande på aksjane.  </p>
+                                    <p>Eksempel:  </p>
+                                    <p>Fire aksjar med pålydande kr 1000 har ein inngangsverdi på kr 2500 pr.  stk. Ved fondsemisjonen har ein for 4 stamaksjar gitt rett til ein  fondsaksje med pålydande kr 1000.  </p>
+                                    <p>Inngangsverdi av fondsaksje: 10000:5 = kr 2000  </p>
+                                    <p>Inngangsverdi av stamaksjar: (10000-2000) : 4 = kr 2000  </p>
+                                    <p>Aksjar skaffa ved splitt/spleis/fusjon/fisjon  </p>
+                                    <p>I tilfelle der det som følgje av splitt/spleis/fusjon/ fisjon har vore  ei endring i forholdet mellom talet på aksjar/partar og dei  underliggjande verdiane i selskapet, må inngangsverdien omfordelast.  Slik
+                                        omfordeling kan ein normalt gjere etter dei same prinsippa som  for omfordeling av RISK-beløp. Sjå nærmare om dette nedanfor under  Omfordeling av RISK-beløp.</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Feltet krev fem desimalar</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvGevinstTap-grp-828/RISKBelopEiertidOppsummertPositivSpesifisertSelskap-datadef-7623">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:alert brreg:lang="EN">
+                                    <p>Enter number with two fraction digits</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>203 Sum RISK-beløp i eiertiden</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>En aksjes inngangsverdi skal opp- eller nedreguleres med RISK-beløp  (Regulering av Inngangsverdi med Skattlagt Kapital) i det tidsrommet  aksjonæren har eiet aksjen. RISK-systemet ble innført for å motvirke
+                                        dobbeltbeskatning av selskap og aksjonær.  </p>
+                                    <p>Fra og med inntektsåret 2003 skal RISK-regulering av inngangsverdien  på grunnfondsbevis beregnes ut i fra endring i sparebankens  utjevningsfond, endring i summen av overkursfond, utjevningsfond, og
+                                        grunnfondsbeviskapital ved fondsemisjon, samt reduksjon i  grunnfondsbeviskapitalen ved utbetaling av ikke innbetalt  grunnfondsbeviskapital. For nærmere informasjon, se RF-1239 Beregning  av RISK pr. 1.1.2005.  </p>
+                                    <p>Selskapet skal hvert år gi aksjonærene opplysning om det årlige  RISK-beløp. Det ble fastsatt RISK-beløp første gang med virkning pr.  1. januar 1993.  </p>
+                                    <p>RISK-beløpet fremkommer på oppgaven fra Verdipapirsentralen, eventuelt  ved melding fra selskapet. I denne posten skal det summeres  RISK-beløp som knytter seg til de solgte aksjer. RISK-beløp for hele
+                                        eierperioden må tas med. RISK-beløpet kan bli positivt eller  negativt.</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feltet krever to desimaler</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>203 Sum RISK-beløp i eiertiden</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Inngangsverdien til ein aksje skal ein regulere opp eller ned med eit  såkalla RISK-beløp (Regulering av Inngangsverdi med Skattlagt  Kapital) i det tidsrommet aksjonæren har ått aksjen. RISK-systemet  blei
+                                        innført for å motverke dobbeltskattlegging av selskap og  aksjonær.  </p>
+                                    <p>Frå og med inntektsåret 2003 skal RISK-regulering av inngangsverdien  på grunnfondsbevis bereknes ut i frå endring i sparebankens  utjamningsfond, endring i summen av overkursfond, utjamningsfond, og
+                                        grunnfondsbeviskapital ved fondsemisjon, samt reduksjon i  grunnfondsbeviskapitalen ved utbetaling av ikkje innbetalt  grunnfondsbeviskapital. For nærmare informasjon, sjå RF-1239  Fastsetjing av RISK pr.
+                                        1.1.2005.  </p>
+                                    <p>Selskapet skal kvart år gi aksjonærane opplysning om det årlege  RISK-beløpet. Det blei fastsett RISK-beløp første gong med verknad  pr. 1.1.1993.  </p>
+                                    <p>RISK-beløpet står på oppgåva frå Verdipapirsentralen, eventuelt i  melding frå selskapet.  </p>
+                                    <p>I denne posten skal ein summere RISK-beløp som knyter seg til dei  aksjane som er selde. RISK-beløp for heile eigartida må takast med.  RISK-beløpet kan bli positivt eller negativt.</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Feltet krev to desimalar</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvGevinstTap-grp-828/RISKBelopEiertidOppsummertNegativSpesifisertSelskap-datadef-11279">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:alert brreg:lang="EN">
+                                    <p>Enter number with two fraction digits</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>203 Sum RISK-beløp i eiertiden</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>En aksjes inngangsverdi skal opp- eller nedreguleres med RISK-beløp  (Regulering av Inngangsverdi med Skattlagt Kapital) i det tidsrommet  aksjonæren har eiet aksjen. RISK-systemet ble innført for å motvirke
+                                        dobbeltbeskatning av selskap og aksjonær.  </p>
+                                    <p>Fra og med inntektsåret 2003 skal RISK-regulering av inngangsverdien  på grunnfondsbevis beregnes ut i fra endring i sparebankens  utjevningsfond, endring i summen av overkursfond, utjevningsfond, og
+                                        grunnfondsbeviskapital ved fondsemisjon, samt reduksjon i  grunnfondsbeviskapitalen ved utbetaling av ikke innbetalt  grunnfondsbeviskapital. For nærmere informasjon, se RF-1239 Beregning  av RISK pr. 1.1.2005.  </p>
+                                    <p>Selskapet skal hvert år gi aksjonærene opplysning om det årlige  RISK-beløp. Det ble fastsatt RISK-beløp første gang med virkning pr.  1. januar 1993.  </p>
+                                    <p>RISK-beløpet fremkommer på oppgaven fra Verdipapirsentralen, eventuelt  ved melding fra selskapet.  </p>
+                                    <p>I denne posten skal det summeres RISK-beløp som knytter seg til de  solgte aksjer. RISK-beløp for hele eierperioden må tas med.  RISK-beløpet kan bli positivt eller negativt.</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feltet krever to desimaler</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>203 Sum RISK-beløp i eigertida</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Inngangsverdien til ein aksje skal ein regulere opp eller ned med eit  såkalla RISK-beløp (Regulering av Inngangsverdi med Skattlagt  Kapital) i det tidsrommet aksjonæren har ått aksjen. RISK-systemet  blei
+                                        innført for å motverke dobbeltskattlegging av selskap og  aksjonær.  </p>
+                                    <p>Frå og med inntektsåret 2003 skal RISK-regulering av inngangsverdien  på grunnfondsbevis bereknes ut i frå endring i sparebankens  utjamningsfond, endring i summen av overkursfond, utjamningsfond, og
+                                        grunnfondsbeviskapital ved fondsemisjon, samt reduksjon i  grunnfondsbeviskapitalen ved utbetaling av ikkje innbetalt  grunnfondsbeviskapital. For nærmare informasjon, sjå RF-1239  Fastsetjing av RISK pr.
+                                        1.1.2005.  </p>
+                                    <p>Selskapet skal kvart år gi aksjonærane opplysning om det årlege  RISK-beløpet. Det blei fastsett RISK-beløp første gong med verknad  pr. 1.1.1993.  </p>
+                                    <p>RISK-beløpet står på oppgåva frå Verdipapirsentralen, eventuelt i  melding frå selskapet.  </p>
+                                    <p>I denne posten skal ein summere RISK-beløp som knyter seg til dei  aksjane som er selde. RISK-beløp for heile eigartida må takast med.  RISK-beløpet kan bli positivt eller negativt.</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Feltet krev to desimalar</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvGevinstTap-grp-828/RealisasjonsRISKJusteringsfaktorSpesifisertSelskap-datadef-1829">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>203 Sum RISK-beløp i eiertiden, justeringsfaktor</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Her skal justeringsfaktor oppgis ved fondsemisjon eller  fusjon/fisjon/splitt/spleis.  </p>
+                                    <p>Omfordeling av RISK-beløp  </p>
+                                    <p>I visse tilfeller skal det foretas en omfordeling av tidligere  fastsatt RISK-beløp. Dette gjelder dersom det i aksjonærens eiertid  har vært en endring i antall aksjer eller i aksjekapitalen i  selskapet som
+                                        følge av:  </p>
+                                    <p>a) fondsemisjon med økning av antall aksjer i selskapet  </p>
+                                    <p>b) antall aksjer i selskapet er økt ved at den enkelte aksje er  splittet i flere aksjer (splitt)  </p>
+                                    <p>c) antall aksjer i selskapet er redusert ved at et antall aksjer  gjøres om til en ny aksje (spleis)  </p>
+                                    <p>d) skattefri fusjon  </p>
+                                    <p>e) skattefri fisjon med innløsning av enkeltaksjer  </p>
+                                    <p>Dersom vilkårene for omfordeling foreligger, skal De ha mottatt  melding om fastsettelse av justeringsfaktor fra VPS eller selskapet.  Omfordeling skjer ved at tidligere fastsatt RISK-beløp multipliseres  med
+                                        justeringsfaktoren. Skattyter må foreta omfordeling av tidligere  registrerte RISK-beløp og inngangsverdier, før beløpene føres inn i  skjemaet RF-1061.  </p>
+                                    <p>Eksempel:  </p>
+                                    <p>A kjøper en aksje i selskap B i 2001 og ytterligere en aksje i samme  selskap i 2002. RISK pr. aksje for inntektsåret 2001 (RISK pr.  1.1.2002) er 20. RISK pr. aksje for inntektsåret 2002 (RISK pr 1.1.  2003) er
+                                        5. I 2003 gjennomføres en fondsemisjon hvor hver stamaksje  (opprinnelige aksje) gir rett til en ny aksje. Justeringsfaktor  fastsettes slik: antall aksjer før fondsemisjonen var 2 og etter  fondsemisjonen 4,
+                                        justeringsfaktoren blir 0,5 (2 dividert på 4).  </p>
+                                    <p>For aksjen ervervet i 2001 blir omfordelt RISK-beløp (RISK for 2001 og  2002) 20+5 x 0,5 = 12,50 For aksjen ervervet i 2002 blir omfordelt  RISK-beløp (RISK bare for 2002) 5 x 0,5 = 2,50  </p>
+                                    <p>A har nå til sammen 4 aksjer. 2 av disse har et omfordelt RISK-beløp  på 12,50 pr aksje og de to siste aksjene har et omfordelt RISK-beløp  på 2,50 pr aksje.  </p>
+                                    <p>Det må påses at sum RISK-beløp i eiertiden er det samme før og etter  omfordeling av RISK-beløp. Ved et samlet salg av alle aksjer i et  selskap er det ikke nødvendig å foreta noen omfordeling av tidligere
+                                        fastsatte RISK-beløp, fordi det er sum RISK-beløp for alle aksjene i  eiertiden som skal føres opp i denne posten.</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feltet krever fem desimaler</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>203 Sum RISK-beløp i eigertida, justeringsfaktor</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Her skal ein gi opp justeringsfaktor ved fondsemisjon eller  fusjon/fisjon/splitt/spleis.  </p>
+                                    <p>Omfordeling av RISK-beløp  </p>
+                                    <p>I visse tilfelle skal det gjerast ei omfordeling av tidlegare fastsett  RISK-beløp. Dette gjeld dersom det i eigartida til aksjonæren har  vore ein endring i talet på aksjar eller i aksjekapitalen i selskapet
+                                        som følgje av:  </p>
+                                    <p>a) fondsemisjon med auke av talet på aksjar i selskapet  </p>
+                                    <p>b) talet på aksjar i selskapet er auka ved at kvar aksje er splitta i  fleire aksjar (splitt)  </p>
+                                    <p>c) talet på aksjar i selskapet er minka ved at eit visst tal aksjar er  gjorde om til ein ny aksje (spleis)  </p>
+                                    <p>d) skattefri fusjon  </p>
+                                    <p>e) skattefri fisjon der enkeltaksjar vert innløyst  </p>
+                                    <p>Dersom vilkåra for omfordeling er til stades, skal De ha fått melding  frå VPS eller selskapet om fastsetjing av ein justeringsfaktor.  </p>
+                                    <p>Omfordeling skjer ved at det tidlegare RISK-beløpet blir multiplisert  med justeringsfaktoren. Skattytar må omfordele tidlegare registrerte  RISK-beløp og inngangsverdiar før beløpa førast i skjemaet  RF-1061.  </p>
+                                    <p>Eksempel:  </p>
+                                    <p>A kjøper 1 aksje i selskap B i 2001 og enda ein aksje i det same  selskapet i 2002. RISK for kvar aksje pr. 1.1.2002 er 20. RISK for  kvar aksje pr. 1.1.2003 er 5. I 2003 blir det gjennomført ein  fondsemisjon
+                                        der kvar stamaksje (opphavleg aksje) gir rett til ein ny  aksje. Justeringsfaktor fastsetjast slik:  </p>
+                                    <p>antall aksjar før fondsemisjonen var 2 og etter fondsemisjonen 4,  justeringsfaktor blir 0,5 (2 dividert på 4).  </p>
+                                    <p>For aksjen skaffa i 2001 blir omfordelt RISK-beløp (RISK for 2001 og  2002) (20+5) x 0,5 = 12,50.  </p>
+                                    <p>For aksjen skaffa i 2001 blir omfordelt RISK-beløp (RISK bare for  2001) 5 x 0,5 = 2,50.  </p>
+                                    <p>A har no til saman 4 aksjar. 2 av desse aksjane har eit omfordelt  RISK-beløp på 12,50 pr aksje og dei to siste aksjane har et omfordelt  RISK-beløp på 2,50 pr aksje.  </p>
+                                    <p>Ein må passe på at summen av RISK-beløpa i eigartida er den same både  før og etter omfordeling av RISK-beløp. Ved samla sal av alle aksjar  i eit selskap er det ikkje nødvendig å gjere noka omfordeling av
+                                        tidlegare fastsette RISK-beløp, fordi det er summen av RISK-beløpa  for alle aksjane i eigartida som skal førast opp i denne posten.</p>
+                                </xforms:help>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Feltet krev fem desimalar</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvGevinstTap-grp-828/AksjerMvInngangsverdiKorrigeringFradragSpesifisertSelskap-datadef-1830">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>204 Korrigering av inngangsverdi med utdelt utbytte</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Ved fastsettelsen av RISK-beløp har utbyttet kommet til fradrag,  eventuelt vil det komme til fradrag ved neste inntektsårs  RISK-beregning. Formålet med de korrigeringer som er beskrevet  nedenfor, er å sikre
+                                        at utdelt utbytte i alle tilfeller kommer til  fradrag i inngangsverdien hos den som faktisk har mottatt utbyttet.  Posten skal ikke anvendes i tilfeller der skattyter erverver aksjer  etter 1. januar og
+                                        realiserer de samme aksjene før tidspunktet for  utbytteutdeling (dvs. at aksjonæren verken har fått nedregulert  aksjen ved RISK-beregningen pr. 1. 1 med avsatt utbytte, eller har  mottatt utbytte).  </p>
+                                    <p>Kan kreve oppregulering av inngangsverdien: Skattyter som realiserer  sine aksjer kan kreve at inngangsverdien korrigeres i den utstrekning  utbytte som er utdelt til en annen aksjonær, har kommet til fradrag i
+                                        skattyters RISK-regulering pr 1. januar. Korrigeringen skjer ved at  utbyttet som er utdelt til andre legges til inngangsverdien på de  realiserte aksjene ved beregning av gevinst/tap (slik at gevinsten
+                                        reduseres/tapet økes tilsvarende).  </p>
+                                    <p>Reglene om hvilket utbytte som skal fradras ved RISK-beregningen, har  endret seg flere ganger siden RISK-systemet ble innført. Det må  derfor skilles mellom de enkelte ervervsår ved anvendelsen av  kan-regelen,
+                                        jf. nedenfor. Korrigering kan foretas når:  </p>
+                                    <p>- de realiserte aksjene er ervervet i 1992 eller 1993, etter at  utbytte ble utdelt vedkommende år.  </p>
+                                    <p>- de realiserte aksjene er ervervet i 1994 eller senere, etter at  utbyttet er utdelt, når det utdelte utbyttet i ervervsåret er høyere  enn det som ble avsatt i årsregnskapet for året før.  </p>
+                                    <p>- aksjene realiseres i 2005 før det avsatte utbyttet i årsregnskapet  for 2004 er utdelt.  </p>
+                                    <p>Skal redusere inngangsverdien:  </p>
+                                    <p>Har skattyter som realiserer aksjer mottatt utbytte som ikke har  redusert hans RISK-regulering pr. 1. januar (f.eks. ved at aksjene er  ervervet etter 1. januar), skal dette utbyttet redusere  inngangsverdien
+                                        på de realiserte aksjene (slik at gevinsten  økes/tapet reduseres tilsvarende). Inngangsverdien skal reduseres  når:  </p>
+                                    <p>- de realiserte aksjene er ervervet i 1994 eller senere, før tidspunkt  for utdeling av utbytte avsatt i regnskapet for forrige år.  </p>
+                                    <p>- aksjene selges etter utbytteutdelingen i 2005 når det utdelte  utbyttet overstiger utbyttet som ble avsatt i årsregnskapet for 2004.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>204 Korrigering av inngangsverdi med utdelt utbytte</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Ved fastsetjing av RISK-beløp har utbyttet kome til frådrag, eventuelt  vil det kome til frådrag ved RISK-fastsettinga for neste inntektsår.  Formålet med de korrigeringar som er beskrivne nedanfor, er å sikra
+                                        at utdelt utbytte i alle tilfelle kjem til frådrag i inngangsverdien  hos skattytar som faktisk har motteke utbytte. Ein nyttar ikkje  reglane der aksjane vert tileigna etter 1.1 i inntektsåret og  realisert
+                                        før tidspunktet for utbytteutdeling (der aksjonæren verken  har fått nedregulert aksjen ved RISK-reguleringa pr. 1.1 med avsett  utbytte, eller har motteke utbytte).  </p>
+                                    <p>Kan krevje oppregulering av inngangsverdien: Skattytar som realiserar  aksjane sine kan krevje at inngangsverdien blir korrigert så langt  utbytte som er utdelt til annan aksjonær, har kome til frådrag i
+                                        skattytar si RISK-regulering pr. 1. januar. Korrigeringa skjer ved at  utbytte som er utdelt til andre leggjast til inngangsverdien på dei  realiserte aksjane ved utrekning av vinst/tap (ved at vinsten blir
+                                        redusert/tapet auka tilsvarande).  </p>
+                                    <p>Reglane om hvilket utbytte som skal kome til frådrag ved  RISK-fastsetjinga, har vorte endra fleire gonger sidan RISK-systemet  vart innført. Ein må derfor skilja mellom dei enkelte ervervsår når  kan-regelen
+                                        nyttast, sjå nedanfor. Korrigering kan krevjast når:  </p>
+                                    <p>- dei realiserte aksjane er tileigne i 1992 eller 1993, etter at  utbytte ble utdelt vedkomande år.  </p>
+                                    <p>- dei realiserte aksjane er tileigna i 1994 eller seinare, etter at  utbytte er utdelt, når det utdelte utbyttet i tileigningsåret er  høgare enn utbytte avsett i årsrekneskapen for året før.  </p>
+                                    <p>- aksjane blir realiserte i 2005 før utbytte avsett i årsrekneskapen  for 2004 er utdelt.  </p>
+                                    <p>Skal redusere inngangsverdien:  </p>
+                                    <p>Har skattytar som realiserar aksjar motteke utbytte som ikkje har  redusert RISK-reguleringa hans pr. 1. januar (t.d. ved at aksjane er  tileigna etter 1. januar), skal utbyttet redusere inngangsverdien på  dei
+                                        realiserte aksjane slik at vinsten blir auka/tapet redusert  tilsvarande.  </p>
+                                    <p>Inngangsvedien skal reduserast når:  </p>
+                                    <p>- dei realiserte aksjane er tileigne i 1994 eller seinare, før den tid  utbytte avsett i rekneskapen for sist år blir utdelt.  </p>
+                                    <p>- aksjane blir solgt i 2005 etter utbytteutdelinga når det utdelte  utbyttet overstig utbytte avsett i årsrekneskapen for 2004.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvGevinstTap-grp-828/AksjerMvInngangsverdiKorrigeringIkkeFradragSpesifisertSelsk-datadef-11280">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>204 Korrigering av inngangsverdi med utdelt utbytte</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Ved fastsettelsen av RISK-beløp har utbyttet kommet til fradrag,  eventuelt vil det komme til fradrag ved neste inntektsårs  RISK-beregning. Formålet med de korrigeringer som er beskrevet  nedenfor, er å sikre
+                                        at utdelt utbytte i alle tilfeller kommer til  fradrag i inngangsverdien hos den som faktisk har mottatt utbyttet.  Posten skal ikke anvendes i tilfeller der skattyter erverver aksjer  etter 1. januar og
+                                        realiserer de samme aksjene før tidspunktet for  utbytteutdeling (dvs. at aksjonæren verken har fått nedregulert  aksjen ved RISK-beregningen pr. 1. 1 med avsatt utbytte, eller har  mottatt utbytte).  </p>
+                                    <p>Kan kreve oppregulering av inngangsverdien: Skattyter som realiserer  sine aksjer kan kreve at inngangsverdien korrigeres i den utstrekning  utbytte som er utdelt til en annen aksjonær, har kommet til fradrag i
+                                        skattyters RISK-regulering pr 1. januar. Korrigeringen skjer ved at  utbyttet som er utdelt til andre legges til inngangsverdien på de  realiserte aksjene ved beregning av gevinst/tap (slik at gevinsten
+                                        reduseres/tapet økes tilsvarende).  </p>
+                                    <p>Reglene om hvilket utbytte som skal fradras ved RISK-beregningen, har  endret seg flere ganger siden RISK-systemet ble innført. Det må  derfor skilles mellom de enkelte ervervsår ved anvendelsen av  kan-regelen,
+                                        jf. nedenfor. Korrigering kan foretas når:  </p>
+                                    <p>- de realiserte aksjene er ervervet i 1992 eller 1993, etter at  utbytte ble utdelt vedkommende år.  </p>
+                                    <p>- de realiserte aksjene er ervervet i 1994 eller senere, etter at  utbyttet er utdelt, når det utdelte utbyttet i ervervsåret er høyere  enn det som ble avsatt i årsregnskapet for året før.  </p>
+                                    <p>- aksjene realiseres i 2005 før det avsatte utbyttet i årsregnskapet  for 2004 er utdelt.  </p>
+                                    <p>Skal redusere inngangsverdien:  </p>
+                                    <p>Har skattyter som realiserer aksjer mottatt utbytte som ikke har  redusert hans RISK-regulering pr. 1. januar (f.eks. ved at aksjene er  ervervet etter 1. januar), skal dette utbyttet redusere  inngangsverdien
+                                        på de realiserte aksjene (slik at gevinsten  økes/tapet reduseres tilsvarende). Inngangsverdien skal reduseres  når:  </p>
+                                    <p>- de realiserte aksjene er ervervet i 1994 eller senere, før tidspunkt  for utdeling av utbytte avsatt i regnskapet for forrige år.  </p>
+                                    <p>- aksjene selges etter utbytteutdelingen i 2005 når det utdelte  utbyttet overstiger utbyttet som ble avsatt i årsregnskapet for 2004.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Utbytte som ikke er kommet til fradrag i skattyters RISK-regulering,  men som er mottatt av skattyter, skal føres her</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>204 Korrigering av inngangsverdi med utdelt utbytte</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Ved fastsetjing av RISK-beløp har utbyttet kome til frådrag, eventuelt  vil det kome til frådrag ved RISK-fastsettinga for neste inntektsår.  Formålet med de korrigeringar som er beskrivne nedanfor, er å sikra
+                                        at utdelt utbytte i alle tilfelle kjem til frådrag i inngangsverdien  hos skattytar som faktisk har motteke utbytte. Ein nyttar ikkje  reglane der aksjane vert tileigna etter 1.1 i inntektsåret og  realisert
+                                        før tidspunktet for utbytteutdeling (der aksjonæren verken  har fått nedregulert aksjen ved RISK-reguleringa pr. 1.1 med avsett  utbytte, eller har motteke utbytte).  </p>
+                                    <p>Kan krevje oppregulering av inngangsverdien: Skattytar som realiserar  aksjane sine kan krevje at inngangsverdien blir korrigert så langt  utbytte som er utdelt til annan aksjonær, har kome til frådrag i
+                                        skattytar si RISK-regulering pr. 1. januar. Korrigeringa skjer ved at  utbytte som er utdelt til andre leggjast til inngangsverdien på dei  realiserte aksjane ved utrekning av vinst/tap (ved at vinsten blir
+                                        redusert/tapet auka tilsvarande).  </p>
+                                    <p>Reglane om hvilket utbytte som skal kome til frådrag ved  RISK-fastsetjinga, har vorte endra fleire gonger sidan RISK-systemet  vart innført. Ein må derfor skilja mellom dei enkelte ervervsår når  kan-regelen
+                                        nyttast, sjå nedanfor. Korrigering kan krevjast når:  </p>
+                                    <p>- dei realiserte aksjane er tileigne i 1992 eller 1993, etter at  utbytte ble utdelt vedkomande år.  </p>
+                                    <p>- dei realiserte aksjane er tileigna i 1994 eller seinare, etter at  utbytte er utdelt, når det utdelte utbyttet i tileigningsåret er  høgare enn utbytte avsett i årsrekneskapen for året før.  </p>
+                                    <p>- aksjane blir realiserte i 2005 før utbytte avsett i årsrekneskapen  for 2004 er utdelt.  </p>
+                                    <p>Skal redusere inngangsverdien:  </p>
+                                    <p>Har skattytar som realiserar aksjar motteke utbytte som ikkje har  redusert RISK-reguleringa hans pr. 1. januar (t.d. ved at aksjane er  tileigna etter 1. januar), skal utbyttet redusere inngangsverdien på  dei
+                                        realiserte aksjane slik at vinsten blir auka/tapet redusert  tilsvarande.  </p>
+                                    <p>Inngangsvedien skal reduserast når:  </p>
+                                    <p>- dei realiserte aksjane er tileigne i 1994 eller seinare, før den tid  utbytte avsett i rekneskapen for sist år blir utdelt.  </p>
+                                    <p>- aksjane blir solgt i 2005 etter utbytteutdelinga når det utdelte  utbyttet overstig utbytte avsett i årsrekneskapen for 2004.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Utbytte som ikkje er kome til frådrag i RISK-reguleringa til  skattytarar, men som er motteke av skattytar, skal førast her</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvGevinstTap-grp-828/AksjekapitalTilbakebetaltSpesifisertSelskap-datadef-1824">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>205 Tilbakebetalt aksjekapital</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Nedsettelse av selskapets aksjekapital med reduksjon av aksjenes  pålydende og tilbakebetaling til aksjonærene, skal redusere aksjenes  inngangsverdi fra det tidspunkt beløpet er tilbakebetalt. Tilsvarende
+                                        gjelder for tilbakebetaling av innbetalt overkurs. Utbetaling til  aksjonærene av fondsemittert aksjekapital behandles som utbytte og  skal ikke føres opp i denne posten.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>205 Tilbakebetalt aksjekapital</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Ei nedsetjing av aksjekapitalen i selskapet med reduksjon av pålydande  på aksjen og tilbakebetaling til aksjonærane av tidlegare innbetalt  aksjekapital, skal redusere inngangsverdien for aksjane frå det
+                                        tidspunkt beløpet er betalt tilbake. Tilsvarande gjeld for  tilbakebetaling av innbetalt overkurs. Utbetaling til aksjonærane av  fondsemittert aksjekapital blir behandla som utbytte og skal ikkje  førast opp i
+                                        denne posten.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvGevinstTap-grp-828/AksjerMvInngangsverdiNegativSaldoSpesifisertSelskap-datadef-7612">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>206 Negativ saldo/avsatt gevinst</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Skattyter som hadde gjenværende negativ saldo etablert i inntektsåret  1991 eller et tidligere inntektsår i medhold av dagjeldende skattelov  av 18. august 1911 nr. 8 § 44 A-6 første og annet ledd, kunne anvende
+                                        deler av saldomassen til blant annet erverv av aksjer og  grunnfondsbevis i banker mv. og aksjer i børsnoterte selskaper som  driver norsk landbasert virksomhet, jf. regler i tidligere  overgangslov av 20. juli
+                                        1991 nr. 54 § 44 A.  </p>
+                                    <p>Ved realisasjon av aksje, andel eller grunnfondsbevis som er ervervet  etter de nevnte reglene, kommer 70 prosent av det investerte beløpet  til fradrag i inngangsverdien på de ervervede aksjene mv. Ble aksjene
+                                        mv. tegnet i selskap som i 1992 var skattepliktig til en kommune i  Nord-Norge eller til Namdalen, jf. tidligere lov av 19 juni 1969 nr.  72 om særlige skatteregler til fremme av distriktsutbygging § 10  første
+                                        ledd annet punktum, kommer 50 prosent av det investerte  beløpet til fradrag i inngangsverdien på de ervervede aksjene mv.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>206 Negativ saldo/avsatt vinst</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Skattytar som hadde rest på negativ saldo etablert i inntektsåret 1991  eller eit tidlegare inntektsår med heimel i dagjeldande skattelov av  18. august 1911 nr. 8 § 44 A-6 første og andre ledd, kunne bruke
+                                        deler av saldomassen til mellom anna å skaffe aksjar og  grunnfondsbevis i bankar m.m. og aksjar i børsnoterte selskapar som  driver norsk landbasert næring, jf. reglar i tidlegare overgangslov  av 20. juli
+                                        1991 nr. 54 § 44 A.  </p>
+                                    <p>Ved realisasjon av aksje, andel eller grunnfondsbevis som er skaffa  etter dei nemnde reglane, kommer 70 prosent av det aksjen m.m. kosta  til reduksjon i inngangsverdien på aksjane m.m. For aksjar m.m. som  er
+                                        teikna i selskap som i 1992 var skattepliktig til ein kommune i  Nord-Noreg eller Namdalen, jf. tidlegare lov av 19. juni 1969 nr. 72  om særlege skatteregler til fremme av distriktsutbygging § 10 første  ledd
+                                        andre punktum, kommer 50 prosent av det aksjen m.m. kosta til  reduksjon i inngangsverdien på aksjane m.m.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvGevinstTap-grp-828/AksjerMvInngangsverdiKorrigertSpesifisertSelskap-datadef-1825">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>207 Korrigert inngangsverdi</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>207 Korrigert inngangsverdi</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvGevinstTap-grp-828/AksjerMvInngangsverdiKorrigertPositivSpesifisertSelskap-datadef-11281">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>207 Korrigert inngangsverdi</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>207 Korrigert inngangsverdi</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvGevinstTap-grp-828/AksjerMvInngangsverdiKorrigertNegativSpesifisertSelskap-datadef-11282">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>207 Korrigert inngangsverdi</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>207 Korrigert inngangsverdi</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvGevinstTap-grp-828/AksjerMvRealisasjonGevinstTapSpesifisertSelskap-datadef-14083">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>208 Gevinst/tap</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Positivt beløp (gevinst) overføres post 301. Negativt beløp (tap)  overføres post 302.  </p>
+                                    <p>Hvor det er benyttet de oppregulerte inngangsverdiene «godkjent takst»  eller «regnskapsmessig egenkapital» og det foreligger tap, skal  postene 209-215 fylles ut. I disse tilfellene er det eventuelt  negativt
+                                        beløp i post 215 som skal overføres post 302, ikke negativt  beløp i post 208.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>208 Vinst/tap</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Positivt beløp (vinst) fører ein over til post 301. Negativt beløp  (tap) fører ein over til post 302.  </p>
+                                    <p>I dei tilfella der det oppstår tap og ein har nytta dei oppregulerte  inngangsverdiane «godkjent takst» eller «rekneskapsmessig  eigenkapital», skal ein fylle ut postane 209-215. I desse tilfella er  det
+                                        eventuelt negativt beløp i post 215 som skal førast over til post  302, ikkje det negative beløpet i post 208.</p>
+                                </xforms:help>
+                            </xforms:input>
+                        </xforms:group>
+                        <xforms:group ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvMaksimaltTapsfradrag-grp-4166">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beregning av maksimalt tapsfradrag</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Skal kun fylles ut hvis skatteyter benytter de oppregulerte  inngangsverdiene godkjent takst eller regnskapsmessig egenkapital og  beløpet i post 208 er negativt (tap)</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Utrekning av maksimalt frådrag for tap</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Skal kun fylles ut hvis skattytar nyttar dei oppregulerte  inngangsverdiane godkjend takst eller rekneskapsmessig eigenkapital  og beløpet i post 208 er negativt (tap)</p>
+                            </xforms:hint>
+                            <xforms:group ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvMaksimaltTapsfradrag-grp-4166/SkattemessigFormuesverdiOgHistoriskKostpris-grp-4167">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvMaksimaltTapsfradrag-grp-4166/SkattemessigFormuesverdiOgHistoriskKostpris-grp-4167/AksjerMvSkattemessigVerdiSpesifisertSelskap-datadef-11731">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>209 Skattemessig formuesverdi</p>
+                                    </xforms:caption>
+                                    <xforms:help brreg:lang="NOB">
+                                        <p>I forbindelse med skattereformen ble det for ikke-børsnoterte aksjer  gitt anledning til å oppregulere inngangsverdien til såkalt  skattemessig formuesverdi pr. 01.01.1992. Denne  oppreguleringsadgangen ble
+                                            gitt de som kunne solgt aksjene  skattefritt pr. 1.1.1992 (krav om 3 års eiertid).</p>
+                                    </xforms:help>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>209 Skattemessig formuesverdi</p>
+                                    </xforms:caption>
+                                    <xforms:help brreg:lang="NON">
+                                        <p>I samband med skattereforma blei det for ikkje-børsnoterte aksjar gitt  høve til å regulere opp inngangsverdien til såkalla skattemessig  formuesverdi pr. 1.1.1992. Dette høvet til regulere opp gjeld berre
+                                            for dei som kunne seld aksjane skattefritt pr. 1.1.1992 (krav om  minst 3 års eigartid).</p>
+                                    </xforms:help>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvMaksimaltTapsfradrag-grp-4166/SkattemessigFormuesverdiOgHistoriskKostpris-grp-4167/AksjerMvKostprisHistoriskSpesifisertSelskap-datadef-1178">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>210 Historisk kostpris</p>
+                                    </xforms:caption>
+                                    <xforms:help brreg:lang="NOB">
+                                        <p>Med historisk kostpris forstås normalt aksjenes opprinnelige  anskaffelsesverdi. Se nærmere om dette under post 202.</p>
+                                    </xforms:help>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>210 Historisk kostpris</p>
+                                    </xforms:caption>
+                                    <xforms:help brreg:lang="NON">
+                                        <p>Med historisk kostpris forstår ein i normalt verdien på aksjen da den  blei skaffa. Sjå meir om dette under post 202.</p>
+                                    </xforms:help>
+                                </xforms:input>
+                            </xforms:group>
+                            <xforms:group ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvMaksimaltTapsfradrag-grp-4166/BeregningAvMaksimaltTapsfradrag-grp-4168">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvMaksimaltTapsfradrag-grp-4166/BeregningAvMaksimaltTapsfradrag-grp-4168/AksjerMvTapSpesifisertSelskap-datadef-7614">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>211 Tap</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>211 Tap</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvMaksimaltTapsfradrag-grp-4166/BeregningAvMaksimaltTapsfradrag-grp-4168/AksjerMvOppregulertInngangsverdiSpesifisertSelskap-datadef-22206">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>212 Oppregulert inngangsverdi</p>
+                                    </xforms:caption>
+                                    <xforms:help brreg:lang="NOB">
+                                        <p>Beløpet hentes fra post 202</p>
+                                    </xforms:help>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>212 Oppregulert inngangsverdi</p>
+                                    </xforms:caption>
+                                    <xforms:help brreg:lang="NON">
+                                        <p>Beløpet hentes fra post 202</p>
+                                    </xforms:help>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvMaksimaltTapsfradrag-grp-4166/BeregningAvMaksimaltTapsfradrag-grp-4168/AksjerMvFormuesverdiKostprisSpesifisertSelskap-datadef-14122">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>213 Skattemessig formuesverdi/-historisk kostpris</p>
+                                    </xforms:caption>
+                                    <xforms:help brreg:lang="NOB">
+                                        <p>I denne posten føres det høyeste av beløpene i postene 209/210.</p>
+                                    </xforms:help>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>213 Skattemessig formuesverdi/-historisk kostpris</p>
+                                    </xforms:caption>
+                                    <xforms:help brreg:lang="NON">
+                                        <p>I denne posten fører ein det høgste av beløpa i postane 209/210.</p>
+                                    </xforms:help>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvMaksimaltTapsfradrag-grp-4166/BeregningAvMaksimaltTapsfradrag-grp-4168/AksjerMvVerdiBeregnetSpesifisertSelskap-datadef-7672">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>214 Sum</p>
+                                    </xforms:caption>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>214 Sum</p>
+                                    </xforms:caption>
+                                </xforms:input>
+                                <xforms:input ref="/Skjema/RealisasjonAvAksjer-grp-3721/RealisasjonAvEnAksje-grp-4413/BeregningAvMaksimaltTapsfradrag-grp-4166/BeregningAvMaksimaltTapsfradrag-grp-4168/AksjerMvTapSkattSpesifisertSelskap-datadef-7673">
+                                    <brreg:benevnelse type="kr"/>
+                                    <brreg:sensitivitet type="Sensitiv"/>
+                                    <xforms:caption brreg:lang="NOB">
+                                        <p>215 Tap (negativt beløp)</p>
+                                    </xforms:caption>
+                                    <xforms:help brreg:lang="NOB">
+                                        <p>Positivt beløp i denne posten betyr at det ikke foreligger  fradragsrett for tap. Dersom det fremkommer et negativt beløp i denne  posten, skal dette overføres post 302. Beløpet som fremkommer i denne
+                                            posten skal ikke gi høyere tapsfradrag enn det beløp som fremkommer i  post 208.</p>
+                                    </xforms:help>
+                                    <xforms:caption brreg:lang="NON">
+                                        <p>215 Tap (negativt beløp)</p>
+                                    </xforms:caption>
+                                    <xforms:help brreg:lang="NON">
+                                        <p>Eit positivt beløp i denne posten viser at det ikkje er frådragsrett  for tap. Dersom det blir eit negativt beløp i denne posten, skal det  førast over til post 302. Beløpet i denne posten skal ikkje gi
+                                            høgare  frådrag for tap enn beløpet i post 208.</p>
+                                    </xforms:help>
+                                </xforms:input>
+                            </xforms:group>
+                        </xforms:group>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Samleoppgave-grp-831">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Sum gevinst/tap</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Sum gevinst/tap</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Samleoppgave-grp-831/AksjerMvGevinstSkattBrutto-datadef-7615">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>301 Sum gevinst</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her fremkommer samtlige gevinster som er ført i post 208 (sum alle  kolonner).</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>301 Sum vinst</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her skal alle vinstar frå post 208 førast (sum alle kolonnar).</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Samleoppgave-grp-831/AksjerMvTapSkattBrutto-datadef-7616">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>302 Sum tap</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Her fremkommer samtlige tap som er ført i post 208 (sum alle  kolonner), eventuelt post 215 for de som har benyttet de oppregulerte  inngangsverdiene godkjent takst eller regnskapsmessig egenkapital.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>302 Sum tap</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Her fører ein alle tap som er førte i post 208 (sum alle kolonnar),  eventuelt post 215 for dei som har nytta dei oppregulerte  inngangsverdiane godkjent takst eller rekneskapsmessig eigenkapital».</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Samleoppgave-grp-831/AksjerMvOmkostninger-datadef-1826">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>303 Omkostninger ved kjøp og salg</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Utgifter til erverv og realisasjon fratrekkes her når aksjen  realiseres. Som utgifter direkte relatert til transaksjonen regnes  bl.a. kjøps- og salgsgebyr.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>303 Omkostninger ved kjøp og sal</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Utgifter i samband med å skaffe eller realisere aksjane, skal  trekkjast frå her når aksjane blir realiserte. Mellom anna kjøps- og  salsgebyr, blir rekna som utgifter som er direkte relatert til  transaksjonen.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Samleoppgave-grp-831/AksjerMvRealisasjonGevinstTapSkatt-datadef-14084">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>304 Netto som føres til selvangivelse eller næringsoppgave</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Nettobeløpet som fremkommer overføres selvangivelsen post 3.1.5  (gevinst) eller post 3.3.8 (tap). For næringsdrivende med begrenset  regnskapsplikt, skal gevinst/tap overføres Næringsoppgave 1 postene  8095 og 8195.
+                            Aksjeselskap og andre foretak med full regnskapsplikt  benytter Næringsoppgave 2 postene 0700 og 0850.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>304 Netto som skal overførast til sjølvmeldinga eller næringsoppgåve</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Nettobeløpet som kjem fram her fører ein over til post 3.1.5 (vinst)  eller post 3.3.8 (tap) i sjølvmeldinga. Næringsdrivande med avgrensa  plikt til å føre rekneskap, skal overføre gevinst/tap til  Næringsoppgåve 1,
+                            postane 8095 og 8195. Aksjeselskap og andre føretak  med full rekneskapsplikt nyttar postane 0700 og 0850 i Næringsoppgåve  2.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

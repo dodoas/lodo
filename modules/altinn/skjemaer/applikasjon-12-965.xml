@@ -1,0 +1,985 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RA-0174: Varehandelstatistikk</brreg:tittel>
+    <brreg:hode>
+        <xforms:model><!--INSTANCE HOLDER: Instansen kan plasseres her!--><xforms:schema xlink:href="melding-12-966.xsd"/><!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!--><xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3895/Enhet-grp-3903/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3895/Enhet-grp-3903/EnhetPostadresse-datadef-14"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3895/Enhet-grp-3903/EnhetPostadressePostnummer-datadef-11400"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3895/Enhet-grp-3903/EnhetPostadressePoststed-datadef-11401"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3895/Enhet-grp-3903/EnhetNACEKode-datadef-5133"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3895/Enhet-grp-3903/EnhetOrganisasjonsnummer-datadef-18"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-3895/Enhet-grp-3903/EnhetEPost-datadef-5963"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>Varehandelsstatistikk</p>
+            </xforms:caption>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-3895">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-3895/Enhet-grp-3903">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Enhet</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Enhet-grp-3903/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn på årsregnskapets eier</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Enhet-grp-3903/EnhetPostadresse-datadef-14">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Enhet-grp-3903/EnhetPostadressePostnummer-datadef-11400">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Enhet-grp-3903/EnhetPostadressePoststed-datadef-11401">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Enhet-grp-3903/EnhetNACEKode-datadef-5133">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>NACE-kode</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Enhet-grp-3903/EnhetOrganisasjonsnummer-datadef-18">
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnummer til årsregnskapets eier</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Enhet-grp-3903/EnhetEPost-datadef-5963">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Foretakets registrerte offisielle e-postadresse er:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Enhet-grp-3903/EnhetEPostKorrigering-datadef-15337">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Hvis e-postadresse mangler eller er feil, før den opp i rubrikken  under:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-3895/Foretaksinformasjon-grp-3904">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Foretaksinformasjon</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-3895/Foretaksinformasjon-grp-3904/EnhetTilstand-datadef-5830">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>I vanlig drift</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>I vanleg drift</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Midlertidig ute av drift</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Midlartidleg ute av drift</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>3</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Under oppbygging</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Under oppbygging</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>4</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Solgt/overdratt</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Seld/overdratt</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Er virksomheten i foretaket:</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Foretaksinformasjon-grp-3904/EnhetUteAvDriftDato-datadef-8275">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fra dato:</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>dd mm åå</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Foretaksinformasjon-grp-3904/EnhetOpphorDato-datadef-8281">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Dato:</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>dd mm åå</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Foretaksinformasjon-grp-3904/EnhetOverdragelseDato-datadef-8282">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Dato:</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>dd mm åå</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Foretaksinformasjon-grp-3904/EnhetNyEierNavn-datadef-5831">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Virksomheten er solgt/overdratt til (oppgi foretakets navn):</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Foretaksinformasjon-grp-3904/EnhetNyEierOrganisasjonsnummer-datadef-13549">
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Virksomheten er solgt/overdratt til (oppgi foretakets  organisasjonsnummer):</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Foretaksinformasjon-grp-3904/EnhetEieform-datadef-35">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Eieform:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-3895/Adresseendring-grp-3937">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Dersom adresseendring, fyll ut:</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Adresseendring-grp-3937/EnhetAdresseEndring-datadef-74">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beliggenhetsadresse:</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Gate eller sted:</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Adresseendring-grp-3937/EnhetPostnummerEndring-datadef-8585">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Adresseendring-grp-3937/EnhetPoststedEndring-datadef-8586">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Adresseendring-grp-3937/EnhetKommuneEndring-datadef-11877">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommune:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Adresseendring-grp-3937/EnhetPostadresseEndring-datadef-11878">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postadresse:</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Postboks, gate eller sted:</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Adresseendring-grp-3937/EnhetPostadressePostnummerEndring-datadef-15436">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Adresseendring-grp-3937/EnhetPostadressePoststedEndring-datadef-15437">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Adresseendring-grp-3937/EnhetPostadresseKommuneEndring-datadef-15438">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommune:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-3895/Kontaktperson-grp-3935">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kontaktperson</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Kontaktperson-grp-3935/KontaktpersonNavn-datadef-2">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Kontaktperson-grp-3935/KontaktpersonTelefonnummer-datadef-3">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefonnummer:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-3895/Kontaktperson-grp-3935/KontaktpersonEPost-datadef-2876">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>E-postadresse:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Sysselsetting-grp-3896">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>1. Sysselsetting</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Beregn gjennomsnittlig antall eiere og lønnstakere i året ved å  summere antall eiere/lønnstakere ved utgangen av hver måned og  dividere med 12. Rund av til nærmeste hele tall.</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/Sysselsetting-grp-3896/SysselsatteUlonnet-datadef-36">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.1 Eiere og familiemedlemmer som arbeider daglig i foretaket uten  fast lønn</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Årsgjennomsnitt. Ingen som det betales arbeidsgiveravgift for regnes  med her, disse inngår i 1.2. Se rettledningen for nærmere forklaring.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Sysselsetting-grp-3896/SysselsatteLonnstakere-datadef-37">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.2 Lønnstakere</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>, dvs. alle personer som arbeider for arbeidsgiver og mottar lønn,  gratiale mv. inklusiv fraværende for en kort periode (permisjon med  lønn, sykdom, ferie, streik), deltidsansatte, sesongarbeidere, utleid  arbeidskraft
+                            mv. Fraværende for en lengere eller ubestemt periode og  innleid arbeidskraft tas ikke med. Årsgjennomsnitt. Se rettledningen  for nærmere forklaring.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Sysselsetting-grp-3896/Sysselsatte-datadef-30">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.3 Totalt antall sysselsatte</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>(1.1 + 1.2)</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Sysselsetting-grp-3896/SysselsatteLonnstakereArsverk-datadef-48">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.4 Antall utførte årsverk</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>av lønnstakere, dvs. summen av alle heltidsansatte og deltidsansatte  omregnet til hvor mange heltidsansatte disse tilsvarer på årsbasis.  Eksempel: En lønnstaker som arbeider kun en dag i uken hele året  utgjør 0,2
+                            årsverk. Oppgi med en desimal.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Sysselsetting-grp-3896/SysselsatteDeltid-datadef-51">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>1.5 Antall deltidsansattte</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/ProsentfordelingAvTotalOmsetningPaUlikeNaringer-grp-3897">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>2. Prosentfordeling av total omsetning for ulike næringer</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Her prosentfordeles summen av postene  3000+3100+3200+3600+3695+3700+3900+/-evt. 3500 (NO2) i  Næringsoppgaven (NO) ekskl. mva. Spesielle offentlige avgifter som  inngår i salgsprisen, trekkes ikke fra. Med handelsvarer i 2.1.1
+                        og  2.1.2 menes innkjøpte varer som selges videre, i eget navn og for  egen regning, uten å bli bearbeidet. Definisjoner av 2.1.1-2.5, se  rettledning.</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/ProsentfordelingAvTotalOmsetningPaUlikeNaringer-grp-3897/SalgsinntekterDetaljomsetning-datadef-673">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.1.1 Detaljhandel.</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Salg av handelsvarer i hovedsak for kjøpers personlige bruk eller til  privathusholdninger</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ProsentfordelingAvTotalOmsetningPaUlikeNaringer-grp-3897/SalgsinntekterEngrosomsetning-datadef-674">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.1.2 Engroshandel.</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Salg av handelsvarer inkl. salg vha kommisjonær videreforhandlere og  til bedrifter</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ProsentfordelingAvTotalOmsetningPaUlikeNaringer-grp-3897/SalgsinntekterAgentur-datadef-672">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.2 Agenturvirksomhet</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Inntekter fra formidling av salg av handelsvarer ved å oppta ordrer i  andre foretaks navn</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ProsentfordelingAvTotalOmsetningPaUlikeNaringer-grp-3897/SalgsinntekterPrimarnaring-datadef-5534">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.3 Primærnæringsvirksomhet</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ProsentfordelingAvTotalOmsetningPaUlikeNaringer-grp-3897/SalgsinntekterIndustrielleAktiviteter-datadef-675">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.4 Industri</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ProsentfordelingAvTotalOmsetningPaUlikeNaringer-grp-3897/SalgsinntekterTjenesteaktiviteter-datadef-49">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.5 Tjenesteyting</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OmsetningOgVarekostnadForHandelsvarer-grp-3898">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>3. Omsetning og varekostnad for handelsvarer</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Med handelsvarer menes innkjøpte varer som selges videre, i eget navn  </p>
+                    <p> og for egen regning, uten å bli bearbeidet. Salgsinntekter og kostnader for tjenester og egenproduserte varer skal  ikke være med. (NO vil si Næringsoppgave)</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/OmsetningOgVarekostnadForHandelsvarer-grp-3898/SalgsinntekterHandelsvarer-datadef-94">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.1 Omsetning av handelsvarer,</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>verdsatt til salgspris eksklusiv mva. spesielle offentlige avgifter  som inngår i prisen trekkes ikke fra, offentlige tilskudd legges ikke  til.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OmsetningOgVarekostnadForHandelsvarer-grp-3898/VarekostnadInnkjopteVarerVideresalg-datadef-5528">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.2 Varekostnad</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>ekskl. mva for solgte handelsvarer. Oppgi verdien av forbruket  verdsatt til innkjøpspris. Dette tilsvarer den delen av NO post 4005  som gjelder handelsvarer. Spesielle offentlige avgifter på  handelsvarene skal ikke
+                            legges til, spesielle offentlige tilskudd  skal ikke trekkes fra i varekostnaden.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OmsetningOgVarekostnadForHandelsvarer-grp-3898/FortjenesteHandelsvarerBrutto-datadef-110">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.3 Bruttofortjeneste</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>(pkt. 3.1 - 3.2)</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OpplysningerOmEksportOgImportFordringerOgGjeldOverforUtlande-grp-3899">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>4. Opplysninger om eksport og import, fordringer og gjeld overfor  utlandet</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Alle virksomheter som er registrert utenfor Norge og norsk  kontinentalsokkel regnes som utenlandske (også norskeeide  datterselskaper og filialer i utlandet). Fysiske personer med fast  bosted utenfor Norge regnes som
+                        utenlandske, uansett statsborgerskap.  </p>
+                    <p> Hvor en tjeneste blir produsert er ikke viktig. Med unntak av kjøp og salg av handels- og produksjonsvarer, regnes  alle former for virksomhet som tjenester (også virksomhet med  godtgjøring i form av royalties,
+                        kommisjonsavgifter, provisjoner og  lignende). Bankgebyrer og mglerprovisjoner skal regnes med i verdien  av tjenestene. Renteinntekter, rentekostnader eller annen  kapitalavkastning fra/til utlandet inngår derimot ikke i  tjenestebgrepet.</p>
+                </xforms:hint>
+                <xforms:selectOne ref="/Skjema/OpplysningerOmEksportOgImportFordringerOgGjeldOverforUtlande-grp-3899/EksportVarerTjenester-datadef-18634">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.1 Solgte foretaket varer eller tjenester til utenlandsk kjøper</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/OpplysningerOmEksportOgImportFordringerOgGjeldOverforUtlande-grp-3899/Eksport-datadef-18635">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.2 Omsetning av eksport, i alt</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>I 1 000 kroner</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmEksportOgImportFordringerOgGjeldOverforUtlande-grp-3899/EksportVarer-datadef-18636">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>- av dette: eksport av varer</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmEksportOgImportFordringerOgGjeldOverforUtlande-grp-3899/EksportTjenester-datadef-18637">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>= eksport av tjenester</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/OpplysningerOmEksportOgImportFordringerOgGjeldOverforUtlande-grp-3899/ImportVarerTjenester-datadef-18638">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.3 Kjøpte foretaket varer eller tjenester fra utlandsk foretak</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/OpplysningerOmEksportOgImportFordringerOgGjeldOverforUtlande-grp-3899/Import-datadef-18639">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.4 Kostnader fra import, i alt</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>I 1 000 kroner</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmEksportOgImportFordringerOgGjeldOverforUtlande-grp-3899/ImportVarer-datadef-18640">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>- av dette: import av varer</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OpplysningerOmEksportOgImportFordringerOgGjeldOverforUtlande-grp-3899/ImportTjenester-datadef-5854">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>= import av tjenester</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/OpplysningerOmEksportOgImportFordringerOgGjeldOverforUtlande-grp-3899/EnhetEiereUtenlandske-datadef-17134">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.5 Hadde foretaket utenlandske aksjonærer per 31.12?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/OpplysningerOmEksportOgImportFordringerOgGjeldOverforUtlande-grp-3899/AksjonarUtenlandskStorstEierandel-datadef-18642">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.6 Hva var prosentandelen til største utenlandske aksjonær per 31.12?</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>%</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/OpplysningerOmEksportOgImportFordringerOgGjeldOverforUtlande-grp-3899/AksjerUtenlandske-datadef-18643">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.7 Eide foretaket aksjer i utenlandske selskaper per 31.12?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/OpplysningerOmEksportOgImportFordringerOgGjeldOverforUtlande-grp-3899/AksjerUtenlandskeStorsteEierandel-datadef-18644">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.8 Hvor stor var den største utenlandske eierandelen per 31.12?</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>%</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/OpplysningerOmEksportOgImportFordringerOgGjeldOverforUtlande-grp-3899/FordringerUtland-datadef-18645">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.9 Hadde foretaket fordringer overfor utlandet per 31.12?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/OpplysningerOmEksportOgImportFordringerOgGjeldOverforUtlande-grp-3899/FordringerUtlandBelop-datadef-3285">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.10 Hvor mye utgjorde samlede fordringer overfor utlandet per 31.12?</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>I 1 000 kroner</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/OpplysningerOmEksportOgImportFordringerOgGjeldOverforUtlande-grp-3899/GjeldUtland-datadef-18646">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.11 Hadde foretaket gjeld oveefor utlandet per 31.12?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/OpplysningerOmEksportOgImportFordringerOgGjeldOverforUtlande-grp-3899/GjeldUtlandBelop-datadef-4422">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.12 Hvor mye utgjorde samlet gjeld til utlandet per 31.12?</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>I 1 000 kroner</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/InvesteringerAktivertOgFullfortIAretLevetidMerEnnEttAr-grp-3900">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>5. Investeringer, aktivert og fullført i året. Levetid mer enn ett  </p>
+                    <p> år i 1000 kroner</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/InvesteringerAktivertOgFullfortIAretLevetidMerEnnEttAr-grp-3900/TilgangerAvNyeOgBrukteDriftsmidlerKjopOgPakostninger-grp-3929">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Tilganger av nye og brukte driftsmidler, kjøp og påkostninger inkl.  aktiverte egenarbeider</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/InvesteringerAktivertOgFullfortIAretLevetidMerEnnEttAr-grp-3900/TilgangerAvNyeOgBrukteDriftsmidlerKjopOgPakostninger-grp-3929/MaskinerMvInvestering-datadef-386">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.1 Maskiner, verktøy, redskap, inventar og software</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(investeringer som påvirker NO-postene 1280 + 1205 + ekskl.  personbiler + 1290)</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InvesteringerAktivertOgFullfortIAretLevetidMerEnnEttAr-grp-3900/TilgangerAvNyeOgBrukteDriftsmidlerKjopOgPakostninger-grp-3929/TransportmidlerInvestering-datadef-432">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.2 Transportmidler</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(investeringer som påvirker NO-postene 1221 + 1225 + 1239 +  personbiler i 1205)</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InvesteringerAktivertOgFullfortIAretLevetidMerEnnEttAr-grp-3900/TilgangerAvNyeOgBrukteDriftsmidlerKjopOgPakostninger-grp-3929/ByggAnleggInvestering-datadef-346">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.3 Bygninger og anlegg inkl. boligbygg</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(investeringer som påvirker NO-postene 1105 + 1115 + 1117 + 1160)</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InvesteringerAktivertOgFullfortIAretLevetidMerEnnEttAr-grp-3900/TilgangerAvNyeOgBrukteDriftsmidlerKjopOgPakostninger-grp-3929/TomtInvestering-datadef-344">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.4 Ubebygget tomt/grunn</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(investeringer som påvirker NO-postene 1140/NO1 og 1150)</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/InvesteringerAktivertOgFullfortIAretLevetidMerEnnEttAr-grp-3900/heravKjoptBruktSpesifiserTilgangerAvBrukteDriftsmidler-grp-3930">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>herav kjøpt brukt</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>spesifiser tilganger av brukte driftsmidler</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/InvesteringerAktivertOgFullfortIAretLevetidMerEnnEttAr-grp-3900/heravKjoptBruktSpesifiserTilgangerAvBrukteDriftsmidler-grp-3930/MaskinerMvInvesteringBrukt-datadef-18647">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.1 Maskiner, verktøy, redskap, inventar og software</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InvesteringerAktivertOgFullfortIAretLevetidMerEnnEttAr-grp-3900/heravKjoptBruktSpesifiserTilgangerAvBrukteDriftsmidler-grp-3930/TransportmidlerInvesteringBrukt-datadef-18648">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.2 Transportmidler</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InvesteringerAktivertOgFullfortIAretLevetidMerEnnEttAr-grp-3900/heravKjoptBruktSpesifiserTilgangerAvBrukteDriftsmidler-grp-3930/ByggAnleggInvesteringBrukt-datadef-18649">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.3 Bygninger og anlegg inkl. boligbygg</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/InvesteringerAktivertOgFullfortIAretLevetidMerEnnEttAr-grp-3900/AvgangerTilSalgspris-grp-3931">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Avganger til salgspris</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/InvesteringerAktivertOgFullfortIAretLevetidMerEnnEttAr-grp-3900/AvgangerTilSalgspris-grp-3931/MaskinerMvSalg-datadef-387">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.1 Maskiner, verktøy, redskap, inventar og software</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InvesteringerAktivertOgFullfortIAretLevetidMerEnnEttAr-grp-3900/AvgangerTilSalgspris-grp-3931/TransportmidlerSalg-datadef-433">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.2 Transportmidler</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InvesteringerAktivertOgFullfortIAretLevetidMerEnnEttAr-grp-3900/AvgangerTilSalgspris-grp-3931/ByggAnleggSalg-datadef-457">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.3 Bygninger og anlegg inkl. boligbygg</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InvesteringerAktivertOgFullfortIAretLevetidMerEnnEttAr-grp-3900/AvgangerTilSalgspris-grp-3931/DriftsmidlerFysiskeFinansiellLeasing-datadef-695">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>5.5 Verdien av fysiske driftsmidler ervervet med finansiell leasing</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p> </p>
+                            <p>(Del av post 5.1, 5.2 og ev. 5.3) Se rettledning for nærmere forklaring.</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/DatautstyrOgProgramvare-grp-3901">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>6. Datautstyr og programvare (del av post 5.1)</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/DatautstyrOgProgramvare-grp-3901/TotaleUtgifter-grp-3932">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Totale utgifter</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/DatautstyrOgProgramvare-grp-3901/TotaleUtgifter-grp-3932/DatautstyrInvestering-datadef-18650">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6.1 Innkjøp av datautstyr</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Omfatter alt kjøp av datautstyr (hardware og systemsoftware, verktøy  og applikasjoner). Både såkalte pakker og kundetilpasset programvare  skal inkluderes i postene.</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/DatautstyrOgProgramvare-grp-3901/TotaleUtgifter-grp-3932/ProgramvareInvestering-datadef-6217">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6.2 Innkjøpt programvare/software (som ikke er tatt med under post  6.1)</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Her inngår summen av alle utgifter (investeringer og kostnader ekskl.  avskrivninger) til kjøp av standard programvare og særskilt tilpasset  eller utviklet programvare. Lisensavgifter og tjenester direkte  tilknyttet
+                                kjøpet (installasjon, testing, vedlikehold) skal  inkluderes. Programvare som er anskaffet sammen med maskinutstyr tas  kun med dersom den ikke er inkludert i kjøp av maskiner og utstyr.  Hvis beløpet ikke kan fastslås
+                                nøyaktig, gjør et anslag.</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/DatautstyrOgProgramvare-grp-3901/TotaleUtgifter-grp-3932/ProgramvareEgenutvikling-datadef-12973">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6.3 Egenutviklet programvare/software for egen bruk</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Posten omfatter totale utgifter, investeringer og kostnader inkl.  lønnskostnader, men uten avskrivninger, for egenutviklet software til  egen bruk, ikke for salg. Kjøp av software og utvikling av software  for kunder
+                                holdes utenom. Kan ikke beløpet fastslås nøyaktig, gjør  anslag.</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/DatautstyrOgProgramvare-grp-3901/heravAktivert-grp-3933">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>herav aktivert</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/DatautstyrOgProgramvare-grp-3901/heravAktivert-grp-3933/DatautstyrInvesteringAktivert-datadef-18651">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6.1 Innkjøp av datautstyr</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Omfatter alt kjøp av datautstyr (hardware og systemsoftware, verktøy  og applikasjoner). Både såkalte pakker og kundetilpasset programvare  skal inkluderes i postene.</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/DatautstyrOgProgramvare-grp-3901/heravAktivert-grp-3933/ProgramvareInvesteringAktivert-datadef-12972">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6.2 Innkjøpt programvare/software (som ikke er tatt med under post  6.1)</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Her inngår summen av alle utgifter (investeringer og kostnader ekskl.  avskrivninger) til kjøp av standard programvare og særskilt tilpasset  eller utviklet programvare. Lisensavgifter og tjenester direkte  tilknyttet
+                                kjøpet (installasjon, testing, vedlikehold) skal  inkluderes. Programvare som er anskaffet sammen med maskinutstyr tas  kun med dersom den ikke er inkludert i kjøp av maskiner og utstyr.  Hvis beløpet ikke kan fastslås
+                                nøyaktig, gjør et anslag.</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/DatautstyrOgProgramvare-grp-3901/heravAktivert-grp-3933/ProgramvareEgenutviklingAktivert-datadef-12974">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>6.3 Egenutviklet programvare/software for egen bruk</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Posten omfatter totale utgifter, investeringer og kostnader inkl.  lønnskostnader, men uten avskrivninger, for egenutviklet software til  egen bruk, ikke for salg. Kjøp av software og utvikling av software  for kunder
+                                holdes utenom. Kan ikke beløpet fastslås nøyaktig, gjør  anslag.</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/FordelingAvForetakstallPaUlikeBedrifter-grp-3902">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>7. Fordeling av foretakstall på ulike bedrifter (avdelinger). Kun  foretak med flere bedrifter fyller ut dette</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Fordel foretakets sysselsetting, lønnskostnader, omsetning,  produktinnsats, tilganger og avganger på bedriftene (avdelingene) i  foretaket. Før på eventuelle nye bedrifter med oppstartsdato, adresse  og andre relevante
+                        opplysninger. Opphørte/solgte bedrifter påføres  opphørs-/salgsdato. Se rettledning for nærmere forklaring.</p>
+                </xforms:hint>
+                <xforms:repeat id="repeat_FordelingAvForetakstallPaUlikeBedrifter-grp-3934" nodeset="/Skjema/FordelingAvForetakstallPaUlikeBedrifter-grp-3902/FordelingAvForetakstallPaUlikeBedrifter-grp-3934">
+                    <xforms:group ref="/Skjema/FordelingAvForetakstallPaUlikeBedrifter-grp-3902/FordelingAvForetakstallPaUlikeBedrifter-grp-3934">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:input ref="/Skjema/FordelingAvForetakstallPaUlikeBedrifter-grp-3902/FordelingAvForetakstallPaUlikeBedrifter-grp-3934/BedriftOrganisasjonsnummerSpesifisertBedrift-datadef-8277">
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ident</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingAvForetakstallPaUlikeBedrifter-grp-3902/FordelingAvForetakstallPaUlikeBedrifter-grp-3934/BedriftAdresseSpesifisertBedrift-datadef-8278">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Adresse</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingAvForetakstallPaUlikeBedrifter-grp-3902/FordelingAvForetakstallPaUlikeBedrifter-grp-3934/BedriftKarakteristikkSpesifisertBedrift-datadef-8279">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Karakteristikk</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingAvForetakstallPaUlikeBedrifter-grp-3902/FordelingAvForetakstallPaUlikeBedrifter-grp-3934/BedriftNACEKodeSpesifisertBedrift-datadef-8280">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>NACE (næringskode)</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingAvForetakstallPaUlikeBedrifter-grp-3902/FordelingAvForetakstallPaUlikeBedrifter-grp-3934/SysselsatteSpesifisertBedrift-datadef-321">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>7.1 Fordel antall sysselsatte</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingAvForetakstallPaUlikeBedrifter-grp-3902/FordelingAvForetakstallPaUlikeBedrifter-grp-3934/LonnskostnaderSpesifisertBedrift-datadef-65">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>7.2 Lønnskostnader</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingAvForetakstallPaUlikeBedrifter-grp-3902/FordelingAvForetakstallPaUlikeBedrifter-grp-3934/OmsetningSpesifisertBedrift-datadef-53">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>7.3 Omsetning</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingAvForetakstallPaUlikeBedrifter-grp-3902/FordelingAvForetakstallPaUlikeBedrifter-grp-3934/ProduktinnsatsSpesifisertBedrift-datadef-5532">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>7.4 Produktinnsats</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingAvForetakstallPaUlikeBedrifter-grp-3902/FordelingAvForetakstallPaUlikeBedrifter-grp-3934/InvesteringerTilgangerUtenTomtSpesifisertBedrift-datadef-14409">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>7.5 Tilganger uten tomt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/FordelingAvForetakstallPaUlikeBedrifter-grp-3902/FordelingAvForetakstallPaUlikeBedrifter-grp-3934/InvesteringerAvgangerUtenTomtSpesifisertBedrift-datadef-14410">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>7.6 Avganger uten tomt</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

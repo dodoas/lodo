@@ -1,0 +1,838 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">KRT-1001: Dokumentbasert tilsyn - Revisjonsselskapers egenmelding</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-807-3820.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/SELSKAPSINFORMASJON-grp-5305/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/SELSKAPSINFORMASJON-grp-5305/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/SELSKAPSINFORMASJON-grp-5305/EnhetAdresse-datadef-15"/>
+            <xforms:bind readOnly="true" ref="/Skjema/SELSKAPSINFORMASJON-grp-5305/EnhetPostnummer-datadef-6673"/>
+            <xforms:bind readOnly="true" ref="/Skjema/SELSKAPSINFORMASJON-grp-5305/EnhetPoststed-datadef-6674"/>
+            <xforms:bind ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308/KlienterRevisjonAntall-datadef-13038" required="true"/>
+            <xforms:bind ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308/OppgiRevisjonsselskapetsBruttoinntektVedSistAvlagteArsoppgjorFo-grp-5309/InntektRevisjonBelop-datadef-21809" required="true"/>
+            <xforms:bind ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308/OppgiRevisjonsselskapetsBruttoinntektVedSistAvlagteArsoppgjorFo-grp-5309/InntektRevisjonsrelaterteTjenesterBelop-datadef-13039" required="true"/>
+            <xforms:bind ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308/OppgiRevisjonsselskapetsBruttoinntektVedSistAvlagteArsoppgjorFo-grp-5309/InntektRadgivningRevisjonsklienterBelop-datadef-13040" required="true"/>
+            <xforms:bind ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308/OppgiRevisjonsselskapetsBruttoinntektVedSistAvlagteArsoppgjorFo-grp-5309/InntektRadgivningAndreBelop-datadef-13041" required="true"/>
+            <xforms:bind ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308/OppgiRevisjonsselskapetsBruttoinntektVedSistAvlagteArsoppgjorFo-grp-5309/InntektRegnskapsforing-datadef-13042" required="true"/>
+            <xforms:bind ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308/OppgiRevisjonsselskapetsBruttoinntektVedSistAvlagteArsoppgjorFo-grp-5309/InntektRevisorrelatertAnnenBelop-datadef-23594" required="true"/>
+            <xforms:bind ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308/ArsresultatBelop-datadef-23595" required="true"/>
+            <xforms:bind ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308/EgenkapitalBelop-datadef-23596" required="true"/>
+            <xforms:bind ref="/Skjema/ARSVERK-grp-5310/SysselsattAnsvarligRevisorArsverkAntall-datadef-23583" required="true"/>
+            <xforms:bind ref="/Skjema/ARSVERK-grp-5310/OppgiAntallArsverkForAnsatteTilknyttetRevisjonPersonerUtenSi-grp-5311/SysselsattStatsautorisertRevisorArsverkAntall-datadef-23584" required="true"/>
+            <xforms:bind ref="/Skjema/ARSVERK-grp-5310/OppgiAntallArsverkForAnsatteTilknyttetRevisjonPersonerUtenSi-grp-5311/SysselsattRegistrertRevisorArsverkAntall-datadef-23585" required="true"/>
+            <xforms:bind ref="/Skjema/ARSVERK-grp-5310/OppgiAntallArsverkForAnsatteTilknyttetRevisjonPersonerUtenSi-grp-5311/SysselsattRevisjonHoyereUtdannelseArsverkAntall-datadef-23586" required="true"/>
+            <xforms:bind ref="/Skjema/ARSVERK-grp-5310/OppgiAntallArsverkForAnsatteTilknyttetRevisjonPersonerUtenSi-grp-5311/SysselsattRevisjonAndreArsverkAntall-datadef-23587" required="true"/>
+            <xforms:bind ref="/Skjema/ARSVERK-grp-5310/SysselsattRadgivningJuristerArsverkAntall-datadef-23588" required="true"/>
+            <xforms:bind ref="/Skjema/ARSVERK-grp-5310/SysselsattRegnskapsforervirksomhetArsverkAntall-datadef-23589" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>KRT-1001 Revisjonsselskapers egenmelding</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Skjemaet skal besvares av revisjonsselskap som er godkjent etter  revisorloven, jf. kredittilsynsloven § 1.  </p>
+                <p/>
+                <p>Hjemmel for oppgaveplikten:  </p>
+                <p>Kredittilsynet skal etter kredittilsynsloven § 3 se til at de  institusjoner det har tilsyn med, virker på en hensiktsmessig og  betryggende måte. Som et ledd i dette tilsynsarbeidet gjennomfører  Kredittilsynet dokumentbasert
+                    tilsyn overfor de revisorer og  revisjonsselskaper som er oppført i revisorregisteret. Denne  tilsynsformen er hjemlet i kredittilsynsloven § 4 første ledd nr. 3.  Kredittilsynet har etter lovens § 7 taushetsplikt om alle
+                    opplysninger som vil fremgå av dokumentbasert tilsyn. Ved stedlig  tilsyn vil Kredittilsynet, direkte eller gjennom tilsyn fra DnR  benytte mottatt informasjon fra dokumentbasert tilsyn som del av  kontrollgrunnlaget. Det vises i
+                    denne sammenheng til retningslinjer  for samarbeidet mellom DnR og Kredittilsynet.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/SELSKAPSINFORMASJON-grp-5305">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>1. SELSKAPSINFORMASJON</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/SELSKAPSINFORMASJON-grp-5305/RapportPeriode-datadef-14901">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Dokumentbasert tilsyn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SELSKAPSINFORMASJON-grp-5305/EnhetOrganisasjonsnummer-datadef-18">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Organisasjonsnummer</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>9 siffer.</p>
+                    </xforms:hint>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer.</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SELSKAPSINFORMASJON-grp-5305/EnhetNavn-datadef-1">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Navn</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SELSKAPSINFORMASJON-grp-5305/EnhetAdresse-datadef-15">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Adresse</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SELSKAPSINFORMASJON-grp-5305/EnhetPostnummer-datadef-6673">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Postnummer</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever fire siffer.</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SELSKAPSINFORMASJON-grp-5305/EnhetPoststed-datadef-6674">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Poststed</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SELSKAPSINFORMASJON-grp-5305/KontaktpersonNavn-datadef-23307">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kontaktperson</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Oppgi en person som Kredittilsynet kan henvende seg til angående  skjemaet.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/SELSKAPSINFORMASJON-grp-5305/EnhetEPost-datadef-21591">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>E-postadresse</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>E-postadresse til kontaktperson.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig e-postadresse.</p>
+                    </xforms:alert>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OMSELSKAPET-grp-5306">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>2. OM SELSKAPET</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Bruk rullegardinen til høyre i skjemaet for å se alle spørsmålene på  siden.</p>
+                </xforms:hint>
+                <xforms:group ref="/Skjema/OMSELSKAPET-grp-5306/EiesOverHalvpartenAvAksjeEllerInnskuddskapitalenOgTilhorerOv-grp-5307">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.01 Eies over halvparten av aksje- eller innskuddskapitalen av og  tilhører over halvparten av stemmene i revisjonsselskapet:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>2.01 Etter revisorloven § 3-5 første ledd nr. 2 skal revisorer eller  revisjonsselskaper som oppfyller kravene i nr. 1, inneha mer enn  halvparten av aksje- eller innskuddskapitalen og stemmene i  selskapet.</p>
+                    </xforms:help>
+                    <xforms:selectOne ref="/Skjema/OMSELSKAPET-grp-5306/EiesOverHalvpartenAvAksjeEllerInnskuddskapitalenOgTilhorerOv-grp-5307/EierePartnereGodkjentRevisor-datadef-23581">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Godkjente revisorer, jf. revisorloven kap. 3?</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Enten ja eller nei må velges.</p>
+                        </xforms:alert>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/OMSELSKAPET-grp-5306/EiesOverHalvpartenAvAksjeEllerInnskuddskapitalenOgTilhorerOv-grp-5307/EierePartnereGodkjentRevisorAntall-datadef-13085">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- Oppgi antall eiere av revisjonsselskapet</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Skriv inn et tall fra 1 til 999.</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:selectOne ref="/Skjema/OMSELSKAPET-grp-5306/EiesOverHalvpartenAvAksjeEllerInnskuddskapitalenOgTilhorerOv-grp-5307/EierePartnereGodkjenteRevisjonsselskap-datadef-23580">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Godkjent revisjonsselskap, jf. revisorloven § 3-5?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Revisjonsselskap må oppfylle kravene i revisorloven § 3-5 første ledd  nr. 1. Selskapet skal ha et styre der (flertallet av) både  medlem(mene) og varamedlem(mene) er godkjent(e) revisor(er).</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/OMSELSKAPET-grp-5306/EiesOverHalvpartenAvAksjeEllerInnskuddskapitalenOgTilhorerOv-grp-5307/EierePartnereOrganisasjonsnummer-datadef-21794">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- Organisasjonsnummer</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>9 siffer.</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer.</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OMSELSKAPET-grp-5306/EiesOverHalvpartenAvAksjeEllerInnskuddskapitalenOgTilhorerOv-grp-5307/EierePartnereNavn-datadef-23579">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:selectOne ref="/Skjema/OMSELSKAPET-grp-5306/EnhetAvdelingskontor-datadef-21797">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.02 Har revisjonsselskapet avdelingskontor(er)?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/OMSELSKAPET-grp-5306/EnhetAvdelingskontorAntall-datadef-21799">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>- Oppgi antall avdelingskontorer</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Skriv inn et tall fra 1 til 999.</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/OMSELSKAPET-grp-5306/EnhetRegnskapsforervirksomhet-datadef-23582">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.03 Driver revisjonsselskapet regnskapsførervirksomhet?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Regnskapsfører- selskap, jf. lov om autorisasjon av regnskapsførere §§  1 og 11.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/OMSELSKAPET-grp-5306/RevisjonsselskapSamarbeidAndreRevisorer-datadef-21800">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.04 Deltar revisjonsselskapet i et samarbeid med andre  revisorer/revisjonsselskaper, jf. revisorloven § 4-7 første ledd?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:repeat id="repeat_SamarbeidendeRevisjonsselskap-grp-5382" nodeset="/Skjema/OMSELSKAPET-grp-5306/SamarbeidendeRevisjonsselskap-grp-5382">
+                    <xforms:group ref="/Skjema/OMSELSKAPET-grp-5306/SamarbeidendeRevisjonsselskap-grp-5382">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:input ref="/Skjema/OMSELSKAPET-grp-5306/SamarbeidendeRevisjonsselskap-grp-5382/SamarbeidendeRevisjonsselskapNavn-datadef-21801">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>- Hva heter samarbeidsgrupperingen/-ene?</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Samarbeidsforhold, jf. revisorloven § 4-7 første ledd. Oppgi hvilken  gruppering, for eksempel Interrevisjon, RevisorGruppen m.fl.</p>
+                            </xforms:help>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet må fylles ut.</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:selectOne ref="/Skjema/OMSELSKAPET-grp-5306/RevisjonsselskapEierandelRadgivningsselskap-datadef-21802">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.05 Har revisjonsselskapet eierandeler i foretak som utfører  rådgivnings- eller andre tjenester til revisjonsklienter?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/OMSELSKAPET-grp-5306/RevisjonsselskapSamarbeidRadgivningsselskaper-datadef-21804">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.06 Har revisjonsselskapet samarbeidsavtale med noen som utfører  rådgivnings- eller andre tjenester til revisjonsklienter?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/OMSELSKAPET-grp-5306/SamarbeidspartnerInternasjonalt-datadef-21806">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.07 Deltar revisjonsselskapet i et internasjonalt samarbeid om  revisjon med revisjonsselskap?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/OMSELSKAPET-grp-5306/SamarbeidspartnerInternasjonaltNavn-datadef-21807">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>- Hva heter samarbeidsgrupperingen?</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet må fylles ut.</p>
+                    </xforms:alert>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>3. OMFANG AV VIRKSOMHETEN</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Ved ingen verdi skal 0 oppgis.</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308/KlienterRevisjonAntall-datadef-13038">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.01 Oppgi antall revisjonsklienter ved sist avlagte årsoppgjør:</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>3.01: Skriv inn et tall fra 0 til 99 999.</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:group ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308/OppgiRevisjonsselskapetsBruttoinntektVedSistAvlagteArsoppgjorFo-grp-5309">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.02 Oppgi revisjonsselskapets bruttoinntekt ved sist avlagte  årsoppgjør fordelt på:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Dette beløpet danner grunnlag for kostnadsfordelingen av  Kredittilsynets kostnader med tilsyn. Vennligst påse at beløpet  oppgis i hele tusen kroner og at det stemmer med selskapets  årsregnskap ved sist avlagte
+                            regnskapsår. Ved avvikende regnskapsår  oppgis tall fra sist avlagte regnskap.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Oppgi beløp i hele tusen.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308/OppgiRevisjonsselskapetsBruttoinntektVedSistAvlagteArsoppgjorFo-grp-5309/InntektRevisjonBelop-datadef-21809">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Revisjon</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Skriv inn et tall fra 0 til 999 999 (beløp i hele tusen).</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308/OppgiRevisjonsselskapetsBruttoinntektVedSistAvlagteArsoppgjorFo-grp-5309/InntektRevisjonsrelaterteTjenesterBelop-datadef-13039">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Revisjonsrelaterte tjenester</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Skriv inn et tall fra 0 til 999 999 (beløp i hele tusen).</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308/OppgiRevisjonsselskapetsBruttoinntektVedSistAvlagteArsoppgjorFo-grp-5309/InntektRadgivningRevisjonsklienterBelop-datadef-13040">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Rådgivning til revisjonsklienter</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Skriv inn et tall fra 0 til 999 999 (beløp i hele tusen).</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308/OppgiRevisjonsselskapetsBruttoinntektVedSistAvlagteArsoppgjorFo-grp-5309/InntektRadgivningAndreBelop-datadef-13041">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Rådgivning til andre enn revisjonsklienter</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Skriv inn et tall fra 0 til 999 999 (beløp i hele tusen).</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308/OppgiRevisjonsselskapetsBruttoinntektVedSistAvlagteArsoppgjorFo-grp-5309/InntektRegnskapsforing-datadef-13042">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Regnskapsføring</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Skriv inn et tall fra 0 til 999 999 (beløp i hele tusen).</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308/OppgiRevisjonsselskapetsBruttoinntektVedSistAvlagteArsoppgjorFo-grp-5309/InntektRevisorrelatertAnnenBelop-datadef-23594">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Annen inntekt</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Skriv inn et tall fra 0 til 999 999 (beløp i hele tusen).</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308/ArsresultatBelop-datadef-23595">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.03 Oppgi revisjonsselskapets årsresultat i følge årsregnskapet ved  sist avlagte årsoppgjør:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Årsresultat, jf. regnskapsloven § 6-1 første ledd nr. 29.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Oppgi beløp i hele tusen.</p>
+                    </xforms:hint>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>3.03: Skriv inn et tall fra 0 til 999 999 (beløp i hele tusen).</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OMFANGAVVIRKSOMHETEN-grp-5308/EgenkapitalBelop-datadef-23596">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.04 Oppgi revisjonsselskapets egenkapital ved sist avlagte  årsoppgjør:</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Oppgi beløp i hele tusen.</p>
+                    </xforms:hint>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>3.04: Skriv inn et tall fra 0 til 999 999 (beløp i hele tusen).</p>
+                    </xforms:alert>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/ARSVERK-grp-5310">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>4. ÅRSVERK</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>1 årsverk = 1 800 timer. Ved ingen verdi skal 0 oppgis.</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/ARSVERK-grp-5310/SysselsattAnsvarligRevisorArsverkAntall-datadef-23583">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.01 Oppgi antall årsverk for ansvarlig(e) revisor(er):</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>4.01: Skriv inn et positivt tall (inntil en desimal), evt. 0.</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:group ref="/Skjema/ARSVERK-grp-5310/OppgiAntallArsverkForAnsatteTilknyttetRevisjonPersonerUtenSi-grp-5311">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.02 Oppgi antall årsverk for ansatte tilknyttet revisjon (personer  uten sikkerhetsstillelse):</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Et årsverk er i denne sammenhengen satt til 1.800 timer. Tallet kan  oppgis med inntil en desimal.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/ARSVERK-grp-5310/OppgiAntallArsverkForAnsatteTilknyttetRevisjonPersonerUtenSi-grp-5311/SysselsattStatsautorisertRevisorArsverkAntall-datadef-23584">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Statsautoriserte revisorer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Skriv inn et positivt tall (inntil en desimal), evt. 0.</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/ARSVERK-grp-5310/OppgiAntallArsverkForAnsatteTilknyttetRevisjonPersonerUtenSi-grp-5311/SysselsattRegistrertRevisorArsverkAntall-datadef-23585">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Registrerte revisorer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Skriv inn et positivt tall (inntil en desimal), evt. 0.</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/ARSVERK-grp-5310/OppgiAntallArsverkForAnsatteTilknyttetRevisjonPersonerUtenSi-grp-5311/SysselsattRevisjonHoyereUtdannelseArsverkAntall-datadef-23586">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Annen høyere utdannelse</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Skriv inn et positivt tall (inntil en desimal), evt. 0.</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/ARSVERK-grp-5310/OppgiAntallArsverkForAnsatteTilknyttetRevisjonPersonerUtenSi-grp-5311/SysselsattRevisjonAndreArsverkAntall-datadef-23587">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Andre, inklusiv administrasjon</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Skriv inn et positivt tall (inntil en desimal), evt. 0.</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/ARSVERK-grp-5310/SysselsattRadgivningJuristerArsverkAntall-datadef-23588">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.03 Oppgi antall årsverk for ansatte tilknyttet  rådgivningsvirksomhet, jurister mv.:</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>4.03: Skriv inn et positivt tall (inntil en desimal), evt. 0.</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/ARSVERK-grp-5310/SysselsattRegnskapsforervirksomhetArsverkAntall-datadef-23589">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.04 Oppgi antall årsverk for ansatte tilknyttet  regnskapsførervirksomhet:</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>4.04: Skriv inn et positivt tall (inntil en desimal), evt. 0.</p>
+                    </xforms:alert>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/KVALITETSKONTROLL-grp-5312">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>5. KVALITETSKONTROLL</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>I denne sammenhengen tenkes det ikke på partners kontroll av oppdrag  utført av medarbeider(e), men på den overordnede kontrollen som  selskapet eventuelt har etablert, for å påse at revisjonen blir  utført i henhold til lover,
+                        forskrifter og selskapets metodikk.</p>
+                </xforms:help>
+                <xforms:selectOne ref="/Skjema/KVALITETSKONTROLL-grp-5312/RevisjonsselskapKvalitetskontroll-datadef-13097">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.01 Har revisjonsselskapet etablert overordnet kvalitetskontroll?</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>5.01: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                </xforms:selectOne>
+                <xforms:group ref="/Skjema/KVALITETSKONTROLL-grp-5312/HvilkeRevisjonsoppdragOmfattesAvSlikKontroll-grp-5313">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.02 Hvilke revisjonsoppdrag omfattes av slik kontroll?</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Flere alternativer kan krysses av.</p>
+                    </xforms:hint>
+                    <xforms:selectMany ref="/Skjema/KVALITETSKONTROLL-grp-5312/HvilkeRevisjonsoppdragOmfattesAvSlikKontroll-grp-5313/RevisjonsselskapKvalitetskontrollRevisjonsoppdrag-datadef-23590">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Børsnoterte revisjonsklienter  </p>
+                                    <p/>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>2</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Revisjonsklienter over en viss størrelse med høy risiko  </p>
+                                    <p/>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>3</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Alle revisjonsoppdrag  </p>
+                                    <p/>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>4</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Alle oppdrag  </p>
+                                    <p/>
+                                    <p/>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>5</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Utvalgte oppdrag</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Minst ett av feltene må krysses av.</p>
+                        </xforms:alert>
+                    </xforms:selectMany>
+                </xforms:group>
+                <xforms:selectOne ref="/Skjema/KVALITETSKONTROLL-grp-5312/RevisjonsselskapKvalitetskontrollDokumentert-datadef-23591">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.03 Er kvalitetskontrollen dokumentert?</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>5.03: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/KVALITETSKONTROLL-grp-5312/RevisjonsselskapKvalitetskontrollDokumentertArAntall-datadef-23592">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.04 Hvor mange år blir denne dokumentasjonen oppbevart?</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>5.04: Skriv inn et tall fra 1 til 99.</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/KVALITETSKONTROLL-grp-5312/RevisjonsselskapKvalitetskontrollRapporteres-datadef-23593">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.05 Rapporteres resultatet av intern kvalitetskontroll årlig internt  i revisjonsselskapet?</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>5.05: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/KVALITETSKONTROLL-grp-5312/EtterutdanningRevisorrelatert-datadef-21811">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.06 Har revisjonsselskapet etablert rutiner som sikrer obligatorisk  etterutdannelse for ansvarlig(e) revisor(er)?</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>5.06: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                </xforms:selectOne>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SOKSMAL-grp-5314">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>6. SØKSMÅL</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/SOKSMAL-grp-5314/SoksmalErstatning-datadef-21810">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>6.01 Har det vært reist søksmål mot revisjonsselskapet og/eller  ansvarlig(e) revisor(er) i løpet av de to foregående år, med krav om  erstatning til klient?</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>6.01: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                </xforms:selectOne>
+                <xforms:group ref="/Skjema/SOKSMAL-grp-5314/Soksmal-grp-5339">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:input ref="/Skjema/SOKSMAL-grp-5314/Soksmal-grp-5339/SoksmalErstatningAntall-datadef-23597">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- Oppgi antall søksmål i ovennevnte periode</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Skriv inn et tall fra 1 til 999.</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SOKSMAL-grp-5314/Soksmal-grp-5339/SoksmalErstatningRettskraftigVirkningAntall-datadef-23598">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- Hvor mange av ovennevnte søksmål er avsluttet med rettskraftig  virkning, herunder evt. rettsforlik?</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Skriv inn et tall fra 0 til 999.</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SOKSMAL-grp-5314/Soksmal-grp-5339/SoksmalErstatningUtbetaltAntall-datadef-23599">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- Hvor mange av de avsluttede sakene har resultert i  erstatningsutbetaling til klient?</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Skriv inn et tall fra 0 til 999.</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:selectOne ref="/Skjema/SOKSMAL-grp-5314/SoksmalErstatningMinneligOrdning-datadef-23600">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>6.02 Ble det i de to foregående år reist krav om erstatning til klient  som har blitt avgjort ved minnelig ordning før hovedforhandling?</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>6.02: Enten ja eller nei må velges.</p>
+                    </xforms:alert>
+                </xforms:selectOne>
+                <xforms:group ref="/Skjema/SOKSMAL-grp-5314/Erstatningskrav-grp-5340">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:input ref="/Skjema/SOKSMAL-grp-5314/Erstatningskrav-grp-5340/SoksmalErstatningMinneligOrdningAntall-datadef-23642">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- Hvor mange slike saker har det vært?</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Skriv inn et tall fra 1 til 999.</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SOKSMAL-grp-5314/Erstatningskrav-grp-5340/SoksmalErstatningMinneligOrdningErkjentErstaningsansvAntall-datadef-23601">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- Hvor mange av sakene har ført til erkjennelse av erstatningsansvar  fra selskapets side?</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Skriv inn et tall fra 0 til 999.</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

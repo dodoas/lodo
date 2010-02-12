@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1022: Kontrolloppstilling over registrerte og innberettede beløp</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-769-3900.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-849/Avgiver-grp-91/OppgavegiverFodselsnummer-datadef-26"/>
+            <xforms:bind ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/Sum-grp-3060/LonnskostnaderLonnsoppgavepliktigeOppgavepliktige-datadef-11291" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1022 Kontrolloppstilling over registrerte og innberettede beløp for  2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Dette skjemaet skal fylles ut av alle som har oppgavepliktige  utbetalinger og som plikter å føre regnskap etter lov eller etter  forskrift gitt i medhold av lov, herunder offentlige etater og  institusjoner. Skjemaet skal sendes
+                    til likningskontoret.  Skattepliktige virksomheter skal levere skjemaet som vedlegg til  næringsoppgaven.  </p>
+                <p/>
+                <p>Hensikten med dette skjemaet er å avstemme de innberettede og  registrerte utbetalingene. De innberettede utbetalingene fremgår av  skjema RF-1025 Årsoppgave for arbeidsgiveravgift - Følgeskriv til  lønns- og trekkoppgaver. De
+                    samlede kostnadsførte og registrerte  oppgavepliktige ytelser skal spesifiseres for hver kontokode.  </p>
+                <p/>
+                <p>Dersom det er flere kontokoder enn det er linjer i skjemaet, må flere  skjemaer benyttes. Postene 111-115 skal kun fylles ut på det siste  skjemaet.  </p>
+                <p>De som har avvikende regnskapsår må basere oppstillingen på  kalenderåret.  </p>
+                <p/>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1022.  </p>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjemaet, RF-1022, helt eller delvis  bli benyttet også av andre offentlige organer som har hjemmel til å  innhente de samme
+                    opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt. samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1022 Kontrolloppstelling over registrerte og melde beløp for 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Dette skjemaet skal fyllast ut av alle som har oppgåvepliktige ytingar  og som pliktar å føre rekneskap etter lov eller etter føresegn gjeve  i medhald av lov, medrekna offentlege etatar og institusjonar.  Skjemaet skal sendast til
+                    likningskontoret. Skattepliktige verksemder  skal levere skjemaet som vedlegg til næringsoppgåva.  </p>
+                <p/>
+                <p>Fomålet med dette skjemaet er å få greie på om det er samsvar mellom  dei melde og registrerte utbetalingane. Dei melde utbetalingane  framgår av skjema RF-1025 Årsoppgåve for arbeidsgivaravgift -  Følgjeskriv til løns- og
+                    trekkoppgåver. Dei samla kostnadsførte og  registrerte oppgåvepliktige ytingar skal spesifiserast for kvar  kontokode.  </p>
+                <p/>
+                <p>Dersom det er fleire kontokodar enn det er linjer i skjemaet, må  fleire skjema nyttast. Postane 111 - 115 skal kun fyllast ut på det  siste skjemaet.  </p>
+                <p>Også dei som har avvikande regnskapsår må leggje kalenderåret til  grunn.  </p>
+                <p/>
+                <p>Andre offentlege organ sin bruk av opplysningar i RF-1022.  </p>
+                <p>For å samordna og forenkla oppgåveinnleveringa  frå næringslivet, kan  opplysningar som vart avgjeve i dette skjemaet, RF-1022, heilt eller  delvis bli nytta også av andre offentlege organ som har heimel til å  innhente dei same
+                    opplysningane, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysningar om evt. samordning kan ein få ved å vende seg til  Oppgåveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-849">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-849/Avgiver-grp-91">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Avgiver</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Avgivar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-849/Avgiver-grp-91/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-849/Avgiver-grp-91/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-849/Avgiver-grp-91/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Nærings-(kontor-)adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Nærings-(kontor-)adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-849/Avgiver-grp-91/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-849/Avgiver-grp-91/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-849/Avgiver-grp-91/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-849/Regnskapsforer-grp-97">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Ekstern regnskapsfører</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Ekstern rekneskapsførar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-849/Regnskapsforer-grp-97/RegnskapsforerNavn-datadef-280">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-849/Regnskapsforer-grp-97/RegnskapsforerOrganisasjonsnummer-datadef-3651">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-849/Regnskapsforer-grp-97/RegnskapsforerAdresse-datadef-281">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Nærings-(kontor-)adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Nærings-(kontor-)adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-849/Regnskapsforer-grp-97/RegnskapsforerPostnummer-datadef-6678">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-849/Regnskapsforer-grp-97/RegnskapsforerPoststed-datadef-6679">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Kontrolloppstilling over registrerte og innberettede beløp for 2005</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Merknader til utfylling av skjemaets side 2:  </p>
+                    <p>Dette skjemaet skal fylles ut av alle som har oppgavepliktige  utbetalinger og som plikter å føre regnskap etter lov eller forskrift  gitt i medhold av lov, herunder offentlige etater og institusjoner.  Skjemaet skal sendes til
+                        likningskontoret. Skattepliktige  virksomheter skal levere skjemaet som vedlegg til næringsoppgaven.  </p>
+                    <p>Hensikten med dette skjemaet er å avstemme de innberettede og  reigstrerte utbetalingene. De innberettede utbetalingene fremgår av  skjema RF-1025 Årsoppgave for arbeidsgiveravgift - Følgeskriv til  lønns- og trekkoppgaver. De
+                        samlede kostnadsførte og registrerte  oppgavepliktige ytelser skal spesifiseres for hver kontokode.  </p>
+                    <p>Dersom det er flere kontokoder enn det er linjer i skjema, må tabeller  benyttes.  </p>
+                    <p>De som har avvikende regnskapsår må basere oppstillingen på  kalenderåret.  </p>
+                    <p>Har den som plikter å gi oppgave, plikt til å ha revisor i henhold til  lov om revisjon og revisorer, skal også revisor underskrive. Det  samme gjelder dersom det etter lov eller forskrift benyttes  kommunerevisor.  </p>
+                    <p>Hver linje er nummerert av hensyn til referanse/identifikasjon.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Kontrolloppstelling over registrerte og melde beløp for 2005</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Merknader til utfyllinga av skjemaet side 2:  </p>
+                    <p>Dette skjemaet skal fyllast ut av alle som har oppgåvepliktige ytingar  og som pliktar å føre reknskap etter lov eller etter føresegn gjeve i  medhald av lov, medrekna offentlege etatar og institusjonar. Skjemaet  skal sendast
+                        til likningskontoret. Skattepliktige verksemder skal  levere skjemaet som vedlegg til næringsoppgåva.  </p>
+                    <p>Formålet med dette skjemaet er å få greie på om det er samsvar mellom  dei melde og reigstrerte utbetalingane. Dei melde utbetalingane  framgår av skjema RF-1025 Årsoppgåve for arbeidsgiveravgift -  Følgjeskriv til løns- og
+                        trekkoppgåver. Dei samla kostnadsførte og  registrerte oppgåvepliktige ytingar skal spesifiserast for kvar  kontokode.  </p>
+                    <p>Dersom det er fleire kontokoder enn det er linjer i skjema, må fleire  tabeller nyttast.  </p>
+                    <p>Også dei som har avvikande reknskapsår må leggje kalenderåret til  grunn.  </p>
+                    <p>Har den som skal gi oppgåve, plikt til å ha revisor etter lov om  revisjon og revisorer, skal også revisor underskrive oppgåva.  Det  same gjeld dersom det etter lov eller forskrift vert nytta  kommunerevisor.  </p>
+                    <p>Kvar linje er nummerert av omsyn til referanse/identifikasjon.</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_Spesifikasjoner-grp-779" nodeset="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/Spesifikasjoner-grp-779">
+                    <xforms:group ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/Spesifikasjoner-grp-779">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>100</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>100</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/Spesifikasjoner-grp-779/LonnskostnaderKontonummerSpesifisertKonti-datadef-8499">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>2 Under konto kode (nr.)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Som hovedregel er det underkontokode (kontonummer) og kontonavn fra  regnskapet som skal oppgis.  </p>
+                                <p>For linjene 111 - 115 er det tilstrekkelig at kontokode oppgis i de  tilfellene det er flere underkontokoder for hver linje.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>2 Under konto kode (nr.)</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Som hovudregel er det underkontokode (kontonummer)og kontonamn frå  rekneskapen som skal førast opp.  </p>
+                                <p>For linjene 111 - 115 er det tilstrekkelig at kontokode oppførast i  dei tilfella det er fleire underkontokodar for kvar linje.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/Spesifikasjoner-grp-779/LonnskostnaderKontonavnSpesifisertKonti-datadef-8509">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>3 Konto navn</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Som hovedregel er det kontonavn fra regnskapet som skal oppgis.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>3 Konto namn</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Som hovudregel er det kontonamn frå rekneskapen som skal førast opp.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/Spesifikasjoner-grp-779/LonnskostnaderOppgavepliktigeSpesifisertKonti-datadef-8500">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>4 Samlede kostnadsførte og registrerte lønnsoppgavepliktige ytelser</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Kolonnen skal inneholde de samlede kostnadsførte og registrerte  lønnsoppgavepliktige ytelser fra regnskapet for den enkelte kontoen.  Utbetalinger under grensen for oppgaveplikt skal også medtas. Ev.
+                                    tilskudd/refusjon vedr. arbeidskraft skal også oppgis på egen linje  (post 112 og 113) og skal ikke redusere den enkelte kostnadskontoen.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>4 Samla kostnadsførte og registrerte lønnsoppgåvepliktige ytingar</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Kolonna skal innehalde dei samla kostnadsførte og registrerte  lønnsoppgåvepliktige ytingane frå rekneskapen for den einskilde  kontoen. Utbetalingar under grensa for oppgåveplikt skal og takast  med. Ev.
+                                    tilskot/refusjon vedr. arbeidskraft skal førast opp på eiga  linje (post 112 og 113) og skal ikkje redusere den einskilde  kostnadskontoen.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/Spesifikasjoner-grp-779/GodtgjorelserTidligereArSpesifisertKonto-datadef-11293">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>5 Tillegg for kostnadsførte lønninnger mv. tidligere år, som er  utbetalt i sist forløpne år</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Kontokode og navn er knyttet mot kostnadskontoen. Tallene i kolonne 5  hentes fra den konto i balansen som er knyttet mot den aktuelle  resultatkontoen. Hvis avsetning til flere resultatposter er ført mot  samme
+                                    balansekonto, kan balansekontoen føres på egen linje.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>5 Tillegg for kostnadsførte løner m.m. tidlegare år, men som er  utbetalt i året som gjekk</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Kontokode og namn er knytta til kostnadskontoen. Tala i kolonnene 5  hentast frå den kontoen i balansen som er knytta mot resultatkontoen.  Dersom avsetning til fleire resultatpostar er ført mot same  balansekonto,
+                                    kan balansekontoen førast på eiga linje.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/Spesifikasjoner-grp-779/FradragIkkeForfalteLonningerPaloptSpesifisertKonto-datadef-11294">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>6 Fradrag for påløpte, ikke forfalte lønninger mv. i sist forløpne år  som ikke er innberettet</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Kontokode og navn er knyttet mot kostnadskontoen. Tallene i kolonne 6  hentes fra den konto i balansen som er knyttet mot den aktuelle  resultatkontoen. Hvis avsetning til flere resultatposter er ført mot  samme
+                                    balansekonto, kan balansekontoen føres på egen linje.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>6 Frådrag for opptente, ikkje forfalne løner m.m. i året som gjekk som  ikkje er melde</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Kontokode og namn er knytta til kostnadskontoen. Tala i kolonne 6  hentast frå den kontoen i balansen som er knytta mot resultatkontoen.  Dersom avsetning til fleire resultatpostar er ført mot same  balansekonto,
+                                    kan balansekontoen førast på eiga linje.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/Spesifikasjoner-grp-779/LonnskostnaderOppgavepliktigeSpesifisertKonto-datadef-11295">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>7 Samlede oppgavepliktige ytelser</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Sum kolonne 7 skal stemme med pkt 1 Sum samlede oppgavepliktige  ytelser i henhold til lønnsoppgaver i skjema RF-1025 Årsoppgave for  arbeidsgiveravgift - Følgeskriv til lønns- og trekkoppgaver.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Kolonne 4 + 5 - 6</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>7 Samla oppgåvepliktige ytingar</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Sum kolonne 7 skal stemme med pkt 1 Sum samla oppgåvepliktige ytingar  i henhold til lønnsoppgåvene i skjema RF-1025 Årsoppgåve for  arbeidsgiveravgift - Følgjeskriv til løns- og trekkoppgåve.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Kolonne 4 + 5 - 6</p>
+                            </xforms:hint>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/Spesifikasjoner-grp-779/LonnskostnaderArbeidsgiveravgiftspliktigeSpesifisertKonto-datadef-11296">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>8 Arbeidsgiveravgiftspliktige ytelser</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Det som skal oppgis her er det beløp av årets utbetalte  oppgavepliktige ytelser (kolonne 7) som er  arbeidsgiveravgiftspliktig, spesifisert pr. konto. Sum kolonne 8 skal  stemme med pkt 3.0 Sum avgiftssone 1-5 i
+                                    skjema RF-1025 Årsoppgave  for arbeidsgiveravgift - Følgeskriv til lønns- og trekkoppgaver.</p>
+                            </xforms:help>
+                            <xforms:caption brreg:lang="NON">
+                                <p>8 Arbeidsgivaravgiftspliktige ytingar</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Det som skal førast opp i denne kolonna er det beløp av årets  utbetalte oppgåvepliktige ytingar (kolonne 7) som er  arbeidsgiveravgiftspliktig, spesifisert pr. konto. Sum kolonne 8 skal  stemme med pkt 3.0 Sum
+                                    avgiftssone 1-5 i skjema RF-1025 Årsoppgåve  for arbeidsgiveravgift - Følgjeskriv til løns- og trekkoppgåve.</p>
+                            </xforms:help>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:group ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/Sum-grp-3001">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>110 Sum</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>110 Sum</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/Sum-grp-3001/LonnskostnaderOppgavepliktige-datadef-8501">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum samlede kostnadsførte og registrerte lønnsoppgavepliktige ytelser</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum samla kostnadsførte og registrerte lønsoppgåvepliktige ytingar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/Sum-grp-3001/GodtgjorelserTidligereAr-datadef-6630">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum tillegg for kostnadsførte lønninnger mv. tidligere år, som er  utbetalt i sist forløpne år</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum tillegg for kostnadsførte løner m.m. tidlegare år, men som er  utbetalt i året som gjekk</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/Sum-grp-3001/FradragIkkeForfalteLonningerPalopt-datadef-6633">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum fradrag for påløpte, ikke forfalte lønninger mv. i sist forløpne  år som ikke er innberettet</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum frådrag for opptente, ikkje forfalne løner m.m. i året som gjekk  som ikkje er melde</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/Sum-grp-3001/LonnskostnaderOppgavepliktigeSamlede-datadef-14876">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum samlede oppgavepliktige ytelser</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum samla oppgavepliktige ytingar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/Sum-grp-3001/YtelserArbeidsgiveravgiftspliktige-datadef-14888">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum arbeidsgiveravgiftspliktige ytelser</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum arbeidsgivaravgiftspliktige ytingar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/SamletKreditertBelop-grp-3055">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>111 Samlet beløp som er kreditert konto for naturalytelser</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>111 Samla beløp som er kreditert konto for naturalytingar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/SamletKreditertBelop-grp-3055/AnsattNaturalytelserKontonummer-datadef-13878">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2 Underkontokode (nr.)</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Som hovedregel er det underkontokode (kontonummer) fra regnskapet som  skal oppgis. For linjene 111-115 er det tilstrekkelig at kontokode  oppgis i de tilfellene det er flere underkontokoder for hver linje.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>2 Underkontokode (nr.)</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Som hovudregel er det underkontokode (kontonummer) frå rekneskapen som  skal førast opp. For linjene 111-115 er det tilstrekkeleg at  kontokode oppførast i dei tilfella det er fleire underkontokodar for  kvar linje.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/SamletKreditertBelop-grp-3055/AnsattNaturalytelser-datadef-6627">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4 Samlede kostnadsførte og registrerte lønnsoppgavepliktige ytelser</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Kolonnen skal inneholde de samlede kostnadsførte og registrerte  lønnsoppgavepliktige ytelser fra regnskapet for den enkelte kontoen.  Utbetalinger under grensen for oppgaveplikt skal også medtas. Ev.  tilskudd/refusjon
+                                vedr. arbeidskraft skal også oppgis på egen linje  (post 112 og 113) og skal ikke redusere den enkelte kostnadskontoen.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>4 Samla kostnadsførte og registrerte lønnsoppgåvepliktige ytingar</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Kolonna skal innehalde dei samla kostnadsførte og registrerte  lønnsoppgåvepliktige ytingane frå rekneskapen for den einskilde  kontoen. Utbetalingar under grensa for oppgåveplikt skal og takast  med. Ev.
+                                tilskot/refusjon vedr. arbeidskraft skal førast opp på eiga  linje (post 112 og 113) og skal ikkje redusere den einskilde  kostnadskontoen.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/OffentligTilskuddVedrorendeArbeidskraft-grp-3056">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>112 Offentlig tilskudd vedrørende arbeidskraft</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Eksempel på konto som skal føres på linje 112  </p>
+                        <p>Offentlige tilskudd arbeidskraft (kontokodegr. 57): Kontokode 570  Lærlingetilskudd.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>112 Offentlig tilskot vedr. arbeidskraft</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Eksempel på konti som skal førast på linje 112:  </p>
+                        <p>Offentlege tilskot arbeidskraft (kontokodegr 57): Kontokode 570  Lærlingetilskot.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/OffentligTilskuddVedrorendeArbeidskraft-grp-3056/TilskuddOffentligArbeidskraftKontonummer-datadef-13879">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2 Underkontokode (nr.)</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Som hovedregel er det underkontokode (kontonummer) fra regnskapet som  skal oppgis. For linjene 111-115 er det tilstrekkelig at kontokode  oppgis i de tilfellene det er flere underkontokoder for hver linje.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>2 Underkontokode (nr.)</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Som hovudregel er det underkontokode (kontonummer) frå rekneskapen som  skal førast opp. For linjene 111-115 er det tilstrekkeleg at  kontokode oppførast i dei tilfella det er fleire underkontokodar for  kvar linje.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/OffentligTilskuddVedrorendeArbeidskraft-grp-3056/TilskuddOffentligArbeidskraft-datadef-7711">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4 Samlede kostnadsførte og registrerte lønnsoppgavepliktige ytelser</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Kolonnen skal inneholde de samlede kostnadsførte og registrerte  lønnsoppgavepliktige ytelser fra regnskapet for den enkelte kontoen.  Utbetalinger under grensen for oppgaveplikt skal også medtas. Ev.  tilskudd/refusjon
+                                vedr. arbeidskraft skal også oppgis på egen linje  (post 112 og 113) og skal ikke redusere den enkelte kostnadskontoen.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>4 Samla kostnadsførte og registrerte lønnsoppgåvepliktige ytingar</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Kolonna skal innehalde dei samla kostnadsførte og registrerte  lønnsoppgåvepliktige ytingane frå rekneskapen for den einskilde  kontoen. Utbetalingar under grensa for oppgåveplikt skal og takast  med. Ev.
+                                tilskot/refusjon vedr. arbeidskraft skal førast opp på eiga  linje (post 112 og 113) og skal ikkje redusere den einskilde  kostnadskontoen.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/OffentligRefusjonVedrorendeArbeidskraft-grp-3057">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>113 Offentlig refusjon vedrørende arbeidskraft inkl.  arbeidsgiveravgift</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Eksempel på kontoer som skal føres på linje 113:  </p>
+                        <p>Offentlig refusjon av arbeidskraft (kontokodegr. 58): Kontokode 580  Refusjon sykepenger og 582 Refusjon av arbeidsgiveravgift.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>113 Offentleg refusjon vedrørande arbeidskraft inkl.  arbeidsgivaravgift</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Eksempel på konti som skal førast på linjene 113:  </p>
+                        <p>Offentleg refusjon av arbeidskraft (kontokodegr 58): Kontokode 580  Refusjon sjukepengar og 582 Refusjon av arbeidsgivaravgift.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/OffentligRefusjonVedrorendeArbeidskraft-grp-3057/RefusjonOffentligArbeidskraftKontonummer-datadef-13880">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2 Underkontokode (nr.)</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Som hovedregel er det underkontokode (kontonummer) fra regnskapet som  skal oppgis. For linjene 111-115 er det tilstrekkelig at kontokode  oppgis i de tilfellene det er flere underkontokoder for hver linje.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>2 Underkontokode (nr.)</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Som hovudregel er det underkontokode (kontonummer) frå rekneskapen som  skal førast opp. For linjene 111-115 er det tilstrekkeleg at  kontokode oppførast i dei tilfella det er fleire underkontokodar for  kvar linje.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/OffentligRefusjonVedrorendeArbeidskraft-grp-3057/RefusjonOffentligArbeidskraft-datadef-7712">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>4 Samlede kostnadsførte og registrerte lønnsoppgavepliktige ytelser</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Kolonnen skal inneholde de samlede kostnadsførte og registrerte  lønnsoppgavepliktige ytelser fra regnskapet for den enkelte kontoen.  Utbetalinger under grensen for oppgaveplikt skal også medtas. Ev.  tilskudd/refusjon
+                                vedr. arbeidskraft skal også oppgis på egen linje  (post 112 og 113) og skal ikke redusere den enkelte kostnadskontoen.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>4 Samla kostnadsførte og registrerte lønnsoppgåvepliktige ytingar</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Kolonna skal innehalde dei samla kostnadsførte og registrerte  lønnsoppgåvepliktige ytingane frå rekneskapen for den einskilde  kontoen. Utbetalingar under grensa for oppgåveplikt skal og takast  med. Ev.
+                                tilskot/refusjon vedr. arbeidskraft skal førast opp på eiga  linje (post 112 og 113) og skal ikkje redusere den einskilde  kostnadskontoen.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/AretsInnbetalingAvArbeidsgiveravgiftOl-grp-3058">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>114 Årets innbetaling av arbeidsgiveravgiftspliktig tilskudd og  premier til pensjonsordning</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>114 Årets innbetaling av arbeidsgivaravgiftspliktig tilskot og premiar  til pensjonsordning</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/AretsInnbetalingAvArbeidsgiveravgiftOl-grp-3058/PensjonsordningerTilskuddPremieAvgiftspliktigeKontonummer-datadef-13881">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2 Underkontokode (nr.)</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Som hovedregel er det underkontokode (kontonummer) fra regnskapet som  skal oppgis. For linjene 111-115 er det tilstrekkelig at kontokode  oppgis i de tilfellene det er flere underkontokoder for hver linje.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>2 Underkontokode (nr.)</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Som hovudregel er det underkontokode (kontonummer) frå rekneskapen som  skal førast opp. For linjene 111-115 er det tilstrekkeleg at  kontokode oppførast i dei tilfella det er fleire underkontokodar for  kvar linje.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/AretsInnbetalingAvArbeidsgiveravgiftOl-grp-3058/PensjonsordningerTilskuddPremieAvgiftspliktige-datadef-11297">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>8 Arbeidsgiveravgiftspliktige ytelser</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>8 Arbeidsgivaravgiftspliktige ytingar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/BeregnetPersoninntekt-grp-3059">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>115 Beregnet personinntekt for aktive aksjonærer</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>115 Utrekna personinntekt for aktive aksjonærar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/BeregnetPersoninntekt-grp-3059/PersoninntektAktiveAkjonarerBeregnet-datadef-6632">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>7 Samlede oppgavepliktige ytelser</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>7 Samla oppgåvepliktige ytingar</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/Sum-grp-3060">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>120 Sum</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>120 Sum</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/Sum-grp-3060/LonnskostnaderLonnsoppgavepliktigeOppgavepliktige-datadef-11291">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum samlede oppgavepliktige ytelser</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Sum kolonne 7 skal stemme med pkt 1 Sum samlede oppgavepliktige  ytelser i henhold til lønnsoppgaver i skjema RF-1025 Årsoppgave for  arbeidsgiveravgift - Følgeskriv til lønns- og trekkoppgaver.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Post 110-7 + 115-7</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum samla oppgåvepliktige ytingar</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Sum kolonne 7 skal stemme med pkt 1 Sum samla oppgåvepliktige ytingar  i henhold til lønnsoppgåvene i skjema RF-1025 Årsoppgåve for  arbeidsgiveravgift - Følgjeskriv til løns- og trekkoppgåve.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Post 110-7 + 115-7</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/KontrolloppstillingOverRegistrerteOgInnberettedeBelop-grp-98/Sum-grp-3060/LonnskostnaderLonnsoppgavepliktigeArbeidsgiveravgiftspliktige-datadef-11292">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum arbeidsgiveravgiftspliktige ytelser</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Det som skal oppgis her er det beløp av årets utbetalte  oppgavepliktige ytelser (kolonne 7) som er  arbeidsgiveravgiftspliktig, spesifisert pr. konto. Sum kolonne 8 skal  stemme med pkt 1 Sum avgiftssone 1-5 i skjema
+                                RF-1025 Årsoppgave for  arbeidsgiveravgift - Følgeskriv til lønns- og trekkoppgaver.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Post 110-8 + 114-8</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Sum arbeidsgivaravgiftspliktige ytingar</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Det som skal førast opp i denne kolonna er det beløp av årets  utbetalte oppgåvepliktige ytingar (kolonne 7) som er  arbeidsgiveravgiftspliktig, spesifisert pr. konto. Sum kolonne 8 skal  stemme med pkt 1 Sum
+                                avgiftssone 1-5 i skjema RF-1025 Årsoppgåve for  arbeidsgiveravgift - Følgjeskriv til løns- og trekkoppgåve.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Post 110-8 + 114-8</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">KT-0301: Innmelding av kraftpriser</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-913-3978.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/Opplysninger-grp-5288/OpplysningerOmKraftleverandoren-grp-5291/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Opplysninger-grp-5288/OpplysningerOmKraftleverandoren-grp-5291/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Opplysninger-grp-5288/OpplysningerOmKraftleverandoren-grp-5291/EnhetPostadresse-datadef-14"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Opplysninger-grp-5288/OpplysningerOmKraftleverandoren-grp-5291/EnhetPostnummer-datadef-6673"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Opplysninger-grp-5288/OpplysningerOmKraftleverandoren-grp-5291/EnhetPoststed-datadef-6674"/>
+            <xforms:bind ref="/Skjema/Opplysninger-grp-5288/Kontaktperson-grp-5292/KontaktpersonFornavn-datadef-18747" required="true"/>
+            <xforms:bind ref="/Skjema/Opplysninger-grp-5288/Kontaktperson-grp-5292/KontaktpersonEtternavn-datadef-18748" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>Innmelding av kraftpriser</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Skjemaet skal benyttes for å rapportere endringer i kraftpriser.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/Opplysninger-grp-5288">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Opplysninger om kraftleverandøren</p>
+                </xforms:caption>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Opplysninger om leverandøren som skal vises på prisoversikten</p>
+                </xforms:hint>
+                <xforms:group ref="/Skjema/Opplysninger-grp-5288/OpplysningerOmKraftleverandoren-grp-5291">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Selskapsopplysninger</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Opplysninger-grp-5288/OpplysningerOmKraftleverandoren-grp-5291/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Org.nr</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Opplysninger-grp-5288/OpplysningerOmKraftleverandoren-grp-5291/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kraftleverandør</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Opplysninger-grp-5288/OpplysningerOmKraftleverandoren-grp-5291/EnhetTelefonnummerKundetelefon-datadef-18744">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kundetelefon</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Opplysninger-grp-5288/OpplysningerOmKraftleverandoren-grp-5291/EnhetTelefaksnummer-datadef-1816">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefaks</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Opplysninger-grp-5288/OpplysningerOmKraftleverandoren-grp-5291/EnhetEPostKundeEPost-datadef-18745">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kunde E-mail</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Opplysninger-grp-5288/OpplysningerOmKraftleverandoren-grp-5291/EnhetWebadresse-datadef-6281">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Webside</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Opplysninger-grp-5288/OpplysningerOmKraftleverandoren-grp-5291/EnhetWebadresseBestillingsskjema-datadef-18746">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Bestillingsskjema</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Opplysninger-grp-5288/OpplysningerOmKraftleverandoren-grp-5291/EnhetPostadresse-datadef-14">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Opplysninger-grp-5288/OpplysningerOmKraftleverandoren-grp-5291/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Opplysninger-grp-5288/OpplysningerOmKraftleverandoren-grp-5291/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sted</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Opplysninger-grp-5288/OpplysningerOmKraftleverandoren-grp-5291/ProduktNavn-datadef-3122">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Produkt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Opplysninger-grp-5288/Kontaktperson-grp-5292">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kontaktperson hos kraftleverandøren</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Opplysninger-grp-5288/Kontaktperson-grp-5292/KontaktpersonFornavn-datadef-18747">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fornavn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Opplysninger-grp-5288/Kontaktperson-grp-5292/KontaktpersonEtternavn-datadef-18748">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Etternavn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Opplysninger-grp-5288/Kontaktperson-grp-5292/KontaktpersonTelefonnummer-datadef-3">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefon</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Opplysninger-grp-5288/Kontaktperson-grp-5292/KontaktpersonEPost-datadef-2876">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>E-mail</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Opplysninger-grp-5288/Kontaktperson-grp-5292/KontaktpersonMobiltelefonnummer-datadef-7626">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Mobil</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Spotpris-grp-5287">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Spotpris</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Spotpris-grp-5287/VarselOmEndringIMarkedskraftTilHusholdningskunder-grp-5293">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Varsel om endring i markedskraft til husholdningskunder</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Prisene (påslag og evt. fastbeløp) oppgis uten elavgift, inklusive  mva. Dette gjelder også for leverandører som har hovedleveringsområde  i Nord-Norge.Bare varslinger som trer i kraft om 2 uker eller kortere  blir
+                            publisert på kraftpris listen.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/Spotpris-grp-5287/VarselOmEndringIMarkedskraftTilHusholdningskunder-grp-5293/ElektrisitetSalgSpotprisHusholdningerPaslag-datadef-23049">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Påslag</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(øre/kwh)</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Spotpris-grp-5287/VarselOmEndringIMarkedskraftTilHusholdningskunder-grp-5293/ElektrisitetSalgFastbelopHusholdninger-datadef-23045">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fastbeløp</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(kr/år)</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Spotpris-grp-5287/VarselOmEndringIMarkedskraftTilHusholdningskunder-grp-5293/ElektrisitetSalgSpotprisHusholdningerNyttPaslagDato-datadef-23050">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Nytt påslag gjelder fra</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(datoformat dd.mm.yyyy)</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Spotpris-grp-5287/OpplysningerOmKontrakt-grp-5295">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Opplysninger om kontrakt</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Betalingsinformasjon. Vennligst gi kort informasjon om selskapets  betalings og faktureringsrutiner. Eksempelvis betalingsform (  forskudd, akonto e.l.) og normalt faktureringspunkt.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/Spotpris-grp-5287/OpplysningerOmKontrakt-grp-5295/ElektrisitetSpotprisBetalingsinformasjon-datadef-23051">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Betalingsinformasjon</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Spotpris-grp-5287/Leveringsomrade-grp-5294">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Leveringsområde</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Leveringsområde, landsdekkende eller med leveringebegrensninger.</p>
+                    </xforms:hint>
+                    <xforms:selectOne ref="/Skjema/Spotpris-grp-5287/Leveringsomrade-grp-5294/ElektrisitetLeveringsomrade-datadef-18749">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Alle_kommuner</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Leverandøren leverer eller tilbyr levering av markedskraft (spotpris) i alle nettområder (dvs. er landsdekkende).</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Noen_kommuner</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Leverandøren har begrensninger på hvilke nettområder leverandøren leverer kraft (dvs. er ikke landsdekkende). Hvis det er leveringsbegrensninger, så skal det spesifiseres hvilke kommuner leverandøren dekker.</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/Spotpris-grp-5287/Leveringsomrade-grp-5294/ElektrisitetSpotprisLeveringsomradeKommune-datadef-23053">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommuner leverandøren kan levere til</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Spotpris-grp-5287/AktiveringAvLeverandor-grp-5296">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Aktivering av leverandør</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/Spotpris-grp-5287/AktiveringAvLeverandor-grp-5296/ElektrisitetSpotprisLeverandorAktivering-datadef-23054">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ikke_aktiv</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Leverandøren leverer ikke markedskraft (spotpris) og vil bare vises på historiske lister.</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Aktiv</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Leverandøren leverer markedskraft (spotpris) og skal være med i prisoversikten.</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:selectOne>
+                </xforms:group>
+                <xforms:selectOne ref="/Skjema/Spotpris-grp-5287/ElektrisitetSpotprisPrisendring-datadef-24015">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Skal det rapporteres endring i pris?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+            </xforms:group>
+            <xforms:group ref="/Skjema/StdVariabel-grp-5289">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Std.variabel</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/StdVariabel-grp-5289/VarselOmEndringAvStandardVariabelKraftprisTilHusholdningskunde-grp-5297">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Varsel om endring av standard variabel kraftpris til husholdningskunde</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Prisene (påslag og evt. fastbeløp) oppgis uten elavgift, inklusive  mva. Dette gjelder også for leverandører som har hovedleveringsområde  i Nord-Norge.Bare varslinger som trer i kraft om 2 uker eller kortere  blir
+                            publisert på kraftpris listen.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/StdVariabel-grp-5289/VarselOmEndringAvStandardVariabelKraftprisTilHusholdningskunde-grp-5297/ElektrisitetSalgKraftprisStandardVariabelHusholdninger-datadef-23044">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kraftpris</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(øre/kwh)</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/StdVariabel-grp-5289/VarselOmEndringAvStandardVariabelKraftprisTilHusholdningskunde-grp-5297/ElektrisitetSalgFastbelopStandardVariabelHusholdninger-datadef-23643">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fastbeløp kraft</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(kr/år)</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/StdVariabel-grp-5289/VarselOmEndringAvStandardVariabelKraftprisTilHusholdningskunde-grp-5297/ElektrisitetSalgNyPrisStandardVariabelHusholdningerDato-datadef-23046">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ny pris gjelder fra</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(datoformat dd.mm.yyyy)</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/StdVariabel-grp-5289/OpplysningerOmKontrakt-grp-5298">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Opplysninger om kontrakt</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Betalingsinformasjon. Vennligst gi kort informasjon om selskapets  betalings og faktureringsrutiner. Eksempelvis betalingsform (  forskudd, akonto e.l.) og normalt faktureringspunkt.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/StdVariabel-grp-5289/OpplysningerOmKontrakt-grp-5298/ElektrisitetStandardVariabelBetalingsinformasjon-datadef-23644">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Betalingsinformasjon</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/StdVariabel-grp-5289/Leveringsomrade-grp-5299">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Leveringsområde</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Leveringsområde, landsdekkende eller med leveringebegrensninger.</p>
+                    </xforms:hint>
+                    <xforms:selectOne ref="/Skjema/StdVariabel-grp-5289/Leveringsomrade-grp-5299/ElektrisitetStandardVariabelLeveringsomrade-datadef-23655">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Alle_kommuner</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Leverandøren leverer eller tilbyr levering av standard variabel kraftpris i alle nettområder (dvs. er landsdekkende).</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Noen_kommuner</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Leverandøren har begrensninger på hvilke nettområder leverandøren leverer kraft (dvs. er ikke landsdekkende). Hvis det er leveringsbegrensninger, så skal det spesifiseres hvilke kommuner leverandøren dekker.</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/StdVariabel-grp-5289/Leveringsomrade-grp-5299/ElektrisitetStandardVariabelLeveringsomradeKommune-datadef-23645">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommuner leverandøren kan levere til</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/StdVariabel-grp-5289/AktiveringAvLeverandor-grp-5300">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Aktivering av leverandør</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/StdVariabel-grp-5289/AktiveringAvLeverandor-grp-5300/ElektrisitetStandardVariabelLeverandorAktivering-datadef-23646">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ikke_aktiv</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Leverandøren leverer ikke standard variabel kraftpris og vil bare vises på historiske lister.</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Aktiv</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Leverandøren leverer stardard variabel kraftpris og skal være med i prisoversikten.</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:selectOne>
+                </xforms:group>
+                <xforms:selectOne ref="/Skjema/StdVariabel-grp-5289/ElektrisitetStandardVariabelPrisendring-datadef-24016">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Skal det rapporteres endring i pris?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Fastpris-grp-5290">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Fastpris</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Fastpris-grp-5290/EndringAvFastprisavtalerTilHusholdningskunder-grp-5301">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Endring av fastprisavtaler til husholdningskunder</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Prisene (kraftpris og evt fastbeløp) oppgis inklusive mva. Dette  gjelder også for leverandører som har hovedleveringsområde i  Nord-Norge. Endringene blir oppdatert på kraftbørsen etter maks 10  minutter.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/Fastpris-grp-5290/EndringAvFastprisavtalerTilHusholdningskunder-grp-5301/ElektrisitetKraftprisFastpriskontrakt1ArPris-datadef-23047">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fastpris-grp-5290/EndringAvFastprisavtalerTilHusholdningskunder-grp-5301/ElektrisitetFastbelopFastpriskontrakt1Ar-datadef-23647">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Pris</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(øre/kWh)</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fastpris-grp-5290/EndringAvFastprisavtalerTilHusholdningskunder-grp-5301/ElektrisitetKraftprisFastpriskontrakt3ArPris-datadef-23048">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>3 år</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fastpris-grp-5290/EndringAvFastprisavtalerTilHusholdningskunder-grp-5301/ElektrisitetFastbelopFastpriskontrakt3Ar-datadef-23648">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fastbeløp</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(kr/år)</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Fastpris-grp-5290/OpplysningerOmKontrakt-grp-5302">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Opplysninger om kontrakt</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Betalingsinformasjon. Vennligst gi kort informasjon om selskapets  betalings og faktureringsrutiner. Eksempelvis betalingsform (  forskudd, akonto e.l.) og normalt faktureringspunkt</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/Fastpris-grp-5290/OpplysningerOmKontrakt-grp-5302/ElektrisitetFastprisBetalingsinformasjon-datadef-23651">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Betalingsinformasjon</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Fastpris-grp-5290/Leveringsomrade-grp-5303">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Leveringsområde</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Leveringsområde, landsdekkende eller med leveringebegrensninger.</p>
+                    </xforms:hint>
+                    <xforms:selectOne ref="/Skjema/Fastpris-grp-5290/Leveringsomrade-grp-5303/ElektrisitetFastprisLeveringsomrade-datadef-23652">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Alle_kommuner</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Leverandøren leverer eller tilbyr levering av fastpriskontrakt i alle nettområder (dvs. er landsdekkende).</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Noen_kommuner</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Leverandøren har begrensninger på hvilke nettområder leverandøren leverer kraft (dvs. er ikke landsdekkende). Hvis det er leveringsbegrensninger, så skal det spesifiseres hvilke kommuner leverandøren dekker.</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/Fastpris-grp-5290/Leveringsomrade-grp-5303/ElektrisitetFastprisLeveringsomradeKommune-datadef-23653">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommuner leverandøren kan levere til</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Fastpris-grp-5290/AktiveringAvLeverandor-grp-5304">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Aktivering av leverandør</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/Fastpris-grp-5290/AktiveringAvLeverandor-grp-5304/ElektrisitetFastprisLeverandorAktivering-datadef-23654">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ikke_aktiv</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Leverandøren leverer ikke fastpriskontrakt og vil bare vises på historiske lister.</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Aktiv</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Leverandøren leverer fastpriskontrakt og skal være med i prisoversikten.</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                    </xforms:selectOne>
+                </xforms:group>
+                <xforms:selectOne ref="/Skjema/Fastpris-grp-5290/ElektrisitetFastprisPrisendring-datadef-24017">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Skal det rapporteres endring i pris?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

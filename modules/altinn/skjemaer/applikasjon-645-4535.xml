@@ -1,0 +1,1673 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1153: Skattlegging av vannkraftverk</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-645-4536.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-1059/Selskap-grp-524/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-1059/Kraftverk-grp-2508/AnleggNavn-datadef-2547" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1153 Skattlegging av vannkraftverk 2005</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Del 1 og 2 i skjemaet RF-1153 skal fylles ut for alle vannkraftverk  med samlet påstemplet merkeytelse på 5 500 kVA eller mer.  </p>
+                <p/>
+                <p>Del 3 - Eiendomsskattegrunnlag skal bare fylles ut for kraftverk med  samlet påstemplet merkeytelse på 10 000 kVA eller mer.  </p>
+                <p/>
+                <p>Generatorer tilkoblet turbiner som har inntak i vassdraget samme sted  og utløp i vassdraget samme sted, slik at samme vannfall utnyttes,  regnes å tilhøre samme kraftverk. Et aggregat regnes som satt ut av  drift når røret er
+                    fysisk frakoblet. Dersom aggregatet har vært ute  av drift mer enn halve inntektsåret, regnes vedkommende generators  merkeytelse ikke med i vurderingen av grensen for samlet påstemplet  merkeytelse på 5 500/10 000 kVA.  </p>
+                <p>Det skal fylles ut et skjema for hvert kraftanlegg.  </p>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i ligningsloven § 4-4 nr. 7  og Finansdepartementets delegeringsvedtak av 28. nov. 1994, jf.  forskrift av 19. nov. 1999 nr. 1158 kapittel 18.  </p>
+                <p/>
+                <p>Andre offentlige myndigheters bruk av opplysninger i RF-1153:  </p>
+                <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjema, RF-1153, helt eller delvis bli  benyttet også av andre offentlige organer som har hjemmel til å  innhente de samme
+                    opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om ev. samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon  </p>
+                <p>75 00 75 00, eller til Skattedirektoratet på telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Opplysninger om grunnrenteinntekt, naturressursskatt og  eiendomsskattegrunnlag etter skl § 18</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-1059">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-1059/Selskap-grp-524">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Selskap</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Skattepliktig som eier vannkraftverk eller som er berettiget til uttak  av kraft, skal svare grunnrenteskatt til staten. Det skal bare svares  grunnrenteskatt for kraftverk med samlet påstemplet merkeytelse på  1500 kVA
+                            eller mer. Det skal fastsettes en grunnrenteinntekt for  hvert kraftverk. Blanketten må derfor fylles ut for hvert kraftverk.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1059/Selskap-grp-524/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1059/Selskap-grp-524/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1059/Selskap-grp-524/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1059/Selskap-grp-524/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1059/Selskap-grp-524/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-1059/Regnskapsforer-grp-530">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Regnskapsfører</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1059/Regnskapsforer-grp-530/RegnskapsforerNavn-datadef-280">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1059/Regnskapsforer-grp-530/RegnskapsforerAdresse-datadef-281">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1059/Regnskapsforer-grp-530/RegnskapsforerPostnummer-datadef-6678">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1059/Regnskapsforer-grp-530/RegnskapsforerPoststed-datadef-6679">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-1059/Kraftverk-grp-2508">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kraftverk</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1059/Kraftverk-grp-2508/AnleggLopenummer-datadef-19639">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Løpenr.</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Skal angis med fire siffer</p>
+                        </xforms:hint>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1059/Kraftverk-grp-2508/AnleggNavn-datadef-2547">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1059/Kraftverk-grp-2508/AnleggKommune-datadef-2759">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommune</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1059/Kraftverk-grp-2508/AnleggKommunenummer-datadef-10352">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kommunenr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1059/Kraftverk-grp-2508/KraftverkMerkeytelse-datadef-5929">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Den samlede  </p>
+                            <p>påstemplede  </p>
+                            <p>merkeytelsen i kVA</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1059/Kraftverk-grp-2508/EVerkEierandel-datadef-2056">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Eierandel</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever to desimaler</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev to desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/BruttoGrunnrenteinntekt-grp-526">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Brutto grunnrenteinntekt</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Hensikten med skatt på grunnrente er å skattlegge den meravkastningen  som oppstår ved at det i vannkraftproduksjonen gjøres bruk av den  begrensede naturressursen vannkraft. Grunnrenteskatt er pålagt eiere  av vannkraftverk
+                        med samlet påstemplet merkeytelse på 5 500 kVA eller  mer. For kraftverk som skal deltakerlignes etter en bruttometode  fastsettes grunnrenteinntekt for hver av deltakerne.  Grunnrenteinntekten skal fastsettes som
+                        salgsinntekter fratrukket  driftskostnader, avskrivninger, eiendomsskatt, konsesjonsavgift og  friinntekt som har til hensikt å skjerme normalavkastningen i det  enkelte kraftverk.  </p>
+                    <p>Utgangspunktet er at kraftverkets årlige salgsinntekter beregnes ved  at summen av årets spotmarkedspriser pr. time multipliseres med den  faktiske produksjon som har foregått i kraftverket i de tilhørende  tidsperioder. Det er
+                        imidlertid gjort unntak fra spotprismodellen når  det gjelder konsesjonskraft, levering iht. langvarig kontrakt og  kraft som forbrukes i produksjonsvirksomhet innen den skattepliktiges  eget foretak.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Skattepliktig som eier vannkraftverk skal svare grunnrenteskatt til  staten. Det skal bare svares grunnrenteskatt for kraftverk med samlet  påstemplet merkeytelse på 5 500 kVA eller mer. Det skal fastsettes en
+                        grunnrenteinntekt for hvert kraftverk.</p>
+                </xforms:hint>
+                <xforms:group ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/ArsproduksjonIKraftverket-grp-2510">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>110 Årsproduksjon i kraftverket</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Skattyter har plikt til å måle kraftproduksjonen time for time i hvert  kraftverk. Produksjonsdataene må lagres på elektronisk lesbart  medium. Dette legges til grunn ved fastsettelsen av årsproduksjonen i  kraftverket.
+                            Dersom skattyter ikke kan dokumentere eller  sannsynliggjøre produksjonstallene på en tilfredsstillende måte,  fastsetter likningsmyndighetene beregningsgrunnlaget skjønnsmessig  bl.a. på grunnlag av de opplysninger som er
+                            registrert hos Statnett  og påstemplet merkeytelse omregnet til installert effekt multiplisert  med antall timer i det aktuelle tidsrom.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/ArsproduksjonIKraftverket-grp-2510/ElektrisitetProduksjon-datadef-833">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>kWh</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftTattUtAvVerket-grp-2511">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>111 Kraft tatt ut av verket iht. konsesjon</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kraft som tas ut av verket iht. til vilkår for konsesjon  (konsesjonskraft) skal verdsettes til oppnådde priser. For  konsesjonskraft avstått i medhold av konsesjoner etter 1. april 1959  vil dette si konsesjonskraftprisen
+                            som hvert år fastsettes av Olje-  og Energidepartementet.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Multiplisert med oppnådd konsesjonspris.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftTattUtAvVerket-grp-2511/ElektrisitetKonsesjon-datadef-5920">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>kWh</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftTattUtAvVerket-grp-2511/ElektrisitetKonsesjonPris-datadef-5921">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x pris</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever tre desimaler</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev tre desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftTattUtAvVerket-grp-2511/SalgsinntekterElektrisitetKonsesjonskraft-datadef-6648">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftLevertIhtLangsiktigKontraktInngattForJanuar-grp-2512">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>112 Kraft levert iht. langsiktig kontrakt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kraft som leveres iht. langsiktig kjøpekontrakt inngått før 1. januar  1996 med uavhengig kjøper verdsettes til kontraktsprisen. Med  langsiktig kontrakt menes kontrakt som har en varighet på 7 år eller  mer.  </p>
+                        <p>Ved forlengelse av slike kontrakter regnes det som fortsatt  kontraktsforhold dersom forlengelsen skjer på grunnlag av kjøpers  eller leietakers opsjon.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Inngått før 1. januar 1996 multiplisert med kontraktspris.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftLevertIhtLangsiktigKontraktInngattForJanuar-grp-2512/KraftKontraktLangsiktigFor01011996-datadef-13263">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>kWh</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftLevertIhtLangsiktigKontraktInngattForJanuar-grp-2512/KraftKontraktLangsiktigPrisFor01011996-datadef-13264">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x pris</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever tre desimaler</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev tre desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftLevertIhtLangsiktigKontraktInngattForJanuar-grp-2512/SalgsinntekterKraftKontraktLangsiktigFor01011996-datadef-13265">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftLevertIhtLangsiktigKontraktInngattJanuarEllerSenere-grp-2513">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>113 Kraft levert iht. langsiktig kontrakt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kraft levert iht. kontrakter som inngås 1. januar 1996 eller senere på  stortingsbestemte vilkår med varighet på 7 år eller mer, verdsettes  til kontraktsprisen.  </p>
+                        <p>Ved forlengelse av slike kontrakter regnes det som fortsatt  kontraktsforhold dersom forlengelsen skjer på grunnlag av kjøpers  eller leietakers opsjon.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Inngått 1. januar 1996 eller senere, multiplisert med kontraktspris</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftLevertIhtLangsiktigKontraktInngattJanuarEllerSenere-grp-2513/KraftKontraktLangsiktigEtter311295-datadef-13254">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>kWh</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftLevertIhtLangsiktigKontraktInngattJanuarEllerSenere-grp-2513/KraftKontraktLangsiktigPrisEtter311295-datadef-13255">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x pris</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever tre desimaler</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev tre desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftLevertIhtLangsiktigKontraktInngattJanuarEllerSenere-grp-2513/SalgsinntekterKraftKontraktLangsiktigEtter311295-datadef-13256">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftLevertIhtAndreTyperKontrakterInngattJanuarEllerSenere-grp-2515">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>114 Kraft levert iht. andre typer kontrakter</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kraft levert iht. andre kontrakter som inngås 1. januar 1996 eller  senere med uavhengig kjøper, verdsettes til kontraktsprisen dersom  kontrakten har en varighet på mer enn 7 år og omfatter en samlet  kraftleveranse på
+                            minst 150 GWh i løpet av kontraktsperioden og  kraften forbrukes i kjøpers produksjonsvirksomhet.  </p>
+                        <p>Ved forlengelse av slike kontrakter regnes det som fortsatt  kontraktsforhold dersom forlengelsen skjer på grunnlag av kjøpers  eller leietakers opsjon.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Inngått 1. januar 1996 eller senere, multiplisert med kontraktspris.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftLevertIhtAndreTyperKontrakterInngattJanuarEllerSenere-grp-2515/KraftKontraktAnnenEtter31121995-datadef-13266">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>kWh</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftLevertIhtAndreTyperKontrakterInngattJanuarEllerSenere-grp-2515/KraftKontraktAnnenPrisEtter31121995-datadef-13267">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x pris</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever tre desimaler</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev tre desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftLevertIhtAndreTyperKontrakterInngattJanuarEllerSenere-grp-2515/SalgsinntekterKraftKontraktAnnenEtter31121995-datadef-13268">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftTattUtIhtLangsiktigLeiekontraktInngattForJanuar-grp-2514">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>115 Kraft levert iht. langsiktig leiekontrakt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kraft som tas ut av verket iht. langsiktig leieavtale inngått før 1.  januar 1996 med uavhengig leietaker og med varighet på 7 år eller  mer, verdsettes til kontraktsprisen.  </p>
+                        <p>Ved forlengelse av slike kontrakter regnes det som fortsatt  kontraktsforhold dersom forlengelsen skjer på grunnlag av kjøpers  eller leietakers opsjon.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Inngått før 1. januar 1996 multiplisert med kontraktsprisen.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftTattUtIhtLangsiktigLeiekontraktInngattForJanuar-grp-2514/KraftLeiekontraktLangsiktigFor01011996-datadef-13269">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>kWh</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftTattUtIhtLangsiktigLeiekontraktInngattForJanuar-grp-2514/KraftLeiekontraktLangsiktigPrisFor01011996-datadef-13270">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x pris</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever tre desimaler</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev tre desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftTattUtIhtLangsiktigLeiekontraktInngattForJanuar-grp-2514/SalgsinntekterKraftLeiekontraktLangsiktigFor01011996-datadef-13271">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftTattUtIhtLangsiktigLeiekontraktInnngattJanuarEllerSener-grp-2516">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>116 Kraft tatt ut iht. langsiktig leiekontrakt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Langsiktig leieavtale inngått 1. januar 1996 eller senere med  uavhengige parter og som har en varighet på 15 år eller mer, skal  kraften verdsettes til kontraktspris når kraften som tas ut av  leietaker forbrukes i
+                            leietakers egen produksjonsvirksomhet, herunder  selskap i samme konsern.  </p>
+                        <p>Ved forlengelse av slike kontrakter regnes det som fortsatt  kontraktsforhold dersom forlengelsen skjer på grunnlag av kjøpers  eller leietakers opsjon.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Innngått 1. januar 1996 eller senere, multiplisert med kontraktspris.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftTattUtIhtLangsiktigLeiekontraktInnngattJanuarEllerSener-grp-2516/KraftLeiekontraktLangsiktigEtter31121995-datadef-13257">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>kWh</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftTattUtIhtLangsiktigLeiekontraktInnngattJanuarEllerSener-grp-2516/KraftLeiekontraktLangsiktigPrisEtter31121995-datadef-13258">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x pris</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever tre desimaler</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev tre desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftTattUtIhtLangsiktigLeiekontraktInnngattJanuarEllerSener-grp-2516/SalgsinntekterKraftLeiekontraktLangsiktigEtter31121995-datadef-13259">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftForbruktIEgenProduksjonsvirksomhet-grp-2517">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>117 Kraft forbrukt i egen produksjonsvirksomhet</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kraft som forbrukes i produksjonsvirksomhet som eies av den  skattepliktige, verdsettes til prisen på den kraft som leveres iht.  Statkraft 1976-kontrakter.  </p>
+                        <p/>
+                        <p>Krav til dokumentasjon  </p>
+                        <p>Skattyter som har kraft som forbrukes i egen produksjonsvirksomhet  (post 117) eller som har mottatt leveranse av kraft som skal  verdsettes etter post 112 - 116, må for det enkelte inntektsår på  eget vedlegg til
+                            selvangivelsen framlegge en dokumentert oversikt som  viser:  </p>
+                        <p>a)  Årets forbruk av kraft i skattyters produksjonsvirksomhet  </p>
+                        <p>b)  Årets krafttilgang iht. kontrakter eller leieavtaler som skal  verdsettes etter post 112 - 116  </p>
+                        <p>c)  Årets produksjon i skattyters egne kraftverk, samt andel av  kraftproduksjon som skattyter har rett til å disponere i kraftverk  hvor skattyter har eierandeler.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Multiplisert med statkraftpris.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftForbruktIEgenProduksjonsvirksomhet-grp-2517/ElektrisitetEgetForbruk-datadef-5924">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>kWh</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftForbruktIEgenProduksjonsvirksomhet-grp-2517/ElektrisitetEgetForbrukPris-datadef-5925">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x pris</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever tre desimaler</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev tre desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/KraftForbruktIEgenProduksjonsvirksomhet-grp-2517/ElektrisitetEgetForbrukVerdi-datadef-6672">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/Arsproduksjon-grp-2518">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>118 Årsproduksjon</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Årsproduksjonen i kraftverket (post 110) fratrekkes kraft tatt ut av  verket iht. konsesjon (faktor i post 111), kraft levert iht.  langsiktig kontrakt eller leieavtale (faktor i postene 112-116) og  kraft forbrukt i egen
+                            produksjonsvirksomhet (faktor i post 117). Den  resterende del årsproduksjonen av kraft multipliseres med  spotmarkedsprisen i tilhørende time.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Fra post 110, redusert med postene 111-117.</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/Arsproduksjon-grp-2518/ElektrisitetProduksjonRedusert-datadef-10353">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/Arsproduksjon-grp-2518/SalgsinntekterElektrisitetSpotmarked-datadef-10354">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x spotmarkedspris i tilhørende tidsavsnitt</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/SumBruttoSalgsinntekt-grp-2519">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>119 Sum brutto salgsinntekt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Summering av post 111 til 118.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/SumBruttoSalgsinntekt-grp-2519/SalgsinntekterElektrisitetBrutto-datadef-10368">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/InntektsforingAvGevinstVedRealisasjonAvDriftsmidlerSomBenyttes-grp-2520">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>120 Inntektsføring av gevinst ved realisasjon av driftsmidler som  benyttes i kraftproduksjon</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Inntektsføring av gevinst ved realisasjon av driftsmidler som benyttes  i kraftproduksjon tillegges brutto salgsinntekter. Skatteloven §§  14-44 til 14-46 gjelder tilsvarende ved inntektsføring av gevinst som  nevnt.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/InntektsforingAvGevinstVedRealisasjonAvDriftsmidlerSomBenyttes-grp-2520/DriftsmidlerRealisasjonGevinst-datadef-18071">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/SumBruttoGrunninntekt-grp-2521">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>121 Sum brutto grunninntekt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Summen i post 119 tillegges beløpet i post 120. Brutto  grunnrenteinntekt overføres til post 150.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Overføres til post 150</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/BruttoGrunnrenteinntekt-grp-526/SumBruttoGrunninntekt-grp-2521/SalgsinntekterGrunnrenteBrutto-datadef-6639">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/BruttoFradragIGrunnrenteinntekten-grp-527">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Brutto fradrag i grunnrenteinntekten</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/BruttoFradragIGrunnrenteinntekten-grp-527/DriftskostnaderGrunnrenteinntekt-datadef-14819">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>130 Driftskostnader</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Driftskostnader som regulært følger av kraftproduksjon som kan fradras  brutto salgsinntekter. Kostnader som er knyttet til flere kraftverk  eller som også er knyttet til annen virksomhet enn kraftproduksjon,  skal etter
+                            loven fordeles på en måte som er egnet til å gi samsvar  mellom kostnadsandel og nytte for hvert verk eller for kraftverket og  annen virksomhet.  </p>
+                        <p>Det gis ikke fradrag for salgs-, overførings- eller  finansieringskostnader. Det gis likevel fradrag for kostnader ved  innmating av kraft til nettet.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:group ref="/Skjema/BruttoFradragIGrunnrenteinntekten-grp-527/KostnaderTilPumpingAvKraft-grp-2522">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>131 Kostnader til pumping av kraft</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kostnader til pumper og pumpestasjoner med merkeytelse 10 000 kVA  eller mer, settes til medgått pumpekraftkvantum i et tidsavsnitt  multiplisert med spotmarkedspris i tilhørende tidsavsnitt. For pumper  og pumpestasjoner
+                            med merkeytelse under 10 000 kVA benyttes en  gjennomsnittlig spotmarkedspris for den aktuelle driftsperioden, jf.  forskrift av 19 nov. 1999 nr. 1158 § 18-3-26 (1), jf § 18-3-9.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/BruttoFradragIGrunnrenteinntekten-grp-527/KostnaderTilPumpingAvKraft-grp-2522/DriftskostnaderPumpekraftOver9999KVA-datadef-13260">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kraftverk med 10 000 kVA eller mer</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/BruttoFradragIGrunnrenteinntekten-grp-527/KostnaderTilPumpingAvKraft-grp-2522/DriftskostnaderPumpekraftUnder10000KVA-datadef-13261">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Kraftverk under 10 000 kVA</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/BruttoFradragIGrunnrenteinntekten-grp-527/AvgifterOffentlige-datadef-3208">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>132 Konsesjonsavgift</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Det enkelte kraftverk kan kreve fradrag for den konsesjonsavgift som  betales av dette kraftverket.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BruttoFradragIGrunnrenteinntekten-grp-527/SkattEiendom-datadef-5927">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>133 Eiendomsskatt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Det enkelte kraftverk kan kreve fradrag for den del av eiendomsskatten  som betales av dette kraftverket. Det gis ikke fradrag for andre  skatter betalt av kraftverket, f.eks. naturressursskatt.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BruttoFradragIGrunnrenteinntekten-grp-527/DriftsmidlerKraftproduksjonAvskrivninger-datadef-13262">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>134 Skattemessige avskrivinger i alminnelig inntekt på driftsmidler i  kraftproduksjon</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Det er her bare de skattemessige avskrivningene etter skatteloven §  14-40 flg. ved beregningen av alminnelig inntekt som kommer til  fradrag. Fradragsretten omfatter avskrivninger både på driftsmidler  som direkte benyttes
+                            i kraftproduksjon, og driftsmidler som inngår  mer indirekte i virksomheten. Det forekommer at et driftsmiddel er  til nytte i flere virksomheter enn bare kraftproduksjon. I slike  tilfeller må det skje en fordeling av
+                            avskrivningene. Denne  fordelingen må skje forholdsmessig etter størrelsen på  nettoinntekten.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BruttoFradragIGrunnrenteinntekten-grp-527/DriftsmidlerRealisasjonTapGrunnrenteinntekt-datadef-14820">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>135 Tap ved realisasjon av driftsmidler</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Fradragsføring av tap ved realisasjon av driftsmidler som benyttes i  kraftproduksjon tillegges brutto fradragsposter. Skatteloven §§ 14-44  til 14-46 gjelder tilsvarende ved fradragsføring av tap som nevnt.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/BruttoFradragIGrunnrenteinntekten-grp-527/FradragGrunnrenteinntekt-datadef-14821">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>136 Sum brutto fradrag</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Sum brutto fradrag</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Overføres til post 151</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Friinntekt-grp-528">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Friinntekt</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Det gis fradrag i grunnrenteinntekten for en friinntekt. Friintekten  fastsettes til gjennomsnittet av inntektsårets inngående og utgående  skattemessige verdi på driftsmidler multiplisert med en normrente.  Inn under begrepet
+                        driftsmidler går i denne sammenheng også ervervet  forretningsverdi og immaterielle rettigheter knyttet til  kraftproduksjon i verket.  </p>
+                    <p/>
+                    <p>Ved fastsettelse av driftsmidlenes skattemessige verdi tas det, for  saldoavskrivbare driftsmidler, utgangspunkt i saldoverdien. Negativ  saldo, gevinst- og tapskonto og tom positiv saldo ses det helt bort  fra i denne
+                        sammenheng.  </p>
+                    <p/>
+                    <p>Ved realisasjon av kraftverk skal friinntekten beregnes separat for  overdrager og erverver, jf. forskriften § 18-3-28. For overdrager  beregnes friinntekten på bakgrunn av denne inngående skattemessige  verdi av driftsmidlene
+                        mv. pr. 1.januar i realisasjonsåret.  </p>
+                    <p/>
+                    <p>For erverver beregnes friintekten på bakgrunn av gjennomsnittet av  dennes inn- og utgående skattemessige verdier av driftsmidlene.  Inngående skattemessige verdi er kjøpesummen og utgående  skattemessige verdi er skattemessige
+                        verdi pr. 31.desember i  anskaffelsesåret. For overdrager og erverver reduseres friintekten  forholdsmessig etter hvor stor del av inntektsåret de har eid  kraftverket.</p>
+                </xforms:help>
+                <xforms:input ref="/Skjema/Friinntekt-grp-528/DriftsmidlerKraftanleggInngangsverdi-datadef-18072">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>140 Skattemessig verdi driftsmidler pr. 01.01.05</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Det gis fradrag i grunnrenteinntekten for en friinntekt. Friinntekten  fastsettes til gjennomsnittet av inntektsårets inngående og utgående  skattemessige verdi på driftsmidler multiplisert med en normrente.  Inn under
+                            begrepet driftsmidler går i denne sammenheng også ervervet  forretningsverdi og immaterielle rettigheter knyttet til  kraftproduksjon i verket.  </p>
+                        <p>Ved fastsettelse av driftsmidlenes skattemessige verdi tas det, for  saldoavskrivbare driftsmidler, utgangspunkt i saldoverdien. Negativ  saldo, gevinst- og tapskonto og tom positiv saldo ses det helt bort  fra i denne
+                            sammenheng.  </p>
+                        <p>Ved realisasjon av kraftverk skal friinntekten beregnes separat for  overdrager og erverver, jf. forskriften § 18-3-28. For overdrager  beregnes fri-inntekten på bakgrunn av dennes inngående skattemessige  verdi av
+                            driftsmidlene mv. pr. 1. januar i realisasjonsåret.  </p>
+                        <p>For erverver beregnes friinntekten på bakgrunn av gjennomsnittet av  dennes inn- og utgående skattemessige verdier av driftsmidlene.  Inngående skattemessige verdi er kjøpesummen og utgående  skattemessige verdi er
+                            skattemessig verdi pr. 31. desember i  anskaffelsesåret. For overdrager og erverver reduseres friinntekten  forholdsmessig etter hvor stor del av inntektsåret de har eid  kraftverket.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Se rettledning for beregning av friinntekt i realisasjonsåret.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Friinntekt-grp-528/DriftsmidlerUtgangsverdiSkattemessig-datadef-18073">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>141 Skattemessig verdi driftsmidler pr. 31.12.05</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Det gis fradrag i grunnrenteinntekten for en friinntekt. Friinntekten  fastsettes til gjennomsnittet av inntektsårets inngående og utgående  skattemessige verdi på driftsmidler multiplisert med en normrente.  Inn under
+                            begrepet driftsmidler går i denne sammenheng også ervervet  forretningsverdi og immaterielle rettigheter knyttet til  kraftproduksjon i verket.  </p>
+                        <p>Ved fastsettelse av driftsmidlenes skattemessige verdi tas det, for  saldoavskrivbare driftsmidler, utgangspunkt i saldoverdien. Negativ  saldo, gevinst- og tapskonto og tom positiv saldo ses det helt bort  fra i denne
+                            sammenheng.  </p>
+                        <p>Ved realisasjon av kraftverk skal friinntekten beregnes separat for  overdrager og erverver, jf. forskriften § 18-3-28. For overdrager  beregnes fri-inntekten på bakgrunn av dennes inngående skattemessige  verdi av
+                            driftsmidlene mv. pr. 1. januar i realisasjonsåret.  </p>
+                        <p>For erverver beregnes friinntekten på bakgrunn av gjennomsnittet av  dennes inn- og utgående skattemessige verdier av driftsmidlene.  Inngående skattemessige verdi er kjøpesummen og utgående  skattemessige verdi er
+                            skattemessig verdi pr. 31. desember i  anskaffelsesåret. For overdrager og erverver reduseres friinntekten  forholdsmessig etter hvor stor del av inntektsåret de har eid  kraftverket.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Se rettledning for beregning av friinntekt i realisasjonsåret.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Friinntekt-grp-528/DriftsmidlerInngaendeUtgaendeSkattemessig-datadef-13272">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>142 Gjennomsnitt av inngående og utgående skattemessig verdi</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Det gis fradrag i grunnrenteinntekten for en friinntekt. Friinntekten  fastsettes til gjennomsnittet av inntektsårets inngående og utgående  skattemessige verdi på driftsmidler multiplisert med en normrente.  Inn under
+                            begrepet driftsmidler går i denne sammenheng også ervervet  forretningsverdi og immaterielle rettigheter knyttet til  kraftproduksjon i verket.  </p>
+                        <p>Ved fastsettelse av driftsmidlenes skattemessige verdi tas det, for  saldoavskrivbare driftsmidler, utgangspunkt i saldoverdien. Negativ  saldo, gevinst- og tapskonto og tom positiv saldo ses det helt bort  fra i denne
+                            sammenheng.  </p>
+                        <p>Ved realisasjon av kraftverk skal friinntekten beregnes separat for  overdrager og erverver, jf. forskriften § 18-3-28. For overdrager  beregnes fri-inntekten på bakgrunn av dennes inngående skattemessige  verdi av
+                            driftsmidlene mv. pr. 1. januar i realisasjonsåret.  </p>
+                        <p>For erverver beregnes friinntekten på bakgrunn av gjennomsnittet av  dennes inn- og utgående skattemessige verdier av driftsmidlene.  Inngående skattemessige verdi er kjøpesummen og utgående  skattemessige verdi er
+                            skattemessig verdi pr. 31. desember i  anskaffelsesåret. For overdrager og erverver reduseres friinntekten  forholdsmessig etter hvor stor del av inntektsåret de har eid  kraftverket.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Friinntekt-grp-528/FriinntekterSkattemessigGjennonsnitt-datadef-14824">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>:2</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Normrenten fastsettes og kunngjøres av Finansdepartementet i januar i  året etter inntektsåret.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Friinntekt-grp-528/NormrenteGrunnrenteinntekt-datadef-14822">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>143 Normrente</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Normrenten fastsettes og kunngjøres av Finansdepartementet i januar i  året etter inntektsåret.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever to desimaler</p>
+                    </xforms:alert>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev to desimalar</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Friinntekt-grp-528/Friinntekt-datadef-5928">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>144 Friinntekt</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Friinntekten overføres til post 152.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Overføres til post 152.</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Grunnrenteinntekt-grp-529">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Grunnrenteinntekt</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Sum brutto grunnrenteinntekt overføres fra post 121. Sum brutto  fradrag i grunnrenteinntekten (overføres fra post 136) og friinntekt  (overføres fra post 144) kommer til fradrag i sum brutto  grunnrenteinntekt. Summen som
+                        fremkommer i post 153 er  grunnrenteinntekt i 2004. Fremførbar negativ grunnrenteinntekt fra  tidligere inntektsår inkludert renter kommer til fradrag i årets  grunnrenteinntekt og føres i post 154.  Beløpet hentes fra vedlegg
+                        til skatteoppgjøret 2003. Summen i post 155 er skattepliktig  grunnrenteinntekt til staten i 2004. Beløpet i post 155 overføres til  RF-1151, kolonne 5. Dersom grunnrenteinntekten er negativ, kan den  ikke komme til fradrag i
+                        positiv grunnrenteinntekt fra andre  kraftverk i foretaket. Negativ grunnrenteinntekt overføres til  kolonne 4 i RF-1151 og fremføres til fradrag i senere års positive  grunnrenteinntekt i samme kraftverk.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Negativt beløp overføres til RF-1151, kolonne 4. Positivt beløp til  RF-1151, kolonne 5</p>
+                </xforms:hint>
+                <xforms:input ref="/Skjema/Grunnrenteinntekt-grp-529/InntekterGrunnrente-datadef-6640">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>153 Grunnrenteinntekt til staten</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Grunnrenteinntekt-grp-529/InntekterGrunnrenteKraftverk-datadef-14823">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>155 Skattepliktig grunnrenteinntekt til staten</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Overføres til RF-1151</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Grunnrenteinntekt-grp-529/InntektGrunnrenteNegativFramforbarTidligereInntektsar-datadef-22865">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>154 Fremførbar negativ grunnrenteinntekt fra tidligere inntektsår  inkl. renter</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/naturressursskatt-grp-5061">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>2 Naturressursskatt</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Skattepliktig som eier vannkraftverket eller som er berettiget til  uttak av kraft, skal svare naturressursskatt til de kommuner og  fylkeskommuner som er tilordnet kraftanleggsformuen. Det skal bare  svares naturressursskatt i
+                        kraftverk som har samlet påstemplet  merkeytelse på 5 500 kVA eller mer. Det skal beregnes et grunnlag for  naturressursskatt for hvert kraftverk. Det skal fylles ut ett skjema  for hvert kraftverk</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/naturressursskatt-grp-5061/arsproduksjon-grp-5062">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>210 Årsproduksjon i kWh</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/naturressursskatt-grp-5061/arsproduksjon-grp-5062/ElektrisitetProduksjon1999Kraftverk-datadef-14872">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>1999</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/naturressursskatt-grp-5061/arsproduksjon-grp-5062/ElektrisitetProduksjon2000Kraftverk-datadef-14873">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2000</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/naturressursskatt-grp-5061/arsproduksjon-grp-5062/ElektrisitetProduksjon2001Kraftverk-datadef-14874">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2001</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/naturressursskatt-grp-5061/arsproduksjon-grp-5062/ElektrisitetProduksjon2002Kraftverk-datadef-17025">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2002</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/naturressursskatt-grp-5061/arsproduksjon-grp-5062/ElektrisitetProduksjon2003Kraftverk-datadef-19640">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2003</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/naturressursskatt-grp-5061/arsproduksjon-grp-5062/ElektrisitetProduksjon2004Kraftverk-datadef-22275">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2004</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/naturressursskatt-grp-5061/arsproduksjon-grp-5062/ElektrisitetProduksjon2005Kraftverk-datadef-24229">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>2005</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/naturressursskatt-grp-5061/arsproduksjon-grp-5062/ElektrisitetArsproduksjon-datadef-19465">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Sum årsproduksjon alle år</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>: 7</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/naturressursskatt-grp-5061/gjennomsnitt-grp-5063">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Gjennomsnittlig produksjon siste 7 år</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/naturressursskatt-grp-5061/gjennomsnitt-grp-5063/ElektrisitetProduksjonGjennomsnitt-datadef-10372">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>211 Sum årsproduksjon alle år delt på antall år (7)</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Fastsettelsen av naturressursskatt skjer på grunnlag av inntektsårets-  og de 6 foregående års produksjon. Summen av produksjonen i årene  1998 til og med 2004 skal divideres på 7 selv om verket har vært i  drift i
+                                færre enn 7 år. Ved fastsettelsen av naturressursskatten skal  denne gjennomsnittsproduksjonen fastsatt i kWh multipliseres med en  sats fastsatt i skatteloven § 18-2 nr. 3.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/naturressursskatt-grp-5061/gjennomsnitt-grp-5063/ElektrisitetProduksjonPumpekraft-datadef-5945">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>212 Medgått pumpekraft</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Totalproduksjon for kraftverket skal reduseres med medgått pumpekraft  i verket eller i separate pumper. Dersom medgått pumpekvantum har  vært til nytte ved produksjonen i flere kraftverk som skattyteren har  plikt til
+                                å svare naturressursskatt av, skal denne kraften fordeles  på en måte som gir samsvar mellom andel av medgått pumpekraftkvantum  og nytte for hvert verk, beregnet etter forholdet mellom  energiekvivalentene nedstrøms i
+                                det magasin det pumpes til.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/naturressursskatt-grp-5061/gjennomsnitt-grp-5063/NaturressursskattGrunnlag-datadef-14870">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>213 Grunnlag for beregning av naturressursskatt</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Gjennomsnittlig produksjon de siste 7 år omregnet til kWh minus  medgått pumpekraft er grunnlaget for beregning av naturressursskatt  og overføres til RF-1151 Vedlegg til selvangivelsen 2004, kolonne 6.</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:repeat id="repeat_prKommune-grp-5064" nodeset="/Skjema/naturressursskatt-grp-5061/prKommune-grp-5064">
+                    <xforms:group ref="/Skjema/naturressursskatt-grp-5061/prKommune-grp-5064">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Beregning av naturressursskatt pr. kommune</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dersom kraftanlegget strekker seg over flere kommuner, må grunnlaget  for utskriving av naturressursskatt fordeles mellom de berørte  kommuner. Fordelingen skjer etter reglene i skatteloven § 18-7. For  kraftanlegg som
+                                ble tilordnet skattegrunnlag i 1996, sklal grunnlaget  for beregning av naturressursskatt fordeles forholdsmessig etter  kommunens andel av kraftverkets skattemessige formuesverdi ved  likningen for inntektsåret 1996,
+                                jf. § 18-7 (8). Grunnlaget i hver  enkelt kommune avrundes nedover til nærmeste 1000 kWh og føres opp i  post 214.</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/naturressursskatt-grp-5061/prKommune-grp-5064/AnleggKommuneSpesifisertKommuneNummer-datadef-19318">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter positive integer with four digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Kommunenummer</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever positivt heltall med fire siffer</p>
+                            </xforms:alert>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev positivt heiltal med fire siffer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/naturressursskatt-grp-5061/prKommune-grp-5064/AnleggSpesifisertAnleggSkattegrunnlag-datadef-19319">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Grunnlag pr. kommune</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+            <xforms:group ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>3 Formuesverdi 2005/eiendomsskattegrunnlag 2007</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Fylles bare ut for kraftverk med samlet påstemplet merkeytelse 10 000  kVA eller mer</p>
+                </xforms:help>
+                <xforms:group ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekter-grp-5067">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Brutto salgsinntekter 2001</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekter-grp-5067/ElektrisitetProduksjon2001-datadef-14121">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>310 Årsproduksjon 2001</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekter-grp-5067/ElektrisitetKonsesjon2001-datadef-14191">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>311 Konsesjonskraft</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekter-grp-5067/ElektrisitetKonsesjonPris2001-datadef-14193">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x pris</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever tre desimaler</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev tre desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekter-grp-5067/SalgsinntekterElektrisitetKonsesjonskraft2001-datadef-14195">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Konsesjonskraft multiplisert med konsesjonskraftpris</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekter-grp-5067/ElektrisitetProduksjonRedusert2001-datadef-14197">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>312 Årsproduksjon fra (post 310) redusert med konsesjonskraft</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekter-grp-5067/SalgsinntekterElektrisitetSpotmarked2001-datadef-14199">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x spotmarkedspris</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekter-grp-5067/SalgsinntekterElektrisitet2001-datadef-20156">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>313 Brutto salgsinntekt 2001</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Sum av post 311 og 312</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekter-grp-5067/SalgsinntekterElektrisitetIndeksregulert2001-datadef-17059">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>314 Indeksregulert brutto salgsinntekt fra 2001</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(Inntekt 2001 x indeks 2005) / 108,7</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterTo-grp-5068">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Brutto salgsinntekter 2002</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterTo-grp-5068/ElektrisitetProduksjon2002-datadef-17041">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>315 Årsproduksjon 2002</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterTo-grp-5068/ElektrisitetKonsesjon2002-datadef-17042">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>316 Konsesjonskraft</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterTo-grp-5068/ElektrisitetKonsesjonPris2002-datadef-17043">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x pris</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever tre desimaler</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev tre desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterTo-grp-5068/SalgsinntekterElektrisitetKonsesjonskraft2002-datadef-17044">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Konsesjonskraft multiplisert med konsesjonskraftpris</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterTo-grp-5068/ElektrisitetProduksjonRedusert2002-datadef-17045">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>317 Årsproduksjon fra (post 315) redusert med konsesjonskraft</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterTo-grp-5068/SalgsinntekterElektrisitetSpotmarked2002-datadef-17046">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x spotmarkedspris</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterTo-grp-5068/SalgsinntekterElektrisitet2002-datadef-17047">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>318 Brutto salgsinntekt i 2002</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Sum av post 316 og 317</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterTo-grp-5068/SalgsinntekterElektristietIndeksregulert2002-datadef-17048">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>319 Indeksregulert brutto salgsinntekt fra 2002</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(Inntekt 2002 x indeks 2005) / 110,1</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterTre-grp-5069">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Brutto salgsinntekter 2003</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterTre-grp-5069/ElektrisitetProduksjon2003-datadef-20157">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>320 Årsproduksjon 2003</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterTre-grp-5069/ElektrisitetKonsesjon2003-datadef-20158">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>321 Konsesjonskraft</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterTre-grp-5069/ElektrisitetKonsesjonPris2003-datadef-20159">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x pris</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever tre desimaler</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev tre desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterTre-grp-5069/SalgsinntekterElektrisitetKonsesjonskraft2003-datadef-20160">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Konsesjonskraft multiplisert med konsesjonskraftpris</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterTre-grp-5069/ElektrisitetProduksjonRedusert2003-datadef-20161">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>322 Årsproduksjon fra (post 320) redusert med konsesjonskraft</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterTre-grp-5069/SalgsinntekterElektrisitetSpotmarked2003-datadef-20162">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x spotmarkedspris</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterTre-grp-5069/SalgsinntekterElektrisitet2003-datadef-20163">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>323 Brutto salgsinntekt i 2003</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Sum av post 321 og 322</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterTre-grp-5069/SalgsinntekterElektrisitetIndeksregulert2003-datadef-22276">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>324 Indeksregulert brutto salgsinntekt fra 2003</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(Inntekt 2003 x indeks 2005) / 112,8</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterFire-grp-5070">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Brutto salgsinntekter 2004</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterFire-grp-5070/ElektrisitetProduksjon2004-datadef-22277">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>325 Årsproduksjon i 2004</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterFire-grp-5070/ElektrisitetKonsesjon2004-datadef-22278">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>326 Konsesjonskraft</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterFire-grp-5070/ElektrisitetKonsesjonPris2004-datadef-22279">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x pris</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever tre desimaler</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev tre desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterFire-grp-5070/SalgsinntekterElektrisitetKonsesjonskraft2004-datadef-22280">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Konsesjonskraft multiplisert med konsesjonskraftpris</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterFire-grp-5070/ElektrisitetProduksjonRedusert2004-datadef-22281">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>327 Årsproduksjon fra (post 325) redusert med konsesjonskraft</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterFire-grp-5070/SalgsinntekterElektrisitetSpotmarked2004-datadef-22282">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x spotmarkedspris</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterFire-grp-5070/SalgsinntekterElektrisitet2004-datadef-22283">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>328 Brutto salgsinntekt i 2004</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Sum av post 326 og 327</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekterFire-grp-5070/SalgsinntekterElektrisitetGjennomsnitt-datadef-10356">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>329 Indeksregulert brutto salgsinntekt fra 2004</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(Inntekt 2004 x indeks 2005) / 113,3</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekter-grp-5066">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Brutto salgsinntekter 2005</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekter-grp-5066/SalgsinntekterElektrisitetIndeksregulert2004-datadef-24230">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>330 Årsproduksjon i 2005</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekter-grp-5066/ElektrisitetProduksjon2005-datadef-24231">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>331 Konsesjonskraft</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekter-grp-5066/ElektrisitetKonsesjon2005-datadef-24232">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x pris</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever tre desimaler</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev tre desimalar</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekter-grp-5066/ElektrisitetKonsesjonPris2005-datadef-24233">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Konsesjonskraft multiplisert med konsesjonskraftpris</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekter-grp-5066/SalgsinntekterElektrisitetKonsesjonskraft2005-datadef-24234">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>332 Årsproduksjon fra (post 330) redusert med konsesjonskraft</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekter-grp-5066/ElektrisitetProduksjonRedusert2005-datadef-24235">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>x spotmarkedspris</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekter-grp-5066/SalgsinntekterElektrisitetSpotmarked2005-datadef-24236">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>333 Brutto salgsinntekt i 2005</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Sum av post 331 og 332</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/formuesverdiEiendomsskattegrunnlag-grp-5065/BruttoSalgsinntekter-grp-5066/SalgsinntekterElektrisitet2005-datadef-24237">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>334 Gjennomsnitt av indeksregulert brutto salgsinntekt fra  2001,2002,2003,2004 og 2005</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Sum av post 314,319,324,329 og 333 : 5 som er snittet fra  </p>
+                            <p>2001, 2002, 2003, 2004 og 2005</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(Post 314, 319, 324, 329 og 333) : 5</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Fradrag-grp-5071">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Fradrag</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Fradrag-grp-5071/driftsutgGRS-grp-5072">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Driftsutg/GRS før indeksregulering</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Justering med konsumprisindeks</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRS-grp-5072/Driftsutgifter2001-datadef-17060">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>335 Fradrag for kostnader fra 2001</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRS-grp-5072/Driftsutgifter2002-datadef-20164">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>336 Fradrag for kostnader fra 2002</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRS-grp-5072/Driftsutgifter2003-datadef-22284">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>337 Fradrag for kostnader fra 2003</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRS-grp-5072/Driftsutgifter2004-datadef-24238">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>338 Fradrag for kostnader fra 2004</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRS-grp-5072/Grunnrenteskatt2001-datadef-20166">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>341 Fradrag for grunnrenteskatt (GRS) fra 2001</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRS-grp-5072/Grunnrenteskatt2002-datadef-17051">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>342 Fradrag for grunnrenteskatt (GRS) fra 2002</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRS-grp-5072/Grunnrenteskatt2003-datadef-22286">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>343 Fradrag for grunnrenteskatt (GRS) fra 2003</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRS-grp-5072/Grunnrenteskatt2004-datadef-24240">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>344 Fradrag for grunnrenteskatt (GRS) fra 2004</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Fradrag-grp-5071/driftsutgGRSEtter-grp-5073">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Driftsutg/GRS etter indeksregulering</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRSEtter-grp-5073/FradragDriftsutgifterIndeksregulert2001-datadef-14210">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>335 Fradrag for kostnader fra 2001 (indeksregulert)</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>utgifter 2001 x indeks 2005 / 108,7</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRSEtter-grp-5073/FradragDriftsutgifterIndeksregulert2002-datadef-17050">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>336 Fradrag for kostnader fra 2002 (indeksregulert)</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>utgifter 2002 x indeks 2005 / 110,1</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRSEtter-grp-5073/FradragDriftsutgifterIndeksregulert2003-datadef-20165">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>337 Fradrag for kostnader fra 2003 (indeksregulert)</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>utgifter 2003 x indeks 2005 /112,8</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRSEtter-grp-5073/FradragDriftsutgifterIndeksregulert2004-datadef-22285">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>338 Fradrag for kostnader fra 2004 (indeksregulsert)</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>utgifter 2004 x indeks 2005 /113,3</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRSEtter-grp-5073/FradragDriftsutgifterIndeksregulert2005-datadef-24239">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>339 Fradrag for kostnader fra 2005</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRSEtter-grp-5073/FradragDriftsutgifterGjennomsnitt-datadef-10358">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>340 Gjennomsnitt siste fem år</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>(Sum post 335,336,337,338,339) : 5</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRSEtter-grp-5073/FradragGrunnrenteskattIndeksregulert2001-datadef-14206">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>341 Fradrag for grunnrenteskatt (GRS) fra 2001 (indeksregulert)</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(GRS 2001 x indeks 2005) / 108,7</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRSEtter-grp-5073/FradragGrunnrenteskattIndeksregulert2002-datadef-17052">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>342 Fradrag for grunnrenteskatt (GRS) fra 2002 (indeksregulert)</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(GRS 2002 x indeks 2005) / 110,1</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRSEtter-grp-5073/FradragGrunnrenteskattIndeksregulert2003-datadef-20167">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>343 Fradrag for grunnrenteskatt (GRS) fra 2003 (indeksregulert)</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(GRS 2003 x indeks 2005) / 112,8</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRSEtter-grp-5073/FradragGrunnrenteskattIndeksregulert2004-datadef-22287">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>344 Fradrag for grunnrenteskatt (GRS) fra 2004 (indeksregulert)</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(GRS 2004 x indeks 2005) / 113,3</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRSEtter-grp-5073/FradragGrunnrenteskattIndeksregulert2005-datadef-24241">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>345 Fradrag for grunnrenteskatt (GRS) fra 2005</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Fradrag-grp-5071/driftsutgGRSEtter-grp-5073/FradragGrunnrenteskattGjennomsnitt-datadef-10361">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>346 Gjennomsnitt siste fem år</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>(Sum post 341,342,343,344 og 345) : 5</p>
+                        </xforms:help>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/naverdiEiendomsskattegrunlag-grp-5074">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Nåverdiberegning av nettoinntektstrøm/beregning av særskilt  eiendomsskattegrunnlag for utskrivning av eiendomsskatt i 2007</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/naverdiEiendomsskattegrunlag-grp-5074/NaverdiberegningAvNettoinntektstrom-grp-5075">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Nåverdiberegning av nettoinntektstrøm</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Netto inntektsstrøm fremkommer ved at beløpene i postene 340  (kostnader) og 346 (grunnrenteskatt) trekkes fra post 334 (brutto  salgsinntekt).</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/naverdiEiendomsskattegrunlag-grp-5074/NaverdiberegningAvNettoinntektstrom-grp-5075/Kontantstrom-datadef-6661">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>350 Kontantstrøm fra driften</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:group ref="/Skjema/naverdiEiendomsskattegrunlag-grp-5074/NaverdiberegningAvNettoinntektstrom-grp-5075/naverdiAvKontantstrom-grp-5125">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>351 Nåverdi av kontantstrøm over uendelig levetid</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Den kontantstrøm som fremkommer i post 350, danner grunnlaget for  nåverdiberegningen over uendelig tid. Nåverdien fremkommer ved at  beløpet i post 350 divideres med den fastsatte rentesats, jf.  forskrift fastsatt med
+                                hjemmel i skatteloven § 18-5 (9).  Finansdepartementet beregner og kunngjør renten i januar 2006.</p>
+                        </xforms:help>
+                        <xforms:input ref="/Skjema/naverdiEiendomsskattegrunlag-grp-5074/NaverdiberegningAvNettoinntektstrom-grp-5075/naverdiAvKontantstrom-grp-5125/KontantstromNaverdi-datadef-10367">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nåverdi</p>
+                            </xforms:caption>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>diskonteringsrente</p>
+                            </xforms:hint>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:group>
+                <xforms:group ref="/Skjema/naverdiEiendomsskattegrunlag-grp-5074/BeregningAvSarskiltEiendomsskattegrunnlag-grp-5076">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Beregning av særskilt eiendomsskattegrunnlag for utskrivning av  eiendomsskatt i 2007</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Beregnet formuesverdi fremkommer ved at fradrag for fremtidige  utskiftningskostnader trekkes fra i kontantstrøm over uendelig tid.  Beregningen av nåverdien av fremtidige utviklingskostnader, skal  foretas på skjema
+                            RF-1161, og summen i post 80 i RF-1161 overføres  til post 361 i dette skjemaet. Beløpet i post 360 - kontantstrøm over  uendelig tid - hentes fra post 351 i dette skjemaet. Kommer man ved  beregningen frem til et negativt
+                            beløp, settes beløpet i posten til  null.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/naverdiEiendomsskattegrunlag-grp-5074/BeregningAvSarskiltEiendomsskattegrunnlag-grp-5076/Fradrag-datadef-2719">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>361 Fradrag for fremtidige utskiftningskostnader</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Beløpet skal overføres fra post 80 i RF-1161</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/naverdiEiendomsskattegrunlag-grp-5074/BeregningAvSarskiltEiendomsskattegrunnlag-grp-5076/FormuesskattBeregnet-datadef-10364">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>362 Beregnet formuesverdi</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/naverdiEiendomsskattegrunlag-grp-5074/BeregningAvSarskiltEiendomsskattegrunnlag-grp-5076/SkattegrunnlagEiendom-datadef-10365">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Grunnlag for naturressursskatt for inntektsåret 2005</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/naverdiEiendomsskattegrunlag-grp-5074/BeregningAvSarskiltEiendomsskattegrunnlag-grp-5076/SkattegrunnlagEiendomMinimumsverdi-datadef-10362">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>363 Minimumsverdi for eiendomsskattegrunnlag</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Grunnlag for naturressursskatt for inntektsåret 2005 x 0,95</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>x 0,95</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/naverdiEiendomsskattegrunlag-grp-5074/BeregningAvSarskiltEiendomsskattegrunnlag-grp-5076/SkattegrunnlagEiendomMaksimumsverdi-datadef-20168">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>364 Maksimumsverdi for eiendomsskattegrunnlag</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Grunnlag for naturressursskatt for inntektsåret 2005 * 2,35</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>x 2,35</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/naverdiEiendomsskattegrunlag-grp-5074/BeregningAvSarskiltEiendomsskattegrunnlag-grp-5076/SkattegrunnlagEiendomBeregnet-datadef-10363">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>365 Eiendomsskattegrunnlag</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Dette utgjør eiendomsskattegrunnlaget for utskrivninig av  eiendomsskatt i skatteåret 2007.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>(Den høyeste verdi av post 362 og 363, begrenset oppad til verdien i  post 364)</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">BR-1001: Vedlegg til årsregnskap</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-362-3588.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/TeksterLagtInnEtterOpprettelseAvGruppe-grp-4165/RegnskapStartdatoEndring-datadef-12969" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:input ref="/Skjema/RegnskapAvslutningsdatoEndring-datadef-12970">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                <xforms:alert brreg:lang="NOB">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </xforms:alert>
+                <xforms:alert brreg:lang="NON">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </xforms:alert>
+            </xforms:input>
+            <xforms:selectOne ref="/Skjema/ArsregnskapBekreftelse-datadef-8078">
+                <xforms:choices>
+                    <xforms:item>
+                        <xforms:value>Ja</xforms:value>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Yes</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Ja</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Ja</p>
+                        </xforms:caption>
+                    </xforms:item>
+                    <xforms:item>
+                        <xforms:value>Nei</xforms:value>
+                        <xforms:caption brreg:lang="EN">
+                            <p>No</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Nei</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Nei</p>
+                        </xforms:caption>
+                    </xforms:item>
+                </xforms:choices>
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Fastsatt av kompetent organ?</p>
+                </xforms:caption>
+            </xforms:selectOne>
+            <xforms:group ref="/Skjema/teksterPlassertVedOpprettelseAvGruppe-grp-4164">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NON">
+                    <p>tekst</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/teksterPlassertVedOpprettelseAvGruppe-grp-4164/MorselskapEndring-datadef-12971">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Tekst</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Tekst</p>
+                    </xforms:alert>
+                </xforms:selectOne>
+            </xforms:group>
+            <xforms:group ref="/Skjema/TeksterLagtInnEtterOpprettelseAvGruppe-grp-4165">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NON">
+                    <p>Tekst</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/TeksterLagtInnEtterOpprettelseAvGruppe-grp-4165/RegnskapsregleneSmaForetak-datadef-8079">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Tekst</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Tekst</p>
+                    </xforms:alert>
+                </xforms:selectOne>
+                <xforms:repeat id="repeat_RegnskapStartdatoEndring-datadef-12969" nodeset="/Skjema/TeksterLagtInnEtterOpprettelseAvGruppe-grp-4165/RegnskapStartdatoEndring-datadef-12969">
+                    <xforms:input ref="/Skjema/TeksterLagtInnEtterOpprettelseAvGruppe-grp-4165/RegnskapStartdatoEndring-datadef-12969">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Tekst</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:repeat>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

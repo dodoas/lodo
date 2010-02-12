@@ -1,0 +1,1072 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1243: Oppgave over gave til institusjon som forestår vitenskaplig forskning</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-106-4222.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/Innledning-grp-5344/OppgaveType-datadef-23782" required="true"/>
+            <xforms:bind ref="/Skjema/Innledning-grp-5344/Inntektsar-datadef-692" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5344/Oppgavegiver-grp-5345/EnhetOrganisasjonsnummer-datadef-18"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5344/Oppgavegiver-grp-5345/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5344/Oppgavegiver-grp-5345/EnhetAdresse-datadef-15"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5344/Oppgavegiver-grp-5345/EnhetPostnummer-datadef-6673"/>
+            <xforms:bind readOnly="true" ref="/Skjema/Innledning-grp-5344/Oppgavegiver-grp-5345/EnhetPoststed-datadef-6674"/>
+            <xforms:bind ref="/Skjema/Innledning-grp-5344/Oppgavegiver-grp-5345/EnhetTelefonnummer-datadef-755" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="EN">
+                <p>RF-1243 Donations to voluntary organisations/scientific research</p>
+            </xforms:caption>
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1243 Oppgave over gaver til visse frivillige  organisasjoner/vitenskapelig forskning</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Oppgave over gaver til frivillig organisasjoner / vitenskapelig  forskning  </p>
+                <p/>
+                <p/>
+                <p>Hvor finner jeg skjema i Altinn  </p>
+                <p>Etter at du har logget deg inn, finner du oppgaven i Tjenester/Nytt  skjema.  </p>
+                <p>Hvem skal levere  </p>
+                <p>Alle som er godkjent under ordningene for:  </p>
+                <p>? tilskudd til vitenskapelig forskning eller yrkesopplæring  </p>
+                <p>? gaver til visse frivillige organisasjoner, tros- eller  livssynssamfunn  </p>
+                <p/>
+                <p>Rollekrav for å fylle ut og sende inn skjema  </p>
+                <p>For å fylle ut dette skjema i Altinn må du inneha rollen  Utfyller/innsender. Dersom du både ønsker å fylle ut og signere/sende  inn skjema må du i tillegg ha rollen Utfyller/signerer SKD.  </p>
+                <p>Det er forhåndstildelt roller til innehaver, daglig leder, styreleder,  styremedlem og deltager i virksomheter, samt eventuelt  regnskapsfører, revisor og norsk representant for utenlandsk selskap  som er registrert i
+                    Enhetsregisteret på virksomheten. Revisor og  styremedlem i AS har kun forhåndstildelt rolle for utfylling.  </p>
+                <p>Dersom du ikke har fått en forhåndstildelt rolle, må du be en av  personene som nevnt over delegere en rolle til deg.  </p>
+                <p>Innsendingsfrekvens  </p>
+                <p>Årlig.  </p>
+                <p>Innleveringsfrist  </p>
+                <p>20. januar:  </p>
+                <p>Innleveringsfrist for ordinære oppgaver.  </p>
+                <p/>
+                <p>Merk: Oppgaver som leveres etter 20. januar året etter inntektsåret er  for sent levert, og oppgavegiver kan ilegges gebyr.  </p>
+                <p/>
+                <p>1. mars:  </p>
+                <p>Innleveringsfrist for evt. endringsoppgaver for å få disse med på  forhåndsutfylt selvangivelse.  </p>
+                <p/>
+                <p>Merk: Endringer etter denne dato kommer ikke automatisk med på  selvangivelsen eller skatteoppgjøret.  </p>
+                <p/>
+                <p>24. april:  </p>
+                <p>Innleveringsfrist for evt. endringsoppgaver.  </p>
+                <p>Merk: Skattyter må selv korrigere selvangivelsen.  </p>
+                <p/>
+                <p>24. juni:  </p>
+                <p>Innleveringsfrist for evt. endringsoppgaver.  </p>
+                <p>Merk: Skattyter må ta kontakt med sitt likningskontor for eventuelle  endringer i selvangivelsen.  </p>
+                <p/>
+                <p>20. oktober:  </p>
+                <p>Siste innleveringsfrist for innsending av endringsoppgaver på  maskinlesbart medium.  </p>
+                <p/>
+                <p>Om skjema  </p>
+                <p>Oppgaveplikten består av ett skjema ? RF-1243 Oppgave over gaver til  frivillig organisasjoner / vitenskapelig forskning.  </p>
+                <p>Oppgaveplikt for mottatte gaver til visse frivillige organisasjoner er  regulert i forskrift av 8. september 2000 nr. 901 om levering av  likningsoppgaver over gaver til visse frivillige organisasjoner, med  hjemmel i ligningsloven
+                    § 6-6 bokstav g, jf. ligningsloven § 6-16  bokstav c.  </p>
+                <p>Oppgaveplikt for mottatte tilskudd til vitenskapelig forskning eller  yrkesopplæring er regulert i forskrift av 18. november 1994 nr. 1016  om levering av likningsoppgaver over tilskudd til vitenskapelig  forskning og
+                    yrkesopplæring, med hjemmel i ligningsloven § 6-6  bokstav d, jf. § 6-16 bokstav c.  </p>
+                <p>Integrasjon mot bedriftssystem  </p>
+                <p>Nei.  </p>
+                <p>Skjemaeier/Innkrever  </p>
+                <p>Skatteetaten.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1243 Oppgåve over gåver til visse frivillige  organisasjonar/vitenskapleg forskning</p>
+            </xforms:caption>
+            <xforms:group ref="/Skjema/Innledning-grp-5344">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="EN">
+                    <p>Initiation</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Innleiing</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/Innledning-grp-5344/OppgaveType-datadef-23782">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>New information</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ordinæroppgave</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ordinæroppgåve</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Change to already sent information</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Endringsoppgave</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Endringsoppgåve</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Contents of form</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="EN">
+                        <p>New information  </p>
+                        <p>New information is all return submissions that are not changes to  already sent information. New information may be sent in in several  submissions. The amount should be stated in whole kroner (NOK).  </p>
+                        <p/>
+                        <p>Changes to already sent information  </p>
+                        <p>Changes to alredy sent information may be sent in in several  submissions.  </p>
+                        <p/>
+                        <p>The amount stated in these returns should consist only of the  difference between the correct amount and the amounted reported  earlier. Reduction or cancellation of amounts reported earlier should  be shown with a minus
+                            sign (-) in front of the amount shown as an  amendment. The amount should be stated in whole kroner (NOK).  </p>
+                        <p/>
+                        <p>The total sum of changed return and original return may not be less  than 0.  </p>
+                        <p/>
+                        <p>The personal identity or organisation number must be identical with  that stated on the return submitted earlier.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgavetype</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Ordinæroppgave  </p>
+                        <p>Ordinæroppgaver er alle oppgaveleveranser som ikke er  endringsoppgaver. Det kan leveres flere ordinæroppgaver. Beløpet  oppgis i hele kroner.  </p>
+                        <p/>
+                        <p>Endringsoppgave  </p>
+                        <p>Endringsoppgaver er oppgaver som endrer ordinæroppgaver. Det kan  leveres flere endringsoppgaver.  </p>
+                        <p/>
+                        <p>Beløpet på endringsoppgaver skal kun bestå av differansen mellom  korrekt beløp og tidligere innrapporterte beløp. Reduksjon eller  annullering av tidligere innrapportert beløp merkes med negativt  fortegn (-) foran
+                            endringsbeløpet. Beløpet oppgis i hele kroner.  </p>
+                        <p/>
+                        <p>Sum endringsoppgave og ordinæroppgave kan totalt ikke bli mindre enn  0.  </p>
+                        <p/>
+                        <p>På endringsoppgaver må fødsels- eller organisasjonsnummer være  identisk med tidligere innrapportert oppgave.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Oppgåvetype</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Ordinæroppgåve  </p>
+                        <p>Ordinæroppgåver er alle oppgåveleveransar som ikkje er  endringsoppgåver. Det kan leverast fleire ordinæroppgåver. Gi opp  beløpet i heile kroner.  </p>
+                        <p/>
+                        <p>Endringsoppgåve  </p>
+                        <p>Endringsoppgåver er oppgåver som endrar ordinæroppgåver. Det kan  leverast fleire endringsoppgåver.  </p>
+                        <p/>
+                        <p>Beløpet på endringsoppgåver skal berre bestå av differansen mellom  korrekt beløp og tidlegare innrapporterte beløp. Reduksjon eller  annullering av tidlegare innrapportert beløp skal merkjast med  negativt forteikn (-)
+                            framfor endringsbeløpet. Gi opp beløpet i heile  kroner.  </p>
+                        <p/>
+                        <p>Sum endringsoppgåve og ordinæroppgåve kan totalt ikkje bli mindre enn  0.  </p>
+                        <p/>
+                        <p>På endringsoppgåver må fødsels- eller organisasjonsnummer vere  identiske med tidlegare innrapportert oppgåve</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/Innledning-grp-5344/Inntektsar-datadef-692">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Tax year</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="EN">
+                        <p>Tax returns may only be submitted for the previous tax year, that is  to say the total amount paid for each individual donor as at 31st  December the year before that in which the return is submitted.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Inntektsår</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Det kan kun leveres likningsoppgaver for forrige inntektsår, dvs.  totalt innbetalt beløp for hver enkelt giver/tilskuddsyter pr. 31.12.  året før innrapporteringsåret.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Inntektsår</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Det kan berre leverast likningsoppgåver for førre inntektsår, dvs.  totalt innbetalt beløp for kvar enkelt givar/tilskottsytar pr. 31.12.  året før innrapporteringsåret.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:group ref="/Skjema/Innledning-grp-5344/Oppgavegiver-grp-5345">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>The organisation for which you reporting</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="EN">
+                        <p>Information about the organisation completing the return is taken from  the Central Coordinating Register for Legal Entities. If you wish to  amend any of this information, you must contact the Central  Coordinating
+                            Register for Legal Entities.  </p>
+                        <p/>
+                        <p>If no information about the organisation completing the return appears  in the form, this is because you did not begin by choosing the  organisation for which you are reporting. It is not possible for a  private individual
+                            to send in form RF-1243. You may not therefore  continue with this form in Altinn. You must start the submission  procedure again by going back to the Home page (hovedside), where you  may select the organisation required
+                            by clicking on Amend (Endre) in  the top right-hand corner. On the private individuals home page you  may also delete the form you selected earlier.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgavegiver</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Opplysninger om oppgavegiver er hentet fra Enhetsregisteret. Hvis du  vil forandre noe i disse opplysningene, må du kontakte  Enhetsregisteret.  </p>
+                        <p/>
+                        <p>Dersom ingen opplysninger om oppgavegiver vises i skjemaet, betyr det  at du innledningsvis ikke valgte virksomheten du skal rapportere for.  Det er ikke mulig å sende inn skjema RF-1243 som privatperson. Dette  skjemaet
+                            kan du derfor ikke benytte videre i Altinn. Du må begynne  innsendingsprosedyren på nytt ved å gå tilbake til Hovedsiden, hvor  du velger ønsket virksomhet ved å trykke på Endre-knappen øverst i  høyre hjørne. På
+                            Hovedsiden til privatpersonen kan du også slette  skjemaet du valgte tidligere.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Oppgåvegivar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Opplysningar om oppgåvegivar er henta frå Einingsregisteret. Dersom du  vil endre noko i desse opplysningane, må du kontakte  Einingsregisteret.  </p>
+                        <p/>
+                        <p>Dersom ingen opplysningar om oppgåvegivar kjem fram i skjemaet, betyr  det at du innleiingsvis ikkje valde verksemda du skal rapportere for.  Det er ikkje mogleg å sende inn skjema RF-1243 som privatperson.  Dette skjemaet
+                            kan du derfor ikkje bruke vidare i Altinn. Du må  begynne innsendingsprosedyren på nytt ved å gå tilbake til Hovudsida,  der du vel ønskt verksemd ved å trykkje på Endre-knappen øvst i høgre  hjørne. På Hovudsida til
+                            privatpersonen kan du også slette skjemaet  du valde tidlegare.</p>
+                    </xforms:help>
+                    <xforms:selectOne ref="/Skjema/Innledning-grp-5344/Oppgavegiver-grp-5345/OrganisasjonType-datadef-23783">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>F</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Voluntary Organisation</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Frivillig organisasjon</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Frivillig organisasjon</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>T</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Religious or Humanist Community</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Trossamfunn eller livssynssamfunn</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Trussamfunn eller livssynssamfunn</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Type of organisation</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="EN">
+                            <p>Voluntary organisation  </p>
+                            <p>An organisation approved under the scheme for tax deduction for  monetary gifts to certain voluntary organisations, in accordance with  section 6-50 of the Taxation Act.  </p>
+                            <p/>
+                            <p>Religious or ethical communities  </p>
+                            <p>Religious or ethical communities approved under the scheme for tax  deduction for monetary gifts to certain voluntary organisations,  without nationwide coverage, but which must be connected to a  registered legal
+                                entity, through which they must register gifts  received, in accordance with section 6-50 of the Taxation Act,  article two, point three.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonstype</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Frivillig organisasjon  </p>
+                            <p>Organisasjon som er godkjent under ordningen skattefradrag for  pengegave til visse frivillige organisasjoner, jf. skatteloven §  6-50.  </p>
+                            <p/>
+                            <p>Trossamfunn eller livssynssamfunn  </p>
+                            <p>Tros- og livssynssamfunn som er godkjent under ordningen med  skattefradrag for pengegave til visse frivillige organisasjoner, uten  nasjonalt omfang, men som må være tilknyttet en registreringsenhet og  registrere
+                                mottatte gaver der, jf. skatteloven § 6-50 annet ledd  tredje punktum.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Type organisasjon</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Frivillig organisasjon  </p>
+                            <p>Organisasjon som er godkjend under ordninga skattefrådrag for  pengegåve til visse frivillige organisasjonar, jf. skattelova § 6-50.    </p>
+                            <p/>
+                            <p>Trussamfunn eller livssynssamfunn  </p>
+                            <p>Trus- og livssynssamfunn som er godkjende under ordninga med  skattefrådrag for pengegåve til visse frivillige organisasjonar, utan  nasjonalt omfang, men som må vere tilknytte ei registreringseining og  registrere
+                                mottekne gåver der, jf. skattelova § 6-50 andre ledd  tredje punktum.</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/Innledning-grp-5344/Oppgavegiver-grp-5345/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Norwegian organisation number</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5344/Oppgavegiver-grp-5345/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Name</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="EN">
+                            <p>Information about the organisation completing the statement should be  filled in here.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Informasjon om oppgåvegivar skal fyllast ut her.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5344/Oppgavegiver-grp-5345/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Address</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5344/Oppgavegiver-grp-5345/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Zip code</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5344/Oppgavegiver-grp-5345/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Town/district</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5344/Oppgavegiver-grp-5345/EnhetTelefonnummer-datadef-755">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Phone number</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefonnr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Telefonnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Innledning-grp-5344/Registreringsenhet-grp-5346">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>The registered legal entity</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="EN">
+                        <p>Religious or ethical communities that do not have a nationwide  coverage should be connected to a registered legal entity, through  which they must register gifts received. The registered legal entity  should report such
+                            gifts received to the taxation authorities on  behalf of the individual religious or ethical community.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Registreringsenhet</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Trossamfunn eller livssynssamfunn som ikke har nasjonalt omfang, skal  være tilknyttet en registreringsenhet og registrere mottatte gaver  der. Registreringsenheten skal innrapportere mottatte gaver til  skattemyndighetene
+                            på vegne av det enkelte tros- eller  livssynssamfunn.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Registreringseining</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Trussamfunn eller livssynssamfunn som ikkje har nasjonalt omfang, skal  vere tilknytte ei registreringseining og registrere mottekne gåver  der. Registreringseininga skal innrapportere mottekne gåver til
+                            skattemyndigheitene på vegner av kvart enkelt trus- eller  livssynssamfunn.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/Innledning-grp-5344/Registreringsenhet-grp-5346/RapporteringsenhetOrganisasjonsnummer-datadef-21772">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Norwegian Organisation Number</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5344/Registreringsenhet-grp-5346/RapporteringsenhetNavn-datadef-21771">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Name</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5344/Registreringsenhet-grp-5346/RapporteringsenhetAdresse-datadef-21773">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Address</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5344/Registreringsenhet-grp-5346/RapporteringsenhetPostnummer-datadef-21774">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Zip code</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5344/Registreringsenhet-grp-5346/RapporteringsenhetPoststed-datadef-21775">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Post Town/District</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Innledning-grp-5344/Registreringsenhet-grp-5346/RapporteringsenhetTelefonnummer-datadef-23784">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>Phone number</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Telefonnr.</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Telefonnr.</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:selectOne ref="/Skjema/Innledning-grp-5344/OppgaveTilskuddGave-datadef-24314">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Donations to scientific research or vocational training</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Tilskudd til vitenskapelig forskning eller yrkesopplæring</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Tilskott til vitskapeleg forskning eller yrkesopplæring</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Donations to certain voluntary organisations, religious or ethical communities</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Gaver til visse frivillige organisasjoner, tros- eller livssynssamfunn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Gåver til visse frivillige organisasjonar, trus- eller livssynssamfunn</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Information concerning</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="EN">
+                        <p>Donations to scientific research or vocational training  </p>
+                        <p>Institutions which conduct scientific research or vocational training,  and which have been approved under the tax deduction scheme or the  Taxation Act section 6-42, should submit a tax return for  contributions to
+                            scientific research or vocational training.  </p>
+                        <p>The requirement to file a return is in consequence of the Tax  Assessment Act sections 6-6 d and 6-16 c and also the regulation of  18th November 1994.  </p>
+                        <p>For more information, see the guidelines for completing and submitting  tax returns for contributions to scientific research or vocational  training on the Norwegian Tax Administration`s website:  www.skatteetaten.no  </p>
+                        <p>Questions regarding the submission of tax returns may be sent to the  Directorate of Taxes by e-mail:  systemforv.grunnlagsdata@skatteetaten.no or telephone (+47) 22 07 70  00 (Data Quality Division - Kontor for
+                            oppgavekvalitet).  </p>
+                        <p/>
+                        <p>Donations to certain voluntary organisations  </p>
+                        <p>Voluntary organisations as well as religious and ethical communities  that have been approved under the tax deduction scheme or the  Taxation Act section 6-50 should submit tax returns on donations to  certain voluntary
+                            organisations.  </p>
+                        <p>The requirement to file a return is in consequence of the Tax  Assessment Act sections 6-6 g and 6-16 c and also the regulation of  18th November 1994.  </p>
+                        <p>For more information, see the guidelines for completing and submitting  tax returns for donations to certain voluntary organisations on the  Norwegian Tax Administration`s website: www.skatteetaten.no  </p>
+                        <p>Questions regarding the submission of tax returns may be sent to the  Directorate of Taxes by e-mail:  systemforv.grunnlagsdata@skatteetaten.no or telephone (+47) 22 07 70  00 (Data Quality Division - Kontor for oppgavekvalitet).</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Oppgaver for</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Tilskudd til vitenskapelig forskning eller yrkesopplæring  </p>
+                        <p>Institusjoner som forestår vitenskapelig forskning eller  yrkesopplæring, og er godkjent under skattefradragsordningen etter  skatteloven § 6-42, skal levere likningsoppgaver over tilskudd til  vitenskapelig forskning eller
+                            yrkesopplæring.  </p>
+                        <p>Oppgaveplikten følger av ligningsloven § 6-6 bokstav d, jf. § 6-16  bokstav c og forskrift av 18. november 1994.  </p>
+                        <p>For mer informasjon, se rettledning for utfylling og innlevering av  likningsoppgaver over tilskudd til vitenskapelig forskning og  yrkesopplæring på skatteetatens nettsider: www.skatteetaten.no  </p>
+                        <p>Spørsmål om innlevering av likningsoppgaver kan rettes til  Skattedirektoratet på e-post:  systemforv.grunnlagsdata@skatteetaten.no eller telefon 22 07 70 00  (Kontor for oppgavekvalitet).  </p>
+                        <p/>
+                        <p>Gaver til visse frivillige organisasjoner  </p>
+                        <p>Frivillige organisasjoner samt tros- og livssynssamfunn som er  godkjent under skattefradragsordningen etter skatteloven § 6-50, skal  levere likningsoppgaver over gaver til visse frivillige  organisasjoner.  </p>
+                        <p>Oppgaveplikten følger av ligningsloven § 6-6 bokstav g, jf. § 6-16  bokstav c og forskrift av 18. november 1994.  </p>
+                        <p>For mer informasjon, se rettledning for utfylling og innlevering av  likningsoppgaver over gaver til visse frivillige organisasjoner på  skatteetatens nettsider: www.skatteetaten.no  </p>
+                        <p>Spørsmål om innlevering av likningsoppgaver kan rettes til  Skattedirektoratet på e-post:  systemforv.grunnlagsdata@skatteetaten.no eller telefon 22 07 70 00  (Kontor for oppgavekvalitet).</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Oppgåver for</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Tilskott til vitskapleg forsking eller yrkesopplæring  </p>
+                        <p>Institusjonar som står for vitskapleg forsking eller yrkesopplæring,  og er godkjende under skattefrådragsordninga etter skattelova § 6-42,  skal levere likningsoppgåver over tilskott til vitskapleg forsking  eller
+                            yrkesopplæring.  </p>
+                        <p>Oppgåveplikta følgjer av likningslova § 6-6 bokstav d, jf. § 6-16  bokstav c og forskrift av 18. november 1994.  </p>
+                        <p>For meir informasjon, sjå rettleiing for utfylling og innlevering av  likningsoppgåver over tilskott til vitskapleg forsking og  yrkesopplæring på skatteetatens nettsider: www.skatteetaten.no  </p>
+                        <p>Spørsmål om innlevering av likningsoppgåver kan rettast til  Skattedirektoratet på e-post:  systemforv.grunnlagsdata@skatteetaten.no eller telefon 22 07 70 00  (Kontor for oppgåvekvalitet).  </p>
+                        <p/>
+                        <p>Gåver til visse frivillige organisasjonar  </p>
+                        <p>Frivillige organisasjonar og trus- og livssynssamfunn som er godkjende  under skattefrådragsordninga etter skattelova § 6-50, skal levere  likningsoppgåver over gåver til visse frivillige organisasjonar.  </p>
+                        <p>Oppgåveplikta følgjer av likningslova § 6-6 bokstav g, jf. § 6-16  bokstav c og forskrift av 18. november 1994.  </p>
+                        <p>For meir informasjon, sjå rettleiing for utfylling og innlevering av  likningsoppgåver over gåver til visse frivillige organisasjonar på  skatteetatens nettsider: www.skatteetaten.no  </p>
+                        <p>Spørsmål om innlevering av likningsoppgåver kan rettast til  Skattedirektoratet på e-post:  systemforv.grunnlagsdata@skatteetaten.no eller telefon 22 07 70 00  (Kontor for oppgåvekvalitet).</p>
+                    </xforms:help>
+                </xforms:selectOne>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Givere-grp-5347">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="EN">
+                    <p>Donors</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="EN">
+                    <p>Donations to certain voluntary organisations  </p>
+                    <p/>
+                    <p>Voluntary organisations as well as religious and ethical communities  that have been approved under the tax deduction scheme or the  Taxation Act section 6-50 should submit tax returns on gifts to  certain voluntary
+                        organisations.  </p>
+                    <p/>
+                    <p>The requirement to file a return is in consequence of the Tax  Assessment Act sections 6-6 g and 6-16 c and also the regulation of  18th November 1994.  </p>
+                    <p/>
+                    <p>For more information, see the guidelines for completing and submitting  tax returns for donations to certain voluntary organisations on the  Norwegian Tax Administration`s website: www.skatteetaten.no  </p>
+                    <p/>
+                    <p>Questions regarding the submission of tax returns may be sent to the  Directorate of Taxes by e-mail:  systemforv.grunnlagsdata@skatteetaten.no or telephone (+47) 22 07 70  00 (Data Quality Division - Kontor for oppgavekvalitet).</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Givere</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Info om skjema gaver til visse frivillige organisasjoner  </p>
+                    <p>Frivillige organisasjoner samt tros- og livssynssamfunn som er  godkjent under skattefradragsordningen etter skatteloven § 6-50, skal  levere likningsoppgaver over gaver til visse frivillige  organisasjoner.  </p>
+                    <p/>
+                    <p>Oppgaveplikten følger av ligningsloven § 6-6 bokstav g, jf. § 6-16  bokstav c og forskrift av 18. november 1994.  </p>
+                    <p/>
+                    <p>For mer informasjon, se rettledning for utfylling og innlevering av  likningsoppgaver over gaver til visse frivillige organisasjoner på  skatteetatens nettsider: www.skatteetaten.no  </p>
+                    <p/>
+                    <p>Spørsmål om innlevering av likningsoppgaver kan rettes til  Skattedirektoratet på e-post:  systemforv.grunnlagsdata@skatteetaten.no eller telefon 22 07 70 00  (Kontor for oppgavekvalitet).</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Givarar</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Info om skjema gåver til visse frivillige organisasjonar  </p>
+                    <p>Frivillige organisasjonar og trus- og livssynssamfunn som er godkjende  under skattefrådragsordninga etter skattelova § 6-50, skal levere  likningsoppgåver over gåver til visse frivillige organisasjonar.  </p>
+                    <p/>
+                    <p>Oppgåveplikta følgjer av likningslova § 6-6 bokstav g, jf. § 6-16  bokstav c og forskrift av 18. november 1994.  </p>
+                    <p/>
+                    <p>For meir informasjon, sjå rettleiing for utfylling og innlevering av  likningsoppgåver over gåver til visse frivillige organisasjonar på  skatteetatens nettsider: www.skatteetaten.no  </p>
+                    <p/>
+                    <p>Spørsmål om innlevering av likningsoppgåver kan rettast til  Skattedirektoratet på e-post:  systemforv.grunnlagsdata@skatteetaten.no eller telefon 22 07 70 00  (Kontor for oppgåvekvalitet).</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_OversiktOverGivere-grp-5348" nodeset="/Skjema/Givere-grp-5347/OversiktOverGivere-grp-5348">
+                    <xforms:group ref="/Skjema/Givere-grp-5347/OversiktOverGivere-grp-5348">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>List of donors</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Oversikt over givere</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Oversikt over givarar</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Givere-grp-5347/OversiktOverGivere-grp-5348/GiverFodselsnummer-datadef-2310">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fødselsnr.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Ved registrering av betaler skal det kun fylles ut ett fødselsnummer  eller organisasjonsnummer pr. betaler. Det er ingen mulighet til å  registrere både fødselsnummer og organisasjonsnummer for en og samme
+                                    betaler.  </p>
+                                <p/>
+                                <p>Dersom fødselsnummer eller organisasjonsnummer ikke er oppgitt, kan  ikke andre opplysninger om betaler (f.eks. navn, adresse, beløp mv.)  bli registrert hos Skattedirektoratet.</p>
+                            </xforms:help>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fødselsnr.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Ved registrering av betalar skal det berre fyllast ut eitt  fødselsnummer eller  organisasjonsnummer pr. betalar. Det er ikkje  høve til å registrere både fødselsnummer og organisasjonsnummer for  ein og same
+                                    betalar.  </p>
+                                <p/>
+                                <p>Dersom fødselsnummer eller organisasjonsnummer ikkje er oppgitt, kan  ikkje andre opplysningar om betalar (f.eks. namn, adresse, beløp  o.a.) bli registrerte hos Skattedirektoratet.</p>
+                            </xforms:help>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Personal identity number...</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="EN">
+                                <p>When registering payers, only one personal identity or organisation  number per payer should be entered. It is not possible to register  both a personal identity and an organisation number for the same  payer.  </p>
+                                <p/>
+                                <p>If no personal identity or organisation number is given, no other  information about the payer (such as name, address, amount etc.) can  be registered with the Directorate of Taxes.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Givere-grp-5347/OversiktOverGivere-grp-5348/GiverOrganisasjonsnummer-datadef-23785">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Org.nr.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Ved registrering av betaler skal det kun fylles ut ett fødselsnummer  eller organisasjonsnummer pr. betaler. Det er ingen mulighet til å  registrere både fødselsnummer og organisasjonsnummer for en og samme
+                                    betaler.  </p>
+                                <p/>
+                                <p>Dersom fødselsnummer eller organisasjonsnummer ikke er oppgitt, kan  ikke andre opplysninger om betaler (f.eks. navn, adresse, beløp mv.)  bli registrert hos Skattedirektoratet.</p>
+                            </xforms:help>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Org.nr.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Ved registrering av betalar skal det berre fyllast ut eitt  fødselsnummer eller  organisasjonsnummer pr. betalar. Det er ikkje  høve til å registrere både fødselsnummer og organisasjonsnummer for  ein og same
+                                    betalar.  </p>
+                                <p/>
+                                <p>Dersom fødselsnummer eller organisasjonsnummer ikkje er oppgitt, kan  ikkje andre opplysningar om betalar (f.eks. namn, adresse, beløp  o.a.) bli registrerte hos Skattedirektoratet.</p>
+                            </xforms:help>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Norwegian organisation number</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="EN">
+                                <p>When registering payers, only one personal identity or organisation  number per payer should be entered. It is not possible to register  both a personal identity and an organisation number for the same  payer.  </p>
+                                <p/>
+                                <p>If no personal identity or organisation number is given, no other  information about the payer (such as name, address, amount etc.) can  be registered with the Directorate of Taxes.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Givere-grp-5347/OversiktOverGivere-grp-5348/GiverNavn-datadef-2308">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Name</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Navn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Namn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Givere-grp-5347/OversiktOverGivere-grp-5348/GiverAdresse-datadef-2309">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Address</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Adresse</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Adresse</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Givere-grp-5347/OversiktOverGivere-grp-5348/GiverPostnummer-datadef-23786">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Zip code</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter positive integer with four digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Postnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever positivt heltall med fire siffer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Postnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev positivt heiltal med fire siffer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Givere-grp-5347/OversiktOverGivere-grp-5348/GiverPoststed-datadef-23787">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Town/district</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Poststed</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Poststad</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Givere-grp-5347/OversiktOverGivere-grp-5348/GiverGaveBelop-datadef-2311">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Amount</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beløp</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Beløp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/Givere-grp-5347/GivereBelopTotalt-datadef-23788">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Total amount of gift</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="EN">
+                        <p>The total amount shows the sum of all stated donations, regardless of  which other fields may have been completed for donor.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Totalbeløp</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Det totale beløpet viser summen av alle oppgitte gaver, uavhengig av  hvilke andre felt som er fylt ut pr. giver/tilskuddsyter.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Totalt betalt gåvebeløp</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Det totale beløpet viser summen av alle oppgitte gåver, uavhengig av  kva for andre felt som er fylte ut pr. givar.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Givere-grp-5347/GivereAntall-datadef-23789">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Total number of donors</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="EN">
+                        <p>The total number of donors/contributors shows the total number of rows  in which information about donors/contributors has been stated,  regardless of which fields have been completed.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall givere</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Totalt antall givere utgjør antall rader der det er oppgitt  informasjon om giver, uavhengig av hvilke felt som er utfylt.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Totalt tal på givarar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Totalt tal på givarar/tilskottsytarar utgjer talet på rader der det er  oppgitt informasjon om givar/tilskottsytar, uavhengig av kva for felt  som er utfylt.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Tilskuddsyter-grp-5350">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="EN">
+                    <p>Donor</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="EN">
+                    <p>Donations to scientific research or vocational training  </p>
+                    <p>Institutions which conduct scientific research or vocational training,  and which have been approved under the tax deduction scheme or the  Taxation Act section 6-42, should submit a tax return for donations  to scientific
+                        research or vocational training.  </p>
+                    <p/>
+                    <p>The requirement to file a return is in consequence of the Tax  Assessment Act sections 6-6 d and 6-16 c and also the regulation of  18th November 1994.  </p>
+                    <p/>
+                    <p>For more information, see the guidelines for completing and submitting  tax returns for donations to scientific research or vocational  training on the Norwegian Tax Administration`s website:  www.skatteetaten.no  </p>
+                    <p/>
+                    <p>Questions regarding the submission of tax returns may be sent to the  Directorate of Taxes by e-mail:  systemforv.grunnlagsdata@skatteetaten.no or telephone (+47) 22 07 70  00 (Data Quality Division - Kontor for oppgavekvalitet).</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Tilskuddsyter</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Info om skjema tilskudd til vitenskapelig forskning eller  yrkesopplæring  </p>
+                    <p/>
+                    <p>Institusjoner som forestår vitenskapelig forskning eller  yrkesopplæring, og er godkjent under skattefradragsordningen etter  skatteloven § 6-42, skal levere likningsoppgaver over tilskudd til  vitenskapelig forskning eller
+                        yrkesopplæring.  </p>
+                    <p/>
+                    <p>Oppgaveplikten følger av ligningsloven § 6-6 bokstav d, jf. § 6-16  bokstav c og forskrift av 18. november 1994.  </p>
+                    <p/>
+                    <p>For mer informasjon, se rettledning for utfylling og innlevering av  likningsoppgaver over tilskudd til vitenskapelig forskning og  yrkesopplæring på skatteetatens nettsider: www.skatteetaten.no  </p>
+                    <p/>
+                    <p>Spørsmål om innlevering av likningsoppgaver kan rettes til  Skattedirektoratet på e-post:  systemforv.grunnlagsdata@skatteetaten.no eller telefon 22 07 70 00  (Kontor for oppgavekvalitet).</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>Tilskotsyter</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Info om skjema tilskudd til vitenskapelig forskning eller  yrkesopplæring.  </p>
+                    <p/>
+                    <p>Institusjoner som forestår vitenskapelig forskning eller  yrkesopplæring, og er godkjent under skattefradragsordningen etter  skatteloven § 6-42, skal levere likningsoppgaver over tilskudd til  vitenskapelig forskning eller
+                        yrkesopplæring.  </p>
+                    <p/>
+                    <p>Oppgaveplikten følger av ligningsloven § 6-6 bokstav d, jf. § 6-16  bokstav c og forskrift av 18. november 1994.  </p>
+                    <p/>
+                    <p>For mer informasjon, se rettledning for utfylling og innlevering av  likningsoppgaver over tilskudd til vitenskapelig forskning og  yrkesopplæring på skatteetatens nettsider: www.skatteetaten.no  </p>
+                    <p/>
+                    <p>Spørsmål om innlevering av likningsoppgaver kan rettes til  Skattedirektoratet på e-post:  systemforv.grunnlagsdata@skatteetaten.no eller telefon 22 07 70 00  (Kontor for oppgavekvalitet).</p>
+                </xforms:help>
+                <xforms:repeat id="repeat_OversiktOverTilskuddsytere-grp-5351" nodeset="/Skjema/Tilskuddsyter-grp-5350/OversiktOverTilskuddsytere-grp-5351">
+                    <xforms:group ref="/Skjema/Tilskuddsyter-grp-5350/OversiktOverTilskuddsytere-grp-5351">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="EN">
+                            <p>List of donors</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Oversikt over tilskuddsytere</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Oversikt over tilskotsytere</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/Tilskuddsyter-grp-5350/OversiktOverTilskuddsytere-grp-5351/GiverTilskuddFodselsnummer-datadef-23790">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Fødselsnr.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Ved registrering av betaler skal det kun fylles ut ett fødselsnummer  eller organisasjonsnummer pr. betaler. Det er ingen mulighet til å  registrere både fødselsnummer og organisasjonsnummer for en og samme
+                                    betaler.  </p>
+                                <p/>
+                                <p>Dersom fødselsnummer eller organisasjonsnummer ikke er oppgitt, kan  ikke andre opplysninger om betaler (f.eks. navn, adresse, beløp mv.)  bli registrert hos Skattedirektoratet.</p>
+                            </xforms:help>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Fødselsnr.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Ved registrering av betalar skal det berre fyllast ut eitt  fødselsnummer eller  organisasjonsnummer pr. betalar. Det er ikkje  høve til å registrere både fødselsnummer og organisasjonsnummer for  ein og same
+                                    betalar.  </p>
+                                <p/>
+                                <p>Dersom fødselsnummer eller organisasjonsnummer ikkje er oppgitt, kan  ikkje andre opplysningar om betalar (f.eks. namn, adresse, beløp  o.a.) bli registrerte hos Skattedirektoratet.</p>
+                            </xforms:help>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig fødselsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Personal identity number...</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="EN">
+                                <p>When registering donors, only one personal identity or organisation  number per donor should be entered. It is not possible to register  both a personal identity and an organisation number for the same  donor.  </p>
+                                <p/>
+                                <p>If no personal identity or organisation number is given, no other  information about the donor (such as name, address, amount etc.) can  be registered with the Directorate of Taxes.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Tilskuddsyter-grp-5350/OversiktOverTilskuddsytere-grp-5351/GiverTilskuddOrganisasjonsnummer-datadef-23791">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Org.nr.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Ved registrering av betaler skal det kun fylles ut ett fødselsnummer  eller organisasjonsnummer pr. betaler. Det er ingen mulighet til å  registrere både fødselsnummer og organisasjonsnummer for en og samme
+                                    betaler.  </p>
+                                <p/>
+                                <p>Dersom fødselsnummer eller organisasjonsnummer ikke er oppgitt, kan  ikke andre opplysninger om betaler (f.eks. navn, adresse, beløp mv.)  bli registrert hos Skattedirektoratet.</p>
+                            </xforms:help>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Org.nr.</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Ved registrering av betalar skal det berre fyllast ut eitt  fødselsnummer eller  organisasjonsnummer pr. betalar. Det er ikkje  høve til å registrere både fødselsnummer og organisasjonsnummer for  ein og same
+                                    betalar.  </p>
+                                <p/>
+                                <p>Dersom fødselsnummer eller organisasjonsnummer ikkje er oppgitt, kan  ikkje andre opplysningar om betalar (f.eks. namn, adresse, beløp  o.a.) bli registrerte hos Skattedirektoratet.</p>
+                            </xforms:help>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Norwegian organisation number</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="EN">
+                                <p>When registering donors, only one personal identity or organisation  number per donor should be entered. It is not possible to register  both a personal identity and an organisation number for the same  donor.  </p>
+                                <p/>
+                                <p>If no personal identity or organisation number is given, no other  information about the donor (such as name, address, amount etc.) can  be registered with the Directorate of Taxes.</p>
+                            </xforms:help>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Tilskuddsyter-grp-5350/OversiktOverTilskuddsytere-grp-5351/GiverTilskuddNavn-datadef-23792">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Name</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Navn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Namn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Tilskuddsyter-grp-5350/OversiktOverTilskuddsytere-grp-5351/GiverTilskuddAdresse-datadef-23793">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Address</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Adresse</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Adresse</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Tilskuddsyter-grp-5350/OversiktOverTilskuddsytere-grp-5351/GiverTilskuddPostnummer-datadef-23794">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Zip code</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="EN">
+                                <p>Enter positive integer with four digits</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Postnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever positivt heltall med fire siffer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Postnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev positivt heiltal med fire siffer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Tilskuddsyter-grp-5350/OversiktOverTilskuddsytere-grp-5351/GiverTilskuddPoststed-datadef-23795">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Town/district</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Poststed</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Poststad</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/Tilskuddsyter-grp-5350/OversiktOverTilskuddsytere-grp-5351/GiverTilskuddBelop-datadef-23796">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Amount</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Beløp</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Beløp</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/Tilskuddsyter-grp-5350/GivereTilskuddTotalt-datadef-23797">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Total donated amount</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="EN">
+                        <p>The total amount shows the sum of all stated donations, regardless of  which other fields may have been completed for donor.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Totalt beløp</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Det totale beløpet viser summen av alle oppgitte beløp, uavhengig av  hvilke andre felt som er fylt ut pr. giver/tilskuddsyter.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Totalt betalt tilskottsbeløp</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Det totale beløpet viser summen av alle oppgitte tilskottsbeløp,  uavhengig av kva for andre felt som er fylte ut pr. tilskottsytar.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Tilskuddsyter-grp-5350/GivereAntall-datadef-23798">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="EN">
+                        <p>Total number of donors</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="EN">
+                        <p>The total number of donors shows the total number of rows in which  information about donors has been stated, regardless of which fields  have been completed.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall tilskuddsytere</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Totalt antall tilskuddsytere utgjør antall rader der det er oppgitt  informasjon om tilskuddsyter, uavhengig av hvilke felt som er utfylt.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Totalt tal på tilskottsytarar</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Totalt tal på tilskottsytarar utgjer talet på rader der det er oppgitt  informasjon om tilskottsytar, uavhengig av kva for felt som er  utfylt.</p>
+                    </xforms:help>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

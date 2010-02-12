@@ -1,0 +1,2015 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">KRT-1004: Regnskapsførerselskapets egenmelding</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1025-5216.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/Selskapsinformasjon-grp-5905/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind ref="/Skjema/OmEierforholdMM-grp-5906/EnhetKonsernTilknytning-datadef-25893" required="true"/>
+            <xforms:bind ref="/Skjema/OmEierforholdMM-grp-5906/EnhetEierinteresserAndre-datadef-22588" required="true"/>
+            <xforms:bind ref="/Skjema/OmEierforholdMM-grp-5906/EnhetFranchisetakerFranchisegiver-datadef-25867" required="true"/>
+            <xforms:bind ref="/Skjema/OmfangAvVirksomhetenMM-grp-5908/RegnskapsforerforetakVirksomhet-datadef-25829" required="true"/>
+            <xforms:bind ref="/Skjema/OmfangAvVirksomhetenMM-grp-5908/OppdragHonorarFjoraret-datadef-25876" required="true"/>
+            <xforms:bind ref="/Skjema/OmfangAvVirksomhetenMM-grp-5908/OppdragHonorar-datadef-25877" required="true"/>
+            <xforms:bind ref="/Skjema/OmfangAvVirksomhetenMM-grp-5908/Arsresultat-datadef-25878" required="true"/>
+            <xforms:bind ref="/Skjema/OmfangAvVirksomhetenMM-grp-5908/EnhetEgenkapitalBelop-datadef-25873" required="true"/>
+            <xforms:bind ref="/Skjema/OmfangAvVirksomhetenMM-grp-5908/OppdragTilleggstjenesterUtoverRegnskapsforing-datadef-25832" required="true"/>
+            <xforms:bind ref="/Skjema/OversiktOverRegnskapsforerselskapetsAnsatteInnleide-grp-5909/SysselsatteRegnskapsforereAutoriserte-datadef-25866" required="true"/>
+            <xforms:bind ref="/Skjema/OversiktOverRegnskapsforerselskapetsAnsatteInnleide-grp-5909/SysselsatteRegnskapsforereOppdragsansvarlige-datadef-25869" required="true"/>
+            <xforms:bind ref="/Skjema/OversiktOverRegnskapsforerselskapetsAnsatteInnleide-grp-5909/SysselsatteArsverk-datadef-25874" required="true"/>
+            <xforms:bind ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/EnhetOppdrag-datadef-25875" required="true"/>
+            <xforms:bind ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/RegnskapsforerforetakOppdragEksterneLokaler-datadef-22595" required="true"/>
+            <xforms:bind ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppdragsgiverTilsynKredittilsynet-datadef-22578" required="true"/>
+            <xforms:bind ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppdragsgiverNotertOsloBors-datadef-25843" required="true"/>
+            <xforms:bind ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppdragsgiverDatterselskapUtenlandskMajoritetseier-datadef-25889" required="true"/>
+            <xforms:bind ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppdragsgiverDriftsinntekt50Til100Mill-datadef-25888" required="true"/>
+            <xforms:bind ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppdragsgiverDriftsinntektOver100Mill-datadef-25890" required="true"/>
+            <xforms:bind ref="/Skjema/InnsendelsesplikterMM-grp-5913/BleRegnskapsforerselskapetsArsregnskapRettidigInnsendtTilRegnska-grp-5914/RegnskapsforerforetakInnsendtArsregnskapFjoraret-datadef-25846" required="true"/>
+            <xforms:bind ref="/Skjema/InnsendelsesplikterMM-grp-5913/BleRegnskapsforerselskapetsArsregnskapRettidigInnsendtTilRegnska-grp-5914/RegnskapsforerforetakInnsendtArsregnskap-datadef-25845" required="true"/>
+            <xforms:bind ref="/Skjema/InnsendelsesplikterMM-grp-5913/HarRegnskapsforerselskapetBlittIlagtForsinkelsesgebyrFordiSelvan-grp-5915/RegnskapsforerforetakForsinkelsesgebyrSelvangivelseFjoraret-datadef-25848" required="true"/>
+            <xforms:bind ref="/Skjema/InnsendelsesplikterMM-grp-5913/HarRegnskapsforerselskapetBlittIlagtForsinkelsesgebyrFordiSelvan-grp-5915/RegnskapsforerforetakForsinkelsesgebyrSelvangivelse-datadef-25847" required="true"/>
+            <xforms:bind ref="/Skjema/InnsendelsesplikterMM-grp-5913/HarRegnskapsforerselskapetBlittIlagtTilleggsskattFor-grp-5916/RegnskapsforerforetakTilleggsskattForfjor-datadef-25849" required="true"/>
+            <xforms:bind ref="/Skjema/InnsendelsesplikterMM-grp-5913/HarRegnskapsforerselskapetBlittIlagtTilleggsskattFor-grp-5916/RegnskapsforerforetakTilleggsskattFjoraret-datadef-25850" required="true"/>
+            <xforms:bind ref="/Skjema/InnsendelsesplikterMM-grp-5913/RegnskapsforerforetakSoksmal-datadef-25851" required="true"/>
+            <xforms:bind ref="/Skjema/InnsendelsesplikterMM-grp-5913/RapporteringEtterHvitvaskingslovgivningen-grp-5917/TransaksjonMistenkelig-datadef-25852" required="true"/>
+            <xforms:bind ref="/Skjema/GjeldendeRutinerMM-grp-5918/HarRegnskapsforerselskapetEtablertRutinerFor-grp-5919/RegnskapsforerforetakOppdragsavtalerSkriftlig-datadef-25855" required="true"/>
+            <xforms:bind ref="/Skjema/GjeldendeRutinerMM-grp-5918/HarRegnskapsforerselskapetEtablertRutinerFor-grp-5919/RegnskapsforerforetakDokumentasjonOppdrag-datadef-25856" required="true"/>
+            <xforms:bind ref="/Skjema/GjeldendeRutinerMM-grp-5918/HarRegnskapsforerselskapetEtablertRutinerFor-grp-5919/RegnskapsforerforetakEtterlevelseHvitvaskingslov-datadef-25858" required="true"/>
+            <xforms:bind ref="/Skjema/GjeldendeRutinerMM-grp-5918/RegnskapsforerforetakInnehaverKlientkonto-datadef-25859" required="true"/>
+            <xforms:bind ref="/Skjema/GjeldendeRutinerMM-grp-5918/RegnskapsforerforetakMedlemNARF-datadef-25892" required="true"/>
+            <xforms:bind ref="/Skjema/GjeldendeRutinerMM-grp-5918/HarRegnskapsforerselskapetTegnetFormuesskadeforsikringSomDekker-grp-5920/RegnskapsforerforetakForsikringAnsvar-datadef-25861" required="true"/>
+            <xforms:bind ref="/Skjema/GjeldendeRutinerMM-grp-5918/HarRegnskapsforerselskapetTegnetFormuesskadeforsikringSomDekker-grp-5920/RegnskapsforerforetakForsikringUnderslag-datadef-25862" required="true"/>
+            <xforms:bind ref="/Skjema/GjeldendeRutinerMM-grp-5918/HarRegnskapsforerselskapetTegnetFormuesskadeforsikringSomDekker-grp-5920/RegnskapsforerforetakForsikringRekonstruksjonMateriale-datadef-25863" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>KRT-1004 Regnskapsførerselskapets egenmelding</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Skjemaet er bygget opp på samme måte som ved det dokumentbaserte  tilsynet (regnskapsførerselskapers egenmelding) i 2004, men er  utvidet med enkelte spørsmål som Kredittilsynet finner relevante i  forhold til autoriserte
+                    regnskapsførerselskapers drift.  </p>
+                <p/>
+                <p>Dokumentbasert tilsyn rettet mot autoriserte regnskapsførerselskaper  vil blant annet gi grunnlag for:  </p>
+                <p>- oversikt over regnskapsførerbransjen med hensyn til struktur og  sammensetning  </p>
+                <p>- statistisk informasjon om sentrale forhold  </p>
+                <p>- prioritering vedrørende stedlige tilsyn  </p>
+                <p>- videreføring av et hensiktsmessig og aktivt tilsyn  </p>
+                <p/>
+                <p>Lovhjemmel for oppgaveplikten  </p>
+                <p>Alle autoriserte regnskapsførerselskaper plikter å besvare og sende  inn egenmeldingen. Kredittilsynet finner det nødvendig å gjøre  oppmerksom på at unnlatelse av å besvare egenmeldingen er brudd på  kredittilsynsloven § 4 første
+                    ledd nr. 3.  </p>
+                <p/>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>KRT-1004 Eigenmelding for rekneskapsførarselskap</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Skjemaet er bygd opp på same måten som ved det dokumentbaserte  tilsynet (eigenmelding for rekneskapsførarselskap) i 2004, men er  utvida med enkelte spørsmål som Kredittilsynet meiner er relevante i  forhold til drifta av
+                    autoriserte rekneskapsførarselskap.  </p>
+                <p/>
+                <p>Dokumentbasert tilsyn retta mot autoriserte rekneskapsførarselskap gir  mellom anna grunnlag for  </p>
+                <p>- oversikt over rekneskapsførarbransjen med omsyn til struktur og  samansetjing  </p>
+                <p>- statistisk informasjon om sentrale forhold  </p>
+                <p>- prioritering av stadlege tilsyn  </p>
+                <p>- vidareføring av eit føremålstenleg og aktivt tilsyn  </p>
+                <p/>
+                <p>Lovheimel for oppgåveplikta  </p>
+                <p>Alle autoriserte rekneskapsførarselskap pliktar å svare på og sende  inn eigenmeldinga. Kredittilsynet finn det nødvendig å gjere merksam  på at de bryt kredittilsynslova § 4 første leddet nr. 3 dersom de  ikkje svarer på eigenmeldinga.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/Selskapsinformasjon-grp-5905">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>1. Selskapsinformasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>1. Selskapsinformasjon</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/Selskapsinformasjon-grp-5905/EnhetOrganisasjonsnummer-datadef-18">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Organisasjonsnummer:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Organisasjonsnummer:</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Organisasjonsnummer:</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Selskapsinformasjon-grp-5905/EnhetNavn-datadef-1">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Navn:</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Namn:</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Selskapsinformasjon-grp-5905/EnhetAdresse-datadef-15">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Adresse:</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Adresse:</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Selskapsinformasjon-grp-5905/EnhetPostnummer-datadef-6673">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:alert brreg:lang="EN">
+                        <p>Enter positive integer with four digits</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Postnummer:</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Feltet krever positivt heltall med fire siffer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Postnummer:</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Feltet krev positivt heiltal med fire siffer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/Selskapsinformasjon-grp-5905/EnhetPoststed-datadef-6674">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Poststed:</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Poststad:</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OmEierforholdMM-grp-5906">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>2. Om eierforhold m.m.</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>2. Om eigarforhold o.a.</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/OmEierforholdMM-grp-5906/EnhetKonsernTilknytning-datadef-25893">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.1 Inngikk regnskapsførerselskapet i konsern per 31.12.2005?</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Jf. regnskapsloven § 1-3.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.1 Var rekneskapsførarselskapet ein del av eit konsern per  31.12.2005?</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Jf. rekneskapslova § 1-3.</p>
+                    </xforms:hint>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/OmEierforholdMM-grp-5906/EnhetMorOrganisasjonsnummer-datadef-5128">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>- Oppgi organisasjonsnummeret til morselskapet:</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>- Opplys om organisasjonsnummeret til morselskapet:</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OmEierforholdMM-grp-5906/EnhetMorNavn-datadef-5129">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>- Organisasjonsnavn til morselskapet:</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>- Organisasjonsnamnet til morselskapet:</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/OmEierforholdMM-grp-5906/EnhetEierinteresserAndre-datadef-22588">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.2 Hadde regnskapsførerselskapet eierinteresser i andre  regnskapsførerselskaper per 31.12.2005, uten at disse inngikk i  konsernforhold?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.2 Hadde rekneskapsførarselskapet eigarinteresser i andre  rekneskapsførarselskap per 31.12.2005 utan at desse var ein del av  eit konsernforhold?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:repeat id="repeat_OppgiOrganisasjonsnummeretEneTilRegnskapsforerselskapetEneDer-grp-5907" nodeset="/Skjema/OmEierforholdMM-grp-5906/OppgiOrganisasjonsnummeretEneTilRegnskapsforerselskapetEneDer-grp-5907">
+                    <xforms:group ref="/Skjema/OmEierforholdMM-grp-5906/OppgiOrganisasjonsnummeretEneTilRegnskapsforerselskapetEneDer-grp-5907">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- Oppgi organisasjonsnummeret(-ene) til regnskapsførerselskapet(-ene)  der regnskapsførerselskapet har eierinteresser:</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- Opplys om organisasjonsnummeret (-nummera) til  rekneskapsførarselskapet (-selskapa) der rekneskapsførarselskapet har  eigarinteresser:</p>
+                        </xforms:caption>
+                        <xforms:input ref="/Skjema/OmEierforholdMM-grp-5906/OppgiOrganisasjonsnummeretEneTilRegnskapsforerselskapetEneDer-grp-5907/EnhetEierinteresserOrganisasjonsnummer-datadef-25864">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Organisasjonsnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Organisasjonsnr.</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Ugyldig organisasjonsnummer</p>
+                            </xforms:alert>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/OmEierforholdMM-grp-5906/OppgiOrganisasjonsnummeretEneTilRegnskapsforerselskapetEneDer-grp-5907/EnhetEierinteresserNavn-datadef-25865">
+                            <brreg:sensitivitet type="Ikke sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Organisasjonsnavn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Organisasjonsnamn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:selectOne ref="/Skjema/OmEierforholdMM-grp-5906/EnhetFranchisetakerFranchisegiver-datadef-25867">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>2.3 Var regnskapsførerselskapet franchisetaker/-giver per 31.12.2005?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>2.3 Var rekneskapsførarselskapet franchisetakar/-givar per 31.12.2005?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/OmEierforholdMM-grp-5906/EnhetFranchisegiverOrganisasjonsnummer-datadef-25868">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>- Oppgi organisasjonsnummeret til franchisegiver:</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>- Opplys om organisasjonsnummeret til franchisegivaren:</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig organisasjonsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OmEierforholdMM-grp-5906/EnhetFranchisegiverNavn-datadef-25870">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>- Organisasjonsnavn til franchisegiver:</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>- Organisasjonsnamnet til franchisegivaren:</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OmfangAvVirksomhetenMM-grp-5908">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>3. Omfang av virksomheten m.m.</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>3. Omfang av verksemda o.a.</p>
+                </xforms:caption>
+                <xforms:selectOne ref="/Skjema/OmfangAvVirksomhetenMM-grp-5908/RegnskapsforerforetakVirksomhet-datadef-25829">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>1</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Rent regnskapsførerselskap per 31.12.2005?</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Reint rekneskapsførarføretak per 31.12.2005?</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>2</xforms:value>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Regnskapsførervirksomhet i kombinasjon med annen type virksomhet per 31.12.2005?</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Rekneskapsførarverksemd i kombinasjon med annan type verksemd per 31.12.2005?</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.1 Drev regnskapsførerselskapet som:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Med rent regnskaps- førerselskap menes at selskapet i 2005  hovedsakelig drev med regnskapsføring i næring for andre (jf.  regnskapsførerloven § 1 første ledd). Kredittilsynet har lagt til  grunn at de som utfører
+                            lønnsføring, fakturering og rådgivning som  inngår som en naturlig del av regnskapsførervirksom- heten skal  krysse av for at de er rene regnskapsførerselskap.  </p>
+                        <p/>
+                        <p>Med regnskapsfører- virksomhet i kombina- sjon med annen type  virksomhet menes at  selskapet i 2005 ikke drev som rent  regnskapsførerselskap.  </p>
+                        <p/>
+                        <p>Dersom omsetningen fra annen type virksomhet utgjorde mindre enn 10 %  av totalomsetningen, legger Kredittilsynet i denne sammenheng likevel  til grunn at selskapet er et rent regnskapsførerselskap. Dersom  omsetning fra
+                            annen type virksomhet var 10 % eller høyere, skal det  krysses av for regnskapsførervirksom- het i kombinasjon med annen  type virksomhet.  </p>
+                        <p/>
+                        <p>Kredittilsynet er innforstått med at det kan være tvil om omsetningen  fra annen virksomhet enn regnskapsføring utgjorde mer eller mindre  enn 10 % av totalomsetningen. Dersom honorarinn- tektene fra  regnskaps- føringen
+                            ikke er særskilt spesifisert i regnskapet, ber  Kredittilsynet om at omsetningen estimeres.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Marker for aktuelt alternativ.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>3.1 Dreiv rekneskapsførarselskapet som:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Reint rekneskaps- førarselskap vil seie at selskapet i 2005  hovudsakleg dreiv med rekneskapsføring i næring for andre (jf.  rekneskapsførarlova § 1 første leddet). Kredittilsynet har lagt til  grunn at dei som utfører
+                            lønnsføring, fakturering og rådgiving som  ein naturleg del av rekneskapsførarverk- semda, skal krysse av for at  dei er reine rekneskapsførarselskap.  </p>
+                        <p/>
+                        <p>Rekneskapsførarverksemd i kombinasjon med annan type verksemd vil seie  at  selskapet i 2005 ikkje dreiv som reint rekneskaps- førarselskap.    </p>
+                        <p/>
+                        <p>Dersom omsetnaden frå annan type verksemd var mindre enn 10 % av  totalomsetnaden, legg Kredittilsynet i denne samanhengen likevel til  grunn at selskapet er eit reint rekneskapsførarselskap. Dersom  omsetnad frå ein annan
+                            type verksemd var 10 % eller høgare, kryssar  du av for rekneskapsførar- verksemd i kombinasjon med annan type  verksemd.  </p>
+                        <p/>
+                        <p>Kredittilsynet er klar over at det kan vere tvil om omsetnaden frå  anna verksemd enn rekneskapsføring var meir eller mindre enn 10 % av  totalomsetnaden. Dersom honorar- inntektene frå rekneskapsføringa  ikkje er
+                            spesifiserte i rekneskapen, ber Kredittilsynet om at  omsetnaden blir estimert.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Marker for aktuelt alternativ.</p>
+                    </xforms:hint>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/OmfangAvVirksomhetenMM-grp-5908/EnhetVirksomhetBoligbyggelag-datadef-25872">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>- Var boligbyggelag den andre typen virksomhet?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>- Var bustadbyggjelag den andre typen verksemd?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:input ref="/Skjema/OmfangAvVirksomhetenMM-grp-5908/OppdragHonorarFjoraret-datadef-25876">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.2 Oppgi honorarinntekt for regnskapsføreroppdrag som inngikk i  årsregnskapet for regnskapsårene:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Honorarinntektene skal oppgis uten merverdiavgift. Selskap som har  krysset av for at de driver som rent regnskapsførerselskap, skal  oppgi den honorarinntekten som fremgår av årsregnskapet til selskapet  for henholdsvis
+                            2004 og 2005. Dersom selskapet har avvikende  regnskapsår, skal tall fra de to sist avlagte årsregnskaper  oppgis.  </p>
+                        <p/>
+                        <p>Selskap som driver kombinert virksomhet, skal kun oppgi den delen av  omsetningen som knytter seg til honorarinntekter fra  regnskapsførervirksom- heten. Dersom honorarinntektene fra  regnskapsføringen ikke er spesifisert i
+                            regnskapet, ber  Kredittilsynet om at beløpet estimeres.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Oppgi beløp i hele tusen.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>3.2 Opplys om honorarinntekta for rekneskapsføraroppdrag som var med i  årsrekneskapen for rekneskapsåra:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Opplys om honorarinntektene utan meirverdiavgift. Selskap som har  kryssa av for at dei driv som reint rekneskapsførarselskap, skal  opplyse om honorarinntekta som kjem fram av årsrekneskapen for  høvesvis 2004 og 2005.
+                            Dersom selskapet har avvikande rekneskapsår,  skal du opplyse om tala frå dei to siste årsrekneskapane.  </p>
+                        <p/>
+                        <p>Selskap som driv kombinert verksemd, skal berre opplyse om den delen  av omsetnaden som knyter seg til honorarinntekter frå  rekneskapsførar- verksemda. Dersom honorarinntektene frå  rekneskapsføringa ikkje er spesifiserte
+                            i rekneskapen, ber  Kredittilsynet om at beløpet blir estimert.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Skriv beløpet i heile tusen.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OmfangAvVirksomhetenMM-grp-5908/OppdragHonorar-datadef-25877">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.2 Oppgi honorarinntekt for regnskapsføreroppdrag som inngikk i  årsregnskapet for regnskapsårene:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Honorarinntektene skal oppgis uten merverdiavgift. Selskap som har  krysset av for at de driver som rent regnskapsførerselskap, skal  oppgi den honorarinntekten som fremgår av årsregnskapet til selskapet  for henholdsvis
+                            2004 og 2005. Dersom selskapet har avvikende  regnskapsår, skal tall fra de to sist avlagte årsregnskaper  oppgis.  </p>
+                        <p/>
+                        <p>Selskap som driver kombinert virksomhet, skal kun oppgi den delen av  omsetningen som knytter seg til honorarinntekter fra  regnskapsførervirksomheten. Dersom honorarinntektene fra  regnskapsføringen ikke er spesifisert i
+                            regnskapet, ber  Kredittilsynet om at beløpet estimeres.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Oppgi beløp i hele tusen.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>3.2 Opplys om honorarinntekta for rekneskapsføraroppdrag som var med i  årsrekneskapen for rekneskapsåra:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Opplys om honorarinntektene utan meirverdiavgift. Selskap som har  kryssa av for at dei driv som reint rekneskapsførarselskap, skal  opplyse om honorarinntekta som kjem fram av årsrekneskapen for  høvesvis 2004 og 2005.
+                            Dersom selskapet har avvikande rekneskapsår,  skal du opplyse om tala frå dei to siste årsrekneskapane.  </p>
+                        <p/>
+                        <p>Selskap som driv kombinert verksemd, skal berre opplyse om den delen  av omsetnaden som knyter seg til honorarinntekter frå  rekneskapsførarverk- semda. Dersom honorarinntektene frå  rekneskapsføringa ikkje er spesifiserte
+                            i rekneskapen, ber  Kredittilsynet om at beløpet blir estimert.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Skriv beløpet i heile tusen.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OmfangAvVirksomhetenMM-grp-5908/Arsresultat-datadef-25878">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.3 Oppgi årsresultat for regnskapsførervirksomheten per 31.12.2005:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Selskap som har avvikende regnskapsår skal oppgi årsresultatet for  sist avlagte årsregnskap.  </p>
+                        <p/>
+                        <p>For selskap som driver kombinert virksomhet, ber Kredittilsynet om at  årsresultatet for den delen av virksomheten som knytter seg til  regnskapsførervirksom- heten estimeres.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Oppgi beløp i hele tusen.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>3.3 Opplys om årsresultatet for rekneskapsførarverksemda per  31.12.2005:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Selskap som har avvikande rekneskapsår, skal føre opp årsresultatet  for den siste årsrekneskapen.  </p>
+                        <p/>
+                        <p>For selskap som driv kombinert verksemd, ber Kredittilsynet om at  årsresultatet for den delen av verksemda som knyter seg til  rekneskapsførarverk- semda, blir estimert.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Skriv beløpet i heile tusen.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OmfangAvVirksomhetenMM-grp-5908/EnhetEgenkapitalBelop-datadef-25873">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.4 Oppgi selskapets egenkapital per 31.12.2005:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Selskapets totale egenkapital oppgis, jf. regnskapsloven § 6-2 første  ledd bokstav C (I og II), uavhengig om man driver rent regnskaps-  førerselskap eller kombinert virksomhet.  </p>
+                        <p/>
+                        <p>Selskap som har avvikende regnskapsår, skal oppgi egenkapitalen ved  det sist avlagte årsregnskapet.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Oppgi beløp i hele tusen.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>3.4 Opplys om eigenkapitalen til selskapet per 31.12.2005:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Opplys om den totale eigenkapitalen til selskapet, jf. rekne-  skapslova § 6-2 første leddet bokstav C (I og II), uavhengig av om  ein driv reint rekneskapsførarselskap eller kombinert verksemd.  </p>
+                        <p/>
+                        <p>Selskap som har avvikande rekneskapsår, skal føre opp eigenkapitalen  ved den siste årsrekneskapen.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Skriv beløpet i heile tusen.</p>
+                    </xforms:hint>
+                </xforms:input>
+                <xforms:selectOne ref="/Skjema/OmfangAvVirksomhetenMM-grp-5908/OppdragTilleggstjenesterUtoverRegnskapsforing-datadef-25832">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>3.5 Utfører selskapet tilleggstjenester utover ordinær  regnskapsføring?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Spørsmålet om rådgivning som et særlig satsningsområde for  regnskapsførerne har i  senere tid vært reist i ulike sammenhenger.  Hensikten med spørsmålet er å få kartlagt  om skillet mellom  regnskapstjenester og
+                            tilleggstjenester som kan anses som  rådgivningstjenester, synliggjøres for oppdragsgiver i form av  spesifikasjon i fakturaen  eller om tjenestene er inkludert i prisen  for regnskapsføreroppdraget.  </p>
+                        <p/>
+                        <p>Eksempler på tilleggstjenester kan være assistanse med oppstart av ny  virksomhet eller  skatterådgivning. Fakturering og lønnskjøring er  eksempler på tjenester som her ikke regnes som tilleggstjenester.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>3.5 Utfører selskapet tilleggstenester utover ordinær  rekneskapsføring?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Spørsmålet om rådgiving som eit særleg satsingsområde for  rekneskapsførarane har i det siste blitt stilt i ulike samanhengar.  Formålet med spørsmålet er å kartleggje om skiljet mellom  rekneskapstenester og
+                            tilleggstenester som kan reknast som  rådgivingstenester, blir gjort synleg for oppdragsgivaren i form av  spesifikasjon i fakturaen, eller om tenestene er inkluderte i prisen  for rekneskapsførar- oppdraget.  </p>
+                        <p/>
+                        <p>Døme på tilleggstenester kan vere assistanse med oppstart av ny  verksemd eller  skatterådgiving. Fakturering og lønnskøyring blir til  dømes ikkje rekna som tilleggstenester her.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/OmfangAvVirksomhetenMM-grp-5908/RegnskapsforerselskapTilleggstjenester-datadef-26180">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>- Blir tilleggstjenestene særskilt spesifisert på faktura til  oppdragsgiver?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>- Blir tilleggstenestene spesifiserte på faktura til oppdragsgivar?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+            </xforms:group>
+            <xforms:group ref="/Skjema/OversiktOverRegnskapsforerselskapetsAnsatteInnleide-grp-5909">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>4. Oversikt over regnskapsførerselskapets ansatte/innleide</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>4. Oversikt over dei tilsette/innleigde i rekneskapsførarselskapet</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/OversiktOverRegnskapsforerselskapetsAnsatteInnleide-grp-5909/SysselsatteRegnskapsforereAutoriserte-datadef-25866">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.1 Oppgi antall autoriserte regnskapsførere per 31.12.2005:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Både fast ansatte og innleide skal regnes med.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>4.1 Opplys om talet på autoriserte rekneskapsførarar per 31.12.2005:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Både fast tilsette og innleigde skal reknast med.</p>
+                    </xforms:help>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OversiktOverRegnskapsforerselskapetsAnsatteInnleide-grp-5909/SysselsatteRegnskapsforereOppdragsansvarlige-datadef-25869">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.2 Oppgi antall oppdragsansvarlige regnskapsførere per 31.12.2005:</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>4.2 Opplys om talet på oppdragsansvarlege rekneskapsførarar per  31.12.2005:</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/OversiktOverRegnskapsforerselskapetsAnsatteInnleide-grp-5909/SysselsatteArsverk-datadef-25874">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>4.3 Oppgi totalt antall årsverk knyttet til regnskapsføring per  31.12.2005:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Ett årsverk er definert som 1700 timer. Både fast ansatte og innleide  skal regnes med.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Svaret skal oppgis med en desimal.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>4.3 Opplys om det samla talet på årsverk som er knytte til  rekneskapsføring per 31.12.2005:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Eit årsverk er definert som 1700 timar. Både fast tilsette og  innleigde skal reknast med.</p>
+                    </xforms:help>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Skriv svaret med éin desimal.</p>
+                    </xforms:hint>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>5. Informasjon om regnskapsføreroppdragene</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>5. Informasjon om rekneskapsføraroppdraga</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/EnhetOppdrag-datadef-25875">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.1 Oppgi antall regnskapsføreroppdrag per 31.12.2005:</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>5.1 Opplys om talet på rekneskapsføraroppdrag per 31.12.2005:</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/RegnskapsforerforetakOppdragEksterneLokaler-datadef-22595">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>- Oppgi hvor mange av oppdragene som føres i oppdragsgivers lokaler:</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>- Opplys om kor mange av oppdraga som blir førte i lokala til  oppdragsgivaren:</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:group ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppgiAntallRegnskapsforeroppdragIPkt51FordeltPaFolgendeOrga-grp-5911">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.2 Fordel regnskapsføreroppdragene oppgitt i spørsmål 5.1 på følgende  organisasjonsformer:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Summen av alle oppdragene skal stemme overens med antall oppdrag som  oppgis i svaret på spørsmål 5.1.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>5.2 Fordel rekneskapsføraroppdraga i spørsmål 5.1 på desse  organisasjonsformene:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Summen av alle oppdraga skal stemme med kor mange oppdrag som er  oppgitt i svaret på spørsmål 5.1.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppgiAntallRegnskapsforeroppdragIPkt51FordeltPaFolgendeOrga-grp-5911/EnhetOppdragENK-datadef-25879">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- enkeltpersonforetak</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- enkeltpersonføretak</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppgiAntallRegnskapsforeroppdragIPkt51FordeltPaFolgendeOrga-grp-5911/EnhetOppdragASA-datadef-25880">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- allmennaksjeselskap (ASA)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- allmennaksjeselskap (ASA)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppgiAntallRegnskapsforeroppdragIPkt51FordeltPaFolgendeOrga-grp-5911/EnhetOppdragAS-datadef-25881">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- aksjeselskap (AS)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- aksjeselskap (AS)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppgiAntallRegnskapsforeroppdragIPkt51FordeltPaFolgendeOrga-grp-5911/EnhetOppdragANS-datadef-25882">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- ansvarlig selskap (ANS)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- ansvarleg selskap (ANS)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppgiAntallRegnskapsforeroppdragIPkt51FordeltPaFolgendeOrga-grp-5911/EnhetOppdragBA-datadef-25883">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- selskap med begrenset ansvar (BA)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- selskap med begrensa ansvar (BA)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppgiAntallRegnskapsforeroppdragIPkt51FordeltPaFolgendeOrga-grp-5911/EnhetOppdragDA-datadef-25884">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- selskap med delt ansvar (DA)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- selskap med delt ansvar (DA)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppgiAntallRegnskapsforeroppdragIPkt51FordeltPaFolgendeOrga-grp-5911/EnhetOppdragStiftelserLegater-datadef-25885">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- stiftelser/legater</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- stiftingar/legat</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppgiAntallRegnskapsforeroppdragIPkt51FordeltPaFolgendeOrga-grp-5911/EnhetOppdragNUF-datadef-25886">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- norskregistrerte utenlandske foretak (NUF)</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- norskregistrerte utanlandske føretak (NUF)</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppgiAntallRegnskapsforeroppdragIPkt51FordeltPaFolgendeOrga-grp-5911/EnhetOppdragAndre-datadef-25887">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- annet</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- anna</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppdragsgiverTilsynKredittilsynet-datadef-22578">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.3 Oppgi antall oppdragsgivere som var underlagt tilsyn fra  Kredittilsynet per 31.12.2005, jf. kredittilsynsloven § 1 første  ledd:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kredittilsynet har tilsyn med følgende virksomheter: banker,  finansieringsselskaper kredittforetak, e-pengeforetak,  forsikringsselskaper, pensjonskasser og fond, forsikringsformidlere,  verdipapirforetak,
+                            forvaltningsselskaper for verdipapirfond, børser  og autoriserte markedsplasser, oppgjørssentraler og  verdipapirregistre, eiendomsmeglingsforetak, inkassoforetak,  regnskapsførere og revisorer.  </p>
+                        <p/>
+                        <p>I tillegg har Kredittilsynet tilsyn med børsnoterte foretaks  finansielle rapportering og atferdsreglene i verdipapirmarkedet.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Verdien må være mellom 0 og 99</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>5.3 Opplys om talet på oppdragsgivarar som var underlagde tilsyn frå  Kredittilsynet per 31.12.2005, jf. kredittilsynslova § 1 første  leddet:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>5.3 Kredittilsynet har tilsyn med bankar, finansieringsselskap,  kredittføretak, e-pengeføretak, forsikringsselskap, pensjonskassar og   fond, forsikringsformidlarar, verdipapirføretak, forvaltingsselskap  for
+                            verdipapirfond, børsar og autoriserte marknadsplassar,  oppgjerssentralar og verdipapirregister, eigedomsmeklingsføretak,  inkassoføretak, rekneskapsførarar og revisorar.  </p>
+                        <p/>
+                        <p>I tillegg har Kredittilsynet tilsyn med den finansielle rapporteringa  til børsnoterte føretak og åtferdsreglane i verdipapirmarknaden.</p>
+                    </xforms:help>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Verdien må vere mellom 0 og 99</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppdragsgiverNotertOsloBors-datadef-25843">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.4 Oppgi antall oppdragsgivere som var notert på Oslo Børs (hoved- og  SMB-listen) per 31.12.2005:</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Verdien må være mellom 0 og 99</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>5.4 Opplys om talet på oppdragsgivarar som var noterte på Oslo Børs  (hovud- og SMB-lista) per 31.12.2005:</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Verdien må vere mellom 0 og 99</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppdragsgiverDatterselskapUtenlandskMajoritetseier-datadef-25889">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.5 Oppgi antall oppdragsgivere som var datterselskap der  majoritetseier var utenlandsk per 31.12.2005:</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Verdien må være mellom 0 og 999</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>5.5 Opplys om talet på oppdragsgivarar som var dotterselskap der  majoritetseigaren var utanlandsk per 31.12.2005:</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Verdien må vere mellom 0 og 999</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:input ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppdragsgiverDriftsinntekt50Til100Mill-datadef-25888">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.6 Oppgi antall oppdragsgivere som hadde sum driftsinntekter mellom  kr 50-100 mill. per 31.12.2005:</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>5.6 Opplys kor mange oppdragsgivarar som hadde sum driftsinntekter  mellom 50 og 100 millionar kroner per 31.12.2005:</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/InformasjonOmRegnskapsforeroppdragene-grp-5910/OppdragsgiverDriftsinntektOver100Mill-datadef-25890">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>5.7 Oppgi antall oppdragsgivere som hadde sum driftsinntekter over kr  100 mill. per 31.12.2005:</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>5.7 Opplys kor mange oppdragsgivarar som hadde sum driftsinntekter  over 100 millionar kroner per 31.12.2005:</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/ITLosninger-grp-5912">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>6. IT-løsninger</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>IT-spørsmålene skal kun besvares av selskap som på spørsmål 3.2 oppgir  at de i 2005 hadde honorarinntekt fra regnskapsføringsoppdrag på  minst 5 millioner kroner.</p>
+                </xforms:help>
+                <xforms:caption brreg:lang="NON">
+                    <p>6. IT-løysingar</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Det er berre selskap som på spørsmål 3.2 opplyser at dei i 2005 hadde  honorarinntekt for rekneskapsføringsoppdrag på minst 5 millionar  kroner, som skal svare på IT-spørsmåla.</p>
+                </xforms:help>
+                <xforms:selectOne ref="/Skjema/ITLosninger-grp-5912/EnhetITStrategiDokumentert-datadef-22582">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>6.1 Har regnskapsførerselskapet en dokumentert IT-strategi?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>6.1 Har rekneskapsførarselskapet ein dokumentert IT-strategi?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/ITLosninger-grp-5912/EnhetITVirksomhetTiltak-datadef-22583">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>6.2 Har regnskapsførerselskapet etablert tiltak som sikrer at  risikoanalyse av IT-virksomheten gjennomføres minst årlig, og ved  større endringer?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>6.2 Har rekneskapsførarselskapet etablert tiltak som sikrar at  risikoanalyse av IT-verksemda blir gjennomført minst éin gong i året  og ved større endringar?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/ITLosninger-grp-5912/EnhetITLosningEndringshandteringsprosedyre-datadef-22584">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>6.3 Blir alle forespørsler om endringer i regnskapsførerselskapets  IT-løsninger dokumentert og behandles disse i organisasjonens  endringshåndteringsprosedyre?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>6.3 Blir alle førespurnader om endringar i IT-løysingane til  rekneskapsførarselskapet dokumenterte, og blir dei behandla i  endringshandteringsprosedyren til organisasjonen?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/ITLosninger-grp-5912/EnhetITLeveranserOvervakningAvtale-datadef-22585">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>6.4 Har regnskapsførerselskapet en prosess for løpende overvåking av  leveranser fra ekstern IT-leverandør, for å sikre at disse skjer i  henhold til avtale(r)?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>6.4 Har rekneskapsførarselskapet ein prosess for løpande overvaking av  leveransar frå ekstern IT-leverandør for å sikre at desse skjer i  samsvar med avtalen/avtalane?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/ITLosninger-grp-5912/EnhetKatastrofeplan-datadef-22586">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>6.5 Foreligger det en katastrofeplan?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>6.5 Ligg det føre ein katastrofeplan?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/ITLosninger-grp-5912/EnhetKatastrofeplanTesting-datadef-22587">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>- Er det gjennomført testing av katastrofeplanen de siste 12 måneder?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>- Er katastrofeplanen testa dei siste tolv månadene?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+            </xforms:group>
+            <xforms:group ref="/Skjema/InnsendelsesplikterMM-grp-5913">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>7. Innsendelsesplikter m.m.</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>7. Innsendingsplikter o.a.</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/InnsendelsesplikterMM-grp-5913/BleRegnskapsforerselskapetsArsregnskapRettidigInnsendtTilRegnska-grp-5914">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>7.1 Ble regnskapsførerselskapets årsregnskap rettidig innsendt til  Regnskapsregisteret for:</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>7.1 Blei årsrekneskapen til rekneskapsførarselskapet send inn rettidig  til Rekneskapsregisteret for:</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/InnsendelsesplikterMM-grp-5913/BleRegnskapsforerselskapetsArsregnskapRettidigInnsendtTilRegnska-grp-5914/RegnskapsforerforetakInnsendtArsregnskapFjoraret-datadef-25846">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- 2004?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- 2004?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/InnsendelsesplikterMM-grp-5913/BleRegnskapsforerselskapetsArsregnskapRettidigInnsendtTilRegnska-grp-5914/RegnskapsforerforetakInnsendtArsregnskap-datadef-25845">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- 2005?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- 2005?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+                <xforms:group ref="/Skjema/InnsendelsesplikterMM-grp-5913/HarRegnskapsforerselskapetBlittIlagtForsinkelsesgebyrFordiSelvan-grp-5915">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>7.2 Har regnskapsførerselskapet blitt ilagt forsinkelsesgebyr fordi  selvangivelsen ble for sent innsendt for:</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>7.2 Har rekneskapsførarselskapet fått forseinkingsgebyr fordi  sjølvmeldinga blei send inn for seint, for:</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/InnsendelsesplikterMM-grp-5913/HarRegnskapsforerselskapetBlittIlagtForsinkelsesgebyrFordiSelvan-grp-5915/RegnskapsforerforetakForsinkelsesgebyrSelvangivelseFjoraret-datadef-25848">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- 2004?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- 2004?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/InnsendelsesplikterMM-grp-5913/HarRegnskapsforerselskapetBlittIlagtForsinkelsesgebyrFordiSelvan-grp-5915/RegnskapsforerforetakForsinkelsesgebyrSelvangivelse-datadef-25847">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- 2005?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- 2005?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+                <xforms:group ref="/Skjema/InnsendelsesplikterMM-grp-5913/HarRegnskapsforerselskapetBlittIlagtTilleggsskattFor-grp-5916">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>7.3 Har regnskapsførerselskapet blitt ilagt tilleggsskatt for:</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>7.3 Har rekneskapsførarselskapet fått tilleggsskatt for:</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/InnsendelsesplikterMM-grp-5913/HarRegnskapsforerselskapetBlittIlagtTilleggsskattFor-grp-5916/RegnskapsforerforetakTilleggsskattForfjor-datadef-25849">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- 2003?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- 2003?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/InnsendelsesplikterMM-grp-5913/HarRegnskapsforerselskapetBlittIlagtTilleggsskattFor-grp-5916/RegnskapsforerforetakTilleggsskattFjoraret-datadef-25850">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- 2004?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- 2004?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+                <xforms:selectOne ref="/Skjema/InnsendelsesplikterMM-grp-5913/RegnskapsforerforetakSoksmal-datadef-25851">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>7.4 Har det i perioden fra 2004 og fram til nå vært reist søksmål mot  regnskapsførerselskapet knyttet til regnskapsførervirksomheten?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Med søksmål menes i denne sammenheng at saken er brakt inn for  domstolene. Tvister som er brakt inn for forliksrådet skal ikke tas  med.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>7.4 Har det i perioden frå 2004 og fram til no vore reist søksmål mot  rekneskapsførarselskapet knytt til rekneskapsførarverksemda?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Søksmål vil i denne samanhengen seie at saka er lagd fram for  domstolane. Ikkje ta med tvistar som er lagde fram for forliksrådet.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:group ref="/Skjema/InnsendelsesplikterMM-grp-5913/RapporteringEtterHvitvaskingslovgivningen-grp-5917">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>7.5 Rapportering etter hvitvaskingslovgivingen</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Jf. hvitvaskingsloven § 7 første ledd</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>7.5 Rapportering etter kvitvaskingslovgivinga</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Jf. kvitvaskingslova § 7 første leddet.</p>
+                    </xforms:hint>
+                    <xforms:selectOne ref="/Skjema/InnsendelsesplikterMM-grp-5913/RapporteringEtterHvitvaskingslovgivningen-grp-5917/TransaksjonMistenkelig-datadef-25852">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>7.5.1 Har regnskapsførerselskapet i 2005 eller 2006 foretatt nærmere  undersøkelser fordi det har vært grunn til å tro at en transaksjon  kan ha tilknytning til utbytte av en straffbar handling eller til  terrorfinansiering?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Regnskapsførere er rapporteringspliktige i henhold til  Hvitvaskingsloven § 7, som lyder:  </p>
+                            <p/>
+                            <p>Dersom rapporteringspliktige har mistanke om at en transaksjon har  tilknytning til utbytte av en straffbar handling eller til forhold  som rammes av straffeloven § 147 a eller 147 b, skal det foretas  nærmere
+                                undersøkelser for å få bekreftet eller avkreftet mistanken.  Plikten gjelder også for den rapporterings- pliktiges ansatte.  </p>
+                            <p/>
+                            <p>Dersom undersøkelsene ikke har avkreftet mistanken, skal den  rapporteringspliktige av eget tiltak oversende opplysninger til  ØKOKRIM om den aktuelle transaksjon og om de forhold som har medført  mistanke. Den
+                                rapporteringspliktige og ansatte skal på forespørsel gi  ØKOKRIM alle nødvendige opplysninger om transaksjonen og mistanken.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>7.5.1 Har rekneskapsførarselskapet i 2005 eller 2006 gjort nærmare  undersøkingar fordi det har vore grunn til å tru at ein transaksjon  kan ha tilknyting til utbyttet av ei straffbar handling eller til  terrorfinansiering?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Rekneskapsførarar er rapporteringspliktige etter § 7 i  kvitvaskingslova:  </p>
+                            <p/>
+                            <p>Dersom rapporteringspliktige har mistanke om at en transaksjon har  tilknytning til utbytte av en straffbar handling eller til forhold  som rammes av straffeloven § 147 a eller 147 b, skal det foretas  nærmere
+                                undersøkelser for å få bekreftet eller avkreftet mistanken.  Plikten gjelder også for den rapporterings- pliktiges ansatte.  </p>
+                            <p/>
+                            <p>Dersom undersøkelsene ikke har avkreftet mistanken, skal den  rapporteringspliktige av eget tiltak oversende opplysninger til  ØKOKRIM om den aktuelle transaksjon og om de forhold som har medført  mistanke. Den
+                                rapporteringspliktige og ansatte skal på forespørsel gi  ØKOKRIM alle nødvendige opplysninger om transaksjonen og mistanken.</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/InnsendelsesplikterMM-grp-5913/RapporteringEtterHvitvaskingslovgivningen-grp-5917/TransaksjonRapportertOkokrim-datadef-25853">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- Har slike transaksjoner blitt rapportert til ØKOKRIM i 2005 eller  hittil i 2006?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- Har slike transaksjonar blitt rapporterte til ØKOKRIM i 2005 eller  til no i 2006?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/InnsendelsesplikterMM-grp-5913/RapporteringEtterHvitvaskingslovgivningen-grp-5917/TransaksjonRapportertOkokrimAntall-datadef-25854">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- Oppgi antall rapporterte transaksjoner:</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- Opplys om talet på rapporterte transaksjonar:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/GjeldendeRutinerMM-grp-5918">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>8. Gjeldende rutiner m.m.</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>8. Gjeldande rutinar o.a.</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GjeldendeRutinerMM-grp-5918/HarRegnskapsforerselskapetEtablertRutinerFor-grp-5919">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>8.1 Har regnskapsførerselskapet etablert rutiner for:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kredittilsynsloven § 3 sier følgende: Tilsynet skal se til at de  institusjoner det har tilsyn med, virker på en hensiktsmessig og  betryggende måte i samsvar med lov og bestemmelser gitt i medhold av  lov samt med den
+                            hensikt som ligger til grunn for institusjonens  opprettelse, dens formål og vedtekter.  </p>
+                        <p/>
+                        <p> Foreløpig standard om god regnskapsførings- skikk punkt B-1 sier  følgende om rutiner:  </p>
+                        <p> Regnskapsførervirksom- heten skal til enhver tid vurdere behovet for  interne rutiner, slik at oppdragsgivers interesser ivaretas på en  forsvarlig måte. Rutinene skal være nedfelt skriftlig hvis dette er  vesentlig for å
+                            sikre gjennomføring, og i så fall være lett  tilgjengelig for samtlige medarbeidere.  </p>
+                        <p/>
+                        <p>Regnskapsførervirksom- heten må kunne begrunne hvorfor opplegget anses  forsvarlig.  </p>
+                        <p/>
+                        <p>Virksomhetens størrelse, herunder antall medarbeidere, og oppdragenes  komplek- sitet er faktorer som må tas hensyn til i denne sammenheng.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>8.1 Har rekneskapsførarselskapet etablert rutinar for:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Kredittilsynslova § 3 seier: Tilsynet skal se til at de institusjoner  det har tilsyn med, virker på en hensiktsmessig og betryggende måte i  samsvar med lov og bestemmelser gitt i medhold av lov samt med den  hensikt som
+                            ligger til grunn for institusjonens opprettelse, dens  formål og vedtekter.  </p>
+                        <p/>
+                        <p>Foreløpig standard om god rekneskapsførings- skikk punkt B-1 seier  dette om rutinar:  </p>
+                        <p/>
+                        <p>Regnskapsførervirksom- heten skal til enhver tid vurdere behovet for  interne rutiner, slik at oppdragsgivers interesser ivaretas på en  forsvarlig måte. Rutinene skal være nedfelt skriftlig hvis dette er  vesentlig for å
+                            sikre gjennomføring, og i så fall være lett  tilgjengelig for samtlige medarbeidere.  </p>
+                        <p/>
+                        <p>Regnskapsførervirksom- heten må kunne begrunne hvorfor opplegget anses  forsvarlig.  </p>
+                        <p/>
+                        <p>Virksomhetens størrelse, herunder antall medarbeidere, og oppdragenes  kompleksitet er faktorer som må tas hensyn til i denne sammenheng.</p>
+                    </xforms:help>
+                    <xforms:selectOne ref="/Skjema/GjeldendeRutinerMM-grp-5918/HarRegnskapsforerselskapetEtablertRutinerFor-grp-5919/RegnskapsforerforetakOppdragsavtalerSkriftlig-datadef-25855">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- å sikre at oppdragsavtaler inngås?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- å sikre at det blir gjort oppdragsavtalar?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/GjeldendeRutinerMM-grp-5918/HarRegnskapsforerselskapetEtablertRutinerFor-grp-5919/RegnskapsforerforetakDokumentasjonOppdrag-datadef-25856">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- utarbeidelse av oppdragsdokumentasjon for alle  regnskapsføreroppdrag?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- å utarbeide oppdragsdokumentasjon for alle rekneskapsføraroppdrag?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/GjeldendeRutinerMM-grp-5918/HarRegnskapsforerselskapetEtablertRutinerFor-grp-5919/RegnskapsforerforetakDokumentasjonUautorisertMedarbeider-datadef-25857">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>I</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ikke aktuelt</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ikkje aktuelt</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- utarbeidelse av dokumentasjon for kvalitetssikring av arbeid utført  av ikke-autoriserte medarbeidere?</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Dersom du driver alene skal du markere at kvalitetskontroll ikke er  aktuelt.</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- å utarbeide dokumentasjon for kvalitetssikring av arbeid som er  utført av ikkje-autoriserte medarbeidarar?</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Dersom du driv åleine, markerer du at kvalitetskontroll ikkje er  aktuelt.</p>
+                        </xforms:hint>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/GjeldendeRutinerMM-grp-5918/HarRegnskapsforerselskapetEtablertRutinerFor-grp-5919/RegnskapsforerforetakRutinerEtterutdanningskrav-datadef-25891">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- å påse at autoriserte regnskapsførere oppfyller kravene til  etterutdanning?</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Bare selskaper med to eller flere autoriserte regnskapsførere skal  svare på spørsmålet.</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- å sjå til at autoriserte rekneskapsførarar oppfyller krava til  etterutdanning?</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Berre selskap med to eller fleire autoriserte rekneskapsførarar skal  svare på spørsmålet.</p>
+                        </xforms:hint>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/GjeldendeRutinerMM-grp-5918/HarRegnskapsforerselskapetEtablertRutinerFor-grp-5919/RegnskapsforerforetakEtterlevelseHvitvaskingslov-datadef-25858">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- å sikre etterlevelse av hvitvaskingslovgivingen?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- å sikre at kvitvaskingslovgivinga blir følgd?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+                <xforms:selectOne ref="/Skjema/GjeldendeRutinerMM-grp-5918/RegnskapsforerforetakInnehaverKlientkonto-datadef-25859">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>8.2 Står regnskapsførerselskapet som innehaver av bankkonto der  midlene tilhører oppdragsgiver (klientkonto)?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Med klientkonto menes her bankkontoer som står i  regnskapsførerselskapets navn, men hvor pengene tilhører  oppdragsgiver.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>8.2 Står rekneskapsførarselskapet som innehavar av bankkonto der  midlane tilhøyrer oppdragsgivaren (klientkonto)?</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Klientkonto vil seie bankkontoar som står i namnet til rekneskaps-  førarselskapet, men der pengane tilhøyrer oppdragsgivaren.</p>
+                    </xforms:help>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/GjeldendeRutinerMM-grp-5918/RegnskapsforerforetakOppdragSamarbeid-datadef-25860">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>8.3 Har regnskapsførerselskapet inngått samarbeid med annen  regnskapsførervirksomhet som kan bistå ved uforutsette hendelser som  setter selskapet ute av stand til å ivareta oppdragsgivers interesser  på en
+                            tilfredsstillende måte?</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>Bare selskaper med én autorisert regnskapsfører skal svare på  spørsmålet.</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>8.3 Samarbeider rekneskapsførarselskapet med andre  rekneskapsførarverksemder som kan assistere ved uventa hendingar som  fører til at selskapet ikkje kan ta vare på interessene til  oppdragsgivaren på ein tilfredsstillande måte?</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>Berre selskap med éin autorisert rekneskapsførar skal svare på  spørsmålet.</p>
+                    </xforms:hint>
+                </xforms:selectOne>
+                <xforms:selectOne ref="/Skjema/GjeldendeRutinerMM-grp-5918/RegnskapsforerforetakMedlemNARF-datadef-25892">
+                    <xforms:choices>
+                        <xforms:item>
+                            <xforms:value>Ja</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>Yes</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Ja</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Ja</p>
+                            </xforms:caption>
+                        </xforms:item>
+                        <xforms:item>
+                            <xforms:value>Nei</xforms:value>
+                            <xforms:caption brreg:lang="EN">
+                                <p>No</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Nei</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Nei</p>
+                            </xforms:caption>
+                        </xforms:item>
+                    </xforms:choices>
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>8.4 Er regnskapsførerselskapet medlem av Norges Autoriserte  Regnskapsføreres Forening (NARF)?</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>8.4 Er rekneskapsførarselskapet medlem av Norges Autoriserte  Regnskapsføreres Forening (NARF)?</p>
+                    </xforms:caption>
+                </xforms:selectOne>
+                <xforms:group ref="/Skjema/GjeldendeRutinerMM-grp-5918/HarRegnskapsforerselskapetTegnetFormuesskadeforsikringSomDekker-grp-5920">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>8.5 Har regnskapsførerselskapet tegnet formuesskadeforsikring som  dekker:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Kredittilsynet vil presisere at de forsikringene det spørres om ikke  er lovpålagte. Spørsmålet stilles fordi tilsynet ønsker en oversikt  over hvor utbredt det er å tegne slike forsikringer.</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>8.5 Har rekneskapsførarselskapet teikna formuesskadeforsikring som  dekkjer:</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Kredittilsynet presiserer at forsikringane det blir spurt om, ikkje er  lovpålagde, men tilsynet ønskjer å få oversikt over kor vanleg det er  å teikne slike forsikringar.</p>
+                    </xforms:help>
+                    <xforms:selectOne ref="/Skjema/GjeldendeRutinerMM-grp-5918/HarRegnskapsforerselskapetTegnetFormuesskadeforsikringSomDekker-grp-5920/RegnskapsforerforetakForsikringAnsvar-datadef-25861">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- ansvar?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- ansvar?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/GjeldendeRutinerMM-grp-5918/HarRegnskapsforerselskapetTegnetFormuesskadeforsikringSomDekker-grp-5920/RegnskapsforerforetakForsikringUnderslag-datadef-25862">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- underslag?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- underslag?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:selectOne ref="/Skjema/GjeldendeRutinerMM-grp-5918/HarRegnskapsforerselskapetTegnetFormuesskadeforsikringSomDekker-grp-5920/RegnskapsforerforetakForsikringRekonstruksjonMateriale-datadef-25863">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>- rekonstruksjon av regnskapsmateriale?</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>- rekonstruksjon av rekneskapsmateriale?</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

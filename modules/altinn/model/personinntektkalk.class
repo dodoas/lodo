@@ -1,0 +1,166 @@
+<?
+
+#Usage
+# new PersonInntektKalk(array('sumPart'=>$_sumPart, 'sumGroup'=>$_sumGroup))
+#Ikke periode 13???);
+#
+
+class PersonInntektKalk
+{
+    var $_sumPart;
+    var $_sumGroup;
+   
+
+    ############################################################################
+    function PersonInntektKalk($args)
+    {	
+       
+    }
+    
+    function calculateNr($ThisYear, $_sumPart, $_sumGroup){
+    	$this->_sumGroup = $_sumGroup;
+    	$this->_sumPart  = $_sumPart;
+    	
+        $this->_sumPart['1.1'][$ThisYear]['saldo']=$this->_sumPart['0402'][$ThisYear]['saldo'];
+        //print("calculate per : ".$this->_sumPart['1.1'][$ThisYear]['saldo']);
+        $this->calculate($ThisYear);
+    }
+    
+    function calculateAS($ThisYear, $_sumPart, $_sumGroup){
+    	
+    	$this->_sumGroup = $_sumGroup;
+    	$this->_sumPart  = $_sumPart;
+    	
+        $this->_sumPart['1.1'][$ThisYear]['saldo']=$this->_sumPart['0940'][$ThisYear]['saldo'];
+        //print("calculateAS : ".$this->_sumPart['1.1'][$ThisYear]['saldo']);
+        $this->calculate($ThisYear);
+     }
+    
+    /*
+     * function: 	calculate
+     * desciption:  
+     * args:  		none
+     * return:      none
+     */
+    function calculate($ThisYear)
+    {   
+    	
+    	$this->_sumPart['1.15'][$ThisYear]['saldo']= abs($this->_sumPart['1.15'][$ThisYear]['saldo']);
+    	$this->_sumPart['1.16'][$ThisYear]['saldo']= abs($this->_sumPart['1.16'][$ThisYear]['saldo']);
+    	$this->_sumPart['1.17'][$ThisYear]['saldo']= abs($this->_sumPart['1.17'][$ThisYear]['saldo']);
+    	$this->_sumPart['1.18'][$ThisYear]['saldo']= abs($this->_sumPart['1.18'][$ThisYear]['saldo']);
+    	$this->_sumPart['1.19'][$ThisYear]['saldo']= abs($this->_sumPart['1.19'][$ThisYear]['saldo']);
+    	$this->_sumPart['1.20'][$ThisYear]['saldo']= abs($this->_sumPart['1.20'][$ThisYear]['saldo']);
+    	 
+    	
+    	
+    	$this->_sumGroup['1.21'][$ThisYear]['saldo']=$this->_sumPart['1.1'][$ThisYear]['saldo']+
+    	                                             $this->_sumGroup['1.21a'][$ThisYear]['saldo']-
+    	                                             abs($this->_sumGroup['1.21b'][$ThisYear]['saldo']);
+    	
+    												
+    	$this->_sumPart['2.9'][$ThisYear]['saldo']=$this->sumGroup('2.7', $Year, $reportHash)-
+    	                                           $this->sumGroup('2.8', $Year, $reportHash);
+    	
+    	if (isset($this->_sumPart['2.10'][$ThisYear-1]['saldo']))
+    		$this->_sumPart['2.10'][$ThisYear]['saldo']=($this->_sumPart['2.9'][$ThisYear]['saldo']+
+    		                                           $this->_sumPart['2.10'][$ThisYear]['saldo'])/2;
+        else $this->_sumPart['2.10'][$ThisYear]['saldo']=$this->_sumPart['2.9'][$ThisYear]['saldo'];
+        
+        //7% eller 0.07 er fastsatt av staten
+        $this->_sumPart['2.11b'][$ThisYear]['saldo']=0.07;
+        $this->_sumPart['2.11c'][$ThisYear]['saldo']=12;
+        $this->_sumPart['2.12'][$ThisYear]['saldo']=$this->_sumPart['2.10'][$ThisYear]['saldo']*
+                                                    $this->_sumPart['2.11b'][$ThisYear]['saldo']*$this->_sumPart['2.11c'][$ThisYear]['saldo']/12;
+       
+        $this->_sumPart['3'][$ThisYear]['saldo']=$this->_sumGroup['1.21'][$ThisYear]['saldo']-
+                                                 $this->_sumPart['2.12'][$ThisYear]['saldo'];
+                                                 
+        $this->_sumPart['4.8'][$ThisYear]['saldo'] = $this->_sumPart['4.5c'][$ThisYear]['saldo']+
+    												$this->_sumPart['4.6c'][$ThisYear]['saldo']+$this->_sumPart['4.7'][$ThisYear]['saldo'];
+    												
+    												
+    	//$this->_sumPart['5.1'][$ThisYear]['saldo']=;
+    	
+    	//20% elle 0.2 er fastsatt av staten
+    	$this->_sumPart['6.2'][$ThisYear]['saldo']=$this->_sumPart['6.1'][$ThisYear]['saldo']*0.2;
+    	
+    	$this->_sumPart['7.10'][$ThisYear]['saldo']=$this->_sumPart['6.2'][$ThisYear]['saldo'];
+    	
+    	$this->_sumPart['7.2'][$ThisYear]['saldo']=$this->_sumPart['3'][$ThisYear]['saldo'];
+    	$this->_sumPart['7.3'][$ThisYear]['saldo']=$this->_sumPart['4.9'][$ThisYear]['saldo'];
+    	$this->_sumPart['7.4'][$ThisYear]['saldo']=$this->_sumPart['7.2'][$ThisYear]['saldo']*
+    	                                           $this->_sumPart['7.3'][$ThisYear]['saldo'];
+    	                                           
+    	$this->_sumPart['7.5'][$ThisYear]['saldo']=$this->_sumPart['7.4'][$ThisYear]['saldo'];
+    	
+    	$this->_sumPart['7.7'][$ThisYear]['saldo']= $this->_sumPart['7.5'][$ThisYear]['saldo']+
+    	                                            $this->_sumPart['7.6'][$ThisYear]['saldo'];
+    	                                            
+    	$this->_sumPart['7.9'][$ThisYear]['saldo']=$this->_sumPart['7.7'][$ThisYear]['saldo']-
+    	                                           $this->_sumPart['7.8'][$ThisYear]['saldo'];   
+    	                                           
+    	$this->_sumPart['7.10'][$ThisYear]['saldo']=$this->_sumPart['6.2'][$ThisYear]['saldo']*
+    	                                            $this->_sumPart['7.3'][$ThisYear]['saldo'];
+    	                            
+    	if ($this->_sumPart['7.9'][$ThisYear]['saldo']<$this->_sumPart['7.10'][$ThisYear]['saldo'])                 
+    		$this->_sumPart['7.11'][$ThisYear]['saldo']=$this->_sumPart['7.9'][$ThisYear]['saldo'];  
+        else  $this->_sumPart['7.11'][$ThisYear]['saldo']=$this->_sumPart['7.10'][$ThisYear]['saldo'];
+         
+         $this->_sumPart['7.12'][$ThisYear]['saldo']=$this->_sumPart['7.4'][$ThisYear]['saldo']-
+                                                            $this->_sumPart['7.11'][$ThisYear]['saldo'];
+                                                            
+                                                            
+        $this->_sumPart['7.15'][$ThisYear]['saldo']=$this->_sumPart['7.12'][$ThisYear]['saldo']+
+                                                 $this->_sumPart['7.13'][$ThisYear]['saldo']-
+                                                    $this->_sumPart['7.14'][$ThisYear]['saldo'];
+                                                    
+        $this->_sumPart['7.18'][$ThisYear]['saldo']=$this->_sumPart['7.15'][$ThisYear]['saldo']-
+                                                    $this->_sumPart['7.16'][$ThisYear]['saldo']+
+                                                    $this->_sumPart['7.17'][$ThisYear]['saldo'];
+                                                    
+                                                    
+                                                   
+    }//function calculate
+    
+    
+ 
+    function sumGroupLogic($Line, $Year, $reportHash, $sumGroup){
+    	$this->_sumGroup=$sumGroup;
+    	
+    	if ($Line == '1.11' || $Line == '1.12' || $Line == '1.13' || $Line == '1.14'){
+            	    $this->sumGroup('1.21a', $Year, $reportHash);
+    	}elseif ($Line == '1.15' || $Line == '1.16' || $Line == '1.17' || $Line == '1.18' ||
+            	    $Line == '1.19' || $Line == '1.20'){
+           			$this->sumGroup('1.21b', $Year, $reportHash);
+        }
+        elseif($Line == '2.1a' || $Line == '2.1b' || $Line == '2.1c' || $Line == '2.1d'||
+           $Line == '2.1e' || $Line == '2.1f' || $Line == '2.1g' || $Line == '2.1h' ||
+           $Line == '2.1j' || $Line == '2.2' || $Line == '2.3' || $Line == '2.4' ||
+           $Line == '2.5' || $Line == '2.6'){
+         	$this->sumGroup('2.7', $Year, $reportHash);	  
+         }
+         
+         
+    }
+
+   
+    
+    function sumGroup($LineNum, $Year, $reportHash)
+    {
+        $this->_sumGroup[$LineNum][$Year]['in']     += $reportHash['AmountIn'];
+        $this->_sumGroup[$LineNum][$Year]['out']    += $reportHash['AmountOut'];
+        $this->_sumGroup[$LineNum][$Year]['saldo']  += $reportHash['AmountIn'] - $reportHash['AmountOut'];
+    }
+    
+    function getSumPart(){
+   		return $this->_sumPart;	
+    }
+    
+    function getSumGroup(){
+   		return $this->_sumGroup;	
+    }
+    
+
+}
+?>

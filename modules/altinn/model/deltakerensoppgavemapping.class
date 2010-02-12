@@ -1,0 +1,184 @@
+<?php
+class DeltakerensOppgaveMapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+        //print ("Accouint: ". $a . "khlk: ". $h);
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+           			$this->ORID[$item] = $v;
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+            	$item = $this->Account[$a];
+            	$this->ORID[$item] = $v;
+	            return 1;
+    	    }
+       	}
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+	{  
+        $this->addMapping('D1',     'EnhetNavn-datadef-1', 'VName');
+		$this->addMapping('D17007', 'EnhetEierandelANSMv-datadef-17007', '');
+		$this->addMapping('D26',    'OppgavegiverFodselsnummer-datadef-26', 'SocialSecurityID');
+		$this->addMapping('D15',    'EnhetAdresse-datadef-15', 'VAddress');
+		$this->addMapping('D6673',  'EnhetPostnummer-datadef-6673', 'VZipCode');
+		$this->addMapping('D6674',  'EnhetPoststed-datadef-6674', 'VCity');
+		$this->addMapping('D29',    'EnhetKommune-datadef-29', 'CompanyMunicipality');
+		$this->addMapping('D18',    'EnhetOrganisasjonsnummer-datadef-18', 'OrgNumber');
+		$this->addMapping('D15019', 'EnhetNavnANSMv-datadef-15019', '');
+		$this->addMapping('D15951', 'AnsvarligSelskapAnsvarsform-datadef-15951', '');
+		$this->addMapping('D15020', 'EnhetAdresseANSMv-datadef-15020', '');
+		$this->addMapping('D15021', 'EnhetPostnummerANSMv-datadef-15021', '');
+		$this->addMapping('D15022', 'EnhetPoststedANSMv-datadef-15022', '');
+		$this->addMapping('D15025', 'DelingsforetakANSMv-datadef-15025', '');
+		$this->addMapping('D15026', 'LiberaltYrkeANSMv-datadef-15026', '');
+		$this->addMapping('D22307', 'BeskatningsmateOrdinarRederiRederi811-datadef-22307', '');
+		$this->addMapping('D15028', 'EnhetSkattekommuneANSMv-datadef-15028', '');
+		$this->addMapping('D15024', 'EnhetTelefonnummerANSMv-datadef-15024', '');
+		$this->addMapping('D15023', 'EnhetOrganisasjonsnummerANSMv-datadef-15023', '');
+		$this->addMapping('D20251', 'KonsernspissNorskOrganisasjonsnummerDeltakeroppgave-datadef-20251', '');
+		$this->addMapping('D17008', 'FormuesverdiNettoANSAndel-datadef-17008', '');
+		$this->addMapping('D17009', 'ResultatANSAndel-datadef-17009', '');
+		$this->addMapping('D17010', 'GodtgjorelseArbeidANSAndel-datadef-17010', '');
+		$this->addMapping('D17011', 'InntekterLottfiskeANSAndel-datadef-17011', '');
+		$this->addMapping('D22308', 'ResultatJordbrukANSMvAndel-datadef-22308', '');
+		$this->addMapping('D22309', 'ResultatSkogbrukReindriftANSMvAndel-datadef-22309', '');
+		$this->addMapping('D22310', 'ResultatJordbrukSkogbrukReindriftANSMvAndel-datadef-22310', '');
+		$this->addMapping('D22311', 'AvviklingsOmstillingsfondetReindriftNettouttakANSMvAndel-datadef-22311', '');
+		$this->addMapping('D17012', 'InntektAlminneligANSAndel-datadef-17012', '');
+		$this->addMapping('D22312', 'AksjerMvRealisasjonGevinstTapNettoANSMvAndel-datadef-22312', '');
+		$this->addMapping('D19960', 'InntektAlminneligANSOverforingSelvangivelse-datadef-19960', '');
+		$this->addMapping('D17013', 'AksjeutbytteANSAndel-datadef-17013', '');
+		$this->addMapping('D19961', 'ArbeidsgodtgjorelseANSFiskeJordSkogPelsRein-datadef-19961', '');
+		$this->addMapping('D19964', 'PersoninntektANSFiskeJordSkogPelsRein-datadef-19964', '');
+		$this->addMapping('D19962', 'ArbeidsgodtgjorelseANSLiberalVirksomhet-datadef-19962', '');
+		$this->addMapping('D19965', 'PersoninntektANSLiberalVirksomhet-datadef-19965', '');
+		$this->addMapping('D19963', 'ArbeidsgodtgjorelseANSAnnenNaring-datadef-19963', '');
+		$this->addMapping('D19966', 'PersoninntektANSAnnenNaring-datadef-19966', '');
+		$this->addMapping('D17016', 'KommuneANSNummerSpesifisertKommune-datadef-17016', '');
+		$this->addMapping('D17017', 'FormueANSAndelSpesifisertKommune-datadef-17017', '');
+		$this->addMapping('D17018', 'ResultatANSAndelSpesifisertKommune-datadef-17018', '');
+		$this->addMapping('D17020', 'InnskuddKontantbelopANSAndel-datadef-17020', '');
+		$this->addMapping('D17021', 'UttakKontantbelopANSAndel-datadef-17021', '');
+		$this->addMapping('D17022', 'UttakFormuesgjenstanderANSDeltaker-datadef-17022', '');
+		$this->addMapping('D17023', 'InnskuddFormuesgjenstanderANSDeltaker-datadef-17023', '');
+		$this->addMapping('D22483', 'TransaksjonerMellomDeltakerSelskapDeltaker-datadef-22483', '');
+		$this->addMapping('D21976', 'GevinstTapskontoInntektANSMvDeltakerRederibeskatningAndel-datadef-21976', '');
+		$this->addMapping('D21977', 'InntektInntredenDeltakerANSMvRederibeskatning-datadef-21977', '');
+		$this->addMapping('D21975', 'FinansinntektDeltakerRederibeskatningAndel-datadef-21975', '');
+		$this->addMapping('D22313', 'TonnasjeskattANSMvDeltakerAndel-datadef-22313', '');
+		$this->addMapping('D21978', 'FinansaktivaANSMvDeltakerRederibeskatningAndelProsent-datadef-21978', '');
+		$this->addMapping('D22314', 'InntektUtgiftSkatteloven238ANSMvDeltakerAndel-datadef-22314', '');
+		$this->addMapping('D22315', 'TotalkapitalANSMvDeltakerAndelRederibeskatningFjoraret-datadef-22315', '');
+		$this->addMapping('D21979', 'TotalkapitalANSMvDeltakerAndelRederibeskatning-datadef-21979', '');
+		$this->addMapping('D22316', 'GjeldANSMvDeltakerAndelRederibeskatning-datadef-22316', '');
+		$this->addMapping('D21980', 'GjeldANSMvDeltakerAndelRederibeskatning-datadef-21980', '');
+		$this->addMapping('D21981', 'BokforingMetodeANSMvRederibeskatning-datadef-21981', '');
+		$this->addMapping('D17061', 'ErververAndelANSNavn-datadef-17061', '');
+		$this->addMapping('D17062', 'ErververAndelANSAdresse-datadef-17062', '');
+		$this->addMapping('D17063', 'ErververAndelANSPostnummer-datadef-17063', '');
+		$this->addMapping('D17064', 'ErververAndelANSPoststed-datadef-17064', '');
+		$this->addMapping('D17065', 'AndelANSRealisertProsent-datadef-17065', '');
+		$this->addMapping('D17066', 'AndelANSSelgerErvervtidspunkt-datadef-17066', '');
+		$this->addMapping('D17067', 'AndelANSRealisasjonstidspunkt-datadef-17067', '');
+		$this->addMapping('D17068', 'AndelANSRealisasjonVederlag-datadef-17068', '');
+		$this->addMapping('D17069', 'AndelANSRealisasjonEgenkapitalSkattemessig-datadef-17069', '');
+		$this->addMapping('D17070', 'AndelANSRealisasjonEgenkapitalSkjevKorreksjon-datadef-17070', '');
+		$this->addMapping('D17071', 'AndelANSRealisasjonOverUnderpris-datadef-17071', '');
+		$this->addMapping('D17072', 'AndelANSRealisasjonFusjonFisjonDifferanse-datadef-17072', '');
+		$this->addMapping('D17073', 'AndelANSRealisasjonSalgskostnader-datadef-17073', '');
+		$this->addMapping('D17076', 'AndelANSRealisasjonGevinst-datadef-17076', '');
+		$this->addMapping('D17077', 'AndelANSRealisasjonTap-datadef-17077', '');
+		$this->addMapping('D17078', 'AndelANSEgenkapitalSkattemessigFjoraret-datadef-17078', '');
+		$this->addMapping('D17079', 'AndelANSResultatAvhender-datadef-17079', '');
+		$this->addMapping('D17080', 'AndelANSInntekterUtgifterSkattefriIkkeFradragsberettigetAvh-datadef-17080', '');
+		$this->addMapping('D17081', 'AndelANSInnbetalingUtbetalingAvhenderSelskap-datadef-17081', '');
+		$this->addMapping('D17082', 'AndelANSEgenkapitalSkattemessigOverdragelsestidspunkt-datadef-17082', '');
+		$this->addMapping('D17083', 'AvhenderAndelANSNavn-datadef-17083', '');
+		$this->addMapping('D17084', 'AvhenderAndelANSAdresse-datadef-17084', '');
+		$this->addMapping('D17085', 'AvhenderAndelANSPostnummer-datadef-17085', '');
+		$this->addMapping('D17086', 'AvhenderAndelANSPoststed-datadef-17086', '');
+		$this->addMapping('D17087', 'AndelANSErvervetProsent-datadef-17087', '');
+		$this->addMapping('D17088', 'AndelANSErvervtidspunkt-datadef-17088', '');
+		$this->addMapping('D17089', 'AndelANSErvervVederlag-datadef-17089', '');
+		$this->addMapping('D17090', 'AndelANSErvervEgenkapitalSkattemessig-datadef-17090', '');
+		$this->addMapping('D17091', 'AndelANSErvervEgenkapitalSkjevKorreksjon-datadef-17091', '');
+		$this->addMapping('D17092', 'AndelANSErvervKjopskostnader-datadef-17092', '');
+		$this->addMapping('D17093', 'AndelANSErvervOverUnderpris-datadef-17093', '');
+		$this->addMapping('D17094', 'AndelANSEgenkapitalSkattemessigForFusjonFisjon-datadef-17094', '');
+		$this->addMapping('D17095', 'AndelANSEgenkapitalSkattemessigEtterFusjonFisjon-datadef-17095', '');
+		$this->addMapping('D17096', 'AndelANSFusjonFisjonDifferanse-datadef-17096', '');
+		$this->addMapping('D17097', 'AndelANSErvervTidspunktSpesifisertAndel-datadef-17097', '');
+		$this->addMapping('D17098', 'AndelANSErvervOverUnderprisBeregnet-datadef-17098', '');
+        
+	}
+ }
+?>

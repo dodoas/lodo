@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-0009: Søknad om kompensasjon av merverdiavgift</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-964-4420.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4446/Soker-grp-4447/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4446/Soker-grp-4447/EnhetOrganisasjonsform-datadef-756"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4446/Soker-grp-4447/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4446/Soker-grp-4447/EnhetAdresse-datadef-15"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4446/Soker-grp-4447/EnhetPostnummer-datadef-6673"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4446/Soker-grp-4447/EnhetPoststed-datadef-6674"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-4446/KIDnummerOmsetning-datadef-18616"/>
+            <xforms:bind ref="/Skjema/SoknadenGjelder-grp-4449/Soknadsperiode-grp-4450/SoknadPeriode-datadef-21018" required="true"/>
+            <xforms:bind ref="/Skjema/SoknadenGjelder-grp-4449/Soknadsperiode-grp-4450/SoknadPeriodeAr-datadef-20445" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-0009 Søknad om kompensasjon av merverdiavgift for kommuner og  fylkeskommuner mv.</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Om utfylling av oppgaven  </p>
+                <p/>
+                <p>Ifølge lov om kompensasjon av merverdiavgift for kommuner,  fylkeskommuner mv. av 12.12.2003 skal det ytes kompensasjon til de  enheter som er nevnt i lovens § 2, ved anskaffelse av varer og  tjenester til bruk i den
+                    kompensasjonsberettigede virksomheten.  </p>
+                <p>Oppgave over merverdiavgift som søkes kompensert, skal sendes  fylkesskattekontoret i det fylke enheten hører til. Merverdiavgift  som søkes kompensert, må være på minst 20 000 kroner per kalenderår.    </p>
+                <p>Frist for innsendelse av oppgave over beløp som kreves refundert, er  en måned og ti dager etter utløpet av søknadsperioden (for hele  kalenderåret er dette 10. februar i året etter anskaffelsen har  funnet sted). Oppgave som er
+                    mangelfull eller innkommet etter utløpet  av søknadsfristen, skal avvises. Andre enn kommuner og fylkeskommuner  kan i henhold til lovens § 9 ta med kravet i neste oppgaveperiode.  Tilgodebeløpet skal tilbakebetales innen tre uker
+                    etter utløpet av  søknadsfristen. Utbetales beløpet for sent, ytes  rentegodtgjørelse.  </p>
+                <p>Oppgaven skal inneholde det samlede beløp som kreves kompensert. Både  det samlede vederlag uten merverdiavgift og selve avgiftsbeløpet for  alle avgiftssatser skal oppgis.  </p>
+                <p>Søknaden skal attesteres av registrert revisor, statsautorisert  revisor eller kommunerevisor.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Merverdiavgift som søkes kompensert må være på minst 20 000 kroner per  kalenderår</p>
+            </xforms:hint>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-0009 Søknad om kompensasjon av meirverdiavgift for kommunar og  fylkeskommunar o.a.</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Om utfylling av oppgåva  </p>
+                <p/>
+                <p>Ifølgje lov om kompensasjon av merverdiavgift for kommuner,  fylkeskommuner mv. av 12.12.2003 skal det ytast kompensasjon til dei  einingane som er nemnde i § 2 i lova, ved kjøp av varer og tenester  til bruk i den verksemda som
+                    har rett på kompensasjon.  </p>
+                <p>Oppgåve over meirverdiavgift som ein søkjer om å få kompensert, skal  sendast til fylkesskattekontoret i det fylket der eininga høyrer til.  Meirverdiavgift som ein søkjer om å få kompensert, må vere på minst  20 000 kroner pr.
+                    kalenderår.  </p>
+                <p>Frist for innsending av oppgåve over beløp som ein krev refundert, er  ein månad og ti dagar etter utløpet av søknadsperioden (for heile  kalenderåret er dette 10. februar i året etter at kjøpet har skjedd).  Oppgåve som er
+                    mangelfull eller innkomen etter at søknadsfristen er  ute, skal avvisast. Andre enn kommunar og fylkeskommunar kan i  samsvar med § 9 i lova ta med kravet i neste oppgåveperiode.  Tilgodebeløpet skal betalast tilbake innan tre
+                    veker etter utløpet av  søknadsfristen. Blir beløpet betalt for seint, blir det gitt  rentegodtgjering.  </p>
+                <p>Oppgåva skal innehalde det samla beløpet som ein krev å få kompensert.  Både det samla vederlaget utan meirverdiavgift og sjølve  avgiftsbeløpet for alle avgiftssatsar skal givast opp.  </p>
+                <p>Søknaden skal attesterast av registrert revisor, statsautorisert  revisor eller kommunerevisor.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NON">
+                <p>Meirverdiavgift som ein søkjer om å få kompensert, må vere på minst 20  000 kroner per kalenderår</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-4446">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-4446/Soker-grp-4447">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Søker</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Søkjar</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/GenerellInformasjon-grp-4446/Soker-grp-4447/OppgaveType-datadef-21075">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>1</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Hovedoppgave</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Hovudoppgåve</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>3</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Korrigert oppgave</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Korrigert oppgåve</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Oppgavetype</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Oppgåvetype</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4446/Soker-grp-4447/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Org.nr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Org.nr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4446/Soker-grp-4447/EnhetOrganisasjonsform-datadef-756">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsform</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsform</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4446/Soker-grp-4447/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn/Firma</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn/Firma</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4446/Soker-grp-4447/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4446/Soker-grp-4447/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-4446/Soker-grp-4447/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/GenerellInformasjon-grp-4446/KIDnummerOmsetning-datadef-18616">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>KID nr.</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>KID nr.</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+            <xforms:group ref="/Skjema/SoknadenGjelder-grp-4449">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Søknaden gjelder</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NOB">
+                    <p>Om utfylling av oppgaven  </p>
+                    <p/>
+                    <p>Ifølge lov om kompensasjon av merverdiavgift for kommuner,  fylkeskommuner mv. av 12.12.2003 skal det ytes kompensasjon til de  enheter som er nevnt i lovens § 2, ved anskaffelse av varer og  tjenester til bruk i den
+                        kompensasjonsberettigede virksomheten.  </p>
+                    <p>Oppgave over merverdiavgift som søkes kompensert, skal sendes  fylkesskattekontoret i det fylke enheten hører til. Merverdiavgift  som søkes kompensert, må være på minst 20 000 kroner per kalenderår.    </p>
+                    <p>Frist for innsendelse av oppgave over beløp som kreves refundert, er  en måned og ti dager etter utløpet av søknadsperioden (for hele  kalenderåret er dette 10. februar i året etter anskaffelsen har  funnet sted). Oppgave som
+                        er mangelfull eller innkommet etter utløpet  av søknadsfristen, skal avvises. Andre enn kommuner og fylkeskommuner  kan i henhold til lovens § 9 ta med kravet i neste oppgaveperiode.  Tilgodebeløpet skal tilbakebetales innen
+                        tre uker etter utløpet av  søknadsfristen. Utbetales beløpet for sent, ytes  rentegodtgjørelse.  </p>
+                    <p>Oppgaven skal inneholde det samlede beløp som kreves kompensert. Både  det samlede vederlag uten merverdiavgift og selve avgiftsbeløpet for  alle avgiftssatser skal oppgis.  </p>
+                    <p>Søknaden skal attesteres av registret revisor, statsautorisert revisor  eller kommunerevisor.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NOB">
+                    <p>Som revisor for enheten bekrefter jeg at:</p>
+                </xforms:hint>
+                <xforms:caption brreg:lang="NON">
+                    <p>Søknaden gjeld</p>
+                </xforms:caption>
+                <xforms:help brreg:lang="NON">
+                    <p>Om utfylling av oppgåva  </p>
+                    <p/>
+                    <p>Ifølgje lov om kompensasjon av merverdiavgift for kommuner,  fylkeskommuner mv. av 12.12.2003 skal det ytast kompensasjon til dei  einingane som er nemnde i § 2 i lova, ved kjøp av varer og tenester  til bruk i den verksemda
+                        som har rett på kompensasjon.  </p>
+                    <p>Oppgåve over meirverdiavgift som ein søkjer om å få kompensert, skal  sendast til fylkesskattekontoret i det fylket der eininga høyrer til.  Meirverdiavgift som ein søkjer om å få kompensert, må vere på minst  20 000 kroner pr.
+                        kalenderår.  </p>
+                    <p>Frist for innsending av oppgåve over beløp som ein krev refundert, er  ein månad og ti dagar etter utløpet av søknadsperioden (for heile  kalenderåret er dette 10. februar i året etter at kjøpet har skjedd).  Oppgåve som er
+                        mangelfull eller innkomen etter at søknadsfristen er  ute, skal avvisast. Andre enn kommunar og fylkeskommunar kan i  samsvar med § 9 i lova ta med kravet i neste oppgåveperiode.  Tilgodebeløpet skal betalast tilbake innan tre
+                        veker etter utløpet av  søknadsfristen. Blir beløpet betalt for seint, blir det gitt  rentegodtgjering.  </p>
+                    <p>Oppgåva skal innehalde det samla beløpet som ein krev å få kompensert.  Både det samla vederlaget utan meirverdiavgift og sjølve  avgiftsbeløpet for alle avgiftssatsar skal givast opp.  </p>
+                    <p>Søknaden skal attesterast av registret revisor, statsautorisert  revisor eller kommunerevisor.</p>
+                </xforms:help>
+                <xforms:hint brreg:lang="NON">
+                    <p>Som revisor for eininga stadfestar eg at:</p>
+                </xforms:hint>
+                <xforms:group ref="/Skjema/SoknadenGjelder-grp-4449/Soknadsperiode-grp-4450">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Søknadsperiode</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Søknadsperiode</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/SoknadenGjelder-grp-4449/Soknadsperiode-grp-4450/SoknadPeriode-datadef-21018">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>014</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Januar - Februar</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Januar - Februar</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>024</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Mars - April</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Mars - April</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>034</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Mai - Juni</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Mai - Juni</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>044</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Juli - August</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Juli - August</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>054</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>September - Oktober</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>September - Oktober</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>064</xforms:value>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>November - Desember</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>November - Desember</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Gjelder for:</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Gjeld for:</p>
+                        </xforms:caption>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/SoknadenGjelder-grp-4449/Soknadsperiode-grp-4450/SoknadPeriodeAr-datadef-20445">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>År</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>År</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SoknadenGjelder-grp-4449/VederlagUtenMerverdiavgift-grp-4451">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Vederlag uten merverdiavgift</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>I hele kroner</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Vederlag utan meirverdiavgift</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>I heile kroner</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/SoknadenGjelder-grp-4449/VederlagUtenMerverdiavgift-grp-4451/VederlagMVAHoySatsGrunnlag-datadef-20446">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Standard sats</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Standard sats</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SoknadenGjelder-grp-4449/VederlagUtenMerverdiavgift-grp-4451/VederlagMVAMiddelsSatsGrunnlag-datadef-20447">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Middels sats</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Middels sats</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SoknadenGjelder-grp-4449/VederlagUtenMerverdiavgift-grp-4451/VederlagMVALavSatsGrunnlag-datadef-20448">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Lav sats</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Låg sats</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SoknadenGjelder-grp-4449/Merverdiavgift-grp-4452">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Merverdiavgift</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NOB">
+                        <p>I hele kroner</p>
+                    </xforms:hint>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Meirverdiavgift</p>
+                    </xforms:caption>
+                    <xforms:hint brreg:lang="NON">
+                        <p>I heile kroner</p>
+                    </xforms:hint>
+                    <xforms:input ref="/Skjema/SoknadenGjelder-grp-4449/Merverdiavgift-grp-4452/VederlagMVAHoySats-datadef-20450">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>25 %</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>25 %</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SoknadenGjelder-grp-4449/Merverdiavgift-grp-4452/VederlagMVAMiddelsSats-datadef-20451">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>13 %</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>13 %</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SoknadenGjelder-grp-4449/Merverdiavgift-grp-4452/VederlagMVALavSats-datadef-20452">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>8 %</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>8 %</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SoknadenGjelder-grp-4449/Merverdiavgift-grp-4452/VederlagMVA-datadef-20453">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Samlet</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Samla</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/SoknadenGjelder-grp-4449/Forklaringsfelter-grp-4453">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Forklaringsfelter</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Forklaringsfelt</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/SoknadenGjelder-grp-4449/Forklaringsfelter-grp-4453/VederlagMVAHoySatsForklaring-datadef-20606">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Standard sats 25 %</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Standard sats 25 %</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SoknadenGjelder-grp-4449/Forklaringsfelter-grp-4453/VederlagMVAMiddelsSatsForklaring-datadef-20607">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Middels sats 13 %</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Middels sats 13 %</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/SoknadenGjelder-grp-4449/Forklaringsfelter-grp-4453/VederlagMVALavSatsForklaring-datadef-20608">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Lav sats 8 %</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Låg sats 8 %</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:input ref="/Skjema/SoknadenGjelder-grp-4449/EnhetBankkonto-datadef-10317">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <brreg:kontroll type="Modulus 11 kontroll for kontonummer"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Bankkontonummer til bruk ved tilbakebetalingen. Endring av kontonummer  legges bare til grunn dersom oppgaven er signert av person som kan  forplikte enheten iht opplysninger i Enhetsregisteret</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig kontonummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Bankkontonummer til bruk ved tilbakebetalinga. Endring av kontonummer  blir lagt til grunn berre dersom oppgåva er signert av person som kan  forplikte eininga i samsvar med opplysningar i Einingsregisteret</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig kontonummer</p>
+                    </xforms:alert>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

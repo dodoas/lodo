@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1003: Aksjonærbeskatningen - Formular nr. 4</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-104-5126.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-314/Selskap-grp-2488/EnhetLigningskontor-datadef-6643" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-314/Selskap-grp-2488/EnhetNavn-datadef-1"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-314/Selskap-grp-2488/EnhetAdresse-datadef-15"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-314/Selskap-grp-2488/EnhetOrganisasjonsnummer-datadef-18" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-314/Selskap-grp-2488/EnhetPostnummer-datadef-6673"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-314/Selskap-grp-2488/EnhetPoststed-datadef-6674"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1003 Aksjonærbeskatning - Formular nr. 4 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Oppgave over utenlandske aksjonærer (herunder andelseiere i aksjefond)  og utenlandske innehavere av grunnfondsbevis. Fylles ut av selskapet  selv om opplysninger blir gitt via Verdipapirsentralen.  </p>
+                <p/>
+                <p>Det må leveres opplysninger på eget ark for tilfelle hvor den angitte  skattesats ikke skal brukes fordi vedkommende aksjonær mv. enten har  fast driftssted i Norge eller råder over en større del av selskapets  stemmetall (jf.
+                    vedkommende skatteavtale).  </p>
+                <p/>
+                <p>Sparebanker og verdipapirfond må sammen med dette skjema for samtlige  utenlandske aksjonærer mv. vedlegge oppgave på formular nr. 2  (RF-1001) for hvert land. Det må påses at det gis opp fullstendig  bostedsadresse. Blir
+                    fullstendige opplysninger på formular nr. 2  levert via Verdipapirsentralen, er det ikke nødvendig å legge ved  oppgaven på formular nr. 2.  </p>
+                <p/>
+                <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 24. oktober 1991, jf. Ligningsloven §§ 6-11 og  6-16b.  </p>
+                <p>Andre offentlige organers bruk av opplysninger i RF-1003. For å  samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjemaet, RF-1003, helt eller delvis  bli benyttet også av andre
+                    offentlige organer som har hjemmel til å  innhente de samme opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt. Samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller
+                    Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1003 Aksjonærbeskatning - Formular nr. 4 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Oppgåve over utanlandske aksjonærar (herunder andelseigare i  aksjefond) og utanlandske innehavarar av grunnfondsbevis. Fylljast ut  av selskapet sjølv om opplysningane blir geven via  Verdipapirsentralen.  </p>
+                <p/>
+                <p>Det må leverast opplysningar på eige ark i dei tilfella der den  oppgjevne skattesatens ikkje skal nyttast fordi vedkomande aksjonær  m.m. anten har fast driftsstad i Noreg eller rår over ein større del  av røystalet i selskapet
+                    (jf. vedkomande skatteavtale).  </p>
+                <p/>
+                <p>Sparebankar og verdipapirfond må saman med dette skjemaet for alle  utanlandske aksjonærar m.m. leggja ved ei oppgåve på formular nr. 2  (RF-1001) for kvart land. Sjå etter at fullstendig bustadsadresse er  gjeven opp. Vert
+                    fullstendige opplysningar på formular nr. 2 gitt via  Verdipapirsentralen, er det ikkje nødvendig å leggje ved oppgåve på  formular nr. 2.  </p>
+                <p/>
+                <p>Fastsett av Skattedirektoratet med heimel i Finansdepartementet sitt  delegeringsvedtak av 24. oktober 1991, jf. Ligningslova §§ 6-11 og  6-16b.  </p>
+                <p>Andre offentlege organ sin bruk av opplysningar i RF-1003. For å  samordna og forenkla oppgåveinnleveringa  frå næringslivet, kan  opplysningar som vart avgjeve i dette skjemaet, RF-1003, heilt eller  delvis bli nytta også av andre
+                    offentlege organ som har heimel til å  innhente dei same opplysningane, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysningar om evt. Samordning kan ein få ved å vende seg til  Oppgåveregisteret på telefon 75 00 75 00, eller
+                    Skattedirektoratet på  telefon 22 07 70 00.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-314">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Generell informasjon</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-314/Selskap-grp-2488">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Selskap</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Selskap</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-314/Selskap-grp-2488/EnhetLigningskontor-datadef-6643">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Til likningskontoret i (kommunenr.)</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Til likningskontoret i (kommunenr.)</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-314/Selskap-grp-2488/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p/>
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-314/Selskap-grp-2488/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p/>
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-314/Selskap-grp-2488/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Org.nr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p/>
+                            <p>Org.nr.  </p>
+                            <p/>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-314/Selskap-grp-2488/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p/>
+                            <p>Postnr.  </p>
+                            <p/>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-314/Selskap-grp-2488/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p/>
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Aksjer eller grunnfondsbevis tilhørende personer eller selskaper  hjemmehørende i</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Aksjar eller grunnfondsbevis tilhørande personer eller selskaper  hjemmehørande i</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/AntallAksjerPrUtdelingstidspunkt-grp-2270">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Antall aksjer pr. utdelingstidspunktet</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Tal på aksjar pr. utdelingstidspunktet</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/AntallAksjerPrUtdelingstidspunkt-grp-2270/AksjerMvUtlandGruppeAAntall-datadef-14128">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>A. Benin, Hellas, Tanzania, Trinidad og Tobago, Tunisia og Zimbabwe</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Vanligvis 20% norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>A. Benin, Hellas, Tanzania, Trinidad og Tobago, Tunisia og Zimbabwe</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Til vanleg 20% norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/AntallAksjerPrUtdelingstidspunkt-grp-2270/AksjerMvUtlandGruppeBAntall-datadef-14129">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>B. Senegal</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>16% norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>B. Senegal  </p>
+                            <p/>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p/>
+                            <p>16% norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/AntallAksjerPrUtdelingstidspunkt-grp-2270/AksjerMvUtlandGruppeCAntall-datadef-14130">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>C. Albania, Argentina, Aserbajdsjan, Australia, Barbados, Belgia,  Bulgaria, Canada, Chile, Danmark, De Nederlandske antiller, Den  forente Arabiske Republikk (Egypt), Elfenbenkysten, Estland, Finland,   Frankrike,
+                                Færøyene, Gambia, Indonesia, Irland, Island, Israel,  Italia, Jamaica, Japan, Kasakhstan*, Kina, Kroatia, Latvia, Litauen,  Luxembourg, Malta, Marokko, Mexico, Nederland, Nepal, New Zealand,  Pakistan, Polen, Portugal,
+                                Singapore, Slovakia, Slovenia, Spania, Sri  Lanka, Storbritannia og Nord-Irland, Sveits, Sverige, Sør-Afrika,  Sør-Korea, Thailand, Tsjekkia, Tyskland, Uganda, Ukraina, USA,  Vietnam, Zambia og Østerrike</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Vanligvis 15% norsk skatt  </p>
+                            <p>* Utbytte vedtatt for Kasakhstan fra 01.mars 2006</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>C. Albania, Argentina, Aserbajdsjan, Australia, Barbados, Belgia,  Bulgaria, Canada, Chile, Danmark, De Nederlandske antiller, Den  forente Arabiske Republikk (Egypt), Elfenbenkysten, Estland, Finland,   Frankrike,
+                                Færøyene, Gambia, Indonesia, Irland, Island, Israel,  Italia, Jamaica, Japan, Kasakhstan*, Kina, Kroatia, Latvia, Litauen,  Luxembourg, Malta, Marokko, Mexico, Nederland, Nepal, New Zealand,  Pakistan, Polen, Portugal,
+                                Singapore, Slovakia, Slovenia, Spania, Sri  Lanka, Storbritannia og Nord-Irland, Sveits, Sverige, Sør-Afrika,  Sør-Korea, Thailand, Tsjekkia, Tyskland, Uganda, Ukraina, USA,  Vietnam, Zambia og Østerrike</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Til vanleg 15% norsk skatt  </p>
+                            <p>* Utbytte vedtatt for Kasakhstan fra 01.mars 2006</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/AntallAksjerPrUtdelingstidspunkt-grp-2270/AksjerMvUtlandGruppeDAntall-datadef-14131">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>D. Romania, Russland, Ungarn og Venezuela</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Vanligvis 10% norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>D. Romania, Russland, Ungarn og Venezuela</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Til vanleg 10% norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/AntallAksjerPrUtdelingstidspunkt-grp-2270/AksjerMvUtlandGruppeEAntall-datadef-14132">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>E. Kypros, Malawi og Sierra Leone</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Vanligvis 5% norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>E. Kypros, Malawi og Sierra Leone  </p>
+                            <p/>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Til vanleg 5% norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/AntallAksjerPrUtdelingstidspunkt-grp-2270/AksjerMvUtlandGruppeFAntall-datadef-14133">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>F. Malaysia</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres også utbytte til utenlandske aksjonærer som er fritatt for  skatt, f.eks.  </p>
+                            <p> - utbytte til internasjonale organisasjoner som er fritatt i hht.  internasjonal konvensjon ol.  </p>
+                            <p>- utbytte til utenlandsk selskap som omfattes av fritaksmetoden, jf.  skatteloven § 2-38 i.  </p>
+                            <p>- utbytte til personlige aksjonærer som er bosatt i en EØS-stat, jf.  Stortingets skattevedtak § 3-5, 4. ledd, tredje punktum.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Ingen norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>F. Malaysia</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her førar ein også utbytte til utanlandske aksjonærar som er fritatt  for skatt, td.  </p>
+                            <p>- utbytte til internasjonale organisasjonar som er fritatt i samsvar  med internasjonal konvensjon o.a.  </p>
+                            <p>- utbytte til utanlandsk selskap som er omfatta av fritaksmetoden, jf.  skattelova § 2-38 i.  </p>
+                            <p>- utbytte til personlege aksjonærar som er busatte i ein annan  EØS-stat, jf. Stortinget sitt skattevedtak § 3-5, 4. ledd, 3.  punktum.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Ingen norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/AntallAksjerPrUtdelingstidspunkt-grp-2270/AksjerMvUtlandGruppeGAntall-datadef-14134">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>G. Andre land</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres også utbytte til utenlandske aksjonærer med 25% norsk skatt,  f.eks.  </p>
+                            <p>- utbytte på aksjer som er registrert på forvalterkonti i VPS etetr  almennaksjeloven § 4-10 (nomineekonti)  </p>
+                            <p>- utbytte til utenlandsk selskap mv. når det ikke er godtgjort at  aksjonæren har krav på lavere kildeskatt etter fritaksmetoden eller  en skatteavtale</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Vanligvis 25% norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>G. Andre land</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her skal det også førast utbytte til utenlandske aksjonærar med 25%  norsk skatt, t.d.  </p>
+                            <p>- utbytte på aksjar som er registrerte på forvalterkonti i VPS etter  almennaksjelova § 4-10 (nomineekonti)  </p>
+                            <p>- utbytte til utanlandsk selskap m.m. når det ikkje er godtgjort at  aksjonæren har krav på lavere kildeskatt etter fritaksmetoden eller  ein skatteavtale</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Til vanleg 25% norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/SamletPalydende-grp-2271">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Samlet pålydende</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Samla pålydande</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/SamletPalydende-grp-2271/AksjerMvUtlandGruppeAPalydende-datadef-14135">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>A. Benin, Hellas, Tanzania, Trinidad og Tobago, Tunisia og Zimbabwe  </p>
+                            <p/>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Vanligvis 20% norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>A. Benin, Hellas, Russland, Tanzania, Trinidad og Tobago, Tunisia og  Zimbabwe  </p>
+                            <p/>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p/>
+                            <p>Vanligvis 20% norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/SamletPalydende-grp-2271/AksjerMvUtlandGruppeBPalydende-datadef-14136">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>B. Senegal</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>16% norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>B. Senegal  </p>
+                            <p/>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p/>
+                            <p>16% norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/SamletPalydende-grp-2271/AksjerMvUtlandGruppeCPalydende-datadef-14137">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>C. Albania, Argentina, Aserbajdsjan, Australia, Barbados, Belgia,  Brasil, Bulgaria, Canada, Danmark, De Nederlandske antiller, Den  forente Arabiske Republikk (Egypt), Elfenbenkysten, Estland, Finland,  Tyskland,
+                                Frankrike, Færøyene, Gambia, Indonesia, Island, Israel,  Italia, Jamaica, Japan, Kina, Kroatia, Latvia, Litauen, Luxembourg,  Malta, Marokko, Mexico, Nederland, Nepal, New Zealand, Pakistan,  Polen, Portugal,
+                                Singapore, Slovakia, Slovenia, Spania, Sri Lanka,  Storbritannia og Nord-Irland, Sveits, Sverige, Sør-Afrika, Sør-Korea,  Tsjekkia, Ukraina, USA, Vietnam, Zambia og Østerrike  </p>
+                            <p/>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Vanligvis 15% norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>C. Albania, Argentina, Aserbajdsjan, Australia, Barbados, Belgia,  Brasil, Bulgaria, Canada, Danmark, De Nederlandske antiller, Den  forente Arabiske Republikk (Egypt), Elfenbenkysten, Estland, Finland,  Tyskland,
+                                Frankrike, Færøyene, Gambia, Indonesia, Island, Israel,  Italia, Jamaica, Japan, Kina, Kroatia, Latvia, Litauen, Luxembourg,  Malta, Marokko, Mexico, Nederland, Nepal, New Zealand, Pakistan,  Polen, Portugal,
+                                Singapore, Slovakia, Slovenia, Spania, Sri Lanka,  Storbritannia og Nord-Irland, Sveits, Sverige, Sør-Afrika, Sør-Korea,  Tsjekkia, Ukraina, USA, Vietnam, Zambia og Østerrike  </p>
+                            <p/>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Vanligvis 15% norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/SamletPalydende-grp-2271/AksjerMvUtlandGruppeDPalydende-datadef-14138">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>D. Irland, Romania, Russland, Ungarn og Venezuela</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Vanligvis 10% norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>D. Irland, Romania, Ungarn og Venezuela</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p/>
+                            <p>Vanligvis 10% norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/SamletPalydende-grp-2271/AksjerMvUtlandGruppeEPalydende-datadef-14139">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>E. Kypros, Malawi og Sierra Leone</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Vanligvis 5% norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>E. Kypros, Malawi og Sierra Leone</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p/>
+                            <p>Vanligvis 5% norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/SamletPalydende-grp-2271/AksjerMvUtlandGruppeFPalydende-datadef-14140">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>F. Malaysia</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres også utbytte til utenlandske aksjonærer som er fritatt for  skatt, f.eks.  </p>
+                            <p> - utbytte til internasjonale organisasjoner som er fritatt i hht.  internasjonal konvensjon ol.  </p>
+                            <p>- utbytte til utenlandsk selskap som omfattes av fritaksmetoden, jf.  skatteloven § 2-38 i.  </p>
+                            <p>- utbytte til personlige aksjonærer som er bosatt i en EØS-stat, jf.  Stortingets skattevedtak § 3-5, 4. ledd, tredje punktum.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Ingen norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>F. Malaysia</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her førar ein også utbytte til utanlandske aksjonærar som er fritatt  for skatt, td.  </p>
+                            <p>- utbytte til internasjonale organisasjonar som er fritatt i samsvar  med internasjonal konvensjon o.a.  </p>
+                            <p>- utbytte til utanlandsk selskap som er omfatta av fritaksmetoden, jf.  skattelova § 2-38 i.  </p>
+                            <p>- utbytte til personlege aksjonærar som er busatte i ein annan  EØS-stat, jf. Stortinget sitt skattevedtak § 3-5, 4. ledd, 3.  punktum.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Ingen norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/SamletPalydende-grp-2271/AksjerMvUtlandGruppeGPalydende-datadef-14141">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>G. Andre land</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres også utbytte til utenlandske aksjonærer med 25% norsk skatt,  f.eks.  </p>
+                            <p>- utbytte på aksjer som er registrert på forvalterkonti i VPS etetr  almennaksjeloven § 4-10 (nomineekonti)  </p>
+                            <p>- utbytte til utenlandsk selskap mv. når det ikke er godtgjort at  aksjonæren har krav på lavere kildeskatt etter fritaksmetoden eller  en skatteavtale</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Vanligvis 25% norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>G. Andre land</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her skal det også førast utbytte til utenlandske aksjonærar med 25%  norsk skatt, t.d.  </p>
+                            <p>- utbytte på aksjar som er registrerte på forvalterkonti i VPS etter  almennaksjelova § 4-10 (nomineekonti)  </p>
+                            <p>- utbytte til utanlandsk selskap m.m. når det ikkje er godtgjort at  aksjonæren har krav på lavere kildeskatt etter fritaksmetoden eller  ein skatteavtale</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Vanligvis 25% norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/SamletUtbytteEllerRenter-grp-2272">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Samlet utbytte eller renter</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Samla utbytte eller renter</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/SamletUtbytteEllerRenter-grp-2272/AksjeutbytteMvUtlandGruppeA-datadef-14142">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>A. Benin, Hellas, Tanzania, Trinidad og Tobago, Tunisia og Zimbabwe  </p>
+                            <p/>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Vanligvis 20% norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>A. Benin, Hellas, Russland, Tanzania, Trinidad og Tobago, Tunisia og  Zimbabwe</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p/>
+                            <p>Vanligvis 20% norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/SamletUtbytteEllerRenter-grp-2272/AksjeutbytteMvUtlandGruppeB-datadef-14143">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>B. Senegal</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>16% norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>B. Senegal  </p>
+                            <p/>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p/>
+                            <p>16% norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/SamletUtbytteEllerRenter-grp-2272/AksjeutbytteMvUtlandGruppeC-datadef-14144">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>C. Albania, Argentina, Aserbajdsjan, Australia, Barbados, Belgia,  Brasil, Bulgaria, Canada, Danmark, De Nederlandske antiller, Den  forente Arabiske Republikk (Egypt), Elfenbenkysten, Estland, Finland,  Tyskland,
+                                Frankrike, Færøyene, Gambia, Indonesia, Island, Israel,  Italia, Jamaica, Japan, Kina, Kroatia, Latvia, Litauen, Luxembourg,  Malta, Marokko, Mexico, Nederland, Nepal, New Zealand, Pakistan,  Polen, Portugal,
+                                Singapore, Slovakia, Slovenia, Spania, Sri Lanka,  Storbritannia og Nord-Irland, Sveits, Sverige, Sør-Afrika, Sør-Korea,  Tsjekkia, Ukraina, USA, Vietnam, Zambia og Østerrike  </p>
+                            <p/>
+                            <p/>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Vanligvis 15% norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>C. Albania, Argentina, Aserbajdsjan, Australia, Barbados, Belgia,  Brasil, Bulgaria, Canada, Danmark, De Nederlandske antiller, Den  forente Arabiske Republikk (Egypt), Elfenbenkysten, Estland, Finland,  Tyskland,
+                                Frankrike, Færøyene, Gambia, Indonesia, Island, Israel,  Italia, Jamaica, Japan, Kina, Kroatia, Latvia, Litauen, Luxembourg,  Malta, Marokko, Mexico, Nederland, Nepal, New Zealand, Pakistan,  Polen, Portugal,
+                                Singapore, Slovakia, Slovenia, Spania, Sri Lanka,  Storbritannia og Nord-Irland, Sveits, Sverige, Sør-Afrika, Sør-Korea,  Tsjekkia, Ukraina, USA, Vietnam, Zambia og Østerrike  </p>
+                            <p/>
+                            <p/>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Vanligvis 15% norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/SamletUtbytteEllerRenter-grp-2272/AksjeutbytteMvUtlandGruppeD-datadef-14145">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>D. Irland, Romania, Russland, Ungarn og Venezuela</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Vanligvis 10% norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>D. Irland, Romania, Ungarn og Venezuela</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p/>
+                            <p>Vanligvis 10% norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/SamletUtbytteEllerRenter-grp-2272/AksjeutbytteMvUtlandGruppeE-datadef-14146">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>E. Kypros, Malawi og Sierra Leone</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Vanligvis 5% norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>E. Kypros, Malawi og Sierra Leone</p>
+                        </xforms:caption>
+                        <xforms:hint brreg:lang="NON">
+                            <p/>
+                            <p>Vanligvis 5% norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/SamletUtbytteEllerRenter-grp-2272/AksjeutbytteMvUtlandGruppeF-datadef-14147">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>F. Malaysia</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres også utbytte til utenlandske aksjonærer som er fritatt for  skatt, f.eks.  </p>
+                            <p> - utbytte til internasjonale organisasjoner som er fritatt i hht.  internasjonal konvensjon ol.  </p>
+                            <p>- utbytte til utenlandsk selskap som omfattes av fritaksmetoden, jf.  skatteloven § 2-38 i.  </p>
+                            <p>- utbytte til personlige aksjonærer som er bosatt i en EØS-stat, jf.  Stortingets skattevedtak § 3-5, 4. ledd, tredje punktum.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Ingen norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>F. Malaysia</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her førar ein også utbytte til utanlandske aksjonærar som er fritatt  for skatt, td.  </p>
+                            <p>- utbytte til internasjonale organisasjonar som er fritatt i samsvar  med internasjonal konvensjon o.a.  </p>
+                            <p>- utbytte til utanlandsk selskap som er omfatta av fritaksmetoden, jf.  skattelova § 2-38 i.  </p>
+                            <p>- utbytte til personlege aksjonærar som er busatte i ein annan  EØS-stat, jf. Stortinget sitt skattevedtak § 3-5, 4. ledd, 3.  punktum.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Ingen norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/AksjerEllerGrunnfondsbevisTilhorendePersonerEllerSelskaperHjemm-grp-315/SamletUtbytteEllerRenter-grp-2272/AksjeutbytteMvUtlandGruppeG-datadef-14148">
+                        <brreg:benevnelse type="kr"/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>G. Andre land</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her føres også utbytte til utenlandske aksjonærer med 25% norsk skatt,  f.eks.  </p>
+                            <p>- utbytte på aksjer som er registrert på forvalterkonti i VPS etetr  almennaksjeloven § 4-10 (nomineekonti)  </p>
+                            <p>- utbytte til utenlandsk selskap mv. når det ikke er godtgjort at  aksjonæren har krav på lavere kildeskatt etter fritaksmetoden eller  en skatteavtale</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Vanligvis 25% norsk skatt</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>G. Andre land</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her skal det også førast utbytte til utenlandske aksjonærar med 25%  norsk skatt, t.d.  </p>
+                            <p>- utbytte på aksjar som er registrerte på forvalterkonti i VPS etter  almennaksjelova § 4-10 (nomineekonti)  </p>
+                            <p>- utbytte til utanlandsk selskap m.m. når det ikkje er godtgjort at  aksjonæren har krav på lavere kildeskatt etter fritaksmetoden eller  ein skatteavtale</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Vanligvis 25% norsk skatt</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/NavnPaDeUtenlandskeAksjonarene-grp-3054">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Navn på de(n) utenlandske aksjonær(en)</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>De(n) utanlandske aksjonær(en) sitt namn</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_NavnPaDeUtenlandskeAksjonarene-grp-328" nodeset="/Skjema/NavnPaDeUtenlandskeAksjonarene-grp-3054/NavnPaDeUtenlandskeAksjonarene-grp-328">
+                    <xforms:group ref="/Skjema/NavnPaDeUtenlandskeAksjonarene-grp-3054/NavnPaDeUtenlandskeAksjonarene-grp-328">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:input ref="/Skjema/NavnPaDeUtenlandskeAksjonarene-grp-3054/NavnPaDeUtenlandskeAksjonarene-grp-328/AksjonarNavnSpesifisertUtenlandskAksjonar-datadef-10155">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Navn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Namn</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/NavnPaDeUtenlandskeAksjonarene-grp-3054/NavnPaDeUtenlandskeAksjonarene-grp-328/AksjonarAksjerMvAntallSpesifisertUtenlandskAksjonar-datadef-10156">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Antall aksjer</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p/>
+                                <p>Tal aksjar</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/NavnPaDeUtenlandskeAksjonarene-grp-3054/NavnPaDeUtenlandskeAksjonarene-grp-328/AksjerPalydende-datadef-1103">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Samlet pålydende</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p/>
+                                <p>Samla pålydande</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/NavnPaDeUtenlandskeAksjonarene-grp-3054/NavnPaDeUtenlandskeAksjonarene-grp-328/AksjonarAksjeutbytteMv-datadef-8073">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Samlet utbytte eller renter</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Samla utbytte eller renter</p>
+                            </xforms:caption>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

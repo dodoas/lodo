@@ -1,0 +1,2261 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--title='RF-1015-U: Lønns- og trekkoppgave' lang='NOB'-->
+    <xs:element name="Skjema">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>RF-1015U Lønns- og trekkoppgave for 2006</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Opplysningene i lønns- og trekkoppgaven blir lagt til grunn ved  ligningen av skattyter. Det er derfor svært viktig at arbeidsgiverne  innberetter riktig lønn og andre ytelser og godtgjørelser under  riktige koder.  </p>
+                    <p/>
+                    <p>For å skille arbeidsgiveravgiftspliktige ytelser fra  arbeidsgiveravgiftsfrie, er de avgiftspliktige merket med -A etter  den tresifrede koden. Dette er gjort av hensyn både til  oppgavegivere, arbeidsgivere og for
+                        kontrollmulighetene av  arbeidsgiveravgiften. Mange koder kan brukes både til avgiftsfrie og  avgiftspliktige ytelser.  </p>
+                    <p>Dersom en slik kode benyttes til innberetning av ytelser som er  avgiftspliktige, skal koden brukes med -A. Når koden omfatter ytelser  som ikke er avgiftspliktige, skal koden brukes uten angivelse av -A,  for eksempel når
+                        arbeidet er utført i utlandet av en utenlandsk  statsborger som ikke er medlem i trygden, eller arbeidet utføres i et  EØS-land eller et land som Norge har sosialkonvensjon med og det ved  blankett E 101 eller særskilt melding
+                        fra norsk trygdemyndighet  fremgår at lønnstakeren er unntatt fra norsk trygd. Se forøvrig  Skattedirektoratets arbeidsgiverhefte, del 2: Arbeidsgiveravgiften,  beregning og oppgjør.  </p>
+                    <p/>
+                    <p>En del koder har karakter av samlekoder hvor ytelsen må spesifiseres  nærmere. Dersom det under koden er listet opp eksempler på ytelser  som koden omfatter, bør oppgavegiveren om mulig bruke en av disse  betegnelsene. Ellers
+                        bør en bruke betegnelsen som er dekkende for  ytelsens art.  </p>
+                    <p/>
+                    <p>Under flere av kodegruppene finnes det en diverse-kode. Denne koden  skal bare benyttes dersom det innberettes ytelser som ikke er dekket  av de øvrige kodene. Ved bruk av diverse-kode skal ytelsens art  alltid spesifiseres.  </p>
+                    <p/>
+                    <p>For alle koder hvor ytelsen skal spesifiseres gjelder at koden skal  brukes en gang for hver enkelt type ytelse.  </p>
+                    <p/>
+                    <p>Endringsoppgaver  </p>
+                    <p>I og med at opplysningene i lønns- og trekkoppgaven blir lagt til  grunn ved ligningen av skattyter, er det viktig at arbeidsgiver  sender inn endringsoppgave dersom nye opplysninger kommer til eller  feilinnberetning oppdages.  </p>
+                    <p/>
+                    <p>De beløpene som berøres av endringen, skal fylles ut med  endringsbeløpet (differansen i forhold til tidligere innsendt  oppgave), eventuelt med beløp som ikke er innberettet tidligere.  Mangler det en opplysning under en
+                        tidligere innberettet kode (f.eks.  antall), er det kun den manglende opplysningen som skal innberettes  på endringsoppgaven. Sett ikke opp tidligere riktig innberettede  beløp i endringsoppgaven.  </p>
+                    <p/>
+                    <p>Reduksjon eller annullering av tidligere innberettet beløp skal merkes  med negativt fortegn (minus) foran endringsbeløpet. Det må ikke  sendes inn erstatningsoppgave (ny oppgave), da dette kan føre til at  arbeidstakeren blir
+                        ilignet for høy inntekt.  </p>
+                    <p/>
+                    <p>Oppgavegivers organisasjonsnummer  </p>
+                    <p>Organisasjonsnummeret skal brukes ved lønnsinnberetningen. Det samme  nummeret som er brukt ved innbetalingen av skattetrekk og  arbeidsgiveravgift må brukes. Ved innberetning av godtgjørelse fra  privat arbeidsgiver som ikke
+                        har organisasjonsnummer, kan  oppgavegivers fødselsnummer oppgis i feltet for organisasjonsnummer.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>RF-1015U Lønns- og trekkoppgåve for 2006</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Opplysningane i lønns- og trekkoppgåva blir lagde til grunn ved  likninga av skattytar. Det er derfor svært viktig at arbeidsgivarane  gir opp riktig lønn og andre ytingar og godtgjeringar under riktige  kodar.  </p>
+                    <p/>
+                    <p>For å skilje arbeidsgivaravgiftspliktige ytingar frå  arbeidsgivaravgiftsfrie, er dei avgiftspliktige merkte med -A etter  den tresifra koden. Dette er gjort av omsyn både til oppgåvegivarar,  arbeidsgivarar og for å kunne
+                        kontrollere arbeidsgivaravgifta. Mange  kodar kan brukast både til avgiftsfrie og avgiftspliktige ytingar.  Dersom ein slik kode blir brukt til å gi opp ytingar som er  avgiftspliktige, skal koden brukast med -A. Når koden
+                        omfattar  ytingar som ikkje er avgiftspliktige, skal koden brukast utan at ein  fører på -A, for eksempel når arbeidet er utført i utlandet av ein  utanlandsk statsborgar som ikkje er medlem i trygda, eller arbeidet  blir
+                        utført i eit EØS-land eller eit land som Noreg har  sosialkonvensjon med, og det ved blankett E 101 eller særskild  melding frå norsk trygdemyndigheit går fram at lønnstakaren er  unnateken frå norsk trygd. Sjå elles
+                        Skattedirektoratets  arbeidsgivarhefter, del 2: Arbeidsgiveravgiften ? beregning og  oppgjør.  </p>
+                    <p/>
+                    <p>Ein del kodar har karakter av samlekodar der ytinga må spesifiserast  nærmare. Dersom det under koden er lista opp eksempel på ytingar som  koden omfattar, bør oppgåvegivaren om mogleg bruke ei av desse  nemningane. Elles bør
+                        ein bruke nemninga som er dekkjande for typen  yting.  </p>
+                    <p/>
+                    <p>Under fleire av kodegruppene finst det ein diverse-kode. Denne koden  skal berre brukast dersom det blir gitt opp ytingar som ikkje er  dekte av dei andre kodane. Ved bruk av diverse-kode skal typen yting  alltid spesifiserast.  </p>
+                    <p>For alle kodar der ytinga skal spesifiserast, gjeld det at koden skal  brukast ein gong for kvar enkelt type yting.  </p>
+                    <p/>
+                    <p>Endringsoppgåver  </p>
+                    <p>I og med at opplysningane i lønns- og trekkoppgåva blir lagde til  grunn ved likninga av skattytar, er det viktig at arbeidsgivar sender  inn endringsoppgåve dersom nye opplysningar kjem til eller  feilmelding blir oppdaga.
+                        Dersom ein skal sende endring av tidlegare  innsend lønns- og trekkoppgåve, skal dette gjerast på same type  blankett. Kryss av i rubrikken for Endringsoppgåve på blanketten. Dei  beløpa som endringa vedkjem, skal fyllast ut
+                        med endringsbeløpet  (differansen i forhold til tidlegare innsend oppgåve), eventuelt med  beløp som ikkje er oppgitt tidlegare. Manglar det ei opplysning under  ein tidlegare oppgitt kode (f.eks. tal for kor mange), er det
+                        berre  den manglande opplysninga som skal givast opp på endringsoppgåva. Set  ikkje opp tidlegare riktig oppgitt beløp i endringsoppgåva.  </p>
+                    <p/>
+                    <p>Reduksjon eller annullering av tidlegare oppgitt beløp skal merkjast  med negativt forteikn (minus) framfor endringsbeløpet. Det må ikkje  sendast inn erstatningsoppgåve (ny oppgåve), for det kan føre til at  arbeidstakaren
+                        blir ilikna for høg inntekt.  </p>
+                    <p/>
+                    <p>Oppgåvegivars organisasjonsnummer  </p>
+                    <p>Organisasjonsnummeret skal brukast ved lønnsinnmeldinga. Det same  nummeret som er brukt ved innbetalinga av skattetrekk og  arbeidsgivaravgift, må brukast. Ved oppgiving av godtgjering frå  privat arbeidsgivar som ikkje har
+                        organisasjonsnummer, kan  oppgåvegivars fødselsnummer givast opp i feltet for  organisasjonsnummer.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Innledning-grp-5549"/>
+                <xs:element minOccurs="0" ref="MestBrukteKoder-grp-5774"/>
+                <xs:element minOccurs="0" ref="OvrigeKoder-grp-5779"/>
+            </xs:sequence>
+            <xs:attribute fixed="1083" name="skjemanummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="5580" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+            <xs:attribute fixed="RF-1015-U" name="blankettnummer" type="xs:string" use="optional"/>
+            <xs:attribute fixed="Lønns- og trekkoppgave" name="tittel" type="xs:string" use="optional"/>
+            <xs:attribute fixed="5541" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+            <xs:attribute name="etatid" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="974761076">
+                            <xs:annotation>
+                                <xs:documentation>SKATTEDIREKTORATET</xs:documentation>
+                            </xs:annotation>
+                        </xs:enumeration>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:anyAttribute/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Innledning-grp-5549">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Innledning</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Innleiing</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="Arbeidsgiver-grp-5770"/>
+                <xs:element minOccurs="0" ref="Arbeidstaker-grp-5771"/>
+                <xs:element minOccurs="0" ref="Sjofolk-grp-5773"/>
+                <xs:element minOccurs="0" ref="Ansettelsesperiode-grp-5772"/>
+            </xs:sequence>
+            <xs:attribute fixed="5549" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Arbeidsgiver-grp-5770">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Arbeidsgiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Arbeidsgivar</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="RapporteringsenhetOrganisasjonsnummer-datadef-21772">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverFodselsnummer-datadef-26">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Fødselsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Fødselsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverNavnPreutfylt-datadef-25795">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverAdressePreutfylt-datadef-25796">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverPostnummerPreutfylt-datadef-25797">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="OppgavegiverPoststedPreutfylt-datadef-25798">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Poststed</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Poststad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5770" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RapporteringsenhetOrganisasjonsnummer-datadef-21772">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummer til juridisk enhet eller underliggende bedrift.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">1</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="21772" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst99Modulus11-repformat-1">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">1</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig organisasjonsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="9"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverFodselsnummer-datadef-26">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Fødselsnummer til oppgavegiveren</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">2</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst1111Modulus11-repformat-18">
+                    <xs:attribute fixed="26" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst1111Modulus11-repformat-18">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">18</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Ugyldig fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Ugyldig fødselsnummer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="11"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverNavnPreutfylt-datadef-25795">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Navn på oppgavegiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst175-repformat-8">
+                    <xs:attribute fixed="25795" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst175-repformat-8">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="175"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverAdressePreutfylt-datadef-25796">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Adresse til oppgavegiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="25796" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst35-repformat-3">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">3</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="35"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverPostnummerPreutfylt-datadef-25797">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Postnummer til oppgavegiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">5</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="25797" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst44BareTall-repformat-10">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">10</brreg:info>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+                    <p>Enter positive integer with four digits</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+                    <p>Feltet krever positivt heltall med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+                    <p>Feltet krev positivt heiltal med fire siffer</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="4"/>
+            <xs:pattern value="[0-9]{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverPoststedPreutfylt-datadef-25798">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Poststed til oppgavegiver</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="25798" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Arbeidstaker-grp-5771">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Arbeidstaker</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Du finner opplysningene på skattekortet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Arbeidstakar</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Du finn opplysningane på skattekortet</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="AnsattFodselsnummer-datadef-1224">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Fødselsnr./D.nr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Fødselsnr./D.nr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="NaringsdrivendeLonnsmottakerOrganisasjonsnummer-datadef-24396">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Organisasjonsnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="AnsattFodselsdato-datadef-22734">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Fødselsdato</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Skal bare fylles ut for personer uten gyldig fødselsnr. eller D.nr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Fødselsdato</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Skal bare nyttast for personer utan gyldig fødselsnr. eller D.nr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="AnsattNavn-datadef-25426">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Navn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Namn</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="AnsattAdresse-datadef-23161">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Adresse</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Adressa</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="AnsattPostnummer-datadef-8466">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Postnr.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="AnsattPoststed-datadef-8467">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Poststed</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Poststad</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="AnsattSkattekortkommunenummer-datadef-23289">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Skattekommune</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Skattekommune</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5771" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AnsattFodselsnummer-datadef-1224">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">7</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst1111Modulus11-repformat-18">
+                    <xs:attribute fixed="1224" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="NaringsdrivendeLonnsmottakerOrganisasjonsnummer-datadef-24396">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Organisasjonsnummer til næringsdrivende mottaker av lønn mv.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">9</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst99Modulus11-repformat-1">
+                    <xs:attribute fixed="24396" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AnsattFodselsdato-datadef-22734">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">8</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Dato-repformat-5">
+                    <xs:attribute fixed="22734" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Dato-repformat-5">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">5</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:date"/>
+    </xs:simpleType>
+    <xs:element name="AnsattNavn-datadef-25426">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">10</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst26-repformat-14">
+                    <xs:attribute fixed="25426" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst26-repformat-14">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">14</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="26"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="AnsattAdresse-datadef-23161">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">11</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst30-repformat-40">
+                    <xs:attribute fixed="23161" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst30-repformat-40">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">40</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="30"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="AnsattPostnummer-datadef-8466">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">12</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="8466" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AnsattPoststed-datadef-8467">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">13</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst35-repformat-3">
+                    <xs:attribute fixed="8467" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AnsattSkattekortkommunenummer-datadef-23289">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">14</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst44BareTall-repformat-10">
+                    <xs:attribute fixed="23289" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Sjofolk-grp-5773">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Sjøfolk</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Merk at dette ikke gjelder for fiskere. Fiskere med krav på særskilt  fradrag for fiskere skal kreve dette i selvangivelsen.  </p>
+                    <p/>
+                    <p>For å få særslikt fradrag for sjøfolk er det et vilkår at skattyter  har arbeid om bord i skip i fart som hovedbeskjeftigelse, og at  arbeidet til sammen utgjør minst 130 dager i samme inntektsår.  Skattyter som arbeider ombord
+                        på flytende innstallasjon har ikke krav  på særskilt fradrag for sjøfolk.  </p>
+                    <p/>
+                    <p>Statsloser har ikke krav på særskilt fradrag for sjøfolk.  </p>
+                    <p/>
+                    <p>Selv om skattyter rent fakstisk ikke har arbeidet om bord i minst 130  dager, er vilkåret likevel oppfylt for en arbeidstaker som er ansatt  for arbeids om bord, og hvor arbeidsforholdet direkte omfattes av en  tariffavtale som
+                        forutsetter minst 130 dager gjennomsnitlig om bord i  løpet av året.  </p>
+                    <p/>
+                    <p>Det presiseres at det er bare for sjøfolk med inntekt om bord at det  gis rett til særskilt fradrag. Det er bare for disse det skal svares  ja på spørmålet Gjelder oppgaven for sjøfolk med inntekt som gir rett  til særskilt
+                        fradrag for sjøfolk?. Dette gjelder uavhengig av om  sjøfolk er gitt fradraget på forskuddsstadiet. alle opplysningene på  lønns- og trekkoppgaven hvor det er svart ja på dette spørsmålet, må  kun omfatte ytelser som gir
+                        grunnlag for særskilt fradrag for  sjøfolk.  </p>
+                    <p>Oppgaven kan likevel inneholde skattefrie ytelser, slik som fri kost,  fri uniform mv.  </p>
+                    <p/>
+                    <p>For sjøfolk som har krav på fradrag for småutgifter, kan antall døgn  om bord hvor arbeisdgiver ikke for en vesentlig del har dekket  småutgiftene, innberettes under kode 921. Opphold på under 48 timer,  som inngår som en del
+                        av den ordinære arbeidstid, skal ikke  innberettes under denne kode.  </p>
+                    <p/>
+                    <p>Sjøfolks inntekter som ikke omfattes av ordningen med særskilt fradrag  for sjøfolk, skal innberettes på egen oppgave.  </p>
+                    <p/>
+                    <p>Lønn til sjøfolk som er utenlandske statsborgere og trygdet etter  folketrygdloven § 2-6, skal innberettes under kode 111-A.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Sjøfolk</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Merk at dette ikkje gjeld for fiskarar. Fiskarar med krav på særskilt  frådrag for fiskarar skal krevje dette i sjølvmeldinga.  </p>
+                    <p/>
+                    <p>For å få særslikt frådrag for sjøfolk er det eit vilkår at skattytar i  hovudsak har arbeid om bord i skip i fart som sysselsetjing, og at  arbeidet til saman utgjer minst 130 dagar i same inntektsår.  Skattytar som arbeidar
+                        ombord på flytande innstallasjon har ikkje  krav på særskilt frådrag for sjøfolk.  </p>
+                    <p/>
+                    <p>Statsloser har ikkje krav på særskilt frådrag for sjøfolk.  </p>
+                    <p/>
+                    <p>Selv om skattytar reint fakstisk ikkje har arbeida om bord i minst 130  dagar, er vilkåret likevel oppfyld for en arbeidstakar som er tilsett  for arbeid om bord, og kor arbeidsforhaldet direkte omfattas av ein  tariffavtale
+                        som går ut frå minst 130 dager om bord i gjennomsnitt i  løpet av året.  </p>
+                    <p/>
+                    <p>Det presiseras at det er bare for sjøfolk med inntekt om bord at det  gis rett til særskilt frådrag. Det er bare for disse du skal svara ja  på spørmålet Gjeld oppgåven for sjøfolk med inntekt som gir rett til  særskilt frådrag
+                        for sjøfolk?. Dette gjeld uavhengig av om sjøfolk er  gitt frådraget på forskuddsstadiet. Alle opplysningane på løns- og  trekkoppgåven kor det er svart ja på dette spørsmålet, må kun omfatte  ytingar som gir grunnlag for
+                        særskilt frådrag for sjøfolk.  </p>
+                    <p>Oppgåven kan likevel innehalde skattefrie ytingar, slik som fri kost,  fri uniform mv.  </p>
+                    <p/>
+                    <p>For sjøfolk som har krav på frådrag for småutgifter, kan tal på døgn  om bord hvor arbeisdgivar ikkje for en vesentlig del har dekt  småutgiftane, innberettes under kode 921. Opphald på under 48 timar,  som inngår som ein del
+                        av den ordinære arbeidstida, skal ikkje  innberettes under denne koden.  </p>
+                    <p/>
+                    <p>Inntekta til sjøfolk som ikkje omfattes av ordninga med særskilt  frådrag for sjøfolk, skal innberettes på eigen oppgåve.  </p>
+                    <p/>
+                    <p>Løn til sjøfolk som er utanlandske statsborgarar og trygda etter  folketrygdloven § 2-6, skal innberettes under kode 111-A.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="OppgaveSjofolk-datadef-24335">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Gjelder oppgaven for sjøfolk med inntekt som gir rett til særskilt  fradrag for sjøfolk?</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Gjeld oppgåva for sjøfolk med inntekt som gir rett til særskilt  frådrag for sjøfolk?</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5773" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OppgaveSjofolk-datadef-24335">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Hvorvidt oppgaven gjelder sjøfolk.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">19</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+                    <xs:attribute fixed="24335" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg2JaNei-repformat-4">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">4</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="3"/>
+            <xs:enumeration value="Ja">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>Yes</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Ja</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Ja</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Nei">
+                <xs:annotation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                            <p>No</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                            <p>Nei</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                    <xs:documentation>
+                        <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                            <p>Nei</p>
+                        </brreg:tekst>
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="Ansettelsesperiode-grp-5772">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Ansettelsesperiode</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Har arbeidstakeren vært ansatt gjennom hele året, skal du svare ja på  spørsmålet om ansatt hele året. Dersom svaret er nei, skal tidsrommet  for ansettelsen oppgis.  </p>
+                    <p/>
+                    <p>Ved ansettelse i adskilte perioder, oppgis antall arbeidsdager.  Foruten fast arbeidsforhold, heltid eller deltid, menes med ansatt  gjennom hele året at arbeidstaker er ansatt f.eks. faste ukedager  eller i fast turnus gjennom
+                        hele året, f.eks. hver onsdag og torsdag,  annen hver helg osv. Det samme gjelder styremedlem o.l. som har hatt  verv hele året.  </p>
+                    <p/>
+                    <p>Når en arbeidstaker er ansatt for noen dager i forskjellige perioder,  mv., regnes ikke dette som ansatt hele året. Antall dager skal da  oppgis.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Periode for tilsetjing</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Har arbeidstakaren vore tilsett heile året, skal du svare ja på  spørsmålet om tilsett heile året. Hvis svaret er nei, må du oppgi  tidsrommet for tilsettinga.  </p>
+                    <p/>
+                    <p>Ved tilsetjing i fleire perioder, skal du oppgi tal på arbeidsdagar.  Foruten fast arbeidsforhold, heiltid eller deltid, menes med tilsett  heile året at arbeidstakaren er tilsett t.d. faste ukedagar eller i  fast turnus
+                        gjennom heile året, t. d. kvar onsdag og torsdag, annan  kvar helg osv. Det same gjeld for styremedlem o.l. som har hatt verv  heile året.  </p>
+                    <p/>
+                    <p>Når ein arbeidstakar er tilsett for nokre dagar i ulike perioder, mv.,  reknes ikkje dette som tilsett heile året. Du skal da oppgi tal på  dagar.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="AnsattAnsettelseHeleAret-datadef-24333">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Har arbeidstakeren vært ansatt gjennom hele året?</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Dersom nei, oppgi tidsrom.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Har arbeidstakaren vore tilsett heile året?</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Hvis nei, oppgi tidsrom.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ArbeidsforholdStartdato-datadef-23170">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Fra dato</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Frå dato</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ArbeidsforholdSluttdato-datadef-23171">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Til dato</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Til dato</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="ArbeidsforholdAntallDager-datadef-24364">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Antall dager</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Ved ansettelse i atskilte perioder oppgis antall dager</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Kor mange dagar</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Ved tilsetjing i fleire tidsrom, oppgje kor mange dager</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5772" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AnsattAnsettelseHeleAret-datadef-24333">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Hvorvidt arbeidstaker har vært ansatt hele året.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">15</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+                    <xs:attribute fixed="24333" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ArbeidsforholdStartdato-datadef-23170">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">16</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Dato-repformat-5">
+                    <xs:attribute fixed="23170" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ArbeidsforholdSluttdato-datadef-23171">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">17</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Dato-repformat-5">
+                    <xs:attribute fixed="23171" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ArbeidsforholdAntallDager-datadef-24364">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Antall dager i arbeidsforholdet</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">18</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall3-repformat-83">
+                    <xs:attribute fixed="24364" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Heltall3-repformat-83">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">83</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="3"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="MestBrukteKoder-grp-5774">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Mest brukte koder</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Mest brukte koder</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="LonnOgForskuddstrekk-grp-5775"/>
+                <xs:element minOccurs="0" ref="TrekkfriBilgodtgjorelse-grp-5776"/>
+                <xs:element minOccurs="0" ref="Naringsdrivende-grp-5777"/>
+                <xs:element minOccurs="0" ref="KoderSomIkkeForesISelvangivelsen-grp-5778"/>
+            </xs:sequence>
+            <xs:attribute fixed="5774" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LonnOgForskuddstrekk-grp-5775">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Lønn og forskuddstrekk</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Lønn og forskottstrekk</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="AnsattLonn-datadef-25427">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>111-A Lønn, honorarer mv.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Under denne kode innberettes utbetalt lønn og annen  kontantgodtgjørelse for arbeid som ikke er utført som ledd i  selvstendig næringsvirksomhet, herunder bl.a. (oppregningen nedenfor  er ikke uttømmende ):  </p>
+                                <p>- godtgjørelse som medlem av styre, representantskap, utvalg, råd o.l.  (jf. kode 114(-A))  </p>
+                                <p>- forfatterhonorar som ikke er beregnet etter salg  </p>
+                                <p>- feriepenger  </p>
+                                <p>- sykepenger i arbeidsgiverperioden og sykepenger som refunderes fra  folketrygden  </p>
+                                <p>- fødselspenger og adopsjonspenger (foreldrepenger) i  arbeidsgiverperioden og fødselspenger og adopsjonspenger  (foreldrepenger) som refunderes fra folketrygden  </p>
+                                <p>- refusjon av utgifter/godtgjørelse til reise mellom hjem og  arbeidssted  </p>
+                                <p>- skattepliktig del av fosterhjemsgodtgjørelse  </p>
+                                <p>- drikkepenger for prosentlønnet serveringspersonale  </p>
+                                <p>- representasjonsgodtgjørelse  </p>
+                                <p>- skattepliktig del av brenselstilskudd (oppvarming av egen bolig)  </p>
+                                <p>- hundefører- og hundetreningstillegg  </p>
+                                <p>- skattepliktig sluttvederlag  </p>
+                                <p>- skattepliktig del av tilleggssluttvederlag  </p>
+                                <p>- lønn opptjent på norsk kontinentalsokkel av personer skattemessig  bosatt i Norge  </p>
+                                <p>- lønn til sjøfolk som er utenlandske statsborgere og trygdet etter  ftrl. § 2-6  </p>
+                                <p>- erstatning for tapt arbeidsfortjeneste - om skattefrie erstatninger,  se kode 911  </p>
+                                <p/>
+                                <p>Lønn som er opptjent før dødsfall og utbetalt etter, og som avdøde  faktisk og rettslig hadde adgang til å få utbetalt før dødsfallet,  innberettes her. Dersom avdøde ikke hadde faktisk og rettslig adgang  til å få
+                                    lønn eller feriepenger utbetalt før dødsfallet, er  godtgjørelsen arv og skal lønnsinnberettes i kode 916. Om etterlønn,  jf. kode 214.  </p>
+                                <p/>
+                                <p>Om opsjonsytelser ved innløsning eller salg av opsjoner i  arbeidsforhold (kontantytelser), se kode 131-A.  </p>
+                                <p/>
+                                <p>Om lønn og annen kontantgodtgjørelse for arbeid utført i utlandet,  herunder på utenlandsk kontinentalsokkel, se kode 113-A.  </p>
+                                <p/>
+                                <p>Om trekkpliktige naturalytelser for arbeid utført i utlandet, se kode  136-A.  </p>
+                                <p/>
+                                <p>Om lønn opptjent av utlending på norsk kontinentalsokkel, se kode  124-A.  </p>
+                                <p/>
+                                <p>Om ikke avgiftspliktig lønn og annen kontantgodtgjørelse for arbeid  utført i Norge, se kode 129.  </p>
+                                <p/>
+                                <p>Om ikke avgiftspliktige naturalytelser for arbeid utført i Norge, se  kode 137.  </p>
+                                <p/>
+                                <p>Om godtgjørelse til privatperson for arbeidsoppdrag i oppdragsgivers  hjem, se kode 140.  </p>
+                                <p/>
+                                <p>Om godtgjørelse fra ideelle organisasjoner, se kode 139.  </p>
+                                <p/>
+                                <p>Om godtgjørelse til dagmamma som passer barn i dagmammaens hjem, se  kode 404.  </p>
+                                <p/>
+                                <p>For arbeidstaker ansatt på nettolønnsordning, se kodene 961-A og kode  971-A.  </p>
+                                <p/>
+                                <p>Om utbetaling av bonus i forsvaret, se kode 128-A  </p>
+                                <p/>
+                                <p>Om lønn som skattlegges etter svalbardskatteloven, se kode 913-A.  </p>
+                                <p/>
+                                <p>Om lønn som skattlegges etter skatteloven for Jan Mayen, se kode 914-A  (opplysningene skal oppgis på egen papiroppgave og sendes direkte til  arbeisdtakerens skattekommune).</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>111-A Lønn, honorar mv.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Under denne koden gir ein opp utbetalt lønn og anna kontantgodtgjering  for arbeid som ikkje er utført som ledd i sjølvstendig  næringsverksemd, mellom anna (opprekninga nedanfor er ikkje  fullstendig):  </p>
+                                <p>- godtgjering som medlem av styre, representantskap, utval, råd o.l.  (jf. kode 114(-A))  </p>
+                                <p>- forfattarhonorar som ikkje er berekna etter sal  </p>
+                                <p>- feriepengar  </p>
+                                <p>- sjukepengar i arbeidsgivarperioden og sjukepengar som blir  refunderte frå folketrygda  </p>
+                                <p>- fødselspengar og adopsjonspengar (foreldrepengar) i  arbeidsgivarperioden og fødselspengar og adopsjonspengar  (foreldrepengar) som blir refunderte frå folketrygda  </p>
+                                <p>- refusjon av utgifter/godtgjering til reise mellom heim og  arbeidsstad  </p>
+                                <p>- skattepliktig del av fosterheimsgodtgjering  </p>
+                                <p>- drikkepengar for prosentlønt serveringspersonale  </p>
+                                <p>- representasjonsgodtgjering  </p>
+                                <p>- skattepliktig del av brenselstilskott (oppvarming av eigen  bustad)  </p>
+                                <p>- hundeførar- og hundetreningstillegg  </p>
+                                <p>- skattepliktig sluttvederlag  </p>
+                                <p>- skattepliktig del av tilleggssluttvederlag  </p>
+                                <p>- lønn opptent på norsk kontinentalsokkel av personar som skattemessig  er busette i Noreg  </p>
+                                <p>- lønn til sjøfolk som er utanlandske statsborgarar og trygda etter  ftrl. § 2-6  </p>
+                                <p>- erstatning for tapt arbeidsforteneste - om skattefrie erstatningar,  sjå kode 911  </p>
+                                <p/>
+                                <p> Lønn som er opptent før dødsfall og utbetalt etter, og som avdøde  faktisk og rettsleg hadde tilgang til å få utbetalt før dødsfallet,  skal givast opp her. Dersom avdøde ikkje hadde faktisk og rettsleg  tilgang
+                                    til å få lønn eller feriepengar utbetalt før dødsfallet, er  godtgjeringa arv og skal givast opp som lønn i kode 916. Om  etterlønn, jf. kode 214.  </p>
+                                <p/>
+                                <p>Om opsjonsytingar ved innløysing eller sal av opsjonar i  arbeidsforhold (kontantytingar), sjå kode 131-A.  </p>
+                                <p/>
+                                <p>Om lønn og anna kontantgodtgjering for arbeid som er utført i  utlandet, mellom anna på utanlandsk kontinentalsokkel, sjå kode  113-A.  </p>
+                                <p/>
+                                <p>Om trekkpliktige naturalytingar for arbeid som er utført i utlandet,  sjå kode 136-A. Om lønn opptent av utlending på norsk  kontinentalsokkel, sjå kode 124-A.  </p>
+                                <p/>
+                                <p>Om ikkje avgiftspliktig lønn og anna kontantgodtgjering for arbeid som  er utført i Noreg, sjå kode 129.  </p>
+                                <p/>
+                                <p>Om ikkje avgiftspliktige naturalytingar for arbeid som er utført i  Noreg, sjå kode 137.  </p>
+                                <p/>
+                                <p>Om godtgjering til privatperson for arbeidsoppdrag i oppdragsgivars  heim, sjå kode 140. Om godtgjering frå ideelle organisasjonar, sjå  kode 139.  </p>
+                                <p/>
+                                <p>Om godtgjering til dagmamma som passar barn i heimen til dagmamma, sjå  kode 404. For arbeidstakar som er tilsett på nettolønnsordning, sjå  kodane 961-A og kode 971-A.  </p>
+                                <p/>
+                                <p>Om utbetaling av bonus i forsvaret, sjå kode 128-A.  </p>
+                                <p/>
+                                <p>Om lønn som blir skattlagd etter svalbardskattelova, sjå kode 913-A  .  </p>
+                                <p/>
+                                <p>Om lønn som blir skattlagd etter skattelova for Jan Mayen, sjå kode  914-A .</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="AnsattForskuddstrekk-datadef-25428">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>950 Forskuddstrekk</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Regulært trekk av trygdeavgift for arbeidstakere som ikke skal  skattlegges i Norge, innberettes også her. Trekk av trygdeavgift som  skal innbetales til Folketrygdkontoret for utenlandssaker, skal ikke
+                                    innberettes.  </p>
+                                <p/>
+                                <p>Trukket skatt og trygdeavgift til Svalbard skal også tas med her.  Trukket skatt og trygdeavgift til Jan Mayen skal ikke tas med her  (innberettes under kode 914-A).  </p>
+                                <p/>
+                                <p>Trukket trygdeavgift for grensegjengere som ikke er skattepliktig til  Norge, skal ikke innberettes.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>950 Forskottstrekk</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Regulært trekk av trygdeavgift for arbeidstakarar som ikkje skal  skattleggjast i Noreg, gir ein opp også her. Trekk av trygdeavgift  som skal innbetalast til Folketrygdkontoret for utanlandssaker, skal  ikkje
+                                    givast opp.  </p>
+                                <p/>
+                                <p>Trekt skatt og trygdeavgift til Svalbard skal òg takast med her. Trekt  skatt og trygdeavgift til Jan Mayen skal ikkje takast med her (skal  givast opp under kode 914-A).  </p>
+                                <p/>
+                                <p>Trekt trygdeavgift for grensegjengarar som ikkje er skattepliktige til  Noreg, skal ikkje givast opp.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5775" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AnsattLonn-datadef-25427">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">20</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall8-repformat-463">
+                    <xs:attribute fixed="25427" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopHeltall8-repformat-463">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">463</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="8"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="AnsattForskuddstrekk-datadef-25428">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">21</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall8-repformat-463">
+                    <xs:attribute fixed="25428" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="TrekkfriBilgodtgjorelse-grp-5776">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>711 Trekkfri bilgodtgjørelse</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Under denne kode innberettes trekkfri bilgodtgjørelse etter satsene i  statens reiseregulativ (særavtale) (eller lavere) for bilgodtgjørelse  når legitimasjonskravene i Skattedirektoratets forskrift om  forskuddstrekk i
+                        utgiftsgodtgjørelser er fulgt. Passasjertillegg  eller andre tillegg skal innberettes under kode 714.  </p>
+                    <p/>
+                    <p>Når utgangs- og endepunktet for tjenestereisen er arbeidsstedet, skal  kilometergodtgjørelse tur/retur egen bolig innberettes under kode  153-A.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>711 Trekkfri bilgodtgjersle</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Under denne koden gir ein opp trekkfri bilgodtgjering etter satsane i  statens reiseregulativ (særavtale)  </p>
+                    <p>(eller lågare) for bilgodtgjering når legitimasjonskrava i  Skattedirektoratet si forskrift om forskottstrekk i  utgiftsgodtgjeringar er følgde. Passasjertillegg eller andre tillegg  skal givast opp under kode 714.  </p>
+                    <p/>
+                    <p>Når utgangs- og endepunktet for tenestereisa er arbeidsstaden, skal  kilometergodtgjering tur/retur eigen bustad givast opp under kode  153-A.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="AnsattBilgodtgjorelseTrekkfri-datadef-25429">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>711 Beløp</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>711 Beløp</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="AnsattBilgodtgjorelseTrekkfriAntallKilometer-datadef-25430">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>711 Antall km.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>711 Kor mange km</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5776" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AnsattBilgodtgjorelseTrekkfri-datadef-25429">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">22</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall8-repformat-463">
+                    <xs:attribute fixed="25429" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AnsattBilgodtgjorelseTrekkfriAntallKilometer-datadef-25430">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Antall kilometer ved trekkfri bilgodtgjørelse</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">23</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall8-repformat-76">
+                    <xs:attribute fixed="25430" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Heltall8-repformat-76">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">76</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="8"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="Naringsdrivende-grp-5777">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Ubetalinger til næringsdrivende mv.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Under denne kode innberettes alle oppgavepliktige utbetalinger og  naturalytelser til næringsdrivende ekskl. mva., unntatt ytelser som  nevnt under kodene 402-406 og 445-448.  </p>
+                    <p/>
+                    <p>I forskrift av 30.12.1983 nr. 1974 §§ 6 og 7 er oppgaveplikten for  utbetalinger til selvstendig næringsdrivende begrenset. For spørsmål  om hvem som ansees som næringsdrivende, se Skattedirektoratets  brosjyre Lønnstaker eller
+                        næringsdrivende? (RF-2028).  </p>
+                    <p/>
+                    <p>Styrehonorar og godtgjørelse som medlem av representantskap, utvalg,  råd o.l. til næringsdrivende skal innberettes under kode 111-A eller  kode 114-A.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Ubetalingar til næringsdrivande mv.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Under denne koden gir ein opp alle oppgåvepliktige utbetalingar og  naturalytingar til næringsdrivande ekskl. mva., bortsett frå ytingar  som er nemnde under kodane 402-406 og 445-448.  </p>
+                    <p/>
+                    <p>I forskrift av 30.12.1983 nr. 1974 §§ 6 og 7 er oppgåveplikta for  utbetalingar til sjølvstendig næringsdrivande avgrensa. For spørsmål  om kven som blir rekna som næringsdrivande, sjå Skattedirektoratet  sin brosjyre
+                        Lønnstakar eller næringsdrivande? (RF-2028).  </p>
+                    <p/>
+                    <p>Styrehonorar og godtgjering som medlem av representantskap, utval, råd  o.l. til næringsdrivande skal givast opp under kode 111-A eller kode  114-A.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="NaringsdrivendeUtbetaling-datadef-25434">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>401 Beløp</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>401 Beløp</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5777" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="NaringsdrivendeUtbetaling-datadef-25434">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">27</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall8-repformat-463">
+                    <xs:attribute fixed="25434" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KoderSomIkkeForesISelvangivelsen-grp-5778">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Koder som ikke føres i selvangivelsen</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Koder som ikkje skal førast i sjølvmeldinga</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="AnsattFeriepenger-datadef-25431">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>000 Feriepenger</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Under denne kode innberettes opptjent feriepengegrunnlag pr. 31.12. i  opptjeningsåret. Har det skjedd et oppgjør av feriepengene ved  fratreden, oppgis intet beløp i denne rubrikken.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>000 Feriepengar</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Under denne koden gir ein opp opptent feriepengegrunnlag pr. 31.12. i  oppteningsåret. Har det skjedd eit oppgjer av feriepengane ved  avgang, gir ein ikkje opp noko beløp i denne rubrikken.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="AnsattUnderholdsbidrag-datadef-25432">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>313 Underholdsbidrag etter pålegg fra Trygdeetatens innkrevingssentral</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Under denne kode innberettes underholdsbidrag som er fratrukket  inntekten etter pålegg fra Trygdeetatens innkrevingssentral og som  gir fradragsrett.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>313 Underhaldstilskott etter pålegg frå Trygdeetatens  innkrevjingssentral</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Under denne koden gir ein opp underhaldsbidrag som er fråtrekt  inntekta etter pålegg frå Trygdeetatens innkrevjingssentral, og som  gir frådragsrett.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="AnsattUnderholdsbidragIkkeFradragsberegnet-datadef-25433">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>316 Underholdsbidrag etter pålegg fra Trygdeetatens innkrevingssentral</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                                <p>Under denne kode innberettes underholdsbidrag som er fratrukket  inntekten etter pålegg fra Trygdeetatens innkrevingssentral og som  ikke gir fradragsrett.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                                <p>Ikke fradragsberettiget</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>316 Underhaldstilskott etter pålegg frå Trygdeetatens  innkrevjingsentral</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                                <p>Under denne koden gir ein opp underhaldsbidrag som er fråtrekt  inntekta etter pålegg frå Trygdeetatens innkrevjingssentral, og som  ikkje gir frådragsrett.</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                                <p>Ikkje frådragsrett</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5778" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AnsattFeriepenger-datadef-25431">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">24</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall8-repformat-463">
+                    <xs:attribute fixed="25431" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AnsattUnderholdsbidrag-datadef-25432">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">25</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall8-repformat-463">
+                    <xs:attribute fixed="25432" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AnsattUnderholdsbidragIkkeFradragsberegnet-datadef-25433">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">26</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall8-repformat-463">
+                    <xs:attribute fixed="25433" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OvrigeKoder-grp-5779">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Øvrige koder</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                    <p>Her finner du alle LTO kodene som ikke finnes på siden for mest brukte  koder.  </p>
+                    <p/>
+                    <p>Velg kode fra nedtrekksmenyen og fyll ut tilhørende felter for koden  du har valgt.  </p>
+                    <p/>
+                    <p>Unntak: kode 914-A Jan Mayen inntekt.  </p>
+                    <p>Inntekter og trekk under denne koden skal innberettes på egen  papiroppgave og sendes direkte til skatteoppkreveren i  arbeidstakerens skattekommune (dvs. ikke sammen med de ordinære  oppgavene).  </p>
+                    <p/>
+                    <p>På www.skatteetaten.no finner du en oversikt over LTO-kodene.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Andre kodar</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                    <p>Her finn du alle LTO kodane som ikkje finst på sida for mest brukte  kodar.  </p>
+                    <p/>
+                    <p>Velg kode frå nedtrekksmenyen og fyll ut alle feltane som høyrer til  koden du har valgt.  </p>
+                    <p/>
+                    <p>Unntak: kode 914-A Jan Mayen inntekt.  </p>
+                    <p>Inntekter og trekk under denne koden skal innberettes på eigen  papiroppgåve og sendast direkte til skatteoppkrevjaren i  arbeidstakarens skattekommune (dvs. ikkje saman med dei ordinære  oppgåvene).  </p>
+                    <p/>
+                    <p>Sjå www.skatteetaten.no for nærmare informasjon om LTO kodane.</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="400" minOccurs="0" ref="OvrigeLTOkoder-grp-5806"/>
+            </xs:sequence>
+            <xs:attribute fixed="5779" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OvrigeLTOkoder-grp-5806">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                    <p>Øvrige lønns- og trekkoppgavekoder</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                    <p>Andre lønns- og trekkoppgåvekodar</p>
+                </brreg:tekst>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="LonnoppgavekodeKodenummer-datadef-25435">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Kode</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Kode</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="LonnsytelserAvgiftsplikt-datadef-25436">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>A - avgiftsplikt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>A - avgiftsplikt</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="LonnsoppgaveTabelloppsettBelop1-datadef-25437">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp 1</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp 1</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="LonnsoppgaveTabelloppsettBelop2-datadef-25438">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp 2</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp 2</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="LonnsoppgaveTabelloppsettAntall-datadef-25439">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Antall 1</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Antall 1</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="LonnsoppgaveTabelloppsettLandkode1-datadef-25440">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Landkode 1</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Landkode 1</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="LonnsoppgaveTabelloppsettLandkode2-datadef-25441">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Landkode 2</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Landkode 2</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="LonnsoppgaveTabelloppsettAr-datadef-25442">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Årstall</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Årstall</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="LonnsoppgaveTabelloppsettBelop3-datadef-25443">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp 3</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp 3</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="LonnsoppgaveTabelloppsettFraDato-datadef-25444">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Fra dato</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Frå dato</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="LonnsoppgaveTabelloppsettTilDato-datadef-25445">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Til dato</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Til dato</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="LonnsoppgaveTabelloppsettBelop4-datadef-25446">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp 4</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp 4</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="LonnsoppgaveTabelloppsettBelop5-datadef-25447">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Beløp 5</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Beløp 5</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="LonnsoppgaveTabelloppsettAnnenOpplysning1-datadef-25448">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Diverse 1</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Diverse 1</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="LonnsoppgaveTabelloppsettAnnenOpplysning2-datadef-25449">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Diverse 2</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Diverse 2</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element minOccurs="0" ref="LonnsoppgaveTabelloppsettAnnenOpplysning3-datadef-25450">
+                    <xs:annotation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                                <p>Diverse 3</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                        <xs:documentation>
+                            <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                                <p>Diverse 3</p>
+                            </brreg:tekst>
+                        </xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute fixed="5806" name="gruppeid" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LonnoppgavekodeKodenummer-datadef-25435">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">28</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst3BareTall-repformat-323">
+                    <xs:attribute fixed="25435" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst3BareTall-repformat-323">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">323</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="3"/>
+            <xs:pattern value="[0-9]{3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="LonnsytelserAvgiftsplikt-datadef-25436">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">29</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+                    <xs:attribute fixed="25436" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LonnsoppgaveTabelloppsettBelop1-datadef-25437">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tabelloppsett kun til bruk i lønns- og trekkoppgave.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">30</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall8-repformat-463">
+                    <xs:attribute fixed="25437" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LonnsoppgaveTabelloppsettBelop2-datadef-25438">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tabelloppsett kun til bruk i lønns- og trekkoppgave.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">31</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall8-repformat-463">
+                    <xs:attribute fixed="25438" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LonnsoppgaveTabelloppsettAntall-datadef-25439">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tabelloppsett kun til bruk i lønns- og trekkoppgave.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">32</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall6-repformat-89">
+                    <xs:attribute fixed="25439" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Heltall6-repformat-89">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">89</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="6"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="LonnsoppgaveTabelloppsettLandkode1-datadef-25440">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tabelloppsett kun til bruk i lønns- og trekkoppgave.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">33</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst22-repformat-484">
+                    <xs:attribute fixed="25440" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst22-repformat-484">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">484</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:length value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="LonnsoppgaveTabelloppsettLandkode2-datadef-25441">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tabelloppsett kun til bruk i lønns- og trekkoppgave.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">34</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst22-repformat-484">
+                    <xs:attribute fixed="25441" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LonnsoppgaveTabelloppsettAr-datadef-25442">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tabelloppsett kun til bruk i lønns- og trekkoppgave.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">35</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Ar44-repformat-6">
+                    <xs:attribute fixed="25442" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Ar44-repformat-6">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">6</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:gYear"/>
+    </xs:simpleType>
+    <xs:element name="LonnsoppgaveTabelloppsettBelop3-datadef-25443">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tabelloppsett kun til bruk i lønns- og trekkoppgave.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">36</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall8-repformat-463">
+                    <xs:attribute fixed="25443" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LonnsoppgaveTabelloppsettFraDato-datadef-25444">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tabelloppsett kun til bruk i lønns- og trekkoppgave.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">37</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Dato-repformat-5">
+                    <xs:attribute fixed="25444" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LonnsoppgaveTabelloppsettTilDato-datadef-25445">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tabelloppsett kun til bruk i lønns- og trekkoppgave.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">38</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Dato-repformat-5">
+                    <xs:attribute fixed="25445" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LonnsoppgaveTabelloppsettBelop4-datadef-25446">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tabelloppsett kun til bruk i lønns- og trekkoppgave.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">39</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall8-repformat-463">
+                    <xs:attribute fixed="25446" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LonnsoppgaveTabelloppsettBelop5-datadef-25447">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tabelloppsett kun til bruk i lønns- og trekkoppgave.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">40</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="BelopHeltall8-repformat-463">
+                    <xs:attribute fixed="25447" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LonnsoppgaveTabelloppsettAnnenOpplysning1-datadef-25448">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tabelloppsett kun til bruk i lønns- og trekkoppgave.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">41</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Heltall4-repformat-38">
+                    <xs:attribute fixed="25448" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Heltall4-repformat-38">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">38</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="4"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="LonnsoppgaveTabelloppsettAnnenOpplysning2-datadef-25449">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tabelloppsett kun til bruk i lønns- og trekkoppgave.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">42</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst11-repformat-489">
+                    <xs:attribute fixed="25449" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst11-repformat-489">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">489</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="11"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="LonnsoppgaveTabelloppsettAnnenOpplysning3-datadef-25450">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+                    <p>Tabelloppsett kun til bruk i lønns- og trekkoppgave.</p>
+                </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+                <brreg:info brreg:type="plassering">43</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="Tekst50-repformat-70">
+                    <xs:attribute fixed="25450" name="orid" type="xs:positiveInteger" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst50-repformat-70">
+        <xs:annotation>
+            <xs:documentation>
+                <brreg:info brreg:type="id">70</brreg:info>
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="50"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

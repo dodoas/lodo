@@ -1,0 +1,181 @@
+<?php
+/* copy right
+ * Created on 09.jun.2005
+ * by Anh Le
+ * 
+ * 
+ */
+class AArsoppgaveMapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+           			$this->ORID[$item] = $v;
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+            	$item = $this->Account[$a];
+            	$this->ORID[$item] = $v;
+	            return 1;
+    	    }
+       	}
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+	{	$this->addMapping('D21819', 'OppgaveEndringsoppgave-datadef-21819', '');
+		$this->addMapping('D5133', 'EnhetNACEKode-datadef-5133', '');
+		$this->addMapping('D26', 'OppgavegiverFodselsnummer-datadef-26', 'SocialSecurityID');
+		$this->addMapping('D18', 'EnhetOrganisasjonsnummer-datadef-18', 'OrgNumber');
+		$this->addMapping('D620', 'OppgavegiverTelefonnummer-datadef-620', 'PhonePrivat');
+		$this->addMapping('D1', 'EnhetNavn-datadef-1', 'VName');
+		$this->addMapping('D15', 'EnhetAdresse-datadef-15', 'VAddress');
+		$this->addMapping('D6673', 'EnhetPostnummer-datadef-6673', 'VZipCode');
+		$this->addMapping('D6674', 'EnhetPoststed-datadef-6674', 'VCity');
+		$this->addMapping('D21591', 'EnhetEPost-datadef-21591', 'Email');
+		$this->addMapping('D22770', 'SkatteoppkreverKommuneNavn-datadef-22770', 'SkatteoppkreverKommuneNavn');
+		$this->addMapping('D22212', 'EnhetArbeidsgiveravgiftsberegningUnntaktilfelleTypeNaring-datadef-22212', 'TypeNaring');
+		$this->addMapping('D6615', 'LonnsoppgaverAntallMaskinelle-datadef-6615', 'ManuelleAntallLonnOgTrekkOppgaver');
+		$this->addMapping('D8490', 'LonnsoppgaverAntallManuelle-datadef-8490', 'MaskinelleAntallLonnOgTrekkOppgaver');
+		$this->addMapping('D8487', 'LonnskostnaderOppgavepliktigeMaskinelle-datadef-8487', '3.02a');
+		$this->addMapping('D8491', 'LonnskostnaderOppgavepliktigeManuelle-datadef-8491', '3.02b');
+		$this->addMapping('D6617', 'LonnskostnaderIkkeOppgavepliktige-datadef-6617', '3.05a');
+		$this->addMapping('D15944', 'YtelserLonnsoppgavepliktigeSamlede-datadef-15944', '3.08a');
+		$this->addMapping('D13882', 'LonnskostnaderArbeidsgiveravgiftspliktigeMaskinelleSone1-datadef-13882', '3.03a1');
+		$this->addMapping('D13887', 'LonnskostnaderArbeidsgiveravgiftspliktigeManuelleSone1-datadef-13887', '3.03b1');
+		$this->addMapping('D13892', 'LonnskostnaderAvgiftpliktigeIkkeOppgavepliktigeSone1-datadef-13892', '3.05b');
+		$this->addMapping('D13897', 'PensjonsordningerTilskuddPremieAvgiftspliktigeSone1-datadef-13897', '3.06a');
+		$this->addMapping('D13902', 'LonnskostnaderArbeidsgiveravgiftspliktigeSone1-datadef-13902', '3.08b');
+		$this->addMapping('D22213', 'LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerUnder62Sone1-datadef-22213', '3.09a');
+		$this->addMapping('D22219', 'LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerOver62Sone1-datadef-22219', '3.010a');
+		$this->addMapping('D13883', 'LonnskostnaderArbeidsgiveravgiftspliktigeMaskinelleSone2-datadef-13883', '3.03a2');
+		$this->addMapping('D13888', 'LonnskostnaderArbeidsgiveravgiftspliktigeManuelleSone2-datadef-13888', '3.03b2');
+		$this->addMapping('D13893', 'LonnskostnaderAvgiftpliktigeIkkeOppgavepliktigeSone2-datadef-13893', '3.05c');
+		$this->addMapping('D13898', 'PensjonsordningerTilskuddPremieAvgiftspliktigeSone2-datadef-13898', '3.06b');
+		$this->addMapping('D13903', 'LonnskostnaderArbeidsgiveravgiftspliktigeSone2-datadef-13903', '3.08c');
+		$this->addMapping('D22214', 'LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerUnder62Sone2-datadef-22214', '3.09b');
+		$this->addMapping('D22220', 'LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerOver62Sone2-datadef-22220', '3.010b');
+		$this->addMapping('D13884', 'LonnskostnaderArbeidsgiveravgiftspliktigeMaskinelleSone3-datadef-13884', '3.03a3');
+		$this->addMapping('D13889', 'LonnskostnaderArbeidsgiveravgiftspliktigeManuelleSone3-datadef-13889', '3.03b3');
+		$this->addMapping('D13894', 'LonnskostnaderAvgiftpliktigeIkkeOppgavepliktigeSone3-datadef-13894', '3.05d');
+		$this->addMapping('D13899', 'PensjonsordningerTilskuddPremieAvgiftspliktigeSone3-datadef-13899', '3.06c');
+		$this->addMapping('D13904', 'LonnskostnaderArbeidsgiveravgiftspliktigeSone3-datadef-13904', '3.08d');
+		$this->addMapping('D22215', 'LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerUnder62Sone3-datadef-22215', '3.09c');
+		$this->addMapping('D22221', 'LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerOver62Sone3-datadef-22221', '3.010c');
+		$this->addMapping('D13885', 'LonnskostnaderArbeidsgiveravgiftspliktigeMaskinelleSone4-datadef-13885', '3.03a4');
+		$this->addMapping('D13890', 'LonnskostnaderArbeidsgiveravgiftspliktigeManuelleSone4-datadef-13890', '3.03b4');
+		$this->addMapping('D13895', 'LonnskostnaderAvgiftpliktigeIkkeOppgavepliktigeSone4-datadef-13895', '3.05e');
+		$this->addMapping('D13900', 'PensjonsordningerTilskuddPremieAvgiftspliktigeSone4-datadef-13900', '3.06d');
+		$this->addMapping('D13905', 'LonnskostnaderArbeidsgiveravgiftspliktigeSone4-datadef-13905', '3.08e');
+		$this->addMapping('D22216', 'LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerUnder62Sone4-datadef-22216', '3.09d');
+		$this->addMapping('D22222', 'LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerOver62Sone4-datadef-22222', '3.010d');
+		$this->addMapping('D13886', 'LonnskostnaderArbeidsgiveravgiftspliktigeMaskinelleSone5-datadef-13886', '3.03a5');
+		$this->addMapping('D13891', 'LonnskostnaderArbeidsgiveravgiftspliktigeManuelleSone5-datadef-13891', '3.03b5');
+		$this->addMapping('D13896', 'LonnskostnaderAvgiftpliktigeIkkeOppgavepliktigeSone5-datadef-13896', '3.05f');
+		$this->addMapping('D13901', 'PensjonsordningerTilskuddPremieAvgiftspliktigeSone5-datadef-13901', '3.06e');
+		$this->addMapping('D13906', 'LonnskostnaderArbeidsgiveravgiftspliktigeSone5-datadef-13906', '3.08f');
+		$this->addMapping('D22217', 'LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerUnder62Sone5-datadef-22217', '3.09e');
+		$this->addMapping('D22223', 'LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerOver62Sone5-datadef-22223', '3.010e');
+		$this->addMapping('D8489', 'ForskuddstrekkTrukketMaskinelle-datadef-8489', '3.04a');
+		$this->addMapping('D8493', 'ForskuddstrekkTrukketManuelle-datadef-8493', '3.04b');
+		$this->addMapping('D8495', 'ForskuddstrekkTrukketSkattemessig-datadef-8495', '3.07');
+		$this->addMapping('D8507', 'LonnskostnaderArbeidsgiveravgiftspliktige-datadef-8507', '3.08g');
+		$this->addMapping('D22218', 'LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerUnder62Sum-datadef-22218', '3.09f');
+		$this->addMapping('D22224', 'LonnskostnadArbeidsgiveravgiftspliktigArbeidstakerOver62Sum-datadef-22224', '3.010f');
+		$this->addMapping('D22225', 'ArbeidsgiveravgiftUtenlandskArbeidstakerUSACanadaGrunnlag-datadef-22225', '3.1a');
+		$this->addMapping('D22226', 'ArbeidsgiveravgiftUtenlandskArbeidstakerUSACanadaBeregnet-datadef-22226', '3.1b');
+		$this->addMapping('D16519', 'AnsattUtenlandskManeder-datadef-16519', '3.2a');
+		$this->addMapping('D16520', 'ArbeidsgiveravgiftUtenlandskManedBeregnet-datadef-16520', '3.2b');
+		$this->addMapping('D6620', 'ArbeidsgiveravgiftEkstraGrunnlag-datadef-6620', '3.3a');
+		$this->addMapping('D6050', 'ArbeidsgiveravgiftEkstraBeregnet-datadef-6050', '3.3b');
+		$this->addMapping('D1226', 'AnsattLonn-datadef-1226', '111-A');
+		$this->addMapping('D2926', 'AnsattNaturalytelserTrekkpliktig-datadef-2926', '112-A');
+		$this->addMapping('D2927', 'AnsattForsikringUlykkeYrkesskadeSkattepliktig-datadef-2927', '116-A');
+		$this->addMapping('D2929', 'AnsattPensjon-datadef-2929', '211');
+		$this->addMapping('D1330', 'AnsattFagforeningskontingent-datadef-1330', '311');
+		$this->addMapping('D1331', 'AnsattPremiePensjonsordning-datadef-1331', '312');
+		$this->addMapping('D1332', 'AnsattUnderholdsbidrag-datadef-1332', '313');
+		$this->addMapping('D2919', 'AnsattPremieFondTrygd-datadef-2919', '314');
+		$this->addMapping('D19662', 'AnsattUnderholdsbidragIkkeFradregsberretiget-datadef-19662', '316');
+		$this->addMapping('D2920', 'NaringsdrivendeUtbetaling-datadef-2920', '401');
+		$this->addMapping('D2928', 'AnsattBilgodtgjorelseTrekkfri-datadef-2928', '711');
+		$this->addMapping('D1333', 'AnsattForskuddstrekk-datadef-1333', '950');
+		$this->addMapping('D8498', 'AnsattUtbetalingAnnen-datadef-8498', '11');
+		$this->addMapping('D8508', 'LonnskostnaderInnberettetManuelle-datadef-8508', '12');
+		$this->addMapping('D6621', 'OppgaverSvalbard-datadef-6621', '5.0a');
+		$this->addMapping('D6622', 'LonnskostnaderSvalbard-datadef-6622', '5.0b');
+		$this->addMapping('D6623', 'SkattetrekkSvalbard-datadef-6623', '5.0c');
+		$this->addMapping('D6616', 'TrygdeavgiftSvalbard-datadef-6616', '5.0d');
+		$this->addMapping('D14878', 'TilleggsopplysningerArsoppgave-datadef-14878', '');
+				
+		        
+        
+	}
+ }
+?>

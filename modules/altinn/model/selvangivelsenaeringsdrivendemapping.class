@@ -1,0 +1,426 @@
+<?php
+class SelvangivelseNrMapping
+{
+    var $ORID = array();
+    var $Human = array();
+    var $Account = array();
+    
+     function addMapping($o, $h, $a)
+    {
+        $this->Human[$o] = $h;
+        $this->Account[$a][] = $o;
+        //print ("Accouint: ". $a . "khlk: ". $h ."<br>");
+    }
+
+    function setOrid($o, $v)
+    {
+        $this->ORID[$o] = $v;
+    }
+
+    function setAccount($a, $v)
+    {
+    	
+       	if (is_array($this->Account[$a]))
+       	{
+	        if($this->Account[$a][0] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+        	{
+       			foreach($this->Account[$a] as $item)
+           			$this->ORID[$item] = $v;
+            	return 1;
+        	}
+       	}
+       	else
+       	{
+	        if($this->Account[$a] == '')
+    	    {
+        	    $this->ORID['FEIL: '.$a] = $v;
+            	return 0;
+        	}
+        	else
+	        {
+            	$item = $this->Account[$a];
+            	$this->ORID[$item] = $v;
+	            return 1;
+    	    }
+       	}
+    }
+
+    function setHuman($h, $v)
+    {
+        $this->ORID[$this->Human[$h]] = $v;
+    }
+
+    function getOridArray()
+    {
+        return $this->ORID;
+    }
+
+    function getHuman($a)
+    {
+        $tmpstr = $this->Human[$this->Account['D'.$a]];
+        $tmp = explode('-', $tmpstr);
+        return $tmp['0'];
+    }
+    
+    function getHumanArray()
+    {
+        return $this->Human;
+    }
+    function getAccount()
+    {
+        return $this->Account;
+    }
+
+    /*function addValues($o, $h, $a, $v)
+    {
+        $ORID[$o] = $v;
+        $Human[$o] = $h;
+        $Account[$a] = $o;
+    }*/
+
+	function mapping()
+	{  $this->addMapping('D2725', 'OppgavegiverLigningskontor-datadef-2725', 'CompanyMunicipality');
+        $this->addMapping('D26', 'OppgavegiverFodselsnummer-datadef-26', 'SocialSecurityID');
+        $this->addMapping('D17132', 'ForhandsligningOnske-datadef-17132', '1.0.3');
+        $this->addMapping('D19679', 'ForhandsligningAr-datadef-19679', '');
+        $this->addMapping('D68', 'OppgavegiverNavn-datadef-68', 'Name');
+        $this->addMapping('D2442', 'OppgavegiverPostadresse-datadef-2442', 'Address');
+        $this->addMapping('D6676', 'OppgavegiverPostnummer-datadef-6676', 'ZipCode');
+        $this->addMapping('D6677', 'OppgavegiverPoststed-datadef-6677', 'City');
+        $this->addMapping('D6696', 'OppgavegiverBoligadresseEndring-datadef-6696', '1.1.2');
+        $this->addMapping('D6697', 'OppgavegiverPostadresseEndring-datadef-6697', '');
+        $this->addMapping('D6699', 'OppgavegiverPostnummerEndring-datadef-6699', '');
+        $this->addMapping('D6698', 'OppgavegiverPoststedEndring-datadef-6698', '');
+        $this->addMapping('D1834', 'OppgavegiverStillingYrke-datadef-1834', 'Category');
+        $this->addMapping('D16533', 'OppgavegiverTelefonnummerPrivat-datadef-16533', 'PhonePrivat');
+        $this->addMapping('D6700', 'OppgavegiverTelefonnummerArbeid-datadef-6700', 'PhoneWork');
+        $this->addMapping('D520', 'OppgavegiverSivilStatus-datadef-520', '1.1.5');
+        $this->addMapping('D2272', 'EktefelleNavn-datadef-2272', '');
+        $this->addMapping('D19372', 'EktefelleFodselsnummer-datadef-19372', '');
+        $this->addMapping('D14086', 'EktefelleInntektFordeling-datadef-14086', '1.2.3');
+        $this->addMapping('D6702', 'EkteskapDato-datadef-6702', '');
+        $this->addMapping('D6703', 'EktefelleNavnForEkteskap-datadef-6703', '');
+        $this->addMapping('D6704', 'EktefelleBoligadresseForEkteskap-datadef-6704', '');
+        $this->addMapping('D6705', 'EktefellePostnummerForEkteskap-datadef-6705', '');
+        $this->addMapping('D6706', 'EktefellePoststedForEkteskap-datadef-6706', '');
+        $this->addMapping('D6707', 'EktefelleSkattekommuneForEkteskap-datadef-6707', '');
+        $this->addMapping('D6708', 'SamboerNavn-datadef-6708', '');
+        $this->addMapping('D6709', 'SamboerFodselsnummer-datadef-6709', '');
+        $this->addMapping('D2728', 'BarnNavnSpesifisertBarn-datadef-2728', '');
+        $this->addMapping('D19405', 'BarnFodselsdatoSpesifisertBarn-datadef-19405', '');
+        $this->addMapping('D6710', 'BarnForsorgerfradragNavnSpesifisertBarn-datadef-6710', '');
+        $this->addMapping('D19406', 'BarnForsorgerfradragFodselsdatoSpesifisertBarn-datadef-19406', '');
+        $this->addMapping('D2729', 'BarnForsorgelseTidsromSpesifisertBarn-datadef-2729', '');
+        $this->addMapping('D2733', 'BSU-datadef-2733', '1.5.1');
+        $this->addMapping('D6713', 'GevinstLotteriOL-datadef-6713', '1.5.2a');
+        $this->addMapping('D2734', 'GevinstLotteriOL-datadef-2734', '1.5.2b');
+        $this->addMapping('D6714', 'GaveArvMottatt-datadef-6714', '1.5.3a');
+        $this->addMapping('D2735', 'GaveArvMottatt-datadef-2735', '1.5.3b');
+        $this->addMapping('D2722', 'AksjeutbytteGodtgjorelsesfradragUbenyttet-datadef-2722', '1.5.4');
+        $this->addMapping('D17033', 'KostnaderForskningsUtviklingsprosjekterSkattefradrag-datadef-17033', '1.5.8');
+        $this->addMapping('D17031', 'EiendomNaringKommune-datadef-17031', '1.5.5a');
+        $this->addMapping('D19785', 'EiendomNaringAnnenKommuneNavn-datadef-19785', '1.5.5b');
+        $this->addMapping('D17034', 'EiendomNaringAnnenKommuneKommunenummerSpesifisertEiendomMv-datadef-17034', '1.5.5c');
+        $this->addMapping('D1117', 'FormueUtland-datadef-1117', '1.5.6a');
+        $this->addMapping('D6680', 'Kreditfradrag-datadef-6680', '1.5.6b');
+        $this->addMapping('D17032', 'LonnUtlandSkattenedsettelse-datadef-17032', '1.5.6c');
+        $this->addMapping('D19784', 'SkattInnbetaltTilbakebetalingKontonummer-datadef-19784', '');
+        $this->addMapping('D6667', 'NaturressursskattUbenyttet-datadef-6667', '');
+        $this->addMapping('D2736', 'Malform-datadef-2736', '1.5.7');
+        $this->addMapping('D6716', 'PersoninntektEnkeltmannsforetakFiskeJordbrukSkogbruk-datadef-6716', '1.6.1');
+        $this->addMapping('D2738', 'PersoninntektDeltakerlignetDelingsforetakFiskeJordbrukSkogbruk-datadef-2738', '1.6.4');
+        $this->addMapping('D2718', 'GodtgjorelseDeltakerlignetDelingsforetakFiskeJordbrukSkog-datadef-2718', '1.6.7');
+        $this->addMapping('D6724', 'SykepengerFiskeJordbrukSkogbruk-datadef-6724', '1.6.12');
+        $this->addMapping('D2741', 'AndelAksjeselskapDeltakerlignetSelskapFiskeJordbrukSkogbruk-datadef-2741', '1.6.15');
+        $this->addMapping('D6717', 'PersoninntektEnkeltmannsforetakLiberaltYrke-datadef-6717', '1.6.2');
+        $this->addMapping('D6719', 'PersoninntektDeltakerlignetDelingsforetakLiberaltYrke-datadef-6719', '1.6.5');
+        $this->addMapping('D6721', 'GodtgjorelseDeltakerlignetDelingsforetakLiberaltYrke-datadef-6721', '1.6.8');
+        $this->addMapping('D2739', 'PersoninntektAksjeselskapLiberaltYrke-datadef-2739', '1.6.10');
+        $this->addMapping('D6725', 'SykepengerLiberaltYrke-datadef-6725', '1.6.13');
+        $this->addMapping('D6727', 'AndelAksjeselskapDeltakerlignetSelskapLiberaltYrke-datadef-6727', '1.6.16');
+        $this->addMapping('D6718', 'PersoninntektEnkeltmannsforetakAnnenNaring-datadef-6718', '1.6.3');
+        $this->addMapping('D6720', 'PersoninntektDeltakerlignetDelingsforetakAnnenNaring-datadef-6720', '1.6.6');
+        $this->addMapping('D6722', 'GodtgjorelseDeltakerlignetDelingsforetakAnnenNaring-datadef-6722', '1.6.9');
+        $this->addMapping('D6723', 'PersoninntektAksjeselskapAnnenNaring-datadef-6723', '1.6.11');
+        $this->addMapping('D6726', 'SykepengerAnnenNaring-datadef-6726', '1.6.14');
+        $this->addMapping('D6728', 'AndelAksjeselskapDeltakerlignetSelskapAnnenNaring-datadef-6728', '1.6.17');
+        $this->addMapping('D7198', 'GodtgjorelseDeltakerlignetSelskapFiskeJordbrukSkogbruk-datadef-7198', '1.7.1');
+        $this->addMapping('D6729', 'GodtgjorelseDeltakerlignetSelskapAnnenNaring-datadef-6729', '1.7.2');
+        $this->addMapping('D6730', 'ArbeidsgiverNavnSpesifisert-datadef-6730', '2.1.1a');
+        $this->addMapping('D4186', 'ArbeidTidsromSpesifisertArbeidsgiver-datadef-4186', '2.1.1b');
+        $this->addMapping('D6731', 'LonnAnnenGodtgjorelseSpesifisertUtbetaler-datadef-6731', '2.1.1c');
+        $this->addMapping('D1123', 'LonnAnnenGodtgjorelse-datadef-1123', '2.1.1d');
+        $this->addMapping('D7691', 'ArbeidsgiverMaritimVirksomhet-datadef-7691', '2.1.2a');
+        $this->addMapping('D6732', 'InntektSjomannsfradragTidsrom-datadef-6732', '2.1.2b');
+        $this->addMapping('D2742', 'InntekterSjomannsfradrag-datadef-2742', '2.1.2c');
+        $this->addMapping('D22169', 'InntekterSjomannsfradragSum-datadef-22169', '2.1.2d');
+        $this->addMapping('D7692', 'ArbeidsgiverBarnepass-datadef-7692', '2.1.3a');
+        $this->addMapping('D6733', 'InntektBarnepassTidsrom-datadef-6733', '2.1.3b');
+        $this->addMapping('D2743', 'InntekterBarnepass-datadef-2743', '2.1.3c');
+        $this->addMapping('D22170', 'InntekterBarnepassSum-datadef-22170', '2.1.3d');
+        $this->addMapping('D7693', 'UtbetalerGodtgjorelserTjenesteutgifter-datadef-7693', '2.1.4a');
+        $this->addMapping('D2744', 'GodtgjorelseTjenesteutgifterOverskudd-datadef-2744', '2.1.4b');
+        $this->addMapping('D22171', 'GodtgjorelseTjenesteutgifterOverskuddSum-datadef-22171', '2.1.4c');
+        $this->addMapping('D7694', 'ArbeidsinntektAnnenBeskrivelse-datadef-7694', '2.1.5.a');
+        $this->addMapping('D6735', 'ArbeidsinntektAnnenTidsrom-datadef-6735', '2.1.5b');
+        $this->addMapping('D2517', 'ArbeidsinntektAnnen-datadef-2517', '2.1.5c');
+        $this->addMapping('D22172', 'ArbeidsinntektAnnenSum-datadef-22172', '2.1.5d');
+        $this->addMapping('D6736', 'LonnNaturalytelserMv-datadef-6736', '2.1.6');
+        $this->addMapping('D6737', 'DagpengerArbeidsledighetTidsrom-datadef-6737', '2.1.7a');
+        $this->addMapping('D2745', 'DagpengerArbeidsledighet-datadef-2745', '2.1.7b');
+        $this->addMapping('D19407', 'PensjonType-datadef-19407', '2.2.1a');
+        $this->addMapping('D6739', 'PensjonTidsromSpesifisertPensjon-datadef-6739', '2.2.1b');
+        $this->addMapping('D2746', 'PensjonerFolketrygden-datadef-2746', '2.2.1c');
+        $this->addMapping('D6740', 'UtbetalerPensjonerSpesifisertUtbetaler-datadef-6740', '2.2.2a');
+        $this->addMapping('D6741', 'Barnepensjon-datadef-6741', '2.2.2b');
+        $this->addMapping('D6742', 'PensjonerIkkeFolketrygdenTidsrom-datadef-6742', '2.2.2c');
+        $this->addMapping('D2747', 'PensjonerIkkeFolketrygden-datadef-2747', '2.2.2d');
+        $this->addMapping('D2518', 'Pensjoner-datadef-2518', '2.2.3');
+        $this->addMapping('D6743', 'EktefelletilleggTidsrom-datadef-6743', '2.2.4a');
+        $this->addMapping('D2689', 'Ektefelletillegg-datadef-2689', '2.2.4b');
+        $this->addMapping('D7670', 'LonnPensjonerMV-datadef-7670', '2.3');
+        $this->addMapping('D6749', 'UtbetalerLonnBarn-datadef-6749', '2.4.1a');
+        $this->addMapping('D6750', 'BarnLonnFodselsnummer-datadef-6750', '2.4.1b');
+        $this->addMapping('D2693', 'BarnLonn-datadef-2693', '2.4.1c');
+        $this->addMapping('D22173', 'BarnLonnSum-datadef-22173', '2.4.1d');
+        $this->addMapping('D14087', 'LonnPensjonerInklBarnsInntekt-datadef-14087', '2.5');
+        $this->addMapping('D6752', 'UtbetalerBidragUtenforArbeidsforholdSpesifisertUtbetaler-datadef-6752', '2.6.1a');
+        $this->addMapping('D6753', 'BidragEgneUtenforArbeidsforhold-datadef-6753', '2.6.1b');
+        $this->addMapping('D7696', 'UtbetalerBidragAndre-datadef-7696', '2.6.2a');
+        $this->addMapping('D6756', 'BidragAndreUtenforArbeidsforhold-datadef-6756', '2.6.2b');
+        $this->addMapping('D7697', 'UtbetalerBarnepensjon-datadef-7697', '2.6.3a');
+        $this->addMapping('D6757', 'BarnPensjonFodselsnummer-datadef-6757', '2.6.3b');
+        $this->addMapping('D6758', 'Barnepensjon-datadef-6758', '2.6.3c');
+        $this->addMapping('D2694', 'BidragMottatt-datadef-2694', '2.6.4a');
+        $this->addMapping('D2211', 'InntekterJordbrukGartneriMv-datadef-2211', '2.7.1');
+        $this->addMapping('D2212', 'InntekterSkogbruk-datadef-2212', '2.7.2');
+        $this->addMapping('D6681', 'InntekterFiskeriSkattemessig-datadef-6681', '2.7.3');
+        $this->addMapping('D22174', 'NaringsinntekterAnnenNaring-datadef-22174', '2.7.4');
+        $this->addMapping('D10085', 'InntektNaringSum-datadef-10085', '2.7.5');
+        $this->addMapping('D11259', 'SykepengerNaring-datadef-11259', '2.7.6');
+        $this->addMapping('D17040', 'EiendomBoligKommunenummer-datadef-17040', '2.8.1a');
+        $this->addMapping('D22185', 'BoligeiendomLigningsverdi0451000SpesifisertVerdi-datadef-22185', '2.8.1b');
+        $this->addMapping('D22186', 'InntekterBoligeiendomProsentligningLigningsverdi0451000-datadef-22186', '2.8.1c');
+        $this->addMapping('D6760', 'BoligeiendomLigningsverdiUtover451000SpesifisertVerdi-datadef-6760', '2.8.1d');
+        $this->addMapping('D6761', 'InntekterBoligeiendomBeregnetSpesifisertVerdi-datadef-6761', '2.8.1e');
+        $this->addMapping('D6762', 'InntekterBoligeiendom-datadef-6762', '2.8.1f');
+        $this->addMapping('D17039', 'EiendomFritidsboligKommunenummer-datadef-17039', '2.8.2a');
+        $this->addMapping('D22187', 'FritidseiendomLigningsverdi0451000SpesifisertVerdi-datadef-22187', '2.8.2b');
+        $this->addMapping('D22188', 'InntekterFritidseiendomProsentligningLigningsverdi0451000-datadef-22188', '2.8.2c');
+        $this->addMapping('D6764', 'FritidseiendomLigningsverdiUtover451000SpesifisertVerdi-datadef-6764', '2.8.2d');
+        $this->addMapping('D6765', 'InntekterFritidseiendomBeregnetSpesifisertVerdi-datadef-6765', '2.8.2e');
+        $this->addMapping('D6766', 'InntekterFritidseiendom-datadef-6766', '2.8.2f');
+        $this->addMapping('D6767', 'InntekterBoligselskapBoligsameieAndel-datadef-6767', '2.8.3');
+        $this->addMapping('D17035', 'EiendomUtenomNaringKommunenummer-datadef-17035', '2.8.4a');
+        $this->addMapping('D6768', 'InntekterUtleieFastEiendomNetto-datadef-6768', '2.8.4b');
+        $this->addMapping('D22175', 'InntekterUtleieFastEiendomNettoSum-datadef-22175', '2.8.4c');
+        $this->addMapping('D17036', 'EiendomRealisertKommunenummer-datadef-17036', '2.8.5a');
+        $this->addMapping('D6771', 'GevinstRealisasjonFastEiendom-datadef-6771', '2.8.5b');
+        $this->addMapping('D22176', 'GevinstRealisasjonFastEiendomSum-datadef-22176', '2.8.5c');
+        $this->addMapping('D14105', 'FastEiendomUtlandLandSpesifisertEiendom-datadef-14105', '2.8.6a');
+        $this->addMapping('D14211', 'InntekterFastEiendomUtlandSpesifisertEiendom-datadef-14211', '2.8.6b');
+        $this->addMapping('D22203', 'InntektFastEiendomUtlandSum-datadef-22203', '2.8.6c');
+        $this->addMapping('D6772', 'InntekterFastEiendomSkattemessig-datadef-6772', '2.8.7a');
+        $this->addMapping('D6773', 'AlminneligInntektUtdrag-datadef-6773', '2.8.7b');
+        $this->addMapping('D6774', 'RenteinntekterBankNavnSpesifisertBank-datadef-6774', '3.1.1a');
+        $this->addMapping('D6775', 'RenteinntekterSpesifisertBank-datadef-6775', '3.1.1b');
+        $this->addMapping('D16537', 'RenteinntekterNaringInnenlandske-datadef-16537', '3.1.1c');
+        $this->addMapping('D7698', 'RenteinntekterAnnetBeskrivelse-datadef-7698', '3.1.2a');
+        $this->addMapping('D6776', 'RenteinntekterAnnet-datadef-6776', '3.1.2b');
+        $this->addMapping('D22177', 'RenteinntekterAnnetSum-datadef-22177', '3.1.2c');
+        $this->addMapping('D1108', 'LivsforsikringAvkastningSkattemessig-datadef-1108', '3.1.3');
+        $this->addMapping('D19989', 'AksjeutbytteNorskeSelskaper-datadef-19989', '3.1.4');
+        $this->addMapping('D15522', 'AksjerMvGevinstSkattNaring-datadef-15522', '3.1.5');
+        $this->addMapping('D2695', 'InntekterUtland-datadef-2695', '3.1.6');
+        $this->addMapping('D1109', 'AksjeutbytteUtenlandskeSelskaperSkattemessig-datadef-1109', '3.1.7');
+        $this->addMapping('D13970', 'InntekterAndreSkattemessigBeskrivelseSpesifisert-datadef-13970', '3.1.8a');
+        $this->addMapping('D14214', 'InntekterAndreSkattemessigSpesifisert-datadef-14214', '3.1.8b');
+        $this->addMapping('D22204', 'InntekterAndreSkattemessigSum-datadef-22204', '3.1.9a');
+        $this->addMapping('D1214', 'KapitalinntekterMV-datadef-1214', '3.1.9b');
+        $this->addMapping('D6778', 'InntektAlminneligForFradrag-datadef-6778', '3.1.10');
+        $this->addMapping('D2696', 'MinstefradragEgenInntekt-datadef-2696', '3.2.1');
+        $this->addMapping('D6777', 'FradragFaktiskeUtgifter-datadef-6777', '3.2.2a');
+        $this->addMapping('D22189', 'MinstefradragEgenInntektFaktiskeUtgifter-datadef-22189', '3.2.2b');
+        $this->addMapping('D11260', 'FradragEktefelletillegg-datadef-11260', '3.2.4');
+        $this->addMapping('D6780', 'FradragBarnLonn-datadef-6780', '3.2.5');
+        $this->addMapping('D6781', 'FradragBarnebidragBarnepensjon-datadef-6781', '3.2.6a');
+        $this->addMapping('D22190', 'MinstefradragEktefelletilleggBarnLonnBarnepensjon-datadef-22190', '3.2.6b');
+        $this->addMapping('D6782', 'FradragKostLosjiMerutgifter-datadef-6782', '3.2.7');
+        $this->addMapping('D6783', 'ReiseHjemArbeidDager-datadef-6783', '3.2.8a');
+        $this->addMapping('D6785', 'ReiseHjemArbeidAvstand-datadef-6785', '3.2.8b');
+        $this->addMapping('D2723', 'ReiseutgifterHjemArbeid-datadef-2723', '3.2.8c');
+        $this->addMapping('D6784', 'ReiseBesokHjemDager-datadef-6784', '3.2.8d');
+        $this->addMapping('D7668', 'ReiseHjemAvstand-datadef-7668', '3.2.8e');
+        $this->addMapping('D6786', 'ReiseutgifterBesokHjem-datadef-6786', '3.2.8f');
+        $this->addMapping('D7669', 'BompengerFergeutgifter-datadef-7669', '3.2.9a');
+        $this->addMapping('D6787', 'ReiseutgifterGrunnlag-datadef-6787', '3.2.9b');
+        $this->addMapping('D6788', 'ReiseutgifterBeregnet-datadef-6788', '3.2.9c');
+        $this->addMapping('D14108', 'ForeldrefradragBeskrivelse-datadef-14108', '3.2.10a');
+        $this->addMapping('D2698', 'Foreldrefradrag-datadef-2698', '3.2.10b');
+        $this->addMapping('D21367', 'ForeldrefradragSumInnbetalt-datadef-21367', '3.2.10c');
+        $this->addMapping('D2271', 'KontingentFagforeningGaverFradragsberettiget-datadef-2271', '3.2.11');
+        $this->addMapping('D2699', 'PensjonsordningPremieTilskudd-datadef-2699', '3.2.12');
+        $this->addMapping('D2700', 'Sjomannsfradrag-datadef-2700', '3.2.13');
+        $this->addMapping('D1353', 'FradragSarskiltFiskeMv-datadef-1353', '3.2.14');
+        $this->addMapping('D7671', 'FradragSjomennFiskeJordbruk-datadef-7671', '');
+        $this->addMapping('D11298', 'Jordbruksfradrag-datadef-11298', '3.2.15');
+        $this->addMapping('D19771', 'Reindriftsfradrag-datadef-19771', '3.2.16');
+        $this->addMapping('D19775', 'Skiferfradrag-datadef-19775', '3.2.17');
+        $this->addMapping('D308', 'PremieTilleggstrygdSkattemessig-datadef-308', '3.2.18');
+        $this->addMapping('D22178', 'UnderskuddJordbruk-datadef-22178', '3.2.19a');
+        $this->addMapping('D22179', 'UnderskuddSkogbruk-datadef-22179', '3.2.19b');
+        $this->addMapping('D21072', 'UnderskuddFiske-datadef-21072', '3.2.19c');
+        $this->addMapping('D22180', 'UnderskuddAnnenNaring-datadef-22180', '3.2.19d');
+        $this->addMapping('D22181', 'UnderskuddEiendomUtenforNaring-datadef-22181', '3.2.19e');
+        $this->addMapping('D16174', 'UnderskuddNaringFordelt-datadef-16174', '3.2.19f');
+        $this->addMapping('D6789', 'FordringshaverNavnSpesifisertFordringshaver-datadef-6789', '3.3.1a');
+        $this->addMapping('D6790', 'FordringshaverAdresseSpesifisertFordringshaver-datadef-6790', '3.3.1b');
+        $this->addMapping('D6791', 'FordringshaverPostnummerSpesifisertFordringshaver-datadef-6791', '3.3.1c');
+        $this->addMapping('D6792', 'FordringshaverPoststedSpesifisertFordringshaver-datadef-6792', '3.3.1d');
+        $this->addMapping('D6793', 'RenteutgifterNorskeFordringshavereSpesifisertFordringshaver-datadef-6793', '3.3.1e');
+        $this->addMapping('D2701', 'RenteutgifterNorskeFordringshavere-datadef-2701', '3.3.1f');
+        $this->addMapping('D2702', 'RenteutgifterUtenlandskeFordringshavere-datadef-2702', '3.3.2');
+        $this->addMapping('D6794', 'BidragsmottakerNavnSpesifisertMottaker-datadef-6794', '3.3.3a');
+        $this->addMapping('D6795', 'BidragsmottakerAdresseSpesifisertMottaker-datadef-6795', '3.3.3b');
+        $this->addMapping('D6796', 'BidragsmottakerPostnummerSpesifisertMottaker-datadef-6796', '3.3.3c');
+        $this->addMapping('D6797', 'BidragsmottakerPoststedSpesifisertMottaker-datadef-6797', '3.3.3d');
+        $this->addMapping('D6798', 'BidragsmottakerKommuneSpesifisertMottaker-datadef-6798', '3.3.3e');
+        $this->addMapping('D6799', 'BidragsmottakerFodselsdatoSpesifisertMottaker-datadef-6799', '3.3.3f');
+        $this->addMapping('D2703', 'UnderholdsbidragFoderad-datadef-2703', '3.3.3g');
+        $this->addMapping('D22182', 'FoderadsytelserMvSum-datadef-22182', '3.3.3h');
+        $this->addMapping('D2704', 'UtgifterBoligselskapAndel-datadef-2704', '3.3.4');
+        $this->addMapping('D2705', 'PremiePensjonsforsikring-datadef-2705', '3.3.5');
+        $this->addMapping('D7699', 'FastEiendomRealisasjonTapBeskrivelse-datadef-7699', '3.3.6a');
+        $this->addMapping('D2706', 'FastEiendomRealisasjonTap-datadef-2706','3.3.6b');
+        $this->addMapping('D22183', 'FastEiendomRealisasjonTapSum-datadef-22183', '3.2.6c');
+        $this->addMapping('D7700', 'FradragUtgifterAndreBeskrivelse-datadef-7700', '3.3.7a');
+        $this->addMapping('D2688', 'FradragUtgifterAndre-datadef-2688', '3.3.7b');
+        $this->addMapping('D22184', 'FradragUtgifterAndreSum-datadef-22184', '3.3.7c');
+        $this->addMapping('D15523', 'AksjerMvTapFradragNaring-datadef-15523', '3.3.8');
+        $this->addMapping('D20278', 'UnderskuddTidligereArFremfores-datadef-20278', '3.3.9');
+        $this->addMapping('D6800', 'FradragArbeidsinntekterKapitalutgifterMV-datadef-6800', '3.3.10');
+        $this->addMapping('D2720', 'InntektAlminnelig-datadef-2720', '3.4');
+        $this->addMapping('D6801', 'SarfradragType-datadef-6801', '3.5a');
+        $this->addMapping('D2707', 'Sarfradrag-datadef-2707', '3.5b');
+        $this->addMapping('D2721', 'KommuneFellesskattGrunnlag-datadef-2721', '3.6');
+        $this->addMapping('D14091', 'InnskuddBankNavnSpesifisertBank-datadef-14091', '4.1.1a');
+        $this->addMapping('D14092', 'InnskuddKontonummerSpesifisertBank-datadef-14092', '4.1.1b');
+        $this->addMapping('D14093', 'InnskuddKontohaverNavnSpesifisertBank-datadef-14093', '4.1.1c');
+        $this->addMapping('D6803', 'BankinnskuddPostgiroinnskuddSpesifisertBank-datadef-6803', '4.1.d');
+        $this->addMapping('D187', 'BankinnskuddPostgiroinnskudd-datadef-187', '4.1.1e');
+        $this->addMapping('D15511', 'KontanterMvNaring-datadef-15511', '4.1.2a');
+        $this->addMapping('D7701', 'KontanterFribelop-datadef-7701', '4.1.2b');
+        $this->addMapping('D16536', 'KontanterMvNaringsdrivende-datadef-16536', '4.1.3');
+        $this->addMapping('D14094', 'AksjefondNavn-datadef-14094', '4.1.4a');
+        $this->addMapping('D14095', 'AksjefondAndelerAntall-datadef-14095', '4.1.4b');
+        $this->addMapping('D14096', 'AksjefondAndelerPalydende-datadef-14096', '4.1.4c');
+        $this->addMapping('D14097', 'AksjefondAndelerVerdi-datadef-14097', '4.1.4d');
+        $this->addMapping('D6806', 'AksjefondSpesifisertVerdi-datadef-6806', '4.1.4e');
+        $this->addMapping('D22191', 'AksjefondSum-datadef-22191', '4.1.4f');
+        $this->addMapping('D14098', 'ObligasjonsfondNavn-datadef-14098', '4.1.5a');
+        $this->addMapping('D14099', 'ObligasjonsfondAndelerAntall-datadef-14099', '4.1.5b');
+        $this->addMapping('D14100', 'ObligasjonsfondAndelerPalydende-datadef-14100', '4.1.5c');
+        $this->addMapping('D14101', 'ObligasjonsfondAndelerVerdi-datadef-14101', '4.1.5d');
+        $this->addMapping('D6807', 'ObligasjonsfondPengemarkedsfondSpesifisertVerdi-datadef-6807', '4.1.5e');
+        $this->addMapping('D22192', 'ObligasjonsfondPengemarkedsfondSum-datadef-22192', '4.1.5f');
+        $this->addMapping('D7702', 'FordringerObligasjonerMvBeskrivelse-datadef-7702', '4.1.6a');
+        $this->addMapping('D11692', 'FordringerObligasjonerMvSkattemessigSpesifisert-datadef-11692', '4.1.6b');
+        $this->addMapping('D22193', 'FordringerObligasjonerMvSum-datadef-22193', '4.1.6c');
+        $this->addMapping('D6808', 'VerdipapirerVPSKontonummer-datadef-6808', '4.1.7a');
+        $this->addMapping('D14102', 'VerdipapirerVPSAntall-datadef-14102', '4.1.7b');
+        $this->addMapping('D14103', 'VerdipapirerVPSPalydende-datadef-14103', '4.1.7c');
+        $this->addMapping('D14104', 'VerdipapirerVPSLigningsverdi-datadef-14104', '4.1.7d');
+        $this->addMapping('D6809', 'VerdipapirerVPS-datadef-6809', '4.1.7e');
+        $this->addMapping('D22194', 'VerdipapirerVPSSum-datadef-22194', '4.1.7f');
+        $this->addMapping('D6810', 'VerdipapirerAndreSelskapNavn-datadef-6810', '4.1.8a');
+        $this->addMapping('D6811', 'VerdipapirerAndreAntall-datadef-6811', '4.1.8b');
+        $this->addMapping('D6812', 'VerdipapirerAndrePalydende-datadef-6812', '4.1.8c');
+        $this->addMapping('D6813', 'VerdipapirerAndreLigningsverdi-datadef-6813', '4.1.8d');
+        $this->addMapping('D1703', 'VerdipapirerAndreSpesifisert-datadef-1703', '4.1.8e');
+        $this->addMapping('D22195', 'VerdipapirerAndreSum-datadef-22195', '4.1.8f');
+        $this->addMapping('D8090', 'BankinnskuddMvUtlandSkattemessig-datadef-8090', '4.1.9');
+        $this->addMapping('D6814', 'InnboLosoreForsikringssum-datadef-6814', '4.2.1a');
+        $this->addMapping('D6815', 'InnboLosoreSalgsverdi-datadef-6815', '4.2.1b');
+        $this->addMapping('D6816', 'FritidsbaterLavereVerdiType-datadef-6816', '4.2.2a');
+        $this->addMapping('D6819', 'FritidsbaterLavereVerdiSalgsverdi-datadef-6819', '4.2.2b');
+        $this->addMapping('D6817', 'InnboLosoreMVForFradrag-datadef-6817', '4.2.2c');
+        $this->addMapping('D6818', 'InnboLosoreMVSkattemessig-datadef-6818', '4.2.3');
+        $this->addMapping('D6820', 'FritidsbaterMerke-datadef-6820', '4.2.4a');
+        $this->addMapping('D14109', 'FritidsbaterHoyereVerdiType-datadef-14109', '4.2.4b');
+        $this->addMapping('D6821', 'FritidsbaterArsmodell-datadef-6821', '4.2.4c');
+        $this->addMapping('D6822', 'FritidsbaterForsikringssum-datadef-6822', '4.2.4d');
+        $this->addMapping('D2709', 'FritidsbaterSalgsverdiSpesifisert-datadef-2709', '4.2.4e');
+        $this->addMapping('D22196', 'FritidsbaterSalgsverdiSum-datadef-22196', '4.2.4f');
+        $this->addMapping('D6823', 'MotorkjoretoyMerke-datadef-6823', '4.2.5a');
+        $this->addMapping('D6824', 'MotorkjoretoyRegistreringAr-datadef-6824', '4.2.5b');
+        $this->addMapping('D6825', 'MotorkjoretoyListeprisNy-datadef-6825', '4.2.5c');
+        $this->addMapping('D2710', 'MotorkjoretoySalgsverdi-datadef-2710', '4.2.5d');
+        $this->addMapping('D22197', 'MotorkjoretoyerSalgsverdiSum-datadef-22197', '4.2.5f');
+        $this->addMapping('D6826', 'CampingvognerMerke-datadef-6826', '4.2.6a');
+        $this->addMapping('D6827', 'CampingvognerRegistreringsar-datadef-6827', '4.2.6b');
+        $this->addMapping('D6828', 'CampingvognerListeprisNy-datadef-6828', '4.2.6c');
+        $this->addMapping('D2711', 'CampingvognerSalgsverdi-datadef-2711', '4.2.6d');
+        $this->addMapping('D22198', 'CampingvognerSalgsverdiSum-datadef-22198', '4.2.6f');
+        $this->addMapping('D10089', 'BoligselskapLigningsverdiNavn-datadef-10089', '4.3.1a');
+        $this->addMapping('D6830', 'BoligselskapOrganisasjonsnummer-datadef-6830', '4.3.1b');
+        $this->addMapping('D17037', 'BoligselskapKommunenummer-datadef-17037', '4.3.1c');
+        $this->addMapping('D6832', 'BoligselskapLigningsverdiAndel-datadef-6832', '4.3.1d');
+        $this->addMapping('D22199', 'BoligselskaperLigningsverdiAndelerSum-datadef-22199', '4.3.1e');
+        $this->addMapping('D6834', 'EiendomSelveidBoligAdresse-datadef-6834', '4.3.2a');
+        $this->addMapping('D11750', 'EiendomSelveidBoligGardsnummer-datadef-11750', '4.3.2b');
+        $this->addMapping('D11751', 'EiendomSelveidBoligBruksnummer-datadef-11751', '4.3.2c');
+        $this->addMapping('D11752', 'EiendomSelveidBoligSeksjonsnummer-datadef-11752', '4.3.2d');
+        $this->addMapping('D18059', 'EiendomBoligFormueKommunenummer-datadef-18059', '4.3.2e');
+        $this->addMapping('D6837', 'BoligSelveid-datadef-6837', '4.3.2f');
+        $this->addMapping('D6839', 'EiendomFritidsboligAdresse-datadef-6839', '4.3.3a');
+        $this->addMapping('D11753', 'EiendomFritidsboligGardsnummer-datadef-11753', '4.3.3b');
+        $this->addMapping('D11754', 'EiendomFritidsboligBruksnummer-datadef-11754', '4.3.3c');
+        $this->addMapping('D11755', 'EiendomFritidsboligSeksjonsnummer-datadef-11755', '4.3.3d');
+        $this->addMapping('D18060', 'EiendomFritidsboligFormueKommunenummer-datadef-18060', '4.3.3e');
+        $this->addMapping('D6842', 'Fritidsbolig-datadef-6842', '4.3.3f');
+        $this->addMapping('D22200', 'FritidsboligerSum-datadef-22200', '4.3.3g');
+        $this->addMapping('D2018', 'EiendomTypeSpesifisertEiendom-datadef-2018', '4.3.4a');
+        $this->addMapping('D6689', 'EiendomNavnSpesifisertEiendom-datadef-6689', '4.3.4b');
+        $this->addMapping('D6843', 'EiendomAdresseSpesifisertEiendom-datadef-6843', '4.3.4c');
+        $this->addMapping('D11756', 'EiendomGardsnummerSpesifisertEiendom-datadef-11756', '4.3.4d');
+        $this->addMapping('D11757', 'EiendomBruksnummerSpesifisertEiendom-datadef-11757', '4.3.4e');
+        $this->addMapping('D11758', 'EiendomSeksjonsnummerSpesifisertEiendom-datadef-11758', '4.3.4f');
+        $this->addMapping('D17038', 'EiendomKommunenummerSpesifisertEiendom-datadef-17038', '4.3.4g');
+        $this->addMapping('D1113', 'EiendomSkattemessigSpesifisertEiendom-datadef-1113', '4.3.4h');
+        $this->addMapping('D22201', 'EiendomSkattemessigSum-datadef-22201', '4.3.4i');
+        $this->addMapping('D6844', 'BilerMaskinerInventarMv-datadef-6844', '4.4.1');
+        $this->addMapping('D1179', 'BuskapSkattemessig-datadef-1179', '4.4.2');
+        $this->addMapping('D16531', 'LagerbeholdningNaringsdrivendeMv-datadef-16531', '4.4.3');
+        $this->addMapping('D6692', 'FartoySkattemessig-datadef-6692', '4.4.4');
+        $this->addMapping('D1114', 'DriftslosoreSkattemessig-datadef-1114', '4.4.5');
+        $this->addMapping('D2712', 'PremiefondInnskudd-datadef-2712', '4.5.1');
+        $this->addMapping('D1115', 'LivsforsikringspoliserSkattemessig-datadef-1115', '4.5.2');
+        $this->addMapping('D2713', 'BoligselskapAnnenFormueAndel-datadef-2713', '4.5.3');
+        $this->addMapping('D7703', 'FormueAnnenBeskrivelseSpesifisert-datadef-7703', '4.5.4a');
+        $this->addMapping('D14215', 'FormueAnnenSkattemessigSpesifisert-datadef-14215', '4.5.4b');
+        $this->addMapping('D20933', 'FormueAnnen-datadef-20933', '4.5.4c');
+        $this->addMapping('D14110', 'FormueFastEiendomUtlandLand-datadef-14110', '4.6.1a');
+        $this->addMapping('D14106', 'FormueFastEiendomUtland-datadef-14106', '4.6.1b');
+        $this->addMapping('D22202', 'FormueFastEiendomUtlandSum-datadef-22202', '4.6.1.c');
+        $this->addMapping('D14107', 'FormueAnnenUtland-datadef-14107', '4.6.2');
+        $this->addMapping('D1118', 'FormueBruttoSkattemessig-datadef-1118', '4.7');
+        $this->addMapping('D22631', 'GjeldNorskeFordringshavereNavnSpesifisertFordringshaver-datadef-22631', '4.8.1a');
+        $this->addMapping('D22632', 'GjeldNorskeFordringshavereAdresseSpesifisertFordringshaver-datadef-22632', '4.8.1b');
+        $this->addMapping('D22633', 'GjeldNorskeFordringshaverePostnummerSpesifisertFordringshaver-datadef-22633', '4.8.1c');
+        $this->addMapping('D22634', 'GjeldNorskeFordringshaverePoststedSpesifisertFordringshaver-datadef-22634', '4.8.1d');
+        $this->addMapping('D22635', 'GjeldNorskeFordringshavereSpesifisertFordringshaver-datadef-22635', '4.8.1e');
+        $this->addMapping('D2714', 'GjeldNorskeFordringshavere-datadef-2714', '4.8.1f');
+        $this->addMapping('D2715', 'GjeldBoligselskapAndel-datadef-2715', '4.8.2');
+        $this->addMapping('D2716', 'GjeldUtenlandskeFordringshavere-datadef-2716', '4.8.3');
+        $this->addMapping('D10087', 'GjeldPersonligeSkattemessig-datadef-10087', '4.8.4');
+        $this->addMapping('D1352', 'FormueNetto-datadef-1352', '4.9');
+        $this->addMapping('D6846', 'Vedlegg-datadef-6846', '');
+        
+	}
+ }
+?>

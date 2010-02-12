@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1125: Opplysninger om bruk av bil</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-245-5818.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind ref="/Skjema/GenerellInformasjon-grp-1124/Avgiver-grp-1125/EnhetNavn-datadef-1" required="true"/>
+            <xforms:bind readOnly="true" ref="/Skjema/GenerellInformasjon-grp-1124/Avgiver-grp-1125/OppgavegiverFodselsnummer-datadef-26"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1125 Opplysninger om bruk av bil 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Skjemaet skal fylles ut uoppfordret og legges ved selvangivelsen av  alle skatteytere som krever fradrag for egne og leasede person-,  kombinerte-, stasjons- og varebiler, busser med inntil 15  passasjerplasser samt lastebiler med
+                    totalvekt under 7 500 kilo.  </p>
+                <p/>
+                <p>Unntak: Skjemaet skal ikke ukrevet leveres:  </p>
+                <p>- dersom det kun kreves fradrag etter kilometersats for yrkeskjøring  med privatbil (gjelder hovedsaklig bil som brukes mindre enn 6000  kilometer i yrke/næring)  </p>
+                <p>- av lønnstakere som mottar bilgodtgjørelse etter statens satser og  legitimasjonskrav når det kreves forenklet overskuddsberegning  </p>
+                <p>- for arbeidsgivers biler benyttet av arbeidstaker hvor standard  fordel (30% av bilens listepris som ny til og med kr 239 100 og 20%  av overskytende beløp), er innberettet på lønns- og trekkoppgave.  </p>
+                <p>Likningsmyndighetene kan også i ovennevnte tilfeller kreve skjemaet  utfylt dersom dette finnes nødvendig.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NOB">
+                <p>Vedlegg til selvangivelsen</p>
+            </xforms:hint>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1125 Opplysningar om bruk av bil 2006</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Skjemaet skal fyllast uoppfordra og leggjast ved sjølvmeldinga av alle  skattytarar som krev frådrag for eigne og leasa person-, kombinerte-,  stasjons- og varebilar, bussar med høgst 15 passasjerplassar og  lastebilar med
+                    totalvekt under 7 500 kilo.  </p>
+                <p/>
+                <p>Unntak: Skjemaet skal ikkje leverast ukrevja:  </p>
+                <p>- dersom det berre blir kravd frådrag etter kilometersats for  yrkeskjøring med privatbil (gjeld hovudsakleg bil som blir brukt  mindre enn 6000 kilometer i yrke/næring)  </p>
+                <p>- av lønnstakarar som får bilgodtgjersle etter statens satsar og og  legitimasjonskrav når det blir kravd forenkla overskotsrekning  </p>
+                <p>- for arbeidsgjevars bilar som blir brukte av arbeidstakar der  standard fordel (30% av bilens listepris som ny til og med kr 239 100  og 20% av overskytande beløp), er innmelde på lønns- og  trekkoppgåve.  </p>
+                <p>Likningsmyndigheitene kan også i dei nemnde tilfella krevje skjemaet  utfylt dersom dei finn det nødvendig.</p>
+            </xforms:help>
+            <xforms:hint brreg:lang="NON">
+                <p>Vedlegg til sjølvmeldinga</p>
+            </xforms:hint>
+            <xforms:group ref="/Skjema/GenerellInformasjon-grp-1124">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Innledning</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-1124/Avgiver-grp-1125">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Avgiver</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Avgivar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1124/Avgiver-grp-1125/EnhetNavn-datadef-1">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1124/Avgiver-grp-1125/EnhetOrganisasjonsnummer-datadef-18">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11 kontroll med vektene 3, 2, 7, 6, 5, 4, 3, 2"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Organisasjonsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig organisasjonsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1124/Avgiver-grp-1125/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1124/Avgiver-grp-1125/Inntektsar-datadef-692">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Inntektsår</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Inntektsår</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1124/Avgiver-grp-1125/EnhetAdresse-datadef-15">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1124/Avgiver-grp-1125/EnhetPostnummer-datadef-6673">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1124/Avgiver-grp-1125/EnhetPoststed-datadef-6674">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/GenerellInformasjon-grp-1124/Regnskapsforer-grp-2633">
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Regnskapsfører</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Rekneskapsførar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1124/Regnskapsforer-grp-2633/RegnskapsforerNavn-datadef-280">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1124/Regnskapsforer-grp-2633/RegnskapsforerAdresse-datadef-281">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Adresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1124/Regnskapsforer-grp-2633/RegnskapsforerPostnummer-datadef-6678">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnr.</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/GenerellInformasjon-grp-1124/Regnskapsforer-grp-2633/RegnskapsforerPoststed-datadef-6679">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/InformasjonOmBil-grp-3497">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Opplysninger om bil</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Opplysningar om bil</p>
+                </xforms:caption>
+                <xforms:repeat id="repeat_omBil-grp-5667" nodeset="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667">
+                    <xforms:group ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:group ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/InformasjonOmBilOgSpesifikasjonAvDriftskostnader-grp-2771">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Informasjon om bil og spesifikasjon av driftskostnader</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Informasjon om bil og spesifikasjon av driftskostnader</p>
+                            </xforms:caption>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/InformasjonOmBilOgSpesifikasjonAvDriftskostnader-grp-2771/BilRegistreringsnummerSpesifisertBil-datadef-7579">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>1 Bilens registreringsnr.</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>1 Bilen sitt registreringsnr.</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/InformasjonOmBilOgSpesifikasjonAvDriftskostnader-grp-2771/BilkategoriSpesifisertBil-datadef-7576">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>2 Bilkategori</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Personbil herunder stv., varebil, kombinert bil, lastebil mv.</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>2 Bilkategori</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Personbil medrekna stv., varebil, kombinert bil, lastebil m.m.</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/InformasjonOmBilOgSpesifikasjonAvDriftskostnader-grp-2771/BilMerkeTypeSpesifisertBil-datadef-7580">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>3 Bilmerke og -type</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>3 Bilmerke og -type</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/InformasjonOmBilOgSpesifikasjonAvDriftskostnader-grp-2771/BilArsmodellSpesifisertBil-datadef-7577">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>4 Årsmodell</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Med årsmodell menes årstall for første gangs registrering som ny i  Norge eller i utlandet.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>4 Årsmodell</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Med årsmodell meiner ein årstal for første gongs registrering som ny i  Noreg eller i utlandet.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/InformasjonOmBilOgSpesifikasjonAvDriftskostnader-grp-2771/BilListeprisSpesifisertBil-datadef-3114">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>5 Listepris som ny</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Med listepris som ny menes hovedimportørens veiledende pris for  vedkommende bilmodell levert importsted på tidspunktet for første  gangs registrering hos Statens vegvesen sin trafikkstasjon, før  eventuell
+                                        rabatt, inklusiv merverdiavgift og vrakpant. Ekstrautstyr  skal tas med i listeprisen. Dette gjelder f.eks. radio/musikkanlegg,  vinterdekk, skiboks, tilhengerfeste mv. Ekstrautstyr som utelukkende  har verdi
+                                        for yrkesbruken holdes utenfor. Dette gjelder f.eks.  spesialinnredninger ment for frakt av verktøy mv.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>5 Listepris som ny</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Med listepris som ny meiner ein hovudimportørens rettleiande pris for  den aktuelle bilmodellen, levert på importstad på tidspunktet for  første gongs registrering hos trafikkstasjonen til Statens vegvesen ,
+                                        før eventuell rabatt, inklusiv meirverdiavgift og vrakpant.  Ekstrautstyr skal takast med i listeprisen. Dette gjeld f.eks.  radio/musikkanlegg, vinterdekk, skiboks, tilhengarfeste o.a.  Ekstrautstyr som berre
+                                        har verdi for yrkesbruken skal haldast  utanfor. Det gjeld f.eks. spesialinnreiingar som er meinte for frakt  av verktøy o.a.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/InformasjonOmBilOgSpesifikasjonAvDriftskostnader-grp-2771/DriftskostnaderSpesifisertBil-datadef-7578">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>6 Driftskostnader</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Denne posten skal kun fylles ut av lønnstakere som krever yrkesbil  lignet etter regnskap. Deltakere i deltakerliknede selskaper samt  eier av enmannsforetak skal også fylle ut posten dersom fordel ved  privat
+                                        bruk etter standardsatsene overstiger 75% av driftskostnadene  inklusive verdiforringelse, eventuelt leasingleie. Disse  næringsdrivende behøver likevel kun fylle ut kolonne I i  spesifikasjonen nedenfor. Sum
+                                        driftskostnader føres eksklusive  faktiske saldoavskrivninger. Avskrivningene skal fremgå av  saldoskjema (RF-1084) som må vedlegges. Spesifikasjon av  driftskostnader og mottatt bilgodtgjørelse føres i feltet
+                                        nedenfor.  Privatkjøring fastsettes ut fra reglene om privat bruk av  arbeidsgivers bil. Som en hovedregel fastsettes fordelen til 30% av  bilens listepris som ny til og med 239 100,- og 20% av overskytende
+                                        beløp. For biler eldre enn 3 år per 1.januar i inntektsåret eller  skattytere som godtar at yrkeskjøring går over 40 000 km i  inntektsåret eller el-biler skal det ved utregningen tas utganspunkt  i bare 75% av
+                                        bilens listepris som ny (i stedet for  100%). Ved  kombinasjon av to eller flere av de nevnte alternativer blir det bare  regnet med 56,25 prosent (75 prosent av 75 prosent) av bilens  listepris som ny. Den
+                                        reduserte listeprisen skal deretter  multipliseres med den relevante prosentsatsen (-satsene) etter  avnsittet ovenfor. Eksempel på når en bil må regnes som eldre enn 3  år per 1. januar i inntektsåret er bil
+                                        førstegangsregistrert 5.  januar 2003. Deretter legger man til 3 år. Dette gir datoen 5.januar  2006. Inntektsåret etter, dvs. 2007, blir bilden regnet som eldre enn  3 år pr. 1. januar i inntektsåret.
+                                        Tilbakeføring for privat fordel  skal ikke overstige 75% av de faktiske kostnader med tillegg av en  årlig saldoavskrivning på 17% med utgangspunkt i bilens listepris på  tidspunktet for førstegangs registrering.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Beløpet hentes fra post 24</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>6 Driftskostnader</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Denne posten skal fyllast ut av lønnstakarar som krev yrkesbil likna  etter rekneskap. Deltakarar i deltakarlikna selskap, og eigar av  einmannsføretak, skal fylle ut posten dersom fordel ved privat bruk  etter
+                                        standardsatsane går over 75% av driftskostnadene inklusive  verdiforringing, eventuelt leasingleige. Desse næringsdrivande treng  likevel berre fylle ut kolonne I i spesifikasjonen nedanfor.. Sum
+                                        driftskostnader skal førast eksklusive faktiske saldoavskrivingar.  Avskrivingane skal gå fram av saldoskjema (RF-1084) som må leggjast  ved. Spesifikasjon av driftskostnader og motteken bilgodtgjersle skal
+                                        førast i feltet under. Privatkjøring blir fastsett ut frå reglane om  privat bruk av arbeidsgivars bil. Som ein hovudregel blir fordelen  fastsatt til 30% av bilens listepris som ny til og med 239 100,- og  20%
+                                        av overskytande beløp. For bilar eldre enn 3 år per 1.januar i  inntektsåret eller skattytarar som godtgjer at yrkeskjøyring går over  40 000 km i inntektsåret eller el-biler  </p>
+                                    <p>skal det ved utrekninga takast utganspunkt i berre 75% av bilens  listepris som ny (i staden for 100%). Ved kombinasjon av to eller  fleire av dei nemnde alternativa blir det berre rekna med 56,25  prosent (75
+                                        prosent av 75 prosent) av bilens listepris som ny. Den  reduserte listeprisen skal deretter multipliserast med den relevante  prosentsatsen (-satsene) etter avnsittet ovanfor. Eksempel på når ein  bil må reknes
+                                        som eldre enn 3 år per 1. januar i inntektsåret, er bil  førstegongsregistrert 5. januar 2003. Deretter legg ein til 3 år.  Dette gir datoen 5.januar 2006. Inntektsåret etter, dvs. 2007, blir  bilen rekna som
+                                        eldre enn 3 år pr. 1. januar i inntektsåret.  Tilbakeføring for privat fordel skal ikkje gå over 75% av dei  faktiske kostnadane med tillegg av ei årleg saldoavskrivning på 17%  med utgangspunkt i bilens
+                                        listepris på tidspunktet for førstegongs  registrering.</p>
+                                </xforms:help>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Beløpet hentast frå post 24</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/InformasjonOmBilOgSpesifikasjonAvDriftskostnader-grp-2771/BilKilometerstandSpesifisertBil-datadef-7581">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>7 Kilometerstand pr. 31.12 i inntektsåret</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>7 Kilometerstand pr. 31.12 i inntektsåret</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/InformasjonOmBilOgSpesifikasjonAvDriftskostnader-grp-2771/BilKilometerstandFjoraretSpesifisertBil-datadef-7582">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>8 Kilometerstand pr. 01.01 i inntektsåret</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>8 Kilometerstand pr. 01.01 i inntektsåret</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/InformasjonOmBilOgSpesifikasjonAvDriftskostnader-grp-2771/BilKjorelengdePrivatSpesifisertBil-datadef-3116">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>9 Antall kilometer yrkeskjøring i inntektsåret</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>9 Kor mange kilometer yrkeskjøring i inntektsåret</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/InformasjonOmBilOgSpesifikasjonAvDriftskostnader-grp-2771/BilBruksomradeSpesifisertBil-datadef-7584">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>10 Hva brukes bilen til i arbeidstiden?</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NOB">
+                                    <p>Kort beskrivelse av bruksområdet</p>
+                                </xforms:hint>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>10 Kva blir bilen brukt til i arbeidstida?</p>
+                                </xforms:caption>
+                                <xforms:hint brreg:lang="NON">
+                                    <p>Kort skildring av bruksområdet</p>
+                                </xforms:hint>
+                            </xforms:input>
+                            <xforms:selectOne ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/InformasjonOmBilOgSpesifikasjonAvDriftskostnader-grp-2771/BilParkeringAdresseSpesifisertBil-datadef-19411">
+                                <xforms:choices>
+                                    <xforms:item>
+                                        <xforms:value>Hjemmeadresse</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Hjemmeadresse</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Heimeadresse</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>Virksomhetens_adresse</xforms:value>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Virksomhetens adresse  </p>
+                                            <p/>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Adresse til verksemda</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                </xforms:choices>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>11 Hvor er bilen parkert utenom arbeidstiden?</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>11 Kvar er bilen parkert utanom arbeidstida?</p>
+                                </xforms:caption>
+                            </xforms:selectOne>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/InformasjonOmBilOgSpesifikasjonAvDriftskostnader-grp-2771/BilParkeringAnnetStedSpesifisertBil-datadef-7667">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Angi eventuelt annet sted:</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Gi opp eventuell annan stad:</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:selectOne ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/InformasjonOmBilOgSpesifikasjonAvDriftskostnader-grp-2771/BilKjorebokSpesifisertBil-datadef-3118">
+                                <xforms:choices>
+                                    <xforms:item>
+                                        <xforms:value>Ja</xforms:value>
+                                        <xforms:caption brreg:lang="EN">
+                                            <p>Yes</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Ja</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Ja</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                    <xforms:item>
+                                        <xforms:value>Nei</xforms:value>
+                                        <xforms:caption brreg:lang="EN">
+                                            <p>No</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NOB">
+                                            <p>Nei</p>
+                                        </xforms:caption>
+                                        <xforms:caption brreg:lang="NON">
+                                            <p>Nei</p>
+                                        </xforms:caption>
+                                    </xforms:item>
+                                </xforms:choices>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>13 Er det ført kjørebok vedr. yrkes-/næringskjøring?</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>13 Er det ført kjørebok vedr. yrkes-/næringskjøring?</p>
+                                </xforms:caption>
+                            </xforms:selectOne>
+                        </xforms:group>
+                        <xforms:group ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/HvemBrukerBilenUtenomArbeidstiden-grp-1139">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>12 Hvem bruker bilen utenom arbeidstiden?</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NOB">
+                                <p>Mottaker av bilgodtgjørelse svarer ikke på disse spørsmålene.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NOB">
+                                <p>Oppgi navn, fødselsnummer, adresse, postnr og poststed</p>
+                            </xforms:hint>
+                            <xforms:caption brreg:lang="NON">
+                                <p>12 Kven bruker bilen utanom arbeidstida?</p>
+                            </xforms:caption>
+                            <xforms:help brreg:lang="NON">
+                                <p>Mottakar av bilgodtgjersle svarer ikkje på desse spørsmåla.</p>
+                            </xforms:help>
+                            <xforms:hint brreg:lang="NON">
+                                <p>Oppgi namn, fødselsnummer, adresse, postnr og poststad</p>
+                            </xforms:hint>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/HvemBrukerBilenUtenomArbeidstiden-grp-1139/BilBrukerNavnSpesifisertBil-datadef-7585">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Navn</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Namn</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/HvemBrukerBilenUtenomArbeidstiden-grp-1139/BilBrukerFodselsnummerSpesifisertBil-datadef-7586">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <brreg:kontroll type="Modulus 11"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Fødselsnr.</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Ugyldig fødselsnummer</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Fødselsnr.</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Ugyldig fødselsnummer</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/HvemBrukerBilenUtenomArbeidstiden-grp-1139/BilBrukerAdresseSpesifisertBil-datadef-7587">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Adresse</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Adresse</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/HvemBrukerBilenUtenomArbeidstiden-grp-1139/BilBrukerPostnummerSpesifisertBil-datadef-7588">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:alert brreg:lang="EN">
+                                    <p>Enter positive integer with four digits</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Postnr.</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NOB">
+                                    <p>Feltet krever positivt heltall med fire siffer</p>
+                                </xforms:alert>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Postnr.</p>
+                                </xforms:caption>
+                                <xforms:alert brreg:lang="NON">
+                                    <p>Feltet krev positivt heiltal med fire siffer</p>
+                                </xforms:alert>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/HvemBrukerBilenUtenomArbeidstiden-grp-1139/BilBrukerPoststedSpesifisertBil-datadef-7589">
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Poststed</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Poststad</p>
+                                </xforms:caption>
+                            </xforms:input>
+                        </xforms:group>
+                        <xforms:group ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/SpesifikasjonAvDriftskostnaderForPrivatBrukAvYrkesbil-grp-1150">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Spesifikasjon av driftskostnader ved bilhold og tilbakeføring for  privat bruk av yrkesbil</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Spesifikasjon av driftskostnader ved bilhald og tilbakeføring for  privat bruk av yrkesbil</p>
+                            </xforms:caption>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/SpesifikasjonAvDriftskostnaderForPrivatBrukAvYrkesbil-grp-1150/DriftskostnaderDrivstoffSpesifisertBil-datadef-7596">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>20 Drivstoff</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>20 Drivstoff</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/SpesifikasjonAvDriftskostnaderForPrivatBrukAvYrkesbil-grp-1150/DriftskostnaderVedlikeholdSpesifisertBil-datadef-11251">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>21 Vedlikehold</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>21 Vedlikehald</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/SpesifikasjonAvDriftskostnaderForPrivatBrukAvYrkesbil-grp-1150/DriftskostnaderForsikringAvgifterSpesifisertBil-datadef-7590">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>22 Forsikring og avgifter</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>22 Forsikring og avgifter</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/SpesifikasjonAvDriftskostnaderForPrivatBrukAvYrkesbil-grp-1150/DriftskostnaderLeasingleieSpesifisertBil-datadef-11252">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>23 Ev. leasingleie</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>23 Eventuell leasingleige</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/SpesifikasjonAvDriftskostnaderForPrivatBrukAvYrkesbil-grp-1150/BilkostnaderVerdiforringelseLinearSpesifisertBil-datadef-11249">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>26 17% saldoavskrivning</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Den årlige saldoavskrivningen på 17% fastsettes med utganspunkt i  bilens listepris på tidspunktet for førstegangs registrering.  Saldoavskrivningen kan regnes ut slik: (Listepris x 0,83n)x 0,17 =
+                                        saldoavskrivningen. n = antall påbegynte inntektsår bilen er  registrert før det aktuelle inntektsåret. Eksempel: Bil benyttet i  2006 med førstegangsregistrering i 2003 og med listepris som ny kr  250 000.
+                                        Saldoavskrivningen for inntektsåret blir da (250  000x0,83x0383x0,83)x0,17 = 24 300. Dersom skattyter anskaffer,  realiserer eller lar seg uttaksbeskatte for yrkesbil i inntektsåret,  må den beregnede
+                                        saldoavskrivning på 17 % avkortes forholdsmessig  etter antall dager (365-deler). Saldoavskrivningen i inntektsåret  2006 er kr 24 300. Beløpet skal inn i post 26. Beløpet legges til Sum  driftskostnader, når
+                                        næringsdrivende krever tilbakeføring for privat  bruk etter 75%-regelen.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>26 17% saldoavskrivning</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Den årlege saldoavskrivinga på 17% blir fastsett med utganspunkt i  bilens listepris på tidspunktet for førstegongs registrering.  Saldoavskrivningen kan reknast ut slik: (Listepris x 0,83n)x 0,17 =
+                                        saldoavskrivinga. n = talet på påbegynte inntektsår bilen er  registrert før det aktuelle inntektsåret. Eksempel: Bil brukt i 2006  med førstegongs registrering i 2003 og med listepris som ny  </p>
+                                    <p>kr 250 000. Saldoavskrivinga for inntektsåret blir då  </p>
+                                    <p>(250 000x0,83x0383x0,83)x0,17 = 24 300. Om skattytar skaffer seg,  realiserer eller lar seg uttaksbeskatte for yrkesbil i inntektsåret,  må den berekna saldoavskrivninga på 17 % reduserast tilsvarande etter
+                                        talet på dagar (365-delar). Saldoavskrivinga i inntektsåret 2006 er  kr 24 300. Beløpet skal inn i post 6. Beløpet skal leggjast til sum  driftskostnader, når næringsdrivande krev tilbakeføring for privat  bruk
+                                        etter 75%- regelen.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/SpesifikasjonAvDriftskostnaderForPrivatBrukAvYrkesbil-grp-1150/BilkostnaderTilbakeforingsgrunnlagSamletKostnadSpesifisertBil-datadef-11250">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>27 Grunnlag for beregning av 75 % tilbakeføring</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>27 Grunnlag for utrekning av 75 % tilbakeføring</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/SpesifikasjonAvDriftskostnaderForPrivatBrukAvYrkesbil-grp-1150/SaldoavskrivningSpesifisertBil-datadef-11253">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>25 Ev. saldoavskrivninger</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>25 Ev. saldoavskrivingar</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/SpesifikasjonAvDriftskostnaderForPrivatBrukAvYrkesbil-grp-1150/BilkostnaderPrivatTilbakefortSpesifisertBil-datadef-7591">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>28 Faktisk tilbakeføring for privat bruk</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>28 Faktisk tilbakeføring for privat bruk</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/SpesifikasjonAvDriftskostnaderForPrivatBrukAvYrkesbil-grp-1150/DriftskostnaderYrketSpesifisertBil-datadef-11254">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>29 Driftskostnader i yrket</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>29 Driftskostnader i yrket</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/SpesifikasjonAvDriftskostnaderForPrivatBrukAvYrkesbil-grp-1150/BilgodtgjorelseMottattSpesifisertBil-datadef-3115">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>30 Mottatt bilgodtgjørelse</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>30 Motteken bilgodtgjersle</p>
+                                </xforms:caption>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/SpesifikasjonAvDriftskostnaderForPrivatBrukAvYrkesbil-grp-1150/DriftskostnaderOverskuddSpesifisertBil-datadef-7594">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>40 Overskudd</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Beløpet skal overføres post 2.1.5 i selvangivelsen dersom man ikke er  næringsdrivende. For næringsdrivende gjelder egne regler, se  rettledningen.</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>40 Overskot</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Beløpet skal overførast post 2.1.5 i sjølvmeldinga så lenge ein ikkje  er næringsdrivande. For næringsdrivande gjeld eigne regler, sjå  rettleiinga.</p>
+                                </xforms:help>
+                            </xforms:input>
+                            <xforms:input ref="/Skjema/InformasjonOmBil-grp-3497/omBil-grp-5667/SpesifikasjonAvDriftskostnaderForPrivatBrukAvYrkesbil-grp-1150/DriftskostnaderUnderskuddSpesifisertBil-datadef-7595">
+                                <brreg:benevnelse type="kr"/>
+                                <brreg:sensitivitet type="Sensitiv"/>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>40 Underskudd</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NOB">
+                                    <p>Beløpet skal overføres post 3.2.2 i selvangivelsen dersom man ikke er  næringsdrivende. For næringsdrivende gjelder egne regler, se  rettledningen</p>
+                                </xforms:help>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>40 Underskot</p>
+                                </xforms:caption>
+                                <xforms:help brreg:lang="NON">
+                                    <p>Belpet skal overførast post 3.2.2 i sjølvmeldinga så lenge ein ikkje  er næringsdrivande. For næringsdrivande gjeld eigne regler, sjå  rettleiinga.</p>
+                                </xforms:help>
+                            </xforms:input>
+                        </xforms:group>
+                    </xforms:group>
+                </xforms:repeat>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

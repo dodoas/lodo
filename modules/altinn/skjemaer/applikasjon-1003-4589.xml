@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1030-E: PSA - beregningsgrunnlag utenlandske ihendehaverobligasjoner</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1003-4590.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/UtenlandskeIhendehaverobligasjonerMv-grp-4869/OppgavegiverFodselsnummer-datadef-26"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>3.1.6/4.6.2 Utenlandske ihendehaverobligasjoner mv. -  Beregningsgrunnlag</p>
+            </xforms:caption>
+            <xforms:caption brreg:lang="NON">
+                <p>3.1.6/4.6.2 Utanlandske ihendehavarobligasjonar o.a. -  Utrekningsgrunnlag</p>
+            </xforms:caption>
+            <xforms:group ref="/Skjema/UtenlandskeIhendehaverobligasjonerMv-grp-4869">
+                <brreg:sensitivitet type="Sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>3.1.6/4.6.2 Utenlandske ihendehaverobligasjoner mv.</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>3.1.6/4.6.2 Utanlandske ihendehavarobligasjonar o.a.</p>
+                </xforms:caption>
+                <xforms:input ref="/Skjema/UtenlandskeIhendehaverobligasjonerMv-grp-4869/OppgavegiverFodselsnummer-datadef-26">
+                    <brreg:preutfyll/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <brreg:kontroll type="Modulus 11"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Fnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NOB">
+                        <p>Ugyldig fødselsnummer</p>
+                    </xforms:alert>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Fnr.</p>
+                    </xforms:caption>
+                    <xforms:alert brreg:lang="NON">
+                        <p>Ugyldig fødselsnummer</p>
+                    </xforms:alert>
+                </xforms:input>
+                <xforms:repeat id="repeat_UtenlandskeIhendehaverobligasjonerMv-grp-4544" nodeset="/Skjema/UtenlandskeIhendehaverobligasjonerMv-grp-4869/UtenlandskeIhendehaverobligasjonerMv-grp-4544">
+                    <xforms:group ref="/Skjema/UtenlandskeIhendehaverobligasjonerMv-grp-4869/UtenlandskeIhendehaverobligasjonerMv-grp-4544">
+                        <brreg:sensitivitet type="Sensitiv"/>
+                        <xforms:input ref="/Skjema/UtenlandskeIhendehaverobligasjonerMv-grp-4869/UtenlandskeIhendehaverobligasjonerMv-grp-4544/UtstederUtlandNavnSpesifisertUtsteder-datadef-8141">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Utsteders navn</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Namn på utstedar</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtenlandskeIhendehaverobligasjonerMv-grp-4869/UtenlandskeIhendehaverobligasjonerMv-grp-4544/IhendehaverobligasjonerMvUtlandAntallSpesifisertUtsteder-datadef-8146">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Antall</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Antal</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtenlandskeIhendehaverobligasjonerMv-grp-4869/UtenlandskeIhendehaverobligasjonerMv-grp-4544/IhendehaverobligasjonerMvUtlandVerdiFjoraretsSpesUtsteder-datadef-8149">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>I. Samlet verdi pr 1.1 i NOK</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>I. Samla verdi pr 1.1 i NOK</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtenlandskeIhendehaverobligasjonerMv-grp-4869/UtenlandskeIhendehaverobligasjonerMv-grp-4544/IhendehaverobligasjonerMvUtlandRenterSpesifisertUtsteder-datadef-8151">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>II. Renter i NOK</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>II. Renter i NOK</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtenlandskeIhendehaverobligasjonerMv-grp-4869/UtenlandskeIhendehaverobligasjonerMv-grp-4544/IhendehaverobligasjonerMvUtlandTrukketSkattSpesifisertUtstede-datadef-8153">
+                            <brreg:benevnelse type="kr"/>
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Trukket skatt i NOK</p>
+                            </xforms:caption>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Trekt skatt i NOK</p>
+                            </xforms:caption>
+                        </xforms:input>
+                        <xforms:input ref="/Skjema/UtenlandskeIhendehaverobligasjonerMv-grp-4869/UtenlandskeIhendehaverobligasjonerMv-grp-4544/IhendehaverobligasjonerUtlandValutakurs-datadef-21627">
+                            <brreg:sensitivitet type="Sensitiv"/>
+                            <xforms:caption brreg:lang="NOB">
+                                <p>Valutakurs som er brukt ved omregningen</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NOB">
+                                <p>Feltet krever to desimaler</p>
+                            </xforms:alert>
+                            <xforms:caption brreg:lang="NON">
+                                <p>Valutakurs som er nytta ved omrekninga</p>
+                            </xforms:caption>
+                            <xforms:alert brreg:lang="NON">
+                                <p>Feltet krev to desimalar</p>
+                            </xforms:alert>
+                        </xforms:input>
+                    </xforms:group>
+                </xforms:repeat>
+                <xforms:input ref="/Skjema/UtenlandskeIhendehaverobligasjonerMv-grp-4869/IhendehaverobligasjonerMvUtlandVerdiFjorarets-datadef-8154">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum kolonne I blir overført til post 4.6.2 i selvangivelsen</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum kolonne I blir overført til post 4.6.2 i sjølvmeldinga</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/UtenlandskeIhendehaverobligasjonerMv-grp-4869/IhendehaverobligasjonerMvUtlandRenter-datadef-8155">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum kolonne II blir overført til post 3.1.6 i selvangivelsen</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum kolonne II blir overført til post 3.1.6 i sjølvmeldinga</p>
+                    </xforms:caption>
+                </xforms:input>
+                <xforms:input ref="/Skjema/UtenlandskeIhendehaverobligasjonerMv-grp-4869/IhendehaverobligasjonerMvUtlandTrukketSkatt-datadef-8156">
+                    <brreg:benevnelse type="kr"/>
+                    <brreg:sensitivitet type="Sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Sum trukket skatt i NOK</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Sum trekt skatt i NOK</p>
+                    </xforms:caption>
+                </xforms:input>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

@@ -1,0 +1,252 @@
+<?
+
+#Usage
+# new NaeringsOppgave2Kalk(array('sumPart'=>$_sumPart, 'sumGroup'=>$_sumGroup))
+#Ikke periode 13???);
+#
+
+class NaeringsOppgave2Kalk
+{
+    var $_sumPart;
+    var $_sumGroup;
+   
+
+    ############################################################################
+    function NaeringsOppgave2Kalk($args)
+    {	
+       
+    }
+    
+
+    ############################################################################
+    function calculate($ThisYear, $_sumPart, $_sumGroup)
+    {   $this->_sumGroup = $_sumGroup;
+    	$this->_sumPart  = $_sumPart;
+    	
+        $this->_sumPart['3000'][$ThisYear]['saldo']=-$this->_sumPart['3000'][$ThisYear]['saldo'];
+    	$this->_sumPart['3100'][$ThisYear]['saldo']=-$this->_sumPart['3100'][$ThisYear]['saldo'];
+    	$this->_sumPart['3200'][$ThisYear]['saldo']=-$this->_sumPart['3200'][$ThisYear]['saldo'];
+    	$this->_sumPart['3300'][$ThisYear]['saldo']=-$this->_sumPart['3300'][$ThisYear]['saldo'];
+    	$this->_sumPart['3400'][$ThisYear]['saldo']=-$this->_sumPart['3400'][$ThisYear]['saldo'];
+    	$this->_sumPart['3500'][$ThisYear]['saldo']=-$this->_sumPart['3500'][$ThisYear]['saldo'];
+    	$this->_sumPart['3600'][$ThisYear]['saldo']=-$this->_sumPart['3600'][$ThisYear]['saldo'];
+    	$this->_sumPart['3695'][$ThisYear]['saldo']=-$this->_sumPart['3695'][$ThisYear]['saldo'];
+    	$this->_sumPart['3700'][$ThisYear]['saldo']=-$this->_sumPart['3700'][$ThisYear]['saldo'];
+    	$this->_sumPart['3800'][$ThisYear]['saldo']=-$this->_sumPart['3800'][$ThisYear]['saldo'];
+    	$this->_sumPart['3900'][$ThisYear]['saldo']=-$this->_sumPart['3900'][$ThisYear]['saldo'];
+    	
+    	$this->_sumPart['8005'][$ThisYear]['saldo']=-$this->_sumPart['8005'][$ThisYear]['saldo'];
+    	$this->_sumPart['8030'][$ThisYear]['saldo']=-$this->_sumPart['8030'][$ThisYear]['saldo'];
+    	$this->_sumPart['8050'][$ThisYear]['saldo']=-$this->_sumPart['8050'][$ThisYear]['saldo'];
+    	$this->_sumPart['8060'][$ThisYear]['saldo']=-$this->_sumPart['8060'][$ThisYear]['saldo'];
+    	$this->_sumPart['8070'][$ThisYear]['saldo']=-$this->_sumPart['8070'][$ThisYear]['saldo'];
+    	$this->_sumPart['8080'][$ThisYear]['saldo']=-$this->_sumPart['8080'][$ThisYear]['saldo'];
+    	
+    	//Ekstra ordinære poster (Inntekter og kostnader)
+    	$this->_sumPart['8400'][$ThisYear]['saldo']=-$this->_sumPart['8400'][$ThisYear]['saldo'];
+    	//$this->_sumPart['8500'][$ThisYear]['saldo']=-$this->_sumPart['8500'][$ThisYear]['saldo'];
+    	//$this->_sumPart['8600'][$ThisYear]['saldo']=-$this->_sumPart['8600'][$ThisYear]['saldo'];
+    	$this->_sumPart['8620'][$ThisYear]['saldo']=-$this->_sumPart['8620'][$ThisYear]['saldo'];
+    	
+    	##Egenkapital                                           
+        $this->_sumPart['2000'][$ThisYear]['saldo']=-$this->_sumPart['2000'][$ThisYear]['saldo'];
+        $this->_sumPart['2010'][$ThisYear]['saldo']=-$this->_sumPart['2010'][$ThisYear]['saldo'];
+        $this->_sumPart['2020'][$ThisYear]['saldo']=-$this->_sumPart['2020'][$ThisYear]['saldo'];
+        $this->_sumPart['2030'][$ThisYear]['saldo']=-$this->_sumPart['2030'][$ThisYear]['saldo'];
+        $this->_sumPart['2041'][$ThisYear]['saldo']=-$this->_sumPart['2041'][$ThisYear]['saldo'];
+        $this->_sumPart['2042'][$ThisYear]['saldo']=-$this->_sumPart['2042'][$ThisYear]['saldo'];
+        $this->_sumPart['2045'][$ThisYear]['saldo']=-$this->_sumPart['2045'][$ThisYear]['saldo'];
+        $this->_sumPart['2050'][$ThisYear]['saldo']=-$this->_sumPart['2050'][$ThisYear]['saldo'];
+        $this->_sumPart['2080'][$ThisYear]['saldo']=-$this->_sumPart['2080'][$ThisYear]['saldo'];
+        
+        ##Gjeld
+        $this->_sumPart['2100'][$ThisYear]['saldo']=-$this->_sumPart['2100'][$ThisYear]['saldo'];
+        $this->_sumPart['2120'][$ThisYear]['saldo']=-$this->_sumPart['2120'][$ThisYear]['saldo'];
+        $this->_sumPart['2160'][$ThisYear]['saldo']=-$this->_sumPart['2160'][$ThisYear]['saldo'];
+        $this->_sumPart['2180'][$ThisYear]['saldo']=-$this->_sumPart['2180'][$ThisYear]['saldo'];
+        $this->_sumPart['2200'][$ThisYear]['saldo']=-$this->_sumPart['2200'][$ThisYear]['saldo'];
+        $this->_sumPart['2210'][$ThisYear]['saldo']=-$this->_sumPart['2210'][$ThisYear]['saldo'];
+        $this->_sumPart['2220'][$ThisYear]['saldo']=-$this->_sumPart['2220'][$ThisYear]['saldo'];
+        $this->_sumPart['2250'][$ThisYear]['saldo']=-$this->_sumPart['2250'][$ThisYear]['saldo'];
+        $this->_sumPart['2260'][$ThisYear]['saldo']=-$this->_sumPart['2260'][$ThisYear]['saldo'];
+        $this->_sumPart['2280'][$ThisYear]['saldo']=-$this->_sumPart['2280'][$ThisYear]['saldo'];
+        $this->_sumPart['2290'][$ThisYear]['saldo']=-$this->_sumPart['2290'][$ThisYear]['saldo'];
+        
+        $this->_sumPart['2310'][$ThisYear]['saldo']=-$this->_sumPart['2310'][$ThisYear]['saldo'];
+        $this->_sumPart['2310'][$ThisYear]['saldo']=-$this->_sumPart['2320'][$ThisYear]['saldo'];
+        $this->_sumPart['2380'][$ThisYear]['saldo']=-$this->_sumPart['2380'][$ThisYear]['saldo'];
+        $this->_sumPart['2400'][$ThisYear]['saldo']=-$this->_sumPart['2400'][$ThisYear]['saldo'];
+        $this->_sumPart['2500'][$ThisYear]['saldo']=-$this->_sumPart['2500'][$ThisYear]['saldo'];
+        $this->_sumPart['2510'][$ThisYear]['saldo']=-$this->_sumPart['2510'][$ThisYear]['saldo'];
+        $this->_sumPart['2530'][$ThisYear]['saldo']=-$this->_sumPart['2530'][$ThisYear]['saldo'];
+        $this->_sumPart['2600'][$ThisYear]['saldo']=-$this->_sumPart['2600'][$ThisYear]['saldo'];
+        $this->_sumPart['2740'][$ThisYear]['saldo']=-$this->_sumPart['2740'][$ThisYear]['saldo'];
+        $this->_sumPart['2770'][$ThisYear]['saldo']=-$this->_sumPart['2770'][$ThisYear]['saldo'];
+        $this->_sumPart['2790'][$ThisYear]['saldo']=-$this->_sumPart['2790'][$ThisYear]['saldo'];
+        $this->_sumPart['2800'][$ThisYear]['saldo']=-$this->_sumPart['2800'][$ThisYear]['saldo'];
+        $this->_sumPart['2900'][$ThisYear]['saldo']=-$this->_sumPart['2900'][$ThisYear]['saldo'];
+        $this->_sumPart['2910'][$ThisYear]['saldo']=-$this->_sumPart['2910'][$ThisYear]['saldo'];
+        $this->_sumPart['2920'][$ThisYear]['saldo']=-$this->_sumPart['2920'][$ThisYear]['saldo'];
+        $this->_sumPart['2949'][$ThisYear]['saldo']=-$this->_sumPart['2949'][$ThisYear]['saldo'];
+        $this->_sumPart['2950'][$ThisYear]['saldo']=-$this->_sumPart['2950'][$ThisYear]['saldo'];
+        $this->_sumPart['2970'][$ThisYear]['saldo']=-$this->_sumPart['2970'][$ThisYear]['saldo'];
+        $this->_sumPart['2980'][$ThisYear]['saldo']=-$this->_sumPart['2980'][$ThisYear]['saldo'];
+        $this->_sumPart['2990'][$ThisYear]['saldo']=-$this->_sumPart['2990'][$ThisYear]['saldo'];
+    	
+    	
+    	$this->_sumGroup['9000'][$ThisYear]['saldo']=-$this->_sumGroup['9000'][$ThisYear]['saldo'];
+        $this->_sumGroup['9060'][$ThisYear]['saldo']=-$this->_sumGroup['9060'][$ThisYear]['saldo'];
+    	
+    	$this->_sumPart['9050'][$ThisYear]['saldo'] = $this->_sumGroup['9000'][$ThisYear]['saldo'] - $this->_sumGroup['9010'][$ThisYear]['saldo'];
+        $this->_sumPart['9100'][$ThisYear]['saldo'] = $this->_sumPart['9050'][$ThisYear]['saldo']+ $this->_sumGroup['9060'][$ThisYear]['saldo'] -
+        											  $this->_sumGroup['9070'][$ThisYear]['saldo'];
+        											  
+        											  
+        $this->_sumPart['9150'][$ThisYear]['saldo'] = $this->_sumPart['9100'][$ThisYear]['saldo'] - 
+                                                      $this->_sumPart['8300'][$ThisYear]['saldo']-
+                                                      $this->_sumPart['8310'][$ThisYear]['saldo']-
+                                                      $this->_sumPart['8320'][$ThisYear]['saldo'];
+        $this->_sumPart['9200'][$ThisYear]['saldo'] = $this->_sumPart['9150'][$ThisYear]['saldo'] +
+                                                      $this->_sumPart['8400'][$ThisYear]['saldo']-
+                                                      $this->_sumPart['8500'][$ThisYear]['saldo']-
+                                                      $this->_sumPart['8600'][$ThisYear]['saldo']+
+                                                      $this->_sumPart['8620'][$ThisYear]['saldo'];
+        
+        $this->_sumPart['0430'][$ThisYear]['saldo'] = $this->_sumPart['0410'][$ThisYear]['saldo'] - $this->_sumPart['0420'][$ThisYear]['saldo'];
+        $this->_sumPart['0450'][$ThisYear]['saldo'] = $this->_sumPart['0430'][$ThisYear]['saldo'] + $this->_sumPart['0440'][$ThisYear]['saldo'];
+        
+        $this->_sumPart['1400'][$ThisYear]['saldo']=$this->_sumGroup['0170'][$ThisYear]['saldo'];
+        $this->_sumPart['1500'][$ThisYear]['saldo'] =  $this->_sumPart['0450'][$ThisYear]['saldo'];
+        
+        $this->_sumGroup['9350'][$ThisYear]['saldo']+=$this->_sumPart['1400'][$ThisYear]['saldo']+
+                                                      $this->_sumPart['1500'][$ThisYear]['saldo'];
+        $this->_sumGroup['9450'][$ThisYear]['saldo']=-$this->_sumGroup['9450'][$ThisYear]['saldo'];
+        $this->_sumGroup['9500'][$ThisYear]['saldo']=-$this->_sumGroup['9500'][$ThisYear]['saldo'];
+        $this->_sumGroup['9550'][$ThisYear]['saldo']=-$this->_sumGroup['9550'][$ThisYear]['saldo'];
+        
+        $this->_sumPart['9400'][$ThisYear]['saldo'] = $this->_sumGroup['9300'][$ThisYear]['saldo'] + $this->_sumGroup['9350'][$ThisYear]['saldo'];      
+        $this->_sumPart['9650'][$ThisYear]['saldo'] = $this->_sumGroup['9450'][$ThisYear]['saldo'] + $this->_sumGroup['9500'][$ThisYear]['saldo'] + $this->_sumGroup['9550'][$ThisYear]['saldo'];
+        
+    	//Styrte poster eller kontoer
+    	if ($this->_sumPart['2080'][$ThisYear]['saldo']>0)
+    		$this->_sumPart['2050'][$ThisYear]['saldo']=$this->_sumPart['2080'][$ThisYear]['saldo'];
+    	
+        //$this->sumGroup['9350'][$ThisYear]['saldo']+=$this->_sumPart['1400'][$ThisYear]['saldo'];
+        
+        //Beregning av næringsinntekt av hele krone
+        $this->_sumPart['060'][$ThisYear]['saldo']=$this->_sumPart['9200'][$ThisYear]['saldo'];
+        $this->_sumPart['0660'][$ThisYear]['saldo']=$this->_sumPart['8006'][$ThisYear]['saldo'];
+        $this->_sumPart['0680'][$ThisYear]['saldo']=$this->_sumPart['8100'][$ThisYear]['saldo'];
+        
+        $this->_sumGroup['0760a'][$ThisYear]['saldo']+=$this->_sumPart['0680'][$ThisYear]['saldo'];
+        $this->_sumPart['0760b'][$ThisYear]['saldo']=$this->_sumGroup['0760a'][$ThisYear]['saldo'];
+        
+        $this->_sumPart['0820'][$ThisYear]['saldo']=$this->_sumPart['8005'][$ThisYear]['saldo'];
+        $this->_sumPart['0900b'][$ThisYear]['saldo']=$this->_sumGroup['0900a'][$ThisYear]['saldo'];
+        
+        $this->_sumPart['0995c'][$ThisYear]['saldo']=$this->_sumPart['0995a'][$ThisYear]['saldo']-
+                                                     $this->_sumPart['0995b'][$ThisYear]['saldo'];
+        										
+        $this->_sumPart['0940'][$ThisYear]['saldo']=$this->_sumPart['060'][$ThisYear]['saldo']+
+                                                    $this->_sumPart['0760b'][$ThisYear]['saldo']-
+                                                    $this->_sumPart['0900b'][$ThisYear]['saldo'];
+        $this->_sumPart['0999'][$ThisYear]['saldo']=$this->_sumPart['0940'][$ThisYear]['saldo']-
+                                                     $this->_sumPart['0980'][$ThisYear]['saldo']-
+                                                     $this->_sumPart['0990'][$ThisYear]['saldo']+
+                                                     $this->_sumPart['0995a'][$ThisYear]['saldo']-
+                                                     $this->_sumPart['0995b'][$ThisYear]['saldo'];
+        //print("Naringsoppgave2: ".$this->_sumPart['0940'][$ThisYear]['saldo']. "<br>");                                          
+    }//function headLodic
+    
+    
+    ############################################################################
+    function sumGroupLogic($Line, $Year, $reportHash, $sumGroup){
+    	 $this->_sumGroup=$sumGroup;
+    	 
+    	  //print ("sumGroupLogic Line:". $Line);
+    	 
+    	 if($Line == "0110" || $Line == "0120" || $Line == "0130" || $Line == "0140" ||
+	               $Line == "0150"  || $Line == "0160" ){
+	                $this->sumGroup('0170', $Year, $reportHash);
+	        }
+            elseif($Line >= 1000 and $Line < 1400)
+            {
+                $this->sumGroup('9300', $Year, $reportHash);
+            }
+            elseif($Line >= 1400 and $Line < 2000)
+            {
+                $this->sumGroup('9350', $Year, $reportHash);
+            }
+            elseif($Line >= 2000 and $Line < 2100)
+            {
+                $this->sumGroup('9450', $Year, $reportHash);
+            }
+            elseif($Line >= 2100 and $Line < 2300)
+            {
+                $this->sumGroup('9500', $Year, $reportHash);
+            }
+            elseif($Line >= 2300 and $Line < 3000)
+            {
+                $this->sumGroup('9550', $Year, $reportHash);
+               
+            }
+            elseif($Line >= 3000 and $Line < 4000)
+            {
+                $this->sumGroup('9000', $Year, $reportHash);
+            }
+            elseif($Line >= 4000 and $Line < 8000)
+            {
+                $this->sumGroup('9010', $Year, $reportHash);
+            }
+            elseif($Line >= 8000 and $Line < 8100 and $Line != 8006)
+            {
+                $this->sumGroup('9060', $Year, $reportHash);
+            }
+            elseif($Line >= 8100 and $Line < 8300 and $Line != 8005)
+            {
+                $this->sumGroup('9070', $Year, $reportHash);
+            }
+            elseif($Line >= 8300 and $Line < 8400)
+            {
+                //$this->sumGroup('9150', $Year, $reportHash);
+            }
+            elseif($Line >= 8400 and $Line < 8700)
+            {
+                //$this->sumGroup('9200', $Year, $reportHash);
+            }
+            elseif($Line == "0610" || $Line == "0620" || $Line == "0630" || $Line == "0640" ||
+	               $Line == "0650"  || $Line == "0660" || $Line == "0670" || $Line == "0680" ||
+	               $Line == "0690" || $Line == "0700" || $Line == "0710" || $Line == "0720" || 
+	               $Line == "0730" || $Line == "0740" || $Line == "0750"){
+	                $this->sumGroup('0760a', $Year, $reportHash);
+	        }
+	        elseif($Line == "0800" || $Line == "0810b" || $Line == "0815" || $Line == "0820" ||
+	               $Line == "0830"  || $Line == "0840" || $Line == "850" || $Line == "0860" ||
+	               $Line == "0870" || $Line == "0880" || $Line == "0885" || $Line == "0890" ){
+	                $this->sumGroup('0900a', $Year, $reportHash);
+	        }
+            
+           
+             
+    }
+
+   
+     ############################################################################
+    function sumGroup($LineNum, $Year, $reportHash)
+    {
+        $this->_sumGroup[$LineNum][$Year]['in']     += $reportHash['AmountIn'];
+        $this->_sumGroup[$LineNum][$Year]['out']    += $reportHash['AmountOut'];
+        $this->_sumGroup[$LineNum][$Year]['saldo']  += $reportHash['AmountIn'] - $reportHash['AmountOut'];
+    }
+    
+    function getSumPart(){
+   		return $this->_sumPart;	
+    }
+    
+    function getSumGroup(){
+   		return $this->_sumGroup;	
+    }
+    
+
+}
+?>

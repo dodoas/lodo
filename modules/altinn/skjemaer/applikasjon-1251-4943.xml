@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<brreg:skjema xmlns:brreg="http://www.brreg.no/or" xmlns:xforms="http://www.w3.org/2002/01/xforms" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <brreg:tittel brreg:lang="NOB">RF-1116: Klage på likningen for privatpersoner</brreg:tittel>
+    <brreg:hode>
+        <xforms:model>
+            <!--INSTANCE HOLDER: Instansen kan plasseres her!-->
+            <xforms:schema xlink:href="melding-1251-4944.xsd"/>
+            <!--SUBMITINFO HOLDER: SubmitInfo kan plasseres her!-->
+            <xforms:bind readOnly="true" ref="/Skjema/OpplysningerOmOppgavegiver-grp-5849/skattyteropplysninger-grp-5859/OppgavegiverNavn-datadef-68"/>
+            <xforms:bind readOnly="true" ref="/Skjema/OpplysningerOmOppgavegiver-grp-5849/skattyteropplysninger-grp-5859/OppgavegiverPostadresse-datadef-2442"/>
+            <xforms:bind readOnly="true" ref="/Skjema/OpplysningerOmOppgavegiver-grp-5849/skattyteropplysninger-grp-5859/OppgavegiverPostnummer-datadef-6676"/>
+            <xforms:bind readOnly="true" ref="/Skjema/OpplysningerOmOppgavegiver-grp-5849/skattyteropplysninger-grp-5859/OppgavegiverPoststed-datadef-6677"/>
+            <xforms:bind readOnly="true" ref="/Skjema/OpplysningerOmOppgavegiver-grp-5849/skattyteropplysninger-grp-5859/OppgavegiverFodselsnummer-datadef-26"/>
+            <xforms:bind ref="/Skjema/Klage-grp-5855/begrunnelse-grp-5863/EiendomNaringAnnenKommuneKommunenummerSpesifisertEiendomMv-datadef-17034" required="true"/>
+        </xforms:model>
+    </brreg:hode>
+    <brreg:kropp>
+        <xforms:group ref="/Skjema">
+            <xforms:caption brreg:lang="NOB">
+                <p>RF-1116 Klage på likningen for lønnstakere/pensjonister</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NOB">
+                <p>Skjema benyttes av lønnstakere og pensjonister som skal klage på  likningen. NB! Inneholder klagen sensitive opplysninger (f. eks. om  sykdom) må klagen sendes i brev til likningskontoret</p>
+            </xforms:help>
+            <xforms:caption brreg:lang="NON">
+                <p>RF-1116 Klage på likningen for lønnstakarar og pensjonistar</p>
+            </xforms:caption>
+            <xforms:help brreg:lang="NON">
+                <p>Skjema gjeld lønnstakarar og pesjonistar som klagar på likninga. NB!  Inneheld skjema sensitive opplysningar (t.d. om sjukdom) må klaga  sendast i brev til likningskontoret.</p>
+            </xforms:help>
+            <xforms:group ref="/Skjema/OpplysningerOmOppgavegiver-grp-5849">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Informasjon om skattyter</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Informasjon om skattytar</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/OpplysningerOmOppgavegiver-grp-5849/skattyteropplysninger-grp-5859">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Skattyteropplysninger</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Opplysningar om skattytar</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/OpplysningerOmOppgavegiver-grp-5849/skattyteropplysninger-grp-5859/OppgavegiverNavn-datadef-68">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmOppgavegiver-grp-5849/skattyteropplysninger-grp-5859/OppgavegiverPostadresse-datadef-2442">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postadresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmOppgavegiver-grp-5849/skattyteropplysninger-grp-5859/OppgavegiverPostnummer-datadef-6676">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Postnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmOppgavegiver-grp-5849/skattyteropplysninger-grp-5859/OppgavegiverPoststed-datadef-6677">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Poststed</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Poststad</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmOppgavegiver-grp-5849/skattyteropplysninger-grp-5859/OppgavegiverFodselsnummer-datadef-26">
+                        <brreg:preutfyll/>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <brreg:kontroll type="Modulus 11"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Fødselsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Fødselsnummer</p>
+                        </xforms:caption>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Ugyldig fødselsnummer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/OpplysningerOmOppgavegiver-grp-5849/Kontaktinformasjon-grp-5860">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Kontaktinformasjon</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NOB">
+                        <p>Fyll inn navn og e-postadresse på den likningskontoret kan kontakte i  forbindelse med saksbehandlingen</p>
+                    </xforms:help>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Kontaktinformasjon</p>
+                    </xforms:caption>
+                    <xforms:help brreg:lang="NON">
+                        <p>Sett inn namn og e-postadresse på den som likningskontoret kan kotakte  i samband med saksbehandlinga.</p>
+                    </xforms:help>
+                    <xforms:input ref="/Skjema/OpplysningerOmOppgavegiver-grp-5849/Kontaktinformasjon-grp-5860/KontaktpersonNavn-datadef-2">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Navn</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Namn</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmOppgavegiver-grp-5849/Kontaktinformasjon-grp-5860/KontaktpersonEPost-datadef-2876">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>e-postadresse</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>e-postadresse</p>
+                        </xforms:caption>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/OpplysningerOmOppgavegiver-grp-5849/Klagefrist-grp-5861">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NOB">
+                        <p>Klagefrist</p>
+                    </xforms:caption>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Klagefrist</p>
+                    </xforms:caption>
+                    <xforms:selectOne ref="/Skjema/OpplysningerOmOppgavegiver-grp-5849/Klagefrist-grp-5861/KlagemeldingSendtInnenKlagefrist-datadef-25454">
+                        <xforms:choices>
+                            <xforms:item>
+                                <xforms:value>Ja</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>Yes</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Ja</p>
+                                </xforms:caption>
+                            </xforms:item>
+                            <xforms:item>
+                                <xforms:value>Nei</xforms:value>
+                                <xforms:caption brreg:lang="EN">
+                                    <p>No</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NOB">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                                <xforms:caption brreg:lang="NON">
+                                    <p>Nei</p>
+                                </xforms:caption>
+                            </xforms:item>
+                        </xforms:choices>
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Klagen er levert innen klagefristen</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Leveres klagen innen klagefristen?  </p>
+                            <p/>
+                            <p>Klagefristen er tre uker etter at utleggingen er kunngjort. For de som  får skatteoppgjør i juni er likevel fristen 10. august. Er  klagefristen oversittet, har du ikke rett til å få klagen behandlet.  Du kan anmode
+                                likningskontoret om å likevel behandle klagen. En slik  anmodning skal begrunnes (se under)</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Klaga er levert innen klagefristen</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Er klaga levert innen fristen?  </p>
+                            <p/>
+                            <p>Klagefristen er tre veker etter at utlegginga er kunngjort. For dei  som får skatteoppgjeret i juni er likevel fristen 10. august. Har  klagefristen gått ut, kan du likevel oppmode likningskontoret om å  behandle klaga.
+                                Ei slik oppmodning skal grunngjevas (sjå under)</p>
+                        </xforms:help>
+                    </xforms:selectOne>
+                    <xforms:input ref="/Skjema/OpplysningerOmOppgavegiver-grp-5849/Klagefrist-grp-5861/KlageGjeldendeInntektsar-datadef-25455">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Klagen/anmodningen om endring gjelder inntektsåret:</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Gjelder klagen andre inntektsår enn 2005 er klagefristen oversittet og  du har ikke rett til å få klagen behandlet. Klagen blir i stedet  ansett som en anmodning om å endre likningen for dette aktuelle  inntektsåret.  </p>
+                            <p/>
+                            <p>Gjelder klagen/anmodningen flere inntektsår, er det tilstrekkelig å  opplyse om det siste av inntektsårene. Det må imidlertid gå klart  frem av begrunnelsen hvilke inntektsår klagen/anmodningen gjelder.</p>
+                        </xforms:help>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Klaga/oppmodinga om endring gjeld inntektsåret:</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Gjeld klaga andre inntektsår enn 2005 er klagefristen utløpt og du har  ikkje rett til å få klaga behandla. Klaga blir i staden behandla som  ei oppmoding om å endre likninga for det aktuelle inntektsåret.  </p>
+                            <p/>
+                            <p>Gjeld klaga/oppmodinga fleire inntektsår, er det nok å sette inn det  siste av inntektsårane. Det må imidlertid gå klart fram av  grunngjevinga kva for inntektsår klaga/oppmodinga gjeld.</p>
+                        </xforms:help>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/OpplysningerOmOppgavegiver-grp-5849/Klagefrist-grp-5861/KlageUtloptKlagefristBegrunnelse-datadef-25456">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Gi begrunnelse for at likningskontoret skal behandle klagen selv om  klagefristen er oversittet.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Er klagefristen oversittet har du ikke rett til å få klagen behandlet.  Det samme gjelder om likningen er fastsatt ved skjønn etter  ligningsloven § 8-2.  </p>
+                            <p/>
+                            <p>Du kan anmode likningkontoret om likevel å behandle klagen. En slik  anmodning skal begrunnes. Ved vurderingen om klagen skal behandles  skal det blant annet tas hensyn til spørsmålets betydning, skattyters  forhold,
+                                sakens opplysnng og den tid som er gått.  </p>
+                            <p/>
+                            <p>Inneholder begrunnelsen mer enn 1 000 tegn, må begrunnelsen leveres  som vedlegg.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>NB! Inneholder begrunnelsen sensitive opplysninger (f. eks. om sykdom)  må klagen sendes i eget brev til likningskontoret.</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Grunngje kvifor likningskontoret skal behandle klaga sjølv om  klagefristen er utløypt.</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Er klagfristen utløpt har du ikkje rett til å få klaga behandla. Det  same gjeld om likninga er fastsett ved skjønn etter ligningsloven §  8-2.  </p>
+                            <p/>
+                            <p>Du kan oppmode likningskontoret om å likevel behandle klaga. Ei slik  oppmoding skal grunngjevas. Ved vurderinga om klaga skal behandlast  skal ein mellom anna ta omsyn til spørsmålet si betydning,  skattytaren sine
+                                forhold, opplysning av saka og den tida som har  gått.  </p>
+                            <p/>
+                            <p>Inneheld grunngjevinga meir enn 1 000 tekn, må ho leverast på eige  vedlegg.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>NB! Inneheld grunngjevinga sensitive opplysningar (t.d om sjukdom) må  klaga sendast i eige brev til likningskontoret</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+            <xforms:group ref="/Skjema/Klage-grp-5855">
+                <brreg:sensitivitet type="Ikke sensitiv"/>
+                <xforms:caption brreg:lang="NOB">
+                    <p>Klage på likningen</p>
+                </xforms:caption>
+                <xforms:caption brreg:lang="NON">
+                    <p>Klage på likninga</p>
+                </xforms:caption>
+                <xforms:group ref="/Skjema/Klage-grp-5855/spesifisering-grp-5862">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:input ref="/Skjema/Klage-grp-5855/spesifisering-grp-5862/KlageSpesifisering-datadef-25457">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Hva påklages?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Her må du angi hva som påklages (for eksempel post i selvangivelsen).  Det kan være at en inntekt er satt for høyt eller et manglende  fradrag. Du må samtidig ta med en konkret påstand, for eksempel oppgi  det beløpet
+                                på den aktuelle posten som du mener er korrekt.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Spesifiser hva (for eksempel hvilke poster) klagen gjelder</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Kva gjeld klaga?</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Her skal du oppgje kva som påklagast (t.d. post i sjølvmeldinga). Det  kan til dømes vere at ei inntekt er satt for høgt eller eit manglande  frådrag. Du må samstundes fremme ein konkret påstand, til dømes det  beløp på
+                                den aktuelle posten som du meiner er rett.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Spesifiser kva (t.d kva postar) klaga gjeld</p>
+                        </xforms:hint>
+                    </xforms:input>
+                </xforms:group>
+                <xforms:group ref="/Skjema/Klage-grp-5855/begrunnelse-grp-5863">
+                    <brreg:sensitivitet type="Ikke sensitiv"/>
+                    <xforms:caption brreg:lang="NON">
+                        <p>Grunngjeving</p>
+                    </xforms:caption>
+                    <xforms:input ref="/Skjema/Klage-grp-5855/begrunnelse-grp-5863/KlageBegrunnelse-datadef-25458">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Begrunnelse for klagen</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NOB">
+                            <p>Det skal gå klart frem hva du mener er feil og begrunnelse for det.  Skatteoppgjøret viser de beløpene du selv har ført i selvangivelsen,  ved siden av de beløpene likningskontoret har lagt til grunn.  Kontroller at
+                                beløpene stemmer (det kan være små differanser på grunn  av øreavrunding). Vær oppmerksom på at du må betale restskatten i  rett tid selv om du klager på likningen.  </p>
+                            <p/>
+                            <p>Du kan legge ved elektroniske vedlegg ved å trykke på arkfanen  Vedlegg, øverst til venstre i skjemaet. Merk vedleggene med  fødselsnummer. Inneholder begrunnelsen mer enn 1 000 tegn, må  begrunnelsen leveres som
+                                vedlegg.  </p>
+                            <p/>
+                            <p>Klagen behandles av likningekontoret. Likningskontoret tar kontakt  dersom det trenger mer informasjon eller dokumentasjon. Forventet  saksbehandlingstid er ca tre måneder.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NOB">
+                            <p>Alle klager skal begrunnes. Begrunnelsen må inneholde bestemte  påstander og redegjøre for de forhold som påstandene bygger på.  </p>
+                            <p/>
+                            <p>NB! Inneholder begrunnelsen sensitive opplysninger (f. eks. om sykdom)  må du sende begrunnelsen i eget brev til likningskontoret.</p>
+                        </xforms:hint>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Grunngjeving for klaga</p>
+                        </xforms:caption>
+                        <xforms:help brreg:lang="NON">
+                            <p>Det skal gå klart frem kva du meiner er feil og ei grunngjeving for  det. Skatteoppgjeret viser dei beløpa du sjølv har ført i  sjølvmeldinga, ved sidan av dei beløpa likningskontoret har lagd til  grunn. Kontroller at
+                                beløpa er riktige (det kan vere små skilnader på  grunn av øyreavrunding). Vær merksam på at du må betale restskatten i  rett tid sjølv om du klagar på likninga.  </p>
+                            <p/>
+                            <p/>
+                            <p>Du kan legge ved elektroniske vedlegg ved å trykke på arkfana Vedlegg,  øvst til venstre i skjema. Merk vedlegga med fødselsnummer. Inneheld  grunngjevinga meir enn 1 000 tekn, må ho leverast på eige vedlegg.  </p>
+                            <p/>
+                            <p>Klaga behandles av likningekontoret. Likningskontoret tek kontakt  dersom det treng meir informasjon eller dokumentasjon.  Saksbehandlingstida er ca tre måneder.</p>
+                        </xforms:help>
+                        <xforms:hint brreg:lang="NON">
+                            <p>Alle klagar skal grunngevast. Grunngjevinga skal inneholde bestemte  påstander og redegjere for dei forholda påstandane byggjer på.  </p>
+                            <p/>
+                            <p>NB! Inneheld grunngjevinga sensitive opplysningar (t.d. om sjukdom) må  ho sendast i eige brev til likningskontoret.</p>
+                        </xforms:hint>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Klage-grp-5855/begrunnelse-grp-5863/EiendomNaringAnnenKommuneNavn-datadef-19785">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:caption brreg:lang="NOB">
+                            <p>Klagen skal sendes likningskontoret i følgende kommune:</p>
+                        </xforms:caption>
+                        <xforms:caption brreg:lang="NON">
+                            <p>Klagen skal sendast likningskontoret i følgande kommune:</p>
+                        </xforms:caption>
+                    </xforms:input>
+                    <xforms:input ref="/Skjema/Klage-grp-5855/begrunnelse-grp-5863/EiendomNaringAnnenKommuneKommunenummerSpesifisertEiendomMv-datadef-17034">
+                        <brreg:sensitivitet type="Ikke sensitiv"/>
+                        <xforms:alert brreg:lang="EN">
+                            <p>Enter positive integer with four digits</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NOB">
+                            <p>Feltet krever positivt heltall med fire siffer</p>
+                        </xforms:alert>
+                        <xforms:alert brreg:lang="NON">
+                            <p>Feltet krev positivt heiltal med fire siffer</p>
+                        </xforms:alert>
+                    </xforms:input>
+                </xforms:group>
+            </xforms:group>
+        </xforms:group>
+    </brreg:kropp>
+</brreg:skjema>

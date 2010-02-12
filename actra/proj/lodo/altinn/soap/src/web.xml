@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+
+    <display-name>Servlet 2.4 Examples</display-name>
+    <description>
+      Servlet 2.4 Examples.
+    </description>
+
+
+
+<servlet>
+<servlet-name>AltInnServlet</servlet-name>
+<servlet-class>no.actra.altinn.AltInnServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>AltInnServlet</servlet-name>
+<url-pattern>/servlet/AltInnServlet</url-pattern>
+</servlet-mapping>
+
+
+
+</web-app>

@@ -1,0 +1,2226 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<SchemaDefinition>
+  <xs:schema xmlns:brreg="http://www.brreg.no/or" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+<!--title='RF-1223: Tilleggsskjema for drosje- og lastebilnæring m.v.' lang='NOB'-->
+    <xs:element name="Skjema">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>RF-1223 Tilleggsskjema for drosje- og lastebilnæringen mv. 2007</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+            <p>Skjemaet skal fylles ut av alle som innehar bevilling for  personbefordring utenfor rute eller driver med lastebilnæring. Dette  gjelder også aksjeselskaper eller deltakerliknede selskaper.  </p>
+            <p>Andre offentlige organers bruk av opplysninger i RF-1223.  </p>
+            <p>For å samordne og forenkle oppgaveinnleveringen fra næringslivet, kan  opplysninger som avgis i dette skjemaet, helt eller delvis bli  benyttet også av andre offentlige organer som har hjemmel til å  innhente de samme
+                        opplysningene, jf. lov om Oppgaveregisteret §§ 5 og  6. Opplysninger om evt. samordning kan fås ved henvendelse til  Oppgaveregisteret på telefon 75 00 75 00, eller Skattedirektoratet på  telefon 22 07 70 00.  </p>
+            <p>Fastsatt av Skattedirektoratet med hjemmel i Finansdepartementets  delegeringsvedtak av 28. november 1994, jf. likningsloven § 4-4 nr.  7.</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>RF-1223 Tilleggsskjema for drosje- og lastebilnæring m.m. 2007</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+            <p>Skjemaet skal fyllast ut av alle som har løyve for persontransport  utanfor rute eller som driv med lastebilnæring. Dette gjeld også  aksjeselskap eller deltakerlikna selskap.  </p>
+            <p>Andre offentlege organ sin bruk av opplysingar i RF-1223.  </p>
+            <p>For å samordna og forenkla oppgåveinnleveringa frå næringslivet, kan  opplysingar som vert avgjeve i skjemaet, heilt eller delvis bli nytta  også av andre offentlege organ som har heimel til å innhente dei same  opplysingar,
+                        jf. lov om Oppgåveregisteret §§ 5 og 6. Opplysingar om  evt. samordning kan ein få ved å vende seg til Oppgåveregisteret på  telefon 75 00 75 00, eller Skattedirektoratet på telefon 22 07 70  00.  </p>
+            <p>Fastsett av Skattedirektoratet med heimel i Finansdepartementet sitt  delegeringsvedtak av 28. november 1994, jf. likningslova § 4-4 nr 7.</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="GenerellInformasjon-grp-1056"/>
+          <xs:element minOccurs="0" ref="Kjoretoy-grp-3824"/>
+          <xs:element minOccurs="0" ref="AndreOpplysninger-grp-3501"/>
+          <xs:element minOccurs="0" ref="Leietakere-grp-2570"/>
+          <xs:element minOccurs="0" ref="PrivatBrukDisponeringAvBil-grp-2571"/>
+        </xs:sequence>
+        <xs:attribute fixed="72" name="skjemanummer" type="xs:integer" use="required"/>
+        <xs:attribute fixed="6982" name="spesifikasjonsnummer" type="xs:integer" use="required"/>
+        <xs:attribute fixed="RF-1223" name="blankettnummer" type="xs:string" use="optional"/>
+        <xs:attribute fixed="Tilleggsskjema for drosje- og lastebilnæring m.v." name="tittel" type="xs:string" use="optional"/>
+        <xs:attribute fixed="347" name="gruppeid" type="xs:positiveInteger" use="optional"/>
+        <xs:attribute name="etatid" use="optional">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="974761076">
+                <xs:annotation>
+                  <xs:documentation>SKATTEDIREKTORATET</xs:documentation>
+                </xs:annotation>
+              </xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:attribute>
+        <xs:anyAttribute/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GenerellInformasjon-grp-1056">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Generell informasjon</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Generell informasjon</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="Avgiver-grp-4202"/>
+        </xs:sequence>
+        <xs:attribute fixed="1056" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="Avgiver-grp-4202">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Avgiver</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Avgivar</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element ref="EnhetNavn-datadef-1">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Navn</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Namn</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="OppgavegiverFodselsnummer-datadef-26">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Fødselsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Fødselsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="EnhetAdresse-datadef-15">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Nærings-(kontor-)adresse</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Nærings-(kontor-)adresse</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="EnhetOrganisasjonsnummer-datadef-18">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Organisasjonsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Feltet for organisasjonsnummer skal fylles ut av alle som har fått  tildelt organisasjonsnummer etter lov om Enhetsregisteret av 3. juni  1994 nr. 15.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Organisasjonsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Feltet for organisasjonsnummer skal fyllast ut av alle som er tildelt  organisasjonsnummer etter lov om Enhetsregisteret av 3. juni 1994 nr.  15.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="EnhetPostnummer-datadef-6673">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Postnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Postnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="EnhetPoststed-datadef-6674">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Poststed</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Poststad</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute fixed="4202" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="EnhetNavn-datadef-1">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Navn på juridisk enhet</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Navn på årsregnskapets eier</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">1</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst175-repformat-8">
+            <xs:attribute fixed="1" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst175-repformat-8">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">8</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="175"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="OppgavegiverFodselsnummer-datadef-26">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Fødselsnummer til oppgavegiveren</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">2</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst1111Modulus11-repformat-18">
+            <xs:attribute fixed="26" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst1111Modulus11-repformat-18">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">18</brreg:info>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+            <p>Ugyldig fødselsnummer</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+            <p>Ugyldig fødselsnummer</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:length value="11"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetAdresse-datadef-15">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Forretningsadresse til juridisk enhet</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">3</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst105-repformat-9">
+            <xs:attribute fixed="15" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst105-repformat-9">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">9</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="105"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetOrganisasjonsnummer-datadef-18">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Organisasjonsnummeret til enheten</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Organisasjonsnummer til årsregnskapets eier</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">6</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst99Modulus11-repformat-1">
+            <xs:attribute fixed="18" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst99Modulus11-repformat-1">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">1</brreg:info>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+            <p>Ugyldig organisasjonsnummer</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+            <p>Ugyldig organisasjonsnummer</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:length value="9"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetPostnummer-datadef-6673">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Postnummer i forretningsadressen til juridisk enhet</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">4</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst44BareTall-repformat-10">
+            <xs:attribute fixed="6673" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst44BareTall-repformat-10">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">10</brreg:info>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="EN" brreg:teksttype="FEIL">
+            <p>Enter positive integer with four digits</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="FEIL">
+            <p>Feltet krever positivt heltall med fire siffer</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="FEIL">
+            <p>Feltet krev positivt heiltal med fire siffer</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:length value="4"/>
+        <xs:pattern value="[0-9]{4}"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="EnhetPoststed-datadef-6674">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Poststed i forretningsadressen til juridisk enhet</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">5</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="6674" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Tekst35-repformat-3">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">3</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="35"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="Kjoretoy-grp-3824">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Kjøretøy</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Køyretøy</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element maxOccurs="999" minOccurs="0" ref="Kjoretoy-grp-3825"/>
+        </xs:sequence>
+        <xs:attribute fixed="3824" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="Kjoretoy-grp-3825">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Kjøretøy</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Køyretøy</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="OpplysningerOmKjorelengderMv-grp-348"/>
+          <xs:element minOccurs="0" ref="Bilkostnader-grp-350"/>
+          <xs:element minOccurs="0" ref="TilleggsopplysningerForDrosjeeiere-grp-351"/>
+        </xs:sequence>
+        <xs:attribute fixed="3825" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="OpplysningerOmKjorelengderMv-grp-348">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Opplysninger om kjørelengde mv.</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+            <p>Det skal fylles ut én kolonne for hver bil/løyve (alle poster skal  fylles ut).</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Opplysningar om kjørelengder m.m.</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+            <p>Det skal fyllast ut ein kolonne for kvar bil/løyve (alle postar skal  fyllast ut).</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="LoyvenummerSpesifisertLoyve-datadef-1862">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>1 Løyvenr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Det skal fylles ut en kolonne for hvert løyve. Er det benyttet flere  biler til det samme løyvet i løpet av året, f.eks. ved bytte av bil,  skal det samme løyvenummeret fylles ut på nytt slik at hver bil har  sin
+                                    kolonne. Utleide løyver skal føres opp med løyvenummeret.  </p>
+                  <p>Erstatningsløyve og reserveløyve skal føres opp med eget løyvenummer.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Også på utleide løyver, se pkt. 4, 18A og 23</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>1 Løyvenr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Det skal fyllast ut ein kolonne for kvart løyve. Er det nytta fleire  bilar til det same løyvet i løpet av året, t.d. ved bytte av bil,  skal det same løyvenummeret fyllast ut på nytt slik at kvar bil har  sin
+                                    kolonne. Utleigde løyver skal førast opp med løyvenummeret.  </p>
+                  <p>Erstatningsløyve og reserveløyve skal førast opp med eige løyvenummer.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Også på utleigde løyver, sjå pkt. 4, 18A og 23</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="BilRegistreringsnummerSpesifisertLoyve-datadef-7955">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>2 Registreringsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>2 Registreringsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="BilRegistreringsdatoSpesifisertLoyve-datadef-7956">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>3 Registreringsdato</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>3 Registreringsdato</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="BilInnkjopsdatoSpesifisertLoyve-datadef-1863">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Innkjøpsår</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Innkjøpsår</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="BilDriftTidsromSpesifisertLoyve-datadef-1864">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>4 Tidsrom bilen har gått på dette løyvet/utleid i inntektsåret</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Her skal føres opp tidsrom (fra-til) den enkelte bilen har gått på det  aktuelle løyvet.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>4 Tidsrom bilen har gått på dette løyvet/utleigd i inntektsåret</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Her skal ein føre opp tidsrom (frå-til) den enkelte bilen har gått på  det aktuelle løyvet.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="BilMerkeTypeSpesifisertLoyve-datadef-7957">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>5 Bilmerke og type</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>5 Bilmerke og type</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="BilKilometerstandSpesifisertLoyve-datadef-7958">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>6 Kilometerstand 31.12</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Avlest kilometerteller fra speedometeret</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>6 Kilometerstand 31.12</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Avlese kilometerteljar frå fartsmålaren</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="BilKilometerstandFjoraretSpesifisertLoyve-datadef-7950">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>7 Kilometerstand 01.01</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Avlest kilometerteller fra speedometeret</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>7 Kilometerstand 01.01</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Avlese kilometerteljar frå fartsmålaren</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="BilKjorelengdeSpesifisertLoyve-datadef-7959">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>8 Antall kilometer kjørt i året</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>8 Talet på kilometer køyrt i året</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="BilKjorelengdeNaringSpesifisertLoyve-datadef-1865">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>9 Herav antall kilometer i næring</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>9 Av desse, talet på kilometer i næring</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="BilDrivstoffSpesifisertLoyve-datadef-1866">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>10 Antall liter drivstoff</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Sett B for bensin, D for diesel og G for gass</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>10 Talet på liter drivstoff</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Sett B for bensin, D for diesel og G for gass</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="LastebilVektSpesifisertLoyve-datadef-1867">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>11 Total vekt (vekt + lasteevne) for lastebil</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>11 Total vekt (vekt + lasteevne) for lastebil</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute fixed="348" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="LoyvenummerSpesifisertLoyve-datadef-1862">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">7</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="1862" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="BilRegistreringsnummerSpesifisertLoyve-datadef-7955">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">8</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="7955" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="BilRegistreringsdatoSpesifisertLoyve-datadef-7956">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">9</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Dato-repformat-5">
+            <xs:attribute fixed="7956" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Dato-repformat-5">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">5</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:date"/>
+    </xs:simpleType>
+    <xs:element name="BilInnkjopsdatoSpesifisertLoyve-datadef-1863">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">10</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="1863" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="BilDriftTidsromSpesifisertLoyve-datadef-1864">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">11</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="1864" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="BilMerkeTypeSpesifisertLoyve-datadef-7957">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">12</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="7957" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="BilKilometerstandSpesifisertLoyve-datadef-7958">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">13</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Heltall15-repformat-79">
+            <xs:attribute fixed="7958" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="Heltall15-repformat-79">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">79</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:integer">
+        <xs:totalDigits value="15"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="BilKilometerstandFjoraretSpesifisertLoyve-datadef-7950">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">14</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Heltall15-repformat-79">
+            <xs:attribute fixed="7950" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="BilKjorelengdeSpesifisertLoyve-datadef-7959">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">15</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Heltall15-repformat-79">
+            <xs:attribute fixed="7959" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="BilKjorelengdeNaringSpesifisertLoyve-datadef-1865">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">16</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Heltall15-repformat-79">
+            <xs:attribute fixed="1865" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="BilDrivstoffSpesifisertLoyve-datadef-1866">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">17</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="1866" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="LastebilVektSpesifisertLoyve-datadef-1867">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">18</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="1867" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="Bilkostnader-grp-350">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Bilkostnader</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+            <p>Disse postene, 12 - 17, skal fylles ut uavhengig av hvordan skattyter  har spesifisert kostnadene i næringsoppgaven.  </p>
+            <p>Postene 12 - 16 må fylles ut også for de som bare har en bil i  næringsvirksomheten.</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Bilkostnader</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+            <p>Desse postane, 12 - 17, skal fyllast ut uavhengig av korleis  skattytaren har spesifisert kostnadene i næringsoppgåva.  </p>
+            <p>Postane 12 - 16 skal fyllast ut sjølv om ein bare har ein bil i  næringa.</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="BilkostnaderDrivstoffSpesifisertLoyve-datadef-1868">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>12 Drivstoff (bensin/diesel/gass)</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Jf. næringsoppgaven post 7000</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>12 Drivstoff (bensin/diesel/gass)</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Jf. næringsoppgåva post 7000</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="BilkostnaderVedlikeholdReparasjonerSpesifisertLoyve-datadef-1870">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>14 Vedlikehold/reparasjoner på biler</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Her skal også kostnader til bildekk, bilvask, vindusviskere osv. tas  med.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Jf. næringsoppgaven post 7020</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>14 Vedlikehald/reparasjonar på bilar</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Her skal også kostnader til bildekk, bilvask, vindusviskarar osv.  takast med.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Jf. næringsoppgåva post 7020</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="BilkostnaderForsikringAvgifterSpesifisertLoyve-datadef-1871">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>15 Forsikring/avgifter</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Her skal bare forsikring på biler tas med. Andre forsikringer skal tas  med i næringsoppgaven post 7500.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Jf. næringsoppgaven post 7040</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>15 Forsikring/avgifter</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Her skal berre forsikringa på bilar takast med. Andre forsikringar  skal takast med i næringsoppgåva post 7500.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Jf. næringsoppgåva post 7040</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="BilkostnaderLeasingleieSpesifisertLoyve-datadef-1872">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>16 Leasingleie</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Jf. næringsoppgaven post 6310</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>16 Leasingleige</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Jf. næringsoppgåva post 6310</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="BilkostnaderSpesifisertLoyve-datadef-7960">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>17 Sum bilkostnader</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>Postene 12-16 skal bare inneholde kostnader som gjelder bilen(e). I  post 14 skal også kostnader til bildekk, bilvask, vindusviskere osv.  tas med.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>17 Sum bilkostnadar</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>Postane 12 - 16 skal berre innehalde kostnader som gjeld bilen/bilane.  I post 14 skal også kostnader til bildekk, bilvask, vindusviskarar  osv. takast med.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute fixed="350" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="BilkostnaderDrivstoffSpesifisertLoyve-datadef-1868">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">19</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="1868" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="BelopHeltall15-repformat-37">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">37</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:integer">
+        <xs:totalDigits value="15"/>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="BilkostnaderVedlikeholdReparasjonerSpesifisertLoyve-datadef-1870">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">20</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="1870" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="BilkostnaderForsikringAvgifterSpesifisertLoyve-datadef-1871">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">21</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="1871" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="BilkostnaderLeasingleieSpesifisertLoyve-datadef-1872">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">22</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="1872" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="BilkostnaderSpesifisertLoyve-datadef-7960">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">23</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="7960" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="TilleggsopplysningerForDrosjeeiere-grp-351">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Tilleggsopplysninger for drosjeeiere</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Tilleggsopplysningar for drosjeeigarar</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="KjoreinntekterKredittSpesifisertLoyve-datadef-1873">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>18 A Kjøreinntekter, kreditt</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>I postene 18 og 19 skal bare inntekt fra transportoppdrag tas med.  </p>
+                  <p>Dersom post 18 inneholder kjøring hvor fakturering skjer til  trygdekontor, skal den del av fakturert beløp som gjelder betaling  for ventetid opplyses særskilt. Dette gjelder også skolebarnkjøring  for det
+                                    offentlige. For skolebarnkjøring gjelder også at samlet  antall kilometer skal opplyses.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+                  <p>Ved utleie, oppgi leieinntekter</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>18 A Køyreinntekter, kreditt</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>I postane 18 og 19 skal berre inntekt frå transportoppdrag takast  med.  </p>
+                  <p>Dersom post 18 inneheld køyring med fakturering til trygdekontor, skal  den delen av det fakturerte beløp som gjeld betaling for venting  opplysast særskild. Dette gjeld også skolebornkøyring for det  offentlege.
+                                    For skolebornkøyring gjeld også at samla kilometertal  skal opplysast.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+                  <p>Når utleige, gi opp leigeinntekta</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="KjoreinntekterKredittVentetidSpesifisertLoyve-datadef-1874">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>18 B Herav betaling for ventetid ved kjøring med fakturering til  trygdekontor</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>I postene 18 og 19 skal bare inntekt fra transportoppdrag tas med.  </p>
+                  <p>Dersom post 18 inneholder kjøring hvor fakturering skjer til  trygdekontor, skal den del av fakturert beløp som gjelder betaling  for ventetid opplyses særskilt. Dette gjelder også skolebarnkjøring  for det
+                                    offentlige. For skolebarnkjøring gjelder også at samlet  antall kilometer skal opplyses.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>18 B Av dette er betaling for venting når køyringa blir fakturert til  trygdekontor</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>I postane 18 og 19 skal berre inntekt frå transportoppdrag takast  med.  </p>
+                  <p>Dersom post 18 inneheld køyring med fakturering til trygdekontor, skal  den delen av det fakturerte beløp som gjeld betaling for venting  opplysast særskild. Dette gjeld også skolebornkøyring for det  offentlege.
+                                    For skolebornkøyring gjeld også at samla kilometertal  skal opplysast.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="KjoreinntekterKredittSkolebarnkjoringSpesifisertLoyve-datadef-1875">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>18 C Herav skolebarnkjøring for det offentlige</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>I postene 18 og 19 skal bare inntekt fra transportoppdrag tas med.  </p>
+                  <p>Dersom post 18 inneholder kjøring hvor fakturering skjer til  trygdekontor, skal den del av fakturert beløp som gjelder betaling  for ventetid opplyses særskilt. Dette gjelder også skolebarnkjøring  for det
+                                    offentlige. For skolebarnkjøring gjelder også at samlet  antall kilometer skal opplyses.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>18 C Av dette kjøyring med skuleborn for det offentlege</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>I postane 18 og 19 skal berre inntekt frå transportoppdrag takast  med.  </p>
+                  <p>Dersom post 18 inneheld køyring med fakturering til trygdekontor, skal  den delen av det fakturerte beløp som gjeld betaling for venting  opplysast særskild. Dette gjeld også skolebornkøyring for det  offentlege.
+                                    For skolebornkøyring gjeld også at samla kilometertal  skal opplysast.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="SkolebarnkjoringKilometerSpesifisertLoyve-datadef-1876">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>18 D Antall kilometer med skolebarnkjøring oppgis her</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>I postene 18 og 19 skal bare inntekt fra transportoppdrag tas med.  </p>
+                  <p>Dersom post 18 inneholder kjøring hvor fakturering skjer til  trygdekontor, skal den del av fakturert beløp som gjelder betaling  for ventetid opplyses særskilt. Dette gjelder også skolebarnkjøring  for det
+                                    offentlige. For skolebarnkjøring gjelder også at samlet  antall kilometer skal opplyses.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>18 D Talet på kilometer køyring med skuleborn skal førast her</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>I postane 18 og 19 skal berre inntekt frå transportoppdrag takast  med.  </p>
+                  <p>Dersom post 18 inneheld køyring med fakturering til trygdekontor, skal  den delen av det fakturerte beløp som gjeld betaling for venting  opplysast særskild. Dette gjeld også skolebornkøyring for det  offentlege.
+                                    For skolebornkøyring gjeld også at samla kilometertal  skal opplysast.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="KjoreinntekterKontantSpesifisertLoyve-datadef-1877">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>19 Kjøreinntekter, kontant</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="HJELP">
+                  <p>I postene 18 og 19 skal bare inntekt fra transportoppdrag tas med.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>19 Køyreinntekter, kontant</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="HJELP">
+                  <p>I postane 18 og 19 skal berre inntekt frå transportoppdrag takast med.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="TaksameterTypeSpesifisertLoyve-datadef-1878">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>20 Taksametermerke/-type</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>20 Taksametermerke/-type</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="TaksameterBesatteKilometerSpesifisertLoyve-datadef-1879">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>21 Antall besatte kilometer når taksameter brukes</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>21 Talet på opptekne kilometer når taksameter blir nytta</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="InnberetningStandardfordelArbeidsgiversBilSpesifisertLoyve-datadef-1880">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>22 Er standardfordelen ved disponering av arbeidsgivers bil  innberettet i arbeidstakers lønn- og trekkoppgave?</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>22  Er standardfordelen ved disponering av bilen til arbeidsgivar  opplyst i arbeidstakaren si lønns- og trekkoppgave?</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="LoyveUtleidSpesifisertLoyve-datadef-1881">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>23 Er løyvet utleid?</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>23 Er løyvet utleigd?</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute fixed="351" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="KjoreinntekterKredittSpesifisertLoyve-datadef-1873">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">24</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="1873" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="KjoreinntekterKredittVentetidSpesifisertLoyve-datadef-1874">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Betaling for ventetid ved kjøring med fakturering til trygdekontor</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">25</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="1874" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="KjoreinntekterKredittSkolebarnkjoringSpesifisertLoyve-datadef-1875">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Betaling for skolebarnkjøring for det offentlige</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">26</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="1875" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="SkolebarnkjoringKilometerSpesifisertLoyve-datadef-1876">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">27</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Heltall15-repformat-79">
+            <xs:attribute fixed="1876" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="KjoreinntekterKontantSpesifisertLoyve-datadef-1877">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">28</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="1877" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="TaksameterTypeSpesifisertLoyve-datadef-1878">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">29</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="1878" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="TaksameterBesatteKilometerSpesifisertLoyve-datadef-1879">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Antall besatte kilometer når taksameter brukes</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">30</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Heltall15-repformat-79">
+            <xs:attribute fixed="1879" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="InnberetningStandardfordelArbeidsgiversBilSpesifisertLoyve-datadef-1880">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="DEF">
+            <p>Er standardfordelen ved disponering av arbeidsgivers bil innberettet i arbeidstakers lønns- og trekkoppgave.</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">31</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+            <xs:attribute fixed="1880" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg2JaNei-repformat-4">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">4</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="3"/>
+        <xs:enumeration value="Ja">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                <p>Yes</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Ja</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Ja</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Nei">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="EN" brreg:teksttype="LEDE">
+                <p>No</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Nei</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Nei</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="LoyveUtleidSpesifisertLoyve-datadef-1881">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">32</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+            <xs:attribute fixed="1881" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="AndreOpplysninger-grp-3501">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Andre opplysninger</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Andre opplysningar</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="GarasjeleieBeregnet-datadef-1882">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>24 Er garasjeleie beregnet?</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>24 Er garasjeleige rekna ut?</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="Garasjeleie-datadef-1883">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Hvis ja, oppgi beløp</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Dersom ja, gi opp sum</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="KontorleieBeregnet-datadef-1884">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>25 Er kontorleie beregnet?</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>25 Er kontorleige rekna ut?</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="Kontorleie-datadef-1885">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Hvis ja, oppgi beløp</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Dersom ja, gi opp sum</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="DrosjevirksomhetDriftssted-datadef-19403">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>26 Drives drosjevirksomheten fra</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>26 Blir drosjeversemda driven frå</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="DriftsstedBoligAvstand-datadef-1887">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>27 Avstand mellom hjem/bolig og sentral dersom drosjevirksomheten  drives fra sentral</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>27 Avstand mellom heim/bustad og sentral dersom drosjeverksemda blir  driven frå sentral</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute fixed="3501" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="GarasjeleieBeregnet-datadef-1882">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">33</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+            <xs:attribute fixed="1882" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="Garasjeleie-datadef-1883">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">34</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="1883" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="KontorleieBeregnet-datadef-1884">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">35</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="KodelisteEttValg2JaNei-repformat-4">
+            <xs:attribute fixed="1884" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="Kontorleie-datadef-1885">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">36</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="BelopHeltall15-repformat-37">
+            <xs:attribute fixed="1885" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="DrosjevirksomhetDriftssted-datadef-19403">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">37</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="KodelisteEttValg2HjemmetSentral-repformat-98">
+            <xs:attribute fixed="19403" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="KodelisteEttValg2HjemmetSentral-repformat-98">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="id">98</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="1"/>
+        <xs:maxLength value="7"/>
+        <xs:enumeration value="Hjemmet">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Hjemmet</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Heimen</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="Sentral">
+          <xs:annotation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                <p>Sentral</p>
+              </brreg:tekst>
+            </xs:documentation>
+            <xs:documentation>
+              <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                <p>Sentral</p>
+              </brreg:tekst>
+            </xs:documentation>
+          </xs:annotation>
+        </xs:enumeration>
+      </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="DriftsstedBoligAvstand-datadef-1887">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">38</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Heltall15-repformat-79">
+            <xs:attribute fixed="1887" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="Leietakere-grp-2570">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Leietakere</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="HINT">
+            <p>Dersom noen av løyvene er utleid, skal opplysninger om leietaker  fylles ut her</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Leigetakare</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="HINT">
+            <p>Dersom nokon av løyvene er utleigde, skal opplysningar om leigetakar  fyllast ut her</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element maxOccurs="999" minOccurs="0" ref="Leietakere-grp-5105"/>
+        </xs:sequence>
+        <xs:attribute fixed="2570" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="Leietakere-grp-5105">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Leietakere</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Leigetakare</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="LeietakerLoyvenummerSpesifisertLoyve-datadef-1888">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Løyve nr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Løyve nr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="LeietakerNavnSpesifisertLoyve-datadef-1889">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Navn på leietaker</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Namn på leigetakar</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="LeietakerAdresseSpesifisertLoyve-datadef-1890">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Adresse</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Adresse</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="LeietakerPostnummerSpesifisertLoyve-datadef-7951">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Postnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Postnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="LeietakerPoststedSpesifisertLoyve-datadef-7952">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Poststed</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Poststad</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="LeietakerFodselsnummerSpesifisertLoyve-datadef-1891">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Fødselsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Fødselsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute fixed="5105" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="LeietakerLoyvenummerSpesifisertLoyve-datadef-1888">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">39</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="1888" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="LeietakerNavnSpesifisertLoyve-datadef-1889">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">40</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="1889" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="LeietakerAdresseSpesifisertLoyve-datadef-1890">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">41</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="1890" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="LeietakerPostnummerSpesifisertLoyve-datadef-7951">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">42</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst44BareTall-repformat-10">
+            <xs:attribute fixed="7951" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="LeietakerPoststedSpesifisertLoyve-datadef-7952">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">43</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="7952" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="LeietakerFodselsnummerSpesifisertLoyve-datadef-1891">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">44</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst1111Modulus11-repformat-18">
+            <xs:attribute fixed="1891" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="PrivatBrukDisponeringAvBil-grp-2571">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Hvem har disponert bilen(e) til privat bruk?</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Kven har disponert bilen (bilane) til privat bruk?</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element maxOccurs="999" minOccurs="0" ref="HvemHarDisponertBilenETilPrivatBruk-grp-5106"/>
+        </xs:sequence>
+        <xs:attribute fixed="2571" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="HvemHarDisponertBilenETilPrivatBruk-grp-5106">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+            <p>Hvem har disponert bilen(e) til privat bruk?</p>
+          </brreg:tekst>
+        </xs:documentation>
+        <xs:documentation>
+          <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+            <p>Kven har disponert bilen (bilane) til privat bruk?</p>
+          </brreg:tekst>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="LeietakerPrivatBrukLoyvenummerSpesifisertLoyve-datadef-1892">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Registreringsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Registreringsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="LeietakerPrivatBrukNavnSpesifisertLoyve-datadef-1893">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Navn på den som har disponert bil</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Namn til den som har disponert bil</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="LeietakerPrivatBrukAdresseSpesifisertLoyve-datadef-1894">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Adresse</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Adresse</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="LeietakerPrivatBrukPostnummerSpesifisertLoyve-datadef-7953">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Postnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Postnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="LeietakerPrivatBrukPoststedSpesifisertLoyve-datadef-7954">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Poststed</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Poststad</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" ref="LeietakerPrivatBrukFodselsnummerSpesifisertLoyve-datadef-1895">
+            <xs:annotation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NOB" brreg:teksttype="LEDE">
+                  <p>Fødselsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+              <xs:documentation>
+                <brreg:tekst brreg:lang="NON" brreg:teksttype="LEDE">
+                  <p>Fødselsnr.</p>
+                </brreg:tekst>
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute fixed="5106" name="gruppeid" type="xs:positiveInteger" use="required"/>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="LeietakerPrivatBrukLoyvenummerSpesifisertLoyve-datadef-1892">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">45</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="1892" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="LeietakerPrivatBrukNavnSpesifisertLoyve-datadef-1893">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">46</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="1893" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="LeietakerPrivatBrukAdresseSpesifisertLoyve-datadef-1894">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">47</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="1894" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="LeietakerPrivatBrukPostnummerSpesifisertLoyve-datadef-7953">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">48</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst44BareTall-repformat-10">
+            <xs:attribute fixed="7953" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="LeietakerPrivatBrukPoststedSpesifisertLoyve-datadef-7954">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">49</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst35-repformat-3">
+            <xs:attribute fixed="7954" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+    <xs:element name="LeietakerPrivatBrukFodselsnummerSpesifisertLoyve-datadef-1895">
+      <xs:annotation>
+        <xs:documentation>
+          <brreg:info brreg:type="plassering">50</brreg:info>
+        </xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+        <xs:simpleContent>
+          <xs:extension base="Tekst1111Modulus11-repformat-18">
+            <xs:attribute fixed="1895" name="orid" type="xs:positiveInteger" use="required"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+</SchemaDefinition>
