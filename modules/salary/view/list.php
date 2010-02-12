@@ -97,14 +97,27 @@ print $_lib['sess']->doctype ?>
     <th class="sub" colspan="3"></th>
 </tr>
 <tr>
-    <td></td>
+    <td>
+  <?
+  if(($_lib['sess']->get_person('AccessLevel') >= 1))
+  {
+    ?>
+    <form name="salary_new" action="<? print $_lib['sess']->dispatch ?>t=salary.template" method="post">
+      <input type="submit" name="action_salaryconf_new" value="Ny ansatt (N)" accesskey="N" />
+    </form>
+    <?
+  }
+  ?>
+
+    </td>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $row_head->SalaryConfID ?>"><b>Hovedmal</b></a></td>
-    <td></td>
+    <td style="background-color: #FFB600"></td>
     <td></td>
     <td></td>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&SalaryConfID=<? print $row_head->SalaryConfID ?>"><? print $_lib['format']->Date(array('value'=>$row_head->TS, 'return'=>'value')) ?></a></td>
-    <td colspan="2"></td>
     <td>L&oslash;nns og trekk oppgave for </td>
+    <td colspan="2"></td>
+
 </tr>
 
 <tbody>
@@ -134,7 +147,7 @@ if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark
         }
       ?>
       </td>
-      <td>
+      <td style="background-color: #FFB600">
       <?
       if($_lib['sess']->get_person('AccessLevel') >= 2 && $accounting->is_valid_accountperiod($setup['salarydefvoucherdate'], $_lib['sess']->get_person('AccessLevel')))
       {
@@ -163,23 +176,21 @@ if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark
       ?>
       </td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&SalaryConfID=<? print $row->SalaryConfID ?>"><? print $_lib['format']->Date(array('value'=>$row->TS, 'return'=>'value')) ?></a></td>
-      <td colspan="2"><? if(($_lib['sess']->get_person('AccessLevel') >= 4) and ($row->SalaryConfID != 1)) { ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.list&amp;SalaryConfID=<? print $row->SalaryConfID ?>&amp;action_salaryconf_delete=1" class="button">Slett</a><? } ?></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=arbeidsgiveravgift.salaryreport&amp;report.Year=<? print $year ?>&amp;report.Employee=<? print $row->AccountPlanID ?>" target="new">Vis <? print $year ?></a></td>
+
+      <td colspan="2">	    
+	<? if(($_lib['sess']->get_person('AccessLevel') >= 4) and ($row->SalaryConfID != 1)) { 
+	    echo $_lib['form3']->button(array('url' => 
+				 $_lib['sess']->dispatch . "t=salary.list&amp;SalaryConfID=" . $row->SalaryConfID . "&amp;action_salaryconf_delete=1"
+				 , 'name' => 'Slett', 'confirm' => 'Vil du virkelig slette linjen?'));
+	 } ?>
+      </td>
+
 <? } ?>
 </tbody>
 <tr>
   <td colspan="6"></td>
   <td colspan="2">
-  <?
-  if(($_lib['sess']->get_person('AccessLevel') >= 1))
-  {
-    ?>
-    <form name="salary_new" action="<? print $_lib['sess']->dispatch ?>t=salary.template" method="post">
-      <input type="submit" name="action_salaryconf_new" value="Ny l&oslash;nnsmal (N)" accesskey="N" />
-    </form>
-    <?
-  }
-  ?>
   </td>
   <td></td>
 </tr>
@@ -228,7 +239,11 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
           <? if($_lib['sess']->get_person('AccessLevel') > 3) {
             if($accounting->is_valid_accountperiod($row->Period, $_lib['sess']->get_person('AccessLevel')))
             {
-                ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.list&SalaryID=<? print $row->SalaryID ?>&action_salary_delete=1" class="button">Slett</a><?
+/*<a href="<? print $_lib['sess']->dispatch ?>t=salary.list&SalaryID=<? print $row->SalaryID ?>&action_salary_delete=1" class="button">Slett</a>*/
+
+		echo $_lib['form3']->button(array('url' => 
+						  $_lib['sess']->dispatch . "t=salary.list&SalaryID=" . $row->SalaryID . "&action_salary_delete=1",
+						  'name' => 'Slett', 'confirm' => 'Vil du virkelig slette linjen?'));
             }
             else
             {

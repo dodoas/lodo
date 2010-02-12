@@ -7,18 +7,11 @@ $db_table = "product";
 
 require_once "record.inc";
 
-if(strlen($_REQUEST['db_start'])>0)
-{
-    $_SETUP['DB_START']['0'] = $_REQUEST['db_start'];
-}
-
-$db_stop = $_SETUP['DB_START']['0'] + $_SETUP['DB_OFFSET']['0'];
-
 $query = "select * from $db_table where Active <> 0";
 $result2 = $_lib['db']->db_query($query);
 $db_total = $_lib['db']->db_numrows($result2);
 
-$query = "select * from $db_table where Active <> 0 order by ProductID asc limit ".$_SETUP['DB_START']['0'].", ".$_SETUP['DB_OFFSET']['0'];
+$query = "select * from $db_table where Active <> 0 order by CAST(ProductNumber as SIGNED), ProductNumber asc"; 
 $result2 = $_lib['db']->db_query($query);
 
 ?>
@@ -49,28 +42,6 @@ $result2 = $_lib['db']->db_query($query);
                         <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_product_new', 'value'=>'Nytt produkt (N)')) ?>
                     </form>
                   <? } ?>
-            <tr>
-                <th>
-                <?
-                    if($_SETUP['DB_START']['0'] >= $_SETUP['DB_OFFSET']['0'])
-                    {
-                        ?> <a href="<? print $_lib['sess']->dispatch ?>t=product.list&amp;db_start=<? print $_SETUP['DB_START']['0']-$_SETUP['DB_OFFSET']['0'] ?>" title="Forrige">&lt;&lt;</a> <?
-                    }
-                    else
-                        print "&lt;&lt;";
-                ?>
-                <th colspan="2">Fant: <? print $db_total ?>, viser <? print $_SETUP['DB_START']['0']." til $db_stop"; ?>
-                <th>
-                <th align="right">
-                <?
-                    if($db_total > $db_stop)
-                    {
-                        ?> <a href="<? print $_lib['sess']->dispatch ?>t=product.list&amp;db_start=<? print $_SETUP['DB_START']['0']+$_SETUP['DB_OFFSET']['0'] ?>" title="Neste">&gt;&gt;</a> <?
-                    }
-                    else
-                        print "&gt;&gt;";
-                ?>
-                <th colspan="3">
             <tr>
                 <th class="sub">Produktnummer</th>
                 <th class="sub">Produktnavn</th>
