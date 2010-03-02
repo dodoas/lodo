@@ -1,6 +1,8 @@
 <?
 #should split to factory pattern with incoming and outgoing invoices.
 includelogic('invoice/invoice');
+includelogic('fakturabank/fakturabankvoting');
+includelogic('exchange/exchange');
 
 class lodo_fakturabank_fakturabank {
     #private $host           = 'fakturabank.cavatina.no';
@@ -25,6 +27,10 @@ class lodo_fakturabank_fakturabank {
                                  'InvoiceLine'      => true,
                                  'TaxSubtotal'      => true
                                 );
+    private $attributesOfInterest = array(
+									 'schemeID',
+									 'currencyID'
+								 );
 
     function __construct() {
         global $_lib;
@@ -73,7 +79,9 @@ class lodo_fakturabank_fakturabank {
         $_lib['sess']->debug($url);
 
         $invoicesO = $this->retrieve($page, $url);
-        return $this->validate_outgoing($invoicesO);
+		$validated_invoices = $this->validate_outgoing($invoicesO);
+		$this->save_outgoing_w_voting($validated_invoices);
+        return $validated_invoices;
     }
 
     ####################################################################################################
@@ -89,8 +97,178 @@ class lodo_fakturabank_fakturabank {
         $_lib['message']->add($url);
 
         $invoicesO = $this->retrieve($page, $url);
-        return $this->validate_incoming($invoicesO);
+		$validated_invoices = $this->validate_incoming($invoicesO);
+		$this->save_incoming_w_voting($validated_invoices);
+        return $validated_invoices;
     }
+
+	public function get_fakturabankincominginvoice($FakturabankID) {
+        global $_lib;
+
+		if (!is_numeric($FakturabankID)) {
+			return false;
+		}
+
+		$query = "SELECT `ID` FROM fakturabankinvoicein WHERE `FakturabankID` = '$FakturabankID'";
+		$result = $_lib['storage']->db_query3(array('query' => $query));
+		if (!$result) {
+			return false;
+		}
+		if (($obj = $_lib['storage']->db_fetch_object($result)) && is_numeric($obj->ID)) {
+			return $obj->ID;
+		}
+		
+		return false;
+	}
+
+	public function get_fakturabankoutgoinginvoice($FakturabankID) {
+        global $_lib;
+
+		if (!is_numeric($FakturabankID)) {
+			return false;
+		}
+
+		$query = "SELECT `ID` FROM fakturabankinvoiceout WHERE `FakturabankID` = '$FakturabankID'";
+		$result = $_lib['storage']->db_query3(array('query' => $query));
+		if (!$result) {
+			return false;
+		}
+		if (($obj = $_lib['storage']->db_fetch_object($result)) && is_numeric($obj->ID)) {
+			return $obj->ID;
+		}
+		
+		return false;
+	}
+
+	private function save_incoming($invoices) {
+        global $_lib;
+
+        if (empty($invoices->Invoice)) {
+            return false;
+        }
+
+		foreach ($invoices->Invoice as &$invoice) {
+			$dataH = array();
+
+			if ($invoice->LodoID) {
+				$action = "update";
+				$dataH['ID'] = $invoice->LodoID;
+			} else {
+				$action = "insert";
+			}
+			
+			$dataH['FakturabankID'] = $invoice->FakturabankID;
+			$dataH['FakturabankNumber'] = $invoice->ID;
+			$dataH['ProfileID'] = $invoice->ProfileID;
+		
+			# find KID
+			if($invoice->PaymentMeans->InstructionNote == 'KID' && $invoice->PaymentMeans->InstructionID) {
+				$dataH['KID']  = $invoice->PaymentMeans->InstructionID; #KID
+			} 
+			$dataH['IssueDate'] = $_lib['date']->mysql_format("%Y-%m-%d", $invoice->IssueDate);
+			$dataH['DocumentCurrency'] = $invoice->DocumentCurrencyCode;
+			$dataH['SupplierPartyIndentification'] = $invoice->AccountingSupplierParty->Party->PartyIdentification->ID;
+			$dataH['SupplierPartyIndentificationSchemeID'] = $invoice->AccountingSupplierParty->Party->PartyIdentification->ID_Attr_schemeID;
+			$dataH['SupplierPartyName'] = $invoice->AccountingSupplierParty->Party->PartyName->Name;
+			$dataH['CustomerPartyIndentification'] = $invoice->AccountingCustomerParty->Party->PartyIdentification->ID;
+			$dataH['CustomerPartyIndentificationSchemeID'] = $invoice->AccountingCustomerParty->Party->PartyIdentification->ID_Attr_schemeID;
+			$dataH['CustomerPartyName'] = $invoice->AccountingCustomerParty->Party->PartyName->Name;
+			$dataH['PaymentMeansCode'] = $invoice->PaymentMeans->PaymentMeansCode;
+			
+			$dataH['PaymentMeansDueDate'] = $_lib['date']->mysql_format("%Y-%m-%d", $invoice->PaymentMeans->PaymentDueDate);
+			$dataH['TaxTotalAmount'] = $invoice->TaxTotal->TaxAmount;
+			$dataH['TaxTotalAmountCurrency'] = $invoice->TaxTotal->TaxAmount_Attr_currencyID;
+			$dataH['LegalMonetaryTotTaxExclusAmount'] = $invoice->LegalMonetaryTotal->TaxExclusiveAmount;
+			$dataH['LegalMonetaryTotTaxExclusAmountCurrency'] = $invoice->LegalMonetaryTotal->TaxExclusiveAmount_Attr_currencyID;
+			$dataH['LegalMonetaryTotPayableAmount'] = $invoice->LegalMonetaryTotal->PayableAmount;
+			$dataH['LegalMonetaryTotPayableAmountCurrency'] = $invoice->LegalMonetaryTotal->PayableAmount_Attr_currencyID;
+			$dataH['Class'] = $invoice->Class;
+			$dataH['Status'] = $invoice->Status;
+			$dataH['Journal'] = $invoice->Journal;
+			$dataH['JournalID'] = $invoice->JournalID;
+			$dataH['AccountPlanID'] = $invoice->AccountPlanID;
+			$dataH['VoucherType'] = $invoice->VoucherType;
+
+			$ret = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'fakturabankinvoicein', 'action' => $action, 'debug' => false));			
+
+			if ($action == "insert") {
+				$invoice->LodoID = $ret;
+			}
+		}
+	}
+
+	private function save_incoming_w_voting($invoices) {
+		$this->save_incoming($invoices);
+
+		$fbvoting = new lodo_fakturabank_fakturabankvoting();
+
+		$fbvoting->save_incoming_w_voting($invoices);
+	}
+
+	private function save_outgoing($invoices) {
+        if (!is_array($invoices) || empty($invoices)) {
+            return false;
+        }
+
+        global $_lib;
+
+		foreach ($invoices->Invoice as &$invoice) {
+			$dataH = array();
+
+			if ($invoice->LodoID) {
+				$action = "update";
+				$dataH['ID'] = $invoice->LodoID;
+			} else {
+				$action = "insert";
+			}
+			
+			$dataH['FakturabankID'] = $invoice->FakturabankID;
+			$dataH['FakturabankNumber'] = $invoice->ID;
+			$dataH['ProfileID'] = $invoice->ProfileID;
+		
+			# find KID
+			if($invoice->PaymentMeans->InstructionNote == 'KID' && $invoice->PaymentMeans->InstructionID) {
+				$dataH['KID']  = $invoice->PaymentMeans->InstructionID; #KID
+			} 
+			$dataH['IssueDate'] = $_lib['date']->mysql_format("%Y-%m-%d", $invoice->IssueDate);
+			$dataH['DocumentCurrency'] = $invoice->DocumentCurrencyCode;
+			$dataH['SupplierPartyIndentification'] = $invoice->AccountingSupplierParty->Party->PartyIdentification->ID;
+			$dataH['SupplierPartyIndentificationSchemeID'] = $invoice->AccountingSupplierParty->Party->PartyIdentification->ID_Attr_schemeID;
+			$dataH['SupplierPartyName'] = $invoice->AccountingSupplierParty->Party->PartyName->Name;
+			$dataH['CustomerPartyIndentification'] = $invoice->AccountingCustomerParty->Party->PartyIdentification->ID;
+			$dataH['CustomerPartyIndentificationSchemeID'] = $invoice->AccountingCustomerParty->Party->PartyIdentification->ID_Attr_schemeID;
+			$dataH['CustomerPartyName'] = $invoice->AccountingCustomerParty->Party->PartyName->Name;
+			$dataH['PaymentMeansCode'] = $invoice->PaymentMeans->PaymentMeansCode;
+			
+			$dataH['PaymentMeansDueDate'] = $_lib['date']->mysql_format("%Y-%m-%d", $invoice->PaymentMeans->PaymentDueDate);
+			$dataH['TaxTotalAmount'] = $invoice->TaxTotal->TaxAmount;
+			$dataH['TaxTotalAmountCurrency'] = $invoice->TaxTotal->TaxAmount_Attr_currencyID;
+			$dataH['LegalMonetaryTotTaxExclusAmount'] = $invoice->LegalMonetaryTotal->TaxExclusiveAmount;
+			$dataH['LegalMonetaryTotTaxExclusAmountCurrency'] = $invoice->LegalMonetaryTotal->TaxExclusiveAmount_Attr_currencyID;
+			$dataH['LegalMonetaryTotPayableAmount'] = $invoice->LegalMonetaryTotal->PayableAmount;
+			$dataH['LegalMonetaryTotPayableAmountCurrency'] = $invoice->LegalMonetaryTotal->PayableAmount_Attr_currencyID;
+			$dataH['Class'] = $invoice->Class;
+			$dataH['Status'] = $invoice->Status;
+			$dataH['Journal'] = $invoice->Journal;
+			$dataH['JournalID'] = $invoice->JournalID;
+			$dataH['AccountPlanID'] = $invoice->AccountPlanID;
+			$dataH['VoucherType'] = $invoice->VoucherType;
+
+			$ret = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'fakturabankinvoiceout', 'action' => $action, 'debug' => false));			
+
+			if ($action == "insert") {
+				$invoice->LodoID = $ret;
+			}
+		}
+	}
+
+	private function save_outgoing_w_voting($invoices) {
+		$this->save_outgoing($invoices);
+
+		$fbvoting = new lodo_fakturabank_fakturabankvoting();
+		
+		$fbvoting->save_outgoing_w_voting($invoices);
+	}
     
     ####################################################################################################
     #READ XML    
@@ -98,7 +276,7 @@ class lodo_fakturabank_fakturabank {
         global $_lib;
 
         if(!$this->login) return false;
-        
+
         $headers = array(
             "GET ".$page." HTTP/1.0",
             "Content-type: text/xml;charset=\"utf-8\"",
@@ -108,6 +286,8 @@ class lodo_fakturabank_fakturabank {
             "SOAPAction: \"run\"",
             "Authorization: Basic " . base64_encode($this->credentials)
         );
+
+
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -128,7 +308,8 @@ class lodo_fakturabank_fakturabank {
             $_lib['message']->add("Nettverkskobling til Fakturabank OK");
         }
         curl_close($ch);
-        
+
+
         $size = strlen($xml_data);
 
         if(substr($xml_data,0,9) != '<Invoices') {
@@ -139,7 +320,7 @@ class lodo_fakturabank_fakturabank {
     
             if($size) {
                 includelogic('xmldomtoobject/xmldomtoobject');
-                $domtoobject = new empatix_framework_logic_xmldomtoobject(array('arrayTags' => $this->ArrayTag));
+                $domtoobject = new empatix_framework_logic_xmldomtoobject(array('arrayTags' => $this->ArrayTag, 'attributesOfInterest' => $this->attributesOfInterest));
                 #print "\n<hr>$xml_data\n<hr>";
                 $invoiceO    = $domtoobject->convert($xml_data);
     
@@ -147,6 +328,7 @@ class lodo_fakturabank_fakturabank {
                 $_lib['message']->add("XML Dokument tomt - pr&oslash;v igjen: $url");            
             }
         }
+
         return $invoiceO;
     }
     
@@ -215,8 +397,12 @@ class lodo_fakturabank_fakturabank {
     ################################################################################################
     #validate - update Accountplans and statuses - ready for journaling flag.
     private function validate_outgoing($invoicesO) {
-        global $_lib, $accounting;
-        
+        if (!is_array($invoicesO->Invoice) || empty($invoicesO->Invoice)) {
+            return false;
+        }
+
+        global $_lib, $accounting;        
+
         foreach($invoicesO->Invoice as &$InvoiceO) {
 
             $i++;
@@ -238,6 +424,13 @@ class lodo_fakturabank_fakturabank {
 
             $urlH = explode('/', $InvoiceO->UBLExtensions->UBLExtension->ExtensionContent->URL);
             $InvoiceO->FakturabankID = $urlH[4]; #Last element is the internalID.
+
+            # get fakturabankinvoiceout id
+			if ($LodoID = $this->get_fakturabankoutgoinginvoice($InvoiceO->FakturabankID)) {
+				$InvoiceO->LodoID = $LodoID;
+			} else {
+				$InvoiceO->LodoID = null;
+			}
 
             #Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to oly look in the correct records? No?
             list($account, $SchemeID)  = $this->find_reskontro($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID, 'customer');
@@ -312,6 +505,7 @@ class lodo_fakturabank_fakturabank {
         
         #Estimate which journal ids will be used
         list($JournalID, $tmp) = $accounting->get_next_available_journalid(array('available' => true, 'update' => false, 'type' => $VoucherType, 'reuse' => false, 'from' => 'Fakturabank estimate'));
+        
 	/* Cleanup error message -eirhje 29.01.10 */
        if(isset($invoicesO->Invoice)) 
         foreach($invoicesO->Invoice as &$InvoiceO) {
@@ -357,7 +551,15 @@ class lodo_fakturabank_fakturabank {
 
             $urlH = explode('/', $InvoiceO->UBLExtensions->UBLExtension->ExtensionContent->URL);
             $InvoiceO->FakturabankID = $urlH[4]; #Last element is the internalID.
-            #Cleaning after prior developer -eirhje 23.01.10
+	    #Cleaning after prior developer -eirhje 23.01.10
+
+            # get fakturabankinvoicein id
+			if ($LodoID = $this->get_fakturabankincominginvoice($InvoiceO->FakturabankID)) {
+				$InvoiceO->LodoID = $LodoID;
+			} else {
+				$InvoiceO->LodoID = null;
+			}
+
             #print "URL: " . $InvoiceO->UBLExtensions->UBLExtension->ExtensionContent->URL . "<br>\n";
             #print "FB ID:   $InvoiceO->FakturabankID<br>\n";
 
@@ -394,6 +596,11 @@ class lodo_fakturabank_fakturabank {
                     $PeriodOld         = $InvoiceO->Period;
                     $InvoiceO->Period  = $accounting->get_first_open_accountingperiod();
                     $InvoiceO->Status .= 'Perioden ' . $PeriodOld . ' er lukket endrer til ' . $InvoiceO->Period . '. ';
+                }
+                if ($InvoiceO->DocumentCurrencyCode != 'NOK' && !exchange::getConversionRate($InvoiceO->DocumentCurrencyCode)) {
+                    $InvoiceO->Journal = false;
+                    $InvoiceO->Class   = 'red';
+                    $InvoiceO->Status .= 'Finner ikke valutaverdi for '. $InvoiceO->DocumentCurrencyCode;
                 }
         
                 #Check that we have not journaled the same invoices earlier. C
@@ -552,13 +759,28 @@ class lodo_fakturabank_fakturabank {
     public function registerincoming() {
         global $_lib, $accounting;
 
-        $invoicesO = $this->incoming();
+        $invoicesO        = $this->incoming();
+        $conversion_rate  = 0;
+        $is_foreign       = false;
 
         foreach($invoicesO->Invoice as &$InvoiceO) {
         
             #If all essential data quality is ok - download the invoice
             if($InvoiceO->Journal) {
                 $dataH = array();
+
+                #Foreign currency
+                if ($InvoiceO->DocumentCurrencyCode != 'NOK') {
+                    $is_foreign = true;
+                    $conversion_rate = exchange::getConversionRate($InvoiceO->DocumentCurrencyCode);
+                    $dataH['TotalCustPrice']    = exchange::convertToNOK($InvoiceO->DocumentCurrencyCode, $InvoiceO->LegalMonetaryTotal->PayableAmount);
+                    $dataH['ForeignCurrencyID'] = $InvoiceO->DocumentCurrencyCode;
+                    $dataH['ForeignAmount']     = $InvoiceO->LegalMonetaryTotal->PayableAmount;
+                    $dataH['ForeignConvRate']   = $conversion_rate;
+                } else {
+                    $dataH['TotalCustPrice'] = $InvoiceO->LegalMonetaryTotal->PayableAmount; #If negative this is probably a credit note
+                }
+
                 $dataH['SupplierAccountPlanID'] = $InvoiceO->AccountPlanID;
                 $dataH['InvoiceNumber']         = $InvoiceO->ID;
                 $dataH['ExternalID']            = $InvoiceO->FakturabankID;
@@ -571,7 +793,7 @@ class lodo_fakturabank_fakturabank {
                 $dataH['VoucherType']           = 'U';
 
                 $dataH['DueDate']               = $InvoiceO->PaymentMeans->PaymentDueDate;
-                $dataH['TotalCustPrice']        = $InvoiceO->LegalMonetaryTotal->PayableAmount; #If negative this is probably a credit note
+                //$dataH['TotalCustPrice']        = $InvoiceO->LegalMonetaryTotal->PayableAmount; #If negative this is probably a credit note
 
                 $dataH['SupplierBankAccount']   = $InvoiceO->PaymentMeans->PayeeFinancialAccount->ID;
                 $dataH['CustomerBankAccount']   = $_lib['sess']->get_companydef('BankAccount');
@@ -660,8 +882,18 @@ class lodo_fakturabank_fakturabank {
                         $datalineH['Comment']           = $line->Item->Description;
                         $datalineH['QuantityOrdered']   = $Quantity;
                         $datalineH['QuantityDelivered'] = $Quantity;
-                        $datalineH['UnitCostPrice']     = $CustPrice;
-                        $datalineH['UnitCustPrice']     = $CustPrice;
+
+                        #Foreign currency
+                        if ($is_foreign) {
+                            $datalineH['UnitCostPrice'] = exchange::convertToNOK($InvoiceO->DocumentCurrencyCode, $CustPrice);
+                            $datalineH['UnitCustPrice'] = $datalineH['UnitCostPrice'];
+                            $datalineH['ForeignCurrencyID'] = $InvoiceO->DocumentCurrencyCode;
+                            $datalineH['ForeignAmount']     = (float)$CustPrice;
+                            $datalineH['ForeignConvRate']   = $conversion_rate;
+                        } else {
+                            $datalineH['TotalCustPrice'] = $InvoiceO->LegalMonetaryTotal->PayableAmount; #If negative this is probably a credit note
+                        }
+
                         $datalineH['UnitCostPriceCurrencyID'] = 'NOK';
                         $datalineH['UnitCustPriceCurrencyID'] = 'NOK';
     
@@ -676,6 +908,11 @@ class lodo_fakturabank_fakturabank {
                         $_lib['storage']->store_record(array('data' => $datalineH, 'table' => 'invoiceinline', 'debug' => false));
                     }
                 }
+				
+				#Update fakturabank voting tables to enable lookup of lodo invoice 
+				#given bank transaction information, when importing transactions from bank
+				$fbvoting = new lodo_fakturabank_fakturabankvoting();
+				$fbvoting->update_fakturabank_incoming_invoice($InvoiceO->FakturabankID, $ID, $InvoiceO->AccountPlanID);
 
                 #Set status in fakturabank
                 $comment = "Lodo PHP Invoicein ID: " . $ID . " registered " . $_lib['sess']->get_session('Datetime');
@@ -734,7 +971,7 @@ class lodo_fakturabank_fakturabank {
                     if($InvoiceO->PaymentMeans->InstructionNote == 'KID' && $InvoiceO->PaymentMeans->InstructionID) {
                         $dataH['KID']  = $InvoiceO->PaymentMeans->InstructionID; #KID
                     }
-                    $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoiceout', 'debug' => false));
+                    $ID = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoiceout', 'debug' => false));
     
                     #MŒ sjekke at produktnummer stemmer og matcher
                     foreach($InvoiceO->InvoiceLine as $line) {
@@ -785,7 +1022,12 @@ class lodo_fakturabank_fakturabank {
                             $_lib['storage']->store_record(array('data' => $datalineH, 'table' => 'invoiceoutline', 'debug' => false));
                         }
                     }
-    
+
+                    #Update fakturabank voting tables to enable lookup of lodo invoice 
+                    #given bank transaction information, when importing transactions from bank
+                    $fbvoting = new lodo_fakturabank_fakturabankvoting();
+                    $fbvoting->update_fakturabank_outgoing_invoice($InvoiceO->FakturabankID, $ID, $InvoiceO->AccountPlanID);
+                        
                     #Set status in fakturabank
                     $comment = "Lodo PHP Invoiceout ID: " . $InvoiceO->ID . " registered " . $_lib['sess']->get_session('Datetime');
                     $this->setEvent($InvoiceO->FakturabankID, 'registered', $comment);

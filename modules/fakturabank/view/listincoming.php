@@ -5,6 +5,8 @@
 
 includelogic('fakturabank/fakturabank');
 includelogic('accounting/accounting');
+includelogic('exchange/exchange');
+
 $accounting = new accounting();
 
 require_once "record.inc";
@@ -69,6 +71,10 @@ Merk: Du m&aring; registrere brukeren din p&aring; <a href="http://fakturabank.n
 <?
 foreach($InvoicesO->Invoice as $InvoiceO) {
   $TotalCustPrice += $InvoiceO->LegalMonetaryTotal->PayableAmount;
+  $tmp_currency_code = $InvoiceO->DocumentCurrencyCode;
+
+  if ($InvoiceO->LegalMonetaryTotal->PayableAmount == 200) {
+  }
   ?>
     <tr class="<? print $InvoiceO->Class ?>">
       <td class="number"><? if($InvoiceO->Journaled) { ?><a href="<? print $_SETUP[DISPATCH]."t=journal.edit&amp;voucher_VoucherType=$InvoiceO->VoucherType&amp;voucher_JournalID=$InvoiceO->JournalID"; ?>&amp;action_journalid_search=1" target="_new"><? print $InvoiceO->VoucherType ?><? print $InvoiceO->JournalID ?></a><? } else { ?><i><a title="Foresl&aring;tt bilagsnummer - dette kan endre seg"><? print $InvoiceO->VoucherType ?><? print $InvoiceO->JournalID ?></a></i><? } ?></td>
@@ -80,7 +86,24 @@ foreach($InvoicesO->Invoice as $InvoiceO) {
       <td>&nbsp;<? print substr($InvoiceO->AccountingSupplierParty->Party->PartyName->Name,0,30) ?></td>
       <td>&nbsp;<? print substr($InvoiceO->MotkontoAccountPlanID,0,30) ?></td>
       <td class="number"><b><? print $InvoiceO->PaymentMeans->PaymentDueDate ?></b></td>
-      <td class="number"><? print $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) ?></td>
+      <!--<td class="number"><? print $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) ?></td>-->
+      <td class="number">
+<? if ($tmp_currency_code == 'NOK') { ?>
+        <? print $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) ?>
+<? } else {
+        $conv = exchange::convertToNOK($tmp_currency_code, $InvoiceO->LegalMonetaryTotal->PayableAmount);
+        $rate = exchange::getConversionRate($tmp_currency_code);
+        if ($conv) {
+            print " (". $tmp_currency_code ." ". $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) ." / $rate) ";
+            print $_lib['format']->Amount($conv);
+        } else {
+            $conv = $_lib['format']->Amount($conv);
+            print "Valutaverdi for ". $tmp_currency_code ." er ikke satt";
+            print " (". $tmp_currency_code ." ". $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) .") ";
+       }
+   }
+?>
+      </td>
       <td class="number"><? print $InvoiceO->Department ?></td>
       <td class="number"><? print $InvoiceO->Project ?></td>
       <td class="number"><? print $InvoiceO->PaymentMeans->PayeeFinancialAccount->ID ?></td>

@@ -153,7 +153,7 @@ if(is_array($bank->bankaccount)) {
         } else {
             $classApproved = 'creditred';
         }    
-	if(is_array($bank->bankvoucher_this_hash))
+	if(is_array($bank->bankvoucher_this_hash)) 
         	$bankvoucher = array_pop($bank->bankvoucher_this_hash);
     
         if (!($i % 3)) { $sec_color = "r0"; } else { $sec_color = "r1"; };
@@ -287,9 +287,10 @@ if(is_array($bank->bankaccount)) {
         $tabindexH[7]++;
     }
 }
+
 if(is_array($bank->bankvoucher_this_hash)) {
     foreach($bank->bankvoucher_this_hash as $bankvoucher) {
-     
+    
         if (!($i % 2)) { $sec_color = "r0"; } else { $sec_color = "r1"; };
         ?>
       <tr class="<? print $sec_color ?>">
