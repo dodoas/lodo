@@ -227,6 +227,12 @@ class accounting {
     */
     public function get_accountplan_object($AccountplanID) {
       global $_lib;
+
+      if (!is_numeric($AccountplanID)) {
+          $_lib['message']->add(array('message' => 'get_accountplan_object(): Mangler AccountplanID'));
+          return false;
+      }
+
       #Get the right color for the accountplan
       if(!isset($this->accountplanH[$AccountplanID])) {
             $query_plan                   = "select * from accountplan where Active=1 and AccountplanID='$AccountplanID'";
@@ -463,6 +469,13 @@ class accounting {
         $fields['voucher_AutoFromWeeklySale'] = $post['voucher_AutoFromWeeklySale'];
         $fields['voucher_AddedByAutoBalance'] = $post['voucher_AddedByAutoBalance'];
         $fields['voucher_AccountPlanID']      = $args['accountplanid'];
+
+        #Foreign currency
+        if (array_key_exists('voucher_ForeignCurrencyID', $post) && array_key_exists('voucher_ForeignAmount', $post) && array_key_exists('voucher_ForeignConvRate', $post)) {
+            $fields['voucher_ForeignCurrencyID'] = $post['voucher_ForeignCurrencyID'];
+            $fields['voucher_ForeignAmount'] = $post['voucher_ForeignAmount'];
+            $fields['voucher_ForeignConvRate'] = $post['voucher_ForeignConvRate'];
+        }
 
         ############################################################################################
         #Vat handling
@@ -861,7 +874,7 @@ class accounting {
                 }
 
                 #setter link fra posteringslinje til automoms posteringslinje
-                $this->update_voucher_line(array('voucher_AutomaticVatVoucherID' => $VoucherID), $args['VoucherID'], 'sub_mva_voucher1');
+                $this->update_voucher_line(array('voucher_AutomaticVatVoucherID' => $VoucherID), $args['VoucherID'], 'sub_mva_voucher1', $args['voucher']->VoucherPeriod);
 
                 #######################
                 #Motsatt pï¿½ samme konto
@@ -877,7 +890,8 @@ class accounting {
 
                 #setter link fra fï¿½rste mva postering til mva motpostering
                 $fields2['voucher_AutomaticVatVoucherID'] = $VoucherID2;
-                $this->update_voucher_line($fields2, $VoucherID, 'sub_mva_voucher2');
+				// use voucher period as mva period
+                $this->update_voucher_line($fields2, $VoucherID, 'sub_mva_voucher2', $args['voucher']->VoucherPeriod);
             }
 
             ##################################
@@ -910,7 +924,7 @@ class accounting {
 
                     $_lib['sess']->debug("Oppdater MVA motpost");#print "<br>";
                     #print_r($fields);
-                    $this->update_voucher_line($fields, $args['voucherAV']->AutomaticVatVoucherID, 'sub_mva_voucher4');
+                    $this->update_voucher_line($fields, $args['voucherAV']->AutomaticVatVoucherID, 'sub_mva_voucher4', $args['voucher']->VoucherPeriod);
                 }
                 else #hvis det ikke eksisterer en motpostering, lages en motpostering.
                 {
@@ -970,7 +984,7 @@ class accounting {
                     $fields['voucher_Vat']      = ''; #setter vat til null pï¿½ postering
                     $fields['voucher_VatID']    = ''; #setter vat til null pï¿½ postering
 
-                    $this->update_voucher_line($fields, $args['voucher']->VoucherID, 'sub_mva_voucher6');
+                    $this->update_voucher_line($fields, $args['voucher']->VoucherID, 'sub_mva_voucher6', $args['voucher']->VoucherPeriod);
                 }
             }
         }
@@ -1465,10 +1479,14 @@ class accounting {
     
     #This is the function that actually carries out the dirty work. Can not be called from outside this library
     #Will not check or update anything - it i the smart version that is for normal usage.
-    private function update_voucher_line($fields, $VoucherID, $comment) {
+	# $check_only_period is a period which is supplied for allowing a period check to go through without
+	# actually updating the voucherPeriod. This was added as a quick solution to avoid unintended 
+	# consequences when fixing
+    private function update_voucher_line($fields, $VoucherID, $comment, $check_only_period = false) {
         global $_lib;
 
-        if($this->is_valid_accountperiod($fields['voucher_VoucherPeriod'], $_lib['sess']->get_person('AccessLevel'))) {
+        if ($this->is_valid_accountperiod($fields['voucher_VoucherPeriod'], $_lib['sess']->get_person('AccessLevel')) || 
+			($check_only_period && $this->is_valid_accountperiod($check_only_period, $_lib['sess']->get_person('AccessLevel')))) {
     
             unset($fields['voucher_VoucherID']); #If voucher id is set, we risk that we change it. This will prevent voucherid change it permanently.
             $fields['voucher_UpdatedByPersonID']  = $_lib['sess']->get_person('PersonID');
@@ -2107,5 +2125,39 @@ class accounting {
             return false;
         }
     }
+
+	public function invoiceIDAvailable($JournalID,
+									   $AccountPlanID,
+									   $InvoiceID,
+									   $VoucherType) {
+		if (!is_numeric($JournalID)) {
+			return false;
+		}
+		
+		if (!is_numeric($AccountPlanID)) {
+			return false;
+		}
+
+		if (!is_numeric($InvoiceID)) {
+			return false;
+		}
+		
+		if ($VoucherType == "" || strlen($VoucherType) != 1) {
+			return false;
+		}
+		
+
+		global $_lib;
+        $query = "select COUNT(*) AS cnt from voucher as v
+                where v.InvoiceID='$InvoiceID' AND 
+                v.InvoiceID != '' AND 
+                v.VoucherType='$VoucherType' AND 
+                v.JournalID != '$JournalID' AND 
+                v.AccountPlanID='$AccountPlanID'";
+        #print "$query<br>\n";
+        $row = $_lib['storage']->get_row(array('query' => $query));
+		return $row->cnt == 0;
+	}
+
 }
 ?>
