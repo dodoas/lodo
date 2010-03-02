@@ -20,8 +20,13 @@ class empatix_framework_logic_xmldomtoobject {
         foreach($args as $key => $value) {
             $this->{$key} = $value;        
         }
+
+		if (!isset($args['attributesOfInterest'])) {
+			$this->attributesOfInterest = array();
+		}
  
         $this->arrayTagH = $args['arrayTags'];
+
     }
     
     ################################################################################################
@@ -37,10 +42,27 @@ class empatix_framework_logic_xmldomtoobject {
         $Oject = $this->domtoobject($domxml->documentElement, 0);
         return $Oject;    
     }
+
+	protected function getAttribute($node, $attribute_name) {
+		if (!$node->hasAttributes()) {
+			return false;
+		}
+
+		foreach ($node->attributes as $name => $attr_node) {
+			if ($name == $attribute_name) {
+				return $attr_node->nodeValue;
+			}
+		}
+		return false;
+
+		// $node->hasAttribute($attribute_name);
+		// return $node->getAttribute($attribute_name);
+	}
     
     ################################################################################################
     private function domtoobject($node, $level) {
         $level++;
+
         if($node->hasChildNodes()) {
 
             for($i=0; $i < $level;$i++) {
@@ -48,7 +70,18 @@ class empatix_framework_logic_xmldomtoobject {
             }
 
             if($this->debug) print "Level: $level $blanks tagName: $node->tagName<br>\n";
+
             foreach($node->childNodes as $childnode){
+
+				// save attributes defined as legal
+				if (!empty($this->attributesOfInterest)) {
+					foreach ($this->attributesOfInterest as $attr) {
+						if ($attr_value = $this->getAttribute($childnode, $attr)) {
+							$attribute_name = $this->nodeName($childnode->nodeName) ."_Attr_" . $attr;
+							$obj->{$attribute_name} = $attr_value;
+						}
+					}
+				}
 
                 if($this->debug) print "Level: $level $blanks childnode: tagName: $childnode->tagName, tagValue: $childnode->tagValue, nodeName: $childnode->nodeName, nodeValue: $childnode->nodeValue<br>\n";
                 #Invoice og InvoiceLine må alltid bli satt til array.

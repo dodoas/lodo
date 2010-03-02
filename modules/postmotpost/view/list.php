@@ -8,6 +8,9 @@ $db_table 				= 'voucher';
 includelogic('accounting/accounting');
 $accounting = new accounting();
 includelogic('postmotpost/postmotpost');
+includelogic('exchange/exchange');
+
+$currencies = exchange::getCurrencies();
 
 $postmotpost = new postmotpost(array('AccountPlanID' => $_REQUEST['AccountPlanID'], 'ReskontroFromAccount' => $_REQUEST['ReskontroFromAccount'], 'ReskontroToAccount' => $_REQUEST['ReskontroToAccount'], 'DepartmentID' => $_REQUEST['report_DepartmentID'], 'ProjectID' => $_REQUEST['report_ProjectID']));
 require "record.inc";
@@ -89,6 +92,7 @@ if(count($postmotpost->voucherH) > 0)
                 <th class="sub">Ut</th>
                 <th class="sub">Valuta inn</th>
                 <th class="sub">Valuta ut</th>
+                <th class="sub">Valuta/kurs</th>
                 <th class="sub">MVA%</th>
                 <th class="sub">Mengde</th>
                 <th class="sub">Avd.</th>
@@ -108,7 +112,7 @@ if(count($postmotpost->voucherH) > 0)
             {
             ?>
                 <tr class="voucher">
-                    <th colspan="11"><? print $postmotpost->sumaccountH[$AccountPlanID]->Name ?></th>
+                    <th colspan="12"><? print $postmotpost->sumaccountH[$AccountPlanID]->Name ?></th>
                     <th colspan="9"></th>
                 </tr>
                 <?
@@ -120,7 +124,16 @@ if(count($postmotpost->voucherH) > 0)
                     } else {
                         $class  = 'voucher';
                     }
-
+                    
+                    #change currency
+                    if($voucher->ForeignCurrencyID != '' && $voucher->ForeignAmount > 0 && $voucher->ForeignConvRate > 0) {
+                        $tmp_foreign = $voucher->ForeignCurrencyID ." ". $_lib['format']->Amount($voucher->ForeignAmount) ." / ". $voucher->ForeignConvRate;
+                    } else {
+                        $tmp_foreign = "Endre valuta";
+                    }
+                    $ch_curr = exchange::getAnchorVoucherForeignCurrency($voucher->VoucherID, $tmp_foreign);
+                    $ch_curr .= exchange::getFormVoucherForeignCurrency($voucher->VoucherID, $voucher->ForeignAmount, $voucher->ForeignConvRate, $voucher->ForeignCurrencyID);
+                        
                     ?>
                     <tr class="<? print $class ?>">
                         <td><? print $voucher->Name; ?></td>
@@ -132,6 +145,7 @@ if(count($postmotpost->voucherH) > 0)
                         <td class="number"><nobr><? if($voucher->AmountOut > 0) { print $_lib['format']->Amount($voucher->AmountOut); } ?></nobr></td>
                         <td class="number"><nobr><? if($voucher->ForeignAmountIn > 0) { print $_lib['format']->Amount($voucher->ForeignAmountIn); } ?></nobr></td>
                         <td class="number"><nobr><? if($voucher->ForeignAmountOut > 0) { print $_lib['format']->Amount($voucher->ForeignAmountOut); } ?></nobr></td>
+                        <td class="number"><nobr><? print $ch_curr; ?></nobr></td>
                         <td><? if($voucher->VAT > 0)          { print $voucher->VAT; } ?></td>
                         <td><? if($voucher->Quantity > 0)     { print $voucher->Quantity; } ?></td>
                         <td><? if($voucher->DepartmentID > 0) { print $voucher->DepartmentID; } ?></td>
@@ -155,7 +169,7 @@ if(count($postmotpost->voucherH) > 0)
                 }
                 ?>
             <tr>
-                <th class="sub" colspan="5">Sum for konto <? print $AccountPlanID ?></th>
+                <th class="sub" colspan="6">Sum for konto <? print $AccountPlanID ?></th>
                 <th class="sub number"><? if($postmotpost->sumaccountH[$AccountPlanID]->Diff  >= 0) { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->Diff); } ?></th>
                 <th class="sub number"><? if($postmotpost->sumaccountH[$AccountPlanID]->Diff  < 0)  { print $_lib['format']->Amount(abs($postmotpost->sumaccountH[$AccountPlanID]->Diff)); } ?></th>
                 <th class="sub number"><? if($postmotpost->sumaccountH[$AccountPlanID]->FAmountIn  > 0) { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->FAmountIn) ; } ?></th>
@@ -164,10 +178,10 @@ if(count($postmotpost->voucherH) > 0)
             </tr>
             <? } ?>
             <tr>
-                <td colspan="18"></td>
+                <td colspan="19"></td>
             </tr>
             <tr class="voucher">
-                <th class="sub" colspan="5">Sum &aring;pne poster</th>
+                <th class="sub" colspan="6">Sum &aring;pne poster</th>
                 <th class="sub number"><nobr><? if($postmotpost->total['total']->Diff  >= 0) { print $_lib['format']->Amount($postmotpost->total['total']->Diff);  }; ?></nobr></th>
                 <th class="sub number"><nobr><? if($postmotpost->total['total']->Diff  < 0)  { print $_lib['format']->Amount(abs($postmotpost->total['total']->Diff));  }; ?></nobr></th>
                 <th class="sub number"><nobr><? if($postmotpost->total['total']->FDiff >= 0) { print $_lib['format']->Amount($postmotpost->total['total']->FDiff); }; ?></nobr></th>
@@ -175,7 +189,7 @@ if(count($postmotpost->voucherH) > 0)
                 <th class="sub" colspan="10"></th>
             </tr>
             <tr>
-                <th class="sub" colspan="5"><? print $postmotpost->total['account']->Name ?></th>
+                <th class="sub" colspan="6"><? print $postmotpost->total['account']->Name ?></th>
                 <th class="sub number"><nobr><? if($postmotpost->total['account']->Diff  >= 0) { print $_lib['format']->Amount($postmotpost->total['account']->Diff);       } ?></nobr></th>
                 <th class="sub number"><nobr><? if($postmotpost->total['account']->Diff  < 0 ) { print $_lib['format']->Amount(abs($postmotpost->total['account']->Diff));  } ?></nobr></th>
                 <th class="sub number"><nobr><? if($postmotpost->total['account']->FDiff >= 0) { print $_lib['format']->Amount($postmotpost->total['account']->FDiff);      } ?></nobr></th>
@@ -183,7 +197,7 @@ if(count($postmotpost->voucherH) > 0)
                 <th class="sub" colspan="10"></th>
             </tr>
             <tr>
-                <th class="sub" colspan="5"><? print $postmotpost->total['diff']->Name ?></th>
+                <th class="sub" colspan="6"><? print $postmotpost->total['diff']->Name ?></th>
                 <th class="sub number"><nobr><? if($postmotpost->total['diff']->Diff >= 0) { print $_lib['format']->Amount($postmotpost->total['diff']->Diff);      } ?></nobr></th>
                 <th class="sub number"><nobr><? if($postmotpost->total['diff']->Diff < 0 ) { print $_lib['format']->Amount(abs($postmotpost->total['diff']->Diff)); } ?></nobr></th>
                 <th class="sub"></th>
@@ -191,7 +205,7 @@ if(count($postmotpost->voucherH) > 0)
                 <th class="sub" colspan="10"></th>
             </tr>
             <tr class="voucher">
-                <th class="sub" colspan="16"></th>
+                <th class="sub" colspan="17"></th>
                 <th class="sub number" colspan="3">
                 <? if($_lib['sess']->get_person('AccessLevel') >= 3) { print $_lib['form3']->submit(array('name' => 'action_postmotpost_openall', 'value'=>'&Aring;pne alle (L)', 'accesskey' => 'O')); } ?> 
                 <? print $_lib['form3']->submit(array('name' => 'action_postmotpost_closeall', 'value'=>'Lukk alle (L)', 'accesskey' => 'L')) ?>

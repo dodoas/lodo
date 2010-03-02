@@ -153,6 +153,9 @@ print $_lib['sess']->doctype ?>
     <th>MVA</th>
     <th>Kode</th>
     <th width="50">Saldo</th>
+    <th width="50">V. inn</th>
+    <th width="50">V. ut</th>
+    <th width="50">V. saldo</th>
     <th>Tekst</th>
     <th>KID</th>
     <th>Faktura</th>
@@ -176,7 +179,7 @@ print $_lib['sess']->doctype ?>
 				<td class="number"></td>
 				<td colspan="2"></td>
 				<td class="number"><? print $_lib['format']->Amount($sumAccountH[$account]) ?></td>
-				<td colspan="3"></td>
+				<td colspan="6"></td>
 				<td class="noprint" colspan="2"></td>
 			</tr>
             <?
@@ -212,7 +215,7 @@ print $_lib['sess']->doctype ?>
             ?>
 
             <tr>
-                <th colspan = "9"><? print "$account - ".$_lib['format']->AccountPlanIDToName($account) ?></th>
+                <th colspan = "12"><? print "$account - ".$_lib['format']->AccountPlanIDToName($account) ?></th>
                 <th></th>
                 <th colspan="5"></th>
             </tr>
@@ -232,7 +235,15 @@ print $_lib['sess']->doctype ?>
                     <th class="sub number"><? print $accountplan->credittext ?></th>
                     <th class="sub" colspan="2"></th>
                     <th class="sub number"><? print $_lib['format']->Amount($sumAccountH[$account]) ?></th>
-                    <th class="sub" colspan="3"></th>
+                    <th class="sub number">V. inn</th>
+                    <th class="sub number">V. ut</th>
+                    <th class="sub number">V. saldo</th>
+                <? if ($voucher->ForeignCurrencyID && $voucher->ForeignAmount && $voucher->ForeignConvRate) { ?>
+                    <th class="sub">Utenlandsk valuta</th>
+                <? } else { ?>
+                    <th class="sub"></th>
+                <? } ?>
+                    <th class="sub" colspan="2"></th>
                     <th class="sub noprint" colspan="2"></th>
                 </tr>
             <?
@@ -243,6 +254,25 @@ print $_lib['sess']->doctype ?>
         $saldo                  += ($voucher->AmountIn - $voucher->AmountOut);
         $_lib['message']->add("$i Saldo: $voucher->VoucherType$voucher->JournalID $voucher->AccountPlanID - $voucher->VoucherPeriod : $voucher->AmountIn - $voucher->AmountOut = $saldo");
         $quantitysum += $voucher->Quantity;
+        
+        #Foreign currency
+        $foreign_amount_in  = 0;
+        $foreign_amount_out = 0;
+        $foreign_saldo      = 0;
+        if ($voucher->ForeignCurrencyID && $voucher->ForeignAmount && $voucher->ForeignConvRate) {
+            $foreign_currency = "(".$voucher->ForeignCurrencyID ." ". $_lib['format']->Amount($voucher->ForeignAmount). " / ". $voucher->ForeignConvRate .") ";
+            $foreign_currency_id = $voucher->ForeignCurrencyID;
+            if ($voucher->AmountIn > 0) {
+                $foreign_amount_in  = $voucher->ForeignAmount;
+            }
+            if ($voucher->AmountOut > 0) {
+                $foreign_amount_out = $voucher->ForeignAmount;
+            }
+            $foreign_saldo += ($foreign_amount_in - $foreign_amount_out);
+        } else {
+            $foreign_currency = '';
+        }
+
         ?>
             <tr class="voucher">
                 <td><nobr><? print $i    ?> <? print $voucher->VoucherDate    ?></nobr></td>
@@ -255,7 +285,10 @@ print $_lib['sess']->doctype ?>
                 <td class="number"><? if($voucher->VatID > 0) { print "$voucher->Vat%"; } ?> </td>
                 <td class="number"><? if($voucher->VatID > 0) { print $voucher->VatID; } ?></td>
                 <td class="number"><nobr><? print $_lib['format']->Amount($saldo); ?></nobr></td>
-                <td><? print substr($voucher->Description,0,20); if(strlen($voucher->Description) > 20) print "..."; ?></td>
+                <td class="number"><? ($voucher->AmountIn > 0) ? print $voucher->ForeignCurrencyID ." ". $_lib['format']->Amount($foreign_amount_in) : print '' ?></td>
+                <td class="number"><? ($voucher->AmountOut > 0) ? print $voucher->ForeignCurrencyID ." ". $_lib['format']->Amount($foreign_amount_out) : print '' ?></td>
+                <td class="number"><? print $voucher->ForeignCurrencyID ." ". $_lib['format']->Amount($foreign_saldo) ?></td>
+                <td><? print $foreign_currency; print substr($voucher->Description,0,20); if(strlen($voucher->Description) > 20) print "..."; ?></td>
                 <td><? print $voucher->KID ?></td>
                 <td><? print $voucher->InvoiceID ?></td>
                 <td class="noprint"><nobr><? print $_lib['format']->Amount(getdiffKID($voucher->AccountPlanID, $voucher->KID, $voucher->VoucherID)) ?></nobr></td>
@@ -274,12 +307,15 @@ print $_lib['sess']->doctype ?>
     <tr>
         <th colspan="9"><? print "$reptype " ?></th>
         <th class="number"><nobr><? print $_lib['format']->Amount($sumSaldoAll) ?></nobr></th>
+        <th colspan="2"></th>
+        <th class="number"><? print $foreign_currency_id ." ". $_lib['format']->Amount($foreign_saldo) ?></th>
         <th colspan="5"></th>
     </tr>
         <tr>
             <th colspan="9"><? print $selectedAccount->AccountPlanID . " " . $selectedAccount->AccountName ?></th>
             <th class="number"><nobr><? list($sumhoved, $quantity) = get_saldo($selectedAccount->AccountPlanID, $_fromperiod, $_lib['date']->get_next_period($_toperiod)); print $_lib['format']->Amount($sumhoved) ?></nobr></th>
-            <th colspan="5"></th>
+            <th colspan="2"></th>
+            <th colspan="6"></th>
         </tr>
         <tr>
             <th colspan="9"><? print "Differanse " ?></th>
@@ -288,7 +324,8 @@ print $_lib['sess']->doctype ?>
             $sumdiff = $sumhoved - $sumSaldoAll;
             print $_lib['format']->Amount($sumdiff);
             ?></nobr></th>
-            <th colspan="5"></th>
+            <th colspan="2"></th>
+            <th colspan="6"></th>
         </tr>
 </table>
 </form>

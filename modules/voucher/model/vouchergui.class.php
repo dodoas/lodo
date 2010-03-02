@@ -103,18 +103,69 @@ class framework_logic_vouchergui
             }
         } 
         $html .= '</nobr>';
+        
         $html .= '<td>';
         if($accountplan->EnableCurrency) {
             $html .= $_lib['form3']->text(array('name' => 'voucher.ForeignAmountIn', 'value' => $_lib['format']->Amount($voucher->ForeignAmountIn), 'class' => 'number', 'size' => '6', 'tabindex' => $tabindexin, 'accesskey' => 'N')) . $accountplan->Currency; 
         };
         $html .= '</td>';
-    
+
         $html .= '<td>';
         if($accountplan->EnableCurrency) {
             $html .= $_lib['form3']->text(array('name' => 'voucher.ForeignAmountOut', 'value' => $_lib['format']->Amount($voucher->ForeignAmountOut), 'class' => 'number', 'size' => '6', 'tabindex' => $tabindexout, 'accesskey' => 'T')) . $accountplan->Currency; 
         }
         $html .= '</td>';
+
+        return $html;
+    }
+
+
+    /***************************************************************************
+    * Show currency imported from Fakturabank
+    * @param
+    * @return
+    */
+    function currency2($voucher) {
+        global $_lib;
     
+        $html = '';
+        
+        #Converted to NOK from foreign currency
+        $is_foreign = false;
+        if ($voucher->ForeignCurrencyID && $voucher->ForeignAmount && $voucher->ForeignConvRate) {
+            $tmp_foreign = $voucher->ForeignCurrencyID ." ". $_lib['format']->Amount($voucher->ForeignAmount);
+            $is_foreign = true;
+        } else {
+            $tmp_foreign = "Sett valuta";
+        }
+
+        $html .= '<td></td>';
+        
+        #Show conversion rate
+        $html .= '<td>';
+        if($is_foreign) {
+            $html .= exchange::getAnchorVoucherForeignCurrency($voucher->VoucherID, 'Rate '. $voucher->ForeignConvRate);
+        } else {
+            $html .= exchange::getAnchorVoucherForeignCurrency($voucher->VoucherID, 'Valuta');
+        }
+        $html .= exchange::getFormVoucherForeignCurrency($voucher->VoucherID, $voucher->ForeignAmount, $voucher->ForeignConvRate, $voucher->ForeignCurrencyID);
+        $html .= '</td>';
+
+        #AmountIn
+        $html .= '<td>';
+        if($is_foreign && $voucher->AmountIn > 0) {
+            $html .= $tmp_foreign;
+        };
+        $html .= '</td>';
+
+
+        #AmountOut
+        $html .= '<td>';
+        if($is_foreign && $voucher->AmountOut > 0) {
+            $html .= $tmp_foreign;
+        };
+        $html .= '</td>';
+
         return $html;
     }
     

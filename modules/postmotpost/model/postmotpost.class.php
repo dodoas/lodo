@@ -255,6 +255,9 @@ class postmotpost {
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->VoucherID         = $voucher->VoucherID;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->KID               = $voucher->KID;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->InvoiceID         = $voucher->InvoiceID;
+                $this->voucherH[$AccountPlanID][$voucher->VoucherID]->ForeignCurrencyID = $voucher->ForeignCurrencyID;
+                $this->voucherH[$AccountPlanID][$voucher->VoucherID]->ForeignAmount		= $voucher->ForeignAmount;
+                $this->voucherH[$AccountPlanID][$voucher->VoucherID]->ForeignConvRate   = $voucher->ForeignConvRate;
             }
 
             /***************************************************************

@@ -4,6 +4,7 @@ $db_table       = "voucher";
 #require_once  "setup.inc";
 includelogic('accounting/accounting');
 includelogic('voucher/vouchergui');
+includelogic('exchange/exchange');
 
 $accounting     = new accounting();
 $voucher_gui    = new framework_logic_vouchergui();
@@ -272,6 +273,7 @@ $numfields = 0;
     $totalAmountOut += $voucher_input->AmountOut;
   #}
 
+
 if(!$accountplan->EnableCurrency)   { $numfields += 2; };
 if(!$accountplan->EnableQuantity)   { $numfields++; };
 if(!$accountplan->EnableDepartment) { $numfields++; };
@@ -334,6 +336,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     <th>Debet</th>
     <th>Kredit</th>
     <th>Saldo</th>
+    <th></th>
     <th>I<u>n</u>n</th>
     <th>U<u>t</u></th>
     <th><u>M</u>VA</th>
@@ -350,7 +353,8 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     <td><? print $voucher_gui->active_line($voucher_input->VoucherIDOld, $voucherHead->VoucherID); ?></td>
     <td><? print $voucher_gui->account($voucher_input->VoucherPeriod, $voucher_input->new, $db_table, $voucher, $voucher_input->AccountPlanID, false) ?></td>
     <? print $voucher_gui->creditdebitfield($AmountField, $accountplan, $voucher_input->AmountIn, $voucher_input->AmountOut) ?>
-    <? print $voucher_gui->currency($voucherHead, $accountplan, $vb, $class) ?>
+    <? //print $voucher_gui->currency($voucherHead, $accountplan, $vb, $class) ?>
+    <? print $voucher_gui->currency2($voucherHead) ?>
     <td><? print $voucher_gui->vat($voucherHead, $accountplan, $VAT, $oldVatID, $voucher_input->VatID, $voucher_input->VatPercent) ?></td>
     <td><? if($accountplan->EnableQuantity)   { ?><input class="voucher" type="text" size="5"  tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" name="voucher.Quantity" accesskey="Q" value="<? print $_lib['format']->Amount($voucherHead->Quantity) ?>"><? } ?></td>
     <td><? if($rowCount>1) { $tmp = ''; } else { $tmp = $tabindex++; }; if($accountplan->EnableDepartment) { $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher_input->DepartmentID, 'tabindex' => $tmp, 'accesskey' => 'V')); } ?></td>
@@ -394,6 +398,13 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
         $totalAmountIn  += $voucher->AmountIn;
         $totalAmountOut += $voucher->AmountOut;
     }
+    
+   #Sum foreign amount
+   if ($voucher->AmountIn > 0)
+      $totalForeignAmountIn  += $voucher->ForeignAmount;
+   if ($voucher->AmountOut > 0)
+      $totalForeignAmountOut += $voucher->ForeignAmount;
+   $totalForeignCurrency = $voucher->ForeignCurrencyID;
 
   if($accountplan->EnableReskontro == 0 and ($view_mvalines == 1 or ($view_mvalines == 0 and $voucher->DisableAutoVat != 1)))
   {
@@ -486,7 +497,8 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
       <td><? print $voucher_gui->active_line($voucher_input->VoucherIDOld, $voucher->VoucherID); ?></td>
       <td><? print $voucher_gui->account($voucher_input->VoucherPeriod, $voucher_input->new, $db_table, $voucher, $voucher->AccountPlanID, true) ?></td>
       <? print $voucher_gui->creditdebitfield($AmountField, $accountplan, $voucher->AmountIn, $voucher->AmountOut) ?>
-      <? print $voucher_gui->currency($voucherHead, $accountplan, $vb, $class1) ?>
+      <? //print $voucher_gui->currency($voucherHead, $accountplan, $vb, $class1) ?>
+      <? print $voucher_gui->currency2($voucher) ?>
       <td><? print $voucher_gui->vat($voucher, $accountplan, $VAT, $oldVatID, $VatID, $VatPercent) ?></td>
       <td><? if($accountplan->EnableQuantity)   { ?><input class="voucher" type="text" size="5"  tabindex="<? print $tabindex++; ?>" accesskey="Q" name="voucher.Quantity"        value="<? print "$voucher->Quantity"; ?>"><? } ?></td>
       <td><? if($accountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher->DepartmentID, 'tabindex' => $tabindex++, 'accesskey' => 'V')); } ?></td>
@@ -518,7 +530,11 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
     <td></td>
     <td align="right"><? print $_lib['format']->Amount($totalAmountIn) ?></td>
     <td align="right"><? print $_lib['format']->Amount($totalAmountOut) ?></td>
-  <td colspan="13" align="right">
+    <td align="right"></td>
+    <td align="right"></td>
+    <td align="right"><? print $totalForeignCurrency ." ". $_lib['format']->Amount($totalForeignAmountIn) ?></td>
+    <td align="right"><? print $totalForeignCurrency ." ". $_lib['format']->Amount($totalForeignAmountOut) ?></td>
+  <td colspan="10" align="right">
   <? if($_lib['sess']->get_person('AccessLevel') >= 2) {
        if($accounting->is_valid_accountperiod($voucher_input->VoucherPeriod, $_lib['sess']->get_person('AccessLevel'))) { ?>
     <form name="form_new_line" action="<? print $MY_SELF ?>" method="post">

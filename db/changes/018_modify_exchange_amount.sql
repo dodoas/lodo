@@ -1,0 +1,1 @@
+ALTER TABLE `exchange` MODIFY COLUMN `Amount` DECIMAL(16,4);

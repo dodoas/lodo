@@ -1,5 +1,6 @@
 <?
 includelogic('accounting/accounting');
+includelogic('exchange/exchange');
 
 class logic_invoicein_invoicein implements Iterator {
 
@@ -15,13 +16,57 @@ class logic_invoicein_invoicein implements Iterator {
             $this->{$key} = $value;
         }       
 
-        if(!$this->FromDate) {
+		#FromDate
+        if (!$this->FromDate && array_key_exists('invin', $_COOKIE) && array_key_exists('fd', $_COOKIE['invin'])) {
+			$this->FromDate =  $_COOKIE['invin']['fd'];
+		} elseif(!$this->FromDate) {
             $this->FromDate = $_lib['sess']->get_session('DateStartYear');
-        }
+		}
+		setcookie("invin[fd]", $this->FromDate, time()+3600);
 
-        if(!$this->ToDate) {
-            $this->ToDate   = $_lib['sess']->get_session('DateEndYear');
-        }
+		#ToDate
+        if (!$this->ToDate && array_key_exists('invin', $_COOKIE) && array_key_exists('td', $_COOKIE['invin'])) {
+			$this->ToDate =  $_COOKIE['invin']['td'];
+		} elseif(!$this->ToDate) {
+            $this->ToDate = $_lib['sess']->get_session('DateStartYear');
+		}
+		setcookie("invin[td]", $this->ToDate, time()+3600);
+
+		#RemittanceStatus
+        if ($this->show_search) {
+			setcookie("invin[rs]", $this->RemittanceStatus, time()+3600);
+		} elseif (!$this->show_search && array_key_exists('invin', $_COOKIE) && array_key_exists('rs', $_COOKIE['invin'])) {
+			$this->RemittanceStatus = $_COOKIE['invin']['rs'];
+		}
+		setcookie("invin[rs]", $this->RemittanceStatus, time()+3600);
+
+		#InvoiceNumber
+        if ($this->show_search) {
+			setcookie("invin[iid]", $this->InvoiceNumber, time()+3600);
+		} elseif (!$this->show_search && array_key_exists('invin', $_COOKIE) && array_key_exists('iid', $_COOKIE['invin'])) {
+			$this->InvoiceNumber = $_COOKIE['invin']['iid'];
+		}
+		setcookie("invin[iid]", $this->InvoiceNumber, time()+3600);
+
+		#Journaled
+        if ($this->show_search && !$this->Journaled) {
+			setcookie("invin[j]", '', time()+3600);
+		} elseif ($this->show_search && $this->Journaled) {
+			$this->Journaled =  1;
+			setcookie("invin[j]", 1, time()+3600);
+		} elseif (array_key_exists('invin', $_COOKIE) && array_key_exists('j', $_COOKIE['invin'])) {
+			$this->Journaled =  $_COOKIE['invin']['j'];
+			setcookie("invin[j]", 1, time()+3600);
+		}
+
+		#PaymentMeans
+        if ($this->show_search) {
+			setcookie("invin[pm]", $this->PaymentMeans, time()+3600);
+		} elseif (!$this->show_search && array_key_exists('invin', $_COOKIE) && array_key_exists('pm', $_COOKIE['invin'])) {
+			$this->PaymentMeans = $_COOKIE['invin']['pm'];
+		}
+		setcookie("invin[pm]", $this->PaymentMeans, time()+3600);
+
         $this->accounting  = new accounting();
     }
 
@@ -55,7 +100,7 @@ class logic_invoicein_invoicein implements Iterator {
         $query  = substr($query, 0, -4);
         $query .= " order by i.InvoiceDate asc";
 
-	#Cleaning after prior developer. -eirhje 23.01.10
+		#Cleaning after prior developer. -eirhje 23.01.10
         #print "$query<br>\n";
         $result     = $_lib['db']->db_query($query);
         list($NextAvailableJournalID) = $this->accounting->get_next_available_journalid(array('available' => true, 'update' => false, 'type' => $this->VoucherType, 'reuse' => false, 'from' => 'Invoicein'));
@@ -212,13 +257,22 @@ class logic_invoicein_invoicein implements Iterator {
                     $VoucherH['voucher_AddedByAutoBalance'] = 0;
                     $VoucherH['voucher_VoucherType']        = $InvoiceO->VoucherType;
                     $VoucherH['voucher_AutoKID']            = 0; #Information updated automatically from KID information
-        
-                    ##
+
+//$InvoiceO->DocumentCurrencyCode = 'EUR'; //DELETE
+
+                    #Foreign currency
+                    $TotCustPrice = $InvoiceO->TotalCustPrice;
+                    if ($InvoiceO->DocumentCurrencyCode != 'NOK') {
+                        $TotCustPrice = exchange::convertToNOK($InvoiceO->DocumentCurrencyCode, $InvoiceO->TotalCustPrice);
+                        $VoucherH['voucher_ForeignCurrencyID']  = $InvoiceO->ForeignCurrencyID; //$InvoiceO->DocumentCurrencyCode;
+                        $VoucherH['voucher_ForeignAmount']      = (float)abs($InvoiceO->ForeignAmount); //abs($InvoiceO->TotalCustPrice);
+                        $VoucherH['voucher_ForeignConvRate']    = (float)$InvoiceO->ForeignConvRate; //exchange::getConversionRate($InvoiceO->DocumentCurrencyCode);
+                    }
                     if($InvoiceO->TotalCustPrice < 0)
                         $VoucherH['voucher_AmountIn']           = abs($InvoiceO->TotalCustPrice);
                     else
                         $VoucherH['voucher_AmountOut']          = abs($InvoiceO->TotalCustPrice);
-    
+
                     $VoucherH['voucher_Active']             = 1;
                     $VoucherH['voucher_Description']        = "";
                     $VoucherH['voucher_AutomaticReason']    = "Fra innk faktura ID: " . $InvoiceO->ID;
@@ -245,9 +299,21 @@ class logic_invoicein_invoicein implements Iterator {
                     $query_invoiceline      = "select il.* from invoiceinline as il where il.ID='$InvoiceO->ID' and il.Active <> 0 order by il.LineID asc";
                     #print "query_invoiceline" . $query_invoiceline . "<br>\n";
                     $result2                = $_lib['db']->db_query($query_invoiceline);
-    
-                    while($line = $_lib['db']->db_fetch_object($result2)) {
-                        #print_r($vatO);
+
+                    $lines = array();
+
+                    while ($line = $_lib['db']->db_fetch_object($result2)) {
+                        $lines[] = $line;
+                    }
+
+                    $num_lines = count($line);
+
+                    $invoice_line_sum = 0;
+
+                    for ($i = 0; $i < $num_lines; $i++) {
+                        $line = $lines[$i];
+
+                        $last_line = ($i == $num_lines - 1) ? true : false;
                             
                         $VoucherH['voucher_AmountIn']       = 0;
                         $VoucherH['voucher_AmountOut']      = 0;
@@ -261,6 +327,17 @@ class logic_invoicein_invoicein implements Iterator {
                             #Add VAT to the price - since it is ex VAT
                             #print "$line->UnitCustPrice * (($line->Vat/100) +1)";
                             $TotalPrice = $TotalPrice * (($line->Vat/100) +1);
+                            $invoice_line_sum += $TotalPrice;
+                        }
+
+                        if ($last_line) {
+                            if ($invoice_line_sum != $InvoiceO->TotalCustPrice) {
+                                if ($TotalPrice < $InvoiceO->TotalCustPrice) {
+                                    $TotalPrice += ($InvoiceO->TotalCustPrice - $invoice_line_sum);
+                                } else {
+                                    $TotalPrice -= ($invoice_line_sum - $InvoiceO->TotalCustPrice);
+                                }
+                            }
                         }
 
                         if($TotalPrice > 0) {
@@ -289,7 +366,27 @@ class logic_invoicein_invoicein implements Iterator {
                         #print_r($VoucherH);
                         $this->accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $InvoiceO->VoucherType, 'comment' => 'Fra fakturabank'));
                     }
-    
+
+
+					# If VatID missing (which it always will be here), and we have accountplanid, and
+					# InvoiceO->InvoiceDate != "", then
+					# get VatID from account plan. This is suboptimal since we do not know if VatID
+					# matches Vat percentage from last invoiceinline, but that will have to be the 
+					# simplification to live with for now, because of time constraints.
+					if (!isset($VoucherH['voucher_VatID']) || $VoucherH['voucher_VatID'] === "" || is_null($VoucherH['Voucher_VatID'])) {
+						if (isset($VoucherH['voucher_AccountPlanID']) && is_numeric($VoucherH['voucher_AccountPlanID']) &&
+							$InvoiceO->InvoiceDate != "") {
+							$account_vatid_query = "SELECT VatID from accountplan WHERE AccountPlanID = '" . $VoucherH['voucher_AccountPlanID'] . "'";
+							if ($result = $_lib['storage']->db_query3(array('query' => $account_vatid_query))) {
+								$account_vatid_obj = $_lib['storage']->db_fetch_object($result);
+								if (!empty($account_vatid_obj)) {
+									$VAT = $accounting->get_vataccount_object(array('VatID' => $account_vatid_obj->VatID, 'date' => $InvoiceO->InvoiceDate));
+									$VoucherH['voucher_VatID'] = $VAT->VatID;								
+								}
+							}
+						}
+					}
+
                     $this->accounting->set_journal_motkonto(array('post' => $VoucherH, 'VoucherType' => $VoucherH['voucher_VoucherType']));
                     $this->accounting->correct_journal_balance($VoucherH, $VoucherH['voucher_JournalID'], $VoucherH['voucher_VoucherType']);
 
@@ -362,5 +459,29 @@ class logic_invoicein_invoicein implements Iterator {
     function rewind() {
         $this->valid = (FALSE !== reset($this->iteratorH)); ;
     }
+
+
+    /***************************************************************************
+    * 
+    * @return mixed array
+    */
+    function getAllReadyInvoices() {
+		global $_lib;
+		$query = "SELECT COUNT(*) AS cnt, EXTRACT(YEAR FROM i.InvoiceDate) AS Y, EXTRACT(MONTH FROM i.InvoiceDate) AS M
+					FROM invoicein i
+					WHERE i.InvoiceNumber NOT IN (SELECT q.`InvoiceID` FROM `voucher` q WHERE i.InvoiceNumber = q.InvoiceID) 
+					GROUP BY Y, M
+					ORDER BY Y, M
+					LIMIT 0,1000";
+		
+	    $result     = $_lib['db']->db_query($query);
+		$lines = array();
+        while($row  = $_lib['db']->db_fetch_object($result)) {
+			$lines[] = array('Y'=>$row->Y, 'M'=>$row->M, 'cnt'=>$row->cnt);
+		}
+		return $lines;
+    }
+
+
 }
 ?>
