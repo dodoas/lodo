@@ -170,7 +170,7 @@ class db_mysql {
 
    #################################################################
    function db_update($db_query) {
-       global $_lib;;
+       global $_lib;
        if($this->debug) print "$db_query<br>\n";
        mysqli_query($this->link, $db_query) or /*$_lib['sess']->error*/ die("Bad update query x: " . var_dump(debug_backtrace()) . '<br>\nbacktrace: <br>\n' . mysqli_error($this->link) . "<br />$db_query");
        return mysqli_affected_rows($this->link);
@@ -604,6 +604,11 @@ class db_mysql {
       $_lib['sess']->debug($args['query']);
       $hash = array();
       $result = $this->db_query($args['query']);
+
+	  if (!$result) {
+		  return $hash;
+	  }
+
       while($_row = $this->db_fetch_assoc($result)) {
         $hash[$_row[$args['key']]] = $_row[$args['value']];
       }
@@ -639,6 +644,11 @@ class db_mysql {
 
         $array = array();
         $result = $_lib['db']->db_query($args['query']);
+
+		if (!$result) {
+			return $hash;
+		}
+
         while($_row = $_lib['db']->db_fetch_object($result)) {
             $hash[$_row->{$args['key']}] = $_row;
         }
@@ -851,6 +861,8 @@ class db_mysql {
             $success = false;
         }
 ;
+
+
         #Sjekk om brukeren har aksess til Œ oppdatere tabellen
         #FIX FIX IMPORTEANT SECURITY HOLE 1 == 1
         if($_lib['sess']->get_tableaccess($table) >= 2 || 1 == 1)
