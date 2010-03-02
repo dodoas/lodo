@@ -260,5 +260,31 @@ class Date
 
     return floor($diff / 86400);
   }
+  
+  # for legal format strings, see: http://php.net/manual/en/function.strftime.php
+  public function mysql_format($informat, $string) {
+	  ## only supported in php 5.3
+	  # for legal format strings, see: http://www.php.net/manual/en/function.date.php
+	  # $dt = DateTime::createFromFormat($format, $string);
+	  
+	  # return $dt->format( 'Y-m-d H:i:s' );
+
+  	  $outformat =  '%Y-%m-%d %H:%M:%S'; 
+	  $ftime = strptime($string, $informat); 
+	  $unxTimestamp = mktime( 
+							 $ftime['tm_hour'], 
+							 $ftime['tm_min'], 
+							 $ftime['tm_sec'], 
+							 1 , 
+							 $ftime['tm_yday'] + 1, 
+							 $ftime['tm_year'] + 1900 
+                 ); 
+
+	  return strftime($outformat, $unxTimestamp);
+  }
+
+  public function t_to_mysql_format($string) {
+	  return self::mysql_format('%Y-%m-%dT%H:%M:%S%z', $string);
+  }
 }
 ?>
