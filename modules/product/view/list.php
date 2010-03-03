@@ -57,18 +57,17 @@ $result2 = $_lib['db']->db_query($query);
             <?
                 while($row = $_lib['db']->db_fetch_object($result2))
                 {
-                    if($row->VatID)
-                    {
+                    if($row->AccountPlanID) {
                         $vat_query = "select Percent from vat as v, accountplan as a where a.AccountPlanID=$row->AccountPlanID and a.VatID=v.VatID";
                         $vatRow = $_lib['storage']->get_row(array('query' => $vat_query));
                     } else {
-                      unset($vatRow);
+                        unset($vatRow);
                     }
                     ?>
                     <tr>
                         <td align="center"><a href="<? print $_lib['sess']->dispatch ?>t=product.edit&ProductID=<? print $row->ProductID ?>"><? print $row->ProductNumber ?></a></td>
                         <td><a href="<? print $_lib['sess']->dispatch ?>t=product.edit&ProductID=<? print $row->ProductID ?>"><? print $row->ProductName ?></a></td>
-                        <td align="right"><? print $_lib['format']->Percent(array('value'=>$vatRow->Percent/100, 'return'=>'value')) ?></td>
+                        <td align="right"><? print $_lib['format']->Percent(array('value'=>$vatRow->Percent*1, 'return'=>'value')) ?></td>
                         <td align="right"><? print $_lib['format']->Amount(array('value'=>$row->UnitCostPrice, 'return'=>'value')) ?></td>
                         <td align="right"><? print $_lib['format']->Amount(array('value'=>$row->UnitCustPrice, 'return'=>'value')) ?></td>
                         <td align="left"><? if($row->AccountPlanID) { $query="select AccountName from accountplan where AccountPlanID=$row->AccountPlanID"; $row2=$_lib['storage']->get_row(array('query' => $query)); print $row->AccountPlanID." ".$row2->AccountName; } ?></td>
