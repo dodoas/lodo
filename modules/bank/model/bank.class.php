@@ -961,7 +961,7 @@ class framework_logic_bank {
         
             if($unvoted->Approved && !$accounting->IsJournalIDInUse($unvoted->JournalID, $this->VoucherType) && ($unvoted->ReskontroAccountPlanID || $unvoted->ResultAccountPlanID) && $unvoted->Day >= 1 && $unvoted->Day <= 31 && $unvoted->JournalID > 0) {
 
-                print_r($unvoted);
+                #print_r($unvoted);
 
                 $VoucherH = array();
                 $VoucherH['voucher_JournalID']           = $unvoted->JournalID;

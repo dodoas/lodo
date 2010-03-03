@@ -15,7 +15,7 @@ class search_class {
             #Find all open posts defined on this customer
             
             $accountplan = $accounting->get_accountplan_object($args['AccountPlanID']);
-            print_r($account);
+            #print_r($account);
             
             $query = "select v.VoucherID, v.AmountIn, v.AmountOut, v.JournalID, v.VoucherType, v.KID, v.InvoiceID, v.VoucherDate, a.AccountName, a.AccountPlanID from accountplan as a , voucher as v left join voucherstruct as s on (v.VoucherID=s.ParentVoucherID or v.VoucherID=s.ChildVoucherID)  where v.AccountPlanID = " . $args['AccountPlanID'] . " and (s.Closed=0 or s.Closed IS NULL) and (a.AccountPlanType='customer' or a.AccountPlanType='supplier') and a.AccountPlanID=v.AccountPlanID";
             #print "$query<br>";
