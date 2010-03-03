@@ -21,6 +21,7 @@ $result2 = $_lib['db']->db_query($query);
     <title>Empatix - product list</title>
     <meta name="cvs"                content="$Id: list.php,v 1.18 2005/10/28 17:59:40 thomasek Exp $">
     <? includeinc('head') ?>
+    <script src="lib/js/sorttable.js"></script>
 </head>
 
 <body>
@@ -29,19 +30,24 @@ $result2 = $_lib['db']->db_query($query);
     includeinc('left');
 ?>
 
-    <table class="lodo_data">
+    <table class="lodo_data" width="700px">
         <thead>
             <tr>
                 <th>Produkt listen:
             <tr>
-                <th colspan="5">
-                <th colspan="3">
+                <th style="text-align: right;">
                   <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
                     <form name="edit" action="<? print $_lib['sess']->dispatch ?>t=product.edit" method="post">
                         <? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table, 'field'=>'ProductNumber')) ?>
                         <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_product_new', 'value'=>'Nytt produkt (N)')) ?>
                     </form>
                   <? } ?>
+               </th>
+            </tr>
+         </thead>
+    </table>
+
+    <table class="sortable lodo_data" width="700px">
             <tr>
                 <th class="sub">Produktnummer</th>
                 <th class="sub">Produktnavn</th>
@@ -52,8 +58,6 @@ $result2 = $_lib['db']->db_query($query);
                 <th class="sub" align="right">Avdeling</th>
                 <th class="sub" align="right">Prosjekt</th>
             </tr>
-        </thead>
-        <tbody>
             <?
                 while($row = $_lib['db']->db_fetch_object($result2))
                 {
@@ -77,7 +81,6 @@ $result2 = $_lib['db']->db_query($query);
                     <?
                 }
             ?>
-        </tbody>
     </table>
 </body>
 </html>
