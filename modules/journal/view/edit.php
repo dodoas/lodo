@@ -358,8 +358,8 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     <td><? print $voucher_gui->active_line($voucher_input->VoucherIDOld, $voucherHead->VoucherID); ?></td>
     <td><? print $voucher_gui->account($voucher_input->VoucherPeriod, $voucher_input->new, $db_table, $voucher, $voucher_input->AccountPlanID, false) ?></td>
     <? print $voucher_gui->creditdebitfield($AmountField, $accountplan, $voucher_input->AmountIn, $voucher_input->AmountOut) ?>
-    <? //print $voucher_gui->currency($voucherHead, $accountplan, $vb, $class) ?>
-    <? print $voucher_gui->currency2($voucherHead) ?>
+    <? print $voucher_gui->currency($voucherHead, $accountplan, $vb, $class) ?>
+<? // print $voucher_gui->currency2($voucherHead) // we cannot use this function yet, as it causes nested forms ?>
     <td><? print $voucher_gui->vat($voucherHead, $accountplan, $VAT, $oldVatID, $voucher_input->VatID, $voucher_input->VatPercent) ?></td>
     <td><? if($accountplan->EnableQuantity)   { ?><input class="voucher" type="text" size="5"  tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" name="voucher.Quantity" accesskey="Q" value="<? print $_lib['format']->Amount($voucherHead->Quantity) ?>"><? } ?></td>
     <td><? if($rowCount>1) { $tmp = ''; } else { $tmp = $tabindex++; }; if($accountplan->EnableDepartment) { $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher_input->DepartmentID, 'tabindex' => $tmp, 'accesskey' => 'V')); } ?></td>
