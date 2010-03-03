@@ -113,7 +113,7 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
 									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber']) {
 										$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber']          = $match['InvoiceID'];
 									}
-							} else if (false) {
+							} else {
 								#If no KID and no Reskontro and in or out amout - try an automatic kid match to update data
 								#Always look up reskontro on kid - no we only do it if kid is missing - and on the first run.
 								#print "Ikke kjør denne nå<br>\n";
