@@ -207,9 +207,10 @@ if(count($postmotpost->voucherH) > 0)
             <tr class="voucher">
                 <th class="sub" colspan="17"></th>
                 <th class="sub number" colspan="3">
+                <? print $_lib['form3']->submit(array('name'=>'action_postpost_update', 'value'=>'Lagre (S)', 'accesskey' => 'S')) ?>
                 <? if($_lib['sess']->get_person('AccessLevel') >= 3) { print $_lib['form3']->submit(array('name' => 'action_postmotpost_openall', 'value'=>'&Aring;pne alle (L)', 'accesskey' => 'O')); } ?> 
                 <? print $_lib['form3']->submit(array('name' => 'action_postmotpost_closeall', 'value'=>'Lukk alle (L)', 'accesskey' => 'L')) ?>
-                <? print $_lib['form3']->submit(array('name'=>'action_postpost_update', 'value'=>'Lagre (S)', 'accesskey' => 'S')) ?>
+
                 </th>
             </tr>
         </tbody>

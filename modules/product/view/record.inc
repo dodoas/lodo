@@ -6,7 +6,7 @@ $ProductID = $_lib['input']->getProperty('ProductID');
 
 if($_lib['input']->getProperty('action_product_new'))
 {
-    $query="select ProductNumber from product where ProductNumber='$_POST[product_ProductNumber]'";
+    $query="select ProductNumber, ProductID from product where ProductNumber='$_POST[product_ProductNumber]'";
     $result = $_lib['db']->db_query($query);
 
     if($_lib['db']->db_numrows($result) == 0)
@@ -17,7 +17,8 @@ if($_lib['input']->getProperty('action_product_new'))
     }
     else
     {
-        $ProductID=$_POST[product_ProductID];
+        $row = $_lib['db']->db_fetch_object($result);
+        $ProductID=$row->ProductID;
     }
 }
 elseif($_lib['input']->getProperty('action_product_update'))

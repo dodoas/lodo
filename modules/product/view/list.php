@@ -7,18 +7,11 @@ $db_table = "product";
 
 require_once "record.inc";
 
-if(strlen($_REQUEST['db_start'])>0)
-{
-    $_SETUP['DB_START']['0'] = $_REQUEST['db_start'];
-}
-
-$db_stop = $_SETUP['DB_START']['0'] + $_SETUP['DB_OFFSET']['0'];
-
 $query = "select * from $db_table where Active <> 0";
 $result2 = $_lib['db']->db_query($query);
 $db_total = $_lib['db']->db_numrows($result2);
 
-$query = "select * from $db_table where Active <> 0 order by ProductID asc limit ".$_SETUP['DB_START']['0'].", ".$_SETUP['DB_OFFSET']['0'];
+$query = "select * from $db_table where Active <> 0 order by CAST(ProductNumber as SIGNED), ProductNumber asc"; 
 $result2 = $_lib['db']->db_query($query);
 
 ?>
@@ -28,6 +21,7 @@ $result2 = $_lib['db']->db_query($query);
     <title>Empatix - product list</title>
     <meta name="cvs"                content="$Id: list.php,v 1.18 2005/10/28 17:59:40 thomasek Exp $">
     <? includeinc('head') ?>
+    <script src="lib/js/sorttable.js"></script>
 </head>
 
 <body>
@@ -36,41 +30,24 @@ $result2 = $_lib['db']->db_query($query);
     includeinc('left');
 ?>
 
-    <table class="lodo_data">
+    <table class="lodo_data" width="700px">
         <thead>
             <tr>
                 <th>Produkt listen:
             <tr>
-                <th colspan="5">
-                <th colspan="3">
+                <th style="text-align: right;">
                   <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
                     <form name="edit" action="<? print $_lib['sess']->dispatch ?>t=product.edit" method="post">
                         <? print $_lib['form3']->Input(array('type'=>'text', 'table'=>$db_table, 'field'=>'ProductNumber')) ?>
                         <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_product_new', 'value'=>'Nytt produkt (N)')) ?>
                     </form>
                   <? } ?>
-            <tr>
-                <th>
-                <?
-                    if($_SETUP['DB_START']['0'] >= $_SETUP['DB_OFFSET']['0'])
-                    {
-                        ?> <a href="<? print $_lib['sess']->dispatch ?>t=product.list&amp;db_start=<? print $_SETUP['DB_START']['0']-$_SETUP['DB_OFFSET']['0'] ?>" title="Forrige">&lt;&lt;</a> <?
-                    }
-                    else
-                        print "&lt;&lt;";
-                ?>
-                <th colspan="2">Fant: <? print $db_total ?>, viser <? print $_SETUP['DB_START']['0']." til $db_stop"; ?>
-                <th>
-                <th align="right">
-                <?
-                    if($db_total > $db_stop)
-                    {
-                        ?> <a href="<? print $_lib['sess']->dispatch ?>t=product.list&amp;db_start=<? print $_SETUP['DB_START']['0']+$_SETUP['DB_OFFSET']['0'] ?>" title="Neste">&gt;&gt;</a> <?
-                    }
-                    else
-                        print "&gt;&gt;";
-                ?>
-                <th colspan="3">
+               </th>
+            </tr>
+         </thead>
+    </table>
+
+    <table class="sortable lodo_data" width="700px">
             <tr>
                 <th class="sub">Produktnummer</th>
                 <th class="sub">Produktnavn</th>
@@ -81,23 +58,20 @@ $result2 = $_lib['db']->db_query($query);
                 <th class="sub" align="right">Avdeling</th>
                 <th class="sub" align="right">Prosjekt</th>
             </tr>
-        </thead>
-        <tbody>
             <?
                 while($row = $_lib['db']->db_fetch_object($result2))
                 {
-                    if($row->VatID)
-                    {
+                    if($row->AccountPlanID) {
                         $vat_query = "select Percent from vat as v, accountplan as a where a.AccountPlanID=$row->AccountPlanID and a.VatID=v.VatID";
                         $vatRow = $_lib['storage']->get_row(array('query' => $vat_query));
                     } else {
-                      unset($vatRow);
+                        unset($vatRow);
                     }
                     ?>
                     <tr>
                         <td align="center"><a href="<? print $_lib['sess']->dispatch ?>t=product.edit&ProductID=<? print $row->ProductID ?>"><? print $row->ProductNumber ?></a></td>
                         <td><a href="<? print $_lib['sess']->dispatch ?>t=product.edit&ProductID=<? print $row->ProductID ?>"><? print $row->ProductName ?></a></td>
-                        <td align="right"><? print $_lib['format']->Percent(array('value'=>$vatRow->Percent/100, 'return'=>'value')) ?></td>
+                        <td align="right"><? print $_lib['format']->Percent(array('value'=>$vatRow->Percent*1, 'return'=>'value')) ?></td>
                         <td align="right"><? print $_lib['format']->Amount(array('value'=>$row->UnitCostPrice, 'return'=>'value')) ?></td>
                         <td align="right"><? print $_lib['format']->Amount(array('value'=>$row->UnitCustPrice, 'return'=>'value')) ?></td>
                         <td align="left"><? if($row->AccountPlanID) { $query="select AccountName from accountplan where AccountPlanID=$row->AccountPlanID"; $row2=$_lib['storage']->get_row(array('query' => $query)); print $row->AccountPlanID." ".$row2->AccountName; } ?></td>
@@ -107,7 +81,6 @@ $result2 = $_lib['db']->db_query($query);
                     <?
                 }
             ?>
-        </tbody>
     </table>
 </body>
 </html>

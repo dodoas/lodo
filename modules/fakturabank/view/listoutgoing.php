@@ -39,6 +39,10 @@ Merk: Du m&aring; registrere brukeren din p&aring; <a href="http://fakturabank.n
 <input type="submit" value="Opprett manglende kontoplaner (A)" name="action_fakturabank_addmissingaccountplan" accesskey="A">
 </form>
 
+<?
+if(is_array($InvoicesO->Invoice))
+{
+ ?>
 <table class="lodo_data">
 <thead>
 <tr>
@@ -58,34 +62,41 @@ Merk: Du m&aring; registrere brukeren din p&aring; <a href="http://fakturabank.n
 </thead>
 <tbody>
 <?
-foreach($InvoicesO->Invoice as $InvoiceO) {
-  $TotalCustPrice += $InvoiceO->LegalMonetaryTotal->PayableAmount;
-  $count++;
-  ?>
-    <tr class="<? print $InvoiceO->Class ?>">
-      <td class="number"><? print $InvoiceO->ID ?></td>
-      <td class="number"><? if($InvoiceO->Journaled) { ?><a href="<? print $_SETUP[DISPATCH]."t=journal.edit&amp;voucher_VoucherType=$InvoiceO->VoucherType&amp;voucher_JournalID=$InvoiceO->ID"; ?>&amp;action_journalid_search=1" target="_new"><? print $InvoiceO->VoucherType ?><? print $InvoiceO->JournalID ?></a><? } else { ?><? print $InvoiceO->VoucherType ?><? print $InvoiceO->JournalID ?><? } ?></td>
-      <td class="number"><? print $InvoiceO->IssueDate ?></td>
-      <td class="number"><? print substr($InvoiceO->IssueDate, 0, 7) ?></td>
-      <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&OrgNumber=<? print $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID ?>&inline=show" target="_new"><? print $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID ?></a></td>
-      <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&AccountPlanID=<? print $InvoiceO->AccountPlanID ?>&inline=show" target="_new"><? print $InvoiceO->AccountPlanID ?></a></td>
-      <td>&nbsp;<? print substr($InvoiceO->AccountingCustomerParty->Party->PartyName->Name,0,30) ?></td>
-      <td class="number"><b><? print $InvoiceO->PaymentMeans->PaymentDueDate ?></b></td>
-      <td class="number"><? print $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) ?></td>
-      <td class="number"><? print $InvoiceO->PaymentMeans->InstructionID ?></td>
-      <td><a href="https://fakturabank.no/invoices/<? str_replace(".", "%2E", rawurlencode(print $InvoiceO->FakturabankID)) ?>" title="Vis/SkrivUt faktura for produkt" target="_new">Vis</a>
-      <td><? print $InvoiceO->Status ?></td>
-  </tr>
-<? } ?>
+  foreach($InvoicesO->Invoice as $InvoiceO) {
+    $TotalCustPrice += $InvoiceO->LegalMonetaryTotal->PayableAmount;
+    $count++;
+    ?>
+      <tr class="<? print $InvoiceO->Class ?>">
+        <td class="number"><? print $InvoiceO->ID ?></td>
+        <td class="number"><? if($InvoiceO->Journaled) { ?><a href="<? print $_SETUP[DISPATCH]."t=journal.edit&amp;voucher_VoucherType=$InvoiceO->VoucherType&amp;voucher_JournalID=$InvoiceO->ID"; ?>&amp;action_journalid_search=1" target="_new"><? print $InvoiceO->VoucherType ?><? print $InvoiceO->JournalID ?></a><? } else { ?><? print $InvoiceO->VoucherType ?><? print $InvoiceO->JournalID ?><? } ?></td>
+        <td class="number"><? print $InvoiceO->IssueDate ?></td>
+        <td class="number"><? print substr($InvoiceO->IssueDate, 0, 7) ?></td>
+        <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&OrgNumber=<? print $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID ?>&inline=show" target="_new"><? print $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID ?></a></td>
+        <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&AccountPlanID=<? print $InvoiceO->AccountPlanID ?>&inline=show" target="_new"><? print $InvoiceO->AccountPlanID ?></a></td>
+        <td>&nbsp;<? print substr($InvoiceO->AccountingCustomerParty->Party->PartyName->Name,0,30) ?></td>
+        <td class="number"><b><? print $InvoiceO->PaymentMeans->PaymentDueDate ?></b></td>
+        <td class="number"><? print $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) ?></td>
+        <td class="number"><? print $InvoiceO->PaymentMeans->InstructionID ?></td>
+        <td><a href="https://fakturabank.no/invoices/<? str_replace(".", "%2E", rawurlencode(print $InvoiceO->FakturabankID)) ?>" title="Vis/SkrivUt faktura for produkt" target="_new">Vis</a>
+        <td><? print $InvoiceO->Status ?></td>
+    </tr>
+<? 
+  }
+
+ ?>
 <tr>
     <th colspan="7">Antall: <? print $count ?></th>
     <th>SUM</th>
     <th class="number"><? print  $_lib['format']->Amount($TotalCustPrice) ?></th>
     <th colspan="4"></th>
 </tr>
+
 </tbody>
 
 </table>
+<? 
+} 
+?>
 </body>
 </html>
 
