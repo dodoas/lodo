@@ -306,7 +306,7 @@ class logic_invoicein_invoicein implements Iterator {
                         $lines[] = $line;
                     }
 
-                    $num_lines = count($line);
+                    $num_lines = count($lines);
 
                     $invoice_line_sum = 0;
 
