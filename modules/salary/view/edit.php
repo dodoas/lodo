@@ -79,7 +79,7 @@ $formname = "salaryUpdate";
   <tr>
     <th class="sub" colspan="1"><? print $head->TabellTrekk ?></th>
     <th class="sub"><? print $head->ProsentTrekk ?></th>
-    <th class="sub"><a href="http://www.skatteetaten.no/upload/97054/<? print $head->TabellTrekk ?>.txt" target="_new">Vis trekktabell</a></th>
+    <th class="sub"><a href="http://www.skatteetaten.no/PageFiles/129117/<? print str_replace("/", "", $head->TabellTrekk) ?>.txt" target="_new">Vis trekktabell</a></th>
   </tr>
 </table>
 <br>
