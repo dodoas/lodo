@@ -127,9 +127,9 @@ class exchange {
 
 		$data = $_lib['input']->get_data();
 		$query_update = " UPDATE voucher SET ".
-            "  ForeignCurrencyID='". mysql_real_escape_string($currency_id) . "'" .
-            ", ForeignAmount='"     . mysql_real_escape_string($foreign_amount) . "'" .
-            ", ForeignConvRate="   . "'" . mysql_real_escape_string($rate) . "'" .
+            "  ForeignCurrencyID='". $_lib['db']->db_escape($currency_id) . "'" .
+            ", ForeignAmount='"     . $_lib['db']->db_escape($foreign_amount) . "'" .
+            ", ForeignConvRate="   . "'" . $_lib['db']->db_escape($rate) . "'" .
 						" WHERE VoucherID = '" . $voucher_id . "'";
 		$_lib['db']->db_update($query_update);
 	}
