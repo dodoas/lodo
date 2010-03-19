@@ -98,15 +98,39 @@ class exchange {
 	 */
 	function updateVoucherForeignCurrency() {
 		global $_lib;
+        if (empty($_POST['voucher_currency_VoucherID']) || 
+            !is_numeric($_POST['voucher_currency_VoucherID'])) {
+            return false;
+        }
+        
+        $voucher_id = $_POST['voucher_currency_VoucherID'];
 
-		$_POST['voucher_ForeignAmount'] = str_replace(',', '.', $_POST['voucher_ForeignAmount']);
-		$_POST['voucher_ForeignConvRate'] = str_replace(',', '.', $_POST['voucher_ForeignConvRate']);
+        $currency_id_key = 'voucher_currency_ForeignCurrencyIDSelection';
+        $amount_key = 'voucher_currency_ForeignAmount';
+        $rate_key = 'voucher_currency_ForeignConvRate';
+        
+        if (empty($_POST[$amount_key])) {
+            return false;
+        }
+
+        if (empty($_POST[$rate_key])) {
+            return false;
+        }
+
+        if (empty($_POST[$currency_id_key])) {
+            return false;
+        }
+
+		$foreign_amount = $_POST[$amount_key] = str_replace(',', '.', $_POST[$amount_key]);
+		$rate = $_POST[$rate_key] = str_replace(',', '.', $_POST[$rate_key]);
+        $currency_id = $_POST[$currency_id_key];
+
 		$data = $_lib['input']->get_data();
 		$query_update = " UPDATE voucher SET ".
-						   "  ForeignCurrencyID='". (($_POST['voucher_ForeignCurrencyID']) ? $_POST['voucher_ForeignCurrencyID'] : '') ."'".
-						   ", ForeignAmount="     . (($_POST['voucher_ForeignAmount'])     ? $_POST['voucher_ForeignAmount']     : 'NULL').
-						   ", ForeignConvRate="   . (($_POST['voucher_ForeignAmount'])     ? $_POST['voucher_ForeignConvRate']   : 'NULL').
-						" WHERE VoucherID = ". $_POST['voucher_VoucherID'];
+            "  ForeignCurrencyID='". mysql_real_escape_string($currency_id) . "'" .
+            ", ForeignAmount='"     . mysql_real_escape_string($foreign_amount) . "'" .
+            ", ForeignConvRate="   . "'" . mysql_real_escape_string($rate) . "'" .
+						" WHERE VoucherID = '" . $voucher_id . "'";
 		$_lib['db']->db_update($query_update);
 	}
 
@@ -120,25 +144,27 @@ class exchange {
 	 * @return string HTML form inside a div block. Div is initially hidden (display:none)
 	 */
 	function getFormVoucherForeignCurrency($voucher_id, $voucher_foreign_amount, $voucher_foreign_rate, $voucher_foreign_currency, $action_url='') {
-        if ($action_url != '')
+        if ($action_url == '')
 			$action_url = 'lodo.php?'. $_SERVER['QUERY_STRING'];
 		$currencies = self::getCurrencies();
         $select_options = '<option value="">Velg valuta</option>';
         foreach ($currencies as $currency) {
-            if ($currency->CurrencyISO == $voucher_foreign_currency)
+            if ($voucher_foreign_currency && $currency->CurrencyISO == $voucher_foreign_currency)
                 $select_options .= '<option value="'. $currency->CurrencyISO .'" selected="selected">'. $currency->CurrencyISO .'</option>';
             else
                 $select_options .= '<option value="'. $currency->CurrencyISO .'">'. $currency->CurrencyISO .'</option>';
         }
 
-        //$ch_curr = '<a href="#" onClick="toggle(\'div_'. $voucher->VoucherID .'\');return false;">'. $tmp_foreign .'</a>';
-        $ch_curr  = '<div style="display:none;" id="div_'. $voucher_id .'"><form method="post" action="'. $action_url .'">';
-        $ch_curr .= 'Valuta: <select name="voucher.ForeignCurrencyID">'. $select_options .'"</select><br />';
-        $ch_curr .= 'Verdi: <input class="number" type="text" name="voucher.ForeignAmount" size="10" value="'. $voucher_foreign_amount .'" /><br />';
-        $ch_curr .= 'Rate: <input class="number" type="text" name="voucher.ForeignConvRate" size="10" value="'. $voucher_foreign_rate .'" /><br />';
-        $ch_curr .= '<input class="number" type="hidden" name="voucher.VoucherID" value="'. $voucher_id .'" />';
-        $ch_curr .= '<input type="submit" name="action_postmotpost_save_currency" value="Lagre" />';
-        $ch_curr .= '</form></div>';
+        $block_return = 'onKeyPress="return disableEnterKey(event)"';
+        $ch_curr  = '<div style="display:none;" class="vouchercurrencywrapper" id="voucher_currency_div_'. $voucher_id .'">';
+        $ch_curr .= 'Valuta: <select name="voucher_currency.ForeignCurrencyID" ' . $block_return . '>'. $select_options .'"</select><br />';
+        $ch_curr .= 'Verdi: <input class="number" type="text" name="voucher_currency.ForeignAmount" size="10" value="'. $voucher_foreign_amount .'" ' . $block_return . ' /><br />';
+        $ch_curr .= 'Rate: <input class="number" type="text" name="voucher_currency.ForeignConvRate" size="10" value="'. $voucher_foreign_rate .'" ' . $block_return . ' /><br />';
+        $ch_curr .= '<input class="number" type="hidden" name="voucher_currency.VoucherID" value="'. $voucher_id .'" />';
+        $ch_curr .= '<input class="number" type="hidden" name="voucher_currency.ForeignCurrencyIDSelection" value="" />';
+        $ch_curr .= '<input type="hidden" name="action_postmotpost_save_currency" value="1" />';
+        $ch_curr .= '<input type="button" name="action_postmotpost_save_currency_button" onclick="return voucherCurrencyChange(this, \'' . $action_url . '\'); " value="Lagre" />';
+        $ch_curr .= '</div>';
 		
 		return $ch_curr;
 	}
@@ -150,7 +176,7 @@ class exchange {
 	 * @return string HTML anchor to use with exchange::getFormVoucherForeignCurrency()
 	 */
 	function getAnchorVoucherForeignCurrency($voucher_id, $link_txt='Velg valuta') {
-        return '<a href="#" onClick="toggle(\'div_'. $voucher_id .'\');return false;">'. $link_txt .'</a>';
+        return '<a href="#" onClick="toggle(\'voucher_currency_div_'. $voucher_id .'\');return false;">'. $link_txt .'</a>';
 	}
 }
 ?>

@@ -156,4 +156,71 @@ function toggle(node)
        target.style.display = "none";
     }
 }
+
+function voucherCurrencyChange(btn, action_url)
+{
+    var wrapper = btn.parentNode;
+
+    var wrapper_children = wrapper.childNodes;
+
+    var currency_id_input = null;
+    var currency_id_selected_input = null;
+    var currency_amount_input = null;
+    var currency_rate_input = null;
+
+	for(var i = 0; i < wrapper_children.length; i++)
+	{
+        if (typeof(wrapper_children[i].name) == 'undefined') {
+            continue;
+        }
+
+        if (wrapper_children[i].name == "voucher_currency.ForeignCurrencyID") {
+            currency_id_input = wrapper_children[i];
+        } else if (wrapper_children[i].name == "voucher_currency.ForeignCurrencyIDSelection") {
+            currency_id_selected_input = wrapper_children[i];            
+        } else if (wrapper_children[i].name == "voucher_currency.ForeignAmount") {
+            currency_amount_input = wrapper_children[i];            
+        } else if (wrapper_children[i].name == "voucher_currency.ForeignConvRate") {
+            currency_rate_input = wrapper_children[i];            
+        }
+	}
+
+    var currency = currency_id_input[currency_id_input.selectedIndex].value;
+    if (currency == "") {
+        alert("Velg en valuta");
+        return false;
+    }
+
+    if (currency_amount_input.value == 0) {
+        alert("Velg en verdi");
+        return false;
+    }
+
+    if (currency_rate_input.value == 0) {
+        alert("Velg en vekslingsrate");
+        return false;
+    }
+
+    currency_id_selected_input.value = currency;
+
+    var currencyform = document.createElement("form");
+    currencyform.method = "post";
+    currencyform.action = action_url;
+    currencyform.appendChild(wrapper.cloneNode(true));
+    currencyform.style.display='none';
+    document.body.appendChild(currencyform);
+    currencyform.submit();
+}
+
+function disableEnterKey(e)
+{
+     var key;      
+     if(window.event)
+          key = window.event.keyCode; //IE
+     else
+          key = e.which; //firefox      
+
+     return (key != 13);
+} 
+
 </script>
