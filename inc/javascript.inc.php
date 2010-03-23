@@ -168,7 +168,7 @@ function voucherCurrencyChange(btn, action_url)
     var currency_amount_input = null;
     var currency_rate_input = null;
 
-    for(var i = 0; i < wrapper_children.length; 
+    for(var i = 0; i < wrapper_children.length; i++)
     {
         if (typeof(wrapper_children[i].name) == 'undefined') {
             continue;
