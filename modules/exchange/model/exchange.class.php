@@ -57,11 +57,30 @@ class exchange {
 	/**
 	 * @return mixed array Array with currencies
 	 */
+	function getInactiveCurrencies() {
+		global $_lib;
+
+		#Retrieve active currencies
+		$query = "SELECT * FROM currency WHERE `CurrencyISO` NOT IN (SELECT `CurrencyID` FROM `exchange` WHERE CurrencyID IS NOT NULL) ORDER BY `CurrencyISO`";
+		$result_currency = $_lib['db']->db_query($query);
+		$currencies = array();
+
+		while($tmp = $_lib['db']->db_fetch_object($result_currency)) {
+			if ($tmp)
+				$currencies[] = $tmp;
+		}
+		
+		return $currencies;
+	}
+
+	/**
+	 * @return mixed array Array with currencies
+	 */
 	function getActiveCurrencies() {
 		global $_lib;
 
 		#Retrieve active currencies
-		$query = "SELECT * FROM currency WHERE `CurrencyISO` NOT IN (SELECT `CurrencyID` FROM `exchange`) ORDER BY `CurrencyISO`";
+		$query = "SELECT DISTINCT * FROM currency WHERE `CurrencyISO` IN (SELECT `CurrencyID` FROM `exchange` WHERE CurrencyID IS NOT NULL) ORDER BY `CurrencyISO`";
 		$result_currency = $_lib['db']->db_query($query);
 		$currencies = array();
 
@@ -92,34 +111,57 @@ class exchange {
 			return false;
 	}
 
+    function validateForeignCurrencyFields($args) {
+        $amount_key = 'voucher_ForeignAmount';
+        $rate_key = 'voucher_ForeignConvRate';
+        $currency_id_key = 'voucher_ForeignCurrencyID';
+
+        if (empty($args[$amount_key])) {
+            return false;
+        }
+
+        if (empty($args[$rate_key])) {
+            return false;
+        }
+
+        if (empty($args[$currency_id_key])) {
+            return false;
+        }
+        
+        return true;
+    }
 
 	/**
 	 * @return string Conversion rate
 	 */
-	function updateVoucherForeignCurrency() {
+	function updateVoucherForeignCurrency($use_selection_var = true) {
 		global $_lib;
-        if (empty($_POST['voucher_currency_VoucherID']) || 
-            !is_numeric($_POST['voucher_currency_VoucherID'])) {
+        if (empty($_POST['voucher_VoucherID']) || 
+            !is_numeric($_POST['voucher_VoucherID'])) {
             return false;
         }
         
-        $voucher_id = $_POST['voucher_currency_VoucherID'];
+        $voucher_id = $_POST['voucher_VoucherID'];
 
-        $currency_id_key = 'voucher_currency_ForeignCurrencyIDSelection';
-        $amount_key = 'voucher_currency_ForeignAmount';
-        $rate_key = 'voucher_currency_ForeignConvRate';
-        
-        if (empty($_POST[$amount_key])) {
+        if ($use_selection_var) {
+            $currency_id_key = 'voucher_ForeignCurrencyIDSelection';
+        } else {
+            $currency_id_key = 'voucher_ForeignCurrencyID';
+        }
+        $amount_key = 'voucher_ForeignAmount';
+        $rate_key = 'voucher_ForeignConvRate';
+
+        $args = array(
+                      'voucher_VoucherID' => $_POST['voucher_VoucherID'],
+                      'voucher_ForeignCurrencyID' => $_POST[$currency_id_key],
+                      $amount_key => $_POST[$amount_key],
+                      $rate_key => $_POST[$rate_key],
+                      );
+
+        if (!self::validateForeignCurrencyFields($args)) {
             return false;
         }
 
-        if (empty($_POST[$rate_key])) {
-            return false;
-        }
-
-        if (empty($_POST[$currency_id_key])) {
-            return false;
-        }
 
 		$foreign_amount = $_POST[$amount_key] = str_replace(',', '.', $_POST[$amount_key]);
 		$rate = $_POST[$rate_key] = str_replace(',', '.', $_POST[$rate_key]);
@@ -146,8 +188,8 @@ class exchange {
 	function getFormVoucherForeignCurrency($voucher_id, $voucher_foreign_amount, $voucher_foreign_rate, $voucher_foreign_currency, $action_url='') {
         if ($action_url == '')
 			$action_url = 'lodo.php?'. $_SERVER['QUERY_STRING'];
-		$currencies = self::getCurrencies();
-        $select_options = '<option value="">Velg valuta</option>';
+		$currencies = self::getActiveCurrencies();
+        $select_options = '<option value="">Standard</option>';
         foreach ($currencies as $currency) {
             if ($voucher_foreign_currency && $currency->CurrencyISO == $voucher_foreign_currency)
                 $select_options .= '<option value="'. $currency->CurrencyISO .'" selected="selected">'. $currency->CurrencyISO .'</option>';
@@ -157,11 +199,11 @@ class exchange {
 
         $block_return = 'onKeyPress="return disableEnterKey(event)"';
         $ch_curr  = '<div style="display:none;" class="vouchercurrencywrapper" id="voucher_currency_div_'. $voucher_id .'">';
-        $ch_curr .= 'Valuta: <select name="voucher_currency.ForeignCurrencyID" ' . $block_return . '>'. $select_options .'"</select><br />';
-        $ch_curr .= 'Verdi: <input class="number" type="text" name="voucher_currency.ForeignAmount" size="10" value="'. $voucher_foreign_amount .'" ' . $block_return . ' /><br />';
-        $ch_curr .= 'Rate: <input class="number" type="text" name="voucher_currency.ForeignConvRate" size="10" value="'. $voucher_foreign_rate .'" ' . $block_return . ' /><br />';
-        $ch_curr .= '<input class="number" type="hidden" name="voucher_currency.VoucherID" value="'. $voucher_id .'" />';
-        $ch_curr .= '<input class="number" type="hidden" name="voucher_currency.ForeignCurrencyIDSelection" value="" />';
+        $ch_curr .= 'Valuta: <select name="voucher.ForeignCurrencyID" ' . $block_return . '>'. $select_options .'"</select><br />';
+        $ch_curr .= 'Verdi: <input class="number" type="text" name="voucher.ForeignAmount" size="10" value="'. $voucher_foreign_amount .'" ' . $block_return . ' /><br />';
+        $ch_curr .= 'Rate: <input class="number" type="text" name="voucher.ForeignConvRate" size="10" value="'. $voucher_foreign_rate .'" ' . $block_return . ' /><br />';
+        $ch_curr .= '<input class="number" type="hidden" name="voucher.VoucherID" value="'. $voucher_id .'" />';
+        $ch_curr .= '<input class="number" type="hidden" name="voucher.ForeignCurrencyIDSelection" value="" />';
         $ch_curr .= '<input type="hidden" name="action_postmotpost_save_currency" value="1" />';
         $ch_curr .= '<input type="button" name="action_postmotpost_save_currency_button" onclick="return voucherCurrencyChange(this, \'' . $action_url . '\'); " value="Lagre" />';
         $ch_curr .= '</div>';
@@ -178,5 +220,23 @@ class exchange {
 	function getAnchorVoucherForeignCurrency($voucher_id, $link_txt='Velg valuta') {
         return '<a href="#" onClick="toggle(\'voucher_currency_div_'. $voucher_id .'\');return false;">'. $link_txt .'</a>';
 	}
+
+    /**
+     * queries Google for the current exchange rate, doesn't need cURL
+     * 
+     * @param mixed  $amount
+     * @param string $currency
+     * @param string $exchangeIn
+     * @return mixed
+     * @author Adapted from Tudor Barbu
+     * @copyright MIT 
+     */
+    static function googleExchangeRateUrl($amount, $currency, $exchangeIn)
+    {
+
+        $googleQuery = $amount . ' ' . $currency . ' in ' . $exchangeIn;
+        $googleQuery = urlEncode( $googleQuery );
+        return 'http://www.google.com/search?q=' . $googleQuery;
+    }
 }
 ?>

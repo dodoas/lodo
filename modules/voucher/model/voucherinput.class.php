@@ -5,6 +5,8 @@
 #
 ##################################
 
+includelogic('exchange/exchange');
+
 class framework_logic_voucherinput
 {
     #Voucherline variables
@@ -37,6 +39,9 @@ class framework_logic_voucherinput
     public $Active                  = 1;
     public $KID                     = '';
     public $InvoiceID               = '';
+    public $ForeignCurrencyID = '';
+    public $ForeignConvRate = 0;
+    public $ForeignAmount = 0;
 
     #Other control variables
 
@@ -83,6 +88,26 @@ class framework_logic_voucherinput
         $this->Quantity           = $args['voucher_Quantity'];
         
         $this->Currency           = strip_tags($args['voucher_Currency']);
+
+        ########################################
+        #Foreign currency information
+        if(isset($args['voucher_ForeignCurrencyID']))
+        {
+            if ($args['voucher_ForeignCurrencyID'] != "") {
+                if (Exchange::validateForeignCurrencyFields($args)) {
+                    $this->ForeignCurrencyID = $args['voucher_ForeignCurrencyID'];
+                    $this->ForeignAmount = $args['voucher_ForeignAmount'];
+                    $this->ForeignConvRate = $args['voucher_ForeignConvRate'];
+                } else {
+                    // invalid data, ignore for now
+                }
+            } else {
+                $this->ForeignCurrencyID = "";
+                $this->ForeignConvRate = 0;
+                $this->ForeignAmount = 0;
+            }
+        }
+
 
         if(isset($_REQUEST['voucher_VoucherType'])) 
             $this->VoucherType        = strip_tags($args['voucher_VoucherType']);
@@ -666,6 +691,17 @@ class framework_logic_voucherinput
         
         if($this->AutomaticBalanceID)
             $request['voucher_AutomaticBalanceID']      = $this->AutomaticBalanceID;
+
+        if ($this->action['voucher_head_update'] || 
+            $this->action['voucher_new'] ||
+            $this->action['voucher_update'] ||
+            $this->action['voucherline_new']) {
+
+            $request['voucher_ForeignCurrencyID']      = $this->ForeignCurrencyID;
+            $request['voucher_ForeignConvRate']      = $this->ForeignConvRate;
+            $request['voucher_ForeignAmount']      = $this->ForeignAmount;            
+        }
+
          
         #print "<h2>Output fra voucher objektet kalt fra: $calledfrom</h2>";
         #print_r($request);

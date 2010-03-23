@@ -168,37 +168,36 @@ function voucherCurrencyChange(btn, action_url)
     var currency_amount_input = null;
     var currency_rate_input = null;
 
-	for(var i = 0; i < wrapper_children.length; i++)
-	{
+    for(var i = 0; i < wrapper_children.length; 
+    {
         if (typeof(wrapper_children[i].name) == 'undefined') {
             continue;
         }
 
-        if (wrapper_children[i].name == "voucher_currency.ForeignCurrencyID") {
+        if (wrapper_children[i].name == "voucher.ForeignCurrencyID") {
             currency_id_input = wrapper_children[i];
-        } else if (wrapper_children[i].name == "voucher_currency.ForeignCurrencyIDSelection") {
+        } else if (wrapper_children[i].name == "voucher.ForeignCurrencyIDSelection") {
             currency_id_selected_input = wrapper_children[i];            
-        } else if (wrapper_children[i].name == "voucher_currency.ForeignAmount") {
+        } else if (wrapper_children[i].name == "voucher.ForeignAmount") {
             currency_amount_input = wrapper_children[i];            
-        } else if (wrapper_children[i].name == "voucher_currency.ForeignConvRate") {
+        } else if (wrapper_children[i].name == "voucher.ForeignConvRate") {
             currency_rate_input = wrapper_children[i];            
         }
-	}
-
+    }
     var currency = currency_id_input[currency_id_input.selectedIndex].value;
     if (currency == "") {
-        alert("Velg en valuta");
-        return false;
+	    alert("Velg en valuta");
+	    return false;
     }
 
     if (currency_amount_input.value == 0) {
-        alert("Velg en verdi");
-        return false;
+	    alert("Velg en verdi");
+	    return false;
     }
 
     if (currency_rate_input.value == 0) {
-        alert("Velg en vekslingsrate");
-        return false;
+	    alert("Velg en vekslingsrate");
+	    return false;
     }
 
     currency_id_selected_input.value = currency;

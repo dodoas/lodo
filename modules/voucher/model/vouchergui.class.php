@@ -148,7 +148,6 @@ class framework_logic_vouchergui
         } else {
             $html .= exchange::getAnchorVoucherForeignCurrency($voucher->VoucherID, 'Valuta');
         }
-        // we cannot use this function yet, as it causes nested forms
         $html .= exchange::getFormVoucherForeignCurrency($voucher->VoucherID, $voucher->ForeignAmount, $voucher->ForeignConvRate, $voucher->ForeignCurrencyID);
         $html .= '</td>';
 

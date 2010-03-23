@@ -10,8 +10,6 @@ $accounting = new accounting();
 includelogic('postmotpost/postmotpost');
 includelogic('exchange/exchange');
 
-$currencies = exchange::getCurrencies();
-
 $postmotpost = new postmotpost(array('AccountPlanID' => $_REQUEST['AccountPlanID'], 'ReskontroFromAccount' => $_REQUEST['ReskontroFromAccount'], 'ReskontroToAccount' => $_REQUEST['ReskontroToAccount'], 'DepartmentID' => $_REQUEST['report_DepartmentID'], 'ProjectID' => $_REQUEST['report_ProjectID']));
 require "record.inc";
 
