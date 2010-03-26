@@ -166,6 +166,7 @@ class lodo_fakturabank_fakturabankvoting {
 		global $_lib;
 
 
+		if(isset($voting))
 		foreach ($voting as &$transaction) {
 			if (isset($transaction) && !empty($transaction) && 
 				isset($transaction->relations) && !empty($transaction->relations)) {
