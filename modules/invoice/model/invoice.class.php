@@ -142,7 +142,7 @@ class invoice {
                 #Get credit days from own company
                 $headH['DueDate'] = $_lib['date']->add_Days($headH['InvoiceDate'], $_lib['sess']->get_session('CreditDays'));
             } else {
-                $headH['DueDate'] = $_lib['date']->add_Days($headH['InvoiceDate'], 10);
+                $headH['DueDate'] = $_lib['date']->add_Days($headH['InvoiceDate'], 0);
             }
         }
 
