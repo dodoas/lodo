@@ -217,6 +217,7 @@ class lodo_fakturabank_fakturabankvoting {
             #Kunne hatt delvis automatisk reskontro match basert paa beskrivelse.
             $lineH['Description'] 		= $_lib['db']->db_escape($fb_transaction['Description']);
             $lineH['ArchiveRef'] 		= $_lib['db']->db_escape($fb_transaction['Ref']);
+            $lineH['KID'] 		= $_lib['db']->db_escape($fb_transaction['KID']);
 
             if($fb_transaction['Incoming']) {
                 $lineH['AmountIn'] = $fb_transaction['Amount'];
