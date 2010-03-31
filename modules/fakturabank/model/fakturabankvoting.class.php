@@ -189,7 +189,8 @@ class lodo_fakturabank_fakturabankvoting {
         $query = "SELECT * FROM fakturabanktransaction WHERE 
                         PostingDate >= '$period_start' AND
                         PostingDate < '$period_end' AND 
-                        (FromBankAccount = '$account_number' OR ToBankAccount = '$account_number')";
+                        (FromBankAccount = '$account_number' OR ToBankAccount = '$account_number')
+                        ORDER BY PostingDate ASC";
 
         $rows = $_lib['storage']->get_hashhash(array('query' => $query, 'key' => 'ID'));
 
