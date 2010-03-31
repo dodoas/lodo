@@ -523,7 +523,7 @@ class lodo_fakturabank_fakturabankvoting {
 
 			$dataH['FakturabankID'] = $transaction->FakturabankID;
 
-			$transaction->incoming = ($transaction->{"from-account"} == "") ? 0 : 1;
+			$transaction->incoming = ($transaction->{"from-account"} == "") ? 1 : 0;
 
 			$dataH['Incoming'] = $transaction->incoming;
 			$dataH['Amount'] = $transaction->amount;
