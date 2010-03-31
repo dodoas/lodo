@@ -148,7 +148,7 @@ class framework_logic_vouchergui
         } else {
             $html .= exchange::getAnchorVoucherForeignCurrency($voucher->VoucherID, 'Valuta');
         }
-        $html .= exchange::getFormVoucherForeignCurrency($voucher->VoucherID, $voucher->ForeignAmount, $voucher->ForeignConvRate, $voucher->ForeignCurrencyID);
+        $html .= exchange::getFormVoucherForeignCurrency($voucher->VoucherID, $voucher->ForeignAmount, $voucher->ForeignConvRate, $voucher->ForeignCurrencyID, '', false);
         $html .= '</td>';
 
         #AmountIn

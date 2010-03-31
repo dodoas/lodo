@@ -1979,7 +1979,7 @@ class accounting {
     * @param VoucherID
     * @return
     */
-    function delete_voucher_line_smart($VoucherID, $JournalID, $VoucherType, $comment) {
+    function delete_voucher_line_smart($VoucherID, $JournalID, $VoucherType, $comment = "") {
         global $_lib;
 
         $_lib['sess']->debug("delete_voucher_line_smart VoucherID: $VoucherID, JournalID: $JournalID, VoucherType: $VoucherType, comment: $comment");

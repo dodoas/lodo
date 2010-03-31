@@ -8,11 +8,6 @@ $AccountPlanID      = $_REQUEST['AccountPlanID'];*/
 #print_r($_REQUEST);
 #print "<br>\n";
 
-#Save foreign currency
-if(isset($_REQUEST['action_postmotpost_save_currency']))
-    exchange::updateVoucherForeignCurrency();
-
-
 includelogic('voucher/voucherinput');
 $voucher_input      = new framework_logic_voucherinput($_REQUEST);
 
