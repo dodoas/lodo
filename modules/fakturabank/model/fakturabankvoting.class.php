@@ -422,15 +422,17 @@ class lodo_fakturabank_fakturabankvoting {
 			return false;
 		}
 
+
         // if transaction was imported from fakturabank, match on fakturabankid
         if (!empty($accountline->FakturabankTransactionLodoID) &&
             is_numeric($accountline->FakturabankTransactionLodoID)) {
 
-            $query = "SELECT FakturabankID FROM fakturabanktransaction WHERE `ID` = '" . $args['accountline']->FakturabankTransactionLodoID . "'";
+            $query = "SELECT FakturabankID FROM fakturabanktransaction WHERE `ID` = '" . $accountline->FakturabankTransactionLodoID . "'";
             $result = $_lib['storage']->db_query3(array('query' => $query));
             if (!$result) {
                 return false;
             }
+
             if (!($obj = $_lib['storage']->db_fetch_object($result)) || !is_numeric($obj->FakturabankID)) {
                 return false;
             }
