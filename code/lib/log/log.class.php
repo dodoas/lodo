@@ -99,6 +99,8 @@ class logg {
     $fields['logaccessdenied_Template']   = $_lib['sess']->get_session('Template');
     $fields['logaccessdenied_Module']     = $_lib['sess']->get_session('Module');
     $fields['logaccessdenied_Interface']  = $_lib['sess']->get_session('Interface');
+    # comment in duration when it has been added as a valid field
+    # $fields['logaccessdenied_Duration']   = $args['duration'];
     $fields['logaccessdenied_Duration']   = $args['duration'];
     $fields['logaccessdenied_SessionID']  = $_lib['sess']->get_session('SID');
     $fields['logaccessdenied_PersonID']   = $_lib['sess']->get_person('PersonID');
