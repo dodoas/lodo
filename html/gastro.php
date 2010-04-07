@@ -8,7 +8,8 @@ $_SESSION['login_id'] = 5;
 $_SESSION['DB_NAME'] = $_REQUEST['DB_NAME_LOGIN'];
 $_SETUP['ACTIVE_INTERFACE'] = "lodo";
 // doesn't look like this is getting set further in..
-$_SETUP['HOME_DIR'] = "/var/www/html/www.lodo.no";
+#$_SETUP['HOME_DIR'] = "/var/www/html/www.lodo.no";
+$_SETUP['HOME_DIR'] = getcwd();
 
 require "gastropass.php";
 if ($_REQUEST['brukernavn'] != "anders" || $_REQUEST['passord'] != $gastropass)
@@ -190,7 +191,7 @@ if ($_REQUEST[$myVar] != "" && is_int($_REQUEST[$myVar]))
 
 */
 
-$file_source = "/var/www/html/www.lodo.no/gastrotest.txt";
+$file_source =  $_SETUP['HOME_DIR'] . "/gastrotest.txt";
 $file_target = $file_source;
 if (is_file($file_source))
         $str = file($file_source);
