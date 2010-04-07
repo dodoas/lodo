@@ -911,8 +911,8 @@ class lodo_fakturabank_fakturabank {
                 
                 #Update fakturabank voting tables to enable lookup of lodo invoice 
                 #given bank transaction information, when importing transactions from bank
-				$fbvoting = new lodo_fakturabank_fakturabankvoting();
-				$fbvoting->update_fakturabank_incoming_invoice($InvoiceO->FakturabankID, $ID, $InvoiceO->AccountPlanID);
+                $fbvoting = new lodo_fakturabank_fakturabankvoting();
+                $fbvoting->update_fakturabank_incoming_invoice($InvoiceO->FakturabankID, $ID, $InvoiceO->AccountPlanID);
 
                 #Set status in fakturabank
                 $comment = "Lodo PHP Invoicein ID: " . $ID . " registered " . $_lib['sess']->get_session('Datetime');
