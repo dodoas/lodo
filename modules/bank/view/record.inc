@@ -100,7 +100,9 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
 							$accountline = $DataH[$server_name][$database_name][$table_name][$pk_name];
 							# find fakturabank data
 							$match = $fbvoting->findmatch(array('Amount' => $value, 'VoucherDate' => $Period . '-' . $accountline['Day'], 'BankAccountID' => $AccountID, 'Incoming' => $incoming, 'id' => $pk_name, 'accountline' => $DataH[$server_name][$database_name][$table_name][$pk_name], 'period' => $Period));
-							if ($match) {
+							if ($match && 
+                                !empty($match['AccountPlanID']) && // ignore interest, transaction costs etc for now (transactions without org numbers)
+                                !empty($match['AccountPlanOrgNumber'])) {
 									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
 										$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] = $match['AccountPlanID'];
 									}
