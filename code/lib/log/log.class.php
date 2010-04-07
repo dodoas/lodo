@@ -101,7 +101,6 @@ class logg {
     $fields['logaccessdenied_Interface']  = $_lib['sess']->get_session('Interface');
     # comment in duration when it has been added as a valid field
     # $fields['logaccessdenied_Duration']   = $args['duration'];
-    $fields['logaccessdenied_Duration']   = $args['duration'];
     $fields['logaccessdenied_SessionID']  = $_lib['sess']->get_session('SID');
     $fields['logaccessdenied_PersonID']   = $_lib['sess']->get_person('PersonID');
     $_lib['db']->db_new_hash($fields, 'logaccessdenied');
