@@ -763,6 +763,8 @@ class lodo_fakturabank_fakturabank {
         $conversion_rate  = 0;
         $is_foreign       = false;
 
+        $fbvoting = new lodo_fakturabank_fakturabankvoting();
+
         foreach($invoicesO->Invoice as &$InvoiceO) {
         
             #If all essential data quality is ok - download the invoice
@@ -908,10 +910,9 @@ class lodo_fakturabank_fakturabank {
                         $_lib['storage']->store_record(array('data' => $datalineH, 'table' => 'invoiceinline', 'debug' => false));
                     }
                 }
-                
+
                 #Update fakturabank voting tables to enable lookup of lodo invoice 
                 #given bank transaction information, when importing transactions from bank
-                $fbvoting = new lodo_fakturabank_fakturabankvoting();
                 $fbvoting->update_fakturabank_incoming_invoice($InvoiceO->FakturabankID, $ID, $InvoiceO->AccountPlanID);
 
                 #Set status in fakturabank

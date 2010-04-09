@@ -310,7 +310,9 @@ if(($voucher_input->action['voucher_update'] or $voucher_input->action['voucher_
 //print_r($_REQUEST);
 #Hvis det er en reskontro sï¿½ vis en liste med alle ï¿½pne poster mot denne reskontroen (dette er den kontoen  man har valgt pï¿½ en posteringslinje
 #print "AccountPlanID: $AccountPlanID<br>\n";
-if($accounting->is_reskontro($voucher_input->AccountPlanID)) {
+
+if(!empty($voucher_input->AccountPlanID) && 
+   $accounting->is_reskontro($voucher_input->AccountPlanID)) {
     $accountplan = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     if($accountplan->EnablePostPost)
     {

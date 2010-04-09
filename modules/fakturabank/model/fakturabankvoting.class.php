@@ -138,6 +138,7 @@ class lodo_fakturabank_fakturabankvoting {
                 $_lib['message']->add("XML Dokument tomt - pr&oslash;v igjen: $url");
             }
         }
+
         return $voting;
     }
 
@@ -363,7 +364,7 @@ class lodo_fakturabank_fakturabankvoting {
 		# Update fakturabankinvoicein, fakturabanktransactionrelation tables 
 		# (to enable lookup of lodo invoice given bank transaction information)
 
-		$query = "UPDATE fakturabanktransactionrelation SET InvoiceID = '$InvoiceID', AccountPlanID = '$AccountPlanID', AccountPlanOrgNumber = '$AccountPlanOrgNumber' WHERE FakturabankInvoiceID = '$FakturabankInvoiceID' AND Incoming = '1'";
+		$query = "UPDATE fakturabanktransactionrelation SET InvoiceID = '$InvoiceID', AccountPlanID = '$AccountPlanID', AccountPlanOrgNumber = '$AccountPlanOrgNumber' WHERE FakturabankInvoiceID = '$FakturabankInvoiceID'";
 
 		$_lib['storage']->db_query3(array('query' => $query));
 

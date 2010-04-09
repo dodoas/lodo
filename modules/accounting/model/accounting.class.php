@@ -230,6 +230,7 @@ class accounting {
 
       if (!is_numeric($AccountplanID)) {
           $_lib['message']->add(array('message' => 'get_accountplan_object(): Mangler AccountplanID'));
+          # throw new Exception("missing accountplan");
           return false;
       }
 
@@ -625,7 +626,9 @@ class accounting {
                     $voucher = $this->get_voucher_object(array('voucherID'=>$voucher->AutomaticVatVoucherID));
                     $_lib['sess']->debug("get_voucher_object3");
 
-                    $this->sub_AutoVat(array('voucher'=>$voucher, 'post'=>$args['post'], 'comment' => 'Fra update account i loop'));
+                    if (!empty($voucher)) {
+                        $this->sub_AutoVat(array('voucher'=>$voucher, 'post'=>$args['post'], 'comment' => 'Fra update account i loop'));
+                    }
                 }
             } else {
                 $_lib['sess']->debug("Kunde er ikke MVA pliktig");
@@ -1908,6 +1911,10 @@ class accounting {
     */
     function is_reskontro($AccountPlanID) {
         global $_lib;
+
+        if (empty($AccountPlanID)) {
+            return false;
+        }
 
         $account = $this->get_accountplan_object($AccountPlanID);
 
