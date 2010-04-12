@@ -4,7 +4,7 @@ $db_table = "exchange";
 require_once "record.inc";
 includelogic('exchange/exchange');
 
-#Retrieve active currencies
+#Retrieve all currencies
 $currencies = exchange::getInactiveCurrencies();
 
 #Input parameters should be validated - also against roles

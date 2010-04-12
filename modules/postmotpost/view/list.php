@@ -141,7 +141,7 @@ if(count($postmotpost->voucherH) > 0)
                         <td><? print $voucher->VoucherPeriod; ?></td>
                         <td class="number"><nobr><? if($voucher->AmountIn > 0) { print $_lib['format']->Amount($voucher->AmountIn); } ?></nobr></td>
                         <td class="number"><nobr><? if($voucher->AmountOut > 0) { print $_lib['format']->Amount($voucher->AmountOut); } ?></nobr></td>
-                        <td class="number"><nobr><? if($voucher->ForeignAmountIn > 0) { print $_lib['format']->Amount($voucher->ForeignAmountIn); } ?></nobr></td>
+                    <td class="number"><nobr><? if($voucher->ForeignAmountIn > 0) { print $_lib['format']->Amount($voucher->ForeignAmountIn); } ?></nobr></td>
                         <td class="number"><nobr><? if($voucher->ForeignAmountOut > 0) { print $_lib['format']->Amount($voucher->ForeignAmountOut); } ?></nobr></td>
                         <td class="number"><nobr><? print $ch_curr; ?></nobr></td>
                         <td><? if($voucher->VAT > 0)          { print $voucher->VAT; } ?></td>

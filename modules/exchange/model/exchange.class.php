@@ -80,13 +80,13 @@ class exchange {
 		global $_lib;
 
 		#Retrieve active currencies
-		$query = "SELECT DISTINCT * FROM currency WHERE `CurrencyISO` IN (SELECT `CurrencyID` FROM `exchange` WHERE CurrencyID IS NOT NULL) ORDER BY `CurrencyISO`";
+		$query = "SELECT c.CurrencyISO, c.CurrencyID, e.Amount FROM currency c, exchange e WHERE c.`CurrencyISO`=`e`.`CurrencyID` ORDER BY c.`CurrencyISO`";
 		$result_currency = $_lib['db']->db_query($query);
 		$currencies = array();
 
 		while($tmp = $_lib['db']->db_fetch_object($result_currency)) {
 			if ($tmp)
-				$currencies[] = $tmp;
+				$currencies[$tmp->CurrencyISO] = $tmp;
 		}
 		
 		return $currencies;
@@ -186,19 +186,41 @@ class exchange {
 	 * @return string HTML form inside a div block. Div is initially hidden (display:none)
 	 */
 	function getFormVoucherForeignCurrency($voucher_id, $voucher_foreign_amount, $voucher_foreign_rate, $voucher_foreign_currency, $action_url='', $has_save_button = true, $has_direction_radio = true) {
+        if ($voucher_id == "") {
+            $voucher_id_text = "newvoucher"; // set to new to make js work
+        } else {
+            $voucher_id_text = "";
+        }
+
         if ($action_url == '')
 			$action_url = 'lodo.php?'. $_SERVER['QUERY_STRING'];
 		$currencies = self::getActiveCurrencies();
+
+        if (empty($currencies)) {
+            return "";
+        }
+
         $select_options = '<option value="">Standard</option>';
         foreach ($currencies as $currency) {
             if ($voucher_foreign_currency && $currency->CurrencyISO == $voucher_foreign_currency)
-                $select_options .= '<option value="'. $currency->CurrencyISO .'" selected="selected">'. $currency->CurrencyISO .'</option>';
+                $select_options .= '<option value="'. $currency->CurrencyISO .'" selected="selected" onchange="onCurrencyChange(this, \''. $voucher_id_text . '\')" onclick="onCurrencyChange(this, \''. $voucher_id_text . '\')">'. $currency->CurrencyISO .'</option>';
             else
-                $select_options .= '<option value="'. $currency->CurrencyISO .'">'. $currency->CurrencyISO .'</option>';
+                $select_options .= '<option value="'. $currency->CurrencyISO .'" onchange="onCurrencyChange(this, \''. $voucher_id_text . '\')" onclick="onCurrencyChange(this, \''. $voucher_id_text . '\')">'. $currency->CurrencyISO .'</option>';
         }
 
+        // we create one currency array for each voucher to allow for specific rates to be tied to specific accountplans or dates (which might be needed in the future) in reports
+        $currency_js = '<script type="text/javascript">';
+        // $currency_js .= 'if (!window.currency_rates) var currency_rates = new Object();';
+
+        $currency_js .= 'window.currency_rates[\''. $voucher_id_text . '\'] = new Object();';
+        foreach ($currencies as $currency) {
+            $currency_js .= 'window.currency_rates[\''. $voucher_id_text . '\'][\'' . $currency->CurrencyISO . '\'] = ' . $currency->Amount . ';';
+        } 
+        $currency_js .= '</script>';
+        $ch_curr .= $currency_js;        
+
         $block_return = 'onKeyPress="return disableEnterKey(event)"';
-        $ch_curr  = '<div style="display:none;" class="vouchercurrencywrapper" id="voucher_currency_div_'. $voucher_id .'">';
+        $ch_curr  .= '<div style="display:none;" class="vouchercurrencywrapper" id="voucher_currency_div_'. $voucher_id_text .'">';
         $ch_curr .= 'Valuta: <select name="voucher.ForeignCurrencyID" ' . $block_return . '>'. $select_options .'"</select><br />';
         $ch_curr .= 'Verdi: <input class="number" type="text" name="voucher.ForeignAmount" size="10" value="'. $voucher_foreign_amount .'" ' . $block_return . ' style="margin-bottom: 3px;"/>';
         if ($has_direction_radio) {
@@ -226,7 +248,11 @@ class exchange {
 	 * @return string HTML anchor to use with exchange::getFormVoucherForeignCurrency()
 	 */
 	function getAnchorVoucherForeignCurrency($voucher_id, $link_txt='Velg valuta') {
-        return '<a href="#" onClick="toggle(\'voucher_currency_div_'. $voucher_id .'\');return false;">'. $link_txt .'</a>';
+        if ($voucher_id == "") {
+            $voucher_id_text = "newvoucher"; // set to new to make js work
+        }
+
+        return '<a href="#" onClick="toggle(\'voucher_currency_div_'. $voucher_id_text .'\');return false;">'. $link_txt .'</a>';
 	}
 
     /**

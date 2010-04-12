@@ -157,6 +157,41 @@ function toggle(node)
     }
 }
 
+function findDirectChildByName(parent, childName) {
+    var wrapper_children = parent.childNodes;
+
+    for(var i = 0; i < wrapper_children.length; i++)
+    {
+        if (typeof(wrapper_children[i].name) == 'undefined') {
+            continue;
+        }
+
+        if (wrapper_children[i].name == childName) {
+            return wrapper_children[i];
+        }
+    }
+
+    return false;
+}
+
+window.currency_rates = new Object();
+
+function onCurrencyChange(selObj, voucher_id) {
+    var currency = selObj.value;
+    var parent = document.getElementById('voucher_currency_div_' + voucher_id);
+
+    if (currency == "") {
+        rate = 0;
+    } else {
+        rate = window.currency_rates[voucher_id][currency];
+    }
+
+    var currency_rate_input = findDirectChildByName(parent, "voucher.ForeignConvRate");
+
+    currency_rate_input.value = rate;
+    currency_rate_input.display = "none";
+}
+
 function voucherCurrencyChange(btn, action_url)
 {
     var wrapper = btn.parentNode;
