@@ -358,8 +358,8 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     <td><? print $voucher_gui->active_line($voucher_input->VoucherIDOld, $voucherHead->VoucherID); ?></td>
     <td><? print $voucher_gui->account($voucher_input->VoucherPeriod, $voucher_input->new, $db_table, $voucher, $voucher_input->AccountPlanID, false) ?></td>
     <? print $voucher_gui->creditdebitfield($AmountField, $accountplan, $voucher_input->AmountIn, $voucher_input->AmountOut) ?>
-<? //print $voucher_gui->currency($voucherHead, $accountplan, $vb, $class) ?>
-<? print $voucher_gui->currency2($voucherHead) ?>
+    <? //print $voucher_gui->currency($voucherHead, $accountplan, $vb, $class) ?>
+    <? print $voucher_gui->currency2($voucherHead) ?>
     <td><? print $voucher_gui->vat($voucherHead, $accountplan, $VAT, $oldVatID, $voucher_input->VatID, $voucher_input->VatPercent) ?></td>
     <td><? if($accountplan->EnableQuantity)   { ?><input class="voucher" type="text" size="5"  tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" name="voucher.Quantity" accesskey="Q" value="<? print $_lib['format']->Amount($voucherHead->Quantity) ?>"><? } ?></td>
     <td><? if($rowCount>1) { $tmp = ''; } else { $tmp = $tabindex++; }; if($accountplan->EnableDepartment) { $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher_input->DepartmentID, 'tabindex' => $tmp, 'accesskey' => 'V')); } ?></td>
@@ -503,7 +503,8 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
       <td><? print $voucher_gui->account($voucher_input->VoucherPeriod, $voucher_input->new, $db_table, $voucher, $voucher->AccountPlanID, true) ?></td>
       <? print $voucher_gui->creditdebitfield($AmountField, $accountplan, $voucher->AmountIn, $voucher->AmountOut) ?>
       <? //print $voucher_gui->currency($voucherHead, $accountplan, $vb, $class1) ?>
-      <? print $voucher_gui->currency2($voucher) ?>
+      <!--<td></td><td></td><td></td><td></td>-->
+      <?  print $voucher_gui->currency2($voucher) // disable currency for nonhead lines ?>
       <td><? print $voucher_gui->vat($voucher, $accountplan, $VAT, $oldVatID, $VatID, $VatPercent) ?></td>
       <td><? if($accountplan->EnableQuantity)   { ?><input class="voucher" type="text" size="5"  tabindex="<? print $tabindex++; ?>" accesskey="Q" name="voucher.Quantity"        value="<? print "$voucher->Quantity"; ?>"><? } ?></td>
       <td><? if($accountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher->DepartmentID, 'tabindex' => $tabindex++, 'accesskey' => 'V')); } ?></td>

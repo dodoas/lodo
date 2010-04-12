@@ -185,7 +185,7 @@ class exchange {
 	 * @param  String $action_url The form action attribute
 	 * @return string HTML form inside a div block. Div is initially hidden (display:none)
 	 */
-	function getFormVoucherForeignCurrency($voucher_id, $voucher_foreign_amount, $voucher_foreign_rate, $voucher_foreign_currency, $action_url='', $has_save_button = true) {
+	function getFormVoucherForeignCurrency($voucher_id, $voucher_foreign_amount, $voucher_foreign_rate, $voucher_foreign_currency, $action_url='', $has_save_button = true, $has_direction_radio = true) {
         if ($action_url == '')
 			$action_url = 'lodo.php?'. $_SERVER['QUERY_STRING'];
 		$currencies = self::getActiveCurrencies();
@@ -200,8 +200,14 @@ class exchange {
         $block_return = 'onKeyPress="return disableEnterKey(event)"';
         $ch_curr  = '<div style="display:none;" class="vouchercurrencywrapper" id="voucher_currency_div_'. $voucher_id .'">';
         $ch_curr .= 'Valuta: <select name="voucher.ForeignCurrencyID" ' . $block_return . '>'. $select_options .'"</select><br />';
-        $ch_curr .= 'Verdi: <input class="number" type="text" name="voucher.ForeignAmount" size="10" value="'. $voucher_foreign_amount .'" ' . $block_return . ' /><br />';
-        $ch_curr .= 'Rate: <input class="number" type="text" name="voucher.ForeignConvRate" size="10" value="'. $voucher_foreign_rate .'" ' . $block_return . ' /> = 100NOK<br />';
+        $ch_curr .= 'Verdi: <input class="number" type="text" name="voucher.ForeignAmount" size="10" value="'. $voucher_foreign_amount .'" ' . $block_return . ' style="margin-bottom: 3px;"/>';
+        if ($has_direction_radio) {
+            $ch_curr .= '<input type="radio" name="voucher_ForeignCurrencyDirection" value="in">Inn';
+            $ch_curr .= '<input type="radio" name="voucher_ForeignCurrencyDirection" value="out" checked>Ut';
+        }
+        $ch_curr .= '<br />';
+        $ch_curr .= 'Rate: <input class="number" type="text" name="voucher.ForeignConvRate" size="10" value="'. $voucher_foreign_rate .'" ' . $block_return . ' /> =100NOK';
+        $ch_curr .= ' <a href="#" onclick="exchangeFindRate(this)" style="display: inline">finn kurs </a><br />';
         $ch_curr .= '<input class="number" type="hidden" name="voucher.VoucherID" value="'. $voucher_id .'" />';
         $ch_curr .= '<input class="number" type="hidden" name="voucher.ForeignCurrencyIDSelection" value="" />';
         if ($has_save_button) {

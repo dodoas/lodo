@@ -805,6 +805,15 @@ class accounting {
                 }
                 $fields = $args['fields'];
 
+                # unset foreign currency fields for vat lines, as we only want them in header line
+                $delete_fields = array('voucher_ForeignCurrencyID',
+                                       'voucher_ForeignAmount',
+                                       'voucher_ForeignConvRate');
+
+                foreach ($delete_fields as $df) {
+                    if (isset($fields[$df])) unset($fields[$df]);
+                }
+
                 $vat = $this->get_vataccount_object(array('VatID'=>$args['post']['voucher_VatID'], 'date' => $args['voucher']->VoucherDate));
                 $fields['voucher_AccountPlanID']  = $vat->AccountPlanID;
                 $_lib['sess']->debug("Kontoplan: $vat->AccountPlanID fra VatID" . $args['post']['voucher_VatID'] . "dato: " . $args['voucher']->VoucherDate);

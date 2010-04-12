@@ -222,4 +222,38 @@ function disableEnterKey(e)
      return (key != 13);
 } 
 
+
+function exchangeFindRate(btn)
+{
+    var wrapper = btn.parentNode;
+
+    var wrapper_children = wrapper.childNodes;
+
+    var currency_id_input = null;
+
+    for(var i = 0; i < wrapper_children.length; i++)
+    {
+        if (typeof(wrapper_children[i].name) == 'undefined') {
+            continue;
+        }
+
+        if (wrapper_children[i].name == "voucher.ForeignCurrencyID") {
+            currency_id_input = wrapper_children[i];
+            break;
+        }
+    }
+    var currency = currency_id_input[currency_id_input.selectedIndex].value;
+    if (currency == "") {
+	    alert("Velg en valuta");
+	    return false;
+    }
+
+    var googleQuery = '100 NOK in ' + currency;
+    var url = 'http://www.google.com/search?q=' + googleQuery;
+
+    window.open(url,'_blank');    
+
+    return false;
+} 
+
 </script>

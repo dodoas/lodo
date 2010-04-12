@@ -130,7 +130,7 @@ if(count($postmotpost->voucherH) > 0)
                         $tmp_foreign = "Endre valuta";
                     }
                     $ch_curr = exchange::getAnchorVoucherForeignCurrency($voucher->VoucherID, $tmp_foreign);
-                    $ch_curr .= exchange::getFormVoucherForeignCurrency($voucher->VoucherID, $voucher->ForeignAmount, $voucher->ForeignConvRate, $voucher->ForeignCurrencyID);
+                    $ch_curr .= exchange::getFormVoucherForeignCurrency($voucher->VoucherID, $voucher->ForeignAmount, $voucher->ForeignConvRate, $voucher->ForeignCurrencyID, '', true, false);
                         
                     ?>
                     <tr class="<? print $class ?>">

@@ -99,21 +99,23 @@ class framework_logic_voucherinput
                 if (Exchange::validateForeignCurrencyFields($args)) {
                     $this->ForeignCurrencyID = $args['voucher_ForeignCurrencyID'];
                     $this->ForeignAmount = $args['voucher_ForeignAmount'];
+                    $foreign_currency_direction = isset($args['voucher_ForeignCurrencyDirection']) &&
+                        $args['voucher_ForeignCurrencyDirection'] == 'in' ? 'in' : 'out';
 
                     $hash = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignAmount']));
                     $this->ForeignAmount = $hash['value'];
                     $hash = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignConvRate']));
                     $this->ForeignConvRate = $hash['value'];
 
-                    $foreign_converted_amount = $this->ForeignAmount * (100 / $this->ForeignConvRate);
-
+                    $foreign_converted_amount = abs($this->ForeignAmount * (100 / $this->ForeignConvRate));
                     if ($foreign_converted_amount) {
-                        if ($foreign_converted_amount > 0) {
+                        /* if ($foreign_converted_amount > 0) { */
+                        if ($foreign_currency_direction == 'in') {
                             $this->AmountIn = $foreign_converted_amount;
                             $this->AmountOut = 0;
                         } else {
                             $this->AmountIn = 0;
-                            $this->AmountOut = abs($foreign_converted_amount);
+                            $this->AmountOut = $foreign_converted_amount;
                         }
                     }
                 } else {
