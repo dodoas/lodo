@@ -129,9 +129,8 @@ if(count($postmotpost->voucherH) > 0)
                     } else {
                         $tmp_foreign = "Endre valuta";
                     }
-                    $ch_curr = exchange::getAnchorVoucherForeignCurrency($voucher->VoucherID, $tmp_foreign);
-                    $ch_curr .= exchange::getFormVoucherForeignCurrency($voucher->VoucherID, $voucher->ForeignAmount, $voucher->ForeignConvRate, $voucher->ForeignCurrencyID, '', true, false);
-                        
+                    $ch_curr = '<a href="' . $_lib['sess']->dispatch ."t=journal.edit&voucher_JournalID=" . $voucher->JournalID . '&amp;voucher_VoucherType=' . $voucher->VoucherType . '&action_journalid_search=1">' . $tmp_foreign . '</a></td>';
+       
                     ?>
                     <tr class="<? print $class ?>">
                         <td><? print $voucher->Name; ?></td>
