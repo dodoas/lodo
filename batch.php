@@ -7,6 +7,7 @@ if($argc <= 1) {
   print "example:\n";
   print "php batch.php model_tablemetadata_tablemetadata.dbupdate db_name=konsulentvikaren0\n";
   print "php batch.php model_tablemetadata_tablemetadata.updateall\n";
+  print "php batch.php model_tablemetadata_tablemetadata.updateallskipsystemdbs\n";
   print "php batch.php model_synchronizeinstallation_synchronizeinstallation.updateinstalltable db_name=konsulentvikaren0\n\n";
   print "php batch.php model_tablemetadata_tablemetadata.runscriptall scriptpath='db/changes/022_scriptname.sql'\n\n";
   print "php batch.php model_fakturabank_fakturabank.generate_invoice_xml InvoiceID=1\n";
