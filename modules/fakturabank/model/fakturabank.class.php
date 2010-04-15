@@ -763,6 +763,8 @@ class lodo_fakturabank_fakturabank {
         $conversion_rate  = 0;
         $is_foreign       = false;
 
+        $fbvoting = new lodo_fakturabank_fakturabankvoting();
+
         foreach($invoicesO->Invoice as &$InvoiceO) {
         
             #If all essential data quality is ok - download the invoice
@@ -793,7 +795,6 @@ class lodo_fakturabank_fakturabank {
                 $dataH['VoucherType']           = 'U';
 
                 $dataH['DueDate']               = $InvoiceO->PaymentMeans->PaymentDueDate;
-                //$dataH['TotalCustPrice']        = $InvoiceO->LegalMonetaryTotal->PayableAmount; #If negative this is probably a credit note
 
                 $dataH['SupplierBankAccount']   = $InvoiceO->PaymentMeans->PayeeFinancialAccount->ID;
                 $dataH['CustomerBankAccount']   = $_lib['sess']->get_companydef('BankAccount');
@@ -886,13 +887,14 @@ class lodo_fakturabank_fakturabank {
                         #Foreign currency
                         if ($is_foreign) {
                             $datalineH['UnitCostPrice'] = exchange::convertToNOK($InvoiceO->DocumentCurrencyCode, $CustPrice);
-                            $datalineH['UnitCustPrice'] = $datalineH['UnitCostPrice'];
                             $datalineH['ForeignCurrencyID'] = $InvoiceO->DocumentCurrencyCode;
                             $datalineH['ForeignAmount']     = (float)$CustPrice;
                             $datalineH['ForeignConvRate']   = $conversion_rate;
                         } else {
-                            $datalineH['TotalCustPrice'] = $InvoiceO->LegalMonetaryTotal->PayableAmount; #If negative this is probably a credit note
+                            $datalineH['UnitCostPrice'] = $CustPrice;
                         }
+                        
+                        $datalineH['UnitCustPrice'] = $datalineH['UnitCostPrice'];
 
                         $datalineH['UnitCostPriceCurrencyID'] = 'NOK';
                         $datalineH['UnitCustPriceCurrencyID'] = 'NOK';
@@ -908,11 +910,10 @@ class lodo_fakturabank_fakturabank {
                         $_lib['storage']->store_record(array('data' => $datalineH, 'table' => 'invoiceinline', 'debug' => false));
                     }
                 }
-				
-				#Update fakturabank voting tables to enable lookup of lodo invoice 
-				#given bank transaction information, when importing transactions from bank
-				$fbvoting = new lodo_fakturabank_fakturabankvoting();
-				$fbvoting->update_fakturabank_incoming_invoice($InvoiceO->FakturabankID, $ID, $InvoiceO->AccountPlanID);
+
+                #Update fakturabank voting tables to enable lookup of lodo invoice 
+                #given bank transaction information, when importing transactions from bank
+                $fbvoting->update_fakturabank_incoming_invoice($InvoiceO->FakturabankID, $ID, $InvoiceO->AccountPlanID);
 
                 #Set status in fakturabank
                 $comment = "Lodo PHP Invoicein ID: " . $ID . " registered " . $_lib['sess']->get_session('Datetime');

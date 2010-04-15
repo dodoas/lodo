@@ -230,6 +230,7 @@ class accounting {
 
       if (!is_numeric($AccountplanID)) {
           $_lib['message']->add(array('message' => 'get_accountplan_object(): Mangler AccountplanID'));
+          # throw new Exception("missing accountplan");
           return false;
       }
 
@@ -625,7 +626,9 @@ class accounting {
                     $voucher = $this->get_voucher_object(array('voucherID'=>$voucher->AutomaticVatVoucherID));
                     $_lib['sess']->debug("get_voucher_object3");
 
-                    $this->sub_AutoVat(array('voucher'=>$voucher, 'post'=>$args['post'], 'comment' => 'Fra update account i loop'));
+                    if (!empty($voucher)) {
+                        $this->sub_AutoVat(array('voucher'=>$voucher, 'post'=>$args['post'], 'comment' => 'Fra update account i loop'));
+                    }
                 }
             } else {
                 $_lib['sess']->debug("Kunde er ikke MVA pliktig");
@@ -801,6 +804,15 @@ class accounting {
                     #print_r($args);
                 }
                 $fields = $args['fields'];
+
+                # unset foreign currency fields for vat lines, as we only want them in header line
+                $delete_fields = array('voucher_ForeignCurrencyID',
+                                       'voucher_ForeignAmount',
+                                       'voucher_ForeignConvRate');
+
+                foreach ($delete_fields as $df) {
+                    if (isset($fields[$df])) unset($fields[$df]);
+                }
 
                 $vat = $this->get_vataccount_object(array('VatID'=>$args['post']['voucher_VatID'], 'date' => $args['voucher']->VoucherDate));
                 $fields['voucher_AccountPlanID']  = $vat->AccountPlanID;
@@ -1480,7 +1492,8 @@ class accounting {
     #This is the function that actually carries out the dirty work. Can not be called from outside this library
     #Will not check or update anything - it i the smart version that is for normal usage.
 	# $check_only_period is a period which is supplied for allowing a period check to go through without
-	# actually updating the voucherPeriod. This was added as a quick solution to avoid unintended 
+	# actually updating the voucherPeriod (i.e. without having voucherPeriod in fields array). 
+    # This was added as a quick solution to avoid unintended 
 	# consequences when fixing
     private function update_voucher_line($fields, $VoucherID, $comment, $check_only_period = false) {
         global $_lib;
@@ -1501,7 +1514,7 @@ class accounting {
             #print "<br>\n<b>update_voucher_line - finished: $VoucherID AmountIn: " . $fields['voucher_AmountIn'] . ", AmountOut: " . $fields['voucher_AmountOut'] . ", Vat: " . $fields['voucher_Vat'] . ", VatID: " . $fields['voucher_VatID'] . "</b><br>\n";
             $_lib['storage']->db_update_hash($fields, 'voucher', $primarykey);        
         } else {
-            print "Ikke lov &aring; oppdatere en bilagslinje i en stengt periode: " . $fields['voucher_VoucherPeriod'] . " - Linjenummer: $VoucherID - kommentar: $comment<br>\n";        
+            print "Ikke lov &aring; oppdatere en bilagslinje i en stengt periode: " . $fields['voucher_VoucherPeriod'] . " - Linjenummer: $VoucherID - kommentar: $comment<br>\n";
         }
     }
 
@@ -1635,7 +1648,7 @@ class accounting {
                 $query = "select VoucherID, AutomaticVatVoucherID from voucher where VoucherID=" . (int) $old->VoucherID . " and JournalID=" . (int) $fields['voucher_JournalID'] . " and VoucherType='" . $fields['voucher_VoucherType'] . "' and Active=1";
                 #print "vat slett loop: $query<br>\n";
                 $hovedbok = $_lib['storage']->get_row(array('query' => $query));
-                $this->update_voucher_line(array('voucher_AutomaticVatVoucherID' => 0), $old->VoucherID, 'slett loop nullstiller automatic vat');
+                $this->update_voucher_line(array('voucher_AutomaticVatVoucherID' => 0), $old->VoucherID, 'slett loop nullstiller automatic vat', $fields['voucher_VoucherPeriod']);
                 while($hovedbok->AutomaticVatVoucherID > 0)
                 {
                     $VoucherIDtmp = $hovedbok->AutomaticVatVoucherID;
@@ -1908,6 +1921,10 @@ class accounting {
     function is_reskontro($AccountPlanID) {
         global $_lib;
 
+        if (empty($AccountPlanID)) {
+            return false;
+        }
+
         $account = $this->get_accountplan_object($AccountPlanID);
 
         if($account->AccountPlanType != 'balance' && $account->AccountPlanType != 'result') {
@@ -1979,7 +1996,7 @@ class accounting {
     * @param VoucherID
     * @return
     */
-    function delete_voucher_line_smart($VoucherID, $JournalID, $VoucherType, $comment) {
+    function delete_voucher_line_smart($VoucherID, $JournalID, $VoucherType, $comment = "") {
         global $_lib;
 
         $_lib['sess']->debug("delete_voucher_line_smart VoucherID: $VoucherID, JournalID: $JournalID, VoucherType: $VoucherType, comment: $comment");
@@ -2025,7 +2042,7 @@ class accounting {
                 #print "Sletter VoucherID: $VoucherID<br>\n";
                 #debug_print_backtrace();
                 #$_lib['storage']->db_delete_hash('voucher', $primarykey);
-                $this->update_voucher_line(array('voucher_Active' => 0), $VoucherID, 'delete_voucher_line'); #Inactivate instead
+                $this->update_voucher_line(array('voucher_Active' => 0), $VoucherID, 'delete_voucher_line', $voucher->VoucherPeriod); #Inactivate instead
             } else {
                 #print "Sletter ikke2<br>\n";
                 $_lib['message']->add(array('message' => 'Prøver å slette en periode som er stengt. Rapporter denne feilen og hvordan den oppstod'));

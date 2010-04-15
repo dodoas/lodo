@@ -4,8 +4,8 @@ $db_table = "exchange";
 require_once "record.inc";
 includelogic('exchange/exchange');
 
-#Retrieve active currencies
-$currencies = exchange::getActiveCurrencies();
+#Retrieve all currencies
+$currencies = exchange::getInactiveCurrencies();
 
 #Input parameters should be validated - also against roles
 $query   = "select * from $db_table";
@@ -44,6 +44,7 @@ foreach ($currencies as $currency) {
     <th>Vekslingsrate
     <th>
     <th>
+    <th>Google Kurs
 <?
 while($exchange = $_lib['db']->db_fetch_object($result_exchange)) {
 ?>
@@ -61,6 +62,8 @@ while($exchange = $_lib['db']->db_fetch_object($result_exchange)) {
     <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
       <input type="submit" value="Slett" name="action_exchange_delete">
     <? } ?>
+<td><a href="<? echo exchange::googleExchangeRateUrl(100, 'NOK', $exchange->CurrencyID); ?>" target="_blank">finn kurs</a>
+    </td>
 </form>
 <? } ?>
 </table>

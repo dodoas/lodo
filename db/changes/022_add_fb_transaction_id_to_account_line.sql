@@ -1,0 +1,1 @@
+ALTER TABLE `accountline` ADD COLUMN `FakturabankTransactionLodoID` bigint(20) AFTER InvoiceNumber;

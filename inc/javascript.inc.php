@@ -156,4 +156,139 @@ function toggle(node)
        target.style.display = "none";
     }
 }
+
+function findDirectChildByName(parent, childName) {
+    var wrapper_children = parent.childNodes;
+
+    for(var i = 0; i < wrapper_children.length; i++)
+    {
+        if (typeof(wrapper_children[i].name) == 'undefined') {
+            continue;
+        }
+
+        if (wrapper_children[i].name == childName) {
+            return wrapper_children[i];
+        }
+    }
+
+    return false;
+}
+
+window.currency_rates = new Object();
+
+function onCurrencyChange(selObj, voucher_id) {
+    var currency = selObj.value;
+    var parent = document.getElementById('voucher_currency_div_' + voucher_id);
+
+    if (currency == "") {
+        rate = 0;
+    } else {
+        rate = window.currency_rates[voucher_id][currency];
+    }
+
+    var currency_rate_input = findDirectChildByName(parent, "voucher.ForeignConvRate");
+
+    currency_rate_input.value = rate;
+    currency_rate_input.display = "none";
+}
+
+function voucherCurrencyChange(btn, action_url)
+{
+    var wrapper = btn.parentNode;
+
+    var wrapper_children = wrapper.childNodes;
+
+    var currency_id_input = null;
+    var currency_id_selected_input = null;
+    var currency_amount_input = null;
+    var currency_rate_input = null;
+
+    for(var i = 0; i < wrapper_children.length; i++)
+    {
+        if (typeof(wrapper_children[i].name) == 'undefined') {
+            continue;
+        }
+
+        if (wrapper_children[i].name == "voucher.ForeignCurrencyID") {
+            currency_id_input = wrapper_children[i];
+        } else if (wrapper_children[i].name == "voucher.ForeignCurrencyIDSelection") {
+            currency_id_selected_input = wrapper_children[i];            
+        } else if (wrapper_children[i].name == "voucher.ForeignAmount") {
+            currency_amount_input = wrapper_children[i];            
+        } else if (wrapper_children[i].name == "voucher.ForeignConvRate") {
+            currency_rate_input = wrapper_children[i];            
+        }
+    }
+    var currency = currency_id_input[currency_id_input.selectedIndex].value;
+    if (currency == "") {
+	    alert("Velg en valuta");
+	    return false;
+    }
+
+    if (currency_amount_input.value == 0) {
+	    alert("Velg en verdi");
+	    return false;
+    }
+
+    if (currency_rate_input.value == 0) {
+	    alert("Velg en vekslingsrate");
+	    return false;
+    }
+
+    currency_id_selected_input.value = currency;
+
+    var currencyform = document.createElement("form");
+    currencyform.method = "post";
+    currencyform.action = action_url;
+    currencyform.appendChild(wrapper.cloneNode(true));
+    currencyform.style.display='none';
+    document.body.appendChild(currencyform);
+    currencyform.submit();
+}
+
+function disableEnterKey(e)
+{
+     var key;      
+     if(window.event)
+          key = window.event.keyCode; //IE
+     else
+          key = e.which; //firefox      
+
+     return (key != 13);
+} 
+
+
+function exchangeFindRate(btn)
+{
+    var wrapper = btn.parentNode;
+
+    var wrapper_children = wrapper.childNodes;
+
+    var currency_id_input = null;
+
+    for(var i = 0; i < wrapper_children.length; i++)
+    {
+        if (typeof(wrapper_children[i].name) == 'undefined') {
+            continue;
+        }
+
+        if (wrapper_children[i].name == "voucher.ForeignCurrencyID") {
+            currency_id_input = wrapper_children[i];
+            break;
+        }
+    }
+    var currency = currency_id_input[currency_id_input.selectedIndex].value;
+    if (currency == "") {
+	    alert("Velg en valuta");
+	    return false;
+    }
+
+    var googleQuery = '100 NOK in ' + currency;
+    var url = 'http://www.google.com/search?q=' + googleQuery;
+
+    window.open(url,'_blank');    
+
+    return false;
+} 
+
 </script>

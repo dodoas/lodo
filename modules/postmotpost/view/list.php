@@ -10,8 +10,6 @@ $accounting = new accounting();
 includelogic('postmotpost/postmotpost');
 includelogic('exchange/exchange');
 
-$currencies = exchange::getCurrencies();
-
 $postmotpost = new postmotpost(array('AccountPlanID' => $_REQUEST['AccountPlanID'], 'ReskontroFromAccount' => $_REQUEST['ReskontroFromAccount'], 'ReskontroToAccount' => $_REQUEST['ReskontroToAccount'], 'DepartmentID' => $_REQUEST['report_DepartmentID'], 'ProjectID' => $_REQUEST['report_ProjectID']));
 require "record.inc";
 
@@ -131,9 +129,7 @@ if(count($postmotpost->voucherH) > 0)
                     } else {
                         $tmp_foreign = "Endre valuta";
                     }
-                    $ch_curr = exchange::getAnchorVoucherForeignCurrency($voucher->VoucherID, $tmp_foreign);
-//                    $ch_curr .= exchange::getFormVoucherForeignCurrency($voucher->VoucherID, $voucher->ForeignAmount, $voucher->ForeignConvRate, $voucher->ForeignCurrencyID);
-                        
+                    $ch_curr = '<a href="' . $_lib['sess']->dispatch ."t=journal.edit&voucher_JournalID=" . $voucher->JournalID . '&amp;voucher_VoucherType=' . $voucher->VoucherType . '&action_journalid_search=1">' . $tmp_foreign . '</a></td>';
                     ?>
                     <tr class="<? print $class ?>">
                         <td><? print $voucher->Name; ?></td>
@@ -143,7 +139,7 @@ if(count($postmotpost->voucherH) > 0)
                         <td><? print $voucher->VoucherPeriod; ?></td>
                         <td class="number"><nobr><? if($voucher->AmountIn > 0) { print $_lib['format']->Amount($voucher->AmountIn); } ?></nobr></td>
                         <td class="number"><nobr><? if($voucher->AmountOut > 0) { print $_lib['format']->Amount($voucher->AmountOut); } ?></nobr></td>
-                        <td class="number"><nobr><? if($voucher->ForeignAmountIn > 0) { print $_lib['format']->Amount($voucher->ForeignAmountIn); } ?></nobr></td>
+                    <td class="number"><nobr><? if($voucher->ForeignAmountIn > 0) { print $_lib['format']->Amount($voucher->ForeignAmountIn); } ?></nobr></td>
                         <td class="number"><nobr><? if($voucher->ForeignAmountOut > 0) { print $_lib['format']->Amount($voucher->ForeignAmountOut); } ?></nobr></td>
                         <td class="number"><nobr><? print $ch_curr; ?></nobr></td>
                         <td><? if($voucher->VAT > 0)          { print $voucher->VAT; } ?></td>

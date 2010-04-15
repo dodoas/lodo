@@ -69,12 +69,12 @@ Merk: Du m&aring; registrere brukeren din p&aring; <a href="http://fakturabank.n
 </thead>
 <tbody>
 <?
-foreach($InvoicesO->Invoice as $InvoiceO) {
-  $TotalCustPrice += $InvoiceO->LegalMonetaryTotal->PayableAmount;
-  $tmp_currency_code = $InvoiceO->DocumentCurrencyCode;
+if (!empty($InvoicesO->Invoice)) {
 
-  if ($InvoiceO->LegalMonetaryTotal->PayableAmount == 200) {
-  }
+  foreach($InvoicesO->Invoice as $InvoiceO) {
+    $TotalCustPrice += $InvoiceO->LegalMonetaryTotal->PayableAmount;
+    $tmp_currency_code = $InvoiceO->DocumentCurrencyCode;
+
   ?>
     <tr class="<? print $InvoiceO->Class ?>">
       <td class="number"><? if($InvoiceO->Journaled) { ?><a href="<? print $_SETUP[DISPATCH]."t=journal.edit&amp;voucher_VoucherType=$InvoiceO->VoucherType&amp;voucher_JournalID=$InvoiceO->JournalID"; ?>&amp;action_journalid_search=1" target="_new"><? print $InvoiceO->VoucherType ?><? print $InvoiceO->JournalID ?></a><? } else { ?><i><a title="Foresl&aring;tt bilagsnummer - dette kan endre seg"><? print $InvoiceO->VoucherType ?><? print $InvoiceO->JournalID ?></a></i><? } ?></td>
@@ -111,7 +111,10 @@ foreach($InvoicesO->Invoice as $InvoiceO) {
       <td align="center"><a href="https://fakturabank.no/suppliers/<? print $InvoiceO->AccountingSupplierParty->Party->PartyIdentification->ID ?>/invoices/<? print str_replace(".", "%2E", rawurlencode($InvoiceO->ID)) ?>" title="Vis faktura i fakturabank" target="_new">Vis</a>
       <td class="number"><? print $InvoiceO->Status ?></td>
   </tr>
-<? } ?>
+<? 
+  } 
+}
+?>
 <tr>
     <th colspan="8"></th>
     <th>SUM</th>

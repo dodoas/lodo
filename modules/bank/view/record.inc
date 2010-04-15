@@ -100,7 +100,9 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
 							$accountline = $DataH[$server_name][$database_name][$table_name][$pk_name];
 							# find fakturabank data
 							$match = $fbvoting->findmatch(array('Amount' => $value, 'VoucherDate' => $Period . '-' . $accountline['Day'], 'BankAccountID' => $AccountID, 'Incoming' => $incoming, 'id' => $pk_name, 'accountline' => $DataH[$server_name][$database_name][$table_name][$pk_name], 'period' => $Period));
-							if ($match) {
+							if ($match && 
+                                !empty($match['AccountPlanID']) && // ignore interest, transaction costs etc for now (transactions without org numbers)
+                                !empty($match['AccountPlanOrgNumber'])) {
 									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
 										$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] = $match['AccountPlanID'];
 									}
@@ -159,7 +161,7 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
 							if($DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] == $debugline) print "Finn fakturanummer: " . $DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber'] . "<br />";
 							
 							$voucher = $accounting->FindJournalWithInvoiceID($DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber']);
-							print_r($voucher);
+							#print_r($voucher);
 							if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
 							    $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] = $voucher->AccountPlanID;
                             }

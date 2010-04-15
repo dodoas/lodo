@@ -47,7 +47,8 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
         <? print $_lib['form3']->url(array('description' => 'Kontoutskrift',    'url' => $_lib['sess']->dispatch . 't=bank.tabbankaccount'  . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> | 
         <? print $_lib['form3']->url(array('description' => 'Bilagsf&oslash;r/Avstemming i slutten av m&aring;neden',          'url' => $_lib['sess']->dispatch . 't=bank.tabjournal'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
         <? print $_lib['form3']->url(array('description' => 'Enkel',          'url' => $_lib['sess']->dispatch . 't=bank.tabsimple'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
-        <? print $_lib['form3']->url(array('description' => 'Import',          'url' => $_lib['sess']->dispatch . 't=bank.import'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?>
+        <? print $_lib['form3']->url(array('description' => 'Import',          'url' => $_lib['sess']->dispatch . 't=bank.import'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
+        <? print $_lib['form3']->url(array('description' => 'Import fra FakturaBank',          'url' => $_lib['sess']->dispatch . 't=bank.fakturabankimport'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?>
 
         <h2>Kasse/bank-avstemming for periode: <? print $bank->ThisPeriod ?> med bilag av type <? print $bank->VoucherType ?> p&aring; konto <? print $bank->AccountNumber ?> <? print $bank->AccountName ?></h2>
         </th>
@@ -134,13 +135,17 @@ $tabindexH[5] = $tabindex + ($count * 5);
 $tabindexH[6] = $tabindex + ($count * 5) + 1;
 $tabindexH[7] = $tabindex + ($count * 7);
 
-
 if(is_array($bank->bankaccount)) {
     foreach($bank->bankaccount as $row) { 
+
         $i++;
 
-        $reskontroaccountplan   = $accounting->get_accountplan_object($row->ReskontroAccountPlanID);
-        $resultaccountplan      = $accounting->get_accountplan_object($row->ResultAccountPlanID);
+        if (!empty($row->ReskontroAccountPlanID)) {
+            $reskontroaccountplan   = $accounting->get_accountplan_object($row->ReskontroAccountPlanID);
+        }
+        if (!empty($row->ResultAccountPlanID)) {
+            $resultaccountplan      = $accounting->get_accountplan_object($row->ResultAccountPlanID);
+        }
 
         $aconf = array();
         $aconf['table']         = 'accountline';
@@ -209,7 +214,9 @@ if(is_array($bank->bankaccount)) {
 
             print $_lib['form3']->accountplan_number_menu($reskontroconf);    
             print $_lib['form3']->URL(array('url' => $_lib['sess']->dispatch . "t=accountplan.reskontro&accountplan_AccountPlanID=$row->ReskontroAccountPlanID", 'description' => 'K', 'title' => 'Endre oppsett p&aring; denne kontoen', 'target' => '_top'));
-            print $reskontroaccountplan->OrgNumber;
+            if (!empty($reskontroaccountplan)) {
+                print $reskontroaccountplan->OrgNumber;
+            }
             ?>
         </td>
         <td><? print $_lib['form3']->checkbox(array('table' => 'accountline', 'field' => 'AutoResultAccount',     'pk' => $row->AccountLineID, 'value' => $row->AutoResultAccount, 'title' => 'Klikk her for &aring; velge resultatkonto automatisk fra reskontro')) ?></td>
@@ -223,20 +230,20 @@ if(is_array($bank->bankaccount)) {
         </td>
         <td>
             <? 
-            if($resultaccountplan->EnableVAT) {
+              if(!empty($resultaccountplan) && $resultaccountplan->EnableVAT) {
                 print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Vat',        'pk' => $row->AccountLineID, 'value' => (int) $row->Vat,         'width' => 2, 'maxlength' => 3));
             }
             ?>
         </td>
         <td>
             <? 
-            if($resultaccountplan->EnableQuantity) {
+            if(!empty($resultaccountplan) && $resultaccountplan->EnableQuantity) {
                 print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'ResultQuantity',        'pk' => $row->AccountLineID, 'value' => $row->ResultQuantity,         'width' => 5, 'maxlength' => 255));
             }
             ?>
         </td>
-        <td><? if($resultaccountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => 'accountline', 'field' => 'DepartmentID',  'pk' => $row->AccountLineID, 'value' => $row->DepartmentID)); } ?></td>
-        <td><? if($resultaccountplan->EnableProject)    { ?><? $_lib['form2']->project_menu2(array(   'table' => 'accountline', 'field' => 'ProjectID',     'pk' => $row->AccountLineID, 'value' => $row->ProjectID)); } ?></td>
+        <td><? if(!empty($resultaccountplan) && $resultaccountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => 'accountline', 'field' => 'DepartmentID',  'pk' => $row->AccountLineID, 'value' => $row->DepartmentID)); } ?></td>
+        <td><? if(!empty($resultaccountplan) && $resultaccountplan->EnableProject)    { ?><? $_lib['form2']->project_menu2(array(   'table' => 'accountline', 'field' => 'ProjectID',     'pk' => $row->AccountLineID, 'value' => $row->ProjectID)); } ?></td>
         <td><? 
             if($row->KID || $row->InvoiceNumber) {
                 if($bank->is_closeable($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber)) {

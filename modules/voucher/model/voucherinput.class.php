@@ -5,6 +5,8 @@
 #
 ##################################
 
+includelogic('exchange/exchange');
+
 class framework_logic_voucherinput
 {
     #Voucherline variables
@@ -37,6 +39,9 @@ class framework_logic_voucherinput
     public $Active                  = 1;
     public $KID                     = '';
     public $InvoiceID               = '';
+    public $ForeignCurrencyID = '';
+    public $ForeignConvRate = 0;
+    public $ForeignAmount = 0;
 
     #Other control variables
 
@@ -84,6 +89,46 @@ class framework_logic_voucherinput
         
         $this->Currency           = strip_tags($args['voucher_Currency']);
 
+        $foreign_converted_amount = false;
+
+        ########################################
+        #Foreign currency information
+        if(isset($args['voucher_ForeignCurrencyID']))
+        {
+            if ($args['voucher_ForeignCurrencyID'] != "") {
+                if (Exchange::validateForeignCurrencyFields($args)) {
+                    $this->ForeignCurrencyID = $args['voucher_ForeignCurrencyID'];
+                    $this->ForeignAmount = $args['voucher_ForeignAmount'];
+                    $foreign_currency_direction = isset($args['voucher_ForeignCurrencyDirection']) &&
+                        $args['voucher_ForeignCurrencyDirection'] == 'in' ? 'in' : 'out';
+
+                    $hash = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignAmount']));
+                    $this->ForeignAmount = $hash['value'];
+                    $hash = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignConvRate']));
+                    $this->ForeignConvRate = $hash['value'];
+
+                    $foreign_converted_amount = abs($this->ForeignAmount * (100 / $this->ForeignConvRate));
+                    if ($foreign_converted_amount) {
+                        /* if ($foreign_converted_amount > 0) { */
+                        if ($foreign_currency_direction == 'in') {
+                            $this->AmountIn = $foreign_converted_amount;
+                            $this->AmountOut = 0;
+                        } else {
+                            $this->AmountIn = 0;
+                            $this->AmountOut = $foreign_converted_amount;
+                        }
+                    }
+                } else {
+                    // invalid data, ignore for now
+                }
+            } else {
+                $this->ForeignCurrencyID = "";
+                $this->ForeignConvRate = 0;
+                $this->ForeignAmount = 0;
+            }
+        }
+
+
         if(isset($_REQUEST['voucher_VoucherType'])) 
             $this->VoucherType        = strip_tags($args['voucher_VoucherType']);
         elseif(isset($_REQUEST['VoucherType'])) 
@@ -92,7 +137,12 @@ class framework_logic_voucherinput
         $this->KID                = $args['voucher_KID']; #Burde ikke trenge 2 referanser
         $this->InvoiceID          = $args['voucher_InvoiceID'];
         
-        $this->Amount             = strip_tags($args['Amount']);
+        if ($foreign_converted_amount) {
+            # I do not enable setting Amount yet, because it seems to be out of use
+            # $this->Amount             = $foreign_converted_amount;
+        } else {
+            $this->Amount             = strip_tags($args['Amount']);
+        }
         
         $this->CustomerNumber     = strip_tags($args['CustomerNumber']);
         if(!$this->CustomerNumber) {
@@ -165,7 +215,7 @@ class framework_logic_voucherinput
 
         $this->logic($args);
         $this->record();
-        
+
         #print "Opprinnelige inn verdier\n";
         #print_r($this);
     }
@@ -222,8 +272,7 @@ class framework_logic_voucherinput
           $this->DueDate = $hash['value'];
           $error6 = $hash['error'];
         }
-        $_lib['message']->add(array('message' => $error1 . $error2 . $error3 . $error4 . $error5 . $error6));
-    
+        $_lib['message']->add(array('message' => $error1 . $error2 . $error3 . $error4 . $error5 . $error6));    
     }
 
     ############################################################################
@@ -666,6 +715,17 @@ class framework_logic_voucherinput
         
         if($this->AutomaticBalanceID)
             $request['voucher_AutomaticBalanceID']      = $this->AutomaticBalanceID;
+
+        if ($this->action['voucher_head_update'] || 
+            $this->action['voucher_new'] ||
+            $this->action['voucher_update'] ||
+            $this->action['voucherline_new']) {
+
+            $request['voucher_ForeignCurrencyID']      = $this->ForeignCurrencyID;
+            $request['voucher_ForeignConvRate']      = $this->ForeignConvRate;
+            $request['voucher_ForeignAmount']      = $this->ForeignAmount;            
+        }
+
          
         #print "<h2>Output fra voucher objektet kalt fra: $calledfrom</h2>";
         #print_r($request);

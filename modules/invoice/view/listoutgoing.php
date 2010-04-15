@@ -111,14 +111,14 @@ $db_sum   = $row->sum;
 <tr>
     <td>
         <form name="invoice_list" action="<? print $_lib['sess']->dispatch ?>t=invoice.listoutgoing" method="post">
-        S&oslash;k:   <input type="text" value="<? print $searchstring ?>" name="searchstring" size="10"/>
+        Kunde:   <input type="text" value="<? print $searchstring ?>" name="searchstring" size="10"/>
         Fra:    <? print $_lib['form3']->date(array('name' => 'FromDate',           'value' => $FromDate)) ?>
         Til:    <? print $_lib['form3']->date(array('name' => 'ToDate',             'value' => $ToDate)) ?>
         Fakturanummer: <? print $_lib['form3']->text(array('name' => 'InvoiceID',   'value' => $InvoiceID)) ?>
         <? print $_lib['form3']->submit(array('name' => 'show_search',   'value' => 'S&oslash;k (S)')) ?>
         </form>
         <form name="invoice_edit" action="<? print $_lib['sess']->dispatch ?>t=invoice.edit" method="post">
-        <input type="hidden" value="edit" name="inline">
+        <input type="hidden" value="edit" name="inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input type="submit" value="Ny faktura (N)" name="action_invoice_new" accesskey="N">
         </form>
 	</td>

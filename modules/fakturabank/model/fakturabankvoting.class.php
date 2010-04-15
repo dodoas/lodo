@@ -138,15 +138,132 @@ class lodo_fakturabank_fakturabankvoting {
                 $_lib['message']->add("XML Dokument tomt - pr&oslash;v igjen: $url");
             }
         }
+
         return $voting;
     }
 
-	public function save_incoming_w_voting($invoices) {
+	public function import_transactions($account_id, $period) {
+        if (!is_numeric($account_id)) {
+            return false;
+        }
+
+        if (!preg_match('/[0-9]{4}-[0-9]{2}/', $period)) {
+            return false;
+        }
+
         global $_lib;
+
+        # get transaction data from fakturabank
 		$voting = $this->get_balance_report();
+        if (!is_array($voting) || empty($voting)) {
+            return false;
+        }
+		$this->save_transactions($voting);
 
-		$this->save_voting($voting);
+        # import fakturabank transaction records accountline table
+        $this->import_transactions_to_accounting($account_id, $period);
 
+	}
+
+    
+
+    protected function import_transactions_to_accounting($account_id, $period) {
+        global $_lib;
+
+		$query = "SELECT AccountNumber FROM account WHERE AccountID='" . $account_id . "'";
+
+
+		$row = $_lib['storage']->get_row(array('query' => $query));
+
+		if (empty($row)) {
+			return false;
+		}
+
+		$account_number = str_replace(" ", "", $row->AccountNumber);
+
+        $period_start = $period . "-01 00:00:00";
+        $period_end = substr($period, 0, 5) . (((int) substr($period, 5, 2)) + 1) . "-01 00:00:00";
+
+        $period_start = $_lib['db']->db_escape($period_start);
+        $period_end = $_lib['db']->db_escape($period_end);
+
+        $query = "SELECT * FROM fakturabanktransaction WHERE 
+                        PostingDate >= '$period_start' AND
+                        PostingDate < '$period_end' AND 
+                        (FromBankAccount = '$account_number' OR ToBankAccount = '$account_number')
+                        ORDER BY PostingDate ASC";
+
+        $rows = $_lib['storage']->get_hashhash(array('query' => $query, 'key' => 'ID'));
+
+        if (!is_array($rows) || empty($rows)) {
+            $_lib['message']->add("Ingen transaksjoner ble funnet i perioden.");
+        }
+
+
+        $transactionsimported = 0;
+        $duplicatetransaction = 0;
+        $Priority = 0;
+
+        $linesA = array();
+
+        foreach ($rows as $fb_transaction) {
+            $lineH = array();
+            # Fiks date formats to iso standard
+            $lineH['AccountID'] 		= $account_id;
+            $lineH['FakturabankTransactionLodoID'] = $fb_transaction['ID'];
+            $lineH['Period'] 			= $period;
+            $lineH['Active'] 			= 1;
+            $lineH['InterestDate'] 		= $fb_transaction['PostingDate'];
+            $lineH['Day'] 				= substr($fb_transaction['PostingDate'], 8, 2);
+				
+            #Kunne hatt delvis automatisk reskontro match basert paa beskrivelse.
+            $lineH['Description'] 		= $_lib['db']->db_escape($fb_transaction['Description']);
+            $lineH['ArchiveRef'] 		= $_lib['db']->db_escape($fb_transaction['Ref']);
+            $lineH['KID'] 		= $_lib['db']->db_escape($fb_transaction['KID']);
+
+            if($fb_transaction['Incoming']) {
+                $lineH['AmountIn'] = $fb_transaction['Amount'];
+				
+            } else {
+                $lineH['AmountOut'] = $fb_transaction['Amount'];
+            }
+
+            #Only add lines with a amount
+            if($lineH['AmountIn'] > 0 || $lineH['AmountOut'] > 0) {
+                # Don't insert transaction if already in DB
+                $sql_exists  = "select * from accountline where FakturabankTransactionLodoID='" . $fb_transaction['ID'] . "'";
+                #print "$sql_days<br>\n";
+
+                $exist   	     = $_lib['storage']->get_row(array('query' => $sql_exists));
+                if($exist) {
+                    $duplicatetransaction++;                
+                } else {
+                    $linesA[] = $lineH;                    
+                }
+            }
+            $transactionsimported++;
+        }
+
+        foreach($linesA as $lineH) { 				
+            $Priority++;
+            
+            $lineH['Priority'] 		 = $Priority;
+            #print_r($lineH);
+            $postvl['AccountLineID'] = $_lib['storage']->store_record(array('table' => 'accountline', 'data' => $lineH));
+
+            #Do we really need voucheraccountline - or could we throw it away????
+            $_lib['db']->store_record(array('data' => $postvl, 'table' => 'voucheraccountline'));
+		}
+
+		$_lib['message']->add("Transactions importert: $transactionsimported, duplikattransaksjoner: $duplicatetransaction<br>");
+    }
+
+	public function save_incoming_w_voting($invoices) {
+        # voting includes both bank transactions and relations to invoices
+		$voting = $this->get_balance_report();
+        # save bank transactions
+		$this->save_transactions($voting);
+        # save voting relations
 		$this->save_voting_relation($voting, $invoices);
 	}
 
@@ -157,7 +274,7 @@ class lodo_fakturabank_fakturabankvoting {
 
 		$voting = $this->get_balance_report();
 
-		$this->save_voting($voting);
+		$this->save_transactions($voting);
 
 		$this->save_voting_relation($voting, $invoices);
 	}
@@ -248,7 +365,7 @@ class lodo_fakturabank_fakturabankvoting {
 		# Update fakturabankinvoicein, fakturabanktransactionrelation tables 
 		# (to enable lookup of lodo invoice given bank transaction information)
 
-		$query = "UPDATE fakturabanktransactionrelation SET InvoiceID = '$InvoiceID', AccountPlanID = '$AccountPlanID', AccountPlanOrgNumber = '$AccountPlanOrgNumber' WHERE FakturabankInvoiceID = '$FakturabankInvoiceID' AND Incoming = '1'";
+		$query = "UPDATE fakturabanktransactionrelation SET InvoiceID = '$InvoiceID', AccountPlanID = '$AccountPlanID', AccountPlanOrgNumber = '$AccountPlanOrgNumber' WHERE FakturabankInvoiceID = '$FakturabankInvoiceID'";
 
 		$_lib['storage']->db_query3(array('query' => $query));
 
@@ -295,23 +412,55 @@ class lodo_fakturabank_fakturabankvoting {
 
 		$invoice_ids = array();
 
-		$transaction_date = $_lib['storage']->db_escape($args['VoucherDate']);
-        $Incoming = $_lib['storage']->db_escape($args['Incoming']);
-		$bank_account = $_lib['storage']->db_escape($args['BankAccount']);
-		$amount = $_lib['storage']->db_escape($args['Amount']);
-
-        if ($Incoming) {
-            $bank_account_stmt = "tr.FromBankAccount = '$bank_account' AND";
-        } else {
-            $bank_account_stmt = "tr.ToBankAccount = '$bank_account' AND";            
+        if (empty($args['id']) || !is_numeric($args['id'])) {
+            return false;
         }
 
-		$query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
+        $query = "SELECT * FROM accountline WHERE `AccountLineID` = '" . $args['id'] . "'";
+
+		$accountline = $_lib['storage']->get_row(array('query' => $query));
+
+		if (empty($accountline)) {
+			return false;
+		}
+
+
+        // if transaction was imported from fakturabank, match on fakturabankid
+        if (!empty($accountline->FakturabankTransactionLodoID) &&
+            is_numeric($accountline->FakturabankTransactionLodoID)) {
+
+            $query = "SELECT FakturabankID FROM fakturabanktransaction WHERE `ID` = '" . $accountline->FakturabankTransactionLodoID . "'";
+            $result = $_lib['storage']->db_query3(array('query' => $query));
+            if (!$result) {
+                return false;
+            }
+
+            if (!($obj = $_lib['storage']->db_fetch_object($result)) || !is_numeric($obj->FakturabankID)) {
+                return false;
+            }
+            $FakturabankTransactionID = $obj->FakturabankID;
+
+            $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
+				tr.FakturabankTransactionID = '$FakturabankTransactionID'";
+        } else { // ... else, transaction imported from css or punched, match on date, amount, account
+            $transaction_date = $_lib['storage']->db_escape($args['VoucherDate']);
+            $Incoming = $_lib['storage']->db_escape($args['Incoming']);
+            $bank_account = $_lib['storage']->db_escape($args['BankAccount']);
+            $amount = $_lib['storage']->db_escape($args['Amount']);
+
+            if ($Incoming) {
+                $bank_account_stmt = "tr.FromBankAccount = '$bank_account' AND";
+            } else {
+                $bank_account_stmt = "tr.ToBankAccount = '$bank_account' AND";            
+            }
+
+            $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
 				tr.InvoiceID IS NOT NULL AND
 				tr.PostingDate = '$transaction_date' AND
 				$bank_account_stmt
 				tr.Incoming = '$Incoming' AND
 				ROUND(tr.TransactionAmount, 2) = ROUND('$amount', 2)";
+        }
 
 		$relations = $_lib['storage']->get_hashhash(array('query' => $query, 'key' => 'InvoiceID'));
 
@@ -360,7 +509,7 @@ class lodo_fakturabank_fakturabankvoting {
 		return false;
 	}
 
-	private function save_voting($voting) {
+	private function save_transactions($voting) {
 		global $_lib;
 
 		foreach ($voting as &$transaction) {
@@ -379,7 +528,7 @@ class lodo_fakturabank_fakturabankvoting {
 
 			$dataH['FakturabankID'] = $transaction->FakturabankID;
 
-			$transaction->incoming = ($transaction->{"from-account"} == "") ? 0 : 1;
+			$transaction->incoming = ($transaction->{"from-account"} == "") ? 1 : 0;
 
 			$dataH['Incoming'] = $transaction->incoming;
 			$dataH['Amount'] = $transaction->amount;

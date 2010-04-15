@@ -35,6 +35,127 @@ class model_tablemetadata_tablemetadata {
         }
     }
 
+    function updateallskipsystemdbs() {
+        global $_lib;
+
+        $system_dbs = array('lodo', 'mysql', 'test', 'information_schema');
+
+        $query_show = "show databases";
+        $result     = $_lib['db']->db_query($query_show);
+        $i = 0;
+        while ($row = $_lib['db']->db_fetch_object($result)) {
+            if (in_array($row->Database, $system_dbs)) {
+                continue;
+            }
+
+            print "Oppdaterer: $row->Database\n";
+            $params['db_name'] = $row->Database;
+            $this->update_db($params);
+        }
+   }
+
+    function runscriptall($args) {
+        if (empty($args['scriptpath'])) {
+            print "Missing scriptpath argument.\n";
+            return false;
+        }
+
+        $scriptpath = $args['scriptpath'];
+
+        global $_lib;
+
+        $system_dbs = array('lodo', 'mysql', 'test', 'information_schema');
+
+        if (!is_file($scriptpath)) {
+            print "File $scriptpath not found.\n";
+            return false;
+        }
+
+        global $_SETUP;
+
+        $script = file_get_contents($scriptpath);
+
+        
+        $params['commands'] = explode(';', $script);
+        # use default login values, assuming all dbs have same login values
+        # in the future we might load setup files instead
+        $params['db_server'] = $_SETUP['DB_SERVER_DEFAULT'];
+        $params['db_user'] = $_SETUP['DB_USER_DEFAULT']; 
+        $params['db_password'] = $_SETUP['DB_PASSWORD_DEFAULT'];
+
+        $query_show = "show databases";
+        $result     = $_lib['db']->db_query($query_show);
+        $i = 0;
+        while ($row = $_lib['db']->db_fetch_object($result)) {
+            if (in_array($row->Database, $system_dbs)) {
+                continue;
+            }
+
+            print "Kjører script på: $row->Database\n";
+            $params['db_name'] = $row->Database;
+            $this->runscriptondb($params);
+        }
+    }
+
+    function verifylododb($db_link) {
+        # verify that db has a table called mvaavstemming, if not assume not lodo db
+        $query = "SHOW TABLES LIKE 'mvaavstemming';";
+        $result = mysqli_query($db_link, $query);
+        if (!$result) {
+            return false;
+        }
+
+        return (mysqli_num_rows($result) == 1);
+    }
+
+    function runscriptondb($params) {
+
+        if (empty($params['db_name'])) {
+            print "DB name missing.\n";
+            return false;
+        }
+
+        $db_name = $params['db_name'];
+
+        try {
+            $db_link = @mysqli_connect($params['db_server'], $params['db_user'], $params['db_password'], $db_name);
+        } catch (Exception $e) {
+            echo 'Caught exception when trying to login to $db_name: ',  $e->getMessage(), "\n";
+            return false;
+        }
+
+        if (!$db_link) {
+            print "You are not authorized to login to this database: $db_name.\n";
+            return false;
+        }
+
+        if (!$this->verifylododb($db_link)) {
+            print "Not a lodo database: $db_name.\n";
+            return false;
+        }
+
+        foreach ($params['commands'] as $command) {
+            if ($command == "" || trim($command) == "") {
+                continue;
+            }
+            print "Kjører kommando: " . substr($command, 0, 40) . "...\n";
+
+                $query = $command;
+    
+                $result = mysqli_query($db_link, $query);
+                if (!$result) {
+                    print "Dbname: $db_name, db_query: $query. <br>\nBad query: " . mysqli_error($db_link) . "<br />\n.\n";
+                    return false;
+                } else {
+                    print "Query successful.\n";
+                }
+        }
+
+        print "Dbname: $db_name, db script successfully executed.\n";
+
+        return true;
+    }
+
     function newlang($args) {
         global $_lib;
 
@@ -91,18 +212,26 @@ class model_tablemetadata_tablemetadata {
         $result = $_lib['db']->db_query($query);
     }
 
+
     private function update_db($args) {
         global $_SETUP, $_lib;
         
-        #print_r($args);
-        
+        #print_r($args);        
+
         $databaseName = $args['db_name'];
         $dsn = $_SETUP['DB_SERVER_DEFAULT'] . $databaseName . $_SETUP['DB_TYPE_DEFAULT'];
         $dbh[$dsn] = new db_mysql(array('host' => $_SETUP['DB_SERVER_DEFAULT'], 'database' => $databaseName, 'username' => $_SETUP['DB_USER_DEFAULT'], 'password' => $_SETUP['DB_PASSWORD_DEFAULT']));
+
+        $query_is_lodo = "SHOW TABLES LIKE 'confdbfields'";
+        $result_is_lodo = $dbh[$dsn]->db_query($query_is_lodo);
+        if (!$result_is_lodo ||  mysqli_num_rows($result_is_lodo) != 1) {
+            $_lib['message']->add("<b>Database: $databaseName er ikke en Lodo database\n");
+            return false;
+        }
     
         $query_update = "update confdbfields SET Active=0";
         $dbh[$dsn]->db_update($query_update);
-    
+
         $query_table  = "show tables";
         $result_table = $dbh[$dsn]->db_query($query_table);
     
