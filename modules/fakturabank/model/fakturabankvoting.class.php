@@ -326,11 +326,14 @@ class lodo_fakturabank_fakturabankvoting {
 					$dataH['CreatedByID'] = $relation->{'created-by-id'};
 					$dataH['UpdatedAt'] = $_lib['date']->t_to_mysql_format($relation->{'updated-at'});
 					$dataH['UpdatedByID'] = $relation->{'updated-by-id'};
-					$dataH['AccountID'] = $relation->{'account'}->{"id"};
-					$dataH['AccountName'] = $relation->{'account'}->{"name"};
-					$dataH['AccountClose'] = $relation->{'account'}->{"close"};
-					$dataH['AccountCreatedAt'] = $_lib['date']->t_to_mysql_format($relation->{'account'}->{"created-at"});
-					$dataH['AccountUpdatedAt'] = $_lib['date']->t_to_mysql_format($relation->{'account'}->{"updated-at"});
+
+                    if (!empty($relation->{'account'})) {
+                        $dataH['AccountID'] = $relation->{'account'}->{"id"};
+                        $dataH['AccountName'] = $relation->{'account'}->{"name"};
+                        $dataH['AccountClose'] = $relation->{'account'}->{"close"};
+                        $dataH['AccountCreatedAt'] = $_lib['date']->t_to_mysql_format($relation->{'account'}->{"created-at"});
+                        $dataH['AccountUpdatedAt'] = $_lib['date']->t_to_mysql_format($relation->{'account'}->{"updated-at"});
+                    }
 
 					$ret = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'fakturabanktransactionrelation', 'action' => $action, 'debug' => false));			
 					if ($action == "insert") {
