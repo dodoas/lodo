@@ -37,7 +37,17 @@ $_lib['convert']    = new convert(array('_dbh' => $_dbh, '_dsn' => $_dsn));
 function includemodel($file) {
     global $_SETUP;
     list($module, $class) = explode('/', $file);
+
+    /* sometimes HOME_DIR is not specified making all 
+       requires here use root / as base */
+    if(!isset($_SETUP['HOME_DIR']))
+        $_SETUP['HOME_DIR'] = getcwd();
+
     require_once($_SETUP['HOME_DIR'] . "/modules/" . $module . "/model/" . $class . ".class.php");
+}
+
+function includelogic($class) {
+    includemodel($class);
 }
 
 #print "Starting: $interface.$module.$class\n";
