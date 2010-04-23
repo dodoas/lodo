@@ -1,16 +1,20 @@
 <?
 /*******************************************************************************
- * Lodo functionality
+ * Lodo recurring invoice
  *
- * @package lodo_core0_invoice
- * @version  $Id:
- * @author Thomas Ekdahl, Empatix AS
+ * @author Thomas Ekdahl, Empatix AS,
+ *         Blix Solutions AS
  * @copyright http://www.empatix.com/ Empatix AS, 1994-2005, post@empatix.com
+ *            http://www.lodo.no, 2010
  *
  */
 
 includelogic('fakturabank/fakturabank');
 includelogic('kid/kid');
+
+/*
+ * for aa kjoere i batch maa litt ekstra logikk til
+ */
 includelogic('accounting/accounting');
 includelogic('invoice/invoice');
 
@@ -498,6 +502,11 @@ class recurring {
         return $_lib['db']->db_new_hash($invoicelineH, $this->table_line);
     }
     
+    /**
+     * lag en ny recurring invoice
+     * @param update
+     *     updater en allerede eksisterende
+     */
     function create_recurring($args, $update = false)
     {
         global $_lib;
@@ -733,6 +742,11 @@ class recurring {
         
     }
 
+    /**
+     * Henter tabell me de forskjellige intervalene. 
+     * etter dette er satt i produksjon kan man ikke fjerne linjer eller endre betydning
+     * uten at det vil foraarsake mye rot 
+     */
     function get_intervals() 
     {
         $recurring_intervals =
@@ -789,6 +803,7 @@ class model_invoicerecurring_recurring
             $name = $db->Database;
             $_lib['message']->add("\n$name\n---------------\n");
 
+            /* sett opp alle de forskjellige _lib-entriene som kreves for denne koden */
             $_lib['storage'] = $_lib['db'] = 
                 new db_mysql(array('host' => $_SETUP['DB_SERVER_DEFAULT'], 
                                    'database' => $name, 
