@@ -239,7 +239,7 @@ class invoice {
                 $lineH['InvoiceID'] = $this->InvoiceID;
                 if($this->debug) print_r($lineH);
                 $_lib['storage']->store_record(array('data' => $lineH, 'table' => $this->table_line, 'debug' => false));
-            } 
+            }
             
             if((count($this->lineH) == 1 && $this->lineH[0]['ProductID'] > 0 && $this->lineH[0]['QuantityDelivered'] != 0) || count($this->lineH) > 1) {
                 $this->journal();
@@ -283,6 +283,71 @@ class invoice {
         return $args['InvoiceID'];
     }
 
+    function copy_from_recurring($recurring_id, $customer_comment = false) 
+    {
+        global $_lib, $accounting;
+        $this->OldInvoiceID = $this->InvoiceID;
+
+        $this->clear_line();
+
+        $accountplan = $accounting->get_accountplan_object($this->CustomerAccountPlanID);
+
+        list($this->InvoiceID, $message) = $accounting->get_next_available_journalid(array('available' => true, 'update' => true, 'type' => $this->VoucherType));
+
+        $sql_head = "select * from recurringout where RecurringID='$recurring_id' and Active != 0";
+        $result_head = $_lib['db']->db_query($sql_head);
+        $headH = $_lib['db']->db_fetch_assoc($result_head);
+
+        unset($headH['RecurringID']);
+
+        if($customer_comment !== false) {
+            $headH['CommentCustomer'] = $customer_comment;
+        }
+
+
+        $headH['InvoiceID']           = $this->InvoiceID;
+        $headH['OrderDate']           = $_lib['sess']->get_session('LoginFormDate');
+        $headH['Period']              = $_lib['date']->get_this_period($_lib['sess']->get_session('Date'));
+        
+        $headH['Status']              = "progress";
+        $headH['Active']              = 1;
+        $headH['CreatedDateTime']     = $_lib['sess']->get_session('Date');
+        $headH['InvoiceDate']         = $_lib['sess']->get_session('LoginFormDate');
+
+        if( ($accountplan->EnableCredit == 1) )
+        {
+            if($accountplan->CreditDays <= 0) {
+              $message .= "Kundenummer: $this->CustomerAccountPlanID har 0 dagers kreditt";
+            }
+            $headH['DueDate'] = $_lib['date']->add_Days($headH['InvoiceDate'], $accountplan->CreditDays);
+            // Rettet av Geir 06.02.2006. Den gamle (linjen nedenfor) beregnet feil.
+            // $_lib['date']->add_Days($row_head->InvoiceDate, $accountplan->CreditDays);
+        }
+        elseif( ($accountplan->EnableCredit == 0) )
+        {
+            $headH['DueDate'] = $row_head->InvoiceDate;
+        }
+
+        $headH['PaymentDate']             = $_lib['sess']->get_session('DateTo');
+        $headH['DeliveryDate']            = $_lib['sess']->get_session('DateTo');
+
+        $this->set_head($headH);
+
+        $query_invoiceline = "select * from recurringoutline where RecurringID='$recurring_id' and Active!=0 order by LineID asc";
+        $result2 = $_lib['db']->db_query($query_invoiceline);
+        while($lineH = $_lib['db']->db_fetch_assoc($result2))
+        {
+            unset($lineH['LineID']); #This id is pk so we cannot copy it.
+            unset($lineH['RecurringID']);
+            #print "linje\n";
+            #print_r($lineH);
+            $this->set_line($lineH);
+        }
+
+        $this->make_invoice();
+        return $this->InvoiceID;
+    }
+   
     /*******************************************************************************
     * Copy invoice
     * @param
@@ -552,6 +617,7 @@ class invoice {
         #print_r($this->headH);
         #print "hode: $this->CustomerAccountPlanID<br>\n";
         #print_r($fields);
+
         $VoucherID = $accounting->insert_voucher_line(array('post'=>$fields, 'accountplanid'=> $this->headH['CustomerAccountPlanID'], 'type'=>'reskontro', 'VoucherType'=> $this->VoucherType, 'invoice'=>'1', 'debug' => true));
 
         $query_invoiceline = "select * from $this->table_line where InvoiceID='$this->InvoiceID' and Active=1 order by LineID asc";

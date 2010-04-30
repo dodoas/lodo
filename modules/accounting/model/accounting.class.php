@@ -1036,7 +1036,7 @@ class accounting {
             $query = "select JournalID, VoucherType, VoucherDate, VoucherPeriod from voucher where JournalID='" . $args['JournalID'] . "' and VoucherType='" . $args['VoucherType']."' and Active=1 limit 1";
             $_lib['sess']->debug($query);
             $row = $_lib['storage']->get_row(array('query' => $query));
-            if(!$row) {
+            if(!$row && empty($args['is_delete'])) {
                 $_lib['message']->add("Bilag " . $args['JournalID'] . " eksisterer ikke\n");
             }
         } else {
@@ -1961,7 +1961,7 @@ class accounting {
         global $_lib;
 
         #Select for å finne perioden til spesifiserte data
-        $voucher = $this->get_journal_head_data(array('JournalID' => $JournalID, 'VoucherType' => $VoucherType));
+        $voucher = $this->get_journal_head_data(array('JournalID' => $JournalID, 'VoucherType' => $VoucherType, 'is_delete' => true));
 
         #Jobb  her
         #sett inactive

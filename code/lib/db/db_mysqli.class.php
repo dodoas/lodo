@@ -899,7 +899,7 @@ class db_mysql {
                         }
                         $query_update .= $field . "=" . $value . ", ";
                     } else {
-                        #print "Field does not exist: " . $args['table'] . ".$field";
+                        # print "Field does not exist: " . $args['table'] . ".$field";
                         $_lib['sess']->warning("Field does not exist: " . $args['table'] . ".$field");
                     }
                 } #end foreach
