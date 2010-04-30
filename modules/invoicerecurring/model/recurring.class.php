@@ -227,14 +227,6 @@ class recurring {
                 if($this->debug) print_r($lineH);
                 $_lib['storage']->store_record(array('data' => $lineH, 'table' => $this->table_line, 'debug' => false));
             } 
-            
-            if((count($this->lineH) == 1 && $this->lineH[0]['ProductID'] > 0 && $this->lineH[0]['QuantityDelivered'] != 0) || count($this->lineH) > 1) {
-                #$this->journal();
-		echo "Ikke journalført";
-            } else {
-                $_lib['message']->add(array('message' => 'Det mangler for mange opplysninger til at fakturaen kan bli bilagsf&oslash;rt'));
-            }
-
         }
         else
         {
@@ -767,6 +759,7 @@ class recurring {
 
 require_once($_SETUP['HOME_DIR'] . "/code/lib/cache/cache.class.php");
 require_once($_SETUP['HOME_DIR'] . "/code/lib/setup/setup.class.php");
+require_once($_SETUP['HOME_DIR'] . "/code/lib/format/format.class.php");
 
 class model_invoicerecurring_recurring 
 {
@@ -812,7 +805,14 @@ class model_invoicerecurring_recurring
 
             $_lib['cache'] = new Cache(array());
             $_lib['setup'] = new framework_lib_setup(array());
+            $_lib['format'] = new format(array('_NF' => $_NF, '_DF' => $_DF, '_dbh' => $_dbh, '_dsn' => $_dsn));
 
+
+            /* companydef needed for journaling as default values. No impact on invoices created. */
+            $sql = "SELECT * FROM company WHERE CompanyID=1";
+            $row = $_lib['db']->get_row(array('query' => $sql));
+            $_lib['sess']->companydef = $row;
+            
             /* check and send */
             global $accounting;
             
