@@ -477,7 +477,7 @@ class db_mysql {
     function db_update_multi_record($input, $table, $primarykey) {
       #print "Multi update<br>";
       if(!$table){
-        print "Empty table in db_update_multi_record<br>";
+        # print "Empty table in db_update_multi_record<br>";
       }
 
       foreach ($input as $key => $value) {
@@ -601,7 +601,6 @@ class db_mysql {
       {
         $_lib['sess']->warning($args['key']." = ".$args['value'].": $error");
       }
-      $_lib['sess']->debug($args['query']);
       $hash = array();
       $result = $this->db_query($args['query']);
 
@@ -918,7 +917,7 @@ class db_mysql {
 
                     #print "<h1>pkfield: $pkfield</h1><br>\n";
                     if($args['debug'] || $this->debug) print "$query\n";
-                    $_lib['sess']->debug("store_record($query)");
+                    #$_lib['sess']->debug("store_record($query)");
                     $result     = $_lib['db']->{'db_' . $action}($query);
                     if($action == 'insert' && !isset($args['data'][$pkfield])) { #Og det er en auotincrement i tabellen. Insert_id finnes i input, da kan vi ikke be om den etterpŒ
                         $success  = $_lib['db']->db_insert_id();
