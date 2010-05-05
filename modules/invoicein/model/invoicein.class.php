@@ -328,11 +328,13 @@ class logic_invoicein_invoicein implements Iterator {
                             #print "$line->UnitCustPrice * (($line->Vat/100) +1)";
                             $TotalPrice = $TotalPrice * (($line->Vat/100) +1);
                             $invoice_line_sum += $TotalPrice;
+                        } else {
+                            $invoice_line_sum += $TotalPrice;
                         }
 
                         if ($last_line) {
                             if ($invoice_line_sum != $InvoiceO->TotalCustPrice) {
-                                if ($TotalPrice < $InvoiceO->TotalCustPrice) {
+                                if ($invoice_line_sum < $InvoiceO->TotalCustPrice) {
                                     $TotalPrice += ($InvoiceO->TotalCustPrice - $invoice_line_sum);
                                 } else {
                                     $TotalPrice -= ($invoice_line_sum - $InvoiceO->TotalCustPrice);
