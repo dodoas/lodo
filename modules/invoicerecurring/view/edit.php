@@ -216,8 +216,9 @@ print $_lib['sess']->doctype ?>
            </table>
           <br />
 	  <?php
-	    $eks = "Faktura for <b>%M</b> i <b>%K</b> kvartal <b>%Y</b>. Sendt uke <b>%W</b>. N&aring; er vi i <b>%H</b> halv&aring;r.";
-            echo "Eksempel:<br />'$eks'<br />ville i dag gitt: <br />";
+	    $eks = "Faktura for <b>%M</b> i <b>%K</b> kvartal <b>%Y</b>. Sendt uke <b>%W</b>. <br />
+N&aring; er vi i <b>%H</b> halv&aring;r. Forrige m&aring;ned var <b>%LM</b>, neste er <b>%NM</b>. Forrige &aring; var <b>%LY</b>, neste er <b>%NY</b>";
+            echo "Eksempel:<br />'$eks'<br /><br />ville i dag gitt: <br /><br/>";
 	    echo "'".$recurring->replace_tokens($eks, date("Y-m-d"))."'<br /><br />";
           ?>
         </div>

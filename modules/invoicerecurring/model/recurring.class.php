@@ -508,7 +508,7 @@ class recurring {
 	    'StartDate' => $args["recurring_StartDate_$this->RecurringID"],
 	    'TimeInterval' => $args["recurring_TimeInterval_$this->RecurringID"]
 	    );
-	
+
 	if($update === false)
 	{
 	    $get = sprintf("select RecurringID from recurring where RecurringID = '%d'", $this->RecurringID);
@@ -547,8 +547,8 @@ class recurring {
     {
 	$date_info = $this->get_date_info($date);
         
-	$replace = array('%M',                 '%W',            '%K',                  '%H',                 '%Y');
-	$with    = array($date_info['m_name'], $date_info['w'], $date_info['kvartal'], $date_info['halvar'], $date_info['y']);
+	$replace = array('%M',                 '%W',            '%K',                  '%H',                 '%Y',            '%LM',            '%NM',            '%LY',             '%NY');
+	$with    = array($date_info['m_name'], $date_info['w'], $date_info['kvartal'], $date_info['halvar'], $date_info['y'], $date_info['lm'], $date_info['nm'], $date_info['y']-1, $date_info['y'] + 1);
         
 	return str_replace($replace, $with, $str);
     }
@@ -721,7 +721,21 @@ class recurring {
             $h = 1;
 	else
             $h = 2;
+
+        if($m == 1) {
+            $lm = 12;
+            $nm = 2;
+        }
+        else if($m == 12) {
+            $lm = 11;
+            $nm = 1;
+        }
+        else { 
+            $lm = $m-1;
+            $nm = $m+1;
+        }
         
+
 	return 
             array(
                 'm_name' => $mnd[$m],       /* månedsnavn */
@@ -730,6 +744,8 @@ class recurring {
                 'y' => $y,                  /* årstall */
                 'kvartal' => $num[$k - 1],  /* kvartalstreng: først, andre, tredje, fjerde */
                 'halvar'  => $num[$h - 1],  /* halvårstreng: første, andre */
+                'nm' => $mnd[$nm],
+                'lm' => $mnd[$lm]
 		);
         
     }
