@@ -137,7 +137,8 @@ $topclass = 'topclass';
                                   <? } else { ?>
                                     <a href="<? print $_lib['sess']->dispatch ?>t=invoice.listoutgoing">Utg&aring;ende faktura (salg)</a>
                                   <? } ?>                              
-                                  <a href="<? print $_lib['sess']->dispatch ?>t=borettslag.multifaktura">Husleie faktura</a>
+
+                                  <a href="<? print $_lib['sess']->dispatch ?>t=invoicerecurring.list">Repeterende faktura</a>
                                 </fieldset>
                                 </td>
                                 <td>
