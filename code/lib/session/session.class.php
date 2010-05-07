@@ -302,9 +302,16 @@ class SessionNew
     }
 
     ############################################################
-    public function debug($text) {
+    public function debug($text) {        
+        global $_SETUP;
+
         $this->d_count++;
 
+        // only collect stacktrace if we are running as debug
+        if(empty($_SETUP['DEBUG'])) {
+            return;
+        }
+        
         $backtraceA = debug_backtrace();
         array_shift($backtraceA);
         $backtraceH = array_shift($backtraceA); #Element 2 is the calling function.

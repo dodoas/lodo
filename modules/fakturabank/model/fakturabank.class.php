@@ -765,6 +765,8 @@ class lodo_fakturabank_fakturabank {
 
         $fbvoting = new lodo_fakturabank_fakturabankvoting();
 
+        if (!empty($invoicesO->Invoice)) {
+
         foreach($invoicesO->Invoice as &$InvoiceO) {
         
             #If all essential data quality is ok - download the invoice
@@ -814,7 +816,7 @@ class lodo_fakturabank_fakturabank {
                         $supplierH = array();
                         $supplierH['AccountPlanID']         = $dataH['SupplierAccountPlanID'];
                         $supplierH['DomesticBankAccount']   = $dataH['SupplierBankAccount'];
-                        $_lib['storage']->store_record(array('data' => $supplierH, 'table' => 'accountplan', 'debug' => true));
+                        $_lib['storage']->store_record(array('data' => $supplierH, 'table' => 'accountplan', 'debug' => false));
                     }
                 }
 
@@ -847,7 +849,7 @@ class lodo_fakturabank_fakturabank {
                 if($InvoiceO->PaymentMeans->InstructionNote == 'KID' && $InvoiceO->PaymentMeans->InstructionID) {
                     $dataH['KID']  = $InvoiceO->PaymentMeans->InstructionID; #KID
                 } 
-                $ID = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoicein', 'debug' => true));
+                $ID = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoicein', 'debug' => false));
 
                 foreach($InvoiceO->InvoiceLine as $line) {
                 
@@ -922,6 +924,7 @@ class lodo_fakturabank_fakturabank {
             } else {
                 #print "Faktura finnes: " . $InvoiceO->AccountPlanID . "', InvoiceID='" . $InvoiceO->ID . "<br>\n";
             }
+        }
         }
     }
 
