@@ -823,6 +823,12 @@ class model_invoicerecurring_recurring
             $_lib['setup'] = new framework_lib_setup(array());
             $_lib['format'] = new format(array('_NF' => $_NF, '_DF' => $_DF, '_dbh' => $_dbh, '_dsn' => $_dsn));
 
+            $query = "SHOW TABLES LIKE 'mvaavstemming';";
+            $row = $_lib['db']->get_row(array('query' => $query));
+
+            if (empty($row)) {
+                return false;
+            }
 
             /* companydef needed for journaling as default values. No impact on invoices created. */
             $sql = "SELECT * FROM company WHERE CompanyID=1";
