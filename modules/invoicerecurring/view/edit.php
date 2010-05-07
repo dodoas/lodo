@@ -167,16 +167,7 @@ print $_lib['sess']->doctype ?>
       <td><? interval_menu($recurring_row->TimeInterval, $RecurringID) ?></td>
     </tr>
     <tr>
-        <td>Faktura periode</td>
-        <td>        
-        <?
-        if($accounting->is_valid_accountperiod($row->Period, $_lib['sess']->get_person('AccessLevel'))) {
-            print $_lib['form3']->AccountPeriod_menu3(array('table' => $db_table, 'field' => 'Period', 'pk'=>$RecurringID, 'value' => $row->Period, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => ''));
-        } else {
-            print $row->Period;
-        }
-        ?>
-        </td>
+      <td></td><td></td>
       <td>Merk</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'Note', 'pk'=>$RecurringID, 'value'=>$row->Note, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
     </tr>
