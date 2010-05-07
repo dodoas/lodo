@@ -632,7 +632,7 @@ class recurring {
 			UPDATE recurring 
 				SET LastDate = DATE_ADD(LastDate,  INTERVAL %s)
 			WHERE RecurringID = %d
-				AND DATEDIFF(DATE_ADD(LastDate, INTERVAL %s), CURDATE()) < 0
+				AND DATEDIFF(DATE_ADD(LastDate, INTERVAL %s), CURDATE()) <= 0
 			",
                            $interval,
                            $recurring["RecurringID"],
