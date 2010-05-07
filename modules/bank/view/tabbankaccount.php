@@ -21,6 +21,132 @@ $_lib['form3']->Locked = $bank->bankvotingperiod->Locked;
     <title>Empatix - <? print $_lib['sess']->get_companydef('CompanyName') ?> : <? print $_lib['sess']->get_person('FirstName') ?> <? print $_lib['sess']->get_person('LastName') ?> - avstemming av bank</title>
     <meta name="cvs"                content="$Id: edit.php,v 1.36 2005/10/24 11:50:24 svenn Exp $" />
     <? includeinc('head') ?>
+
+
+    <script> 
+      /* script for å generere de enorme konto-listene */
+      /*
+        $reskontroconf['field']         = 'ReskontroAccountPlanID';
+        $reskontroconf['value']         = $row->ReskontroAccountPlanID;
+        $reskontroconf['type'][]        = 'reskontro';
+        $reskontroconf['type'][]        = 'employee';
+      */
+
+      <?php
+        function generate_kontoliste($conf) {
+            global $_lib;
+    
+            /* lager javascript-funksjon-toppen */
+            echo "function kontoliste_";
+            foreach($conf['type'] as $v)
+                echo $v;
+            echo "(name, selected, dest) {\n";
+            
+            /* lager JSON-array med alle kontoene. */
+            printf("var data = %s", json_encode($_lib['form3']->accountplan_number_menu3($conf)));
+            
+            echo " 
+          color = '';
+          text  = 'Velg konto';
+
+          for(var i = 0; i < data.length; i++) {
+            if(data[i][0] == selected) {
+              color = data[i][1];
+              text  = data[i][2];
+              break;
+            }
+          }
+
+          /* setter inn valgt element */
+          /* 0: value, 2: color, 3: text */
+          select =  document.getElementById('kontoliste_' + dest);
+          select.style.width = '200px';
+          select.name = name;
+          var option = document.createElement('option');
+          option.style.backgroundColor = color;
+          option.innerHTML = text;
+          option.value = selected;
+          try {
+            select.add(option, null);
+          } catch(ex) {
+            select.appendChild(option);
+          }
+
+          /* on mouse over lages resten av listen */
+          select.onmouseover = function(e) {
+            var targ;
+            if (!e) var e = window.event;
+            if (e.target) targ = e.target;
+            else if (e.srcElement) targ = e.srcElement;
+
+            try {
+            if (targ.nodeType == 3) // defeat Safari bug
+              targ = targ.parentNode;
+            } catch(exp) {
+               /* some error */
+            }
+
+            targ.onmouseover = null;
+            if(targ.length > 1)
+              return;
+
+            for(i = 0; i < data.length; i++) {
+              value = data[i][0];
+              color = data[i][1];
+              text  = data[i][2];
+
+              if(value == selected || text == '') 
+                continue;
+ 
+              var option = document.createElement('option');
+              option.value = value;
+              option.style.backgroundColor = color;
+              option.innerHTML = text;
+              try {
+                targ.add(option, null);
+              } catch(ex) {
+                //targ.add(option);
+                targ.appendChild(option);
+              }
+            }
+            document.getElementById('list_form').normalize();
+          }
+
+          ";
+
+          echo "}";
+        }
+
+        $field_counter = 0;
+
+        function display_kontoliste($conf) {
+            global $field_counter;
+
+            $field_counter++;
+            printf("<select id='kontoliste_%d'></select>", $field_counter);
+            
+            echo "<script> kontoliste_";
+            foreach($conf['type'] as $v)
+                echo $v;
+            printf("('%s.%s.%d', %d, %d);</script>", $conf['table'], $conf['field'], $conf['pk'], $conf['value'], $field_counter);
+        }
+
+        $reskontroconf['value']         = $row->ReskontroAccountPlanID;
+        $reskontroconf['type'][]        = 'reskontro';
+        $reskontroconf['type'][]        = 'employee';
+        $reskontroconf['field']         = 'ReskontroAccountPlanID';
+        generate_kontoliste($reskontroconf);
+
+        $resultconf['field']         = 'ResultAccountPlanID';
+        $resultconf['value']         = $row->ResultAccountPlanID;
+        $resultconf['type'][]        = 'hovedbok';
+        generate_kontoliste($resultconf);
+
+        $reskontroconf = null;
+        $resultconf = null;
+      ?>
+
+    </script>
 </head>
 <body>
 
@@ -54,7 +180,7 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
         </th>
     </tr>
 </form>
-<form name="template_update"  name="bankvoting" action="<? print $MY_SELF ?>" method="post">
+<form id="list_form" name="template_update"  name="bankvoting" action="<? print $MY_SELF ?>" method="post">
 <? print $_lib['form3']->hidden(array('name' => 'AccountID', 'value' => $bank->AccountID)) ?>
 <? print $_lib['form3']->hidden(array('name' => 'Period',    'value' => $bank->ThisPeriod)) ?>
   <tr>
@@ -212,7 +338,8 @@ if(is_array($bank->bankaccount)) {
             $reskontroconf['type'][]        = 'reskontro';
             $reskontroconf['type'][]        = 'employee';
 
-            print $_lib['form3']->accountplan_number_menu($reskontroconf);    
+	    display_kontoliste($reskontroconf);
+            //print $_lib['form3']->accountplan_number_menu($reskontroconf);    // OLD 
             print $_lib['form3']->URL(array('url' => $_lib['sess']->dispatch . "t=accountplan.reskontro&accountplan_AccountPlanID=$row->ReskontroAccountPlanID", 'description' => 'K', 'title' => 'Endre oppsett p&aring; denne kontoen', 'target' => '_top'));
             if (!empty($reskontroaccountplan)) {
                 print $reskontroaccountplan->OrgNumber;
@@ -221,11 +348,13 @@ if(is_array($bank->bankaccount)) {
         </td>
         <td><? print $_lib['form3']->checkbox(array('table' => 'accountline', 'field' => 'AutoResultAccount',     'pk' => $row->AccountLineID, 'value' => $row->AutoResultAccount, 'title' => 'Klikk her for &aring; velge resultatkonto automatisk fra reskontro')) ?></td>
         <td>
-            <?            
+            <?      
             $resultconf['field']         = 'ResultAccountPlanID';
             $resultconf['value']         = $row->ResultAccountPlanID;
             $resultconf['type'][]        = 'hovedbok';
-            print $_lib['form3']->accountplan_number_menu($resultconf);                
+	    display_kontoliste($resultconf);
+
+            //print $_lib['form3']->accountplan_number_menu($resultconf);    // OLD
             ?>                
         </td>
         <td>
