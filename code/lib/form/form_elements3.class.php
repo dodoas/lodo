@@ -995,6 +995,116 @@ class form3
         return $element;
     }
 
+    function accountplan_number_menu3($args) {
+        global $_lib;
+        $name = $this->MakeName($args);
+
+		$colorH = array(
+			'balance'  => '#0FF000',
+			'result'   => '#0FFFF0',
+			'employee' => '#CCCCCC',
+			'supplier' => '#FFF000',
+			'customer' => '#00FF00'
+		);
+
+		$where = '';
+
+		if(count($args['type'])) {
+			#print_r($args['type']);
+			foreach($args['type'] as $tmp => $type) {
+	
+				#print "type: $type<br>\n";
+	
+				if($type == 'hovedbok') {
+					$where .= " ((AccountPlanType='balance' or AccountPlanType='result') and EnableReskontro = 0) or ";
+				} elseif($type == 'hovedbokwreskontro') {
+					$where .= " ((AccountPlanType='balance' or AccountPlanType='result') and EnableReskontro = 1) or ";
+				} elseif($type == 'hovedbokwemployee') {
+					$where .= " ((AccountPlanType='balance' or AccountPlanType='result' or AccountPlanType='employee') and EnableReskontro = 0) or ";
+				} elseif($type == 'reskontro') {
+					$where .= " (AccountPlanType != 'balance' and AccountPlanType != 'result') or ";
+				} elseif($type) {
+					$where .= " AccountPlanType='$type' or ";
+				} else {
+					print "No type argument supplied to accountplan_number_menu";
+				}
+			}
+
+			$where = substr($where, 0, -4); #remove the last or
+		} else {
+			print "No type argument supplied to accountplan_number_menu";
+		}
+
+        $query = "select AccountPlanID, AccountName, AccountPlanType from accountplan where Active=1 and ($where) order by AccountPlanID";
+        #print "$query<br>";
+        $result = $_lib['db']->db_query($query);
+
+        if(!$args['num_letters'])
+        {
+            $num_letters = '30';
+        }
+        else
+        {
+            $num_letters = $args['num_letters'];
+        } //Default number of letters in menu
+        
+        $element_array = array();
+              
+        while($_row = $_lib['db']->db_fetch_object($result))
+        {
+
+			#$optioncolor = "class=\"$_row->AccountPlanType\""; 
+			if($_row->AccountPlanID == $args['value']) {
+                            $found = true;
+                            $selectedcolor = $optioncolor;
+
+                            $element_array[] = array(
+                                $_row->AccountPlanID,
+                                $colorH[$_row->AccountPlanType],
+                                substr("$_row->AccountPlanID-$_row->AccountName",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) . ")"
+                                );
+			}
+			else {
+                            $element_array[] = array(
+                                $_row->AccountPlanID,
+                                $colorH[$_row->AccountPlanType], 
+                                substr("$_row->AccountPlanID-$_row->AccountName",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) . ")"
+                                ); 
+                        }
+        }
+
+        $query = "select AccountPlanID, AccountName, AccountPlanType from accountplan where Active=1 and ($where) order by AccountName";
+        $result = $_lib['db']->db_query($query);
+
+        while($_row = $_lib['db']->db_fetch_object($result))
+        {
+                        $element_array[] = array(
+                            $_row->AccountPlanID,
+                            $colorH[$_row->AccountPlanType],
+                            substr("$_row->AccountName-$_row->AccountPlanID",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) .")"
+                            );
+        }
+
+        if(!$found && isset($args['value']) && $args['value'] > 0)
+        {
+            $element_array[] = array(
+                $_row->AccountPlanID,
+                "#FF0000",
+                substr("Konto finnes ikke: " . $args['value'],0, $num_letters)
+                );
+        }
+        elseif(!$found && isset($args['value']))
+        {
+            $element_array[] = array(
+                $_row->AccountPlanID,
+                "#FFFFFF",
+                substr("Velg konto",0, $num_letters)
+                );
+        }
+
+        return $element_array;
+    }
+
 ###########################################################
 
     #input: width, maxwidth, width_sub, width_add
