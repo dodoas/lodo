@@ -175,34 +175,34 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
     {
         $sec_color = "BGColorDark";
     }
-
-  $_lib['sess']->debug("ja");
-  $TotalCustPrice += $row->TotalCustPrice;
-
-  $interval_sql = "SELECT * FROM recurring WHERE RecurringID = " . $row->RecurringID;
-  $interval_row = $_lib['db']->get_row(array('query' => $interval_sql));
-  $interval = $recurring_intervals[ $interval_row->TimeInterval ][0];
-
-  if($interval != '')
-  {
-    $interval_sql = "SELECT DATE_ADD(LastDate, INTERVAL " . $recurring_intervals[ $interval_row->TimeInterval ][1] . ") as NextDate, LastDate
+    
+    $_lib['sess']->debug("ja");
+    $TotalCustPrice += $row->TotalCustPrice;
+    
+    $interval_sql = "SELECT * FROM recurring WHERE RecurringID = " . $row->RecurringID;
+    $interval_row = $_lib['db']->get_row(array('query' => $interval_sql));
+    $interval = $recurring_intervals[ $interval_row->TimeInterval ][0];
+    
+    if($interval != '')
+    {
+        $interval_sql = "SELECT DATE_ADD(LastDate, INTERVAL " . $recurring_intervals[ $interval_row->TimeInterval ][1] . ") as NextDate, LastDate
   			FROM recurring 
   			WHERE RecurringID = " . $row->RecurringID;
-    $interval_row = $_lib['db']->get_row(array('query' => $interval_sql));
-    $nextDate = $interval_row->NextDate;
-    $lastDate = $interval_row->LastDate;
-
-    if($lastDate == "0000-00-00")
-    {
-      $nextDate = "-";
-      $lastDate = "-";
+        $interval_row2 = $_lib['db']->get_row(array('query' => $interval_sql));
+        $nextDate = $interval_row2->NextDate;
+        $lastDate = $interval_row2->LastDate;
+        
+        if($lastDate == "0000-00-00")
+        {
+            $nextDate = $interval_row->StartDate;
+            $lastDate = "-";
+        }
     }
-  }
-  else
-  {
-    $nextDate = "N/A";
-    $lastDate = "N/A";
-  }
+    else
+    {
+        $nextDate = "N/A";
+        $lastDate = "N/A";
+    }
   ?>
   <form name="invoice" action="<? print $MY_SELF ?>" method="post">
     <tr class="<? print $sec_color ?>">

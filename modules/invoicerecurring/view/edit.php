@@ -213,6 +213,10 @@ print $_lib['sess']->doctype ?>
             <tr><td><b>%K</b></td><td>kvartalsnummer.</td></tr> 
             <tr><td><b>%H</b></td><td>halv&aring;rsnummer.</td></tr>
             <tr><td><b>%Y</b></td><td>&aring;rstall.</td></tr>
+            <tr><td><b>%NY</b></td><td>neste &aring;</td></tr>
+            <tr><td><b>%LY</b></td><td>forrige &aring;</td></tr>
+            <tr><td><b>%NM</b></td><td>neste m&aring;ned</td></tr>
+            <tr><td><b>%LM</b></td><td>forrige m&aring;ned</td></tr>
            </table>
           <br />
 	  <?php
