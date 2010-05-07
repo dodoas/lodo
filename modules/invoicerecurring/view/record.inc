@@ -35,6 +35,7 @@ elseif($_lib['input']->getProperty('action_invoicerecurring_delete')) {
     header ($header);
 }
 elseif($_lib['input']->getProperty('action_invoicerecurring_linenew')) {
+    $recurring->create_recurring($_POST, true);
     $recurring->update($_POST);
     #print "Du fikk en ny linje<br>\n";
     $recurring->linenew();
