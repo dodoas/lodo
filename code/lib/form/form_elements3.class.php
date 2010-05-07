@@ -1061,14 +1061,14 @@ class form3
                             $element_array[] = array(
                                 $_row->AccountPlanID,
                                 $colorH[$_row->AccountPlanType],
-                                substr("$_row->AccountPlanID-$_row->AccountName",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) . ")"
+                                utf8_encode(substr("$_row->AccountPlanID-$_row->AccountName",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) . ")")
                                 );
 			}
 			else {
                             $element_array[] = array(
                                 $_row->AccountPlanID,
                                 $colorH[$_row->AccountPlanType], 
-                                substr("$_row->AccountPlanID-$_row->AccountName",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) . ")"
+                                utf8_encode(substr("$_row->AccountPlanID-$_row->AccountName",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) . ")")
                                 ); 
                         }
         }
@@ -1081,7 +1081,7 @@ class form3
                         $element_array[] = array(
                             $_row->AccountPlanID,
                             $colorH[$_row->AccountPlanType],
-                            substr("$_row->AccountName-$_row->AccountPlanID",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) .")"
+                            utf8_encode(substr("$_row->AccountName-$_row->AccountPlanID",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) .")")
                             );
         }
 
@@ -1090,7 +1090,7 @@ class form3
             $element_array[] = array(
                 $_row->AccountPlanID,
                 "#FF0000",
-                substr("Konto finnes ikke: " . $args['value'],0, $num_letters)
+                utf8_encode(substr("Konto finnes ikke: " . $args['value'],0, $num_letters))
                 );
         }
         elseif(!$found && isset($args['value']))
@@ -1098,7 +1098,7 @@ class form3
             $element_array[] = array(
                 $_row->AccountPlanID,
                 "#FFFFFF",
-                substr("Velg konto",0, $num_letters)
+                utf8_encode(substr("Velg konto",0, $num_letters))
                 );
         }
 
