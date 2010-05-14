@@ -830,6 +830,13 @@ class model_invoicerecurring_recurring
                 return false;
             }
 
+            $query = "SHOW TABLES LIKE 'mvaavstemming';";
+            $row = $_lib['db']->get_row(array('query' => $query));
+            
+            if (empty($row)) {
+                return false;
+            }
+
             /* companydef needed for journaling as default values. No impact on invoices created. */
             $sql = "SELECT * FROM company WHERE CompanyID=1";
             $row = $_lib['db']->get_row(array('query' => $sql));
@@ -840,7 +847,9 @@ class model_invoicerecurring_recurring
             
             $accounting = 0;
 
-            $r =  $_lib['db']->db_query("SELECT * FROM recurring") or die(mysql_error());
+            /* check_and_send does not check if startDate is in the future. 
+               This is done here to save a query. */
+            $r =  $_lib['db']->db_query("SELECT * FROM recurring WHERE StartDate <= NOW()") or die(mysql_error());
             $recurring_array = array();
 
             while($row = $_lib['db']->db_fetch_assoc($r))
