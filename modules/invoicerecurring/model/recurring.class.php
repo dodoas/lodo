@@ -632,7 +632,7 @@ class recurring {
 			UPDATE recurring 
 				SET LastDate = DATE_ADD(LastDate,  INTERVAL %s)
 			WHERE RecurringID = %d
-				AND DATEDIFF(DATE_ADD(LastDate, INTERVAL %s), CURDATE()) < 0
+				AND DATEDIFF(DATE_ADD(LastDate, INTERVAL %s), CURDATE()) <= 0
 			",
                            $interval,
                            $recurring["RecurringID"],
@@ -834,7 +834,9 @@ class model_invoicerecurring_recurring
             
             $accounting = 0;
 
-            $r =  $_lib['db']->db_query("SELECT * FROM recurring") or die(mysql_error());
+            /* check_and_send does not check if startDate is in the future. 
+               This is done here to save a query. */
+            $r =  $_lib['db']->db_query("SELECT * FROM recurring WHERE StartDate <= NOW()") or die(mysql_error());
             $recurring_array = array();
 
             while($row = $_lib['db']->db_fetch_assoc($r))
