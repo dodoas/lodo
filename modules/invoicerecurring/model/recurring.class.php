@@ -825,13 +825,6 @@ class model_invoicerecurring_recurring
 
             $query = "SHOW TABLES LIKE 'mvaavstemming';";
             $row = $_lib['db']->get_row(array('query' => $query));
-
-            if (empty($row)) {
-                return false;
-            }
-
-            $query = "SHOW TABLES LIKE 'mvaavstemming';";
-            $row = $_lib['db']->get_row(array('query' => $query));
             
             if (empty($row)) {
                 return false;
