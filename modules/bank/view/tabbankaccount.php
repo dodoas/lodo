@@ -62,6 +62,10 @@ $_lib['form3']->Locked = $bank->bankvotingperiod->Locked;
           select =  document.getElementById('kontoliste_' + dest);
           select.style.width = '200px';
           select.name = name;
+
+          // complying with current implementation where select's bacgroundcolor is same as selected option
+          select.style.backgroundColor = color;
+
           var option = document.createElement('option');
           option.style.backgroundColor = color;
           option.innerHTML = text;
@@ -89,6 +93,13 @@ $_lib['form3']->Locked = $bank->bankvotingperiod->Locked;
             targ.onmouseover = null;
             if(targ.length > 1)
               return;
+
+            if (text != 'Velg konto') {
+              var option = document.createElement('option');
+              option.value = 'unset';
+              option.innerHTML = 'Velg Konto';
+              targ.appendChild(option);
+            }
 
             for(i = 0; i < data.length; i++) {
               value = data[i][0];
@@ -127,7 +138,7 @@ $_lib['form3']->Locked = $bank->bankvotingperiod->Locked;
             
             echo "<script> kontoliste_";
             foreach($conf['type'] as $v)
-                echo $v;
+                echo $v;            
             printf("('%s.%s.%d', %d, %d);</script>", $conf['table'], $conf['field'], $conf['pk'], $conf['value'], $field_counter);
         }
 
@@ -338,7 +349,7 @@ if(is_array($bank->bankaccount)) {
             $reskontroconf['type'][]        = 'reskontro';
             $reskontroconf['type'][]        = 'employee';
 
-	    display_kontoliste($reskontroconf);
+            display_kontoliste($reskontroconf);
             //print $_lib['form3']->accountplan_number_menu($reskontroconf);    // OLD 
             print $_lib['form3']->URL(array('url' => $_lib['sess']->dispatch . "t=accountplan.reskontro&accountplan_AccountPlanID=$row->ReskontroAccountPlanID", 'description' => 'K', 'title' => 'Endre oppsett p&aring; denne kontoen', 'target' => '_top'));
             if (!empty($reskontroaccountplan)) {

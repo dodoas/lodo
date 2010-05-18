@@ -54,6 +54,30 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
 					#Speedier to have it here? Could we throw away the inner loop?
                    	if($table_name == 'accountline') { #We are just working on accountline?
 
+                        # Allow unsetting a reskontro
+                        # We do this via a flag to ignore auto-matching of the account
+                        if (isset($DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) &&
+                            $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] == 'unset') {
+                            $UnsetReskontroAccountPlanID = true;
+                            # set value to "" to not trigger errors like:
+                            # get_accountplan_object(): Mangler AccountplanID
+                            $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] = "";
+                        } else {
+                            $UnsetReskontroAccountPlanID = false;
+                        }
+
+                        # Allow unsetting a resultaccount
+                        # We do this via a flag to ignore auto-matching of the account
+                        if (isset($DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID']) &&
+                            $DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID'] == 'unset') {
+                            $UnsetResultAccountPlanID = true;
+                            # set value to "" to not trigger errors like:
+                            # get_accountplan_object(): Mangler AccountplanID
+                            $DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID'] = "";
+                        } else {
+                            $UnsetResultAccountPlanID = false;
+                        }
+
 						if($DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] == $debugline) print_r($DataH[$server_name][$database_name][$table_name][$pk_name]);
 
                         #These fields are generated from a drop down with alternatives
@@ -218,6 +242,19 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
                         }
 
                         if($DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] == $debugline) print_r($DataH[$server_name][$database_name][$table_name][$pk_name]);
+
+
+                        # if unset flag, then unset ReskontroAccountPlanID                        
+                        if ($UnsetReskontroAccountPlanID) {
+                            $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] = DB_NULL_PLACEHOLDER;
+                            $UnsetReskontroAccountPlanID = false;
+                        }   
+
+                        # if unset flag, then unset ResultAccountPlanID
+                        if ($UnsetResultAccountPlanID) {
+                            $DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID'] = DB_NULL_PLACEHOLDER;
+                            $UnsetResultAccountPlanID = false;
+                        }   
                     }
                 }
             }
