@@ -1035,7 +1035,7 @@ class form3
 			print "No type argument supplied to accountplan_number_menu";
 		}
 
-        $query = "select AccountPlanID, AccountName, AccountPlanType from accountplan where Active=1 and ($where) order by AccountPlanID";
+        $query = "select AccountPlanID, AccountName, AccountPlanType from accountplan where Active=1 and AccountPlanID != '0' and ($where) order by AccountPlanID";
         #print "$query<br>";
         $result = $_lib['db']->db_query($query);
 
@@ -1073,7 +1073,7 @@ class form3
                         }
         }
 
-        $query = "select AccountPlanID, AccountName, AccountPlanType from accountplan where Active=1 and ($where) order by AccountName";
+        $query = "select AccountPlanID, AccountName, AccountPlanType from accountplan where Active=1 and AccountPlanID != '0' and ($where) order by AccountName";
         $result = $_lib['db']->db_query($query);
 
         while($_row = $_lib['db']->db_fetch_object($result))

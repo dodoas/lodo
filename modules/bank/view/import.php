@@ -51,7 +51,7 @@ class accountline_import {
 			'Sort'			  => 'reverse',
 			'IgnoreLines'     => 0,
 			'ArchiveRef'      => -1,
-			'ThousandSep'     => ''
+			'ThousandSep'     => '.'
 			),
 		'spb1privat1' => array(
 			'BookKeepingDate' => 0,

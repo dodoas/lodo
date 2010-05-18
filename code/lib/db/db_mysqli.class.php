@@ -8,6 +8,8 @@
 #By: Thomas Ekdahl 2000-12-01
 #
 
+define('DB_NULL_PLACEHOLDER', 'NULLNULLNULLNULLNULLerTULLTULLTULL');
+
 class db_mysql {
 
   #global $DB_USER; # , $DB_PASSWORD, $DB_SERVER, $this->database;
@@ -330,7 +332,11 @@ class db_mysql {
                 foreach($pk_data as $field => $value) {
                     #print "$field = $value<br>\n";
                   #Should we check if it is funsctions here? no.
-                  $query_set .= "$field = '$value',";
+                    if ($value == DB_NULL_PLACEHOLDER) {
+                        $query_set .= "$field = NULL,";
+                    } else {
+                        $query_set .= "$field = '$value',";
+                    }
                 }
                 $query_set   = substr($query_set, 0, -1);
                 $pk_field    = $this->find_table_pk($table_name);
