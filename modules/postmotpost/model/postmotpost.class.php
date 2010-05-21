@@ -564,5 +564,17 @@ class postmotpost {
         #print "$sql_openpost<br>\n";
         return $_lib['db']->db_delete($sql_openpost);
     }
+
+    function findMotKonto($AccountPlanID) {
+        global $_lib;
+
+        $q = 
+            "SELECT MotkontoResultat1, MotkontoResultat2, MotkontoResultat3, MotkontoBalanse1, MotkontoBalanse2, MotkontoBalanse3 " .
+            " FROM accountplan WHERE AccountPlanID = $AccountPlanID";
+
+        $r = $_lib['db']->db_query($q);
+        
+        return $_lib['db']->db_fetch_assoc($r);
+    }
 }
 ?>
