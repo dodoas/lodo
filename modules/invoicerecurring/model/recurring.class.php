@@ -516,7 +516,7 @@ class recurring {
 	    
 	    if(!$row)
 	    {
-		$_lib['storage']->store_record(array('data' => $data, 'table' => 'recurring', 'debug' => true));
+		$_lib['storage']->store_record(array('data' => $data, 'table' => 'recurring', 'debug' => false));
 	    }
 	}
 	else

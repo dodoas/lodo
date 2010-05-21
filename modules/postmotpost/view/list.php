@@ -111,9 +111,34 @@ if(count($postmotpost->voucherH) > 0)
             ?>
                 <tr class="voucher">
                     <th colspan="12"><? print $postmotpost->sumaccountH[$AccountPlanID]->Name ?></th>
-                    <th colspan="9"></th>
+                    <th colspan="6">
+                    <?
+
+                    /* display motkontoresultat and -balanse from accountplan */
+                    $reskonto = $postmotpost->findMotKonto($AccountPlanID);
+                
+                    $last = "";
+                    foreach($reskonto as $kontokey => $konto) {
+                        if(!$konto)
+                            continue;
+                        
+                        if($last != substr($kontokey, 0, -1)) { 
+                            $last = substr($kontokey, 0, -1);
+                            
+                            printf(" %s: ", $last); 
+                        }
+                        else {
+                            printf(", ");
+                        }
+                        
+                        printf("%d", $konto);
+                    }
+                    ?>
+                  </th>
                 </tr>
+
                 <?
+                $closeable = 0;
                 foreach($account as $voucher)
                 {
                     if($MatchAccountPlanID == $voucher->AccountPlanID && $voucher->KID == $MatchKID)
@@ -153,17 +178,36 @@ if(count($postmotpost->voucherH) > 0)
                         <td class="<? print $class ?>">
                         	<?
                         	if($postmotpost->isCloseAble($AccountPlanID, $voucher->KID, $voucher->InvoiceID)) {
-                        		print $_lib['form3']->button(array('url'=>$_SETUP['DISPATCH']."t=postmotpost.list&amp;MatchAccountPlanID=$voucher->AccountPlanID&amp;MatchKid=$voucher->KID&amp;MatchInvoiceID=$voucher->InvoiceID&amp;AccountPlanID=$postmotpost->AccountPlanID&amp;action_postmotpost_close=1", 'name'=>'Lukk')); 
-							} else {
-								print $_lib['format']->Amount($postmotpost->getDiff($AccountPlanID, $voucher->KID, $voucher->InvoiceID));
-							}
-							?>
-						</td>
+                                    $closeable++;
+                                    
+                                    print $_lib['form3']->button(array('url'=>$_SETUP['DISPATCH']."t=postmotpost.list&amp;MatchAccountPlanID=$voucher->AccountPlanID&amp;MatchKid=$voucher->KID&amp;MatchInvoiceID=$voucher->InvoiceID&amp;AccountPlanID=$postmotpost->AccountPlanID&amp;action_postmotpost_close=1", 'name'=>'Lukk')); 
+                                } else {
+                                    print $_lib['format']->Amount($postmotpost->getDiff($AccountPlanID, $voucher->KID, $voucher->InvoiceID));
+                                }
+                                ?>
+                        </td>
                         <td class="noprint"><? print $_lib['form3']->button(array('url'=> $_lib['sess']->dispatch ."t=postmotpost.list&AccountPlanID=" . $postmotpost->AccountPlanID . "&amp;MatchAccountPlanID=" . $voucher->AccountPlanID . "&amp;MatchKID=" . $voucher->KID, 'name'=>'Vis samme kid')) ?></td>
                     </tr>
                     <?
                 }
                 ?>
+            <tr>
+              <td colspan="18">
+              <td colspan="6">
+               <?
+                 if($closeable) {
+                     print $_lib['form3']->submit(
+                         array('name' => 'action_postmotpost_closethis_' . $AccountPlanID, 'value'=>'Lukk denne', 'accesskey' => 'L')
+                         );
+                 }
+                 print $_lib['form3']->submit(
+                     array('name' => 'action_postmotpost_openthis_' . $AccountPlanID, 'value'=>'&Aring;pne denne', 'accesskey' => 'L')
+                     );
+                 print $_lib['form3']->submit(array('name'=>'action_postpost_update', 'value'=>'Lagre (S)', 'accesskey' => 'S'));
+                ?>
+              </td>
+            </tr>
+
             <tr>
                 <th class="sub" colspan="6">Sum for konto <? print $AccountPlanID ?></th>
                 <th class="sub number"><? if($postmotpost->sumaccountH[$AccountPlanID]->Diff  >= 0) { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->Diff); } ?></th>

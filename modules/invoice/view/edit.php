@@ -290,7 +290,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 			if($_lib['sess']->get_person('AccessLevel') >= 4 && $inline == 'edit')
 			{
 				if($accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
-					print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_delete', 'value'=>'Slett faktura (D)', 'accesskey'=>'D'));
+                                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_delete', 'value'=>'Slett faktura (D)', 'accesskey'=>'D', 'confirm' => 'Er du sikker p&aring; at du vil slette denne fakturaen?'));
 			}
 	
 			if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit')

@@ -149,6 +149,16 @@ class postmotpost {
     function getopenpost() {
         global $_lib, $accounting;
 
+        /* clean old totals */
+        $this->total['total']->Name        = 'Total';
+        $this->total['total']->AmountIn   = 0;
+        $this->total['total']->AmountOut  = 0;
+        $this->total['total']->FAmountIn  = 0;
+        $this->total['total']->FAmountOut = 0;
+        $this->voucherH = array();
+        $this->matchH = array();
+        $this->sumaccountH = array();
+
         if($this->AccountPlanID){
 
             $accountplan  = $accounting->get_accountplan_object($this->AccountPlanID);
@@ -498,6 +508,56 @@ class postmotpost {
             #$_lib['message']->add("Duplikatlukking: $ParentVoucherID:$ChildVoucherID");
         }
     }
+
+    /**
+     * Open all posts on given accountplan.
+     */
+    public function openAllPostsAccount($AccountPlanID) {
+        global $_lib;
+
+        $voucher_query = "select VoucherID from voucher where AccountPlanID=$AccountPlanID";
+        $r = $_lib['db']->db_query($voucher_query);
+
+        while($voucher = $_lib['db']->db_fetch_assoc($r)) {
+            $id = $voucher['VoucherID'];
+            $delete_query = "DELETE FROM voucherstruct WHERE ParentVoucherID = $id OR ChildVoucherID = $id";
+            $_lib['db']->db_delete($delete_query);
+        }
+    }
+
+    /**
+     * Close all posts on given accountplan
+     */ 
+    public function closeAllPostsAccount($AccountPlanID) {
+        global $_lib;
+
+        $this->getopenpost();
+        $closeableH = array();
+
+        $account = $this->voucherH[$AccountPlanID];
+        
+        foreach($account as $voucher) {
+            if($this->isCloseAble($AccountPlanID, $voucher->KID, $voucher->InvoiceID)) {
+                
+                #print "Kan lukkes: AccountPlanID: $AccountPlanID<br>\n";
+                #print_r($account);
+                
+                $close = new stdClass();
+                $close->matchAccountPlanID  = $voucher->AccountPlanID;
+                $close->matchKid            = $voucher->KID;
+                $close->matchInvoiceID      = $voucher->InvoiceID;
+                $close->AccountPlanID       = $this->AccountPlanID;
+                $closeableH[]               = $close;
+            }
+        }
+
+        $_lib['message']->add("Lukker " . count($closeableH) . " bilag p&aring; $AccountPlanID som g&aring;r i null");
+        if(count($closeableH)) {
+            foreach($closeableH as $close) {
+                $this->closePost($close->matchAccountPlanID, $close->matchKid, $close->matchInvoiceID);
+            }
+        }
+    }
     
     #Close all open posts that has sum on KID to 0
     public function closeAllPosts() {
@@ -553,6 +613,18 @@ class postmotpost {
         $sql_openpost  = "delete from voucherstruct";
         #print "$sql_openpost<br>\n";
         return $_lib['db']->db_delete($sql_openpost);
+    }
+
+    function findMotKonto($AccountPlanID) {
+        global $_lib;
+
+        $q = 
+            "SELECT MotkontoResultat1, MotkontoResultat2, MotkontoResultat3, MotkontoBalanse1, MotkontoBalanse2, MotkontoBalanse3 " .
+            " FROM accountplan WHERE AccountPlanID = $AccountPlanID";
+
+        $r = $_lib['db']->db_query($q);
+        
+        return $_lib['db']->db_fetch_assoc($r);
     }
 }
 ?>
