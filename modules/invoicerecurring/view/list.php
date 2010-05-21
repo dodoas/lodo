@@ -59,12 +59,18 @@ else
 
 /* Sokestreng */
 $query  = "select i.* from recurringout as i where ";
- if($FromDate) {
-     $query .= " i.InvoiceDate >= '$FromDate' and ";
+$query  .= " 1 and ";
+//$query  .= " r.RecurringID = i.RecurringID and ";
+/* if($FromDate) {
+     // $query .= "i.InvoiceDate >= '$FromDate' and ";
+     $query .= " ((r.LastDate = '0000-00-00' = 0 AND r.StartDate >= '$FromDate') 
+                    OR (r.LastDate != '0000-00-00' AND r.LastDate >= '$FromDate')) AND ";
  }
  if($ToDate) {
-     $query .= " i.InvoiceDate <= '$ToDate' and ";
- }
+     //$query .= " i.InvoiceDate <= '$ToDate' and ";
+     $query .= " ((r.LastDate = '0000-00-00' = 0 AND r.StartDate <= '$ToDate')
+                     OR (r.LastDate != '0000-00-00' AND r.LastDate <= '$FromDate')) AND ";
+                     }*/
 
  if($RecurringID) {
      $query .= " i.RecurringID='$RecurringID' and ";
@@ -196,6 +202,14 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
         {
             $nextDate = $interval_row->StartDate;
             $lastDate = "-";
+
+            if(!$RecurringID && strtotime($nextDate) <= strtotime($FromDate))
+                continue;
+        }
+        else {
+            if(!$RecurringID && (strtotime($nextDate) <= strtotime($FromDate) || 
+                                 strtotime($nextDate) >= strtotime($ToDate)) )
+                continue;
         }
     }
     else
