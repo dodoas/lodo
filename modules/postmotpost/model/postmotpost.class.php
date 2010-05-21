@@ -149,6 +149,16 @@ class postmotpost {
     function getopenpost() {
         global $_lib, $accounting;
 
+        /* clean old totals */
+        $this->total['total']->Name        = 'Total';
+        $this->total['total']->AmountIn   = 0;
+        $this->total['total']->AmountOut  = 0;
+        $this->total['total']->FAmountIn  = 0;
+        $this->total['total']->FAmountOut = 0;
+        $this->voucherH = array();
+        $this->matchH = array();
+        $this->sumaccountH = array();
+
         if($this->AccountPlanID){
 
             $accountplan  = $accounting->get_accountplan_object($this->AccountPlanID);
