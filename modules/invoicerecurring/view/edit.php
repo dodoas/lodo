@@ -63,7 +63,19 @@ print $_lib['sess']->doctype ?>
     <meta name="cvs"                content="$Id: edit.php,v 1.78 2005/11/03 15:57:27 thomasek Exp $" />
     <? includeinc('head') ?>
 </head>
-
+    <script>
+    function showhide(id)
+    {
+        el = document.getElementById(id);
+        if(el == null)
+            return null;
+        
+        if(el.style.display == 'block')
+            el.style.display = 'none';
+        else
+            el.style.display = 'block';
+    }
+    </script>
 <body>
 <? includeinc('top') ?>
 <? includeinc('left') ?>
@@ -206,7 +218,7 @@ print $_lib['sess']->doctype ?>
       <td valign="top">Kommentar til kunde</td>
       <td colspan="3">
         <? print $_lib['form3']->TextArea(array('table'=>$db_table, 'field'=>'CommentCustomer', 'pk'=>$RecurringID, 'value'=>$row->CommentCustomer, 'tabindex'=>$tabindex++, 'height'=>'5', 'width'=>'80')) ?>
-        <div id="info">
+        <div id="info" style="display: none;">
           <table>
             <tr><td><b>%M</b></td><td>m&aring;nedsnavn.</td></tr>
             <tr><td><b>%W</b></td><td>uketall.</td></tr>
@@ -224,7 +236,12 @@ print $_lib['sess']->doctype ?>
 N&aring; er vi i <b>%H</b> halv&aring;r. Forrige m&aring;ned var <b>%LM</b>, neste er <b>%NM</b>. Forrige &aring; var <b>%LY</b>, neste er <b>%NY</b>";
             echo "Eksempel:<br />'$eks'<br /><br />ville i dag gitt: <br /><br/>";
 	    echo "'".$recurring->replace_tokens($eks, date("Y-m-d"))."'<br /><br />";
-          ?>
+          ?><br />
+          <a href="javascript:showhide('info');showhide('show_info')">Skjul hjelp</a>
+        </div>
+
+        <div id="show_info" style="display: block;">
+          <a href="javascript:showhide('info');showhide('show_info')">Vis hjelp</a>
         </div>
       </td>
     </tr>
