@@ -508,6 +508,56 @@ class postmotpost {
             #$_lib['message']->add("Duplikatlukking: $ParentVoucherID:$ChildVoucherID");
         }
     }
+
+    /**
+     * Open all posts on given accountplan.
+     */
+    public function openAllPostsAccount($AccountPlanID) {
+        global $_lib;
+
+        $voucher_query = "select VoucherID from voucher where AccountPlanID=$AccountPlanID";
+        $r = $_lib['db']->db_query($voucher_query);
+
+        while($voucher = $_lib['db']->db_fetch_assoc($r)) {
+            $id = $voucher['VoucherID'];
+            $delete_query = "DELETE FROM voucherstruct WHERE ParentVoucherID = $id OR ChildVoucherID = $id";
+            $_lib['db']->db_delete($delete_query);
+        }
+    }
+
+    /**
+     * Close all posts on given accountplan
+     */ 
+    public function closeAllPostsAccount($AccountPlanID) {
+        global $_lib;
+
+        $this->getopenpost();
+        $closeableH = array();
+
+        $account = $this->voucherH[$AccountPlanID];
+        
+        foreach($account as $voucher) {
+            if($this->isCloseAble($AccountPlanID, $voucher->KID, $voucher->InvoiceID)) {
+                
+                #print "Kan lukkes: AccountPlanID: $AccountPlanID<br>\n";
+                #print_r($account);
+                
+                $close = new stdClass();
+                $close->matchAccountPlanID  = $voucher->AccountPlanID;
+                $close->matchKid            = $voucher->KID;
+                $close->matchInvoiceID      = $voucher->InvoiceID;
+                $close->AccountPlanID       = $this->AccountPlanID;
+                $closeableH[]               = $close;
+            }
+        }
+
+        $_lib['message']->add("Lukker " . count($closeableH) . " bilag p&aring; $AccountPlanID som g&aring;r i null");
+        if(count($closeableH)) {
+            foreach($closeableH as $close) {
+                $this->closePost($close->matchAccountPlanID, $close->matchKid, $close->matchInvoiceID);
+            }
+        }
+    }
     
     #Close all open posts that has sum on KID to 0
     public function closeAllPosts() {
