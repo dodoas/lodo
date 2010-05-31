@@ -114,7 +114,7 @@ while($row = $_lib['db']->db_fetch_object($result_week))
       <td><? $hash = $_lib['format']->Amount(array('value'=>$row->TotalCash)); print $hash['value']; ?>
       <td><? $hash = $_lib['format']->Amount(array('value'=>$row->TotalAmount)); print $hash['value']; ?>
       <td>
-      <? if($_lib['sess']->get_person('AccessLevel') > 2) {
+      <? if($_lib['sess']->get_person('AccessLevel') > 3) {
         if($accounting->is_valid_accountperiod($week->Period, $_lib['sess']->get_person('AccessLevel')))
         {
             ?><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.list&amp;WeeklySaleID=<? print $row->WeeklySaleID ?>&amp;action_weeklysale_delete=1" class="button">Slett</a><?
