@@ -306,7 +306,11 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 		} else {
 			print "Faktura l&aring;st";
 		}
-        print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
+
+		if($_lib['sess']->get_person('AccessLevel') >= 3) {
+		    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
+		}
+
         if(!$row->Locked) { print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_lock', 		'value'=>'L&aring;s (L)', 'accesskey'=>'L')); };
         ?>
 </form>
