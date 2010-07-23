@@ -5,10 +5,8 @@ includelogic('fakturabank/fakturabankvoting');
 includelogic('exchange/exchange');
 
 class lodo_fakturabank_fakturabank {
-    #private $host           = 'fakturabank.cavatina.no';
-    private $host           = 'fakturabank.no';
-    #private $protocol       = 'http';
-    private $protocol       = 'https';
+    private $host           = '';
+    private $protocol       = '';
     private $username       = '';
     private $password       = '';
     private $login          = false;
@@ -39,6 +37,9 @@ class lodo_fakturabank_fakturabank {
         $this->username         = $_lib['sess']->get_person('FakturabankUsername');
         $this->password         = $_lib['sess']->get_person('FakturabankPassword');
         $this->retrievestatus   = $_lib['setup']->get_value('fakturabank.status');
+
+        $this->host = $GLOBALS['_SETUP']['FB_SERVER'];
+        $this->protocol = $GLOBALS['_SETUP']['FB_SERVER_PROTOCOL'];
 
         if(is_array($args)) {
             foreach($args as $key => $value) {
@@ -1140,7 +1141,11 @@ class lodo_fakturabank_fakturabank {
             
                 $identification = $doc->createElement('cac:PartyIdentification');
                     $cbc = $doc->createElement('cbc:ID', $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID);
-                    $cbc->setAttribute('schemeID', 'NO:ORGNR');
+                    if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID) && strlen(preg_replace('/[^0-9]/', '', $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) == 9) {
+                        $cbc->setAttribute('schemeID', 'NO:ORGNR');
+                    } else {
+                        $cbc->setAttribute('schemeID', 'FAKTURABANK:CUSTOMERNUMBER');
+                    }
                     $identification->appendChild($cbc);
                 $cacparty->appendChild($identification);
 
