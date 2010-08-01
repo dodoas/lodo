@@ -602,7 +602,7 @@ class recurring {
 	/* slår opp SQL INTERVAL streng for gitt interval. Se interval.inc */
 	$interval = $recurring_intervals[ $recurring["TimeInterval"] ][1];
 
-        if($recrurring["StartDate"] == "0000-00-00")
+        if($recurring["StartDate"] == "0000-00-00")
             return;
         
 	if($recurring["LastDate"] == "0000-00-00")
@@ -827,7 +827,7 @@ class model_invoicerecurring_recurring
             $row = $_lib['db']->get_row(array('query' => $query));
             
             if (empty($row)) {
-                return false;
+                continue;
             }
 
             /* companydef needed for journaling as default values. No impact on invoices created. */
