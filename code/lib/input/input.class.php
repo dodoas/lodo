@@ -46,7 +46,19 @@ class input
         foreach ($_REQUEST as $key => $value)
         {
             $key    = strip_tags($key);
-            $value  = strip_tags($value);
+
+            if (is_array($value)) {
+                $arrval = array();
+
+                foreach ($value as $kkey => $vval) {
+                    $arrval[strip_tags($kkey)] = strip_tags($vval);
+                }
+
+                $value = $arrval;
+            } else {
+                $value  = strip_tags($value);
+            }
+
             $this->request[$key] = $value;
 
 			if($key == '__utma' || $key == '__utmc' || $key == '__utmz') {
