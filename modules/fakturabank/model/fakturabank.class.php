@@ -72,7 +72,8 @@ class lodo_fakturabank_fakturabank {
         #https://fakturabank.no/invoices/outgoing.xml?orgnr=981951271
 
         $page       = "invoices/outgoing.xml";
-        $params     = "?orgnr=$this->OrgNumber";
+
+        $params     = "?rows=1000&orgnr=$this->OrgNumber"; // add top limit rows=1000, otherwise we only get one record
         $params     .= "&supplier_status=created"; #Only retrieve with status 'created'
         $params     .= "&order=invoiceno";
         
@@ -92,7 +93,7 @@ class lodo_fakturabank_fakturabank {
         #https://fakturabank.no/invoices?orgnr=981951271
 
         $page       = "invoices";
-        $params     = "?orgnr=" . $this->OrgNumber . '&order=issue_date';
+        $params     = "?rows=1000&orgnr=" . $this->OrgNumber . '&order=issue_date'; // add top limit rows=1000, otherwise we only get one record
         if($this->retrievestatus) $params .= '&customer_status=' . $this->retrievestatus;
         $url    = "$this->protocol://$this->host/$page$params";
         $_lib['message']->add($url);
