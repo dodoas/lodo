@@ -3,10 +3,8 @@
 includelogic('invoice/invoice');
 
 class lodo_fakturabank_fakturabankvoting {
-    #private $host           = 'fakturabank.cavatina.no';
-    private $host           = 'fakturabank.no';
-    #private $protocol       = 'http';
-    private $protocol       = 'https';
+    private $host           = '';
+    private $protocol       = '';
     private $username       = '';
     private $password       = '';
     private $login          = false;
@@ -57,6 +55,9 @@ class lodo_fakturabank_fakturabankvoting {
         $this->username         = $_lib['sess']->get_person('FakturabankUsername');
         $this->password         = $_lib['sess']->get_person('FakturabankPassword');
         $this->retrievestatus   = $_lib['setup']->get_value('fakturabank.status');
+
+        $this->host = $GLOBALS['_SETUP']['FB_SERVER'];
+        $this->protocol = $GLOBALS['_SETUP']['FB_SERVER_PROTOCOL'];
 
         if(!$this->username || !$this->username) {
             $_lib['message']->add("Fakturabank brukernavn og passord er ikke definert p&aring; brukeren din");
@@ -207,6 +208,13 @@ class lodo_fakturabank_fakturabankvoting {
         $linesA = array();
 
         foreach ($rows as $fb_transaction) {
+            // Do not import split transactions (split by cremul data showing which transactions
+            // the transaction is an accumulation of), in the future we might want to use them,
+            // for which they will be available in fakturabanktransaction table.
+            if ($fb_transaction['IsSplit']) {
+                continue;
+            }
+
             $lineH = array();
             # Fiks date formats to iso standard
             $lineH['AccountID'] 		= $account_id;
@@ -220,6 +228,7 @@ class lodo_fakturabank_fakturabankvoting {
             $lineH['Description'] 		= $_lib['db']->db_escape($fb_transaction['Description']);
             $lineH['ArchiveRef'] 		= $_lib['db']->db_escape($fb_transaction['Ref']);
             $lineH['KID'] 		= $_lib['db']->db_escape($fb_transaction['KID']);
+            $lineH['InvoiceNumber'] 		= $_lib['db']->db_escape($fb_transaction['Invoiceno']);
 
             if($fb_transaction['Incoming']) {
                 $lineH['AmountIn'] = $fb_transaction['Amount'];
@@ -531,9 +540,14 @@ class lodo_fakturabank_fakturabankvoting {
 
 			$dataH['FakturabankID'] = $transaction->FakturabankID;
 
-			$transaction->incoming = ($transaction->{"from-account"} == "") ? 1 : 0;
+            // store incoming value for further use in save_voting()
+			$transaction->incoming = (
+                                      $transaction->{"transaction-type"} == "C" || // credit
+                                      $transaction->{"transaction-type"} == "RD" // reverse debit
+                                      ) ? 1 : 0;
 
 			$dataH['Incoming'] = $transaction->incoming;
+			$dataH['TransactionType'] = $transaction->{"transaction-type"};
 			$dataH['Amount'] = $transaction->amount;
 			$dataH['Currency'] = $transaction->currency;
 			$dataH['Description'] = $transaction->description;
@@ -543,6 +557,10 @@ class lodo_fakturabank_fakturabankvoting {
 			$dataH['PostingDate'] = $_lib['date']->mysql_format("%Y-%m-%d", $transaction->{"posting-date"});
 			$dataH['Ref'] = $transaction->ref;
 			$dataH['KID'] = $transaction->kid;
+			$dataH['InvoiceNumber'] = $transaction->invoiceno;
+			$dataH['IsSplit'] = $transaction->{"is-split"};
+			$dataH['CounterpartName'] = $transaction->{"counterpart-name"};
+
 			$dataH['TransactionBatchId'] = $transaction->{"transaction-batch-id"};
 			$dataH['UnitId'] = $transaction->{"unit-id"};
 			$dataH['CreatedAt'] = $_lib['date']->t_to_mysql_format($transaction->{"created-at"});
