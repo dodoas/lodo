@@ -447,17 +447,20 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
             </tr>
         </table>
         <?
-        if(!$weeklysale->head->Period)
+        if($_lib['sess']->get_person('AccessLevel') >= 2) 
         {
+            if(!$weeklysale->head->Period)
+            {
             ?>
-            <input type="submit" name="action_weeklysale_journal"  value="Lagre (S)" accesskey="S" align="right" tabindex="307"/>
+                <input type="submit" name="action_weeklysale_journal"  value="Lagre (S)" accesskey="S" align="right" tabindex="307"/>
             <?
-        }
-        elseif($accounting->is_valid_accountperiod($weeklysale->head->Period, $_lib['sess']->get_person('AccessLevel')))
-        {
+            }
+            elseif($accounting->is_valid_accountperiod($weeklysale->head->Period, $_lib['sess']->get_person('AccessLevel')))
+            {
             ?>
-            <input type="submit" name="action_weeklysale_journal"  value="Lagre (S)" accesskey="S" align="right" />
+                <input type="submit" name="action_weeklysale_journal"  value="Lagre (S)" accesskey="S" align="right" />
             <?
+            }
         }
         ?>
     </form>
