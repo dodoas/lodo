@@ -38,6 +38,8 @@ $result_conf    = $_lib['db']->db_query($query_conf);
 
 <table cellspacing="0">
 
+<? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
+
 <table class="lodo_data">
   <tr>
     <th>Navn</th>
@@ -63,14 +65,14 @@ while($row = $_lib['db']->db_fetch_object($result_conf))
 
       <form action="<? print $_lib['sess']->dispatch ?>t=weeklysale.edit&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>&action_weeklysale_new=1" method="post">
       <td>
-        <input type="text" name="init_bilagsnummer" size="4" value="">
+        <input type="text" name="init_bilagsnummer" size="4" value="" id="init_bilagsnummer">
       </td>
       <td>
-        <input type="text" name="init_date" size="10" value="<?php echo date("Y-m-d", strtotime("sunday")) ?>">
+        <input type="text" name="init_date" size="10" value="<?php echo date("Y-m-d", strtotime("sunday")) ?>" id="init_date">
       </td>
       <td>
 	<?php
-	echo $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $_COOKIE['invoice_period'], 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => '', name => 'init_periode'));
+	echo $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $_COOKIE['invoice_period'], 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => '', 'name' => 'init_periode', 'id' => 'init_periode'));
 	?>
       </td>
       <td>
@@ -78,7 +80,6 @@ while($row = $_lib['db']->db_fetch_object($result_conf))
       </td>
       <td>
         <input type="submit" value="Ny ukeomsetning">
-
         <?php
 	/*
 	  <a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.edit&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>&action_weeklysale_new=1" class="action">Ny ukeomsetning for avdeling <? print $row->DepartmentID; ?></a>
@@ -106,6 +107,10 @@ while($row = $_lib['db']->db_fetch_object($result_conf))
   </tr>
 <? } ?>
 </table>
+
+<? } /* accesslevel 2 */ ?>
+
+
 <br />
 <table class="lodo_data">
 <thead>
@@ -143,7 +148,7 @@ while($row = $_lib['db']->db_fetch_object($result_week))
       <td><? $hash = $_lib['format']->Amount(array('value'=>$row->TotalCash)); print $hash['value']; ?>
       <td><? $hash = $_lib['format']->Amount(array('value'=>$row->TotalAmount)); print $hash['value']; ?>
       <td>
-      <? if($_lib['sess']->get_person('AccessLevel') > 3) {
+      <? if($_lib['sess']->get_person('AccessLevel') >= 3) {
         if($accounting->is_valid_accountperiod($week->Period, $_lib['sess']->get_person('AccessLevel')))
         {
             ?><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.list&amp;WeeklySaleID=<? print $row->WeeklySaleID ?>&amp;action_weeklysale_delete=1" class="button">Slett</a><?
