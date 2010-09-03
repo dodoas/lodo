@@ -92,7 +92,13 @@ class invoice {
             #print_r($headH);
 
             $headH['Active']                 = 1;
-            $headH['InvoiceDate']            = $_lib['sess']->get_session('Date');
+            if(isset($_COOKIE["invoice_voucher_date"])) {
+                $headH['InvoiceDate']            = $_COOKIE["invoice_voucher_date"];
+            }
+            else {
+                $headH['InvoiceDate']            = $_lib['sess']->get_session('Date');
+            }
+
             $headH['InsertedDateTime']       = $_lib['sess']->get_session('Date');
             #$headH['DueDate']               = $_lib['sess']->get_session('Date');
             $headH['PaymentDate']            = $_lib['sess']->get_session('Date');
@@ -174,8 +180,14 @@ class invoice {
         }
 
         $headH['FromCompanyID']         = $_lib['sess']->get_companydef('CompanyID');
-        if(strlen($headH['Period']) != 7)
-            $headH['Period']            = $_lib['date']->get_this_period($headH['InvoiceDate']);
+        if(strlen($headH['Period']) != 7) {
+            if(isset($_COOKIE['invoice_period'])) {
+                $headH['Period']            = $_COOKIE['invoice_period'];
+            }
+            else {
+                $headH['Period']            = $_lib['date']->get_this_period($headH['InvoiceDate']);
+            }
+        }
 
         #print_r($headH);
         if(!$headH['CustomerAccountPlanID'])
