@@ -13,6 +13,7 @@ $db_table = "invoiceout";
 $db_table2 = "invoiceoutline";
 
 includelogic('accounting/accounting');
+includelogic('invoice/factoring');
 $accounting = new accounting();
 require_once "record.inc";
 
@@ -20,7 +21,7 @@ $get_invoice            = "select I.* from $db_table as I where InvoiceID='$Invo
 #print "Get invoice " . $get_invoice . "<br>\n";
 $row                    = $_lib['storage']->get_row(array('query' => $get_invoice));
 
-$get_invoiceto          = "select * from accountplan where AccountPlanID=" . (int) $row->AccountPlanID;
+$get_invoiceto          = "select * from accountplan where AccountPlanID=" . (int) $row->CustomerAccountPlanID;
 #print "invoiceto " . $get_invoiceto . "<br>\n";
 $row_to                 = $_lib['storage']->get_row(array('query' => $get_invoiceto));
 
@@ -32,7 +33,19 @@ $query_invoiceline      = "select * from $db_table2 where InvoiceID='$InvoiceID'
 #print "query_invoiceline" . $query_invoiceline . "<br>\n";
 $result2                = $_lib['db']->db_query($query_invoiceline);
 #print "Ferdig";
-print $_lib['sess']->doctype ?>
+
+/**
+ * factoring setup
+ */
+/*$factoring = new invoice_factoring($InvoiceID);
+
+if(!$factoring->isGlobalEnabled() || (!$factoring->hasFactoring() && (int)$row->CustomerAccountPlanID == 0)) {
+    $willUseFactoring = false;
+}*/
+
+print $_lib['sess']->doctype;
+
+?>
 <head>
     <title>Empatix - <? print $_lib['sess']->get_companydef('CompanyName') ?> : <? print $_lib['sess']->get_person('FirstName') ?> <? print $_lib['sess']->get_person('LastName') ?> - Faktura <? print $InvoiceID ?></title>
     <meta name="cvs"                content="$Id: edit.php,v 1.78 2005/11/03 15:57:27 thomasek Exp $" />
