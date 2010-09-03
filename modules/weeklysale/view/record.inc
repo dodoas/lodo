@@ -39,6 +39,12 @@ elseif($_REQUEST['action_weeklysale_new'])
 	$postmain['weeklysale_JournalDate']       = $_lib['sess']->get_session('LoginFormDate');
 	$postmain['weeklysale_JournalID']         = $JournalID;
 	$postmain['weeklysale_VoucherType']       = $sale_conf->VoucherType;
+
+	if(isset($_POST['init_bilagsnummer'])) {
+		$postmain['weeklysale_JournalID']   = (int)$_POST['init_bilagsnummer'];
+		$postmain['weeklysale_Period']      = $_POST['init_periode'];
+		$postmain['weeklysale_JournalDate'] = $_POST['init_date'];
+	}
   
 	#Possible to extend or alter parameters here
 	$WeeklySaleID = $_lib['storage']->db_new_hash($postmain, 'weeklysale');
