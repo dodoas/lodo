@@ -16,6 +16,24 @@ elseif($_lib['input']->getProperty('action_invoice_new')) {
     $InvoiceID = $invoice->create($_POST);
 }
 
+elseif($_lib['input']->getProperty('action_auto_save')) {
+    if(!$accounting->is_valid_accountperiod($_POST['voucher_period'], $_lib['sess']->get_person('AccessLevel'))) { 
+        $message = "Perioden er stengt"; 
+	$voucher_period = "";
+    }
+    else {
+        $message = "";
+	$voucher_periode = $_POST['voucher_period'];
+    }
+
+    $header = "Location: " . str_replace("&amp;", "&", $_lib['sess']->dispatch) . "t=invoice.listoutgoing&message=$message";
+    header($header);
+    setcookie('invoice_period', $voucher_periode, time() + 60*60*5);
+    setcookie('invoice_voucher_date', $_POST['voucher_date'], time() + 60*60*5);
+
+    exit();
+}
+
 elseif($_lib['input']->getProperty('action_invoice_outlinedelete')) {
     $invoice->linedelete($_lib['input']->getProperty('LineID'));
     $invoice->init(array());
