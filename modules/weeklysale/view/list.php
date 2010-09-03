@@ -17,7 +17,7 @@ if (!$order_by)   { $order_by  = "AccountNumber"; }
 $db_stop = $_SETUP[DB_START][0] + $_SETUP[DB_OFFSET][0];
 
 /* S¿kestreng */
-$query_week     = "select * from $db_table order by Period desc, JournalDate desc";
+$query_week     = "select * from $db_table order by Period desc, JournalID desc";
 $result_week    = $_lib['db']->db_query($query_week);
 
 $query_conf     = "select * from weeklysaleconf";
@@ -43,6 +43,10 @@ $result_conf    = $_lib['db']->db_query($query_conf);
     <th>Navn</th>
     <th>Avdelingsnummer</th>
     <th>Bilagsart</th>
+    <th>Bilagsnummer</th>
+    <th>Bilagsdato</th>
+    <th>Periode</th>
+    <th>Uke</th>
     <th>Opprett ny uke</th>
     <th></th>
 <tbody>
@@ -56,7 +60,32 @@ while($row = $_lib['db']->db_fetch_object($result_conf))
       <td><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.template&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>"><? print $row->Name; ?></a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.template&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>"><? print $row->DepartmentID; ?></a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.template&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>"><? print $row->VoucherType; ?></a></td>
-      <td><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.edit&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>&action_weeklysale_new=1" class="action">Ny ukeomsetning for avdeling <? print $row->DepartmentID; ?></a></td>
+
+      <form action="<? print $_lib['sess']->dispatch ?>t=weeklysale.edit&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>&action_weeklysale_new=1" method="post">
+      <td>
+        <input type="text" name="init_bilagsnummer" size="4" value="">
+      </td>
+      <td>
+        <input type="text" name="init_date" size="10" value="<?php echo date("Y-m-d", strtotime("sunday")) ?>">
+      </td>
+      <td>
+	<?php
+	echo $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $_COOKIE['invoice_period'], 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => '', name => 'init_periode'));
+	?>
+      </td>
+      <td>
+        <input type="text" value="<?php echo date("W"); ?>" name="init_week" size="3">        
+      </td>
+      <td>
+        <input type="submit" value="Ny ukeomsetning">
+
+        <?php
+	/*
+	  <a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.edit&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>&action_weeklysale_new=1" class="action">Ny ukeomsetning for avdeling <? print $row->DepartmentID; ?></a>
+	*/
+	?>
+        </form>
+      </td>
       <td>
       <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
         <a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.list&amp;WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>&amp;action_weeklysaleconf_delete=1" class="button">Slett</a>
