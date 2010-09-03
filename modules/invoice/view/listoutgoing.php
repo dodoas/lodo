@@ -119,6 +119,7 @@ $db_sum   = $row->sum;
      </form>
 
 </tr>
+<? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
 <tr>
     <form name="invoice_edit" action="<? print $_lib['sess']->dispatch ?>t=invoice.edit" method="post">
     <td>
@@ -144,6 +145,7 @@ $db_sum   = $row->sum;
     </td>
     </form>
 </tr>
+<? } ?>
 </table>
 <table>
 <tr>
