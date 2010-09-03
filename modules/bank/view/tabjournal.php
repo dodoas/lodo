@@ -6,7 +6,7 @@ includelogic('accounting/accounting');
 
 $accounting     = new accounting();
 $bank           = new framework_logic_bank($_lib['input']->request);
-$bank->init(); #Read data
+//$bank->init(); #Read data
 
 require_once "record.inc";
 $bank->init(); #Read data
@@ -19,6 +19,142 @@ $warningH = array();
     <title>Empatix - <? print $_lib['sess']->get_companydef('CompanyName') ?> : <? print $_lib['sess']->get_person('FirstName') ?> <? print $_lib['sess']->get_person('LastName') ?> - avstemming av bank</title>
     <meta name="cvs"                content="$Id: edit.php,v 1.36 2005/10/24 11:50:24 svenn Exp $" />
     <? includeinc('head') ?>
+
+    <script> 
+      /* script for å generere de enorme konto-listene */
+      /*
+        $reskontroconf['field']         = 'ReskontroAccountPlanID';
+        $reskontroconf['value']         = $row->ReskontroAccountPlanID;
+        $reskontroconf['type'][]        = 'reskontro';
+        $reskontroconf['type'][]        = 'employee';
+      */
+
+      <?php
+        function generate_kontoliste($conf) {
+            global $_lib;
+    
+            /* lager javascript-funksjon-toppen */
+            echo "function kontoliste_";
+            foreach($conf['type'] as $v)
+                echo $v;
+            echo "(name, selected, dest) {\n";
+            
+            /* lager JSON-array med alle kontoene. */
+            printf("var data = %s", json_encode($_lib['form3']->accountplan_number_menu3($conf)));
+            
+            echo " 
+          color = '';
+          text  = 'Velg konto';
+
+          for(var i = 0; i < data.length; i++) {
+            if(data[i][0] == selected) {
+              color = data[i][1];
+              text  = data[i][2];
+              break;
+            }
+          }
+
+          /* setter inn valgt element */
+          /* 0: value, 2: color, 3: text */
+          select =  document.getElementById('kontoliste_' + dest);
+          select.style.width = '200px';
+          select.name = name;
+
+          // complying with current implementation where select's bacgroundcolor is same as selected option
+          select.style.backgroundColor = color;
+
+          var option = document.createElement('option');
+          option.style.backgroundColor = color;
+          option.innerHTML = text;
+          option.value = selected;
+          try {
+            select.add(option, null);
+          } catch(ex) {
+            select.appendChild(option);
+          }
+
+          /* on mouse over lages resten av listen */
+          select.onmouseover = function(e) {
+            var targ;
+            if (!e) var e = window.event;
+            if (e.target) targ = e.target;
+            else if (e.srcElement) targ = e.srcElement;
+
+            try {
+            if (targ.nodeType == 3) // defeat Safari bug
+              targ = targ.parentNode;
+            } catch(exp) {
+               /* some error */
+            }
+
+            targ.onmouseover = null;
+            if(targ.length > 1)
+              return;
+
+            if (text != 'Velg konto') {
+              var option = document.createElement('option');
+              option.value = 'unset';
+              option.innerHTML = 'Velg Konto';
+              targ.appendChild(option);
+            }
+
+            for(i = 0; i < data.length; i++) {
+              value = data[i][0];
+              color = data[i][1];
+              text  = data[i][2];
+
+              if(value == selected || text == '') 
+                continue;
+ 
+              var option = document.createElement('option');
+              option.value = value;
+              option.style.backgroundColor = color;
+              option.innerHTML = text;
+              try {
+                targ.add(option, null);
+              } catch(ex) {
+                //targ.add(option);
+                targ.appendChild(option);
+              }
+            }
+            document.getElementById('list_form').normalize();
+          }
+
+          ";
+
+          echo "}";
+        }
+
+        $field_counter = 0;
+
+        function display_kontoliste($conf) {
+            global $field_counter;
+
+            $field_counter++;
+            printf("<select id='kontoliste_%d'></select>", $field_counter);
+            
+            echo "<script> kontoliste_";
+            foreach($conf['type'] as $v)
+                echo $v;            
+            printf("('%s.%s.%d', %d, %d);</script>", $conf['table'], $conf['field'], $conf['pk'], $conf['value'], $field_counter);
+        }
+
+        $reskontroconf['field']         = 'ReskontroAccountPlanID';
+        $reskontroconf['value']         = $row->ReskontroAccountPlanID;
+        $reskontroconf['type'][]        = 'reskontro';
+        $reskontroconf['type'][]        = 'employee';
+        generate_kontoliste($reskontroconf);
+
+        $resultconf['field']         = 'ResultAccountPlanID';
+        $resultconf['value']         = $row->ResultAccountPlanID;
+        $resultconf['type'][]        = 'hovedbok';        
+        generate_kontoliste($resultconf);
+
+        $reskontroconf = null;
+        $resultconf = null;
+      ?>
+
+      </script>
 </head>
 <body>
 
@@ -152,7 +288,8 @@ if(is_array($bank->unvotedaccount)) {
             $reskontroconf['value']         = $row->ReskontroAccountPlanID;
             $reskontroconf['type'][]        = 'reskontro';
             $reskontroconf['type'][]        = 'employee';
-            print $_lib['form3']->accountplan_number_menu($reskontroconf);    
+            //print $_lib['form3']->accountplan_number_menu($reskontroconf);    
+            display_kontoliste($reskontroconf);
             print $reskontroaccountplan->OrgNumber;
             ?>
         </td>
@@ -162,7 +299,8 @@ if(is_array($bank->unvotedaccount)) {
             $resultconf['field']         = 'ResultAccountPlanID';
             $resultconf['value']         = $row->ResultAccountPlanID;
             $resultconf['type'][]        = 'hovedbok';
-            print $_lib['form3']->accountplan_number_menu($resultconf);                
+            //print $_lib['form3']->accountplan_number_menu($resultconf);                
+            display_kontoliste($resultconf);
             ?>                
         </td>
         <td>
