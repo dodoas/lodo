@@ -47,7 +47,13 @@ $query_conf     = "select * from salaryconf as S, accountplan as A, kommune as K
 #print "$query_conf<br>\n";
 $result_conf    = $_lib['db']->db_query($query_conf);
 
-print $_lib['sess']->doctype ?>
+
+$period_open = ($accounting->is_valid_accountperiod($setup['salarydefvoucherdate'], $_lib['sess']->get_person('AccessLevel'))) ? true : false;
+
+
+print $_lib['sess']->doctype;
+
+?>
 
 <head>
     <title>Empatix - salary list</title>
@@ -76,55 +82,23 @@ print $_lib['sess']->doctype ?>
         <td><? print $_lib['form3']->text(array('table'=>'setup.value', 'field'=>'salarydeffromdate', 'value'=>$setup['salarydeffromdate'], 'width'=>'10')) ?></td>
         <td><? print $_lib['form3']->text(array('table'=>'setup.value', 'field'=>'salarydeftodate', 'value'=>$setup['salarydeftodate'], 'width'=>'10')) ?></td>
         <td>
-        <? if(!$accounting->is_valid_accountperiod($setup['salarydefvoucherdate'], $_lib['sess']->get_person('AccessLevel'))) { print "Perioden er stengt"; } ?>
+        <? if(!$period_open) { print "Perioden er stengt"; } ?>
         </td>
         <td><? print $_lib['form3']->submit(array('name'=>'action_defconf_save', 'value'=>'Lagre verdier', 'accesskey'=>'S')) ?></td>
     </tr>
     </table>
 </form>
-<br><br>
-<table class="lodo_data">
-<tr>
-    <th colspan="9">Hovedmal hele firma</th>
-</tr>
-<tr>
-    <th class="sub">Ansatt/konto</th>
-    <th class="sub">Navn/mal</th>
-    <th class="sub">Ny l&oslash;nn</th>
-    <th class="sub">Kommune</th>
-    <th class="sub">Arb.avg.</th>
-    <th class="sub">Sist endret</th>
-    <th class="sub" colspan="3"></th>
-</tr>
-<tr>
-    <td>
-  <?
-  if(($_lib['sess']->get_person('AccessLevel') >= 1))
-  {
-    ?>
-    <form name="salary_new" action="<? print $_lib['sess']->dispatch ?>t=salary.template" method="post">
-      <input type="submit" name="action_salaryconf_new" value="Ny ansatt (N)" accesskey="N" />
-    </form>
-    <?
-  }
-  ?>
 
-    </td>
-    <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $row_head->SalaryConfID ?>"><b>Hovedmal</b></a></td>
-    <td style="background-color: #FFB600"></td>
-    <td></td>
-    <td></td>
-    <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&SalaryConfID=<? print $row_head->SalaryConfID ?>"><? print $_lib['format']->Date(array('value'=>$row_head->TS, 'return'=>'value')) ?></a></td>
-    <td>L&oslash;nns og trekk oppgave for </td>
-    <td colspan="2"></td>
+<? if($period_open) {
 
-</tr>
+/*
+ * tape-function to reuse code
+ */
+function worker_line($row, $i) {
+  global $_lib, $accounting, $setup;
 
-<tbody>
-<?
-while($row = $_lib['db']->db_fetch_object($result_conf)) {
-$i++;
-if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
+  $i++;
+  if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
 ?>
   <tr class="<? print "$sec_color"; ?>">
       <td>
@@ -178,15 +152,123 @@ if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark
       <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&SalaryConfID=<? print $row->SalaryConfID ?>"><? print $_lib['format']->Date(array('value'=>$row->TS, 'return'=>'value')) ?></a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=arbeidsgiveravgift.salaryreport&amp;report.Year=<? print $year ?>&amp;report.Employee=<? print $row->AccountPlanID ?>" target="new">Vis <? print $year ?></a></td>
 
-      <td colspan="2">	    
+      <? if(($_lib['sess']->get_person('AccessLevel') >= 3)) { ?>
+      <td colspan="1">
+      <? } else { ?>	    
+      <td colspan="3">
+      <? } ?>
+      
 	<? if(($_lib['sess']->get_person('AccessLevel') >= 4) and ($row->SalaryConfID != 1)) { 
 	    echo $_lib['form3']->button(array('url' => 
 				 $_lib['sess']->dispatch . "t=salary.list&amp;SalaryConfID=" . $row->SalaryConfID . "&amp;action_salaryconf_delete=1"
 				 , 'name' => 'Slett', 'confirm' => 'Vil du virkelig slette linjen?'));
 	 } ?>
       </td>
+      <td style="text-align: right">
+      <?
+        echo $row->SalaryConfID;
+      ?>
+      </td>
+    
+      <td> 
+      <?
+        $sql = sprintf("SELECT * FROM salaryinfo WHERE SalaryConfID = %d", $row->SalaryConfID);
+        $salaryinfo = $_lib['storage']->get_row(array('query' => $sql));
 
+        if($salaryinfo === null) 
+        {
+          $checked = false; 
+        } 
+        else 
+        { 
+          $checked = true;
+        } 
+      ?>
+      <input type="checkbox" name="recieveSalary[]" value="<? echo $row->SalaryConfID ?>" <? echo $checked ? "checked" : "" ?> />
+      <input type="hidden" name="existingSalaryLines[]" value="<? echo $row->SalaryConfID ?>" />
+      <?
+        if($checked) {
+          printf('<input type="text" size="24" name="salaryinfo_amount_%d" value="%s" />', $row->SalaryConfID, 
+                  $salaryinfo->amount);
+        }
+      ?>
+      </td>
+
+<? 
+}  /* function */
+
+$current_workers = array();
+$old_workers = array();
+
+while($row = $_lib['db']->db_fetch_object($result_conf)) {
+    if($row->WorkStop != '0000-00-00' && strtotime($row->WorkStop) < time()) {
+        $old_workers[] = $row;
+    }
+    else {
+        $current_workers[] = $row;
+    }
+}
+?>
+
+<br><br>
+<table class="lodo_data">
+<tr>
+    <th colspan="10">Hovedmal hele firma</th>
+</tr>
+<tr>
+    <th class="sub">Ansatt/konto</th>
+    <th class="sub">Navn/mal</th>
+    <th class="sub">Ny l&oslash;nn</th>
+    <th class="sub">Kommune</th>
+    <th class="sub">Arb.avg.</th>
+    <th class="sub">Sist endret</th>
+<? if(($_lib['sess']->get_person('AccessLevel') >= 3)) { ?>
+    <th class="sub" colspan="3"></th>
+    <th class="sub">L&oslash;nnsmal</th>
+<? } else { ?>
+    <th class="sub" colspan="4"></th>
 <? } ?>
+</tr>
+<tr>
+    <td>
+  <?
+  if(($_lib['sess']->get_person('AccessLevel') >= 1))
+  {
+    ?>
+    <form name="salary_new" action="<? print $_lib['sess']->dispatch ?>t=salary.template" method="post">
+      <input type="submit" name="action_salaryconf_new" value="Ny ansatt (N)" accesskey="N" />
+    </form>
+    <?
+  }
+  ?>
+
+    </td>
+    <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $row_head->SalaryConfID ?>"><b>Hovedmal</b></a></td>
+    <td style="background-color: #FFB600"></td>
+    <td></td>
+    <td></td>
+    <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&SalaryConfID=<? print $row_head->SalaryConfID ?>"><? print $_lib['format']->Date(array('value'=>$row_head->TS, 'return'=>'value')) ?></a></td>
+    <td>L&oslash;nns og trekk oppgave for </td>
+    <td colspan="2"></td>
+</tr>
+
+<tbody>
+   <form name="salary_save_info" action="<? print $_lib['sess']->dispatch ?>t=salary.list" method="post">
+   <? 
+     $i = 1;
+     foreach($current_workers as $row) {
+       worker_line($row, $i);
+       $i++;
+     }
+  ?>
+  <tr>
+    <td colspan="9">
+    </td>
+    <td>
+      <input name="salary_save_info" type="submit" value="Lagre" />
+    </td>
+  </tr>
+  </form>
 </tbody>
 <tr>
   <td colspan="6"></td>
@@ -195,6 +277,90 @@ if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark
   <td></td>
 </tr>
 </table>
+
+<?
+
+///
+/// OLD WORKERS:
+///
+
+if(!isset($_GET['view_old_workers'])) {
+   echo '<br><br><a href="' . $_lib['sess']->dispatch . 't=salary.list&view_old_workers">Vis tidligere ansatte</a><br><br>';
+}
+else {
+   echo '<br><br><a href="' . $_lib['sess']->dispatch . 't=salary.list">Skjul tidligere ansatte</a><br><br>';
+
+?>
+<table class="lodo_data">
+<tr>
+    <th colspan="10">Tidligere ansatte</th>
+</tr>
+<tr>
+    <th class="sub">Ansatt/konto</th>
+    <th class="sub">Navn/mal</th>
+    <th class="sub">Ny l&oslash;nn</th>
+    <th class="sub">Kommune</th>
+    <th class="sub">Arb.avg.</th>
+    <th class="sub">Sist endret</th>
+<?php if(($_lib['sess']->get_person('AccessLevel') >= 3)) { ?>
+    <th class="sub" colspan="3"></th>
+    <th class="sub">L&oslash;nnsmal</th>
+<? } else { ?>
+    <th class="sub" colspan="4"></th>
+<? } ?>
+</tr>
+<tr>
+    <td>
+  <?
+  if(($_lib['sess']->get_person('AccessLevel') >= 1))
+  {
+    ?>
+    <form name="salary_new" action="<? print $_lib['sess']->dispatch ?>t=salary.template" method="post">
+      <input type="submit" name="action_salaryconf_new" value="Ny ansatt (N)" accesskey="N" />
+    </form>
+    <?
+  }
+  ?>
+
+    </td>
+    <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $row_head->SalaryConfID ?>"><b>Hovedmal</b></a></td>
+    <td style="background-color: #FFB600"></td>
+    <td></td>
+    <td></td>
+    <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&SalaryConfID=<? print $row_head->SalaryConfID ?>"><? print $_lib['format']->Date(array('value'=>$row_head->TS, 'return'=>'value')) ?></a></td>
+    <td>L&oslash;nns og trekk oppgave for </td>
+    <td colspan="2"></td>
+</tr>
+
+<tbody>
+   <form name="salary_save_info" action="<? print $_lib['sess']->dispatch ?>t=salary.list&view_old_workers" method="post">
+   <? 
+     $i = 1;
+     foreach($old_workers as $row) {
+       worker_line($row, $i);
+     }
+  ?>
+  <tr>
+    <td colspan="9">
+    </td>
+    <td>
+      <input name="salary_save_info" type="submit" value="Lagre" />
+    </td>
+  </tr>
+  </form>
+</tbody>
+<tr>
+  <td colspan="6"></td>
+  <td colspan="2">
+  </td>
+  <td></td>
+</tr>
+</table>
+
+<?php
+}
+?>
+
 <br />
 <table class="lodo_data">
 <thead>
@@ -258,5 +424,8 @@ while($row = $_lib['db']->db_fetch_object($result_salary))
 ?>
 </tbody>
 </table>
+
+<? } /* if($period_open) */ ?>
+
 </body>
 </html>

@@ -26,6 +26,9 @@ $query_salary   = "select * from salaryline where SalaryID = '$SalaryID' order b
 #print "$query_salary<br>";
 $result_salary  = $_lib['db']->db_query($query_salary);
 
+$remove_info = sprintf("DELETE FROM salaryinfo WHERE SalaryConfID = %d LIMIT 1", $SalaryConfID);
+$_lib['db']->db_query($remove_info);
+
 $formname = "salaryUpdate";
 ?>
 

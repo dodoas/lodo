@@ -4,7 +4,28 @@ $VoucherType = 'L';
 
 if($debug) print_r($_REQUEST);
 
-if($_lib['input']->getProperty('action_salary_update'))
+if($_lib['input']->getProperty('salary_save_info')) {
+  $existing = $_POST['existingSalaryLines'];
+  $checked  = $_POST['recieveSalary'];
+
+  if($checked == null) {
+    $checked = array();
+  }
+
+  foreach($existing as $item) {
+    $sql = sprintf("DELETE FROM salaryinfo WHERE SalaryConfID = %d LIMIT 1", $item);
+    $_lib['db']->db_query($sql);
+
+    $amount = $_POST['salaryinfo_amount_' . $item];
+
+    if(in_array($item, $checked)) {
+      $sql = sprintf("INSERT INTO salaryinfo (`SalaryConfID`, `Amount`) VALUES ('%d', '%s');",
+                     $item, $amount);
+      $_lib['db']->db_query($sql);
+    }
+  }
+}
+elseif($_lib['input']->getProperty('action_salary_update'))
 {
   #Possible to extend or alter parameters here
   $tables['salary']     = 'SalaryID';
