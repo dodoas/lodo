@@ -103,6 +103,11 @@ $bank           = $_lib['db']->db_fetch_object($result_bank);
   <input type="submit" name="action_bank_cardadd"    value="Nytt kort (N)" accesskey="N" />
 <? } ?>
 
+<?php
+
+/****
+ * IKKE I DRIFT
+
 <table>
 <tr>
     <th>Kort type</th>
@@ -141,6 +146,11 @@ foreach($bankaccount->bankaccountcardA as $tmp => $card) { ?>
 <? } ?>
 </table>
 </form>
+
+
+***/ ?>
+
+
 <? includeinc('bottom') ?>
 </body>
 </html>

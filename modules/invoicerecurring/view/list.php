@@ -126,7 +126,9 @@ $db_sum   = $row->sum;
         </form>
         <form name="invoicerecurring_edit" action="<? print $_lib['sess']->dispatch ?>t=invoicerecurring.edit" method="post">
         <input type="hidden" value="edit" name="inline">
+        <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
         <input type="submit" value="Ny faktura (N)" name="action_invoicerecurring_new" accesskey="N">
+        <? } ?>
         </form>
 	</td>
 </tr>

@@ -103,26 +103,49 @@ $db_sum   = $row->sum;
     <div class="red error"><? print $_lib['message']->get() ?></div>
 <? } ?>
 
-<? print $_lib['message']->get(); ?>
-
 <table>
 <thead>
-
 <tr>
-    <td>
-        <form name="invoice_list" action="<? print $_lib['sess']->dispatch ?>t=invoice.listoutgoing" method="post">
+     <form name="invoice_list" action="<? print $_lib['sess']->dispatch ?>t=invoice.listoutgoing" method="post">
+     <td>
         Kunde:   <input type="text" value="<? print $searchstring ?>" name="searchstring" size="10"/>
         Fra:    <? print $_lib['form3']->date(array('name' => 'FromDate',           'value' => $FromDate)) ?>
         Til:    <? print $_lib['form3']->date(array('name' => 'ToDate',             'value' => $ToDate)) ?>
         Fakturanummer: <? print $_lib['form3']->text(array('name' => 'InvoiceID',   'value' => $InvoiceID)) ?>
         <? print $_lib['form3']->submit(array('name' => 'show_search',   'value' => 'S&oslash;k (S)')) ?>
-        </form>
-        <form name="invoice_edit" action="<? print $_lib['sess']->dispatch ?>t=invoice.edit" method="post">
         <input type="hidden" value="edit" name="inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="submit" value="Ny faktura (N)" name="action_invoice_new" accesskey="N">
-        </form>
-	</td>
+
+     </td>
+     </form>
+
 </tr>
+<? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
+<tr>
+    <form name="invoice_edit" action="<? print $_lib['sess']->dispatch ?>t=invoice.edit" method="post">
+    <td>
+	Bilagsdato:
+	<? print $_lib['form3']->date(array('name' => 'voucher_date',           'value' => $_COOKIE['invoice_voucher_date'])) ?>	
+	Periode:
+	<?
+	print $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $_COOKIE['invoice_period'],
+	'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => ''));
+	?>
+
+        <input type="hidden" value="edit" name="inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="submit" value="Lagre" name="action_auto_save">
+        <?
+	if($accounting->is_valid_accountperiod($_COOKIE['invoice_period'], $_lib['sess']->get_person('AccessLevel'))) {
+	    echo '<input type="submit" value="Ny faktura (N)" name="action_invoice_new" accesskey="N">';
+        }
+        else {
+            echo '<i>Du m&aring; velge en &aring;pen periode for &aring; lage ny faktura</i>';
+        }
+        ?>
+
+    </td>
+    </form>
+</tr>
+<? } ?>
 </table>
 <table>
 <tr>

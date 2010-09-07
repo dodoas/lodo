@@ -13,15 +13,22 @@ require_once "record.inc";
 $weeklysale = new weeklysale($WeeklySaleID, $WeeklySaleConfID);
 $weeklysale->presentation();
 
-#print_r($weeklysale->salehead['enablequantity']);
+if(isset($_POST['init_bilagsnummer'])) {
+    $weeklysale->head->Week        = (int)$_POST['init_week'];	
+}
+
+$allow_changes = (($_GET["action_weeklysale_new"] == "1") || ($_lib['sess']->get_person('AccessLevel') >= 4));
 
 $readonly = "";
-if($weeklysale->head->Period and !$accounting->is_valid_accountperiod($weeklysale->head->Period, $_lib['sess']->get_person('AccessLevel'))) {
-  $_lib['message']->add(array('message' => "Perioden er lukket, du kan ikke endre data"));
-  $readonly = "readonly disable";
+if($allow_changes) {
+    if($weeklysale->head->Period and !$accounting->is_valid_accountperiod($weeklysale->head->Period, $_lib['sess']->get_person('AccessLevel'))) {
+        $_lib['message']->add(array('message' => "Perioden er lukket, du kan ikke endre data"));
+        $readonly = "readonly disable";
+    }
 }
 
 $formname = "Update";
+
 ?>
 <? print $_lib['sess']->doctype ?>
 <head>
@@ -36,6 +43,23 @@ $formname = "Update";
     <? includeinc('left') ?>
 
     <?if($_lib['message']->get()) { ?> <div class="warning"><? print $_lib['message']->get() ?></div><br><? } ?>
+
+<?php
+
+/*
+ * Check if there is already registered any weekly sales on this journal id.
+ * prints a message to the user if this is true
+ */
+$duplicates = $_lib['db']->db_query("SELECT WeeklySaleID FROM weeklysale WHERE JournalID = ".$weeklysale->head->JournalID." AND WeeklySaleID != " . $WeeklySaleID);
+if($_lib['db']->db_numrows($duplicates) >= 1) {
+    printf('Det finnes allerede en ukeomsetning med bilagsnummer %d. <a href="%s">G&aring; tilbake</a>', $weeklysale->head->JournalID, 
+		$_lib['sess']->dispatch . "&view_mvalines=&view_linedetails=&t=weeklysale.list");
+    $_lib['db']->db_query("DELETE FROM weeklysale WHERE WeeklySaleID = ".$WeeklySaleID." LIMIT 1");
+    exit();
+}
+
+
+?>
 
     <form name="<? print $formname ?>" action="<? print $MY_SELF ?>" method="post">
         <input type="hidden" name="WeeklySaleID" value="<? print $WeeklySaleID ?>">
@@ -63,11 +87,38 @@ $formname = "Update";
                	<?
                 #To let the user change vouchertype at this point would make a lot of probems with updates, series and hovedbok A posteringer.
                 #$_lib['form2']->Type_menu2(array('table' => 'weeklysale', 'field' => 'VoucherType', 'type' => 'VoucherType', 'value'  => $weeklysale->head->VoucherType, 'pk' => $weeklysale->head->WeeklySaleID));
-                print $_lib['form3']->text(array('table'=>'weeklysale',   'field' => 'JournalID'  , 'pk' => $weeklysale->head->WeeklySaleID, 'value' => $weeklysale->head->JournalID, 'width' => 10, 'tabindex' => 1)) ?>
+
+		if($allow_changes) {
+	                print $_lib['form3']->text(array('table'=>'weeklysale',   'field' => 'JournalID'  , 'pk' => $weeklysale->head->WeeklySaleID, 'value' => $weeklysale->head->JournalID, 'width' => 10, 'tabindex' => 1)); 
+		}
+		else {
+			print $weeklysale->head->JournalID;
+	                print $_lib['form3']->hidden(array('table'=>'weeklysale',   'field' => 'JournalID'  , 'pk' => $weeklysale->head->WeeklySaleID, 'value' => $weeklysale->head->JournalID, 'width' => 10, 'tabindex' => 1)); 
+		}
+		?>
                 <? print $_lib['form3']->hidden(array('name'=>'VoucherPeriodOld', 'value'=>$weeklysale->head->Period)) ?>
                 </td>
-                <td colspan="2"><? print $_lib['form3']->text(array('table'=>'weeklysale', 'field'=>'JournalDate', 'pk'=>$weeklysale->head->WeeklySaleID, 'value'=>$weeklysale->head->JournalDate, 'width'=>'10', 'tabindex'=>'2', 'OnChange'=>"update_period(this, '".$formname."', 'weeklysale.JournalDate.".$weeklysale->head->WeeklySaleID."', 'weeklysale.Period.".$weeklysale->head->WeeklySaleID."');")) ?></td>
-                <td align="center"><? print $_lib['form3']->AccountPeriod_menu3(array('table' => 'weeklysale', 'field' => 'Period', 'pk'=>$weeklysale->head->WeeklySaleID, 'value' => $weeklysale->head->Period, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'pk' => $weeklysale->head->WeeklySaleID, 'tabindex'=>'3', 'required'=>'1')) ?></td>
+                <td colspan="2">
+		<? 
+		if($allow_changes) {
+			print $_lib['form3']->text(array('table'=>'weeklysale', 'field'=>'JournalDate', 'pk'=>$weeklysale->head->WeeklySaleID, 'value'=>$weeklysale->head->JournalDate, 'width'=>'10', 'tabindex'=>'2', 'OnChange'=>"update_period(this, '".$formname."', 'weeklysale.JournalDate.".$weeklysale->head->WeeklySaleID."', 'weeklysale.Period.".$weeklysale->head->WeeklySaleID."');")); 
+		}
+		else {
+			print $_lib['form3']->hidden(array('table'=>'weeklysale', 'field'=>'JournalDate', 'pk'=>$weeklysale->head->WeeklySaleID, 'value'=>$weeklysale->head->JournalDate, 'width'=>'10', 'tabindex'=>'2', 'OnChange'=>"update_period(this, '".$formname."', 'weeklysale.JournalDate.".$weeklysale->head->WeeklySaleID."', 'weeklysale.Period.".$weeklysale->head->WeeklySaleID."');")); 
+			print $weeklysale->head->JournalDate;
+		}
+		?>
+		</td>
+                <td align="center">
+		<? 
+		if($allow_changes) {
+			print $_lib['form3']->AccountPeriod_menu3(array('table' => 'weeklysale', 'field' => 'Period', 'pk'=>$weeklysale->head->WeeklySaleID, 'value' => $weeklysale->head->Period, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'pk' => $weeklysale->head->WeeklySaleID, 'tabindex'=>'3', 'required'=>'1'));
+		}
+		else {
+			print $weeklysale->head->Period;
+		}
+		?>
+		</td>
                 <td colspan="2">
                     <nobr>
                         <?
@@ -82,16 +133,26 @@ $formname = "Update";
             </tr>
             <tr>
                 <td colspan="1"></td>
-                <td colspan="3"></td>
+                <td colspan="3"><?php if($is_dup) echo "<b>Bilagsnummeret er allerede registrert!</b>"; ?></td>
                 <td colspan="3"></td>
                 <td colspan="3"><? print $weeklysale->head->CompanyZipCode ?> <? print $weeklysale->head->CompanyCity ?></td>
                 <td colspan="3"></td>
             </tr>
             <tr>
                 <td colspan="1">Uke</td>
-                <td colspan="2"><input type="text" <? print $readonly ?> name="weeklysale.Week.<? print $weeklysale->head->WeeklySaleID ?>" value="<? print $weeklysale->head->Week ?>" size="3" class="number" tabindex="4">
-                <td colspan="1">&Aring;r</td>
-                <td colspan="1"><input type="text" <? print $readonly ?> name="weeklysale.Year.<? print $weeklysale->head->WeeklySaleID ?>" value="<? print $weeklysale->head->Year ?>" size="5" class="number" tabindex="4">
+                <td colspan="2">
+		<?php
+		if($allow_changes) {
+		?>
+			<input type="text" <? print $readonly ?> name="weeklysale.Week.<? print $weeklysale->head->WeeklySaleID ?>" value="<? print $weeklysale->head->Week ?>" size="3" class="number" tabindex="4">
+		<?php
+		}
+		else {
+			print $weeklysale->head->Week;
+		} 
+		?>
+                <td colspan="1"></td>
+                <td colspan="1"><input type="hidden" <? print $readonly ?> name="weeklysale.Year.<? print $weeklysale->head->WeeklySaleID ?>" value="<? print $weeklysale->head->Year ?>" size="5" class="number" tabindex="4">
                 <td colspan="1">Fast kasse</td>
                 <td colspan="1"><? print $_lib['format']->Amount($weeklysale->head->PermanentCash) ?></td>
                 <td colspan="3">Tlf: <? print $weeklysale->head->CompanyPhone ?></td>
@@ -118,6 +179,27 @@ $formname = "Update";
                 <td class="menu"></td>
                 <?/*<td class="menu">L&aring;s*/?>
             <?
+            /* 
+             * Calculate the correct days for the given week number.  
+             * If the week starts in one month and ends in another then the days in
+             * the first day is omited 
+             */
+            if(isset($_POST['init_bilagsnummer'])) {
+                $count_from = strtotime(date("Y") . "-W" . $_POST['init_week']);
+                $month_day  = date("d", $count_from);
+                $days_in_month = date("t", $count_from);
+
+                if($month_day + 7 > $days_in_month) {
+                  $start_from = $days_in_month - $month_day + 1;
+                  $start_with = 1;
+                }
+                else {
+                  $start_from = 0;
+                  $start_with = $month_day;
+                }
+            }
+
+            $date_counter = 0;
             foreach($weeklysale->sale as $WeeklySaleDayID => $line) {
  
                 #print_r($line);
@@ -146,6 +228,15 @@ $formname = "Update";
                 ?>
                 <tr>
                 <td class="menu"><? print $line->WeekDayName ?></td>
+
+		<?php
+                  if(isset($_POST['init_bilagsnummer']) && $start_from <= $date_counter) {
+                     $line->Day = (int)$start_with;
+                     $start_with++;
+                  }
+                  $date_counter++;
+		?>
+
                 <td class="number"><input type="text" <? print $readonly ?> name="weeklysaleday.Day.<? print $line->WeeklySaleDayID ?>" value="<? print $line->Day ?>" size="2" class="number" tabindex="<? print (5 + $counter) ?>"></td>
                 <td class="number"><nobr><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.zreport&WeeklySaleID=<? print $WeeklySaleID ?>&WeeklySaleDayID=<? print $line->WeeklySaleDayID?>">Z</a><input type="text" <? print $readonly ?> name="weeklysaleday.Znr.<? print $line->WeeklySaleDayID ?>" value="<? print $line->Znr ?>" size="4" class="<? print $classznr ?>"  title="<? print $titleznr ?>" tabindex="<? print (6 + $counter) ?>"></nobr></td>
                 <td class="number"><input type="text" <? print $readonly ?> name="weeklysaleday.ZnrTotalAmount.<? print $line->WeeklySaleDayID ?>" value="<? print $_lib['format']->Amount($line->ZnrTotalAmount) ?>" size="7" class="<? print $classznramount ?>" title="<? print $titleznramount ?>" tabindex="<? print (7 + $counter) ?>">
@@ -356,17 +447,20 @@ $formname = "Update";
             </tr>
         </table>
         <?
-        if(!$weeklysale->head->Period)
+        if($_lib['sess']->get_person('AccessLevel') >= 2) 
         {
+            if(!$weeklysale->head->Period)
+            {
             ?>
-            <input type="submit" name="action_weeklysale_journal"  value="Lagre (S)" accesskey="S" align="right" tabindex="307"/>
+                <input type="submit" name="action_weeklysale_journal"  value="Lagre (S)" accesskey="S" align="right" tabindex="307"/>
             <?
-        }
-        elseif($accounting->is_valid_accountperiod($weeklysale->head->Period, $_lib['sess']->get_person('AccessLevel')))
-        {
+            }
+            elseif($accounting->is_valid_accountperiod($weeklysale->head->Period, $_lib['sess']->get_person('AccessLevel')))
+            {
             ?>
-            <input type="submit" name="action_weeklysale_journal"  value="Lagre (S)" accesskey="S" align="right" />
+                <input type="submit" name="action_weeklysale_journal"  value="Lagre (S)" accesskey="S" align="right" />
             <?
+            }
         }
         ?>
     </form>
