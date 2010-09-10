@@ -11,6 +11,7 @@ $VoucherType='S';
 
 $db_table = "invoiceout";
 $db_table2 = "invoiceoutline";
+$db_table3 = "invoiceoutprint";
 
 includelogic('accounting/accounting');
 $accounting = new accounting();
@@ -31,7 +32,9 @@ $row_from               = $_lib['storage']->get_row(array('query' => $get_invoic
 $query_invoiceline      = "select * from $db_table2 where InvoiceID='$InvoiceID' and Active <> 0 order by LineID asc";
 #print "query_invoiceline" . $query_invoiceline . "<br>\n";
 $result2                = $_lib['db']->db_query($query_invoiceline);
-#print "Ferdig";
+
+$get_invoiceprint       = "select InvoicePrintDate from $db_table3 where InvoiceID='$InvoiceID'";
+$row_print              = $_lib['storage']->get_row(array('query' => $get_invoiceprint));
 
 /**
  * factoring setup
@@ -160,6 +163,12 @@ print $_lib['sess']->doctype;
         }
         ?>
         </td>
+        <? if($row_print) { ?>
+        <td>Utskriftsdato</td>
+        <td><? print $_lib['form3']->text(array('table'=>$db_table3, 'field'=>'InvoicePrintDate', 'pk'=>$InvoiceID, 'value'=>substr($row_print->InvoicePrintDate,0,10), 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
+        <? } ?>
+    </tr>
+    <tr>
       <td>Merk</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'Note', 'pk'=>$InvoiceID, 'value'=>$row->Note, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
     </tr>

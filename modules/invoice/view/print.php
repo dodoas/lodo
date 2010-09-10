@@ -8,6 +8,7 @@ $VoucherType='S';
 
 $db_table = "invoiceout";
 $db_table2 = "invoiceoutline";
+$db_table3 = "invoiceoutprint";
 
 includelogic('accounting/accounting');
 $accounting = new accounting();
@@ -23,6 +24,9 @@ $row_from               = $_lib['storage']->get_row(array('query' => $get_invoic
 
 $query_invoiceline      = "select * from $db_table2 where InvoiceID='$InvoiceID' and Active <> 0 order by LineID asc";
 $result2                = $_lib['db']->db_query($query_invoiceline);
+
+$get_invoiceprint       = "select InvoicePrintDate from $db_table3 where InvoiceID='$InvoiceID'";
+$row_print              = $_lib['storage']->get_row(array('query' => $get_invoiceprint));
 
 $query_company = "select * from company where CompanyID='".$_lib['sess']->get_companydef('CompanyID')."'";
 $row_company = $_lib['storage']->get_row(array('query'=>$query_company));
@@ -131,6 +135,13 @@ print $_lib['sess']->doctype ?>
       <td>Forfalls dato</td>
       <td><b><? print substr($row->DueDate,0,10) ?></b></td>
     </tr>
+    <? if($row_print) { ?>
+    <tr> 
+      <td>Utskriftsdato</td>
+      <td><b><? print substr($row_print->InvoicePrintDate,0,10) ?></b></td>
+    </tr>
+    <? } ?>
+ 
     <tr>
       <td>V&aring;r ref.</td>
       <td><? print $row->RefCustomer ?></td>

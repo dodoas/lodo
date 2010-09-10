@@ -5,6 +5,7 @@ $VoucherType='S';
 
 $db_table = "invoiceout";
 $db_table2 = "invoiceoutline";
+$db_table3 = "invoiceoutprint";
 
 includelogic('accounting/accounting');
 includelogic('invoicepdf/faktura');
@@ -22,6 +23,9 @@ $row_from               = $_lib['storage']->get_row(array('query' => $get_invoic
 $query_invoiceline      = "select * from $db_table2 where InvoiceID='$InvoiceID' and Active <> 0 order by LineID asc";
 #print "$query_invoiceline<br>\n";
 $result2                = $_lib['db']->db_query($query_invoiceline);
+
+$get_invoiceprint       = "select InvoicePrintDate from $db_table3 where InvoiceID='$InvoiceID'";
+$row_print              = $_lib['storage']->get_row(array('query' => $get_invoiceprint));
 
 $query_company = "select * from company where CompanyID='".$_lib['sess']->get_companydef('CompanyID')."'";
 $row_company = $_lib['storage']->get_row(array('query'=>$query_company));
@@ -112,6 +116,8 @@ if($row->Note) $params["invoiceData"]["Merk"]      = $row->Note;
 $params["invoiceData"]["Side"] = "1";
 $params["invoiceData"]["Fakturadato"] = $myFakutra->norwegianDate(substr($row->InvoiceDate,0,10));
 $params["invoiceData"]["Betalingsfrist"] = $myFakutra->norwegianDate(substr($row->DueDate,0,10));
+if($row_print) $params["invoiceData"]["Utskriftsdato"] = $myFakutra->norwegianDate(substr($row_print->InvoicePrintDate, 0, 10));
+
 if($row->RefInternal) $params["invoiceData"]["Deres referanse"] = $row->RefInternal;
 if($row->RefCustomer) $params["invoiceData"]["Vår referanse"] = $row->RefCustomer;
 if ($row->ProjectName != "")
