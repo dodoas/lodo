@@ -185,6 +185,7 @@ class db_mysql {
 
    #################################################################
    function db_delete($db_query) {
+       global $_lib;
        if($this->debug) print "$db_query<br>\n";
        return mysqli_query($this->link, $db_query) or $_lib['sess']->error("Bad delete query: " . mysqli_error($this->link) . "<br />$db_query");
    }
