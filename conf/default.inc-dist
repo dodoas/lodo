@@ -43,6 +43,11 @@ $_SETUP['SLASH']			= "/";
 ##################################################################
 #Set default debug level
 $_SETUP[DEBUG]				= false;  						#Debug level
+$_SETUP['FB_SERVER']        = "fakturabank.no";
+$_SETUP['FB_SERVER_PROTOCOL']        = "https";
+# $_SETUP['FB_SERVER']        = "localhost:3000";
+# $_SETUP['FB_SERVER_PROTOCOL']        = "http";
+$_SETUP['FB_URL'] = $_SETUP['FB_SERVER_PROTOCOL'] . "//" . $_SETUP['FB_SERVER'] . "/";
 
 ##################################################################
 #Number format
