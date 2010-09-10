@@ -13,7 +13,6 @@ $db_table = "invoiceout";
 $db_table2 = "invoiceoutline";
 
 includelogic('accounting/accounting');
-includelogic('invoice/factoring');
 $accounting = new accounting();
 require_once "record.inc";
 
