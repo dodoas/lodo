@@ -214,7 +214,7 @@ class invoice {
 
         #Update multi into db to support old format        
         #print_r($args);
-        $_lib['db']->db_update_multi_table($args, array('invoiceout' => 'InvoiceID', 'invoiceoutline' => 'LineID'));
+        $_lib['db']->db_update_multi_table($args, array('invoiceout' => 'InvoiceID', 'invoiceoutline' => 'LineID', 'invoiceoutprint' => 'InvoiceID'));
 
         #Then read everything from disk and correct calculations
         $this->init($args);
@@ -290,7 +290,12 @@ class invoice {
         $this->init($args);
         $this->set_head($args);
         $this->set_line(array('Active' => 1));
-        
+
+        /* create the invoiceoutprint row */    
+        $s = sprintf("INSERT INTO invoiceoutprint (`InvoiceID`, `InvoicePrintDate`) VALUES ('%d', '0000-00-00');", 
+                     $args['InvoiceID']); 
+        $_lib['db']->db_query($s);
+
         $this->make_invoice();
         return $args['InvoiceID'];
     }
@@ -553,6 +558,9 @@ class invoice {
 
         $sql_delete_invoice     = "delete from invoiceout where InvoiceID=" . $this->InvoiceID;
         $_lib['db']->db_delete($sql_delete_invoice);
+
+        $sql_delete_print_date  = "delete from invoiceoutprint where InvoiceID=" . $this->InvoiceID;
+        $_lib['db']->db_delete($sql_delete_print_date);
 
         #print "Sletter: $this->InvoiceID, $this->VoucherType<br>\n";
         $accounting->delete_journal($this->InvoiceID, $this->VoucherType);
