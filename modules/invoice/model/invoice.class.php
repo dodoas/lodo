@@ -341,6 +341,11 @@ class invoice {
 //            $headH['InvoiceDate'] = $_lib['date']->add_Days( $recurring['LastDate'], $recurring['PrintInterval'] );
             $headH['InvoiceDate'] = $recurring['LastDate'];
             $headH['Period']      = $_lib['date']->get_this_period($recurring['LastDate']);
+
+            $s = sprintf("REPLACE INTO invoiceoutprint (`InvoiceID`, `InvoicePrintDate`) 
+				VALUES ('%d', DATE_SUB(DATE('%s'), INTERVAL %d DAY));",
+                         $this->InvoiceID, $recurring['LastDate'], $recurring['PrintInterval']);
+            $_lib['db']->db_query($s);
         }
 
         if( ($accountplan->EnableCredit == 1) )
@@ -372,10 +377,6 @@ class invoice {
             #print_r($lineH);
             $this->set_line($lineH);
         }
-
-        $s = sprintf("REPLACE INTO invoiceoutprint (`InvoiceID`, `InvoicePrintDate`) VALUES ('%d', DATE_SUB(DATE('%s'), INTERVAL %d DAY));",
-                     $this->InvoiceID, $recurring['LastDate'], $recurring['PrintInterval']);
-        $_lib['db']->db_query($s);
 
 
         $this->make_invoice();
