@@ -179,7 +179,8 @@ print $_lib['sess']->doctype ?>
       <td><? interval_menu($recurring_row->TimeInterval, $RecurringID) ?></td>
     </tr>
     <tr>
-      <td></td><td></td>
+      <td>Utskriftsdato</td>
+      <td><? print $_lib['form3']->text(array('table'=>'recurring', 'field'=>'PrintInterval', 'pk'=>$RecurringID, 'value'=>$recurring_row->PrintInterval, 'width'=>'30', 'tabindex'=>$tabindex++)); ?></td>
       <td>Merk</td>
       <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'Note', 'pk'=>$RecurringID, 'value'=>$row->Note, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
     </tr>
@@ -327,35 +328,35 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     <tr>
         <td>
         <?
-        if(!$row->Locked) {
-			if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
-			{
+//        if(!$row->Locked) {
+//			if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
+//			{
 				print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoicerecurring_linenew', 'value'=>'Ny fakturalinje (N)', 'accesskey'=>'N'));
-			}
-        }
+//			}
+//        }
         ?>
         <td colspan="6" align="right">
         <?
-        if(!$row->Locked) {
+//        if(!$row->Locked) {
 			if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit')
 			{
-				if($accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
+//				if($accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
                                     print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoicerecurring_delete', 'value'=>'Slett faktura (D)', 'accesskey'=>'D', 'confirm' => 'Er du sikker p&aring; at du vil slette denne malen?'));
 			}
 	
 			if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit')
 			{
-				if($accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel'))) {
+//				if($accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel'))) {
 					print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoicerecurring_update', 'value'=>'Lagre faktura (S)', 'accesskey'=>'S'));
-				} else {
-					print "Periode stengt";
-				}
+//				} else {
+//					print "Periode stengt";
+//				}
 			} else {
 			  print "Du har ikke tilgang til &aring; lagre faktura";
 			}
-		} else {
-			print "Faktura l&aring;st";
-		}
+//		} else {
+//			print "Faktura l&aring;st";
+//		}
 
 
         ?>

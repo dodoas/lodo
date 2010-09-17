@@ -305,6 +305,11 @@ class invoice {
         global $_lib, $accounting;
         $this->OldInvoiceID = $this->InvoiceID;
 
+        /* henter recurring-linjen */
+        $s = "SELECT * FROM recurring WHERE RecurringID = '$recurring_id'";
+        $r = $_lib['db']->db_query($s);
+        $recurring = $_lib['db']->db_fetch_assoc($r);
+
         $this->clear_line();
 
         $accountplan = $accounting->get_accountplan_object($this->CustomerAccountPlanID);
@@ -321,7 +326,6 @@ class invoice {
             $headH['CommentCustomer'] = $customer_comment;
         }
 
-
         $headH['InvoiceID']           = $this->InvoiceID;
         $headH['OrderDate']           = $_lib['sess']->get_session('LoginFormDate');
         $headH['Period']              = $_lib['date']->get_this_period($_lib['sess']->get_session('Date'));
@@ -330,6 +334,14 @@ class invoice {
         $headH['Active']              = 1;
         $headH['CreatedDateTime']     = $_lib['sess']->get_session('Date');
         $headH['InvoiceDate']         = $_lib['sess']->get_session('LoginFormDate');
+
+        /* legger på print-intervalet om det finnes for denne recurringinvoice'en */
+        if($recurring['PrintInterval'])
+        {
+//            $headH['InvoiceDate'] = $_lib['date']->add_Days( $recurring['LastDate'], $recurring['PrintInterval'] );
+            $headH['InvoiceDate'] = $recurring['LastDate'];
+            $headH['Period']      = $_lib['date']->get_this_period($recurring['LastDate']);
+        }
 
         if( ($accountplan->EnableCredit == 1) )
         {
@@ -360,6 +372,11 @@ class invoice {
             #print_r($lineH);
             $this->set_line($lineH);
         }
+
+        $s = sprintf("REPLACE INTO invoiceoutprint (`InvoiceID`, `InvoicePrintDate`) VALUES ('%d', DATE_SUB(DATE('%s'), INTERVAL %d DAY));",
+                     $this->InvoiceID, $recurring['LastDate'], $recurring['PrintInterval']);
+        $_lib['db']->db_query($s);
+
 
         $this->make_invoice();
         return $this->InvoiceID;

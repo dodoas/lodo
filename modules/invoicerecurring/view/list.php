@@ -85,6 +85,7 @@ $query  .= " order by RecurringID desc";
 
 #print "$query<br>\n";
 $result_inv = $_lib['db']->db_query($query);
+
 $query_count = "SELECT COUNT(*) as total, sum(TotalCustPrice) as sum FROM $db_table $where";
 $result_count = $_lib['db']->db_query($query_count);
 $row = $_lib['db']->db_fetch_object($result_count);
@@ -190,7 +191,7 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
     $interval_sql = "SELECT * FROM recurring WHERE RecurringID = " . $row->RecurringID;
     $interval_row = $_lib['db']->get_row(array('query' => $interval_sql));
     $interval = $recurring_intervals[ $interval_row->TimeInterval ][0];
-    
+
     if($interval != '')
     {
         $interval_sql = "SELECT DATE_ADD(LastDate, INTERVAL " . $recurring_intervals[ $interval_row->TimeInterval ][1] . ") as NextDate, LastDate
@@ -205,7 +206,7 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
             $nextDate = $interval_row->StartDate;
             $lastDate = "-";
 
-            if(!$RecurringID && strtotime($nextDate) <= strtotime($FromDate))
+            if(!$RecurringID && strtotime($nextDate) < strtotime($FromDate))
                 continue;
         }
         else {
@@ -237,11 +238,7 @@ title="Vis/Endre faktura informasjon"><? print $row->RecurringID ?></a></td>
       <td class="number"><b><? echo $nextDate ?></b></td>
       <td class="number"><? print $_lib['format']->Amount($row->TotalCustPrice) ?></td>
       <td align="center">
-      <? if($accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')) && $_lib['sess']->get_person('AccessLevel') >= 2) { ?>
       <a href="<? print $_lib['sess']->dispatch ?>t=invoicerecurring.edit&RecurringID=<? print $row->RecurringID ?>&inline=edit" title="Endre faktura" target="_new">Endre</a><br />
-      <? } else { ?>
-      <a href="<? print $_lib['sess']->dispatch ?>t=invoicerecurring.edit&RecurringID=<? print $row->RecurringID ?>&inline=show" title="Endre faktura" target="_new">Stengt</a><br />
-      <? } ?>
       </td>
 
 

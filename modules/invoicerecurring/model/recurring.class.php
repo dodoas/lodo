@@ -506,7 +506,8 @@ class recurring {
 	$data = array(
 	    'RecurringID' => $this->RecurringID,
 	    'StartDate' => $args["recurring_StartDate_$this->RecurringID"],
-	    'TimeInterval' => $args["recurring_TimeInterval_$this->RecurringID"]
+	    'TimeInterval' => $args["recurring_TimeInterval_$this->RecurringID"],
+	    'PrintInterval' => $args["recurring_PrintInterval_$this->RecurringID"]
 	    );
 
 	if($update === false)
@@ -522,8 +523,9 @@ class recurring {
 	else
 	{
 	    $_lib['db']->db_update(
-		sprintf("update recurring SET StartDate = '%s', TimeInterval = '%s' WHERE RecurringID = '%d'", 
-			mysql_escape_string($data['StartDate']), mysql_escape_string($data['TimeInterval']), $this->RecurringID));    
+		sprintf("update recurring SET StartDate = '%s', TimeInterval = '%s', PrintInterval = '%d' WHERE RecurringID = '%d'", 
+			mysql_escape_string($data['StartDate']), mysql_escape_string($data['TimeInterval']),
+			$data['PrintInterval'], $this->RecurringID));    
 	}
     }
 
@@ -601,6 +603,7 @@ class recurring {
 
 	/* slår opp SQL INTERVAL streng for gitt interval. Se interval.inc */
 	$interval = $recurring_intervals[ $recurring["TimeInterval"] ][1];
+	$printinterval = $recurring["PrintInterval"] . " DAY";
 
         if($recurring["StartDate"] == "0000-00-00")
             return;
@@ -608,8 +611,8 @@ class recurring {
 	if($recurring["LastDate"] == "0000-00-00")
 	{
             $sql = sprintf("UPDATE recurring 
-					SET LastDate = StartDate - INTERVAL %s
-					WHERE RecurringID = %d", $interval, $recurring["RecurringID"]);
+					SET LastDate = DATE_SUB(StartDate - INTERVAL %s, INTERVAL %s)
+					WHERE RecurringID = %d", $interval, $printinterval, $recurring["RecurringID"]);
 
             $_lib['db']->db_query($sql);
 
@@ -627,19 +630,27 @@ class recurring {
             /* 
                oppdater denne linjen med ny LastDate om det skal sendes ut en ny
                faktura nå
+
+			UPDATE recurring 
+				SET LastDate = DATE_SUB(DATE_ADD(LastDate,  INTERVAL %s), INTERVAL %s)
+			WHERE RecurringID = %d
+				AND DATEDIFF(DATE_SUB(DATE_ADD(LastDate, INTERVAL %s), INTERVAL %s), CURDATE()) <= 0
+
             */
-            $sql = sprintf("
+            $sql = sprintf(
+                        "
 			UPDATE recurring 
 				SET LastDate = DATE_ADD(LastDate,  INTERVAL %s)
 			WHERE RecurringID = %d
-				AND DATEDIFF(DATE_ADD(LastDate, INTERVAL %s), CURDATE()) <= 0
+				AND DATEDIFF(DATE_SUB(DATE_ADD(LastDate, INTERVAL %s), INTERVAL %s), CURDATE()) <= 0
 			",
                            $interval,
                            $recurring["RecurringID"],
-                           $interval
+                           $interval, $printinterval
 		);
             
             $r = $_lib['db']->db_query($sql);
+            echo $sql;
 
             $sql = sprintf("SELECT * FROM recurring WHERE RecurringID = %d",
                            $recurring["RecurringID"]);
@@ -777,6 +788,14 @@ require_once($_SETUP['HOME_DIR'] . "/code/lib/cache/cache.class.php");
 require_once($_SETUP['HOME_DIR'] . "/code/lib/setup/setup.class.php");
 require_once($_SETUP['HOME_DIR'] . "/code/lib/format/format.class.php");
 
+function shutdown_handle()
+{
+  global $_lib;
+
+//  echo $_lib['message']->get();
+   
+}
+
 class model_invoicerecurring_recurring 
 {
     function database_list() {
@@ -805,6 +824,7 @@ class model_invoicerecurring_recurring
     {
         global $_lib, $_SETUP;
 
+        register_shutdown_function('shutdown_handle');
         $dbs = $this->database_list();
         
         foreach($dbs as $db) 
