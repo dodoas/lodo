@@ -53,6 +53,10 @@ class db_mysql {
    function db_query($db_query) {
        global $_lib;;
        # if($this->debug) print "$db_query<br>\n";
+       if(empty($db_query)) 
+       {
+           throw new Exception( sprintf("Empty query: `%s'\n", $db_query) );
+       }
        $result = mysqli_query($this->link, $db_query) or $_lib['sess']->error("Dbname: $this->database, <br>\nBad query: " . mysqli_error($this->link) . "<br />\ndb_query: $db_query");
        return $result;
    }
