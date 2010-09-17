@@ -491,6 +491,7 @@ class lodo_fakturabank_fakturabank {
                 }
             } else {
                 $InvoiceO->Status     .= "Finner ikke kunde basert pŒ PartyIdentification: " . $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
+                $InvoiceO->Status     .= sprintf('<a href="%s&t=fakturabank.createaccount&orgno=%s">Opprett</a>', $_lib['sess']->dispatch, $this->OrgNumber);
                 $InvoiceO->Journal = false;
                 $InvoiceO->Class   = 'red';
             }
