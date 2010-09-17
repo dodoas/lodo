@@ -13,8 +13,10 @@ $apc = new accountperiodcomment();
 /* open the comment field for every post */
 foreach($apc->AccountH as $AccountID => $AccountName) {
     foreach($apc->PeriodH as $Period => $tmp) {
-        $bank = new framework_logic_bank(array('Period' => $Period, 'AccountID' => $AccountID));
-        $bank->init();
+        if(!$apc->DataH[$AccountID][$Period]->BankVotingPeriodID) {
+            $bank = new framework_logic_bank(array('Period' => $Period, 'AccountID' => $AccountID));
+            $bank->init();
+        }
     }
 }
 
