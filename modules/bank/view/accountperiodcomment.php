@@ -6,7 +6,20 @@
 
 include 'record.inc';
 includelogic('accountperiodcomment/accountperiodcomment');
+includemodel('bank/bank');
+
 $apc = new accountperiodcomment();
+
+/* open the comment field for every post */
+foreach($apc->AccountH as $AccountID => $AccountName) {
+    foreach($apc->PeriodH as $Period => $tmp) {
+        $bank = new framework_logic_bank(array('Period' => $Period, 'AccountID' => $AccountID));
+        $bank->init();
+    }
+}
+
+$apc = new accountperiodcomment();
+
 ?>
 <? print $_lib['sess']->doctype ?>
 <head>
@@ -23,28 +36,40 @@ $apc = new accountperiodcomment();
 <h1><a href="<? print $_lib['sess']->dispatch ?>t=bank.list">Kasse/bank-avstemming</a> / <a href="<? print $_lib['sess']->dispatch ?>t=bank.accountperiodcomment"><b>Konto periode kommentar</b></a></h1>
 
 <? print $_lib['form3']->start(array('name' => 'accountperiodcomment')); ?>
+
 <table class="lodo_data">
 <thead>
   <tr>
-    <th></th>
-    <? foreach($apc->AccountH as $AccountID => $AccountName) { ?>
-        <th><? print $AccountName ?></th>
+    <th style="width: 70px;"><b>konto</b></th>
+    <? foreach($apc->PeriodH as $Period => $tmp) { ?>
+        <th style="width: 70px; text-align: center;"><b><? print $Period ?></b></th>
     <? } ?>
   </tr>
 </thead>
 <tbody>
-<? foreach($apc->PeriodH as $Period => $tmp) { 
-    $i++;
-    if (!($i % 3)) { $sec_color = "r0"; } else { $sec_color = "r1"; }; ?>
-    <tr class="<? print $sec_color ?>">
-    <td><b><? print $Period ?></b></td>
-    <? foreach($apc->AccountH as $AccountID => $AccountName) { ?>
-    <td><? if($apc->DataH[$AccountID][$Period]->BankVotingPeriodID) print $_lib['form3']->text(array('table' => 'bankvotingperiod', 'field' => 'Comment', 'pk' => $apc->DataH[$AccountID][$Period]->BankVotingPeriodID, 'value' => $apc->DataH[$AccountID][$Period]->Comment)) ?></td>
+
+<? foreach($apc->AccountH as $AccountID => $AccountName) { 
+    ?>
+    <tr>
+    <td><? print $AccountName ?></td>
+    <? foreach($apc->PeriodH as $Period => $tmp) { ?>
+        <td>
+    <? 
+       if($apc->DataH[$AccountID][$Period]->BankVotingPeriodID) 
+           print $_lib['form3']->text(array('table' => 'bankvotingperiod', 
+                                            'field' => 'Comment', 
+                                            'pk'    => $apc->DataH[$AccountID][$Period]->BankVotingPeriodID, 
+                                            'value' => $apc->DataH[$AccountID][$Period]->Comment));
+       else
+           print '&aring;pn;';
+    ?>        
+        </td>
     <? } ?>
-</tr>
+    </tr>
 <? } ?>
 </tbody>
 </table>
+
 <? print $_lib['form3']->submit(array('name' => 'action_bank_commentupdate', 'value' => 'Lagre', 'accesskey' => 'S')); ?>
 <? print $_lib['form3']->stop(array()); ?>
 </body>
