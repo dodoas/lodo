@@ -50,11 +50,10 @@ $formname = "Update";
  * Check if there is already registered any weekly sales on this journal id.
  * prints a message to the user if this is true
  */
-$duplicates = $_lib['db']->db_query("SELECT WeeklySaleID FROM weeklysale WHERE JournalID = ".$weeklysale->head->JournalID." AND WeeklySaleID != " . $WeeklySaleID);
+$duplicates = $_lib['db']->db_query("SELECT WeeklySaleID FROM weeklysale WHERE JournalID = ".$weeklysale->head->JournalID." AND WeeklySaleID != " . $WeeklySaleID . " AND VoucherType = '" . $weeklysale->head->VoucherType . "'");
 if($_lib['db']->db_numrows($duplicates) >= 1) {
     printf('Det finnes allerede en ukeomsetning med bilagsnummer %d. <a href="%s">G&aring; tilbake</a>', $weeklysale->head->JournalID, 
 		$_lib['sess']->dispatch . "&view_mvalines=&view_linedetails=&t=weeklysale.list");
-    $_lib['db']->db_query("DELETE FROM weeklysale WHERE WeeklySaleID = ".$WeeklySaleID." LIMIT 1");
     exit();
 }
 
