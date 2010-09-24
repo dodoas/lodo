@@ -507,7 +507,8 @@ class recurring {
 	    'RecurringID' => $this->RecurringID,
 	    'StartDate' => $args["recurring_StartDate_$this->RecurringID"],
 	    'TimeInterval' => $args["recurring_TimeInterval_$this->RecurringID"],
-	    'PrintInterval' => $args["recurring_PrintInterval_$this->RecurringID"]
+	    'PrintInterval' => $args["recurring_PrintInterval_$this->RecurringID"],
+	    'EndDate' => $args["recurring_EndDate_$this->RecurringID"]
 	    );
 
 	if($update === false)
@@ -523,9 +524,9 @@ class recurring {
 	else
 	{
 	    $_lib['db']->db_update(
-		sprintf("update recurring SET StartDate = '%s', TimeInterval = '%s', PrintInterval = '%d' WHERE RecurringID = '%d'", 
+		sprintf("update recurring SET StartDate = '%s', TimeInterval = '%s', PrintInterval = '%d', EndDate = '%s' WHERE RecurringID = '%d'", 
 			mysql_escape_string($data['StartDate']), mysql_escape_string($data['TimeInterval']),
-			$data['PrintInterval'], $this->RecurringID));    
+			$data['PrintInterval'], $data['EndDate'], $this->RecurringID));    
 	}
     }
 
@@ -631,11 +632,6 @@ class recurring {
                oppdater denne linjen med ny LastDate om det skal sendes ut en ny
                faktura nå
 
-			UPDATE recurring 
-				SET LastDate = DATE_SUB(DATE_ADD(LastDate,  INTERVAL %s), INTERVAL %s)
-			WHERE RecurringID = %d
-				AND DATEDIFF(DATE_SUB(DATE_ADD(LastDate, INTERVAL %s), INTERVAL %s), CURDATE()) <= 0
-
             */
             $sql = sprintf(
                         "
@@ -643,10 +639,11 @@ class recurring {
 				SET LastDate = DATE_ADD(LastDate,  INTERVAL %s)
 			WHERE RecurringID = %d
 				AND DATEDIFF(DATE_SUB(DATE_ADD(LastDate, INTERVAL %s), INTERVAL %s), CURDATE()) <= 0
+				AND (EndDate = '0000-00-00' OR DATE_ADD(LastDate,  INTERVAL %s) < EndDate)
 			",
                            $interval,
                            $recurring["RecurringID"],
-                           $interval, $printinterval
+                           $interval, $printinterval, $printinterval
 		);
             
             $r = $_lib['db']->db_query($sql);

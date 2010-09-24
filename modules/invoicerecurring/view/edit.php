@@ -173,16 +173,17 @@ print $_lib['sess']->doctype ?>
 
 ?>
     <tr>
-      <td>Start dato</td>
+      <td>Startdato</td>
       <td><? print $_lib['form3']->text(array('table'=>'recurring', 'field'=>'StartDate', 'pk'=>$RecurringID, 'value'=>$recurring_row->StartDate, 'width'=>'30', 'tabindex'=>$tabindex++)); ?></td>
       <td>Interval</td>
       <td><? interval_menu($recurring_row->TimeInterval, $RecurringID) ?></td>
     </tr>
     <tr>
-      <td>Utskriftsdato</td>
+      <td>Utskriftsdifferanse</td>
       <td><? print $_lib['form3']->text(array('table'=>'recurring', 'field'=>'PrintInterval', 'pk'=>$RecurringID, 'value'=>$recurring_row->PrintInterval, 'width'=>'30', 'tabindex'=>$tabindex++)); ?></td>
-      <td>Merk</td>
-      <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'Note', 'pk'=>$RecurringID, 'value'=>$row->Note, 'width'=>'30', 'tabindex'=>$tabindex++)) ?></td>
+      
+      <td>Sluttdato</td>
+      <td><? print $_lib['form3']->text(array('table'=>'recurring', 'field'=>'EndDate', 'pk'=>$RecurringID, 'value'=>$recurring_row->EndDate, 'width'=>'30', 'tabindex'=>$tabindex++)); ?></td>
     </tr>
     <tr>
       <td>TotalCustPrice</td>
@@ -291,9 +292,13 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <td align="right"><? print $_lib['format']->Amount($vatline) ?></td>
         <td align="right"><? print $_lib['format']->Amount($sumline) ?></td>
         <td>
-        <? if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($row->Period, $_lib['sess']->get_person('AccessLevel'))) { ?>
+        <? 
+// if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($row->Period, $_lib['sess']->get_person('AccessLevel'))) { 
+?>
         <a href="<? print $_SETUP[DISPATCH]."t=invoicerecurring.edit&RecurringID=$RecurringID&action_invoicerecurring_outlinedelete=1&amp;LineID=$LineID&amp;inline=edit" ?>" class="button">Slett</a>
-        <? } ?>
+        <? 
+//} 
+?>
     <tr>
         <td colspan="8"><? print $_lib['form3']->textarea(array('table'=>$db_table2, 'field'=>'Comment', 'pk'=>$LineID, 'value'=>$row2->Comment, 'tabindex'=>$tabindex++, 'min_height'=>'1', 'height'=>'1', 'width'=>'80')) ?>
     <?
