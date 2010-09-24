@@ -108,10 +108,10 @@ $db_sum   = $row->sum;
 <tr>
      <form name="invoice_list" action="<? print $_lib['sess']->dispatch ?>t=invoice.listoutgoing" method="post">
      <td>
-        Kunde:   <input type="text" value="<? print $searchstring ?>" name="searchstring" size="10"/>
+        Kundenavn:   <input type="text" value="<? print $searchstring ?>" name="searchstring" size="10"/>
+        Fakturanummer: <? print $_lib['form3']->text(array('name' => 'InvoiceID',   'value' => $InvoiceID)) ?>
         Fra:    <? print $_lib['form3']->date(array('name' => 'FromDate',           'value' => $FromDate)) ?>
         Til:    <? print $_lib['form3']->date(array('name' => 'ToDate',             'value' => $ToDate)) ?>
-        Fakturanummer: <? print $_lib['form3']->text(array('name' => 'InvoiceID',   'value' => $InvoiceID)) ?>
         <? print $_lib['form3']->submit(array('name' => 'show_search',   'value' => 'S&oslash;k (S)')) ?>
         <input type="hidden" value="edit" name="inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -123,8 +123,13 @@ $db_sum   = $row->sum;
 <tr>
     <form name="invoice_edit" action="<? print $_lib['sess']->dispatch ?>t=invoice.edit" method="post">
     <td>
-	Bilagsdato:
-	<? print $_lib['form3']->date(array('name' => 'voucher_date',           'value' => $_COOKIE['invoice_voucher_date'])) ?>	
+	Fakturadato:
+	<? 
+	  $voucher_date = $_COOKIE['invoice_voucher_date']; 
+	  if($voucher_date == "")
+	    $voucher_date = date("Y-m-d");
+	?>
+	<? print $_lib['form3']->date(array('name' => 'voucher_date',           'value' => $voucher_date)) ?>	
 	Periode:
 	<?
 	print $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $_COOKIE['invoice_period'],
@@ -169,6 +174,7 @@ $db_sum   = $row->sum;
 </tr>
 <tr>
     <th align="right">Faktura nr</th>
+    <th align="right">Utskriftsdato</th>
     <th align="right">Fakturadato</th>
     <th align="right">Periode</th>
     <!--<th>OrdreRef-->
@@ -191,6 +197,10 @@ $db_sum   = $row->sum;
 <?
 while($row = $_lib['db']->db_fetch_object($result_inv))
 {
+    $print_sql = "SELECT * FROM invoiceoutprint WHERE InvoiceID = " . $row->InvoiceID;
+    $printinfo = $_lib['db']->db_fetch_assoc( $_lib['db']->db_query($print_sql) );
+    $printdate = $printinfo['InvoicePrintDate'];
+
     $i++;
     if (!($i % 2))
     {
@@ -206,6 +216,7 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
   <form name="invoice" action="<? print $MY_SELF ?>" method="post">
     <tr class="<? print $sec_color ?>">
       <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=invoice.edit&InvoiceID=<? print $row->InvoiceID ?>&inline=show" title="Vis/Endre faktura informasjon"><? print $row->InvoiceID ?></a></td>
+      <td class="number"><? print $printdate ?></td>
       <td class="number"><? print substr($row->InvoiceDate,0,10) ?></td>
       <td class="number"><? print $row->Period ?></td>
       <!--<td><? print $row->OrderRef; ?>-->
