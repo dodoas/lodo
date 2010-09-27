@@ -29,6 +29,43 @@ $result_conf    = $_lib['db']->db_query($query_conf);
     <title>Empatix - <? print $_lib['sess']->get_companydef('CompanyName') ?> : <? print $_lib['sess']->get_person('FirstName') ?> <? print $_lib['sess']->get_person('LastName') ?> - project list</title>
     <meta name="cvs"                content="$Id: list.php,v 1.44 2005/10/28 17:59:41 thomasek Exp $" />
     <? includeinc('head') ?>
+    <script>
+function createCookie(name,value,days) {
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		var expires = "; expires="+date.toGMTString();
+	}
+	else var expires = "";
+	document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function readCookie(name) {
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0)==' ') c = c.substring(1,c.length);
+		if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+	}
+	return null;
+}
+
+function eraseCookie(name) {
+	createCookie(name,"",-1);
+}
+   
+function swap_checkbox(n) {
+	name = "weeklysale_checkbox_" + n;
+	if(readCookie(name) == null) {
+		createCookie(name, "1", 1);
+        }
+	else {
+		eraseCookie(name);
+	}
+}
+
+    </script>
 </head>
 
 <body>
@@ -42,13 +79,14 @@ $result_conf    = $_lib['db']->db_query($query_conf);
 
 <table class="lodo_data">
   <tr>
-    <th>Navn</th>
     <th>Avdelingsnummer</th>
+    <th>Navn</th>
     <th>Bilagsart</th>
     <th>Bilagsnummer</th>
+    <th></th>
+    <th>Uke</th>
     <th>Bilagsdato</th>
     <th>Periode</th>
-    <th>Uke</th>
     <th>Opprett ny uke</th>
     <th></th>
 <tbody>
@@ -59,13 +97,38 @@ while($row = $_lib['db']->db_fetch_object($result_conf))
     if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
     ?>
     <tr class="<? print "$sec_color"; ?>">
-      <td><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.template&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>"><? print $row->Name; ?></a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.template&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>"><? print $row->DepartmentID; ?></a></td>
-      <td><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.template&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>"><? print $row->VoucherType; ?></a></td>
+      <td><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.template&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>"><? print $row->Name; ?></a></td>
+      <td style="text-align: right;"><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.template&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>"><? print $row->VoucherType; ?></a></td>
 
       <form action="<? print $_lib['sess']->dispatch ?>t=weeklysale.edit&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>&action_weeklysale_new=1" method="post">
       <td>
         <input type="text" name="init_bilagsnummer" size="4" value="" id="init_bilagsnummer">
+      </td>
+      <td>
+        <? 
+          $checked = ""; 
+          if(isset($_COOKIE['weeklysale_checkbox_' . $row->WeeklySaleConfID]))
+            $checked = "checked"; 
+        ?>
+        <input type="checkbox" id="checkbox_<?= $row->WeeklySaleConfID ?>" onclick="swap_checkbox('<?= $row->WeeklySaleConfID ?>')" <?= $checked ?>/>
+      </td>
+      <td>
+        <select name="init_week">
+        <?php
+	  for($i = 1; $i <= 53; $i++) {
+            if(strlen("$i") < 2)
+              $wk = "0$i";
+            else
+              $wk = $i;
+
+            if($wk == date("W"))
+              printf("<option value='%d' selected>%s</option>", $i, $wk);
+            else
+              printf("<option value='%d'>%s</option>", $i, $wk);
+          }
+        ?>
+        </select>
       </td>
       <td>
         <input type="text" name="init_date" size="10" value="<?php echo date("Y-m-d", strtotime("sunday")) ?>" id="init_date">
@@ -74,9 +137,6 @@ while($row = $_lib['db']->db_fetch_object($result_conf))
 	<?php
 	echo $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $_COOKIE['invoice_period'], 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => '', 'name' => 'init_periode', 'id' => 'init_periode'));
 	?>
-      </td>
-      <td>
-        <input type="text" value="<?php echo date("W"); ?>" name="init_week" size="3">        
       </td>
       <td>
         <input type="submit" value="Ny ukeomsetning">
@@ -148,7 +208,8 @@ while($row = $_lib['db']->db_fetch_object($result_week))
       <td><? $hash = $_lib['format']->Amount(array('value'=>$row->TotalCash)); print $hash['value']; ?>
       <td><? $hash = $_lib['format']->Amount(array('value'=>$row->TotalAmount)); print $hash['value']; ?>
       <td>
-      <? if($_lib['sess']->get_person('AccessLevel') >= 3) {
+      <? if( ($_lib['sess']->get_person('AccessLevel') >= 3 && !(int)$row->TotalCash) ||
+             $_lib['sess']->get_person('AccessLevel') >= 4) {
         if($accounting->is_valid_accountperiod($week->Period, $_lib['sess']->get_person('AccessLevel')))
         {
             ?><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.list&amp;WeeklySaleID=<? print $row->WeeklySaleID ?>&amp;action_weeklysale_delete=1" class="button">Slett</a><?
