@@ -135,7 +135,7 @@ print $_lib['sess']->doctype ?>
       <td>Forfalls dato</td>
       <td><b><? print substr($row->DueDate,0,10) ?></b></td>
     </tr>
-    <? if($row_print) { ?>
+    <? if($row_print && $row_print->InvoicePrintDate != '0000-00-00') { ?>
     <tr> 
       <td>Utskriftsdato</td>
       <td><b><? print substr($row_print->InvoicePrintDate,0,10) ?></b></td>

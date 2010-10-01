@@ -128,16 +128,21 @@ $db_sum   = $row->sum;
 	  $voucher_date = $_COOKIE['invoice_voucher_date']; 
 	  if($voucher_date == "")
 	    $voucher_date = date("Y-m-d");
+
+          if(isset($_COOKIE['invoice_period']))
+            $invoice_period = $_COOKIE['invoice_period'];
+          else
+            $invoice_period = date("Y-m");    
 	?>
 	<? print $_lib['form3']->date(array('name' => 'voucher_date',           'value' => $voucher_date)) ?>	
 	Periode:
 	<?
-	print $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $_COOKIE['invoice_period'],
+	print $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $invoice_period,
 	'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => ''));
 	?>
 
         <input type="hidden" value="edit" name="inline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="submit" value="Lagre" name="action_auto_save">
+        <input type="submit" value="Lagre dato" name="action_auto_save">
         <?
 	if($accounting->is_valid_accountperiod($_COOKIE['invoice_period'], $_lib['sess']->get_person('AccessLevel'))) {
 	    echo '<input type="submit" value="Ny faktura (N)" name="action_invoice_new" accesskey="N">';
@@ -200,6 +205,9 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
     $print_sql = "SELECT * FROM invoiceoutprint WHERE InvoiceID = " . $row->InvoiceID;
     $printinfo = $_lib['db']->db_fetch_assoc( $_lib['db']->db_query($print_sql) );
     $printdate = $printinfo['InvoicePrintDate'];
+
+    if($printdate == "0000-00-00")
+	$printdate = "";
 
     $i++;
     if (!($i % 2))

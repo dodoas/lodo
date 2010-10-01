@@ -116,7 +116,7 @@ if($row->Note) $params["invoiceData"]["Merk"]      = $row->Note;
 $params["invoiceData"]["Side"] = "1";
 $params["invoiceData"]["Fakturadato"] = $myFakutra->norwegianDate(substr($row->InvoiceDate,0,10));
 $params["invoiceData"]["Betalingsfrist"] = $myFakutra->norwegianDate(substr($row->DueDate,0,10));
-if($row_print) $params["invoiceData"]["Utskriftsdato"] = $myFakutra->norwegianDate(substr($row_print->InvoicePrintDate, 0, 10));
+if($row_print && $row_print->InvoicePrintDate != '0000-00-00') $params["invoiceData"]["Utskriftsdato"] = $myFakutra->norwegianDate(substr($row_print->InvoicePrintDate, 0, 10));
 
 if($row->RefInternal) $params["invoiceData"]["Deres referanse"] = $row->RefInternal;
 if($row->RefCustomer) $params["invoiceData"]["Vår referanse"] = $row->RefCustomer;
