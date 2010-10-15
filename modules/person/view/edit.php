@@ -61,16 +61,16 @@ $person = $_lib['storage']->get_row(array('query' => $query));
         <td><input type="text" name="<? print $db_table ?>.FirstName" value="<? print $person->FirstName ?>" size="24" tabindex="4" maxlength="50"></td>
     </tr><tr>
         <td class="BGColorDark">Adresse</td>
-        <td> <input type="text" name="<? print $db_table ?>.VAddress" value="<? print $person->VAddress ?>" size="24" tabindex="5" maxlength="50"></td>
+        <td> <input type="text" name="<? print $db_table ?>.Address" value="<? print $person->Address ?>" size="24" tabindex="5" maxlength="50"></td>
         <td class="BGColorDark">Land</td>
-        <td><input type="text" name="<? print $db_table ?>.VCountry" value="<? print $person->VCountry ?>" size="24" tabindex="6" maxlength="50"></td>
+        <td><input type="text" name="<? print $db_table ?>.Country" value="<? print $person->Country ?>" size="24" tabindex="6" maxlength="50"></td>
     </tr>
     <tr>
         <td class="BGColorDark">Postnummer</td>
         <! forandret fra PostalCode til ZipCode 6/1-2005 >
-        <td><input type="text" name="<? print $db_table ?>.VZipCode" value="<? print $person->VZipCode ?>" size="24" tabindex="7" maxlength="50"></td>
+        <td><input type="text" name="<? print $db_table ?>.ZipCode" value="<? print $person->ZipCode ?>" size="24" tabindex="7" maxlength="50"></td>
         <td class="BGColorDark">Poststed</td>
-        <td><input type="text" name="<? print $db_table ?>.VCity" value="<? print $person->VCity ?>" size="24" tabindex="8" maxlength="50"></td>
+        <td><input type="text" name="<? print $db_table ?>.City" value="<? print $person->City ?>" size="24" tabindex="8" maxlength="50"></td>
     </tr>
     <tr>
         <td class="BGColorDark">Hjemmetelefon</td>
