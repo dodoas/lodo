@@ -167,11 +167,11 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
         <tbody>
             <tr>
                 <td class="menu"></td>
-                <td class="menu">Dag</td>
-                <td class="menu">Z nr</td>
-                <td class="menu">Z nr total</td>
+                <td class="menu" style="text-align: right;">Dag</td>
+                <td class="menu" style="text-align: right;">Z nr</td>
+                <td class="menu" style="text-align: right;">Z nr total</td>
                 <? foreach($weeklysale->salehead['groups'] as $name => $id) { ?>
-                    <td class="menu"><? print $name ?></td>
+                    <td class="menu" style="text-align: right;"><? print $name ?></td>
                 <? } ?>
                 <td class="menuright">Total</td>
                 <td class="menu" colspan="2">Sig</td>
@@ -242,7 +242,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
 
                 <? foreach($weeklysale->salehead['groups'] as $name => $i) { ?>
                 <td class="number"><nobr><input type="text" title="Bel&oslash;p" <? print $readonly ?> name="weeklysaleday.Group<? print $i ?>Amount.<? print $line->WeeklySaleDayID ?>"   value="<? print $_lib['format']->Amount($line->{"Group{$i}Amount"}) ?>"  size="7" class="number" tabindex="<? print (8 + $counter) ?>">
-                <? if($weeklysale->salehead['enablequantity'][$i] == 1) { ?><input type="text" title="Antall"<? print $readonly ?> name="weeklysaleday.Group<? print $i ?>Quantity.<? print $line->WeeklySaleDayID ?>" value="<? print $_lib['format']->Amount(array('value'=>$line->{"Group{$i}Quantity"}, 'return'=>'value')) ?>"  size="7" class="number"><? } ?></nobr></td>
+                <? if($weeklysale->salehead['enablequantity'][$i] == 1) { ?><input type="text" style="background-color: #999; color: black;" title="Antall"<? print $readonly ?> name="weeklysaleday.Group<? print $i ?>Quantity.<? print $line->WeeklySaleDayID ?>" value="<? print $_lib['format']->Amount(array('value'=>$line->{"Group{$i}Quantity"}, 'return'=>'value')) ?>"  size="7" class="number"><? } ?></nobr></td>
                 <? } ?>
 
                 <td class="menuright"><nobr><? print $_lib['format']->Amount($weeklysale->salehead['sumday'][$line->ParentWeeklySaleDayID]) ?></nobr></td>
@@ -308,24 +308,24 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <td colspan="12">&nbsp;</td>
             </tr>
             <tr>
-                <td class="menu"></td>
-                <td class="menu">Dag</td>
-                <td class="menu">Znr</td>
+                <td class="menu" style="text-align: right;"></td>
+                <td class="menu" style="text-align: right;">Dag</td>
+                <td class="menu" style="text-align: right;">Znr</td>
                  <? 
                 if(is_array($weeklysale->revenuehead['groups'])) {
                     foreach($weeklysale->revenuehead['groups'] as $name => $id) { ?>
-                        <td class="menu"><? print $name ?></td>
+                        <td class="menu" style="text-align: right;"><? print $name ?></td>
                     <? } 
                 } ?>
-                <td class="menu">Kontant</td>
-                <td class="menu">Sum</td>
-                <td class="menu">Kontant inn</td>
-                <td class="menu">Kontant ut</td>
-                <td class="menu">Opptelling</td>
-                <td class="menu">Diff</td>
-                <td class="menu">Forklaring</td>
-                <td class="menu">Sig</td>
-                <td class="menu">L&aring;s</td>
+                <td class="menu" style="text-align: right;">Kontant</td>
+                <td class="menu" style="text-align: right;">Sum</td>
+                <td class="menu" style="text-align: right;">Kontant inn</td>
+                <td class="menu" style="text-align: right;">Kontant ut</td>
+                <td class="menu" style="text-align: right;">Opptelling</td>
+                <td class="menu" style="text-align: right;">Diff</td>
+                <td class="menu" style="text-align: right;">Forklaring</td>
+                <td class="menu" style="text-align: right;">Sig</td>
+                <td class="menu" style="text-align: right;">L&aring;s</td>
             <?
             $sumtot = 0;
             $sum = array();
@@ -432,16 +432,33 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <td class="number"><nobr><? print $_lib['format']->Amount($weeklysale->head->sumcashout) ?></nobr></td>
                 <td colspan="10"></td>
             </tr>
+	    <? foreach(range(1,3) as $bankn) { ?>
             <tr>
-                <td class="menu" colspan="3">Privat: (Innskudd - Uttak)</td>
+                <td class="menu" colspan="3">Bank <?= $bankn ?></td>
+                <td class="number"><input <? print $readonly ?> type="text" name="weeklysale.Bank<?= $bankn ?>Amount.<? print $weeklysale->head->WeeklySaleID ?>" value="<? $hash = $_lib['format']->Amount(array('value'=>$weeklysale->head->{"Bank".$bankn."Amount"})); print $hash['value']; ?>" size="8" class="number" tabindex="305"></td>
+		<td>Dato</td>
+		<td class="date" colspan="2"><input <? print $readonly ?> type="text" name="weeklysale.Bank<?= $bankn ?>Date.<? print $weeklysale->head->WeeklySaleID ?>" value="<? print $weeklysale->head->{"Bank".$bankn."Date"}; ?>"></td>
+		<td colspan="5">Negative bel&oslash;p er innskudd til bank</td>
+            </tr>
+            <? } ?>
+            <tr>
+                <td class="menu" colspan="3">Privat:</td>
                 <td class="number"><input <? print $readonly ?> type="text" name="weeklysale.PrivateAmount.<? print $weeklysale->head->WeeklySaleID ?>" value="<? $hash = $_lib['format']->Amount(array('value'=>$weeklysale->head->PrivateAmount)); print $hash['value']; ?>" size="8" class="number" tabindex="305">
                 <td>Forklaring</td>
-                <td colspan="3"><input <? print $readonly ?> type="text" name="weeklysale.PrivateExplanation.<? print $weeklysale->head->WeeklySaleID ?>" value="<? print $weeklysale->head->PrivateExplanation ?>" size="20" class="number" tabindex="306">
-                <td colspan="6"></td>
+                <td colspan="2"><input <? print $readonly ?> type="text" name="weeklysale.PrivateExplanation.<? print $weeklysale->head->WeeklySaleID ?>" value="<? print $weeklysale->head->PrivateExplanation ?>" size="20" class="number" tabindex="306">
+                <td colspan="6">Negative bel&oslash;p er uttak fra kasse</td>
             </tr>
             <tr>
                 <td class="menu" colspan="3">Sum</td>
-                <td class="number"><nobr><? print $_lib['format']->Amount($weeklysale->head->TotalAmount) ?></nobr></td>
+		<?
+			if($weeklysale->head->TotalAmount < 0)
+				$sumcolor = "red";
+			else if($weeklysale->head->TotalAmount == 0)
+				$sumcolor = "green";
+			else
+				$sumcolor = "blue";
+		?>
+                <td class="number" style="color: <?= $sumcolor ?>"><nobr><? print $_lib['format']->Amount($weeklysale->head->TotalAmount) ?></nobr></td>
                 <td colspan="10"></td>
             </tr>
         </table>
