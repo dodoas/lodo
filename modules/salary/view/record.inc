@@ -17,10 +17,13 @@ if($_lib['input']->getProperty('salary_save_info')) {
     $_lib['db']->db_query($sql);
 
     $amount = $_POST['salaryinfo_amount_' . $item];
+    $project = $_POST['salaryinfo_project_'. $item];
+    if($project == '')
+        $project = -1;
 
     if(in_array($item, $checked)) {
-      $sql = sprintf("INSERT INTO salaryinfo (`SalaryConfID`, `Amount`) VALUES ('%d', '%s');",
-                     $item, $amount);
+      $sql = sprintf("INSERT INTO salaryinfo (`SalaryConfID`, `amount`, `project`) VALUES ('%d', '%s', '%s');",
+                     $item, $amount, $project);
       $_lib['db']->db_query($sql);
     }
   }

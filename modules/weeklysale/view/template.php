@@ -48,6 +48,14 @@ $result_sale    = $_lib['db']->db_query($query_sale);
     <th class="sub">Permanente kontanter</th>
     <td colspan="2"><input type="text" name="weeklysaleconf.PermanentCash.<? print $head->WeeklySaleConfID ?>"   value="<? print $_lib['format']->Amount($head->PermanentCash) ?>" size="30"></td>
    </tr>
+   <tr>
+    <th class="sub">Oppstartsdato</th>
+    <td colspan="2"><input type="text" name="weeklysaleconf.StartDate.<? print $head->WeeklySaleConfID ?>"  value="<? print $head->StartDate ?>" /></td>
+   </tr>
+   <tr>
+    <th class="sub">Sluttdato</th>
+    <td colspan="2"><input type="text" name="weeklysaleconf.EndDate.<? print $head->WeeklySaleConfID ?>"  value="<? print $head->EndDate ?>" /></td>
+   </tr>
 <?
 $aconf = array();
 $aconf['table']         = 'weeklysalegroupconf';

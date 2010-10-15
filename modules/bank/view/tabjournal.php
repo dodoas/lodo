@@ -286,7 +286,7 @@ if(is_array($bank->unvotedaccount)) {
       <? print $_lib['form3']->hidden(array('table' => 'accountline', 'field' => 'Day',         'pk' => $row->AccountLineID, 'value' => $row->Day)) ?>
       <tr class="<? print "$sec_color"; ?>">
         <td><? print $row->Priority ?></td>
-        <td><? print $_lib['form3']->URL(array('url' => $bank->urlvoucher . '&amp;voucher_JournalID=' . $row->JournalID . '&amp;voucher_VoucherType=' . $row->VoucherType . "&amp;action_journalid_search=1", 'description' => $row->VoucherType . $row->JournalID)) ?></td>
+        <td><? print $bank->VoucherType . $_lib['form3']->URL(array('url' => $bank->urlvoucher . '&amp;voucher_JournalID=' . $row->JournalID . '&amp;voucher_VoucherType=' . $row->VoucherType . "&amp;action_journalid_search=1", 'description' => $row->VoucherType . $row->JournalID)) ?></td>
         <td><? print $row->Day ?></td>
         <td class="number menu-left-border"><? if($row->AmountOut > 0) print $_lib['format']->Amount($row->AmountOut); ?></td>
         <td class="number menu-right-border"><? if($row->AmountIn > 0)  print $_lib['format']->Amount($row->AmountIn); ?></td>

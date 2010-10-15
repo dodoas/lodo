@@ -57,12 +57,20 @@ function eraseCookie(name) {
    
 function swap_checkbox(n) {
 	name = "weeklysale_checkbox_" + n;
+
 	if(readCookie(name) == null) {
 		createCookie(name, "1", 1);
         }
 	else {
 		eraseCookie(name);
 	}
+}
+
+function set_cookie(name, elid)
+{
+	var el = document.getElementById(elid);
+	var value = el.options[ el.selectedIndex ].value;
+	createCookie(name, value, 1);
 }
 
     </script>
@@ -88,6 +96,8 @@ function swap_checkbox(n) {
     <th>Bilagsdato</th>
     <th>Periode</th>
     <th>Opprett ny uke</th>
+    <th>Oppstart</th>
+    <th>Slutt</th>
     <th></th>
 <tbody>
 <?
@@ -116,7 +126,7 @@ while($row = $_lib['db']->db_fetch_object($result_conf))
       <td>
         <select name="init_week">
         <?php
-	  for($i = 1; $i <= 53; $i++) {
+	  for($i = 0; $i <= 53; $i++) {
             if(strlen("$i") < 2)
               $wk = "0$i";
             else
@@ -135,8 +145,9 @@ while($row = $_lib['db']->db_fetch_object($result_conf))
       </td>
       <td>
 	<?php
-	echo $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $_COOKIE['invoice_period'], 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => '', 'name' => 'init_periode', 'id' => 'init_periode'));
+	echo $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $_COOKIE['invoice_period'], 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => '', 'name' => 'init_periode', 'id' => 'init_periode_' . $row->WeeklySaleConfID));
 	?>
+        <input value="Lagre periode" type="button" onclick="set_cookie('invoice_period', 'init_periode_<? print $row->WeeklySaleConfID ?>')">
       </td>
       <td>
         <input type="submit" value="Ny ukeomsetning">
@@ -147,6 +158,15 @@ while($row = $_lib['db']->db_fetch_object($result_conf))
 	?>
         </form>
       </td>
+
+      <td>
+	<? print $row->StartDate ?>
+      </td>
+
+      <td>
+	<? print $row->EndDate ?>
+      </td>
+
       <td>
       <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
         <a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.list&amp;WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>&amp;action_weeklysaleconf_delete=1" class="button">Slett</a>

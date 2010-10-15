@@ -51,9 +51,10 @@ $apc = new accountperiodcomment();
 <tbody>
 
 <? foreach($apc->AccountH as $AccountID => $AccountName) { 
+    $bankname = $_lib['storage']->get_row(array('query' => "SELECT BankName FROM account WHERE AccountID = $AccountID"));
     ?>
     <tr>
-    <td><? print $AccountName ?></td>
+    <td><? print $AccountName . " - " . $bankname->BankName ?></td>
     <? foreach($apc->PeriodH as $Period => $tmp) { ?>
         <td>
     <? 

@@ -298,6 +298,9 @@ class weeklysale {
         #print "saletotal: " . $this->head->sumcash . " + sumcashin: " . $this->head->sumcashin . " - sumcashout: " . $this->sumcashout . " + PrivateAmount: " . $this->head->PrivateAmount . "<br>\n";
         $this->head->TotalAmount = $this->head->sumcash + $this->head->sumcashin - $this->head->sumcashout + $this->head->PrivateAmount; #total_week
 
+	foreach(range(1, 3) as $i)
+	        $this->head->TotalAmount += $this->head->{"Bank" . $i ."Amount"};
+
         #print_r($this->revenue);
 
         return true;
