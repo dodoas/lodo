@@ -546,7 +546,16 @@ class form3
             print "query: ".$args['query']."<br />name: ".$name."<br />";
         }
 
-        $element    = "<select name=\"$name\" id=\"$name\"";
+        if(isset($args['id'])) 
+        {
+            $id = $args['id'];
+        }
+        else
+        {
+            $id = $name;
+        }   
+
+        $element    = "<select name=\"$name\" id=\"$id\"";
         if($tabindex)  { $element .= " tabindex=\"$tabindex\""; }
         if($accesskey) { $element .= " accesskey=\"$args[accesskey]\""; }
         if($args['autosubmit']) { $element .= " onchange=submit()";  }
