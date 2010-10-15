@@ -59,8 +59,40 @@ print $_lib['sess']->doctype;
     <title>Empatix - salary list</title>
     <meta name="cvs"                content="$Id: list.php,v 1.49 2005/10/28 17:59:41 thomasek Exp $" />
     <? includeinc('head') ?>
-</head>
 
+    <script>
+function changemonth()
+{
+        var voucherdate = document.getElementById('setup.value.salarydefvoucherdate');
+	var fromdate = document.getElementById('setup.value.salarydeffromdate');
+	var todate   = document.getElementById('setup.value.salarydeftodate');
+	var select   = document.getElementById('month');
+
+	var selectedmonth = select.value;
+	if(selectedmonth.length < 2)
+		selectedmonth = "0" + selectedmonth; 
+
+	var monthlengths = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+        var date = new Date();
+
+	monthlength = monthlengths[ parseInt(select.value) - 1 ];
+	year = date.getFullYear();
+
+	/* leap year */
+	if(parseInt(select.value) == 2)
+	{
+		if(year % 400 == 0)
+			monthlength += 1;
+		else if(year % 4 == 0 && year % 100 != 0)
+			monthlength += 1;
+	}
+
+        voucherdate.value = "" + year + "-" + selectedmonth;
+	fromdate.value = voucherdate.value + "-01";
+	todate.value = voucherdate.value + "-" + monthlength;
+}
+    </script>
+</head>
 <body>
 
 <? includeinc('top') ?>
@@ -71,13 +103,33 @@ print $_lib['sess']->doctype;
     <tr>
         <th colspan="5">Standardverdier for nye lønninger</th>
     <tr>
+        <th class="sub">M&aring;ned</th>
         <th class="sub">Bilagsdato</th>
         <th class="sub">Fra dato</th>
         <th class="sub">Til dato</th>
         <th class="sub"></th>
         <th class="sub"></th>
     </tr>
-    <tr>
+    <tr> 
+        <td> 
+        <?
+            $months = array(1 => 'Januar', 2 => 'Februar', 3 => 'Mars', 4=> 'April', 5=> 'Mai', 
+				6 => 'Juni', 7 => 'Juli', 8 => 'August', 9 => 'September', 10 => 'Oktober', 
+				11 => 'November', 12 => 'Desember');
+
+	    list($dummy, $month) = explode('-', $setup['salarydefvoucherdate']);
+	    $month_selected = (int)$month;
+
+	    printf("<select id='month' onchange='changemonth();' />");
+	    foreach($months as $n => $month) {
+	        if($n == $month_selected)
+	            printf("<option value='%d' selected>%s</option>\n", $n, $month);
+		else
+	            printf("<option value='%d'>%s</option>\n", $n, $month);
+	    }
+	    printf("</select>");
+	?>
+        </td>
         <td><? print $_lib['form3']->text(array('table'=>'setup.value', 'field'=>'salarydefvoucherdate', 'value'=>$setup['salarydefvoucherdate'], 'width'=>'10')) ?></td>
         <td><? print $_lib['form3']->text(array('table'=>'setup.value', 'field'=>'salarydeffromdate', 'value'=>$setup['salarydeffromdate'], 'width'=>'10')) ?></td>
         <td><? print $_lib['form3']->text(array('table'=>'setup.value', 'field'=>'salarydeftodate', 'value'=>$setup['salarydeftodate'], 'width'=>'10')) ?></td>
@@ -121,55 +173,7 @@ function worker_line($row, $i) {
         }
       ?>
       </td>
-      <td style="background-color: #FFB600">
-      <?
-      if($_lib['sess']->get_person('AccessLevel') >= 2 && $accounting->is_valid_accountperiod($setup['salarydefvoucherdate'], $_lib['sess']->get_person('AccessLevel')))
-      {
-        if($row->SalaryConfID != 1)
-        {
-            ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&amp;SalaryConfID=<? print $row->SalaryConfID ?>&amp;action_salary_new=1" class="button"><? if($row->SalaryConfID != 1) { print $row->AccountPlanID; } ?></a><?
-        }
-      } else {
-        print "Stengt";
-      }
-      ?>
-      </td>
-      <td>
-      <?
-        if($row->SalaryConfID != 1)
-        {
-            ?><a href="<? print $_lib['sess']->dispatch ?>t=arbeidsgiveravgift.edit"><? print $row->KommuneName; ?></a></td><?
-        }
-      ?>
-      <td>
-      <?
-        if($row->SalaryConfID != 1)
-        {
-            ?><a href="<? print $_lib['sess']->dispatch ?>t=arbeidsgiveravgift.edit"><? print $row->Sone; ?></a><?
-        }
-      ?>
-      </td>
-      <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&SalaryConfID=<? print $row->SalaryConfID ?>"><? print $_lib['format']->Date(array('value'=>$row->TS, 'return'=>'value')) ?></a></td>
-      <td><a href="<? print $_lib['sess']->dispatch ?>t=arbeidsgiveravgift.salaryreport&amp;report.Year=<? print $year ?>&amp;report.Employee=<? print $row->AccountPlanID ?>" target="new">Vis <? print $year ?></a></td>
 
-      <? if(($_lib['sess']->get_person('AccessLevel') >= 3)) { ?>
-      <td colspan="1">
-      <? } else { ?>	    
-      <td colspan="3">
-      <? } ?>
-      
-	<? if(($_lib['sess']->get_person('AccessLevel') >= 4) and ($row->SalaryConfID != 1)) { 
-	    echo $_lib['form3']->button(array('url' => 
-				 $_lib['sess']->dispatch . "t=salary.list&amp;SalaryConfID=" . $row->SalaryConfID . "&amp;action_salaryconf_delete=1"
-				 , 'name' => 'Slett', 'confirm' => 'Vil du virkelig slette linjen?'));
-	 } ?>
-      </td>
-      <td style="text-align: right">
-      <?
-        echo $row->SalaryConfID;
-      ?>
-      </td>
-    
       <td> 
       <?
         $sql = sprintf("SELECT * FROM salaryinfo WHERE SalaryConfID = %d", $row->SalaryConfID);
@@ -188,12 +192,59 @@ function worker_line($row, $i) {
       <input type="hidden" name="existingSalaryLines[]" value="<? echo $row->SalaryConfID ?>" />
       <?
         if($checked) {
-          printf('<input type="text" size="24" name="salaryinfo_amount_%d" value="%s" />', $row->SalaryConfID, 
-                  $salaryinfo->amount);
+            printf('<input type="text" size="50" name="salaryinfo_amount_%d" value="%s" />', $row->SalaryConfID, 
+                    $salaryinfo->amount);
+            $_lib['form2']->project_menu2(array('table' => 'salaryinfo',  'field' =>  
+'project', 'value' => $salaryinfo->project, 'tabindex' => $tabindex++, 'accesskey' => 'P', 'pk' => $row->SalaryConfID));
         }
       ?>
       </td>
 
+      <td style="background-color: #FFB600">
+      <?
+      if($_lib['sess']->get_person('AccessLevel') >= 2 && $accounting->is_valid_accountperiod($setup['salarydefvoucherdate'], $_lib['sess']->get_person('AccessLevel')))
+      {
+        if($row->SalaryConfID != 1 && $checked)
+        {
+            ?><a target="_blank" href="<? print $_lib['sess']->dispatch ?>t=salary.edit&amp;SalaryConfID=<? print $row->SalaryConfID ?>&amp;action_salary_new=1" class="button"><? if($row->SalaryConfID != 1) { print $row->AccountPlanID; } ?></a><?
+        }
+      } else {
+        print "Stengt";
+      }
+      ?>
+      </td>
+
+      <td>
+      <?
+        if($row->SalaryConfID != 1)
+        {
+            ?><a href="<? print $_lib['sess']->dispatch ?>t=arbeidsgiveravgift.edit"><? print $row->KommuneName; ?></a></td><?
+        }
+      ?>
+
+      <td><?= $row->WorkStart ?></td>
+      <td><?= $row->WorkStop ?></td>
+
+      <td><a href="<? print $_lib['sess']->dispatch ?>t=arbeidsgiveravgift.salaryreport&amp;report.Year=<? print $year ?>&amp;report.Employee=<? print $row->AccountPlanID ?>" target="new">Vis <? print $year ?></a></td>
+
+      <? if(($_lib['sess']->get_person('AccessLevel') >= 3)) { ?>
+      <td colspan="1">
+      <? } else { ?>	    
+      <td colspan="3">
+      <? } ?>
+      
+	<? if(($_lib['sess']->get_person('AccessLevel') >= 4) and ($row->SalaryConfID != 1)) { 
+	    echo $_lib['form3']->button(array('url' => 
+				 $_lib['sess']->dispatch . "t=salary.list&amp;SalaryConfID=" . $row->SalaryConfID . "&amp;action_salaryconf_delete=1"
+				 , 'name' => 'Slett', 'confirm' => 'Vil du virkelig slette linjen?'));
+ 	   } ?>
+      </td>
+      <td style="text-align: right">
+      <?
+        echo $row->SalaryConfID;
+      ?>
+      </td>
+    
 <? 
 }  /* function */
 
@@ -216,18 +267,16 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
     <th colspan="10">Hovedmal hele firma</th>
 </tr>
 <tr>
-    <th class="sub">Ansatt/konto</th>
-    <th class="sub">Navn/mal</th>
+    <th class="sub">Ansatte</th>
+    <th class="sub">Navn</th>
     <th class="sub">Ny l&oslash;nn</th>
+    <th class="sub" style="background-color: #FFB600">L&oslash;nnslipp</th>
     <th class="sub">Kommune</th>
-    <th class="sub">Arb.avg.</th>
-    <th class="sub">Sist endret</th>
-<? if(($_lib['sess']->get_person('AccessLevel') >= 3)) { ?>
-    <th class="sub" colspan="3"></th>
-    <th class="sub">L&oslash;nnsmal</th>
-<? } else { ?>
-    <th class="sub" colspan="4"></th>
-<? } ?>
+    <th class="sub">Startdato</th>
+    <th class="sub">Sluttdato</th>
+    <th class="sub">L&T</th>
+    <th class="sub"></th>
+    <th class="sub">Mal</th>
 </tr>
 <tr>
     <td>
@@ -244,12 +293,12 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
 
     </td>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $row_head->SalaryConfID ?>"><b>Hovedmal</b></a></td>
+    <td></td>
     <td style="background-color: #FFB600"></td>
     <td></td>
     <td></td>
-    <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&SalaryConfID=<? print $row_head->SalaryConfID ?>"><? print $_lib['format']->Date(array('value'=>$row_head->TS, 'return'=>'value')) ?></a></td>
-    <td>L&oslash;nns og trekk oppgave for </td>
-    <td colspan="2"></td>
+    <td></td>
+    <td colspan="3"></td>
 </tr>
 
 <tbody>
@@ -296,18 +345,18 @@ else {
     <th colspan="10">Tidligere ansatte</th>
 </tr>
 <tr>
-    <th class="sub">Ansatt/konto</th>
-    <th class="sub">Navn/mal</th>
+    <th class="sub">Ansatte</th>
+    <th class="sub">Navn</th>
     <th class="sub">Ny l&oslash;nn</th>
+    <th class="sub" style="background-color: #FFB600">L&oslash;nnslipp</th>
     <th class="sub">Kommune</th>
-    <th class="sub">Arb.avg.</th>
-    <th class="sub">Sist endret</th>
-<?php if(($_lib['sess']->get_person('AccessLevel') >= 3)) { ?>
-    <th class="sub" colspan="3"></th>
-    <th class="sub">L&oslash;nnsmal</th>
-<? } else { ?>
-    <th class="sub" colspan="4"></th>
-<? } ?>
+    <th class="sub">Startdato</th>
+    <th class="sub">Sluttdato</th>
+    <th class="sub">L&T</th>
+    <th class="sub"></th>
+    <th class="sub">Mal</th>
+
+
 </tr>
 <tr>
     <td>
@@ -323,13 +372,14 @@ else {
   ?>
 
     </td>
+
     <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $row_head->SalaryConfID ?>"><b>Hovedmal</b></a></td>
+    <td></td>
     <td style="background-color: #FFB600"></td>
     <td></td>
     <td></td>
-    <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&SalaryConfID=<? print $row_head->SalaryConfID ?>"><? print $_lib['format']->Date(array('value'=>$row_head->TS, 'return'=>'value')) ?></a></td>
-    <td>L&oslash;nns og trekk oppgave for </td>
-    <td colspan="2"></td>
+    <td></td>
+    <td colspan="3"></td>
 </tr>
 
 <tbody>
