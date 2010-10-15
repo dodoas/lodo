@@ -15,6 +15,9 @@ if($_lib['input']->getProperty('action_bank_new')) {
   $postmain['account_VoucherType'] = 'B';
   $AccountID = $_lib['db']->db_new_hash($postmain, 'account');
 }
+elseif($_lib['input']->getProperty('action_period_update')) {
+    $_lib['storage']->update($_lib['input']->get_data());
+}
 elseif($_lib['input']->getProperty('action_bank_update')) {
     #print_r($_input->get_data());
 

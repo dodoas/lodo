@@ -3,6 +3,8 @@
 # Based on EasyComposer technology
 # Copyright Thomas Ekdahl, 1994-2005, thomas@ekdahl.no, http://www.ekdahl.no
 
+include('record.inc');
+
 $query_account  = "select * from account order By Active desc, Sort asc";
 $result_account = $_lib['db']->db_query($query_account);
 
@@ -14,6 +16,10 @@ $ba = new model_bank_bankaccount(array());
     <title>Empatix - <? print $_lib['sess']->get_companydef('CompanyName') ?> : <? print $_lib['sess']->get_person('FirstName') ?> <? print $_lib['sess']->get_person('LastName') ?> - bankaccount list</title>
     <meta name="cvs"                content="$Id: list.php,v 1.24 2005/10/28 17:59:40 thomasek Exp $" />
     <? includeinc('head') ?>
+    <style>
+     table.lodo_data th { padding-left: 10px; }
+     table.lodo_data td { padding-left: 10px; }
+    </style>
 </head>
 
 <body>
@@ -26,16 +32,17 @@ $ba = new model_bank_bankaccount(array());
 <table class="lodo_data">
 <thead>
   <tr>
-    <th>Bankkonto</th>
     <th>Def periode</th>
-    <th>Type</th>
-    <th>Konto</th>
-    <th>Kontonavn</th>
+    <th>Bankkonto</th>
     <th>Banknavn</th>
+    <th>Kontonavn</th>
+    <th>Konto</th>
     <th>Eier</th>
     <th>Saldo</th>
-    <th>Til og med</th>
     <th>Aktiv</th>
+    <th>Type</th>
+    <th>Gyldig fra</th>
+    <th>Gyldig til</th>
     <th>Oppsett</th>
     <th>Import</th>
   </tr>
@@ -54,22 +61,34 @@ else
 	$TotalAmount += $Amount;
 ?>
     <tr class="<? print "$sec_color"; ?>">
+      <td>	
+        <form method="post" action="">
+        <? 
+           print $_lib['form3']->AccountPeriod_menu3(
+                array('table' => 'account', 'field' => 'DefaultPeriod',
+                        'pk' => $row->AccountID, 'value' => $Period, 
+                        'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 
+                        'required'=> false));
+        ?>	
+	<input type="submit" value="Lagre" name="action_period_update">
+        </form>
+      </td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=bank.tabbankaccount&amp;AccountID=<? print $row->AccountID ?>&amp;Period=<? print $row->DefaultPeriod ?>"><? print $row->AccountNumber ?></a></td>
-      <td><? print $Period ?></td>
-      <td><? print $row->VoucherType ?></td>
-      <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.hovedbok&amp;accountplan_AccountPlanID=<? print $row->AccountPlanID ?>&amp;Period=<? print $row->DefaultPeriod ?>"><? print $row->AccountPlanID ?></a></td>
-      <td><a href="<? print $_lib['sess']->dispatch ?>t=bank.tabbankaccount&amp;AccountID=<? print $row->AccountID ?>&amp;Period=<? print $row->DefaultPeriod ?>"><? print $row->AccountDescription ?></a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=bank.tabbankaccount&amp;AccountID=<? print $row->AccountID ?>&amp;Period=<? print $row->DefaultPeriod ?>"><? print $row->BankName ?></a></td>
+      <td><a href="<? print $_lib['sess']->dispatch ?>t=bank.tabbankaccount&amp;AccountID=<? print $row->AccountID ?>&amp;Period=<? print $row->DefaultPeriod ?>"><? print $row->AccountDescription ?></a></td>
+      <td><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.hovedbok&amp;accountplan_AccountPlanID=<? print $row->AccountPlanID ?>&amp;Period=<? print $row->DefaultPeriod ?>"><? print $row->AccountPlanID ?></a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=bank.tabbankaccount&amp;AccountID=<? print $row->AccountID ?>&amp;Period=<? print $row->DefaultPeriod ?>"><? print $row->OwnerName ?></a></td>
       <td class="number"><? print $_lib['format']->Amount($Amount) ?></td>
-      <td class="number"><? print $LastPeriod ?></td>
       <td><? if($row->Active)    { print "Aktiv"; }; ?></td>
+      <td><? print $row->VoucherType ?></td>
+      <td><? print $row->ValidFrom ?></td>
+      <td><? print $row->ValidTo ?></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=bank.template&amp;AccountID=<? print $row->AccountID ?>">Endre</a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=bank.import&amp;AccountID=<? print $row->AccountID ?>">Import</a></td>
     </tr>
 <? } ?>
   <tr>
-    <td colspan="6"></td>
+    <td colspan="5"></td>
     <td><b>Sum</b></td>
   	<td><b><? print $_lib['format']->Amount($TotalAmount) ?><b></td>
   </tr>
