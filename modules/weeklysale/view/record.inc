@@ -476,6 +476,18 @@ function update_weeklysale($post, $pk){
   
     if($JournalID != $oldID)
       $_lib['message']->add(array('message' => "Bilagsnr finnes allerede, du ble tildelt et nytt"));
+
+    /*
+     * In addition to checking if a record in the Voucher table is using $JournalID we must check 
+     * if an existing weeklysale has already asked to use the $JournalID and in that 
+     * case return, and not update. In the future, if we should find the next available $JournalID
+     * based on a search in both Voucher and weeklysale tables instead.
+     */
+    $duplicates = $_lib['db']->db_query("SELECT WeeklySaleID FROM weeklysale WHERE JournalID = ".$JournalID." AND WeeklySaleID != " . $post['WeeklySaleID'] . " AND VoucherType = '" . $VoucherType . "'");
+    if($_lib['db']->db_numrows($duplicates) >= 1) {
+        printf('Ikke oppdater ukeomsetning siden det allerede finnes en ukeomsetning med bilagsnummer %d.', $JournalID);
+        return false;
+    }
   
     #Possible to extend or alter parameters here
     $tables['weeklysale']     = 'WeeklySaleID';
