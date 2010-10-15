@@ -119,16 +119,16 @@ $db_sum   = $row->sum;
 <tr>
     <td>
         <form name="invoicerecurring_list" action="<? print $_lib['sess']->dispatch ?>t=invoicerecurring.list" method="post">
-        S&oslash;k:   <input type="text" value="<? print $searchstring ?>" name="searchstring" size="10"/>
+        Kundenavn:   <input type="text" value="<? print $searchstring ?>" name="searchstring" size="10"/>
+        Fakturanummer: <? print $_lib['form3']->text(array('name' => 'RecurringID',   'value' => $RecurringID)) ?>
         Fra:    <? print $_lib['form3']->date(array('name' => 'FromDate',           'value' => $FromDate)) ?>
         Til:    <? print $_lib['form3']->date(array('name' => 'ToDate',             'value' => $ToDate)) ?>
-        Fakturanummer: <? print $_lib['form3']->text(array('name' => 'RecurringID',   'value' => $RecurringID)) ?>
         <? print $_lib['form3']->submit(array('name' => 'show_search',   'value' => 'S&oslash;k (S)')) ?>
         </form>
         <form name="invoicerecurring_edit" action="<? print $_lib['sess']->dispatch ?>t=invoicerecurring.edit" method="post">
         <input type="hidden" value="edit" name="inline">
         <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
-        <input type="submit" value="Ny faktura (N)" name="action_invoicerecurring_new" accesskey="N">
+        <input type="submit" value="Ny repeterende faktura (N)" name="action_invoicerecurring_new" accesskey="N">
         <? } ?>
         </form>
 	</td>
@@ -157,6 +157,8 @@ $db_sum   = $row->sum;
 <tr>
     <th align="right">Rep. faktura</th>
     <th align="right">Interval</th>
+    <th align="right">Utskriftsdato</th>
+    <th align="right">Sluttdato</th>
     <!--<th>OrdreRef-->
     <th align="right">Kunde nr</th>
     <th>Firmanavn</th>
@@ -194,12 +196,15 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
 
     if($interval != '')
     {
-        $interval_sql = "SELECT DATE_ADD(LastDate, INTERVAL " . $recurring_intervals[ $interval_row->TimeInterval ][1] . ") as NextDate, LastDate
+        $interval_sql = "SELECT DATE_ADD(LastDate, INTERVAL " . $recurring_intervals[ $interval_row->TimeInterval ][1] . ") as NextDate, LastDate,
+				PrintInterval, EndDate
   			FROM recurring 
   			WHERE RecurringID = " . $row->RecurringID;
         $interval_row2 = $_lib['db']->get_row(array('query' => $interval_sql));
         $nextDate = $interval_row2->NextDate;
         $lastDate = $interval_row2->LastDate;
+        $endDate  = $interval_row2->EndDate;
+        $printInterval = $interval_row2->PrintInterval;
         
         if($lastDate == "0000-00-00")
         {
@@ -219,6 +224,8 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
     {
         $nextDate = "N/A";
         $lastDate = "N/A";
+        $endDate  = "N/A";
+        $printInterval = "N/A";
     }
   ?>
   <form name="invoice" action="<? print $MY_SELF ?>" method="post">
@@ -228,6 +235,8 @@ title="Vis/Endre faktura informasjon"><? print $row->RecurringID ?></a></td>
 <!--      <td class="number"><? print substr($row->InvoiceDate,0,10) ?></td>
       <td class="number"><? print $row->Period ?></td> -->
       <td class="center"><? echo $interval; ?></td>
+      <td class="center"><? echo $printInterval; ?></td>
+      <td class="center"><? echo $endDate; ?></td>
       <!--<td><? print $row->OrderRef; ?>-->
       <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&accountplan.AccountPlanID=<? print $row->CustomerAccountPlanID ?>&inline=show"><? print $row->CustomerAccountPlanID ?></a></td></td>
       <td>&nbsp;<a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&accountplan.AccountPlanID=<? print $row->CustomerAccountPlanID ?>&inline=show"><? print substr($row->IName,0,30) ?></a></td>
