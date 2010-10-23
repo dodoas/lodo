@@ -461,7 +461,7 @@ class lodo_fakturabank_fakturabank {
                 
                     foreach($InvoiceO->InvoiceLine as &$line) {
                     
-                        if($line->TaxTotal->TaxSubtotal[0]->TaxableAmount > 0) {
+                        if($line->TaxTotal->TaxSubtotal[0]->TaxableAmount != 0) {
                             #It has to be an amount to be checked - all zero lines will not be imported later.
                             $query          = "select * from product where ProductNumber='" . $line->Item->SellersItemIdentification->ID . "' and Active=1";
                             #print "$query<br>\n";
