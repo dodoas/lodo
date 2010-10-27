@@ -1386,7 +1386,7 @@ class lodo_fakturabank_fakturabank {
 
         #print_r($InvoiceH);
 
-        $xml = $this->hash_to_xml($InvoiceO);
+        $xml = utf8_encode($this->hash_to_xml($InvoiceO));
         #$_lib['message']->add("FB->write1()");
         
         #print "<br>\n<br>\n$xml\n<br>\n<br>";
