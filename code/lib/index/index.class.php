@@ -222,6 +222,11 @@ $_lib['setup']     = new framework_lib_setup(array());
 
 require_once($_SETUP['HOME_DIR'] . "/code/lib/security/security.class.php");
 
+#
+# TODO: HVOR BØR DENNE LIGGE - martin 
+#
+require_once($_SETUP['HOME_DIR'] . "/modules/timesheets/model/login.php");
+
 #Dynamic language negotiation
 #if(!$lang) {
 #  $pri_language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0,2);
@@ -317,7 +322,7 @@ elseif(!$_template and $args[0] != 'lib')
 
 #Cust is the flag for customized code. It is found on RoleTemplate but not retrieved yet.
 
-#print "Inkluderer: " . $include."<br>";
+# print "Inkluderer: " . $include."<br>";
 if(!$include)
 {
     if($args[0] == 'lib')
@@ -382,7 +387,7 @@ elseif(file_exists($include) == false)
     #exit;
 }
 
-#print "$include<br>";
+# print "$include<br>";
 $aclev = $_lib['sess']->check_roletemplate($_SETUP['ACTIVE_INTERFACE'], $args[0], $args[1]);
 
 if($aclev >= 1 or (!$_SETUP['SECURITY']['ROLE'] and $_lib['sess']->login_id > 0))
