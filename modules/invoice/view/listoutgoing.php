@@ -98,7 +98,7 @@ $db_sum   = $row->sum;
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
-<h2><a href="<? print $_lib['sess']->dispatch ?>t=invoice.listoutgoing">Faktura - Liste</a> / <a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.listoutgoing">Hent utg&aring;ende fakturaer fra fakturabank</a></h2>
+<h2><a href="<? print $_lib['sess']->dispatch ?>t=invoice.listoutgoing">Faktura - Liste</a> <? if($_lib['sess']->get_person('FakturabankImportInvoiceAccess')) { ?> / <a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.listoutgoing">Hent utg&aring;ende fakturaer fra fakturabank</a></h2> <? } ?>
 <? if($_lib['message']->get()) { ?>
     <div class="red error"><? print $_lib['message']->get() ?></div>
 <? } ?>

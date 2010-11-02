@@ -29,7 +29,8 @@ print $_lib['sess']->doctype; ?>
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
-<h2><a href="<? print $_lib['sess']->dispatch ?>t=invoicein.list">Innkommende fakturaer</a> / <a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.listincoming">Fakturabank</a></h2>
+<h2><a href="<? print $_lib['sess']->dispatch ?>t=invoicein.list">Innkommende fakturaer</a> 
+<? if($_lib['sess']->get_person('FakturabankImportInvoiceAccess')) { ?> / <a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.listincoming">Fakturabank</a></h2> <? } ?>
 <? if($_lib['message']->get()) { ?>
     <div class="red error"><? print $_lib['message']->get() ?></div>
 <? } ?>
@@ -40,7 +41,6 @@ print $_lib['sess']->doctype; ?>
 <li>Fakturaer som blir registrert her kan bli automatisk bilagsf&oslash;rt.</li>
 <li>Grensesnittet for &aring; registrere fakturaer her er enklere enn bilagsgrensesnittet.</li>
 </ul>
-
 <form name="invoice_edit" action="<? print $_lib['sess']->dispatch ?>t=invoicein.list" method="post">
 <input type="submit" value="Ny innkommende faktura (N)" name="action_invoicein_add" accesskey="N">
 </form>

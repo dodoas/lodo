@@ -157,6 +157,20 @@ $person = $_lib['storage']->get_row(array('query' => $query));
         <td class="BGColorDark">Passord</td>
         <td><input type="password" name="<? print $db_table ?>.FakturabankPassword" value="<? print $person->FakturabankPassword ?>" size="24" tabindex="26"></td>
     </tr>
+        <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
+    <tr>
+        <td class="BGColorDark">Tilgang til import av faktura</td>
+        <td><? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'FakturabankImportInvoiceAccess', 'value'=>$person->FakturabankImportInvoiceAccess, 'tabindex'=>'27')) ?></td>
+        <td class="BGColorDark">Tilgang til eksport av faktura</td>
+        <td><? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'FakturabankExportInvoiceAccess', 'value'=>$person->FakturabankExportInvoiceAccess, 'tabindex'=>'28')) ?></td>
+    </tr>
+    <tr>
+        <td class="BGColorDark">Tilgang til import av banktransaksjoner</td>
+        <td><? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'FakturabankImportBankTransactionAccess', 'value'=>$person->FakturabankImportBankTransactionAccess, 'tabindex'=>'29')) ?></td>
+        <td class="BGColorDark"></td>
+        <td></td>
+    </tr>
+         <? } ?>
     <tr>
         <td align="left" valign="top" class="BGColorDark">Info</td>
         <td colspan="3"><textarea name="<? print $db_table ?>.Notes" cols="80" rows="6" tabindex="30"><? print $person->Notes ?></textarea></td>
