@@ -1188,7 +1188,7 @@ class lodo_fakturabank_fakturabank {
         ############################################################################################
         $paymentmeans = $doc->createElement('cac:PaymentMeans');
     
-            $cbc = $doc->createElement('cbc:PaymentMeansCode', $InvoiceO->PaymentMeans->PaymentMeansCode);
+        $cbc = $doc->createElement('cbc:PaymentMeansCode', $InvoiceO->PaymentMeans->PaymentMeansCode);
             $cbc->setAttribute('listSchemeURI', 'urn:www.nesubl.eu:codelist:gc:PaymentMeansCode:2007.1');
             $cbc->setAttribute('listID', 'Payment Means');
             $paymentmeans->appendChild($cbc);
@@ -1417,7 +1417,7 @@ class lodo_fakturabank_fakturabank {
         // Apply the XML to our curl call
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $xml); 
-        
+
         $data = curl_exec($ch); 
         #$_lib['message']->add("FB->write()->exec()");
         

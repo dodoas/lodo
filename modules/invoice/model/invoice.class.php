@@ -794,6 +794,10 @@ class invoice {
         $this->invoiceO->PaymentMeans->PayeeFinancialAccount->ID    = $supplier->BankAccount;
         $this->invoiceO->PaymentMeans->PayeeFinancialAccount->Name  = 'Bank';
 
+        if (!empty($invoice->KID)) {
+            $this->invoiceO->PaymentMeans->InstructionID = $invoice->KID;
+            $this->invoiceO->PaymentMeans->InstructionNote = "KID";
+        }
         ############################################################################################
         $query_invoiceline      = "select il.*, p.UNSPSC, p.EAN from invoiceoutline as il, product as p where il.InvoiceID='" . (int) $this->InvoiceID . "' and il.ProductID=p.ProductID and il.Active <> 0 order by il.LineID asc";
         #print "$query_invoiceline\n";
