@@ -291,10 +291,17 @@ class invoice {
         $this->set_head($args);
         $this->set_line(array('Active' => 1));
 
-        /* create the invoiceoutprint row */    
-        $s = sprintf("INSERT INTO invoiceoutprint (`InvoiceID`, `InvoicePrintDate`) VALUES ('%d', '0000-00-00');", 
-                     $args['InvoiceID']); 
-        $_lib['db']->db_query($s);
+
+        // Check if entry already exists in invoiceoutprint table (might be the case for an "unsaved") invoice.
+        $query_invprint = "select * from invoiceoutprint where InvoiceID='" . $args['InvoiceID'] . "'";
+        $result2 = $_lib['db']->db_query($query_invprint);
+        if (!$result2 || !($row = $_lib['db']->db_fetch_assoc($result2))) {
+            /* create the invoiceoutprint row */    
+            $s = sprintf("INSERT INTO invoiceoutprint (`InvoiceID`, `InvoicePrintDate`) VALUES ('%d', '0000-00-00');", 
+                         $args['InvoiceID']); 
+            $_lib['db']->db_query($s);
+
+        }
 
         $this->make_invoice();
         return $args['InvoiceID'];
