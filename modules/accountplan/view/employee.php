@@ -13,8 +13,16 @@ require_once "record.inc";
 $query   = "select * from $db_table where AccountPlanID = " . $AccountPlanID;
 $account = $_lib['storage']->get_row(array('query' => $query));
 
+$password_query = "SELECT * FROM timesheetpasswords WHERE AccountPlanID = " .
+					$AccountPlanID;
+$password = $_lib['db']->get_row(array('query' => $password_query));
+
+
 if($account->AccountPlanType)
     $AccountPlanType = $account->AccountPlanType;
+
+$fakturabankemail_query = "select * from fakturabankemail where AccountPlanID = " . $AccountPlanID;
+$fakturabankemail = $_lib['storage']->get_row(array('query' => $fakturabankemail_query));
 
 print $_lib['sess']->doctype ?>
 
@@ -41,6 +49,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
 <table class="lodo_data">
 <form name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=accountplan.employee" method="post">
 <input type="hidden" name="accountplan_AccountPlanID" value="<? print $AccountPlanID ?>">
+<input type="hidden" name="fakturabankemail_AccountPlanID" value="<? print $AccountPlanID ?>">
 <input type="hidden" name="JournalID" value="<? print $JournalID ?>">
   <tr class="result">
     <th colspan="5">Ansatt <? print $AccountPlanID ?> (underkonto til hovedbok)</th>
@@ -55,7 +64,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
   <tr>
     <td class="menu">Navn</td>
     <td></td>
-    <td><input type="text" name="accountplan.AccountName" value="<? print $account->AccountName  ?>" size="20"></td>
+    <td><input class="lodoreqfelt" type="text" name="accountplan.AccountName" value="<? print $account->AccountName  ?>" size="20"></td>
     <td></td>
     <td></td>
   </tr>
@@ -63,14 +72,14 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
   <tr>
     <td class="menu">Adresse</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableInvoiceAddress", $account->EnableInvoiceAddress,'') ?></td>
-    <td><input type="text" name="accountplan.Address" value="<? print $account->Address  ?>" size="20"></td>
+    <td><input class="lodoreqfelt" type="text" name="accountplan.Address" value="<? print $account->Address  ?>" size="20"></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
     <td class="menu">Postnummer</td>
     <td></td>
-    <td><input type="text" name="accountplan.ZipCode" value="<? print $account->ZipCode  ?>" size="4"></td><td>Poststed</td><td><input type="text" name="accountplan.City" value="<? print $account->City  ?>" size="20">
+    <td><input class="lodoreqfelt" type="text" name="accountplan.ZipCode" value="<? print $account->ZipCode  ?>" size="4"></td><td>Poststed</td><td><input class="lodoreqfelt" type="text" name="accountplan.City" value="<? print $account->City  ?>" size="20">
     </td>
   </tr>
   <tr>
@@ -101,11 +110,18 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td><input type="text" name="accountplan.Mobile" value="<? print $account->Mobile  ?>" size="20"></td>
   </tr>
   <tr>
-    <td class="menu">E-Post</td>
+    <td class="menu">E-Post privat</td>
     <td></td>
-    <td><input type="text" name="accountplan.Email" value="<? print $account->Email  ?>" size="20"></td>
+    <td><input class="lodoreqfelt" type="text" name="accountplan.Email" value="<? print $account->Email  ?>" size="20"></td>
     <td></td>
     <td></td>
+  </tr>
+  <tr>
+    <td class="menu">E-Post fakturabank</td>
+    <td></td>
+    <td><input type="text" name="fakturabankemail.Email" value="<? print $fakturabankemail->Email  ?>" size="20"></td>
+    <td></td>
+    <td></td>    
   </tr>
   <tr>
     <td class="menu">Tekst informasjon</td>
@@ -118,14 +134,18 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
   <tr>
     <td class="menu">Bank kontonummer</td>
     <td></td>
-    <td><input type="text" name="accountplan.DomesticBankAccount" value="<? print $account->DomesticBankAccount  ?>" size="20"></td>
+    <td><input class="lodoreqfelt" type="text" name="accountplan.DomesticBankAccount" value="<? print $account->DomesticBankAccount  ?>" size="20"></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
     <td class="menu">Kreditt tid</td>
-    <td><? $_lib['form2']->checkbox2($db_table, "EnableCredit", $account->EnableCredit,''); ?> </td>
-    <td><input type="text" name="accountplan.CreditDays" value="<? print $account->CreditDays ?>" size="4" class="number">Dager</td>
+    <td>
+     <input type="hidden" name="accountplan.EnableCredit" value="1"/>
+<? /* $_lib['form2']->checkbox2($db_table, "EnableCredit", $account->EnableCredit,''); */ ?> 
+
+</td>
+    <td><input class="lodoreqfelt" type="text" name="accountplan.CreditDays" value="<? print $account->CreditDays ?>" size="4" class="number">Dager</td>
   </tr>
   <tr>
     <td class="menu">Avdeling</td>
@@ -158,44 +178,58 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
   <tr>
     <td class="menu">F&oslash;dselsdag</td>
     <td></td>
-    <td colspan="3"><? print $_lib['form3']->date(array('table'=>$db_table, 'field'=>'BirthDate', 'value'=>$account->BirthDate)) ?> (Brukes for beregning av arbeidsgiveravgift over/under 62 &aring;r)</td>
+    <td colspan="3"><? print $_lib['form3']->date(array('table'=>$db_table, 'field'=>'BirthDate', 'value'=>$account->BirthDate, 'class'=>'lodoreqfelt')) ?> (Brukes for beregning av arbeidsgiveravgift over/under 62 &aring;r)</td>
   </tr>
   <tr>
     <td class="menu">Personnr</td>
     <td></td>
-    <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'SocietyNumber', 'value'=>$account->SocietyNumber)) ?></td>
+    <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'SocietyNumber', 'value'=>$account->SocietyNumber, 'class'=>'lodoreqfelt')) ?></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
     <td class="menu">Kommune</td>
     <td></td>
-    <td><? print $_lib['form3']->kommune_menu(array('table'=>$db_table, 'field'=>'KommuneID', 'value'=>$account->KommuneID)) ?></td>
+    <td><? print $_lib['form3']->kommune_menu(array('table'=>$db_table, 'field'=>'KommuneID', 'value'=>$account->KommuneID, 'class'=>'lodoreqfelt')) ?></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
     <td class="menu">Tabelltrekk:</td>
     <td></td>
-    <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'TabellTrekk', 'value'=>$account->TabellTrekk)) ?></td>
+    <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'TabellTrekk', 'value'=>$account->TabellTrekk, 'class'=>'lodoreqfelt')) ?></td>
     <td>Prosenttrekk:</td>
-    <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'ProsentTrekk', 'value'=>$account->ProsentTrekk)) ?></td>
+    <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'ProsentTrekk', 'value'=>$account->ProsentTrekk, 'class'=>'lodoreqfelt')) ?></td>
     </td>
   </tr>
   <tr>
     <td class="menu">Arbeid start</td>
     <td></td>
-    <td><? print $_lib['form3']->date(array('table'=>$db_table, 'field'=>'WorkStart', 'value'=>$account->WorkStart)) ?></td>
+    <td><? print $_lib['form3']->date(array('table'=>$db_table, 'field'=>'WorkStart', 'value'=>$account->WorkStart, 'class'=>'lodoreqfelt')) ?></td>
     <td>Arbeid slutt</td>
-    <td><? print $_lib['form3']->date(array('table'=>$db_table, 'field'=>'WorkStop', 'value'=>$account->WorkStop)) ?></td>
+    <td><? print $_lib['form3']->date(array('table'=>$db_table, 'field'=>'WorkStop', 'value'=>$account->WorkStop, 'class'=>'lodoreqfelt')) ?></td>
   </tr>
   <tr>
     <td class="menu">Stillingsprosent</td>
     <td></td>
-    <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'WorkPercent', 'value'=>$account->WorkPercent)) ?></td>
+    <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'WorkPercent', 'value'=>$account->WorkPercent, 'class'=>'lodoreqfelt')) ?></td>
     <td></td>
     <td></td>
   </tr>
+
+  <tr class="result">
+    <th colspan="5">Timeliste</th>
+  </tr>
+  <tr>
+    <td class="menu">Passord</td> <td></td>
+    <td><input type="text" name="timesheetpasswords.Password" value="<?= $password->Password ?>" /></td>
+  </tr>
+  <tr>
+    <td class="menu">Oversikt</td> <td></td>
+    <td><a href="<? print $_SETUP['DISPATCH'] ?>t=timesheets.list&AccountPlanID=<?= $AccountPlanID ?>&Username=<?= $account->AccountName ?>">Vis oversikt</a></td>
+  </tr>
+  
+
   <tr class="result">
     <th colspan="5">Logg</th>
   </tr>
@@ -228,6 +262,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     </td>
     </form>
   </tr>
+
   <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
   <tr>
     <td colspan="2" align="right">
@@ -240,6 +275,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
         </form>
     </td>
   </tr>
+
   <? } ?>
 </table>
 </form>
