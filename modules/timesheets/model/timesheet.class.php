@@ -39,7 +39,7 @@ class timesheet_user
         if(get_magic_quotes_gpc())
             $str = stripslashes($str);
         
-        return mysql_real_escape_string($str);
+        return mysql_escape_string($str);
     }
 
     private function login()
