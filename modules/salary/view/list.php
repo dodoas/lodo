@@ -48,7 +48,7 @@ $query_conf     = "select * from salaryconf as S, accountplan as A, kommune as K
 $result_conf    = $_lib['db']->db_query($query_conf);
 
 
-$period_open = ($accounting->is_valid_accountperiod($setup['salarydefvoucherdate'], $_lib['sess']->get_person('AccessLevel'))) ? true : false;
+$period_open = ($accounting->is_valid_accountperiod($setup['salarydefvoucherperiod'], $_lib['sess']->get_person('AccessLevel'))) ? true : false;
 
 
 print $_lib['sess']->doctype;
@@ -64,6 +64,7 @@ print $_lib['sess']->doctype;
 function changemonth()
 {
         var voucherdate = document.getElementById('setup.value.salarydefvoucherdate');
+        var voucherperiod = document.getElementById('setup.value.salarydefvoucherperiod');
 	var fromdate = document.getElementById('setup.value.salarydeffromdate');
 	var todate   = document.getElementById('setup.value.salarydeftodate');
 	var select   = document.getElementById('month');
@@ -87,9 +88,10 @@ function changemonth()
 			monthlength += 1;
 	}
 
-        voucherdate.value = "" + year + "-" + selectedmonth;
-	fromdate.value = voucherdate.value + "-01";
-	todate.value = voucherdate.value + "-" + monthlength;
+        voucherdate.value = "" + year + "-" + selectedmonth + "-01";
+        voucherperiod.value = "" + year + "-" + selectedmonth;
+	fromdate.value = voucherperiod.value + "-01";
+	todate.value = voucherperiod.value + "-" + monthlength;
 }
     </script>
 </head>
@@ -105,6 +107,7 @@ function changemonth()
     <tr>
         <th class="sub">M&aring;ned</th>
         <th class="sub">Bilagsdato</th>
+        <th class="sub">Periode</th>
         <th class="sub">Fra dato</th>
         <th class="sub">Til dato</th>
         <th class="sub"></th>
@@ -130,7 +133,9 @@ function changemonth()
 	    printf("</select>");
 	?>
         </td>
+        
         <td><? print $_lib['form3']->text(array('table'=>'setup.value', 'field'=>'salarydefvoucherdate', 'value'=>$setup['salarydefvoucherdate'], 'width'=>'10')) ?></td>
+        <td><? print $_lib['form3']->text(array('table'=>'setup.value', 'field'=>'salarydefvoucherperiod', 'value'=>$setup['salarydefvoucherperiod'], 'width'=>'10')) ?></td>
         <td><? print $_lib['form3']->text(array('table'=>'setup.value', 'field'=>'salarydeffromdate', 'value'=>$setup['salarydeffromdate'], 'width'=>'10')) ?></td>
         <td><? print $_lib['form3']->text(array('table'=>'setup.value', 'field'=>'salarydeftodate', 'value'=>$setup['salarydeftodate'], 'width'=>'10')) ?></td>
         <td>
@@ -202,7 +207,7 @@ function worker_line($row, $i) {
 
       <td style="background-color: #FFB600">
       <?
-      if($_lib['sess']->get_person('AccessLevel') >= 2 && $accounting->is_valid_accountperiod($setup['salarydefvoucherdate'], $_lib['sess']->get_person('AccessLevel')))
+      if($_lib['sess']->get_person('AccessLevel') >= 2 && $accounting->is_valid_accountperiod($setup['salarydefvoucherperiod'], $_lib['sess']->get_person('AccessLevel')))
       {
         if($row->SalaryConfID != 1 && $checked)
         {

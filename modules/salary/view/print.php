@@ -21,6 +21,20 @@ $head           = $_lib['db']->db_fetch_object($result_head);
 
 $query_salary   = "select * from salaryline where SalaryID = '$SalaryID' order by LineNumber asc";
 $result_salary  = $_lib['db']->db_query($query_salary);
+
+$project_query = "select * from project";
+$project_result = $_lib['db']->db_query($project_query);
+$projects = array();
+while( $project_line = $_lib['db']->db_fetch_assoc($project_result))
+	$projects[ $project_line['ProjectID'] ] = $project_line['Heading'];
+$projects[0] = "";
+
+$department_query = "select * from companydepartment";
+$department_result = $_lib['db']->db_query($department_query);
+$departments = array();
+while( $department_line = $_lib['db']->db_fetch_assoc($department_result))
+	$departments[ $department_line['CompanyDepartmentID'] ] = $department_line['DepartmentName'];
+$departments[0] = "";
 ?>
 
 <? print $_lib['sess']->doctype ?>
@@ -102,6 +116,12 @@ $result_salary  = $_lib['db']->db_query($query_salary);
     <td><label>Periode</label></td>
     <td><? print $head->Period ?></td>
   </tr>
+  <tr>
+    <td><label>Kommentar:</label></td>
+  </tr>
+  <tr>
+    <td colspan="4" style="font-family: arial"><?= nl2br($head->Comment) ?></td>
+  </tr>
 </table>
 <br>
 <table class="lodo_data">
@@ -157,8 +177,8 @@ $result_salary  = $_lib['db']->db_query($query_salary);
         $forige_linje = $line->LineNumber;
 ?></nobr></td>
         <td><? print $line->AccountPlanID ?></td>
-        <td><? print $line->DepartmentID ?></td>
-        <td><? print $line->ProjectID ?></td>
+        <td><?= $departments[$line->DepartmentID] ?></td>
+        <td><?= $projects[$line->ProjectID] ?></td>
       </tr>
       <?
   }

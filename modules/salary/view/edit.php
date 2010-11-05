@@ -242,6 +242,16 @@ $formname = "salaryUpdate";
   <td colspan="13">
 </tr>
 <tr>
+<th colspan="13">Kommentar</th>
+</tr>
+
+<tr>
+<td colspan="13">
+<textarea name="salary.Comment.<? print $head->SalaryID ?>" cols="100" rows="4"><?= $head->Comment  ?></textarea>
+</td>
+</tr>
+
+<tr>
     <td colspan="6"></td>
     <td colspan="5"></td>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.print&amp;SalaryID=<? print $SalaryID ?>" target="_new" />Vis</a></td>
