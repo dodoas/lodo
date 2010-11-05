@@ -37,7 +37,7 @@ class timesheet_user
     public function escape($str)
     {
         if(get_magic_quotes_gpc())
-            $str = strip_slashes($str);
+            $str = stripslashes($str);
         
         return mysql_real_escape_string($str);
     }
