@@ -27,7 +27,7 @@ class accountperiodcomment {
         $this->PeriodH  = $_lib['storage']->get_hash(array('key' => 'Period', 'value' => 'Period', 'query' => $query_periods));
         
         #X axis
-        $query_accounts = "select AccountID, concat(AccountPlanID, ' - ' ,AccountNumber, ' ' , AccountDescription) as AccountNumber from account where Active=1 order by Sort";
+        $query_accounts = "select AccountID, concat(AccountPlanID, ' - ' ,AccountNumber, ' - ' , BankName, ' - ', AccountDescription) as AccountNumber from account where Active=1 order by Sort";
         $this->AccountH = $_lib['storage']->get_hash(array('key' => 'AccountID', 'value' => 'AccountNumber', 'query' => $query_accounts));
     }
 }
