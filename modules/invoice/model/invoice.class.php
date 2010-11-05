@@ -781,6 +781,9 @@ class invoice {
 
         $this->invoiceO->AccountingCustomerParty->Party->WebsiteURI                     = $customer->URL;
         $this->invoiceO->AccountingCustomerParty->Party->PartyIdentification->ID        = preg_replace('/[^0-9]+/', '', $customer->OrgNumber);
+        if (empty($this->invoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) {
+            $this->invoiceO->AccountingCustomerParty->Party->PartyIdentification->CustomerID = $customer->AccountPlanID;
+        }
         $this->invoiceO->AccountingCustomerParty->Party->PartyName->Name                = $customer->AccountName;
         $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName      = $customer->Address;
         $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->BuildingNumber  = '';
