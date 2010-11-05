@@ -84,7 +84,7 @@ $topclass = 'topclass';
                   </td>
                 </tr>
                 <tr>
-                <td colspan="5"
+                <td colspan="5">
                     <div class="modulemenu">
                         <table>
                             <tr valign="top">
