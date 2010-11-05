@@ -24,7 +24,6 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
 
 
 
-    echo $r;
     #Check of this is a new and usaved account, if so - just create it
     $queryexist   = "select * from accountplan where AccountPlanID = $AccountPlanID";
     $accountexist = $_lib['storage']->get_row(array('query' => $queryexist));
