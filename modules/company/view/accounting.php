@@ -60,82 +60,6 @@ $result2 = $_lib['db']->db_query($query2);
     <td class="BGColorLight" colspan="3"><input type="text" name="company.PostAccount"  value="<? print $row->PostAccount ?>" size="70"></td>
   </tr>
   <tr>
-    <th colspan="4" class="menu">Regnskapskontoer (deprecated - vi bruker n&aring; metadata p&aring; kontoplanen for &aring; bestemme hva det er)</th>
-   </tr>
-   <tr>
-    <td class="BGColorDark">Ansatte</td>
-    <td class="BGColorLight">
-        <? if($_lib['sess']->get_person('AccessLevel') > 3) { ?>
-        <input type="text" name="company.AccountEmployeeFrom"   value="<? print $row->AccountEmployeeFrom ?>" size="14">
-        <input type="text" name="company.AccountEmployeeTo"     value="<? print $row->AccountEmployeeTo ?>" size="14">
-        <? } else {
-            print $row->AccountEmployeeFrom; ?> - <? print $row->AccountEmployeeTo; ?>
-        <? } ?></td>
-    <td class="BGColorDark"></td>
-    <td class="BGColorLight"></td>
-  </tr>
-  <tr>
-    We dont need this with metadata based accountplans
-    <td class="BGColorDark">Hovedbok balanse</td>
-    <td class="BGColorLight">
-        <? if($_lib['sess']->get_person('AccessLevel') > 3) { ?>
-        <input type="text" name="company.AccountHovedbokBalanseFrom"    value="<? print $row->AccountHovedbokBalanseFrom ?>" size="14">
-        <input type="text" name="company.AccountHovedbokBalanseTo"      value="<? print $row->AccountHovedbokBalanseTo ?>" size="14">
-        <? } else {
-            print $row->AccountHovedbokBalanseFrom ?> - <? print $row->AccountHovedbokBalanseTo ?>
-        <? } ?></td>
-    <td>Prosjekt starter fra 0 og oppover
-    <td>
-  </tr>
-  <tr>
-    <td class="BGColorDark">Hovedbok resultat
-    <td class="BGColorLight">
-        <? if($_lib['sess']->get_person('AccessLevel') > 3) { ?>
-        <input type="text" name="company.AccountHovedbokResultatFrom"   value="<? print $row->AccountHovedbokResultatFrom ?>" size="14">
-        <input type="text" name="company.AccountHovedbokResultatTo"     value="<? print $row->AccountHovedbokResultatTo ?>" size="14">
-        <? } else {
-            print $row->AccountHovedbokResultatFrom ?> - <? print $row->AccountHovedbokResultatTo ?>
-        <? } ?>
-    <td>Avdeling starter fra 0 og oppover</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td class="BGColorDark">Reskontro</td>
-    <td class="BGColorLight">
-      <?
-      if($_lib['sess']->get_person('AccessLevel') > 3)
-      {
-        ?>
-        <input type="text" name="company.AccountHovedbokReskontroFrom"   value="<? print $row->AccountHovedbokReskontroFrom ?>" size="14">
-        <input type="text" name="company.AccountHovedbokReskontroTo"     value="<? print $row->AccountHovedbokReskontroTo ?>" size="14">
-      <?
-      }
-      else
-      {
-        print $row->AccountHovedbokReskontroFrom." - ".$row->AccountHovedbokReskontroTo;
-      }
-      ?>
-    <td></td>
-    <td></td>
-   </tr>
-  <tr>
-    <td class="BGColorDark">Konto for timef&oslash;rings kunder</td>
-    <td class="BGColorLight" colspan="3"><input type="text" name="company.HourAccountPlanID"  value="<? print $row->HourAccountPlanID ?>" size="70"></td>
-  </tr>
-    <?
-    while($row2 = $_dbh[$_dsn]->db_fetch_object($result2))
-    {
-    ?>
-    <tr>
-      <td class="BGColorDark"><? print $row2->AccountPlanID." - ".$row2->AccountName ?></td>
-      <td class="BGColorLight"> <? print $row2->ReskontroAccountPlanType . " - " . $row2->ReskontroFromAccount . " - " . $row2->ReskontroToAccount; ?></td>
-      <td></td>
-      <td></td>
-    </tr>
-    <?
-    }
-    ?>
-  <tr>
     <th colspan="4" class="menu">Renter
   </tr>
   <tr>
@@ -164,7 +88,7 @@ $result2 = $_lib['db']->db_query($query2);
     <td class="BGColorLight"></td>
   </tr>
   <tr>
-    <th colspan="4" class="menu">Regnskap</th>
+    <th colspan="4" class="menu">Regnskap (F&oslash;rste ledig nummer)</th>
   </tr>
   <tr>
     <td class="BGColorDark">K Kassa bilagsnummer</td>
