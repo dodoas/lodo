@@ -9,10 +9,13 @@ $bankaccount    = new model_bank_bankaccount($_lib['input']->request);
 $bank           = new framework_logic_bank($_lib['input']->request);
 $accounting     = new accounting();
 
-
 require_once "record.inc";
 
 $bank->init(); #Read data
+
+$bankname = $_lib['db']->db_query("SELECT AccountName FROM accountplan WHERE AccountPlanID = " . $bank->AccountPlanID);
+$bankname = $_lib['db']->db_fetch_assoc($bankname);
+$bankname = $bankname['AccountName'];
 
 $_lib['form3']->Locked = $bank->bankvotingperiod->Locked;
 ?>
@@ -218,7 +221,7 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
         <b>Det er differanse mellom summen av tilbakef&oslash;rte + tilleggsf&oslash;rte bilag (<? print $bank->bankvotingperiod->topAmountSaldo ?>) og summen av transaksjoner p&aring; kto <? print $bank->AccountPlanID ?> (<? print $bank->voucher->saldo ?>) : <? print round($bank->bankvotingperiod->topAmountSaldo - $bank->voucher->saldo, 2) ?></b>
         <? } ?>
         </td>
-    <td colspan="6" class="sub"><b>Hovedbokskonto: <? print $bank->AccountPlanID ?></b></td>
+    <td colspan="6" class="sub"><b>Hovedbokskonto: <? print $bank->AccountPlanID ?>  - <?= $bankname ?></b></td>
 </tr>
   <tr>
     <td class="menu">Pri</td>
