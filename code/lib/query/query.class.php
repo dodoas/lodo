@@ -33,8 +33,8 @@ $_QUERY['form']['faqCategoryMenu']          = "select MenuValue, MenuChoice from
 
 $_QUERY['form']['MenuReportID']             = "select MenuValue, MenuChoice from confmenues where MenuName='MenuReportID' order by MenuChoice";
 $_QUERY['form']['VoucherDescriptionID']     = "select MenuID, MenuChoice from confmenues where MenuName='VoucherDescriptionID' order by MenuChoice";
-$_QUERY['form']['DebitColor']               = "select MenuValue, MenuChoice from confmenues where MenuName='DebitColor' and LanguageID='no' order by MenuChoice";
-$_QUERY['form']['CreditColor']              = "select MenuValue, MenuChoice from confmenues where MenuName='CreditColor' and LanguageID='no' order by MenuChoice";
+$_QUERY['form']['DebitColor']               = "select MenuValue, MenuChoice from confmenues where MenuName='DebitColor' order by MenuChoice";
+$_QUERY['form']['CreditColor']              = "select MenuValue, MenuChoice from confmenues where MenuName='CreditColor' order by MenuChoice";
 $_QUERY['form']['VoucherType']              = "select MenuValue, MenuChoice from confmenues where MenuName='VoucherType' order by MenuChoice";
 $_QUERY['form']['AccountPlanType']          = "select MenuValue, MenuChoice from confmenues where MenuName='AccountPlanType' order by MenuChoice";
 $_QUERY['form']['VoucherSearchType']        = "select MenuValue, MenuChoice from confmenues where MenuName='VoucherSearchType' order by MenuChoice";
