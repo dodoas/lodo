@@ -24,12 +24,12 @@ elseif($_lib['input']->getProperty('action_project_new'))
 			$_lib['db']->db_insert2(array('query'=> $query));
 			$ProjectID = $_POST['project_ProjectID'];
         } else {
-       		$_message->add(array('message' => "ProsjektID er ikke oppgitt"));
+       		$_lib['message']->add(array('message' => "ProsjektID er ikke oppgitt"));
         }
     }
     else
     {
-    	$_message->add(array('message' => "Prosjektet fantes fra f¿r"));
+    	$_lib['message']->add(array('message' => "Prosjektet fantes fra f¿r"));
         $ProjectID=$_POST['project_ProjectID'];
     }
 }
