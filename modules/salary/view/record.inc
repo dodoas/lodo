@@ -167,7 +167,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
       $postmain['salary_ValidFrom']           = $fromDate;
       $postmain['salary_ValidTo']             = $toDate;
       $postmain['salary_JournalDate']         = $journalDate;
-      $postmain['salary_Period']              = $_lib['date']->get_this_period($journalDate);
+      $postmain['salary_Period']              = $setup['salarydefvoucherperiod'];  //$_lib['date']->get_this_period($journalDate);
 
       if($accountplan->EnableCredit == 1)
         $postmain['salary_PayDate']           = $_lib['date']->add_Days($journalDate, $accountplan->CreditDays);
