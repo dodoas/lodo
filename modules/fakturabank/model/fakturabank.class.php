@@ -1142,10 +1142,11 @@ class lodo_fakturabank_fakturabank {
                 $cacparty->appendChild($cbc);
             
                 $identification = $doc->createElement('cac:PartyIdentification');
-                    $cbc = $doc->createElement('cbc:ID', $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID);
                     if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID) && strlen(preg_replace('/[^0-9]/', '', $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) == 9) {
+                        $cbc = $doc->createElement('cbc:ID', $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID);
                         $cbc->setAttribute('schemeID', 'NO:ORGNR');
                     } else {
+                        $cbc = $doc->createElement('cbc:ID', $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->CustomerID);
                         $cbc->setAttribute('schemeID', 'FAKTURABANK:CUSTOMERNUMBER');
                     }
                     $identification->appendChild($cbc);
