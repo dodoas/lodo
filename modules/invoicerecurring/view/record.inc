@@ -29,7 +29,12 @@ elseif($_lib['input']->getProperty('action_invoicerecurring_outlinedelete')) {
 elseif($_lib['input']->getProperty('action_invoicerecurring_delete')) {
     $recurring->delete_invoice();
 
-    $header = "Location: http://".$_SERVER['HTTP_HOST'] . '/' . $_SETUP['DISPATCHR'] ."t=invoicerecurring.list&message=" . urlencode($_lib['message']->get());
+    if(isset($_SERVER['HTTPS']))
+        $protocol = "https";
+    else
+        $protocol = "http";
+
+    $header = "Location: ".$protocol."://".$_SERVER['HTTP_HOST'] . '/' . $_SETUP['DISPATCHR'] ."t=invoicerecurring.list&message=" . urlencode($_lib['message']->get());
     #print "$header<br>";
     #It is a problem that http host includes server port after the first deletion.
     header ($header);

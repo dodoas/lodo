@@ -43,7 +43,12 @@ elseif($_lib['input']->getProperty('action_invoice_outlinedelete')) {
 elseif($_lib['input']->getProperty('action_invoice_delete')) {
     $invoice->delete_invoice();
 
-    $header = "Location: http://".$_SERVER['HTTP_HOST'] . ':' . $_SERVER['SERVER_PORT'] . '/' . $_SETUP['DISPATCHR'] ."t=invoice.list&message=" . urlencode($_lib['message']->get());
+    if(isset($_SERVER['HTTPS']))
+        $protocol = "https";
+    else
+        $protocol = "http";
+
+    $header = "Location: ".$protocol."://".$_SERVER['HTTP_HOST'] . ':' . $_SERVER['SERVER_PORT'] . '/' . $_SETUP['DISPATCHR'] ."t=invoice.listoutgoing&message=" . urlencode($_lib['message']->get());
     #print "$header<br>";
     #It is a problem that http host includes server port after the first deletion.
     header ($header);
