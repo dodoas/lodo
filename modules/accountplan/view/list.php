@@ -212,6 +212,10 @@ while($row = $_lib['db']->db_fetch_object($result_plan))
 <?
 }
 ?>
+<p>
+ <a href="<? print $_lib['sess']->dispatch ?>&t=timesheets.list&tp=listprojects&period=2010-9">Vis timelisterapporter</a>
+</p>
+
 </body>
 </html>
 
