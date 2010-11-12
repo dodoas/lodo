@@ -256,11 +256,6 @@ title="Vis/Endre faktura informasjon"><? print $row->RecurringID ?></a></td>
   <?
 }
 ?>
-<tr>
-    <td colspan="9"></td>
-    <td class="number"><? print $TotalCustPrice ?></td>
-    <td></td>
-</tr>
 </tbody>
 
 </table>
