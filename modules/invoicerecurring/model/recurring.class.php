@@ -612,8 +612,8 @@ class recurring {
 	if($recurring["LastDate"] == "0000-00-00")
 	{
             $sql = sprintf("UPDATE recurring 
-					SET LastDate = DATE_SUB(StartDate - INTERVAL %s, INTERVAL %s)
-					WHERE RecurringID = %d", $interval, $printinterval, $recurring["RecurringID"]);
+					SET LastDate = StartDate - INTERVAL %s
+					WHERE RecurringID = %d", $interval, $recurring["RecurringID"]);
 
             $_lib['db']->db_query($sql);
 
@@ -639,11 +639,11 @@ class recurring {
 				SET LastDate = DATE_ADD(LastDate,  INTERVAL %s)
 			WHERE RecurringID = %d
 				AND DATEDIFF(DATE_SUB(DATE_ADD(LastDate, INTERVAL %s), INTERVAL %s), CURDATE()) <= 0
-				AND (EndDate = '0000-00-00' OR DATE_ADD(LastDate,  INTERVAL %s) < EndDate)
+				AND (EndDate = '0000-00-00' OR DATE_ADD(LastDate, INTERVAL %s) < EndDate)
 			",
                            $interval,
                            $recurring["RecurringID"],
-                           $interval, $printinterval, $printinterval
+                           $interval, $printinterval, $interval
 		);
             
             $r = $_lib['db']->db_query($sql);
@@ -859,9 +859,9 @@ class model_invoicerecurring_recurring
 
             /* check_and_send does not check if startDate is in the future. 
                This is done here to save a query. */
-            $r =  $_lib['db']->db_query("SELECT * FROM recurring WHERE StartDate <= NOW()") or die(mysql_error());
-            $recurring_array = array();
-
+            $r =  $_lib['db']->db_query("SELECT * FROM recurring WHERE DATE_SUB(StartDate, INTERVAL `PrintInterval` DAY) <= NOW()") 
+                           or die("ERROR: " . mysql_error());
+            $recurring_array = array();	
             while($row = $_lib['db']->db_fetch_assoc($r))
             {   
                 $recurring_array[] = $row;
