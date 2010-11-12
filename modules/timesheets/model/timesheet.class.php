@@ -301,6 +301,14 @@ class timesheet_user_page
         {
         case 'view':
             $this->view(); break;
+
+        case 'listprojects':
+            $this->listprojects(); break;
+        case 'listprojectperiods':
+            $this->listprojectperiods(); break;
+        case 'listprojectperiod':
+            $this->listprojectperiod(); break;
+
         case '':
         case 'index':
         default:
@@ -390,9 +398,12 @@ class timesheet_user_page
         $this->print_bottom();
     }
 
-    private function print_table($period, $fields, $array, $dest)
+    private function print_table($period, $fields, $array, $dest, $show_unlock = true)
     {
-        $locked = $this->user->is_period_locked($period);
+        if($period[0] == "_")
+            $locked = true;
+        else
+            $locked = $this->user->is_period_locked($period);
 
         printf(
             "<form action='%s' method='post'>" .
@@ -505,7 +516,7 @@ class timesheet_user_page
         if(!$locked)
             printf("<p><input type='submit' name='save' value='Lagre' /></p>");
         
-        if($this->user->is_admin())
+        if($show_unlock && $this->user->is_admin())
         {
             if($locked)
             {
@@ -659,5 +670,167 @@ class timesheet_user_page
         $this->print_table($period_name, $fields, $entries, $this->root . '&tp=view&period=' . $_REQUEST['period']);
 
         $this->print_bottom();
+    }
+
+    function listprojects()
+    {
+        global $_lib;
+
+        $projects  = $this->user->list_projects();        
+        
+        printf("<h2>Velg Prosjekt</h2>");
+        printf("<a href='javascript:history.go(-1)'>Tilbake</a><br />");
+        printf("<form action='%s' method='post'>\n", $this->root . "&tp=listprojectperiods");
+
+        printf("<select name='project'>\n");
+        foreach($projects as $k => $v)
+        {
+            printf("<option value='%s'>%s</option>\n", $k, $v);
+        }
+        printf("</select>");
+
+        printf("<input type='submit' value='Velg'>\n");
+        printf("</form>");
+    }
+
+    function listprojectperiods()
+    {
+        $project = $_POST["project"];
+        global $_lib;
+
+        if(!$this->user->is_admin())
+            return;
+
+        $sql = sprintf(
+            "SELECT CONCAT(YEAR(`date`), '-', MONTH(`date`)) as Period 
+               FROM timesheets 
+               WHERE SumTime > '00:00:00'
+               GROUP BY Period ORDER BY `date`"
+            );
+
+        $r = $_lib['db']->db_query($sql);
+
+        $periods = array();
+        while( $row = $_lib['db']->db_fetch_assoc($r) )
+        {
+            $periods[] = $row['Period'];
+        }
+
+        printf("<h2>Velge periode</h2>");
+        printf("<a href='javascript:history.go(-1)'>Tilbake</a>");
+
+        printf("<table>");
+        printf("<tr><td style='width: 100px;'><b>&Aring;r</b></td><td><b>M&aring;ned</b></td></tr>\n");
+
+        $lastyear = "nil";
+        foreach($periods as $k => $period)
+        {
+            list($year, $month) = explode("-", $period);
+
+            if($year != $lastyear)
+            {
+                $lastyear = $year;
+                $yeardata = $year;
+            }
+            else
+            {
+                $yeardata = "";
+            }
+
+            if($month < 10)
+                $month = "0$month";
+
+            printf("<tr><td>%s</td><td><a href='%s&tp=listprojectperiod&period=%s-%s&project=%d'>%s</a></td></tr>\n",
+                   $yeardata, $this->root, $year, $month, $project, $month);
+        }
+        printf("</table>");
+    }
+
+    function listprojectperiod()
+    {
+        global $_lib;
+        $period = $this->user->escape($_GET["period"]);
+        $project = $_GET["project"];
+
+        if(!$this->user->is_admin())
+            return;
+
+        printf("<h2>Oversikt over %s</h2>", $period);
+        printf("<a href='javascript:history.go(-1)'>Tilbake</a>");
+
+        if(strlen($period) == 7)
+        {        
+            $sql = sprintf(
+                   "SELECT t.*, a.AccountName
+                      FROM timesheets t, accountplan a
+                    WHERE
+                      t.Project = %d
+                      AND t.AccountPlanID = a.AccountPlanID
+                      AND Date >= '%s-01' AND Date <= '%s-01' + INTERVAL 1 MONTH
+                      AND SumTime > '00:00:00'
+                    ORDER BY t.Date, a.AccountName",
+                   $project, $period, $period);
+        }
+        else
+        {
+            $sql = sprintf(
+                   "SELECT t.*, a.AccountName
+                      FROM timesheets t, accountplan a
+                    WHERE
+                      t.Project = %d
+                      AND t.AccountPlanID = a.AccountPlanID
+                      AND Date = '%s'
+                      AND SumTime > '00:00:00'
+                    ORDER BY t.Date, a.AccountName",
+                   $project, $period);
+        }
+
+        $period = array();
+        $entries = array();
+
+        $r = $_lib['db']->db_query($sql);
+        while($row = $_lib['db']->db_fetch_assoc($r))
+        {
+            $period[] = $row; 
+        }
+
+        foreach($period as $entry)
+        {
+            list($year, $month, $day) = explode('-', $entry['Date']);
+
+            if(isset($_POST['del_line_' . $entry['EntryID']]))
+            {
+                $sql = sprintf(
+                    "DELETE FROM timesheets
+                       WHERE EntryID = %d LIMIT 1", $entry['EntryID']);
+
+                $_lib['db']->db_query($sql);
+
+            }
+            else
+            {
+                if(!isset($entries[$day]))
+                    $entries[$day] = array();
+                
+                $entry['Day'] = $day;
+                $entries[$day][] = $entry;
+            }
+        }
+
+        $worktypes = $this->user->list_worktypes();
+        $projects  = $this->user->list_projects();
+
+        $fields = array(
+            'Day'        => array('type' => 'caption', 'size' => '3'),
+            'BeginTime'  => array('type' => 'text', 'size' => '10', 'default' => '00:00:00'),
+            'EndTime'    => array('type' => 'text', 'size' => '10', 'default' => '00:00:00'),
+            'SumTime'    => array('type' => 'text', 'size' => '10', 'default' => '00:00:00'),
+            'Project'    => array('type' => 'select', 'options' => $projects, 'default' => 0),
+            'WorkType'   => array('type' => 'select', 'options' => $worktypes, 'default' => 0),
+            'Comment'    => array('type' => 'text', 'size' => '255', 'default' => ""),
+            'AccountName' => array('type' => 'text', 'size'=> '255', 'default' => "Unknown"),
+            );
+
+        $this->print_table("_" . $period, $fields, $entries, "", $false);
     }
 };
