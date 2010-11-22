@@ -73,6 +73,12 @@ if($searchstring){
 }
 
 $query = substr($query, 0, -4);
+
+# Work around to avoid mysql stall query because of double space before order statement
+if (substr($query, -1) == " ") {
+        $query = substr($query, 0, -1);
+}
+
 $query  .= " order by InvoiceID desc";
 
 #print "$query<br>\n";
