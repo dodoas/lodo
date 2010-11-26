@@ -416,6 +416,9 @@ class invoice {
         
         $headH['Status']              = "progress";
         $headH['Active']              = 1;
+        $headH['Locked']              = 0; // hard code to unlocked since this is a new invoice
+        $headH['FakturabankPersonID'] = 0; // hard code to nil since this is a new invoice
+        $headH['FakturabankDateTime'] = null; // hard code to nil since this is a new invoice
         $headH['CreatedDateTime']     = $_lib['sess']->get_session('Date');
         $headH['InvoiceDate']         = $_lib['sess']->get_session('LoginFormDate');
 
