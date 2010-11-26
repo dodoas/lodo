@@ -1141,46 +1141,55 @@ class lodo_fakturabank_fakturabank {
                 $cbc = $doc->createElement('cbc:WebsiteURI', $InvoiceO->AccountingCustomerParty->Party->WebsiteURI);
                 $cacparty->appendChild($cbc);
             
+                // Add customer nr
                 $identification = $doc->createElement('cac:PartyIdentification');
-                    if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID) && strlen(preg_replace('/[^0-9]/', '', $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) == 9) {
-                        $cbc = $doc->createElement('cbc:ID', $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID);
-                        $cbc->setAttribute('schemeID', 'NO:ORGNR');
-                    } else {
-                        $cbc = $doc->createElement('cbc:ID', $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->CustomerID);
-                        $cbc->setAttribute('schemeID', 'FAKTURABANK:CUSTOMERNUMBER');
-                    }
-                    $identification->appendChild($cbc);
+                $cbc = $doc->createElement('cbc:ID', $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->CustomerID);
+                $cbc->setAttribute('schemeID', 'FAKTURABANK:CUSTOMERNUMBER');
+                $identification->appendChild($cbc);
                 $cacparty->appendChild($identification);
 
                 $name = $doc->createElement('cac:PartyName');
-
-                    $cbc = $doc->createElement('cbc:Name', $InvoiceO->AccountingCustomerParty->Party->PartyName->Name);
-                    $name->appendChild($cbc);
-
+                $cbc = $doc->createElement('cbc:Name', $InvoiceO->AccountingCustomerParty->Party->PartyName->Name);
+                $name->appendChild($cbc);
                 $cacparty->appendChild($name);
-                
+
                 $adress = $doc->createElement('cac:PostalAddress');
                 
-                    $cbc = $doc->createElement('cbc:StreetName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName));
-                    $adress->appendChild($cbc);
-
-                    $cbc = $doc->createElement('cbc:BuildingNumber', $InvoiceO->AccountingCustomerParty->Party->PostalAddress->BuildingNumber);
-                    $adress->appendChild($cbc);
-    
-                    $cbc = $doc->createElement('cbc:CityName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->CityName));
-                    $adress->appendChild($cbc);
-    
-                    $cbc = $doc->createElement('cbc:PostalZone', $InvoiceO->AccountingCustomerParty->Party->PostalAddress->PostalZone);
-                    $adress->appendChild($cbc);
-    
-                    $country = $doc->createElement('cac:Country');
-
-                        $cbc = $doc->createElement('cbc:IdentificationCode', $InvoiceO->AccountingCustomerParty->Party->PostalAddress->Country->IdentificationCode);
-                        $country->appendChild($cbc);
-
-                    $adress->appendChild($country);
-
+                $cbc = $doc->createElement('cbc:StreetName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName));
+                $adress->appendChild($cbc);
+                
+                $cbc = $doc->createElement('cbc:BuildingNumber', $InvoiceO->AccountingCustomerParty->Party->PostalAddress->BuildingNumber);
+                $adress->appendChild($cbc);
+                
+                $cbc = $doc->createElement('cbc:CityName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->CityName));
+                $adress->appendChild($cbc);
+                
+                $cbc = $doc->createElement('cbc:PostalZone', $InvoiceO->AccountingCustomerParty->Party->PostalAddress->PostalZone);
+                $adress->appendChild($cbc);
+                
+                $country = $doc->createElement('cac:Country');
+                
+                $cbc = $doc->createElement('cbc:IdentificationCode', $InvoiceO->AccountingCustomerParty->Party->PostalAddress->Country->IdentificationCode);
+                $country->appendChild($cbc);
+                
+                $adress->appendChild($country);
+                
                 $cacparty->appendChild($adress);
+
+
+                if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)){ 
+                    if (strlen(preg_replace('/[^0-9]/', '', $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) == 9) { // has valid org nr, add it
+                        $legal_entity = $doc->createElement('cac:PartyLegalEntity');
+                        $cbc = $doc->createElement('cbc:CompanyID', $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID);
+                        $cbc->setAttribute('schemeID', 'NO:ORGNR');
+                        $legal_entity->appendChild($cbc);
+                        $cacparty->appendChild($legal_entity);
+                    } else {
+                        // Die with a message since we don't have time right now to properly handle this error (i.e. give user a direct link to edit customer).
+                        die("hash_to_xml::invalid orgnr. Organisasjonsnummeret " . $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID . " til " . $InvoiceO->AccountingCustomerParty->Party->PartyName->Name . " er ugyldig. Fakturaen ble ikke sent. Rett organisasjonsnummeret og send fakturaen en gang til.");
+                    }    
+                } 
+
             
             $customer->appendChild($cacparty);
 
@@ -1387,7 +1396,7 @@ class lodo_fakturabank_fakturabank {
 
         #print_r($InvoiceH);
 
-        $xml = utf8_encode($this->hash_to_xml($InvoiceO));
+        $xml = $this->hash_to_xml($InvoiceO);
         #$_lib['message']->add("FB->write1()");
         
         #print "<br>\n<br>\n$xml\n<br>\n<br>";
