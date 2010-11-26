@@ -1186,7 +1186,7 @@ class lodo_fakturabank_fakturabank {
                         $cacparty->appendChild($legal_entity);
                     } else {
                         // Die with a message since we don't have time right now to properly handle this error (i.e. give user a direct link to edit customer).
-                        die("hash_to_xml::invalid orgnr. Organisasjonsnummeret " . $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID . " til " . $InvoiceO->AccountingCustomerParty->Party->PartyName->Name . " er ugyldig. Fakturaen ble ikke sent. Rett organisasjonsnummeret og send fakturaen en gang til.");
+                        $_lib['message']->add("hash_to_xml::invalid orgnr. Organisasjonsnummeret " . $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID . " til " . $InvoiceO->AccountingCustomerParty->Party->PartyName->Name . " er ugyldig. Fakturaen ble likevel sendt med kundenr som id.");
                     }    
                 } 
 
