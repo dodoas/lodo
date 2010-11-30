@@ -66,6 +66,18 @@ function swap_checkbox(n) {
 	}
 }
 
+function set_period_cookies(setup_id) {
+    set_cookie('<?php echo $_SESSION['DB_NAME'] ?>_weeklysale_period_' + setup_id, 'init_periode_' + setup_id);
+    set_cookie_simple('<?php echo $_SESSION['DB_NAME'] ?>_weeklysale_init_date_' + setup_id, 'init_date_' + setup_id);
+}
+
+function set_cookie_simple(name, elid)
+{
+	var el = document.getElementById(elid);
+	var value = el.value;
+	createCookie(name, value, 1);
+}
+
 function set_cookie(name, elid)
 {
 	var el = document.getElementById(elid);
@@ -118,7 +130,7 @@ while($row = $_lib['db']->db_fetch_object($result_conf))
       <td>
         <? 
           $checked = ""; 
-          if(isset($_COOKIE['weeklysale_checkbox_' . $row->WeeklySaleConfID]))
+          if(isset($_COOKIE[$_SESSION['DB_NAME'] . '_weeklysale_checkbox_' . $row->WeeklySaleConfID]))
             $checked = "checked"; 
         ?>
         <input type="checkbox" id="checkbox_<?= $row->WeeklySaleConfID ?>" onclick="swap_checkbox('<?= $row->WeeklySaleConfID ?>')" <?= $checked ?>/>
@@ -141,13 +153,19 @@ while($row = $_lib['db']->db_fetch_object($result_conf))
         </select>
       </td>
       <td>
-        <input type="text" name="init_date" size="10" value="<?php echo date("Y-m-d", strtotime("sunday")) ?>" id="init_date">
+        <input type="text" id="init_date_<?php echo $row->WeeklySaleConfID ?>" name="init_date" size="10" value="<?php 
+if (empty($_COOKIE[$_SESSION['DB_NAME'] . '_weeklysale_init_date_' . $row->WeeklySaleConfID])) {
+echo date("Y-m-d", strtotime("sunday"));
+} else {
+echo $_COOKIE[$_SESSION['DB_NAME'] . '_weeklysale_init_date_' . $row->WeeklySaleConfID];
+}
+?>">
       </td>
       <td>
 	<?php
-	echo $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $_COOKIE['invoice_period'], 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => '', 'name' => 'init_periode', 'id' => 'init_periode_' . $row->WeeklySaleConfID));
+	echo $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $_COOKIE[$_SESSION['DB_NAME'] . '_weeklysale_period_' . $row->WeeklySaleConfID], 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => '', 'name' => 'init_periode', 'id' => 'init_periode_' . $row->WeeklySaleConfID));
 	?>
-        <input value="Lagre periode" type="button" onclick="set_cookie('invoice_period', 'init_periode_<? print $row->WeeklySaleConfID ?>')">
+        <input value="Lagre periode" type="button" onclick="set_period_cookies('<?php echo $row->WeeklySaleConfID ?>')">
       </td>
       <td>
         <input type="submit" value="Ny ukeomsetning">
