@@ -1149,7 +1149,7 @@ class lodo_fakturabank_fakturabank {
                 $cacparty->appendChild($identification);
 
                 $name = $doc->createElement('cac:PartyName');
-                $cbc = $doc->createElement('cbc:Name', $InvoiceO->AccountingCustomerParty->Party->PartyName->Name);
+                $cbc = $doc->createElement('cbc:Name', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PartyName->Name));
                 $name->appendChild($cbc);
                 $cacparty->appendChild($name);
 
