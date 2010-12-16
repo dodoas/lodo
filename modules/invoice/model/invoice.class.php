@@ -770,7 +770,7 @@ class invoice {
         $supplier               = $_lib['storage']->get_row(array('query' => $sql_supplier));
 
         $this->invoiceO->AccountingSupplierParty->Party->WebsiteURI                     = $supplier->URL;
-        $this->invoiceO->AccountingSupplierParty->Party->PartyIdentification->ID        = preg_replace('/[^0-9]/', '', $supplier->OrgNumber);
+        $this->invoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID        = preg_replace('/[^0-9]/', '', $supplier->OrgNumber);
         $this->invoiceO->AccountingSupplierParty->Party->PartyName->Name                = $supplier->CompanyName;
         $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName      = $supplier->IAddress;
         $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->BuildingNumber  = '';
@@ -783,8 +783,8 @@ class invoice {
         $customer     = $_lib['storage']->get_row(array('query' => $sql_customer));
 
         $this->invoiceO->AccountingCustomerParty->Party->WebsiteURI                     = $customer->URL;
-        $this->invoiceO->AccountingCustomerParty->Party->PartyIdentification->ID        = preg_replace('/[^0-9]+/', '', $customer->OrgNumber);
-        $this->invoiceO->AccountingCustomerParty->Party->PartyIdentification->CustomerID = $customer->AccountPlanID;
+        $this->invoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID        = preg_replace('/[^0-9]+/', '', $customer->OrgNumber);
+        $this->invoiceO->AccountingCustomerParty->Party->PartyIdentification->ID = $customer->AccountPlanID;
         $this->invoiceO->AccountingCustomerParty->Party->PartyName->Name                = $customer->AccountName;
         $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName      = $customer->Address;
         $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->BuildingNumber  = '';

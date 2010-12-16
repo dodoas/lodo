@@ -431,7 +431,6 @@ class lodo_fakturabank_fakturabankvoting {
         $query = "SELECT * FROM accountline WHERE `AccountLineID` = '" . $args['id'] . "'";
 
 		$accountline = $_lib['storage']->get_row(array('query' => $query));
-
 		if (empty($accountline)) {
 			return false;
 		}
@@ -523,6 +522,8 @@ class lodo_fakturabank_fakturabankvoting {
 
 	private function save_transactions($voting) {
 		global $_lib;
+
+        if (empty($voting)) return false;
 
 		foreach ($voting as &$transaction) {
 			$dataH = array();

@@ -169,11 +169,17 @@ class lodo_fakturabank_fakturabank {
 			} 
 			$dataH['IssueDate'] = $_lib['date']->mysql_format("%Y-%m-%d", $invoice->IssueDate);
 			$dataH['DocumentCurrency'] = $invoice->DocumentCurrencyCode;
-			$dataH['SupplierPartyIndentification'] = $invoice->AccountingSupplierParty->Party->PartyIdentification->ID;
-			$dataH['SupplierPartyIndentificationSchemeID'] = $invoice->AccountingSupplierParty->Party->PartyIdentification->ID_Attr_schemeID;
+			$dataH['SupplierPartyIndentification'] = $invoice->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
+			$dataH['SupplierPartyIndentificationSchemeID'] = $invoice->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
 			$dataH['SupplierPartyName'] = $invoice->AccountingSupplierParty->Party->PartyName->Name;
-			$dataH['CustomerPartyIndentification'] = $invoice->AccountingCustomerParty->Party->PartyIdentification->ID;
-			$dataH['CustomerPartyIndentificationSchemeID'] = $invoice->AccountingCustomerParty->Party->PartyIdentification->ID_Attr_schemeID;
+            # use companyid if present
+            if (!empty($invoice->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)) {
+                $dataH['CustomerPartyIndentification'] = $invoice->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
+                $dataH['CustomerPartyIndentificationSchemeID'] = $invoice->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
+            } else {
+                $dataH['CustomerPartyIndentification'] = $invoice->AccountingCustomerParty->Party->PartyIdentification->ID; 
+                $dataH['CustomerPartyIndentificationSchemeID'] = $invoice->AccountingCustomerParty->Party->PartyIdentification->ID_Attr_schemeID;
+            }
 			$dataH['CustomerPartyName'] = $invoice->AccountingCustomerParty->Party->PartyName->Name;
 			$dataH['PaymentMeansCode'] = $invoice->PaymentMeans->PaymentMeansCode;
 			
@@ -234,11 +240,17 @@ class lodo_fakturabank_fakturabank {
 			} 
 			$dataH['IssueDate'] = $_lib['date']->mysql_format("%Y-%m-%d", $invoice->IssueDate);
 			$dataH['DocumentCurrency'] = $invoice->DocumentCurrencyCode;
-			$dataH['SupplierPartyIndentification'] = $invoice->AccountingSupplierParty->Party->PartyIdentification->ID;
-			$dataH['SupplierPartyIndentificationSchemeID'] = $invoice->AccountingSupplierParty->Party->PartyIdentification->ID_Attr_schemeID;
+			$dataH['SupplierPartyIndentification'] = $invoice->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
+			$dataH['SupplierPartyIndentificationSchemeID'] = $invoice->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
 			$dataH['SupplierPartyName'] = $invoice->AccountingSupplierParty->Party->PartyName->Name;
-			$dataH['CustomerPartyIndentification'] = $invoice->AccountingCustomerParty->Party->PartyIdentification->ID;
-			$dataH['CustomerPartyIndentificationSchemeID'] = $invoice->AccountingCustomerParty->Party->PartyIdentification->ID_Attr_schemeID;
+            # use companyid if present
+            if (!empty($invoice->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)) {
+                $dataH['CustomerPartyIndentification'] = $invoice->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
+                $dataH['CustomerPartyIndentificationSchemeID'] = $invoice->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
+            } else {
+                $dataH['CustomerPartyIndentification'] = $invoice->AccountingCustomerParty->Party->PartyIdentification->ID;
+                $dataH['CustomerPartyIndentificationSchemeID'] = $invoice->AccountingCustomerParty->Party->PartyIdentification->ID_Attr_schemeID;
+            }
 			$dataH['CustomerPartyName'] = $invoice->AccountingCustomerParty->Party->PartyName->Name;
 			$dataH['PaymentMeansCode'] = $invoice->PaymentMeans->PaymentMeansCode;
 			
@@ -434,9 +446,15 @@ class lodo_fakturabank_fakturabank {
 				$InvoiceO->LodoID = null;
 			}
 
-            #Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to oly look in the correct records? No?
-            list($account, $SchemeID)  = $this->find_reskontro($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID, 'customer');
-            if($account) {
+            if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)) {
+                $party_id = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
+            } else {
+                $party_id = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
+            }
+        
+            #Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to only look in the correct records? No?
+            list($account, $SchemeID)  = $this->find_reskontro($party_id, 'customer');
+            if ($account) {
                 $InvoiceO->AccountPlanID   = $account->AccountPlanID;
                 
                 if(!$accounting->is_valid_accountperiod($InvoiceO->Period, $_lib['sess']->get_person('AccessLevel'))) {
@@ -490,7 +508,7 @@ class lodo_fakturabank_fakturabank {
                     $InvoiceO->Status   .= "Klar til bilagsf&oslash;ring basert p&aring: SchemeID: $SchemeID";
                 }
             } else {
-                $InvoiceO->Status     .= "Finner ikke kunde basert pŒ PartyIdentification: " . $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
+                $InvoiceO->Status     .= "Finner ikke kunde basert pŒ PartyIdentification: " . $party_id;
                 $InvoiceO->Status     .= sprintf('<a href="%s&t=fakturabank.createaccount&orgno=%s">Opprett</a>', $_lib['sess']->dispatch, $this->OrgNumber);
                 $InvoiceO->Journal = false;
                 $InvoiceO->Class   = 'red';
@@ -567,7 +585,7 @@ class lodo_fakturabank_fakturabank {
             #print "FB ID:   $InvoiceO->FakturabankID<br>\n";
 
             #Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to oly look in the correct records? No?
-            list($account, $SchemeID)  = $this->find_reskontro($InvoiceO->AccountingSupplierParty->Party->PartyIdentification->ID, 'supplier');
+            list($account, $SchemeID)  = $this->find_reskontro($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID, 'supplier');
             if($account) {
                 $InvoiceO->AccountPlanID   = $account->AccountPlanID;
 
@@ -581,6 +599,7 @@ class lodo_fakturabank_fakturabank {
                     $InvoiceO->Status .= 'Faktura er allerede lastet ned';
                 }
     
+
                 if($account->EnableMotkontoResultat && $account->MotkontoResultat1) {
                     $InvoiceO->MotkontoAccountPlanID   = $account->MotkontoResultat1;
                 } elseif($account->EnableMotkontoBalanse && $account->MotkontoBalanse1) {
@@ -635,7 +654,7 @@ class lodo_fakturabank_fakturabank {
 
                 #$this->registerincoming($InvoiceO);
             } else {
-                $InvoiceO->Status   .= "Finner ikke leverand&oslash;r basert p&aring; PartyIdentification: " . $InvoiceO->AccountingSupplierParty->Party->PartyIdentification->ID;
+                $InvoiceO->Status   .= "Finner ikke leverand&oslash;r basert p&aring; PartyIdentification: " . $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID; 
                 $InvoiceO->Journal = false;
                 $InvoiceO->Class   = 'red';
             }
@@ -689,17 +708,23 @@ class lodo_fakturabank_fakturabank {
     
         foreach($invoicesO->Invoice as $InvoiceO) {
 
+            if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)) {
+                $party_id = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
+            } else {
+                $party_id = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID; 
+            }
+
             #check if exists first
-            if($this->find_reskontro($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID, 'customer')) {
+            if($this->find_reskontro($party_id, 'customer')) {
                 $dataH = array();
                 
-                if($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID > 10000) {
+                if($party_id > 10000) {
                     #Vi burde visst SchemeID - slik at vi kan bestemme om kontoplan skal telles automatisk eller ikke > 10000 pga norsk kontoplan
 
                     #Vi mŒ uansett sjekke at den foreslŒtte kontoplanen ikke eksiterer fra f¿r.
 
-                    $dataH['AccountPlanID']     = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
-                    $dataH['OrgNumber']         = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID; #We dont know SchemID because of parser limitations
+                    $dataH['AccountPlanID']     = $party_id;
+                    $dataH['OrgNumber']         = $party_id; #We dont know SchemID because of parser limitations
                     $dataH['AccountName']       = $InvoiceO->AccountingCustomerParty->Party->PartyName->Name;
                     $dataH['AccountPlanType']   = 'customer';
 
@@ -734,7 +759,7 @@ class lodo_fakturabank_fakturabank {
                     #exit;
                     $count++;
                 } else {
-                    $_lib['message']->add("Reskontro med nummer lavere enn 10.000 mŒ opprettes manuelt: " . $InvoiceO->AccountingSupplierParty->Party->PartyIdentification->ID);
+                    $_lib['message']->add("Reskontro med nummer lavere enn 10.000 mŒ opprettes manuelt: " . $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID);
                 }
             }
         }
@@ -1092,12 +1117,6 @@ class lodo_fakturabank_fakturabank {
                 $cbc = $doc->createElement('cbc:WebsiteURI', $InvoiceO->AccountingSupplierParty->Party->WebsiteURI);
                 $cacparty->appendChild($cbc);
             
-                $identification = $doc->createElement('cac:PartyIdentification');
-                    $cbc = $doc->createElement('cbc:ID', $InvoiceO->AccountingSupplierParty->Party->PartyIdentification->ID);
-                    $cbc->setAttribute('schemeID', 'NO:ORGNR');
-                    $identification->appendChild($cbc);
-                $cacparty->appendChild($identification);
-
                 $name = $doc->createElement('cac:PartyName');
 
                     $cbc = $doc->createElement('cbc:Name', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PartyName->Name));
@@ -1127,7 +1146,14 @@ class lodo_fakturabank_fakturabank {
                     $adress->appendChild($country);
 
                 $cacparty->appendChild($adress);
+
+                $legalentity = $doc->createElement('cac:PartyLegalEntity');
+                $cbc = $doc->createElement('cbc:CompanyID', $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID);
+                $cbc->setAttribute('schemeID', 'NO:ORGNR');
+                $identification->appendChild($cbc);
+                $cacparty->appendChild($legalentity);
             
+
             $supplier->appendChild($cacparty);
 
         $invoice->appendChild($supplier);
@@ -1143,7 +1169,7 @@ class lodo_fakturabank_fakturabank {
             
                 // Add customer nr
                 $identification = $doc->createElement('cac:PartyIdentification');
-                $cbc = $doc->createElement('cbc:ID', $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->CustomerID);
+                $cbc = $doc->createElement('cbc:ID', $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID); 
                 $cbc->setAttribute('schemeID', 'FAKTURABANK:CUSTOMERNUMBER');
                 $identification->appendChild($cbc);
                 $cacparty->appendChild($identification);
@@ -1177,15 +1203,15 @@ class lodo_fakturabank_fakturabank {
                 $cacparty->appendChild($adress);
 
 
-                if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)){ 
-                    if (strlen(preg_replace('/[^0-9]/', '', $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) == 9) { // has valid org nr, add it
+                if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)){ 
+                    if (strlen(preg_replace('/[^0-9]/', '', $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)) == 9) { // has valid org nr, add it, 
                         $legal_entity = $doc->createElement('cac:PartyLegalEntity');
-                        $cbc = $doc->createElement('cbc:CompanyID', $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID);
+                        $cbc = $doc->createElement('cbc:CompanyID', $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID);
                         $cbc->setAttribute('schemeID', 'NO:ORGNR');
                         $legal_entity->appendChild($cbc);
                         $cacparty->appendChild($legal_entity);
                     } else {
-                        $_lib['message']->add("hash_to_xml::invalid orgnr. Organisasjonsnummeret " . $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID . " til " . $InvoiceO->AccountingCustomerParty->Party->PartyName->Name . " er ugyldig. Fakturaen ble likevel sendt med kundenr som id.");
+                        $_lib['message']->add("hash_to_xml::invalid orgnr. Organisasjonsnummeret " . $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID . " til " . $InvoiceO->AccountingCustomerParty->Party->PartyName->Name . " er ugyldig. Fakturaen ble likevel sendt med kundenr som id.");
                     }    
                 } 
 
