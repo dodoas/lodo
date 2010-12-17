@@ -130,17 +130,28 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
 							if ($match && 
                                 !empty($match['AccountPlanID']) && // ignore interest, transaction costs etc for now (transactions without org numbers)
                                 !empty($match['AccountPlanOrgNumber'])) {
+
+                                
+                                $query = "select FakturabankNumber, KID from fakturabankinvoicein where ID = '" . $match['InvoiceID'] . "'";
+                                $invoices = $_lib['storage']->get_hashhash(array('query' => $query, 'key' => 'ID'));
+                                if (!empty($invoices)) {
+                                    $invoice_match = reset($invoices);
+                                } else {
+                                    $invoice_match = false;
+                                }
+
+
 									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
 										$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] = $match['AccountPlanID'];
 									}
 									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroOrgNumber']) {
 										$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroOrgNumber']     = $match['AccountPlanOrgNumber'];
 									}
-									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['KID']) {
-										$DataH[$server_name][$database_name][$table_name][$pk_name]['KID']                    = $match['KID'];
+									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['KID'] && !empty($invoice_match['KID'])) {
+										$DataH[$server_name][$database_name][$table_name][$pk_name]['KID']                    = $invoice_match['KID'];
 									}
-									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber']) {
-										$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber']          = $match['InvoiceID'];
+									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber'] && !empty($invoice_match['FakturabankNumber'])) {
+										$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber']          = $invoice_match['FakturabankNumber'];
 									}
 							} else {
 								#If no KID and no Reskontro and in or out amout - try an automatic kid match to update data
