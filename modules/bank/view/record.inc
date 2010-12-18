@@ -132,7 +132,7 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
                                 !empty($match['AccountPlanOrgNumber'])) {
 
                                 
-                                $query = "select FakturabankNumber, KID from fakturabankinvoicein where ID = '" . $match['InvoiceID'] . "'";
+                                $query = "select FakturabankNumber, KID from fakturabankinvoicein where LodoID = '" . $match['InvoiceID'] . "'";
                                 $invoices = $_lib['storage']->get_hashhash(array('query' => $query, 'key' => 'ID'));
                                 if (!empty($invoices)) {
                                     $invoice_match = reset($invoices);
