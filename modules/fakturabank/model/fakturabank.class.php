@@ -1150,7 +1150,7 @@ class lodo_fakturabank_fakturabank {
                 $legalentity = $doc->createElement('cac:PartyLegalEntity');
                 $cbc = $doc->createElement('cbc:CompanyID', $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID);
                 $cbc->setAttribute('schemeID', 'NO:ORGNR');
-                $identification->appendChild($cbc);
+                $legalentity->appendChild($cbc);
                 $cacparty->appendChild($legalentity);
             
 
