@@ -642,14 +642,17 @@ class timesheet_user_page
             
             if(!isset($entries[$d]))
             {
-                $entries[$i] = array();
-                $entries[$i][] = array('Day' => $d);
+                $entries[$d] = array();
+                $entries[$d][] = array('Day' => $d);
             }
 
             if(isset($_POST['new_line_' . $d]))
             {
-                $entries[$i] = array();
-                $entries[$i][] = array('Day' => $d);
+
+                if (empty($entries[$d])) {
+                    $entries[$d] = array();
+                }
+                $entries[$d][] = array('Day' => $d);
             }
         }
 
