@@ -507,6 +507,25 @@ class form3
         $name       = $this->MakeName($args);
         $tabindex   = $this->MakeTabindex($args);
 
+        if(isset($args['disabled']))
+        {
+            $disabled = "disabled";
+        }
+        else
+        {
+            $disabled = "";
+        }
+
+
+        if(isset($args['class']))
+        {
+            $class = $args['class'];
+        }
+        else 
+        {
+            $class = "";
+        }
+
         if(isset($args['width']))
         {
             $width = $args['width'];
@@ -555,7 +574,7 @@ class form3
             $id = $name;
         }   
 
-        $element    = "<select name=\"$name\" id=\"$id\"";
+        $element    = "<select name=\"$name\" id=\"$id\" class=\"$class\" $disabled ";
         if($tabindex)  { $element .= " tabindex=\"$tabindex\""; }
         if($accesskey) { $element .= " accesskey=\"$args[accesskey]\""; }
         if($args['autosubmit']) { $element .= " onchange=submit()";  }
@@ -998,7 +1017,8 @@ class form3
         }
 
         $element .= "</select>\n";
-        $element = "<select  $selectedcolor name=\"".$name."\" tabindex=\"".$args['tabindex']."\" accesskey=\"".$args['accesskey']."\" class=\"".$args['class']."\"" . $element;
+
+        $element = "<select $selectedcolor name=\"".$name."\" tabindex=\"".$args['tabindex']."\" accesskey=\"".$args['accesskey']."\" class=\"".$args['class']."\"" . $element;
 
         #$_lib['db']->db_free_result($result);
         return $element;

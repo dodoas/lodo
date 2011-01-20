@@ -113,7 +113,7 @@ while($row = $_lib['db']->db_fetch_object($result_conf))
 
       <form action="<? print $_lib['sess']->dispatch ?>t=weeklysale.edit&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>&action_weeklysale_new=1" method="post">
       <td>
-        <input type="text" name="init_bilagsnummer" size="4" value="" id="init_bilagsnummer">
+        <input type="text" name="init_bilagsnummer" size="4" value="" id="init_bilagsnummer_<? print $row->WeeklySaleConfID ?>" class="bilagsnummer">
       </td>
       <td>
         <? 
@@ -141,16 +141,16 @@ while($row = $_lib['db']->db_fetch_object($result_conf))
         </select>
       </td>
       <td>
-        <input type="text" name="init_date" size="10" value="<?php echo date("Y-m-d", strtotime("sunday")) ?>" id="init_date">
+        <input type="text" name="init_date" size="10" value="<?= $_COOKIE['invoice_voucher_date'] ?>" id="init_date_<? print $row->WeeklySaleConfID ?>">
       </td>
       <td>
 	<?php
 	echo $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $_COOKIE['invoice_period'], 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => '', 'name' => 'init_periode', 'id' => 'init_periode_' . $row->WeeklySaleConfID));
 	?>
-        <input value="Lagre periode" type="button" onclick="set_cookie('invoice_period', 'init_periode_<? print $row->WeeklySaleConfID ?>')">
+        <input value="Lagre periode" type="button" onclick="set_cookie('invoice_period', 'init_periode_<? print $row->WeeklySaleConfID ?>'); createCookie('invoice_voucher_date', document.getElementById('init_date_<? print $row->WeeklySaleConfID ?>').value, 1);">
       </td>
       <td>
-        <input type="submit" value="Ny ukeomsetning">
+        <input id='new_weeklysale_<? print $row->WeeklySaleConfID ?>' type="submit" value="Ny ukeomsetning" disabled>
         <?php
 	/*
 	  <a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.edit&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>&action_weeklysale_new=1" class="action">Ny ukeomsetning for avdeling <? print $row->DepartmentID; ?></a>
@@ -210,10 +210,13 @@ while($row = $_lib['db']->db_fetch_object($result_conf))
 
 <tbody>
 <?
+$journalIDs = array();
 while($row = $_lib['db']->db_fetch_object($result_week))
 {
     $query = "select Period from weeklysale where WeeklySaleID='$row->WeeklySaleID'";
     $week = $_lib['storage']->get_row(array('query' => $query));
+
+    $journalIDs[] = $row->JournalID;
 
     $i++;
     if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
@@ -239,6 +242,28 @@ while($row = $_lib['db']->db_fetch_object($result_week))
 ?>
 </tbody>
 </table>
+
+<script>
+$(document).ready(function(){
+	var journalIDs = <?= json_encode($journalIDs); ?>;
+
+	$.each($('.bilagsnummer'), function() {
+		$(this).keyup(function(){
+			var id = $(this).attr('id').substr(18);
+			var el = $('#new_weeklysale_' + id);
+			var val = $(this).val();
+
+			if(parseInt(val) == val && val != '' && val != '0' && $.inArray(val, journalIDs) == -1) {
+				el.removeAttr("disabled");
+			}
+			else {
+				el.attr("disabled", "disabled");
+			}
+		});
+	});
+});
+</script>
+
 </body>
 </html>
 

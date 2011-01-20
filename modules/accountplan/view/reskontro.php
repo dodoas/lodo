@@ -26,6 +26,15 @@ elseif($AccountPlanID) #since this is automatically created
 #print "query: $query<br>\n";
 $account = $_lib['storage']->get_row(array('query' => $query));
 
+/*
+ * Hack for å få korrekt info ved opprettelse av ny konto 
+ */
+if($OrgNumber && $_lib['input']->getProperty('NewAccount'))
+{
+    $account->OrgNumber = $OrgNumber;
+    $account->EnableCredit = 1;
+}
+
 if($account->AccountPlanID){
     $AccountPlanID = $account->AccountPlanID;
 }
@@ -77,7 +86,7 @@ if($JournalID) {
   <tr>
     <td class="menu">Aktiv</td>
     <td></td>
-    <td><? $_lib['form2']->checkbox2($db_table, "Active", $account->Active,'') ?> <? print $_lib['form3']->Type_menu3(array('table' => $db_table, 'field'=>'AccountPlanType', 'value' => $AccountPlanType, 'type'=>'AccountPlanType', 'required'=>'1')) ?></td>
+    <td><? $_lib['form2']->checkbox2($db_table, "Active", $account->Active,'') ?> <? print $_lib['form3']->Type_menu3(array('table' => $db_table, 'field'=>'AccountPlanType', 'value' => $AccountPlanType, 'type'=>'AccountPlanType', 'required'=>'1', 'disabled' => 1)) ?></td>
     <td>Viktig! M&aring; settes riktig for at regnskapet skal fungere</td>
     <td></td>
   </tr>
@@ -224,7 +233,8 @@ if($JournalID) {
   </tr>
   <tr>
     <td class="menu">Kreditt tid</td>
-    <td><? $_lib['form2']->checkbox2($db_table, "EnableCredit", $account->EnableCredit,''); ?> </td>
+    <td><input type="hidden" name="<?= $db_table ?>.EnableCredit" value="1" /></td>
+
     <td><input type="text" name="accountplan.CreditDays" value="<? print $account->CreditDays ?>" size="4" class="number">Dager</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableAutogiro", $account->EnableAutogiro,''); ?> Autogiro</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableNettbank", $account->EnableNettbank,''); ?> Nettbank</td>

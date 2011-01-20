@@ -17,4 +17,5 @@
     <link rel="shortcut icon"       href="favicon.ico" type="image/x-icon" />
 
     <script type="text/javascript"  src="/lib/tigra_calendar/calendar1.js"></script>
+    <script type="text/javascript"  src='/lib/js/jquery.js'></script>
     <style  type="text/css">@import url(/lib/htmlarea3/htmlarea.css)</style>

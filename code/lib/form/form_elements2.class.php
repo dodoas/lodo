@@ -314,6 +314,12 @@ class form2 {
         $to_account     = $conf['to_account'];
       }
 
+      if(isset($conf['disabled'])) {
+        $disabled = "disabled";
+      } else {
+        $disabled = "";
+      }
+
       $query = "select AccountPlanID, AccountName from accountplan where Active=1 and EnableReskontro=0 and AccountPlanID >= '$from_account' and AccountPlanID <= '$to_account'  order by AccountPlanID";
       #print "$query<br>";
       $result = $_lib['db']->db_query($query);
@@ -324,9 +330,9 @@ class form2 {
       }; #Default number of letters in menu
 
       if($conf[pk]) {
-        print "<select name=\"" . $conf[table] . "." . $conf[field] . "." . $conf[pk] . "\" tabindex=\"" . $conf[tabindex] . "\" accesskey=\"" . $conf[accesskey] . "\">\n";
+        print "<select name=\"" . $conf[table] . "." . $conf[field] . "." . $conf[pk] . "\" tabindex=\"" . $conf[tabindex] . "\" accesskey=\"" . $conf[accesskey] . "\" $disabled>\n";
       } else {
-        print "<select name=\"" . $conf[table] . "." . $conf[field] . "\" tabindex=\"" . $conf[tabindex] . "\" accesskey=\"" . $conf[accesskey] . "\">\n";
+        print "<select name=\"" . $conf[table] . "." . $conf[field] . "\" tabindex=\"" . $conf[tabindex] . "\" accesskey=\"" . $conf[accesskey] . "\" $disabled>\n";
       }
       if($conf['value']) {
         print "<option value=\"\">" . substr('Velg konto',0, $num_letters);

@@ -179,7 +179,7 @@ function worker_line($row, $i) {
       ?>
       </td>
 
-      <td> 
+      <td style="background-color: yellow"> 
       <?
         $sql = sprintf("SELECT * FROM salaryinfo WHERE SalaryConfID = %d", $row->SalaryConfID);
         $salaryinfo = $_lib['storage']->get_row(array('query' => $sql));
@@ -205,13 +205,13 @@ function worker_line($row, $i) {
       ?>
       </td>
 
-      <td style="background-color: #FFB600">
+      <td style="background-color: yellow">
       <?
       if($_lib['sess']->get_person('AccessLevel') >= 2 && $accounting->is_valid_accountperiod($setup['salarydefvoucherperiod'], $_lib['sess']->get_person('AccessLevel')))
       {
         if($row->SalaryConfID != 1 && $checked)
         {
-            ?><a target="_blank" href="<? print $_lib['sess']->dispatch ?>t=salary.edit&amp;SalaryConfID=<? print $row->SalaryConfID ?>&amp;action_salary_new=1" class="button"><? if($row->SalaryConfID != 1) { print $row->AccountPlanID; } ?></a><?
+            ?><a target="_blank" href="<? print $_lib['sess']->dispatch ?>t=salary.edit&amp;SalaryConfID=<? print $row->SalaryConfID ?>&amp;action_salary_new=1" class="button"><? if($row->SalaryConfID != 1) { print /* $row->AccountPlanID */ "Lage l&oslash;nnslipp"; } ?></a><?
         }
       } else {
         print "Stengt";
@@ -274,8 +274,8 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
 <tr>
     <th class="sub">Ansatte</th>
     <th class="sub">Navn</th>
-    <th class="sub">Ny l&oslash;nn</th>
-    <th class="sub" style="background-color: #FFB600">L&oslash;nnslipp</th>
+    <th class="sub" style="background-color: yellow; color: black;">Merk</th>
+    <th class="sub" style="background-color: yellow; color: black;">L&oslash;nnslipp</th>
     <th class="sub">Kommune</th>
     <th class="sub">Startdato</th>
     <th class="sub">Sluttdato</th>
@@ -298,8 +298,8 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
 
     </td>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $row_head->SalaryConfID ?>"><b>Hovedmal</b></a></td>
-    <td></td>
-    <td style="background-color: #FFB600"></td>
+    <td style="background-color: yellow"></td>
+    <td style="background-color: yellow"></td>
     <td></td>
     <td></td>
     <td></td>
@@ -316,11 +316,13 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
      }
   ?>
   <tr>
-    <td colspan="9">
+    <td colspan="2">
     </td>
-    <td>
-      <input name="salary_save_info" type="submit" value="Lagre" />
+    <td style="background-color: yellow">
+      <input type="checkbox" disabled checked>
+      <input name="salary_save_info" type="submit" value="Disse f&aring;r l&oslash;nn" />
     </td>
+    <td style="background-color: yellow"></td>
   </tr>
   </form>
 </tbody>
@@ -379,7 +381,7 @@ else {
     </td>
 
     <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $row_head->SalaryConfID ?>"><b>Hovedmal</b></a></td>
-    <td></td>
+    <td style="background-color: #E0F8E0">a</td>
     <td style="background-color: #FFB600"></td>
     <td></td>
     <td></td>

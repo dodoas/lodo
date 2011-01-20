@@ -67,6 +67,7 @@ class timesheet_user
     public function logout()
     {
         unset($_SESSION['timesheet_login']);
+	session_destroy();
     }
 
     public function get_id() 
@@ -153,6 +154,32 @@ class timesheet_user
         }
 
         return $entries;
+    }
+
+    public function get_stats($period) 
+    {
+        global $_lib;
+
+        $period = $this->escape($period);
+
+        $sql = sprintf(
+            "SELECT 
+               Sum(HOUR(SumTime) * 60 + MINUTE(SumTime) ) as sum, Project
+             From timesheets
+             WHERE AccountPlanID = %d
+                   AND CONCAT(YEAR(date), '-', MONTH(date)) = '%s'
+             GROUP BY Project
+            ", $this->id, $period);
+
+        $r = $_lib['db']->db_query($sql);
+            
+        $projects = array();
+        while( $row = $_lib['db']->db_fetch_assoc($r) )
+        {
+            $projects[] = $row;
+        }
+
+        return $projects;  
     }
 
     public function is_period_locked($period)
@@ -269,14 +296,15 @@ class timesheet_user_page
         if(!$this->user->is_admin())
         {
             printf("<html>\n" .
-               "  <head>\n" .
-               "    <title>Timesheet registration for %s</title>\n" .
-               "  </head>\n" .
-               "  <body>\n" .
-               "    <p>Logget inn som %s (%d)<p>\n" .
-               "    <p><a href='%s'>Tilbake</a></p>\n",
-               $this->user->get_username(), $this->user->get_username(), $this->user->get_id(),
-               $this->root
+                   "  <head>\n" .
+                   "    <title>Timesheet registration for %s</title>\n" .
+                   "    <script src='/lib/js/jquery.js'></script>" .
+                   "  </head>\n" .
+                   "  <body>\n" .
+                   "    <p>Logget inn som %s (%d)<p>\n" .
+                   "    <p><a href='%s'>Tilbake</a></p>\n",
+                   $this->user->get_username(), $this->user->get_username(), $this->user->get_id(),
+                   $this->root
             );
 
             printf("    <p><a href='?logout'>log ut</a></p>");
@@ -405,8 +433,31 @@ class timesheet_user_page
         else
             $locked = $this->user->is_period_locked($period);
 
+        printf("
+<script type='text/javascript'>
+  $(document).ready(function(){
+    $('#save_button').click(function(){
+      var read_and_remove = function() {
+        var field_name = this.name.substring(0, this.name.length - 2);
+
+        $('#' + field_name).val( $('#' + field_name + '_h').val() + ':' + $('#' + field_name + '_m').val() );
+        $('#' + field_name + '_h').remove();
+        $('#' + field_name + '_m').remove();
+      };
+
+      $.each($('.BeginTime_h'), read_and_remove);
+      $.each($('.EndTime_h'), read_and_remove);
+      $.each($('.SumTime_h'), read_and_remove);
+
+      return true;
+    });
+  });
+</script> 
+
+");
+
         printf(
-            "<form action='%s' method='post'>" .
+            "<form action='%s' method='post' id='tabel_form'>" .
             "<input type='hidden' name='save_table' value='save' />" .
             "<table>\n" .
             "<tr>\n",
@@ -461,8 +512,41 @@ class timesheet_user_page
                         if($locked)
                             $data = $value;
                         else
-                            $data = sprintf("<input name='%s' type='text' value='%s' id='$field' />", $name, 
+                            $data = sprintf("<input name='%s' type='text' value='%s' class='$field' />", $name, 
                                             $value);
+                    }
+                    else if($field_data['type'] == "time")
+                    {
+                        $value = substr($value, 0, 5);
+                        list($h, $m) = explode(':', $value);
+                        if($locked)
+                        {
+                            $data = $value;
+                        }
+                        else 
+                        {
+                            if(strstr($name, "SumTime"))
+                            {
+                                $data = sprintf(
+                                    "<input name='%s_h' type='text' value='%s' class='%s_h' style='width: 25px; background-color:green; color: #eee; text-align: right;' id='%s_h' />" .
+                                    "<input name='%s_m' type='text' value='%s' class='%s_m' style='width: 25px; text-align:right;' id='%s_m' />" .
+                                    "<input name='%s' type='hidden' value='' id='%s' /> " ,
+                                    $name, $h, $field, $name,
+                                    $name, $m, $field, $name,
+                                    $name, $name);
+                            }
+                            else
+                            {
+                                $data = sprintf(
+                                    "<input name='%s_h' type='text' value='%s' class='%s_h' style='width: 25px; background-color:#E0F8E0; text-align: right;' id='%s_h' />" .
+                                    "<input name='%s_m' type='text' value='%s' class='%s_m' style='width: 25px; text-align:right;' id='%s_m' />" .
+                                    "<input name='%s' type='hidden' value='' id='%s' /> " ,
+                                    $name, $h, $field, $name,
+                                    $name, $m, $field, $name,
+                                    $name, $name);
+                            }
+                        }
+                                            
                     }
                     else if($field_data['type'] == "select")
                     {
@@ -507,14 +591,31 @@ class timesheet_user_page
 
         $sum_h += (int)($sum_m / 60);
         $sum_m =  $sum_m % 60;
-        printf("<tr><td></td><td>Sum</td><td></td><td>%s:%s</td></tr>",
+        printf("<tr><td><b>Sum</b></td><td></td><td></td><td>%s:%s</td></tr>",
                (strlen("$sum_h") < 2 ? "0$sum_h" : $sum_h),
                (strlen("$sum_m") < 2 ? "0$sum_m" : $sum_m));
+
+        $stats = $this->user->get_stats($period);
+        $projects  = $this->user->list_projects();
+
+        echo "<tr></tr>";
+
+        foreach($stats as $stat)
+        {
+            $sum_h = (int)($stat['sum'] / 60);
+            $sum_m =  $stat['sum'] % 60;
+            $p = $projects[ $stat['Project'] ];
+            printf("<tr><td colspan=2><b>Sum %s</b></td><td></td><td>%s:%s</td></tr>",
+                   $p, 
+                   (strlen("$sum_h") < 2 ? "0$sum_h" : $sum_h),
+                   (strlen("$sum_m") < 2 ? "0$sum_m" : $sum_m));
+                   
+        }
 
         printf("</table>");
 
         if(!$locked)
-            printf("<p><input type='submit' name='save' value='Lagre' /></p>");
+            printf("<p><input type='submit' name='save' value='Lagre' id='save_button' /></p>");
         
         if($show_unlock && $this->user->is_admin())
         {
@@ -534,6 +635,14 @@ class timesheet_user_page
     {
         global $_lib;
         $period_name = $this->user->escape($_REQUEST['period']);
+
+        $add_line = false;
+        foreach($_POST as $k => $v) {
+            if(substr($k, 0, 8) == "new_line") {
+                $add_line = true;
+                break;
+            }
+        }
 
         /*
          *
@@ -630,6 +739,7 @@ class timesheet_user_page
                     $entries[$day] = array();
                 
                 $entry['Day'] = $day;
+
                 $entries[$day][] = $entry;
             }
         }
@@ -643,13 +753,13 @@ class timesheet_user_page
             if(!isset($entries[$d]))
             {
                 $entries[$i] = array();
-                $entries[$i][] = array('Day' => $d);
+                $entries[$i][] = array('Day' => $d, 'Sort' => 'behind');
             }
 
             if(isset($_POST['new_line_' . $d]))
             {
-                $entries[$i] = array();
-                $entries[$i][] = array('Day' => $d);
+                // $entries[$i] = array();
+                $entries[$d][] = array('Day' => $d);
             }
         }
 
@@ -658,14 +768,31 @@ class timesheet_user_page
 
         $fields = array(
             'Day'        => array('type' => 'caption', 'size' => '3'),
-            'BeginTime'  => array('type' => 'text', 'size' => '10', 'default' => '00:00:00'),
-            'EndTime'    => array('type' => 'text', 'size' => '10', 'default' => '00:00:00'),
-            'SumTime'    => array('type' => 'text', 'size' => '10', 'default' => '00:00:00'),
+            'BeginTime'  => array('type' => 'time', 'size' => '10', 'default' => '00:00'),
+            'EndTime'    => array('type' => 'time', 'size' => '10', 'default' => '00:00'),
+            'SumTime'    => array('type' => 'time', 'size' => '10', 'default' => '00:00'),
             'Project'    => array('type' => 'select', 'options' => $projects, 'default' => 0),
             'WorkType'   => array('type' => 'select', 'options' => $worktypes, 'default' => 0),
             'Comment'    => array('type' => 'text', 'size' => '255', 'default' => "")
             );
 
+        function sorting_function ($a, $b) {
+            echo "{";
+            print_r($a); echo " ";
+            print_r($b);
+            echo "}</br>";
+            if($a['Day'] == $b['Day'])
+            {
+                if(isset($a['Sort']))
+                    return -1;
+                else
+                    return 1;
+            }
+            else
+                return $a['Day'] - $b['Day'];
+        };
+
+        //usort($entries, "sorting_function");
         ksort($entries);
         $this->print_table($period_name, $fields, $entries, $this->root . '&tp=view&period=' . $_REQUEST['period']);
 
