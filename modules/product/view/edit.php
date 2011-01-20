@@ -66,6 +66,8 @@ $VAT = $accounting->get_vataccount_object(array('VatID' => $accountplan->VatID, 
     <tr>
         <td>Pris</td>
         <td colspan="2"><? print $_lib['form3']->input(array('type'=>'text', 'table'=>$db_table, 'field'=>'UnitCustPrice', 'pk'=>$row->ProductID, 'value'=>$_lib['format']->Amount($row->UnitCustPrice))) ?>
+	<td width="100">Inklusiv MVA:</td>
+        <td width="200"><input type="text" id="priceincvat" /></td>
     </tr>
     <tr>
         <td>Resultat konto</td>
@@ -120,6 +122,22 @@ $VAT = $accounting->get_vataccount_object(array('VatID' => $accountplan->VatID, 
   </form>
 </tfoot>
 </table>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#priceincvat').keyup(function(){
+    var dest = $('#product\\.UnitCustPrice\\.<?= $row->ProductID ?>');
+    var val = $('#priceincvat').val();
+    var mva = <?= 1+(((float)$VAT->Percent)/100) ?>;
+    
+    var value = String(val/mva);
+    var comma = value.indexOf('.');
+    if(comma != -1)
+      value = value.substring(0, value.indexOf('.') + 3);
+    dest.val(value);
+  });
+});
+</script>
 
 </body>
 </html>

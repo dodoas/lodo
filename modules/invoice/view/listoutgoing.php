@@ -246,6 +246,8 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
       <td align="center">
       <? if($accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')) && $_lib['sess']->get_person('AccessLevel') >= 2) { ?>
       <a href="<? print $_lib['sess']->dispatch ?>t=invoice.edit&InvoiceID=<? print $row->InvoiceID ?>&inline=edit" title="Endre faktura" target="_new">Endre</a><br />
+      <? } else if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
+      <a href="<? print $_lib['sess']->dispatch ?>t=invoice.edit&InvoiceID=<? print $row->InvoiceID ?>&inline=edit" title="Endre faktura" target="_new">Endre stengt</a><br />
       <? } else { ?>
       <a href="<? print $_lib['sess']->dispatch ?>t=invoice.edit&InvoiceID=<? print $row->InvoiceID ?>&inline=show" title="Endre faktura" target="_new">Stengt</a><br />
       <? } ?>

@@ -232,10 +232,11 @@ function worker_line($row, $i) {
 
       <td><a href="<? print $_lib['sess']->dispatch ?>t=arbeidsgiveravgift.salaryreport&amp;report.Year=<? print $year ?>&amp;report.Employee=<? print $row->AccountPlanID ?>" target="new">Vis <? print $year ?></a></td>
 
+
       <? if(($_lib['sess']->get_person('AccessLevel') >= 3)) { ?>
       <td colspan="1">
       <? } else { ?>	    
-      <td colspan="3">
+      <td colspan="1">
       <? } ?>
       
 	<? if(($_lib['sess']->get_person('AccessLevel') >= 4) and ($row->SalaryConfID != 1)) { 
@@ -244,6 +245,7 @@ function worker_line($row, $i) {
 				 , 'name' => 'Slett', 'confirm' => 'Vil du virkelig slette linjen?'));
  	   } ?>
       </td>
+
       <td style="text-align: right">
       <?
         echo $row->SalaryConfID;
@@ -351,19 +353,18 @@ else {
 <tr>
     <th colspan="10">Tidligere ansatte</th>
 </tr>
+
 <tr>
     <th class="sub">Ansatte</th>
     <th class="sub">Navn</th>
-    <th class="sub">Ny l&oslash;nn</th>
-    <th class="sub" style="background-color: #FFB600">L&oslash;nnslipp</th>
+    <th class="sub" style="background-color: yellow; color: black;">Merk</th>
+    <th class="sub" style="background-color: yellow; color: black;">L&oslash;nnslipp</th>
     <th class="sub">Kommune</th>
     <th class="sub">Startdato</th>
     <th class="sub">Sluttdato</th>
     <th class="sub">L&T</th>
     <th class="sub"></th>
     <th class="sub">Mal</th>
-
-
 </tr>
 <tr>
     <td>
@@ -377,16 +378,15 @@ else {
     <?
   }
   ?>
-
     </td>
-
     <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $row_head->SalaryConfID ?>"><b>Hovedmal</b></a></td>
-    <td style="background-color: #E0F8E0">a</td>
-    <td style="background-color: #FFB600"></td>
+    <td style="background-color: yellow"></td>
+    <td style="background-color: yellow"></td>
     <td></td>
     <td></td>
     <td></td>
     <td colspan="3"></td>
+
 </tr>
 
 <tbody>
@@ -398,11 +398,13 @@ else {
      }
   ?>
   <tr>
-    <td colspan="9">
+    <td colspan="2">
     </td>
-    <td>
-      <input name="salary_save_info" type="submit" value="Lagre" />
+    <td style="background-color: yellow">
+      <input type="checkbox" disabled checked>
+      <input name="salary_save_info" type="submit" value="Disse f&aring;r l&oslash;nn" />
     </td>
+    <td style="background-color: yellow"></td>
   </tr>
   </form>
 </tbody>

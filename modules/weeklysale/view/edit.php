@@ -184,7 +184,11 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
              * the first day is omited 
              */
             if(isset($_POST['init_bilagsnummer'])) {
-                $count_from = strtotime(date("Y") . "-W" . $_POST['init_week']);
+                $count_from = mktime(0,0,1,1,1);
+                if(date("N") != 1) 
+                    $count_from = strtotime("next monday", $count_from);
+                $count_from = strtotime("+" . ($_POST['init_week'] - 1) . " week", $count_from);
+
                 $month_day  = date("d", $count_from);
                 $days_in_month = date("t", $count_from);
 
@@ -196,11 +200,12 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                   $start_from = 0;
                   $start_with = $month_day;
                 }
+                $last_day_name = "";
             }
 
             $date_counter = 0;
+
             foreach($weeklysale->sale as $WeeklySaleDayID => $line) {
- 
                 #print_r($line);
  
                 if(round($line->ZnrTotalAmount,2) != round($weeklysale->salehead['sumday'][$line->ParentWeeklySaleDayID],2)) {
@@ -230,8 +235,14 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
 
 		<?php
                   if(isset($_POST['init_bilagsnummer']) && $start_from <= $date_counter) {
+                     if($last_day_name != $line->WeekDayName) {
+                         if($last_day_name != "")
+                             $start_with++;
+                         $last_day_name = $line->WeekDayName;
+                     }
+
                      $line->Day = (int)$start_with;
-                     $start_with++;
+
                   }
                   $date_counter++;
 		?>

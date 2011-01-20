@@ -307,16 +307,18 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 
         <td colspan="6" align="right">
         <?
-        if(!$row->Locked) {
+
+        if(!$row->Locked || $_lib['sess']->get_person('AccessLevel') >= 4) {
 			if($_lib['sess']->get_person('AccessLevel') >= 4 && $inline == 'edit')
 			{
 				if($accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
                                     print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_delete', 'value'=>'Slett faktura (D)', 'accesskey'=>'D', 'confirm' => 'Er du sikker p&aring; at du vil slette denne fakturaen?'));
 			}
-	
+
 			if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit')
 			{
-				if($accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel'))) {
+				if($accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel'))
+                                    || $_lib['sess']->get_person('AccessLevel') >= 4) {
 					print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_update', 'value'=>'Lagre faktura (S)', 'accesskey'=>'S'));
 				} else {
 					print "Periode stengt";
