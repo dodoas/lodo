@@ -88,8 +88,8 @@ function changemonth()
 			monthlength += 1;
 	}
 
-        voucherdate.value = "" + year + "-" + selectedmonth + "-01";
         voucherperiod.value = "" + year + "-" + selectedmonth;
+        voucherdate.value = voucherperiod.value + "-" + monthlength;
 	fromdate.value = voucherperiod.value + "-01";
 	todate.value = voucherperiod.value + "-" + monthlength;
 }

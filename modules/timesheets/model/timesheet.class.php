@@ -758,7 +758,9 @@ class timesheet_user_page
 
             if(isset($_POST['new_line_' . $d]))
             {
-                // $entries[$i] = array();
+                if (empty($entries[$d])) {
+                    $entries[$d] = array();
+                }
                 $entries[$d][] = array('Day' => $d);
             }
         }

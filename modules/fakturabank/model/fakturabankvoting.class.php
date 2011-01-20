@@ -431,7 +431,6 @@ class lodo_fakturabank_fakturabankvoting {
         $query = "SELECT * FROM accountline WHERE `AccountLineID` = '" . $args['id'] . "'";
 
 		$accountline = $_lib['storage']->get_row(array('query' => $query));
-
 		if (empty($accountline)) {
 			return false;
 		}
@@ -474,7 +473,8 @@ class lodo_fakturabank_fakturabankvoting {
 				ROUND(tr.TransactionAmount, 2) = ROUND('$amount', 2)";
         }
 
-		$relations = $_lib['storage']->get_hashhash(array('query' => $query, 'key' => 'InvoiceID'));
+        # there might be several relations for a transaction and only those with AccountPlanID set serves a purpose since that is the only ones we currently can handle
+		$relations = $_lib['storage']->get_hashhash(array('query' => $query . " AND AccountPlanID is not NULL AND AccountPlanID != ''", 'key' => 'InvoiceID'));
 
 		if (empty($relations)) {
 			return false;
@@ -523,6 +523,8 @@ class lodo_fakturabank_fakturabankvoting {
 
 	private function save_transactions($voting) {
 		global $_lib;
+
+        if (empty($voting)) return false;
 
 		foreach ($voting as &$transaction) {
 			$dataH = array();

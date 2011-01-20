@@ -65,13 +65,20 @@ if(is_array($InvoicesO->Invoice))
   foreach($InvoicesO->Invoice as $InvoiceO) {
     $TotalCustPrice += $InvoiceO->LegalMonetaryTotal->PayableAmount;
     $count++;
+
+    if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)) {
+        $party_id = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
+    } else {
+        $party_id = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID; //checked
+    }
+
     ?>
       <tr class="<? print $InvoiceO->Class ?>">
         <td class="number"><? print $InvoiceO->ID ?></td>
         <td class="number"><? if($InvoiceO->Journaled) { ?><a href="<? print $_SETUP[DISPATCH]."t=journal.edit&amp;voucher_VoucherType=$InvoiceO->VoucherType&amp;voucher_JournalID=$InvoiceO->ID"; ?>&amp;action_journalid_search=1" target="_new"><? print $InvoiceO->VoucherType ?><? print $InvoiceO->JournalID ?></a><? } else { ?><? print $InvoiceO->VoucherType ?><? print $InvoiceO->JournalID ?><? } ?></td>
         <td class="number"><? print $InvoiceO->IssueDate ?></td>
         <td class="number"><? print substr($InvoiceO->IssueDate, 0, 7) ?></td>
-        <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&OrgNumber=<? print $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID ?>&inline=show" target="_new"><? print $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID ?></a></td>
+        <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&OrgNumber=<? print $party_id ?>&inline=show" target="_new"><? print $party_id ?></a></td>
         <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&AccountPlanID=<? print $InvoiceO->AccountPlanID ?>&inline=show" target="_new"><? print $InvoiceO->AccountPlanID ?></a></td>
         <td>&nbsp;<? print substr($InvoiceO->AccountingCustomerParty->Party->PartyName->Name,0,30) ?></td>
         <td class="number"><b><? print $InvoiceO->PaymentMeans->PaymentDueDate ?></b></td>

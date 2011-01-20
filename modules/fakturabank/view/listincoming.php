@@ -81,7 +81,7 @@ if (!empty($InvoicesO->Invoice)) {
       <td class="number"><? print $InvoiceO->ID ?></td>
       <td class="number"><? print $InvoiceO->IssueDate ?></td>
       <td class="number"><? print $InvoiceO->Period ?></td>
-      <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&OrgNumber=<? print $InvoiceO->AccountingSupplierParty->Party->PartyIdentification->ID ?>&inline=show" target="_new"><? print $InvoiceO->AccountingSupplierParty->Party->PartyIdentification->ID ?></a></td>
+      <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&OrgNumber=<? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID ?>&inline=show" target="_new"><? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID ?></a></td>
       <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&AccountPlanID=<? print $InvoiceO->AccountPlanID ?>&inline=show" target="_new"><? print $InvoiceO->AccountPlanID ?></a></td>
       <td>&nbsp;<? print substr($InvoiceO->AccountingSupplierParty->Party->PartyName->Name,0,30) ?></td>
       <td>&nbsp;<? print substr($InvoiceO->MotkontoAccountPlanID,0,30) ?></td>
@@ -108,7 +108,7 @@ if (!empty($InvoicesO->Invoice)) {
       <td class="number"><? print $InvoiceO->Project ?></td>
       <td class="number"><? print $InvoiceO->PaymentMeans->PayeeFinancialAccount->ID ?></td>
       <td class="number"><? print $InvoiceO->PaymentMeans->InstructionID ?></td>
-      <td align="center"><a href="<?php echo $_SETUP['FB_URL'] ?>suppliers/<? print $InvoiceO->AccountingSupplierParty->Party->PartyIdentification->ID ?>/invoices/<? print str_replace(".", "%2E", rawurlencode($InvoiceO->ID)) ?>" title="Vis faktura i fakturabank" target="_new">Vis</a>
+      <td align="center"><a href="<?php echo $_SETUP['FB_URL'] ?>suppliers/<? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID ?>/invoices/<? print str_replace(".", "%2E", rawurlencode($InvoiceO->ID)) ?>" title="Vis faktura i fakturabank" target="_new">Vis</a>
       <td class="number"><? print $InvoiceO->Status ?></td>
   </tr>
 <? 
