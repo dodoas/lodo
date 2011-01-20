@@ -776,23 +776,6 @@ class timesheet_user_page
             'Comment'    => array('type' => 'text', 'size' => '255', 'default' => "")
             );
 
-        function sorting_function ($a, $b) {
-            echo "{";
-            print_r($a); echo " ";
-            print_r($b);
-            echo "}</br>";
-            if($a['Day'] == $b['Day'])
-            {
-                if(isset($a['Sort']))
-                    return -1;
-                else
-                    return 1;
-            }
-            else
-                return $a['Day'] - $b['Day'];
-        };
-
-        //usort($entries, "sorting_function");
         ksort($entries);
         $this->print_table($period_name, $fields, $entries, $this->root . '&tp=view&period=' . $_REQUEST['period']);
 
