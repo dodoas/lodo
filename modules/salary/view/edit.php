@@ -252,7 +252,21 @@ $formname = "salaryUpdate";
 </tr>
 
 <tr>
-    <td colspan="6"></td>
+    <td colspan="6">
+      <?
+		if($_lib['sess']->get_person('FakturabankExportPaycheckAccess')) {
+		    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_salary_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
+		}
+
+      ?>
+     	<? if($head>FakturabankPersonID) { ?>
+     	<td>Sendt til Fakturabank</td>
+     	<td><? print $head->FakturabankDateTime ?></td>
+     	<td>Sendt til Fakturabank av</td>
+     	<td><? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?></td>
+		<? } ?>
+
+    </td>
     <td colspan="5"></td>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.print&amp;SalaryID=<? print $SalaryID ?>" target="_new" />Vis</a></td>
     <?

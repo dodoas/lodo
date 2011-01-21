@@ -714,5 +714,15 @@ elseif($_lib['input']->getProperty('action_salary_updatesalarycode')) {
         #print "$sql_update<br>\n";
         $_lib['db']->db_update($sql_update);
     }
+} elseif($_lib['input']->getProperty('action_salary_fakturabanksend')) {
+    if($_lib['sess']->get_person('FakturabankExportPaycheckAccess')) {
+        // comment out until ready
+        /* includelogic('fakturabank/fakturabanksalary'); */
+        /* $fb = new lodo_fakturabank_fakturabanksalary(); */
+
+        /* $fb->sendsalary($SalaryID, $SalaryConfID); */
+        print "<h1>Feature is not available yet</h1>";
+        
+    } // else handle illegal access attempt
 }
 ?>

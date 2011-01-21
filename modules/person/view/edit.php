@@ -167,8 +167,8 @@ $person = $_lib['storage']->get_row(array('query' => $query));
     <tr>
         <td class="BGColorDark">Tilgang til import av banktransaksjoner</td>
         <td><? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'FakturabankImportBankTransactionAccess', 'value'=>$person->FakturabankImportBankTransactionAccess, 'tabindex'=>'29')) ?></td>
-        <td class="BGColorDark"></td>
-        <td></td>
+         <td class="BGColorDark">Tilgang til eksport av l&oslash;nnslipp</td>
+        <td><? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'FakturabankExportPaycheckAccess', 'value'=>$person->FakturabankExportPaycheckAccess, 'tabindex'=>'29')) ?></td>
     </tr>
          <? } ?>
     <tr>
