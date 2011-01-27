@@ -125,7 +125,7 @@ while($row = $_lib['db']->db_fetch_object($result_conf))
 
       <form action="<? print $_lib['sess']->dispatch ?>t=weeklysale.edit&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>&action_weeklysale_new=1" method="post">
       <td>
-        <input type="text" name="init_bilagsnummer" size="4" value="" id="init_bilagsnummer_<? print $row->WeeklySaleConfID ?>" class="bilagsnummer">
+        <input type="text" name="init_bilagsnummer" size="4" value="" id="init_bilagsnummer_<? print $row->WeeklySaleConfID ?>_<? print $row->VoucherType; ?>" class="bilagsnummer">
       </td>
       <td>
         <? 
@@ -231,7 +231,7 @@ echo $_COOKIE[$_SESSION['DB_NAME'] . '_weeklysale_init_date_' . $row->WeeklySale
 $journalIDs = array();
 while($row = $_lib['db']->db_fetch_object($result_week))
 {
-    $journalIDs[] = $row->JournalID;
+    $journalIDs[] = $row->VoucherType . $row->JournalID;
     $query = "select Period from weeklysale where WeeklySaleID='$row->WeeklySaleID'";
     $week = $_lib['storage']->get_row(array('query' => $query));
 
@@ -249,7 +249,7 @@ while($row = $_lib['db']->db_fetch_object($result_week))
       <td><? $hash = $_lib['format']->Amount(array('value'=>$row->TotalAmount)); print $hash['value']; ?>
       <td>
       <? if( ($_lib['sess']->get_person('AccessLevel') >= 3 && !(int)$row->TotalCash) ||
-             $_lib['sess']->get_person('AccessLevel') >= 4) {
+              $_lib['sess']->get_person('AccessLevel') >= 4) {
         if($accounting->is_valid_accountperiod($week->Period, $_lib['sess']->get_person('AccessLevel')))
         {
             ?><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.list&amp;WeeklySaleID=<? print $row->WeeklySaleID ?>&amp;action_weeklysale_delete=1" class="button">Slett</a><?
@@ -266,11 +266,14 @@ $(document).ready(function(){
 
   $.each($('.bilagsnummer'), function() {
     $(this).keyup(function(){
-      var id = $(this).attr('id').substr(18);
+      var id_type = $(this).attr('id').substr(18).split('_');
+      var id = id_type[0];
+      var type = id_type[1];
+
       var el = $('#new_weeklysale_' + id);
       var val = $(this).val();
  
-      if(parseInt(val) == val && val != '' && val != '0' && $.inArray(val, journalIDs) == -1) {
+      if(parseInt(val) == val && val.length <= 10 && val != '' && val != '0' && $.inArray(type + val, journalIDs) == -1) {
         el.removeAttr("disabled");
       }
       else {

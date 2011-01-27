@@ -1,4 +1,9 @@
 <?
+
+if(isset($_POST['accountplan_AccountPlanType'])) {
+    $accountplan_type = $_POST['accountplan_AccountPlanType'];
+}
+
 if($accountplan_type == 'hovedbok')
     $selectedAccountPlanType = 'result';
 elseif($accountplan_type == 'reskontro')
@@ -35,7 +40,7 @@ else
   </tr>
   <tr>
     <td>
-        <? print $_lib['form3']->Type_menu3(array('table'=>$db_table, 'field'=>'AccountPlanType', 'value'=>$selectedAccountPlanType, 'type'=>'AccountPlanType', 'required'=>'1', 'disabled' => 1)) ?>
+        <?  print $_lib['form3']->Type_menu3(array('table'=>$db_table, 'field'=>'AccountPlanType', 'value'=>$selectedAccountPlanType, 'type'=>'AccountPlanType', 'required'=>'1', 'disabled' => 1))  ?>
     </td>
     <td>
         <input type="text"    value=""  name="accountplan.AccountPlanID" id="account_id" />

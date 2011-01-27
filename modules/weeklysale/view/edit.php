@@ -204,6 +204,34 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
             }
 
             $date_counter = 0;
+            $tabindex = 0;
+            $taboffset = 5;
+
+
+            //
+            // Tabindex calculation:
+            // for i in range(1, y+1):
+            //     print [if_(j == 1, (j - 1) * y + i, y + (x - 1) * (i - 1) + (j - 1)) for j in range(1, x+1)]
+            // 
+            // i.e. x = 10, y = 7
+            //
+            // [1, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+            // [2, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+            // [3, 26, 27, 28, 29, 30, 31, 32, 33, 34]
+            // [4, 35, 36, 37, 38, 39, 40, 41, 42, 43]
+            // [5, 44, 45, 46, 47, 48, 49, 50, 51, 52]
+            // [6, 53, 54, 55, 56, 57, 58, 59, 60, 61]
+            // [7, 62, 63, 64, 65, 66, 67, 68, 69, 70]
+            // 
+            // --
+            // 
+            // The first column is indexed downwards, while the rest are indexed to the right.
+            //
+
+            $i = 1;
+            $j = 1;
+            $x = 24;
+            $y = count($weeklysale->sale);
 
             foreach($weeklysale->sale as $WeeklySaleDayID => $line) {
                 #print_r($line);
@@ -247,26 +275,37 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                   $date_counter++;
 		?>
 
-                <td class="number"><input type="text" <? print $readonly ?> name="weeklysaleday.Day.<? print $line->WeeklySaleDayID ?>" value="<? print $line->Day ?>" size="2" class="number" tabindex="<? print (5 + $counter) ?>"></td>
-                <td class="number"><nobr><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.zreport&WeeklySaleID=<? print $WeeklySaleID ?>&WeeklySaleDayID=<? print $line->WeeklySaleDayID?>">Z</a><input type="text" <? print $readonly ?> name="weeklysaleday.Znr.<? print $line->WeeklySaleDayID ?>" value="<? print $line->Znr ?>" size="4" class="<? print $classznr ?>"  title="<? print $titleznr ?>" tabindex="<? print (6 + $counter) ?>"></nobr></td>
-                <td class="number"><input type="text" <? print $readonly ?> name="weeklysaleday.ZnrTotalAmount.<? print $line->WeeklySaleDayID ?>" value="<? print $_lib['format']->Amount($line->ZnrTotalAmount) ?>" size="7" class="<? print $classznramount ?>" title="<? print $titleznramount ?>" tabindex="<? print (7 + $counter) ?>">
+                <? $tabno = $taboffset + (($j == 1) ? (($j - 1) * $y + $i) : ($y + ($x - 1) * ($i - 1) + ($j - 1))); $j++; ?>
+                <td class="number"><input type="text" <? print $readonly ?> name="weeklysaleday.Day.<? print $line->WeeklySaleDayID ?>" value="<? print $line->Day ?>" size="2" class="number" tabindex="<? print $tabno ?>"></td>
 
-                <? foreach($weeklysale->salehead['groups'] as $name => $i) { ?>
-                <td class="number"><nobr><input type="text" title="Bel&oslash;p" <? print $readonly ?> name="weeklysaleday.Group<? print $i ?>Amount.<? print $line->WeeklySaleDayID ?>"   value="<? print $_lib['format']->Amount($line->{"Group{$i}Amount"}) ?>"  size="7" class="number" tabindex="<? print (8 + $counter) ?>">
-                <? if($weeklysale->salehead['enablequantity'][$i] == 1) { ?><input type="text" style="background-color: #999; color: black;" title="Antall"<? print $readonly ?> name="weeklysaleday.Group<? print $i ?>Quantity.<? print $line->WeeklySaleDayID ?>" value="<? print $_lib['format']->Amount(array('value'=>$line->{"Group{$i}Quantity"}, 'return'=>'value')) ?>"  size="7" class="number"><? } ?></nobr></td>
+                <? $tabno = $taboffset + (($j == 1) ? (($j - 1) * $y + $i) : ($y + ($x - 1) * ($i - 1) + ($j - 1))); $j++; ?>
+                <td class="number"><nobr><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.zreport&WeeklySaleID=<? print $WeeklySaleID ?>&WeeklySaleDayID=<? print $line->WeeklySaleDayID?>">Z</a><input type="text" <? print $readonly ?> name="weeklysaleday.Znr.<? print $line->WeeklySaleDayID ?>" value="<? print $line->Znr ?>" size="4" class="<? print $classznr ?>"  title="<? print $titleznr ?>" tabindex="<? print $tabno ?>"></nobr></td>
+
+                <? $tabno = $taboffset + (($j == 1) ? (($j - 1) * $y + $i) : ($y + ($x - 1) * ($i - 1) + ($j - 1))); $j++; ?>
+                <td class="number"><input type="text" <? print $readonly ?> name="weeklysaleday.ZnrTotalAmount.<? print $line->WeeklySaleDayID ?>" value="<? print $_lib['format']->Amount($line->ZnrTotalAmount) ?>" size="7" class="<? print $classznramount ?>" title="<? print $titleznramount ?>" tabindex="<? print $tabno ?>">
+
+                <? foreach($weeklysale->salehead['groups'] as $name => $v) { ?>
+                <? $tabno = $taboffset + (($j == 1) ? (($j - 1) * $y + $i) : ($y + ($x - 1) * ($i - 1) + ($j - 1))); $j++; ?>
+                <td class="number"><nobr><input type="text" title="Bel&oslash;p" <? print $readonly ?> name="weeklysaleday.Group<? print $v ?>Amount.<? print $line->WeeklySaleDayID ?>"   value="<? print $_lib['format']->Amount($line->{"Group{$v}Amount"}) ?>"  size="7" class="number" tabindex="<? print $tabno ?>">
+                <? if($weeklysale->salehead['enablequantity'][$v] == 1) { ?>
+                  <? $tabno = $taboffset + (($j == 1) ? (($j - 1) * $y + $i) : ($y + ($x - 1) * ($i - 1) + ($j - 1))); $j++; ?>
+                  <input type="text" style="background-color: #999; color: black;" title="Antall"<? print $readonly ?> name="weeklysaleday.Group<? print $v ?>Quantity.<? print $line->WeeklySaleDayID ?>" value="<? print $_lib['format']->Amount(array('value'=>$line->{"Group{$v}Quantity"}, 'return'=>'value')) ?>"  size="7" class="number" tabindex="<? print $tabno ?>" ><? } ?></nobr></td>
                 <? } ?>
 
                 <td class="menuright"><nobr><? print $_lib['format']->Amount($weeklysale->salehead['sumday'][$line->ParentWeeklySaleDayID]) ?></nobr></td>
                 <td colspan="2"><? print $line->Person ?></td>
             	<td><a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.edit&WeeklySaleID=<? print $WeeklySaleID ?>&action_weeklysale_daynew=1&amp;DayID=<? print $line->DayID ?>&amp;Day=<? print $line->Day ?>">Ny linje</a></td>
                 <?
-                $counter += 43;
+                $i++;
+		$j = 1;
 
                 if($line->Locked == 1 and $readonly == "disabled")
                 {
                     $readonly = "";
                 }
             }
+
+	    $tabindex = $tabno + 1;
             ?>
             <tr>
                 <td class="menu">Sum</td>
@@ -340,7 +379,7 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
             <?
             $sumtot = 0;
             $sum = array();
-            $counter=0;
+            $counter=1;
             
             if(is_array($weeklysale->revenue)) {
                 foreach($weeklysale->revenue as $WeeklySaleDayID => $line) {
@@ -357,23 +396,23 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                         <td class="number"><? print $line->Znr ?></td>
                         <? if(is_array($weeklysale->revenuehead['groups'])) {
 				        foreach($weeklysale->revenuehead['groups'] as $name => $i) { ?>
-                        <td class="number"><input <? print $readonly ?> type="text" name="weeklysaleday.Group<? print $i ?>Amount.<? print $line->WeeklySaleDayID ?>"      value="<? print $_lib['format']->Amount($line->{"Group{$i}Amount"}) ?>"  size="7" class="number" tabindex="<? print (28 + $counter) ?>">
+                        <td class="number"><input <? print $readonly ?> type="text" name="weeklysaleday.Group<? print $i ?>Amount.<? print $line->WeeklySaleDayID ?>"      value="<? print $_lib['format']->Amount($line->{"Group{$i}Amount"}) ?>"  size="7" class="number" tabindex="<? print ($counter * $x) ?>">
                         <? } 
 			            } ?>
     
                         <!-- Kontant-->
                         <td class="number"><input type="hidden" name="weeklysaleday.Group18Amount.<? print $line->WeeklySaleDayID ?>" value="<? print $weeklysale->head->sum18 ?>"><nobr><? print $_lib['format']->Amount($weeklysale->revenuehead['sumcash'][$line->ParentWeeklySaleDayID]) ?></nobr>
                         <td class="number"><nobr><? print $_lib['format']->Amount($weeklysale->salehead['sumday'][$line->ParentWeeklySaleDayID]) ?></nobr>
-                        <td class="number"><!-- kontant inn --><input type="text" <? print $readonly ?> name="weeklysaleday.Group19Amount.<? print $line->WeeklySaleDayID ?>"   value="<? $hash = $_lib['format']->Amount(array('value'=>$line->Group19Amount)); print $hash['value']; ?>" size="7" class="number" tabindex="<? print (46 + $counter) ?>">
-                        <td class="number"><!-- kontant ut --><input type="text" <? print $readonly ?> name="weeklysaleday.Group20Amount.<? print $line->WeeklySaleDayID ?>"   value="<? $hash = $_lib['format']->Amount(array('value'=>$line->Group20Amount)); print $hash['value']; ?>" size="7" class="number" tabindex="<? print (47 + $counter) ?>">
-                        <td class="number"><!-- opptelling --><input <? print $readonly ?> type="text" name="weeklysaleday.ActuallyCashAmount.<? print $line->WeeklySaleDayID ?>" value="<? $hash = $_lib['format']->Amount(array('value'=>$line->ActuallyCashAmount)); print $hash['value']; ?>" size="7" class="number" tabindex="<? print (45 + $counter) ?>">
+                        <td class="number"><!-- kontant inn --><input type="text" <? print $readonly ?> name="weeklysaleday.Group19Amount.<? print $line->WeeklySaleDayID ?>"   value="<? $hash = $_lib['format']->Amount(array('value'=>$line->Group19Amount)); print $hash['value']; ?>" size="7" class="number" tabindex="<? print ($tabindex + (2*7 + $counter)) ?>">
+                        <td class="number"><!-- kontant ut --><input type="text" <? print $readonly ?> name="weeklysaleday.Group20Amount.<? print $line->WeeklySaleDayID ?>"   value="<? $hash = $_lib['format']->Amount(array('value'=>$line->Group20Amount)); print $hash['value']; ?>" size="7" class="number" tabindex="<? print ($tabindex + (3*7 + $counter)) ?>">
+                        <td class="number"><!-- opptelling --><input <? print $readonly ?> type="text" name="weeklysaleday.ActuallyCashAmount.<? print $line->WeeklySaleDayID ?>" value="<? $hash = $_lib['format']->Amount(array('value'=>$line->ActuallyCashAmount)); print $hash['value']; ?>" size="7" class="number" tabindex="<? print ($tabindex + (4*7 + $counter)) ?>">
                         <td class="number"><!-- diff --><? if($weeklysale->revenuehead['sumdiff'][$line->ParentWeeklySaleDayID] != 0) { print "<font color=\"red\">"; } ?><? print $_lib['format']->Amount($weeklysale->revenuehead['sumdiff'][$line->ParentWeeklySaleDayID]) ?><? if($weeklysale->revenuehead['sumdiff'][$line->ParentWeeklySaleDayID] != 0) { print "</font>"; } ?></td>
                         <td><? if($weeklysale->revenuehead['sumdiff'][$line->ParentWeeklySaleDayID] != 0) { ?><input <? print $readonly ?> type="text" name="weeklysaleday.CashAmountExplanation.<? print $line->WeeklySaleDayID ?>" value="<? print $line->CashAmountExplanation ?>" size="20" tabindex="306"><? } ?>
                         <td><? print $line->Person ?><? //$_lib['form2']->CompanyContactMenu( array('table' => 'weeklysaleday', 'field' => 'PersonID', 'value' => $line->PersonID, 'pk' => $line->WeeklySaleDayID, 'disabled'=>$line->Locked)); ?>
                         <td><? if($weeklysale->salehead['sumday'][$line->ParentWeeklySaleDayID] > 0) { print $_lib['form3']->checkbox(array('name'=>"weeklysaleday.Locked.".$line->WeeklySaleDayID, 'value'=>$line->Locked, 'disabled'=>($_lib['sess']->get_person('AccessLevel') >= 3)?'0':$line->Locked)); } ; ?>
                     </tr>
                     <?
-                    $counter += 43;
+                    $counter += 1;
     
                     if($line->Locked == 1 and $readonly == "disabled")
                     {

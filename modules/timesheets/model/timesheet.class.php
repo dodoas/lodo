@@ -207,7 +207,7 @@ class timesheet_user
     {
         global $_lib;
 
-        $r = $_lib['db']->db_query("SELECT ProjectID, Heading FROM project WHERE active = 1");
+        $r = $_lib['db']->db_query("SELECT ProjectID, Heading FROM project WHERE active = 1 ORDER BY Heading");
 
         $list = array();
 
@@ -244,7 +244,7 @@ class timesheet_user
     {
         global $_lib;
 
-        $r = $_lib['db']->db_query("SELECT * FROM timesheetsworktype");
+        $r = $_lib['db']->db_query("SELECT * FROM timesheetsworktype ORDER BY Name");
         $list = array();
 
         while($row = $_lib['db']->db_fetch_assoc($r))
@@ -291,6 +291,27 @@ class timesheet_user_page
         $this->root = $root;
     }
 
+    private function create_timeselectbox($name, $class, $value, $options) 
+    {
+        $el = sprintf('<select name="%s" id="%s" class="%s">', $name, $name, $class);
+        
+        foreach($options as $v) {
+            $v2 = "$v";
+            if(strlen($v2) < 2) 
+                $v2 = "0$v2";
+            
+            if($v == $value) 
+                $el .= sprintf('<option value="%d" selected="selected">%s</option>', $v, $v2);
+            else
+                $el .= sprintf('<option value="%d">%s</option>', $v, $v2);
+            
+        }
+
+        $el .= '</select>';
+        
+        return $el;
+    }
+    
     private function print_head()
     {
         if(!$this->user->is_admin())
@@ -315,6 +336,12 @@ class timesheet_user_page
                    "<p><a href='%s'>Tilbake til oversikt</a></p>", 
                    $this->user->get_username(), $this->root);
         }
+
+        printf(
+            "<style>".
+            ".BeginTime_h, .EndTime_h, .SumTime_h { background-color: green; color: white; }".
+            "</style>"
+            );
     }
 
     private function print_bottom()
@@ -481,7 +508,7 @@ class timesheet_user_page
         {
             foreach($entries as $entry)
             {
-                printf("<tr style='background-color: %s'>\n", ( ($i + 1) % 2 != 0 ? "#DDD" : "#FFF" ));
+                printf("<tr style='%s'>\n", ( ((int)$entry['Day']) % 2 != 0 ? "background-color: #000; color: white;" : "background-color:#FFF; color:black;" ));
 
                 foreach($fields as $field => $field_data)
                 {
@@ -528,21 +555,25 @@ class timesheet_user_page
                             if(strstr($name, "SumTime"))
                             {
                                 $data = sprintf(
-                                    "<input name='%s_h' type='text' value='%s' class='%s_h' style='width: 25px; background-color:green; color: #eee; text-align: right;' id='%s_h' />" .
-                                    "<input name='%s_m' type='text' value='%s' class='%s_m' style='width: 25px; text-align:right;' id='%s_m' />" .
-                                    "<input name='%s' type='hidden' value='' id='%s' /> " ,
-                                    $name, $h, $field, $name,
-                                    $name, $m, $field, $name,
+                                    "%s %s <input name='%s' type='hidden' value='' id='%s' />",
+                                    $this->create_timeselectbox($name."_h", $field."_h", $h, range(0,23)),
+                                    $this->create_timeselectbox($name."_m", $field."_m", $m, range(0,59,5)),
+                                    $name, $name);
+                            }
+                            else if(strstr($name, "EndTime")) 
+                            {
+                                $data = sprintf(
+                                    "%s %s <input name='%s' type='hidden' value='' id='%s' />",
+                                    $this->create_timeselectbox($name."_h", $field."_h", $h, range(0,24)),
+                                    $this->create_timeselectbox($name."_m", $field."_m", $m, range(0,59,5)),
                                     $name, $name);
                             }
                             else
                             {
                                 $data = sprintf(
-                                    "<input name='%s_h' type='text' value='%s' class='%s_h' style='width: 25px; background-color:#E0F8E0; text-align: right;' id='%s_h' />" .
-                                    "<input name='%s_m' type='text' value='%s' class='%s_m' style='width: 25px; text-align:right;' id='%s_m' />" .
-                                    "<input name='%s' type='hidden' value='' id='%s' /> " ,
-                                    $name, $h, $field, $name,
-                                    $name, $m, $field, $name,
+                                    "%s %s <input name='%s' type='hidden' value='' id='%s' />",
+                                    $this->create_timeselectbox($name."_h", $field."_h", $h, range(0,23)),
+                                    $this->create_timeselectbox($name."_m", $field."_m", $m, range(0,59,5)),
                                     $name, $name);
                             }
                         }

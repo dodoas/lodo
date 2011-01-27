@@ -8,20 +8,24 @@ if(!$AccountPlanID && $AccountPlanType) {
 
 if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->getProperty('action_accountplan_updateautomatic'))
 {
-    $password_sql = sprintf("DELETE FROM timesheetpasswords WHERE AccountPlanID = %d", $AccountPlanID);
-    $_lib['db']->db_query($password_sql);
-    $password_sql = sprintf("INSERT INTO timesheetpasswords (`AccountPlanID`, `Password`)
-		VALUES ('%d', '%s');", $AccountPlanID, $_POST['timesheetpasswords_Password']);
-    $_lib['db']->db_query($password_sql);
+    if(isset($_POST['timesheetpasswords_Password'])) 
+    {
+        $password_sql = sprintf("DELETE FROM timesheetpasswords WHERE AccountPlanID = %d", $AccountPlanID);
+        $_lib['db']->db_query($password_sql);
+        $password_sql = sprintf("INSERT INTO timesheetpasswords (`AccountPlanID`, `Password`)
+  		VALUES ('%d', '%s');", $AccountPlanID, $_POST['timesheetpasswords_Password']);
+        $_lib['db']->db_query($password_sql);
+    }
 
-    $fakturabankemail_query = sprintf("DELETE FROM fakturabankemail WHERE AccountPlanID = %d", $AccountPlanID);
-    $_lib['db']->db_query($fakturabankemail_query);
+    if(isset($_POST['fakturabankemail_Email'])) {
+        $fakturabankemail_query = sprintf("DELETE FROM fakturabankemail WHERE AccountPlanID = %d", $AccountPlanID);
+        $_lib['db']->db_query($fakturabankemail_query);
 
-    $fakturabankemail_query = sprintf("INSERT INTO fakturabankemail (`AccountPlanID`, `Email`) 
-						VALUES('%d', '%s');",
-					$AccountPlanID, $_POST['fakturabankemail_Email']);
-    $_lib['db']->db_query($fakturabankemail_query);
-
+        $fakturabankemail_query = sprintf("INSERT INTO fakturabankemail (`AccountPlanID`, `Email`) 
+    						VALUES('%d', '%s');",
+    					$AccountPlanID, $_POST['fakturabankemail_Email']);
+        $_lib['db']->db_query($fakturabankemail_query);
+    }
 
 
     #Check of this is a new and usaved account, if so - just create it

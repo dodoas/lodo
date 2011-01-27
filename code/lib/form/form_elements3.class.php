@@ -507,15 +507,12 @@ class form3
         $name       = $this->MakeName($args);
         $tabindex   = $this->MakeTabindex($args);
 
-        if(isset($args['disabled']))
-        {
-            $disabled = "disabled";
+        if(isset($args['disabled'])) {
+            $disabled = true;
         }
-        else
-        {
-            $disabled = "";
+        else {
+            $disabled = false;
         }
-
 
         if(isset($args['class']))
         {
@@ -574,7 +571,16 @@ class form3
             $id = $name;
         }   
 
-        $element    = "<select name=\"$name\" id=\"$id\" class=\"$class\" $disabled ";
+        // Disabled fields doesn't get submited 
+        // a quick fix for this is to make the selectbox with a different name than 
+        // requested and make a second hidden field with the original name and the value.
+        if($disabled) {
+            $element    = '<input type="hidden" name="'.$name.'" value="'.$args['value'].'" />';
+            $element    .= "<select name=\"".$name."_disabled\" id=\"$id\" class=\"$class\" disabled=\"disabled\" ";
+        }
+        else {
+            $element    = "<select name=\"$name\" id=\"$id\" class=\"$class\" "; 
+        }
         if($tabindex)  { $element .= " tabindex=\"$tabindex\""; }
         if($accesskey) { $element .= " accesskey=\"$args[accesskey]\""; }
         if($args['autosubmit']) { $element .= " onchange=submit()";  }
