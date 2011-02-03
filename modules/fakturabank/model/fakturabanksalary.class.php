@@ -10,6 +10,12 @@ class lodo_fakturabank_fakturabanksalary {
     private $timeout        = 30; 
     private $credentials    = '';
     private $OrgNumber      = '';
+    private $ArrayTag       = array(
+                                    'import-paychecks-result' => true,
+                                 'paycheck-results'          => true,
+                                 'paycheck'  => true,
+                                );
+
 
     function __construct() {
         global $_lib;
@@ -43,12 +49,38 @@ class lodo_fakturabank_fakturabanksalary {
     
     ################################################################################################
     public function createSalaryXML($SalaryID, $SalaryConfID) {
+        #########################################
+        #This should be placed under firmaoppsett
+        $lineInFrom  =  10;
+        $lineInTo    =  69;
+        $lineOutFrom =  70;
+        $lineOutTo   = 100;
+
+
         global $_lib;
 
         $query_head     = "select S.*, F.Email AS FakturabankEmail, A.AccountName, A.Address, A.City, A.ZipCode, A.SocietyNumber, A.TabellTrekk, A.ProsentTrekk, A.Email, A.Address, A.ZipCode, A.LastName, A.FirstName, A.City, A.Phone, A.Mobile, A.DomesticBankAccount from salary as S, accountplan as A, fakturabankemail as F  where S.SalaryID='$SalaryID' and S.AccountPlanID=A.AccountPlanID and F.AccountPlanID = S.AccountPlanID and A.AccountPlanID = F.AccountPlanID";
         #print "$query_head<br>";
         $result_head    = $_lib['db']->db_query($query_head);
         $head           = $_lib['db']->db_fetch_object($result_head);
+
+        $accountplan_edit_url = "/lodo.php?view_mvalines=&view_linedetails=&t=accountplan.employee&accountplan_AccountPlanID=" . $head->AccountPlanID;
+
+        if (empty($head))  {
+            $_lib['message']->add("Du maring; sette den ansattes person.fakturabank.no-adresse <a href=\"$accountplan_edit_url\">her</a> for &aring; kunne laste opp l&oslash;nnslipper.");
+            echo "Du m&aring; sette den ansattes person.fakturabank.no-adresse <a href=\"$accountplan_edit_url\">her</a> for &aring; kunne laste opp l&oslash;nnslipper.<br>";
+        
+            return false;
+        }
+
+        if (empty($head->FirstName) || empty($head->LastName)) {
+            $_lib['message']->add("Du maring; sette den ansattes fornavn og etternavn <a href=\"$accountplan_edit_url\">her</a> for &aring; kunne laste opp l&oslash;nnslipper.");
+            echo "Du maring; sette den ansattes fornavn og etternavn <a href=\"$accountplan_edit_url\">her</a> for &aring; kunne laste opp l&oslash;nnslipper.<br>";
+
+            return false;
+        }
+
+        //http://locallodo.no/lodo.php?view_mvalines=&view_linedetails=&t=accountplan.employee&accountplan_AccountPlanID=10000
 
         $query_salary   = "select * from salaryline where SalaryID = '$SalaryID' order by LineNumber asc";
         $result_salary  = $_lib['db']->db_query($query_salary);
@@ -60,8 +92,8 @@ class lodo_fakturabank_fakturabanksalary {
             $projects[ $project_line['ProjectID'] ] = $project_line['Heading'];
         $projects[0] = "";
 
-        $xml_prefix = "<" . "?xml version=\"1.0\" encoding=\"UTF-8\"?" . "><paycheck_messages><paycheck>\n";
-        $xml_postfix = "</paycheck></paycheck_messages>\n";
+        $xml_prefix = "<" . "?xml version=\"1.0\" encoding=\"UTF-8\"?" . ">\n<paycheck_messages>\n<paycheck>\n";
+        $xml_postfix = "</paycheck>\n</paycheck_messages>\n";
 
         $xml_content = "";
 
@@ -104,14 +136,16 @@ class lodo_fakturabank_fakturabanksalary {
                 $sumVacation += ($line->VacationPayment / 100) * $line->AmountThisPeriod;
             }
 
+
+
             $xml_paycheck_lines .= "<code>" . $line->LineNumber . "</code>\n";
-            $xml_paycheck_lines .= "<description>" . $line->SalaryText . "</description>\n";
+            $xml_paycheck_lines .= "<description>" . htmlentities($line->SalaryText) . "</description>\n";
             $xml_paycheck_lines .= "<work_amount>" . $line->NumberInPeriod . "</work_amount>\n";
 
             // leave work_amount_unit blank since the system does not yet specify such
             $xml_paycheck_lines .= "<work_amount_unit />\n";
-            $xml_paycheck_lines .= "<work_amount_rate>" . $line->Rate . "</work_amount_rate>\n";
-            $xml_paycheck_lines .= "<amount_period>" . $line->NumberInPeriod . "</amount_period>\n";
+            $xml_paycheck_lines .= "<work_amount_unit_rate>" . $line->Rate . "</work_amount_unit_rate>\n";
+            $xml_paycheck_lines .= "<amount_period>" . $line->AmountThisPeriod . "</amount_period>\n";
 
             if ($line->LineNumber == $last_line_value) {
                 $amount_year = "-Som over-";
@@ -156,18 +190,19 @@ class lodo_fakturabank_fakturabanksalary {
 
 
 		$xml_content .= "<employer>\n";
-		$xml_content .= "<name>" . $_lib['sess']->get_companydef('CompanyName') . "</name>";
+		$xml_content .= "<name>" . $_lib['sess']->get_companydef('CompanyName') . "</name>\n";
 
 		$xml_content .= "<postal_address>\n";
-		$xml_content .= "<street>" . $_lib['sess']->get_companydef('VAddress') . "</street>";
-		$xml_content .= "<city>" . $_lib['sess']->get_companydef('VCity') . "</city>";
-		$xml_content .= "<zip_code>" . $_lib['sess']->get_companydef('VZipCode') . "</zip_code>";
-		$xml_content .= "<country_code>NO</country_code>";
+		$xml_content .= "<street>" . $_lib['sess']->get_companydef('VAddress') . "</street>\n";
+		$xml_content .= "<city>" . $_lib['sess']->get_companydef('VCity') . "</city>\n";
+		$xml_content .= "<zip_code>" . $_lib['sess']->get_companydef('VZipCode') . "</zip_code>\n";
+		$xml_content .= "<country_code>NO</country_code>\n"; // hardcoded to Norway for now
 		$xml_content .= "</postal_address>\n";
 
         $xml_content .= "<email>" . $_lib['sess']->get_companydef('Email') . "</email>\n";
         $xml_content .= "<website>" . $_lib['sess']->get_companydef('WWW') . "</website>\n";
         $xml_content .= "<identifier>" . $this->OrgNumber . "</identifier>\n";
+        $xml_content .= "<position />";
         $xml_content .= "<scheme>NO:ORGNR</scheme>\n";
 
 		$xml_content .= "</employer>\n";
@@ -176,24 +211,24 @@ class lodo_fakturabank_fakturabanksalary {
         /* employee */
 
 		$xml_content .= "<employee>\n";
-        $xml_content .= "<id>" . $head->AccountPlanID . "</id>";
-		$xml_content .= "<first_name>" . $head->FirstName . "</first_name>";
-		$xml_content .= "<last_name>" . $head->LastName . "</last_name>";
-        $xml_content .= "<scheme>FAKTURABANK:EMAIL</scheme>";
-        $xml_content .= "<identifier>" . $head->FakturabankEmail . "</identifier>";
-        $xml_content .= "<email>" . $head->Email . "</email>";
+        $xml_content .= "<employee_number>" . $head->AccountPlanID . "</employee_number>\n";
+		$xml_content .= "<first_name>" . $head->FirstName . "</first_name>\n";
+		$xml_content .= "<last_name>" . $head->LastName . "</last_name>\n";
+        $xml_content .= "<scheme>FAKTURABANK:EMAIL</scheme>\n";
+        $xml_content .= "<identifier>" . $head->FakturabankEmail . "</identifier>\n";
+        $xml_content .= "<email>" . $head->Email . "</email>\n";
 
-		$xml_content .= "<postal_address>";
-		$xml_content .= "<street>" . $head->Address . "</street>";
-		$xml_content .= "<city>" . $head->City . "</city>";
-        $xml_content .= "<zip_code>" . $head->ZipCode . "</zip_code>";
-		$xml_content .= "<country_code>NO</country_code>";
-		$xml_content .= "</postal_address>";
+		$xml_content .= "<postal_address>\n";
+		$xml_content .= "<street>" . $head->Address . "</street>\n";
+		$xml_content .= "<city>" . $head->City . "</city>\n";
+        $xml_content .= "<zip_code>" . $head->ZipCode . "</zip_code>\n";
+		$xml_content .= "<country_code>NO</country_code>\n"; // hardcoded to Norway for now
+		$xml_content .= "</postal_address>\n";
 
-        $xml_content .= "<fixedphone>" . $head->Phone . "</fixedphone>";
-        $xml_content .= "<cellphone>" . $head->Mobile . "</cellphone>";
-        $xml_content .= "<bank_account_country>NO</bank_account_country>";
-        $xml_content .= "<bank_account_number>" . $head->DomesticBankAccount . "</bank_account_number>";
+        $xml_content .= "<fixedphone>" . $head->Phone . "</fixedphone>\n";
+        $xml_content .= "<cellphone>" . $head->Mobile . "</cellphone>\n";
+        $xml_content .= "<bank_account_country_code>NO</bank_account_country_code>\n"; // hardcoded to Norway for now
+        $xml_content .= "<bank_account_number>" . $head->DomesticBankAccount . "</bank_account_number>\n";
 
 		$xml_content .= "</employee>\n";
 
@@ -224,34 +259,45 @@ class lodo_fakturabank_fakturabanksalary {
 
 		$fpGrunnlag = $totalThisYear->total - $totalThisYearFradrag->total;
 
-        $xml_content .= "<paycheck_additional>";
-        $xml_content .= "<title>Feriepenge grunnlag</title>";
-        $xml_content .= "<value>" . $_lib['format']->Amount(array('value'=>$fpGrunnlag_da, 'return'=>'value')) . "</value>";
-        $xml_content .= "</paycheck_additional>";
+        $xml_content .= "<paycheck_additional>\n";
+        $xml_content .= "<title>Feriepenge grunnlag</title>\n";
+        $xml_content .= "<value>" . $_lib['format']->Amount(array('value'=>$fpGrunnlag_da, 'return'=>'value')) . "</value>\n";
+        $xml_content .= "</paycheck_additional>\n";
 
 
 
         return $xml_prefix . $xml_content . $xml_postfix;
     }
 
-    function sendsalary($SalaryID) {
+    function sendsalary($SalaryID, $SalaryConfID) {
+        global $_lib;
         $xml = $this->createSalaryXML($SalaryID, $SalaryConfID);
+        if ($xml === false) {
+            return false;
+        }
         $fakturabank_salary_id = $this->write($xml);
-        // TODO save 
-        //FakturabankID
-        //FakturabankPersonID
-        //FakturabankDateTime
+
+        if (!$fakturabank_salary_id) {
+            return false;
+        }
+
+
+        $dataH = array();
+        $dataH['SalaryID']             = $SalaryID;
+        $dataH['FakturabankID']   = $fakturabank_salary_id;
+        $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
+        $dataH['FakturabankDateTime']   = $_lib['sess']->get_session('Datetime');
+        
+        $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'salary', 'debug' => false));
+        return true;
     }
 
     ####################################################################################################
     #WRITE XML
     function write($xml) {
-        echo("modules/fakturabank/model/fakturabanksalary.class.php-" . __LINE__ . ":xml:" . (is_array($xml) || is_object($xml) ? print_r($xml, true) : $xml . ". <br/>\n"));
-        
         global $_lib;
 
-        
-        $page = "/import_paychecks.xml";
+        $page = "/import_paychecks";
         $url  = "$this->protocol://$this->host$page";
         
         $headers = array(
@@ -279,24 +325,65 @@ class lodo_fakturabank_fakturabanksalary {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $xml); 
 
         $data = curl_exec($ch); 
-        error_log("modules/fakturabank/model/fakturabanksalary.class.php-" . __LINE__ . ":data:" . (is_array($data) || is_object($data) ? print_r($data, true) : $data . ". <br/>\n"));
-        $_lib['message']->add("modules/fakturabank/model/fakturabanksalary.class.php-" . __LINE__ . ":data:" . (is_array($data) || is_object($data) ? print_r($data, true) : $data . ". <br/>\n"));
-        #$_lib['message']->add("FB->write()->exec()");
 
-        $success = false;
+        $import_paycheck_result = $this->parseResult(substr($data, strpos($data, "<?xml version")));
+
+        $ret = false;
         if (curl_errno($ch)) {
-            $_lib['message']->add("Error: opprette faktura: " . curl_error($ch));
+            $_lib['message']->add("Error: lastet opp lønnslipp: " . curl_error($ch) . " " . $import_paycheck_result['message']);
+            if (!empty($import_paycheck_result['paycheck-results'])) {
+                $_lib['message']->add("Error info: " . $import_paycheck_result['paycheck-results'][0]['error-message']);
+            }
+            $ret = false;
         } else {
+
             // Show me the result
-            $_lib['message']->add(microtime() . " Opprettet faktura: $i");
-            $_lib['message']->add("<pre>$data</pre>");
-            #print_r(curl_getinfo($ch));
-            $success  = true;
+            if ($import_paycheck_result['omitted-paychecks'] == 1) {
+                $_lib['message']->add("Fakturaen finnes allerede");
+                $ret = false;
+            } else if ($import_paycheck_result['failed-paychecks'] == 1) { // we might get errors even if errno is 0
+                $_lib['message']->add("Feil under opplasting: " . $import_paycheck_result['message'] . " Info: " . $import_paycheck_result['exception']);
+                $ret = false;
+            } else if ($import_paycheck_result['created-paychecks'] == 0) {
+                $_lib['message']->add("Feil tilbakemeldingsinfo fra server opplasting. " . $import_paycheck_result['message'] . " Info: " . $import_paycheck_result['exception']);
+                $ret = false;
+            } else {
+                $_lib['message']->add("Fakturaen ble opprettet riktig");
+                $ret  = $import_paycheck_result['paycheck-results'][0]['paycheck-result']['id'];
+            }
         }
        
         curl_close($ch);
         // todo return salary id
-        return $success;
+        return $ret;
+    }
+
+    function parseResult($xml_data) {
+        global $_lib;
+
+        $size = strlen($xml_data);
+
+        if($size) {
+            includelogic('xmldomtoobject/xmldomtoobject');
+            $domtoobject = new empatix_framework_logic_xmldomtoobject(array('arrayTags' => $this->ArrayTag));
+            #print "\n<hr>$xml_data\n<hr>";
+            $import_paychecks_result    = $domtoobject->convert($xml_data);
+        } else {
+                $_lib['message']->add("XML Dokument tomt - pr&oslash;v igjen: $url");            
+                return false;
+        }
+        // ugly convert from stdClass to array, and slight restructuring
+        $ret_arr = (array) $import_paychecks_result;
+        if (!empty($ret_arr['paycheck-results'])) {
+            $ret_arr['paycheck-results'] = (array) $ret_arr['paycheck-results'];
+
+            foreach ($ret_arr['paycheck-results'] as &$res) {
+                $res = (array) $res;
+                $res['paycheck-result'] = (array) $res['paycheck-result'];
+            }
+        }
+
+        return $ret_arr;
     }
 }
 ?>

@@ -716,13 +716,13 @@ elseif($_lib['input']->getProperty('action_salary_updatesalarycode')) {
     }
 } elseif($_lib['input']->getProperty('action_salary_fakturabanksend')) {
     if($_lib['sess']->get_person('FakturabankExportPaycheckAccess')) {
-        // comment out until ready
-        /* includelogic('fakturabank/fakturabanksalary'); */
-        /* $fb = new lodo_fakturabank_fakturabanksalary(); */
+        includelogic('fakturabank/fakturabanksalary');
+        $fb = new lodo_fakturabank_fakturabanksalary();
 
-        /* $fb->sendsalary($SalaryID, $SalaryConfID); */
-        print "<h1>Feature is not available yet</h1>";
+        $fb->sendsalary($SalaryID, $SalaryConfID);
+        error_log("modules/salary/view/record.inc: " . __LINE__);
+        //        print "<h1>Feature is not available yet</h1>";
         
-    } // else handle illegal access attempt
+    } // else TODO later: handle illegal access attempt
 }
 ?>

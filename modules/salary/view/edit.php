@@ -44,6 +44,13 @@ $formname = "salaryUpdate";
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
+<? if($_lib['message']->get()) { 
+    $msg = $_lib['message']->get();
+$mcolor = (strstr($msg, "rror")) ? "red" : "black";
+?>
+    <div class="<? echo $mcolor ?> error"><? print $_lib['message']->get() ?><br/></div>
+<? } ?>
+
 <? print $message ?>
 
 <form name="<? print $formname ?>" action="<? print $MY_SELF ?>" method="post">
@@ -252,18 +259,15 @@ $formname = "salaryUpdate";
 </tr>
 
 <tr>
-    <td colspan="6">
+    <td colspan="<? echo ($head->FakturabankPersonID) ? '2' : '6'  ?>">
       <?
 		if($_lib['sess']->get_person('FakturabankExportPaycheckAccess')) {
 		    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_salary_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
 		}
 
       ?>
-     	<? if($head>FakturabankPersonID) { ?>
-     	<td>Sendt til Fakturabank</td>
-     	<td><? print $head->FakturabankDateTime ?></td>
-     	<td>Sendt til Fakturabank av</td>
-     	<td><? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?></td>
+     	<? if ($head->FakturabankPersonID) { ?>
+<td colspan="4">Sendt til Fakturabank <? print $head->FakturabankDateTime ?>, av <? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?></td>
 		<? } ?>
 
     </td>

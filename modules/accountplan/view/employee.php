@@ -68,6 +68,12 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td></td>
     <td></td>
   </tr>
+  <tr>
+                             <td class="menu">Fornavn (Kun for personer)</td>
+    <td></td>
+    <td><input class="lodoreqfelt" type="text" name="accountplan.FirstName" value="<? print $account->FirstName  ?>" size="20"></td>
+                             <td>Etternavn (Kun for personer)</td>
+    <td><input class="lodoreqfelt" type="text" name="accountplan.LastName" value="<? print $account->LastName  ?>" size="20"></td>
   </tr>
   <tr>
     <td class="menu">Adresse</td>
