@@ -287,17 +287,6 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
 </tr>
 <tr>
     <td>
-  <?
-  if(($_lib['sess']->get_person('AccessLevel') >= 1))
-  {
-    ?>
-    <form name="salary_new" action="<? print $_lib['sess']->dispatch ?>t=salary.template" method="post">
-      <input type="submit" name="action_salaryconf_new" value="Ny ansatt (N)" accesskey="N" />
-    </form>
-    <?
-  }
-  ?>
-
     </td>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $row_head->SalaryConfID ?>"><b>Hovedmal</b></a></td>
     <td style="background-color: yellow"></td>
