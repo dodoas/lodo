@@ -24,6 +24,9 @@ if($account->AccountPlanType)
 $fakturabankemail_query = "select * from fakturabankemail where AccountPlanID = " . $AccountPlanID;
 $fakturabankemail = $_lib['storage']->get_row(array('query' => $fakturabankemail_query));
 
+$salary_conf_query = "SELECT SalaryConfID FROM salaryconf WHERE AccountPlanID = $AccountPlanID";
+$salary_conf = $_lib['db']->db_query($salary_conf_query);
+
 print $_lib['sess']->doctype ?>
 
 <head>
@@ -56,8 +59,12 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
   </tr>
   <tr>
     <td class="menu">Aktiv</td>
-    <td></td>
-    <td><? $_lib['form2']->checkbox2($db_table, "Active", $account->Active,'') ?> <? print $_lib['form3']->Type_menu3(array('table'=>$db_table, 'field'=>'AccountPlanType', 'value' => $AccountPlanType, 'type'=>'AccountPlanType', 'required'=>'1')) ?></td>
+    <td>
+      <? $_lib['form2']->checkbox2($db_table, "Active", $account->Active,'') ?> 
+    </td>
+    <td>
+      <? print $_lib['form3']->Type_menu3(array('table'=>$db_table, 'field'=>'AccountPlanType', 'value' => $AccountPlanType, 'type'=>'AccountPlanType', 'required'=>'1', 'disabled'=>true)) ?>
+    </td>
     <td>Viktig! M&aring; settes riktig for at regnskapet skal fungere</td>
     <td></td>
   </tr>
@@ -214,7 +221,14 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
     <td></td>
     <td><? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'WorkPercent', 'value'=>$account->WorkPercent, 'class'=>'lodoreqfelt')) ?></td>
     <td></td>
-    <td></td>
+    <td><? 
+  
+      if($_lib['db']->db_numrows($salary_conf) != 0) {
+        $salary_conf_row = $_lib['db']->db_fetch_assoc($salary_conf);
+        printf( "L&oslash;nnsmal %d", $salary_conf_row['SalaryConfID']);
+      }
+
+    ?></td>
   </tr>
 
   <tr class="result">
