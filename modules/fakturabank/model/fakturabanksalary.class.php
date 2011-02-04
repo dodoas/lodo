@@ -145,12 +145,23 @@ class lodo_fakturabank_fakturabanksalary {
             // leave work_amount_unit blank since the system does not yet specify such
             $xml_paycheck_lines .= "<work_amount_unit />\n";
             $xml_paycheck_lines .= "<work_amount_unit_rate>" . $line->Rate . "</work_amount_unit_rate>\n";
-            $xml_paycheck_lines .= "<amount_period>" . $line->AmountThisPeriod . "</amount_period>\n";
+            if($line->LineNumber >= $lineOutFrom and $line->LineNumber <= $lineOutTo)
+            {
+                $adjustedLineAmount = -$line->AmountThisPeriod;
+            } else {
+                $adjustedLineAmount = $line->AmountThisPeriod;
+            }
+            $xml_paycheck_lines .= "<amount_period>" . $adjustedLineAmount . "</amount_period>\n";
 
             if ($line->LineNumber == $last_line_value) {
                 $amount_year = "-Som over-";
             } else {
-                $amount_year = $totalThisYear->total;
+                if($line->LineNumber >= $lineOutFrom and $line->LineNumber <= $lineOutTo)
+                {
+                    $amount_year = -$totalThisYear->total;
+                } else {
+                    $amount_year = $totalThisYear->total;
+                }
             }
             $last_line_value = $line->LineNumber;
 
