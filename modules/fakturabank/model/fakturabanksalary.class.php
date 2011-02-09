@@ -277,7 +277,7 @@ class lodo_fakturabank_fakturabanksalary {
 
 
 
-        return $xml_prefix . $xml_content . $xml_postfix;
+        return utf8_encode($xml_prefix . $xml_content . $xml_postfix);
     }
 
     function sendsalary($SalaryID, $SalaryConfID) {
