@@ -350,7 +350,7 @@ class lodo_fakturabank_fakturabanksalary {
 
             // Show me the result
             if ($import_paycheck_result['omitted-paychecks'] == 1) {
-                $_lib['message']->add("Fakturaen finnes allerede");
+                $_lib['message']->add("L&oslash;nnslipp finnes allerede");
                 $ret = false;
             } else if ($import_paycheck_result['failed-paychecks'] == 1) { // we might get errors even if errno is 0
                 $_lib['message']->add("Feil under opplasting: " . $import_paycheck_result['message'] . " Info: " . $import_paycheck_result['exception']);
@@ -359,7 +359,7 @@ class lodo_fakturabank_fakturabanksalary {
                 $_lib['message']->add("Feil tilbakemeldingsinfo fra server opplasting. " . $import_paycheck_result['message'] . " Info: " . $import_paycheck_result['exception']);
                 $ret = false;
             } else {
-                $_lib['message']->add("Fakturaen ble opprettet riktig");
+                $_lib['message']->add("L&oslash;nnslippen ble opprettet riktig");
                 $ret  = $import_paycheck_result['paycheck-results'][0]['paycheck-result']['id'];
             }
         }
