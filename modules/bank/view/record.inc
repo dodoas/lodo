@@ -3,6 +3,7 @@ $AccountID  = $_lib['input']->getProperty('AccountID');
 $Period     = $_lib['input']->getProperty('Period');
 
 includelogic('fakturabank/fakturabankvoting');
+includelogic('fakturabank/reconciliationreason');
 
 #$bank2           = new framework_logic_bank($_lib['input']->request);
 #$bank2->init();
@@ -31,6 +32,7 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
 
 	// get fakturabank
 	$fbvoting         = new lodo_fakturabank_fakturabankvoting();
+	$fbreconcilationreason = new lodo_fakturabank_reconciliationreason();
 
     foreach($DataH as $server_name => $server_data) {
         foreach($server_data as $database_name => $database_data) {
@@ -126,7 +128,7 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
 							
 							$accountline = $DataH[$server_name][$database_name][$table_name][$pk_name];
 							# find fakturabank data
-							$match = $fbvoting->findmatch(array('Amount' => $value, 'VoucherDate' => $Period . '-' . $accountline['Day'], 'BankAccountID' => $AccountID, 'Incoming' => $incoming, 'id' => $pk_name, 'accountline' => $DataH[$server_name][$database_name][$table_name][$pk_name], 'period' => $Period));
+							$match = $fbvoting->findinvoicematch(array('Amount' => $value, 'VoucherDate' => $Period . '-' . $accountline['Day'], 'BankAccountID' => $AccountID, 'Incoming' => $incoming, 'id' => $pk_name, 'accountline' => $DataH[$server_name][$database_name][$table_name][$pk_name], 'period' => $Period));
 							if ($match && 
                                 !empty($match['AccountPlanID']) && // ignore interest, transaction costs etc for now (transactions without org numbers)
                                 !empty($match['AccountPlanOrgNumber'])) {
@@ -154,28 +156,45 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
 										$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber']          = $invoice_match['FakturabankNumber'];
 									}
 							} else {
-								#If no KID and no Reskontro and in or out amout - try an automatic kid match to update data
-								#Always look up reskontro on kid - no we only do it if kid is missing - and on the first run.
-								#print "Ikke kjør denne nå<br>\n";
+                                # find possible matches on non-invoice reconcilation reasons
+                                $match = $fbvoting->findnoninvoicematch(array('Amount' => $value, 'VoucherDate' => $Period . '-' . $accountline['Day'], 'BankAccountID' => $AccountID, 'Incoming' => $incoming, 'id' => $pk_name, 'accountline' => $DataH[$server_name][$database_name][$table_name][$pk_name], 'period' => $Period));
+                                $reconciliation_accountplan_id = null;
+                                $reconciliation_accountplan = null;
+                                    error_log("modules/bank/view/record.inc-" . __LINE__ . ":match['FakturabankBankTransactionAccountID']:" . (is_array($match['FakturabankBankTransactionAccountID']) || is_object($match['FakturabankBankTransactionAccountID']) ? print_r($match['FakturabankBankTransactionAccountID'], true) : $match['FakturabankBankTransactionAccountID'] . ". <br/>\n"));
+                                if ($match && 
+                                    //                                    empty($DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID']) &&
+                                    !empty($match['FakturabankBankTransactionAccountID'])) {
+                                    $reconciliation_accountplan = $fbreconcilationreason->bank_reconciliation_reason_to_accountplan($match['FakturabankBankTransactionAccountID']);
+                                }
 
-								$match = $moneyflow->findmatch(array($field => $value, 'VoucherDate' => $Period . '-' . $line->Day));
-								if(count($match) == 1) {
-									#Fant eksakt en match på beløp.
-									#print_r($match[0]);
+                                if (!empty($reconciliation_accountplan)) {
+									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID']) {
+										$DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID'] = $reconciliation_accountplan['AccountPlanID'];
+									}
+                                } else {
+                                    #If no KID and no Reskontro and in or out amout - try an automatic kid match to update data
+                                    #Always look up reskontro on kid - no we only do it if kid is missing - and on the first run.
+                                    #print "Ikke kjør denne nå<br>\n";
+
+                                    $match = $moneyflow->findmatch(array($field => $value, 'VoucherDate' => $Period . '-' . $line->Day));
+                                    if(count($match) == 1) {
+                                        #Fant eksakt en match på beløp.
+                                        #print_r($match[0]);
 								
-									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
-										$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] = $match[0]->AccountPlanID;
-									}
-									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroOrgNumber']) {
-										$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroOrgNumber']     = $match[0]->OrgNumber;
-									}
-									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['KID']) {
-										$DataH[$server_name][$database_name][$table_name][$pk_name]['KID']                    = $match[0]->KID;
-									}
-									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber']) {
-										$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber']          = $match[0]->InvoiceID;
-									}
-								}								
+                                        if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
+                                            $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] = $match[0]->AccountPlanID;
+                                        }
+                                        if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroOrgNumber']) {
+                                            $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroOrgNumber']     = $match[0]->OrgNumber;
+                                        }
+                                        if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['KID']) {
+                                            $DataH[$server_name][$database_name][$table_name][$pk_name]['KID']                    = $match[0]->KID;
+                                        }
+                                        if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber']) {
+                                            $DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber']          = $match[0]->InvoiceID;
+                                        }
+                                    }
+                                }								
 							}
 						}
 						elseif($DataH[$server_name][$database_name][$table_name][$pk_name]['KID'] > 0 && !$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {

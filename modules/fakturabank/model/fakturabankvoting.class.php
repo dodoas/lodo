@@ -474,7 +474,7 @@ class lodo_fakturabank_fakturabankvoting {
         }
 
         # there might be several relations for a transaction and only those with AccountPlanID set serves a purpose since that is the only ones we currently can handle
-		$relations = $_lib['storage']->get_hashhash(array('query' => $query . " AND AccountPlanID is not NULL AND AccountPlanID != ''", 'key' => 'InvoiceID'));
+		$relations = $_lib['storage']->get_hashhash(array('query' => $query . " AND AccountPlanID is not NULL AND AccountPlanID != '' AND InvoiceID IS NOT NULL", 'key' => 'InvoiceID'));
 
 		if (empty($relations)) {
 			return false;
@@ -482,6 +482,69 @@ class lodo_fakturabank_fakturabankvoting {
 
 		return $relations;
 	}
+
+    function lookup_reconciliation_reason_relations($args) {
+		global $_lib;
+
+		$invoice_ids = array();
+
+        if (empty($args['id']) || !is_numeric($args['id'])) {
+            return false;
+        }
+
+        $query = "SELECT * FROM accountline WHERE `AccountLineID` = '" . $args['id'] . "'";
+
+		$accountline = $_lib['storage']->get_row(array('query' => $query));
+		if (empty($accountline)) {
+			return false;
+		}
+
+        // if transaction was imported from fakturabank, match on fakturabankid
+        if (!empty($accountline->FakturabankTransactionLodoID) &&
+            is_numeric($accountline->FakturabankTransactionLodoID)) {
+
+            $query = "SELECT FakturabankID FROM fakturabanktransaction WHERE `ID` = '" . $accountline->FakturabankTransactionLodoID . "'";
+            $result = $_lib['storage']->db_query3(array('query' => $query));
+            if (!$result) {
+                return false;
+            }
+
+            if (!($obj = $_lib['storage']->db_fetch_object($result)) || !is_numeric($obj->FakturabankID)) {
+                return false;
+            }
+            $FakturabankTransactionID = $obj->FakturabankID;
+
+            $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
+				tr.FakturabankTransactionID = '$FakturabankTransactionID'";
+        } else { // ... else, transaction imported from css or punched, match on date, amount, account
+            $transaction_date = $_lib['storage']->db_escape($args['VoucherDate']);
+            $Incoming = $_lib['storage']->db_escape($args['Incoming']);
+            $bank_account = $_lib['storage']->db_escape($args['BankAccount']);
+            $amount = $_lib['storage']->db_escape($args['Amount']);
+
+            if ($Incoming) {
+                $bank_account_stmt = "tr.FromBankAccount = '$bank_account' AND";
+            } else {
+                $bank_account_stmt = "tr.ToBankAccount = '$bank_account' AND";            
+            }
+
+            $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
+				tr.InvoiceID IS NOT NULL AND
+				tr.PostingDate = '$transaction_date' AND
+				$bank_account_stmt
+				tr.Incoming = '$Incoming' AND
+				ROUND(tr.TransactionAmount, 2) = ROUND('$amount', 2)";
+        }
+
+        # there might be several relations for a transaction and only those with FakturabankBankTransactionAccountID set serves a purpose since that is the only ones we currently can handle
+		$relations = $_lib['storage']->get_hashhash(array('query' => $query . " AND (InvoiceID IS NULL) AND FakturabankBankTransactionAccountID IS NOT NULL AND FakturabankBankTransactionAccountID != '0'", 'key' => 'FakturabankID'));
+
+		if (empty($relations)) {
+			return false;
+		}
+
+		return $relations;
+    }
 
 	public function get_fakturabanktransactionrelation($FakturabankID) {
         global $_lib;
@@ -576,7 +639,7 @@ class lodo_fakturabank_fakturabankvoting {
 		}
 	}
 
-    public function findmatch($args) {
+    public function findinvoicematch($args) {
         global $_lib;
 
         $args['VoucherDate'] = substr($args['VoucherDate'], 0, 10);
@@ -603,6 +666,33 @@ class lodo_fakturabank_fakturabankvoting {
 		return $relation;
     }
    
+
+    public function findnoninvoicematch($args) {
+        global $_lib;
+
+        $args['VoucherDate'] = substr($args['VoucherDate'], 0, 10);
+
+		$query = "SELECT AccountNumber FROM account WHERE AccountID='" . $args['BankAccountID'] . "'";
+
+		$row = $_lib['storage']->get_row(array('query' => $query));
+
+		if (empty($row)) {
+			return false;
+		}
+
+		$args['BankAccount'] = str_replace(" ", "", $row->AccountNumber);
+
+		$relations = $this->lookup_reconciliation_reason_relations($args);
+
+		if (!isset($relations) || empty($relations)) {
+			return false;
+		}
+
+		#get first relation
+		$relation = reset($relations);
+
+		return $relation;
+    }
 
     ################################################################################################
     #validate - 
