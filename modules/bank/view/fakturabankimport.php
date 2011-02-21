@@ -75,6 +75,14 @@ Periode: <? print $_lib['form3']->AccountPeriod_menu3(array('name' => 'Period', 
 <input type="submit" name="action_bank_import"  value="Importer">
 <? } ?>
 </form>
+<? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
+<p>
+<br>
+<br>
+<br>
+<a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.bankreconciliationlist">Oppsett av koblinger mellom avstemmings&aring;rsaker og kontoer</a>
+</p>
+<? } ?>
 </body>
 </html>
 <pre>
