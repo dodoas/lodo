@@ -73,4 +73,5 @@ elseif($_lib['input']->getProperty('action_invoice_lock')) {
     $invoice->init(array());
     $invoice->lock();
 }
+
 ?>

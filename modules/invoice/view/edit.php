@@ -347,8 +347,12 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <form name="skriv_ut2" action="<? print $_lib['sess']->dispatch ?>t=invoice.print2&InvoiceID=<? print $InvoiceID ?>" method="post" target="_top">
             <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'value'=>'Vis PDF fil')) ?>
         </form>
-        <form name="send_mail" action="<? print $MY_SELF ?>" method="post">
-            <? //print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_send_email', 'value'=>'Send email')) ?>
+     </tr>
+     <tr>
+        <td colspan="7" align="right">
+        <form name="send_mail" action="<? print $_lib['sess']->dispatch ?>t=invoice.sendmail&InvoiceID=<? print $InvoiceID ?>" method="post">
+            <input type="text" value="" name="email_recipient" />
+            <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_send_email2', 'value'=>'Send email')) ?>
         </form>
      </tr>
      <tr>
