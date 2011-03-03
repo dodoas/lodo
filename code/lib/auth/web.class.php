@@ -57,6 +57,7 @@ if ($_SESSION['login_id'] and !$_REQUEST['DB_NAME_LOGIN'])
 elseif ($username && $password && $_REQUEST['DB_NAME_LOGIN'])
 {
     //print "The user tries to login";
+
     #$query = " select PersonID, FirstName, LastName, Email, Language, Css FROM person WHERE Email='$username' and Password=PASSWORD('$password') and Active=1";
 
     $query = " select PersonID, FirstName, LastName, Email, LanguageID, Css FROM person WHERE Email='?' and Password=PASSWORD('?') and
@@ -79,7 +80,11 @@ trim(Password) <> ''";
         $include = $_SETUP['HOME_DIR'].$_SETUP['SLASH']."code".$_SETUP['SLASH'].$_SETUP['INTERFACE'].$_SETUP['SLASH'].$_SETUP['FIRSTPAGE'].".php";
         $_lib['message']->add(array('message' => 'Password or Email Invalid'));
     }
-
+    else {
+        // log login to company database table `logusage'
+        $tmp_logger = new logg(array('_dsn' => $_dsn, '_SETUP' => $_SETUP, '_sess' => $_sess, 'path' => $log_path, 'module' => $args[0], 'template' => $args[1]));
+        $tmp_logger->usage(array('sess'=>$_lib['sess']));
+    }
     #Global information on logged in users
     $_SESSION['login_id'] = $_row->PersonID;
     $_lib['sess']->debug("Auth: $_row->PersonID");
