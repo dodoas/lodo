@@ -142,7 +142,7 @@ class timesheet_user
                FROM timesheets 
                WHERE AccountPlanID = %d 
                      AND CONCAT(YEAR(date), '-', MONTH(date)) = '%s'
-               ORDER BY Date, EntryID",
+               ORDER BY Date, BeginTime, EntryID",
             $this->id, $period);
 
         $r = $_lib['db']->db_query($sql);
@@ -154,6 +154,40 @@ class timesheet_user
         }
 
         return $entries;
+    }
+
+    public function list_diets() 
+    {
+        global $_lib;
+
+        $sql = sprintf("SELECT * FROM timesheetdiet");
+        
+        $r = $_lib['db']->db_query($sql);
+        
+        $diets = array();
+        while( $row = $_lib['db']->db_fetch_assoc($r) )
+        {
+            $diets[ $row['DietID'] ] = $row['Name'];
+        }
+
+        return $diets;
+    }
+
+    public function list_accommodations() 
+    {
+        global $_lib;
+
+        $sql = sprintf("SELECT * FROM timesheetaccommodation");
+
+        $r = $_lib['db']->db_query($sql);
+        
+        $accoms = array();
+        while( $row = $_lib['db']->db_fetch_assoc($r) )
+        {
+            $accoms[ $row['AccommodationID'] ] = $row['Name'];
+        }
+
+        return $accoms;
     }
 
     public function get_stats($period) 
@@ -234,7 +268,49 @@ class timesheet_user
     {
         global $_lib;
 
-        $sql = sprintf("DELETE FROM timesheetsworktype WHERE WorkTypeID = %d", $id);
+        $sql = sprintf("DELETE FROM timesheetsworktype WHERE WorkTypeID = %d LIMIT 1", $id);
+        $_lib['db']->db_query($sql);
+
+        return true;
+    }
+
+    public function new_diet($name) 
+    {
+        global $_lib;
+
+        $name = $this->escape($name);
+        $sql = sprintf("INSERT INTO timesheetdiet (`Name`) VALUES ('%s')", $name);
+        $_lib['db']->db_query($sql);
+
+        return true;
+    }
+
+    public function del_diet($id)
+    {
+        global $_lib;
+
+        $sql = sprintf("DELETE FROM timesheetdiet WHERE DietID = %d LIMIT 1", $id);
+        $_lib['db']->db_query($sql);
+
+        return true;
+    }
+
+    public function del_accommodation($id) 
+    {
+        global $_lib;
+
+        $sql = sprintf("DELETE FROM timesheetaccommodation WHERE AccommodationID = %d", $id);
+        $_lib['db']->db_query($sql);
+
+        return true;
+    }
+
+    public function new_accommodation($name) 
+    {
+        global $_lib;
+
+        $name = $this->escape($name);
+        $sql = sprintf("INSERT INTO timesheetaccommodation (`Name`) VALUES ('%s')", $name);
         $_lib['db']->db_query($sql);
 
         return true;
@@ -295,7 +371,8 @@ class timesheet_user_page
     {
         $el = sprintf('<select name="%s" id="%s" class="%s">', $name, $name, $class);
         
-        foreach($options as $v) {
+        foreach($options as $v) 
+        {
             $v2 = "$v";
             if(strlen($v2) < 2) 
                 $v2 = "0$v2";
@@ -319,7 +396,8 @@ class timesheet_user_page
             printf("<html>\n" .
                    "  <head>\n" .
                    "    <title>Timesheet registration for %s</title>\n" .
-                   "    <script src='/lib/js/jquery.js'></script>" .
+                   "    <script src='/lib/js/jquery.js'></script>\n" .
+                   "    <style> * { font-size: 11px; } </style>\n" .
                    "  </head>\n" .
                    "  <body>\n" .
                    "    <p>Logget inn som %s (%d)<p>\n" .
@@ -335,10 +413,15 @@ class timesheet_user_page
             printf("<h1>Timelister for %s</h1>" .
                    "<p><a href='%s'>Tilbake til oversikt</a></p>", 
                    $this->user->get_username(), $this->root);
+
         }
 
         printf(
             "<style>".
+            "a.hilight { color: black; }" .
+            "table { border-collapse: collapse; }" .
+            "td { padding: 2px; padding-right: 7px; } ".
+            "tr:hover { background-color: #eee; } " .
             ".BeginTime_h, .EndTime_h, .SumTime_h { background-color: green; color: white; }".
             "</style>"
             );
@@ -382,6 +465,22 @@ class timesheet_user_page
             else if(isset($_GET['delete_worktype']))
             {
                 $this->user->del_worktype($_GET['delete_worktype']);
+            }
+            else if(isset($_GET['delete_diet'])) 
+            {
+                $this->user->del_diet($_GET['delete_diet']);
+            }
+            else if(isset($_POST['new_diet'])) 
+            {
+                $this->user->new_diet($_POST['new_diet_name']);
+            }
+            else if(isset($_GET['delete_accom']))
+            {
+                $this->user->del_accommodation($_GET['delete_accom']);
+            }
+            else if(isset($_POST['new_accom'])) 
+            {
+                $this->user->new_accommodation($_POST['new_accom_name']);
             }
         }
 
@@ -429,9 +528,11 @@ class timesheet_user_page
 
         if($this->user->is_admin())
         {
-            echo '<h2>Arbeidsarter</h2>';
             $worktypes = $this->user->list_worktypes();
+            $diets     = $this->user->list_diets();
+            $accoms    = $this->user->list_accommodations();
             
+            echo '<h2>Arbeidsarter</h2>';
             echo '<table>';
             foreach($worktypes as $k => $v)
             {
@@ -443,16 +544,56 @@ class timesheet_user_page
                     <input type="text" value="" name="new_worktype_name" />
                   </td>
                   <td>
-                    <input type="submit" name="new_worktype" value="Lag">
+                    <input type="submit" name="new_worktype" value="Opprett">
                   </td>
-                </tr>', $this->root);
+                </tr>
+                </form>', $this->root);
+            echo '</table>';
+
+
+            echo '<h2>Dietter</h2>';
+            echo '<table>';
+            foreach($diets as $k => $v) 
+            {
+                printf("<tr><td>%s</td><td><a href='%s&delete_diet=%d'>Slett</a></td></tr>\n", $v, $this->root, $k);
+            }
+            printf('<tr>
+                  <form action="%s" method="post">
+                  <td>
+                    <input type="text" value="" name="new_diet_name" />
+                  </td>
+                  <td>
+                    <input type="submit" name="new_diet" value="Opprett">
+                  </td>
+                </tr>
+                </form>', $this->root);
+            echo '</table>';
+
+            echo '<h2>Overnattinger</h2>';
+            echo '<table>';
+            foreach($accoms as $k => $v) 
+            {
+                printf("<tr><td>%s</td><td><a href='%s&delete_accom=%d'>Slett</a></td></tr>\n", $v, $this->root, $k);
+            }
+            printf('<tr>
+                  <form action="%s" method="post">
+                  <td>
+                    <input type="text" value="" name="new_accom_name" />
+                  </td>
+                  <td>
+                    <input type="submit" name="new_accom" value="Opprett">
+                  </td>
+                </tr>
+                </form>', $this->root);
             echo '</table>';
         }
-
 
         $this->print_bottom();
     }
 
+    /**
+     * Print period table
+     */
     private function print_table($period, $fields, $array, $dest, $show_unlock = true)
     {
         if($period[0] == "_")
@@ -460,6 +601,9 @@ class timesheet_user_page
         else
             $locked = $this->user->is_period_locked($period);
 
+        /*
+         * Save button javascript-callback. Concats time-fields to one field before submit.
+         */
         printf("
 <script type='text/javascript'>
   $(document).ready(function(){
@@ -491,9 +635,10 @@ class timesheet_user_page
             $dest
             );
 
+        /* Headers */
         foreach($fields as $field => $field_data)
         {
-            printf(' <th>%s</th> ', $field);
+            printf(' <th>%s</th> ', $field_data['translation']);
         }
 
         printf(
@@ -501,15 +646,39 @@ class timesheet_user_page
             );
 
         $i = 0;
-        $sum_h = 0;
-        $sum_m = 0;
+        $sum_h  = 0;
+        $sum_m  = 0;
+        $sum_km = 0;
+        $last_day = -1;
 
+        /* Table Body */
         foreach($array as $entries)
         {
             foreach($entries as $entry)
             {
-                printf("<tr style='%s'>\n", ( ((int)$entry['Day']) % 2 != 0 ? "background-color: #000; color: white;" : "background-color:#FFF; color:black;" ));
+                foreach($fields as $name_ => $dummy) /* fetch first field name */
+                    break;
 
+                if($entry['Locked'] == '1')
+                    $lockedLine = true;
+                else
+                    $lockedLine = false;
+
+                $day_no = $entry[$name_];
+                if($day_no != $last_day) 
+                {
+                    if($last_day != -1) 
+                    {
+                        printf("<tr><td colspan=13 style='background-color: #aaa;'></td></tr>");
+                    }
+
+                    printf("<tr><td><b>%s</b></td></tr>", $day_no);
+                }
+
+                printf("<tr style='%s' id='rowno_%d' class='row'><td></td>\n", "color:black;", $i);
+                $last_day = $day_no;
+                
+                
                 foreach($fields as $field => $field_data)
                 {
                     $value = $field_data['default'];
@@ -518,16 +687,276 @@ class timesheet_user_page
                         $value = $entry[$field];
                     }
 
+                    $name = 'field_' . $entry[$name_] . '_' . $field . '_' . $i;
+
+                    if($field == 'Day') 
+                    {
+                        continue;
+                    }
+                    else if($field == 'SumTime')
+                    {
+                        list($h, $m) = explode(':', $value);
+                        $sum_h += $h;
+                        $sum_m += $m;
+                    }
+                    else if($field == 'TravelDistance')
+                    {
+                        $sum_km += $value;
+                    }
+
+                    $data = "";
+                    if($field_data['type'] == "caption")
+                    {
+                        $data = htmlspecialchars($value);
+                    }
+                    else if($field_data['type'] == "text")
+                    {
+                        $value = htmlspecialchars($value, ENT_QUOTES);
+
+                        if($locked || $lockedLine)
+                            $data = wordwrap($value, 30, '<br />');
+                        else
+                            $data = sprintf("<input name='%s' type='text' value='%s' size='%d' class='$field' />", $name, 
+                                            $value, $field_data['size']);
+                    }
+                    else if($field_data['type'] == "time")
+                    {
+                        $value = substr($value, 0, 5);
+                        list($h, $m) = explode(':', $value);
+                        if($locked || $lockedLine)
+                        {
+                            $data = $value;
+                        }
+                        else 
+                        {
+                            if(strstr($name, "SumTime"))
+                            {
+                                $data = sprintf(
+                                    "%s %s <input name='%s' type='hidden' value='' id='%s' />",
+                                    $this->create_timeselectbox($name."_h", $field."_h", $h, range(0,23)),
+                                    $this->create_timeselectbox($name."_m", $field."_m", $m, range(0,59,5)),
+                                    $name, $name);
+                            }
+                            else if(strstr($name, "EndTime")) 
+                            {
+                                $data = sprintf(
+                                    "%s %s <input name='%s' type='hidden' value='' id='%s' />",
+                                    $this->create_timeselectbox($name."_h", $field."_h", $h, range(0,24)),
+                                    $this->create_timeselectbox($name."_m", $field."_m", $m, range(0,59,5)),
+                                    $name, $name);
+                            }
+                            else
+                            {
+                                $data = sprintf(
+                                    "%s %s <input name='%s' type='hidden' value='' id='%s' />",
+                                    $this->create_timeselectbox($name."_h", $field."_h", $h, range(0,23)),
+                                    $this->create_timeselectbox($name."_m", $field."_m", $m, range(0,59,5)),
+                                    $name, $name);
+                            }
+                        }
+                                            
+                    }
+                    else if($field_data['type'] == "select")
+                    {
+                        if($locked || $lockedLine)
+                        {
+                            $data = $field_data['options'][$value];
+                        }
+                        else
+                        {
+                            $data  = sprintf("<select name='%s'>\n", $name);
+
+                            if($value == 0)
+                                $nullselected = 'selected';
+                            else
+                                $nullselected = '';
+
+                            $data .= sprintf("  <option value='0' %s> - </option>\n", $nullselected);
+                                                        
+                            foreach($field_data['options'] as $option => $option_value)
+                            {
+                                if($option == $value)
+                                    $data .= sprintf("  <option value='%s' selected>%s</option>\n", $option, 
+                                                     $option_value);
+                                else
+                                    $data .= sprintf("  <option value='%s'>%s</option>\n", $option, 
+                                                     $option_value);
+                            }
+                       
+                            $data .= sprintf("</select>\n");
+                        }
+                    }
+
+                    printf(" <td>%s</td> ", $data);
+                }
+
+                if(!$locked && !$lockedLine)
+                {
+                    printf("<td>");
+
+                    if($this->user->is_admin()) 
+                    {
+                        printf("<input type='submit' name='lock_line_%d' class='lock_line' value='L&aring;s linje' /> ", 
+                               $entry['EntryID']);
+                    }
+
+                    printf("<input type='button' id='new_line_%s_%d' value='Ny linje' class='new_line' /> ".
+                           "<input type='button' id='del_line_%s' class='del_line' value='Slett linje' /></td>",
+                           $entry['Day'], $i, $i);
+                }
+                else if(!$locked)
+                {
+                    printf("<td>");
+                    
+                    if($lockedLine && $this->user->is_admin())
+                    {
+                        printf("<input type='submit' name='unlock_line_%d' value='L&aring;s opp' class='unlock_line' /> ",
+                               $entry['EntryID']);
+                    }
+
+                    if(!$lockedLine)
+                    {
+                        printf("<input type='button' id='del_line_%s' class='del_line' value='Slett linje' /></td>", $i);
+                    }
+
+                    printf("<input type='button' id='new_line_%s_%d' value='Ny linje' class='new_line' /> ",
+                           $entry['Day'], $i);
+                }
+                
+                printf("</tr>\n");
+
+                $i++;
+            }
+
+        }
+
+        $sum_h += (int)($sum_m / 60);
+        $sum_m =  $sum_m % 60;
+        printf("<tr><td><b>Sum</b></td><td></td><td></td><td>%s:%s</td></tr>",
+               (strlen("$sum_h") < 2 ? "0$sum_h" : $sum_h),
+               (strlen("$sum_m") < 2 ? "0$sum_m" : $sum_m));
+
+        $stats = $this->user->get_stats($period);
+        $projects  = $this->user->list_projects();
+
+        echo "<tr></tr>";
+
+        $hilight_id = 0;
+        foreach($stats as $stat)
+        {
+            $hilight_id ++;
+            $sum_h = (int)($stat['sum'] / 60);
+            $sum_m =  $stat['sum'] % 60;
+            $p = $projects[ $stat['Project'] ];
+            printf("<tr><td colspan=2><b>Sum <a href='#' class='hilight' id='hilight_%d'>%s</a</b></td><td></td><td>%s:%s</td></tr>",
+                   $hilight_id, $p, 
+                   (strlen("$sum_h") < 2 ? "0$sum_h" : $sum_h),
+                   (strlen("$sum_m") < 2 ? "0$sum_m" : $sum_m));
+                   
+            ?>
+<script>
+     $('#hilight_<?= $hilight_id ?>').click(function(){
+             $.each($('tr'),
+                    function(){
+                        var t = $(this);
+                        //this.css({'backgroundColor': 'white'});
+                        if(t.attr('id').substring(0, 5) != 'rowno')
+                            return;
+
+                        t.css({'backgroundColor': 'white'});
+                        var is_correct_project = false;
+                        var has_sum = false;
+
+                        $.each( $('#' + t.attr('id') + ' select'), function(){
+                                if($(this).attr('name').indexOf('Project') != -1 &&
+                                   $(this).val() == '<?= $stat['Project'] ?>') {
+                                    is_correct_project = true;
+                                }
+                                else if($(this).attr('name').indexOf('SumTime') != -1 &&
+                                        $(this).val() > 0) {
+                                    has_sum = true;
+                                }
+                            });
+
+                        if(is_correct_project && has_sum) {
+                            t.css({'backgroundColor': '#bbb'});
+                        }
+                    }
+             );
+             
+         });
+</script>
+            <?
+        }
+
+        if($sum_km > 0) 
+        {
+            printf('<tr><td colspan=3><b>Sum reiselengde</b></td><td>%d km</td></tr>', $sum_km);
+        }
+
+        printf("</table>");
+
+        if(!$locked)
+            printf("<p><input type='submit' name='save' value='Lagre' id='save_button' /></p>");
+        
+        if($show_unlock && $this->user->is_admin())
+        {
+            if($locked)
+            {
+                printf("<p><input type='submit' name='unlock' value='L&aring;s opp' /></p>");
+            }
+            else
+            {
+                printf("<p><input type='submit' name='lock' value='L&aring;s' /></p>");
+            }
+        }
+
+        printf("</tabel>\n" .
+               "</form>\n");
+
+        ?>
+        
+<script>
+$(document).ready(function() {
+    var nextI = <?= $i ?>;
+
+    var del_function = function() {
+        var arr = this.id.split('_');
+        var i = arr[2];
+        $('#rowno_' + i).remove();
+    };
+
+    $('.del_line').click(del_function);
+
+
+    $('.new_line').click(function() {
+        var arr = this.id.split('_');
+        var day = arr[2], i = arr[3];
+
+        var color = (day % 2 != 0 ? "background-color: #000; color: white;" : "background-color:#FFF; color:black;");
+<?
+                $row = sprintf("<tr id='rowno_%%I%%' class='row'>\n");
+
+                /*
+                 * Folgende kode er identisk med noe som ligger lengre opp.
+                 * Det burde faktoriseres. 
+                 */
+                foreach($fields as $field => $field_data)
+                {
+                    $value = $field_data['default'];
+
                     if($field == 'SumTime')
                     {
                         list($h, $m) = explode(':', $value);
                         $sum_h += $h;
                         $sum_m += $m;
                     }
+                    else if($field == 'Day') 
+                    {
+                        $value ="";
+                    }
 
-                    foreach($fields as $name => $dummy) /* fetch first field name */
-                        break;
-                    $name = 'field_' . $entry[$name] . '_' . $field . '_' . $i;
+                    $name = 'field_%DAY%_' . $field . '_' . '%I%';
 
                     $data = "";
                     if($field_data['type'] == "caption")
@@ -539,8 +968,8 @@ class timesheet_user_page
                         if($locked)
                             $data = $value;
                         else
-                            $data = sprintf("<input name='%s' type='text' value='%s' class='$field' />", $name, 
-                                            $value);
+                            $data = sprintf("<input name='%s' type='text' value='%s' size='%d' class='$field' />", $name, 
+                                            $value, $field_data['size']);
                     }
                     else if($field_data['type'] == "time")
                     {
@@ -588,7 +1017,7 @@ class timesheet_user_page
                         else
                         {
                             $data  = sprintf("<select name='%s'>\n", $name);
-                            
+
                             foreach($field_data['options'] as $option => $option_value)
                             {
                                 if($option == $value)
@@ -603,62 +1032,38 @@ class timesheet_user_page
                         }
                     }
 
-                    printf(" <td>%s</td> ", $data);
+                    $row .= sprintf(" <td>%s</td> ", $data);
                 }
 
                 if(!$locked)
                 {
-                    printf("<td><input type='submit' name='new_line_%s' value='Ny linje' /><td>".
-                           "<td><input type='submit' name='del_line_%s' value='Slett linje' /></td>",
-                           $entry['Day'], $entry['EntryID']);
+                    $row .= sprintf("<td><input type='button' id='new_line_%s_%s' value='Ny linje' class='new_line' /> ".
+                                    "<input type='button' id='del_line_%s' class='del_line' value='Slett linje' /></td>",
+                                    "%DAY%", "%I%", "%I%");
                 }
                 
-                printf("</tr>\n");
+                $row .= sprintf("</tr>\n");
 
-                $i++;
-            }
+                printf('
+        var line = "%s";', str_replace("\n", "", addslashes($row)));
 
-        }
+?>
+        line = line.replace(/\%I\%/g, nextI)
+                   .replace(/\%COLOR\%/g, color)
+                   .replace(/\%DAY\%/g, day);
+        $('#rowno_' + i).after(line);
+        $('#new_line_' + day + '_' + nextI).click(arguments.callee);
+        $('#del_line_' + nextI).click(del_function);
+        nextI ++;
 
-        $sum_h += (int)($sum_m / 60);
-        $sum_m =  $sum_m % 60;
-        printf("<tr><td><b>Sum</b></td><td></td><td></td><td>%s:%s</td></tr>",
-               (strlen("$sum_h") < 2 ? "0$sum_h" : $sum_h),
-               (strlen("$sum_m") < 2 ? "0$sum_m" : $sum_m));
+    });
 
-        $stats = $this->user->get_stats($period);
-        $projects  = $this->user->list_projects();
-
-        echo "<tr></tr>";
-
-        foreach($stats as $stat)
-        {
-            $sum_h = (int)($stat['sum'] / 60);
-            $sum_m =  $stat['sum'] % 60;
-            $p = $projects[ $stat['Project'] ];
-            printf("<tr><td colspan=2><b>Sum %s</b></td><td></td><td>%s:%s</td></tr>",
-                   $p, 
-                   (strlen("$sum_h") < 2 ? "0$sum_h" : $sum_h),
-                   (strlen("$sum_m") < 2 ? "0$sum_m" : $sum_m));
-                   
-        }
-
-        printf("</table>");
-
-        if(!$locked)
-            printf("<p><input type='submit' name='save' value='Lagre' id='save_button' /></p>");
+	
+});
+</script>
         
-        if($show_unlock && $this->user->is_admin())
-        {
-            if($locked)
-            {
-                printf("<p><input type='submit' name='unlock' value='L&aring;s opp' /></p>");
-            }
-            else
-            {
-                printf("<p><input type='submit' name='lock' value='L&aring;s' /></p>");
-            }
-        }
+
+        <?
 
     }
 
@@ -668,8 +1073,10 @@ class timesheet_user_page
         $period_name = $this->user->escape($_REQUEST['period']);
 
         $add_line = false;
-        foreach($_POST as $k => $v) {
-            if(substr($k, 0, 8) == "new_line") {
+        foreach($_POST as $k => $v) 
+        {
+            if(substr($k, 0, 8) == "new_line") 
+            {
                 $add_line = true;
                 break;
             }
@@ -701,11 +1108,18 @@ class timesheet_user_page
         {
             $num_days = date("t", strtotime($period_name . '-01'));
 
+            $locked = $this->user->is_period_locked($period);
+            if($locked) 
+            {
+                die("Can't do that");
+            }
+
             $sql = sprintf(
                 "DELETE FROM timesheets 
                    WHERE Date >= '%s-01' 
                          AND Date <= '%s-%d' 
-                         AND AccountPlanID = %d",
+                         AND AccountPlanID = %d
+                         AND Locked = 0",
                 $period_name, $period_name, $num_days, $this->user->get_id());
 
             $_lib['db']->db_query($sql);
@@ -718,7 +1132,8 @@ class timesheet_user_page
                     continue;
 
                 $cols = array('BeginTime', 'EndTime', 'SumTime',
-                              'Project', 'WorkType', 'Comment');
+                              'Project', 'WorkType', 'Comment', 
+                              'Diet', 'Accommodation', 'TravelRoute', 'TravelDesc', 'TravelDistance');
 
                 /* should be a better way to do this */
                 $sql = "INSERT INTO timesheets (`AccountPlanID`, `Date`";
@@ -736,6 +1151,31 @@ class timesheet_user_page
                 $_lib['db']->db_query($sql);
             }
         }
+        else if($this->user->is_admin()) 
+        {
+            foreach($_POST as $k => $v) 
+            {
+                if(substr($k, 0, 9) == "lock_line") 
+                {
+                    $id = substr($k, 10);
+                    $sql = sprintf("UPDATE timesheets SET Locked = 1 WHERE AccountPlanID = %d AND EntryID = %d", 
+                                   $this->user->get_id(), $id);
+
+                    $_lib['db']->db_query($sql);
+                    break;
+                }
+                else if(substr($k, 0, 11) == "unlock_line") 
+                {                    
+                    $id = substr($k, 12);
+                    $sql = sprintf("UPDATE timesheets SET Locked = 0 WHERE AccountPlanID = %d AND EntryID = %d", 
+                                   $this->user->get_id(), $id);
+
+                    $_lib['db']->db_query($sql);
+
+                    break;
+                }
+            }
+        }
 
 
         /*
@@ -750,6 +1190,13 @@ class timesheet_user_page
 
         $month_days = date("t", strtotime($_REQUEST['period'] . "-01"));
         $entries = array();
+
+        // Ingen lokalisering?.. Føler jeg har gjort denne jobben før. Må lage noe system for det
+        list($date_y, $date_m) = explode('-', $_REQUEST['period']);
+        $months = array("N/A", "Januar", "Februar", "Mars", "April", "Mai",
+                        "Juni", "Juli", "August", "September", "Oktober", "November", "Desember");
+        printf('<h3>%s %d</h3>', $months[$date_m], $date_y);
+
 
         foreach($period as $entry)
         {
@@ -789,7 +1236,8 @@ class timesheet_user_page
 
             if(isset($_POST['new_line_' . $d]))
             {
-                if (empty($entries[$d])) {
+                if (empty($entries[$d])) 
+                {
                     $entries[$d] = array();
                 }
                 $entries[$d][] = array('Day' => $d);
@@ -798,15 +1246,25 @@ class timesheet_user_page
 
         $worktypes = $this->user->list_worktypes();
         $projects  = $this->user->list_projects();
+        $diets     = $this->user->list_diets();
+        $accommodations = $this->user->list_accommodations();
 
         $fields = array(
-            'Day'        => array('type' => 'caption', 'size' => '3'),
-            'BeginTime'  => array('type' => 'time', 'size' => '10', 'default' => '00:00'),
-            'EndTime'    => array('type' => 'time', 'size' => '10', 'default' => '00:00'),
-            'SumTime'    => array('type' => 'time', 'size' => '10', 'default' => '00:00'),
-            'Project'    => array('type' => 'select', 'options' => $projects, 'default' => 0),
-            'WorkType'   => array('type' => 'select', 'options' => $worktypes, 'default' => 0),
-            'Comment'    => array('type' => 'text', 'size' => '255', 'default' => "")
+            'Day'        => array('type' => 'caption', 'size' => '3', 'translation' => 'Dag'),
+            'BeginTime'  => array('type' => 'time', 'size' => '10', 'default' => '00:00', 'translation' => 'Start'),
+            'EndTime'    => array('type' => 'time', 'size' => '10', 'default' => '00:00', 'translation' => 'Slutt'),
+            'SumTime'    => array('type' => 'time', 'size' => '10', 'default' => '00:00', 'translation' => 'Sum'),
+            'Project'    => array('type' => 'select', 'options' => $projects, 'default' => 0, 'translation' => 'Prosjekt'),
+            'WorkType'   => array('type' => 'select', 'options' => $worktypes, 'default' => 0, 'translation' => 'Arbeidesart'),
+
+            'Diet'       => array('type' => 'select', 'options' => $diets, 'default' => 0, 'translation' => 'Diett'),
+            'Accommodation' => array('type' => 'select', 'options' => $accommodations, 'default' => 0, 'translation' => 'Overnatting'),
+
+            'TravelRoute' => array('type' => 'text', 'size' => '30', 'default' => "", 'translation' => 'Reiserute'),
+            'TravelDesc' => array('type' => 'text', 'size' => '30', 'default' => "", 'translation' => 'Reisebeskrivelse'),
+            'TravelDistance' => array('type' => 'text', 'size' => '3', 'default' => "0", 'translation' => 'Reiselengde (km)'),
+
+            'Comment'    => array('type' => 'text', 'size' => '30', 'default' => "", 'translation' => 'Kommentar')
             );
 
         ksort($entries);
