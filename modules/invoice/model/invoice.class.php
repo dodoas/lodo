@@ -765,11 +765,17 @@ class invoice {
         $this->invoiceO->IssueDate            = $invoice->InvoiceDate;
         $this->invoiceO->DocumentCurrencyCode = 'NOK';
 
+        /* Order Reference does not yet exist in Lodo so ignore it
+        if (!empty($invoice->OrderRef)) {
+            $this->invoiceO->OrderReference->ID = $invoice->OrderRef; // this should be RefSupplier but has been hardcoded the wrong way other places in lodo and must be reverted (incl in existing database records) before we can use RefSupplier
+        }
+        */
+
         ############################################################################################
         $sql_supplier = "select * from company where CompanyID=" . (int) $invoice->FromCompanyID;
         $supplier               = $_lib['storage']->get_row(array('query' => $sql_supplier));
 
-        $this->invoiceO->AccountingSupplierParty->Party->WebsiteURI                     = $supplier->URL;
+        $this->invoiceO->AccountingSupplierParty->Party->WebsiteURI                     = $supplier->WWW;
         $this->invoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID        = preg_replace('/[^0-9]/', '', $supplier->OrgNumber);
         $this->invoiceO->AccountingSupplierParty->Party->PartyName->Name                = $supplier->CompanyName;
         $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName      = $supplier->IAddress;
@@ -777,6 +783,29 @@ class invoice {
         $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->CityName        = $supplier->ICity;
         $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone      = $supplier->IZipCode;
         $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode= 'NO';
+
+        if (!empty($supplier->Phone)) {
+            $this->invoiceO->AccountingSupplierParty->Party->Contact->Telephone = $supplier->Phone;
+        }
+        if (!empty($supplier->Fax)) {
+            $this->invoiceO->AccountingSupplierParty->Party->Contact->Telefax = $supplier->Fax;
+        }
+        if (!empty($supplier->Email)) {
+            $this->invoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail = $supplier->Email;
+        }
+
+        if (!empty($invoice->RefCustomer)) { 
+            // We should use RefSupplier but has been hardcoded the wrong way other places in lodo and must be reverted (incl in existing database records) before we can use RefSupplier
+            $ref_names = explode(" ", $invoice->RefCustomer, 2); // max two segments
+            $this->invoiceO->AccountingSupplierParty->Party->Person->FirstName = $ref_names[0];
+            if (count($ref_names) > 1) {
+                $this->invoiceO->AccountingSupplierParty->Party->Person->FamilyName = $ref_names[1];
+            } else {
+                $this->invoiceO->AccountingSupplierParty->Party->Person->FamilyName = "";
+            }
+            $this->invoiceO->AccountingSupplierParty->Party->Person->MiddleName = "";
+            $this->invoiceO->AccountingSupplierParty->Party->Person->JobTitle = "";
+        }
 
         ############################################################################################
         $sql_customer = "select * from accountplan where AccountPlanID=" . (int) $invoice->CustomerAccountPlanID;

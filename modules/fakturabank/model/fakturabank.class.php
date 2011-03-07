@@ -1109,6 +1109,13 @@ class lodo_fakturabank_fakturabank {
         $cbc = $doc->createElement('cbc:DocumentCurrencyCode', $InvoiceO->DocumentCurrencyCode);
         $invoice->appendChild($cbc);
 
+        if (!empty($InvoiceO->OrderReference)) {
+            $order_reference = $doc->createElement('cac:OrderReference');
+            $cbc = $doc->createElement('cbc:ID', utf8_encode($InvoiceO->OrderReference->ID));
+            $order_reference->appendChild($cbc);
+            $cacparty->appendChild($order_reference);
+        }
+
         ############################################################################################
         #AccountingSupplierParty
         $supplier = $doc->createElement('cac:AccountingSupplierParty');
@@ -1153,6 +1160,44 @@ class lodo_fakturabank_fakturabank {
                 $legalentity->appendChild($cbc);
                 $cacparty->appendChild($legalentity);
             
+                if (!empty($InvoiceO->AccountingSupplierParty->Party->Contact->Telephone) ||
+                    !empty($InvoiceO->AccountingSupplierParty->Party->Contact->Fax) ||
+                    !empty($InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail)) {
+                    $contact = $doc->createElement('cac:Contact');
+                    if (!empty($InvoiceO->AccountingSupplierParty->Party->Contact->Telephone)) {
+                        $cbc = $doc->createElement('cbc:Telephone', $InvoiceO->AccountingSupplierParty->Party->Contact->Telephone);
+                        $contact->appendChild($cbc);
+                    }
+                    if (!empty($InvoiceO->AccountingSupplierParty->Party->Contact->Telefax)) {
+                        $cbc = $doc->createElement('cbc:Telefax', $InvoiceO->AccountingSupplierParty->Party->Contact->Telefax);
+                        $contact->appendChild($cbc);
+                    }
+                    if (!empty($InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail)) {
+                        $cbc = $doc->createElement('cbc:ElectronicMail', $InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail);
+                        $contact->appendChild($cbc);
+                    }
+                    $cacparty->appendChild($contact);
+                }
+
+
+                if (!empty($InvoiceO->AccountingSupplierParty->Party->Person)) {
+                    $person = $doc->createElement('cac:Person');
+                    $cbc = $doc->createElement('cbc:FirstName', $InvoiceO->AccountingSupplierParty->Party->Person->FirstName);
+                    $person->appendChild($cbc);
+                    $cbc = $doc->createElement('cbc:FamilyName', $InvoiceO->AccountingSupplierParty->Party->Person->FamilyName);
+                    $person->appendChild($cbc);
+                    if (!empty($InvoiceO->AccountingSupplierParty->Party->Person->MiddleName)) {
+                        $cbc = $doc->createElement('cbc:MiddleName', $InvoiceO->AccountingSupplierParty->Party->Person->MiddleName);
+                        $person->appendChild($cbc);
+                    }
+                    if (!empty($InvoiceO->AccountingSupplierParty->Party->Person->JobTitle)) {
+                        $cbc = $doc->createElement('cbc:JobTitle', $InvoiceO->AccountingSupplierParty->Party->Person->JobTitle);
+                        $person->appendChild($cbc);
+                    }
+
+                    $cacparty->appendChild($person);
+                }
+
 
             $supplier->appendChild($cacparty);
 
@@ -1164,8 +1209,10 @@ class lodo_fakturabank_fakturabank {
         $customer = $doc->createElement('cac:AccountingCustomerParty');
             $cacparty = $doc->createElement('cac:Party');
             
+            if (!empty($InvoiceO->AccountingCustomerParty->Party->WebsiteURI)) {
                 $cbc = $doc->createElement('cbc:WebsiteURI', $InvoiceO->AccountingCustomerParty->Party->WebsiteURI);
                 $cacparty->appendChild($cbc);
+            }
             
                 // Add customer nr
                 $identification = $doc->createElement('cac:PartyIdentification');
