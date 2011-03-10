@@ -630,7 +630,7 @@ class timesheet_user_page
         printf(
             "<form action='%s' method='post' id='tabel_form'>" .
             "<input type='hidden' name='save_table' value='save' />" .
-            "<table>\n" .
+            "<table style='width: 1700px;'>\n" .
             "<tr>\n",
             $dest
             );
@@ -714,10 +714,19 @@ class timesheet_user_page
                         $value = htmlspecialchars($value, ENT_QUOTES);
 
                         if($locked || $lockedLine)
+                        {
                             $data = wordwrap($value, 30, '<br />');
-                        else
-                            $data = sprintf("<input name='%s' type='text' value='%s' size='%d' class='$field' />", $name, 
-                                            $value, $field_data['size']);
+                        }
+                        else 
+                        {
+                            if($field_data['size'] < 5)
+                                $text_align = 'right';
+                            else
+                                $text_align = 'left';
+
+                            $data = sprintf("<input name='%s' type='text' value='%s' size='%d' class='$field' style='text-align: %s'/>", $name, 
+                                            $value, $field_data['size'], $text_align);
+                        }
                     }
                     else if($field_data['type'] == "time")
                     {
@@ -965,82 +974,75 @@ $(document).ready(function() {
                     }
                     else if($field_data['type'] == "text")
                     {
-                        if($locked)
-                            $data = $value;
+                        if($field_data['size'] < 5)
+                            $text_align = 'right';
                         else
-                            $data = sprintf("<input name='%s' type='text' value='%s' size='%d' class='$field' />", $name, 
-                                            $value, $field_data['size']);
+                            $text_align = 'left';
+                        
+                        $data = sprintf("<input name='%s' type='text' value='%s' size='%d' class='$field' style='text-align: %s'/>", $name, 
+                                        $value, $field_data['size'], $text_align);
                     }
                     else if($field_data['type'] == "time")
                     {
                         $value = substr($value, 0, 5);
                         list($h, $m) = explode(':', $value);
-                        if($locked)
+
+                        if(strstr($name, "SumTime"))
                         {
-                            $data = $value;
+                            $data = sprintf(
+                                "%s %s <input name='%s' type='hidden' value='' id='%s' />",
+                                $this->create_timeselectbox($name."_h", $field."_h", $h, range(0,23)),
+                                $this->create_timeselectbox($name."_m", $field."_m", $m, range(0,59,5)),
+                                $name, $name);
                         }
-                        else 
+                        else if(strstr($name, "EndTime")) 
                         {
-                            if(strstr($name, "SumTime"))
-                            {
-                                $data = sprintf(
-                                    "%s %s <input name='%s' type='hidden' value='' id='%s' />",
-                                    $this->create_timeselectbox($name."_h", $field."_h", $h, range(0,23)),
-                                    $this->create_timeselectbox($name."_m", $field."_m", $m, range(0,59,5)),
-                                    $name, $name);
-                            }
-                            else if(strstr($name, "EndTime")) 
-                            {
-                                $data = sprintf(
-                                    "%s %s <input name='%s' type='hidden' value='' id='%s' />",
-                                    $this->create_timeselectbox($name."_h", $field."_h", $h, range(0,24)),
-                                    $this->create_timeselectbox($name."_m", $field."_m", $m, range(0,59,5)),
-                                    $name, $name);
-                            }
-                            else
-                            {
-                                $data = sprintf(
-                                    "%s %s <input name='%s' type='hidden' value='' id='%s' />",
-                                    $this->create_timeselectbox($name."_h", $field."_h", $h, range(0,23)),
-                                    $this->create_timeselectbox($name."_m", $field."_m", $m, range(0,59,5)),
-                                    $name, $name);
-                            }
-                        }
-                                            
-                    }
-                    else if($field_data['type'] == "select")
-                    {
-                        if($locked)
-                        {
-                            $data = $field_data['options'][$value];
+                            $data = sprintf(
+                                "%s %s <input name='%s' type='hidden' value='' id='%s' />",
+                                $this->create_timeselectbox($name."_h", $field."_h", $h, range(0,24)),
+                                $this->create_timeselectbox($name."_m", $field."_m", $m, range(0,59,5)),
+                                $name, $name);
                         }
                         else
                         {
-                            $data  = sprintf("<select name='%s'>\n", $name);
-
-                            foreach($field_data['options'] as $option => $option_value)
-                            {
-                                if($option == $value)
-                                    $data .= sprintf("  <option value='%s' selected>%s</option>\n", $option, 
-                                                     $option_value);
-                                else
-                                    $data .= sprintf("  <option value='%s'>%s</option>\n", $option, 
-                                                     $option_value);
-                            }
-                       
-                            $data .= sprintf("</select>\n");
+                            $data = sprintf(
+                                "%s %s <input name='%s' type='hidden' value='' id='%s' />",
+                                $this->create_timeselectbox($name."_h", $field."_h", $h, range(0,23)),
+                                $this->create_timeselectbox($name."_m", $field."_m", $m, range(0,59,5)),
+                                $name, $name);
                         }
+                    }
+                    else if($field_data['type'] == "select")
+                    {
+                        $data  = sprintf("<select name='%s'>\n", $name);
+                        
+                        if($value == 0)
+                            $nullselected = 'selected';
+                        else
+                            $nullselected = '';
+                        
+                        $data .= sprintf("  <option value='0' %s> - </option>\n", $nullselected);
+                        
+                        
+                        foreach($field_data['options'] as $option => $option_value)
+                        {
+                            if($option == $value)
+                                $data .= sprintf("  <option value='%s' selected>%s</option>\n", $option, 
+                                                 $option_value);
+                            else
+                                $data .= sprintf("  <option value='%s'>%s</option>\n", $option, 
+                                                 $option_value);
+                        }
+                        
+                        $data .= sprintf("</select>\n");
                     }
 
                     $row .= sprintf(" <td>%s</td> ", $data);
                 }
 
-                if(!$locked)
-                {
-                    $row .= sprintf("<td><input type='button' id='new_line_%s_%s' value='Ny linje' class='new_line' /> ".
-                                    "<input type='button' id='del_line_%s' class='del_line' value='Slett linje' /></td>",
-                                    "%DAY%", "%I%", "%I%");
-                }
+                $row .= sprintf("<td><input type='button' id='new_line_%s_%s' value='Ny linje' class='new_line' /> ".
+                                "<input type='button' id='del_line_%s' class='del_line' value='Slett linje' /></td>",
+                                "%DAY%", "%I%", "%I%");
                 
                 $row .= sprintf("</tr>\n");
 
