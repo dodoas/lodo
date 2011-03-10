@@ -357,6 +357,10 @@ class timesheet_user_page
     private $user;
     private $root = "/?";
 
+    private $months = array("N/A", "Januar", "Februar", "Mars", "April", "Mai",
+                            "Juni", "Juli", "August", "September", "Oktober", "November", "Desember");
+
+
     public function __construct($user)
     {
         $this->user = $user;
@@ -389,20 +393,24 @@ class timesheet_user_page
         return $el;
     }
     
-    private function print_head()
+    private function print_head($title = '')
     {
+        if($title != '')
+            $title = ' - ' . $title;
+
         if(!$this->user->is_admin())
         {
             printf("<html>\n" .
                    "  <head>\n" .
-                   "    <title>Timesheet registration for %s</title>\n" .
+                   "    <title>Timesheet registration for %s%s</title>\n" .
                    "    <script src='/lib/js/jquery.js'></script>\n" .
                    "    <style> * { font-size: 11px; } </style>\n" .
                    "  </head>\n" .
                    "  <body>\n" .
-                   "    <p>Logget inn som %s (%d)<p>\n" .
+                   "    <p>Logget inn som %s (%d) %s<p>\n" .
                    "    <p><a href='%s'>Tilbake</a></p>\n",
-                   $this->user->get_username(), $this->user->get_username(), $this->user->get_id(),
+                   $this->user->get_username(), $title,
+                   $this->user->get_username(), $this->user->get_id(), $title,
                    $this->root
             );
 
@@ -410,9 +418,9 @@ class timesheet_user_page
         }
         else
         {
-            printf("<h1>Timelister for %s</h1>" .
+            printf("<h1>Timelister for %s%s</h1>" .
                    "<p><a href='%s'>Tilbake til oversikt</a></p>", 
-                   $this->user->get_username(), $this->root);
+                   $this->user->get_username(), $title, $this->root);
 
         }
 
@@ -519,7 +527,7 @@ class timesheet_user_page
                 printf("<td></td>");
             }
 
-            printf("<td style='text-align: center;'>%s</td><td><a href='%s&tp=view&period=%s'>velg</a></td>", $month, $this->root, $period);
+            printf("<td style='text-align: left;'>%s</td><td><a href='%s&tp=view&period=%s'>velg</a></td>", $this->months[$month], $this->root, $period);
             
             printf("</tr>\n");
             $i ++;
@@ -630,7 +638,7 @@ class timesheet_user_page
         printf(
             "<form action='%s' method='post' id='tabel_form'>" .
             "<input type='hidden' name='save_table' value='save' />" .
-            "<table style='width: 1700px;'>\n" .
+            "<table style='width: 1800px;'>\n" .
             "<tr>\n",
             $dest
             );
@@ -638,13 +646,14 @@ class timesheet_user_page
         /* Headers */
         foreach($fields as $field => $field_data)
         {
-            printf(' <th>%s</th> ', $field_data['translation']);
+            printf(' <th style="text-align: left;">%s</th> ', $field_data['translation']);
         }
 
         printf(
             "</tr>\n"
             );
 
+        $sum_fields = array();
         $i = 0;
         $sum_h  = 0;
         $sum_m  = 0;
@@ -672,7 +681,10 @@ class timesheet_user_page
                         printf("<tr><td colspan=13 style='background-color: #aaa;'></td></tr>");
                     }
 
-                    printf("<tr><td><b>%s</b></td></tr>", $day_no);
+                    $w = date('w', strtotime($period . '-' . $day_no));
+                    $wd = array('S&oslash;ndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'L&oslash;rdag');
+                    $w = $wd[$w];
+                    printf("<tr style='height: 25px;'><td><b>%s</b></td><td colspan=2></td><td><b>%s</b></td></tr>", $day_no, $w);
                 }
 
                 printf("<tr style='%s' id='rowno_%d' class='row'><td></td>\n", "color:black;", $i);
@@ -767,6 +779,21 @@ class timesheet_user_page
                     }
                     else if($field_data['type'] == "select")
                     {
+                        /* make field sum */
+                        if(!isset($sum_fields[$field])) 
+                        {
+                            $sum_fields[$field] = array();
+                            $sum_fields[$field][$value] = 1;
+                        }
+                        else if(!isset($sum_fields[$field][$value]))
+                        {
+                            $sum_fields[$field][$value] = 1;
+                        }
+                        else 
+                        {
+                            $sum_fields[$field][$value] += 1;
+                        }
+
                         if($locked || $lockedLine)
                         {
                             $data = $field_data['options'][$value];
@@ -799,24 +826,19 @@ class timesheet_user_page
                     printf(" <td>%s</td> ", $data);
                 }
 
+                printf("<td width=230>");
+
                 if(!$locked && !$lockedLine)
                 {
-                    printf("<td>");
-
-                    if($this->user->is_admin()) 
-                    {
-                        printf("<input type='submit' name='lock_line_%d' class='lock_line' value='L&aring;s linje' /> ", 
-                               $entry['EntryID']);
-                    }
+                    printf("<input type='submit' name='lock_line_%d' class='lock_line' value='L&aring;s linje' /> ", 
+                           $entry['EntryID']);
 
                     printf("<input type='button' id='new_line_%s_%d' value='Ny linje' class='new_line' /> ".
-                           "<input type='button' id='del_line_%s' class='del_line' value='Slett linje' /></td>",
+                           "<input type='button' id='del_line_%s' class='del_line' value='Slett linje' />",
                            $entry['Day'], $i, $i);
                 }
                 else if(!$locked)
                 {
-                    printf("<td>");
-                    
                     if($lockedLine && $this->user->is_admin())
                     {
                         printf("<input type='submit' name='unlock_line_%d' value='L&aring;s opp' class='unlock_line' /> ",
@@ -825,12 +847,21 @@ class timesheet_user_page
 
                     if(!$lockedLine)
                     {
-                        printf("<input type='button' id='del_line_%s' class='del_line' value='Slett linje' /></td>", $i);
+                        printf("<input type='button' id='del_line_%s' class='del_line' value='Slett linje' /> ", $i);
                     }
 
                     printf("<input type='button' id='new_line_%s_%d' value='Ny linje' class='new_line' /> ",
                            $entry['Day'], $i);
+
                 }
+
+                if($lockedLine && $entry['LockedBy'] != '') 
+                {
+                    printf('<p>L&aring;st av %s %s</p>', $entry['LockedBy'], $entry['LockedTime']);
+                }
+                
+                printf('</td>');
+                    
                 
                 printf("</tr>\n");
 
@@ -903,8 +934,25 @@ class timesheet_user_page
             printf('<tr><td colspan=3><b>Sum reiselengde</b></td><td>%d km</td></tr>', $sum_km);
         }
 
+        printf('<tr style="height: 10px;"></tr><tr><td colspan=3><b>Antall oppf&oslash;ringer</b></td><tr>');
+        foreach($sum_fields as $f => $a) 
+        {
+            $o = $fields[$f]['options'];
+
+            printf('<tr><td colspan=3><b>%s</b></td></tr>', $fields[$f]['translation']);
+
+            foreach($a as $n => $v) 
+            {
+                if($n == 0)
+                    continue;
+
+                printf("<tr><td></td><td colspan=2>%s</td><td>%d</td></tr>", $o[$n], $v);
+            }
+        }
+
         printf("</table>");
 
+        
         if(!$locked)
             printf("<p><input type='submit' name='save' value='Lagre' id='save_button' /></p>");
         
@@ -1022,7 +1070,6 @@ $(document).ready(function() {
                             $nullselected = '';
                         
                         $data .= sprintf("  <option value='0' %s> - </option>\n", $nullselected);
-                        
                         
                         foreach($field_data['options'] as $option => $option_value)
                         {
@@ -1153,20 +1200,32 @@ $(document).ready(function() {
                 $_lib['db']->db_query($sql);
             }
         }
-        else if($this->user->is_admin()) 
+        else
         {
             foreach($_POST as $k => $v) 
             {
                 if(substr($k, 0, 9) == "lock_line") 
                 {
                     $id = substr($k, 10);
-                    $sql = sprintf("UPDATE timesheets SET Locked = 1 WHERE AccountPlanID = %d AND EntryID = %d", 
-                                   $this->user->get_id(), $id);
+
+                    if($this->user->is_admin()) 
+                    {
+                        $locked_by = $this->user->escape(
+                            $_lib['sess']->get_person('FirstName') . ' ' . $_lib['sess']->get_person('LastName')
+                            );
+                    }
+                    else
+                    {
+                        $locked_by = $this->user->escape($this->user->get_username());
+                    }
+
+                    $sql = sprintf("UPDATE timesheets SET Locked = 1, LockedBy = '%s', LockedTime = NOW() WHERE AccountPlanID = %d AND EntryID = %d", 
+                                   $locked_by, $this->user->get_id(), $id);
 
                     $_lib['db']->db_query($sql);
                     break;
                 }
-                else if(substr($k, 0, 11) == "unlock_line") 
+                else if(substr($k, 0, 11) == "unlock_line" && $this->user->is_admin()) 
                 {                    
                     $id = substr($k, 12);
                     $sql = sprintf("UPDATE timesheets SET Locked = 0 WHERE AccountPlanID = %d AND EntryID = %d", 
@@ -1188,17 +1247,13 @@ $(document).ready(function() {
 
         $period = $this->user->list_period($_REQUEST['period']);
 
-        $this->print_head();
-
         $month_days = date("t", strtotime($_REQUEST['period'] . "-01"));
         $entries = array();
 
         // Ingen lokalisering?.. Føler jeg har gjort denne jobben før. Må lage noe system for det
         list($date_y, $date_m) = explode('-', $_REQUEST['period']);
-        $months = array("N/A", "Januar", "Februar", "Mars", "April", "Mai",
-                        "Juni", "Juli", "August", "September", "Oktober", "November", "Desember");
-        printf('<h3>%s %d</h3>', $months[$date_m], $date_y);
 
+        $this->print_head(sprintf('%s %d', $this->months[$date_m], $date_y));
 
         foreach($period as $entry)
         {
@@ -1263,7 +1318,7 @@ $(document).ready(function() {
             'Accommodation' => array('type' => 'select', 'options' => $accommodations, 'default' => 0, 'translation' => 'Overnatting'),
 
             'TravelRoute' => array('type' => 'text', 'size' => '30', 'default' => "", 'translation' => 'Reiserute'),
-            'TravelDesc' => array('type' => 'text', 'size' => '30', 'default' => "", 'translation' => 'Reisebeskrivelse'),
+            'TravelDesc' => array('type' => 'text', 'size' => '30', 'default' => "", 'translation' => 'Reiseform&aring;l'),
             'TravelDistance' => array('type' => 'text', 'size' => '3', 'default' => "0", 'translation' => 'Reiselengde (km)'),
 
             'Comment'    => array('type' => 'text', 'size' => '30', 'default' => "", 'translation' => 'Kommentar')
