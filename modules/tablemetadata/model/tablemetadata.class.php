@@ -301,7 +301,6 @@ class model_tablemetadata_tablemetadata {
             #print_r($tablefields);
             while($row = $dbh[$dsn]->db_fetch_object($result_tableinfo))
             {
-                echo("modules/tablemetadata/model/tablemetadata.class.php: " . __LINE__);
                 #print_r($row);
     
                     $FieldExtra = "";
