@@ -364,6 +364,10 @@ class lodo_fakturabank_fakturabankvoting {
 					$dataH['FakturabankID'] = $relation->{'id'};
 					$dataH['FakturabankTransactionID'] = $transaction->{"id"};
 					$dataH['FakturabankInvoiceID'] = $relation->{"invoice-id"};
+                    if (!empty($relation->{"paycheck-no"})) {
+                        $dataH['PaycheckNo'] = $relation->{"paycheck-no"};
+                    }
+					$dataH['FakturabankInvoiceID'] = $relation->{"invoice-id"};
 					$dataH['Incoming'] = $transaction->incoming;
 					$dataH['Description'] = $transaction->description;
 					$dataH['DoneReconciliatedAt'] = $_lib['date']->t_to_mysql_format($transaction->{"done-reconciliated-at"});
@@ -528,6 +532,72 @@ class lodo_fakturabank_fakturabankvoting {
 		}
 
 		return $relations;
+	}
+
+	public function lookup_paycheck_relations($args) {
+		global $_lib;
+
+		$invoice_ids = array();
+
+        if (empty($args['id']) || !is_numeric($args['id'])) {
+            return false;
+        }
+
+        $query = "SELECT * FROM accountline WHERE `AccountLineID` = '" . $args['id'] . "'";
+
+		$accountline = $_lib['storage']->get_row(array('query' => $query));
+		if (empty($accountline)) {
+			return false;
+		}
+
+
+        // if transaction was imported from fakturabank, match on fakturabankid
+        if (!empty($accountline->FakturabankTransactionLodoID) &&
+            is_numeric($accountline->FakturabankTransactionLodoID)) {
+
+            $query = "SELECT FakturabankID FROM fakturabanktransaction WHERE `ID` = '" . $accountline->FakturabankTransactionLodoID . "'";
+            $result = $_lib['storage']->db_query3(array('query' => $query));
+            if (!$result) {
+                return false;
+            }
+
+            if (!($obj = $_lib['storage']->db_fetch_object($result)) || !is_numeric($obj->FakturabankID)) {
+                return false;
+            }
+            $FakturabankTransactionID = $obj->FakturabankID;
+
+            $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
+				tr.FakturabankTransactionID = '$FakturabankTransactionID' and PaycheckNo is not null";
+        } else { // ... else, transaction imported from css or punched, match on date, amount, account
+            $transaction_date = $_lib['storage']->db_escape($args['VoucherDate']);
+            $Incoming = $_lib['storage']->db_escape($args['Incoming']);
+            $bank_account = $_lib['storage']->db_escape($args['BankAccount']);
+            $amount = $_lib['storage']->db_escape($args['Amount']);
+
+            if ($Incoming) {
+                $bank_account_stmt = "tr.FromBankAccount = '$bank_account' AND";
+            } else {
+                $bank_account_stmt = "tr.ToBankAccount = '$bank_account' AND";            
+            }
+
+            $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
+ 				PaycheckNo IS NOT NULL AND
+				tr.InvoiceID IS NOT NULL AND
+				tr.PostingDate = '$transaction_date' AND
+				$bank_account_stmt
+				tr.Incoming = '$Incoming' AND
+				ROUND(tr.TransactionAmount, 2) = ROUND('$amount', 2)";
+        }
+
+
+        # there might be several relations for a transaction and only those with AccountPlanID set serves a purpose since that is the only ones we currently can handle
+		$relations = $_lib['storage']->get_hashhash(array('query' => $query, 'key' => 'PaycheckNo'));
+
+		if (empty($relations)) {
+			return false;
+		}
+
+        return $relations;
 	}
 
     function lookup_reconciliation_reason_relations($args) {
@@ -713,6 +783,40 @@ class lodo_fakturabank_fakturabankvoting {
 		return $relation;
     }
    
+
+    public function findpaycheckmatch($args) {
+        global $_lib;
+
+        $args['VoucherDate'] = substr($args['VoucherDate'], 0, 10);
+
+		$query = "SELECT AccountNumber FROM account WHERE AccountID='" . $args['BankAccountID'] . "'";
+
+		$row = $_lib['storage']->get_row(array('query' => $query));
+
+		if (empty($row)) {
+			return false;
+		}
+
+		$args['BankAccount'] = str_replace(" ", "", $row->AccountNumber);
+
+		$relations = $this->lookup_paycheck_relations($args);
+		if (!isset($relations) || empty($relations)) {
+			return false;
+		}
+
+		#get first relation
+		$relation = reset($relations);
+
+        $query = "select AccountPlanID from salary where JournalID = '" . substr($relation['PaycheckNo'], 1) . "'";
+        $paychecks = $_lib['storage']->get_hashhash(array('query' => $query, 'key' => 'AccountPlanID'));
+        if (!empty($paychecks)) {
+            $paycheck_match = reset($paychecks);
+        } else {
+            $paycheck_match = false;
+        }
+
+		return $paycheck_match;
+    }
 
     public function findnoninvoicematch($args) {
         global $_lib;

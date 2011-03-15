@@ -126,11 +126,15 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
 								$value = $DataH[$server_name][$database_name][$table_name][$pk_name]['AmountOut'];
 							}
 							
-							$accountline = $DataH[$server_name][$database_name][$table_name][$pk_name];
-							# find fakturabank data
-							$match = $fbvoting->findinvoicematch(array('Amount' => $value, 'VoucherDate' => $Period . '-' . $accountline['Day'], 'BankAccountID' => $AccountID, 'Incoming' => $incoming, 'id' => $pk_name, 'accountline' => $DataH[$server_name][$database_name][$table_name][$pk_name], 'period' => $Period));
-							if ($match && 
-                                !empty($match['AccountPlanID']) && // ignore interest, transaction costs etc for now (transactions without org numbers)
+
+                            $accountline = $DataH[$server_name][$database_name][$table_name][$pk_name];
+                            # find fakturabank data
+                            if ($match = $fbvoting->findpaycheckmatch(array('Amount' => $value, 'VoucherDate' => $Period . '-' . $accountline['Day'], 'BankAccountID' => $AccountID, 'Incoming' => $incoming, 'id' => $pk_name, 'accountline' => $DataH[$server_name][$database_name][$table_name][$pk_name], 'period' => $Period))) { // look for paycheck
+                                if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
+                                    $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] = $match['AccountPlanID'];
+                                }
+                            } elseif (($match = $fbvoting->findinvoicematch(array('Amount' => $value, 'VoucherDate' => $Period . '-' . $accountline['Day'], 'BankAccountID' => $AccountID, 'Incoming' => $incoming, 'id' => $pk_name, 'accountline' => $DataH[$server_name][$database_name][$table_name][$pk_name], 'period' => $Period)))  && 
+                                !empty($match['AccountPlanID']) && // only invoice matches (i.e. with orgnr)
                                 !empty($match['AccountPlanOrgNumber'])) {
 
                                 
@@ -160,7 +164,6 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
                                 $match = $fbvoting->findnoninvoicematch(array('Amount' => $value, 'VoucherDate' => $Period . '-' . $accountline['Day'], 'BankAccountID' => $AccountID, 'Incoming' => $incoming, 'id' => $pk_name, 'accountline' => $DataH[$server_name][$database_name][$table_name][$pk_name], 'period' => $Period));
                                 $reconciliation_accountplan_id = null;
                                 $reconciliation_accountplan = null;
-                                    error_log("modules/bank/view/record.inc-" . __LINE__ . ":match['FakturabankBankTransactionAccountID']:" . (is_array($match['FakturabankBankTransactionAccountID']) || is_object($match['FakturabankBankTransactionAccountID']) ? print_r($match['FakturabankBankTransactionAccountID'], true) : $match['FakturabankBankTransactionAccountID'] . ". <br/>\n"));
                                 if ($match && 
                                     //                                    empty($DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID']) &&
                                     !empty($match['FakturabankBankTransactionAccountID'])) {
