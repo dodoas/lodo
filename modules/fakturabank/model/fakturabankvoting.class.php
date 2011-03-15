@@ -12,6 +12,7 @@ class lodo_fakturabank_fakturabankvoting {
     private $retrievestatus = '';
     private $credentials    = '';
     private $OrgNumber      = '';
+    private $account_number = '';
     public  $startexectime  = '';
     public  $stopexectime   = '';
     public  $diffexectime   = '';
@@ -72,15 +73,22 @@ class lodo_fakturabank_fakturabankvoting {
         $this->credentials = "$this->username:$this->password";		
 	}
 
-	function get_balance_report() {
+	function get_balance_report($account_id = null, $period = null) {
         global $_lib;
 
 		$this->setup_connection_values();
 
 		$page       = "balance_report.xml";
 		// http://fakturabank.no/balance_report.xml?identifier=
+        // TODO: limit on account
         $params     = "?identifier=" . $this->OrgNumber . '&identifier_type=NO:ORGNR';
-//        if($this->retrievestatus) $params .= '&customer_status=' . $this->retrievestatus;
+        if ($account_id != null && $period != null) {
+            $params     .= '&';
+            $params .= "start_date=" . $this->period_to_startdate($period) . "&";
+            $params .= "end_date=" . $this->period_to_enddate($period) . "&";
+            $params .= "country_code=NO&";
+            $params .= "account_number=" . $this->get_account_number($account_id) . "&";
+        }
         $url    = "$this->protocol://$this->host/$page$params";
         $_lib['message']->add($url);
 
@@ -148,14 +156,14 @@ class lodo_fakturabank_fakturabankvoting {
             return false;
         }
 
-        if (!preg_match('/[0-9]{4}-[0-9]{2}/', $period)) {
+        if (!preg_match('/([0-9]{4})-([0-9]){2}/', $period, $matches)) {
             return false;
         }
 
         global $_lib;
 
         # get transaction data from fakturabank
-		$voting = $this->get_balance_report();
+		$voting = $this->get_balance_report($account_id, $period);
         if (!is_array($voting) || empty($voting)) {
             return false;
         }
@@ -164,11 +172,41 @@ class lodo_fakturabank_fakturabankvoting {
         # import fakturabank transaction records accountline table
         $this->import_transactions_to_accounting($account_id, $period);
 
+        $this->save_voting_relation($voting);
 	}
 
-    
+    protected function period_to_startdate($period) {
+        return "$period-01";
+    }
 
-    protected function import_transactions_to_accounting($account_id, $period) {
+    protected function period_to_enddate($period) {
+        if (!preg_match('/([0-9]{4})-([0-9]{2})/', $period, $matches)) {
+            return false;
+        }        
+
+        $month = (int) $matches[2];
+        $year = (int) $matches[1];
+
+        if ($month == 12) {
+            $month = 1;
+            $year++;
+        } else {
+            $month++;
+        }
+
+        $day = 1; // hardcode to 29 of previous month to give slack
+
+        $monthstr = $month < 10 ? "0$month" : "$month";
+        $daystr = $day < 10 ? "0$day" : "$day";
+
+        return "$year-$monthstr-$daystr";
+
+    }
+
+    protected function get_account_number($account_id) {
+        if ($this->account_number != "") {
+            return $this->account_number;
+        }
         global $_lib;
 
 		$query = "SELECT AccountNumber FROM account WHERE AccountID='" . $account_id . "'";
@@ -180,7 +218,15 @@ class lodo_fakturabank_fakturabankvoting {
 			return false;
 		}
 
-		$account_number = str_replace(" ", "", $row->AccountNumber);
+		return str_replace(" ", "", $row->AccountNumber);
+    }
+
+    protected function import_transactions_to_accounting($account_id, $period) {
+        $account_number = $this->get_account_number($account_id);
+        if (!$account_number) {
+            return false;
+        }
+        global $_lib;
 
         $period_start = $period . "-01 00:00:00";
         $period_end = substr($period, 0, 5) . (((int) substr($period, 5, 2)) + 1) . "-01 00:00:00";
@@ -273,7 +319,7 @@ class lodo_fakturabank_fakturabankvoting {
         # save bank transactions
 		$this->save_transactions($voting);
         # save voting relations
-		$this->save_voting_relation($voting, $invoices);
+		$this->save_voting_relation($voting);
 	}
 
 	public function save_outgoing_w_voting($invoices) {
@@ -285,15 +331,16 @@ class lodo_fakturabank_fakturabankvoting {
 
 		$this->save_transactions($voting);
 
-		$this->save_voting_relation($voting, $invoices);
+		$this->save_voting_relation($voting);
 	}
 
-	public function save_voting_relation(&$voting, $invoices) {
+	public function save_voting_relation(&$voting) {
 		global $_lib;
 
 
 		if(isset($voting))
 		foreach ($voting as &$transaction) {
+
 			if (isset($transaction) && !empty($transaction) && 
 				isset($transaction->relations) && !empty($transaction->relations)) {
 				
