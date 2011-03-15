@@ -226,7 +226,6 @@ class model_tablemetadata_tablemetadata {
         #print_r($args);        
 
         $databaseName = $args['db_name'];
-        echo("modules/tablemetadata/model/tablemetadata.class.php-" . __LINE__ . ":databaseName:" . (is_array($databaseName) || is_object($databaseName) ? print_r($databaseName, true) : $databaseName . ". <br/>\n"));
         $tableFilter = $args['tablefilter'];
         $dsn = $_SETUP['DB_SERVER_DEFAULT'] . $databaseName . $_SETUP['DB_TYPE_DEFAULT'];
         $dbh[$dsn] = new db_mysql(array('host' => $_SETUP['DB_SERVER_DEFAULT'], 'database' => $databaseName, 'username' => $_SETUP['DB_USER_DEFAULT'], 'password' => $_SETUP['DB_PASSWORD_DEFAULT']));
