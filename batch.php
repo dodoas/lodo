@@ -8,6 +8,7 @@ if($argc <= 1) {
   print "php batch.php model_tablemetadata_tablemetadata.dbupdate db_name=konsulentvikaren0\n";
   print "php batch.php model_tablemetadata_tablemetadata.updateall\n";
   print "php batch.php model_tablemetadata_tablemetadata.updateallskipsystemdbs\n";
+  print "php batch.php model_tablemetadata_tablemetadata.updateallskipsystemdbs tablefilter=invoicein\n";
   print "php batch.php model_synchronizeinstallation_synchronizeinstallation.updateinstalltable db_name=konsulentvikaren0\n\n";
   print "php batch.php model_tablemetadata_tablemetadata.runscriptall scriptpath='db/changes/022_scriptname.sql'\n\n";
   print "php batch.php model_fakturabank_fakturabank.generate_invoice_xml InvoiceID=1\n";
@@ -31,7 +32,11 @@ require_once("code/lib/date/date.class.php");
 $_lib['message']    = new message(array('dbserver'=> $_SETUP['DB_SERVER']['0'], 'dbname' => $_SESSION['DB_NAME']));
 $_lib['sess']       = new SessionNew(array('database' =>  $_SETUP['DB_NAME_DEFAULT'], 'company_id' => $_SETUP['COMPANY_ID'], 'interface' => $_SETUP['ACTIVE_INTERFACE']));
 $_lib['storage']    = $_lib['db'] = new db_mysql(array('host' => $_SETUP['DB_SERVER_DEFAULT'], 'database' => $_SETUP['DB_NAME_DEFAULT'], 'username' => $_SETUP['DB_USER_DEFAULT'], 'password' => $_SETUP['DB_PASSWORD_DEFAULT']));
+if (empty($_DF)) { $_DF = null; }
+if (empty($_NF)) { $_NF = null; }
 $_lib['date']       = new Date($_DF, $_NF);
+if (empty($_dsn)) $_dsn = null;
+if (empty($_dbh)) $_dbh = null;
 $_lib['convert']    = new convert(array('_dbh' => $_dbh, '_dsn' => $_dsn));
 
 function includemodel($file) {

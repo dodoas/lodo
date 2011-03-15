@@ -35,8 +35,14 @@ class model_tablemetadata_tablemetadata {
         }
     }
 
-    function updateallskipsystemdbs() {
+    function updateallskipsystemdbs($args) {
         global $_lib;
+
+        if (empty($args['tablefilter'])) {
+            $tablefilter = null;
+        } else {
+            $tablefilter = $args['tablefilter'];
+        }
 
         $system_dbs = array('lodo', 'mysql', 'test', 'information_schema');
 
@@ -50,6 +56,7 @@ class model_tablemetadata_tablemetadata {
 
             print "Oppdaterer: $row->Database\n";
             $params['db_name'] = $row->Database;
+            $params['tablefilter'] = $tablefilter;
             $this->update_db($params);
         }
    }
@@ -219,6 +226,8 @@ class model_tablemetadata_tablemetadata {
         #print_r($args);        
 
         $databaseName = $args['db_name'];
+        echo("modules/tablemetadata/model/tablemetadata.class.php-" . __LINE__ . ":databaseName:" . (is_array($databaseName) || is_object($databaseName) ? print_r($databaseName, true) : $databaseName . ". <br/>\n"));
+        $tableFilter = $args['tablefilter'];
         $dsn = $_SETUP['DB_SERVER_DEFAULT'] . $databaseName . $_SETUP['DB_TYPE_DEFAULT'];
         $dbh[$dsn] = new db_mysql(array('host' => $_SETUP['DB_SERVER_DEFAULT'], 'database' => $databaseName, 'username' => $_SETUP['DB_USER_DEFAULT'], 'password' => $_SETUP['DB_PASSWORD_DEFAULT']));
 
@@ -232,7 +241,11 @@ class model_tablemetadata_tablemetadata {
         $query_update = "update confdbfields SET Active=0";
         $dbh[$dsn]->db_update($query_update);
 
-        $query_table  = "show tables";
+        if (!empty($tableFilter)) {
+            $query_table  = "show tables LIKE '$tableFilter'";
+        } else {
+            $query_table  = "show tables";
+        }
         $result_table = $dbh[$dsn]->db_query($query_table);
     
         $query = "update confdbfields SET Active=0";
@@ -254,10 +267,20 @@ class model_tablemetadata_tablemetadata {
           7 => 'datetime',
         );
     
-    
+
+        $total = 0;
+        $updated = 0;
+        $new = 0;
+        $new_fields = 0;
+
         while ($table_obj = $dbh[$dsn]->db_fetch_object($result_table))
         {
-            $table_choice = "Tables_in_$databaseName";
+            if (!empty($tableFilter)) {
+                $table_choice = "Tables_in_$databaseName ($tableFilter)";
+            } else {
+                $table_choice = "Tables_in_$databaseName";
+
+            }
             $table = $table_obj->{$table_choice};
             #print_r($table);
     
@@ -278,6 +301,7 @@ class model_tablemetadata_tablemetadata {
             #print_r($tablefields);
             while($row = $dbh[$dsn]->db_fetch_object($result_tableinfo))
             {
+                echo("modules/tablemetadata/model/tablemetadata.class.php: " . __LINE__);
                 #print_r($row);
     
                     $FieldExtra = "";
@@ -288,7 +312,10 @@ class model_tablemetadata_tablemetadata {
                     $Required   = "";
                     $FormHeight     = 0;
                     $FormWidth      = 0;
-    
+                    $FormTypeEdit = "";
+                    $DefaultValue = "";
+                    $type_num = "";
+
                     #print_r($tablefields[$i]);
                     #exit;
                     $type       = $row->Type;
@@ -300,6 +327,8 @@ class model_tablemetadata_tablemetadata {
                     $null       = $row->Null;
     
                     $fieldType = $type;
+
+                    $len = null;
     
                     if(preg_match('{(.*)\((.*)\)}', $type, $m)) {
                         if(is_int($m['2'])) {
@@ -334,6 +363,14 @@ class model_tablemetadata_tablemetadata {
                         $FormHeight    = 1;
                         $FormWidth     = 25;
                     }
+                    /* // Not tested yet
+                    elseif($type == 'time')
+                    {
+                        $inputType = 'Time';
+                        $FormType  = 'text';
+                        $FormHeight    = 1;
+                        $FormWidth     = 10;
+                        } */
                     elseif($type == 'timestamp')
                     {
                         $inputType = 'Datetime';
@@ -397,6 +434,13 @@ class model_tablemetadata_tablemetadata {
                         $FormHeight = 1;
                         $FormWidth = 12;
                     }
+                    elseif($type == 'bigint')
+                    {
+                        $inputType = 'Int';
+                        $FormType = 'text';
+                        $FormHeight = 1;
+                        $FormWidth = 20;
+                    }
                     elseif($type == 'set')
                     {
                         $inputType = 'String';
@@ -444,7 +488,7 @@ class model_tablemetadata_tablemetadata {
                     }
                     else
                     {
-                        $_lib['message']->add("Finnes ikke: ???");
+                        $_lib['message']->add("Finnes ikke type: $type");
                         $_lib['message']->add("table:" .  $table ." type:".$type." type_num:".$type_num." field:".$field." length: ".$len." flags:".$flags);
                     }
     
@@ -895,7 +939,8 @@ class model_tablemetadata_tablemetadata {
     
                     $fields    = "Active=1, ";
                     $fieldType = $dbh[$dsn]->db_escape($fieldType);
-    
+
+
                     if(!$exists)
                     {
                         $query = "INSERT INTO confdbfields SET TableName='$table', TableField='$field', ValidFrom=NOW(), FormType='$FormType', FormTypeEdit='$FormTypeEdit', FieldType='$fieldType', FormHeight='$FormHeight', FormWidth='$FormWidth', PrimaryKey=$pk, Active=1, InputValidation='$inputType', OutputValidation='$outputType', FieldExtra='$FieldExtra', FieldExtraEdit='$FieldExtraEdit',Required='$Required', DefaultValue = '$DefaultValue'";
