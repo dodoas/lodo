@@ -7,7 +7,6 @@ class lodo_fakturabank_reconciliationreason {
         global $_lib;
 
         $query = "select AccountPlanID from fakturabankbankreconciliationreason where FakturabankBankReconciliationReasonID = '" . $fakturabank_bank_reconciliation_reason_id . "' AND AccountPlanID != '0' and AccountPlanID is not null";
-        error_log("modules/fakturabank/model/reconciliationreason.class.php-" . __LINE__ . ":query:" . (is_array($query) || is_object($query) ? print_r($query, true) : $query . ". <br/>\n"));
 
         $rows = $_lib['storage']->get_hashhash(array('query' => $query, 'key' => 'FakturabankBankReconciliationReasonID'));
         if (empty($rows)) {
