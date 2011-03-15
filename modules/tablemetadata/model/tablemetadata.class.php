@@ -237,7 +237,11 @@ class model_tablemetadata_tablemetadata {
             return false;
         }
     
-        $query_update = "update confdbfields SET Active=0";
+        if (!empty($tableFilter)) {
+            $query_update = "update confdbfields SET Active=0 where TableName='$tableFilter'";
+        } else {
+            $query_update = "update confdbfields SET Active=0";
+        }
         $dbh[$dsn]->db_update($query_update);
 
         if (!empty($tableFilter)) {
@@ -246,9 +250,6 @@ class model_tablemetadata_tablemetadata {
             $query_table  = "show tables";
         }
         $result_table = $dbh[$dsn]->db_query($query_table);
-    
-        $query = "update confdbfields SET Active=0";
-        $exists = $dbh[$dsn]->db_update($query);
     
         $typemap = array(
           10 => 'date',
