@@ -12,12 +12,16 @@ while($row = $_lib['db']->db_fetch_object($result_setup)) {
 }
 
 includelogic('accounting/accounting');
+//includelogic('timesheets/timesheet');
 $accounting = new accounting();
 
 $thisDate            	= $_lib['sess']->get_session('LoginFormDate');
 $thisYear            	= substr($thisDate,0,4);
 $firstPeriodThisYear 	= $_lib['date']->get_this_year($thisDate).'-01';
 $lastPeriodThisYear 	= $accounting->get_last_accountperiod_this_year($thisDate);
+
+//$timesheet = new timesheet_user();
+//$timesheet_projects = $timesheet->list_projects();
 
 print $_lib['sess']->doctype ?>
 
@@ -357,7 +361,7 @@ print $_lib['sess']->doctype ?>
 <input type="hidden" name="report.Sort" value="VoucherDate">
 
 <tr>
-	<th rowspan="4">L<br />&Oslash;<br />N<br />N<br /></th>
+	<th rowspan="5">L<br />&Oslash;<br />N<br />N<br /></th>
     <td>Terminoppgave skattetrekk og arbeidsgiveravgift</td>
     <td>Fra periode</td>
     <td>
@@ -391,6 +395,7 @@ print $_lib['sess']->doctype ?>
     <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
 </tr>
 </form>
+
 <form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=arbeidsgiveravgift.inberarbeidsgiveravgift" method="post" target="_blank">
 <tr>
     <td>Innberettet arbeidsgiveravgift</td>
@@ -403,6 +408,7 @@ print $_lib['sess']->doctype ?>
     <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
 </tr>
 </form>
+
 <form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=feriepenger.feriepenger" method="post" target="_blank">
 <tr class="r0">
     <td>Avsettning feriepenger og arbeidsgiver avgift</td>
@@ -415,6 +421,31 @@ print $_lib['sess']->doctype ?>
     <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
 </tr>
 </form>
+
+<form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=timesheets.report_proxy" method="post" target="_blank">
+<tr>
+    <td>Prosjektsrapport</td>
+    <td>Prosjekt</td>
+    <td><?
+            $aconf = array();
+            $aconf['table']         = 'report';
+            $aconf['field']         = 'ProjectID';
+            $aconf['accesskey']     = 'P';
+            $_lib['form2']->project_menu2($aconf);
+            ?>
+    </td>
+
+    <td>Periode</td>
+    <td><?
+           $timesheet_period_sql = "SELECT CONCAT(YEAR(date), '-', MONTH(date)) as one, CONCAT(YEAR(date), '-', MONTH(date)) as two FROM timesheets GROUP BY one";
+           print $_lib['form3']->_MakeSelect(array('query' => $timesheet_period_sql, 'name' => 'report_Project'));
+            ?>
+    </td>
+
+    <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
+</tr>
+</form>
+
 </table>
 
 <hr>
