@@ -15,7 +15,6 @@ assert(!is_int($JournalID)); #All main input should be int
 
 $searchstring = $_lib['input']->getProperty('searchstring');
 
-
 $where .= " where ";
 if($searchstring) {
 	$where .= " (AccountPlanID like '%$searchstring%' or AccountName like '%$searchstring%' or OrgNumber like '%$searchstring%' or DomesticBankAccount like '%$searchstring%') and ";
@@ -212,9 +211,6 @@ while($row = $_lib['db']->db_fetch_object($result_plan))
 <?
 }
 ?>
-<p>
- <a href="<? print $_lib['sess']->dispatch ?>&t=timesheets.list&tp=listprojects&period=2010-9">Vis timelisterapporter</a>
-</p>
 
 </body>
 </html>

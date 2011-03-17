@@ -63,7 +63,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>';
   </tr>
   <tr>
     <td class="menu">Aktiv</td>
-    <td colspan="2"><? $_lib['form2']->checkbox2($db_table, "Active", $account->Active,'') ?> <? print $_lib['form3']->Type_menu3(array('table'=>$db_table, 'field'=>'AccountPlanType', 'value'=>$AccountPlanType, 'type'=>'AccountPlanType', 'required'=>'1', 'notShowKey' => 1)) ?> Viktig! M&aring; settes riktig for at regnskapet skal fungere</td>
+    <td colspan="2"><? $_lib['form2']->checkbox2($db_table, "Active", $account->Active,'') ?> <? print $_lib['form3']->Type_menu3(array('table'=>$db_table, 'field'=>'AccountPlanType', 'value'=>$AccountPlanType, 'type'=>'AccountPlanType', 'required'=>'1', 'notShowKey' => 1, 'disabled' => 1)) ?> Viktig! M&aring; settes riktig for at regnskapet skal fungere</td>
   </tr>
   <tr>
     <td class="menu">Navn</td>
@@ -302,7 +302,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>';
         <? print $_lib['form3']->hidden(array('name'=>'AccountPlanID', 'value'=>$AccountPlanID)) ?>
         <? print $_lib['form3']->submit(array('value'=>'Deaktiver (D)', 'name'=>'action_accountplan_deactivate', 'accesskey'=>'D')) ?>
         <? if($_lib['sess']->get_person('AccessLevel') > 3) {
-            print $_lib['form3']->submit(array('value'=>'Slett (D)', 'name'=>'action_accountplan_delete', 'accesskey'=>''));
+            print $_lib['form3']->submit(array('value'=>'Slett (D)', 'name'=>'action_accountplan_delete', 'accesskey'=>'', 'confirm' => 'Er du sikker p&aring; at du vil slette kontoen'));
         } ?>
         </form>
     </td>

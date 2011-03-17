@@ -243,13 +243,18 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
   <tr>
     <td class="menu">Passord</td> <td></td>
     <td><input type="text" name="timesheetpasswords.Password" value="<?= $password->Password ?>" /></td>
+    <td>Ansatt logger inn med:</td>
+
   </tr>
   <tr>
     <td class="menu">Oversikt</td> <td></td>
     <td><a href="<? print $_SETUP['DISPATCH'] ?>t=timesheets.list&AccountPlanID=<?= $AccountPlanID ?>&Username=<?= $account->AccountName ?>">Vis oversikt</a></td>
+    <td>Database: <b><?= $_SESSION['DB_NAME'] ?></b><br />
+        Brukernavn: <b><?= $AccountPlanID ?></b> eller <b><?= $account->AccountName ?></b><br />
+        Passord: <b><?= $password->Password ?></b></td>
+
   </tr>
   
-
   <tr class="result">
     <th colspan="5">Logg</th>
   </tr>
@@ -290,7 +295,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
         <? print $_lib['form3']->hidden(array('name'=>'AccountPlanID', 'value'=>$AccountPlanID)) ?>
         <? print $_lib['form3']->submit(array('value'=>'Deaktiver (D)', 'name'=>'action_accountplan_deactivate', 'accesskey'=>'D')) ?>
         <? if($_lib['sess']->get_person('AccessLevel') > 3) {
-            print $_lib['form3']->submit(array('value'=>'Slett (D)', 'name'=>'action_accountplan_delete', 'accesskey'=>''));
+            print $_lib['form3']->submit(array('value'=>'Slett (D)', 'name'=>'action_accountplan_delete', 'accesskey'=>'', 'confirm' => 'Er du sikker p&aring; at du vil slette denne?'));
         } ?>
         </form>
     </td>

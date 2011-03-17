@@ -1,4 +1,5 @@
 <?
+
 /* $Id: reskontro.php,v 1.65 2005/11/03 15:33:11 thomasek Exp $ main.php,v 1.12 2001/11/20 17:55:12 thomasek Exp $ */
 if($_lib['input']->getProperty('accountplan_AccountPlanID'))
 	$AccountPlanID  		= $_lib['input']->getProperty('accountplan_AccountPlanID');
@@ -331,7 +332,7 @@ if($JournalID) {
         <? print $_lib['form3']->hidden(array('name'=>'AccountPlanID', 'value'=>$AccountPlanID)) ?>
         <? print $_lib['form3']->submit(array('value'=>'Deaktiver (D)', 'name'=>'action_accountplan_deactivate', 'accesskey'=>'D')) ?>
         <? if($_lib['sess']->get_person('AccessLevel') > 3) {
-            print $_lib['form3']->submit(array('value'=>'Slett (D)', 'name'=>'action_accountplan_delete', 'accesskey'=>''));
+            print $_lib['form3']->submit(array('value'=>'Slett (D)', 'name'=>'action_accountplan_delete', 'accesskey'=>'', 'confirm' => 'Er du sikker p&aring; at du vil slette denne?'));
         } ?>
         </form>
     </td>
