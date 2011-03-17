@@ -251,6 +251,10 @@ function worker_line($row, $i) {
         echo $row->SalaryConfID;
       ?>
       </td>
+
+      <td> 
+        <a href="<? print $_lib['sess']->dispatch ?>t=timesheets.list&AccountPlanID=<?= $row->AccountPlanID ?>&Username=<?= $row->AccountName ?>">timeliste</a>
+      </td>
     
 <? 
 }  /* function */
@@ -271,7 +275,7 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
 <br><br>
 <table class="lodo_data">
 <tr>
-    <th colspan="10">Hovedmal hele firma</th>
+    <th colspan="11">Hovedmal hele firma</th>
 </tr>
 <tr>
     <th class="sub">Ansatte</th>
@@ -284,6 +288,7 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
     <th class="sub">L&T</th>
     <th class="sub"></th>
     <th class="sub">Mal</th>
+    <th class="sub"></th>
 </tr>
 <tr>
     <td>
@@ -340,7 +345,7 @@ else {
 ?>
 <table class="lodo_data">
 <tr>
-    <th colspan="10">Tidligere ansatte</th>
+    <th colspan="11">Tidligere ansatte</th>
 </tr>
 
 <tr>
@@ -354,11 +359,12 @@ else {
     <th class="sub">L&T</th>
     <th class="sub"></th>
     <th class="sub">Mal</th>
+    <th class="sub"></th>
 </tr>
 <tr>
     <td>
   <?
-  if(($_lib['sess']->get_person('AccessLevel') >= 1))
+  if(($_lib['sess']->get_person('AccessLevel') >= 4))
   {
     ?>
     <form name="salary_new" action="<? print $_lib['sess']->dispatch ?>t=salary.template" method="post">
