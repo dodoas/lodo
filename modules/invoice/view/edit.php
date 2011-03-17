@@ -351,7 +351,10 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
      <tr>
         <td colspan="7" align="right">
         <form name="send_mail" action="<? print $_lib['sess']->dispatch ?>t=invoice.sendmail&InvoiceID=<? print $InvoiceID ?>" method="post">
-            <input type="text" value="" name="email_recipient" />
+            <br />
+            <input type="text" value="<? print $row->IEmail; ?>" name="email_recipient" />
+            <input type="hidden" value="<? print $row_from->Email ?>" name="send_mail_copy_mail" />
+            <input name="send_mail_copy" type="checkbox" checked /> kopi til firma 
             <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_send_email2', 'value'=>'Send email')) ?>
         </form>
      </tr>

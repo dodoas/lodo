@@ -47,8 +47,15 @@ ob_end_clean();
 $data_html = "<html><body>" . strstr($data_html, "<h2>");
 $data_html = strip_tags($data_html, "<html><body><table><h2><tr><td><thead><tbody><tfoot><label><colgroup><br><th>");
 
-send_invoice($_REQUEST['email_recipient'], $row_from->Email, $_REQUEST['InvoiceID'], $data_html, $data_pdf);
+$recipient = $_REQUEST['email_recipient'];
 
+if(isset($_REQUEST['send_mail_copy']) && $_REQUEST['send_mail_copy']) 
+{
+  $recipient .= ', ' . $_REQUEST['send_mail_copy_mail'];
+}
+
+send_invoice($recipient, $row_from->Email, $_REQUEST['InvoiceID'], $data_html, $data_pdf);
+echo $recipient;
 echo '<h2>Email sent</h2>';
 echo '<META HTTP-EQUIV="Refresh" CONTENT="1; URL='. $_lib['sess']->dispatch . 't=invoice.edit&InvoiceID=' . $InvoiceID . '">';
 
