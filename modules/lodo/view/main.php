@@ -107,13 +107,6 @@ print $_lib['sess']->doctype ?>
 			</td>
         </tr>
     </table>
-    <table>
-    <tr>
-        <td valign="top"><SCRIPT language=javascript src="http://www.skatteetaten.no/templates/JSFeed.aspx?id=29272&Feed=bedriftkalender"></SCRIPT></td>
-        <td valign="top"><SCRIPT language=javascript src="http://www.skatteetaten.no/templates/JSFeed.aspx?id=29271&Feed=privatkalender"></SCRIPT></td>
-        <td valign="top"><SCRIPT language=javascript src="http://www.skatteetaten.no/templates/JSFeed.aspx?id=29282"></SCRIPT></td>
-    </tr>
-    </table>
 <?
 if(ini_get('register_globals')) {
    print "<b>Fatal:</b> Empatix requires that register_globals in php.ini is disabled.<br>";
