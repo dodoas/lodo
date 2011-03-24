@@ -252,7 +252,11 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <td align="right"><? print $_lib['format']->Amount($vatline) ?></td>
         <td align="right"><? print $_lib['format']->Amount($sumline) ?></td>
         <td>
-        <? if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($row->Period, $_lib['sess']->get_person('AccessLevel'))) { ?>
+        <? if(
+               (!$row->Locked && 
+                   $_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($row->Period, $_lib['sess']->get_person('AccessLevel')))
+               ||  
+                ($_lib['sess']->get_person('AccessLevel') >= 4 && $inline == 'edit' && $accounting->is_valid_accountperiod($row->Period, $_lib['sess']->get_person('AccessLevel')))) { ?>
         <a href="<? print $_SETUP[DISPATCH]."t=invoice.edit&InvoiceID=$InvoiceID&action_invoice_outlinedelete=1&amp;LineID=$LineID&amp;inline=edit" ?>" class="button">Slett</a>
         <? } ?>
     <tr>
@@ -289,12 +293,12 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     <tr>
         <td>
         <?
-        if(!$row->Locked) {
-			if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
-			{
-				print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_linenew', 'value'=>'Ny fakturalinje (N)', 'accesskey'=>'N'));
-			}
-        }
+	    if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
+            {
+                if(!$row->Locked || $_lib['sess']->get_person('AccessLevel') >= 4) {
+                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_linenew', 'value'=>'Ny fakturalinje (N)', 'accesskey'=>'N'));
+                }
+	    }
         ?>
         <td>
         <?
