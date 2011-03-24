@@ -239,6 +239,29 @@ class timesheet_user
         return $locked;
     }
 
+    public function get_period_info($period)
+    {
+        global $_lib;
+        $period = $this->escape($period);
+
+        $sql = sprintf(
+            "SELECT * FROM timesheetperiods WHERE AccountPlanID = %d AND Period = '%s'",
+            $this->id, $period);
+
+        $r = $_lib['db']->db_query($sql);
+
+        $row = $_lib['db']->db_fetch_assoc($r);
+        if(!$row)
+        {
+            $row = array('Locked' => false, 
+                         'Period' => $period,
+                         'AccountPlanID' => $this->id,
+                         'Comment' => "");
+        }
+
+        return $row;
+    }
+
     public function list_projects()
     {
         global $_lib;
@@ -675,18 +698,21 @@ class timesheet_user_page
      */
     private function print_table($period, $fields, $array, $dest, $show_unlock = true)
     {
+        $period_info = $this->user->get_period_info($period);
+        
         if($period[0] == "_")
             $locked = true;
         else
-            $locked = $this->user->is_period_locked($period);
+            $locked = $period_info['Locked'];
 
+        
         /*
          * Save button javascript-callback. Concats time-fields to one field before submit.
          */
         printf("
 <script type='text/javascript'>
   $(document).ready(function(){
-    $('#save_button').click(function(){
+    $('input[type=\"submit\"]').click(function(){
       var read_and_remove = function() {
         var field_name = this.name.substring(0, this.name.length - 2);
 
@@ -947,7 +973,7 @@ class timesheet_user_page
                         }
                     }
 
-                    printf(" <td>%s</td> ", $data);
+                    printf(" <td class='field_%s'>%s</td> ", $field, $data);
                 }
 
                 
@@ -958,16 +984,23 @@ class timesheet_user_page
 
         }
 
-        echo "</table><br /><table>";
+        echo "</table>";
+        echo "<br />";
+        echo "<table>";
 
         $sum_h += (int)($sum_m / 60);
         $sum_m =  $sum_m % 60;
-        printf("<tr><td><b>Sum timer</b></td><td></td><td></td><td>%s:%s</td></tr>",
+        printf("<tr><td><b>Sum timer</b></td><td></td><td></td><td>%s:%s</td>",
                (strlen("$sum_h") < 2 ? "0$sum_h" : $sum_h),
                (strlen("$sum_m") < 2 ? "0$sum_m" : $sum_m));
 
         $stats = $this->user->get_stats($period);
         $projects  = $this->user->list_projects();
+
+        echo 
+            "<td rowspan='10'><label style='display: block'>Kommentar</label><textarea cols='100' rows='18' name='comment'>" .
+            htmlspecialchars( $period_info['Comment'], ENT_NOQUOTES ) .
+            "</textarea></td></tr>";
 
         echo "<tr></tr>";
 
@@ -997,6 +1030,12 @@ class timesheet_user_page
                         t.css({'backgroundColor': 'white'});
                         var is_correct_project = false;
                         var has_sum = false;
+
+                        if(t.children('.field_Project').html() == '<?= $p ?>' &&
+                           t.children('.field_SumTime').html() != '00:00') {
+                            is_correct_project = true;
+                            has_sum = true;
+                        }
 
                         $.each( $('#' + t.attr('id') + ' select'), function(){
                                 if($(this).attr('name').indexOf('Project') != -1 &&
@@ -1245,17 +1284,27 @@ $(document).ready(function() {
          */
         if($this->user->is_admin() && isset($_POST['lock']))
         {
-            $sql = sprintf(
-                "INSERT INTO timesheetperiods (`Period`, `AccountPlanID`, `Locked`)
+            $project_info = $this->user->get_period_info($period_name);
+            if(!isset($project_info['TimesheetPeriodID']))
+            {
+                $sql = sprintf(
+                    "INSERT INTO timesheetperiods (`Period`, `AccountPlanID`, `Locked`)
                       VALUES('%s', '%d', '1');",
-                $period_name, $this->user->get_id());
+                    $period_name, $this->user->get_id());
+            }
+            else
+            {
+                $sql = sprintf(
+                    "UPDATE timesheetperiods SET Locked = 1 WHERE Period = '%s' AND AccountPlanID = %d",
+                    $period_name, $this->user->get_id());
+            }
 
             $_lib['db']->db_query($sql);
         }
         else if($this->user->is_admin() && isset($_POST['unlock']))
         {
             $sql = sprintf(
-                "DELETE FROM timesheetperiods WHERE Period = '%s' AND AccountPlanID = %d",
+                "UPDATE timesheetperiods SET Locked = 0 WHERE Period = '%s' AND AccountPlanID = %d",
                 $period_name, $this->user->get_id());
 
             $_lib['db']->db_query($sql);
@@ -1268,6 +1317,22 @@ $(document).ready(function() {
 
         if(isset($_POST['save']))
         {
+            $project_info = $this->user->get_period_info($period_name);
+            if(!isset($project_info['TimesheetPeriodID']))
+            {
+                $sql = sprintf(
+                    "INSERT INTO timesheetperiods (`Period`, `AccountPlanID`, `Locked`, `Comment`)
+                      VALUES('%s', '%d', '0', '%s');",
+                    $period_name, $this->user->get_id(), $this->user->escape($_POST['comment']));
+            }
+            else
+            {
+                $sql = sprintf(
+                    "UPDATE timesheetperiods SET Comment = '%s' WHERE Period = '%s' AND AccountPlanID = %d",
+                    $this->user->escape($_POST['comment']), $period_name, $this->user->get_id());
+            }
+            $_lib['db']->db_query($sql);
+
             $num_days = date("t", strtotime($period_name . '-01'));
 
             $locked = $this->user->is_period_locked($period);
@@ -1332,6 +1397,14 @@ $(document).ready(function() {
                     }
 
                     list($lock_day, $lock_no) = explode('_', $_POST['id_' . $id]);
+
+                    /*foreach(array('BeginTime', 'EndTime', 'SumTime') as $f) 
+                    {
+                        $_POST[sprintf('field_%s_%s_%d', $lock_day, $f, $lock_no)] = 
+                            $_POST[sprintf('field_%s_%s_%d_h', $lock_day, $f, $lock_no)] . ':' .
+                            $_POST[sprintf('field_%s_%s_%d_m', $lock_day, $f, $lock_no)];
+                            
+                            }*/
 
                     $update_rest = "";
                     foreach($cols as $col)
