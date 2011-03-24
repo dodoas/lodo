@@ -2,6 +2,9 @@
 
 if(isset($_POST['accountplan_AccountPlanType'])) {
     $accountplan_type = $_POST['accountplan_AccountPlanType'];
+} 
+else if(isset($_GET['accountplan_type'])) {
+    $accountplan_type = $_GET['accountplan_type'];
 }
 
 if($accountplan_type == 'hovedbok')
