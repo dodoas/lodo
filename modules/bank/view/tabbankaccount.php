@@ -280,6 +280,8 @@ if(is_array($bank->bankaccount)) {
 
         $i++;
 
+        $reskontroaccountplan = null;
+
         if (!empty($row->ReskontroAccountPlanID)) {
             $reskontroaccountplan   = $accounting->get_accountplan_object($row->ReskontroAccountPlanID);
         }
