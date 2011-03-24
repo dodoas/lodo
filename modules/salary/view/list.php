@@ -43,8 +43,8 @@ $result_salary  = $_lib['db']->db_query($query_salary);
 $query_conf_head= "select * from salaryconf as S where S.SalaryConfID=1";
 $row_head = $_lib['storage']->get_row(array('query' => $query_conf_head));
 
-$query_conf     = "select * from salaryconf as S, accountplan as A, kommune as K where S.AccountPlanID=A.AccountPlanID and A.KommuneID=K.KommuneID and S.SalaryConfID!=1 order by AccountName asc";
-#print "$query_conf<br>\n";
+$query_conf     = "select *, A.KommuneID as NoKommune from salaryconf as S, accountplan as A, kommune as K where S.AccountPlanID=A.AccountPlanID and (A.KommuneID=K.KommuneID or (A.KommuneID = 0 and K.KommuneID = 1) ) and S.SalaryConfID!=1 order by AccountName asc";
+print "$query_conf<br>\n";
 $result_conf    = $_lib['db']->db_query($query_conf);
 
 
@@ -223,7 +223,18 @@ function worker_line($row, $i) {
       <?
         if($row->SalaryConfID != 1)
         {
-            ?><a href="<? print $_lib['sess']->dispatch ?>t=arbeidsgiveravgift.edit"><? print $row->KommuneName; ?></a></td><?
+          if($row->NoKommune == 0) 
+          {
+            ?>
+            <span style="color: red;">Ingen kommune valgt!</span>
+            <?
+          }
+          else
+          {
+            ?>
+          <a href="<? print $_lib['sess']->dispatch ?>t=arbeidsgiveravgift.edit"><? print $row->KommuneName; ?></a></td>
+            <?
+          }
         }
       ?>
 
