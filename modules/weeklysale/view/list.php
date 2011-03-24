@@ -68,7 +68,9 @@ function swap_checkbox(n) {
 
 function set_period_cookies(setup_id) {
     set_cookie('<?php echo $_SESSION['DB_NAME'] ?>_weeklysale_period_' + setup_id, 'init_periode_' + setup_id);
+    set_cookie('<?php echo $_SESSION['DB_NAME'] ?>_weeklysale_init_week_' + setup_id, 'init_week_' + setup_id);
     set_cookie_simple('<?php echo $_SESSION['DB_NAME'] ?>_weeklysale_init_date_' + setup_id, 'init_date_' + setup_id);
+    set_cookie_simple('<?php echo $_SESSION['DB_NAME'] ?>_weeklysale_checkbox_' + setup_id, 'checkbox_' + setup_id);
 }
 
 function set_cookie_simple(name, elid)
@@ -111,10 +113,13 @@ function set_cookie(name, elid)
     <th>Oppstart</th>
     <th>Slutt</th>
     <th></th>
+    <th></th>
 <tbody>
 <?
 while($row = $_lib['db']->db_fetch_object($result_conf))
 {
+    $next_id_ = $accounting->get_next_available_journalid(array('type'=>$row->VoucherType, 'available' => true, 'update' => false));
+    $next_id = $next_id_[0];
     $i++;
     if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
     ?>
@@ -125,18 +130,25 @@ while($row = $_lib['db']->db_fetch_object($result_conf))
 
       <form action="<? print $_lib['sess']->dispatch ?>t=weeklysale.edit&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>&action_weeklysale_new=1" method="post">
       <td>
-        <input type="text" name="init_bilagsnummer" size="4" value="" id="init_bilagsnummer_<? print $row->WeeklySaleConfID ?>_<? print $row->VoucherType; ?>" class="bilagsnummer">
+        <input type="text" name="init_bilagsnummer" size="4" value="<?= $next_id ?>" id="init_bilagsnummer_<? print $row->WeeklySaleConfID ?>_<? print $row->VoucherType; ?>" class="bilagsnummer">
       </td>
       <td>
         <? 
           $checked = ""; 
-          if(isset($_COOKIE[$_SESSION['DB_NAME'] . '_weeklysale_checkbox_' . $row->WeeklySaleConfID]))
+          if(isset($_COOKIE[$_SESSION['DB_NAME'] . '_weeklysale_checkbox_' . $row->WeeklySaleConfID]) 
+              && $_COOKIE[$_SESSION['DB_NAME'] . '_weeklysale_checkbox_' . $row->WeeklySaleConfID] )
             $checked = "checked"; 
         ?>
         <input type="checkbox" id="checkbox_<?= $row->WeeklySaleConfID ?>" onclick="swap_checkbox('<?= $row->WeeklySaleConfID ?>')" <?= $checked ?>/>
       </td>
       <td>
-        <select name="init_week">
+       <?
+          $week_checked = false;
+          if(isset($_COOKIE[$_SESSION['DB_NAME'] . '_weeklysale_init_week_' . $row->WeeklySaleConfID])) {
+             $week_checked = $_COOKIE[$_SESSION['DB_NAME'] . '_weeklysale_init_week_' . $row->WeeklySaleConfID];
+          }
+        ?>
+        <select name="init_week" id="init_week_<?php echo $row->WeeklySaleConfID ?>">
         <?php
 	  for($i = 0; $i <= 53; $i++) {
             if(strlen("$i") < 2)
@@ -144,7 +156,8 @@ while($row = $_lib['db']->db_fetch_object($result_conf))
             else
               $wk = $i;
 
-            if($wk == date("W"))
+            if( ($week_checked !== false && $wk == $week_checked)
+                || ($week_checked === false && $wk == date("W")) )
               printf("<option value='%d' selected>%s</option>", $i, $wk);
             else
               printf("<option value='%d'>%s</option>", $i, $wk);
@@ -153,7 +166,7 @@ while($row = $_lib['db']->db_fetch_object($result_conf))
         </select>
       </td>
       <td>
-        <input type="text" id="init_date_<?php echo $row->WeeklySaleConfID ?>" name="init_date" size="10" value="<?php 
+        <input type="text" id="init_date_<?php echo $row->WeeklySaleConfID ?>" name="init_date" size="10" class='bilagsnummer' value="<?php 
 if (empty($_COOKIE[$_SESSION['DB_NAME'] . '_weeklysale_init_date_' . $row->WeeklySaleConfID])) {
 echo date("Y-m-d", strtotime("sunday"));
 } else {
@@ -163,12 +176,12 @@ echo $_COOKIE[$_SESSION['DB_NAME'] . '_weeklysale_init_date_' . $row->WeeklySale
       </td>
       <td>
 	<?php
-	echo $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $_COOKIE[$_SESSION['DB_NAME'] . '_weeklysale_period_' . $row->WeeklySaleConfID], 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => '', 'name' => 'init_periode', 'id' => 'init_periode_' . $row->WeeklySaleConfID));
+	echo $_lib['form3']->AccountPeriod_menu3(array('table' => 'voucher', 'field' => 'period', 'value' => $_COOKIE[$_SESSION['DB_NAME'] . '_weeklysale_period_' . $row->WeeklySaleConfID], 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => '', 'name' => 'init_periode', 'id' => 'init_periode_' . $row->WeeklySaleConfID, 'class' => 'bilagsnummer'));
 	?>
         <input value="Lagre periode" type="button" onclick="set_period_cookies('<?php echo $row->WeeklySaleConfID ?>')">
       </td>
       <td>
-        <input id='new_weeklysale_<? print $row->WeeklySaleConfID ?>' type="submit" value="Ny ukeomsetning" disabled>
+        <input id='new_weeklysale_<? print $row->WeeklySaleConfID ?>' type="submit" value="Ny ukeomsetning">
         <?php
 	/*
 	  <a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.edit&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>&action_weeklysale_new=1" class="action">Ny ukeomsetning for avdeling <? print $row->DepartmentID; ?></a>
@@ -189,9 +202,14 @@ echo $_COOKIE[$_SESSION['DB_NAME'] . '_weeklysale_init_date_' . $row->WeeklySale
       <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
         <a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.list&amp;WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>&amp;action_weeklysaleconf_delete=1" class="button">Slett</a>
       <? } ?>
+      </td>
+      <td>
+        <span style='color:red;' id='error_<? print $row->WeeklySaleConfID ?>'></span>
+
 <?
 }
 ?>
+
 		</td>
 	</tr>
 </tbody>
@@ -266,21 +284,58 @@ $(document).ready(function(){
 
   $.each($('.bilagsnummer'), function() {
     $(this).keyup(function(){
-      var id_type = $(this).attr('id').substr(18).split('_');
-      var id = id_type[0];
-      var type = id_type[1];
+      var id_type = $(this).attr('id').split('_');
+      var id = id_type[2];
+      var type = id_type[3];
 
       var el = $('#new_weeklysale_' + id);
       var val = $(this).val();
+      var err = $('#error_' + id);
  
-      if(parseInt(val) == val && val.length <= 10 && val != '' && val != '0' && $.inArray(type + val, journalIDs) == -1) {
-        el.removeAttr("disabled");
+      if(id_type.length >= 4) {
+        if(parseInt(val) != val) {
+          el.attr("disabled", "disabled");
+          err.html('Bilagsnummeret er ikke et tall');
+        }
+        else if(val.length > 10) { 
+          el.attr("disabled", "disabled");
+          err.html('Bilagsnummeret er for h&oslash;yt');
+        }
+        else if(val == '' || val == 0) {
+          el.attr("disabled", "disabled");
+          err.html('Bilagsnummeret er for lavt');
+        }
+        else if($.inArray(type + val, journalIDs) != -1) {
+          el.attr("disabled", "disabled");
+          err.html('Bilagsnummeret eksisterer');
+        }
+        else {
+          el.removeAttr("disabled");
+          err.html('');
+        }
       }
       else {
-        el.attr("disabled", "disabled");
+        var selected_period = $('#init_periode_' + id).val().split('-');
+        var selected_date = $('#init_date_' + id).val().split('-');
+  
+        if(selected_period[0] != selected_date[0] 
+           || selected_period[1] != selected_date[1]) {
+          err.html('Periode og dato stemmer ikke');
+        }
+        else {
+          err.html('');
+        }
       }
+
+    });  
+
+    $(this).change(function(){
+       $(this).trigger('keyup');
     });
+    
+    $(this).trigger('keyup');    
   });
+
 });
 </script>
 
