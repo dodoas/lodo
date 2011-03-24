@@ -88,6 +88,7 @@ $query_count = "SELECT COUNT(*) as total, sum(TotalCustPrice) as sum FROM $db_ta
 $result_count = $_lib['db']->db_query($query_count);
 $row = $_lib['db']->db_fetch_object($result_count);
 
+
 $db_total = $row->total;
 $db_sum   = $row->sum;
 ?>
@@ -151,6 +152,9 @@ $db_sum   = $row->sum;
         <input type="submit" value="Lagre dato" name="action_auto_save">
         <?
 	if($accounting->is_valid_accountperiod($_COOKIE['invoice_period'], $_lib['sess']->get_person('AccessLevel'))) {
+            $nextid = $accounting->get_next_available_journalid(array('type'=>'S', 'available' => true, 'update' => true));
+
+            echo ' fakturanummer: ' . $nextid[0];
 	    echo '<input type="submit" value="Ny faktura (N)" name="action_invoice_new" accesskey="N">';
         }
         else {
@@ -241,8 +245,8 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
       <td><? print substr($row->CommentCustomer,0,30) ?></td>
       <td class="number"><b><? print substr($row->DueDate,0,10) ?></b></td>
       <td class="number"><? print $_lib['format']->Amount($row->TotalCustPrice) ?></td>
-      <td align="center"><a href="<? print $_lib['sess']->dispatch ?>t=invoice.print&InvoiceID=<? print $row->InvoiceID ?>&inline=show" title="Vis/SkrivUt faktura for produkt" target="_new">Vis</a>
-      <a href="<? print $_lib['sess']->dispatch ?>t=invoice.print2&InvoiceID=<? print $row->InvoiceID ?>&inline=show" title="Vis/SkrivUt faktura for produkt som PDF fil">Vis PDF</a><br /></td>
+      <td align="center"><a href="<? print $_lib['sess']->dispatch ?>t=invoice.print&InvoiceID=<? print $row->InvoiceID ?>&inline=show" title="Vis/SkrivUt faktura for produkt" target="_new">Faktura</a>
+      <a href="<? print $_lib['sess']->dispatch ?>t=invoice.print2&InvoiceID=<? print $row->InvoiceID ?>&inline=show" title="Vis/SkrivUt faktura for produkt som PDF fil">PDF</a><br /></td>
       <td align="center">
       <? if($accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')) && $_lib['sess']->get_person('AccessLevel') >= 2) { ?>
       <a href="<? print $_lib['sess']->dispatch ?>t=invoice.edit&InvoiceID=<? print $row->InvoiceID ?>&inline=edit" title="Endre faktura" target="_new">Endre</a><br />

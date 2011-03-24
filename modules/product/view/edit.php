@@ -109,7 +109,8 @@ $VAT = $accounting->get_vataccount_object(array('VatID' => $accountplan->VatID, 
         <td align="right" colspan="1">
             <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
             <!-- <? print $_lib['form3']->submit(array('value'=>'Slett (D)', 'name'=>'action_product_delete', 'accesskey'=>'D', 'tabindex'=>'7')) ?> -->
-            <a href="<? print $_lib['sess']->dispatch."t=product.list&amp;ProductID=$row->ProductID&amp;action_product_delete=1" ?>" accesskey="D" class="button">Slett (D)</a>
+            <a href="<? print $_lib['sess']->dispatch."t=product.list&amp;ProductID=$row->ProductID&amp;action_product_delete=1" ?>" accesskey="D" class="button" 
+                 onclick='return confirm("Er du sikker?")'>Slett (D)</a>
             </td>
             <? } ?>
         </td>

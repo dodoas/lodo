@@ -114,7 +114,7 @@ if($companydepartment->km0101) {
     <? print $_lib['form3']->hidden(array('name'=>'CompanyDepartmentID', 'value'=>$CompanyDepartmentID)) ?>
     <td colspan="4" align="right">
     <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
-    <input type="submit" name="action_department_delete" value="Slett avdeling" />
+    <input type="submit" name="action_department_delete" value="Slett avdeling" onclick='return confirm("Er du sikker?")' />
     <? } ?>
 </form>
 </table>

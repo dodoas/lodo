@@ -62,7 +62,7 @@ $project = $_lib['storage']->get_row(array('query' => $query));
 <form name="delete" action="<? print $_lib['sess']->dispatch ?>t=project.list" method="post">
   <tr>
     <? print $_lib['form3']->hidden(array('name'=>'ProjectID', 'value'=>$ProjectID)) ?>
-    <td colspan="4" align="right"><input type="submit" name="action_project_delete" value="Slett prosjekt" />
+    <td colspan="4" align="right"><input type="submit" name="action_project_delete" value="Slett prosjekt" onclick='return confirm("Er du sikker?")' />
 </form>
 </table>
 <? includeinc('bottom') ?>
