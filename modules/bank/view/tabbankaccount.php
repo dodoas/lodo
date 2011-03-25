@@ -86,6 +86,7 @@ $_lib['form3']->Locked = $bank->bankvotingperiod->Locked;
             if (e.target) targ = e.target;
             else if (e.srcElement) targ = e.srcElement;
 
+
             try {
             if (targ.nodeType == 3) // defeat Safari bug
               targ = targ.parentNode;
@@ -97,7 +98,9 @@ $_lib['form3']->Locked = $bank->bankvotingperiod->Locked;
             if(targ.length > 1)
               return;
 
-            if (text != 'Velg konto') {
+var selectedOptionText = targ.options[targ.selectedIndex].text;
+
+            if (selectedOptionText != 'Velg konto') {
               var option = document.createElement('option');
               option.value = 'unset';
               option.innerHTML = 'Velg Konto';
