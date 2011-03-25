@@ -56,13 +56,13 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
 						}							
 					}
 
+                    $accountplan = null;
+
 					#Speedier to have it here? Could we throw away the inner loop?
                    	if($table_name == 'accountline') { #We are just working on accountline?
-
                         # Allow unsetting a reskontro
                         # We do this via a flag to ignore auto-matching of the account
-                        if (isset($DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) &&
-                            $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] == 'unset') {
+                        if (!isset($DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'])) {
                             $UnsetReskontroAccountPlanID = true;
                             # set value to "" to not trigger errors like:
                             # get_accountplan_object(): Mangler AccountplanID
@@ -73,8 +73,7 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
 
                         # Allow unsetting a resultaccount
                         # We do this via a flag to ignore auto-matching of the account
-                        if (isset($DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID']) &&
-                            $DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID'] == 'unset') {
+                        if (!isset($DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID'])) {
                             $UnsetResultAccountPlanID = true;
                             # set value to "" to not trigger errors like:
                             # get_accountplan_object(): Mangler AccountplanID
@@ -128,6 +127,7 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
 							
 
                             $accountline = $DataH[$server_name][$database_name][$table_name][$pk_name];
+
                             # find fakturabank data
                             if ($match = $fbvoting->findpaycheckmatch(array('Amount' => $value, 'VoucherDate' => $Period . '-' . $accountline['Day'], 'BankAccountID' => $AccountID, 'Incoming' => $incoming, 'id' => $pk_name, 'accountline' => $DataH[$server_name][$database_name][$table_name][$pk_name], 'period' => $Period))) { // look for paycheck
                                 if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
