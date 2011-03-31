@@ -87,6 +87,23 @@ class timesheet_user
         return $this->admin;
     }
 
+
+    public function list_customers()
+    {
+        global $_lib;
+
+        $sql = "SELECT AccountPlanID, AccountName FROM accountplan WHERE AccountPlanType = 'customer'";
+        $r = $_lib['db']->db_query($sql);
+
+        $customers = array();
+        while( $row = $_lib['db']->db_fetch_assoc($r) )
+        {
+            $customers[ $row['AccountPlanID'] ] = $row['AccountName'];
+        }
+
+        return $customers;
+    }
+
     /**
      * Return an array of periods i.e. array('YYYY-MM')
      */
@@ -138,6 +155,10 @@ class timesheet_user
         global $_lib;
 
         $period = $this->escape($period);
+        if($period[0] == '_')
+        {
+            $period = substr($period, 1);
+        }
 
         $sql = sprintf(
             "SELECT *
@@ -456,7 +477,18 @@ class timesheet_user_page
             "td { padding: 2px; padding-right: 7px; } ".
             "tr:hover { background-color: #eee; } " .
             ".BeginTime_h, .EndTime_h, .SumTime_h { background-color: green; color: white; }".
+            "</style>".
+
+            "<style media='print'>".
+            "#layout_top { display: none; }".
+            "html { font-size: 10px; margin: 0px; }".
+            "* { margin:0; padding 0; }".
+            ".noprint,hr { display: none; }".
+            "textarea { border: 0px; }".
+            "input { border: 0px; }".
+            "tr { border: 1px solid black; }".
             "</style>"
+
             );
     }
 
@@ -698,13 +730,18 @@ class timesheet_user_page
      */
     private function print_table($period, $fields, $array, $dest, $show_unlock = true)
     {
+        if($period[0] == "_")
+        {
+            $period = substr($period, 1);
+            $locked = true;
+        }
+        else
+        {
+            $locked = $period_info['Locked'];
+        }
+
         $period_info = $this->user->get_period_info($period);
         
-        if($period[0] == "_")
-            $locked = true;
-        else
-            $locked = $period_info['Locked'];
-
         
         /*
          * Save button javascript-callback. Concats time-fields to one field before submit.
@@ -732,12 +769,18 @@ class timesheet_user_page
 
 ");
 
+        $width = 170 * count($fields);
+        if(isset($_POST['report']))
+        {
+            $width = round($width * 0.60);
+        }
+
         printf(
             "<form action='%s' method='post' id='tabel_form'>" .
             "<input type='hidden' name='save_table' value='save' />" .
-            "<table style='width: 2500px;'>\n" .
+            "<table style='width: %dpx;'>\n" .
             "<tr>\n",
-            $dest
+            $dest, $width
             );
 
         /* Headers */
@@ -756,6 +799,7 @@ class timesheet_user_page
         $sum_m  = 0;
         $sum_km = 0;
         $sum_parking = 0;
+        $sum_drivingexpenses = 0;
         $sum_toll = 0;
         $last_day = -1;
 
@@ -783,7 +827,7 @@ class timesheet_user_page
                     $w = date('w', strtotime($period . '-' . $day_no));
                     $wd = array('S&oslash;ndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'L&oslash;rdag');
                     $w = $wd[$w];
-                    printf("<tr style='height: 25px;'><td><b>%s</b></td><td colspan=2></td><td><b>%s</b></td></tr>", $day_no, $w);
+                    printf("<tr style='height: 25px;'><td><b>%s</b></td><td colspan=2><b>%s</b></td></tr>", $day_no, $w);
                 }
 
                 printf("<tr style='%s' id='rowno_%d' class='row'><td></td>\n", "color:black;", $i);
@@ -864,6 +908,10 @@ class timesheet_user_page
                     else if($field == 'Parking') 
                     {
                         $sum_parking += $value;
+                    }
+                    else if($field == 'DrivingExpenses')
+                    {
+                        $sum_drivingexpenses += $value;
                     }
 
                     $data = "";
@@ -986,7 +1034,7 @@ class timesheet_user_page
 
         echo "</table>";
         echo "<br />";
-        echo "<table>";
+        echo "<table style='page-break-before: always;'>";
 
         $sum_h += (int)($sum_m / 60);
         $sum_m =  $sum_m % 60;
@@ -1074,6 +1122,11 @@ class timesheet_user_page
             printf('<tr><td colspan=3><b>Sum parkering</b></td><td>%10.2f kr</td></tr>', $sum_parking);
         }
 
+        if($sum_drivingexpenses > 0) 
+        {
+            printf('<tr><td colspan=3><b>Sum parkering</b></td><td>%10.2f kr</td></tr>', $sum_drivingexpenses);
+        }
+
 
         printf('<tr style="height: 10px;"></tr><tr><td colspan=3><b>Antall oppf&oslash;ringer</b></td><tr>');
         foreach($sum_fields as $f => $a) 
@@ -1101,11 +1154,11 @@ class timesheet_user_page
         {
             if($locked)
             {
-                printf("<p><input type='submit' name='unlock' value='L&aring;s opp' /></p>");
+                printf("<p><input type='submit' name='unlock' value='L&aring;s opp' class='noprint' /></p>");
             }
             else
             {
-                printf("<p><input type='submit' name='lock' value='L&aring;s' /></p>");
+                printf("<p><input type='submit' name='lock' value='L&aring;s' class='noprint' /></p>");
             }
         }
 
@@ -1312,7 +1365,9 @@ $(document).ready(function() {
 
         $cols = array('BeginTime', 'EndTime', 'SumTime',
                       'Project', 'WorkType', 'Comment', 
-                      'Diet', 'Accommodation', 'TravelRoute', 'TravelDesc', 'TravelDistance', 'Toll', 'Parking');
+                      'Diet', 'Accommodation', 'TravelRoute', 
+                      'TravelDesc', 'TravelDistance', 'Toll', 
+                      'Parking', 'Customer', 'DrivingExpenses');
 
 
         if(isset($_POST['save']))
@@ -1398,14 +1453,6 @@ $(document).ready(function() {
 
                     list($lock_day, $lock_no) = explode('_', $_POST['id_' . $id]);
 
-                    /*foreach(array('BeginTime', 'EndTime', 'SumTime') as $f) 
-                    {
-                        $_POST[sprintf('field_%s_%s_%d', $lock_day, $f, $lock_no)] = 
-                            $_POST[sprintf('field_%s_%s_%d_h', $lock_day, $f, $lock_no)] . ':' .
-                            $_POST[sprintf('field_%s_%s_%d_m', $lock_day, $f, $lock_no)];
-                            
-                            }*/
-
                     $update_rest = "";
                     foreach($cols as $col)
                     {
@@ -1451,6 +1498,10 @@ $(document).ready(function() {
 
         // Ingen lokalisering?.. Føler jeg har gjort denne jobben før. Må lage noe system for det
         list($date_y, $date_m) = explode('-', $_REQUEST['period']);
+        if($date_y[0] == '_')
+        {
+            $date_y = substr($date_y, 1);
+        }
 
         $this->print_head(sprintf('%s %d', $this->months[$date_m], $date_y));
 
@@ -1500,36 +1551,89 @@ $(document).ready(function() {
             }
         }
 
+        $customers = $this->user->list_customers();
         $worktypes = $this->user->list_worktypes();
         $projects  = $this->user->list_projects();
         $diets     = $this->user->list_diets();
         $accommodations = $this->user->list_accommodations();
 
         $fields = array(
-            'Day'        => array('type' => 'caption', 'size' => '3', 'translation' => 'Dag'),
-            'BeginTime'  => array('type' => 'time', 'size' => '10', 'default' => '00:00', 'translation' => 'Start'),
-            'EndTime'    => array('type' => 'time', 'size' => '10', 'default' => '00:00', 'translation' => 'Slutt'),
-            'SumTime'    => array('type' => 'time', 'size' => '10', 'default' => '00:00', 'translation' => 'Sum'),
-            'Project'    => array('type' => 'select', 'options' => $projects, 'default' => 0, 'translation' => 'Prosjekt'),
-            'WorkType'   => array('type' => 'select', 'options' => $worktypes, 'default' => 0, 'translation' => 'Arbeidesart'),
+            'Day'        => array('type' => 'caption', 'size' => '3', 'translation' => 'Dag', 'checked' => true),
+            'BeginTime'  => array('type' => 'time', 'size' => '10', 'default' => '00:00', 'translation' => 'Start', 'checked' => true),
+            'EndTime'    => array('type' => 'time', 'size' => '10', 'default' => '00:00', 'translation' => 'Slutt', 'checked' => true),
+            'SumTime'    => array('type' => 'time', 'size' => '10', 'default' => '00:00', 'translation' => 'Sum', 'checked' => true),
 
-            'Comment'    => array('type' => 'text', 'size' => '30', 'default' => "", 'translation' => 'Kommentar'),
+            'Customer'   => array('type' => 'select', 'options' => $customers, 'default' => 0, 'translation' => 'Kunde', 'checked' => true),
+            'Project'    => array('type' => 'select', 'options' => $projects, 'default' => 0, 'translation' => 'Prosjekt', 'checked' => true),
+            'WorkType'   => array('type' => 'select', 'options' => $worktypes, 'default' => 0, 'translation' => 'Arbeidesart', 'checked' => true),
+
+            'Comment'    => array('type' => 'text', 'size' => '30', 'default' => "", 'translation' => 'Kommentar', 'checked' => true),
             'Buttons'    => array(''),
 
-            'Diet'       => array('type' => 'select', 'options' => $diets, 'default' => 0, 'translation' => 'Diett'),
-            'Accommodation' => array('type' => 'select', 'options' => $accommodations, 'default' => 0, 'translation' => 'Overnatting'),
+            'Diet'       => array('type' => 'select', 'options' => $diets, 'default' => 0, 'translation' => 'Diett', 'checked' => false),
+            'Accommodation' => array('type' => 'select', 'options' => $accommodations, 'default' => 0, 'translation' => 'Overnatting', 'checked' => false),
 
-            'TravelRoute' => array('type' => 'text', 'size' => '30', 'default' => "", 'translation' => 'Reiserute'),
-            'TravelDesc' => array('type' => 'text', 'size' => '30', 'default' => "", 'translation' => 'Reiseform&aring;l'),
-            'TravelDistance' => array('type' => 'text', 'size' => '3', 'default' => "0", 'translation' => 'Reiselengde (km)'),
+            'TravelRoute' => array('type' => 'text', 'size' => '30', 'default' => "", 'translation' => 'Reiserute', 'checked' => false),
+            'TravelDesc' => array('type' => 'text', 'size' => '30', 'default' => "", 'translation' => 'Reiseform&aring;l', 'checked' => false),
+            'TravelDistance' => array('type' => 'text', 'size' => '3', 'default' => "0", 'translation' => 'Reiselengde (km)', 'checked' => false),
 
-            'Toll' => array('type' => 'text', 'size' => 3, 'default' => '0.00', 'translation' => 'Bompenger'),
-            'Parking' => array('type' => 'text', 'size' => 3, 'default' => '0.00', 'translation' => 'Parkering')
-
+            'Toll' => array('type' => 'text', 'size' => 3, 'default' => '0.00', 'translation' => 'Bompenger', 'checked' => false),
+            'Parking' => array('type' => 'text', 'size' => 3, 'default' => '0.00', 'translation' => 'Parkering', 'checked' => false),
+            'DrivingExpenses' => array('type' => 'text', 'size' => 3, 'default' => '0', 'translation' => 'Reise', 'checked' => false)
             );
+        
+        $full_fields = $fields;
+
+        if(isset($_POST['report']))
+        {
+            foreach($full_fields as $k => $v)
+            {
+                if(!isset($_POST[$k]))
+                    unset($fields[$k]);
+            }
+        }
 
         ksort($entries);
         $this->print_table($period_name, $fields, $entries, $this->root . '&tp=view&period=' . $_REQUEST['period']);
+
+
+        /*
+         * Report generating interface
+         */
+        $report_period = $_REQUEST['period'];
+        if($report_period[0] != '_')
+            $report_period = '_' . $report_period;
+
+        print '<div class="noprint">';
+        print '<h2>Lag rapport</h2>';
+        printf('<form action="%s" method="post">', $this->root . '&tp=view&period=' . $report_period);
+        print '<input type="hidden" name="report" value="1">';
+        foreach($full_fields as $field => $data)
+        {
+            if($field == 'Buttons')
+                continue;
+            
+            if(isset($_POST['report']))
+            {
+                if(isset($_POST[$field]))
+                    $checked = "checked";
+                else
+                    $checked = "";
+            }
+            else
+            {
+                if($data['checked'])
+                    $checked = "checked";
+                else
+                    $checked = "";
+            }
+
+            printf('<input type="checkbox" name="%s" %s /> %s<br />',
+                   $field, $checked, $data['translation']);
+        }
+
+        print '<br /><input type="submit" value="Lag rapport" /></form>';
+        print '</div>';
 
         $this->print_bottom();
     }
@@ -1541,7 +1645,7 @@ $(document).ready(function() {
         $projects  = $this->user->list_projects();        
         
         printf("<h2>Velg Prosjekt</h2>");
-        printf("<a href='javascript:history.go(-1)'>Tilbake</a><br />");
+        printf("<a href='javascript:history.go(-1)' class='noprint'>Tilbake</a><br />");
         printf("<form action='%s' method='post'>\n", $this->root . "&tp=listprojectperiods");
 
         printf("<select name='project'>\n");
