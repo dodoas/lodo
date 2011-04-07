@@ -4,34 +4,40 @@
 //error_reporting(E_ALL);
 
 function send_invoice($to, $from, $invoiceno, $html, $attachment) {
-    $attachment = chunk_split(base64_encode($attachment));
+    global $_lib;
+    $attachment = str_replace("\r", "", chunk_split(base64_encode($attachment)));
+    $html = str_replace(array("=", "\r"), array("=3D", ""), $html);
     $hash = md5(time());
 
-    $headers  = 'MIME-Version: 1.0' . "\r\n";
-    $headers .= 'Content-type: multipart/mixed; boundary="Email-mixed-'.$hash.'"' . "\r\n";
-    $headers .= "To: $to\r\n";
-    $headers .= "From: $from\r\n";
-    
-    $message = sprintf("--Email-mixed-%s\r\n" .
-                       "Content-Type: text/html; charset='iso-8859-1'\r\n" .
-                       "\r\n" .
-                       "%s" .
-                       "\r\n" .
-                       "--Email-mixed-%s\r\n" .
-                       "Content-Type: application/pdf; name=invoice_%d.pdf\r\n" .
-                       "Content-Transfer-Encoding: base64\r\n" .
-                       "Content-Disposition: attachment\r\n" .
-                       "\r\n" .
-                       "%s" .
-                       "--Email-mixed-%s\r\n",
-                       $hash,
-                       $html,
-                       $hash,
-                       $invoiceno,
-                       $attachment,
-                       $hash);
+    $boundary = $hash;
 
-    mail($to, "Invoice " . $invoiceno, $message, $headers);
+    $headers  = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: multipart/mixed; boundary='.$boundary. "\r\n";
+    $headers .= "From: $from\r\n";
+
+    $message = sprintf("--$boundary\n" .
+                       "Content-Type: text/html; charset=ISO-8859-1\n" .
+                       "Content-Transfer-Encoding: quoted-printable\n" .
+                       "\n" .
+                       "%s" .
+                       "\n" .
+                       "--$boundary\n" .
+                       "Content-Type: application/pdf; name=invoice_%d.pdf\n" .
+                       "Content-Disposition: attachment; filename=invoice_%d.pdf\n" .
+                       "Content-Transfer-Encoding: base64\r\n" .
+                       "\n" .
+                       "%s" .
+                       "--$boundary--",
+                       $html,
+                       $invoiceno, $invoiceno,
+                       $attachment);
+
+    mail(
+          $to
+        , $_lib['sess']->company->CompanyName . " - invoice " . $invoiceno
+        , $message
+        , $headers
+    );
 }
 
 ob_start();
@@ -53,6 +59,7 @@ if(isset($_REQUEST['send_mail_copy']) && $_REQUEST['send_mail_copy'])
 {
   $recipient .= ', ' . $_REQUEST['send_mail_copy_mail'];
 }
+
 
 send_invoice($recipient, $row_from->Email, $_REQUEST['InvoiceID'], $data_html, $data_pdf);
 echo $recipient;

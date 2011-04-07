@@ -152,9 +152,9 @@ $db_sum   = $row->sum;
         <input type="submit" value="Lagre dato" name="action_auto_save">
         <?
 	if($accounting->is_valid_accountperiod($_COOKIE['invoice_period'], $_lib['sess']->get_person('AccessLevel'))) {
-            $nextid = $accounting->get_next_available_journalid(array('type'=>'S', 'available' => true, 'update' => true));
+            list($nextJournalID, $nextMessage) = $accounting->get_next_available_journalid(array('type'=>'S', 'available' => true));
 
-            echo ' fakturanummer: ' . $nextid[0];
+            echo ' fakturanummer: ' . $nextJournalID;
 	    echo '<input type="submit" value="Ny faktura (N)" name="action_invoice_new" accesskey="N">';
         }
         else {
