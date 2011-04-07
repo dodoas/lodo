@@ -118,8 +118,7 @@ function set_cookie(name, elid)
 <?
 while($row = $_lib['db']->db_fetch_object($result_conf))
 {
-    $next_id_ = $accounting->get_next_available_journalid(array('type'=>$row->VoucherType, 'available' => true, 'update' => false));
-    $next_id = $next_id_[0];
+    list($nextJournalID, $nextMessage) = $accounting->get_next_available_journalid(array('type'=>$row->VoucherType, 'available' => true));
     $i++;
     if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
     ?>
@@ -130,7 +129,7 @@ while($row = $_lib['db']->db_fetch_object($result_conf))
 
       <form action="<? print $_lib['sess']->dispatch ?>t=weeklysale.edit&WeeklySaleConfID=<? print $row->WeeklySaleConfID ?>&action_weeklysale_new=1" method="post">
       <td>
-        <input type="text" name="init_bilagsnummer" size="4" value="<?= $next_id ?>" id="init_bilagsnummer_<? print $row->WeeklySaleConfID ?>_<? print $row->VoucherType; ?>" class="bilagsnummer">
+        <input type="text" name="init_bilagsnummer" size="4" value="<?= $nextJournalID ?>" id="init_bilagsnummer_<? print $row->WeeklySaleConfID ?>_<? print $row->VoucherType; ?>" class="bilagsnummer">
       </td>
       <td>
         <? 
