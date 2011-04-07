@@ -116,6 +116,10 @@ else
         <td class="menu">Firma oppsett</td>
         <td><? print $_lib['form3']->checkbox(array('table' => 'install', 'field' => 'company')); ?></td>
       </tr>
+      <tr>
+        <td class="menu">Kopier l&oslash;nnsmal</td>
+        <td><? print $_lib['form3']->checkbox(array('table' => 'install', 'field' => 'salaryconf')); ?></td>
+      </tr>
       <? } ?>
       <tr>
         <th colspan="2">Du m&aring; angi forhandler til denne instalasjonen</th>
