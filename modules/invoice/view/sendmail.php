@@ -4,6 +4,7 @@
 //error_reporting(E_ALL);
 
 function send_invoice($to, $from, $invoiceno, $html, $attachment) {
+    global $_lib;
     $attachment = str_replace("\r", "", chunk_split(base64_encode($attachment)));
     $html = str_replace(array("=", "\r"), array("=3D", ""), $html);
     $hash = md5(time());
@@ -31,7 +32,12 @@ function send_invoice($to, $from, $invoiceno, $html, $attachment) {
                        $invoiceno, $invoiceno,
                        $attachment);
 
-    mail($to, "Invoice " . $invoiceno, $message, $headers);
+    mail(
+          $to
+        , $_lib['sess']->company->CompanyName . " - invoice " . $invoiceno
+        , $message
+        , $headers
+    );
 }
 
 ob_start();
@@ -53,6 +59,7 @@ if(isset($_REQUEST['send_mail_copy']) && $_REQUEST['send_mail_copy'])
 {
   $recipient .= ', ' . $_REQUEST['send_mail_copy_mail'];
 }
+
 
 send_invoice($recipient, $row_from->Email, $_REQUEST['InvoiceID'], $data_html, $data_pdf);
 echo $recipient;
