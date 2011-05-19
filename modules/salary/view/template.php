@@ -22,6 +22,15 @@ print $_lib['sess']->doctype ?>
     <title>Empatix - customer</title>
     <meta name="cvs"                content="$Id: template.php,v 1.46 2005/10/28 17:59:41 thomasek Exp $" />
     <? includeinc('head') ?>
+
+    <script>
+    function switchActive(id)
+    {
+       var value = $(document.getElementById('active.' + id));
+       value.val( value.val() == '1' ? '0' : '1' );
+    }
+    </script>
+
 </head>
 <? print $message ?>
 <body>
@@ -49,6 +58,7 @@ print $_lib['sess']->doctype ?>
       </th>
       <th colspan="9"></th>
   <tr>
+    <th class="sub">Aktiv</th>
     <th class="sub">Linje</th>
     <th class="sub">Tekst</th>
     <th class="sub">Antall denne periode</th>
@@ -74,6 +84,15 @@ print $_lib['sess']->doctype ?>
         }
    ?>
    <tr>
+    <td>
+    <?
+        if($ishovedmal != 1)
+        {
+            ?><input type="hidden" name="salaryconfline.Active.<? print $line->SalaryConfLineID ?>" id="active.<? print $line->SalaryConfLineID ?>" value="<? print $line->Active ?>" /><?
+            ?><input type="checkbox" <? print ($line->Active ? 'checked="checked"' : '') ?> onchange="switchActive(<? print $line->SalaryConfLineID ?>)" /><?
+        }
+    ?>
+    </td>
     <td>
     <?
         if($ishovedmal == 1 and ($_lib['sess']->get_person('AccessLevel') >= 3))

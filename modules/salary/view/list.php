@@ -5,6 +5,7 @@
 
 $SalaryID = $_REQUEST['SalaryID'];
 $SalaryConfID = $_REQUEST['SalaryConfID'];
+$SalaryperiodconfID = $_REQUEST['SalaryperiodconfID'];
 
 includelogic('accounting/accounting');
 $accounting = new accounting();
@@ -46,8 +47,30 @@ $row_head = $_lib['storage']->get_row(array('query' => $query_conf_head));
 $query_conf     = "select *, A.KommuneID as NoKommune from salaryconf as S, accountplan as A, kommune as K where S.AccountPlanID=A.AccountPlanID and (A.KommuneID=K.KommuneID or (A.KommuneID = 0 and K.KommuneID = 1) ) and S.SalaryConfID!=1 order by AccountName asc";
 $result_conf    = $_lib['db']->db_query($query_conf);
 
+if($SalaryperiodconfID)
+{
+    $period_query = sprintf("SELECT Period FROM salaryperiodconf WHERE SalaryperiodconfID = %d", $SalaryperiodconfID);
+    $period_result = $_lib['db']->db_query($period_query);
+    $period_row = $_lib['db']->db_fetch_assoc($period_result);
 
-$period_open = ($accounting->is_valid_accountperiod($setup['salarydefvoucherperiod'], $_lib['sess']->get_person('AccessLevel'))) ? true : false;
+    $period_open = ($accounting->is_valid_accountperiod($period_row['Period'], $_lib['sess']->get_person('AccessLevel'))) ? true : false;
+
+    $entry_query = sprintf("SELECT * FROM salaryperiodentries WHERE SalaryperiodconfID = %d", $SalaryperiodconfID);
+    $entry_result = $_lib['db']->db_query($entry_query);
+    $entries = array();
+  
+    while($row = $_lib['db']->db_fetch_assoc($entry_result))
+    {
+        if(!isset($entries[ $row['AccountPlanID'] ]))
+            $entries[ $row['AccountPlanID'] ] = array();
+
+        $entries[ $row['AccountPlanID'] ][] = $row;
+    }
+}
+else
+{
+    $period_open = false;
+}
 
 
 print $_lib['sess']->doctype;
@@ -59,99 +82,74 @@ print $_lib['sess']->doctype;
     <meta name="cvs"                content="$Id: list.php,v 1.49 2005/10/28 17:59:41 thomasek Exp $" />
     <? includeinc('head') ?>
 
-    <script>
-function changemonth()
-{
-        var voucherdate = document.getElementById('setup.value.salarydefvoucherdate');
-        var voucherperiod = document.getElementById('setup.value.salarydefvoucherperiod');
-	var fromdate = document.getElementById('setup.value.salarydeffromdate');
-	var todate   = document.getElementById('setup.value.salarydeftodate');
-	var select   = document.getElementById('month');
-
-	var selectedmonth = select.value;
-	if(selectedmonth.length < 2)
-		selectedmonth = "0" + selectedmonth; 
-
-	var monthlengths = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
-        var date = new Date();
-
-	monthlength = monthlengths[ parseInt(select.value) - 1 ];
-	year = date.getFullYear();
-
-	/* leap year */
-	if(parseInt(select.value) == 2)
-	{
-		if(year % 400 == 0)
-			monthlength += 1;
-		else if(year % 4 == 0 && year % 100 != 0)
-			monthlength += 1;
-	}
-
-        voucherperiod.value = "" + year + "-" + selectedmonth;
-        voucherdate.value = voucherperiod.value + "-" + monthlength;
-	fromdate.value = voucherperiod.value + "-01";
-	todate.value = voucherperiod.value + "-" + monthlength;
-}
-    </script>
-</head>
+</head> 
 <body>
 
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
-<form name="salary_new" action="<? print $_lib['sess']->dispatch ?>t=salary.list" method="post">
-    <table class="lodo_data">
-    <tr>
-        <th colspan="5">Standardverdier for nye lønninger</th>
-    <tr>
-        <th class="sub">M&aring;ned</th>
-        <th class="sub">Bilagsdato</th>
-        <th class="sub">Periode</th>
-        <th class="sub">Fra dato</th>
-        <th class="sub">Til dato</th>
-        <th class="sub"></th>
-        <th class="sub"></th>
-    </tr>
-    <tr> 
-        <td> 
-        <?
-            $months = array(1 => 'Januar', 2 => 'Februar', 3 => 'Mars', 4=> 'April', 5=> 'Mai', 
-				6 => 'Juni', 7 => 'Juli', 8 => 'August', 9 => 'September', 10 => 'Oktober', 
-				11 => 'November', 12 => 'Desember');
+<?
 
-	    list($dummy, $month) = explode('-', $setup['salarydefvoucherdate']);
-	    $month_selected = (int)$month;
+  $period_query = "SELECT SalaryperiodconfID, Name, Year FROM salaryperiodconf ORDER BY Year, SalaryperiodconfID";
+  $period_result = $_lib['db']->db_query($period_query);
 
-	    printf("<select id='month' onchange='changemonth();' />");
-	    foreach($months as $n => $month) {
-	        if($n == $month_selected)
-	            printf("<option value='%d' selected>%s</option>\n", $n, $month);
-		else
-	            printf("<option value='%d'>%s</option>\n", $n, $month);
-	    }
-	    printf("</select>");
-	?>
-        </td>
-        
-        <td><? print $_lib['form3']->text(array('table'=>'setup.value', 'field'=>'salarydefvoucherdate', 'value'=>$setup['salarydefvoucherdate'], 'width'=>'10')) ?></td>
-        <td><? print $_lib['form3']->text(array('table'=>'setup.value', 'field'=>'salarydefvoucherperiod', 'value'=>$setup['salarydefvoucherperiod'], 'width'=>'10')) ?></td>
-        <td><? print $_lib['form3']->text(array('table'=>'setup.value', 'field'=>'salarydeffromdate', 'value'=>$setup['salarydeffromdate'], 'width'=>'10')) ?></td>
-        <td><? print $_lib['form3']->text(array('table'=>'setup.value', 'field'=>'salarydeftodate', 'value'=>$setup['salarydeftodate'], 'width'=>'10')) ?></td>
-        <td>
-        <? if(!$period_open) { print "Perioden er stengt"; } ?>
-        </td>
-        <td><? print $_lib['form3']->submit(array('name'=>'action_defconf_save', 'value'=>'Lagre verdier', 'accesskey'=>'S')) ?></td>
-    </tr>
-    </table>
-</form>
+?>
+<div>
+  <p>Velg periode</p>
+  <form action="<?= $_lib['sess']->dispatch ?>&t=salary.list" method="post">
+  <select name="SalaryperiodconfID">
+  <?
+    $last = array('Year' => 0, 'Month' => 0);
+    $month = date('n');
+    $year  = date('Y');
+    while( $row = $_lib['db']->db_fetch_assoc($period_result) )
+    {
+        if($row['Year'] != $last['Year'])
+        {
+           $last['Year'] = $row['Year'];
+           $last['Month'] = 0;
+        }
 
-<? if($period_open) {
+        $last['Month'] ++;
+
+        if( $SalaryperiodconfID == $row['SalaryperiodconfID'] || 
+           (!$SalaryperiodconfID && $last['Year'] == $year && $last['Month'] == $month) )
+        { 
+            $selected = "selected";
+        }
+        else
+        {
+            $selected = "";
+        }
+  
+        printf("<option value=\"%d\" %s>%s - %s</option>", 
+               $row['SalaryperiodconfID'], $selected, $row['Year'], $row['Name']);
+    }
+  ?>
+  </select>
+  <input type="submit" value="Velg" />
+  </form>
+  <p><a href="<?= $_lib['sess']->dispatch ?>t=salary.config">Konfigurasjon</a></p>
+</div>
+
+<? 
+
+if(!$SalaryperiodconfID) 
+{
+    echo "Ingen periode er valgt";
+}
+else if(!$period_open) 
+{
+    echo "Perioden er stengt";
+}
+else 
+{
 
 /*
  * tape-function to reuse code
  */
 function worker_line($row, $i) {
-  global $_lib, $accounting, $setup;
+  global $_lib, $accounting, $setup, $entries, $SalaryperiodconfID;
 
   $i++;
   if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
@@ -178,19 +176,37 @@ function worker_line($row, $i) {
       ?>
       </td>
 
+      <td style="text-align: right">
+      <?
+        echo $row->SalaryConfID;
+      ?>
+      </td>
+
       <td style="background-color: yellow"> 
       <?
-        $sql = sprintf("SELECT * FROM salaryinfo WHERE SalaryConfID = %d", $row->SalaryConfID);
+        $sql = sprintf("SELECT * FROM salaryinfo WHERE SalaryConfID = %d AND SalaryperiodconfID = %d", $row->SalaryConfID, $SalaryperiodconfID);
         $salaryinfo = $_lib['storage']->get_row(array('query' => $sql));
 
         if($salaryinfo === null) 
         {
-          $checked = false; 
+            $checked = false; 
         } 
         else 
         { 
-          $checked = true;
+            $checked = true;
         } 
+
+        if(!$checked && isset($entries[ $row->AccountPlanID ]))
+        {
+            foreach($entries[ $row->AccountPlanID ] as $a) 
+            {
+                if($a['Processed'] == 0)
+                {
+                    $checked = true;
+                    break;
+                }
+            }
+        }
       ?>
       <input type="checkbox" name="recieveSalary[]" value="<? echo $row->SalaryConfID ?>" <? echo $checked ? "checked" : "" ?> />
       <input type="hidden" name="existingSalaryLines[]" value="<? echo $row->SalaryConfID ?>" />
@@ -210,12 +226,28 @@ function worker_line($row, $i) {
       {
         if($row->SalaryConfID != 1 && $checked)
         {
-            ?><a target="_blank" href="<? print $_lib['sess']->dispatch ?>t=salary.edit&amp;SalaryConfID=<? print $row->SalaryConfID ?>&amp;action_salary_new=1" class="button"><? if($row->SalaryConfID != 1) { print /* $row->AccountPlanID */ "Lage l&oslash;nnslipp"; } ?></a><?
+            ?><a target="_blank" href="<? print $_lib['sess']->dispatch ?>t=salary.edit&amp;SalaryConfID=<? print $row->SalaryConfID ?>&amp;action_salary_new=1&amp;SalaryperiodconfID=<? print $SalaryperiodconfID ?>" class="button"><? if($row->SalaryConfID != 1) { print /* $row->AccountPlanID */ "Lage l&oslash;nnslipp"; } ?></a><?
         }
       } else {
         print "Stengt";
       }
       ?>
+      </td>
+
+      <td>
+        <?
+          if(isset($entries[ $row->AccountPlanID ]))
+          {
+              foreach($entries[ $row->AccountPlanID ] as $a)
+              {
+                  if($a['Processed'] != 0)
+                  {
+                      printf("<a href='%s&t=salary.edit&SalaryID=%d'>L%d</a> ",
+                             $_lib['sess']->dispatch, $a['SalaryID'], $a['JournalID']);
+                  }
+              }          
+          }
+        ?>
       </td>
 
       <td>
@@ -256,12 +288,6 @@ function worker_line($row, $i) {
  	   } ?>
       </td>
 
-      <td style="text-align: right">
-      <?
-        echo $row->SalaryConfID;
-      ?>
-      </td>
-
       <td> 
         <a href="<? print $_lib['sess']->dispatch ?>t=timesheets.list&AccountPlanID=<?= $row->AccountPlanID ?>&Username=<?= $row->AccountName ?>">timeliste</a>
       </td>
@@ -283,28 +309,39 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
 ?>
 
 <br><br>
+<form name="salary_save_info" action="<? print $_lib['sess']->dispatch ?>t=salary.list&SalaryperiodconfID=<?= $SalaryperiodconfID ?>" method="post">
 <table class="lodo_data">
 <tr>
-    <th colspan="11">Hovedmal hele firma</th>
+    <th colspan="12">Hovedmal hele firma</th>
 </tr>
 <tr>
     <th class="sub">Ansatte</th>
     <th class="sub">Navn</th>
-    <th class="sub" style="background-color: yellow; color: black;">Merk</th>
+    <th class="sub">
+      <a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $row_head->SalaryConfID ?>"><b>Hovedmal</b></a>
+    </th>
+    <th class="sub" style="background-color: yellow; color: black;">
+      <input type="checkbox" disabled checked>
+      <input name="salary_save_info" type="submit" value="Disse f&aring;r l&oslash;nn" />
+
+    </th>
     <th class="sub" style="background-color: yellow; color: black;">L&oslash;nnslipp</th>
+    <th class="sub">L&oslash;nninger</th>
     <th class="sub">Kommune</th>
     <th class="sub">Startdato</th>
     <th class="sub">Sluttdato</th>
     <th class="sub">L&T</th>
     <th class="sub"></th>
-    <th class="sub">Mal</th>
     <th class="sub"></th>
 </tr>
 <tr>
+    <td></td>
+    <td></td>
+
     <td>
     </td>
-    <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $row_head->SalaryConfID ?>"><b>Hovedmal</b></a></td>
-    <td style="background-color: yellow"></td>
+    <td style="background-color: yellow">
+    </td>
     <td style="background-color: yellow"></td>
     <td></td>
     <td></td>
@@ -313,7 +350,6 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
 </tr>
 
 <tbody>
-   <form name="salary_save_info" action="<? print $_lib['sess']->dispatch ?>t=salary.list" method="post">
    <? 
      $i = 1;
      foreach($current_workers as $row) {
@@ -321,16 +357,6 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
        $i++;
      }
   ?>
-  <tr>
-    <td colspan="2">
-    </td>
-    <td style="background-color: yellow">
-      <input type="checkbox" disabled checked>
-      <input name="salary_save_info" type="submit" value="Disse f&aring;r l&oslash;nn" />
-    </td>
-    <td style="background-color: yellow"></td>
-  </tr>
-  </form>
 </tbody>
 <tr>
   <td colspan="6"></td>
@@ -339,6 +365,7 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
   <td></td>
 </tr>
 </table>
+</form>
 
 <?
 
@@ -347,71 +374,61 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
 ///
 
 if(!isset($_GET['view_old_workers'])) {
-   echo '<br><br><a href="' . $_lib['sess']->dispatch . 't=salary.list&view_old_workers">Vis tidligere ansatte</a><br><br>';
+   echo '<br><br><a href="' . $_lib['sess']->dispatch . 't=salary.list&view_old_workers&SalaryperiodconfID=' . $SalaryperiodconfID . '">Vis tidligere ansatte</a><br><br>';
 }
 else {
-   echo '<br><br><a href="' . $_lib['sess']->dispatch . 't=salary.list">Skjul tidligere ansatte</a><br><br>';
+   echo '<br><br><a href="' . $_lib['sess']->dispatch . 't=salary.list&SalaryperiodconfID=' . $SalaryperiodconfID . '">Skjul tidligere ansatte</a><br><br>';
 
 ?>
+
+<form name="salary_save_info" action="<? print $_lib['sess']->dispatch ?>t=salary.list&SalaryperiodconfID=<?= $SalaryperiodconfID ?>&view_old_workers" method="post">
 <table class="lodo_data">
 <tr>
-    <th colspan="11">Tidligere ansatte</th>
+    <th colspan="12">Tidligere ansatte</th>
 </tr>
 
 <tr>
     <th class="sub">Ansatte</th>
     <th class="sub">Navn</th>
-    <th class="sub" style="background-color: yellow; color: black;">Merk</th>
+    <th class="sub">
+      <a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $row_head->SalaryConfID ?>"><b>Hovedmal</b></a>
+    </th>
+    <th class="sub" style="background-color: yellow; color: black;">
+      <input type="checkbox" disabled checked>
+      <input name="salary_save_info" type="submit" value="Disse f&aring;r l&oslash;nn" />
+
+    </th>
     <th class="sub" style="background-color: yellow; color: black;">L&oslash;nnslipp</th>
+    <th class="sub">L&oslash;nninger</th>
     <th class="sub">Kommune</th>
     <th class="sub">Startdato</th>
     <th class="sub">Sluttdato</th>
     <th class="sub">L&T</th>
     <th class="sub"></th>
-    <th class="sub">Mal</th>
     <th class="sub"></th>
 </tr>
 <tr>
+    <td></td>
+    <td></td>
+
     <td>
-  <?
-  if(($_lib['sess']->get_person('AccessLevel') >= 4))
-  {
-    ?>
-    <form name="salary_new" action="<? print $_lib['sess']->dispatch ?>t=salary.template" method="post">
-      <input type="submit" name="action_salaryconf_new" value="Ny ansatt (N)" accesskey="N" />
-    </form>
-    <?
-  }
-  ?>
     </td>
-    <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $row_head->SalaryConfID ?>"><b>Hovedmal</b></a></td>
-    <td style="background-color: yellow"></td>
+    <td style="background-color: yellow">
+    </td>
     <td style="background-color: yellow"></td>
     <td></td>
     <td></td>
     <td></td>
     <td colspan="3"></td>
-
 </tr>
 
 <tbody>
-   <form name="salary_save_info" action="<? print $_lib['sess']->dispatch ?>t=salary.list&view_old_workers" method="post">
    <? 
      $i = 1;
      foreach($old_workers as $row) {
        worker_line($row, $i);
      }
   ?>
-  <tr>
-    <td colspan="2">
-    </td>
-    <td style="background-color: yellow">
-      <input type="checkbox" disabled checked>
-      <input name="salary_save_info" type="submit" value="Disse f&aring;r l&oslash;nn" />
-    </td>
-    <td style="background-color: yellow"></td>
-  </tr>
-  </form>
 </tbody>
 <tr>
   <td colspan="6"></td>
@@ -420,6 +437,7 @@ else {
   <td></td>
 </tr>
 </table>
+</form>
 
 <?php
 }

@@ -10,6 +10,7 @@ $lineOutTo   = 100;
 
 $SalaryID       = (int) $_REQUEST['SalaryID'];
 $SalaryConfID   = (int) $_REQUEST['SalaryConfID'];
+$SalaryperiodconfID = (int) $_REQUEST['SalaryperiodconfID'];
 
 includelogic('accounting/accounting');
 $accounting = new accounting();
@@ -26,8 +27,49 @@ $query_salary   = "select * from salaryline where SalaryID = '$SalaryID' order b
 #print "$query_salary<br>";
 $result_salary  = $_lib['db']->db_query($query_salary);
 
-$remove_info = sprintf("DELETE FROM salaryinfo WHERE SalaryConfID = %d LIMIT 1", $SalaryConfID);
+$info_query = sprintf("SELECT * FROM salaryinfo WHERE SalaryConfID = %d AND SalaryperiodconfID = %d LIMIT 1", $SalaryConfID, $SalaryperiodconfID);
+$info_result = $_lib['db']->db_query($info_query);
+$info_row = $_lib['db']->db_fetch_assoc($info_result);
+$remove_info = sprintf("DELETE FROM salaryinfo WHERE SalaryConfID = %d AND SalaryperiodconfID = %d LIMIT 1", $SalaryConfID, $SalaryperiodconfID);
 $_lib['db']->db_query($remove_info);
+
+if($SalaryperiodconfID)
+{
+    $periodconf_query = sprintf("SELECT * FROM salaryperiodconf WHERE SalaryperiodconfID = %d", $SalaryperiodconfID);
+    $periodconf_result = $_lib['db']->db_query($periodconf_query);
+    $periodconf_row = $_lib['db']->db_fetch_assoc($periodconf_result);
+
+    $head->JournalDate = $periodconf_row['Voucherdate']; // name mismatch
+    $head->Period      = $periodconf_row['Period'];
+    $head->ValidFrom   = $periodconf_row['Fromdate'];
+    $head->ValidTo     = $periodconf_row['Todate'];
+    $head->InternComment = $info_row['amount'];
+
+    $entry_test_query = sprintf("SELECT * FROM salaryperiodentries WHERE JournalID = %d LIMIT 1", $head->JournalID);
+    $entry_test_result = $_lib['db']->db_query($entry_test_query);
+    if( !$_lib['db']->db_numrows($entry_test_result) )
+    {
+        $entry_query = sprintf("SELECT * FROM salaryperiodentries WHERE SalaryperiodconfID = %d AND AccountPlanID = %d AND Processed = 0", 
+                               $SalaryperiodconfID, $head->AccountPlanID);
+        $entry_result = $_lib['db']->db_query($entry_query);
+        if($_lib['db']->db_numrows($entry_result))
+        {
+            $entry_update_query = sprintf(
+                "UPDATE salaryperiodentries SET Processed = 1, JournalID = %d, SalaryID = %d WHERE SalaryperiodconfID = %d AND AccountPlanID = %d AND Processed = 0 LIMIT 1",
+                $head->JournalID, $SalaryID, $SalaryperiodconfID, $head->AccountPlanID);
+        }
+        else
+        {
+            $entry_update_query = sprintf(
+                 "INSERT INTO salaryperiodentries (`SalaryperiodconfID`, `JournalID`, `SalaryID`, `AccountPlanID`, `Processed`)
+                                            VALUES(%d, %d, %d, %d, 1);", 
+                 $SalaryperiodconfID, $head->JournalID, $SalaryID, $head->AccountPlanID);
+        }
+
+        $_lib['db']->db_query($entry_update_query);
+    }
+}
+
 
 $formname = "salaryUpdate";
 ?>
@@ -255,6 +297,16 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 <tr>
 <td colspan="13">
 <textarea name="salary.Comment.<? print $head->SalaryID ?>" cols="100" rows="4"><?= $head->Comment  ?></textarea>
+</td>
+</tr>
+
+<tr>
+<th colspan="13">Internkommentar</th>
+</tr>
+
+<tr>
+<td colspan="13">
+<textarea name="salary.InternComment.<? print $head->SalaryID ?>" cols="100" rows="4"><?= $head->InternComment  ?></textarea>
 </td>
 </tr>
 

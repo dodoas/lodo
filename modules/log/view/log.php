@@ -37,7 +37,8 @@ a { color: black; }
 
 <script>
 
-var data = <? include('log.json'); ?>
+var data = <? include('log.json'); ?>;
+
 var max_entries = 20;
 var colors = [ "F22", "A33", "844", "655", "666", "565", "484", "3A3", "2F2" ];
 
@@ -60,6 +61,10 @@ function rating(index)
     var now = date.getTime();
 
     var entries = array.length;
+
+    if(entries <= 0)
+        return 0;
+
     var first = parse_ts(array[entries - 1]['TS']);
     var diff = (now - first) / (60*60*24*1000);
 

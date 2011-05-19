@@ -13,17 +13,17 @@ if($_lib['input']->getProperty('salary_save_info')) {
   }
 
   foreach($existing as $item) {
-    $sql = sprintf("DELETE FROM salaryinfo WHERE SalaryConfID = %d LIMIT 1", $item);
+    $sql = sprintf("DELETE FROM salaryinfo WHERE SalaryConfID = %d AND SalaryperiodconfID = %d LIMIT 1", $item, $SalaryperiodconfID);
     $_lib['db']->db_query($sql);
 
     $amount = $_POST['salaryinfo_amount_' . $item];
-    $project = $_POST['salaryinfo_project_'. $item];
+    $project = $_POST['salaryinfo_project_' . $item];
     if($project == '')
         $project = -1;
 
     if(in_array($item, $checked)) {
-      $sql = sprintf("INSERT INTO salaryinfo (`SalaryConfID`, `amount`, `project`) VALUES ('%d', '%s', '%s');",
-                     $item, $amount, $project);
+      $sql = sprintf("INSERT INTO salaryinfo (`SalaryConfID`, `amount`, `project`, `SalaryperiodconfID`) VALUES ('%d', '%s', '%s', '%d');",
+                     $item, $amount, $project, $SalaryperiodconfID);
       $_lib['db']->db_query($sql);
     }
   }
@@ -217,6 +217,11 @@ elseif($_lib['input']->getProperty('action_salary_new'))
       $result_salary_employee   = $_lib['db']->db_query($query_salary_employee);
 
       while($line = $_lib['db']->db_fetch_object($result_salary_employee)) {
+        if(!$line->Active)
+        {
+          unset($lines[$line->LineNumber]);
+          continue;
+        }
         $lines[$line->LineNumber]['AccountPlanID']      = $line->AccountPlanID;
         $lines[$line->LineNumber]['NumberInPeriod']     = $line->NumberInPeriod;
         $lines[$line->LineNumber]['Rate']               = $line->Rate;
