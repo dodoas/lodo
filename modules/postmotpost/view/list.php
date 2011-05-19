@@ -98,7 +98,7 @@ if(count($postmotpost->voucherH) > 0)
                 <th class="sub">Forfall</th>
                 <th class="sub">Tekst</th>
                 <th class="sub">KID</th>
-                <th class="sub">Faktura#</th>
+                <th class="sub">Fakturanr</th>
                 <th class="sub"></th>
                 <th class="sub noprint"></th>
             </tr>
