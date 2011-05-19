@@ -551,10 +551,10 @@ class form3
         }
         else
         {
-            if($_sess->language == 'no')
+            if(true || $_sess->language == 'no') # hardcode to norwegian since language not working
                 $notChoosenText = 'Ikke valgt';
             else
-                $notChoosenText = 'Not choosen';
+                $notChoosenText = 'Not chosen'; 
         }
 
         if(isset($args['debug']))
@@ -639,7 +639,7 @@ class form3
 
                 if($key == $args['value'] and strlen($args['value']) > 0)
                 {
-                  $element .= '<option value="' . $key. '" selected>';
+                  $element .= '<option value="' . $key. '" selected="selected">';
                   $found = true;
                 }
                 else
