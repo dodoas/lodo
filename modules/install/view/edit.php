@@ -118,7 +118,7 @@ else
       </tr>
       <tr>
         <td class="menu">Kopier l&oslash;nnsmal</td>
-        <td><? print $_lib['form3']->checkbox(array('table' => 'install', 'field' => 'salaryconf')); ?></td>
+        <td><? print $_lib['form3']->checkbox(array('table' => 'install', 'field' => 'salaryconf', 'value' => 1)); ?></td>
       </tr>
       <? } ?>
       <tr>
