@@ -299,6 +299,22 @@ class timesheet_user
         return $list;
     }
 
+    public function list_departments()
+    {
+        global $_lib;
+
+        $r = $_lib['db']->db_query("SELECT CompanyDepartmentID, DepartmentName FROM companydepartment WHERE active = 1 ORDER BY DepartmentName");
+
+        $list = array();
+
+        while($row = $_lib['db']->db_fetch_assoc($r))
+        {
+            $list[ $row['CompanyDepartmentID'] ] = $row['DepartmentName'];
+        }
+
+        return $list;
+    }
+
     public function new_worktype($name)
     {
         global $_lib;
@@ -472,21 +488,22 @@ class timesheet_user_page
 
         printf(
             "<style>".
-            "a.hilight { color: black; }" .
-            "table { border-collapse: collapse; }" .
-            "td { padding: 2px; padding-right: 7px; } ".
-            "tr:hover { background-color: #eee; } " .
-            ".BeginTime_h, .EndTime_h, .SumTime_h { background-color: green; color: white; }".
+            "a.hilight { color: black; }\n" .
+            "table { border-collapse: collapse; }\n" .
+            "td { padding: 2px; padding-right: 7px; }\n".
+            "tr:hover { background-color: #eee; }\n" .
+            ".BeginTime_h, .EndTime_h, .SumTime_h { background-color: green; color: white; }\n".
+            ".day_0 { background-color: #f66; }\n".
             "</style>".
 
             "<style media='print'>".
-            "#layout_top { display: none; }".
-            "html { font-size: 10px; margin: 0px; }".
-            "* { margin:0; padding 0; }".
-            ".noprint,hr { display: none; }".
-            "textarea { border: 0px; }".
-            "input { border: 0px; }".
-            "tr { border: 1px solid black; }".
+            "#layout_top { display: none; }\n".
+            "html { font-size: 10px; margin: 0px; }\n".
+            "* { margin:0; padding 0; }\n".
+            ".noprint,hr { display: none; }\n".
+            "textarea { border: 0px; }\n".
+            "input { border: 0px; }\n".
+            "tr { border: 1px solid black; }\n".
             "</style>"
 
             );
@@ -806,8 +823,12 @@ class timesheet_user_page
         /* Table Body */
         foreach($array as $entries)
         {
-            foreach($entries as $entry)
+            //foreach($entries as $entry)
+            $entries_count = count($entries);
+            for($entries_i = 0; $entries_i < $entries_count; $entries_i++)
             {
+                $entry = $entries[ $entries_i ];
+
                 foreach($fields as $name_ => $dummy) /* fetch first field name */
                     break;
 
@@ -824,10 +845,25 @@ class timesheet_user_page
                         printf("<tr><td colspan='%d' style='background-color: #aaa;'></td></tr>", count($fields));
                     }
 
+                    $line_date = $entry['Date'];
+                    $sum_time = 0.0;
+                    for($i = 0; $entries[$entries_i + $i]['Date'] == $line_date; $i++)
+                    {
+                        $t = explode(':', $entries[$entries_i + $i]['SumTime']);
+
+                        $sum_time += ((int)$t[0] * 60) + (int)$t[1];
+                    }
+
                     $w = date('w', strtotime($period . '-' . $day_no));
                     $wd = array('S&oslash;ndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'L&oslash;rdag');
-                    $w = $wd[$w];
-                    printf("<tr style='height: 25px;'><td><b>%s</b></td><td colspan=2><b>%s</b></td></tr>", $day_no, $w);
+                    $w2 = $wd[$w];
+                    printf("<tr style='height: 25px;', class='day_%d'><td><b>%s</b></td><td colspan='2'><b>%s</b></td><td>%02d:%02d</td>".
+                           "<td colspan='%d'><input type='submit' value='L&aring;s dag' name='lock_day_%s' />".
+                           "<input type='submit' value='Lagre' name='save' /></td></tr>", 
+                           $w, $day_no, $w2, 
+                           (int)$sum_time / 60, $sum_time % 60,
+                           count($fields)-2, $day_no);
+
                 }
 
                 printf("<tr style='%s' id='rowno_%d' class='row'><td></td>\n", "color:black;", $i);
@@ -1364,7 +1400,7 @@ $(document).ready(function() {
         }
 
         $cols = array('BeginTime', 'EndTime', 'SumTime',
-                      'Project', 'WorkType', 'Comment', 
+                      'Project', 'CompanyDepartment', 'WorkType', 'Comment', 
                       'Diet', 'Accommodation', 'TravelRoute', 
                       'TravelDesc', 'TravelDistance', 'Toll', 
                       'Parking', 'Customer', 'DrivingExpenses');
@@ -1403,7 +1439,6 @@ $(document).ready(function() {
                          AND AccountPlanID = %d
                          AND Locked = 0",
                 $period_name, $period_name, $num_days, $this->user->get_id());
-
             $_lib['db']->db_query($sql);
 
             $matches = array();
@@ -1428,7 +1463,6 @@ $(document).ready(function() {
                 }
 
                 $sql .= ");";
-
                 $_lib['db']->db_query($sql);
             }
         }
@@ -1436,7 +1470,15 @@ $(document).ready(function() {
         {
             foreach($_POST as $k => $v) 
             {
-                if(substr($k, 0, 9) == "lock_line") 
+                if(substr($k, 0, 8) == "lock_day")
+                {
+                    $day = substr($k, 9);
+                    
+                    $sql = sprintf("UPDATE timesheets SET Locked = 1, LockedBy = '%s', LockedTime = NOW() WHERE AccountPlanID = %d AND Date = '%s-%s'",
+                                   $locked_by, $this->user->get_id(), $period_name, $day);
+                    $_lib['db']->db_query($sql);
+                }
+                else if(substr($k, 0, 9) == "lock_line") 
                 {
                     $id = substr($k, 10);
 
@@ -1554,6 +1596,7 @@ $(document).ready(function() {
         $customers = $this->user->list_customers();
         $worktypes = $this->user->list_worktypes();
         $projects  = $this->user->list_projects();
+        $departments = $this->user->list_departments();
         $diets     = $this->user->list_diets();
         $accommodations = $this->user->list_accommodations();
 
@@ -1565,6 +1608,7 @@ $(document).ready(function() {
 
             'Customer'   => array('type' => 'select', 'options' => $customers, 'default' => 0, 'translation' => 'Kunde', 'checked' => true),
             'Project'    => array('type' => 'select', 'options' => $projects, 'default' => 0, 'translation' => 'Prosjekt', 'checked' => true),
+            'CompanyDepartment'    => array('type' => 'select', 'options' => $departments, 'default' => 0, 'translation' => 'Avdeling', 'checked' => true),
             'WorkType'   => array('type' => 'select', 'options' => $worktypes, 'default' => 0, 'translation' => 'Arbeidesart', 'checked' => true),
 
             'Comment'    => array('type' => 'text', 'size' => '30', 'default' => "", 'translation' => 'Kommentar', 'checked' => true),
@@ -1792,6 +1836,7 @@ $(document).ready(function() {
             'EndTime'    => array('type' => 'text', 'size' => '10', 'default' => '00:00:00'),
             'SumTime'    => array('type' => 'text', 'size' => '10', 'default' => '00:00:00'),
             'Project'    => array('type' => 'select', 'options' => $projects, 'default' => 0),
+            //'CompanyDepartment'    => array('type' => 'select', 'options' => $projects, 'default' => 0),
             'WorkType'   => array('type' => 'select', 'options' => $worktypes, 'default' => 0),
             'Comment'    => array('type' => 'text', 'size' => '255', 'default' => ""),
             'AccountName' => array('type' => 'text', 'size'=> '255', 'default' => "Unknown"),
