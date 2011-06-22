@@ -101,6 +101,11 @@ class Install
             {
               $where = "-w \"ProjectID != 0\"";
             }
+            elseif($table == "salaryconf" || $table == "salaryconfline")
+            {
+              $where = "-w \"SalaryConfID = 1\"";
+            }
+
 
             if($i == 1)
                 $operator = '>';

@@ -88,11 +88,9 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
                         if($DataH[$server_name][$database_name][$table_name][$pk_name]['KIDandInvoiceIDandAccountPlanID']) {
                             if($DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] == $debugline) print "P: " . $DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] . "KIDandAccountPlanID<br>";
                             list($KID, $InvoiceNumber, $ReskontroAccountPlanID) = explode('#', $DataH[$server_name][$database_name][$table_name][$pk_name]['KIDandInvoiceIDandAccountPlanID']);
-
                             if($DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] == $debugline) print "Resultat fra meny: KIDandInvoiceIDandAccountPlanID<br>\n";
                             #print_r($DataH[$server_name][$database_name][$table_name][$pk_name]['KIDandInvoiceIDandAccountPlanID']);
-
-                            if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
+            if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
 					            $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] = $ReskontroAccountPlanID;
                             }
 						    if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['KID']) {
@@ -103,6 +101,10 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
     						}
 						    #print_r($DataH[$server_name][$database_name][$table_name][$pk_name]);
                         }
+
+
+                        $foo = $DataH[$server_name][$database_name][$table_name][$pk_name];
+                        error_log("modules/bank/view/record.inc-" . __LINE__ . ":foo:" . (is_array($foo) || is_object($foo) ? print_r($foo, true) : $foo . ". <br/>\n"));
 
                         unset($DataH[$server_name][$database_name][$table_name][$pk_name]['KIDandInvoiceIDandAccountPlanID']); #Does not exist in db.
 
@@ -137,6 +139,7 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
                                 !empty($match['AccountPlanID']) && // only invoice matches (i.e. with orgnr)
                                 !empty($match['AccountPlanOrgNumber'])) {
 
+                                error_log("modules/bank/view/record.inc: " . __LINE__);
                                 
                                 $query = "select FakturabankNumber, KID from fakturabankinvoicein where LodoID = '" . $match['InvoiceID'] . "'";
                                 $invoices = $_lib['storage']->get_hashhash(array('query' => $query, 'key' => 'ID'));
@@ -146,6 +149,7 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
                                     $invoice_match = false;
                                 }
 
+                                error_log("modules/bank/view/record.inc: " . __LINE__);
 
 									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
 										$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] = $match['AccountPlanID'];
@@ -156,7 +160,10 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
 									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['KID'] && !empty($invoice_match['KID'])) {
 										$DataH[$server_name][$database_name][$table_name][$pk_name]['KID']                    = $invoice_match['KID'];
 									}
+
+                                    error_log("modules/bank/view/record.inc: " . __LINE__);
 									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber'] && !empty($invoice_match['FakturabankNumber'])) {
+                                        error_log("modules/bank/view/record.inc: " . __LINE__);
 										$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber']          = $invoice_match['FakturabankNumber'];
 									}
 							} else {
@@ -194,6 +201,7 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
                                             $DataH[$server_name][$database_name][$table_name][$pk_name]['KID']                    = $match[0]->KID;
                                         }
                                         if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber']) {
+                                            error_log("modules/bank/view/record.inc: " . __LINE__);
                                             $DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber']          = $match[0]->InvoiceID;
                                         }
                                     }
@@ -297,6 +305,7 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
         }
     }
   
+    error_log("modules/bank/view/record.inc-" . __LINE__ . ":DataH:" . (is_array($DataH) || is_object($DataH) ? print_r($DataH, true) : $DataH . ". <br/>\n"));
     #print_r($DataH);
     $_lib['storage']->update($DataH);
 }
