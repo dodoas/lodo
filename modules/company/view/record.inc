@@ -16,6 +16,28 @@ elseif($_lib['input']->getProperty('action_company_update')) {
       $primarykey['CompanyID'] = (int) $_lib['input']->getProperty('CompanyID');
       #Possible to extend or alter parameters here
       #print_r($_POST);
+
+      if($_POST['company_IName'] == '')
+      {
+          $_POST['company_IName'] = $_POST['company_CompanyName'];
+      }
+      if($_POST['company_IAddress'] == '')
+      {
+          $_POST['company_IAddress'] = $_POST['company_VAddress'];
+      }
+      if($_POST['company_IZipCode'] == '')
+      {
+          $_POST['company_IZipCode'] = $_POST['company_VZipCode'];
+      }
+      if($_POST['company_ICity'] == '')
+      {
+          $_POST['company_ICity'] = $_POST['company_VCity'];
+      }
+      if($_POST['company_ICountry'] == '')
+      {
+          $_POST['company_ICountry'] = $_POST['company_VCountry'];
+      }
+
       $_dbh[$_dsn]->db_update_hash($_POST, $db_table, $primarykey);
 }
 elseif ($_lib['input']->getProperty('action_company_delete'))
