@@ -95,7 +95,6 @@ print $_lib['sess']->doctype;
 
 ?>
 <div>
-  <p>Velg periode</p>
   <form action="<?= $_lib['sess']->dispatch ?>&t=salary.list" method="post">
   <select name="SalaryperiodconfID">
   <?
@@ -127,9 +126,9 @@ print $_lib['sess']->doctype;
     }
   ?>
   </select>
-  <input type="submit" value="Velg" />
+  <input type="submit" value="Velg periode" />
   </form>
-  <p><a href="<?= $_lib['sess']->dispatch ?>t=salary.config">Konfigurasjon</a></p>
+  <a style="float:right;" href="<?= $_lib['sess']->dispatch ?>t=salary.config">Konfigurasjon</a>
 </div>
 
 <? 
@@ -226,7 +225,7 @@ function worker_line($row, $i) {
       {
         if($row->SalaryConfID != 1 && $checked)
         {
-            ?><a target="_blank" href="<? print $_lib['sess']->dispatch ?>t=salary.edit&amp;SalaryConfID=<? print $row->SalaryConfID ?>&amp;action_salary_new=1&amp;SalaryperiodconfID=<? print $SalaryperiodconfID ?>" class="button"><? if($row->SalaryConfID != 1) { print /* $row->AccountPlanID */ "Lage l&oslash;nnslipp"; } ?></a><?
+            ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&amp;SalaryConfID=<? print $row->SalaryConfID ?>&amp;action_salary_new=1&amp;SalaryperiodconfID=<? print $SalaryperiodconfID ?>" class="button"><? if($row->SalaryConfID != 1) { print /* $row->AccountPlanID */ "Lage l&oslash;nnslipp"; } ?></a><?
         }
       } else {
         print "Stengt";

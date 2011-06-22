@@ -38,12 +38,18 @@ if($SalaryperiodconfID)
     $periodconf_query = sprintf("SELECT * FROM salaryperiodconf WHERE SalaryperiodconfID = %d", $SalaryperiodconfID);
     $periodconf_result = $_lib['db']->db_query($periodconf_query);
     $periodconf_row = $_lib['db']->db_fetch_assoc($periodconf_result);
+    
+    $interCommentProject = $_lib['db']->db_fetch_assoc( $_lib['db']->db_query(
+                               sprintf("SELECT Heading FROM project WHERE ProjectID = %d", $info_row['project'])
+                           ));
 
     $head->JournalDate = $periodconf_row['Voucherdate']; // name mismatch
     $head->Period      = $periodconf_row['Period'];
     $head->ValidFrom   = $periodconf_row['Fromdate'];
     $head->ValidTo     = $periodconf_row['Todate'];
-    $head->InternComment = $info_row['amount'];
+    $head->InternComment = $interCommentProject['Heading'] . ': ' . $info_row['amount'];
+
+    print_r($interCommentProject);
 
     $entry_test_query = sprintf("SELECT * FROM salaryperiodentries WHERE JournalID = %d LIMIT 1", $head->JournalID);
     $entry_test_result = $_lib['db']->db_query($entry_test_query);
@@ -70,6 +76,8 @@ if($SalaryperiodconfID)
     }
 }
 
+$SalaryperiodconfID_row = $_lib['db']->get_row( array( 'query' => sprintf("SELECT SalaryperiodconfID FROM salaryperiodconf WHERE Period = '%s'", $head->Period) ) );
+$SalaryperiodconfID = $SalaryperiodconfID_row->SalaryperiodconfID;
 
 $formname = "salaryUpdate";
 ?>
@@ -94,6 +102,8 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 <? } ?>
 
 <? print $message ?>
+
+<p><a href="<? print $_lib['sess']->dispatch ?>t=salary.list&SalaryperiodconfID=<?= $SalaryperiodconfID ?>">Tilbake til l&oslash;nnsslipp</a></p>
 
 <form name="<? print $formname ?>" action="<? print $MY_SELF ?>" method="post">
 <input type="hidden" name="SalaryID" value="<? print $SalaryID ?>">
@@ -287,6 +297,11 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
     <?
   }
   ?>
+<tr><td></td><td><b>Sum</b></td><td colspan="2"></td>
+<td style="text-align: right;"><b><? print $_lib['format']->Amount(array('value'=>$sumThisPeriod, 'return'=>'value')) ?></b></td>
+<td style="text-align: right;"><b><? print $_lib['format']->Amount(array('value'=>$sumThisYear, 'return'=>'value')) ?></b></td>
+</tr>
+
 <tr height="20">
   <td colspan="13">
 </tr>
@@ -386,14 +401,6 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 <tr>
   <td>Feriepenge grunnlag dette &aring;r</td>
   <td><nobr><? print $_lib['format']->Amount(array('value'=>$fpGrunnlag_da, 'return'=>'value')) ?></nobr></td>
-</tr>
-<tr>
-  <td>Utbetales i periode</td>
-  <td><nobr><? print $_lib['format']->Amount(array('value'=>$sumThisPeriod, 'return'=>'value')) ?></nobr></td>
-</tr>
-<tr>
-  <td>Utbetalt hittil i &aring;r</td>
-  <td><nobr><? print $_lib['format']->Amount(array('value'=>$sumThisYear, 'return'=>'value')) ?></nobr></td>
 </tr>
 </table>
 </form>
