@@ -49,8 +49,6 @@ if($SalaryperiodconfID)
     $head->ValidTo     = $periodconf_row['Todate'];
     $head->InternComment = $interCommentProject['Heading'] . ': ' . $info_row['amount'];
 
-    print_r($interCommentProject);
-
     $entry_test_query = sprintf("SELECT * FROM salaryperiodentries WHERE JournalID = %d LIMIT 1", $head->JournalID);
     $entry_test_result = $_lib['db']->db_query($entry_test_query);
     if( !$_lib['db']->db_numrows($entry_test_result) )
@@ -102,8 +100,6 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 <? } ?>
 
 <? print $message ?>
-
-<p><a href="<? print $_lib['sess']->dispatch ?>t=salary.list&SalaryperiodconfID=<?= $SalaryperiodconfID ?>">Tilbake til l&oslash;nnsslipp</a></p>
 
 <form name="<? print $formname ?>" action="<? print $MY_SELF ?>" method="post">
 <input type="hidden" name="SalaryID" value="<? print $SalaryID ?>">
@@ -338,8 +334,14 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 		<? } ?>
 
     </td>
-    <td colspan="5"></td>
-    <td><a href="<? print $_lib['sess']->dispatch ?>t=salary.print&amp;SalaryID=<? print $SalaryID ?>" target="_new" />Vis</a></td>
+    <td colspan="2"></td>
+
+    <td colspan="3">
+      <a href="<? print $_lib['sess']->dispatch ?>t=salary.list&SalaryperiodconfID=<?= $SalaryperiodconfID ?>">Tilbake til l&oslash;nnsslipp</a>
+    </td>
+    <td>
+      <a href="<? print $_lib['sess']->dispatch ?>t=salary.print&amp;SalaryID=<? print $SalaryID ?>" target="_new" />Vis</a>
+    </td>
     <?
     if($_lib['sess']->get_person('AccessLevel') >= 2)
     {

@@ -128,7 +128,7 @@ print $_lib['sess']->doctype;
   </select>
   <input type="submit" value="Velg periode" />
   </form>
-  <a style="float:right;" href="<?= $_lib['sess']->dispatch ?>t=salary.config">Konfigurasjon</a>
+  <a href="<?= $_lib['sess']->dispatch ?>t=salary.config">Konfigurasjon</a>
 </div>
 
 <? 
@@ -321,8 +321,8 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
     </th>
     <th class="sub" style="background-color: yellow; color: black;">
       <input type="checkbox" disabled checked>
-      <input name="salary_save_info" type="submit" value="Disse f&aring;r l&oslash;nn" />
-
+      <input name="salary_save_info" type="submit" value="Disse f&aring;r l&oslash;nn / Lagre opplysninger" />
+      Valgt periode: <?= $period_row['Period'] ?>
     </th>
     <th class="sub" style="background-color: yellow; color: black;">L&oslash;nnslipp</th>
     <th class="sub">L&oslash;nninger</th>
@@ -394,7 +394,7 @@ else {
     </th>
     <th class="sub" style="background-color: yellow; color: black;">
       <input type="checkbox" disabled checked>
-      <input name="salary_save_info" type="submit" value="Disse f&aring;r l&oslash;nn" />
+      <input name="salary_save_info" type="submit" value="Disse f&aring;r l&oslash;nn / Lagre opplysninger" />
 
     </th>
     <th class="sub" style="background-color: yellow; color: black;">L&oslash;nnslipp</th>

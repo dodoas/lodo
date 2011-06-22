@@ -110,7 +110,9 @@ if($_type == 'hovedbok')
 {
   if($_active == 1)
   {
-      $safe_from_period = mysql_escape_string($_from_period);
+      #$safe_from_period = mysql_escape_string($_from_period);
+      #$safe_to_period = mysql_escape_string($_to_period);
+      $safe_from_period = mysql_escape_string($_from_prev_period);
       $safe_to_period = mysql_escape_string($_to_period);
 
       /* henter ut aktive kontoer og kontoer satt til uaktiv, men allikevel har en voucher registrert --m */
@@ -126,7 +128,7 @@ if($_type == 'hovedbok')
 				OR 
 				
 				( 
-					A.Active = 0 AND 
+					-- A.Active = 0 AND 
 					A.AccountPlanType = 'balance' AND
 					V.AccountPlanID = A.AccountPlanID AND 
 					V.VoucherPeriod >= '$safe_from_period' AND
@@ -148,7 +150,7 @@ if($_type == 'hovedbok')
 				OR
 			
 				(
-					A.Active = 0 AND 
+					-- A.Active = 0 AND 
 					A.AccountPlanType = 'result' AND
 					V.AccountPlanID = A.AccountPlanID AND
 					V.VoucherPeriod >= '$safe_from_period' AND
