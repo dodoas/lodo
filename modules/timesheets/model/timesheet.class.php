@@ -1335,7 +1335,8 @@ $(document).ready(function() {
         line = line.replace(/\%I\%/g, nextI)
                    .replace(/\%COLOR\%/g, color)
                    .replace(/\%DAY\%/g, day);
-        $('#rowno_' + i).after(line);
+        var last_line = $(this).closest('tr');
+        last_line.after(line);
         $('#new_line_' + day + '_' + nextI).click(arguments.callee);
         $('#del_line_' + nextI).click(del_function);
         nextI ++;
