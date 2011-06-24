@@ -335,7 +335,16 @@ class framework_logic_bank {
         $bankvotingperiod = $_lib['db']->db_fetch_object($bankvotingperiod_hash);
 
         if(!$bankvotingperiod) {
-= abs($this->prevbankaccountcalc->AmountSaldo);
+            $bankvotingperiod->AccountID            = $postmain['bankvotingperiod_AccountID']         = $this->AccountID;
+            $bankvotingperiod->Period               = $postmain['bankvotingperiod_Period']            = $Period;
+            $bankvotingperiod->InsertedDateTime     = $postmain['bankvotingperiod_InsertedDateTime']  = 'NOW()';
+            $bankvotingperiod->InsertedByPersonID   = $postmain['bankvotingperiod_InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
+
+            #The previous periods end saldo is the next periods default start saldo.
+            if($this->prevbankaccountcalc->AmountSaldo > 0) {
+                $bankvotingperiod->AmountIn         = $postmain['bankvotingperiod_AmountIn']          = abs($this->prevbankaccountcalc->AmountSaldo);
+            } else {
+                $bankvotingperiod->AmountOut        = $postmain['bankvotingperiod_AmountOut']         = abs($this->prevbankaccountcalc->AmountSaldo);
             }
 
             $bankvotingperiod->BankVotingPeriodID   = $_lib['db']->db_new_hash($postmain, 'bankvotingperiod');            
@@ -369,8 +378,6 @@ class framework_logic_bank {
             }
         }
         if($InvoiceID && !$success) {
-            $sfoo = $this->closeablevoucheraccountline['InvoiceID'];
-            error_log("modules/bank/model/bank.class.php-" . __LINE__ . ":sfoo:" . (is_array($sfoo) || is_object($sfoo) ? print_r($sfoo, true) : $sfoo . ". <br/>\n"));
             if(isset($this->closeablevoucheraccountline['InvoiceID'][$InvoiceID]) && round($this->closeablevoucheraccountline['InvoiceID'][$InvoiceID], 2) == 0) {
                 $success = true;
             }
@@ -391,8 +398,6 @@ class framework_logic_bank {
         if($InvoiceID) {
             $this->closeablevoucheraccountline['InvoiceID'][$InvoiceID] += round($amount,2);
         }
-
-            error_log("modules/bank/model/bank.class.php-" . __LINE__ . ":this->closeablevoucheraccountline:" . (is_array($this->closeablevoucheraccountline) || is_object($this->closeablevoucheraccountline) ? print_r($this->closeablevoucheraccountline, true) : $this->closeablevoucheraccountline . ". <br/>\n"));
 
         if($KID == $this->debugKID) {
             print "set: voucheraccount #$AccountPlanID#$KID#$InvoiceID# += $amount - saldo #" . $this->closeablevoucheraccountline['KID'][$KID] . "# - $comment<br>\n";
