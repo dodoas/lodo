@@ -1812,6 +1812,7 @@ class accounting {
     * @return hash with active periods
     */
     function get_open_accountperiod_hash(){
+        // TODO this method should maybe take AcccessLevel into account
         global $_lib;
         $query = "select Period, 1 from accountperiod where (Status=2 or Status=3) order by Period asc";
         return $_lib['storage']->get_hash(array('query' => $query, 'key' => 'Period', 'value' => 'Period'));
