@@ -250,7 +250,20 @@ class logic_invoicein_invoicein implements Iterator {
                     #ToBe Done: Check Payment means for codes 10, 42, 48 - and change the journaling accorging to this.    
                     $VoucherH = array();
                     $VoucherH['voucher_ExternalID']         = $InvoiceO->ExternalID;
-                    $VoucherH['voucher_VoucherPeriod']      = $InvoiceO->Period;
+
+                    if ($accounting->is_valid_accountperiod($InvoiceO->Period, $_lib['sess']->get_person('AccessLevel'))) {
+                        $VoucherH['voucher_VoucherPeriod']      = $InvoiceO->Period;
+                    } else {
+                        $first_open_period = $accounting->get_first_open_accountingperiod();
+                        if ($first_open_period > $InvoiceO->Period) { // since periods are 0 preceded we can use normal string comparison
+                            // first open period is later then Invoice0->Period, so use it
+                            $VoucherH['voucher_VoucherPeriod'] = $first_open_period;
+                        } else { // use last open period instead
+                            $last_open_period = $accounting->get_last_open_accountingperiod();
+                            $VoucherH['voucher_VoucherPeriod'] = $last_open_period;
+                        }
+                    }
+
                     $VoucherH['voucher_VoucherDate']        = $InvoiceO->InvoiceDate;
                     $VoucherH['voucher_DueDate']            = $InvoiceO->DueDate;
                     $VoucherH['voucher_EnableAutoBalance']  = 0;
