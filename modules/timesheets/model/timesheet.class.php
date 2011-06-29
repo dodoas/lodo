@@ -847,8 +847,12 @@ class timesheet_user_page
 
                     $line_date = $entry['Date'];
                     $sum_time = 0.0;
+                    $control = 0;
                     for($i = 0; $entries[$entries_i + $i]['Date'] == $line_date; $i++)
                     {
+                        if ($control++ > 2000) {
+                            break;
+                        }
                         $t = explode(':', $entries[$entries_i + $i]['SumTime']);
 
                         $sum_time += ((int)$t[0] * 60) + (int)$t[1];
