@@ -137,7 +137,7 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
   <tr>
     <th class="sub" colspan="1"><? print $head->TabellTrekk ?></th>
     <th class="sub"><? print $head->ProsentTrekk ?></th>
-    <th class="sub"><a href="http://www.skatteetaten.no/PageFiles/129117/<? print str_replace("/", "", $head->TabellTrekk) ?>.txt" target="_new">Vis trekktabell</a></th>
+    <th class="sub"><a href="https://skort.skatteetaten.no/skd/trekk/trekk" target="_new">Vis trekktabell</a></th>
   </tr>
 </table>
 <br>
