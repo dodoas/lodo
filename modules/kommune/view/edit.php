@@ -50,7 +50,7 @@ if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark
   </tr>
   <? } ?>
 </table>
-<a href="http://www.skatteetaten.no/Templates/TabellerOgSatser.aspx?id=29509&epslanguage=NO" target="_blank">Skattekommune oversikt</a>
+<a href="http://www.skatteetaten.no/no/Tabeller-og-satser/Arbeidsgiveravgift---soneinndeling/" target="_blank">Skattekommune oversikt</a>
 <? includeinc('bottom') ?>
 </body>
 </html>
