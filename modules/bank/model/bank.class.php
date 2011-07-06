@@ -745,17 +745,49 @@ class framework_logic_bank {
 
                         #print "Fant mer enn en match<br>";
                         
-                        #print_r($match);
-                        $dataH = array();
+                        # Found more than one match, see if we can discriminate on InvoiceNumber
+                        //$unvotedmatch->InvoiceNumber
 
-                        $dataH['Manuell match'] = 'Ingen match';
-                        foreach($match as $tmp => $info) {
-                            #We have to make a compound key - to return three values.
-                            $dataH[$info->KID . '#' . $info->InvoiceID . '#' . $info->AccountPlanID] = $info->InvoiceID . ':' . $info->DueDate . ':' . $info->AccountName . ':' . $info->AccountPlanID;
-                            #print "Mange: KID: $info->KID - $info->AccountPlanID:$info->AccountName: dato: $info->VoucherDate, belop: $info->AmountBalance<br>\n";
+                        $single_match = null;
+                        if (!empty($unvotedmatch->InvoiceNumber)) {
+                            $match_count = 0;
+
+                            foreach($match as $tmp => $info) {
+                                if ($info->InvoiceID == $unvotedmatch->InvoiceNumber) {
+                                    $match_count++;
+                                    if ($match_count > 1) {
+                                        $single_match = null;
+                                        break;
+                                    } else {
+                                        $single_match = $info;
+                                    }
+                                }
+                            }
                         }
 
-                        $this->unvotedaccount[$id]->MatchSelect = $dataH;
+                        if ($single_match) {
+                            $this->unvotedaccount[$id]->MatchAccountPlanID   = $single_match->AccountPlanID;
+                            $this->unvotedaccount[$id]->MatchAccountName     = $single_match->AccountName;
+                            $this->unvotedaccount[$id]->MatchInvoiceID       = $single_match->InvoiceID;
+                            $this->unvotedaccount[$id]->MatchVoucherDate     = $single_match->VoucherDate;
+                            $this->unvotedaccount[$id]->MatchVoucherID       = $single_match->VoucherID;
+                            $this->unvotedaccount[$id]->MatchVoucherType     = $single_match->VoucherType;
+                            $this->unvotedaccount[$id]->MatchJournalID       = $single_match->JournalID;
+                        } else {
+                            #print_r($match);
+                            $dataH = array();
+
+                            $dataH['Manuell match'] = 'Ingen match';
+                            $only_match = null;                        
+
+                            foreach($match as $tmp => $info) {
+                                #We have to make a compound key - to return three values.
+                                $dataH[$info->KID . '#' . $info->InvoiceID . '#' . $info->AccountPlanID] = $info->InvoiceID . ':' . $info->DueDate . ':' . $info->AccountName . ':' . $info->AccountPlanID;
+                                #print "Mange: KID: $info->KID - $info->AccountPlanID:$info->AccountName: dato: $info->VoucherDate, belop: $info->AmountBalance<br>\n";
+                            }
+
+                            $this->unvotedaccount[$id]->MatchSelect = $dataH;
+                        }
                     }
                 }
             }
