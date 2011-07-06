@@ -156,6 +156,10 @@ class lodo_fakturabank_fakturabankvoting {
             return false;
         }
 
+        if (empty($period)) {
+            return false;
+        }
+
         if (!preg_match('/([0-9]{4})-([0-9]){2}/', $period, $matches)) {
             return false;
         }
@@ -167,12 +171,12 @@ class lodo_fakturabank_fakturabankvoting {
         if (!is_array($voting) || empty($voting)) {
             return false;
         }
-		$this->save_transactions($voting);
+		$this->save_transactions($voting, $period);
 
         # import fakturabank transaction records accountline table
         $this->import_transactions_to_accounting($account_id, $period);
 
-        $this->save_voting_relation($voting);
+        $this->save_voting_relation($voting, true);
 	}
 
     protected function period_to_startdate($period) {
@@ -194,7 +198,7 @@ class lodo_fakturabank_fakturabankvoting {
             $month++;
         }
 
-        $day = 1; // hardcode to 29 of previous month to give slack
+        $day = 1; // hardcode to 1 of next month to get slack
 
         $monthstr = $month < 10 ? "0$month" : "$month";
         $daystr = $day < 10 ? "0$day" : "$day";
@@ -283,7 +287,7 @@ class lodo_fakturabank_fakturabankvoting {
                 $lineH['AmountOut'] = $fb_transaction['Amount'];
             }
 
-            #Only add lines with a amount
+            #Only add lines with an amount
             if($lineH['AmountIn'] > 0 || $lineH['AmountOut'] > 0) {
                 # Don't insert transaction if already in DB
                 $sql_exists  = "select * from accountline where FakturabankTransactionLodoID='" . $fb_transaction['ID'] . "'";
@@ -310,31 +314,25 @@ class lodo_fakturabank_fakturabankvoting {
             $_lib['db']->store_record(array('data' => $postvl, 'table' => 'voucheraccountline'));
 		}
 
-		$_lib['message']->add("Transactions importert: $transactionsimported, duplikattransaksjoner: $duplicatetransaction<br>");
+		$_lib['message']->add("Transaksjoner importert: $transactionsimported, duplikat-transaksjoner: $duplicatetransaction<br>");
     }
 
-	public function save_incoming_w_voting($invoices) {
-        # voting includes both bank transactions and relations to invoices
-		$voting = $this->get_balance_report();
-        # save bank transactions
-		$this->save_transactions($voting);
-        # save voting relations
-		$this->save_voting_relation($voting);
-	}
+    public function lookup_invoice($FakturabankInvoiceID) {
+		global $_lib;
 
-	public function save_outgoing_w_voting($invoices) {
-		return; 
+        $query = "SELECT * FROM fakturabankinvoicein WHERE `FakturabankID` = '" . $FakturabankInvoiceID . "'";
 
-        global $_lib;
+        $ret = $_lib['storage']->get_row(array('query' => $query));
+        if (!empty($ret)) {
+            return $ret;
+        }
 
-		$voting = $this->get_balance_report();
+        $query = "SELECT * FROM fakturabankinvoiceout WHERE `FakturabankID` = '" . $FakturabankInvoiceID . "'";
+        $ret = $_lib['storage']->get_row(array('query' => $query));
+		return $ret;
+    }
 
-		$this->save_transactions($voting);
-
-		$this->save_voting_relation($voting);
-	}
-
-	public function save_voting_relation(&$voting) {
+	public function save_voting_relation(&$voting, $lookup_invoice_data = false) {
 		global $_lib;
 
 
@@ -359,11 +357,21 @@ class lodo_fakturabank_fakturabankvoting {
 						unset($dataH['ID']);
 					}
 
-					# decipher type (e.g. InvoiceIn, InvoiceOut, TransactionCosts etc.)
-
 					$dataH['FakturabankID'] = $relation->{'id'};
 					$dataH['FakturabankTransactionID'] = $transaction->{"id"};
-					$dataH['FakturabankInvoiceID'] = $relation->{"invoice-id"};
+                    if (!empty($relation->{"invoice-id"})) {
+                        $dataH['FakturabankInvoiceID'] = $relation->{"invoice-id"};
+                        if ($lookup_invoice_data) { # update relation with invoice data, to enable easy lookup of relations in the future
+                            if ($invoice = $this->lookup_invoice($dataH['FakturabankInvoiceID'])) {
+                                $dataH['InvoiceID'] = $invoice->InvoiceID;
+                                $dataH['AccountPlanID'] = $invoice->AccountPlanID;
+                                $dataH['AccountPlanOrgNumber'] = $invoice->AccountPlanOrgNumber;
+                            }
+                        }
+                    }
+
+					# decipher type (e.g. InvoiceIn, InvoiceOut, TransactionCosts etc.)
+
                     if (!empty($relation->{"paycheck-no"})) {
                         $dataH['PaycheckNo'] = $relation->{"paycheck-no"};
                     }
@@ -504,7 +512,7 @@ class lodo_fakturabank_fakturabankvoting {
 
             $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
 				tr.FakturabankTransactionID = '$FakturabankTransactionID'";
-        } else { // ... else, transaction imported from css or punched, match on date, amount, account
+        } else { // ... else, transaction imported from csv or punched, match on date, amount, account
             $transaction_date = $_lib['storage']->db_escape($args['VoucherDate']);
             $Incoming = $_lib['storage']->db_escape($args['Incoming']);
             $bank_account = $_lib['storage']->db_escape($args['BankAccount']);
@@ -701,10 +709,35 @@ class lodo_fakturabank_fakturabankvoting {
 		return false;
 	}
 
-	private function save_transactions($voting) {
+	private function save_transactions($voting, $period) {
 		global $_lib;
 
         if (empty($voting)) return false;
+
+        /**
+         * To avoid having old (and potentially deleted or modified) transactions around
+         * after doing import of a period, we must first delete existing transactions and relations, in this
+         * period.
+         *
+         * In save_voting_relations(), called after this function if $period exists, 
+         * we will update relations with invoice data like done in 
+         * update_fakturabank_outgoing/ingoing_invoice().
+         * If we don't do this, then the data linking a relation to an invoice (and 
+         * thereby to a ledger (reskontro)) could be lost, since this data is added
+         * when importing invoices.
+         */
+
+        $query = "select FakturabankID from fakturabanktransaction where PostingDate LIKE '$period%'";
+        $existing_transactions = $_lib['storage']->get_hashhash(array('query' => $query, 'key' => 'FakturabankID'));
+        if (!empty($existing_transactions)) {
+            foreach ($existing_transactions as $ExistingFakturabankID => $ExistingFakturabankTransaction) {
+                $query = "delete from fakturabanktransactionrelation where FakturabankTransactionID = '$ExistingFakturabankID'";
+                $_lib['db']->db_delete($query);
+            }
+            
+            $query = "delete from fakturabanktransaction where PostingDate LIKE '$period%'";
+                $_lib['db']->db_delete($query);
+        }
 
 		foreach ($voting as &$transaction) {
 			$dataH = array();

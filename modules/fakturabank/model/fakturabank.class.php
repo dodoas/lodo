@@ -82,7 +82,7 @@ class lodo_fakturabank_fakturabank {
 
         $invoicesO = $this->retrieve($page, $url);
 		$validated_invoices = $this->validate_outgoing($invoicesO);
-		$this->save_outgoing_w_voting($validated_invoices);
+		$this->save_outgoing($validated_invoices);
         return $validated_invoices;
     }
 
@@ -100,7 +100,8 @@ class lodo_fakturabank_fakturabank {
 
         $invoicesO = $this->retrieve($page, $url);
 		$validated_invoices = $this->validate_incoming($invoicesO);
-		$this->save_incoming_w_voting($validated_invoices);
+        $this->save_incoming($validated_invoices);
+
         return $validated_invoices;
     }
 
@@ -205,14 +206,6 @@ class lodo_fakturabank_fakturabank {
 		}
 	}
 
-	private function save_incoming_w_voting($invoices) {
-		$this->save_incoming($invoices);
-
-		$fbvoting = new lodo_fakturabank_fakturabankvoting();
-
-		$fbvoting->save_incoming_w_voting($invoices);
-	}
-
 	private function save_outgoing($invoices) {
         if (!is_array($invoices) || empty($invoices)) {
             return false;
@@ -276,14 +269,6 @@ class lodo_fakturabank_fakturabank {
 		}
 	}
 
-	private function save_outgoing_w_voting($invoices) {
-		$this->save_outgoing($invoices);
-
-		$fbvoting = new lodo_fakturabank_fakturabankvoting();
-		
-		$fbvoting->save_outgoing_w_voting($invoices);
-	}
-    
     ####################################################################################################
     #READ XML    
     private function retrieve($page, $url) {
