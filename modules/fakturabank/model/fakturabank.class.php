@@ -494,7 +494,16 @@ class lodo_fakturabank_fakturabank {
                 }
             } else {
                 $InvoiceO->Status     .= "Finner ikke kunde basert pŒ PartyIdentification: " . $party_id;
-                $InvoiceO->Status     .= sprintf('<a href="%s&t=fakturabank.createaccount&orgno=%s&type=customer">Opprett</a>', $_lib['sess']->dispatch, $this->OrgNumber);
+                                                // only offer autocreation for suppliers with a valid partyid
+                if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID) &&
+                    $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID == "NO:ORGNR") {
+                    $InvoiceO->Status .= sprintf('<a href="%s&t=fakturabank.createaccount&accountplanid=%s&type=customer">Opprett</a>', $_lib['sess']->dispatch, $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID);
+                } else if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) { // no orgnr present, offer creation based on customerid
+                    $InvoiceO->Status .= sprintf('<a href="%s&t=fakturabank.createaccount&accountplanid=%s&type=customer">Opprett p&aring; kundenr</a>', $_lib['sess']->dispatch, $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID);
+                } else {
+                    $InvoiceO->Status .= 'Ikke mulig &aring; auto-opprette denne type id';
+                }
+
                 $InvoiceO->Journal = false;
                 $InvoiceO->Class   = 'red';
             }
@@ -640,7 +649,8 @@ class lodo_fakturabank_fakturabank {
                 #$this->registerincoming($InvoiceO);
             } else {
                 $InvoiceO->Status   .= "Finner ikke leverand&oslash;r basert p&aring; PartyIdentification: " . $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID; 
-                $InvoiceO->Status   .= sprintf('<a href="%s&t=fakturabank.createaccount&orgno=%s&type=supplier">Opprett</a>', $_lib['sess']->dispatch, $this->OrgNumber);
+
+                $InvoiceO->Status   .= sprintf('<a href="%s&t=fakturabank.createaccount&accountplanid=%s&type=supplier">Opprett</a>', $_lib['sess']->dispatch, $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID);
 
                 $InvoiceO->Journal = false;
                 $InvoiceO->Class   = 'red';
