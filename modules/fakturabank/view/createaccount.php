@@ -2,7 +2,7 @@
 
 $accountplanid = $_GET["accountplanid"];
 
-$type = $_GET["type"] == 'supplier';
+$type = $_GET["type"];
 
 if (!in_array($type, array('balance', 'result', 'customer', 'employee'))) {
     $type = 'supplier';    
