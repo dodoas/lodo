@@ -363,7 +363,7 @@ class lodo_fakturabank_fakturabankvoting {
                         $dataH['FakturabankInvoiceID'] = $relation->{"invoice-id"};
                         if ($lookup_invoice_data) { # update relation with invoice data, to enable easy lookup of relations in the future
                             if ($invoice = $this->lookup_invoice($dataH['FakturabankInvoiceID'])) {
-                                $dataH['InvoiceID'] = $invoice->InvoiceID;
+                                $dataH['InvoiceID'] = $invoice->ID;
                                 $dataH['AccountPlanID'] = $invoice->AccountPlanID;
                                 $dataH['AccountPlanOrgNumber'] = $invoice->AccountPlanOrgNumber;
                             }
