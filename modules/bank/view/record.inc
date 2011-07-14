@@ -90,7 +90,9 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
                             list($KID, $InvoiceNumber, $ReskontroAccountPlanID) = explode('#', $DataH[$server_name][$database_name][$table_name][$pk_name]['KIDandInvoiceIDandAccountPlanID']);
                             if($DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] == $debugline) print "Resultat fra meny: KIDandInvoiceIDandAccountPlanID<br>\n";
                             #print_r($DataH[$server_name][$database_name][$table_name][$pk_name]['KIDandInvoiceIDandAccountPlanID']);
-            if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
+
+
+                            if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
 					            $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] = $ReskontroAccountPlanID;
                             }
 						    if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['KID']) {
@@ -108,7 +110,10 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
 						if($DataH[$server_name][$database_name][$table_name][$pk_name]['Day'])
 							$DataH[$server_name][$database_name][$table_name][$pk_name]['Day']  = str_pad($DataH[$server_name][$database_name][$table_name][$pk_name]['Day'], 2, '0', STR_PAD_LEFT);;
 
-						if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['KID'] && !$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber'] && !$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] && ($DataH[$server_name][$database_name][$table_name][$pk_name]['AmountIn'] > 0 || $DataH[$server_name][$database_name][$table_name][$pk_name]['AmountOut'] > 0)) {
+						if(
+                           (!$DataH[$server_name][$database_name][$table_name][$pk_name]['KID'] && !$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber'] && !$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] && ($DataH[$server_name][$database_name][$table_name][$pk_name]['AmountIn'] > 0 || $DataH[$server_name][$database_name][$table_name][$pk_name]['AmountOut'] > 0)) 
+                           || 
+                           (!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] && !$DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID'])) {
                             if($DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] == $debugline) print "P: " . $DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] . "Ikke KID ikke ReskontroAccountPlanID<br>";
 
 							# KID, invoicenumber or reskontro missing. Find match from fakturabank data or moneyflow
