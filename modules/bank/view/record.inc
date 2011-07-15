@@ -8,8 +8,6 @@ includelogic('fakturabank/reconciliationreason');
 #$bank2           = new framework_logic_bank($_lib['input']->request);
 #$bank2->init();
 
-$debugline = 99999999999999999;
-
 if($_lib['input']->getProperty('action_bank_new')) {
   $postmain['account_ValidFrom']   = $_lib['sess']->get_session('Date');
   $postmain['account_Active']      = 1;
@@ -20,6 +18,71 @@ elseif($_lib['input']->getProperty('action_period_update')) {
     $_lib['storage']->update($_lib['input']->get_data());
 }
 elseif($_lib['input']->getProperty('action_bank_update')) {
+    do_bank_update($AccountID, $Period);
+}
+elseif($_lib['input']->getProperty('action_bank_votinglinenewtillegg')) {
+  $Period = $_lib['input']->getProperty('Period');
+  $postmain['bankvotingline_AccountID']            = $AccountID;
+  $postmain['bankvotingline_VoucherDate']          = "$Period-01";
+  $postmain['bankvotingline_VoucherPeriod']        = $Period;
+  $postmain['bankvotingline_InsertedDateTime']     = 'NOW()';
+  $postmain['bankvotingline_Type']                 = 'tillegg';
+  $postmain['bankvotingline_InsertedByPersonID']   = $_lib['sess']->get_person('PersonID');
+  #print_r($postmain);
+  $postmain['bankvotingline_AccountLineID']        = $_lib['db']->db_new_hash($postmain, 'bankvotingline');
+}
+elseif($_lib['input']->getProperty('action_bank_votinglinenewtilbake')) {
+  $Period = $_lib['input']->getProperty('Period');
+  $postmain['bankvotingline_AccountID']            = $AccountID;
+  $postmain['bankvotingline_VoucherDate']          = "$Period-01";
+  $postmain['bankvotingline_VoucherPeriod']        = $Period;
+  $postmain['bankvotingline_InsertedDateTime']     = 'NOW()';
+  $postmain['bankvotingline_Type']                 = 'tilbake';
+  $postmain['bankvotingline_InsertedByPersonID']   = $_lib['sess']->get_person('PersonID');
+  #print_r($postmain);
+  $postmain['bankvotingline_AccountLineID']        = $_lib['db']->db_new_hash($postmain, 'bankvotingline');
+}
+elseif($_lib['input']->getProperty('action_bank_accountlinedelete')) {
+
+    $sql_delete  = "update accountline set Active=0 where AccountLineID=" . (int) $_lib['input']->getProperty('AccountLineID');
+    print "$sql_delete<br>\n";
+    $_lib['db']->db_delete($sql_delete);
+}
+elseif($_lib['input']->getProperty('action_bank_accountlinenew')) {
+
+    $bank->AddAccountLines($_lib['input']->getProperty('numnewlines'));
+}
+elseif($_lib['input']->getProperty('action_bank_zerojournalid')) {
+    $bank->ZeroAccountLineJournalID();
+}
+elseif($_lib['input']->getProperty('action_bank_journal')) {
+    $bank->init();
+    $bank->journal();
+}
+elseif($_lib['input']->getProperty('action_bank_cardadd')) {
+    $bankaccount->cardadd($_lib['input']->getProperty('AccountID'));
+}
+elseif($_lib['input']->getProperty('action_bank_cardremove')) {
+    $bankaccount->cardremove($_lib['input']->getProperty('BankAccountCardID'));
+}
+elseif($_lib['input']->getProperty('action_bank_periodremove')) {
+    $bankaccount->periodremove();
+}
+elseif($_lib['input']->getProperty('action_bank_periodlock')) {
+    $bankaccount->periodlock();
+}
+elseif($_lib['input']->getProperty('action_bank_commentupdate')) {
+	#print_r($_POST);
+	$tables['bankvotingperiod']    = 'BankVotingPeriodID';
+	$_lib['storage']->db_update_multi_table($_POST, $tables);
+}
+
+
+function do_bank_update($AccountID, $Period) {
+    global $_lib, $accounting;
+
+    $debugline = 99999999999999999;
+
     #print_r($_input->get_data());
 
     $PrevPeriod     = $_lib['date']->get_prev_period(array('value' => $Period . '-01', 'realPeriod' => 1));
@@ -110,13 +173,21 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
 						if($DataH[$server_name][$database_name][$table_name][$pk_name]['Day'])
 							$DataH[$server_name][$database_name][$table_name][$pk_name]['Day']  = str_pad($DataH[$server_name][$database_name][$table_name][$pk_name]['Day'], 2, '0', STR_PAD_LEFT);;
 
+                        /**************************************************
+                         *
+                         * Automatching code begins
+                         *
+                         */
+
+                        /* if we are missing account then look for matches in bank transaction relations */
 						if(
-                           (!$DataH[$server_name][$database_name][$table_name][$pk_name]['KID'] && !$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber'] && !$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] && ($DataH[$server_name][$database_name][$table_name][$pk_name]['AmountIn'] > 0 || $DataH[$server_name][$database_name][$table_name][$pk_name]['AmountOut'] > 0)) 
-                           || 
+                           ($DataH[$server_name][$database_name][$table_name][$pk_name]['AmountIn'] > 0 || $DataH[$server_name][$database_name][$table_name][$pk_name]['AmountOut'] > 0) &&
+                           // ((!$DataH[$server_name][$database_name][$table_name][$pk_name]['KID'] && !$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber'] && !$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) || 
                            (!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] && !$DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID'])) {
+							# KID, invoicenumber or reskontro missing. Find match from fakturabank data or moneyflow
+
                             if($DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] == $debugline) print "P: " . $DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] . "Ikke KID ikke ReskontroAccountPlanID<br>";
 
-							# KID, invoicenumber or reskontro missing. Find match from fakturabank data or moneyflow
 
 							if($DataH[$server_name][$database_name][$table_name][$pk_name]['AmountIn'] > 0) {
 								$incoming = 0;
@@ -140,26 +211,18 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
                                 !empty($match['AccountPlanID']) && // only invoice matches (i.e. with orgnr)
                                 !empty($match['AccountPlanOrgNumber'])) {
 
-                                $query = "select FakturabankNumber, KID from fakturabankinvoicein where LodoID = '" . $match['InvoiceID'] . "'";
-                                $invoices = $_lib['storage']->get_hashhash(array('query' => $query, 'key' => 'ID'));
-                                if (!empty($invoices)) {
-                                    $invoice_match = reset($invoices);
-                                } else {
-                                    $invoice_match = false;
-                                }
-
 									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
 										$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] = $match['AccountPlanID'];
 									}
 									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroOrgNumber']) {
 										$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroOrgNumber']     = $match['AccountPlanOrgNumber'];
 									}
-									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['KID'] && !empty($invoice_match['KID'])) {
-										$DataH[$server_name][$database_name][$table_name][$pk_name]['KID']                    = $invoice_match['KID'];
+									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['KID'] && !empty($match['KID'])) {
+										$DataH[$server_name][$database_name][$table_name][$pk_name]['KID']                    = $match['KID'];
 									}
 
-									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber'] && !empty($invoice_match['FakturabankNumber'])) {
-										$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber']          = $invoice_match['FakturabankNumber'];
+									if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber'] && !empty($match['InvoiceNumber'])) {
+										$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber']          = $match['InvoiceNumber'];
 									}
 							} else {
                                 # find possible matches on non-invoice reconcilation reasons
@@ -177,7 +240,7 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
 										$DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID'] = $reconciliation_accountplan['AccountPlanID'];
 									}
                                 } else {
-                                    #If no KID and no Reskontro and in or out amout - try an automatic kid match to update data
+                                    #If no KID and no Reskontro and in or out amount - try an automatic kid match to update data
                                     #Always look up reskontro on kid - no we only do it if kid is missing - and on the first run.
                                     #print "Ikke kjør denne nå<br>\n";
 
@@ -301,61 +364,6 @@ elseif($_lib['input']->getProperty('action_bank_update')) {
   
     #print_r($DataH);
     $_lib['storage']->update($DataH);
-}
-elseif($_lib['input']->getProperty('action_bank_votinglinenewtillegg')) {
-  $Period = $_lib['input']->getProperty('Period');
-  $postmain['bankvotingline_AccountID']            = $AccountID;
-  $postmain['bankvotingline_VoucherDate']          = "$Period-01";
-  $postmain['bankvotingline_VoucherPeriod']        = $Period;
-  $postmain['bankvotingline_InsertedDateTime']     = 'NOW()';
-  $postmain['bankvotingline_Type']                 = 'tillegg';
-  $postmain['bankvotingline_InsertedByPersonID']   = $_lib['sess']->get_person('PersonID');
-  #print_r($postmain);
-  $postmain['bankvotingline_AccountLineID']        = $_lib['db']->db_new_hash($postmain, 'bankvotingline');
-}
-elseif($_lib['input']->getProperty('action_bank_votinglinenewtilbake')) {
-  $Period = $_lib['input']->getProperty('Period');
-  $postmain['bankvotingline_AccountID']            = $AccountID;
-  $postmain['bankvotingline_VoucherDate']          = "$Period-01";
-  $postmain['bankvotingline_VoucherPeriod']        = $Period;
-  $postmain['bankvotingline_InsertedDateTime']     = 'NOW()';
-  $postmain['bankvotingline_Type']                 = 'tilbake';
-  $postmain['bankvotingline_InsertedByPersonID']   = $_lib['sess']->get_person('PersonID');
-  #print_r($postmain);
-  $postmain['bankvotingline_AccountLineID']        = $_lib['db']->db_new_hash($postmain, 'bankvotingline');
-}
-elseif($_lib['input']->getProperty('action_bank_accountlinedelete')) {
 
-    $sql_delete  = "update accountline set Active=0 where AccountLineID=" . (int) $_lib['input']->getProperty('AccountLineID');
-    print "$sql_delete<br>\n";
-    $_lib['db']->db_delete($sql_delete);
-}
-elseif($_lib['input']->getProperty('action_bank_accountlinenew')) {
-
-    $bank->AddAccountLines($_lib['input']->getProperty('numnewlines'));
-}
-elseif($_lib['input']->getProperty('action_bank_zerojournalid')) {
-    $bank->ZeroAccountLineJournalID();
-}
-elseif($_lib['input']->getProperty('action_bank_journal')) {
-    $bank->init();
-    $bank->journal();
-}
-elseif($_lib['input']->getProperty('action_bank_cardadd')) {
-    $bankaccount->cardadd($_lib['input']->getProperty('AccountID'));
-}
-elseif($_lib['input']->getProperty('action_bank_cardremove')) {
-    $bankaccount->cardremove($_lib['input']->getProperty('BankAccountCardID'));
-}
-elseif($_lib['input']->getProperty('action_bank_periodremove')) {
-    $bankaccount->periodremove();
-}
-elseif($_lib['input']->getProperty('action_bank_periodlock')) {
-    $bankaccount->periodlock();
-}
-elseif($_lib['input']->getProperty('action_bank_commentupdate')) {
-	#print_r($_POST);
-	$tables['bankvotingperiod']    = 'BankVotingPeriodID';
-	$_lib['storage']->db_update_multi_table($_POST, $tables);
 }
 ?>
