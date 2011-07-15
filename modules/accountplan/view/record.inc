@@ -1,4 +1,9 @@
 <?
+
+function clean_org_number($orgnr) {
+    return preg_replace('/\s/', '', $orgnr);
+}
+
 if(!$AccountPlanID && $AccountPlanType) {
     // If accountplan id is not given - we make a new one by max old + 1
     $query_accountplan    = "select max(AccountPlanID)+1 as AccountPlanID from accountplan where AccountPlanType = '$AccountPlanType'";
@@ -26,7 +31,11 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
                                           $AccountPlanID, $_POST['fakturabankemail_Email']);
         $_lib['db']->db_query($fakturabankemail_query);
     }
-    
+
+
+    if (!empty($_POST['accountplan_OrgNumber'])) {
+        $_POST['accountplan_OrgNumber'] = clean_org_number($_POST['accountplan_OrgNumber']);
+    }
     
     // Check of this is a new and usaved account, if so - just create it
     $queryexist   = "select * from accountplan where AccountPlanID = $AccountPlanID";
