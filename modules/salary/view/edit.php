@@ -349,13 +349,35 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
         if(!$head->Period)
         {
             ?>
-            <td><input type="submit" name="action_salary_journal" value="Lagre (S)" accesskey="S" align="right" /><br /></td>
+            <td>
+                <?php
+                  if(!$head->LockedBy) echo '<input type="submit" name="action_salary_lock" value="L&aring;s (L)" accesskey="L" />';
+                  else echo "L&aring;st av " . $head->LockedBy . " " . $head->LockedDate;
+
+                  if(!$head->LockedBy || $_lib['sess']->get_person('AccessLevel') >= 4) 
+                  {
+                    echo '<input type="submit" name="action_salary_journal" value="Lagre (S)" accesskey="S" align="right" /><br /></td>';
+                  }
+        
+                ?>
+
+            </td>
             <?
         }
         elseif($accounting->is_valid_accountperiod($head->Period, $_lib['sess']->get_person('AccessLevel')))
         {
             ?>
-            <td><input type="submit" name="action_salary_journal" value="Lagre (S)" accesskey="S" align="right" /><br /></td>
+            <td>
+                <?php
+                  if(!$head->LockedBy) echo '<input type="submit" name="action_salary_lock" value="L&aring;s (L)" accesskey="L" />';
+                  else echo "L&aring;st av " . $head->LockedBy . " " . $head->LockedDate;
+
+                  if(!$head->LockedBy || $_lib['sess']->get_person('AccessLevel') >= 4) 
+                  {
+                    echo '<input type="submit" name="action_salary_journal" value="Lagre (S)" accesskey="S" align="right" /><br /></td>';
+                  }
+            ?>
+            </td>
             <?
         }
     }

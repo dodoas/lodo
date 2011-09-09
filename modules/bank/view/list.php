@@ -27,7 +27,7 @@ $ba = new model_bank_bankaccount(array());
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
-<h1><a href="<? print $_lib['sess']->dispatch ?>t=bank.list"><b>Kasse/bank-avstemming</b></a> / <a href="<? print $_lib['sess']->dispatch ?>t=bank.accountperiodcomment">Konto periode kommentar</a></h1>
+<h1><a href="<? print $_lib['sess']->dispatch ?>t=bank.list"><b>Kasse/bank-avstemming</b></a> <br /> <a href="<? print $_lib['sess']->dispatch ?>t=bank.accountperiodcomment">Brukte bilagsnummer</a></h1>
 
 <table class="lodo_data">
 <thead>

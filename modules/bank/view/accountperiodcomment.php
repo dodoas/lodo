@@ -35,7 +35,8 @@ $apc = new accountperiodcomment();
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
-<h1><a href="<? print $_lib['sess']->dispatch ?>t=bank.list">Kasse/bank-avstemming</a> / <a href="<? print $_lib['sess']->dispatch ?>t=bank.accountperiodcomment"><b>Konto periode kommentar</b></a></h1>
+<h1><a href="<? print $_lib['sess']->dispatch ?>t=bank.list">Kasse/bank-avstemming</a> <br />
+<a href="<? print $_lib['sess']->dispatch ?>t=bank.accountperiodcomment"><b>Brukte bilagsnummer</b></a></h1>
 
 <? print $_lib['form3']->start(array('name' => 'accountperiodcomment')); ?>
 

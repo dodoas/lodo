@@ -62,7 +62,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
 
             if($monthly != 'total' && $monthly != 'percent')
             {
-	        	if (!($i % 3)) { $class = "r0"; } else { $class = "r1"; };
+                if( ($i % 4) == 1 || ($i % 4) == 2) { $class = "r0"; } else { $class = "r1"; };
     	    	$i++;
 
                 $Period = $avst->year."-".sprintf("%02d",$monthly);
@@ -182,7 +182,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
             if($monthly != 'total' && $monthly != 'percent')
             {
             	$i++;
-        		if (!($i % 3)) { $class = "r0"; } else { $class = "r1"; };
+                if( ($i % 4) == 1 || ($i % 4) == 2) { $class = "r0"; } else { $class = "r1"; };
                 ?>
                 <tr class="<? print $class ?>">
                     <td><? print $_lib['format']->MonthToText(array('value'=>$monthly, 'return' => 'value')) ?></td>
@@ -465,7 +465,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
 </table>
 <table>
     <tr>
-        <td width="500" class="number"><? print $_lib['form3']->submit(array('name'=>'action_avstemming_update', 'value'=>'Oppdater siden (S)', 'accesskey'=>'S')) ?>   <? global $_sess; if($_lib['sess']->get_person('AccessLevel') >= 3) { ?> <a href="<? print $_lib['sess']->dispatch."t=mvaavstemming.fix_mva_avst"; ?>">oppdater MVA Kode</a>   <? } ?> </td>
+        <td width="500" class="number"><? print $_lib['form3']->submit(array('name'=>'action_avstemming_update', 'value'=>'Lagre siden (S)', 'accesskey'=>'S')) ?>   <? global $_sess; if($_lib['sess']->get_person('AccessLevel') >= 3) { ?> <a href="<? print $_lib['sess']->dispatch."t=mvaavstemming.fix_mva_avst"; ?>">oppdater MVA Kode</a>   <? } ?> </td>
     </tr>
 </table>
 </form>

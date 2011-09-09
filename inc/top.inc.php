@@ -146,8 +146,8 @@ $topclass = 'topclass';
                                 <legend>Oppsett</legend>   
                                 <a href="<? print $_lib['sess']->dispatch ?>t=report.list">Rapporter</a>
                                 <!--a href="<? print $_lib['sess']->dispatch ?>t=accountplan.list&accountplan_type=hovedbok">Hovedbokskontoer</a-->
-                                <a href="<? print $_lib['sess']->dispatch ?>t=accountplan.list&accountplan_type=balance">Hovedbok balanse</a>
-                                <a href="<? print $_lib['sess']->dispatch ?>t=accountplan.list&accountplan_type=result">Hovedbok resultat</a>
+                                <a href="<? print $_lib['sess']->dispatch ?>t=accountplan.list&accountplan_type=balance">Hovedbok balanse 3</a>
+                                <a href="<? print $_lib['sess']->dispatch ?>t=accountplan.list&accountplan_type=result">Hovedbok resultat 3</a>
                                 <?
                                 $query2         = "select AccountPlanID, AccountName, ReskontroAccountPlanType from accountplan where EnableReskontro=1 and AccountPlanID != 2930 and Active=1 order by AccountPlanID asc";
                                 #print "$query2<br>\n";

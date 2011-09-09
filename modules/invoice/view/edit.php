@@ -293,6 +293,14 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     <tr>
         <td>
         <?
+	if(!$row->Locked) { 
+		print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_lock', 		'value'=>'L&aring;s (L)', 'accesskey'=>'L')); 
+	};
+
+        ?>
+        </td>
+        <td>
+        <?
 	    if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
             {
                 if(!$row->Locked || $_lib['sess']->get_person('AccessLevel') >= 4) {
@@ -300,7 +308,6 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
                 }
 	    }
         ?>
-        <td>
         <?
         if($_lib['sess']->get_person('AccessLevel') >= 2)
         {
@@ -311,6 +318,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 
         <td colspan="6" align="right">
         <?
+
 
         if(!$row->Locked || $_lib['sess']->get_person('AccessLevel') >= 4) {
 			if($_lib['sess']->get_person('AccessLevel') >= 4 && $inline == 'edit')
@@ -338,7 +346,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 		    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
 		}
 
-        if(!$row->Locked) { print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_lock', 		'value'=>'L&aring;s (L)', 'accesskey'=>'L')); };
+
         ?>
 </form>
     <tr height="10">

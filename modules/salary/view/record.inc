@@ -399,6 +399,12 @@ elseif($_lib['input']->getProperty('action_salaryconf_update'))
     $_lib['storage']->db_update_multi_table($_POST, $tables);
   }
 }
+elseif($_lib['input']->getProperty('action_salary_lock'))
+{
+  $query = sprintf("UPDATE salary SET LockedBy = '%s %s', LockedDate = NOW() WHERE SalaryID = %d LIMIT 1", 
+			$_lib['sess']->get_person('FirstName'), $_lib['sess']->get_person('LastName'), $SalaryID);
+  $_lib['db']->db_query($query);
+}
 elseif($_lib['input']->getProperty('action_salary_journal'))
 {
   ################################################################

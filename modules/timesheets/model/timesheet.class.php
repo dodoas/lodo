@@ -649,6 +649,20 @@ class timesheet_user_page
             $i ++;
         }
         echo '</table>';
+        
+        if(!$this->user->is_admin())
+        {
+            printf("<table>" .
+                   "<tr><td>Annen m&aring;ned:</td>" .
+                   "  <td><form action='%s' method='get'>" .
+                   "    <input type='hidden' name='tp' value='view' />" .
+                   "    <input type='text' value='YYYY-MM' name='period' />" .
+                   "    <input type='submit' value='G&aring; til' />" .
+                   "  </form></td>" .
+                   "</tr>" .
+                   "</table>",
+                   $this->root);
+        }
 
         if($this->user->is_admin())
         {
@@ -1018,18 +1032,41 @@ class timesheet_user_page
                     else if($field_data['type'] == "select")
                     {
                         /* make field sum */
-                        if(!isset($sum_fields[$field])) 
+                        if($field == "Diet" || $field == "Accommodation" || $field == "Project") 
                         {
-                            $sum_fields[$field] = array();
-                            $sum_fields[$field][$value] = 1;
+                            if(!isset($sum_fields[$field])) 
+                            {
+                                $sum_fields[$field] = array();
+                                $sum_fields[$field][$value] = 1;
+                            }
+                            else if(!isset($sum_fields[$field][$value]))
+                            {
+                                $sum_fields[$field][$value] = 1;
+                            }
+                            else 
+                            {
+                                $sum_fields[$field][$value] += 1;
+                            }
                         }
-                        else if(!isset($sum_fields[$field][$value]))
+                        else
                         {
-                            $sum_fields[$field][$value] = 1;
-                        }
-                        else 
-                        {
-                            $sum_fields[$field][$value] += 1;
+                            if(!isset($sum_fields[$field])) 
+                            {
+                                $sum_fields[$field] = array();
+                                //$sum_fields[$field][$value] = 1;
+                                list($h, $m) = explode(':', $entry['SumTime']);
+                                $sum_fields[$field][$value] = (float)$h + $m / 60.0;
+                            }
+                            else if(!isset($sum_fields[$field][$value]))
+                            {
+                                list($h, $m) = explode(':', $entry['SumTime']);
+                                $sum_fields[$field][$value] = (float)$h + $m / 60.0;
+                            }
+                            else 
+                            {
+                                list($h, $m) = explode(':', $entry['SumTime']);
+                                $sum_fields[$field][$value] += (float)$h + $m / 60.0;
+                            }
                         }
 
                         if($locked || $lockedLine)
@@ -1180,7 +1217,16 @@ class timesheet_user_page
                 if($n == 0)
                     continue;
 
-                printf("<tr><td></td><td colspan=2>%s</td><td>%d</td></tr>", $o[$n], $v);
+                if(!is_float($v)) 
+                {
+                    printf("<tr><td></td><td colspan=2>%s</td><td>%d</td></tr>", $o[$n], $v);
+                }
+                else
+                {
+                    $h = floor($v);
+                    $m = ($v - $h) * 60.0;
+                    printf("<tr><td></td><td colspan=2>%s</td><td>%02d:%02d</td></tr>", $o[$n], $h, $m);
+                }
             }
         }
 
@@ -1356,6 +1402,70 @@ $(document).ready(function() {
 
     }
 
+    private function save($period_name, $period, $cols) 
+    {
+        global $_lib;
+
+        $project_info = $this->user->get_period_info($period_name);
+        if(!isset($project_info['TimesheetPeriodID']))
+        {
+            $sql = sprintf(
+                "INSERT INTO timesheetperiods (`Period`, `AccountPlanID`, `Locked`, `Comment`)
+                      VALUES('%s', '%d', '0', '%s');",
+                $period_name, $this->user->get_id(), $this->user->escape($_POST['comment']));
+        }
+        else
+        {
+            $sql = sprintf(
+                "UPDATE timesheetperiods SET Comment = '%s' WHERE Period = '%s' AND AccountPlanID = %d",
+                $this->user->escape($_POST['comment']), $period_name, $this->user->get_id());
+        }
+        $_lib['db']->db_query($sql);
+        
+        $num_days = date("t", strtotime($period_name . '-01'));
+        
+        // $period == $period_name?
+        $locked = $this->user->is_period_locked($period);
+        if($locked) 
+        {
+            die("Can't do that");
+        }
+        
+        $sql = sprintf(
+            "DELETE FROM timesheets 
+                   WHERE Date >= '%s-01' 
+                         AND Date <= '%s-%d' 
+                         AND AccountPlanID = %d
+                         AND Locked = 0",
+                $period_name, $period_name, $num_days, $this->user->get_id());
+        $_lib['db']->db_query($sql);
+        
+        $matches = array();
+        foreach($_POST as $k => $v)
+        {
+            preg_match('/field_(?P<Day>\d+)_BeginTime_(?P<No>\d+)/', $k, $matches);
+            if(sizeof($matches) <= 0)
+                continue;
+            
+            /* should be a better way to do this */
+            $sql = "INSERT INTO timesheets (`AccountPlanID`, `Date`";
+            foreach($cols as $col)
+                $sql .= ", `$col`";
+            $sql .= sprintf(") VALUES ('%d', '%s-%d'", 
+                            $this->user->get_id(), $period_name, $matches['Day']);
+            foreach($cols as $col) 
+            {
+                $sql .= sprintf(", '%s'", $this->user->escape( 
+                                    $_POST[sprintf('field_%s_%s_%d', 
+                                                   $matches['Day'], $col, 
+                                                   $matches['No'])]));
+            }
+            
+            $sql .= ");";
+            $_lib['db']->db_query($sql);
+        }        
+    }
+
     private function view()
     {
         global $_lib;
@@ -1413,70 +1523,26 @@ $(document).ready(function() {
 
         if(isset($_POST['save']))
         {
-            $project_info = $this->user->get_period_info($period_name);
-            if(!isset($project_info['TimesheetPeriodID']))
-            {
-                $sql = sprintf(
-                    "INSERT INTO timesheetperiods (`Period`, `AccountPlanID`, `Locked`, `Comment`)
-                      VALUES('%s', '%d', '0', '%s');",
-                    $period_name, $this->user->get_id(), $this->user->escape($_POST['comment']));
-            }
-            else
-            {
-                $sql = sprintf(
-                    "UPDATE timesheetperiods SET Comment = '%s' WHERE Period = '%s' AND AccountPlanID = %d",
-                    $this->user->escape($_POST['comment']), $period_name, $this->user->get_id());
-            }
-            $_lib['db']->db_query($sql);
-
-            $num_days = date("t", strtotime($period_name . '-01'));
-
-            $locked = $this->user->is_period_locked($period);
-            if($locked) 
-            {
-                die("Can't do that");
-            }
-
-            $sql = sprintf(
-                "DELETE FROM timesheets 
-                   WHERE Date >= '%s-01' 
-                         AND Date <= '%s-%d' 
-                         AND AccountPlanID = %d
-                         AND Locked = 0",
-                $period_name, $period_name, $num_days, $this->user->get_id());
-            $_lib['db']->db_query($sql);
-
-            $matches = array();
-            foreach($_POST as $k => $v)
-            {
-                preg_match('/field_(?P<Day>\d+)_BeginTime_(?P<No>\d+)/', $k, $matches);
-                if(sizeof($matches) <= 0)
-                    continue;
-
-                /* should be a better way to do this */
-                $sql = "INSERT INTO timesheets (`AccountPlanID`, `Date`";
-                foreach($cols as $col)
-                    $sql .= ", `$col`";
-                $sql .= sprintf(") VALUES ('%d', '%s-%d'", 
-                                $this->user->get_id(), $period_name, $matches['Day']);
-                foreach($cols as $col) 
-                {
-                    $sql .= sprintf(", '%s'", $this->user->escape( 
-                                        $_POST[sprintf('field_%s_%s_%d', 
-                                                       $matches['Day'], $col, 
-                                                       $matches['No'])]));
-                }
-
-                $sql .= ");";
-                $_lib['db']->db_query($sql);
-            }
+            $this->save($period_name, $period, $cols);
         }
         else
         {
+            if($this->user->is_admin()) 
+            {
+                $locked_by = $this->user->escape(
+                    $_lib['sess']->get_person('FirstName') . ' ' . $_lib['sess']->get_person('LastName')
+                    );
+            }
+            else
+            {
+                $locked_by = $this->user->escape($this->user->get_username());
+            }
+
             foreach($_POST as $k => $v) 
             {
                 if(substr($k, 0, 8) == "lock_day")
                 {
+                    $this->save($period_name, $period, $cols);
                     $day = substr($k, 9);
                     
                     $sql = sprintf("UPDATE timesheets SET Locked = 1, LockedBy = '%s', LockedTime = NOW() WHERE AccountPlanID = %d AND Date = '%s-%s'",
@@ -1486,17 +1552,6 @@ $(document).ready(function() {
                 else if(substr($k, 0, 9) == "lock_line") 
                 {
                     $id = substr($k, 10);
-
-                    if($this->user->is_admin()) 
-                    {
-                        $locked_by = $this->user->escape(
-                            $_lib['sess']->get_person('FirstName') . ' ' . $_lib['sess']->get_person('LastName')
-                            );
-                    }
-                    else
-                    {
-                        $locked_by = $this->user->escape($this->user->get_username());
-                    }
 
                     list($lock_day, $lock_no) = explode('_', $_POST['id_' . $id]);
 
@@ -1607,17 +1662,19 @@ $(document).ready(function() {
 
         $fields = array(
             'Day'        => array('type' => 'caption', 'size' => '3', 'translation' => 'Dag', 'checked' => true),
+            
             'BeginTime'  => array('type' => 'time', 'size' => '10', 'default' => '00:00', 'translation' => 'Start', 'checked' => true),
             'EndTime'    => array('type' => 'time', 'size' => '10', 'default' => '00:00', 'translation' => 'Slutt', 'checked' => true),
             'SumTime'    => array('type' => 'time', 'size' => '10', 'default' => '00:00', 'translation' => 'Sum', 'checked' => true),
+            'Buttons'    => array(''),
+            'Comment'    => array('type' => 'text', 'size' => '30', 'default' => "", 'translation' => 'Kommentar', 'checked' => true),
+
 
             'Customer'   => array('type' => 'select', 'options' => $customers, 'default' => 0, 'translation' => 'Kunde', 'checked' => true),
             'Project'    => array('type' => 'select', 'options' => $projects, 'default' => 0, 'translation' => 'Prosjekt', 'checked' => true),
             'CompanyDepartment'    => array('type' => 'select', 'options' => $departments, 'default' => 0, 'translation' => 'Avdeling', 'checked' => true),
-            'WorkType'   => array('type' => 'select', 'options' => $worktypes, 'default' => 0, 'translation' => 'Arbeidesart', 'checked' => true),
+            'WorkType'   => array('type' => 'select', 'options' => $worktypes, 'default' => 0, 'translation' => 'Arbeidsart', 'checked' => true),
 
-            'Comment'    => array('type' => 'text', 'size' => '30', 'default' => "", 'translation' => 'Kommentar', 'checked' => true),
-            'Buttons'    => array(''),
 
             'Diet'       => array('type' => 'select', 'options' => $diets, 'default' => 0, 'translation' => 'Diett', 'checked' => false),
             'Accommodation' => array('type' => 'select', 'options' => $accommodations, 'default' => 0, 'translation' => 'Overnatting', 'checked' => false),

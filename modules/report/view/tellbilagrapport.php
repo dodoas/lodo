@@ -35,6 +35,10 @@ krsort($dataH);
     <? includeinc('left'); ?>
     <h2><? print $_lib['sess']->get_companydef('CompanyName') ?> - <? print $_lib['sess']->get_person('FirstName') ?> <? print $_lib['sess']->get_person('LastName') ?> (<? print $_lib['sess']->get_session('Date') ?>)</h2>
 
+
+    <?php
+        ob_start();
+    ?>
     <b>Bilag pr mnd (parentes er antall linjer)</b>
     <table width="50%">
         <thead>
@@ -82,6 +86,12 @@ krsort($dataH);
             <? } ?>
     </table>
 
+    <?php
+         $first_table = ob_get_contents();
+         ob_end_clean();
+    ?>
+
+
     <b>Bilag pr &aring;r (parentes er antall linjer)</b>
     <table width="50%">
         <thead>
@@ -113,6 +123,13 @@ krsort($dataH);
                 </tr>
             <? } ?>
     </table>
+
+    <?php
+
+        echo $first_table;
+
+    ?>
+
 
 
 </body>
