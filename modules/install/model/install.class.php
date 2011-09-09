@@ -126,6 +126,17 @@ class Install
         system($command);
     }
 
+    function create_periods() 
+    {
+        $year = date("Y");
+        for($i = 1; $i <= 13; $i++) {
+            $period = sprintf("%d-%02d", $year, $i);
+            $query = sprintf("INSERT INTO accountperiod (`Status`, `Period`) VALUES (2, '%s');", $period);
+            $this->_dbh[$this->dsn_remote]->db_insert2(array('query' => $query, 'insert_id' => false));
+        }
+    }
+
+
     function insert_user($args)
     {
         global $_lib, $_SETUP;

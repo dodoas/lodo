@@ -51,9 +51,9 @@ elseif($_REQUEST['action_install_db'])
         $tables['accountplanNorwegian'] = true;
     }
 
-    if(isset($_REQUEST['install_accountperiod']) && $_REQUEST['install_accountperiod']){
+    /*if(isset($_REQUEST['install_accountperiod']) && $_REQUEST['install_accountperiod']){
         $tables['accountperiod']        = true;
-    }
+    }*/
 
     if(isset($_REQUEST['install_arbeidsgiveravgift']) && $_REQUEST['install_arbeidsgiveravgift']){
         $tables['arbeidsgiveravgift']   = true;
@@ -108,6 +108,7 @@ elseif($_REQUEST['action_install_db'])
     $install->install_prefs();
     #print "Installer preferanser<br>";
     ##########
+    $install->create_periods();
 
 
     #Do not insert user information if we have chosen to copy company tables
