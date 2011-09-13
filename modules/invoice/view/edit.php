@@ -356,7 +356,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <form name="skriv_ut" action="<? print $_lib['sess']->dispatch ?>t=invoice.print&InvoiceID=<? print $InvoiceID ?>&amp;inline=edit" method="post" target="_new">
             <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'value'=>'Vis')) ?>
         </form>
-        <form name="skriv_ut2" action="<? print $_lib['sess']->dispatch ?>t=invoice.print2&InvoiceID=<? print $InvoiceID ?>" method="post" target="_top">
+        <form name="skriv_ut2" action="<? print $_lib['sess']->dispatch ?>t=invoice.print2&InvoiceID=<? print $InvoiceID ?>" method="post" target="_new">
             <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'value'=>'Vis PDF fil')) ?>
         </form>
      </tr>
