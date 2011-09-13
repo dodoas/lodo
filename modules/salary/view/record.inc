@@ -124,28 +124,34 @@ elseif($_lib['input']->getProperty('action_salary_new'))
         $query_setup    = "select name, value from setup";
         $setup          = $_lib['storage']->get_hash(array('query' => $query_setup, 'key' => 'name', 'value' => 'value'));
         if($debug) print_r($setup);
-    
-      if(strlen($setup['salarydefvoucherdate'])>0)
+
+        $query_salary_period_conf = "select * from salaryperiodconf where SalaryperiodconfID = '" . (int) $_lib['input']->getProperty('SalaryperiodconfID') . "'";
+
+        $result_salary_period_conf = $_lib['db']->db_query($query_salary_period_conf);
+        $salary_period_conf        = $_lib['db']->db_fetch_object($result_salary_period_conf);
+
+
+        if(!empty($salary_period_conf->Voucherdate))
       {
-        $journalDate = $setup['salarydefvoucherdate'];
+          $journalDate = $salary_period_conf->Voucherdate;
       }
       else
       {
         $journalDate = $_lib['sess']->get_session('Date');
       }
 
-      if(strlen($setup['salarydeffromdate'])>0)
+        if(!empty($salary_period_conf->Fromdate))
       {
-          $fromDate = $setup['salarydeffromdate'];
+          $fromDate = $salary_period_conf->Fromdate;
       }
       else
       {
           $fromDate = $_lib['sess']->get_session('Date');
       }
 
-      if(strlen($setup['salarydeftodate'])>0)
+        if(!empty($salary_period_conf->Todate))
       {
-          $toDate = $setup['salarydeftodate'];
+          $toDate = $salary_period_conf->Todate;
       }
       else
       {
@@ -167,7 +173,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
       $postmain['salary_ValidFrom']           = $fromDate;
       $postmain['salary_ValidTo']             = $toDate;
       $postmain['salary_JournalDate']         = $journalDate;
-      $postmain['salary_Period']              = $setup['salarydefvoucherperiod'];  //$_lib['date']->get_this_period($journalDate);
+      $postmain['salary_Period']              = $salary_period_conf->Period;  //$_lib['date']->get_this_period($journalDate);
 
       if($accountplan->EnableCredit == 1)
         $postmain['salary_PayDate']           = $_lib['date']->add_Days($journalDate, $accountplan->CreditDays);
@@ -731,7 +737,6 @@ elseif($_lib['input']->getProperty('action_salary_updatesalarycode')) {
         $fb = new lodo_fakturabank_fakturabanksalary();
 
         $fb->sendsalary($SalaryID, $SalaryConfID);
-        error_log("modules/salary/view/record.inc: " . __LINE__);
         //        print "<h1>Feature is not available yet</h1>";
         
     } // else TODO later: handle illegal access attempt

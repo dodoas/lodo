@@ -47,6 +47,7 @@ $row_head = $_lib['storage']->get_row(array('query' => $query_conf_head));
 $query_conf     = "select *, A.KommuneID as NoKommune from salaryconf as S, accountplan as A, kommune as K where S.AccountPlanID=A.AccountPlanID and (A.KommuneID=K.KommuneID or (A.KommuneID = 0 and K.KommuneID = 1) ) and S.SalaryConfID!=1 order by AccountName asc";
 $result_conf    = $_lib['db']->db_query($query_conf);
 
+$current_period = null;
 if($SalaryperiodconfID)
 {
     $period_query = sprintf("SELECT Period FROM salaryperiodconf WHERE SalaryperiodconfID = %d", $SalaryperiodconfID);
@@ -54,6 +55,8 @@ if($SalaryperiodconfID)
     $period_row = $_lib['db']->db_fetch_assoc($period_result);
 
     $period_open = ($accounting->is_valid_accountperiod($period_row['Period'], $_lib['sess']->get_person('AccessLevel'))) ? true : false;
+
+    $current_period = $period_row['Period'];
 
     $entry_query = sprintf("SELECT * FROM salaryperiodentries WHERE SalaryperiodconfID = %d", $SalaryperiodconfID);
     $entry_result = $_lib['db']->db_query($entry_query);
@@ -148,7 +151,7 @@ else
  * tape-function to reuse code
  */
 function worker_line($row, $i) {
-  global $_lib, $accounting, $setup, $entries, $SalaryperiodconfID;
+    global $_lib, $accounting, $setup, $entries, $SalaryperiodconfID, $current_period, $period_open;
 
   $i++;
   if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
@@ -170,14 +173,14 @@ function worker_line($row, $i) {
         }
         else
         {
-            ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $row->SalaryConfID ?>&amp;action_salarysubconf_enter=1"><? print $row->AccountName ?></a><?
+            ?><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.employee&accountplan_AccountPlanID=<? print $row->AccountPlanID ?>"><? print $row->AccountName ?></a><?
         }
       ?>
       </td>
 
       <td style="text-align: right">
       <?
-        echo $row->SalaryConfID;
+            ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $row->SalaryConfID ?>&amp;action_salarysubconf_enter=1"><? print $row->SalaryConfID ?></a><?
       ?>
       </td>
 
@@ -221,7 +224,8 @@ function worker_line($row, $i) {
 
       <td style="background-color: yellow">
       <?
-      if($_lib['sess']->get_person('AccessLevel') >= 2 && $accounting->is_valid_accountperiod($setup['salarydefvoucherperiod'], $_lib['sess']->get_person('AccessLevel')))
+
+      if(!empty($current_period) && $_lib['sess']->get_person('AccessLevel') >= 2 && $period_open)
       {
         if($row->SalaryConfID != 1 && $checked)
         {

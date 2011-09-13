@@ -240,7 +240,8 @@ class Date
   function add_Days($date, $add)
   {
     global $_lib;
-    $row = $_lib['db']->get_row(array('query' => "SELECT ADDDATE('$date', INTERVAL $add DAY) as duedate"));
+    $query = "SELECT ADDDATE('$date', INTERVAL $add DAY) as duedate";
+    $row = $_lib['db']->get_row(array('query' => $query));
     return $row->duedate;
   }
 
