@@ -71,10 +71,18 @@ $apc = new accountperiodcomment();
     <? } ?>
     </tr>
 <? } ?>
+<?php 
+         $save_button = $_lib['form3']->submit(array('name' => 'action_bank_commentupdate', 'value' => 'Lagre', 'accesskey' => 'S'));
+$iter = 0;
+?>
+  <tr>
+    <? foreach($apc->PeriodH as $Period => $tmp) { ?>
+    <td><?php if ($iter++ % 6 == 0) print $save_button ?></td>
+    <? } ?>
+  </tr>
 </tbody>
 </table>
 
-<? print $_lib['form3']->submit(array('name' => 'action_bank_commentupdate', 'value' => 'Lagre', 'accesskey' => 'S')); ?>
 <? print $_lib['form3']->stop(array()); ?>
 </body>
 </html>
