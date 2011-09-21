@@ -1103,24 +1103,13 @@ class lodo_fakturabank_fakturabank {
         $cbc = $doc->createElement('cbc:IssueDate', $InvoiceO->IssueDate);
         $invoice->appendChild($cbc);
 
-        $cbc = $doc->createElement('cbc:Note', $InvoiceO->Note);
-        $invoice->appendChild($cbc);
-
         $cbc = $doc->createElement('cbc:DocumentCurrencyCode', $InvoiceO->DocumentCurrencyCode);
         $invoice->appendChild($cbc);
 
         if (!empty($InvoiceO->OrderReference)) {
             $order_reference = $doc->createElement('cac:OrderReference');
-
-            if (!empty($InvoiceO->OrderReference->ID)) {
-                $cbc = $doc->createElement('cbc:ID', utf8_encode($InvoiceO->OrderReference->ID));
-                $order_reference->appendChild($cbc);
-            }
-            if (!empty($InvoiceO->OrderReference->SalesOrderID)) {
-                $cbc = $doc->createElement('cbc:SalesOrderID', utf8_encode($InvoiceO->OrderReference->SalesOrderID));
-                $order_reference->appendChild($cbc);
-            }
-
+            $cbc = $doc->createElement('cbc:ID', utf8_encode($InvoiceO->OrderReference->ID));
+            $order_reference->appendChild($cbc);
             $invoice->appendChild($order_reference);
         }
 
@@ -1139,60 +1128,38 @@ class lodo_fakturabank_fakturabank {
 
                 $cacparty->appendChild($name);
 
-                $address = $doc->createElement('cac:PostalAddress', '');
+                $adress = $doc->createElement('cac:PostalAddress', '');
                 
                     $cbc = $doc->createElement('cbc:StreetName', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName));
-                    $address->appendChild($cbc);
+                    $adress->appendChild($cbc);
     
                     $cbc = $doc->createElement('cbc:BuildingNumber', $InvoiceO->AccountingSupplierParty->Party->PostalAddress->BuildingNumber);
-                    $address->appendChild($cbc);
+                    $adress->appendChild($cbc);
     
                     $cbc = $doc->createElement('cbc:CityName', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PostalAddress->CityName));
-                    $address->appendChild($cbc);
+                    $adress->appendChild($cbc);
     
                     $cbc = $doc->createElement('cbc:PostalZone', $InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone);
-                    $address->appendChild($cbc);
+                    $adress->appendChild($cbc);
     
                     $country = $doc->createElement('cac:Country');
 
                         $cbc = $doc->createElement('cbc:IdentificationCode', $InvoiceO->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode);
                         $country->appendChild($cbc);
 
-                    $address->appendChild($country);
+                    $adress->appendChild($country);
 
-                $cacparty->appendChild($address);
-
-                if (!empty($InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID)) {
-                    $partytaxscheme = $doc->createElement('cac:PartyTaxScheme');
-                    $cbc = $doc->createElement('cbc:CompanyID', $InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID);                    
-                    $cbc->setAttribute('schemeID', 'NO:ORGNR');
-                    $partytaxscheme->appendChild($cbc);
-
-                    $taxscheme = $doc->createElement('cac:TaxScheme');
-                    
-                    $cbc = $doc->createElement('cbc:ID', 'VAT');                    
-                    $cbc->setAttribute('schemeID', 'UN/ECE 5153');
-                    $cbc->setAttribute('schemeAgencyID', '6');
-                    $taxscheme->appendChild($cbc);
-
-                    $partytaxscheme->appendChild($taxscheme);
-
-                    $cacparty->appendChild($partytaxscheme);
-                }
+                $cacparty->appendChild($adress);
 
                 $legalentity = $doc->createElement('cac:PartyLegalEntity');
                 $cbc = $doc->createElement('cbc:CompanyID', $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID);
-
                 $cbc->setAttribute('schemeID', 'NO:ORGNR');
                 $legalentity->appendChild($cbc);
-
                 $cacparty->appendChild($legalentity);
-
-
+            
                 if (!empty($InvoiceO->AccountingSupplierParty->Party->Contact->Telephone) ||
                     !empty($InvoiceO->AccountingSupplierParty->Party->Contact->Fax) ||
-                    !empty($InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail) ||
-                    !empty($InvoiceO->AccountingSupplierParty->Party->Contact->Mobile)) {
+                    !empty($InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail)) {
                     $contact = $doc->createElement('cac:Contact');
                     if (!empty($InvoiceO->AccountingSupplierParty->Party->Contact->Telephone)) {
                         $cbc = $doc->createElement('cbc:Telephone', $InvoiceO->AccountingSupplierParty->Party->Contact->Telephone);
@@ -1204,10 +1171,6 @@ class lodo_fakturabank_fakturabank {
                     }
                     if (!empty($InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail)) {
                         $cbc = $doc->createElement('cbc:ElectronicMail', $InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail);
-                        $contact->appendChild($cbc);
-                    }
-                    if (!empty($InvoiceO->AccountingSupplierParty->Party->Contact->Mobile)) {
-                        $cbc = $doc->createElement('cbc:Note', "Mobile: " . $InvoiceO->AccountingSupplierParty->Party->Contact->Mobile);
                         $contact->appendChild($cbc);
                     }
                     $cacparty->appendChild($contact);
@@ -1231,7 +1194,7 @@ class lodo_fakturabank_fakturabank {
 
                     $cacparty->appendChild($person);
                 }
-            
+
 
             $supplier->appendChild($cacparty);
 
@@ -1260,47 +1223,29 @@ class lodo_fakturabank_fakturabank {
                 $name->appendChild($cbc);
                 $cacparty->appendChild($name);
 
-                $address = $doc->createElement('cac:PostalAddress');
+                $adress = $doc->createElement('cac:PostalAddress');
                 
                 $cbc = $doc->createElement('cbc:StreetName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName));
-                $address->appendChild($cbc);
+                $adress->appendChild($cbc);
                 
                 $cbc = $doc->createElement('cbc:BuildingNumber', $InvoiceO->AccountingCustomerParty->Party->PostalAddress->BuildingNumber);
-                $address->appendChild($cbc);
+                $adress->appendChild($cbc);
                 
                 $cbc = $doc->createElement('cbc:CityName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->CityName));
-                $address->appendChild($cbc);
+                $adress->appendChild($cbc);
                 
                 $cbc = $doc->createElement('cbc:PostalZone', $InvoiceO->AccountingCustomerParty->Party->PostalAddress->PostalZone);
-                $address->appendChild($cbc);
+                $adress->appendChild($cbc);
                 
                 $country = $doc->createElement('cac:Country');
                 
                 $cbc = $doc->createElement('cbc:IdentificationCode', $InvoiceO->AccountingCustomerParty->Party->PostalAddress->Country->IdentificationCode);
                 $country->appendChild($cbc);
                 
-                $address->appendChild($country);
+                $adress->appendChild($country);
                 
-                $cacparty->appendChild($address);
+                $cacparty->appendChild($adress);
 
-
-                if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID)) {
-                    $partytaxscheme = $doc->createElement('cac:PartyTaxScheme');
-                    $cbc = $doc->createElement('cbc:CompanyID', $InvoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID);                    
-                    $cbc->setAttribute('schemeID', 'NO:ORGNR');
-                    $partytaxscheme->appendChild($cbc);
-
-                    $taxscheme = $doc->createElement('cac:TaxScheme');
-                    
-                    $cbc = $doc->createElement('cbc:ID', 'VAT');                    
-                    $cbc->setAttribute('schemeID', 'UN/ECE 5153');
-                    $cbc->setAttribute('schemeAgencyID', '6');
-                    $taxscheme->appendChild($cbc);
-
-                    $partytaxscheme->appendChild($taxscheme);
-
-                    $cacparty->appendChild($partytaxscheme);
-                }
 
                 if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)){ 
                     if (strlen(preg_replace('/[^0-9]/', '', $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)) == 9) { // has valid org nr, add it, 
@@ -1308,64 +1253,11 @@ class lodo_fakturabank_fakturabank {
                         $cbc = $doc->createElement('cbc:CompanyID', $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID);
                         $cbc->setAttribute('schemeID', 'NO:ORGNR');
                         $legal_entity->appendChild($cbc);
-
                         $cacparty->appendChild($legal_entity);
                     } else {
                         $_lib['message']->add("hash_to_xml::invalid orgnr. Organisasjonsnummeret " . $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID . " til " . $InvoiceO->AccountingCustomerParty->Party->PartyName->Name . " er ugyldig. Fakturaen ble likevel sendt med kundenr som id.");
                     }    
                 } 
-
-
-                if (!empty($InvoiceO->AccountingCustomerParty->Party->Contact->Telephone) ||
-                    !empty($InvoiceO->AccountingCustomerParty->Party->Contact->Fax) ||
-                    !empty($InvoiceO->AccountingCustomerParty->Party->Contact->ElectronicMail) ||
-                    !empty($InvoiceO->AccountingCustomerParty->Party->Contact->Mobile)) {
-                    $contact = $doc->createElement('cac:Contact');
-                    if (!empty($InvoiceO->AccountingCustomerParty->Party->Contact->Telephone)) {
-                        $cbc = $doc->createElement('cbc:Telephone', $InvoiceO->AccountingCustomerParty->Party->Contact->Telephone);
-                        $contact->appendChild($cbc);
-                    }
-                    if (!empty($InvoiceO->AccountingCustomerParty->Party->Contact->Telefax)) {
-                        $cbc = $doc->createElement('cbc:Telefax', $InvoiceO->AccountingCustomerParty->Party->Contact->Telefax);
-                        $contact->appendChild($cbc);
-                    }
-                    if (!empty($InvoiceO->AccountingCustomerParty->Party->Contact->ElectronicMail)) {
-                        $cbc = $doc->createElement('cbc:ElectronicMail', $InvoiceO->AccountingCustomerParty->Party->Contact->ElectronicMail);
-                        $contact->appendChild($cbc);
-                    }
-                    if (!empty($InvoiceO->AccountingCustomerParty->Party->Contact->Mobile)) {
-                        $cbc = $doc->createElement('cbc:Note', 'Mobile: ' . $InvoiceO->AccountingCustomerParty->Party->Contact->Mobile);
-                        $contact->appendChild($cbc);
-                    }
-
-                    if (!empty($InvoiceO->AccountingCustomerParty->Party->Contact->BankAccount)) {
-                        $cbc = $doc->createElement('cbc:BankAccount', $InvoiceO->AccountingCustomerParty->Party->Contact->BankAccount);
-                        $cbc->setAttribute('schemeID', 'BBAN'); // use IBAN if IBAN, BBAN or BANK is unclassified account
-                        $contact->appendChild($cbc);
-                    }
-
-                    $cacparty->appendChild($contact);
-
-
-                    if (!empty($InvoiceO->AccountingCustomerParty->Party->Person)) {
-                        $person = $doc->createElement('cac:Person');
-                        $cbc = $doc->createElement('cbc:FirstName', $InvoiceO->AccountingCustomerParty->Party->Person->FirstName);
-                        $person->appendChild($cbc);
-                        $cbc = $doc->createElement('cbc:FamilyName', $InvoiceO->AccountingCustomerParty->Party->Person->FamilyName);
-                        $person->appendChild($cbc);
-                        if (!empty($InvoiceO->AccountingCustomerParty->Party->Person->MiddleName)) {
-                            $cbc = $doc->createElement('cbc:MiddleName', $InvoiceO->AccountingCustomerParty->Party->Person->MiddleName);
-                            $person->appendChild($cbc);
-                        }
-                        if (!empty($InvoiceO->AccountingCustomerParty->Party->Person->JobTitle)) {
-                            $cbc = $doc->createElement('cbc:JobTitle', $InvoiceO->AccountingCustomerParty->Party->Person->JobTitle);
-                            $person->appendChild($cbc);
-                        }
-
-                        $cacparty->appendChild($person);
-                    }
-            
-                }
 
             
             $customer->appendChild($cacparty);
@@ -1391,30 +1283,15 @@ class lodo_fakturabank_fakturabank {
             $cbc = $doc->createElement('cbc:InstructionNote', $InvoiceO->PaymentMeans->InstructionNote);
             $paymentmeans->appendChild($cbc);
 
-            if (!empty($InvoiceO->PaymentMeans->PayerFinancialAccount)) {
-                $payerfinancialaccount = $doc->createElement('cac:PayerFinancialAccount');
-
-                $cbc = $doc->createElement('cbc:ID', $InvoiceO->PaymentMeans->PayerFinancialAccount->ID);
-                $cbc->setAttribute('schemeID', 'BBAN');
-                $payerfinancialaccount->appendChild($cbc);
-                
-                $cbc = $doc->createElement('cbc:Name', $InvoiceO->PaymentMeans->PayerFinancialAccount->Name);
-                $payerfinancialaccount->appendChild($cbc);
-
-                $paymentmeans->appendChild($payerfinancialaccount);
-            }
-
             $financialaccount = $doc->createElement('cac:PayeeFinancialAccount');
 
                 $cbc = $doc->createElement('cbc:ID', $InvoiceO->PaymentMeans->PayeeFinancialAccount->ID);
-                $cbc->setAttribute('schemeID', 'BBAN');
                 $financialaccount->appendChild($cbc);
                 
                 $cbc = $doc->createElement('cbc:Name', $InvoiceO->PaymentMeans->PayeeFinancialAccount->Name);
                 $financialaccount->appendChild($cbc);
-
-            $paymentmeans->appendChild($financialaccount);
                         
+            $paymentmeans->appendChild($financialaccount);
 
         $invoice->appendChild($paymentmeans);
 

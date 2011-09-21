@@ -763,11 +763,16 @@ class invoice {
         ############################################################################################
         $this->invoiceO->ID                   = $invoice->InvoiceID;
         $this->invoiceO->IssueDate            = $invoice->InvoiceDate;
+        $this->invoiceO->Note            = $invoice->CommentCustomer;
         $this->invoiceO->DocumentCurrencyCode = 'NOK';
 
-        /* Order Reference does not yet exist in Lodo so ignore it
-        if (!empty($invoice->OrderRef)) {
-            $this->invoiceO->OrderReference->ID = $invoice->OrderRef; // this should be RefSupplier but has been hardcoded the wrong way other places in lodo and must be reverted (incl in existing database records) before we can use RefSupplier
+        /* Do not transmit references as OrderReference as now, as they are in Lodo, not reference ids, but instead CONTACT PERSONS
+        if (!empty($invoice->RefInternal)) {
+            $this->invoiceO->OrderReference->ID = $invoice->RefInternal; // this should be RefCustomer but has been hardcoded the wrong way other places in lodo and must be reverted (incl in existing database records) before we can use RefCustomer
+        }
+
+        if (!empty($invoice->RefCustomer)) {
+            $this->invoiceO->OrderReference->SalesOrderID = $invoice->RefCustomer; // this should be RefInternal but has been hardcoded the wrong way other places in lodo and must be reverted (incl in existing database records) before we can use RefCustomer
         }
         */
 
@@ -777,6 +782,9 @@ class invoice {
 
         $this->invoiceO->AccountingSupplierParty->Party->WebsiteURI                     = $supplier->WWW;
         $this->invoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID        = preg_replace('/[^0-9]/', '', $supplier->OrgNumber);
+        if (strstr(strtolower($supplier->OrgNumber), 'mva')) {
+            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = $supplier->OrgNumber;
+        }
         $this->invoiceO->AccountingSupplierParty->Party->PartyName->Name                = $supplier->CompanyName;
         $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName      = $supplier->IAddress;
         $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->BuildingNumber  = '';
@@ -787,12 +795,16 @@ class invoice {
         if (!empty($supplier->Phone)) {
             $this->invoiceO->AccountingSupplierParty->Party->Contact->Telephone = $supplier->Phone;
         }
+        if (!empty($supplier->Mobile)) {
+            $this->invoiceO->AccountingSupplierParty->Party->Contact->Mobile = $supplier->Mobile;
+        }
         if (!empty($supplier->Fax)) {
             $this->invoiceO->AccountingSupplierParty->Party->Contact->Telefax = $supplier->Fax;
         }
         if (!empty($supplier->Email)) {
             $this->invoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail = $supplier->Email;
         }
+
 
         if (!empty($invoice->RefCustomer)) { 
             // We should use RefSupplier but has been hardcoded the wrong way other places in lodo and must be reverted (incl in existing database records) before we can use RefSupplier
@@ -813,6 +825,9 @@ class invoice {
 
         $this->invoiceO->AccountingCustomerParty->Party->WebsiteURI                     = $customer->URL;
         $this->invoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID        = preg_replace('/[^0-9]+/', '', $customer->OrgNumber);
+        if (strstr(strtolower($customer->OrgNumber), 'mva')) {
+            $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID        = $customer->OrgNumber;
+        }
         $this->invoiceO->AccountingCustomerParty->Party->PartyIdentification->ID = $customer->AccountPlanID;
         $this->invoiceO->AccountingCustomerParty->Party->PartyName->Name                = $customer->AccountName;
         $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName      = $customer->Address;
@@ -821,11 +836,44 @@ class invoice {
         $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->PostalZone     = $customer->ZipCode;
         $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->Country->IdentificationCode= 'NO';
 
+        if (!empty($customer->Phone)) {
+            $this->invoiceO->AccountingCustomerParty->Party->Contact->Telephone = $customer->Phone;
+        }
+        if (!empty($customer->Mobile)) {
+            $this->invoiceO->AccountingCustomerParty->Party->Contact->Mobile = $customer->Mobile;
+        }
+        if (!empty($customer->Fax)) {
+            $this->invoiceO->AccountingCustomerParty->Party->Contact->Telefax = $customer->Fax;
+        }
+        if (!empty($customer->Email)) {
+            $this->invoiceO->AccountingCustomerParty->Party->Contact->ElectronicMail = $customer->Email;
+        }
+
+        if (!empty($invoice->RefInternal)) { 
+            // We should use RefCustomer but has been hardcoded the wrong way other places in lodo and must be reverted (incl in existing database records) before we can use RefCustomer
+            $ref_names = explode(" ", $invoice->RefInternal, 2); // max two segments
+            $this->invoiceO->AccountingCustomerParty->Party->Person->FirstName = $ref_names[0];
+            if (count($ref_names) > 1) {
+                $this->invoiceO->AccountingCustomerParty->Party->Person->FamilyName = $ref_names[1];
+            } else {
+                $this->invoiceO->AccountingCustomerParty->Party->Person->FamilyName = "";
+            }
+            $this->invoiceO->AccountingCustomerParty->Party->Person->MiddleName = "";
+            $this->invoiceO->AccountingCustomerParty->Party->Person->JobTitle = "";
+        }
+
+
+
         ############################################################################################
         $this->invoiceO->PaymentMeans->PaymentMeansCode             = 42;
         $this->invoiceO->PaymentMeans->PaymentDueDate               = $invoice->DueDate;
         $this->invoiceO->PaymentMeans->PayeeFinancialAccount->ID    = $supplier->BankAccount;
         $this->invoiceO->PaymentMeans->PayeeFinancialAccount->Name  = 'Bank';
+
+        if (!empty($invoice->BankAccount)) {
+            $this->invoiceO->PaymentMeans->PayerFinancialAccount->ID = $invoice->BankAccount;
+            $this->invoiceO->PaymentMeans->PayerFinancialAccount->Name  = 'Bank';
+        }
 
         if (!empty($invoice->KID)) {
             $this->invoiceO->PaymentMeans->InstructionID = $invoice->KID;
@@ -873,6 +921,7 @@ class invoice {
             $this->invoiceO->TaxTotal[$VatPercent]->TaxSubtotal->TaxCategory->Percent         = $VatPercent;
             $this->invoiceO->TaxTotal[$VatPercent]->TaxSubtotal->TaxCategory->TaxScheme->ID   = 'VAT';
         }
+
         $this->invoiceO->LegalMonetaryTotal->PayableAmount      = $total + $taxtotal;
         $this->invoiceO->LegalMonetaryTotal->TaxExclusiveAmount = $total;
 
