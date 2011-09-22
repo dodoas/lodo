@@ -613,7 +613,7 @@ class lodo_fakturabank_fakturabank {
                     $InvoiceO->Period  = $accounting->get_first_open_accountingperiod();
                     $InvoiceO->Status .= 'Perioden ' . $PeriodOld . ' er lukket endrer til ' . $InvoiceO->Period . '. ';
                 }
-                if ($InvoiceO->DocumentCurrencyCode != 'NOK' && !exchange::getConversionRate($InvoiceO->DocumentCurrencyCode)) {
+                if ($InvoiceO->DocumentCurrencyCode != exchange::getLocalCurrency() && !exchange::getConversionRate($InvoiceO->DocumentCurrencyCode)) {
                     $InvoiceO->Journal = false;
                     $InvoiceO->Class   = 'red';
                     $InvoiceO->Status .= 'Finner ikke valutaverdi for '. $InvoiceO->DocumentCurrencyCode;
@@ -799,10 +799,10 @@ class lodo_fakturabank_fakturabank {
                 $dataH = array();
 
                 #Foreign currency
-                if ($InvoiceO->DocumentCurrencyCode != 'NOK') {
+                if ($InvoiceO->DocumentCurrencyCode != exchange::getLocalCurrency()) {
                     $is_foreign = true;
                     $conversion_rate = exchange::getConversionRate($InvoiceO->DocumentCurrencyCode);
-                    $dataH['TotalCustPrice']    = exchange::convertToNOK($InvoiceO->DocumentCurrencyCode, $InvoiceO->LegalMonetaryTotal->PayableAmount);
+                    $dataH['TotalCustPrice']    = exchange::convertToLocal($InvoiceO->DocumentCurrencyCode, $InvoiceO->LegalMonetaryTotal->PayableAmount);
                     $dataH['ForeignCurrencyID'] = $InvoiceO->DocumentCurrencyCode;
                     $dataH['ForeignAmount']     = $InvoiceO->LegalMonetaryTotal->PayableAmount;
                     $dataH['ForeignConvRate']   = $conversion_rate;
@@ -913,7 +913,7 @@ class lodo_fakturabank_fakturabank {
 
                         #Foreign currency
                         if ($is_foreign) {
-                            $datalineH['UnitCostPrice'] = exchange::convertToNOK($InvoiceO->DocumentCurrencyCode, $CustPrice);
+                            $datalineH['UnitCostPrice'] = exchange::convertToLocal($InvoiceO->DocumentCurrencyCode, $CustPrice);
                             $datalineH['ForeignCurrencyID'] = $InvoiceO->DocumentCurrencyCode;
                             $datalineH['ForeignAmount']     = (float)$CustPrice;
                             $datalineH['ForeignConvRate']   = $conversion_rate;
@@ -923,8 +923,8 @@ class lodo_fakturabank_fakturabank {
                         
                         $datalineH['UnitCustPrice'] = $datalineH['UnitCostPrice'];
 
-                        $datalineH['UnitCostPriceCurrencyID'] = 'NOK';
-                        $datalineH['UnitCustPriceCurrencyID'] = 'NOK';
+                        $datalineH['UnitCostPriceCurrencyID'] = exchange::getLocalCurrency();
+                        $datalineH['UnitCustPriceCurrencyID'] = exchange::getLocalCurrency();
     
                         $datalineH['TaxAmount']         = $line->TaxTotal->TaxSubtotal[0]->TaxAmount;
                         $datalineH['Vat']               = $line->TaxTotal->TaxSubtotal[0]->Percent;
@@ -1037,8 +1037,8 @@ class lodo_fakturabank_fakturabank {
                             $datalineH['QuantityDelivered'] = $Quantity;
                             $datalineH['UnitCostPrice']     = $CustPrice;
                             $datalineH['UnitCustPrice']     = $CustPrice;
-                            $datalineH['UnitCostPriceCurrencyID'] = 'NOK';
-                            $datalineH['UnitCustPriceCurrencyID'] = 'NOK';
+                            $datalineH['UnitCostPriceCurrencyID'] = exchange::getLocalCurrency();
+                            $datalineH['UnitCustPriceCurrencyID'] = exchange::getLocalCurrency();
         
                             $datalineH['TaxAmount']         = $line->TaxTotal->TaxSubtotal[0]->TaxAmount;
                             $datalineH['Vat']               = $line->TaxTotal->TaxSubtotal[0]->Percent;

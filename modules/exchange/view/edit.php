@@ -35,7 +35,7 @@ foreach ($currencies as $currency) {
 ?>
       </select>
       <input type="submit" name="action_exchange_new" value="Ny valuta" />
-      Basis: NOK 100,-
+           Basis: <?php echo exchange::getLocalCurrency() ?> 100,-
       </form>
     <? } ?>
 
@@ -62,7 +62,7 @@ while($exchange = $_lib['db']->db_fetch_object($result_exchange)) {
     <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
       <input type="submit" value="Slett" name="action_exchange_delete">
     <? } ?>
-<td><a href="<? echo exchange::googleExchangeRateUrl(100, 'NOK', $exchange->CurrencyID); ?>" target="_blank">finn kurs</a>
+<td><a href="<? echo exchange::googleExchangeRateUrl(100, exchange::getLocalCurrency(), $exchange->CurrencyID); ?>" target="_blank">finn kurs</a>
     </td>
 </form>
 <? } ?>

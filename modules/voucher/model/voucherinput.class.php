@@ -16,7 +16,7 @@ class framework_logic_voucherinput
     public $AccountPlanID           = 0;
     public $VoucherPeriod           = '';
     public $VoucherDate             = '';
-    public $Currency                = 'NOK';
+    public $Currency                = '';
     public $VoucherType             = '';
     public $AmountIn                = 0;
     public $AmountOut               = 0;
@@ -87,6 +87,7 @@ class framework_logic_voucherinput
         $this->AccountLineID      = $args['AccountLineID'];
         $this->Quantity           = $args['voucher_Quantity'];
         
+        $this->Currency = exchange::getLocalCurrency();
         $this->Currency           = strip_tags($args['voucher_Currency']);
 
         $foreign_converted_amount = false;

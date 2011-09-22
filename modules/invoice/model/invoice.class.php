@@ -26,6 +26,7 @@
 * $invoice->update($invoiceH);
 */
 
+includelogic('exchange/exchange');
 includelogic('fakturabank/fakturabank');
 includelogic('kid/kid');
 
@@ -768,7 +769,7 @@ class invoice {
         $sql_supplier = "select * from company where CompanyID=" . (int) $invoice->FromCompanyID;
         $supplier               = $_lib['storage']->get_row(array('query' => $sql_supplier));
 
-        $this->invoiceO->DocumentCurrencyCode = $supplier->CurrencyID;
+        $this->invoiceO->DocumentCurrencyCode = exchange::getLocalCurrency();
 
         /* Do not transmit references as OrderReference as now, as they are in Lodo, not reference ids, but instead CONTACT PERSONS
         if (!empty($invoice->RefInternal)) {

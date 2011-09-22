@@ -222,7 +222,6 @@ class logic_invoicein_invoicein implements Iterator {
     * @return Current iteration
     */
     public function add() {
-
         $dataH['CustomerBankAccount']       = $_lib['sess']->get_companydef('BankAccount');
         $old_pattern                        = array("/[^0-9]/");
         $new_pattern                        = array("");
@@ -275,8 +274,8 @@ class logic_invoicein_invoicein implements Iterator {
 
                     #Foreign currency
                     $TotCustPrice = $InvoiceO->TotalCustPrice;
-                    if ($InvoiceO->DocumentCurrencyCode != 'NOK') {
-                        $TotCustPrice = exchange::convertToNOK($InvoiceO->DocumentCurrencyCode, $InvoiceO->TotalCustPrice);
+                    if ($InvoiceO->DocumentCurrencyCode != exchange::getLocalCurrency()) {
+                        $TotCustPrice = exchange::convertToLocal($InvoiceO->DocumentCurrencyCode, $InvoiceO->TotalCustPrice);
                         $VoucherH['voucher_ForeignCurrencyID']  = $InvoiceO->ForeignCurrencyID; //$InvoiceO->DocumentCurrencyCode;
                         $VoucherH['voucher_ForeignAmount']      = (float)abs($InvoiceO->ForeignAmount); //abs($InvoiceO->TotalCustPrice);
                         $VoucherH['voucher_ForeignConvRate']    = (float)$InvoiceO->ForeignConvRate; //exchange::getConversionRate($InvoiceO->DocumentCurrencyCode);

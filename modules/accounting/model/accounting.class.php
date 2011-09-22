@@ -15,6 +15,7 @@
 */
 
 includelogic('postmotpost/postmotpost');
+includelogic('exchange/exchange');
 
 class accounting {
     public  $debug               = false;
@@ -157,7 +158,7 @@ class accounting {
           if(($args['JournalID'] == $voucersequence[$args['type']] + 1) || ($sequencechange[$args['type']] == 1))
           {
             #Allowed to update sequence number
-            $primarykeycompany['CompanyID']     = $_lib['sess']->get_companydef('CompanyID');
+            $primarykeycompany['CompanyID']     = exchange::getLocalCurrency();
 
             $fields["company_" . $sequencefield[$args['type']]] = $args['JournalID'] + 1;
             #print "HER35<BR>";
@@ -1061,7 +1062,7 @@ class accounting {
     private function get_currency_object($currency) {
         global $_lib;
         if(!$currency) {
-          $currency = "NOK";
+          $currency = exchange::getLocalCurrency();
         }
   
         $query_currency  = "select * from exchange where Currency='$currency'";

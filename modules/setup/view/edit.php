@@ -172,6 +172,26 @@ print $_lib['sess']->doctype ?>
   <tr>
     <td colspan="7"><? print $_lib['form3']->text(array('table' => 'setup.value', 'field' => 'outgoing', 'value' => $setup['outgoing'])) ?> [blank (bruker lodo)/fakturabank (henter fra fakturabank)/empatix (faktura er i empatix)]</td>
   </tr>
+    <td class="BGColorDark">Valuta</td>
+    <td class="BGColorLight">
+<?php
+#Retrieve all currencies
+
+includelogic('exchange/exchange');
+
+$currencies = exchange::getAllCurrencies();
+?>
+      <select name="setup.value.localcurrency">
+<?
+foreach ($currencies as $currency) {
+?>
+<option value="<? echo $currency->CurrencyISO; ?>" <?php if (!empty($setup['localcurrency']) && $setup['localcurrency'] == $currency->CurrencyISO) echo 'selected="selected"'; ?>><? echo $currency->CurrencyISO; ?></option>
+<?
+}
+?>
+      </select>
+
+    </td>
   <tr>
     <td colspan="7" align="right">
     <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>

@@ -88,10 +88,10 @@ if (!empty($InvoicesO->Invoice)) {
       <td class="number"><b><? print $InvoiceO->PaymentMeans->PaymentDueDate ?></b></td>
       <!--<td class="number"><? print $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) ?></td>-->
       <td class="number">
-<? if ($tmp_currency_code == 'NOK') { ?>
+<? if ($tmp_currency_code == exchange::getLocalCurrency()) { ?>
         <? print $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) ?>
 <? } else {
-        $conv = exchange::convertToNOK($tmp_currency_code, $InvoiceO->LegalMonetaryTotal->PayableAmount);
+        $conv = exchange::convertToLocal($tmp_currency_code, $InvoiceO->LegalMonetaryTotal->PayableAmount);
         $rate = exchange::getConversionRate($tmp_currency_code);
         if ($conv) {
             print " (". $tmp_currency_code ." ". $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) ." / $rate) ";

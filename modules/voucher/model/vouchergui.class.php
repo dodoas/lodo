@@ -1,5 +1,7 @@
 <?
 
+includelogic('exchange/exchange');
+
 ##################################
 #
 # Funksjoner som brukes i bilagsregistreringsskjermbildet journal/edit
@@ -130,7 +132,7 @@ class framework_logic_vouchergui
     
         $html = '';
         
-        #Converted to NOK from foreign currency
+        #Converted to local currency from foreign currency
         $is_foreign = false;
         if ($voucher->ForeignCurrencyID && $voucher->ForeignAmount && $voucher->ForeignConvRate) {
             $tmp_foreign = $voucher->ForeignCurrencyID ." ". $_lib['format']->Amount($voucher->ForeignAmount);
