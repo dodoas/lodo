@@ -1423,7 +1423,7 @@ class lodo_fakturabank_fakturabank {
         $tax = $doc->createElement('cac:TaxTotal');
             
             $cbc = $doc->createElement('cbc:TaxAmount', $InvoiceO->TaxTotal['TaxAmount']);
-            $cbc->setAttribute('currencyID', 'NOK');
+            $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
             $tax->appendChild($cbc);
 
         #print_r($invoiceH);
@@ -1435,11 +1435,11 @@ class lodo_fakturabank_fakturabank {
                 if(is_numeric($VatPercent)) {
                     $subtotal = $doc->createElement('cac:TaxSubtotal');
                         $cbc = $doc->createElement('cbc:TaxableAmount', $Vat->TaxSubtotal->TaxableAmount);
-                        $cbc->setAttribute('currencyID', 'NOK');
+                        $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
                         $subtotal->appendChild($cbc);
         
                         $cbc = $doc->createElement('cbc:TaxAmount', $Vat->TaxSubtotal->TaxAmount);
-                        $cbc->setAttribute('currencyID', 'NOK');
+                        $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
                         $subtotal->appendChild($cbc);
         
                         $category = $doc->createElement('cac:TaxCategory');
@@ -1472,11 +1472,11 @@ class lodo_fakturabank_fakturabank {
         $monetary = $doc->createElement('cac:LegalMonetaryTotal');
             
             $cbc = $doc->createElement('cbc:TaxExclusiveAmount', $InvoiceO->LegalMonetaryTotal->TaxExclusiveAmount);
-            $cbc->setAttribute('currencyID', 'NOK');
+            $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
             $monetary->appendChild($cbc);
 
             $cbc = $doc->createElement('cbc:PayableAmount', $InvoiceO->LegalMonetaryTotal->PayableAmount);
-            $cbc->setAttribute('currencyID', 'NOK');
+            $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
             $monetary->appendChild($cbc);
             
         $invoice->appendChild($monetary);
@@ -1492,23 +1492,23 @@ class lodo_fakturabank_fakturabank {
                     $invoiceline->appendChild($cbc);
     
                     $cbc = $doc->createElement('cbc:LineExtensionAmount', $line->LineExtensionAmount);
-                    $cbc->setAttribute('currencyID', 'NOK');
+                    $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
                     $invoiceline->appendChild($cbc);
     
                     $total = $doc->createElement('cac:TaxTotal');
     
                         $cbc = $doc->createElement('cbc:TaxAmount', $line->TaxTotal->TaxAmount);
-                        $cbc->setAttribute('currencyID', 'NOK');
+                        $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
     
                         $total->appendChild($cbc);
     
                         $subtotal = $doc->createElement('cac:TaxSubtotal');
                             $cbc  = $doc->createElement('cbc:TaxableAmount', $line->TaxTotal->TaxSubtotal->TaxableAmount);
-                            $cbc->setAttribute('currencyID', 'NOK');
+                            $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
                             $subtotal->appendChild($cbc);
                             $cbc  = $doc->createElement('cbc:TaxAmount',     $line->TaxTotal->TaxSubtotal->TaxAmount);
                             $subtotal->appendChild($cbc);
-                            $cbc->setAttribute('currencyID', 'NOK');
+                            $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
                             $cbc  = $doc->createElement('cbc:Percent',       $line->TaxTotal->TaxSubtotal->Percent);
                             $subtotal->appendChild($cbc);
     
@@ -1559,7 +1559,7 @@ class lodo_fakturabank_fakturabank {
                     $price = $doc->createElement('cac:Price');
         
                         $cbc = $doc->createElement('cbc:PriceAmount', $line->Price->PriceAmount);
-                        $cbc->setAttribute('currencyID', 'NOK');
+                        $cbc->setAttribute('currencyID', $InvoiceO->DocumentCurrencyCode);
                         $price->appendChild($cbc);
         
                         $cbc = $doc->createElement('cbc:BaseQuantity', $line->Price->BaseQuantity);

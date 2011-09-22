@@ -764,7 +764,11 @@ class invoice {
         $this->invoiceO->ID                   = $invoice->InvoiceID;
         $this->invoiceO->IssueDate            = $invoice->InvoiceDate;
         $this->invoiceO->Note            = $invoice->CommentCustomer;
-        $this->invoiceO->DocumentCurrencyCode = 'NOK';
+
+        $sql_supplier = "select * from company where CompanyID=" . (int) $invoice->FromCompanyID;
+        $supplier               = $_lib['storage']->get_row(array('query' => $sql_supplier));
+
+        $this->invoiceO->DocumentCurrencyCode = $supplier->CurrencyID;
 
         /* Do not transmit references as OrderReference as now, as they are in Lodo, not reference ids, but instead CONTACT PERSONS
         if (!empty($invoice->RefInternal)) {
@@ -777,8 +781,6 @@ class invoice {
         */
 
         ############################################################################################
-        $sql_supplier = "select * from company where CompanyID=" . (int) $invoice->FromCompanyID;
-        $supplier               = $_lib['storage']->get_row(array('query' => $sql_supplier));
 
         $this->invoiceO->AccountingSupplierParty->Party->WebsiteURI                     = $supplier->WWW;
         $this->invoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID        = preg_replace('/[^0-9]/', '', $supplier->OrgNumber);

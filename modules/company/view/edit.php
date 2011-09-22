@@ -6,6 +6,8 @@
 $db_table  = "company";
 $db_table2 = "person";
 
+includelogic('exchange/exchange');
+
 $CompanyID = $_REQUEST['CompanyID'];
 assert(!is_int($CompanyID)); #All main input should be int
 
@@ -87,8 +89,23 @@ if(!isset($row_comp->CompanyID))
   <tr>
     <td class="BGColorDark">Land</td>
     <td class="BGColorLight"><input type="text" name="company.VCountry" value="<? print $row_comp->VCountry ?>" size="24"></td>
-    <td class="BGColorDark"></td>
-    <td class="BGColorLight"></td>
+    <td class="BGColorDark">Valuta</td>
+    <td class="BGColorLight">
+<?php
+#Retrieve all currencies
+$currencies = exchange::getInactiveCurrencies();
+?>
+      <select name="company.CurrencyID">
+<?
+foreach ($currencies as $currency) {
+?>
+<option value="<? echo $currency->CurrencyISO; ?>" <?php if (!empty($row_comp->CurrencyID) && $row_comp->CurrencyID == $currency->CurrencyISO) echo 'selected="selected"'; ?>><? echo $currency->CurrencyISO; ?></option>
+<?
+}
+?>
+      </select>
+
+    </td>
   </tr>
   <tr>
     <td class="BGColorDark">Organisasjons nr</td>
