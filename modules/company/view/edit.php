@@ -93,7 +93,7 @@ if(!isset($row_comp->CompanyID))
     <td class="BGColorLight">
 <?php
 #Retrieve all currencies
-$currencies = exchange::getInactiveCurrencies();
+$currencies = exchange::getAllCurrencies();
 ?>
       <select name="company.CurrencyID">
 <?

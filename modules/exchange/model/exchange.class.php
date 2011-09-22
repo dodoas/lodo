@@ -8,7 +8,6 @@ class exchange {
 
     function __construct() { }
 
-
 	/**
 	 * @param String $currency Currency ISO code
 	 * @param float $amount Amount in foreign currency
@@ -62,6 +61,25 @@ class exchange {
 
 		#Retrieve active currencies
 		$query = "SELECT * FROM currency WHERE `CurrencyISO` NOT IN (SELECT `CurrencyID` FROM `exchange` WHERE CurrencyID IS NOT NULL) ORDER BY `CurrencyISO`";
+		$result_currency = $_lib['db']->db_query($query);
+		$currencies = array();
+
+		while($tmp = $_lib['db']->db_fetch_object($result_currency)) {
+			if ($tmp)
+				$currencies[] = $tmp;
+		}
+		
+		return $currencies;
+	}
+
+	/**
+	 * @return mixed array Array with currencies
+	 */
+	function getAllCurrencies() {
+		global $_lib;
+
+		#Retrieve currencies
+		$query = "SELECT * FROM currency ORDER BY `CurrencyISO`";
 		$result_currency = $_lib['db']->db_query($query);
 		$currencies = array();
 
