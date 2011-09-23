@@ -25,7 +25,7 @@ $get_invoiceto          = "select * from accountplan where AccountPlanID=" . (in
 #print "invoiceto " . $get_invoiceto . "<br>\n";
 $row_to                 = $_lib['storage']->get_row(array('query' => $get_invoiceto));
 
-$get_invoicefrom        = "select IName as FromName, IAddress as FromAddress, Email, IZipCode as Zip, ICity as City, ICountry as Country, Phone, BankAccount, Mobile, OrgNumber from company where CompanyID='$row->FromCompanyID'";
+$get_invoicefrom        = "select IName as FromName, IAddress as FromAddress, Email, IZipCode as Zip, ICity as City, ICountry as Country, Phone, BankAccount, Mobile, OrgNumber, VatNumber from company where CompanyID='$row->FromCompanyID'";
 #print "get_invoicefrom " . $get_invoicefrom . "<br>\n";
 $row_from               = $_lib['storage']->get_row(array('query' => $get_invoicefrom));
 
@@ -136,6 +136,12 @@ print $_lib['sess']->doctype;
         <td><? print $row_from->OrgNumber ?></td>
         <td>Org nr</td>
         <td><? print $row_to->OrgNumber ?></td>
+    </tr>
+    <tr>
+        <td><?php if (!empty($row_from->VatNumber)) echo 'Vat nr' ?></td>
+        <td><? if (!empty($row_from->VatNumber)) print $row_from->VatNumber ?></td>
+        <td><?php if (!empty($row_to->VatNumber)) echo 'Vat nr' ?></td>
+        <td><? if (!empty($row_to->VatNumber)) print $row_to->VatNumber ?></td>
     </tr>
     <tr height="5">
         <td colspan="4"></td>

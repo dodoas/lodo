@@ -1164,8 +1164,12 @@ class lodo_fakturabank_fakturabank {
 
                 if (!empty($InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID)) {
                     $partytaxscheme = $doc->createElement('cac:PartyTaxScheme');
-                    $cbc = $doc->createElement('cbc:CompanyID', $InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID);                    
-                    $cbc->setAttribute('schemeID', 'NO:ORGNR');
+                    $cbc = $doc->createElement('cbc:CompanyID', $InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID);
+                    if (!empty($InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID)) {
+                        $cbc->setAttribute('schemeID', $InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID);
+                    }
+
+
                     $partytaxscheme->appendChild($cbc);
 
                     $taxscheme = $doc->createElement('cac:TaxScheme');
@@ -1287,7 +1291,9 @@ class lodo_fakturabank_fakturabank {
                 if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID)) {
                     $partytaxscheme = $doc->createElement('cac:PartyTaxScheme');
                     $cbc = $doc->createElement('cbc:CompanyID', $InvoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID);                    
-                    $cbc->setAttribute('schemeID', 'NO:ORGNR');
+                    if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID)) {
+                        $cbc->setAttribute('schemeID', $InvoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID);
+                    }
                     $partytaxscheme->appendChild($cbc);
 
                     $taxscheme = $doc->createElement('cac:TaxScheme');
