@@ -14,10 +14,10 @@ includelogic('kid/kid');
 $accounting = new accounting();
 require_once "record.inc";
 
-$get_invoice            = "select I.*, A.OrgNumber, A.Mobile, A.Phone, A.AccountName from $db_table as I, accountplan as A where InvoiceID='$InvoiceID' and A.AccountPlanID=I.CustomerAccountPlanID";
+$get_invoice            = "select I.*, A.OrgNumber, A.VatNumber, A.Mobile, A.Phone, A.AccountName from $db_table as I, accountplan as A where InvoiceID='$InvoiceID' and A.AccountPlanID=I.CustomerAccountPlanID";
 $row                    = $_lib['storage']->get_row(array('query' => $get_invoice));
 
-$get_invoicefrom        = "select IName as FromName, IAddress as FromAddress, Email, IZipCode as Zip, ICity as City, ICountry as Country, Phone, BankAccount, Mobile, OrgNumber from company where CompanyID='$row->FromCompanyID'";
+$get_invoicefrom        = "select IName as FromName, IAddress as FromAddress, Email, IZipCode as Zip, ICity as City, ICountry as Country, Phone, BankAccount, Mobile, OrgNumber, VatNumber from company where CompanyID='$row->FromCompanyID'";
 $row_from               = $_lib['storage']->get_row(array('query' => $get_invoicefrom));
 
 $query_invoiceline      = "select * from $db_table2 where InvoiceID='$InvoiceID' and Active <> 0 order by LineID asc";
@@ -47,6 +47,9 @@ $params["sender"]["zip"]        = $row_from->Zip;
 $params["sender"]["city"]       = $row_from->City;
 $params["sender"]["country"]    = $row_from->Country;
 $params["sender"]["orgnumber"]  = $row_from->OrgNumber;
+if (!empty($row_from->VatNumber)) {
+    $params["sender"]["vatnumber"]  = $row_from->VatNumber;
+}
 $params["sender"]["email"]      = $row_from->Email;
 
 $params["recipient"]["name"]    = $row->AccountName;
@@ -67,6 +70,9 @@ else
 }
 $params["recipient"]["country"]     = $row->ICountry;
 $params["recipient"]["orgnumber"]   = $row->OrgNumber;
+if (!empty($row->VatNumber)) {
+    $params["recipient"]["vatnumber"]   = $row->VatNumber;
+}
 $params["recipient"]["email"]       = $row->DEmail;
 
 
@@ -89,17 +95,25 @@ if (strlen($row_from->BankAccount) == 11)
     $params["companyInfo"]["Kontonr"] = kontonr($row_from->BankAccount);
 else
     $params["companyInfo"]["Kontonr"] = $row_from->BankAccount;
-if (strlen($row_from->OrgNumber) == 9)
-{
-    if ($_lib['sess']->get_companydef('VATDuty'))
-    {
-        $params["companyInfo"]["OrgNr"] = orgnr($row_from->OrgNumber) . " MVA";
-    }
-    else
+
+if  (!empty($row_from->VatNumber)) {
         $params["companyInfo"]["OrgNr"] = orgnr($row_from->OrgNumber);
+        $params["companyInfo"]["MvaNr"] = orgnr($row_from->VatNumber);
+} else {
+    if   (strlen($row_from->OrgNumber) == 9)
+    {
+        if ($_lib['sess']->get_companydef('VATDuty'))
+        {
+            $params["companyInfo"]["OrgNr"] = orgnr($row_from->OrgNumber) . " MVA";
+        }
+        else
+        {
+            $params["companyInfo"]["OrgNr"] = orgnr($row_from->OrgNumber);
+        }
+    } else {
+        $params["companyInfo"]["OrgNr"] = $row_from->OrgNumber;
+    }
 }
-else
-    $params["companyInfo"]["OrgNr"] = $row_from->OrgNumber;
 
 if ($row_from->Phone)
   $params["companyInfo"]["Telefon"]   = $row_from->Phone;

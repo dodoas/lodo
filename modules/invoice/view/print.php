@@ -14,11 +14,11 @@ includelogic('accounting/accounting');
 $accounting = new accounting();
 require_once "record.inc";
 
-$get_invoice            = "select I.*, A.InvoiceCommentCustomerPosition, A.OrgNumber, A.Mobile, A.Phone, A.AccountName from $db_table as I, accountplan as A where InvoiceID='$InvoiceID' and A.AccountPlanID=I.CustomerAccountPlanID";
+$get_invoice            = "select I.*, A.InvoiceCommentCustomerPosition, A.OrgNumber, A.VatNumber, A.Mobile, A.Phone, A.AccountName from $db_table as I, accountplan as A where InvoiceID='$InvoiceID' and A.AccountPlanID=I.CustomerAccountPlanID";
 #print "$get_invoice<br>\n";
 $row                    = $_lib['storage']->get_row(array('query' => $get_invoice));
 
-$get_invoicefrom        = "select IName as FromName, IAddress as FromAddress, Email, IZipCode as Zip, ICity as City, Phone, BankAccount, Mobile, OrgNumber, ICountry as Country from company where CompanyID='$row->FromCompanyID'";
+$get_invoicefrom        = "select IName as FromName, IAddress as FromAddress, Email, IZipCode as Zip, ICity as City, Phone, BankAccount, Mobile, OrgNumber, VatNumber, ICountry as Country from company where CompanyID='$row->FromCompanyID'";
 #print "$get_invoicefrom<br>\n";
 $row_from               = $_lib['storage']->get_row(array('query' => $get_invoicefrom));
 
@@ -119,6 +119,12 @@ print $_lib['sess']->doctype ?>
         <td><? print $row_from->OrgNumber ?></td>
         <td><label>Org nr</label></td>
         <td><? print $row->OrgNumber ?></td>
+    </tr>
+    <tr>
+        <td><label><?php if (!empty($row_from->VatNumber)) echo 'Vat nr' ?></label></td>
+        <td><? if (!empty($row_from->VatNumber)) print $row_from->VatNumber ?></td>
+        <td><label><?php if (!empty($row->VatNumber)) echo 'Vat nr' ?></label></td>
+        <td><? if (!empty($row->VatNumber)) print $row->VatNumber ?></td>
     </tr>
     <tr height="20">
         <td></td>

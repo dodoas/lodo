@@ -785,8 +785,14 @@ class invoice {
 
         $this->invoiceO->AccountingSupplierParty->Party->WebsiteURI                     = $supplier->WWW;
         $this->invoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID        = preg_replace('/[^0-9]/', '', $supplier->OrgNumber);
-        if (strstr(strtolower($supplier->OrgNumber), 'mva')) {
+        if (!empty($supplier->VatNumber)) {
+            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = $supplier->VatNumber;
+            if ($supplier->ICountry == 'Sverige') {
+                $InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'SE:VAT';
+            } // else leave empty
+        } else if (strstr(strtolower($supplier->OrgNumber), 'mva')) {
             $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = $supplier->OrgNumber;
+            $InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
         }
         $this->invoiceO->AccountingSupplierParty->Party->PartyName->Name                = $supplier->CompanyName;
         $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName      = $supplier->IAddress;
@@ -828,9 +834,17 @@ class invoice {
 
         $this->invoiceO->AccountingCustomerParty->Party->WebsiteURI                     = $customer->URL;
         $this->invoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID        = preg_replace('/[^0-9]+/', '', $customer->OrgNumber);
-        if (strstr(strtolower($customer->OrgNumber), 'mva')) {
+
+        if (!empty($customer->VatNumber)) {
+            $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID        = $customer->VatNumber;
+            if ($customer->Country == 'Sverige') {
+                $InvoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'SE:VAT';
+            } // else leave empty
+        } else if (strstr(strtolower($customer->OrgNumber), 'mva')) {
             $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID        = $customer->OrgNumber;
+            $InvoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
         }
+
         $this->invoiceO->AccountingCustomerParty->Party->PartyIdentification->ID = $customer->AccountPlanID;
         $this->invoiceO->AccountingCustomerParty->Party->PartyName->Name                = $customer->AccountName;
         $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName      = $customer->Address;

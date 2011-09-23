@@ -103,8 +103,8 @@ if($JournalID) {
     <td class="menu">Adresse</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableInvoiceAddress", $account->EnableInvoiceAddress,'') ?></td>
     <td><input type="text" name="accountplan.Address" value="<? print $account->Address  ?>" size="30"></td>
-    <td></td>
-    <td></td>
+    <td>MVA-nummer</td>
+    <td><input type="text" name="accountplan.VatNumber" value="<? print $account->VatNumber  ?>" size="30"></td>
   </tr>
   <tr>
     <td class="menu">Postnummer</td>

@@ -95,8 +95,8 @@ if(!isset($row_comp->CompanyID))
   <tr>
     <td class="BGColorDark">Organisasjons nr</td>
     <td class="BGColorLight"><input type="text" name="company.OrgNumber" value="<? print $row_comp->OrgNumber ?>" size="24"></td>
-    <td class="BGColorDark"></td>
-    <td class="BGColorLight"></td>
+    <td class="BGColorDark">MVA nr</td>
+    <td class="BGColorLight"><input type="text" name="company.VatNumber" value="<? print $row_comp->VatNumber ?>" size="24"></td>
   </tr>
   <tr>
     <td class="BGColorDark">Kontorkommune nr</td>
