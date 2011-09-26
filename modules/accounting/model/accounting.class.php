@@ -1077,6 +1077,9 @@ class accounting {
     */
     function getHovedbokToAccount($AccountPlanID)
     {
+        if (is_object($AccountPlanID) && !empty($AccountPlanID->AccountPlanID)) {
+            $AccountPlanID = $AccountPlanID->AccountPlanID;
+        }
         global $_lib;
     
         $query_plan = "select * from accountplan where AccountPlanID = '$AccountPlanID'";
