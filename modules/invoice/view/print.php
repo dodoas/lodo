@@ -53,6 +53,7 @@ print $_lib['sess']->doctype ?>
 <? print $_lib['form3']->URL(array('description' => '>>', 'title' => 'Klikk for &aring; se neste bilag',   'url' => $_lib['sess']->dispatch . 't=invoice.print&amp;InvoiceID=' . ($InvoiceID + 1))) ?>
 </span>
 </h2>
+<div style="margin-bottom: 10px">Valuta <? print $row->CurrencyID ?></div> 
 <table class="lodo_data" id="head" frame="sides" rules="groups" summary="Faktura">
 <COLGROUP align="left" span="2">
 <thead>

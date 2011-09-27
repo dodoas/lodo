@@ -237,7 +237,7 @@ class invoice {
             unset($this->headH['DeliveryDate']);
             unset($this->headH['OrderDate']);
             unset($this->headH['inline']);
-
+            
             $headH = $this->headH;
 
             if($this->debug) print_r($headH);
@@ -289,9 +289,9 @@ class invoice {
         list($args['InvoiceID'], $message)                = $accounting->get_next_available_journalid(array('available' => true, 'update' => true, 'type' => $this->VoucherType));
 
         $this->init($args);
+        $args['CurrencyID'] = exchange::getLocalCurrency();
         $this->set_head($args);
         $this->set_line(array('Active' => 1));
-
 
         // Check if entry already exists in invoiceoutprint table (might be the case for an "unsaved") invoice.
         $query_invprint = "select * from invoiceoutprint where InvoiceID='" . $args['InvoiceID'] . "'";

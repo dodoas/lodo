@@ -13,7 +13,11 @@ $db_table = "invoiceout";
 $db_table2 = "invoiceoutline";
 $db_table3 = "invoiceoutprint";
 
+includelogic('exchange/exchange');
+
 includelogic('accounting/accounting');
+
+
 $accounting = new accounting();
 require_once "record.inc";
 
@@ -151,6 +155,27 @@ print $_lib['sess']->doctype;
 <tbody>
     <tr height="5">
         <td colspan="4"></td>
+    </tr>
+    <tr>
+      <td>Valuta</td>
+      <td>
+<?php
+#Retrieve all currencies
+
+$currencies = exchange::getAllCurrencies();
+?>
+      <select name="<?php echo $db_table . '.CurrencyID.' . $InvoiceID ?>">
+<?
+foreach ($currencies as $currency) {
+?>
+<option value="<? echo $currency->CurrencyISO; ?>" <?php if ($row->CurrencyID == $currency->CurrencyISO) echo 'selected'; ?>><? echo $currency->CurrencyISO; ?></option>
+<?
+}
+?>
+      </select>
+</td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <td>Faktura dato</td>

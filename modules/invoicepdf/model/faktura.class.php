@@ -627,6 +627,9 @@ function SplitByLength($string, $chunkLength=1){
         // Betalingsfrist på regningen
         $this->pdf->SetXY(167, 197);
         $this->pdf->Cell(23,  $this->lineHeight, $params["invoiceData"]["Betalingsfrist"], $this->showMyFrame);
+        /* // Betalingsfrist på regningen */
+        /* $this->pdf->SetXY(167, 209); */
+        /* $this->pdf->Cell(23,  $this->lineHeight, $params["invoiceData"]["Valuta"], $this->showMyFrame); */
 
         // Betalingsinfo på regningen (overskrifter)
         $this->pdf->SetFont($this->invoiceGiroFont,'B',$this->invoiceGiroFontSize);
