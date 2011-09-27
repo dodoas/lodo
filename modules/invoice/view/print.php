@@ -225,7 +225,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     $sumlines += $sumline;
     $vatlines += $vatline;
 
-    if($row_company->InvoiceCommentCustomerPosition == 'top' and strlen($row2->Comment) > 0)
+    if($row_company->InvoiceLineCommentPosition == 'top' and strlen($row2->Comment) > 0)
     {
         ?>
         <tr>
@@ -245,7 +245,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <td class="number"><? print $_lib['format']->Amount($sumline) ?></td>
     </tr>
     <?
-    if($row_company->InvoiceCommentCustomerPosition == 'bottom' and strlen($row2->Comment) > 0)
+    if($row_company->InvoiceLineCommentPosition == 'bottom' and strlen($row2->Comment) > 0)
     {
         ?>
         <tr>

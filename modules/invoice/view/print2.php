@@ -166,11 +166,11 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     $params2["mva"] = $row2->Vat;
     $params2["mvabelop"] = $vatline;
     $params2["linjesum"] = $sumline;
-    if($row_company->InvoiceCommentCustomerPosition == 'bottom')
+    if($row_company->InvoiceLineCommentPosition == 'bottom')
         $myFakutra->addInvoiceLine ($params2);
     if ($row2->Comment != "")
         $myFakutra->addLongTextLine(array('tekst' =>$row2->Comment));
-    if($row_company->InvoiceCommentCustomerPosition == 'top' || !$row_company->InvoiceCommentCustomerPosition)
+    if($row_company->InvoiceLineCommentPosition == 'top' || !$row_company->InvoiceLineCommentPosition)
         $myFakutra->addInvoiceLine ($params2);
     $rowCounter++;
     #print_r($row_company);

@@ -136,6 +136,12 @@ if(!isset($row_comp->CompanyID))
     <td class="BGColorLight"><? print $_lib['form3']->Type_menu3(array('table'=>'company', 'field'=>'InvoiceCommentCustomerPosition', 'value'=>$row_comp->InvoiceCommentCustomerPosition, 'type'=>'InvoiceCommentCustomerPosition', 'required'=>'1')) ?></td>
   </tr>
   <tr>
+    <td class="BGColorDark">Plassering av linjekommentar</td>
+    <td class="BGColorLight"><? print $_lib['form3']->Type_menu3(array('table'=>'company', 'field'=>'InvoiceLineCommentPosition', 'value'=>$row_comp->InvoiceLineCommentPosition, 'type'=>'InvoiceCommentCustomerPosition', 'required'=>'1')) ?></td>
+    <td class="BGColorDark"></td>
+    <td class="BGColorLight"></td>
+  </tr>
+  <tr>
     <th colspan="4" class="menu">Leveringsadresse</th>
   </tr>
   <tr>
