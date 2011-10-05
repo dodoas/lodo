@@ -789,11 +789,13 @@ class invoice {
         if (!empty($supplier->VatNumber)) {
             $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = $supplier->VatNumber;
             if ($supplier->ICountryCode == 'SE') {
-                $InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'SE:VAT';
+                $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'SE:VAT';
+            } else if ($supplier->ICountryCode == 'NO') {
+                $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
             } // else leave empty
         } else if (strstr(strtolower($supplier->OrgNumber), 'mva')) {
             $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = $supplier->OrgNumber;
-            $InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
+            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
         }
         $this->invoiceO->AccountingSupplierParty->Party->PartyName->Name                = $supplier->CompanyName;
         $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName      = $supplier->IAddress;
@@ -843,11 +845,13 @@ class invoice {
         if (!empty($customer->VatNumber)) {
             $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID        = $customer->VatNumber;
             if ($customer->CountryCode == 'SE') {
-                $InvoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'SE:VAT';
+                $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'SE:VAT';
+            } else if ($customer->CountryCode == 'NO') {
+                $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
             } // else leave empty
         } else if (strstr(strtolower($customer->OrgNumber), 'mva')) {
             $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID        = $customer->OrgNumber;
-            $InvoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
+            $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
         }
 
         $this->invoiceO->AccountingCustomerParty->Party->PartyIdentification->ID = $customer->AccountPlanID;
