@@ -64,7 +64,8 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
             if($org->IAdress->Address1) $_POST['accountplan_Address'] = $org->IAdress->Address1;
             if($org->IAdress->City)     $_POST['accountplan_City']    = $org->IAdress->City;
             if($org->IAdress->ZipCode)  $_POST['accountplan_ZipCode'] = $org->IAdress->ZipCode;
-            if($org->IAdress->Country)  $_POST['accountplan_Country'] = $org->IAdress->Country;
+            
+            if($org->IAdress->Country)  $_POST['accountplan_CountryCode'] = $_lib['format']->countryToCode($org->IAdress->Country);
             
             if($org->DomesticBankAccount) $_POST['accountplan_DomesticBankAccount'] = $org->DomesticBankAccount;
             

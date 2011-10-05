@@ -129,7 +129,7 @@ if($JournalID) {
   <tr>
     <td class="menu">Land</td>
     <td></td>
-    <td><input type="text" name="accountplan.Country" value="<? print $account->Country  ?>" size="30"></td>
+    <td><? print $_lib['form3']->Country_menu3(array('table'=>'accountplan', 'field'=>'CountryCode', 'value'=>$account->CountryCode, 'required'=>false)); ?></td>
     <td colspan="2">&nbsp</td>
   </tr>
   <tr>

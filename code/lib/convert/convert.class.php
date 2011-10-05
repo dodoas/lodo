@@ -432,14 +432,25 @@ class convert {
   }
 
    function Country($args) {
-     $email = $args['value'];
+     $code = $args['value'];
       #Does nothing yet
-      if(preg_match("/@/", $email)){
+      if(preg_match("/@/", $code)){
 
       } else {
-        #$error = "This is not a valid email adress";
+        $error = "This is not a valid country code";
       }
-      return array('value' => $email, 'error' => $error);
+      return array('value' => $code, 'error' => $error);
+  }
+
+   function CountryCode($args) {
+     $code = $args['value'];
+      #Does nothing yet
+      if(preg_match("/[A-Z][A-Z]/", $code)){
+
+      } else {
+        # $error = "This is not a valid country code";
+      }
+      return array('value' => $code, 'error' => $error);
   }
 
    function Phone($args) {

@@ -17,7 +17,7 @@ require_once "record.inc";
 $get_invoice            = "select I.*, A.OrgNumber, A.VatNumber, A.Mobile, A.Phone, A.AccountName from $db_table as I, accountplan as A where InvoiceID='$InvoiceID' and A.AccountPlanID=I.CustomerAccountPlanID";
 $row                    = $_lib['storage']->get_row(array('query' => $get_invoice));
 
-$get_invoicefrom        = "select IName as FromName, IAddress as FromAddress, Email, IZipCode as Zip, ICity as City, ICountry as Country, Phone, BankAccount, Mobile, OrgNumber, VatNumber from company where CompanyID='$row->FromCompanyID'";
+$get_invoicefrom        = "select IName as FromName, IAddress as FromAddress, Email, IZipCode as Zip, ICity as City, ICountryCode as CountryCode, Phone, BankAccount, Mobile, OrgNumber, VatNumber from company where CompanyID='$row->FromCompanyID'";
 $row_from               = $_lib['storage']->get_row(array('query' => $get_invoicefrom));
 
 $query_invoiceline      = "select * from $db_table2 where InvoiceID='$InvoiceID' and Active <> 0 order by LineID asc";
@@ -45,7 +45,8 @@ $params["sender"]["name"]       = $row_from->FromName;
 $params["sender"]["address1"]   = $row_from->FromAddress;
 $params["sender"]["zip"]        = $row_from->Zip;
 $params["sender"]["city"]       = $row_from->City;
-$params["sender"]["country"]    = $row_from->Country;
+$params["sender"]["country"]    = $_lib['format']->codeToCountry($row_from->CountryCode);
+
 $params["sender"]["orgnumber"]  = $row_from->OrgNumber;
 if (!empty($row_from->VatNumber)) {
     $params["sender"]["vatnumber"]  = $row_from->VatNumber;
@@ -68,7 +69,7 @@ else
     $params["recipient"]["zip"]  = $row->IPoBoxZipCode;
     $params["recipient"]["city"] = $row->IPoBoxZipCodeCity;
 }
-$params["recipient"]["country"]     = $row->ICountry;
+$params["recipient"]["country"]     = $_lib['format']->codeToCountry($row->ICountryCode);
 $params["recipient"]["orgnumber"]   = $row->OrgNumber;
 if (!empty($row->VatNumber)) {
     $params["recipient"]["vatnumber"]   = $row->VatNumber;

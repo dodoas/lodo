@@ -63,7 +63,7 @@ $person = $_lib['storage']->get_row(array('query' => $query));
         <td class="BGColorDark">Adresse</td>
         <td> <input type="text" name="<? print $db_table ?>.Address" value="<? print $person->Address ?>" size="24" tabindex="5" maxlength="50"></td>
         <td class="BGColorDark">Land</td>
-        <td><input type="text" name="<? print $db_table ?>.Country" value="<? print $person->Country ?>" size="24" tabindex="6" maxlength="50"></td>
+        <td><? print $_lib['form3']->Country_menu3(array('table'=>$db_table, 'field'=>'CountryCode', 'value'=>$person->CountryCode, 'required'=>false)); ?></td>
     </tr>
     <tr>
         <td class="BGColorDark">Postnummer</td>

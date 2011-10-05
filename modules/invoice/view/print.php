@@ -18,7 +18,7 @@ $get_invoice            = "select I.*, A.InvoiceCommentCustomerPosition, A.OrgNu
 #print "$get_invoice<br>\n";
 $row                    = $_lib['storage']->get_row(array('query' => $get_invoice));
 
-$get_invoicefrom        = "select IName as FromName, IAddress as FromAddress, Email, IZipCode as Zip, ICity as City, Phone, BankAccount, Mobile, OrgNumber, VatNumber, ICountry as Country from company where CompanyID='$row->FromCompanyID'";
+$get_invoicefrom        = "select IName as FromName, IAddress as FromAddress, Email, IZipCode as Zip, ICity as City, Phone, BankAccount, Mobile, OrgNumber, VatNumber, ICountryCode as CountryCode from company where CompanyID='$row->FromCompanyID'";
 #print "$get_invoicefrom<br>\n";
 $row_from               = $_lib['storage']->get_row(array('query' => $get_invoicefrom));
 
@@ -87,9 +87,9 @@ print $_lib['sess']->doctype ?>
     </tr>
     <tr>
         <td><label>Land</label></td>
-        <td><? print $row_from->Country ?></td>
+        <td><? print $_lib['format']->codeToCountry($row_from->CountryCode) ?></td>
         <td><label>Land</label></td>
-        <td><? print $row->DCountry ?></td>
+        <td><? print $_lib['format']->codeToCountry($row_from->CountryCode) ?></td>
     </tr>
     <tr>
         <td><label>Tlf nr</label></td>

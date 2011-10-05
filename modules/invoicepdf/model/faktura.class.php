@@ -216,6 +216,7 @@ class pdfInvoice
             $lineNumber++;
             $this->pdf->SetXY($this->invoiceHeadSenderLeftMargin, $this->invoiceHeadSenderStart + ($this->lineHeight * $lineNumber));
         }
+
         if ($params["sender"]["country"] != "" && $params["sender"]["country"] != $params["recipient"]["country"])
         {
             $this->pdf->Cell($this->invoiceHeadAdressWidth, $this->lineHeight, $this->korriger($params["sender"]["country"]), $this->showMyFrame);

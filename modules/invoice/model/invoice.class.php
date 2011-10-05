@@ -135,8 +135,9 @@ class invoice {
         $headH['IZipCode']              = $accountplan->ZipCode;
         $headH['ICity']                 = $accountplan->City;
         $headH['DCity']                 = $accountplan->City;
-        $headH['DCountry']              = $accountplan->Country;
-        $headH['ICountry']              = $accountplan->Country;
+        
+        $headH['DCountryCode']              = $accountplan->CountryCode;
+        $headH['ICountryCode']              = $accountplan->CountryCode;
         $headH['DEmail']                = $accountplan->Email;
         $headH['IEmail']                = $accountplan->Email;
 
@@ -787,7 +788,7 @@ class invoice {
         $this->invoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID        = preg_replace('/[^0-9]/', '', $supplier->OrgNumber);
         if (!empty($supplier->VatNumber)) {
             $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = $supplier->VatNumber;
-            if ($supplier->ICountry == 'Sverige') {
+            if ($supplier->ICountryCode == 'SE') {
                 $InvoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'SE:VAT';
             } // else leave empty
         } else if (strstr(strtolower($supplier->OrgNumber), 'mva')) {
@@ -799,7 +800,11 @@ class invoice {
         $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->BuildingNumber  = '';
         $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->CityName        = $supplier->ICity;
         $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone      = $supplier->IZipCode;
-        $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode= 'NO';
+        if (empty($supplier->ICountryCode)) {
+            $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode= 'NO';
+        } else {
+            $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode= $supplier->ICountryCode;
+        }
 
         if (!empty($supplier->Phone)) {
             $this->invoiceO->AccountingSupplierParty->Party->Contact->Telephone = $supplier->Phone;
@@ -837,7 +842,7 @@ class invoice {
 
         if (!empty($customer->VatNumber)) {
             $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID        = $customer->VatNumber;
-            if ($customer->Country == 'Sverige') {
+            if ($customer->CountryCode == 'SE') {
                 $InvoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'SE:VAT';
             } // else leave empty
         } else if (strstr(strtolower($customer->OrgNumber), 'mva')) {
@@ -851,7 +856,11 @@ class invoice {
         $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->BuildingNumber  = '';
         $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->CityName        = $customer->City;
         $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->PostalZone     = $customer->ZipCode;
-        $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->Country->IdentificationCode= 'NO';
+        if (empty($customer->CountryCode)) {
+            $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->Country->IdentificationCode= 'NO';
+        } else {
+            $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->Country->IdentificationCode= $customer->CountryCode;
+        }
 
         if (!empty($customer->Phone)) {
             $this->invoiceO->AccountingCustomerParty->Party->Contact->Telephone = $customer->Phone;

@@ -88,7 +88,7 @@ if(!isset($row_comp->CompanyID))
   </tr>
   <tr>
     <td class="BGColorDark">Land</td>
-    <td class="BGColorLight"><input type="text" name="company.VCountry" value="<? print $row_comp->VCountry ?>" size="24"></td>
+    <td class="BGColorLight"><? print $_lib['form3']->Country_menu3(array('table'=>'company', 'field'=>'VCountryCode', 'value'=>$row_comp->VCountryCode, 'required'=>false)); ?></td>
     <td class="BGColorDark"></td>
     <td class="BGColorLight"></td>
   </tr>
@@ -125,7 +125,7 @@ if(!isset($row_comp->CompanyID))
   </tr>
   <tr>
     <td class="BGColorDark">Land</td>
-    <td class="BGColorLight"><input type="text" name="company.ICountry" value="<? print $row_comp->ICountry ?>" size="24"></td>
+    <td class="BGColorLight"><? print $_lib['form3']->Country_menu3(array('table'=>'company', 'field'=>'ICountryCode', 'value'=>$row_comp->ICountryCode, 'required'=>'1')); ?></td>
     <td class="BGColorDark"></td>
     <td class="BGColorLight"></td>
   </tr>
@@ -162,7 +162,7 @@ if(!isset($row_comp->CompanyID))
   </tr>
   <tr>
     <td class="BGColorDark">Land</td>
-    <td class="BGColorLight"><input type="text" name="company.DCountry" value="<? print "$row_comp->DCountry"; ?>" size="24"></td>
+    <td class="BGColorLight"><? print $_lib['form3']->Country_menu3(array('table'=>'company', 'field'=>'DCountryCode', 'value'=>$row_comp->DCountryCode, 'required'=>false)); ?></td>
     <td class="BGColorDark"></td>
     <td class="BGColorLight"></td>
   </tr>

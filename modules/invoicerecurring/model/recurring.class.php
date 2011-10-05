@@ -117,8 +117,9 @@ class recurring {
         $headH['IZipCode']              = $accountplan->ZipCode;
         $headH['ICity']                 = $accountplan->City;
         $headH['DCity']                 = $accountplan->City;
-        $headH['DCountry']              = $accountplan->Country;
-        $headH['ICountry']              = $accountplan->Country;
+
+        $headH['DCountryCode']              = $accountplan->CountryCode;
+        $headH['ICountryCode']              = $accountplan->CountryCode;
         $headH['DEmail']                = $accountplan->Email;
         $headH['IEmail']                = $accountplan->Email;
 

@@ -60,7 +60,7 @@ class lodo_fakturabank_fakturabanksalary {
 
         global $_lib;
 
-        $query_head     = "select S.*, F.Email AS FakturabankEmail, A.AccountName, A.Address, A.City, A.ZipCode, A.SocietyNumber, A.TabellTrekk, A.ProsentTrekk, A.Email, A.Address, A.ZipCode, A.LastName, A.FirstName, A.City, A.Phone, A.Mobile, A.DomesticBankAccount from salary as S, accountplan as A, fakturabankemail as F  where S.SalaryID='$SalaryID' and S.AccountPlanID=A.AccountPlanID and F.AccountPlanID = S.AccountPlanID and A.AccountPlanID = F.AccountPlanID";
+        $query_head     = "select S.*, F.Email AS FakturabankEmail, A.AccountName, A.Address, A.City, A.ZipCode, A.SocietyNumber, A.TabellTrekk, A.ProsentTrekk, A.Email, A.Address, A.ZipCode, A.LastName, A.FirstName, A.City, A.CountryCode, A.Phone, A.Mobile, A.DomesticBankAccount from salary as S, accountplan as A, fakturabankemail as F  where S.SalaryID='$SalaryID' and S.AccountPlanID=A.AccountPlanID and F.AccountPlanID = S.AccountPlanID and A.AccountPlanID = F.AccountPlanID";
         #print "$query_head<br>";
         $result_head    = $_lib['db']->db_query($query_head);
         $head           = $_lib['db']->db_fetch_object($result_head);
@@ -208,7 +208,7 @@ class lodo_fakturabank_fakturabanksalary {
 		$xml_content .= "<street>" . $_lib['sess']->get_companydef('VAddress') . "</street>\n";
 		$xml_content .= "<city>" . $_lib['sess']->get_companydef('VCity') . "</city>\n";
 		$xml_content .= "<zip_code>" . $_lib['sess']->get_companydef('VZipCode') . "</zip_code>\n";
-		$xml_content .= "<country_code>NO</country_code>\n"; // hardcoded to Norway for now
+		$xml_content .= "<country_code>" . ($_lib['sess']->get_companydef('VCountryCode') == '' ? 'NO' : $_lib['sess']->get_companydef('VCountryCode'))  . "</country_code>\n"; // hardcoded to Norway for now
 		$xml_content .= "</postal_address>\n";
 
         $xml_content .= "<email>" . $_lib['sess']->get_companydef('Email') . "</email>\n";
@@ -234,12 +234,12 @@ class lodo_fakturabank_fakturabanksalary {
 		$xml_content .= "<street>" . $head->Address . "</street>\n";
 		$xml_content .= "<city>" . $head->City . "</city>\n";
         $xml_content .= "<zip_code>" . $head->ZipCode . "</zip_code>\n";
-		$xml_content .= "<country_code>NO</country_code>\n"; // hardcoded to Norway for now
+        $xml_content .= "<country_code>" . (empty($head->CountryCode) ? 'NO' : $head->CountryCode) . "</country_code>\n"; // hardcoded to Norway for now
 		$xml_content .= "</postal_address>\n";
 
         $xml_content .= "<fixedphone>" . $head->Phone . "</fixedphone>\n";
         $xml_content .= "<cellphone>" . $head->Mobile . "</cellphone>\n";
-        $xml_content .= "<bank_account_country_code>NO</bank_account_country_code>\n"; // hardcoded to Norway for now
+        $xml_content .= "<bank_account_country_code>" . (empty($head->CountryCode) ? 'NO' : $head->CountryCode) . "</bank_account_country_code>\n"; // hardcoded to Norway for now
         $xml_content .= "<bank_account_number>" . $head->DomesticBankAccount . "</bank_account_number>\n";
 
 		$xml_content .= "</employee>\n";
@@ -287,6 +287,7 @@ class lodo_fakturabank_fakturabanksalary {
         if ($xml === false) {
             return false;
         }
+
         $fakturabank_salary_id = $this->write($xml);
 
         if (!$fakturabank_salary_id) {

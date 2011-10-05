@@ -99,6 +99,14 @@ class form3
         return $this->_MakeSelect($args);
     }
 
+    function Country_menu3($args)
+    {
+        $args['query'] = 'select Code, LocalName from country order by LocalName asc';
+        $args['num_letters'] = 60;
+        $args['width'] = 60;
+        return $this->_MakeSelect($args);
+    }
+
 ###########################################################
 
     function sone_menu($args)

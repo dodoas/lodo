@@ -581,6 +581,10 @@ class model_tablemetadata_tablemetadata {
                     {
                         $inputType = 'Country';
                     }
+                    if(preg_match("/CountryCode/", $field))
+                    {
+                        $inputType = 'CountryCode';
+                    }
                     if(preg_match("/Active/", $field))
                     {
                         $FormType = "checkbox";

@@ -29,7 +29,7 @@ $get_invoiceto          = "select * from accountplan where AccountPlanID=" . (in
 #print "invoiceto " . $get_invoiceto . "<br>\n";
 $row_to                 = $_lib['storage']->get_row(array('query' => $get_invoiceto));
 
-$get_invoicefrom        = "select IName as FromName, IAddress as FromAddress, Email, IZipCode as Zip, ICity as City, ICountry as Country, Phone, BankAccount, Mobile, OrgNumber, VatNumber from company where CompanyID='$row->FromCompanyID'";
+$get_invoicefrom        = "select IName as FromName, IAddress as FromAddress, Email, IZipCode as Zip, ICity as City, ICountryCode as CountryCode, Phone, BankAccount, Mobile, OrgNumber, VatNumber from company where CompanyID='$row->FromCompanyID'";
 #print "get_invoicefrom " . $get_invoicefrom . "<br>\n";
 $row_from               = $_lib['storage']->get_row(array('query' => $get_invoicefrom));
 
@@ -106,9 +106,9 @@ print $_lib['sess']->doctype;
     </tr>
     <tr>
         <td>Land</td>
-        <td><? print $row_from->Country ?></td>
+        <td><? print $_lib['format']->codeToCountry($row_from->CountryCode) ?></td>
         <td>Land</td>
-        <td><? print $row_to->Country ?></td>
+        <td><? print $_lib['format']->codeToCountry($row_to->CountryCode) ?></td>
     </tr>
     <tr>
         <td>Tlf nr</td>

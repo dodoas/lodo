@@ -28,7 +28,7 @@ $get_invoicefrom        = "select * from accountplan where AccountPlanID=" . (in
 #print "get_invoicefrom " . $get_invoicefrom . "<br>\n";
 $invoicein->from        = $_lib['storage']->get_row(array('query' => $get_invoicefrom));
 
-$get_invoiceto          = "select CompanyName, IAddress as FromAddress, Email, IZipCode as Zip, ICity as City, ICountry as Country, Phone, Mobile, OrgNumber from company where CompanyID='" . $_lib['sess']->get_companydef('CompanyID') . "'";
+$get_invoiceto          = "select CompanyName, IAddress as FromAddress, Email, IZipCode as Zip, ICity as City, ICountryCode as CountryCode, Phone, Mobile, OrgNumber from company where CompanyID='" . $_lib['sess']->get_companydef('CompanyID') . "'";
 #print "get_invoiceto " . $get_invoiceto . "<br>\n";
 $invoicein->to          = $_lib['storage']->get_row(array('query' => $get_invoiceto));
 

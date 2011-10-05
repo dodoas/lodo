@@ -33,9 +33,9 @@ elseif($_lib['input']->getProperty('action_company_update')) {
       {
           $_POST['company_ICity'] = $_POST['company_VCity'];
       }
-      if($_POST['company_ICountry'] == '')
+      if($_POST['company_ICountryCode'] == '')
       {
-          $_POST['company_ICountry'] = $_POST['company_VCountry'];
+          $_POST['company_ICountryCode'] = $_POST['company_VCountryCode'];
       }
 
       $_dbh[$_dsn]->db_update_hash($_POST, $db_table, $primarykey);

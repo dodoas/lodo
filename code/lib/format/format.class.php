@@ -383,6 +383,31 @@ class format {
             return $hash;
     }
 
+    function codeToCountry($code) 
+    {
+        global $_lib;
+
+        if (strlen($code) != 2) {
+            return "";
+        }
+
+        $query = "select LocalName from country where `Code` = '$code'";
+        $row = $_lib['storage']->get_row(array('query' => $query));
+        return $row->LocalName;
+    }
+
+    function countryToCode($country) {
+        global $_lib;
+
+        if (strlen($country) == 2) {
+            return strtoupper($country);
+        }
+
+        $query = "select Code from country where LocalName = '" . $_lib['storage']->db_escape($country) . "'";
+        $row = $_lib['storage']->get_row(array('query' => $query));
+        return $row->Code;
+    }
+
     #Must have a valid db record row in to show height/width/etc
     function file($args)
     {
