@@ -1103,7 +1103,7 @@ class lodo_fakturabank_fakturabank {
         $cbc = $doc->createElement('cbc:IssueDate', $InvoiceO->IssueDate);
         $invoice->appendChild($cbc);
 
-        $cbc = $doc->createElement('cbc:Note', $InvoiceO->Note);
+        $cbc = $doc->createElement('cbc:Note', utf8_encode($InvoiceO->Note));
         $invoice->appendChild($cbc);
 
         $cbc = $doc->createElement('cbc:DocumentCurrencyCode', $InvoiceO->DocumentCurrencyCode);
@@ -1129,28 +1129,28 @@ class lodo_fakturabank_fakturabank {
         $supplier = $doc->createElement('cac:AccountingSupplierParty');
             $cacparty = $doc->createElement('cac:Party');
             
-                $cbc = $doc->createElement('cbc:WebsiteURI', $InvoiceO->AccountingSupplierParty->Party->WebsiteURI);
+            $cbc = $doc->createElement('cbc:WebsiteURI', utf8_encode($InvoiceO->AccountingSupplierParty->Party->WebsiteURI));
                 $cacparty->appendChild($cbc);
             
                 $name = $doc->createElement('cac:PartyName');
-
-                    $cbc = $doc->createElement('cbc:Name', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PartyName->Name));
-                    $name->appendChild($cbc);
-
-                $cacparty->appendChild($name);
+                $cbc = $doc->createElement('cbc:Name');
+                $cdata = $doc->createCDATASection(utf8_encode($InvoiceO->AccountingSupplierParty->Party->PartyName->Name)); // handle ampersand in company names (we should probably send all text data with cdata function)
+                $cbc->appendChild($cdata);
+                $name->appendChild($cbc);
+                $cacparty->appendChild($name);;
 
                 $address = $doc->createElement('cac:PostalAddress', '');
                 
                     $cbc = $doc->createElement('cbc:StreetName', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName));
                     $address->appendChild($cbc);
     
-                    $cbc = $doc->createElement('cbc:BuildingNumber', $InvoiceO->AccountingSupplierParty->Party->PostalAddress->BuildingNumber);
+                    $cbc = $doc->createElement('cbc:BuildingNumber', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PostalAddress->BuildingNumber));
                     $address->appendChild($cbc);
     
                     $cbc = $doc->createElement('cbc:CityName', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PostalAddress->CityName));
                     $address->appendChild($cbc);
     
-                    $cbc = $doc->createElement('cbc:PostalZone', $InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone);
+                    $cbc = $doc->createElement('cbc:PostalZone', utf8_encode($InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone));
                     $address->appendChild($cbc);
     
                     $country = $doc->createElement('cac:Country');
@@ -1220,16 +1220,16 @@ class lodo_fakturabank_fakturabank {
 
                 if (!empty($InvoiceO->AccountingSupplierParty->Party->Person)) {
                     $person = $doc->createElement('cac:Person');
-                    $cbc = $doc->createElement('cbc:FirstName', $InvoiceO->AccountingSupplierParty->Party->Person->FirstName);
+                    $cbc = $doc->createElement('cbc:FirstName', utf8_encode($InvoiceO->AccountingSupplierParty->Party->Person->FirstName));
                     $person->appendChild($cbc);
-                    $cbc = $doc->createElement('cbc:FamilyName', $InvoiceO->AccountingSupplierParty->Party->Person->FamilyName);
+                    $cbc = $doc->createElement('cbc:FamilyName', utf8_encode($InvoiceO->AccountingSupplierParty->Party->Person->FamilyName));
                     $person->appendChild($cbc);
                     if (!empty($InvoiceO->AccountingSupplierParty->Party->Person->MiddleName)) {
-                        $cbc = $doc->createElement('cbc:MiddleName', $InvoiceO->AccountingSupplierParty->Party->Person->MiddleName);
+                        $cbc = $doc->createElement('cbc:MiddleName', utf8_encode($InvoiceO->AccountingSupplierParty->Party->Person->MiddleName));
                         $person->appendChild($cbc);
                     }
                     if (!empty($InvoiceO->AccountingSupplierParty->Party->Person->JobTitle)) {
-                        $cbc = $doc->createElement('cbc:JobTitle', $InvoiceO->AccountingSupplierParty->Party->Person->JobTitle);
+                        $cbc = $doc->createElement('cbc:JobTitle', utf8_encode($InvoiceO->AccountingSupplierParty->Party->Person->JobTitle));
                         $person->appendChild($cbc);
                     }
 
@@ -1248,7 +1248,7 @@ class lodo_fakturabank_fakturabank {
             $cacparty = $doc->createElement('cac:Party');
             
             if (!empty($InvoiceO->AccountingCustomerParty->Party->WebsiteURI)) {
-                $cbc = $doc->createElement('cbc:WebsiteURI', $InvoiceO->AccountingCustomerParty->Party->WebsiteURI);
+                $cbc = $doc->createElement('cbc:WebsiteURI', utf8_encode($InvoiceO->AccountingCustomerParty->Party->WebsiteURI));
                 $cacparty->appendChild($cbc);
             }
             
@@ -1260,7 +1260,9 @@ class lodo_fakturabank_fakturabank {
                 $cacparty->appendChild($identification);
 
                 $name = $doc->createElement('cac:PartyName');
-                $cbc = $doc->createElement('cbc:Name', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PartyName->Name));
+                $cbc = $doc->createElement('cbc:Name');
+                $cdata = $doc->createCDATASection(utf8_encode($InvoiceO->AccountingCustomerParty->Party->PartyName->Name)); // handle ampersand in company names (we should probably send all text data with cdata function)
+                $cbc->appendChild($cdata);
                 $name->appendChild($cbc);
                 $cacparty->appendChild($name);
 
@@ -1269,13 +1271,13 @@ class lodo_fakturabank_fakturabank {
                 $cbc = $doc->createElement('cbc:StreetName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName));
                 $address->appendChild($cbc);
                 
-                $cbc = $doc->createElement('cbc:BuildingNumber', $InvoiceO->AccountingCustomerParty->Party->PostalAddress->BuildingNumber);
+                $cbc = $doc->createElement('cbc:BuildingNumber', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->BuildingNumber));
                 $address->appendChild($cbc);
                 
                 $cbc = $doc->createElement('cbc:CityName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->CityName));
                 $address->appendChild($cbc);
                 
-                $cbc = $doc->createElement('cbc:PostalZone', $InvoiceO->AccountingCustomerParty->Party->PostalAddress->PostalZone);
+                $cbc = $doc->createElement('cbc:PostalZone', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PostalAddress->PostalZone));
                 $address->appendChild($cbc);
                 
                 $country = $doc->createElement('cac:Country');
@@ -1355,16 +1357,16 @@ class lodo_fakturabank_fakturabank {
 
                     if (!empty($InvoiceO->AccountingCustomerParty->Party->Person)) {
                         $person = $doc->createElement('cac:Person');
-                        $cbc = $doc->createElement('cbc:FirstName', $InvoiceO->AccountingCustomerParty->Party->Person->FirstName);
+                        $cbc = $doc->createElement('cbc:FirstName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->Person->FirstName));
                         $person->appendChild($cbc);
-                        $cbc = $doc->createElement('cbc:FamilyName', $InvoiceO->AccountingCustomerParty->Party->Person->FamilyName);
+                        $cbc = $doc->createElement('cbc:FamilyName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->Person->FamilyName));
                         $person->appendChild($cbc);
                         if (!empty($InvoiceO->AccountingCustomerParty->Party->Person->MiddleName)) {
-                            $cbc = $doc->createElement('cbc:MiddleName', $InvoiceO->AccountingCustomerParty->Party->Person->MiddleName);
+                            $cbc = $doc->createElement('cbc:MiddleName', utf8_encode($InvoiceO->AccountingCustomerParty->Party->Person->MiddleName));
                             $person->appendChild($cbc);
                         }
                         if (!empty($InvoiceO->AccountingCustomerParty->Party->Person->JobTitle)) {
-                            $cbc = $doc->createElement('cbc:JobTitle', $InvoiceO->AccountingCustomerParty->Party->Person->JobTitle);
+                            $cbc = $doc->createElement('cbc:JobTitle', utf8_encode($InvoiceO->AccountingCustomerParty->Party->Person->JobTitle));
                             $person->appendChild($cbc);
                         }
 
@@ -1394,7 +1396,7 @@ class lodo_fakturabank_fakturabank {
             $paymentmeans->appendChild($cbc);
 
             #KID (text)
-            $cbc = $doc->createElement('cbc:InstructionNote', $InvoiceO->PaymentMeans->InstructionNote);
+            $cbc = $doc->createElement('cbc:InstructionNote', utf8_encode($InvoiceO->PaymentMeans->InstructionNote));
             $paymentmeans->appendChild($cbc);
 
             if (!empty($InvoiceO->PaymentMeans->PayerFinancialAccount)) {
@@ -1404,7 +1406,7 @@ class lodo_fakturabank_fakturabank {
                 $cbc->setAttribute('schemeID', 'BBAN');
                 $payerfinancialaccount->appendChild($cbc);
                 
-                $cbc = $doc->createElement('cbc:Name', $InvoiceO->PaymentMeans->PayerFinancialAccount->Name);
+                $cbc = $doc->createElement('cbc:Name', utf8_encode($InvoiceO->PaymentMeans->PayerFinancialAccount->Name));
                 $payerfinancialaccount->appendChild($cbc);
 
                 $paymentmeans->appendChild($payerfinancialaccount);
@@ -1416,7 +1418,7 @@ class lodo_fakturabank_fakturabank {
                 $cbc->setAttribute('schemeID', 'BBAN');
                 $financialaccount->appendChild($cbc);
                 
-                $cbc = $doc->createElement('cbc:Name', $InvoiceO->PaymentMeans->PayeeFinancialAccount->Name);
+                $cbc = $doc->createElement('cbc:Name', utf8_encode($InvoiceO->PaymentMeans->PayeeFinancialAccount->Name));
                 $financialaccount->appendChild($cbc);
 
             $paymentmeans->appendChild($financialaccount);
@@ -1595,6 +1597,7 @@ class lodo_fakturabank_fakturabank {
         #print_r($InvoiceH);
 
         $xml = $this->hash_to_xml($InvoiceO);
+        
         #$_lib['message']->add("FB->write1()");
         
         #print "<br>\n<br>\n$xml\n<br>\n<br>";
