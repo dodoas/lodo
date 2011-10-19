@@ -1207,7 +1207,7 @@ class lodo_fakturabank_fakturabank {
                         $contact->appendChild($cbc);
                     }
                     if (!empty($InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail)) {
-                        $cbc = $doc->createElement('cbc:ElectronicMail', $InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail);
+                        $cbc = $doc->createElement('cbc:ElectronicMail', utf8_encode($InvoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail));
                         $contact->appendChild($cbc);
                     }
                     if (!empty($InvoiceO->AccountingSupplierParty->Party->Contact->Mobile)) {
@@ -1262,6 +1262,7 @@ class lodo_fakturabank_fakturabank {
                 $name = $doc->createElement('cac:PartyName');
                 $cbc = $doc->createElement('cbc:Name');
                 $cdata = $doc->createCDATASection(utf8_encode($InvoiceO->AccountingCustomerParty->Party->PartyName->Name)); // handle ampersand in company names (we should probably send all text data with cdata function)
+                //$cdata = $doc->createCDATASection(utf8_encode($InvoiceO->AccountingCustomerParty->Party->PartyName->Name)); // handle ampersand in company names (we should probably send all text data with cdata function)
                 $cbc->appendChild($cdata);
                 $name->appendChild($cbc);
                 $cacparty->appendChild($name);
@@ -1338,7 +1339,7 @@ class lodo_fakturabank_fakturabank {
                         $contact->appendChild($cbc);
                     }
                     if (!empty($InvoiceO->AccountingCustomerParty->Party->Contact->ElectronicMail)) {
-                        $cbc = $doc->createElement('cbc:ElectronicMail', $InvoiceO->AccountingCustomerParty->Party->Contact->ElectronicMail);
+                        $cbc = $doc->createElement('cbc:ElectronicMail', utf8_encode($InvoiceO->AccountingCustomerParty->Party->Contact->ElectronicMail));
                         $contact->appendChild($cbc);
                     }
                     if (!empty($InvoiceO->AccountingCustomerParty->Party->Contact->Mobile)) {
