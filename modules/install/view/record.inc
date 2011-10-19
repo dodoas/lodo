@@ -36,6 +36,9 @@ elseif($_REQUEST['action_install_db'])
     $tables['menu']                     = true;
     $tables['linetextmap']              = true;
     $tables['altinnschemalist']         = true;
+    $tables['currency']         = true;
+    $tables['exchange']         = true;
+    $tables['country']         = true;
 
     $vat  = $_REQUEST['install_vat'];
     if($_REQUEST['install_vat'] == 1) {
