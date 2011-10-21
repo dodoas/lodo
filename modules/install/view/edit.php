@@ -101,8 +101,28 @@ else
         <td><? print $_lib['form3']->checkbox(array('table' => 'install', 'field' => 'arbeidsgiveravgift')); ?></td>
       </tr>
       <tr>
+        <td class="menu">Velg valuta</td>
+        <td>
+           <?php
+#Retrieve all currencies
+includelogic('exchange/exchange');
+
+$currencies = exchange::getAllCurrencies();
+?>
+      <select name="install.localcurrency">
+<?
+foreach ($currencies as $currency) {
+?>
+<option value="<? echo $currency->CurrencyISO; ?>" <?php if ($currency->CurrencyISO == 'NOK') echo 'selected="selected"'; ?>><? echo $currency->CurrencyISO; ?></option>
+<?
+}
+?>
+      </select>
+        </td>
+      </tr>
+      <tr>
         <td class="menu">Valuta oppsett</td>
-        <td><? print $_lib['form3']->checkbox(array('table' => 'install', 'field' => 'exchange')); ?></td>
+                                                                                                                     <td><? print $_lib['form3']->checkbox(array('table' => 'install', 'field' => 'exchange')); ?></td>
       </tr>
       <tr>
         <td class="menu">Prosjekt oppsett</td>

@@ -37,7 +37,6 @@ elseif($_REQUEST['action_install_db'])
     $tables['linetextmap']              = true;
     $tables['altinnschemalist']         = true;
     $tables['currency']         = true;
-    $tables['exchange']         = true;
     $tables['country']         = true;
 
     $vat  = $_REQUEST['install_vat'];
@@ -145,6 +144,8 @@ elseif($_REQUEST['action_install_db'])
     //$args = array();
 
     $install->salary();
+
+    $install->set_local_currency($_REQUEST['install_localcurrency']);
 
     #print "Installasjon ferdig<br>";
     $_REQUEST['installation_finished'] = true;

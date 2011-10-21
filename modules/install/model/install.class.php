@@ -286,6 +286,41 @@ class Install
         #print "Ferdig med ? intsallere preferanser";
     }
 
+    function set_local_currency($local_currency_iso) {
+        global $_lib;
+
+        if (!preg_match("/^[A-Z]*$/", $local_currency_iso)) { // safety against injection
+            $local_currency_iso = "NOK";
+        }
+        $query = "select Value from `setup` where Name='localcurrency'";
+        $row = $_lib['db']->get_row(array('query' => $query));
+        
+        if (empty($row)) {
+            $query = "INSERT INTO  `setup` (
+`SetupID` ,
+`Name` ,
+`Value` ,
+`Module` ,
+`TS` ,
+`MD5Created` ,
+`MD5Updated` ,
+`CreatedByPersonID` ,
+`UpdatedByPersonID` ,
+`CreatedDateTime` ,
+`CompanyID` ,
+`PersonID`
+)
+VALUES (
+NULL ,  'localcurrency', '". $local_currency_iso . "' , NULL , NOW( ) ,  '',  '',  '0',  '0',  '0000-00-00 00:00:00',  
+'0',  '0'
+)";
+        } else {
+            $query = "UPDATE `setup` SET `Value` = '" . $local_currency_iso . "' WHERE Name='localcurrency'";
+        }
+
+        $this->_dbh[$this->dsn_remote]->db_query3(array('query'=>$query, 'do_not_die'=>'1'));
+    }
+
     /* Denne funksjonen skj?nner jeg ikke helt hva skal brukes til */
     function salary() {
         global $_lib;
