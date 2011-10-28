@@ -1,6 +1,7 @@
 <?
 
 /* $Id: reskontro.php,v 1.65 2005/11/03 15:33:11 thomasek Exp $ main.php,v 1.12 2001/11/20 17:55:12 thomasek Exp $ */
+
 if($_lib['input']->getProperty('accountplan_AccountPlanID'))
 	$AccountPlanID  		= $_lib['input']->getProperty('accountplan_AccountPlanID');
 if($_lib['input']->getProperty('AccountPlanID'))

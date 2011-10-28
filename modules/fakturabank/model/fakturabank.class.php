@@ -431,10 +431,20 @@ class lodo_fakturabank_fakturabank {
 				$InvoiceO->LodoID = null;
 			}
 
+
             if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)) {
+                $companyid = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
                 $party_id = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
             } else {
+                $companyid = "";
                 $party_id = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
+            }
+
+
+            if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) {
+                $customernumber = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
+            } else {
+                $customernumber = "";
             }
         
             #Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to only look in the correct records? No?
@@ -494,15 +504,23 @@ class lodo_fakturabank_fakturabank {
                 }
             } else {
                 $InvoiceO->Status     .= "Finner ikke kunde basert pŒ PartyIdentification: " . $party_id;
-                                                // only offer autocreation for suppliers with a valid partyid
-                if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID) &&
-                    $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID == "NO:ORGNR") {
-                    $InvoiceO->Status .= sprintf('<a href="%s&t=fakturabank.createaccount&accountplanid=%s&type=customer">Opprett</a>', $_lib['sess']->dispatch, $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID);
-                } else if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) { // no orgnr present, offer creation based on customerid
-                    $InvoiceO->Status .= sprintf('<a href="%s&t=fakturabank.createaccount&accountplanid=%s&type=customer">Opprett p&aring; kundenr</a>', $_lib['sess']->dispatch, $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID);
-                } else {
+
+                if (empty($customernumber) && empty($companyid)) {
                     $InvoiceO->Status .= 'Ikke mulig &aring; auto-opprette denne type id';
+                } else {
+                    $msg = "Opprett";
+                    if (empty($companyid)) { // no orgnr present, offer creation based on customerid
+                        $accountplanid = $customernumber;
+                        $msg .= " p&aring; kundenr";
+                    } elseif (empty($customernumber)) {
+                        $accountplanid = $companyid;
+                    } else { // both customernumber and companyid present
+                        $accountplanid = $customernumber;
+                    }
+
+                    $InvoiceO->Status .= sprintf('<a href="%s&t=fakturabank.createaccount&accountplanid=%s&orgnumber=%s&type=customer">%s</a>', $_lib['sess']->dispatch, $accountplanid, $companyid, $msg);
                 }
+                                    
 
                 $InvoiceO->Journal = false;
                 $InvoiceO->Class   = 'red';
@@ -650,7 +668,7 @@ class lodo_fakturabank_fakturabank {
             } else {
                 $InvoiceO->Status   .= "Finner ikke leverand&oslash;r basert p&aring; PartyIdentification: " . $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID; 
 
-                $InvoiceO->Status   .= sprintf('<a href="%s&t=fakturabank.createaccount&accountplanid=%s&type=supplier">Opprett</a>', $_lib['sess']->dispatch, $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID);
+                $InvoiceO->Status   .= sprintf('<a href="%s&t=fakturabank.createaccount&accountplanid=%s&orgnumber=%s&type=supplier">Opprett</a>', $_lib['sess']->dispatch, $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID, $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID);
 
                 $InvoiceO->Journal = false;
                 $InvoiceO->Class   = 'red';
