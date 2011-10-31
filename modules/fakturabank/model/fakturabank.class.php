@@ -700,7 +700,7 @@ class lodo_fakturabank_fakturabank {
             foreach($SequenceH as $key => $value) {
         
                 #We should look at SchemeID - but the parser does not give us the scheme id - so we look in the preferred sequence until we find an account.
-                $query                  = "select * from accountplan where $key like '%" . $PartyIdentification . "%' and $key <> '' and $key is not null and AccountPlanType='$type'";
+                $query                  = "select * from accountplan where REPLACE($key, ' ', '') like '%" . $PartyIdentification . "%' and $key <> '' and $key is not null and AccountPlanType='$type'";
                 #print "$query<br>\n";
                 $account                = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));   
                 if($account) {
