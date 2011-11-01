@@ -723,10 +723,24 @@ class lodo_fakturabank_fakturabank {
     
         foreach($invoicesO->Invoice as $InvoiceO) {
 
+            $party_id = null;
+            $companyid = "";
+            $customernumber = "";
+
             if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)) {
-                $party_id = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
-            } else {
-                $party_id = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID; 
+                $companyid = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
+                $party_id = $companyid;
+            }
+
+            // customer number overrides company id as account plan id
+            if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) {
+                $customernumber = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
+                $party_id = $customernumber;
+            }
+
+            if (empty($customernumber) && empty($companyid)) {
+                $_lib['message']->add("Ikke mulig &aring; auto-opprette denne type id: " . $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID);
+                continue;
             }
 
             #check if exists first
@@ -739,7 +753,9 @@ class lodo_fakturabank_fakturabank {
                     #Vi mŒ uansett sjekke at den foreslŒtte kontoplanen ikke eksiterer fra f¿r.
 
                     $dataH['AccountPlanID']     = $party_id;
-                    $dataH['OrgNumber']         = $party_id; #We dont know SchemID because of parser limitations
+                    if (!empty($companyid)) {
+                        $dataH['OrgNumber']         = $companyid; #We dont know SchemID because of parser limitations
+                    }
                     $dataH['AccountName']       = $InvoiceO->AccountingCustomerParty->Party->PartyName->Name;
                     $dataH['AccountPlanType']   = 'customer';
 
