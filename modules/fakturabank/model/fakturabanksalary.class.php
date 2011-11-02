@@ -102,6 +102,7 @@ class lodo_fakturabank_fakturabanksalary {
         $xml_content .= "<to_date>" . $head->ValidTo . "</to_date>\n";
 		$xml_content .= "<document_number>L" . $head->JournalID . "</document_number>\n";
 		$xml_content .= "<document_date>" . $head->JournalDate . "</document_date>\n";
+		$xml_content .= "<payment_due_date>" . $head->PayDate . "</payment_due_date>\n";
 		$xml_content .= "<period>" . $head->Period . "</period>\n";
         $xml_content .= "<currency_code>" . exchange::getLocalCurrency() . "</currency_code>\n";
 
