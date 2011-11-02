@@ -29,7 +29,7 @@ $get_invoiceto          = "select * from accountplan where AccountPlanID=" . (in
 #print "invoiceto " . $get_invoiceto . "<br>\n";
 $row_to                 = $_lib['storage']->get_row(array('query' => $get_invoiceto));
 
-$get_invoicefrom        = "select IName as FromName, IAddress as FromAddress, Email, IZipCode as Zip, ICity as City, ICountryCode as CountryCode, Phone, BankAccount, Mobile, OrgNumber, VatNumber from company where CompanyID='$row->FromCompanyID'";
+$get_invoicefrom        = "select IName as FromName, IAddress as FromAddress, Email, WWW, IZipCode as Zip, ICity as City, ICountryCode as CountryCode, Phone, BankAccount, Mobile, OrgNumber, VatNumber from company where CompanyID='$row->FromCompanyID'";
 #print "get_invoicefrom " . $get_invoicefrom . "<br>\n";
 $row_from               = $_lib['storage']->get_row(array('query' => $get_invoicefrom));
 
@@ -129,6 +129,15 @@ print $_lib['sess']->doctype;
         <td>Email</td>
         <td><? print $row->IEmail ?></td>
     </tr>
+
+    <tr>
+        <td>Web</td>
+        <td><? print $row_from->WWW ?></td>
+        <td>Web</td>
+        <td><? print $row_to->Web ?></td>
+    </tr>
+
+
     <tr>
         <td>Konto nr</td>
         <td><? print $row_from->BankAccount ?></td>
@@ -324,21 +333,27 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     <tr>
         <td>
         <?
-	if(!$row->Locked) { 
-		print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_lock', 		'value'=>'L&aring;s (L)', 'accesskey'=>'L')); 
-	};
-
-        ?>
-        </td>
-        <td>
-        <?
 	    if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
             {
                 if(!$row->Locked || $_lib['sess']->get_person('AccessLevel') >= 4) {
                     print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_linenew', 'value'=>'Ny fakturalinje (N)', 'accesskey'=>'N'));
+                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_update', 'value'=>'Lagre faktura (S)', 'accesskey'=>'S'));
+                }
+                else {
+                    print "Periode stengt";
                 }
 	    }
+            else {
+                if($inline == 'edit')
+                    print "Du har ikke tilgang til &aring; lagre faktura";
+                else
+                    print "-";
+            }
         ?>
+        </td>
+    </tr>
+    <tr>
+        <td>
         <?
         if($_lib['sess']->get_person('AccessLevel') >= 2)
         {
@@ -346,6 +361,17 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         }
         ?>
         </td>
+    </tr>
+    <tr>
+        <td>
+        <?
+	if(!$row->Locked) { 
+		print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_lock', 'value'=>'L&aring;s (L)', 'accesskey'=>'L', 'confirm'=>'Er du sikker p&aring; at du vil l&aring;se fakturaen?')); 
+	};
+
+        ?>
+        </td>
+
 
         <td colspan="6" align="right">
         <?
@@ -358,17 +384,6 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
                                     print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_delete', 'value'=>'Slett faktura (D)', 'accesskey'=>'D', 'confirm' => 'Er du sikker p&aring; at du vil slette denne fakturaen?'));
 			}
 
-			if($_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit')
-			{
-				if($accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel'))
-                                    || $_lib['sess']->get_person('AccessLevel') >= 4) {
-					print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_update', 'value'=>'Lagre faktura (S)', 'accesskey'=>'S'));
-				} else {
-					print "Periode stengt";
-				}
-			} else {
-			  print "Du har ikke tilgang til &aring; lagre faktura";
-			}
 		} else {
 			print "Faktura l&aring;st";
 		}
@@ -385,7 +400,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     <tr>
         <td colspan="7" align="right">
         <form name="skriv_ut" action="<? print $_lib['sess']->dispatch ?>t=invoice.print&InvoiceID=<? print $InvoiceID ?>&amp;inline=edit" method="post" target="_new">
-            <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'value'=>'Vis')) ?>
+            <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'value'=>'Utskrift')) ?>
         </form>
         <form name="skriv_ut2" action="<? print $_lib['sess']->dispatch ?>t=invoice.print2&InvoiceID=<? print $InvoiceID ?>" method="post" target="_new">
             <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'value'=>'Vis PDF fil')) ?>

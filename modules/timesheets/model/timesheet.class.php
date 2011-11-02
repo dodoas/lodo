@@ -138,7 +138,7 @@ class timesheet_user
 
             if(!in_array("$y-$m", $periods))
             {
-                $periods[] = "$y-$m";
+                $periods[] = sprintf("%d-%d", $y, $m);
             }
         }
 
@@ -426,6 +426,12 @@ class timesheet_user_page
     public function __construct($user)
     {
         $this->user = $user;
+
+        /* fix period-strings. 
+           Somehow it expects dates in format 2011-2 instead of 2011-02 
+         */
+        list($fix_y, $fix_m) = explode('-', $_REQUEST['period']);
+        $_REQUEST['period'] = sprintf("%d-%d", $fix_y, (int)$fix_m);
     }
 
     public function set_root($root)
@@ -609,7 +615,13 @@ class timesheet_user_page
         }
 
         $periods = $this->user->list_periods();
-        rsort($periods);
+        function date_cmp($a, $b) {
+           list($a_y, $a_m) = explode('-', $a);
+           list($b_y, $b_m) = explode('-', $b);
+           return ((int)$a_y * 100 + (int)$a_m) > ((int)$b_y * 100 + (int)$b_m);
+        }
+
+        usort($periods, "date_cmp");
 
         $this->print_head();
 
@@ -622,9 +634,11 @@ class timesheet_user_page
 
         $last_year = "0";
         $i = 0;
+
         foreach($periods as $period)
         {
             list($year, $month) = explode('-', $period);
+            $month = (int)$month;
 
             printf("<tr>");
             
@@ -770,6 +784,7 @@ class timesheet_user_page
         {
             $locked = $period_info['Locked'];
         }
+
 
         $period_info = $this->user->get_period_info($period);
         
@@ -1032,7 +1047,7 @@ class timesheet_user_page
                     else if($field_data['type'] == "select")
                     {
                         /* make field sum */
-                        if($field == "Diet" || $field == "Accommodation" || $field == "Project") 
+                        if($field == "Diet" || $field == "Accommodation") 
                         {
                             if(!isset($sum_fields[$field])) 
                             {
@@ -1109,130 +1124,26 @@ class timesheet_user_page
 
         }
 
+        /* Headers */
+        printf("<tr>");
+        foreach($fields as $field => $field_data)
+        {
+            printf(' <th style="text-align: left;">%s</th> ', $field_data['translation']);
+        }
+
+        printf(
+            "</tr>\n"
+            );
+
+
         echo "</table>";
         echo "<br />";
-        echo "<table style='page-break-before: always;'>";
-
-        $sum_h += (int)($sum_m / 60);
-        $sum_m =  $sum_m % 60;
-        printf("<tr><td><b>Sum timer</b></td><td></td><td></td><td>%s:%s</td>",
-               (strlen("$sum_h") < 2 ? "0$sum_h" : $sum_h),
-               (strlen("$sum_m") < 2 ? "0$sum_m" : $sum_m));
-
-        $stats = $this->user->get_stats($period);
-        $projects  = $this->user->list_projects();
 
         echo 
-            "<td rowspan='10'><label style='display: block'>Kommentar</label><textarea cols='100' rows='18' name='comment'>" .
+            "<label style='display: block'>Kommentar</label><textarea cols='100' rows='18' name='comment'>" .
             htmlspecialchars( $period_info['Comment'], ENT_NOQUOTES ) .
-            "</textarea></td></tr>";
+            "</textarea>";
 
-        echo "<tr></tr>";
-
-
-        $hilight_id = 0;
-        foreach($stats as $stat)
-        {
-            $hilight_id ++;
-            $sum_h = (int)($stat['sum'] / 60);
-            $sum_m =  $stat['sum'] % 60;
-            $p = $projects[ $stat['Project'] ];
-            printf("<tr><td colspan=3><b>Sum <a href='#' class='hilight' id='hilight_%d'>%s</a</b></td><td>%s:%s</td></tr>",
-                   $hilight_id, $p, 
-                   (strlen("$sum_h") < 2 ? "0$sum_h" : $sum_h),
-                   (strlen("$sum_m") < 2 ? "0$sum_m" : $sum_m));
-                   
-            ?>
-<script>
-     $('#hilight_<?= $hilight_id ?>').click(function(){
-             $.each($('tr'),
-                    function(){
-                        var t = $(this);
-                        //this.css({'backgroundColor': 'white'});
-                        if(t.attr('id').substring(0, 5) != 'rowno')
-                            return;
-
-                        t.css({'backgroundColor': 'white'});
-                        var is_correct_project = false;
-                        var has_sum = false;
-
-                        if(t.children('.field_Project').html() == '<?= $p ?>' &&
-                           t.children('.field_SumTime').html() != '00:00') {
-                            is_correct_project = true;
-                            has_sum = true;
-                        }
-
-                        $.each( $('#' + t.attr('id') + ' select'), function(){
-                                if($(this).attr('name').indexOf('Project') != -1 &&
-                                   $(this).val() == '<?= $stat['Project'] ?>') {
-                                    is_correct_project = true;
-                                }
-                                else if($(this).attr('name').indexOf('SumTime') != -1 &&
-                                        $(this).val() > 0) {
-                                    has_sum = true;
-                                }
-                            });
-
-                        if(is_correct_project && has_sum) {
-                            t.css({'backgroundColor': '#bbb'});
-                        }
-                    }
-             );
-             
-         });
-</script>
-            <?
-        }
-
-        if($sum_km > 0) 
-        {
-            printf('<tr><td colspan=3><b>Sum reiselengde</b></td><td>%d km</td></tr>', $sum_km);
-        }
-
-        if($sum_toll > 0) 
-        {
-            printf('<tr><td colspan=3><b>Sum bompenger</b></td><td>%10.2f kr</td></tr>', $sum_toll);
-        }
-
-        if($sum_parking > 0) 
-        {
-            printf('<tr><td colspan=3><b>Sum parkering</b></td><td>%10.2f kr</td></tr>', $sum_parking);
-        }
-
-        if($sum_drivingexpenses > 0) 
-        {
-            printf('<tr><td colspan=3><b>Sum parkering</b></td><td>%10.2f kr</td></tr>', $sum_drivingexpenses);
-        }
-
-
-        printf('<tr style="height: 10px;"></tr><tr><td colspan=3><b>Antall oppf&oslash;ringer</b></td><tr>');
-        foreach($sum_fields as $f => $a) 
-        {
-            $o = $fields[$f]['options'];
-
-            printf('<tr><td colspan=3><b>%s</b></td></tr>', $fields[$f]['translation']);
-
-            foreach($a as $n => $v) 
-            {
-                if($n == 0)
-                    continue;
-
-                if(!is_float($v)) 
-                {
-                    printf("<tr><td></td><td colspan=2>%s</td><td>%d</td></tr>", $o[$n], $v);
-                }
-                else
-                {
-                    $h = floor($v);
-                    $m = ($v - $h) * 60.0;
-                    printf("<tr><td></td><td colspan=2>%s</td><td>%02d:%02d</td></tr>", $o[$n], $h, $m);
-                }
-            }
-        }
-
-        printf("</table>");
-
-        
         if(!$locked)
             printf("<p><input type='submit' name='save' value='Lagre' id='save_button' /></p>");
         
@@ -1250,6 +1161,57 @@ class timesheet_user_page
 
         printf("</tabel>\n" .
                "</form>\n");
+
+
+
+
+        $stats = $this->user->get_stats($period);
+        $projects  = $this->user->list_projects();
+
+
+        printf("<pre style='page-break-before: always;'>");
+        printf("%-40s %.2f\n", "Jobbet timer", $sum_h + $sum_m / 60);
+
+
+        foreach($sum_fields as $f => $a) {
+            if($f == 'Project' || $f == 'Customer' || $f == 'CompanyDepartment' || $f == 'WorkType')
+            {
+                printf("\n%s - timer\n", $fields[$f]['translation']);
+                $format = "    %-36s %.2f\n";
+            }
+            else if($f == 'Diet' || $f == 'Accommodation')
+            {
+                printf("\n%s, antall\n", $fields[$f]['translation']);
+                $format = "    %-36s %d\n";
+            }
+
+            $o = $fields[$f]['options'];
+            $sum = 0;
+            foreach($a as $c => $v) 
+            {
+                if($v <= 0.001) continue;
+                if(!isset($o[$c])) $o[$c] = 'Diverse';
+                printf($format, $o[$c], $v);
+                $sum += $v;
+            }
+ 
+            if($f == 'Project' || $f == 'Customer' || $f == 'CompanyDepartment' || $f == 'WorkType')
+            {
+                printf("    %-36s %2.2f\n", "Sum " . $fields[$f]['translation'], $sum);
+            }
+
+        }
+
+        if($sum_km > 0)
+            printf("\n%-47s %d\n", "Kilometer kj&oslash;rt", $sum_km);
+
+        if($sum_toll + $sum_parkin + $sum_drivingexpenses > 0) 
+        {
+            printf("\nUtlagt - kroner\n");
+            if($sum_toll > 0) printf("    %-36s %2.2f\n", "Bompenger", $sum_toll);
+            if($sum_parking > 0) printf("    %-36s %2.2f\n", "Parkering", $sum_parking);
+            if($sum_drivingexpenses > 0) printf("    %-36s %2.2f\n", "Reiseutgifter", $sum_drivingexpenses);
+        }
 
         ?>
         
@@ -1676,8 +1638,8 @@ $(document).ready(function() {
             'WorkType'   => array('type' => 'select', 'options' => $worktypes, 'default' => 0, 'translation' => 'Arbeidsart', 'checked' => true),
 
 
-            'Diet'       => array('type' => 'select', 'options' => $diets, 'default' => 0, 'translation' => 'Diett', 'checked' => false),
-            'Accommodation' => array('type' => 'select', 'options' => $accommodations, 'default' => 0, 'translation' => 'Overnatting', 'checked' => false),
+            'Diet'       => array('type' => 'select', 'options' => $diets, 'default' => 0, 'translation' => 'Diett - Mat', 'checked' => false),
+            'Accommodation' => array('type' => 'select', 'options' => $accommodations, 'default' => 0, 'translation' => 'Diett - Overnatting', 'checked' => false),
 
             'TravelRoute' => array('type' => 'text', 'size' => '30', 'default' => "", 'translation' => 'Reiserute', 'checked' => false),
             'TravelDesc' => array('type' => 'text', 'size' => '30', 'default' => "", 'translation' => 'Reiseform&aring;l', 'checked' => false),
@@ -1698,6 +1660,7 @@ $(document).ready(function() {
                     unset($fields[$k]);
             }
         }
+
 
         ksort($entries);
         $this->print_table($period_name, $fields, $entries, $this->root . '&tp=view&period=' . $_REQUEST['period']);

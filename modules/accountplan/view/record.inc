@@ -120,9 +120,6 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
                     else if($k == "SalaryConfID") {
                         $v = $id;
                     }
-                    else if($k == "Active") {
-                        $v = '0';
-                    }
                     
                     if($i++ != 0) 
                         $q .= ",";

@@ -7,6 +7,7 @@ $db_table2 = 'salaryconfline';
 
 includelogic('accounting/accounting');
 $accounting = new accounting();
+
 require_once "record.inc";
 
 $query_head     = "select * from $db_table where SalaryConfID = '$SalaryConfID'";
@@ -86,11 +87,8 @@ print $_lib['sess']->doctype ?>
    <tr>
     <td>
     <?
-        if($ishovedmal != 1)
-        {
             ?><input type="hidden" name="salaryconfline.Active.<? print $line->SalaryConfLineID ?>" id="active.<? print $line->SalaryConfLineID ?>" value="<? print $line->Active ?>" /><?
             ?><input type="checkbox" <? print ($line->Active ? 'checked="checked"' : '') ?> onchange="switchActive(<? print $line->SalaryConfLineID ?>)" /><?
-        }
     ?>
     </td>
     <td>

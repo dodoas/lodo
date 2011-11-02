@@ -14,11 +14,11 @@ includelogic('accounting/accounting');
 $accounting = new accounting();
 require_once "record.inc";
 
-$get_invoice            = "select I.*, A.InvoiceCommentCustomerPosition, A.OrgNumber, A.VatNumber, A.Mobile, A.Phone, A.AccountName from $db_table as I, accountplan as A where InvoiceID='$InvoiceID' and A.AccountPlanID=I.CustomerAccountPlanID";
+$get_invoice            = "select I.*, A.InvoiceCommentCustomerPosition, A.OrgNumber, A.VatNumber, A.Mobile, A.Phone, A.AccountName, A.Web from $db_table as I, accountplan as A where InvoiceID='$InvoiceID' and A.AccountPlanID=I.CustomerAccountPlanID";
 #print "$get_invoice<br>\n";
 $row                    = $_lib['storage']->get_row(array('query' => $get_invoice));
 
-$get_invoicefrom        = "select IName as FromName, IAddress as FromAddress, Email, IZipCode as Zip, ICity as City, Phone, BankAccount, Mobile, OrgNumber, VatNumber, ICountryCode as CountryCode from company where CompanyID='$row->FromCompanyID'";
+$get_invoicefrom        = "select IName as FromName, IAddress as FromAddress, Email, WWW, IZipCode as Zip, ICity as City, Phone, BankAccount, Mobile, OrgNumber, VatNumber, ICountryCode as CountryCode from company where CompanyID='$row->FromCompanyID'";
 #print "$get_invoicefrom<br>\n";
 $row_from               = $_lib['storage']->get_row(array('query' => $get_invoicefrom));
 
@@ -46,14 +46,12 @@ print $_lib['sess']->doctype ?>
 
 <body>
 
-
-<h2>Faktura <? print $InvoiceID ?> 
+<h2>
 <span class="noprint">
 <? print $_lib['form3']->URL(array('description' => '<<', 'title' => 'Klikk for &aring; se forrige bilag', 'url' => $_lib['sess']->dispatch . 't=invoice.print&amp;InvoiceID=' . ($InvoiceID - 1))) ?>
 <? print $_lib['form3']->URL(array('description' => '>>', 'title' => 'Klikk for &aring; se neste bilag',   'url' => $_lib['sess']->dispatch . 't=invoice.print&amp;InvoiceID=' . ($InvoiceID + 1))) ?>
 </span>
 </h2>
-<div style="margin-bottom: 10px">Valuta <? print $row->CurrencyID ?></div> 
 <table class="lodo_data" id="head" frame="sides" rules="groups" summary="Faktura">
 <COLGROUP align="left" span="2">
 <thead>
@@ -110,11 +108,25 @@ print $_lib['sess']->doctype ?>
         <td><? print $row->IEmail ?></td>
     </tr>
     <tr>
+        <td><label>Web</label></td>
+        <td><? print $row_from->WWW ?></td>
+        <td><label>Web</label></td>
+        <td><? print $row->Web ?></td>
+    </tr>
+    <tr>
         <td><label>Konto nr</label></td>
         <td><? print $row_from->BankAccount ?></td>
         <td><label>Konto nr</label></td>
         <td><b><? print $row->BankAccount ?><b></td>
     </tr>
+
+    <tr>
+	    <td>KID</td>
+	    <td><? print $row->KID ?></td>
+            <td></td><td></td>
+    </tr>
+
+
     <tr>
         <td><label>Org nr</label></td>
         <td><? print $row_from->OrgNumber ?></td>
@@ -127,6 +139,19 @@ print $_lib['sess']->doctype ?>
         <td><label><?php if (!empty($row->VatNumber)) echo 'Vat nr' ?></label></td>
         <td><? if (!empty($row->VatNumber)) print $row->VatNumber ?></td>
     </tr>
+    <tr>
+      <td>Avdeling</td>
+      <td><? if($row->DepartmentID) print $row->DepartmentID ?></td>
+      <td>Avdeling</td>
+      <td><? print $row->DepartmentCustomer ?></td>
+    </tr>
+    <tr>
+      <td>Prosjekt</td>
+      <td><? if($row->ProjectID) print $row->ProjectID ?></td>
+      <td>Prosjekt</td>
+      <td><? print $row->ProjectNameCustomer ?></td>
+    </tr>
+
     <tr height="20">
         <td></td>
         <td></td>
@@ -136,6 +161,14 @@ print $_lib['sess']->doctype ?>
 </thead>
 
 <tbody>
+    <tr>
+      <td>Fakturanummer</td>
+      <td><?= $InvoiceID ?></td>
+ 
+      <td>Valuta</td>
+      <td><?= $row->CurrencyID ?></td>
+    </tr>
+
     <tr>
       <td>Faktura dato</td>
       <td><b><? print substr($row->InvoiceDate,0,10) ?></b></td>
@@ -156,26 +189,13 @@ print $_lib['sess']->doctype ?>
       <td><? print $row->RefInternal ?></td>
     </tr>
     <tr>
-      <td>Avdeling</td>
-      <td><? if($row->DepartmentID) print $row->DepartmentID ?></td>
-      <td>Avdeling</td>
-      <td><? print $row->DepartmentCustomer ?></td>
-    </tr>
-    <tr>
-      <td>Prosjekt</td>
-      <td><? if($row->ProjectID) print $row->ProjectID ?></td>
-      <td>Prosjekt</td>
-      <td><? print $row->ProjectNameCustomer ?></td>
-    </tr>
-    <tr>
       <td>Leverings betingelse</td>
       <td><? print $row->DeliveryCondition ?></td>
       <td>Betalings betingelse</td>
       <td><? print $row->PaymentCondition ?></td>
     </tr>
-    <tr>
-	    <td>KID</td>
-	    <td><? print $row->KID ?></td>
+    <tr>  
+            <td></td><td></td>
 	    <td>Merk</td>
 	    <td><? print $row->Note ?></td>
     </tr>

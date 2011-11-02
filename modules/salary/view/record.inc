@@ -357,7 +357,6 @@ elseif($_lib['input']->getProperty('action_salaryconf_new'))
 elseif($_lib['input']->getProperty('action_salaryconf_update'))
 {
   $lagre = true;
-
   ############################
   # Hvis det er hovedmal
   if($_POST['SalaryConfID'] == 1)

@@ -148,6 +148,14 @@ if($JournalID) {
     <td></td>
   </tr>
   <tr>
+    <td class="menu">Web</td>
+    <td></td>
+    <td><input type="text" name="accountplan.Web" value="<? print $account->Web  ?>" size="30"></td>
+    <td></td>
+    <td></td>
+  </tr>
+
+  <tr>
     <td class="menu">Tekst informasjon</td>
     <td></td>
     <td colspan="3"><input type="text" name="accountplan.Description" value="<? print $account->Description  ?>" size="70"></td>
