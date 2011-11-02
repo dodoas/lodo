@@ -34,11 +34,17 @@ print $_lib['sess']->doctype; ?>
 Merk: Du m&aring; registrere brukeren din p&aring; <a href="http://fakturabank.no">http://fakturabank.no</a> for at dette skal fungere
 
 
-<form name="invoice_edit" action="<? print $_lib['sess']->dispatch ?>t=fakturabank.listoutgoing" method="post">
+<form name="invoice_edit" id="invoice_edit" action="<? print $_lib['sess']->dispatch ?>t=fakturabank.listoutgoing" method="post">
 <input type="submit" value="Registrer utg&aring;ende fakturaer (R)" name="action_fakturabank_registeroutgoing" accesskey="R">
 <input type="submit" value="Opprett manglende kontoplaner (A)" name="action_fakturabank_addmissingaccountplan" accesskey="A">
+<input type="hidden" value="" name="action_fakturabank_addsinglemissingaccountplan_id" id="action_fakturabank_addsinglemissingaccountplan_id" />
 </form>
-
+<script type="text/javascript">
+function addsingleaccountplan(invoice_id) {
+    $('#invoice_edit #action_fakturabank_addsinglemissingaccountplan_id').val(invoice_id);
+    $('#invoice_edit').submit();
+}
+</script>
 <?
 if(is_array($InvoicesO->Invoice))
 {

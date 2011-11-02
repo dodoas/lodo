@@ -510,15 +510,10 @@ class lodo_fakturabank_fakturabank {
                 } else {
                     $msg = "Opprett";
                     if (empty($companyid)) { // no orgnr present, offer creation based on customerid
-                        $accountplanid = $customernumber;
                         $msg .= " p&aring; kundenr";
-                    } elseif (empty($customernumber)) {
-                        $accountplanid = $companyid;
-                    } else { // both customernumber and companyid present
-                        $accountplanid = $customernumber;
                     }
-
-                    $InvoiceO->Status .= sprintf('<a href="%s&t=fakturabank.createaccount&accountplanid=%s&orgnumber=%s&type=customer">%s</a>', $_lib['sess']->dispatch, $accountplanid, $companyid, $msg);
+                         
+                    $InvoiceO->Status .= sprintf('<a href="#" onclick="javascript:addsingleaccountplan(\'%s\'); return false;">%s</a>', $InvoiceO->ID, $msg);
                 }
                                     
 
@@ -715,13 +710,16 @@ class lodo_fakturabank_fakturabank {
         return array($account, $SchemeID);
     }
 
-    #Only fo adding new customers at this point in time.
-    public function addmissingaccountplan() {
+    #Only for adding new customers at this point in time.
+    public function addmissingaccountplan($single_invoice_id = false) {
         global $_lib;
         $invoicesO  = $this->outgoing();
         $count      = 0;
     
         foreach($invoicesO->Invoice as $InvoiceO) {
+            if (!empty($single_invoice_id) && $InvoiceO->ID != $single_invoice_id) {
+                continue; // this is not the droid you are looking for
+            }
 
             $party_id = null;
             $companyid = "";
@@ -792,6 +790,10 @@ class lodo_fakturabank_fakturabank {
                 } else {
                     $_lib['message']->add("Reskontro med nummer lavere enn 10.000 mŒ opprettes manuelt: " . $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID);
                 }
+            }
+
+            if (!empty($single_invoice_id) && $InvoiceO->ID == $single_invoice_id) {
+                break; // finished since we have processed the only one we wanted
             }
         }
         $_lib['message']->add("$count kontoplaner automatisk opprettet - motkonto m&aring; settes manuelt");
