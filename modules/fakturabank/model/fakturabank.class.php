@@ -431,24 +431,10 @@ class lodo_fakturabank_fakturabank {
 				$InvoiceO->LodoID = null;
 			}
 
+            list($partyid, $companyid, $customernumber) = $this->extractIdentifiers($InvoiceO);
 
-            if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)) {
-                $companyid = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
-                $party_id = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
-            } else {
-                $companyid = "";
-                $party_id = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
-            }
-
-
-            if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) {
-                $customernumber = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
-            } else {
-                $customernumber = "";
-            }
-        
             #Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to only look in the correct records? No?
-            list($account, $SchemeID)  = $this->find_reskontro($party_id, 'customer');
+            list($account, $SchemeID)  = $this->find_reskontro($partyid, 'customer');
             if ($account) {
                 $InvoiceO->AccountPlanID   = $account->AccountPlanID;
                 
@@ -503,7 +489,7 @@ class lodo_fakturabank_fakturabank {
                     $InvoiceO->Status   .= "Klar til bilagsf&oslash;ring basert p&aring: SchemeID: $SchemeID";
                 }
             } else {
-                $InvoiceO->Status     .= "Finner ikke kunde basert på PartyIdentification: " . $party_id;
+                $InvoiceO->Status     .= "Finner ikke kunde basert på PartyIdentification: " . $partyid;
 
                 if (empty($customernumber) && empty($companyid)) {
                     $InvoiceO->Status .= 'Ikke mulig &aring; auto-opprette denne type id';
@@ -672,6 +658,25 @@ class lodo_fakturabank_fakturabank {
         return $invoicesO;
     }
 
+    private function extractIdentifiers($InvoiceO) {
+        $partyid = null;
+        $companyid = "";
+        $customernumber = "";
+
+        if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)) {
+            $companyid = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
+            $partyid = $companyid;
+        }
+
+        // customer number overrides company id as account plan id
+        if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) {
+            $customernumber = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
+            $partyid = $customernumber;
+        }
+
+        return array($partyid, $companyid, $customernumber);
+    }
+
     ################################################################################################
     # Try to find the reskontro in the following sequenze: OrgNumber, E-Mail, Phone, AccountPlanID/Customer number
     # It will be possible to add a lot of mappings here - but it will be a lot of manuell adminsitration to get it working
@@ -721,20 +726,7 @@ class lodo_fakturabank_fakturabank {
                 continue; // this is not the droid you are looking for
             }
 
-            $party_id = null;
-            $companyid = "";
-            $customernumber = "";
-
-            if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)) {
-                $companyid = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
-                $party_id = $companyid;
-            }
-
-            // customer number overrides company id as account plan id
-            if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) {
-                $customernumber = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
-                $party_id = $customernumber;
-            }
+            list($partyid, $companyid, $customernumber) = $this->extractIdentifiers($InvoiceO);
 
             if (empty($customernumber) && empty($companyid)) {
                 $_lib['message']->add("Ikke mulig &aring; auto-opprette denne type id: " . $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID);
@@ -742,15 +734,15 @@ class lodo_fakturabank_fakturabank {
             }
 
             #check if exists first
-            if($this->find_reskontro($party_id, 'customer')) {
+            if($this->find_reskontro($partyid, 'customer')) {
                 $dataH = array();
                 
-                if($party_id > 10000) {
+                if($partyid > 10000) {
                     #Vi burde visst SchemeID - slik at vi kan bestemme om kontoplan skal telles automatisk eller ikke > 10000 pga norsk kontoplan
 
                     #Vi må uansett sjekke at den foreslåtte kontoplanen ikke eksiterer fra før.
 
-                    $dataH['AccountPlanID']     = $party_id;
+                    $dataH['AccountPlanID']     = $partyid;
                     if (!empty($companyid)) {
                         $dataH['OrgNumber']         = $companyid; #We dont know SchemID because of parser limitations
                     }
