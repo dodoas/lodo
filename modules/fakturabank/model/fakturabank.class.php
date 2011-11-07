@@ -74,7 +74,7 @@ class lodo_fakturabank_fakturabank {
         $page       = "invoices/outgoing.xml";
 
         $params     = "?rows=200&orgnr=$this->OrgNumber"; // add top limit rows=1000, otherwise we only get one record
-        $params     .= "&supplier_status=created"; #Only retrieve with status 'created'
+        $params     .= "&supplier_status=approved"; #Only retrieve with status 'approved'
         $params     .= "&order=invoiceno";
         
         $url    = "$this->protocol://$this->host/$page$params";
