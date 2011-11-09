@@ -839,7 +839,7 @@ class invoice {
         $sql_customer = "select * from accountplan where AccountPlanID=" . (int) $invoice->CustomerAccountPlanID;
         $customer     = $_lib['storage']->get_row(array('query' => $sql_customer));
 
-        $this->invoiceO->AccountingCustomerParty->Party->WebsiteURI                     = $customer->URL;
+        $this->invoiceO->AccountingCustomerParty->Party->WebsiteURI                     = $customer->Web;
         $this->invoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID        = preg_replace('/[^0-9]+/', '', $customer->OrgNumber);
 
         if (!empty($customer->VatNumber)) {
