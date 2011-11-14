@@ -684,19 +684,33 @@ class lodo_fakturabank_fakturabank {
         global $_lib;
         
         if($PartyIdentification) {
-        
-            $SequenceH = array(
-                'OrgNumber'                 => 1,
-                'IBAN'                      => 2,
-                'DomesticBankAccount'       => 3,
-                'Email'                     => 4,
-                'Mobile'                    => 5,
-                'Phone'                     => 6,
-                'CustomerNumber'            => 7,
-                'AccountPlanID'             => 8,
-                'AccountName'               => 9,
-            );
+
+            if ($type == 'supplier') {
+                $SequenceH = array(
+                                   'OrgNumber'                 => 1,
+                                   'IBAN'                      => 2,
+                                   'DomesticBankAccount'       => 3,
+                                   'Email'                     => 4,
+                                   'Mobile'                    => 5,
+                                   'Phone'                     => 6,
+                                   'AccountPlanID'             => 8,
+                                   'AccountName'               => 9,
+                                   );
+
+            } else {
+                $SequenceH = array(
+                                   'OrgNumber'                 => 1,
+                                   'IBAN'                      => 2,
+                                   'DomesticBankAccount'       => 3,
+                                   'Email'                     => 4,
+                                   'Mobile'                    => 5,
+                                   'Phone'                     => 6,
+                                   'CustomerNumber'            => 7,
+                                   'AccountPlanID'             => 8,
+                                   'AccountName'               => 9,
+                                   );
     
+            }
             foreach($SequenceH as $key => $value) {
         
                 #We should look at SchemeID - but the parser does not give us the scheme id - so we look in the preferred sequence until we find an account.
@@ -1136,6 +1150,25 @@ class lodo_fakturabank_fakturabank {
 
         $cbc = $doc->createElement('cbc:DocumentCurrencyCode', $InvoiceO->DocumentCurrencyCode);
         $invoice->appendChild($cbc);
+
+       
+        /* /\* gather data to be sent in AccountCost element *\/ */
+        /* $acc_cost = ''; */
+        /* $acc_types = array('Department', 'DepartmentCode', 'Project', 'ProjectCode', 'CustomerDepartment', 'CustomerProject'); */
+
+        /* foreach ($acc_types as $acc_type) { */
+        /*     if (!empty($InvoiceO->$acc_type)) { */
+        /*         if (!$empty($acc_cost)) { */
+        /*             $acc_cost .= '&'; */
+        /*         } */
+        /*         $acc_cost .= strtolower($acc_type) . '=' . urlencode($InvoiceO->$acc_type); */
+        /*     } */
+        /* } */
+
+        /* if (!empty($acc_cost)) { */
+        /*     $cbc = $doc->createElement('cbc:AccountingCost', utf8_encode($acc_cost)); */
+        /*     $invoice->appendChild($cbc); */
+        /* } */
 
         if (!empty($InvoiceO->OrderReference)) {
             $order_reference = $doc->createElement('cac:OrderReference');
