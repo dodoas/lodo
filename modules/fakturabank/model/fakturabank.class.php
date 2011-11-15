@@ -664,8 +664,13 @@ class lodo_fakturabank_fakturabank {
         $customernumber = "";
 
         if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)) {
-            $companyid = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
-            $partyid = $companyid;
+            if ($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID == 'FAKTURABANK:CUSTOMERNUMBER') {
+                $customernumber = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
+                $partyid = $customernumber;
+            } else {
+                $companyid = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
+                $partyid = $companyid;
+            }
         }
 
         // customer number overrides company id as account plan id
