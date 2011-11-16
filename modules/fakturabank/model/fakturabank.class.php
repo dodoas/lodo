@@ -93,7 +93,7 @@ class lodo_fakturabank_fakturabank {
         #https://fakturabank.no/invoices?orgnr=981951271
 
         $page       = "invoices";
-        $params     = "?rows=200&orgnr=" . $this->OrgNumber . '&order=issue_date'; // add top limit rows=1000, otherwise we only get one record
+        $params     = "?rows=200&orgnr=" . $this->OrgNumber . '&order=issue_date&sord=asc'; // add top limit rows=1000, otherwise we only get one record
         if($this->retrievestatus) $params .= '&customer_status=' . $this->retrievestatus;
         $url    = "$this->protocol://$this->host/$page$params";
         $_lib['message']->add($url);
