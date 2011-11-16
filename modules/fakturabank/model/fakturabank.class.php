@@ -431,12 +431,20 @@ class lodo_fakturabank_fakturabank {
 				$InvoiceO->LodoID = null;
 			}
 
-            list($partyid, $companyid, $customernumber) = $this->extractIdentifiers($InvoiceO);
+            if (empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) {
+                $InvoiceO->Status     .= "Faktura mangler kundenummer";
+                $InvoiceO->Journal     = false;
+                $InvoiceO->Class       = 'red';
+
+                continue;
+            }
+
+            $customernumber = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
 
             #Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to only look in the correct records? No?
-            list($account, $SchemeID)  = $this->find_reskontro($partyid, 'customer');
+            $account = $this->find_customer_reskontro_by_customernumber($customernumber);
             if ($account) {
-                $InvoiceO->AccountPlanID   = $account->AccountPlanID;
+                $InvoiceO->AccountPlanID = $account->AccountPlanID;
                 
                 if(!$accounting->is_valid_accountperiod($InvoiceO->Period, $_lib['sess']->get_person('AccessLevel'))) {
                     #Finne siste og første åpne periode kunne vært i et eget accountperiod objekt.
@@ -486,23 +494,12 @@ class lodo_fakturabank_fakturabank {
                 }
 
                 if($InvoiceO->Journal) {
-                    $InvoiceO->Status   .= "Klar til bilagsf&oslash;ring basert p&aring: SchemeID: $SchemeID";
+                    $InvoiceO->Status   .= "Klar til bilagsf&oslash;ring basert p&aring: Kundenummer";
                 }
             } else {
-                $InvoiceO->Status     .= "Finner ikke kunde basert på PartyIdentification: " . $partyid;
-
-                if (empty($customernumber) && empty($companyid)) {
-                    $InvoiceO->Status .= 'Ikke mulig &aring; auto-opprette denne type id';
-                } else {
-                    $msg = "Opprett";
-                    if (empty($companyid)) { // no orgnr present, offer creation based on customerid
-                        $msg .= " p&aring; kundenr";
-                    }
-                         
-                    $InvoiceO->Status .= sprintf('<a href="#" onclick="javascript:addsingleaccountplan(\'%s\'); return false;">%s</a>', $InvoiceO->ID, $msg);
-                }
-                                    
-
+                $InvoiceO->Status     .= "Finner ikke kunde basert på kundenummer: " . $customernumber;
+                $msg = "Opprett p&aring; kundenr";
+                $InvoiceO->Status .= sprintf('<a href="#" onclick="javascript:addsingleaccountplan(\'%s\'); return false;">%s</a>', $InvoiceO->ID, $msg);
                 $InvoiceO->Journal = false;
                 $InvoiceO->Class   = 'red';
             }
@@ -658,28 +655,32 @@ class lodo_fakturabank_fakturabank {
         return $invoicesO;
     }
 
-    private function extractIdentifiers($InvoiceO) {
-        $partyid = null;
-        $companyid = "";
-        $customernumber = "";
+    private function extractCustomerSchemeID($InvoiceO) {
+        $companyid = null;
+        $schemeid = null;
 
         if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)) {
-            if ($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID == 'FAKTURABANK:CUSTOMERNUMBER') {
-                $customernumber = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
-                $partyid = $customernumber;
-            } else {
+            if ($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID != 'FAKTURABANK:CUSTOMERNUMBER') {
                 $companyid = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
-                $partyid = $companyid;
+                $schemeid = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
             }
         }
 
-        // customer number overrides company id as account plan id
-        if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) {
-            $customernumber = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
-            $partyid = $customernumber;
-        }
+        return array($companyid, $schemeid);
+    }
 
-        return array($partyid, $companyid, $customernumber);
+
+    private function find_customer_reskontro_by_customernumber($customernumber) {
+        global $_lib;
+        
+        
+        $query                  = "select * from accountplan where REPLACE(AccountPlanID, ' ', '') like '%" . $customernumber . "%' and AccountPlanID <> '' and AccountPlanID is not null and AccountPlanType='customer'";
+        $account                = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));   
+        if($account) {
+            return $account;
+        } else {
+            return false;
+        }
     }
 
     ################################################################################################
@@ -737,6 +738,9 @@ class lodo_fakturabank_fakturabank {
     #Only for adding new customers at this point in time.
     public function addmissingaccountplan($single_invoice_id = false) {
         global $_lib;
+        
+        $VALID_ORGNO_SCHEMES = array('NO:ORGNR', 'SE:OrganisationNumber');
+
         $invoicesO  = $this->outgoing();
         $count      = 0;
     
@@ -745,25 +749,30 @@ class lodo_fakturabank_fakturabank {
                 continue; // this is not the droid you are looking for
             }
 
-            list($partyid, $companyid, $customernumber) = $this->extractIdentifiers($InvoiceO);
-
-            if (empty($customernumber) && empty($companyid)) {
-                $_lib['message']->add("Ikke mulig &aring; auto-opprette denne type id: " . $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID);
+            if (empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) {
+                $_lib['message']->add("Ikke mulig &aring; auto-opprette fordi kundenr mangler.");
                 continue;
             }
 
+            $customernumber = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
+
+            list($SchemeID, $SchemeIDType) = $this->extractCustomerSchemeID($InvoiceO);
+
             #check if exists first
-            if($this->find_reskontro($partyid, 'customer')) {
+            if ($account = $this->find_customer_reskontro_by_customernumber($customernumber)) {
+                continue; // exists already
+            } else {
                 $dataH = array();
                 
-                if($partyid > 10000) {
+                if($customernumber > 10000) {
                     #Vi burde visst SchemeID - slik at vi kan bestemme om kontoplan skal telles automatisk eller ikke > 10000 pga norsk kontoplan
 
                     #Vi må uansett sjekke at den foreslåtte kontoplanen ikke eksiterer fra før.
 
-                    $dataH['AccountPlanID']     = $partyid;
-                    if (!empty($companyid)) {
-                        $dataH['OrgNumber']         = $companyid; #We dont know SchemID because of parser limitations
+
+                    $dataH['AccountPlanID']     = $customernumber;
+                    if (!empty($SchemeID) && in_array($SchemeIDType, $VALID_ORGNO_SCHEMES)) {
+                        $dataH['OrgNumber']         = $SchemeID;
                     }
                     $dataH['AccountName']       = $InvoiceO->AccountingCustomerParty->Party->PartyName->Name;
                     $dataH['AccountPlanType']   = 'customer';
@@ -797,9 +806,9 @@ class lodo_fakturabank_fakturabank {
                     #print_r($dataH);
                     $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'accountplan', 'action' => 'auto', 'debug' => false));
                     #exit;
-                    $count++;
+                    $count++;                    
                 } else {
-                    $_lib['message']->add("Reskontro med nummer lavere enn 10.000 må opprettes manuelt: " . $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID);
+                    $_lib['message']->add("Reskontro med nummer lavere enn 10.000 må opprettes manuelt: " . $customernumber);
                 }
             }
 
