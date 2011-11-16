@@ -551,14 +551,14 @@ class invoice {
         if(!$line['ProductName'])
             $lineH['ProductName'] = $product->ProductName;
         } else {
-            $_lib['message']->add(array('message' => 'Du m&aring; velge produkter til alle fakturalinjene'));
+            $_lib['message']->add(array('message' => 'InvoiceID ' . $this->InvoiceID . ':Du m&aring; velge produkter til alle fakturalinjene'));
         }
 
         if($lineH['QuantityDelivered'] == 0)
-            $_lib['message']->add(array('message' => 'Du m&aring; taste Antall produkter p&aring; fakturalinjen'));
+            $_lib['message']->add(array('message' => 'InvoiceID ' . $this->InvoiceID . ':Du m&aring; taste Antall produkter p&aring; fakturalinjen'));
 
         if($lineH['UnitCustPrice'] == 0)
-            $_lib['message']->add(array('message' => 'Du m&aring; sette en Enhetspris p&aring; fakturalinjen'));
+            $_lib['message']->add(array('message' => 'InvoiceID ' . $this->InvoiceID . ':Du m&aring; sette en Enhetspris p&aring; fakturalinjen'));
 
         #exit;
         $tmpquant   = $lineH['QuantityDelivered'];
