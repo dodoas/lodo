@@ -483,10 +483,9 @@ class lodo_fakturabank_fakturabank {
                                     $InvoiceO->Class       = 'red';
                                 }
                             } else {
-                                $InvoiceO->Status     .= "Produktnr: " . $line->Item->SellersItemIdentification->ID . " eksisterer ikke";
-                                #$InvoiceO->Journal     = false;
-                                #$InvoiceO->Class       = 'red';                        
-                                #print "$InvoiceO->Status<br>\n";
+                                $InvoiceO->Status     .= "Produktnr: " . $line->Item->SellersItemIdentification->ID . " eksisterer ikke. ";
+                                $InvoiceO->Journal     = false;
+                                $InvoiceO->Class       = 'red';                        
                             }
                         }
                         #Vi kunne ha auto opprettet produkter ogsŒ.....
@@ -497,7 +496,7 @@ class lodo_fakturabank_fakturabank {
                     $InvoiceO->Status   .= "Klar til bilagsf&oslash;ring basert p&aring: Kundenummer";
                 }
             } else {
-                $InvoiceO->Status     .= "Finner ikke kunde basert pŒ kundenummer: " . $customernumber;
+                $InvoiceO->Status     .= "Finner ikke kunde basert pŒ kundenummer: " . $customernumber . ". ";
                 $msg = "Opprett p&aring; kundenr";
                 $InvoiceO->Status .= sprintf('<a href="#" onclick="javascript:addsingleaccountplan(\'%s\'); return false;">%s</a>', $InvoiceO->ID, $msg);
                 $InvoiceO->Journal = false;
