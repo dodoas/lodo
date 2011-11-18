@@ -795,7 +795,7 @@ class lodo_fakturabank_fakturabank {
 
                     #Credit/debit color and text
                     $dataH['debittext']         = 'Salg';
-                    $dataH['credittext']        = 'Betaling';
+                    $dataH['credittext']        = 'Betal';
                     $dataH['DebitColor']        = 'debitblue';
                     $dataH['CreditColor']       = 'creditred';
     
