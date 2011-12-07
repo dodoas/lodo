@@ -436,15 +436,16 @@ class SessionNew
 
     ############################################################
     function set_person() {
+        global $_SETUP;
         #From person table
         $dbh          = $this->dbh;
         $query        = "select * from person where PersonID='$this->login_id'";
         $person       = $this->db->get_row(array('query' => $query));
   
-        if($person->Debug) {
+        if($person->Debug || !empty($_SETUP['DEBUG_FOR_ALL_PERSONS'])) {
             $this->debug = true;
             ini_set('display_errors',1);
-            error_reporting(E_ALL ^ E_NOTICE);
+            error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
         }
   
         //print $query;
