@@ -772,7 +772,38 @@ class invoice {
 
         $this->invoiceO->DocumentCurrencyCode = exchange::getLocalCurrency();
 
-        /* Do not transmit references as OrderReference as now, as they are in Lodo, not reference ids, but instead CONTACT PERSONS
+        if ($invoice->DepartmentID != "" || $invoice->DepartmentID === 0) { // "0" is valid
+            $this->invoiceO->DepartmentCode = $invoice->DepartmentID;
+
+            $sql_department = "select * from companydepartment where CompanyDepartmentID=" . (int) $invoice->DepartmentID;
+            $department = $_lib['storage']->get_row(array('query' => $sql_department));
+
+            if (!empty($department->DepartmentName)) {
+                $this->invoiceO->Department = $department->DepartmentName;
+            }
+        }
+
+        if (!empty($invoice->DepartmentCustomer)) {
+            $this->invoiceO->CustomerDepartment = $invoice->DepartmentCustomer;
+        }
+
+        if ($invoice->ProjectID != "" || $invoice->ProjectID === 0) { // "0" is valid
+            $this->invoiceO->ProjectCode = $invoice->ProjectID;
+
+            $sql_project = "select * from project where ProjectID=" . (int) $invoice->ProjectID;
+            $project = $_lib['storage']->get_row(array('query' => $sql_project));
+
+            if (!empty($project->Heading)) {
+                $this->invoiceO->Project = $project->Heading;
+            }
+        }
+
+        if (!empty($invoice->ProjectNameCustomer)) {
+            $this->invoiceO->CustomerProject = $invoice->ProjectNameCustomer;
+        }
+        
+
+        /* Do not transmit references as OrderReference, because in Lodo they are not reference ids, but instead CONTACT PERSONS
         if (!empty($invoice->RefInternal)) {
             $this->invoiceO->OrderReference->ID = $invoice->RefInternal; // this should be RefCustomer but has been hardcoded the wrong way other places in lodo and must be reverted (incl in existing database records) before we can use RefCustomer
         }

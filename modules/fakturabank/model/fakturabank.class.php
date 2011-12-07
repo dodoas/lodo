@@ -99,7 +99,15 @@ class lodo_fakturabank_fakturabank {
         $_lib['message']->add($url);
 
         $invoicesO = $this->retrieve($page, $url);
+        if (empty($invoicesO)) {
+            return false;
+        }
+
 		$validated_invoices = $this->validate_incoming($invoicesO);
+        if (empty($validated_invoices)) {
+            return false;
+        }
+
         $this->save_incoming($validated_invoices);
 
         return $validated_invoices;
@@ -143,6 +151,44 @@ class lodo_fakturabank_fakturabank {
 		return false;
 	}
 
+    private function find_project_by_id($ProjectID) {
+        global $_lib;
+
+        if (!is_numeric($ProjectID)) {
+            return false;
+        }
+
+        $query = "SELECT `ProjectID` FROM project WHERE `ProjectID` = '$ProjectID'";
+		$result = $_lib['storage']->db_query3(array('query' => $query));
+		if (!$result) {
+			return false;
+		}
+		if ($obj = $_lib['storage']->db_fetch_object($result)) {
+			return $ProjectID;
+		} else {
+            return false;
+        }
+    }
+
+    private function find_department_by_id($CompanyDepartmentID) {
+        global $_lib;
+
+        if (!is_numeric($CompanyDepartmentID)) {
+            return false;
+        }
+
+        $query = "SELECT `CompanyDepartmentID` FROM companydepartment WHERE `CompanyDepartmentID` = '$CompanyDepartmentID'";
+		$result = $_lib['storage']->db_query3(array('query' => $query));
+		if (!$result) {
+			return false;
+		}
+		if ($obj = $_lib['storage']->db_fetch_object($result)) {
+			return $CompanyDepartmentID;
+		} else {
+            return false;
+        }
+    }
+
 	private function save_incoming($invoices) {
         global $_lib;
 
@@ -159,7 +205,10 @@ class lodo_fakturabank_fakturabank {
 			} else {
 				$action = "insert";
 			}
-			
+
+            if (empty($invoice->FakturabankID)) {
+                continue;
+            }
 			$dataH['FakturabankID'] = $invoice->FakturabankID;
 			$dataH['FakturabankNumber'] = $invoice->ID;
 			$dataH['ProfileID'] = $invoice->ProfileID;
@@ -181,6 +230,21 @@ class lodo_fakturabank_fakturabank {
                 $dataH['CustomerPartyIndentification'] = $invoice->AccountingCustomerParty->Party->PartyIdentification->ID; 
                 $dataH['CustomerPartyIndentificationSchemeID'] = $invoice->AccountingCustomerParty->Party->PartyIdentification->ID_Attr_schemeID;
             }
+            /* Fields do not exist in fakturabankinvoicein table  
+            if ($invoice->Department != "") { // "0" is valid
+                $dataH['Department'] = $invoice->Department;
+            }
+            if ($invoice->Project  != "") { // "0" is valid
+                $dataH['Project'] = $invoice->Project;
+            }
+            if (!empty($invoice->ProjectNameInternal)) {
+                $dataH['ProjectNameInternal'] = $invoice->ProjectNameInternal;
+            }
+            if (!empty($invoice->ProjectNameCustomer)) {
+                $dataH['ProjectNameCustomer'] = $invoice->ProjectNameCustomer;
+            }
+            */
+
 			$dataH['CustomerPartyName'] = $invoice->AccountingCustomerParty->Party->PartyName->Name;
 			$dataH['PaymentMeansCode'] = $invoice->PaymentMeans->PaymentMeansCode;
 			
@@ -207,7 +271,7 @@ class lodo_fakturabank_fakturabank {
 	}
 
 	private function save_outgoing($invoices) {
-        if (!is_array($invoices) || empty($invoices)) {
+        if (empty($invoices)) {
             return false;
         }
 
@@ -244,6 +308,23 @@ class lodo_fakturabank_fakturabank {
                 $dataH['CustomerPartyIndentification'] = $invoice->AccountingCustomerParty->Party->PartyIdentification->ID;
                 $dataH['CustomerPartyIndentificationSchemeID'] = $invoice->AccountingCustomerParty->Party->PartyIdentification->ID_Attr_schemeID;
             }
+            /* Fields do not exist in fakturabankinvoiceout table  
+            if (is_numeric($invoice->DepartmentID)) { // "0" is valid
+                $dataH['DepartmentID'] = $invoice->DepartmentID;
+            }
+            if (!empty($invoice->DepartmentCustomer)) {
+                $dataH['DepartmentCustomer'] = $invoice->DepartmentCustomer;
+            }
+            if (is_numeric($invoice->ProjectID)) { // "0" is valid
+                $dataH['ProjectID'] = $invoice->ProjectID;
+            }
+            if (!empty($invoice->ProjectNameInternal)) {
+                $dataH['ProjectNameInternal'] = $invoice->ProjectNameInternal;
+            }
+            if (!empty($invoice->ProjectNameCustomer)) {
+                $dataH['ProjectNameCustomer'] = $invoice->ProjectNameCustomer;
+            }
+            */
 			$dataH['CustomerPartyName'] = $invoice->AccountingCustomerParty->Party->PartyName->Name;
 			$dataH['PaymentMeansCode'] = $invoice->PaymentMeans->PaymentMeansCode;
 			
@@ -393,6 +474,63 @@ class lodo_fakturabank_fakturabank {
         return $retstatus;
     }
 
+    private function extractOutgoingAccountingCost(&$InvoiceO) {
+        // we support using ; instead of &
+        parse_str(str_replace(";", "&", $InvoiceO->AccountingCost), $acc_cost_params);
+        /* department information is not required for outgoing invoices, so no error if empty */
+        if (!empty($acc_cost_params)) {
+            if (!empty($acc_cost_params['customerdepartment'])) {
+                // In Lodo, DepartmentCustomer is really used for department project name (in this case supplier department name)
+                $InvoiceO->DepartmentCustomer = $acc_cost_params['customerdepartment'];
+            }
+
+            if ($acc_cost_params['departmentcode'] != '') {
+                if (!is_numeric($DepartmentID = $acc_cost_params['departmentcode'])) {
+                    $InvoiceO->Status     .= "Faktura har feil i avdelingskode (departmentcode " . $acc_cost_params['departmentcode'] . " must be empty or a number for incoming invoices)";
+                    $InvoiceO->Journal     = false;
+                    $InvoiceO->Class       = 'red';
+                    return false;
+                }
+                if (is_numeric($this->find_department_by_id($acc_cost_params['departmentcode']))) {
+                    $InvoiceO->DepartmentID = $DepartmentID;
+                } else {
+                    $InvoiceO->Status     .= "Fant ikke intern avdeling for kode " . $DepartmentID . " (departmentcode does not match any internal departments)";
+                    $InvoiceO->Journal     = false;
+                    $InvoiceO->Class       = 'red';
+                    return false;
+                }
+            }
+
+            if (!empty($acc_cost_params['customerproject'])) {
+                $InvoiceO->ProjectNameCustomer = $acc_cost_params['customerproject']; 
+            }
+
+            if ($acc_cost_params['projectcode'] != "") {
+                if (!is_numeric($acc_cost_params['projectcode'])) {
+                    $InvoiceO->Status     .= "Faktura har feil i prosjektkode (projectcode must be empty or a number for incoming invoices)";
+                    $InvoiceO->Journal     = false;
+                    $InvoiceO->Class       = 'red';
+                    return false;
+                }
+                if (is_numeric($ProjectID = $this->find_project_by_id($acc_cost_params['projectcode']))) {
+                    $InvoiceO->ProjectID = $ProjectID;
+                } else {
+                    $InvoiceO->Status     .= "Fant ikke kundens prosjekt for kode $ProjectID (projectcode does not match any internal projects)";
+                    $InvoiceO->Journal     = false;
+                    $InvoiceO->Class       = 'red';
+                    return false;
+                }
+
+                if (!empty($acc_cost_params['project'])) {
+                    $InvoiceO->ProjectNameInternal = $acc_cost_params['project']; 
+                }
+            }
+        }            
+
+
+        return true;
+    }
+
     ################################################################################################
     #validate - update Accountplans and statuses - ready for journaling flag.
     private function validate_outgoing($invoicesO) {
@@ -440,6 +578,10 @@ class lodo_fakturabank_fakturabank {
             }
 
             $customernumber = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
+
+            if (!$this->extractOutgoingAccountingCost($InvoiceO)) {
+                continue;
+            }
 
             #Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to only look in the correct records? No?
             $account = $this->find_customer_reskontro_by_customernumber($customernumber);
@@ -506,6 +648,76 @@ class lodo_fakturabank_fakturabank {
         return $invoicesO;
     }
 
+    private function extractIncomingAccountingCost(&$InvoiceO) {
+        // we support using ; instead of &
+        parse_str(str_replace(";", "&", $InvoiceO->AccountingCost), $acc_cost_params);
+        /* department information is not required for incoming invoices, so no error if empty */
+        if (!empty($acc_cost_params)) {
+            /* Ignore department for now, since we currently don't store it in the db
+               if (!empty($acc_cost_params['department'])) {
+               // In Lodo, DepartmentCustomer is really used for department project name (in this case supplier department name)
+               $InvoiceO->DepartmentCustomer = $acc_cost_params['department'];
+               }
+            */
+            
+            if ($acc_cost_params['customerdepartmentcode'] != "") {
+                if (!is_numeric($acc_cost_params['customerdepartmentcode'])) {
+                    $InvoiceO->Status     .= "Faktura har feil i prosjektkode (customerdepartmentcode must be empty or a number for incoming invoices)";
+                    $InvoiceO->Journal     = false;
+                    $InvoiceO->Class       = 'red';
+                    return false;
+                }
+                if (is_numeric($DepartmentID = $this->find_department_by_id($acc_cost_params['customerdepartmentcode']))) {
+                    $InvoiceO->Department = $DepartmentID;
+                } else {
+                    $InvoiceO->Status     .= "Fant ikke intern avdeling for kode $DepartmentID (customerdepartmentcode does not match any internal departments)";
+                    $InvoiceO->Journal     = false;
+                    $InvoiceO->Class       = 'red';
+                    return false;
+                }
+            }
+
+            if (!empty($acc_cost_params['project'])) {
+                // In Lodo, ProjectNameCustomer is really used for counterpart project name (in this case  supplier)
+                $InvoiceO->ProjectNameCustomer = $acc_cost_params['project']; 
+            }
+                
+            if ($acc_cost_params['customerprojectcode'] != "") { // "0" is a valid value
+                if (!is_numeric($acc_cost_params['customerprojectcode'])) {
+                    $InvoiceO->Status     .= "Faktura har feil i prosjektkode (customerprojectcode must be empty or a number for incoming invoices)";
+                    $InvoiceO->Journal     = false;
+                    $InvoiceO->Class       = 'red';
+                    return false;
+                }
+                if (is_numeric($ProjectID = $this->find_project_by_id($acc_cost_params['customerprojectcode']))) {
+                    $InvoiceO->Project = $ProjectID;
+                } else {
+                    $InvoiceO->Status     .= "Fant ikke kundens prosjekt for kode $ProjectID (customerprojectcode does not match any internal projects)";
+                    $InvoiceO->Journal     = false;
+                    $InvoiceO->Class       = 'red';
+                    return false;
+                }
+
+                if (!empty($acc_cost_params['customerproject'])) {
+                    $InvoiceO->ProjectNameInternal = $acc_cost_params['customerproject']; 
+                }
+            }
+
+            if (!empty($acc_cost_params['reisegarantifondet'])) {
+                $value = $acc_cost_params['reisegarantifondet'];
+                $value = strtolower($value);
+                if($value ==  1 || $value ==  'yes' || $value == 'ja') {
+                    $value = 1;
+                } else {
+                    $value = 0;
+                }
+                $InvoiceO->Reisegarantifond = $value;
+            }
+        }            
+        
+        return true;
+    }
+
     ################################################################################################
     #validate - update Accountplans and statuses - ready for journaling flag.
     private function validate_incoming($invoicesO) {
@@ -535,29 +747,22 @@ class lodo_fakturabank_fakturabank {
             $InvoiceO->MotkontoAccountPlanID = 0;
             $InvoiceO->Period        = substr($InvoiceO->IssueDate, 0, 7);
             $InvoiceO->VoucherType   = $VoucherType;
-            
-            #Retrieve Project and Department
-            if($InvoiceO->AccountingCost) {
-                $AccountingCostH = explode('&', $InvoiceO->AccountingCost);
-                #print_r($AccountingCostH);
-                foreach($AccountingCostH as $pair) {
-                    list($key, $value) = explode('=', $pair);  
-                    if($key && $value) {
-                        if($key == 'department')
-                            $InvoiceO->Department = $value;
-                        if($key == 'project')
-                            $InvoiceO->Project = $value;
-                        if($key == 'reisegarantifondet')
-                            $value = strtolower($value);
-                            if($value ==  1 || $value ==  'yes' || $value == 'ja') {
-                                $value = 1;
-                            } else {
-                                $value = 0;
-                            }
-                            $InvoiceO->Reisegarantifond = $value;
-                    }
-                }
+
+
+            if (empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) {
+                $InvoiceO->Status     .= "Faktura mangler kundenummer";
+                $InvoiceO->Journal     = false;
+                $InvoiceO->Class       = 'red';
+
+                continue;
             }
+
+
+            if (!$this->extractIncomingAccountingCost($InvoiceO)) {
+                continue;
+            }
+
+
 
             $urlH = explode('/', $InvoiceO->UBLExtensions->UBLExtension->ExtensionContent->URL);
             $InvoiceO->FakturabankID = $urlH[4]; #Last element is the internalID.
@@ -873,6 +1078,8 @@ class lodo_fakturabank_fakturabank {
                 $dataH['InvoiceDate']           = $InvoiceO->IssueDate;
                 $dataH['Department']            = $InvoiceO->Department;
                 $dataH['Project']               = $InvoiceO->Project;
+                $dataH['ProjectNameInternal']               = $InvoiceO->ProjectNameInternal;
+                $dataH['ProjectNameCustomer']               = $InvoiceO->ProjectNameCustomer;
                 $dataH['isReisegarantifond']    = $InvoiceO->Reisegarantifond;
                 $dataH['VoucherType']           = 'U';
 
@@ -1024,7 +1231,6 @@ class lodo_fakturabank_fakturabank {
         
                 #If it does not exist - insert it into incoming invoices table - ready for remittance
                 if(!$invoiceexists) {
-
                     $dataH = array();
                     $dataH['CustomerAccountPlanID'] = $InvoiceO->AccountPlanID;
                     $dataH['InvoiceID']             = $InvoiceO->ID;
@@ -1041,6 +1247,11 @@ class lodo_fakturabank_fakturabank {
                     $dataH['Active']                = 1;
                     $dataH['FromCompanyID']         = 1;
                     $dataH['SupplierAccountPlanID'] = 1;
+                    $dataH['DepartmentID'] = $InvoiceO->DepartmentID;
+                    $dataH['ProjectID'] = $InvoiceO->ProjectID;
+                    $dataH['DepartmentCustomer'] = $InvoiceO->DepartmentCustomer;
+                    $dataH['ProjectNameInternal'] = $InvoiceO->ProjectNameInternal;
+                    $dataH['ProjectNameCustomer'] = $InvoiceO->ProjectNameCustomer;
                     
                     $dataH['IName']                  = $InvoiceO->AccountingCustomerParty->Party->PartyName->Name;        
                     $dataH['IAddress']               = $InvoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName;
@@ -1165,23 +1376,23 @@ class lodo_fakturabank_fakturabank {
         $invoice->appendChild($cbc);
 
        
-        /* /\* gather data to be sent in AccountCost element *\/ */
-        /* $acc_cost = ''; */
-        /* $acc_types = array('Department', 'DepartmentCode', 'Project', 'ProjectCode', 'CustomerDepartment', 'CustomerProject'); */
+        /* gather data to be sent in AccountCost element */
+        $acc_cost = '';
+        $acc_types = array('Department', 'DepartmentCode', 'Project', 'ProjectCode', 'CustomerDepartment', 'CustomerProject');
 
-        /* foreach ($acc_types as $acc_type) { */
-        /*     if (!empty($InvoiceO->$acc_type)) { */
-        /*         if (!$empty($acc_cost)) { */
-        /*             $acc_cost .= '&'; */
-        /*         } */
-        /*         $acc_cost .= strtolower($acc_type) . '=' . urlencode($InvoiceO->$acc_type); */
-        /*     } */
-        /* } */
+        foreach ($acc_types as $acc_type) {
+            if ($InvoiceO->$acc_type != "") {
+                if (!empty($acc_cost)) {
+                    $acc_cost .= ';';
+                }
+                $acc_cost .= strtolower($acc_type) . '=' . urlencode($InvoiceO->$acc_type);
+            }
+        }
 
-        /* if (!empty($acc_cost)) { */
-        /*     $cbc = $doc->createElement('cbc:AccountingCost', utf8_encode($acc_cost)); */
-        /*     $invoice->appendChild($cbc); */
-        /* } */
+        if (!empty($acc_cost)) {
+            $cbc = $doc->createElement('cbc:AccountingCost', utf8_encode($acc_cost));
+            $invoice->appendChild($cbc);
+        }
 
         if (!empty($InvoiceO->OrderReference)) {
             $order_reference = $doc->createElement('cac:OrderReference');
