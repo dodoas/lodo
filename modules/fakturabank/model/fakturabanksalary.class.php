@@ -203,7 +203,7 @@ class lodo_fakturabank_fakturabanksalary {
 
 
 		$xml_content .= "<employer>\n";
-		$xml_content .= "<name>" . $_lib['sess']->get_companydef('CompanyName') . "</name>\n";
+		$xml_content .= "<name><![CDATA[" . $_lib['sess']->get_companydef('CompanyName') . "]]></name>\n";
 
 		$xml_content .= "<postal_address>\n";
 		$xml_content .= "<street>" . $_lib['sess']->get_companydef('VAddress') . "</street>\n";
