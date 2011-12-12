@@ -748,21 +748,9 @@ class lodo_fakturabank_fakturabank {
             $InvoiceO->Period        = substr($InvoiceO->IssueDate, 0, 7);
             $InvoiceO->VoucherType   = $VoucherType;
 
-
-            if (empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) {
-                $InvoiceO->Status     .= "Faktura mangler kundenummer";
-                $InvoiceO->Journal     = false;
-                $InvoiceO->Class       = 'red';
-
-                continue;
-            }
-
-
             if (!$this->extractIncomingAccountingCost($InvoiceO)) {
                 continue;
             }
-
-
 
             $urlH = explode('/', $InvoiceO->UBLExtensions->UBLExtension->ExtensionContent->URL);
             $InvoiceO->FakturabankID = $urlH[4]; #Last element is the internalID.
