@@ -181,15 +181,15 @@ class lodo_fakturabank_fakturabanksalary {
 		$xml_content .= "<paid_amount_year>" . $sumTotalYear . "</paid_amount_year>\n";
 
 
-        /* Find taxing method */
         $taxing = "";
+        // Find taxing method
         if (!empty($head->TabellTrekk)) {
-            $taxing_method = "table";
+            $taxing_method = "Tabelltrekk";
             $taxing_method_value = $head->TabellTrekk;
             $taxing .= "<taxing_method>\n<name>$taxing_method</name>\n<value>$taxing_method_value</value>\n</taxing_method>\n";
         }
         if (!empty($head->ProsentTrekk)) {
-            $taxing_method = "percentage";
+            $taxing_method = "Prosenttrekk";
             $taxing_method_value = $head->ProsentTrekk;
             $taxing .= "<taxing_method>\n<name>$taxing_method</name>\n<value>$taxing_method_value</value>\n</taxing_method>\n";
         }           
@@ -205,8 +205,9 @@ class lodo_fakturabank_fakturabanksalary {
 
         /* employer */
 
+
 		$xml_content .= "<employer>\n";
-		$xml_content .= "<name><![CDATA[" . $_lib['sess']->get_companydef('CompanyName') . "]]></name>\n";
+		$xml_content .= "<name>" . $_lib['sess']->get_companydef('CompanyName') . "</name>\n";
 
 		$xml_content .= "<postal_address>\n";
 		$xml_content .= "<street>" . $_lib['sess']->get_companydef('VAddress') . "</street>\n";
@@ -289,6 +290,7 @@ class lodo_fakturabank_fakturabanksalary {
     function sendsalary($SalaryID, $SalaryConfID) {
         global $_lib;
         $xml = $this->createSalaryXML($SalaryID, $SalaryConfID);
+        error_log("modules/fakturabank/model/fakturabanksalary.class.php-" . __LINE__ . ":xml:" . (is_array($xml) || is_object($xml) ? print_r($xml, true) : $xml . ". <br/>\n"));
         if ($xml === false) {
             return false;
         }
@@ -363,7 +365,7 @@ class lodo_fakturabank_fakturabanksalary {
                 $_lib['message']->add("Feil under opplasting: " . $import_paycheck_result['message'] . " Info: " . $import_paycheck_result['exception']);
                 $ret = false;
             } else if ($import_paycheck_result['created-paychecks'] == 0) {
-                $_lib['message']->add("Feil tilbakemeldingsinfo fra server opplasting. " . $import_paycheck_result['message'] . " Info: " . (empty($import_paycheck_result['exception']) ? "Unknown error." : $import_paycheck_result['exception']));
+                $_lib['message']->add("Feil tilbakemeldingsinfo fra server opplasting. " . $import_paycheck_result['message'] . " Info: " . $import_paycheck_result['exception']);
                 $ret = false;
             } else {
                 $_lib['message']->add("L&oslash;nnslippen ble opprettet riktig");
