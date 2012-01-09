@@ -1373,7 +1373,7 @@ class lodo_fakturabank_fakturabank {
                 if (!empty($acc_cost)) {
                     $acc_cost .= ';';
                 }
-                $acc_cost .= strtolower($acc_type) . '=' . urlencode($InvoiceO->$acc_type);
+                $acc_cost .= strtolower($acc_type) . '=' . urlencode(utf8_encode($InvoiceO->$acc_type));
             }
         }
 
