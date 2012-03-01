@@ -340,7 +340,8 @@ class db_mysql {
                     if ($value == DB_NULL_PLACEHOLDER) {
                         $query_set .= "$field = NULL,";
                     } else {
-                        $query_set .= "$field = '$value',";
+                        //$query_set .= "$field = '$value',";
+			$query_set .= sprintf("%s = '%s',", $field, $this->db_escape($value)); // OK?
                     }
                 }
                 $query_set   = substr($query_set, 0, -1);

@@ -151,7 +151,7 @@ class lodo_fakturabank_fakturabankvoting {
         return $voting;
     }
 
-	public function import_transactions($account_id, $period) {
+    public function import_transactions($account_id, $period) {
         if (!is_numeric($account_id)) {
             return false;
         }
@@ -166,17 +166,20 @@ class lodo_fakturabank_fakturabankvoting {
 
         global $_lib;
 
-        # get transaction data from fakturabank
-		$voting = $this->get_balance_report($account_id, $period);
+        //# get transaction data from fakturabank
+        $voting = $this->get_balance_report($account_id, $period);
         if (!is_array($voting) || empty($voting)) {
             return false;
         }
-		$this->save_transactions($voting, $period);
+        $this->save_transactions($voting, $period);
 
-        # import fakturabank transaction records accountline table
+        // I believe import_transactions_to_accounting need this data to work.
+        $this->save_voting_relation($voting);
+
+        //# import fakturabank transaction records accountline table
         $this->import_transactions_to_accounting($account_id, $period);
 
-        $this->save_voting_relation($voting);
+
 	}
 
     protected function period_to_startdate($period) {
@@ -277,12 +280,63 @@ class lodo_fakturabank_fakturabankvoting {
             #Kunne hatt delvis automatisk reskontro match basert paa beskrivelse.
             $lineH['Description'] 		= $_lib['db']->db_escape($fb_transaction['Description']);
             $lineH['ArchiveRef'] 		= $_lib['db']->db_escape($fb_transaction['Ref']);
-            $lineH['KID'] 		= $_lib['db']->db_escape($fb_transaction['KID']);
-            $lineH['InvoiceNumber'] 		= $_lib['db']->db_escape($fb_transaction['Invoiceno']);
+            $lineH['KID'] 		        = $_lib['db']->db_escape($fb_transaction['KID']);
+
+            //
+            // It is most likely an error that Invoiceno is used here. The field in fakturabanktransaction is called InvoiceNumber.
+            // That field might also be wrong since I have never observed it having a value.
+            // The wanted data should reside inside fakturabanktransactionrelation.
+            // - maw
+            //
+            // $lineH['InvoiceNumber'] 		= $_lib['db']->db_escape($fb_transaction['Invoiceno']);
+            //$lineH['InvoiceNumber'] = $_lib['db']->db_escape( $this->get_fakturabanktransactionrelation( $fb_transaction['ID'] ) );
+
+
+            $lineH['InvoiceNumber'] = $_lib['db']->db_escape($fb_transaction['InvoiceNumber']);
+
+            echo $fb_transaction['FakturabankID']."<br />";
+            $transaction_relations = $this->get_faturabanktransactionrelations( $fb_transaction['FakturabankID'] );
+            if(count($transaction_relations) > 1 || $lineH['InvoiceNumber'] == '') {
+                if(count($transaction_relations) == 1) {
+                    $lineH['InvoiceNumber'] = $transaction_relations[0]['InvoiceNumber'];
+                    $lineH['KID'] = $transaction_relations[0]['KID'];
+                    print_r($transaction_relations);
+
+                    if($lineH['InvoiceNumber'] == '') {
+                        $lineH['InvoiceNumber'] = "FB(" . $fb_transaction['FakturabankID'] . ")";
+                        $lineH['KID'] = "";
+                    }
+                }
+                else if(count($transaction_relations)) {
+                    $lineH['InvoiceNumber'] = "FB(" . $fb_transaction['FakturabankID'] . ")";
+                    $lineH['KID'] = "";
+                }
+            }
+
+            //$lineH['InvoiceNumber'] = "FB(" . $fb_transaction['FakturabankID'] . ")";
+
+            //
+            // Do some quick and dirty Scheme ID lookup
+            //
+            foreach($transaction_relations as $rel) {
+                if($rel['InvoiceCustomerIdentitySchemeID'] == 'NO:ORGNR') {
+                    $query = sprintf(
+                        "SELECT AccountPlanID FROM accountplan WHERE OrgNumber = '%s'",
+                        $rel['InvoiceCustomerIdentity']
+                        );
+                    echo " '".$query."' <br />";
+                    $accountplan_row = $_lib['storage']->get_row(array('query' => $query));
+                    if($accountplan_row) {
+                        echo "Found One!<br />" . $lineH['InvoiceNumber'];
+                        $lineH['ReskontroAccountPlanID'] = $accountplan_row->AccountPlanID;
+                        break;
+                    }
+                }
+            }                
 
             if($fb_transaction['Incoming']) {
                 $lineH['AmountIn'] = $fb_transaction['Amount'];
-				
+                
             } else {
                 $lineH['AmountOut'] = $fb_transaction['Amount'];
             }
@@ -308,13 +362,14 @@ class lodo_fakturabank_fakturabankvoting {
             
             $lineH['Priority'] 		 = $Priority;
             #print_r($lineH);
+
             $postvl['AccountLineID'] = $_lib['storage']->store_record(array('table' => 'accountline', 'data' => $lineH));
-
-            #Do we really need voucheraccountline - or could we throw it away????
+            print_r($postvl);
+            //#Do we really need voucheraccountline - or could we throw it away????
             $_lib['db']->store_record(array('data' => $postvl, 'table' => 'voucheraccountline'));
-		}
+        }
 
-		$_lib['message']->add("Transaksjoner importert: $transactionsimported, duplikat-transaksjoner: $duplicatetransaction<br>");
+        $_lib['message']->add("Transaksjoner importert: $transactionsimported, duplikat-transaksjoner: $duplicatetransaction<br>");
     }
 
     public function lookup_invoice($FakturabankInvoiceID) {
@@ -351,142 +406,145 @@ class lodo_fakturabank_fakturabankvoting {
         return false;
     }
 
-	public function save_voting_relation(&$voting) {
-		global $_lib;
+    public function save_voting_relation(&$voting) {
+        global $_lib;
+        
+        if(isset($voting))
+            foreach ($voting as &$transaction) {
+                
+                if (isset($transaction) && !empty($transaction) && 
+                    isset($transaction->relations) && !empty($transaction->relations)) {
+                    
+                    printf("Transaction: %d: <br />", $transaction->{'id'});
 
+                    foreach ($transaction->relations->relation as &$relation) {
+                        $dataH = array();
 
-		if(isset($voting))
-		foreach ($voting as &$transaction) {
+                        printf("Relation: %d<br />", $relation->{'id'});
 
-			if (isset($transaction) && !empty($transaction) && 
-				isset($transaction->relations) && !empty($transaction->relations)) {
-				
-				foreach ($transaction->relations->relation as &$relation) {
-					$dataH = array();
-
-					$relation->{'FakturabankID'} = $relation->{'id'};
-					
-					if ($LodoID = $this->get_fakturabanktransactionrelation($relation->{'FakturabankID'})) {
-						$relation->{'LodoID'} = $LodoID;
-						$action = "update";
-						$dataH['ID'] = $relation->{'LodoID'};
-					} else {
-						$relation->{'LodoID'} = null;
-						$action = "insert";
-						unset($dataH['ID']);
-					}
-
-					$dataH['FakturabankID'] = $relation->{'id'};
-					$dataH['FakturabankTransactionID'] = $transaction->{"id"};
-
-
-                    /* find and set invoice related data */
-
-                    $dataH['FakturabankInvoiceID'] = $relation->{"invoice-id"};
-                    if (!empty($relation->{"invoice-id"})) {
-                        $dataH['InvoiceNumber'] = $relation->{"invoiceno"};
-                        if (!empty($relation->{"kid"})) {
-                            $dataH['KID'] = $relation->{"kid"};
-                        }
-                        $has_counterpart_id = false;
-
-                        // assume incoming unless supplier id is our id, as we should have all our
-                        // outgoing invoices with a proper supplier orgnr
-                        $dataH['InvoiceType'] = 'incoming'; 
-
-                        if (!empty($relation->{"invoice-supplier-identity"})) {
-                            $dataH['InvoiceSupplierIdentity'] = $relation->{"invoice-supplier-identity"};
-                            $dataH['InvoiceSupplierIdentitySchemeID'] = $relation->{"invoice-supplier-identity-scheme-id"};
-                            if ($dataH['InvoiceSupplierIdentitySchemeID'] == 'NO:ORGNR' &&
-                                $dataH['InvoiceSupplierIdentity'] == $this->OrgNumber) {
-                                $dataH['InvoiceType'] = 'outgoing';
-                            } else {
-                                $has_counterpart_id = true;
-                            }
-                        }
-                        if (!empty($relation->{"invoice-customer-identity"})) {
-                            $dataH['InvoiceCustomerIdentity'] = $relation->{"invoice-customer-identity"};
-                            $dataH['InvoiceCustomerIdentitySchemeID'] = $relation->{"invoice-customer-identity-scheme-id"};
-                            if ($dataH['InvoiceCustomerIdentitySchemeID'] == 'NO:ORGNR' &&
-                                $dataH['InvoiceCustomerIdentity'] == $this->OrgNumber) {
-                                $dataH['InvoiceType'] = 'incoming';
-                            } else {
-                                $has_counterpart_id = true;
-                            }
+                        $relation->{'FakturabankID'} = $relation->{'id'};
+			
+                        if ($LodoID = $this->get_fakturabanktransactionrelation($relation->{'FakturabankID'})) {
+                            $relation->{'LodoID'} = $LodoID;
+                            $action = "update";
+                            $dataH['ID'] = $relation->{'LodoID'};
+                        } else {
+                            $relation->{'LodoID'} = null;
+                            $action = "insert";
+                            unset($dataH['ID']);
                         }
                         
-                        # update relation with invoice data, to enable easy lookup of relations in bank reconciliation
-                        if ($invoice = $this->lookup_invoice($dataH['FakturabankInvoiceID'])) {
-                            $dataH['InvoiceID'] = $invoice->ID;
-                            $dataH['AccountPlanID'] = $invoice->AccountPlanID;
-                            $dataH['AccountPlanOrgNumber'] = $invoice->AccountPlanOrgNumber;
-                        } else if ($has_counterpart_id) {
-                            # manually lookup accountplanid and accountplanorgnumber,
-                            # this must work both for incoming and outgoing invoices
-                            # In some cases there will not yet be an accountplan in the system
-                            # for the counterpart of the invoice
-                            if ($dataH['InvoiceType'] == 'outgoing') {
-                                $accountplan = $this->find_account_plan($dataH['InvoiceCustomerIdentity'], $dataH['InvoiceCustomerIdentitySchemeID']);
-                            } else {
-                                $accountplan = $this->find_account_plan($dataH['InvoiceSupplierIdentity'], $dataH['InvoiceSupplierIdentitySchemeID']);
+                        $dataH['FakturabankID'] = $relation->{'id'};
+                        $dataH['FakturabankTransactionID'] = $transaction->{"id"};
+                        
+                        
+                        /* find and set invoice related data */
+                        
+                        $dataH['FakturabankInvoiceID'] = $relation->{"invoice-id"};
+                        if (!empty($relation->{"invoice-id"})) {
+                            $dataH['InvoiceNumber'] = $relation->{"invoiceno"};
+                            if (!empty($relation->{"kid"})) {
+                                $dataH['KID'] = $relation->{"kid"};
                             }
-
-                            if ($accountplan) {
-                                $dataH['AccountPlanID'] = $accountplan->AccountPlanID;
-                                if (!empty($accountplan->OrgNumber)) {
-                                    $dataH['AccountPlanOrgNumber'] = $accountplan->OrgNumber;
+                            $has_counterpart_id = false;
+                            
+                            // assume incoming unless supplier id is our id, as we should have all our
+                            // outgoing invoices with a proper supplier orgnr
+                            $dataH['InvoiceType'] = 'incoming'; 
+                            
+                            if (!empty($relation->{"invoice-supplier-identity"})) {
+                                $dataH['InvoiceSupplierIdentity'] = $relation->{"invoice-supplier-identity"};
+                                $dataH['InvoiceSupplierIdentitySchemeID'] = $relation->{"invoice-supplier-identity-scheme-id"};
+                                if ($dataH['InvoiceSupplierIdentitySchemeID'] == 'NO:ORGNR' &&
+                                    $dataH['InvoiceSupplierIdentity'] == $this->OrgNumber) {
+                                    $dataH['InvoiceType'] = 'outgoing';
+                                } else {
+                                    $has_counterpart_id = true;
+                                }
+                            }
+                            if (!empty($relation->{"invoice-customer-identity"})) {
+                                $dataH['InvoiceCustomerIdentity'] = $relation->{"invoice-customer-identity"};
+                                $dataH['InvoiceCustomerIdentitySchemeID'] = $relation->{"invoice-customer-identity-scheme-id"};
+                                if ($dataH['InvoiceCustomerIdentitySchemeID'] == 'NO:ORGNR' &&
+                                    $dataH['InvoiceCustomerIdentity'] == $this->OrgNumber) {
+                                    $dataH['InvoiceType'] = 'incoming';
+                                } else {
+                                    $has_counterpart_id = true;
+                                }
+                            }
+                            
+                            //# update relation with invoice data, to enable easy lookup of relations in bank reconciliation
+                            if ($invoice = $this->lookup_invoice($dataH['FakturabankInvoiceID'])) {
+                                $dataH['InvoiceID'] = $invoice->ID;
+                                $dataH['AccountPlanID'] = $invoice->AccountPlanID;
+                                $dataH['AccountPlanOrgNumber'] = $invoice->AccountPlanOrgNumber;
+                            } else if ($has_counterpart_id) {
+                                //# manually lookup accountplanid and accountplanorgnumber,
+                                //# this must work both for incoming and outgoing invoices
+                                //# In some cases there will not yet be an accountplan in the system
+                                //# for the counterpart of the invoice
+                                if ($dataH['InvoiceType'] == 'outgoing') {
+                                    $accountplan = $this->find_account_plan($dataH['InvoiceCustomerIdentity'], $dataH['InvoiceCustomerIdentitySchemeID']);
+                                } else {
+                                    $accountplan = $this->find_account_plan($dataH['InvoiceSupplierIdentity'], $dataH['InvoiceSupplierIdentitySchemeID']);
+                                }
+                                
+                                if ($accountplan) {
+                                    $dataH['AccountPlanID'] = $accountplan->AccountPlanID;
+                                    if (!empty($accountplan->OrgNumber)) {
+                                        $dataH['AccountPlanOrgNumber'] = $accountplan->OrgNumber;
+                                    }
                                 }
                             }
                         }
-                    }
-                    
+                        
+                        
+                        /* look for paycheck data */
+                        
+                        if (!empty($relation->{"paycheck-no"})) {
+                            $dataH['PaycheckNo'] = $relation->{"paycheck-no"};                        
+                            if (empty($transaction->invoiceno)) {
+                                //# set InvoiceNumber = PaycheckNo if PaycheckNo present and InvoiceNumber empty
+                                $transaction_query = "UPDATE accountline SET InvoiceNumber = '" . $relation->{"paycheck-no"} . "' WHERE FakturabankTransactionLodoID = (SELECT ID from fakturabanktransaction WHERE FakturabankID = '" . $transaction->{"id"} . "')";
+                                $_lib['storage']->db_query3(array('query' => $transaction_query));
+                            }
+                        }
+                        $dataH['Incoming'] = $transaction->incoming;
+                        $dataH['Description'] = $transaction->description;
+                        $dataH['DoneReconciliatedAt'] = $_lib['date']->t_to_mysql_format($transaction->{"done-reconciliated-at"});
+                        $dataH['FromBankAccount'] = $this->strip_account_number($transaction->{"from-account"});
+                        $dataH['ToBankAccount'] = $this->strip_account_number($transaction->{"to-account"});
+                        $dataH['PostingDate'] = $_lib['date']->mysql_format("%Y-%m-%d", $transaction->{"posting-date"});
+                        $dataH['Ref'] = $transaction->ref;
+                        if (empty($dataH['KID']) && !empty($transaction->kid)) {
+                            $dataH['KID'] = $transaction->kid;
+                        }
+                        $dataH['Type'] = $relation->{'type'};
+                        $dataH['Amount'] = $relation->{'amount'};
+                        $dataH['Currency'] = $transaction->{"currency"}; // should be relation currency
+                        $dataH['TransactionAmount'] = $transaction->amount;
+                        $dataH['TransactionCurrency'] = $transaction->{"currency"};
+                        $dataH['FakturabankBankTransactionAccountID'] = $relation->{'bank-transaction-account-id'};
+                        $dataH['CreatedAt'] = $_lib['date']->t_to_mysql_format($relation->{'created-at'});
+                        $dataH['CreatedByID'] = $relation->{'created-by-id'};
+                        $dataH['UpdatedAt'] = $_lib['date']->t_to_mysql_format($relation->{'updated-at'});
+                        $dataH['UpdatedByID'] = $relation->{'updated-by-id'};
 
-                    /* look for paycheck data */
-
-                    if (!empty($relation->{"paycheck-no"})) {
-                        $dataH['PaycheckNo'] = $relation->{"paycheck-no"};                        
-                        if (empty($transaction->invoiceno)) {
-                            # set InvoiceNumber = PaycheckNo if PaycheckNo present and InvoiceNumber empty
-                            $transaction_query = "UPDATE accountline SET InvoiceNumber = '" . $relation->{"paycheck-no"} . "' WHERE FakturabankTransactionLodoID = (SELECT ID from fakturabanktransaction WHERE FakturabankID = '" . $transaction->{"id"} . "')";
-                            $_lib['storage']->db_query3(array('query' => $transaction_query));
+                        if (!empty($relation->{'account'})) {
+                            $dataH['AccountID'] = $relation->{'account'}->{"id"};
+                            $dataH['AccountName'] = $relation->{'account'}->{"name"};
+                            $dataH['AccountClose'] = $relation->{'account'}->{"close"};
+                            $dataH['AccountCreatedAt'] = $_lib['date']->t_to_mysql_format($relation->{'account'}->{"created-at"});
+                            $dataH['AccountUpdatedAt'] = $_lib['date']->t_to_mysql_format($relation->{'account'}->{"updated-at"});
+                        }
+                        
+                        $ret = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'fakturabanktransactionrelation', 'action' => $action, 'debug' => false));			
+                        if ($action == "insert") {
+                            $relation->{'LodoID'} = $ret;
                         }
                     }
-					$dataH['Incoming'] = $transaction->incoming;
-					$dataH['Description'] = $transaction->description;
-					$dataH['DoneReconciliatedAt'] = $_lib['date']->t_to_mysql_format($transaction->{"done-reconciliated-at"});
-					$dataH['FromBankAccount'] = $this->strip_account_number($transaction->{"from-account"});
-					$dataH['ToBankAccount'] = $this->strip_account_number($transaction->{"to-account"});
-					$dataH['PostingDate'] = $_lib['date']->mysql_format("%Y-%m-%d", $transaction->{"posting-date"});
-					$dataH['Ref'] = $transaction->ref;
-                    if (empty($dataH['KID']) && !empty($transaction->kid)) {
-                        $dataH['KID'] = $transaction->kid;
-                    }
-					$dataH['Type'] = $relation->{'type'};
-					$dataH['Amount'] = $relation->{'amount'};
-					$dataH['Currency'] = $transaction->{"currency"}; // should be relation currency
-					$dataH['TransactionAmount'] = $transaction->amount;
-					$dataH['TransactionCurrency'] = $transaction->{"currency"};
-					$dataH['FakturabankBankTransactionAccountID'] = $relation->{'bank-transaction-account-id'};
-					$dataH['CreatedAt'] = $_lib['date']->t_to_mysql_format($relation->{'created-at'});
-					$dataH['CreatedByID'] = $relation->{'created-by-id'};
-					$dataH['UpdatedAt'] = $_lib['date']->t_to_mysql_format($relation->{'updated-at'});
-					$dataH['UpdatedByID'] = $relation->{'updated-by-id'};
-
-                    if (!empty($relation->{'account'})) {
-                        $dataH['AccountID'] = $relation->{'account'}->{"id"};
-                        $dataH['AccountName'] = $relation->{'account'}->{"name"};
-                        $dataH['AccountClose'] = $relation->{'account'}->{"close"};
-                        $dataH['AccountCreatedAt'] = $_lib['date']->t_to_mysql_format($relation->{'account'}->{"created-at"});
-                        $dataH['AccountUpdatedAt'] = $_lib['date']->t_to_mysql_format($relation->{'account'}->{"updated-at"});
-                    }
-
-					$ret = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'fakturabanktransactionrelation', 'action' => $action, 'debug' => false));			
-					if ($action == "insert") {
-						$relation->{'LodoID'} = $ret;
-					}
-				}
-			}
-		}
+                }
+            }
 	}
 
 	public function update_fakturabank_incoming_invoice($FakturabankInvoiceID, $InvoiceID, $AccountPlanID) {
@@ -505,7 +563,7 @@ class lodo_fakturabank_fakturabankvoting {
 		}
 
 		# find orgnumber
-        $query = "SELECT accountplan.OrgNumber from accountplan where accountplan.AccountPlanID = '$AccountPlanID'";
+                $query = "SELECT accountplan.OrgNumber from accountplan where accountplan.AccountPlanID = '$AccountPlanID'";
 		$org_hash = $_lib['storage']->get_hashhash(array('query' => $query, 'key' => 'OrgNumber', 'value' => 'OrgNumber'));
 		$AccountPlanOrgNumber = reset($org_hash);
 		$AccountPlanOrgNumber = $AccountPlanOrgNumber['OrgNumber'];
@@ -556,214 +614,237 @@ class lodo_fakturabank_fakturabankvoting {
 	}
 
 	public function lookup_invoice_relations($args) {
-		global $_lib;
-
-		$invoice_ids = array();
-
-        if (empty($args['id']) || !is_numeric($args['id'])) {
-            return false;
-        }
-
-        $query = "SELECT * FROM accountline WHERE `AccountLineID` = '" . $args['id'] . "'";
-
-		$accountline = $_lib['storage']->get_row(array('query' => $query));
-		if (empty($accountline)) {
-			return false;
-		}
-
-
-        // if transaction was imported from fakturabank, match on fakturabankid
-        if (!empty($accountline->FakturabankTransactionLodoID) &&
-            is_numeric($accountline->FakturabankTransactionLodoID)) {
-
-            $query = "SELECT FakturabankID FROM fakturabanktransaction WHERE `ID` = '" . $accountline->FakturabankTransactionLodoID . "'";
-            $result = $_lib['storage']->db_query3(array('query' => $query));
-            if (!$result) {
+            global $_lib;
+            
+            $invoice_ids = array();
+            
+            if (empty($args['id']) || !is_numeric($args['id'])) {
+                return false;
+            }
+            
+            $query = "SELECT * FROM accountline WHERE `AccountLineID` = '" . $args['id'] . "'";
+            
+            $accountline = $_lib['storage']->get_row(array('query' => $query));
+            if (empty($accountline)) {
                 return false;
             }
 
-            if (!($obj = $_lib['storage']->db_fetch_object($result)) || !is_numeric($obj->FakturabankID)) {
-                return false;
-            }
-            $FakturabankTransactionID = $obj->FakturabankID;
-
-            $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
+            
+            // if transaction was imported from fakturabank, match on fakturabankid
+            if (!empty($accountline->FakturabankTransactionLodoID) &&
+                is_numeric($accountline->FakturabankTransactionLodoID)) {
+                
+                $query = "SELECT FakturabankID FROM fakturabanktransaction WHERE `ID` = '" . $accountline->FakturabankTransactionLodoID . "'";
+                $result = $_lib['storage']->db_query3(array('query' => $query));
+                if (!$result) {
+                    return false;
+                }
+                
+                if (!($obj = $_lib['storage']->db_fetch_object($result)) || !is_numeric($obj->FakturabankID)) {
+                    return false;
+                }
+                $FakturabankTransactionID = $obj->FakturabankID;
+                
+                $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
 				tr.FakturabankTransactionID = '$FakturabankTransactionID'";
-        } else { // ... else, transaction imported from csv or punched, match on date, amount, account
-            $transaction_date = $_lib['storage']->db_escape($args['VoucherDate']);
-            $Incoming = $_lib['storage']->db_escape($args['Incoming']);
-            $bank_account = $_lib['storage']->db_escape($args['BankAccount']);
-            $amount = $_lib['storage']->db_escape($args['Amount']);
-
-            if ($Incoming) {
-                $bank_account_stmt = "tr.FromBankAccount = '$bank_account' AND";
-            } else {
-                $bank_account_stmt = "tr.ToBankAccount = '$bank_account' AND";            
-            }
-
-            $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
+            } else { // ... else, transaction imported from csv or punched, match on date, amount, account
+                $transaction_date = $_lib['storage']->db_escape($args['VoucherDate']);
+                $Incoming = $_lib['storage']->db_escape($args['Incoming']);
+                $bank_account = $_lib['storage']->db_escape($args['BankAccount']);
+                $amount = $_lib['storage']->db_escape($args['Amount']);
+                
+                if ($Incoming) {
+                    $bank_account_stmt = "tr.FromBankAccount = '$bank_account' AND";
+                } else {
+                    $bank_account_stmt = "tr.ToBankAccount = '$bank_account' AND";            
+                }
+                
+                $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
 				tr.PostingDate = '$transaction_date' AND
 				$bank_account_stmt
 				tr.Incoming = '$Incoming' AND
 				ROUND(tr.TransactionAmount, 2) = ROUND('$amount', 2)";
-        }
-
-        # there might be several relations for a transaction and only those with AccountPlanID set serves a purpose since that is the only ones we currently can handle
-		$relations = $_lib['storage']->get_hashhash(array('query' => $query . " AND AccountPlanID is not NULL AND AccountPlanID != '' AND FakturabankInvoiceID IS NOT NULL", 'key' => 'FakturabankInvoiceID'));
-
-		if (empty($relations)) {
-			return false;
-		}
-
-		return $relations;
+            }
+            
+            //# there might be several relations for a transaction and only those with AccountPlanID set serves a purpose since that is the only ones we currently can handle
+            $relations = $_lib['storage']->get_hashhash(array('query' => $query . " AND AccountPlanID is not NULL AND AccountPlanID != '' AND FakturabankInvoiceID IS NOT NULL", 'key' => 'FakturabankInvoiceID'));
+            
+            if (empty($relations)) {
+                return false;
+            }
+            
+            return $relations;
 	}
 
 	public function lookup_paycheck_relations($args) {
-		global $_lib;
-
-		$invoice_ids = array();
-
-        if (empty($args['id']) || !is_numeric($args['id'])) {
-            return false;
-        }
-
-        $query = "SELECT * FROM accountline WHERE `AccountLineID` = '" . $args['id'] . "'";
-
-		$accountline = $_lib['storage']->get_row(array('query' => $query));
-		if (empty($accountline)) {
-			return false;
-		}
-
-
-        // if transaction was imported from fakturabank, match on fakturabankid
-        if (!empty($accountline->FakturabankTransactionLodoID) &&
-            is_numeric($accountline->FakturabankTransactionLodoID)) {
-
-            $query = "SELECT FakturabankID FROM fakturabanktransaction WHERE `ID` = '" . $accountline->FakturabankTransactionLodoID . "'";
-            $result = $_lib['storage']->db_query3(array('query' => $query));
-            if (!$result) {
+            global $_lib;
+            
+            $invoice_ids = array();
+            
+            if (empty($args['id']) || !is_numeric($args['id'])) {
+                return false;
+            }
+            
+            $query = "SELECT * FROM accountline WHERE `AccountLineID` = '" . $args['id'] . "'";
+            
+            $accountline = $_lib['storage']->get_row(array('query' => $query));
+            if (empty($accountline)) {
                 return false;
             }
 
-            if (!($obj = $_lib['storage']->db_fetch_object($result)) || !is_numeric($obj->FakturabankID)) {
-                return false;
-            }
-            $FakturabankTransactionID = $obj->FakturabankID;
 
-            $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
+            // if transaction was imported from fakturabank, match on fakturabankid
+            if (!empty($accountline->FakturabankTransactionLodoID) &&
+                is_numeric($accountline->FakturabankTransactionLodoID)) {
+                
+                $query = "SELECT FakturabankID FROM fakturabanktransaction WHERE `ID` = '" . $accountline->FakturabankTransactionLodoID . "'";
+                $result = $_lib['storage']->db_query3(array('query' => $query));
+                if (!$result) {
+                    return false;
+                }
+                
+                if (!($obj = $_lib['storage']->db_fetch_object($result)) || !is_numeric($obj->FakturabankID)) {
+                    return false;
+                }
+                $FakturabankTransactionID = $obj->FakturabankID;
+                
+                $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
 				tr.FakturabankTransactionID = '$FakturabankTransactionID' and PaycheckNo is not null";
-        } else { // ... else, transaction imported from css or punched, match on date, amount, account
-            $transaction_date = $_lib['storage']->db_escape($args['VoucherDate']);
-            $Incoming = $_lib['storage']->db_escape($args['Incoming']);
-            $bank_account = $_lib['storage']->db_escape($args['BankAccount']);
-            $amount = $_lib['storage']->db_escape($args['Amount']);
+            } else { // ... else, transaction imported from css or punched, match on date, amount, account
+                $transaction_date = $_lib['storage']->db_escape($args['VoucherDate']);
+                $Incoming = $_lib['storage']->db_escape($args['Incoming']);
+                $bank_account = $_lib['storage']->db_escape($args['BankAccount']);
+                $amount = $_lib['storage']->db_escape($args['Amount']);
 
-            if ($Incoming) {
-                $bank_account_stmt = "tr.FromBankAccount = '$bank_account' AND";
-            } else {
-                $bank_account_stmt = "tr.ToBankAccount = '$bank_account' AND";            
+                if ($Incoming) {
+                    $bank_account_stmt = "tr.FromBankAccount = '$bank_account' AND";
+                } else {
+                    $bank_account_stmt = "tr.ToBankAccount = '$bank_account' AND";            
             }
 
-            $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
+                $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
  				PaycheckNo IS NOT NULL AND
 				tr.InvoiceID IS NOT NULL AND
 				tr.PostingDate = '$transaction_date' AND
 				$bank_account_stmt
 				tr.Incoming = '$Incoming' AND
 				ROUND(tr.TransactionAmount, 2) = ROUND('$amount', 2)";
-        }
+            }
 
 
-        # there might be several relations for a transaction and only those with AccountPlanID set serves a purpose since that is the only ones we currently can handle
-		$relations = $_lib['storage']->get_hashhash(array('query' => $query, 'key' => 'PaycheckNo'));
-
-		if (empty($relations)) {
-			return false;
-		}
-
-        return $relations;
+            //# there might be several relations for a transaction and only those with AccountPlanID set serves a purpose since that is the only ones we currently can handle
+            $relations = $_lib['storage']->get_hashhash(array('query' => $query, 'key' => 'PaycheckNo'));
+            
+            if (empty($relations)) {
+                return false;
+            }
+            
+            return $relations;
 	}
 
-    function lookup_reconciliation_reason_relations($args) {
-		global $_lib;
-
-		$invoice_ids = array();
-
-        if (empty($args['id']) || !is_numeric($args['id'])) {
-            return false;
-        }
-
-        $query = "SELECT * FROM accountline WHERE `AccountLineID` = '" . $args['id'] . "'";
-
-		$accountline = $_lib['storage']->get_row(array('query' => $query));
-		if (empty($accountline)) {
-			return false;
-		}
-
-        // if transaction was imported from fakturabank, match on fakturabankid
-        if (!empty($accountline->FakturabankTransactionLodoID) &&
-            is_numeric($accountline->FakturabankTransactionLodoID)) {
-
-            $query = "SELECT FakturabankID FROM fakturabanktransaction WHERE `ID` = '" . $accountline->FakturabankTransactionLodoID . "'";
-            $result = $_lib['storage']->db_query3(array('query' => $query));
-            if (!$result) {
+        function lookup_reconciliation_reason_relations($args) {
+            global $_lib;
+            
+            $invoice_ids = array();
+            
+            if (empty($args['id']) || !is_numeric($args['id'])) {
                 return false;
             }
 
-            if (!($obj = $_lib['storage']->db_fetch_object($result)) || !is_numeric($obj->FakturabankID)) {
+            $query = "SELECT * FROM accountline WHERE `AccountLineID` = '" . $args['id'] . "'";
+            
+            $accountline = $_lib['storage']->get_row(array('query' => $query));
+            if (empty($accountline)) {
                 return false;
             }
-            $FakturabankTransactionID = $obj->FakturabankID;
-
-            $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
+            
+            // if transaction was imported from fakturabank, match on fakturabankid
+            if (!empty($accountline->FakturabankTransactionLodoID) &&
+                is_numeric($accountline->FakturabankTransactionLodoID)) {
+                
+                $query = "SELECT FakturabankID FROM fakturabanktransaction WHERE `ID` = '" . $accountline->FakturabankTransactionLodoID . "'";
+                $result = $_lib['storage']->db_query3(array('query' => $query));
+                if (!$result) {
+                    return false;
+                }
+                
+                if (!($obj = $_lib['storage']->db_fetch_object($result)) || !is_numeric($obj->FakturabankID)) {
+                    return false;
+                }
+                $FakturabankTransactionID = $obj->FakturabankID;
+                
+                $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
 				tr.FakturabankTransactionID = '$FakturabankTransactionID'";
-        } else { // ... else, transaction imported from css or punched, match on date, amount, account
-            $transaction_date = $_lib['storage']->db_escape($args['VoucherDate']);
-            $Incoming = $_lib['storage']->db_escape($args['Incoming']);
-            $bank_account = $_lib['storage']->db_escape($args['BankAccount']);
-            $amount = $_lib['storage']->db_escape($args['Amount']);
-
-            if ($Incoming) {
-                $bank_account_stmt = "tr.FromBankAccount = '$bank_account' AND";
-            } else {
-                $bank_account_stmt = "tr.ToBankAccount = '$bank_account' AND";            
-            }
-
-            $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
+            } else { // ... else, transaction imported from css or punched, match on date, amount, account
+                $transaction_date = $_lib['storage']->db_escape($args['VoucherDate']);
+                $Incoming = $_lib['storage']->db_escape($args['Incoming']);
+                $bank_account = $_lib['storage']->db_escape($args['BankAccount']);
+                $amount = $_lib['storage']->db_escape($args['Amount']);
+                
+                if ($Incoming) {
+                    $bank_account_stmt = "tr.FromBankAccount = '$bank_account' AND";
+                } else {
+                    $bank_account_stmt = "tr.ToBankAccount = '$bank_account' AND";            
+                }
+                
+                $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
 				tr.InvoiceID IS NOT NULL AND
 				tr.PostingDate = '$transaction_date' AND
 				$bank_account_stmt
 				tr.Incoming = '$Incoming' AND
 				ROUND(tr.TransactionAmount, 2) = ROUND('$amount', 2)";
+            }
+            
+            //# there might be several relations for a transaction and only those with FakturabankBankTransactionAccountID set serves a purpose since that is the only ones we currently can handle
+            $relations = $_lib['storage']->get_hashhash(array('query' => $query . " AND (InvoiceID IS NULL) AND FakturabankBankTransactionAccountID IS NOT NULL AND FakturabankBankTransactionAccountID != '0'", 'key' => 'FakturabankID'));
+            
+            if (empty($relations)) {
+                return false;
+            }
+
+            return $relations;
         }
 
-        # there might be several relations for a transaction and only those with FakturabankBankTransactionAccountID set serves a purpose since that is the only ones we currently can handle
-		$relations = $_lib['storage']->get_hashhash(array('query' => $query . " AND (InvoiceID IS NULL) AND FakturabankBankTransactionAccountID IS NOT NULL AND FakturabankBankTransactionAccountID != '0'", 'key' => 'FakturabankID'));
+        public function get_faturabanktransactionrelations($FakturabankTransactionID) {
+            global $_lib;
+            
+            if(!is_numeric($FakturabankTransactionID)) {
+                return false;
+            }
+            
+            $query = sprintf("SELECT * FROM fakturabanktransactionrelation WHERE FakturabankTransactionID = '%d'", 
+                             $FakturabankTransactionID);
 
-		if (empty($relations)) {
-			return false;
-		}
+            //printf("%s<br />", $query);
 
-		return $relations;
-    }
+            $arr = array();
+            $r = $_lib['storage']->db_query3(array('query' => $query));
+
+            while( ($row = $_lib['storage']->db_fetch_assoc($r)) ) {
+                $arr[] = $row;
+            }
+
+            return $arr;
+        }
 
 	public function get_fakturabanktransactionrelation($FakturabankID) {
-        global $_lib;
-
-		if (!is_numeric($FakturabankID)) {
-			return false;
-		}
-
-		$query = "SELECT `ID` FROM fakturabanktransactionrelation WHERE `FakturabankID` = '$FakturabankID'";
-		$result = $_lib['storage']->db_query3(array('query' => $query));
-		if (!$result) {
-			return false;
-		}
-		if (($obj = $_lib['storage']->db_fetch_object($result)) && is_numeric($obj->ID)) {
-			return $obj->ID;
-		}
-		
-		return false;
+            global $_lib;
+            
+            if (!is_numeric($FakturabankID)) {
+                printf("False1<br>");
+                return false;
+            }
+            
+            $query = "SELECT `ID` FROM fakturabanktransactionrelation WHERE `FakturabankID` = '$FakturabankID'";
+            $result = $_lib['storage']->db_query3(array('query' => $query));
+            if (!$result) {
+                return false;
+            }
+            if (($obj = $_lib['storage']->db_fetch_object($result)) && is_numeric($obj->ID)) {
+                return $obj->ID;
+            }
+            
+            return false;
 	}
 
 	public function get_fakturabanktransaction($FakturabankID) {
@@ -865,32 +946,34 @@ class lodo_fakturabank_fakturabankvoting {
 		}
 	}
 
-    public function findinvoicematch($args) {
-        global $_lib;
+        public function findinvoicematch($args) {
+            global $_lib;
+            
+            $args['VoucherDate'] = substr($args['VoucherDate'], 0, 10);
+            
+            $query = "SELECT AccountNumber FROM account WHERE AccountID='" . $args['BankAccountID'] . "'";
+            
+            printf("Got id: %d\n", $args['id']);
 
-        $args['VoucherDate'] = substr($args['VoucherDate'], 0, 10);
+            $row = $_lib['storage']->get_row(array('query' => $query));
+            
+            if (empty($row)) {
+                return false;
+            }
 
-		$query = "SELECT AccountNumber FROM account WHERE AccountID='" . $args['BankAccountID'] . "'";
+            $args['BankAccount'] = str_replace(" ", "", $row->AccountNumber);
+            
+            $relations = $this->lookup_invoice_relations($args);
+            
+            if (!isset($relations) || empty($relations)) {
+                return false;
+            }
 
-		$row = $_lib['storage']->get_row(array('query' => $query));
+            //#get first relation
+            $relation = reset($relations);
 
-		if (empty($row)) {
-			return false;
-		}
-
-		$args['BankAccount'] = str_replace(" ", "", $row->AccountNumber);
-
-		$relations = $this->lookup_invoice_relations($args);
-
-		if (!isset($relations) || empty($relations)) {
-			return false;
-		}
-
-		#get first relation
-		$relation = reset($relations);
-
-		return $relation;
-    }
+            return $relation;
+        }
    
 
     public function findpaycheckmatch($args) {
