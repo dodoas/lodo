@@ -9,6 +9,7 @@
 */
 
 includelogic('moneyflow/moneyflow');
+includelogic('fakturabank/fakturabankvoting');
 
 class framework_logic_bank {
 
@@ -1053,13 +1054,100 @@ class framework_logic_bank {
                     ############
                     #1.st line
                     $VoucherH['voucher_AccountPlanID']       = $this->AccountPlanID;
-                    $accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $this->VoucherType, 'comment' => 'Fra bankavstemming'));
 
-                    ############
-                    #2d line
-                    $VoucherH['voucher_AccountPlanID']       = $unvoted->ReskontroAccountPlanID;
-                    $VoucherH = $this->SwitchSideAmount($VoucherH);
-                    $accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $this->VoucherType, 'comment' => 'Fra bankavstemming'));
+                    // mawcode
+                    if( substr($unvoted->InvoiceNumber, 0, 2) == "FB" ) {
+                        $fbbank = new lodo_fakturabank_fakturabankvoting();
+                        $FBVoucherH = $VoucherH;
+                        preg_match("/FB\((\d+)\)/", $unvoted->InvoiceNumber, $matches);
+                        $fakturabankID = $matches[1];
+
+                        //print_r($matches);
+                        $relations = $fbbank->get_faturabanktransactionrelations($fakturabankID);
+                        $relations_invoices = array();
+                        foreach($relations as $rel) {
+                            $relations_invoices[] = $rel['InvoiceNumber'];
+                        }
+
+
+
+                        $sum = $unvoted->AmountIn - $unvoted->AmountOut;
+
+                        foreach($relations as $rel) {
+                            $sum -= $rel['Amount'];
+                        }
+
+                        if($sum >= 0.0001 || $sum <= -0.0001) {
+                            $_lib['message']->add("Sum is not zero in " . $unvoted->InvoiceNumber);
+                            
+                            echo "Sum is not zero in " . $unvoted->InvoiceNumber . " ". $sum;
+
+                            continue;
+                        }
+
+                        //$VoucherH['voucher_InvoiceID'] = implode(',', $relations_invoices);
+
+                        $accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $this->VoucherType, 'comment' => 'Fra bankavstemming'));
+
+
+                        foreach($relations as $rel) {
+                            if($rel['InvoiceCustomerIdentitySchemeID'] == 'NO:ORGNR') {
+                                $query = sprintf(
+                                    "SELECT AccountPlanID FROM accountplan WHERE OrgNumber = '%s'",
+                                    $rel['InvoiceCustomerIdentity']
+                                    );
+                                $accountplan_row = $_lib['storage']->get_row(array('query' => $query));
+                                
+                                if($accountplan_row) {
+                                    if($accountplan_row->AccountID != 0) {
+                                        $reconciliation = $_lib['storage']->get_row(array('query' => 
+                                                                                    sprintf(
+                                                                                        "SELECT AccountPlanID 
+                                                                                           FROM FakturabankBankReconciliationReasonID 
+                                                                                           WHERE fakturabankbankreconciliationreason = %d",
+                                                                                        $accountplan_row->AccountID)));
+                   
+                                        print("Found an AccountID " . $accountplan_row->AccountID . "<br />");
+                                        $FBVoucher['voucher_AccountPlanID'] = $reconciliation['AccountPlanID'];
+
+                                        if($rel['Amount'] > 0) {
+                                            $FBVoucherH['voucher_AmountOut']    = $rel['Amount'];
+                                            $FBVoucherH['voucher_AmountIn']     = 0;
+                                        } else {
+                                            $FBVoucherH['voucher_AmountIn']     = $rel['Amount'];
+                                            $FBVoucherH['voucher_AmountOut']      = 0;
+                                        }
+                                    }
+                                    else {
+                                        $FBVoucherH['voucher_AccountPlanID'] = $accountplan_row->AccountPlanID;
+                                        $FBVoucherH['voucher_AmountOut']     = $rel['Amount'];
+                                        $FBVoucherH['voucher_AmountIn']      = 0;
+                                    }
+
+                                    $FBVoucherH['voucher_ProjectID']     = $unvoted->ProjectID;
+                                    $FBVoucherH['voucher_DepartmentID']  = $unvoted->DepartmentID;
+                                    $FBVoucherH['voucher_Quantity']      = $unvoted->ResultQuantity;
+                                    $FBVoucherH['voucher_VAT']           = $unvoted->VAT;
+                                    $FBVoucherH['voucher_InvoiceID']     = $rel['InvoiceNumber'];
+                                    $FBVoucherH['voucher_KID']           = $rel['KID'];
+                                    $FBVoucherH['voucher_Description']   = $rel['Description'];
+
+                                    print_r($FBVoucherH);
+                                    $accounting->insert_voucher_line(array('post' => $FBVoucherH, 'accountplanid' => $FBVoucherH['voucher_AccountPlanID'], 'VoucherType'=> $this->VoucherType, 
+                                                                           'comment' => 'Fra bankavstemming'));
+                                }
+                            }
+                        }
+                        //print_r($relations);
+                    }
+                    else {
+                        $accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $this->VoucherType, 'comment' => 'Fra bankavstemming'));
+                        //############
+                        //#2d line
+                        $VoucherH['voucher_AccountPlanID']       = $unvoted->ReskontroAccountPlanID;
+                        $VoucherH = $this->SwitchSideAmount($VoucherH);
+                        $accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $this->VoucherType, 'comment' => 'Fra bankavstemming'));
+                    }
                 
                 ####################################################################################
                 } elseif($unvoted->ResultAccountPlanID) {

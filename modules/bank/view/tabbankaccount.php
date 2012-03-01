@@ -4,6 +4,7 @@
 includemodel('bank/bank');
 includemodel('bank/bankaccount');
 includemodel('accounting/accounting');
+includelogic('fakturabank/fakturabankvoting');
 
 $bankaccount    = new model_bank_bankaccount($_lib['input']->request);
 $bank           = new framework_logic_bank($_lib['input']->request);
@@ -11,6 +12,7 @@ $accounting     = new accounting();
 
 require_once "record.inc";
 
+$fbbank = new lodo_fakturabank_fakturabankvoting();
 $bank->init(); #Read data
 
 $bankname = $_lib['db']->db_query("SELECT AccountName FROM accountplan WHERE AccountPlanID = " . $bank->AccountPlanID);
@@ -344,7 +346,19 @@ if(is_array($bank->bankaccount)) {
         </td>
         <? if(count($row->MatchSelect) < 1) { ?>
         <td>
-            <? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber', 'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[6])) ?>
+            <? 
+            
+            print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber', 'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[6]));
+        
+        if( substr($row->InvoiceNumber, 0, 2) == "FB" ) {
+            preg_match("/FB\((\d+)\)/", $row->InvoiceNumber, $matches);
+            $fakturabankID = $matches[1];
+
+            $relations = $fbbank->get_faturabanktransactionrelations($fakturabankID);
+            print count($relations);
+        }
+
+            ?>
         </td>
         <? } ?>
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Description',     'pk' => $row->AccountLineID, 'value' => $row->Description,      'width' => 12, 'maxlength' => 255, 'tabindex' => $tabindexH[7])) ?></td>
