@@ -313,23 +313,50 @@ class lodo_fakturabank_fakturabankvoting {
                 }
             }
 
-            //$lineH['InvoiceNumber'] = "FB(" . $fb_transaction['FakturabankID'] . ")";
+            /* remove trailing -F from invoices starting with L */
+            if($lineH['InvoiceNumber'][0] == 'L') {
+                if(substr($lineH['InvoiceNumber'], -2) == "-F") {
+                    $lineH['InvoiceNumber'] = substr($lineH['InvoiceNumber'], 0, -2);
+                }
+            }
 
             //
             // Do some quick and dirty Scheme ID lookup
             //
             foreach($transaction_relations as $rel) {
-                if($rel['InvoiceCustomerIdentitySchemeID'] == 'NO:ORGNR') {
-                    $query = sprintf(
-                        "SELECT AccountPlanID FROM accountplan WHERE OrgNumber = '%s'",
-                        $rel['InvoiceCustomerIdentity']
-                        );
-                    echo " '".$query."' <br />";
-                    $accountplan_row = $_lib['storage']->get_row(array('query' => $query));
-                    if($accountplan_row) {
-                        echo "Found One!<br />" . $lineH['InvoiceNumber'];
-                        $lineH['ReskontroAccountPlanID'] = $accountplan_row->AccountPlanID;
+                if($fb_transaction['TransactionType'] == 'C') {
+                    if($rel['InvoiceCustomerIdentitySchemeID'] == 'NO:ORGNR') {
+                        $query = sprintf(
+                            "SELECT AccountPlanID FROM accountplan WHERE OrgNumber = '%s'",
+                            $rel['InvoiceCustomerIdentity']
+                            );
+                        echo "C '".$query."' <br />";
+                        $accountplan_row = $_lib['storage']->get_row(array('query' => $query));
+                        if($accountplan_row) {
+                            echo "Found One!<br />" . $lineH['InvoiceNumber'];
+                            $lineH['ReskontroAccountPlanID'] = $accountplan_row->AccountPlanID;
+                            break;
+                        }
+                    }
+                }
+                else if($fb_transaction['TransactionType'] == 'D') {
+                    // special case for salaries 
+                    if($rel['InvoiceNumber'] != '' and $rel['InvoiceNumber'][0] == 'L') {
                         break;
+                    }
+
+                    if($rel['InvoiceSupplierIdentitySchemeID'] == 'NO:ORGNR') {
+                        $query = sprintf(
+                            "SELECT AccountPlanID FROM accountplan WHERE OrgNumber = '%s'",
+                            $rel['InvoiceSupplierIdentity']
+                            );
+                        echo "D '".$query."' <br />";
+                        $accountplan_row = $_lib['storage']->get_row(array('query' => $query));
+                        if($accountplan_row) {
+                            echo "Found One!<br />" . $lineH['InvoiceNumber'];
+                            $lineH['ReskontroAccountPlanID'] = $accountplan_row->AccountPlanID;
+                            break;
+                        }
                     }
                 }
             }                
@@ -865,6 +892,27 @@ class lodo_fakturabank_fakturabankvoting {
 		
 		return false;
 	}
+
+        public function get_fakturabanktransactionobject($FakturabankID) {
+        global $_lib;
+
+		if (!is_numeric($FakturabankID)) {
+			return false;
+		}
+
+		$query = "SELECT * FROM fakturabanktransaction WHERE `FakturabankID` = '$FakturabankID'";
+		$result = $_lib['storage']->db_query3(array('query' => $query));
+		if (!$result) {
+			return false;
+		}
+		if (($obj = $_lib['storage']->db_fetch_object($result)) && is_numeric($obj->ID)) {
+			return $obj;
+		}
+		
+		return false;
+	}
+
+        
 
 	private function save_transactions($voting, $period) {
 		global $_lib;
