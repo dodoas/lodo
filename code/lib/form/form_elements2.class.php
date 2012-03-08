@@ -413,6 +413,43 @@ class form2 {
   }
 
   #args input: , $args[table, $args[field, $args[value, $args[tabindex, $args[accesskey, $args[pk, $num_letters, company_id
+  function shelf_menu2($args) {
+      $shelf = new lodo_shelf();
+      
+      if(!$conf['num_letters']) {
+          $num_letters = '20';
+      } else {
+          $num_letters = $conf['num_letters'];
+      }; 
+             
+
+      if($args['pk']) {
+          print "<select name=\"$args[table].$args[field].$args[pk]\" tabindex=\"$args[tabindex]\" accesskey=\"$args[accesskey]\">\n";
+      } else {
+          print "<select name=\"$args[table].$args[field]\" tabindex=\"$args[tabindex]\" accesskey=\"$args[accesskey]\">\n";
+      }
+      if($conf['value']) {
+          print "<option value=\"\">" . substr("Finnes ikke: . $conf[value]",0, $num_letters);
+      } else {
+          print "<option value=\"\">" . substr('Velg hylle',0, $num_letters);
+      }
+
+      foreach($shelf->listAll() as $id => $l) {
+          list($name, $active) = $l;
+
+          if($id != $args['value'] and !$active) 
+              continue;
+
+          if($id == $args['value']) 
+              print "<option value=\"".$id."\" selected>".$id." - " . substr($name,0,$num_letters) . "\n";
+          else
+              print "<option value=\"".$id."\">".$id." - " . substr($name,0,$num_letters) . "\n";
+      }
+
+      print "</select>\n";
+  }
+
+  #args input: , $args[table, $args[field, $args[value, $args[tabindex, $args[accesskey, $args[pk, $num_letters, company_id
   function project_menu2($args) {
       global $_lib;
 

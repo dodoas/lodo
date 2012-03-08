@@ -1,0 +1,13 @@
+CREATE TABLE  `shelf` (
+`ShelfID` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`Active` BOOL NOT NULL ,
+`Name` VARCHAR( 128 ) NOT NULL
+) ENGINE = MYISAM;
+
+ALTER TABLE  `product` ADD  `ShelfID` INT( 11 ) NOT NULL ,
+ADD  `Unitsize` FLOAT NOT NULL ,
+ADD  `Bulksize` INT NOT NULL ;
+
+ALTER TABLE  `varelager` ADD  `LockedBy` INT( 11 ) NOT NULL ,
+ADD  `LockedDate` DATE NOT NULL ,
+ADD  `Comment` TEXT NOT NULL ;

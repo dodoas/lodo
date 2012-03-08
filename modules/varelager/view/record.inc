@@ -60,4 +60,17 @@ elseif($_REQUEST['action_varelager_delete'])
     $_lib['db']->db_delete_hash('varelagerline', $primarykey);
 }
 
+elseif($_REQUEST['action_varelager_lock']) {
+    $query = sprintf("UPDATE varelager SET LockedBy = '%d', LockedDate = NOW() WHERE VareLagerID = %d",
+                     $_SESSION["login_id"], $VareLagerID);
+    $_lib['db']->db_query($query);
+}
+
+elseif($_REQUEST['action_varelager_unlock']) {
+    $query = sprintf("UPDATE varelager SET LockedBy = '0', LockedDate = NOW() WHERE VareLagerID = %d",
+                     $VareLagerID);
+    $_lib['db']->db_query($query);
+}
+
+
 ?>
