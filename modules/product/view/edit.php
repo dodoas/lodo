@@ -11,6 +11,8 @@ $db_table  = "product";
 
 
 includelogic('accounting/accounting');
+includelogic('shelf/shelf');
+
 $accounting = new accounting();
 require_once "record.inc";
 
@@ -18,6 +20,7 @@ $query = "select * from $db_table where ProductID='$ProductID'";
 $row = $_lib['storage']->get_row(array('query' => $query));
 
 $accountplan = $accounting->get_accountplan_object($row->AccountPlanID);
+//$shelfs = new lodo_shelf();
 
 $VAT = $accounting->get_vataccount_object(array('VatID' => $accountplan->VatID, 'date' => $_lib['sess']->get_session('LoginFormDate')));
 
@@ -86,12 +89,24 @@ $VAT = $accounting->get_vataccount_object(array('VatID' => $accountplan->VatID, 
         <td colspan="2"><? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' =>  'ProjectID', 'pk'=>$row->ProductID,  'value' =>  $row->ProjectID, 'tabindex' => '5')) ?></td>
     </tr>
     <tr>
+        <td>Hylle</td>
+        <td colspan="2"><? $_lib['form2']->shelf_menu2(array('table' => $db_table,  'field' =>  'ShelfID', 'pk'=>$row->ProductID,  'value' =>  $row->ShelfID, 'tabindex' => '5')) ?></td>
+    </tr>
+    <tr>
         <td>UNSPSC</td>
         <td colspan="2"><? print $_lib['form3']->input(array('type'=>'text', 'table'=>$db_table, 'field'=>'UNSPSC', 'pk'=>$row->ProductID, 'value'=> $row->UNSPSC)) ?>
     </tr>
     <tr>
         <td>EAN</td>
         <td colspan="2"><? print $_lib['form3']->input(array('type'=>'text', 'table'=>$db_table, 'field'=>'EAN', 'pk'=>$row->ProductID, 'value'=> $row->EAN)) ?>
+    </tr>
+    <tr>
+        <td>Enhetsst&oslash;rrelse</td>
+        <td colspan="2"><? print $_lib['form3']->input(array('type'=>'text', 'table'=>$db_table, 'field'=>'Unitsize', 'pk'=>$row->ProductID, 'value'=>$row->Unitsize)) ?>
+    </tr>
+    <tr>
+        <td>Antall enheter i pris</td>
+        <td colspan="2"><? print $_lib['form3']->input(array('type'=>'text', 'table'=>$db_table, 'field'=>'Bulksize', 'pk'=>$row->ProductID, 'value'=>$row->Bulksize)) ?>
     </tr>
 
 </tbody>
