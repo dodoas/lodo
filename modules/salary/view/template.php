@@ -39,7 +39,10 @@ print $_lib['sess']->doctype ?>
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
+<? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?>
 <form name="template_update" action="<? print $MY_SELF ?>" method="post">
+<? } ?>
+
 <input type="hidden" name="SalaryConfID" value="<? print $SalaryConfID ?>" size="7" class="number">
 <table class="lodo_data">
   <tr class="result">
@@ -239,7 +242,7 @@ print $_lib['sess']->doctype ?>
     ?>
     </td>
     <td>
-        <nobr><? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $SalaryConfID ?>&amp;SalaryConfLineID=<? print $line->SalaryConfLineID ?>&amp;action_salaryconfline_new=1" class="button">Ny linje nr <? print $line->LineNumber ?></a><?}?>
+        <nobr><? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $SalaryConfID ?>&amp;SalaryConfLineID=<? print $line->SalaryConfLineID ?>&amp;action_salaryconfline_new=1" class="button">Ny linje nr <? print $line->LineNumber ?></a><?}?>
     </td>
    <?
     $counter++;
@@ -254,12 +257,16 @@ print $_lib['sess']->doctype ?>
   <td colspan="10"></td>
   <td><nobr><? if(($_lib['sess']->get_person('AccessLevel') >= 3) and ($ishovedmal == 1)) { ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $SalaryConfID ?>&amp;action_salarymainconfline_new=1" class="button">Ny linje</a><? } ?></nobr></td>
   <td colspan="2" align="right">
-  <? if(($_lib['sess']->get_person('AccessLevel') >= 2) or ($ishovedmal == 1)) { ?><input type="submit" name="action_salaryconf_update"  value="Lagre l&oslash;nns konfigurasjon (S)" accesskey="S" /><?}?>
+  <? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><input type="submit" name="action_salaryconf_update"  value="Lagre l&oslash;nns konfigurasjon (S)" accesskey="S" /><?}?>
   </td>
 
 </tr>
 </table>
-</form>
+
+<? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?>
+<form />
+<? } ?>
+
 <table>
     <tr>
         <td>

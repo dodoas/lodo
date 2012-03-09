@@ -15,7 +15,7 @@ $SalaryperiodconfID = (int) $_REQUEST['SalaryperiodconfID'];
 includelogic('accounting/accounting');
 $accounting = new accounting();
 require_once "record.inc";
-$query_head     = "select S.*, A.AccountName, A.Address, A.City, A.ZipCode, A.SocietyNumber, A.TabellTrekk, A.ProsentTrekk from salary as S, accountplan as A where S.SalaryID='$SalaryID' and S.AccountPlanID=A.AccountPlanID";
+$query_head     = "select S.*, A.AccountName, A.Address, A.City, A.ZipCode, A.SocietyNumber, A.TabellTrekk, A.ProsentTrekk, A.KommuneID from salary as S, accountplan as A where S.SalaryID='$SalaryID' and S.AccountPlanID=A.AccountPlanID";
 $head           = $_lib['storage']->get_row(array('query' => $query_head));
 
 $query_arb 		= "select a.Percent from kommune as k, arbeidsgiveravgift as a where a.Code=k.Sone";
@@ -77,6 +77,8 @@ if($SalaryperiodconfID)
 $SalaryperiodconfID_row = $_lib['db']->get_row( array( 'query' => sprintf("SELECT SalaryperiodconfID FROM salaryperiodconf WHERE Period = '%s'", $head->Period) ) );
 $SalaryperiodconfID = $SalaryperiodconfID_row->SalaryperiodconfID;
 
+$Kommune = $_lib['db']->get_row( array( 'query' => sprintf("SELECT * FROM kommune WHERE KommuneID ='%d'", $head->KommuneID)  ) );
+
 $formname = "salaryUpdate";
 ?>
 
@@ -115,6 +117,7 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
     <th>Til dato
     <th>Utbetalt dato
     <th>Konto for utbetaling
+    <th>Skattekommune
   </tr>
   <tr>
     <th class="sub">L <a href="<? print $_lib['sess']->dispatch."t=journal.edit&voucher_JournalID=$head->JournalID"; ?>&type=salary&view=1"><? print $head->JournalID ?></a>
@@ -128,6 +131,7 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
     <th class="sub"><input type="text" name="salary.ValidTo.<? print $head->SalaryID ?>" value="<? print $head->ValidTo ?>" size="10" class="number">
     <th class="sub"><input type="text" name="salary.PayDate.<? print $head->SalaryID ?>" value="<? print $head->PayDate ?>" size="10" class="number">
     <th class="sub"><input type="text" name="salary.DomesticBankAccount.<? print $head->SalaryID ?>" value="<? print $head->DomesticBankAccount ?>" size="16" class="number">
+    <th class="sub"><?= $Kommune->KommuneNumber ?> <?= $Kommune->KommuneName ?></th>
   </tr>
   <tr>
     <th class="salaryhead">Tabelltrekk</th>
