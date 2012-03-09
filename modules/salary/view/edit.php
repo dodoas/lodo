@@ -131,7 +131,7 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
     <th class="sub"><input type="text" name="salary.ValidTo.<? print $head->SalaryID ?>" value="<? print $head->ValidTo ?>" size="10" class="number">
     <th class="sub"><input type="text" name="salary.PayDate.<? print $head->SalaryID ?>" value="<? print $head->PayDate ?>" size="10" class="number">
     <th class="sub"><input type="text" name="salary.DomesticBankAccount.<? print $head->SalaryID ?>" value="<? print $head->DomesticBankAccount ?>" size="16" class="number">
-    <th class="sub"><?= $Kommune->KommuneName ?></th>
+    <th class="sub"><?= $Kommune->KommuneNumber ?> <?= $Kommune->KommuneName ?></th>
   </tr>
   <tr>
     <th class="salaryhead">Tabelltrekk</th>
