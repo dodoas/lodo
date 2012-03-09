@@ -17,23 +17,23 @@ elseif($_lib['input']->getProperty('action_company_update')) {
       #Possible to extend or alter parameters here
       #print_r($_POST);
 
-      if($_POST['company_IName'] == '')
+      if(isset($_POST['company_IName']) && $_POST['company_IName'] == '')
       {
           $_POST['company_IName'] = $_POST['company_CompanyName'];
       }
-      if($_POST['company_IAddress'] == '')
+      if(isset($_POST['company_IAddress']) && $_POST['company_IAddress'] == '')
       {
           $_POST['company_IAddress'] = $_POST['company_VAddress'];
       }
-      if($_POST['company_IZipCode'] == '')
+      if(isset($_POST['company_IZipCode']) && $_POST['company_IZipCode'] == '')
       {
           $_POST['company_IZipCode'] = $_POST['company_VZipCode'];
       }
-      if($_POST['company_ICity'] == '')
+      if(isset($_POST['company_ICity']) && $_POST['company_ICity'] == '')
       {
           $_POST['company_ICity'] = $_POST['company_VCity'];
       }
-      if($_POST['company_ICountryCode'] == '')
+      if(isset($_POST['company_ICountryCode']) && $_POST['company_ICountryCode'] == '')
       {
           $_POST['company_ICountryCode'] = $_POST['company_VCountryCode'];
       }
