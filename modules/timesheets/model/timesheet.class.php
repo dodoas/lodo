@@ -1205,7 +1205,7 @@ class timesheet_user_page
         if($sum_km > 0)
             printf("\n%-47s %d\n", "Kilometer kj&oslash;rt", $sum_km);
 
-        if($sum_toll + $sum_parkin + $sum_drivingexpenses > 0) 
+        if($sum_toll + $sum_parking + $sum_drivingexpenses > 0) 
         {
             printf("\nUtlagt - kroner\n");
             if($sum_toll > 0) printf("    %-36s %2.2f\n", "Bompenger", $sum_toll);
