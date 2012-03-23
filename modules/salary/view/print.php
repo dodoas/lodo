@@ -35,6 +35,9 @@ $departments = array();
 while( $department_line = $_lib['db']->db_fetch_assoc($department_result))
 	$departments[ $department_line['CompanyDepartmentID'] ] = $department_line['DepartmentName'];
 $departments[0] = "";
+
+$kommune = $_lib['db']->get_row( array( 'query' => sprintf("SELECT * FROM kommune WHERE KommuneID ='%d'", $head->KommuneID)  ) );
+
 ?>
 
 <? print $_lib['sess']->doctype ?>
@@ -115,6 +118,10 @@ $departments[0] = "";
     <td class="empty" width="10"></td>
     <td><label>Periode</label></td>
     <td><? print $head->Period ?></td>
+  </tr>
+  <tr>
+    <td><label>Skattekommune</label></td>
+    <td><? if($kommune) { printf("%s %s", $kommune->KommuneNumber, $kommune->KommuneName); } ?></td>
   </tr>
   <tr>
     <td><label>Kommentar:</label></td>

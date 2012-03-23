@@ -151,10 +151,31 @@ else
  * tape-function to reuse code
  */
 function worker_line($row, $i) {
-    global $_lib, $accounting, $setup, $entries, $SalaryperiodconfID, $current_period, $period_open;
+    global $_lib, $accounting, $setup, $entries, $SalaryperiodconfID, $current_period, $period_open, $period_row;
 
-  $i++;
-  if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
+    $year = substr($period_row['Period'], 0, 4);
+
+    $taxcard = false;
+
+    while(!$taxcard) {
+        $taxcard = $_lib['db']->get_row(array(
+                                            'query'
+                                            => sprintf("SELECT * FROM reportedtaxcard 
+                                                        WHERE AccountPlanID = %d 
+                                                          AND Year = %d",
+                                                       $row->AccountPlanID, $year)));
+
+        if(!$taxcard) {
+            $_lib['db']->db_query(
+                sprintf("INSERT INTO reportedtaxcard (`AccountPlanID`, `Year`) VALUES (%d, %d);",
+                        $row->AccountPlanID, $year)
+                );
+        }
+    }
+
+
+    $i++;
+    if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
 ?>
   <tr class="<? print "$sec_color"; ?>">
       <td>
@@ -239,6 +260,18 @@ function worker_line($row, $i) {
 
       <td>
         <?
+            $lastSalaryQuery = sprintf("SELECT JournalID FROM salary WHERE AccountPlanID = %d ORDER BY TS DESC LIMIT 1", $row->AccountPlanID);
+            $lastSalary = $_lib['storage']->get_row(array('query' => $lastSalaryQuery));
+            
+            if($lastSalary) {
+                printf("L%d", $lastSalary->JournalID);
+            }
+        ?>
+        
+      </td>
+
+      <td>
+        <?
           if(isset($entries[ $row->AccountPlanID ]))
           {
               foreach($entries[ $row->AccountPlanID ] as $a)
@@ -286,13 +319,18 @@ function worker_line($row, $i) {
       
 	<? if(($_lib['sess']->get_person('AccessLevel') >= 4) and ($row->SalaryConfID != 1)) { 
 	    echo $_lib['form3']->button(array('url' => 
-				 $_lib['sess']->dispatch . "t=salary.list&amp;SalaryConfID=" . $row->SalaryConfID . "&amp;action_salaryconf_delete=1"
-				 , 'name' => 'Slett', 'confirm' => 'Vil du virkelig slette linjen?'));
+                                              $_lib['sess']->dispatch . "t=salary.list&amp;SalaryConfID=" . $row->SalaryConfID . "&amp;action_salaryconf_delete=1"
+                                              , 'name' => 'Slett', 'confirm' => 'Vil du virkelig slette linjen?'));
  	   } ?>
       </td>
 
       <td> 
         <a href="<? print $_lib['sess']->dispatch ?>t=timesheets.list&AccountPlanID=<?= $row->AccountPlanID ?>&Username=<?= $row->AccountName ?>">timeliste</a>
+      </td>
+
+
+      <td> 
+       <input type="text" name="reportedtaxcard.Date.<?= $taxcard->ReportedTaxCardID ?>" value="<?= $taxcard->Date ?>">
       </td>
     
 <? 
@@ -315,7 +353,7 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
 <form name="salary_save_info" action="<? print $_lib['sess']->dispatch ?>t=salary.list&SalaryperiodconfID=<?= $SalaryperiodconfID ?>" method="post">
 <table class="lodo_data">
 <tr>
-    <th colspan="12">Hovedmal hele firma</th>
+    <th colspan="14">Hovedmal hele firma</th>
 </tr>
 <tr>
     <th class="sub">Ansatte</th>
@@ -329,11 +367,13 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
       Valgt periode: <?= $period_row['Period'] ?>
     </th>
     <th class="sub" style="background-color: yellow; color: black;">L&oslash;nnslipp</th>
+    <th class="sub">Forrige</th>
     <th class="sub">L&oslash;nninger</th>
     <th class="sub">Kommune</th>
     <th class="sub">Startdato</th>
     <th class="sub">Sluttdato</th>
     <th class="sub">L&T</th>
+    <th class="sub"></th>
     <th class="sub"></th>
     <th class="sub"></th>
 </tr>
@@ -402,6 +442,7 @@ else {
 
     </th>
     <th class="sub" style="background-color: yellow; color: black;">L&oslash;nnslipp</th>
+    <th class="sub">Forrige</th>
     <th class="sub">L&oslash;nninger</th>
     <th class="sub">Kommune</th>
     <th class="sub">Startdato</th>

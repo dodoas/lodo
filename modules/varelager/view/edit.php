@@ -103,7 +103,7 @@ print $_lib['sess']->doctype
             global $departmentSum, $departmentAmount, $lastDepartment, $_lib;
 
             if($departmentSum != -1) {
-                printf("<tr style='background-color: #888;'><td><b>Sum %s</b><td></td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><b>%s</b></td><td><b>%s</b></td></tr>", 
+                printf("<tr style='background-color: #888;'><td><b>Sum %s</b><td></td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td style='text-align: right'><b>%s</b></td><td style='text-align: right'><b>%s</b></td></tr>", 
                        $lastDepartment, 
                        $_lib['format']->Amount(array('value'=>$departmentSum, 'return'=>'value')),
                        $departmentAmount
@@ -115,7 +115,7 @@ print $_lib['sess']->doctype
             global $projectSum, $projectAmount, $lastProject, $_lib;
 
             if($projectSum != -1) {
-                printf("<tr style='background-color: #aaa;'><td></td><td><b>Sum %s</b></td><td></td><td></td><td></td><td></td><td></td><td><td></td><td><b>%s</b></td><td><b>%s</b></td></tr>", 
+                printf("<tr style='background-color: #aaa;'><td></td><td><b>Sum %s</b></td><td></td><td></td><td></td><td></td><td></td><td><td></td><td style='text-align: right'><b>%s</b></td><td style='text-align: right'><b>%s</b></td></tr>", 
                        $lastProject, 
                        $_lib['format']->Amount(array('value'=>$projectSum, 'return'=>'value')),
                        $projectAmount
@@ -127,7 +127,7 @@ print $_lib['sess']->doctype
             global $shelfSum, $shelfAmount, $lastShelf, $_lib;
 
             if($shelfSum != -1) {
-                printf("<tr style='background-color: #ccc;'><td></td><td></td><td><b>Sum %s</b></td><td></td><td></td><td></td><td></td><td></td><td><td><b>%s</b></td><td><b>%s</b></td></tr>", 
+                printf("<tr style='background-color: #ccc;'><td></td><td></td><td><b>Sum %s</b></td><td></td><td></td><td></td><td></td><td></td><td><td style='text-align: right'><b>%s</b></td><td style='text-align: right'><b>%s</b></td></tr>", 
                        $lastShelf, 
                        $_lib['format']->Amount(array('value'=>$shelfSum, 'return'=>'value')),
                        $shelfAmount

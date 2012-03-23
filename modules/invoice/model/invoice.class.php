@@ -108,8 +108,8 @@ class invoice {
             $headH['DeliveryDate']= $_lib['sess']->get_session('DateTo');
         }
 
-        #Possible to extend or alter parameters here
-        #Set default parameters
+        //#Possible to extend or alter parameters here
+        //#Set default parameters
         $accountplan = $accounting->get_accountplan_object($this->CustomerAccountPlanID);
 
         $headH['IName']                 = $accountplan->AccountName;
@@ -470,7 +470,22 @@ class invoice {
         $ret = $_lib['db']->db_update($query);
         
         $_lib['message']->add(array('message' => "Linje $LineID p&aring; faktura $this->InvoiceID er slettet"));
-        
+
+        if($this->CustomerAccountPlanID == 0) {
+            $query = sprintf(
+                "SELECT I.CustomerAccountPlanID FROM 
+                      invoiceout I,
+                      invoiceoutline IL
+                    WHERE
+                        IL.LineID = %d AND I.InvoiceID = IL.InvoiceID",
+                $LineID
+                );
+            
+            $row = $_lib['db']->get_row(array('query' => $query));
+            
+            $this->CustomerAccountPlanID = $row->CustomerAccountPlanID;
+        }
+
         $this->init(array());
         $this->make_invoice();
     }

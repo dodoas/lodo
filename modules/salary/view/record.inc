@@ -27,6 +27,12 @@ if($_lib['input']->getProperty('salary_save_info')) {
       $_lib['db']->db_query($sql);
     }
   }
+
+  /* updated taxcard */
+  $_lib['storage']->db_update_multi_table($_POST, 
+                                          array(
+                                              'reportedtaxcard' => 'ReportedTaxcardID'
+                                              ));
 }
 elseif($_lib['input']->getProperty('action_salary_update'))
 {
@@ -163,7 +169,6 @@ elseif($_lib['input']->getProperty('action_salary_new'))
       $query_head_employee  = "select * from salaryconf where SalaryConfID = '" . (int) $_lib['input']->getProperty('SalaryConfID') . "'";
       $result_head_employee = $_lib['db']->db_query($query_head_employee);
       $head_employee        = $_lib['db']->db_fetch_object($result_head_employee);
-
       $accountplan = $accounting->get_accountplan_object($head_employee->AccountPlanID);
 
       #Possible to extend or alter parameters here
@@ -174,6 +179,8 @@ elseif($_lib['input']->getProperty('action_salary_new'))
       $postmain['salary_ValidTo']             = $toDate;
       $postmain['salary_JournalDate']         = $journalDate;
       $postmain['salary_Period']              = $salary_period_conf->Period;  //$_lib['date']->get_this_period($journalDate);
+      $postmain['salary_KommuneID']           = $accountplan->KommuneID;
+      echo "KOMMUNE!" . $accountplan->KommuneID;
 
       if($accountplan->EnableCredit == 1)
         $postmain['salary_PayDate']           = $_lib['date']->add_Days($journalDate, $accountplan->CreditDays);
@@ -406,9 +413,21 @@ elseif($_lib['input']->getProperty('action_salaryconf_update'))
 }
 elseif($_lib['input']->getProperty('action_salary_lock'))
 {
-  $query = sprintf("UPDATE salary SET LockedBy = '%s %s', LockedDate = NOW() WHERE SalaryID = %d LIMIT 1", 
-			$_lib['sess']->get_person('FirstName'), $_lib['sess']->get_person('LastName'), $SalaryID);
-  $_lib['db']->db_query($query);
+    $query = sprintf("UPDATE salary SET LockedBy = '%s %s', LockedDate = NOW() WHERE SalaryID = %d LIMIT 1", 
+                     $_lib['sess']->get_person('FirstName'), $_lib['sess']->get_person('LastName'), $SalaryID);
+    $_lib['db']->db_query($query);
+}
+elseif($_lib['input']->getProperty('action_salary_internal')) {
+    $head = $_POST;    
+    $head2 = $_POST;
+
+    foreach($head2 as $k => $v) {
+        if(strstr($k, "InternComment") === false) {
+            unset($head[$k]);
+        }
+    }
+
+    $_lib['storage']->db_update_multi_table($head, array('salary' => 'SalaryID'));
 }
 elseif($_lib['input']->getProperty('action_salary_journal'))
 {
@@ -736,6 +755,10 @@ elseif($_lib['input']->getProperty('action_salary_updatesalarycode')) {
         $fb = new lodo_fakturabank_fakturabanksalary();
 
         $fb->sendsalary($SalaryID, $SalaryConfID);
+
+        $query = sprintf("UPDATE salary SET LockedBy = '%s %s', LockedDate = NOW() WHERE SalaryID = %d LIMIT 1", 
+                         $_lib['sess']->get_person('FirstName'), $_lib['sess']->get_person('LastName'), $SalaryID);
+        $_lib['db']->db_query($query);
         //        print "<h1>Feature is not available yet</h1>";
         
     } // else TODO later: handle illegal access attempt
