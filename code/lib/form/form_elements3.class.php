@@ -1042,43 +1042,48 @@ class form3
         global $_lib;
         $name = $this->MakeName($args);
 
-		$colorH = array(
-			'balance'  => '#0FF000',
-			'result'   => '#0FFFF0',
-			'employee' => '#CCCCCC',
-			'supplier' => '#FFF000',
-			'customer' => '#00FF00'
-		);
-
-		$where = '';
-
-		if(count($args['type'])) {
-			#print_r($args['type']);
-			foreach($args['type'] as $tmp => $type) {
-	
-				#print "type: $type<br>\n";
-	
-				if($type == 'hovedbok') {
-					$where .= " ((AccountPlanType='balance' or AccountPlanType='result') and EnableReskontro = 0) or ";
-				} elseif($type == 'hovedbokwreskontro') {
-					$where .= " ((AccountPlanType='balance' or AccountPlanType='result') and EnableReskontro = 1) or ";
-				} elseif($type == 'hovedbokwemployee') {
-					$where .= " ((AccountPlanType='balance' or AccountPlanType='result' or AccountPlanType='employee') and EnableReskontro = 0) or ";
-				} elseif($type == 'reskontro') {
-					$where .= " (AccountPlanType != 'balance' and AccountPlanType != 'result') or ";
-				} elseif($type) {
-					$where .= " AccountPlanType='$type' or ";
-				} else {
-					print "No type argument supplied to accountplan_number_menu";
-				}
+        $colorH = array(
+            'balance'  => '#0FF000',
+            'result'   => '#0FFFF0',
+            'employee' => '#CCCCCC',
+            'supplier' => '#FFF000',
+            'customer' => '#00FF00'
+            );
+        
+        $where = '';
+        
+        if(count($args['type'])) {
+            #print_r($args['type']);
+            foreach($args['type'] as $tmp => $type) {
+                
+                //#print "type: $type<br>\n";
+                
+                if($type == 'hovedbok') {
+                    $where .= " ((AccountPlanType='balance' or AccountPlanType='result') and EnableReskontro = 0) or ";
+                } elseif($type == 'hovedbokwreskontro') {
+                    $where .= " ((AccountPlanType='balance' or AccountPlanType='result') and EnableReskontro = 1) or ";
+                } elseif($type == 'hovedbokwemployee') {
+                    $where .= " ((AccountPlanType='balance' or AccountPlanType='result' or AccountPlanType='employee') and EnableReskontro = 0) or ";
+                } elseif($type == 'reskontro') {
+                    $where .= " (AccountPlanType != 'balance' and AccountPlanType != 'result') or ";
+                } elseif($type) {
+                    $where .= " AccountPlanType='$type' or ";
+                } else {
+                    print "No type argument supplied to accountplan_number_menu";
+                }
 			}
+            
+            $where = substr($where, 0, -4); //#remove the last or
+        } 
+        else {
+            print "No type argument supplied to accountplan_number_menu";
+        }
 
-			$where = substr($where, 0, -4); #remove the last or
-		} else {
-			print "No type argument supplied to accountplan_number_menu";
-		}
+        if(isset($args['showInactive']))
+            $query = "select AccountPlanID, AccountName, AccountPlanType from accountplan where AccountPlanID != '0' and ($where) order by AccountPlanID";
+        else
+            $query = "select AccountPlanID, AccountName, AccountPlanType from accountplan where Active=1 and AccountPlanID != '0' and ($where) order by AccountPlanID";
 
-        $query = "select AccountPlanID, AccountName, AccountPlanType from accountplan where Active=1 and AccountPlanID != '0' and ($where) order by AccountPlanID";
         #print "$query<br>";
         $result = $_lib['db']->db_query($query);
 

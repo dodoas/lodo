@@ -248,7 +248,10 @@ foreach ($currencies as $currency) {
       <td colspan="3"><? print $_lib['form3']->TextArea(array('table'=>$db_table, 'field'=>'CommentCustomer', 'pk'=>$InvoiceID, 'value'=>$row->CommentCustomer, 'tabindex'=>$tabindex++, 'height'=>'5', 'width'=>'80')) ?></td>
     </tr>
     <tr>
-      <td valign="top">Kommentar (intern)</td>
+      <td valign="top">
+        Kommentar (intern)<br />
+        <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_save_internal', 'value'=>'Lagre')) ?>
+      </td>
       <td colspan="3"><? print $_lib['form3']->TextArea(array('table'=>$db_table, 'field'=>'CommentInternal', 'pk'=>$InvoiceID, 'value'=>$row->CommentInternal, 'tabindex'=>$tabindex++, 'height'=>'5', 'width'=>'80')) ?></td>
     </tr>
 </tbody>

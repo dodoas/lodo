@@ -15,7 +15,7 @@ $SalaryperiodconfID = (int) $_REQUEST['SalaryperiodconfID'];
 includelogic('accounting/accounting');
 $accounting = new accounting();
 require_once "record.inc";
-$query_head     = "select S.*, A.AccountName, A.Address, A.City, A.ZipCode, A.SocietyNumber, A.TabellTrekk, A.ProsentTrekk, A.KommuneID from salary as S, accountplan as A where S.SalaryID='$SalaryID' and S.AccountPlanID=A.AccountPlanID";
+$query_head     = "select S.*, A.AccountName, A.Address, A.City, A.ZipCode, A.SocietyNumber, A.TabellTrekk, A.ProsentTrekk from salary as S, accountplan as A where S.SalaryID='$SalaryID' and S.AccountPlanID=A.AccountPlanID";
 $head           = $_lib['storage']->get_row(array('query' => $query_head));
 
 $query_arb 		= "select a.Percent from kommune as k, arbeidsgiveravgift as a where a.Code=k.Sone";
@@ -77,7 +77,7 @@ if($SalaryperiodconfID)
 $SalaryperiodconfID_row = $_lib['db']->get_row( array( 'query' => sprintf("SELECT SalaryperiodconfID FROM salaryperiodconf WHERE Period = '%s'", $head->Period) ) );
 $SalaryperiodconfID = $SalaryperiodconfID_row->SalaryperiodconfID;
 
-$Kommune = $_lib['db']->get_row( array( 'query' => sprintf("SELECT * FROM kommune WHERE KommuneID ='%d'", $head->KommuneID)  ) );
+$kommune = $_lib['db']->get_row( array( 'query' => sprintf("SELECT * FROM kommune WHERE KommuneID ='%d'", $head->KommuneID)  ) );
 
 $formname = "salaryUpdate";
 ?>
@@ -124,14 +124,30 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
     <th class="sub"><? print $_lib['form3']->text(array('table'=>'salary', 'field'=>'JournalDate', 'pk'=>$head->SalaryID, 'value'=>$head->JournalDate, 'OnChange'=>"update_period(this, '".$formname."', 'salary.JournalDate.".$head->SalaryID."', 'salary.Period.".$head->SalaryID."');")) ?>
     <th class="sub"><? print $_lib['form3']->AccountPeriod_menu3(array('table' => 'salary', 'field' => 'Period', 'pk'=>$head->SalaryID, 'value' => $head->Period, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'pk' => $head->SalaryID, 'required'=>'1')); ?>
     <th class="sub"><?
-        $aconf = array('table'=>'salary', 'field'=>'AccountPlanID', 'value'=>$head->AccountPlanID, 'tabindex'=>'', 'accesskey'=>'K', 'pk'=>$head->SalaryID, 'type'=> array('0' => 'employee'));
+        $aconf = array('table'=>'salary', 'field'=>'AccountPlanID', 'value'=>$head->AccountPlanID, 
+                       'tabindex'=>'', 'accesskey'=>'K', 'pk'=>$head->SalaryID, 'type'=> array('0' => 'employee'));
         print $_lib['form3']->accountplan_number_menu($aconf);
         ?>
     <th class="sub"><input type="text" name="salary.ValidFrom.<? print $head->SalaryID ?>" value="<? print $head->ValidFrom ?>" size="10" class="number">
     <th class="sub"><input type="text" name="salary.ValidTo.<? print $head->SalaryID ?>" value="<? print $head->ValidTo ?>" size="10" class="number">
     <th class="sub"><input type="text" name="salary.PayDate.<? print $head->SalaryID ?>" value="<? print $head->PayDate ?>" size="10" class="number">
     <th class="sub"><input type="text" name="salary.DomesticBankAccount.<? print $head->SalaryID ?>" value="<? print $head->DomesticBankAccount ?>" size="16" class="number">
-    <th class="sub"><?= $Kommune->KommuneNumber ?> <?= $Kommune->KommuneName ?></th>
+    <th class="sub"><? 
+            if($kommune) { 
+                printf("%s %s", $kommune->KommuneNumber, $kommune->KommuneName); 
+            } 
+            else {
+                print $_lib['form3']->kommune_menu(array(
+                                                       'table' => 'salary',
+                                                       'field' => 'KommuneID',
+                                                       'value' => 0,
+                                                       'accesskey' => 'K',
+                                                       'pk' => $head->SalaryID,
+                                                       
+                                                       ));
+            }
+    ?>
+  </th>
   </tr>
   <tr>
     <th class="salaryhead">Tabelltrekk</th>
@@ -360,9 +376,10 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 
                   if(!$head->LockedBy || $_lib['sess']->get_person('AccessLevel') >= 4) 
                   {
-                    echo '<input type="submit" name="action_salary_journal" value="Lagre (S)" accesskey="S" align="right" /><br /></td>';
+                    echo '<input type="submit" name="action_salary_journal" value="Lagre (S)" accesskey="S" align="right" /><br />';
                   }
-        
+
+                  echo '<input type="submit" name="action_salary_internal" value="Lagre internkommentar(S)" accesskey="S" align="right" />';
                 ?>
 
             </td>
@@ -378,8 +395,10 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 
                   if(!$head->LockedBy || $_lib['sess']->get_person('AccessLevel') >= 4) 
                   {
-                    echo '<input type="submit" name="action_salary_journal" value="Lagre (S)" accesskey="S" align="right" /><br /></td>';
+                    echo '<input type="submit" name="action_salary_journal" value="Lagre (S)" accesskey="S" align="right" /><br />';
                   }
+
+                  echo '<input type="submit" name="action_salary_internal" value="Lagre internkommentar(S)" accesskey="S" align="right" />';
             ?>
             </td>
             <?

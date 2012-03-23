@@ -32,7 +32,6 @@
 //
 //
 
-
 //
 // Henter ut aarene som har data
 //
@@ -40,10 +39,13 @@ $years = $_lib['db']->get_hash(
     array( 'query' => 'SELECT Year FROM salaryperiodconf ORDER BY Year ASC', 'key' => 'Year' )
     );
 $years[ date("Y") ] = true;     // sikrer at dette aaret et med
+$years[ substr($_lib['sess']->get_session('LoginFormDate'), 0, 4) ] = true; // sikre at aaret i satt i configurasjonen
 $years[ date("Y") + 1 ] = true; // legger til et aar fremover
 $confyear = $_lib['input']->getProperty('confyear');
 if(!$confyear)
   $confyear = date("Y");
+
+ksort($years);
 
 require_once "record_config.inc";
 

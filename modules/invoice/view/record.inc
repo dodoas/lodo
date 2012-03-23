@@ -74,4 +74,19 @@ elseif($_lib['input']->getProperty('action_invoice_lock')) {
     $invoice->lock();
 }
 
+elseif($_lib['input']->getProperty('action_save_internal')) {
+    /* dont store anything but internal comment */
+    $head = $_POST;
+    $head2 = $_POST;
+    foreach($head2 as $k => $v) {
+        if(strstr($k, "CommentInternal") === false) {
+            unset($head[$k]);
+        }
+    }
+
+    $invoice->update($head);    
+}
+
+
+
 ?>

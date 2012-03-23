@@ -48,7 +48,7 @@ $_QUERY['form']['avdmenu']                  = "select CompanyDepartmentID, Depar
 $_QUERY['form']['sonemenu']                 = "select Code, concat('Kode: ', Code, ' - ',Percent, '%') from arbeidsgiveravgift";
 $_QUERY['form']['kommunemenu']              = "select KommuneID, KommuneNumber, KommuneName from kommune";
 $_QUERY['form']['periodmenu']               = "select substring(Period,1,4), substring(Period,1,4) from accountperiod group by Period order by Period desc";
-$_QUERY['form']['productmenu']              = "select ProductID, ProductName from product where Active='1' order by ProductNumber asc";
+$_QUERY['form']['productmenu']              = "select ProductID, ProductNumber, ProductName from product where Active='1' order by ProductNumber asc";
 $_QUERY['form']['vatmenu']                  = "select * from vat where Active=1 ";
 $_QUERY['form']['vatSalesMenu']             = "select * from vat where Percent>=0 and VatID<20 and Active=1 ";
 $_QUERY['form']['vatBuyMenu']               = "select * from vat where Percent>=0 and VatID>=20 and Active=1 ";

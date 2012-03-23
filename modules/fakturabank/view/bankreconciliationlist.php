@@ -42,10 +42,10 @@ includeinc('left') ?>
 <table class="lodo_data">
 <thead>
   <tr>
-    <th align="left" colspan="4">Koblinger mellom Fakturabank banktransaksjonsavstemmings&aring;rsaker og bokf&oslash;ringskontoer
+    <th align="left" colspan="6">Koblinger mellom Fakturabank banktransaksjonsavstemmings&aring;rsaker og bokf&oslash;ringskontoer
   <tr>
     <th>
-    <th colspan="4">
+    <th colspan="5">
         <form name="fakturabankbankreconciliationreason_search" action="<? print $_lib['sess']->dispatch ?>t=fakturabank.bankreconciliationedit" method="post">
 Ny kobling (skriv fb id):
             <? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'FakturabankBankReconciliationReasonID', 'width'=>'10')) ?>
@@ -53,23 +53,42 @@ Ny kobling (skriv fb id):
         </form>
   <tr>
     <th class="menu">Fakturabank Avstemmings ID
-                                                                                                              <th class="menu">FB Kode
-                                                                                                              <th class="menu">FB Navn
-          <th class="menu">Bokf&oslash;ringskonto 
+    <th class="menu">FB Kode
+    <th class="menu">FB Navn
+    <th class="menu">Bokf&oslash;ringskonto 
+    <th class="menu">Aktiv</th>
+    <th class="menu">LODO Navn</th>
 </tr>
 </thead>
 
 <tbody>
 <?
 while($row = $_lib['db']->db_fetch_object($result_fakturabankbankreconciliationreason)) {
-$i++;
-if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
-?>
-  <tr class="<? print "$sec_color"; ?>">
-      <td><a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.bankreconciliationedit&fakturabankbankreconciliationreason_FakturabankBankReconciliationReasonID=<? print $row->FakturabankBankReconciliationReasonID ?>"><? print $row->FakturabankBankReconciliationReasonID; ?></a>
-                                                                                                                                                                                                                                                                                             <td><? print $row->FakturabankBankReconciliationReasonCode; ?>
-                                                                                                                                                                                                                                                                                             <td><? print $row->FakturabankBankReconciliationReasonName; ?>
-      <td><? print $row->AccountPlanID; ?>
+    $i++;
+
+    if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
+
+    $checkQuery = sprintf("SELECT AccountName, Active FROM accountplan WHERE AccountPlanID = %d", $row->AccountPlanID);
+    if( ($check = $_lib['db']->get_row(array('query' => $checkQuery))) ) {
+        $found = true;
+        $active = $check->Active;
+        $name = $check->AccountName;
+    }
+    else {
+        $found = false;
+        $active = false;
+        $name = "";
+    }
+
+    ?>
+    <tr class="<? print "$sec_color"; ?>" style="<?= ($found?"": "background-color: red") ?>">
+         <td><a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.bankreconciliationedit&fakturabankbankreconciliationreason_FakturabankBankReconciliationReasonID=<? print $row->FakturabankBankReconciliationReasonID ?>"><? print $row->FakturabankBankReconciliationReasonID; ?></a>
+         <td><? print $row->FakturabankBankReconciliationReasonCode; ?>
+         <td><? print $row->FakturabankBankReconciliationReasonName; ?>
+         <td><? print $row->AccountPlanID; ?>
+         <td><?= ($active?"ja":"nei") ?>
+         <td><?= $name ?></td>
+ 
 <? } ?>
 </tbody>
 </table>
