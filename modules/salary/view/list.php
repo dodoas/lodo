@@ -375,7 +375,7 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
     <th class="sub">L&T</th>
     <th class="sub"></th>
     <th class="sub"></th>
-    <th class="sub"></th>
+    <th class="sub">Skattekort registert</th>
 </tr>
 <tr>
     <td></td>

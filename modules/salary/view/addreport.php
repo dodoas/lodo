@@ -14,6 +14,9 @@
 include('reportcodes.php');
 $year = $_GET['year'];
 
+includemodel('salary/salaryreport');
+$salaryreport = new salaryreport(array('year'=>$year, 'employeeID'=>$_GET['AccountPlanID']));
+
 ?>
 Innberetning
 <form action="<?= $_lib['sess']->dispatch ?>t=salary.employeereport&year=<?= $year ?>" method="post">
@@ -33,8 +36,11 @@ foreach($codes as $code) {
 
     foreach($codes as $code) {
         printf('
-          <td><input type="text" name="add_amounts[%s]" /></td>
-        ', $code);
+          <td><input type="text" name="add_amounts[%s]" value="%d" /></td>
+        ', 
+               $code,
+               $salaryreport->_reportHash['head'][$code]['sumLineCode']
+            );
     } 
 
   ?>

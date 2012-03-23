@@ -32,6 +32,7 @@ print $_lib['sess']->doctype ?>
   <tr>
       <th>Dato</th>
       <th>Beskrivelse</th>
+      <th></th>
       <th><input type="button" name="name" value=" Oppdater " onClick="document.location='<?php global $MY_SELF; print $MY_SELF; ?>';"/></th>
   </tr>
   <tr>
@@ -43,6 +44,8 @@ print $_lib['sess']->doctype ?>
             <? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'Description', 'width'=>'30', 'tabindex'=>'2')) ?>
         </th>
         <th>
+        </th>
+        <th>
             <? print $_lib['form3']->submit(array('name'=>'action_varelager_new', 'value'=>'Ny varetelling')) ?>
         </th>
       </form>
@@ -50,13 +53,14 @@ print $_lib['sess']->doctype ?>
   <tr>
     <th class="menu">Dato</th>
     <th class="menu">Beskrivelse</th>
+    <th class="menu">Sum</th>
     <th class="menu"></th>
   </tr>
 </thead>
 
 <tbody>
 <?
-$query = "select * from $db_table order by CreatedDate desc";
+$query = "select *, SUM(L.CostPrice * L.Antall) as S from $db_table as V, varelagerline as L WHERE L.VarelagerID = V.VarelagerID group by V.VareLagerID order by CreatedDate desc ";
 $result = $_lib['db']->db_query($query);
 while($row = $_lib['db']->db_fetch_object($result))
 {
@@ -67,10 +71,14 @@ if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark
       <td><a href="<? print $_lib['sess']->dispatch ?>t=varelager.edit&VareLagerID=<? print $row->VareLagerID ?>" target="_new"><? print $row->CreatedDate; ?></a></td>
       <td><a href="<? print $_lib['sess']->dispatch ?>t=varelager.edit&VareLagerID=<? print $row->VareLagerID ?>" target="_new"><? print $row->Description; ?></a></td>
       <td>
-      <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
+        <?= $_lib['format']->Amount(array('value'=>$row->S, 'return'=>'value')) ?>
+      </td>
+      <td>
+      <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
       <a href="<? print $_lib['sess']->dispatch ?>t=varelager.list&action_varelager_delete=<? print $row->VareLagerID ?>" class="button">Slett</a>
       <? } ?>
       </td>
+
   </tr>
 <? } ?>
 </tbody>

@@ -27,7 +27,7 @@ $report_date = $row['Date'];
 
 ?>
 Innberetning
-<form action="<?= $_lib['sess']->dispatch ?>t=salary.tmp&year=<?= $year ?>" method="post">
+<form action="<?= $_lib['sess']->dispatch ?>t=salary.employeereport&year=<?= $year ?>" method="post">
   <table>
     <tr>
       <th>Date</td>
