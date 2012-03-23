@@ -412,9 +412,9 @@ class SessionNew
         } else {
             foreach ($this->debug_hash as $line => $linenum) {
                 if(!$start_time) {
-                    $start_time = $this->debug_hash[$line][time];
+                    $start_time = $this->debug_hash[$line]['time'];
                 }
-                $time_since_start = $this->debug_hash[$line][time] - $start_time;
+                $time_since_start = $this->debug_hash[$line]['time'] - $start_time;
             }
         }
         return $time_since_start;
@@ -445,7 +445,7 @@ class SessionNew
         if($person->Debug || !empty($_SETUP['DEBUG_FOR_ALL_PERSONS'])) {
             $this->debug = true;
             ini_set('display_errors',1);
-            error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
+	    error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
         }
   
         //print $query;

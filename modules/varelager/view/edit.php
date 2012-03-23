@@ -262,7 +262,13 @@ print $_lib['sess']->doctype
               }
               ?>
             <tr>
-                <td colspan="10" align="right"><? print $_lib['form3']->submit(array('name'=>'action_varelager_update', 'value'=>'Slett')) ?></td>
+              <?
+                 if($_lib['sess']->get_person('AccessLevel') >= 3 && $sum == 0) { 
+              ?>
+              <td colspan="10" align="right"><? print $_lib['form3']->submit(array('name'=>'action_varelager_update', 'value'=>'Slett')) ?></td>
+              <? 
+                 }  
+                 ?>
             </tr>
             <tr>
                 <td colspan="10" align="right"><input type="button" name="name" value=" Lukk "/ onClick="window.close();">

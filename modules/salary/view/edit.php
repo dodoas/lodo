@@ -403,6 +403,10 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
             </td>
             <?
         }
+        else 
+        {
+            echo "<td>Perioden er stengt</td>";
+        }
     }
   ?>
 </tr>

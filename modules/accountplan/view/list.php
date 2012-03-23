@@ -86,51 +86,33 @@ if($JournalID) { ?>
 <?
 }
 ?>
-<h2><? print "$account_name"; ?></h2>
-
 <form name="accountplan_list" action="<? print $MY_SELF ?>" method="post">
-<table>
-<tr>
-  <td>
   <table class="lodo_data">
-    <thead>
-      <tr>
-        <th colspan="2">S&oslash;k</th>
-      </tr>
-    </thead>
     <tr>
-      <th class="menu">S&oslash;k kun etter aktive</th>
-      <td><? $_lib['form2']->checkbox2('accountplan', 'active', $_lib['input']->getProperty('accountplan_active'),'');        ?></td>
-    </tr>
-    <tr>
-      <th class="menu">Fritekst s&oslash;k
-       <td>
-         <input type="text"   name="searchstring" value="<? print $searchstring ?>" />
-         <input type="hidden" name="JournalID"    value="<? print $JournalID ?>"    />
-         <input type="hidden" name="report.Sort"  value="AccountPlanID"  			/>
-         <input type="hidden" name="limit"        value="1"  />
-       </td>
-    </tr>
-    <tr>
-    	<th class="menu">
-    	Type
-    	</th>
-    	<td>
+      <td>
+        Type:
     	<? print $_lib['form3']->Type_menu3(array('table' => accountplan, 'field'=>'type', 'value' => $accountplan_type, 'type' => 'AccountPlanType', 'required' => 0)) ?>
-    	</td>
-    </tr>
-    <tr>
-      <td colspan="2" align="right">
+      </td>
+
+      <td style="padding-left: 15px;">
+        Fritekst: <input type="text"   name="searchstring" value="<? print $searchstring ?>" />
+        <input type="hidden" name="JournalID"    value="<? print $JournalID ?>"    />
+        <input type="hidden" name="report.Sort"  value="AccountPlanID"  			/>
+        <input type="hidden" name="limit"        value="1"  />
+      </td>
+
+      <td style="padding-left: 15px;">
+        Kun aktive:
+        <? $_lib['form2']->checkbox2('accountplan', 'active', $_lib['input']->getProperty('accountplan_active'),'');        ?>
+      </td>
+      <td>
         <input type="submit" value="S&oslash;k" name="action_accountplan_search" />
-    </form>
-  </tbody>
+      </td>
+    </tr>
   </table>
-  </td>
-  <td valign="top">
-  <? require_once 'new.inc'; ?>
-  </td>
-</tr>
-</table>
+</form>
+<? require_once 'new.inc'; ?>
+
 <?
 if(isset($limitSet))
 {
@@ -138,7 +120,7 @@ if(isset($limitSet))
 <table class="lodo_data">
 <thead>
   <tr>
-    <th colspan="14">Kontoer</th>
+    <th colspan="14">Kontoer - <?= $account_name ?></th>
   <tr>
     <th class="menu">Aktiv</th>
     <th class="menu">Konto</th>

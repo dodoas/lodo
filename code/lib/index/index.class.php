@@ -151,13 +151,13 @@ if(!$include)
         //$_SESSION['DB_NAME'] = $_SETUP['DB_NAME_DEFAULT'];
     }
 
-    $args = split('\.', $t);
+    $args = explode('.', $t);
     if(strlen($_REQUEST['submit_login']) > 0)
     {
         if(!isset($args[0]) or !strlen($args[0]) or !isset($args[1]) or !strlen($args[1]))
         {
             $_SETUP['ACTIVE_INTERFACE'] = $_SETUP['LOGIN_INTERFACE'];
-            $args = split('\.', $_SETUP['LOGIN_FIRSTPAGE']);
+            $args = explode('.', $_SETUP['LOGIN_FIRSTPAGE']);
         }
     }
     else

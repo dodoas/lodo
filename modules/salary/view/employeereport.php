@@ -152,16 +152,24 @@ while( $employee = $_lib['db']->db_fetch_assoc( $employees_r ) ) {
         $all_reports[] = $report_line;
     }
 
+    /*
     $query = sprintf("SELECT DATEDIFF( DATE('%s'), DATE('%s') ) AS d", $salaryreport->_reportHash['account']['WorkStop'], $salaryreport->_reportHash['account']['WorkStart']);
     $workedDays_r = $_lib['db']->db_query($query);
     $workedDays = $_lib['db']->db_fetch_assoc($workedDays_r);
     $workedDays['d'] += 1;
 
     if($workedDays['d'] < 1)
+    continue;*/
+
+    $query = sprintf("SELECT SalaryID FROM salary WHERE PayDate >= '%d-01-01' AND PayDate < '%d-01-01'",
+                     $year, $year + 1);
+    if($_lib['db']->get_row(array('query' => $query)) == false) {
         continue;
+    }
+                     
 
     $fields = array(
-        array('<b>'.$salaryreport->_reportHash['account']['AccountName'].'</b>', $salaryreport->_reportHash['account']['SocietyNumber']),
+        array($employee['AccountPlanID'] . ' <b>'.$salaryreport->_reportHash['account']['AccountName'].'</b>', $salaryreport->_reportHash['account']['SocietyNumber']),
         array($salaryreport->_reportHash['account']['Address'], 'alle dager: ' . ($salaryreport->_reportHash['account']['WorkedWholeYear'] ? 'ja' : 'nei') ),
         array($salaryreport->_reportHash['account']['ZipCode'], $salaryreport->_reportHash['account']['WorkStart']),
         array($salaryreport->_reportHash['account']['City'], $salaryreport->_reportHash['account']['WorkStop']),
