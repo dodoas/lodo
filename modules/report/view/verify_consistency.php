@@ -428,7 +428,7 @@ while($voucher = $_lib['db']->db_fetch_object($result_bad_date))
 <br />
 
 <fieldset>
-<legend>8. Bilag som er f&oslash;rt mot kontoer som ikke er aktive eller kontoer som er slettet</legend>
+<legend>8. Bilag som er f&oslash;rt mot kontoer som er slettet</legend>
 <table class="lodo_data">
 <thead>
   <tr class="voucher">
@@ -453,7 +453,7 @@ while($voucher = $_lib['db']->db_fetch_object($result_bad_date))
 </thead>
 <tbody>
 <?
-$query_notactive        = "select v.* from voucher as v left join  accountplan as a on a.AccountPlanID=v.AccountPlanID and a.Active=1 where a.AccountPlanID is null and v.Active=1";
+$query_notactive        = "select v.* from voucher as v left join  accountplan as a on a.AccountPlanID=v.AccountPlanID where a.AccountPlanID is null";
 $result_notactive       = $_lib['db']->db_query($query_notactive);
 while($voucher          = $_lib['db']->db_fetch_object($result_notactive))
 { ?>
@@ -513,6 +513,58 @@ while($row = $_lib['db']->db_fetch_object($result_week))
     </tr>
 <? } ?>
 </table>
+</fieldset>
+
+<fieldset>
+  <legend>10. Mistenkelige bilag</legend>
+  <table class="lodo_data">
+    <thead>
+      <tr>
+        <th class="sub">Bilagsnummer</th>
+        <th class="sub">Dato</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <?
+    
+         $query = "
+SELECT 
+  V1.JournalID, V1.VoucherType, V1.VoucherDate
+FROM
+  voucher AS V1
+  LEFT JOIN voucher AS V2 ON (V2.VoucherID = V1.AutomaticVatVoucherID)
+  LEFT JOIN voucher AS V3 ON (V3.VoucherID = V2.AutomaticVatVoucherID)
+WHERE
+  V1.Active = 1
+  AND V1.VatID != 0
+  AND V1.Vat > 0.0
+  AND (
+    (V2.VoucherID IS NULL 
+       OR V2.Active = 0)
+    OR
+    (V3.VoucherID IS NULL
+       OR V3.Active = 0)
+  )
+";
+   
+         $res = $_lib['db']->db_query($query);   
+         while( ($row = $_lib['db']->db_fetch_assoc($res)) ) {
+      ?>
+      <tr class="BGColorLight">
+        <td>
+          <a href="<? print $_SETUP[DISPATCH]."t=journal.edit&amp;voucher_VoucherType=". $row['VoucherType'] ."&amp;voucher_JournalID=". $row['JournalID']; ?>&amp;action_journalid_search=1">
+            <? printf("%s%s", $row['VoucherType'], $row['JournalID']); ?>
+          </a>
+        </td>
+        <td><? printf("%s", $row['VoucherDate']); ?></td>
+        
+      </tr>
+      <?
+         }
+         ?>
+    </tbody>
+  </table>
 </fieldset>
 
 </body>

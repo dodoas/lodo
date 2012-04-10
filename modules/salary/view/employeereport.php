@@ -56,10 +56,13 @@ $year = isset($_REQUEST["year"]) ? (int)$_REQUEST["year"] : date("Y");
 $employees_q = "select *, A.KommuneID as NoKommune from salaryconf as S, accountplan as A, kommune as K where S.AccountPlanID=A.AccountPlanID and (A.KommuneID=K.KommuneID or (A.KommuneID = 0 and K.KommuneID = 1) ) and S.SalaryConfID!=1 order by AccountName asc";
 $employees_r = $_lib['db']->db_query($employees_q);
 
+printf("<h1>L&oslash;nnsrapport for %d</h1>", $year);
+
 printf('<form action="%st=salary.employeereport" method="post">
           <input name="year" value="%s" />
           <input type="submit" value="Change year" />
         </form><br /><br />', $_lib['sess']->dispatch, $year);
+
 
 print('<table class="lodo_data" border=1">
 <tr>
