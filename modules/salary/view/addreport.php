@@ -18,9 +18,9 @@ includemodel('salary/salaryreport');
 $salaryreport = new salaryreport(array('year'=>$year, 'employeeID'=>$_GET['AccountPlanID']));
 
 ?>
-Innberetning
+<h1>Innberetning</h1>
 <form action="<?= $_lib['sess']->dispatch ?>t=salary.employeereport&year=<?= $year ?>" method="post">
-  <table>
+  <table class="lodo_data">
     <tr>
       <th>Date</th>
 <?php
@@ -29,9 +29,10 @@ foreach($codes as $code) {
 }
 
 ?>
+    <th></th>
     </tr>
     <tr>
-      <td><input type="text" name="add_date" value="<?= date("Y-m-d") ?>" />
+      <td><input type="text" name="add_date" value="<? print $year ?>-01-01" />
   <?php
 
     foreach($codes as $code) {
@@ -44,8 +45,10 @@ foreach($codes as $code) {
     } 
 
   ?>
+    <td>
+      <input type="hidden" value="<?= $_GET['AccountPlanID'] ?>" name="AccountPlanID" />
+      <input type="submit" value="Lagre" name="add_report" />
+    </td>
     </tr>
   </table>
-  <input type="hidden" value="<?= $_GET['AccountPlanID'] ?>" name="AccountPlanID" />
-  <input type="submit" value="Lagre" name="add_report" />
 </form>

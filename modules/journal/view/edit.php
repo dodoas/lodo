@@ -260,6 +260,7 @@ if(abs($resultCheck->saldo1 - $resultCheck->saldo2) != 0)
 
 <br />
 <br />
+
 <form class="voucher" name="<? print $form_name2 ?>" action="<? print $MY_SELF ?>" method="post">
     <? print $_lib['form3']->hidden(array('name' => 'type'              , 'value' => $voucher_input->type)) ?>
     <? print $_lib['form3']->hidden(array('name' => 'voucher.VoucherID' , 'value' => $voucherHead->VoucherID)) ?>
@@ -328,11 +329,23 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
         }
         ?>
 	    &nbsp;&nbsp;
-	    <?
+        <?
 	    if($voucherHead->ExternalID) {
 	    	print $_lib['form3']->button(array('name' => 'Vis i fakturabank', 'url' => 'https://fakturabank.no/invoices/' . $voucherHead->ExternalID, 'target' => '_new'));
-	    } ?>
+	    } 
+        ?>
+        <? 
+          // Quick-fix for making it impossible to add entries in locked periods
+          if(!$accounting->is_valid_accountperiod($voucher_input->VoucherPeriod, $_lib['sess']->get_person('AccessLevel')) && isset($voucher_input->new)) 
+          {
+              print $voucher_gui->update_journal_button_head($voucherHead, $voucher_input->VoucherPeriod, $voucher_input->VoucherType, $voucher_input->JournalID, $voucher_input->new, $rowCount);
+              print '</form>';
+              exit;
+          }
+        ?>
         <br /><br />
+
+
     </td>
   </tr>
   <tr class="voucher">
