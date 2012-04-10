@@ -459,7 +459,7 @@ print $_lib['sess']->doctype ?>
 <table class="lodo_data" width="100%">
 <tr>
 	<th rowspan="4">R<br />A<br />P<br />P<br />O<br />R<br />T<br />E<br />R<br /></th>
-	<td><a href="<? print $_lib['sess']->dispatch ?>t=mvaavstemming.list" target="_blank">MVA Avstemming</a></td
+	<td><a href="<? print $_lib['sess']->dispatch ?>t=mvaavstemming.list" target="_blank">MVA Avstemming</a></td>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=report.verify_consistency&report_Type=balancenotok&report_Sort=VoucherID" target="_blank">Bilags, balanse, resultat, reskontro, dato og periode kontroll</a></td>
 </tr>
 <tr>
