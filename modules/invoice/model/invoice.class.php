@@ -75,7 +75,14 @@ class invoice {
             #print "xx3<br>\n";
 
             $headH = $_lib['db']->db_fetch_assoc($result_head);
-            #print_r($headH);
+            //print_r($headH);
+
+            /* 
+             * InvoiceDate is needed by set_line to select correct VAT 
+             */
+            if(isset($headH['InvoiceDate'])) {
+                $this->set_head(array('InvoiceDate' => $headH['InvoiceDate']));
+            }
 
             while($lineH = $_lib['db']->db_fetch_assoc($result_line)) {
                 $this->set_line($lineH);
@@ -549,8 +556,7 @@ class invoice {
         #print_r($accountplan);
         
         $VAT = $accounting->get_vataccount_object(array('VatID' => $accountplan->VatID, 'date' => $this->headH['InvoiceDate']));
-        #print_r($VAT);
-
+        
         #print_r($product);
 
         if($line['QuantityDelivered'] == 0) #Rettet av Geir. Maa vare mulig aa lage kreditnota med minus i antall.

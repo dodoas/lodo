@@ -21,6 +21,23 @@ $password = $_lib['db']->get_row(array('query' => $password_query));
 if($account->AccountPlanType)
     $AccountPlanType = $account->AccountPlanType;
 
+if($_lib['input']->getProperty('NewAccount'))
+{
+    /* fetch data from template */
+    $query = sprintf("SELECT * FROM accountplantemplate WHERE AccountPlanType = '%s'", $AccountPlanType);
+    $template_r = $_lib['db']->db_query($query);
+    $template = $_lib['db']->db_fetch_assoc($template_r);
+
+    if($template) {
+        foreach($template as $k => $v) {
+            if($k == "AccountPlanID")
+                continue;
+
+            $account->$k = $v;
+        }
+    }
+}
+
 $fakturabankemail_query = "select * from fakturabankemail where AccountPlanID = " . $AccountPlanID;
 $fakturabankemail = $_lib['storage']->get_row(array('query' => $fakturabankemail_query));
 

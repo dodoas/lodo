@@ -58,6 +58,7 @@ print $_lib['sess']->doctype ?>
                     ?><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.list&accountplan_type=<? print $row2->ReskontroAccountPlanType ?>" title="Reskontro"><? print $row2->AccountPlanID ?> - <? print $row2->AccountName ?></a><?
                 }
                 ?>
+                <a href="<? print $_lib['sess']->dispatch ?>t=accountplantemplate.list"><b>Hovedmaler for kontoer</b></a>
             </td>
             <td>
                 <a href="<? print $_lib['sess']->dispatch ?>t=vat.edit">Merverdiavgift</a>
