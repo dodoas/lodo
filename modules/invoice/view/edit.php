@@ -250,7 +250,6 @@ foreach ($currencies as $currency) {
     <tr>
       <td valign="top">
         Kommentar (intern)<br />
-        <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_save_internal', 'value'=>'Lagre')) ?>
       </td>
       <td colspan="3"><? print $_lib['form3']->TextArea(array('table'=>$db_table, 'field'=>'CommentInternal', 'pk'=>$InvoiceID, 'value'=>$row->CommentInternal, 'tabindex'=>$tabindex++, 'height'=>'5', 'width'=>'80')) ?></td>
     </tr>
@@ -357,10 +356,12 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     </tr>
     <tr>
         <td>
+        <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_save_internal', 'value'=>'Lagre internkommentar')) ?>
+
         <?
         if($_lib['sess']->get_person('AccessLevel') >= 2)
         {
-           print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_newonthis', 'value'=>'Ny faktura ut i fra denne'));
+            print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_newonthis', 'value'=>'Ny faktura ut i fra denne', 'confirm' => 'Er du sikker p&aring; at du vil lage ny ut i fra denne?'));
         }
         ?>
         </td>
@@ -381,19 +382,18 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 
 
         if(!$row->Locked || $_lib['sess']->get_person('AccessLevel') >= 4) {
-			if($_lib['sess']->get_person('AccessLevel') >= 4 && $inline == 'edit')
-			{
-				if($accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
-                                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_delete', 'value'=>'Slett faktura (D)', 'accesskey'=>'D', 'confirm' => 'Er du sikker p&aring; at du vil slette denne fakturaen?'));
-			}
+            if($_lib['sess']->get_person('AccessLevel') >= 4 && $inline == 'edit') {
+                if($accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
+                    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_delete', 'value'=>'Slett faktura (D)', 'accesskey'=>'D', 'confirm' => 'Er du sikker p&aring; at du vil slette denne fakturaen?'));
+            }
+        } 
+        else {
+            print "Faktura l&aring;st";
+        }
 
-		} else {
-			print "Faktura l&aring;st";
-		}
-
-		if($_lib['sess']->get_person('FakturabankExportInvoiceAccess')) {
-		    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
-		}
+        if($_lib['sess']->get_person('FakturabankExportInvoiceAccess')) {
+            print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
+        }
 
 
         ?>
@@ -406,7 +406,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
             <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'value'=>'Utskrift')) ?>
         </form>
         <form name="skriv_ut2" action="<? print $_lib['sess']->dispatch ?>t=invoice.print2&InvoiceID=<? print $InvoiceID ?>" method="post" target="_new">
-            <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'value'=>'Vis PDF fil')) ?>
+            <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'value'=>'Utskrift PDF')) ?>
         </form>
      </tr>
      <tr>

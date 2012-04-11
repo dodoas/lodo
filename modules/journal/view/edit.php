@@ -335,16 +335,10 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
 	    } 
         ?>
         <? 
-          // Quick-fix for making it impossible to add entries in locked periods
-          if(!$accounting->is_valid_accountperiod($voucher_input->VoucherPeriod, $_lib['sess']->get_person('AccessLevel')) && isset($voucher_input->new)) 
-          {
-              print $voucher_gui->update_journal_button_head($voucherHead, $voucher_input->VoucherPeriod, $voucher_input->VoucherType, $voucher_input->JournalID, $voucher_input->new, $rowCount);
-              print '</form>';
-              exit;
-          }
+            if(!$accounting->is_valid_accountperiod($voucher_input->VoucherPeriod, $_lib['sess']->get_person('AccessLevel')))
+                printf("Perioden %s er stengt", $voucher_input->VoucherPeriod);
         ?>
         <br /><br />
-
 
     </td>
   </tr>
@@ -369,7 +363,12 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
   </tr>
   <tr class="voucher" valign="top">
     <td><? print $voucher_gui->active_line($voucher_input->VoucherIDOld, $voucherHead->VoucherID); ?></td>
-    <td><? print $voucher_gui->account($voucher_input->VoucherPeriod, $voucher_input->new, $db_table, $voucher, $voucher_input->AccountPlanID, false) ?></td>
+    <td>
+      <? 
+        if($accounting->is_valid_accountperiod($voucher_input->VoucherPeriod, $_lib['sess']->get_person('AccessLevel')))
+            print $voucher_gui->account($voucher_input->VoucherPeriod, $voucher_input->new, $db_table, $voucher, $voucher_input->AccountPlanID, false) 
+      ?>
+    </td>
     <? print $voucher_gui->creditdebitfield($AmountField, $accountplan, $voucher_input->AmountIn, $voucher_input->AmountOut) ?>
     <? //print $voucher_gui->currency($voucherHead, $accountplan, $vb, $class) ?>
     <? print $voucher_gui->currency2($voucherHead) ?>
@@ -382,7 +381,12 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     <td><input class="voucher" type="text" size="22" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>"  accesskey="R" name="voucher.InvoiceID" value="<? print $voucher_input->InvoiceID ?>"></td>
     <td><!-- <? if($rowCount>1) { $tmp = ''; } else { $tmp = $tabindex++; }; print $_lib['form3']->Type_menu3(array('table' => $db_table, 'field' => 'DescriptionID', 'value' => $voucherHead->DescriptionID, 'type' => 'VoucherDescriptionID', 'tabindex' => $tmp, 'accesskey' => 'E')); ?> --></td>
     <td><input class="voucher" type="text" size="10" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" accesskey="G" name="voucher.Description"       value="<? print $voucher_input->Description; ?>"></td>
-    <td align="right"><? print $voucher_gui->update_journal_button_head($voucherHead, $voucher_input->VoucherPeriod, $voucher_input->VoucherType, $voucher_input->JournalID, $voucher_input->new, $rowCount) ?></td>    
+    <td align="right">
+      <? 
+         if($accounting->is_valid_accountperiod($voucher_input->VoucherPeriod, $_lib['sess']->get_person('AccessLevel')))
+             print $voucher_gui->update_journal_button_head($voucherHead, $voucher_input->VoucherPeriod, $voucher_input->VoucherType, $voucher_input->JournalID, $voucher_input->new, $rowCount) 
+      ?>
+    </td>    
   </tr>
   <? if($view_linedetails == 1) { ?>
   <tr valign="top">
@@ -392,6 +396,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
    </tr>
    <? } ?>
 </form>
+
 
 
 <?

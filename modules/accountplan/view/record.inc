@@ -97,8 +97,6 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
         $query   = "select * from $db_table where AccountPlanID = $AccountPlanID";
         $account = $_lib['storage']->get_row(array('query' => $query));
 	
-        $_POST['accountplan_debittext']  = "Inn";
-        $_POST['accountplan_credittext'] = "Ut";
         $_POST['accountplan_InsertedByPersonID'] = $_lib['sess']->get_person('PersonID');
         $_POST['accountplan_InsertedDateTime']   = $_lib['sess']->get_session('Datetime');
         
@@ -140,10 +138,11 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
             $_POST['accountplan_EnableReport4'] = 1;
             $_POST['accountplan_EnableReport5'] = 1;
         }
+
         if($AccountPlanType == 'customer' || $AccountPlanType == 'supplier') {
             $query = "select AccountPlanID, EnablePostPost, EnableMoneyFlow from accountplan where EnableReskontro=1 and Active=1 and ReskontroAccountPlanType='" . $AccountPlanType . "'";
             $account = $_lib['storage']->get_row(array('query' => $query));
-
+            
             $_POST['accountplan_EnablePostPost'] 	= $account->EnablePostPost;
             $_POST['accountplan_EnableMoneyFlow'] 	= $account->EnableMoneyFlow;
         }

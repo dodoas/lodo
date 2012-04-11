@@ -43,6 +43,7 @@ class pdfInvoice
 
     public $invoiceHeadCompanyInfoStart = 20;
     public $invoiceHeadCompanyInfoLeftMargin = 135;
+    public $invoiceHeadCompanyBetingelserLeftMargin = 135;
     public $invoiceHeadCompanyInfoWidth = 25;
     public $invoiceHeadCompanyInfoWidth2 = 22;
     public $invoiceHeadCompanyInfoFont = 9;
@@ -53,6 +54,8 @@ class pdfInvoice
     public $invoiceHeaderWidth = 22;
     public $invoiceHeaderFont = 16;
     public $invoiceHeaderHeight = 5;
+
+    public $invoiceLinesPerSite = 18;
 
     public $invoiceLineHeadFontSize = 9;
     public $invoiceLineHeadStart = 83;
@@ -292,9 +295,19 @@ class pdfInvoice
 
             $this->pdf->SetFont($this->invoiceFont,'', $this->invoiceHeadCompanyInfoFont);
             $this->pdf->SetXY($this->invoiceHeadCompanyInfoLeftMargin + $this->invoiceHeadCompanyInfoWidth, $this->invoiceHeadCompanyInfoStart + ($this->invoiceHeadlineHeight * $lineNumber));
-            $this->pdf->Cell($this->invoiceHeadCompanyInfoWidth2, $this->invoiceHeadlineHeight, $this->korriger($value),$this->showMyFrame);
+            $this->pdf->Cell($this->invoiceHeadCompanyInfoWidth2, $this->invoiceHeadlineHeight, 
+                             $this->korriger($value),$this->showMyFrame);
 
             $lineNumber++;
+        }
+
+        if($this->invoiceHeadCompanyInfoStart + ($this->invoiceHeadlineHeight * ($lineNumber + 1)) > $this->invoiceLineHeadStart - ($this->lineHeight * 1.2)) {
+            $this->invoiceLineHeadStart = $this->invoiceHeadCompanyInfoStart + ($this->invoiceHeadlineHeight * ($lineNumber)) + ($this->lineHeight * 1.2) + 10;
+            $this->invoiceLinesPerSite = 17;
+        }
+
+        if($this->invoiceHeadCompanyInfoStart + ($this->invoiceHeadlineHeight * $lineNumber) > 60) {
+           $this->invoiceHeadCompanyBetingelserLeftMargin = 80;
         }
 
     }
@@ -363,12 +376,12 @@ class pdfInvoice
         $newLines = count($this->splitString($params[$myText], $this->{$myRight} - $this->{$myLeft}));
 
         $this->pdf->SetFont($this->invoiceFont,'',$this->invoiceLineFontSize);
-        if (!($this->invoiceLineCurrentLine < 18))
+        if (!($this->invoiceLineCurrentLine < $this->invoiceLinesPerSite))
         {
             // Her tror jeg vi må legge opp til at det lages ny header igjen.
             $this->sideskift();
         }
-        else if (!(($this->invoiceLineCurrentLine + $newLines - 1) < 18))
+        else if (!(($this->invoiceLineCurrentLine + $newLines - 1) < $this->invoiceLinesPerSite))
         {
             // Her tror jeg vi må legge opp til at det lages ny header igjen.
             $this->sideskift();
@@ -461,7 +474,7 @@ class pdfInvoice
         // This means that you have available 86 mm or 21 lines or 14 lines if full spec vat og  18 lines if simple spec vat
 
         $this->pdf->SetFont($this->invoiceFont,'',$this->invoiceLineFontSize);
-        if (!($this->invoiceLineCurrentLine < 18))
+        if (!($this->invoiceLineCurrentLine < $this->invoiceLinesPerSite))
         {
             // Her tror jeg vi må legge opp til at det lages ny header igjen.
             $this->sideskift();
@@ -565,8 +578,13 @@ function SplitByLength($string, $chunkLength=1){
     {
         // From 88 mm to 169 mm. ( 30 mm is consumed by full vat spec or 14 mm if simple vat spec. )
         // This means that you have available 86 mm or 21 lines or 14 lines if full spec vat og  18 lines if simple spec vat
-        $this->pdf->SetFont($this->invoiceFont,'',$this->invoiceLineFontSize - 1);
+        $this->pdf->SetFont($this->invoiceFont,'B',$this->invoiceLineFontSize - 1);
         $lines = $this->splitString($params["betingelser"], 65);
+        $this->pdf->SetXY($this->invoiceHeadCompanyBetingelserLeftMargin, 60 + ($myLine * ($this->lineHeight -1)));
+        $this->pdf->Cell(60, ($this->lineHeight -1), $this->korriger("Betalingsbetingelser"), $this->showMyFrame, 0, "L");
+        $this->pdf->SetFont($this->invoiceFont,'',$this->invoiceLineFontSize - 1);
+        $myLine = 1;
+
         for($i = 0; $i < count($lines); $i++)
         {
             $myTekst = $lines[$i];
@@ -574,7 +592,7 @@ function SplitByLength($string, $chunkLength=1){
 
             $myLeft = "invoiceLineHeadLeft1";
             $myRight = "invoiceLineHeadLeft8";
-            $this->pdf->SetXY($this->invoiceHeadCompanyInfoLeftMargin, 60 + ($myLine * ($this->lineHeight -1)));
+            $this->pdf->SetXY($this->invoiceHeadCompanyBetingelserLeftMargin, 60 + ($myLine * ($this->lineHeight -1)));
             $this->pdf->Cell(60, ($this->lineHeight -1), $this->korriger($myTekst), $this->showMyFrame, 0, "L");
             $myLine++;
         }
@@ -777,7 +795,7 @@ function SplitByLength($string, $chunkLength=1){
  */
     function ore_format($amt)
     {
-        list($tull, $tall) = split("\.", sprintf("%.2F", $amt));
+        list($tull, $tall) = explode(".", sprintf("%.2F", $amt));
         return $tall;
     }
 /**
@@ -788,7 +806,7 @@ function SplitByLength($string, $chunkLength=1){
  */
     function norwegianDate($dato)
     {
-        list($y, $m, $d) = split("-", $dato);
+        list($y, $m, $d) = explode("-", $dato);
         return $d . "." . $m . "." . $y;
     }
 /**
@@ -800,7 +818,7 @@ function SplitByLength($string, $chunkLength=1){
  */
     function splitString($str, $maxLength)
 {
-    $words = split(" ", $str);
+    $words = explode(" ", $str);
     $wordCounter = 0;
     $lineCounter = 0;
     $fromWord = 0;

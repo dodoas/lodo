@@ -93,7 +93,7 @@ print $_lib['sess']->doctype;
 
 <?
 
-  $period_query = "SELECT SalaryperiodconfID, Name, Year FROM salaryperiodconf ORDER BY Year, SalaryperiodconfID";
+  $period_query = "SELECT SalaryperiodconfID, Name, Year, Period FROM salaryperiodconf ORDER BY Period DESC, SalaryperiodconfID";
   $period_result = $_lib['db']->db_query($period_query);
 
 ?>
@@ -101,21 +101,10 @@ print $_lib['sess']->doctype;
   <form action="<?= $_lib['sess']->dispatch ?>&t=salary.list" method="post">
   <select name="SalaryperiodconfID">
   <?
-    $last = array('Year' => 0, 'Month' => 0);
-    $month = date('n');
-    $year  = date('Y');
     while( $row = $_lib['db']->db_fetch_assoc($period_result) )
     {
-        if($row['Year'] != $last['Year'])
-        {
-           $last['Year'] = $row['Year'];
-           $last['Month'] = 0;
-        }
-
-        $last['Month'] ++;
-
         if( $SalaryperiodconfID == $row['SalaryperiodconfID'] || 
-           (!$SalaryperiodconfID && $last['Year'] == $year && $last['Month'] == $month) )
+            (!$SalaryperiodconfID && ($row['Period']."-01") == $_SESSION['LoginFormDate']) )
         { 
             $selected = "selected";
         }
@@ -260,18 +249,6 @@ function worker_line($row, $i) {
 
       <td>
         <?
-            $lastSalaryQuery = sprintf("SELECT JournalID FROM salary WHERE AccountPlanID = %d ORDER BY TS DESC LIMIT 1", $row->AccountPlanID);
-            $lastSalary = $_lib['storage']->get_row(array('query' => $lastSalaryQuery));
-            
-            if($lastSalary) {
-                printf("L%d", $lastSalary->JournalID);
-            }
-        ?>
-        
-      </td>
-
-      <td>
-        <?
           if(isset($entries[ $row->AccountPlanID ]))
           {
               foreach($entries[ $row->AccountPlanID ] as $a)
@@ -284,6 +261,18 @@ function worker_line($row, $i) {
               }          
           }
         ?>
+      </td>
+
+      <td>
+        <?
+            $lastSalaryQuery = sprintf("SELECT JournalID FROM salary WHERE AccountPlanID = %d ORDER BY TS DESC LIMIT 1", $row->AccountPlanID);
+            $lastSalary = $_lib['storage']->get_row(array('query' => $lastSalaryQuery));
+            
+            if($lastSalary) {
+                printf("L%d", $lastSalary->JournalID);
+            }
+        ?>
+        
       </td>
 
       <td>
@@ -330,7 +319,18 @@ function worker_line($row, $i) {
 
 
       <td> 
-       <input type="text" name="reportedtaxcard.Date.<?= $taxcard->ReportedTaxCardID ?>" value="<?= $taxcard->Date ?>">
+        <?php
+            
+            list($y, $m, $d) = explode('-', $current_period);
+            if($m >= 4 && $taxcard->Date == '0000-00-00')
+            {
+                printf('<input type="text" name="reportedtaxcard.Date.%s" value="%s" style="background-color: red">', $taxcard->ReportedTaxCardID, $taxcard->Date);
+            }
+            else {
+                printf('<input type="text" name="reportedtaxcard.Date.%s" value="%s">', $taxcard->ReportedTaxCardID, $taxcard->Date);
+            }
+
+        ?>
       </td>
     
 <? 
@@ -367,8 +367,8 @@ while($row = $_lib['db']->db_fetch_object($result_conf)) {
       Valgt periode: <?= $period_row['Period'] ?>
     </th>
     <th class="sub" style="background-color: yellow; color: black;">L&oslash;nnslipp</th>
-    <th class="sub">Forrige</th>
     <th class="sub">L&oslash;nninger</th>
+    <th class="sub">Siste</th>
     <th class="sub">Kommune</th>
     <th class="sub">Startdato</th>
     <th class="sub">Sluttdato</th>
@@ -442,8 +442,8 @@ else {
 
     </th>
     <th class="sub" style="background-color: yellow; color: black;">L&oslash;nnslipp</th>
-    <th class="sub">Forrige</th>
     <th class="sub">L&oslash;nninger</th>
+    <th class="sub">Siste</th>
     <th class="sub">Kommune</th>
     <th class="sub">Startdato</th>
     <th class="sub">Sluttdato</th>
