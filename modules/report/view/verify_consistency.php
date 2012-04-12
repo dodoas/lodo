@@ -539,12 +539,16 @@ WHERE
   V1.Active = 1
   AND V1.VatID != 0
   AND V1.Vat > 0.0
+  AND V1.AmountIn + V1.AmountOut > 0.1
   AND (
     (V2.VoucherID IS NULL 
        OR V2.Active = 0)
     OR
     (V3.VoucherID IS NULL
        OR V3.Active = 0)
+    OR
+    (V2.AmountIn != V3.AmountOut
+      OR V2.AmountOut != V3.AmountIn)
   )
 ";
    

@@ -15,7 +15,7 @@ $SalaryperiodconfID = (int) $_REQUEST['SalaryperiodconfID'];
 includelogic('accounting/accounting');
 $accounting = new accounting();
 require_once "record.inc";
-$query_head     = "select S.*, A.AccountName, A.Address, A.City, A.ZipCode, A.SocietyNumber, A.TabellTrekk, A.ProsentTrekk from salary as S, accountplan as A where S.SalaryID='$SalaryID' and S.AccountPlanID=A.AccountPlanID";
+$query_head     = "select F.Email as FEmail, S.*, A.AccountName, A.Address, A.City, A.ZipCode, A.SocietyNumber, A.TabellTrekk, A.ProsentTrekk from salary as S, fakturabankemail F, accountplan as A where S.SalaryID='$SalaryID' and S.AccountPlanID=A.AccountPlanID and F.AccountPlanID = A.AccountPlanID";
 $head           = $_lib['storage']->get_row(array('query' => $query_head));
 
 $query_arb 		= "select a.Percent from kommune as k, arbeidsgiveravgift as a where a.Code=k.Sone";
@@ -93,15 +93,6 @@ $formname = "salaryUpdate";
 
 <? includeinc('top') ?>
 <? includeinc('left') ?>
-
-<? if($_lib['message']->get()) { 
-    $msg = $_lib['message']->get();
-$mcolor = (strstr($msg, "rror")) ? "red" : "black";
-?>
-    <div class="<? echo $mcolor ?> error"><? print $_lib['message']->get() ?><br/></div>
-<? } ?>
-
-<? print $message ?>
 
 <form name="<? print $formname ?>" action="<? print $MY_SELF ?>" method="post">
 <input type="hidden" name="SalaryID" value="<? print $SalaryID ?>">
@@ -341,58 +332,42 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 </td>
 </tr>
 
-<tr>
-    <td colspan="<? echo ($head->FakturabankPersonID) ? '2' : '6'  ?>">
-      <?
-		if($_lib['sess']->get_person('FakturabankExportPaycheckAccess')) {
-		    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_salary_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
-		}
-
-      ?>
-     	<? if ($head->FakturabankPersonID) { ?>
-<td colspan="4">Sendt til Fakturabank <? print $head->FakturabankDateTime ?>, av <? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?></td>
-		<? } ?>
-
-    </td>
-    <td colspan="2"></td>
-
-    <td colspan="3">
-      <a href="<? print $_lib['sess']->dispatch ?>t=salary.list&SalaryperiodconfID=<?= $SalaryperiodconfID ?>">Tilbake til l&oslash;nnsslipp</a>
-    </td>
-    <td>
-      <a href="<? print $_lib['sess']->dispatch ?>t=salary.print&amp;SalaryID=<? print $SalaryID ?>" target="_new" />Vis</a>
-    </td>
-    <?
+<?
     if($_lib['sess']->get_person('AccessLevel') >= 2)
     {
         print $_lib['form3']->hidden(array('name'=>'fieldcount', 'value'=>$counter));
         if(!$head->Period)
         {
             ?>
-            <td>
-                <?php
-                  if(!$head->LockedBy) echo '<input type="submit" name="action_salary_lock" value="L&aring;s (L)" accesskey="L" />';
-                  else echo "L&aring;st av " . $head->LockedBy . " " . $head->LockedDate;
+        <tr>
+          <td> 
+          <?php
+            if(!$head->LockedBy || $_lib['sess']->get_person('AccessLevel') >= 4) 
+            {
+              echo '<input type="submit" name="action_salary_journal" value="Lagre (S)" accesskey="S" align="right" />';
+            }
+    
+            echo '<input type="submit" name="action_salary_internal" value="Lagre internkommentar(S)" accesskey="S" align="right" />';
+          ?>
 
-                  if(!$head->LockedBy || $_lib['sess']->get_person('AccessLevel') >= 4) 
-                  {
-                    echo '<input type="submit" name="action_salary_journal" value="Lagre (S)" accesskey="S" align="right" /><br />';
-                  }
-
-                  echo '<input type="submit" name="action_salary_internal" value="Lagre internkommentar(S)" accesskey="S" align="right" />';
-                ?>
-
-            </td>
-            <?
+          </td>
+        <tr>
+          <td>
+          <?php
+            if(!$head->LockedBy) echo '<input type="submit" name="action_salary_lock" value="L&aring;s (L)" accesskey="L" />';
+            else echo "L&aring;st av " . $head->LockedBy . " " . $head->LockedDate;
+          ?>
+          </td>
+        </tr>
+        <?
         }
         elseif($accounting->is_valid_accountperiod($head->Period, $_lib['sess']->get_person('AccessLevel')))
         {
-            ?>
-            <td>
+          ?>
+        <tr>
+          <td>
                 <?php
-                  if(!$head->LockedBy) echo '<input type="submit" name="action_salary_lock" value="L&aring;s (L)" accesskey="L" />';
-                  else echo "L&aring;st av " . $head->LockedBy . " " . $head->LockedDate;
-
+              
                   if(!$head->LockedBy || $_lib['sess']->get_person('AccessLevel') >= 4) 
                   {
                     echo '<input type="submit" name="action_salary_journal" value="Lagre (S)" accesskey="S" align="right" /><br />';
@@ -400,7 +375,16 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 
                   echo '<input type="submit" name="action_salary_internal" value="Lagre internkommentar(S)" accesskey="S" align="right" />';
             ?>
-            </td>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <?
+             if(!$head->LockedBy) echo '<input type="submit" name="action_salary_lock" value="L&aring;s (L)" accesskey="L" />';
+             else echo "L&aring;st av " . $head->LockedBy . " " . $head->LockedDate;
+          ?>
+          </td>
+        </tr>
             <?
         }
         else 
@@ -410,6 +394,48 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
     }
   ?>
 </tr>
+
+<tr>
+  <td colspan = "7"></td>
+  <td colspan = "4">Fakturabankepost: <?php print $head->FEmail; ?></td>
+    <td colspan="<? echo ($head->FakturabankPersonID) ? '2' : '6'  ?>">
+      <?
+		if($_lib['sess']->get_person('FakturabankExportPaycheckAccess')) {
+		    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_salary_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
+		}
+
+      ?>
+      <? if ($head->FakturabankPersonID) { ?>
+           <td colspan="4">Sendt til Fakturabank <? print $head->FakturabankDateTime ?>, av <? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?></td>
+      <? } ?>
+
+    </td>
+</tr>
+<tr>
+    <td colspan="8"></td>
+
+    <td colspan="3">
+      <a href="<? print $_lib['sess']->dispatch ?>t=salary.list&SalaryperiodconfID=<?= $SalaryperiodconfID ?>">Tilbake til l&oslash;nnsslipp</a>
+    </td>
+    <td>
+      <a href="<? print $_lib['sess']->dispatch ?>t=salary.print&amp;SalaryID=<? print $SalaryID ?>" target="_new" />Utskrift</a>
+    </td>
+</tr>
+<tr>
+<td colspan="4"></td>
+<td colspan="7">
+<? if($_lib['message']->get()) { 
+    $msg = $_lib['message']->get();
+$mcolor = (strstr($msg, "rror")) ? "red" : "black";
+?>
+    <div class="<? echo $mcolor ?> error"><? print $_lib['message']->get() ?><br/></div>
+<? } ?>
+
+<? print $message ?>
+</tr>
+</td>
+
+
 </table>
 <table>
 <?php

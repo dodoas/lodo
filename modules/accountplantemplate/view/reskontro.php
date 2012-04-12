@@ -85,6 +85,12 @@ if($JournalID) {
     <td></td>
     <td></td>
   </tr>
+  <tr>
+    <td class="menu">Land</td>
+    <td></td>
+    <td><? print $_lib['form3']->Country_menu3(array('table'=>'accountplantemplate', 'field'=>'CountryCode', 'value'=>$account->CountryCode, 'required'=>false)); ?></td>
+    <td colspan="2">&nbsp</td>
+  </tr>
   <tr class="result">
     <th colspan="5">Bilagsf&oslash;ringsinformasjon</th>
   </tr>

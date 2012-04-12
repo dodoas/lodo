@@ -104,7 +104,7 @@ print $_lib['sess']->doctype;
     while( $row = $_lib['db']->db_fetch_assoc($period_result) )
     {
         if( $SalaryperiodconfID == $row['SalaryperiodconfID'] || 
-            (!$SalaryperiodconfID && ($row['Period']."-01") == $_SESSION['LoginFormDate']) )
+            (!$SalaryperiodconfID && $row['Period'] == date('Y-m')) )
         { 
             $selected = "selected";
         }

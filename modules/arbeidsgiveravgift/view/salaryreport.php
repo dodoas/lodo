@@ -268,9 +268,11 @@ function NorskDato($dato)
                 {
                 	if ($lineHash['sumLineCode'] != 0)
                 	if ($lineHash['SalaryCode'] == "610" || $lineHash['SalaryCode'] == "613" || $lineHash['SalaryCode'] == "616" || $lineHash['SalaryCode'] == "619" || $lineHash['SalaryCode'] == "620"  || $lineHash['SalaryCode'] == "623"  || $lineHash['SalaryCode'] == "624" || $lineHash['SalaryCode'] == "626" || $lineHash['SalaryCode'] == "627" || $lineHash['SalaryCode'] == "628")
-                    	print $lineHash['SalaryText'] . ", Antall d&oslash;gn: " . $lineHash['NumberInPeriod']."<br />";
+                            print $lineHash['SalaryText'] . ", Antall d&oslash;gn: " . $lineHash['NumberInPeriod']."<br />";
                 	elseif ($lineHash['SalaryCode'] == "614")
-                    	print $lineHash['SalaryText'] . ", Antall dager: " . $lineHash['NumberInPeriod']."<br />";
+                            print $lineHash['SalaryText'] . ", Antall dager: " . $lineHash['NumberInPeriod']."<br />";
+                        elseif ($lineHash['SalaryCode'] == "721")
+                            print $lineHash['SalaryText'] . ", Antall km: " . $lineHash['NumberInPeriod']."<br />";
                     else
                     {
                     	print $lineHash['SalaryText']."<br />";

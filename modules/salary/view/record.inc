@@ -679,6 +679,7 @@ elseif($_lib['input']->getProperty('action_salarysubconf_enter'))
             $fields = array();
             $fields['salaryconfline_SalaryConfID']          = $SalaryConfID;
             $fields['salaryconfline_LineNumber']            = $conflinehash['LineNumber'];
+            $fields['salaryconfline_Active']            = $conflinehash['Active'];
             $fields['salaryconfline_SalaryText']            = $conflinehash['SalaryText'];
             $fields['salaryconfline_NumberInPeriod']        = $conflinehash['NumberInPeriod'];
             $fields['salaryconfline_Rate']                  = $conflinehash['Rate'];
@@ -731,7 +732,7 @@ elseif($_lib['input']->getProperty('action_salary_updatesalarycode')) {
     $SalaryID 	    = $_lib['input']->getProperty('SalaryID');
     $SalaryConfID   = $_lib['input']->getProperty('SalaryConfID');
     
-    $query 	= "select LineNumber, SalaryCode, EnableVacationPayment, EnableEmployeeTax, SalaryText, AccountPlanID from salaryconfline where SalaryConfID='$SalaryConfID'";
+    $query 	= "select LineNumber, SalaryCode, EnableVacationPayment, EnableEmployeeTax, SalaryText, AccountPlanID from salaryconfline where SalaryConfID='$SalaryConfID' AND Active = 1";
     #print $query;
     $codehash = $_lib['storage']->get_hashhash(array('query'=>$query, 'key'=>'LineNumber'));
     #print_r($codehash);
