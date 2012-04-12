@@ -21,7 +21,7 @@ $password = $_lib['db']->get_row(array('query' => $password_query));
 if($account->AccountPlanType)
     $AccountPlanType = $account->AccountPlanType;
 
-if($_lib['input']->getProperty('NewAccount'))
+if(!$account && $_lib['input']->getProperty('NewAccount'))
 {
     /* fetch data from template */
     $query = sprintf("SELECT * FROM accountplantemplate WHERE AccountPlanType = '%s'", $AccountPlanType);

@@ -21,7 +21,7 @@ $query   = "select * from $db_table where AccountPlanID = $AccountPlanID";
 #print "$query<br>";
 $account = $_lib['storage']->get_row(array('query' => $query));
 
-if($_lib['input']->getProperty('NewAccount'))
+if(!$account && $_lib['input']->getProperty('NewAccount'))
 {
     /* fetch data from template */
     $query = sprintf("SELECT * FROM accountplantemplate WHERE AccountPlanType = '%s'", $AccountPlanType);

@@ -36,7 +36,7 @@ if($OrgNumber && $_lib['input']->getProperty('NewAccount'))
     $account->OrgNumber = $OrgNumber;
     $account->EnableCredit = 1;
 }
-else if($_lib['input']->getProperty('NewAccount')) 
+else if(!$account && $_lib['input']->getProperty('NewAccount'))
 {
     /* fetch data from template */
     $query = sprintf("SELECT * FROM accountplantemplate WHERE AccountPlanType = '%s'", $AccountPlanType);
