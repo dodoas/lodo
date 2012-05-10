@@ -180,6 +180,7 @@ class framework_logic_vouchergui
     function account($VoucherPeriod, $new, $db_table, $voucher, $AccountPlanID, $autosubmit) {
         global $_lib, $accounting, $tabindex;
         $html = '';
+
         if(!$voucher->DisableAutoVat) {
             if($accounting->is_valid_accountperiod($VoucherPeriod, $_lib['sess']->get_person('AccessLevel')) || isset($new)) {
                 $aconf = array();
@@ -194,7 +195,6 @@ class framework_logic_vouchergui
                 $aconf['type'][]        = 'hovedbok';
                 $aconf['type'][]        = 'employee';
                 $html .=  $_lib['form3']->accountplan_number_menu($aconf);
-        
             } else {
                 $acctmp = $accounting->get_accountplan_object($AccountPlanID);
                 $html  .= $acctmp->AccountName;

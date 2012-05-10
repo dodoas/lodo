@@ -32,7 +32,7 @@ foreach($codes as $code) {
     <th></th>
     </tr>
     <tr>
-      <td><input type="text" name="add_date" value="<? print $year ?>-01-01" />
+      <td><input type="text" name="add_date" value="<? print date("Y-m-d") ?>" />
   <?php
 
     foreach($codes as $code) {

@@ -11,6 +11,8 @@
 
 <?php
 
+$year = isset($_REQUEST["year"]) ? (int)$_REQUEST["year"] : (isset($_REQUEST["report_year"]) ? (int)$_REQUEST["report_year"] : date("Y"));
+
 include('record_salaryreport.php');
 includemodel('salary/salaryreport');
 
@@ -52,17 +54,10 @@ CREATE TABLE  `salaryreportaccountentries` (
 
 include('reportcodes.php');
 
-$year = isset($_REQUEST["year"]) ? (int)$_REQUEST["year"] : date("Y");
 $employees_q = "select *, A.KommuneID as NoKommune from salaryconf as S, accountplan as A, kommune as K where S.AccountPlanID=A.AccountPlanID and (A.KommuneID=K.KommuneID or (A.KommuneID = 0 and K.KommuneID = 1) ) and S.SalaryConfID!=1 order by AccountName asc";
 $employees_r = $_lib['db']->db_query($employees_q);
 
-printf("<h1>L&oslash;nnsrapport for %d</h1>", $year);
-
-printf('<form action="%st=salary.employeereport" method="post">
-          <input name="year" value="%s" />
-          <input type="submit" value="Change year" />
-        </form><br /><br />', $_lib['sess']->dispatch, $year);
-
+printf("<h1>%s - L&oslash;nnsrapport for %d</h1>", $_lib['sess']->get_companydef('CompanyName'), $year);
 
 print('<table class="lodo_data" border=1">
 <tr>
@@ -82,7 +77,7 @@ function print_values($codes, $line, $print_extra = true) {
 
     printf("<td>%s</td>", $line['Date']);
     foreach($codes as $code) {
-        printf("<td>%2.2f</td>", $line['amounts'][$code]);
+        printf("<td style='text-align: right'>%s</td>", $_lib['format']->Amount($line['amounts'][$code]));
     }
 
     if($print_extra) {
@@ -125,7 +120,7 @@ function print_sums($employee_id, $codes, $report) {
 
     print("<td><b>sum</b></td>");
     foreach($codes as $code) {
-        printf("<td><b>%2.2f</b></td>", $sums[$code]);
+        printf("<td style='text-align: right'><b>%s</b></td>", $_lib['format']->Amount($sums[$code]));
     }
 
     if($employee_id)
@@ -142,7 +137,7 @@ while( $employee = $_lib['db']->db_fetch_assoc( $employees_r ) ) {
 
     $report_lines = array(); 
     while( $report = $_lib['db']->db_fetch_assoc($reports_r) ) {
-        $report_line = array( 'Date' => $report['Date'], 'Locked' => $report['Locked'], 'LockedBy' => $report['LockedBy'], 'ID' => $report['SalaryReportID'] );
+        $report_line = array( 'Date' => $report['ReportDate'], 'Locked' => $report['Locked'], 'LockedBy' => $report['LockedBy'], 'ID' => $report['SalaryReportID'] );
         $report_amounts = array();
 
         $amounts_r = $_lib['db']->db_query( sprintf("select * from salaryreportentries WHERE SalaryReportID = %d", $report['SalaryReportID']) );
@@ -169,14 +164,13 @@ while( $employee = $_lib['db']->db_fetch_assoc( $employees_r ) ) {
     if($_lib['db']->get_row(array('query' => $query)) == false) {
         continue;
     }
-                     
 
     $fields = array(
         array($employee['AccountPlanID'] . ' <b>'.$salaryreport->_reportHash['account']['AccountName'].'</b>', $salaryreport->_reportHash['account']['SocietyNumber']),
         array($salaryreport->_reportHash['account']['Address'], 'alle dager: ' . ($salaryreport->_reportHash['account']['WorkedWholeYear'] ? 'ja' : 'nei') ),
         array($salaryreport->_reportHash['account']['ZipCode'], $salaryreport->_reportHash['account']['WorkStart']),
         array($salaryreport->_reportHash['account']['City'], $salaryreport->_reportHash['account']['WorkStop']),
-        array('', $workedDays['d'] . ' dager' )
+        array($salaryreport->_reportHash['account']['KommuneNumber'] . " ". $salaryreport->_reportHash['account']['KommuneName'], $workedDays['d'] . ' dager' )
     );
 
     $no_lines = count($report_lines);
@@ -267,7 +261,7 @@ foreach($accountreports as $accountreport) {
         <td>%s</td>", $accountreport['Account']);
 
     foreach($codes as $c) {
-        printf("<td>%2.2f</td>", $accountreport['amounts'][$c]);
+        printf("<td style='text-align: right'>%s</td>", $_lib['format']->Amount($accountreport['amounts'][$c]));
     }
 
     if($accountreport['Locked'] == 0) {
@@ -313,7 +307,7 @@ foreach($codes as $c) {
 
     $sum_account[$c] = $sum;
 
-    printf('<td>%2.2f</td>', $sum);
+    printf('<td>%s</td>', $_lib['format']->Amount($sum));
 }
 printf('
 <td><a href="%st=salary.addreportaccount&year=%d">+</a></td></tr>
@@ -331,9 +325,9 @@ foreach($codes as $c) {
     $d = $sum - $sum_account[$c];
 
     if($d < -0.01 || $d > 0.01)
-        printf("<td><span style='color:red'>%2.2f<span></td>", $d);
+        printf("<td><span style='color:red'>%s<span></td>", $d);
     else
-        printf("<td>%2.2f</td>", $d);
+        printf("<td>%s</td>", $d);
 }
 
 

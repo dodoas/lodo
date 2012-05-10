@@ -409,9 +409,19 @@ print $_lib['sess']->doctype ?>
 </tr>
 </form>
 
-<form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=feriepenger.feriepenger" method="post" target="_blank">
+<form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=salary.employeereport" method="post" target="_blank">
 <tr class="r0">
-    <td><a href="<?= $_lib['sess']->dispatch ?>&t=salary.employeereport&year=<?= date("Y") ?>">Innberetning l&oslash;nn</a></td>
+    <td>Innberetning l&oslash;nn</td>
+    <td>Velg &aring;r</td>
+
+    <td>
+    <?
+       print $_lib['form3']->Type_menu3(array('table' => 'report', 'field' => 'year', 'type'=>'PosibleSalaryYears', 'required'=>true, 'value' => $thisYear));
+    ?>
+    </td>
+    <td colspan="2">&nbsp;</td>
+    <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
+
 </tr>
 </form>
 

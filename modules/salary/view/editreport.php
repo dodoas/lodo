@@ -23,10 +23,15 @@ while($row = $_lib['db']->db_fetch_assoc($res)) {
 $query = sprintf("SELECT Date FROM salaryreport WHERE SalaryReportID = %d", $_GET['SalaryReportID']);
 $res = $_lib['db']->db_query($query);
 $row = $_lib['db']->db_fetch_assoc($res);
-$report_date = $row['Date'];
+$report_date = $row['ReportDate'];
+
+$query = sprintf("SELECT A.AccountName FROM accountplan A, salaryreport S WHERE A.AccountPlanID = S.AccountPlanID AND SalaryReportID = %d", $_GET["SalaryReportID"]);
+$res = $_lib['db']->db_query($query);
+$row = $_lib['db']->db_fetch_assoc($res);
+$name = $row['AccountName'];
 
 ?>
-Innberetning
+<h1>Innberetning for <?php print $name ?></h1>
 <form action="<?= $_lib['sess']->dispatch ?>t=salary.employeereport&year=<?= $year ?>" method="post">
   <table>
     <tr>

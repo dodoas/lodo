@@ -1,8 +1,9 @@
 <?php
 
 if(isset($_POST['add_report'])) {
-    $query = sprintf("INSERT INTO salaryreport (`Date`, `AccountPlanID`) VALUES ('%s', '%d');", 
-                     mysql_escape_string($_POST['add_date']), $_POST['AccountPlanID']);
+    $query = sprintf("INSERT INTO salaryreport (`Date`, `AccountPlanID`, `ReportDate`) VALUES ('%d-01-01', '%d', '%s');", 
+                     $year, $_POST['AccountPlanID'], mysql_escape_string($_POST['add_date']));
+
     $_lib['db']->db_query($query);
     $id = $_lib['db']->db_insert_id();
  
@@ -13,7 +14,7 @@ if(isset($_POST['add_report'])) {
     }
 }
 else if(isset($_POST['edit_report'])) {
-    $query = sprintf("UPDATE salaryreport SET Date = '%s' WHERE SalaryReportID = %d", mysql_escape_string($_POST['edit_date']), $_POST['SalaryReportID']);
+    $query = sprintf("UPDATE salaryreport SET ReportDate = '%s' WHERE SalaryReportID = %d", mysql_escape_string($_POST['edit_date']), $_POST['SalaryReportID']);
     $_lib['db']->db_query($query);
 
     foreach($_POST['edit_amounts'] as $code => $amount) {
