@@ -228,6 +228,31 @@ class lodo_fakturabank_fakturabankvoting {
 		return str_replace(" ", "", $row->AccountNumber);
     }
 
+    private function lookup_account_by_OrgNumber($OrgNumber) {
+        global $_lib;
+
+        $query = sprintf(
+            "SELECT AccountPlanID FROM accountplan WHERE OrgNumber = '%s'",
+            $rel['InvoiceSupplierIdentity']
+            );
+        
+        $row = $_lib['storage']->get_row(array('query' => $query));        
+
+        return $row;
+    }
+
+    /*private function decide_transactiontype($transaction) {
+        global $_lib;
+        
+        if($transaction['InvoiceCustomerIdentitySchemeID'] == 'NO:ORGNR'
+           && $transaction['InvoiceCustomerIdentity'] == $this->OrgNumber)
+            return 'ING';
+        else if($transaction['InvoiceSupplierIdentitySchemeID'] == 'NO:ORGNR'
+                && $transaction['InvoiceSupplierIdentity'] == $this->OrgNumber)
+            return 'UTG';
+        
+            }*/
+
     protected function import_transactions_to_accounting($account_id, $period) {
         $account_number = $this->get_account_number($account_id);
         if (!$account_number) {
@@ -291,7 +316,6 @@ class lodo_fakturabank_fakturabankvoting {
             // $lineH['InvoiceNumber'] 		= $_lib['db']->db_escape($fb_transaction['Invoiceno']);
             //$lineH['InvoiceNumber'] = $_lib['db']->db_escape( $this->get_fakturabanktransactionrelation( $fb_transaction['ID'] ) );
 
-
             $lineH['InvoiceNumber'] = $_lib['db']->db_escape($fb_transaction['InvoiceNumber']);
 
             echo $fb_transaction['FakturabankID']."<br />";
@@ -324,46 +348,40 @@ class lodo_fakturabank_fakturabankvoting {
             // Do some quick and dirty Scheme ID lookup
             //
             foreach($transaction_relations as $rel) {
-                if($fb_transaction['TransactionType'] == 'C') {
-                    if($rel['InvoiceCustomerIdentitySchemeID'] == 'NO:ORGNR') {
-                        $query = sprintf(
-                            "SELECT AccountPlanID FROM accountplan WHERE OrgNumber = '%s'",
-                            $rel['InvoiceCustomerIdentity']
-                            );
-                        echo "C '".$query."' <br />";
-                        $accountplan_row = $_lib['storage']->get_row(array('query' => $query));
-                        if($accountplan_row) {
-                            echo "Found One!<br />" . $lineH['InvoiceNumber'];
-                            $lineH['ReskontroAccountPlanID'] = $accountplan_row->AccountPlanID;
-                            break;
-                        }
-                    }
-                }
-                else if($fb_transaction['TransactionType'] == 'D') {
-                    // special case for salaries 
-                    if($rel['InvoiceNumber'] != '' and $rel['InvoiceNumber'][0] == 'L') {
-                        break;
-                    }
+                if($rel['InvoiceType'] == 'incoming') {
+                    $lineH['Comment'] = 'Ing';
 
-                    if($rel['InvoiceSupplierIdentitySchemeID'] == 'NO:ORGNR') {
-                        $query = sprintf(
-                            "SELECT AccountPlanID FROM accountplan WHERE OrgNumber = '%s'",
-                            $rel['InvoiceSupplierIdentity']
-                            );
-                        echo "D '".$query."' <br />";
-                        $accountplan_row = $_lib['storage']->get_row(array('query' => $query));
-                        if($accountplan_row) {
-                            echo "Found One!<br />" . $lineH['InvoiceNumber'];
-                            $lineH['ReskontroAccountPlanID'] = $accountplan_row->AccountPlanID;
-                            break;
-                        }
-                    }
+                    $accountplan_row = $this->find_account_plan($rel['InvoiceSupplierIdentity'], $rel['InvoiceSupplierIdentitySchemeID']);
+                    $lineH['ReskontroAccountPlanID'] = $accountplan_row->AccountPlanID;
+
+                    break;
+                }
+                else if($rel['InvoiceType'] == 'outgoing') {
+                    $lineH['Comment'] = 'Utg';
+
+                    $accountplan_row = $this->find_account_plan($rel['InvoiceCustomerIdentity'], $rel['InvoiceCustomerIdentitySchemeID']);
+                    $lineH['ReskontroAccountPlanID'] = $accountplan_row->AccountPlanID;
+
+                    break;
+                }
+                else if($rel['AccountID'] != 0) {
+                    $lineH['Comment'] = 'Hov';
+
+                    $query = sprintf(
+                        "SELECT AccountPlanID 
+                           FROM fakturabankbankreconciliationreason
+                           WHERE FakturabankBankReconciliationReasonID = %d",
+                        $rel['AccountID']);
+
+                    $reconciliation = $_lib['storage']->get_row(array('query' => $query));
+                    $lineH['ResultAccountPlanID'] = $reconciliation->AccountPlanID;
+
+                    break;
                 }
             }                
 
             if($fb_transaction['Incoming']) {
                 $lineH['AmountIn'] = $fb_transaction['Amount'];
-                
             } else {
                 $lineH['AmountOut'] = $fb_transaction['Amount'];
             }

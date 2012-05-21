@@ -251,14 +251,21 @@ while($row = $_lib['db']->db_fetch_assoc($accountreport_r)) {
         $amounts[$amountrow['Code']] = $amountrow['Amount'];
     }
 
-    $accountreports[] = array('SalaryReportAccountID' => $row['SalaryReportAccountID'], 'Account' => $account['AccountName'], 'Locked' => $row['Locked'], 'LockedBy' => $row['LockedBy'], 'amounts' => $amounts);
+    $accountreports[] = array(
+        'SalaryReportAccountID' => $row['SalaryReportAccountID'], 
+        'Account' => $account['AccountName'], 
+        'AccountPlanID' => $row['AccountPlanID'],
+        'Locked' => $row['Locked'], 
+        'LockedBy' => $row['LockedBy'], 
+        'amounts' => $amounts
+        );
 
 }
 
 foreach($accountreports as $accountreport) {
     printf("
       <tr> 
-        <td>%s</td>", $accountreport['Account']);
+        <td>%s %s</td>", $accountreport['AccountPlanID'], $accountreport['Account']);
 
     foreach($codes as $c) {
         printf("<td style='text-align: right'>%s</td>", $_lib['format']->Amount($accountreport['amounts'][$c]));
@@ -307,7 +314,7 @@ foreach($codes as $c) {
 
     $sum_account[$c] = $sum;
 
-    printf('<td>%s</td>', $_lib['format']->Amount($sum));
+    printf('<td style="text-align: right">%s</td>', $_lib['format']->Amount($sum));
 }
 printf('
 <td><a href="%st=salary.addreportaccount&year=%d">+</a></td></tr>
@@ -325,9 +332,9 @@ foreach($codes as $c) {
     $d = $sum - $sum_account[$c];
 
     if($d < -0.01 || $d > 0.01)
-        printf("<td><span style='color:red'>%s<span></td>", $d);
+        printf("<td style='text-align: right'><span style='color:red'>%s<span></td>", $_lib['format']->Amount($d));
     else
-        printf("<td>%s</td>", $d);
+        printf("<td style='text-align: right'>%s</td>", $_lib['format']->Amount($d));
 }
 
 

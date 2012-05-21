@@ -33,6 +33,12 @@ includeinc('left') ?>
 
 
 <h2><? print $_lib['message']->get() ?></h2>
+<p>
+  Gr&oslash;nn = OK<br />
+  Gr&aring; = Konto finnes, men ikke aktiv<br />
+  R&oslash;d = Konto finnes ikke
+</p>
+
 
 <p>
 <form action="<? print $MY_SELF ?>" method="post">
@@ -81,7 +87,7 @@ while($row = $_lib['db']->db_fetch_object($result_fakturabankbankreconciliationr
     }
 
     ?>
-    <tr class="<? print "$sec_color"; ?>" style="<?= ($found?"": "background-color: red") ?>">
+    <tr class="<? print "$sec_color"; ?>" style="<?= ($found ? ($active ? "background-color: green" : "background-color: gray"): "background-color: red") ?>">
          <td><a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.bankreconciliationedit&fakturabankbankreconciliationreason_FakturabankBankReconciliationReasonID=<? print $row->FakturabankBankReconciliationReasonID ?>"><? print $row->FakturabankBankReconciliationReasonID; ?></a>
          <td><? print $row->FakturabankBankReconciliationReasonCode; ?>
          <td><? print $row->FakturabankBankReconciliationReasonName; ?>
@@ -92,5 +98,6 @@ while($row = $_lib['db']->db_fetch_object($result_fakturabankbankreconciliationr
 <? } ?>
 </tbody>
 </table>
+
 </body>
 </html>

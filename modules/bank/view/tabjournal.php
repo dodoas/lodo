@@ -225,7 +225,9 @@ $warningH = array();
   <?php
                                                         }
 ?>
-    <td colspan="7"></td>
+    <td colspan="4"></td>
+    <td><input type="button" onclick="$('input[name*=accountline.Approved]').attr('checked', true)" value="OK" /></td>
+    <td colspan="2"></td>
 </tr>
   <tr>
     <th class="menu" colspan="6">Tilbakef&oslash;re - f&oslash;rt bank ikke regnskap</th>
@@ -294,7 +296,7 @@ if(is_array($bank->unvotedaccount)) {
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber',   'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 23)) ?></td>
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Description',     'pk' => $row->AccountLineID, 'value' => $row->Description,       'width' => 22, 'maxlength' => 255, 'tabindex' => $tabindexH[6])) ?></td>
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Comment',         'pk' => $row->AccountLineID, 'value' => $row->Comment,           'width' => 12, 'maxlength' => 255, 'tabindex' => $tabindexH[7])) ?></td>
-        <td class="<? print $classApproved ?>"><? print $_lib['form3']->checkbox(array('table' => 'accountline', 'field' => 'Approved',     'pk' => $row->AccountLineID, 'value' => $row->Approved)) ?></td>
+        <td class="<? print $classApproved ?>"><? print $_lib['form3']->checkbox(array('table' => 'accountline', 'field' => 'Approved', 'pk' => $row->AccountLineID, 'value' => $row->Approved)) ?></td>
         <td>
             <?
             $reskontroconf['field']         = 'ReskontroAccountPlanID';

@@ -176,6 +176,27 @@ var selectedOptionText = targ.options[targ.selectedIndex].text;
 
 <? print $_lib['message']->get(); ?>
 
+<?
+$relationcount = array();
+if(is_array($bank->bankaccount)) {
+    foreach($bank->bankaccount as $row) { 
+        if( substr($row->InvoiceNumber, 0, 2) == "FB" ) {
+            preg_match("/FB\((\d+)\)/", $row->InvoiceNumber, $matches);
+            $fakturabankID = $matches[1];
+
+            $relations = $fbbank->get_faturabanktransactionrelations($fakturabankID);
+
+            $c = count($relations);
+            $relationcount[$fakturabankID] = $c;
+
+            if($c == 0) {
+                printf("<b>Noe er galt med denne importen fra fakturabank FB(%d).</b><br />", $fakturabankID);
+            }
+        }        
+    }
+}
+?>
+
 <form name="template_update" name="period_choice" action="<? print $MY_SELF ?>" method="post">
 <? print $_lib['form3']->hidden(array('name' => 'AccountID', 'value' => $bank->AccountID)) ?>
 
@@ -282,6 +303,7 @@ $tabindexH[5] = $tabindex + ($count * 5);
 $tabindexH[6] = $tabindex + ($count * 5) + 1;
 $tabindexH[7] = $tabindex + ($count * 7);
 
+
 if(is_array($bank->bankaccount)) {
     foreach($bank->bankaccount as $row) { 
 
@@ -352,12 +374,11 @@ if(is_array($bank->bankaccount)) {
             
             print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber', 'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[6]));
         
-        if( substr($row->InvoiceNumber, 0, 2) == "FB" ) {
+        if(substr($row->InvoiceNumber, 0, 2) == "FB") {
             preg_match("/FB\((\d+)\)/", $row->InvoiceNumber, $matches);
             $fakturabankID = $matches[1];
 
-            $relations = $fbbank->get_faturabanktransactionrelations($fakturabankID);
-            print count($relations);
+            print $relationcount[$fakturabankID]; 
         }
 
             ?>

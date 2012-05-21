@@ -1018,8 +1018,169 @@ class framework_logic_bank {
                     $VoucherH['voucher_InvoiceID']           = $unvoted->JournalID;
                 }
 
+
+                // mawcode
+                if( substr($unvoted->InvoiceNumber, 0, 2) == "FB" ) {
+                    $VoucherH['voucher_AccountPlanID']       = $this->AccountPlanID;
+                    printf("<hr />%s:<br />", $unvoted->InvoiceNumber);
+                    
+                    $fbbank = new lodo_fakturabank_fakturabankvoting();
+                    $FBVoucherH = $VoucherH;
+                    preg_match("/FB\((\d+)\)/", $unvoted->InvoiceNumber, $matches);
+                    $fakturabankID = $matches[1];
+                    
+                    //print_r($matches);
+                    $transaction = $fbbank->get_fakturabanktransactionobject($fakturabankID);
+                    
+                    print("TRANSACTION: ");
+                    print_r($transaction);
+                    print("<br />");
+                    
+                    $relations = $fbbank->get_faturabanktransactionrelations($fakturabankID);
+                    $relations_invoices = array();
+                    foreach($relations as $rel) {
+                        $relations_invoices[] = $rel['InvoiceNumber'];
+                    }
+                    
+                    $sum = $unvoted->AmountIn - $unvoted->AmountOut;
+                    
+                    foreach($relations as $rel) {
+                        $sum -= $rel['Amount'];
+                        print_r($rel);
+                    }
+                    
+                    if($sum >= 0.0001 || $sum <= -0.0001) {
+                        $_lib['message']->add("Sum is not zero in " . $unvoted->InvoiceNumber);
+                        
+                        echo "Sum is not zero in " . $unvoted->InvoiceNumber . " ". $sum;
+                        
+                        continue;
+                    }
+                    
+                    //$VoucherH['voucher_InvoiceID'] = implode(',', $relations_invoices);
+                    
+                    $accounting->insert_voucher_line(
+                        array(
+                            'post' => $VoucherH, 
+                            'accountplanid' => $VoucherH['voucher_AccountPlanID'], 
+                            'VoucherType'=> $this->VoucherType, 
+                            'comment' => 'Fra bankavstemming'
+                            )
+                        );
+                    
+                    $FBVoucherH['voucher_ProjectID']     = $unvoted->ProjectID;
+                    $FBVoucherH['voucher_DepartmentID']  = $unvoted->DepartmentID;
+                    $FBVoucherH['voucher_Quantity']      = $unvoted->ResultQuantity;
+                    $FBVoucherH['voucher_VAT']           = $unvoted->VAT;
+                    
+                    foreach($relations as $rel) {
+                        print_r($rel);
+                        echo "<br>\n";
+                        
+                        if($rel['InvoiceType'] == 'incoming') {
+                            $query = sprintf(
+                                "SELECT AccountPlanID FROM accountplan WHERE OrgNumber = '%s'",
+                                $rel['InvoiceSupplierIdentity']
+                                );
+                            $accountplan_row = $_lib['storage']->get_row(array('query' => $query));
+
+                            if(!$accountplan_row)
+                                printf("Could not find incoming: %s<br />", $rel['InvoiceSupplierIdentity']);
+                            
+                            if($accountplan_row) {
+                                printf("Adding normal Incoming\n");
+                                $FBVoucherH['voucher_AccountPlanID'] = $accountplan_row->AccountPlanID;
+                                
+                                $FBVoucherH['voucher_AmountOut']     = $rel['Amount'];
+                                $FBVoucherH['voucher_AmountIn']      = 0;
+                                
+                                $FBVoucherH['voucher_InvoiceID']     = $rel['InvoiceNumber'];
+                                $FBVoucherH['voucher_KID']           = $rel['KID'];
+                                $FBVoucherH['voucher_Description']   = $rel['Description'];
+                                
+                                print_r($FBVoucherH);
+                                $accounting->insert_voucher_line(
+                                    array(
+                                        'post' => $FBVoucherH, 
+                                        'accountplanid' => $FBVoucherH['voucher_AccountPlanID'], 
+                                        'VoucherType'=> $this->VoucherType, 
+                                        'comment' => 'Ing. Fra bankavstemming'
+                                        )
+                                    );
+                            }    
+                        }
+                        else if($rel['InvoiceType'] == 'outgoing') {
+                            $query = sprintf(
+                                "SELECT AccountPlanID FROM accountplan WHERE OrgNumber = '%s'",
+                                $rel['InvoiceCustomerIdentity']
+                                );
+                            $accountplan_row = $_lib['storage']->get_row(array('query' => $query));
+                            
+                            if($accountplan_row) {
+                                printf("Adding normal Outgoing\n");
+                                $FBVoucherH['voucher_AccountPlanID'] = $accountplan_row->AccountPlanID;
+                                
+                                $FBVoucherH['voucher_AmountIn']     = $rel['Amount'];
+                                $FBVoucherH['voucher_AmountOut']      = 0;
+                                
+                                $FBVoucherH['voucher_InvoiceID']     = $rel['InvoiceNumber'];
+                                $FBVoucherH['voucher_KID']           = $rel['KID'];
+                                $FBVoucherH['voucher_Description']   = $rel['Description'];
+                                
+                                print_r($FBVoucherH);
+                                $accounting->insert_voucher_line(
+                                    array(
+                                        'post' => $FBVoucherH, 
+                                        'accountplanid' => $FBVoucherH['voucher_AccountPlanID'], 
+                                        'VoucherType'=> $this->VoucherType, 
+                                        'comment' => 'Utg. Fra bankavstemming'
+                                        )
+                                    );
+                            }    
+                        }
+                        else {
+                            
+                            //
+                            // Hovedsbokfoering ved f.eks. rabatt
+                            //
+                            if($rel['AccountID'] != 0) {
+                                printf("Adding extra ");
+                                print_r($rel);
+                                $query = sprintf(
+                                    "SELECT AccountPlanID 
+                                           FROM fakturabankbankreconciliationreason
+                                           WHERE FakturabankBankReconciliationReasonID = %d",
+                                    $rel['AccountID']);
+                                
+                                printf("%s\n", $query);
+                                
+                                $reconciliation = $_lib['storage']->get_row(array('query' => $query));
+                                
+                                print("Found an AccountID " . $rel['AccountID'] . " on account " . $reconciliation->AccountPlanID . " <br />");
+                                $FBVoucherH['voucher_AccountPlanID'] = $reconciliation->AccountPlanID;
+                                
+                                if($rel['Amount'] > 0) {
+                                    $FBVoucherH['voucher_AmountOut']    = $rel['Amount'];
+                                    $FBVoucherH['voucher_AmountIn']     = 0;
+                                } else {
+                                    $FBVoucherH['voucher_AmountIn']     = -$rel['Amount'];
+                                    $FBVoucherH['voucher_AmountOut']    = 0;
+                                }
+                                
+                                $FBVoucherH['voucher_InvoiceID']     = '';
+                                $FBVoucherH['voucher_KID']           = '';
+                                $FBVoucherH['voucher_Description']   = $rel['Description'];
+                                
+                                $accounting->insert_voucher_line(array('post' => $FBVoucherH, 
+                                                                       'accountplanid' => $FBVoucherH['voucher_AccountPlanID'], 
+                                                                       'VoucherType'=> $this->VoucherType, 
+                                                                       'comment' => 'Hov. Fra bankavstemming'));
+                            }
+                        }
+                    }
+                }
                 ####################################################################################
-                if($unvoted->ReskontroAccountPlanID && $unvoted->ResultAccountPlanID) {
+                else if($unvoted->ReskontroAccountPlanID && $unvoted->ResultAccountPlanID) {
 
                     ############
                     #1.st line
@@ -1055,123 +1216,8 @@ class framework_logic_bank {
                     #1.st line
                     $VoucherH['voucher_AccountPlanID']       = $this->AccountPlanID;
 
-                    // mawcode
-                    if( substr($unvoted->InvoiceNumber, 0, 2) == "FB" ) {
-                        $fbbank = new lodo_fakturabank_fakturabankvoting();
-                        $FBVoucherH = $VoucherH;
-                        preg_match("/FB\((\d+)\)/", $unvoted->InvoiceNumber, $matches);
-                        $fakturabankID = $matches[1];
-
-                        //print_r($matches);
-                        $transaction = $fbbank->get_fakturabanktransactionobject($fakturabankID);
-
-                        print("TRANSACTION: ");
-                        print_r($transaction);
-                        print("<br />");
-
-                        $relations = $fbbank->get_faturabanktransactionrelations($fakturabankID);
-                        $relations_invoices = array();
-                        foreach($relations as $rel) {
-                            $relations_invoices[] = $rel['InvoiceNumber'];
-                        }
-
-                        $sum = $unvoted->AmountIn - $unvoted->AmountOut;
-
-                        foreach($relations as $rel) {
-                            $sum -= $rel['Amount'];
-                        }
-
-                        if($sum >= 0.0001 || $sum <= -0.0001) {
-                            $_lib['message']->add("Sum is not zero in " . $unvoted->InvoiceNumber);
-                            
-                            echo "Sum is not zero in " . $unvoted->InvoiceNumber . " ". $sum;
-
-                            continue;
-                        }
-
-                        //$VoucherH['voucher_InvoiceID'] = implode(',', $relations_invoices);
-
-                        $accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $this->VoucherType, 'comment' => 'Fra bankavstemming'));
-
-
-                        $schemeIDField = 'InvoiceCustomerIdentitySchemeID';
-                        $identitiyField = 'InvoiceCustomerIdentity';
-
-                        if($transaction->TransactionType == 'D') {
-                            printf("USING D!<br />");
-                            $schemeIDField = 'InvoiceSupplierIdentitySchemeID';
-                            $identitiyField = 'InvoiceSupplierIdentity';                            
-                        }
-                        
-                        $FBVoucherH['voucher_ProjectID']     = $unvoted->ProjectID;
-                        $FBVoucherH['voucher_DepartmentID']  = $unvoted->DepartmentID;
-                        $FBVoucherH['voucher_Quantity']      = $unvoted->ResultQuantity;
-                        $FBVoucherH['voucher_VAT']           = $unvoted->VAT;
-
-                        foreach($relations as $rel) {
-                            if($rel[$schemeIDField] == 'NO:ORGNR') {
-                                $query = sprintf(
-                                    "SELECT AccountPlanID FROM accountplan WHERE OrgNumber = '%s'",
-                                    $rel[$identitiyField]
-                                    );
-                                $accountplan_row = $_lib['storage']->get_row(array('query' => $query));
-                                
-                                if($accountplan_row) {
-                                    printf("Adding normal\n");
-                                    $FBVoucherH['voucher_AccountPlanID'] = $accountplan_row->AccountPlanID;
-                                    
-                                    $FBVoucherH['voucher_AmountOut']     = $rel['Amount'];
-                                    $FBVoucherH['voucher_AmountIn']      = 0;
-
-                                    $FBVoucherH['voucher_InvoiceID']     = $rel['InvoiceNumber'];
-                                    $FBVoucherH['voucher_KID']           = $rel['KID'];
-                                    $FBVoucherH['voucher_Description']   = $rel['Description'];
-
-                                    print_r($FBVoucherH);
-                                    $accounting->insert_voucher_line(array('post' => $FBVoucherH, 'accountplanid' => $FBVoucherH['voucher_AccountPlanID'], 'VoucherType'=> $this->VoucherType, 
-                                                                           'comment' => 'Fra bankavstemming'));
-                                }
-                            }
-                            else {
-
-                                //
-                                // Hovedsbokfoering ved f.eks. rabatt
-                                //
-                                if($rel['AccountID'] != 0) {
-                                    printf("Adding extra ");
-                                    print_r($rel);
-                                    $query = sprintf(
-                                        "SELECT AccountPlanID 
-                                           FROM fakturabankbankreconciliationreason
-                                           WHERE FakturabankBankReconciliationReasonID = %d",
-                                        $rel['AccountID']);
-
-                                    printf("%s\n", $query);
-
-                                    $reconciliation = $_lib['storage']->get_row(array('query' => $query));
-                                    
-                                    print("Found an AccountID " . $rel['AccountID'] . " on account " . $reconciliation->AccountPlanID . " <br />");
-                                    $FBVoucherH['voucher_AccountPlanID'] = $reconciliation->AccountPlanID;
-
-                                    if($rel['Amount'] > 0) {
-                                        $FBVoucherH['voucher_AmountOut']    = $rel['Amount'];
-                                        $FBVoucherH['voucher_AmountIn']     = 0;
-                                    } else {
-                                        $FBVoucherH['voucher_AmountIn']     = -$rel['Amount'];
-                                        $FBVoucherH['voucher_AmountOut']    = 0;
-                                    }
-
-                                    $FBVoucherH['voucher_InvoiceID']     = '';
-                                    $FBVoucherH['voucher_KID']           = '';
-                                    $FBVoucherH['voucher_Description']   = $rel['Description'];
-
-                                    $accounting->insert_voucher_line(array('post' => $FBVoucherH, 'accountplanid' => $FBVoucherH['voucher_AccountPlanID'], 'VoucherType'=> $this->VoucherType, 
-                                                                           'comment' => 'Fra bankavstemming'));
-                                }
-                            }
-                        }
-                    }
-                    else {
+                    //else 
+                    {
                         $accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $this->VoucherType, 'comment' => 'Fra bankavstemming'));
                         //############
                         //#2d line
