@@ -398,7 +398,7 @@ print $_lib['sess']->doctype ?>
 
 <form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=arbeidsgiveravgift.inberarbeidsgiveravgift" method="post" target="_blank">
 <tr>
-    <td>Innberettet arbeidsgiveravgift</td>
+    <td>Innberettet skattetrekk og arbeidsgiveravgift</td>
     <td>Velg &aring;r</td>
     <td>
         <?

@@ -1120,8 +1120,8 @@ class framework_logic_bank {
                                 printf("Adding normal Outgoing\n");
                                 $FBVoucherH['voucher_AccountPlanID'] = $accountplan_row->AccountPlanID;
                                 
-                                $FBVoucherH['voucher_AmountIn']     = $rel['Amount'];
-                                $FBVoucherH['voucher_AmountOut']      = 0;
+                                $FBVoucherH['voucher_AmountOut']     = $rel['Amount'];
+                                $FBVoucherH['voucher_AmountIn']      = 0;
                                 
                                 $FBVoucherH['voucher_InvoiceID']     = $rel['InvoiceNumber'];
                                 $FBVoucherH['voucher_KID']           = $rel['KID'];

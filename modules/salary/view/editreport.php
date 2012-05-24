@@ -48,8 +48,8 @@ foreach($codes as $code) {
 
     foreach($codes as $code) {
         printf('
-          <td><input type="text" name="edit_amounts[%s]" value="%s" /></td>
-        ', $code, $amounts[$code]);
+          <td><input style="text-align: right;" type="text" name="edit_amounts[%s]" value="%s" /></td>
+        ', $code, $_lib['format']->Amount($amounts[$code]));
     } 
 
   ?>

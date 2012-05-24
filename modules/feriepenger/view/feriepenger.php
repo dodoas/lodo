@@ -57,11 +57,11 @@ $myIndexNr = $result[$myIndex];
             <td class="number"><?php print $ansattID; ?></td>
             <td class="number"><?php print $result["Navn"]; ?></td>
             <td class="number"><?php print $_lib['format']->Amount($result["Grunnlag"]) ?><input align="right" type="hidden" size="15" name="<?php print $db_table . "_" . $i . "_Grunnlag"; ?>" value="<?php print $_lib['format']->Amount($result["Grunnlag"]) ?>"></td>
-            <td class="number"><input align="right" type="text" size="15" name="<?php print $db_table . "_" . $i . "_Prosentsats"; ?>" value="<?php print $_lib['format']->Amount($result["Prosentsats"]) ?>"></td>
+            <td class="number"><input align="right" style="text-align: right" type="text" size="15" name="<?php print $db_table . "_" . $i . "_Prosentsats"; ?>" value="<?php print $_lib['format']->Amount($result["Prosentsats"]) ?>"></td>
             <td class="number"><?php print $_lib['format']->Amount($result["Feriepenger"]) ?></td>
-            <td class="number"><input align="right" type="text" size="15" name="<?php print $db_table . "_" . $i . "_Utbetalt"; ?>" value="<?php print $_lib['format']->Amount($result["Utbetalt"]) ?>"></td>
+            <td class="number"><input align="right" style="text-align: right" type="text" size="15" name="<?php print $db_table . "_" . $i . "_Utbetalt"; ?>" value="<?php print $_lib['format']->Amount($result["Utbetalt"]) ?>"></td>
             <td class="number"><?php print $_lib['format']->Amount($result["Rest"]) ?></td>
-            <td class="number"><input align="right" type="text" size="15" name="<?php print $db_table . "_" . $i . "_ArbeidsgiveravgSats"; ?>" value="<?php print $_lib['format']->Amount($result["ArbeidsgiveravgSats"]) ?>"></td>
+            <td class="number"><input align="right" style="text-align: right" type="text" size="15" name="<?php print $db_table . "_" . $i . "_ArbeidsgiveravgSats"; ?>" value="<?php print $_lib['format']->Amount($result["ArbeidsgiveravgSats"]) ?>"></td>
             <td class="number"><?php print $_lib['format']->Amount($result["ArbeidsgiveravgiftBelop"]) ?></td>
             <td class="number"><?php print $_lib['format']->Amount($result["SkyldigFeriepengeGrunnlag"]) ?></td>
         </tr>
@@ -69,16 +69,16 @@ $myIndexNr = $result[$myIndex];
 }
 ?>
         <tr>
-            <td class="number">&nbsp;</td>
-            <td class="number">&nbsp;</td>
-            <td class="number">&nbsp;</td>
-            <td class="number">&nbsp;</td>
             <td>Sum</td>
             <td class="number">&nbsp;</td>
+            <td class="number"><?php print $_lib['format']->Amount($grid->sumGrunnlag()) ?></td>
+            <td class="number">&nbsp;</td>
+            <td class="number"><?php print $_lib['format']->Amount($grid->sumFeriepenger()) ?></td>
+            <td class="number"><?php print $_lib['format']->Amount($grid->sumUtbetalt()) ?></td>
             <td class="number"><?php print $_lib['format']->Amount($grid->restFeriepenger()) ?></td>
             <td class="number">&nbsp;</td>
             <td class="number"><?php print $_lib['format']->Amount($grid->restArbeidsgiveravgift()) ?></td>
-            <td class="number">&nbsp;</td>
+            <td class="number"><?php print $_lib['format']->Amount($grid->sumSkyldig()) ?></td>
         </tr>
 <?php
 $ansattID = 1000;

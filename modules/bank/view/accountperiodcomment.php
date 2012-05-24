@@ -40,48 +40,72 @@ $apc = new accountperiodcomment();
 
 <? print $_lib['form3']->start(array('name' => 'accountperiodcomment')); ?>
 
-<table class="lodo_data">
-<thead>
-  <tr>
-    <th style="width: 70px;"><b>konto</b></th>
-    <? foreach($apc->PeriodH as $Period => $tmp) { ?>
-        <th style="width: 70px; text-align: center;"><b><? print $Period ?></b></th>
-    <? } ?>
-  </tr>
-</thead>
-<tbody>
+<?php
 
-<? foreach($apc->AccountH as $AccountID => $AccountName) { 
-    //$bankname = $_lib['storage']->get_row(array('query' => "SELECT BankName FROM account WHERE AccountID = $AccountID"));
-    ?>
-    <tr>
-    <td><? print $AccountName ?></td>
-    <? foreach($apc->PeriodH as $Period => $tmp) { ?>
-        <td>
-    <? 
-       if($apc->DataH[$AccountID][$Period]->BankVotingPeriodID) 
-           print $_lib['form3']->text(array('table' => 'bankvotingperiod', 
-                                            'field' => 'Comment', 
-                                            'pk'    => $apc->DataH[$AccountID][$Period]->BankVotingPeriodID, 
-                                            'value' => $apc->DataH[$AccountID][$Period]->Comment));
-       else
-           print '&aring;pn;';
-    ?>        
-        </td>
-    <? } ?>
-    </tr>
-<? } ?>
-<?php 
-         $save_button = $_lib['form3']->submit(array('name' => 'action_bank_commentupdate', 'value' => 'Lagre', 'accesskey' => 'S'));
-$iter = 0;
+$data = array();
+$save_button = $_lib['form3']->submit(array('name' => 'action_bank_commentupdate', 'value' => 'Lagre', 'accesskey' => 'S'));
+
+foreach($apc->AccountH as $AccountID => $AccountName) {
+
+    foreach($apc->PeriodH as $Period => $tmp)
+    {
+        $year = substr($Period, 0, 4);
+
+        if($apc->DataH[$AccountID][$Period]->BankVotingPeriodID)
+            $data[$year][$AccountName][$Period] = 
+                array(
+                'a' => $AccountID,
+                'period' => $Period, 
+                'pk' => $apc->DataH[$AccountID][$Period]->BankVotingPeriodID,
+                'value' => $apc->DataH[$AccountID][$Period]->Comment
+                );
+        else
+            $data[$year][$AccoutName][$Period] = array(
+                'a' => $AccountID,
+                'error' => true
+                );
+    }
+}
+
+foreach($data as $year => $accounts) {
+    echo "<h1>$year</h1>";
+
+    echo "<table class='lodo_data'>";
+    echo "<tr>";
+    echo "<th>Konto</th>";
+
+    foreach($accounts[key($accounts)] as $pname => $d)
+        echo "<th>$pname</th>";
+
+    echo "</tr>";
+
+    foreach($accounts as $account => $period) {
+        echo "<tr>";
+        echo "<td>$account</td>";
+
+        foreach($period as $pname => $d) {
+            if(!isset($d['error'])) {
+                printf("<td>%s</td>", 
+                       $_lib['form3']->text(array('table' => 'bankvotingperiod', 
+                                                  'field' => 'Comment', 
+                                                  'pk'    => $d['pk'],
+                                                  'value' => $d['value']))
+                    );
+            }
+            else {
+                echo "<td></td>";
+            }
+        }
+
+        echo "</tr>";
+    }
+
+    echo "<tr><td>$save_button</td></tr>";
+
+    echo "</table>";
+}
+
 ?>
-  <tr>
-    <? foreach($apc->PeriodH as $Period => $tmp) { ?>
-    <td><?php if ($iter++ % 6 == 0) print $save_button ?></td>
-    <? } ?>
-  </tr>
-</tbody>
-</table>
 
 <? print $_lib['form3']->stop(array()); ?>
 </body>

@@ -51,7 +51,7 @@ print $_lib['form3']->accountplan_number_menu(array('table' => 'reportaccount', 
 print('</td>');
 
 foreach($data as $c => $a)
-    printf('<td><input type="input" name="amounts[%s]" value="%s" /></td>', $c, $a);
+    printf('<td><input style="text-align: right;" type="input" name="amounts[%s]" value="%s" /></td>', $c, $_lib['format']->Amount($a));
 
 print('<tr><td><input type="submit" name="edit_report_account" value="Save" /></td></tr>');
 

@@ -9,7 +9,7 @@ if(isset($_POST['add_report'])) {
  
     foreach($_POST['add_amounts'] as $code => $amount) {
         $query = sprintf("INSERT INTO salaryreportentries (`SalaryReportID`, `Code`, `Amount`) VALUES ('%d', '%s', '%s');", 
-                         $id, mysql_escape_string($code), mysql_escape_string($amount));
+                         $id, mysql_escape_string($code), mysql_escape_string(str_replace(array(" ", ","), array("", "."), $amount)));
         $_lib['db']->db_query($query);
     }
 }
@@ -19,7 +19,8 @@ else if(isset($_POST['edit_report'])) {
 
     foreach($_POST['edit_amounts'] as $code => $amount) {
         $query = sprintf("UPDATE salaryreportentries SET Amount = '%s' WHERE Code = '%s' AND SalaryReportID = %d", 
-                         mysql_escape_string($amount), mysql_escape_string($code), $_POST['SalaryReportID']);
+                         mysql_escape_string(str_replace(array(" ", ","), array("", "."), $amount)), mysql_escape_string($code), $_POST['SalaryReportID']);
+        echo $query;
         $_lib['db']->db_query($query);
     }
 }
@@ -43,7 +44,7 @@ else if(isset($_POST['add_report_account'])) {
 
     foreach($_POST['amounts'] as $code => $amount) {
         $query = sprintf("INSERT INTO salaryreportaccountentries (`SalaryReportAccountID`, `Code`, `Amount`) VALUES ('%d', '%s', '%s');",
-                         $id, mysql_escape_string($code), mysql_escape_string($amount));
+                         $id, mysql_escape_string($code), mysql_escape_string(str_replace(array(" ", ","), array("", "."), $amount)));
         $_lib['db']->db_query($query);
     }
     
@@ -56,7 +57,8 @@ else if(isset($_POST['edit_report_account'])) {
 
     foreach($_POST['amounts'] as $code => $amount) {
         $query = sprintf("UPDATE salaryreportaccountentries SET Amount = '%s' WHERE Code = '%s' AND SalaryReportAccountID = %d",
-                         mysql_escape_string($amount), mysql_escape_string($code), $_POST['SalaryReportAccountID']);
+                         mysql_escape_string(str_replace(array(" ", ","), array("", "."), $amount)), 
+                         mysql_escape_string($code), $_POST['SalaryReportAccountID']);
         $_lib['db']->db_query($query);
     }
 }
