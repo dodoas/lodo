@@ -348,10 +348,16 @@ class lodo_fakturabank_fakturabankvoting {
             // Do some quick and dirty Scheme ID lookup
             //
             foreach($transaction_relations as $rel) {
-                if($rel['InvoiceType'] == 'incoming') {
+                if($rel['PaycheckNo'] != '') {
+                    $lineH['Comment'] = 'Lon';
+
+                    $accountplan_row = $this->find_account_plan_type($rel['InvoiceSupplierIdentity'], $rel['InvoiceSupplierIdentitySchemeID'], 'supplier');
+                    $lineH['ReskontroAccountPlanID'] = $accountplan_row->AccountPlanID;
+                }
+                else if($rel['InvoiceType'] == 'incoming') {
                     $lineH['Comment'] = 'Ing';
 
-                    $accountplan_row = $this->find_account_plan($rel['InvoiceSupplierIdentity'], $rel['InvoiceSupplierIdentitySchemeID']);
+                    $accountplan_row = $this->find_account_plan_type($rel['InvoiceSupplierIdentity'], $rel['InvoiceSupplierIdentitySchemeID'], 'supplier');
                     $lineH['ReskontroAccountPlanID'] = $accountplan_row->AccountPlanID;
 
                     break;
@@ -359,7 +365,7 @@ class lodo_fakturabank_fakturabankvoting {
                 else if($rel['InvoiceType'] == 'outgoing') {
                     $lineH['Comment'] = 'Utg';
 
-                    $accountplan_row = $this->find_account_plan($rel['InvoiceCustomerIdentity'], $rel['InvoiceCustomerIdentitySchemeID']);
+                    $accountplan_row = $this->find_account_plan_type($rel['InvoiceCustomerIdentity'], $rel['InvoiceCustomerIdentitySchemeID'], 'customer');
                     $lineH['ReskontroAccountPlanID'] = $accountplan_row->AccountPlanID;
 
                     break;
@@ -432,11 +438,38 @@ class lodo_fakturabank_fakturabankvoting {
 		return $ret;
     }
 
+    public function find_account_plan_type($identity, $scheme_id, $type) {
+        global $_lib;
+
+        /* no account found on identity value, try lookup on orgnumber if it exists */
+
+        if ($scheme_id == 'NO:ORGNR') {
+            $query = "SELECT AccountPlanID, OrgNumber FROM accountplan WHERE OrgNumber = '$identity' AND AccountPlanType = '$type'";
+            $r = $_lib['storage']->get_row(array('query' => $query));
+            if($r)
+                return $r;
+        }
+        else if($scheme_id == 'FAKTURABANK:EMAIL') {
+            $query = "SELECT AccountPlanID FROM fakturabankemail WHERE Email = '$identity'";
+            $r = $_lib['storage']->get_row(array('query' => $query));
+            if($r)
+                return $r;
+        }
+
+        $query = "SELECT AccountPlanID, OrgNumber FROM accountplan WHERE AccountPlanID = '$identity'";
+        $accountplan = $_lib['storage']->get_row(array('query' => $query));
+        if (!empty($accountplan)) {
+            return $accountplan;
+        }
+
+        return false;
+    }
+
     public function find_account_plan($identity, $scheme_id) {
         global $_lib;
 
         $query = "SELECT AccountPlanID, OrgNumber FROM accountplan WHERE AccountPlanID = '$identity'";
-		$accountplan = $_lib['storage']->get_row(array('query' => $query));
+        $accountplan = $_lib['storage']->get_row(array('query' => $query));
         if (!empty($accountplan)) {
             return $accountplan;
         }
