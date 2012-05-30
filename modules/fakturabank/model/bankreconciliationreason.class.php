@@ -1,5 +1,6 @@
 <?
-class lodo_fakturabank_reconciliationreason {
+
+class lodo_fakturabank_bankreconciliationreason {
     private $username       = '';
     private $password       = '';
 
@@ -92,11 +93,12 @@ class lodo_fakturabank_reconciliationreason {
 
             $has_accountno = !empty($account['default_account_plan_number']);
 
-            $query = "insert into fakturabankbankreconciliationreason (FakturabankBankReconciliationReasonID, " . ($has_accountno ? "AccountPlanID, " : "") . "FakturabankBankReconciliationReasonCode, FakturabankBankReconciliationReasonName) values ('" .
+            $query = "insert into fakturabankbankreconciliationreason (FakturabankBankReconciliationReasonID, " . ($has_accountno ? "AccountPlanID, " : "") . "FakturabankBankReconciliationReasonCode, FakturabankBankReconciliationReasonName, LedgerType) values ('" .
                 $account['id'] . "', '" .
                 ($has_accountno ? $account['default_account_plan_number'] . "', '" : "") .
                 utf8_decode($account['code']) . "', '" . 
-                utf8_decode($account['name']) . "')";
+                utf8_decode($account['name']) . "', '" . 
+                utf8_decode($account['default_account_ledger_type']) . "')";
 
 			$_lib['db']->db_insert2(array('query'=> $query));
         }

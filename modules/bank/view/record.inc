@@ -3,7 +3,7 @@ $AccountID  = $_lib['input']->getProperty('AccountID');
 $Period     = $_lib['input']->getProperty('Period');
 
 includelogic('fakturabank/fakturabankvoting');
-includelogic('fakturabank/reconciliationreason');
+includelogic('fakturabank/bankreconciliationreason');
 
 #$bank2           = new framework_logic_bank($_lib['input']->request);
 #$bank2->init();
@@ -95,7 +95,7 @@ function do_bank_update($AccountID, $Period) {
     
     // get fakturabank
     $fbvoting         = new lodo_fakturabank_fakturabankvoting();
-    $fbreconcilationreason = new lodo_fakturabank_reconciliationreason();
+    $fbreconcilationreason = new lodo_fakturabank_bankreconciliationreason();
     
     printf("ANYBODY HERE?<br />\n");
 

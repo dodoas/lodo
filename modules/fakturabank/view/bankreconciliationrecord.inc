@@ -4,8 +4,8 @@
 $primarykey['FakturabankBankReconciliationReasonID'] = $FakturabankBankReconciliationReasonID;
 
 if($_lib['input']->getProperty('action_fakturabankbankreconciliationreason_import')) {
-    includelogic('fakturabank/reconciliationreason');
-	$fbreconcilationreason = new lodo_fakturabank_reconciliationreason();
+    includelogic('fakturabank/bankreconciliationreason');
+	$fbreconcilationreason = new lodo_fakturabank_bankreconciliationreason();
     $fbreconcilationreason->import_mappings();
 } elseif($_lib['input']->getProperty('action_fakturabankbankreconciliationreason_update')) {
   #Possible to extend or alter parameters here

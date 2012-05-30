@@ -262,6 +262,13 @@ class lodo_fakturabank_fakturabank {
 			$dataH['AccountPlanID'] = $invoice->AccountPlanID;
 			$dataH['VoucherType'] = $invoice->VoucherType;
 
+            if (!empty($invoice->FakturabankCustomerReconciliationReasonID)) {
+                $dataH['FakturabankCustomerReconciliationReasonID'] = $invoice->FakturabankCustomerReconciliationReasonID;
+            }
+            if (!empty($invoice->FakturabankSupplierReconciliationReasonID)) {
+                $dataH['FakturabankSupplierReconciliationReasonID'] = $invoice->FakturabankSupplierReconciliationReasonID;
+            }
+
 			$ret = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'fakturabankinvoicein', 'action' => $action, 'debug' => false));			
 
 			if ($action == "insert") {
@@ -341,6 +348,13 @@ class lodo_fakturabank_fakturabank {
 			$dataH['JournalID'] = $invoice->JournalID;
 			$dataH['AccountPlanID'] = $invoice->AccountPlanID;
 			$dataH['VoucherType'] = $invoice->VoucherType;
+
+            if (!empty($invoice->FakturabankCustomerReconciliationReasonID)) {
+                $dataH['FakturabankCustomerReconciliationReasonID'] = $invoice->FakturabankCustomerReconciliationReasonID;
+            }
+            if (!empty($invoice->FakturabankSupplierReconciliationReasonID)) {
+                $dataH['FakturabankSupplierReconciliationReasonID'] = $invoice->FakturabankSupplierReconciliationReasonID;
+            }
 
 			$ret = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'fakturabankinvoiceout', 'action' => $action, 'debug' => false));			
 
@@ -525,8 +539,15 @@ class lodo_fakturabank_fakturabank {
                     $InvoiceO->ProjectNameInternal = $acc_cost_params['project']; 
                 }
             }
-        }            
 
+            if (!empty($acc_cost_params['customerreconciliationreasonid']) && is_numeric($acc_cost_params['customerreconciliationreasonid'])) {
+                $InvoiceO->CustomerFakturabankInvoiceReconciliationReasonID = $acc_cost_params['customerreconciliationreasonid'];
+            }
+
+            if (!empty($acc_cost_params['supplierreconciliationreasonid']) && is_numeric($acc_cost_params['supplierreconciliationreasonid'])) {
+                $InvoiceO->SupplierFakturabankInvoiceReconciliationReasonID = $acc_cost_params['supplierreconciliationreasonid'];
+            }
+        }
 
         return true;
     }
@@ -713,7 +734,15 @@ class lodo_fakturabank_fakturabank {
                 }
                 $InvoiceO->Reisegarantifond = $value;
             }
-        }            
+
+            if (!empty($acc_cost_params['customerreconciliationreasonid']) && is_numeric($acc_cost_params['customerreconciliationreasonid'])) {
+                $InvoiceO->CustomerFakturabankReconciliationReasonID = $acc_cost_params['customerreconciliationreasonid'];
+            }
+
+            if (!empty($acc_cost_params['supplierreconciliationreasonid']) && is_numeric($acc_cost_params['supplierreconciliationreasonid'])) {
+                $InvoiceO->SupplierFakturabankReconciliationReasonID = $acc_cost_params['supplierreconciliationreasonid'];
+            }
+        }
         
         return true;
     }
