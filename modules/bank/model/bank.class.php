@@ -1078,11 +1078,9 @@ class framework_logic_bank {
                         echo "<br>\n";
                         
                         if($rel['InvoiceType'] == 'incoming') {
-                            $query = sprintf(
-                                "SELECT AccountPlanID FROM accountplan WHERE OrgNumber = '%s'",
-                                $rel['InvoiceSupplierIdentity']
+                            $accountplan_row = $fbbank->find_account_plan_type(
+                                $rel['InvoiceSupplierIdentity'], $rel['InvoiceSupplierIdentitySchemeID'], 'supplier'
                                 );
-                            $accountplan_row = $_lib['storage']->get_row(array('query' => $query));
 
                             if(!$accountplan_row)
                                 printf("Could not find incoming: %s<br />", $rel['InvoiceSupplierIdentity']);
@@ -1110,12 +1108,14 @@ class framework_logic_bank {
                             }    
                         }
                         else if($rel['InvoiceType'] == 'outgoing') {
-                            $query = sprintf(
-                                "SELECT AccountPlanID FROM accountplan WHERE OrgNumber = '%s'",
-                                $rel['InvoiceCustomerIdentity']
+                            $accountplan_row = $fbbank->find_account_plan_type(
+                                $rel['InvoiceCustomerIdentity'], $rel['InvoiceCustomerIdentitySchemeID'], 'customer'
                                 );
-                            $accountplan_row = $_lib['storage']->get_row(array('query' => $query));
                             
+                            if(!$accountplan_row)
+                                printf("Could not find outgoing: %s<br />", $rel['InvoiceSupplierIdentity']);
+
+
                             if($accountplan_row) {
                                 printf("Adding normal Outgoing\n");
                                 $FBVoucherH['voucher_AccountPlanID'] = $accountplan_row->AccountPlanID;
