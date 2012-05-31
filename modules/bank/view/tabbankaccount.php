@@ -154,13 +154,13 @@ var selectedOptionText = targ.options[targ.selectedIndex].text;
         $reskontroconf['type'][]        = 'reskontro';
         $reskontroconf['type'][]        = 'employee';
         $reskontroconf['field']         = 'ReskontroAccountPlanID';
-        $reskontroconf['showInactive']  = true;
+	//$reskontroconf['showInactive']  = true;
         generate_kontoliste($reskontroconf);
 
         $resultconf['field']         = 'ResultAccountPlanID';
         $resultconf['value']         = $row->ResultAccountPlanID;
         $resultconf['type'][]        = 'hovedbok';
-        $resultconf['showInactive']  = true;
+        //$resultconf['showInactive']  = true;
         generate_kontoliste($resultconf);
 
         $reskontroconf = null;

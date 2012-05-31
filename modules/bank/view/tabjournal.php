@@ -3,9 +3,11 @@
 
 includelogic('bank/bank');
 includelogic('accounting/accounting');
+includelogic('postmotpost/postmotpost');
 
 $accounting     = new accounting();
 $bank           = new framework_logic_bank($_lib['input']->request);
+$postmotpost    = new postmotpost(array());
 //$bank->init(); #Read data
 
 require_once "record.inc";
@@ -239,6 +241,7 @@ if(is_array($bank->unvotedaccount)) {
     $aconf['table']         = 'accountline';
 
     foreach($bank->unvotedaccount as $row) {
+        $warning = '';
 
         $reskontroaccountplan   = $accounting->get_accountplan_object($row->ReskontroAccountPlanID);
         $resultaccountplan      = $accounting->get_accountplan_object($row->ResultAccountPlanID);
@@ -246,7 +249,7 @@ if(is_array($bank->unvotedaccount)) {
         $aconf['pk']            = $row->AccountLineID;
 
         $reskontroconf = $resultconf = $aconf;
-        
+
         if($row->Approved) {
             $classApproved = 'creditblue';
         } else {
@@ -255,34 +258,115 @@ if(is_array($bank->unvotedaccount)) {
 
         #If JournalID is used, we are not allowed to journal this entry automatic
         if(!$row->ReskontroAccountPlanID && !$row->ResultAccountPlanID) {
-            $warning = "Velg konto";
+            $warning .= "Velg konto. ";
             $warningH['chosseaccount']++;
             $classWarning = 'creditred';
 
         } elseif($accounting->IsJournalIDInUse($row->JournalID, $bank->VoucherType)) {
-            $warning = "Bilagsnummeret er brukt";
+            $warning .= "Bilagsnummeret er brukt. ";
             $warningH['journalidused']++;
             $classWarning = 'creditred';
 
         } elseif(!$row->Approved) {
-            $warning = "Ikke godkjent";
+            $warning .= "Ikke godkjent. ";
             $warningH['notapproved']++;
             $classWarning = 'creditred';
 
         } elseif($row->Day < 1 || $row->Day > 31) {
-            $warning = "Ikke lovlig dato";
+            $warning .= "Ikke lovlig dato. ";
             $warningH['notapproved']++;
             $classWarning = 'creditred';
 
         } elseif($row->JournalID < 1) {
-            $warning = "Ikke lovlig bilagsnummer";
+            $warning .= "Ikke lovlig bilagsnummer. ";
             $warningH['notapproved']++;
             $classWarning = 'creditred';
             
         } else {
-            $warning = $_lib['form3']->URL(array('url' => $bank->urlvoucher . '&amp;VoucherType=' . $bank->VoucherType . '&amp;voucher_AmountIn=' . $row->AmountIn . '&amp;voucher_AmountOut=' . $row->AmountOut . '&amp;voucher_KID=' . $row->KID . '&amp;voucher_VoucherDate=' . $row->Period . '-' . $row->Day . '&amp;AccountLineID=' . $row->AccountLineID . '&amp;JournalID=' . $row->JournalID . '&amp;voucher_Description=' . $row->Description . '&amp;new=1', 'description' => 'F&oslash;r bilag'));
+            $warning .= $_lib['form3']->URL(array('url' => $bank->urlvoucher . '&amp;VoucherType=' . $bank->VoucherType . '&amp;voucher_AmountIn=' . $row->AmountIn . '&amp;voucher_AmountOut=' . $row->AmountOut . '&amp;voucher_KID=' . $row->KID . '&amp;voucher_VoucherDate=' . $row->Period . '-' . $row->Day . '&amp;AccountLineID=' . $row->AccountLineID . '&amp;JournalID=' . $row->JournalID . '&amp;voucher_Description=' . $row->Description . '&amp;new=1', 'description' => 'F&oslash;r bilag'));
             $classWarning = 'creditblue';
         }
+
+        if(!$row->Approved && $row->KID != '') {
+            list($pmp_status, $pmp_possible_invoices) = $postmotpost->findOpenPostKid($row->KID, 0);
+            $pmp_found = false;
+
+            if($pmp_status) {
+                foreach($pmp_possible_invoices as $tmp) {
+                    foreach($tmp as $pmp_invoice) {
+                        if($pmp_invoice['InvoiceID'] == $row->InvoiceNumber 
+                           && (int)$pmp_invoice['AmountIn'] == (int)$row->AmountIn 
+                           && (int)$pmp_invoice['AmountOut'] == (int)$row->AmountOut) {
+
+                            if($warning == '' || $warning == "Ikke godkjent. ") {
+                                $row->Approved = 1;
+
+                                $warning .= "OK! ";
+                                $classApproved = 'creditred';
+                                $pmp_found = true;
+                            }
+                        }
+                        else {
+                            $warning .= "Bel&oslash;p stemmer ikke. ";
+                        }
+                    }
+
+                    if($pmp_found)
+                        break;
+                }
+            }
+
+            if(!$pmp_found) {
+                $warning .= "Finner ikke motpost. ";
+            }
+        }
+        else if(!$row->Aproved && $row->KID == '') {
+            $query_open_voucher = 
+                sprintf(
+                    "select 
+                         v.JournalID, v.VoucherID, v.AmountIn, v.AmountOut, v.AccountPlanID, v.VoucherDate, v.KID, v.InvoiceID 
+                     from 
+                         accountplan as a, 
+                         voucher as v 
+                     left join 
+                          voucherstruct as vs on (vs.ParentVoucherID=v.VoucherID or vs.ChildVoucherID=v.VoucherID)                                 
+                     where
+                          v.AccountPlanID = %d and
+                          v.InvoiceID = '%s' and
+                          vs.ParentVoucherID is null and
+                          v.AccountPlanID=a.AccountPlanID and
+                          a.EnablePostPost=1 &&
+                          a.EnableReskontro=0 and
+                          v.Active=1
+                     order by VoucherStructID asc",
+                    $row->ReskontroAccountPlanID, 
+                    $row->InvoiceNumber
+                    );
+            
+            $pmp_invoice = $_lib['db']->get_row(array('query' => $query_open_voucher));
+            
+            if($pmp_invoice) {
+                if($pmp_invoice->InvoiceID == $row->InvoiceNumber 
+                   && (int)$pmp_invoice->AmountIn == (int)$row->AmountIn 
+                   && (int)$pmp_invoice->AmountOut == (int)$row->AmountOut) {
+                    if($warning == '' || $warning == "Ikke godkjent. ") {
+                        $row->Approved = 1;
+                        
+                        $warning .= "OK! ";
+                        $classApproved = 'creditred';
+                        $pmp_found = true;
+                    }
+                }
+                else {
+                    $warning .= "Bel&oslash;p stemmer ikke. ";
+                }
+            }
+            else {
+                $warning .= "Finner ikke motpost. ";
+            }
+        }
+
+        
       ?>
       <? print $_lib['form3']->hidden(array('table' => 'accountline', 'field' => 'JournalID',   'pk' => $row->AccountLineID, 'value' => $row->JournalID)) ?>
       <? print $_lib['form3']->hidden(array('table' => 'accountline', 'field' => 'Day',         'pk' => $row->AccountLineID, 'value' => $row->Day)) ?>
