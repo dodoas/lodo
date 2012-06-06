@@ -4,6 +4,21 @@ class lodo_fakturabank_bankreconciliationreason {
     private $username       = '';
     private $password       = '';
 
+    public static function translate_ledger_type($ledger_type) {
+        switch ($ledger_type) {
+            case "main":
+                return "hoved";
+            case "customer":
+                return "kunde";
+            case "supplier":
+                return "leverand&oslash;r";
+            case "salary":
+            return "l&oslash;nn";
+            default:
+                return null;
+        }
+    }
+    
     public function bank_reconciliation_reason_to_accountplan($fakturabank_bank_reconciliation_reason_id) {
         global $_lib;
 
