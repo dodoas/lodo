@@ -9,8 +9,6 @@ $AccountNumber  = $_REQUEST['AccountNumber'];
 $AccountID      = $_REQUEST['AccountID'];
 $Bank      		= $_REQUEST['Bank'];
 
-print_r($_POST);
-
 if($_REQUEST['Period']) {
 	$Period     = $_REQUEST['Period'];
     $PeriodSelection = $Period;
