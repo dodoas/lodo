@@ -3,23 +3,24 @@
 # Based on EasyComposer technology
 # Copyright Thomas Ekdahl, 1994-2005, thomas@ekdahl.no, http://www.ekdahl.no
 
+includelogic('fakturabank/invoicereconciliationreason');
 includelogic('fakturabank/bankreconciliationreason');
 
-$FakturabankBankReconciliationReasonID = $_REQUEST['FakturabankBankReconciliationReasonID'];
-assert(!is_int($FakturabankBankReconciliationReasonID)); #All main input should be int
+$FakturabankInvoiceReconciliationReasonID = $_REQUEST['FakturabankInvoiceReconciliationReasonID'];
+assert(!is_int($FakturabankInvoiceReconciliationReasonID)); #All main input should be int
 
 
-$db_table = "fakturabankbankreconciliationreason";
-require_once "bankreconciliationrecord.inc";
+$db_table = "fakturabankinvoicereconciliationreason";
+require_once "invoicereconciliationrecord.inc";
 
-$query = "select * from $db_table order by FakturabankBankReconciliationReasonID";
-$result_fakturabankbankreconciliationreason = $_lib['db']->db_query($query);
+$query = "select * from $db_table order by FakturabankInvoiceReconciliationReasonID";
+$result_fakturabankinvoicereconciliationreason = $_lib['db']->db_query($query);
 
 ?>
 
 <? print $_lib['sess']->doctype ?>
 <head>
-    <title>Empatix - fakturabankbankreconciliationreason list</title>
+    <title>Empatix - fakturabankinvoicereconciliationreason list</title>
     <? includeinc('head') ?>
 </head>
 
@@ -30,7 +31,7 @@ includeinc('top') ?>
 <? 
 includeinc('left') ?>
 
-<? print $_lib['form3']->url(array('description' => 'Bank',          'url' => $_lib['sess']->dispatch . 'view_mvalines=&view_linedetails=&t=bank.list')) ?>
+<? print $_lib['form3']->url(array('description' => 'Innkommende faktura',          'url' => $_lib['sess']->dispatch . 'view_mvalines=&view_linedetails=&t=invoicein.list')) ?>
 
 
 
@@ -44,7 +45,7 @@ includeinc('left') ?>
 
 <p>
 <form action="<? print $MY_SELF ?>" method="post">
-<input type="submit" name="action_fakturabankbankreconciliationreason_import" value="Importer fra Fakturabank" />
+<input type="submit" name="action_fakturabankinvoicereconciliationreason_import" value="Importer fra Fakturabank" />
 </form>
 </p>
 <table class="lodo_data">
@@ -54,10 +55,10 @@ includeinc('left') ?>
   <tr>
     <th>
     <th colspan="5">
-        <form name="fakturabankbankreconciliationreason_search" action="<? print $_lib['sess']->dispatch ?>t=fakturabank.bankreconciliationedit" method="post">
+        <form name="fakturabankinvoicereconciliationreason_search" action="<? print $_lib['sess']->dispatch ?>t=fakturabank.invoicereconciliationedit" method="post">
 Ny kobling (skriv fb id):
-            <? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'FakturabankBankReconciliationReasonID', 'width'=>'10')) ?>
-            <? print $_lib['form3']->submit(array('name'=>'action_fakturabankbankreconciliationreason_new', 'value'=>'Ny kobling')) ?>
+            <? print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'FakturabankInvoiceReconciliationReasonID', 'width'=>'10')) ?>
+            <? print $_lib['form3']->submit(array('name'=>'action_fakturabankinvoicereconciliationreason_new', 'value'=>'Ny kobling')) ?>
         </form>
   <tr>
     <th class="menu">Fakturabank Avstemmings ID
@@ -72,7 +73,7 @@ Ny kobling (skriv fb id):
 
 <tbody>
 <?
-while($row = $_lib['db']->db_fetch_object($result_fakturabankbankreconciliationreason)) {
+while($row = $_lib['db']->db_fetch_object($result_fakturabankinvoicereconciliationreason)) {
     $i++;
 
     if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
@@ -91,9 +92,9 @@ while($row = $_lib['db']->db_fetch_object($result_fakturabankbankreconciliationr
 
     ?>
     <tr class="<? print "$sec_color"; ?>" style="<?= ($found ? ($active ? "background-color: green" : "background-color: gray"): "background-color: red") ?>">
-         <td><a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.bankreconciliationedit&fakturabankbankreconciliationreason_FakturabankBankReconciliationReasonID=<? print $row->FakturabankBankReconciliationReasonID ?>"><? print $row->FakturabankBankReconciliationReasonID; ?></a>
-         <td><? print $row->FakturabankBankReconciliationReasonCode; ?>
-         <td><? print $row->FakturabankBankReconciliationReasonName; ?>
+         <td><a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.invoicereconciliationedit&fakturabankinvoicereconciliationreason_FakturabankInvoiceReconciliationReasonID=<? print $row->FakturabankInvoiceReconciliationReasonID ?>"><? print $row->FakturabankInvoiceReconciliationReasonID; ?></a>
+         <td><? print $row->FakturabankInvoiceReconciliationReasonCode; ?>
+         <td><? print $row->FakturabankInvoiceReconciliationReasonName; ?>
          <td><? print lodo_fakturabank_bankreconciliationreason::translate_ledger_type($row->LedgerType); ?>
          <td><? print $row->AccountPlanID; ?>
          <td><?= ($active?"ja":"nei") ?>

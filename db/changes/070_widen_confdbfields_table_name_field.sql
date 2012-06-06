@@ -1,1 +1,0 @@
-ALTER TABLE confdbfields modify `TableField` varchar(80) NOT NULL DEFAULT '';

@@ -698,6 +698,20 @@ class form3
 
 ###########################################################
 
+    function AccountTypeMenu($name, $value) {
+        global $_lib;
+        
+        return $this->_MakeSelect(array('name' => $name,
+                                        'value' => $value,
+                                        'required' => true,
+                                        'data' => Array("main" => "hoved",
+                                                        "salary" => "l&oslash;nn",
+                                                        "customer" => "kunde",
+                                                        "supplier" => "leverand&oslash;r")));
+    }
+
+###########################################################
+
     function PeriodeYear_menu3($args)
     {
         $args['query'] = $this->_QUERY['form']['periodmenu'];

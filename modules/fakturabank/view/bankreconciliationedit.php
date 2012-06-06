@@ -1,5 +1,6 @@
 <?
 /* $Id: edit.php,v 1.31 2005/10/28 17:59:40 thomasek Exp $ main.php,v 1.12 2001/11/20 17:55:12 thomasek Exp $ */
+
 $FakturabankBankReconciliationReasonID = (int) $_REQUEST['fakturabankbankreconciliationreason_FakturabankBankReconciliationReasonID'];
 
 $db_table = "fakturabankbankreconciliationreason";
@@ -39,6 +40,9 @@ $fakturabankbankreconciliationreason = $_lib['storage']->get_row(array('query' =
     <tr>
         <td class="menu">FB Navn
         <td><input type="text" name="fakturabankbankreconciliationreason.FakturabankBankReconciliationReasonName" value="<? print $fakturabankbankreconciliationreason->FakturabankBankReconciliationReasonName  ?>" size="60">
+    <tr>
+        <td class="menu">Type
+        <td><? print $_lib['form3']->AccountTypeMenu('fakturabankbankreconciliationreason.LedgerType', $fakturabankbankreconciliationreason->LedgerType) ?>
     <tr>
         <td class="menu">Konto
         <td><input type="text" name="fakturabankbankreconciliationreason.AccountPlanID" value="<? print $fakturabankbankreconciliationreason->AccountPlanID  ?>" size="60">

@@ -18,18 +18,20 @@ elseif($_lib['input']->getProperty('action_fakturabankbankreconciliationreason_n
     $result = $_lib['db']->db_query($query);
     if($_lib['db']->db_numrows($result) == 0)
     {
-    	if(!empty($_POST['fakturabankbankreconciliationreason_FakturabankBankReconciliationReasonID']) &&
-           !empty($_POST['fakturabankbankreconciliationreason_AccountPlanID'])) {
+    	if (!empty($_POST['fakturabankbankreconciliationreason_FakturabankBankReconciliationReasonID'])) {
 			$post = $_POST;
-			$query = "insert into fakturabankbankreconciliationreason (FakturabankBankReconciliationReasonID, AccountPlanID, FakturabankBankReconciliationReasonCode, FakturabankBankReconciliationReasonName) values ('".$post['fakturabankbankreconciliationreason_FakturabankBankReconciliationReasonID']."', '".$post['fakturabankbankreconciliationreason_AccountPlanID'] . "', '" . $post['fakturabankbankreconciliationreason_FakturabankBankReconciliationReasonCode'] . "', '" . $post['fakturabankbankreconciliationreason_FakturabankBankReconciliationReasonName'] ."')";
+            $ledger_type = 'main';
+            if (!empty($post['fakturabankbankreconciliationreason_LedgerType'])) {
+                $ledger_type = $post['fakturabankbankreconciliationreason_LedgerType'];
+            }
+
+			$query = "insert into fakturabankbankreconciliationreason (FakturabankBankReconciliationReasonID, AccountPlanID, FakturabankBankReconciliationReasonCode, FakturabankBankReconciliationReasonName, LedgerType) values ('".$post['fakturabankbankreconciliationreason_FakturabankBankReconciliationReasonID']."', '".$post['fakturabankbankreconciliationreason_AccountPlanID'] . "', '" . $post['fakturabankbankreconciliationreason_FakturabankBankReconciliationReasonCode'] . "', '" . $post['fakturabankbankreconciliationreason_FakturabankBankReconciliationReasonName'] . "', '" . $ledger_type ."')";
 			#print "$query<br>";
 			$_lib['db']->db_insert2(array('query'=> $query));
 			$FakturabankBankReconciliationReasonID = $_POST['fakturabankbankreconciliationreason_FakturabankBankReconciliationReasonID'];
         } else {
             if (empty($_POST['fakturabankbankreconciliationreason_FakturabankBankReconciliationReasonID'])) {
                 $_lib['message']->add(array('message' => "Fakturabank avstemmingskode er ikke oppgitt"));
-            } else {
-                $_lib['message']->add(array('message' => "Kontoplan ID er ikke oppgitt"));
             }
         }
     }
