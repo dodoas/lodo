@@ -36,6 +36,7 @@ elseif($_REQUEST['action_install_db'])
     $tables['menu']                     = true;
     $tables['linetextmap']              = true;
     $tables['altinnschemalist']         = true;
+    $tables['accountplantemplate']      = true;
     $tables['currency']         = true;
     $tables['country']         = true;
 
