@@ -4,8 +4,8 @@
 # Copyright Thomas Ekdahl, 1994-2003, thomas@ekdahl.no, http://www.ekdahl.no
 
 
-#print "Jeg far: " . $_SESSION['DB_NAME'] . " vs $_SETUP[DB_NAME_DEFAULT] vs " . $_REQUEST['DB_NAME_LOGIN']. "<br>";
-#print "login_ind: " . $_SESSION['login_id'] . "<br>";
+//print "Jeg far: " . $_SESSION['DB_NAME'] . " vs $_SETUP[DB_NAME_DEFAULT] vs " . $_REQUEST['DB_NAME_LOGIN']. "<br>";
+//print "login_ind: " . $_SESSION['login_id'] . "<br>";
 
 #####################################################################################
 $username = $_REQUEST['username'];
@@ -122,6 +122,14 @@ trim(Password) <> ''";
 else
 {
     //print "The user is not logged inn";
+
+    if($username || $password) {
+        unset($_SESSION['DB_NAME']);
+        header("Location: /");
+        echo "ERROR!";
+        exit;
+    }
+
     if($_REQUEST['lang'])
     {
         $_SESSION['lang'] = $_REQUEST['lang'];
