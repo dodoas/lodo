@@ -20,6 +20,7 @@ $bankname = $_lib['db']->db_fetch_assoc($bankname);
 $bankname = $bankname['AccountName'];
 
 $_lib['form3']->Locked = $bank->bankvotingperiod->Locked;
+
 ?>
 <? print $_lib['sess']->doctype ?>
 <head>
@@ -359,16 +360,16 @@ if(is_array($bank->bankaccount)) {
     
             #print $_lib['form3']->URL(array('url' => $bank->url . '&amp;type=bank&amp;side=AmountIn&amp;searchstring=' . $row->AmountIn, 'description' => '<img src="/lib/icons/search.gif">')) ?>
         </td>
-        <td <? if(count($row->MatchSelect) >= 1) { print " colspan=\"2\""; } ?>>
+        <td <? if($row->InvoiceNumber == '' && count($row->MatchSelect) >= 1) { print " colspan=\"2\""; } ?>>
             <? 
-            if(count($row->MatchSelect) >= 1) {
+            if($row->InvoiceNumber == '' && count($row->MatchSelect) >= 1) {
                 print $_lib['form3']->select(array('table' => 'accountline', 'field' => 'KIDandInvoiceIDandAccountPlanID', 'pk' => $row->AccountLineID, 'value' => $row->KID, 'data' => $row->MatchSelect, 'width' => 50, 'required' => false)); 
             } else {
                 print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID', 'pk' => $row->AccountLineID, 'value' => $row->KID,     'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[5]));
             }
             ?>
         </td>
-        <? if(count($row->MatchSelect) < 1) { ?>
+        <? if($row->InvoiceNumber != '' || count($row->MatchSelect) < 1) { ?>
         <td>
             <? 
             
