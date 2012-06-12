@@ -91,25 +91,25 @@ class lodo_fakturabank_fakturabank {
     public function incoming() {
         global $_lib;
         #https://fakturabank.no/invoices?orgnr=981951271
-
+        
         $page       = "invoices";
         $params     = "?rows=200&orgnr=" . $this->OrgNumber . '&order=issue_date&sord=asc'; // add top limit rows=1000, otherwise we only get one record
         if($this->retrievestatus) $params .= '&customer_status=' . $this->retrievestatus;
         $url    = "$this->protocol://$this->host/$page$params";
         $_lib['message']->add($url);
-
+        
         $invoicesO = $this->retrieve($page, $url);
         if (empty($invoicesO)) {
             return false;
         }
-
-		$validated_invoices = $this->validate_incoming($invoicesO);
+        
+        $validated_invoices = $this->validate_incoming($invoicesO);
         if (empty($validated_invoices)) {
             return false;
         }
-
+        
         $this->save_incoming($validated_invoices);
-
+        
         return $validated_invoices;
     }
 
@@ -189,40 +189,42 @@ class lodo_fakturabank_fakturabank {
         }
     }
 
-	private function save_incoming($invoices) {
+    private function save_incoming($invoices) {
         global $_lib;
-
+        
         if (empty($invoices->Invoice)) {
             return false;
         }
-
-		foreach ($invoices->Invoice as &$invoice) {
-			$dataH = array();
-
-			if ($invoice->LodoID) {
-				$action = "update";
-				$dataH['ID'] = $invoice->LodoID;
-			} else {
-				$action = "insert";
-			}
-
+        
+        foreach ($invoices->Invoice as &$invoice) {
+            $dataH = array();
+            
+            if ($invoice->LodoID) {
+                $action = "update";
+                $dataH['ID'] = $invoice->LodoID;
+            } else {
+                $action = "insert";
+            }
+            
             if (empty($invoice->FakturabankID)) {
                 continue;
             }
-			$dataH['FakturabankID'] = $invoice->FakturabankID;
-			$dataH['FakturabankNumber'] = $invoice->ID;
-			$dataH['ProfileID'] = $invoice->ProfileID;
-		
-			# find KID
-			if($invoice->PaymentMeans->InstructionNote == 'KID' && $invoice->PaymentMeans->InstructionID) {
-				$dataH['KID']  = $invoice->PaymentMeans->InstructionID; #KID
-			} 
-			$dataH['IssueDate'] = $_lib['date']->mysql_format("%Y-%m-%d", $invoice->IssueDate);
-			$dataH['DocumentCurrency'] = $invoice->DocumentCurrencyCode;
-			$dataH['SupplierPartyIndentification'] = $invoice->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
-			$dataH['SupplierPartyIndentificationSchemeID'] = $invoice->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
-			$dataH['SupplierPartyName'] = $invoice->AccountingSupplierParty->Party->PartyName->Name;
-            # use companyid if present
+
+            $dataH['FakturabankID'] = $invoice->FakturabankID;
+            $dataH['FakturabankNumber'] = $invoice->ID;
+            $dataH['ProfileID'] = $invoice->ProfileID;
+            
+            //# find KID
+            if($invoice->PaymentMeans->InstructionNote == 'KID' && $invoice->PaymentMeans->InstructionID) {
+                $dataH['KID']  = $invoice->PaymentMeans->InstructionID; #KID
+                                                                            } 
+            $dataH['IssueDate'] = $_lib['date']->mysql_format("%Y-%m-%d", $invoice->IssueDate);
+            $dataH['DocumentCurrency'] = $invoice->DocumentCurrencyCode;
+            $dataH['SupplierPartyIndentification'] = $invoice->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
+            $dataH['SupplierPartyIndentificationSchemeID'] = $invoice->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
+            $dataH['SupplierPartyName'] = $invoice->AccountingSupplierParty->Party->PartyName->Name;
+
+            //# use companyid if present
             if (!empty($invoice->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)) {
                 $dataH['CustomerPartyIndentification'] = $invoice->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
                 $dataH['CustomerPartyIndentificationSchemeID'] = $invoice->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
@@ -230,6 +232,7 @@ class lodo_fakturabank_fakturabank {
                 $dataH['CustomerPartyIndentification'] = $invoice->AccountingCustomerParty->Party->PartyIdentification->ID; 
                 $dataH['CustomerPartyIndentificationSchemeID'] = $invoice->AccountingCustomerParty->Party->PartyIdentification->ID_Attr_schemeID;
             }
+
             /* Fields do not exist in fakturabankinvoicein table  
             if ($invoice->Department != "") { // "0" is valid
                 $dataH['Department'] = $invoice->Department;
@@ -245,39 +248,40 @@ class lodo_fakturabank_fakturabank {
             }
             */
 
-			$dataH['CustomerPartyName'] = $invoice->AccountingCustomerParty->Party->PartyName->Name;
-			$dataH['PaymentMeansCode'] = $invoice->PaymentMeans->PaymentMeansCode;
-			
-			$dataH['PaymentMeansDueDate'] = $_lib['date']->mysql_format("%Y-%m-%d", $invoice->PaymentMeans->PaymentDueDate);
-			$dataH['TaxTotalAmount'] = $invoice->TaxTotal->TaxAmount;
-			$dataH['TaxTotalAmountCurrency'] = $invoice->TaxTotal->TaxAmount_Attr_currencyID;
-			$dataH['LegalMonetaryTotTaxExclusAmount'] = $invoice->LegalMonetaryTotal->TaxExclusiveAmount;
-			$dataH['LegalMonetaryTotTaxExclusAmountCurrency'] = $invoice->LegalMonetaryTotal->TaxExclusiveAmount_Attr_currencyID;
-			$dataH['LegalMonetaryTotPayableAmount'] = $invoice->LegalMonetaryTotal->PayableAmount;
-			$dataH['LegalMonetaryTotPayableAmountCurrency'] = $invoice->LegalMonetaryTotal->PayableAmount_Attr_currencyID;
-			$dataH['Class'] = $invoice->Class;
-			$dataH['Status'] = $invoice->Status;
-			$dataH['Journal'] = $invoice->Journal;
-			$dataH['JournalID'] = $invoice->JournalID;
-			$dataH['AccountPlanID'] = $invoice->AccountPlanID;
-			$dataH['VoucherType'] = $invoice->VoucherType;
-
+            $dataH['CustomerPartyName'] = $invoice->AccountingCustomerParty->Party->PartyName->Name;
+            $dataH['PaymentMeansCode'] = $invoice->PaymentMeans->PaymentMeansCode;
+            
+            $dataH['PaymentMeansDueDate'] = $_lib['date']->mysql_format("%Y-%m-%d", $invoice->PaymentMeans->PaymentDueDate);
+            $dataH['TaxTotalAmount'] = $invoice->TaxTotal->TaxAmount;
+            $dataH['TaxTotalAmountCurrency'] = $invoice->TaxTotal->TaxAmount_Attr_currencyID;
+            $dataH['LegalMonetaryTotTaxExclusAmount'] = $invoice->LegalMonetaryTotal->TaxExclusiveAmount;
+            $dataH['LegalMonetaryTotTaxExclusAmountCurrency'] = $invoice->LegalMonetaryTotal->TaxExclusiveAmount_Attr_currencyID;
+            $dataH['LegalMonetaryTotPayableAmount'] = $invoice->LegalMonetaryTotal->PayableAmount;
+            $dataH['LegalMonetaryTotPayableAmountCurrency'] = $invoice->LegalMonetaryTotal->PayableAmount_Attr_currencyID;
+            $dataH['Class'] = $invoice->Class;
+            $dataH['Status'] = $invoice->Status;
+            $dataH['Journal'] = $invoice->Journal;
+            $dataH['JournalID'] = $invoice->JournalID;
+            $dataH['AccountPlanID'] = $invoice->AccountPlanID;
+            $dataH['VoucherType'] = $invoice->VoucherType;
+            
             if (!empty($invoice->FakturabankCustomerReconciliationReasonID)) {
                 $dataH['FakturabankCustomerReconciliationReasonID'] = $invoice->FakturabankCustomerReconciliationReasonID;
             }
+            
             if (!empty($invoice->FakturabankSupplierReconciliationReasonID)) {
                 $dataH['FakturabankSupplierReconciliationReasonID'] = $invoice->FakturabankSupplierReconciliationReasonID;
             }
-
-			$ret = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'fakturabankinvoicein', 'action' => $action, 'debug' => false));			
-
-			if ($action == "insert") {
-				$invoice->LodoID = $ret;
-			}
-		}
-	}
-
-	private function save_outgoing($invoices) {
+            
+            $ret = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'fakturabankinvoicein', 'action' => $action, 'debug' => false));			
+            
+            if ($action == "insert") {
+                $invoice->LodoID = $ret;
+            }
+        }
+    }
+    
+    private function save_outgoing($invoices) {
         if (empty($invoices)) {
             return false;
         }

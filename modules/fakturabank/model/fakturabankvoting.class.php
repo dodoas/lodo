@@ -155,32 +155,30 @@ class lodo_fakturabank_fakturabankvoting {
         if (!is_numeric($account_id)) {
             return false;
         }
-
+        
         if (empty($period)) {
             return false;
         }
-
+        
         if (!preg_match('/([0-9]{4})-([0-9]){2}/', $period, $matches)) {
             return false;
         }
-
+        
         global $_lib;
-
+        
         //# get transaction data from fakturabank
         $voting = $this->get_balance_report($account_id, $period);
         if (!is_array($voting) || empty($voting)) {
             return false;
         }
         $this->save_transactions($voting, $period);
-
+        
         // I believe import_transactions_to_accounting need this data to work.
         $this->save_voting_relation($voting);
-
+        
         //# import fakturabank transaction records accountline table
         $this->import_transactions_to_accounting($account_id, $period);
-
-
-	}
+    }
 
     protected function period_to_startdate($period) {
         return "$period-01";
@@ -344,45 +342,95 @@ class lodo_fakturabank_fakturabankvoting {
                 }
             }
 
+            $lineH['Comment'] = '';
+
             //
             // Do some quick and dirty Scheme ID lookup
             //
             foreach($transaction_relations as $rel) {
+                $relation_error = "";
+                $relation_found = false;
+
                 if($rel['PaycheckNo'] != '') {
-                    $lineH['Comment'] = 'Lon';
+                    $lineH['Comment'] .= 'Lon ';
 
                     $accountplan_row = $this->find_account_plan_type($rel['InvoiceSupplierIdentity'], $rel['InvoiceSupplierIdentitySchemeID'], 'supplier');
-                    $lineH['ReskontroAccountPlanID'] = $accountplan_row->AccountPlanID;
+
+                    if(!$accountplan_row) {
+                        $relation_error = sprintf("Missing supplier with %s = %s", 
+                                                  $rel['InvoiceSupplierIdentitySchemeID'], 
+                                                  $rel['InvoiceSupplierIdentity']);
+                    }
+                    else {
+                        $relation_found = true;
+                        $lineH['ReskontroAccountPlanID'] = $accountplan_row->AccountPlanID;
+                    }
                 }
                 else if($rel['InvoiceType'] == 'incoming') {
-                    $lineH['Comment'] = 'Ing';
+                    $lineH['Comment'] .= 'Ing ';
 
                     $accountplan_row = $this->find_account_plan_type($rel['InvoiceSupplierIdentity'], $rel['InvoiceSupplierIdentitySchemeID'], 'supplier');
-                    $lineH['ReskontroAccountPlanID'] = $accountplan_row->AccountPlanID;
 
-                    break;
+                    if(!$accountplan_row) {
+                        $relation_error = sprintf("Missing supplier with %s = %s", 
+                                                  $rel['InvoiceSupplierIdentitySchemeID'], 
+                                                  $rel['InvoiceSupplierIdentity']);
+                    }
+                    else {
+                        $lineH['ReskontroAccountPlanID'] = $accountplan_row->AccountPlanID;
+                        $relation_found = true;
+                    }
                 }
                 else if($rel['InvoiceType'] == 'outgoing') {
-                    $lineH['Comment'] = 'Utg';
+                    $lineH['Comment'] .= 'Utg ';
 
                     $accountplan_row = $this->find_account_plan_type($rel['InvoiceCustomerIdentity'], $rel['InvoiceCustomerIdentitySchemeID'], 'customer');
-                    $lineH['ReskontroAccountPlanID'] = $accountplan_row->AccountPlanID;
 
-                    break;
+                    if(!$accountplan_row) {
+                        $relation_error = sprintf("Missing customer with %s = %s", 
+                                                  $rel['InvoiceCustomerIdentitySchemeID'], 
+                                                  $rel['InvoiceCustomerIdentity']);
+                    }
+                    else {
+                        $lineH['ReskontroAccountPlanID'] = $accountplan_row->AccountPlanID;
+                        $relation_found = true;
+                    }
                 }
                 else if($rel['AccountID'] != 0) {
-                    $lineH['Comment'] = 'Hov';
-
                     $query = sprintf(
-                        "SELECT AccountPlanID 
-                           FROM fakturabankbankreconciliationreason
-                           WHERE FakturabankBankReconciliationReasonID = %d",
+                        "SELECT r.AccountPlanID, r.LedgerType
+                           FROM fakturabankbankreconciliationreason r,
+                                accountplan a
+                           WHERE r.FakturabankBankReconciliationReasonID = %d and r.AccountPlanID = a.AccountPlanID",
                         $rel['AccountID']);
 
                     $reconciliation = $_lib['storage']->get_row(array('query' => $query));
-                    $lineH['ResultAccountPlanID'] = $reconciliation->AccountPlanID;
+                    
+                    echo "<br>Rec:<br>";
+                    print_r($reconciliation);
+                    echo "<br><br>";
 
-                    break;
+                    if(!$reconciliation) {
+                        $relation_error = sprintf("Missing reason id %d\n", $rel['AccountID']);
+                    }
+                    else {                    
+                        if($reconciliation->LedgerType == "main") {
+                            $lineH['ResultAccountPlanID'] = $reconciliation->AccountPlanID;
+                            $lineH['Comment'] .= 'Hov(Result) ';
+                        }
+                        else {
+                            $lineH['ReskontroAccountPlanID'] = $reconciliation->AccountPlanID;
+                            $lineH['Comment'] .= 'Hov(Reskontro) ';
+                        }
+
+                        $relation_found = true;
+                    }
+                }
+
+                if(!$relation_found) {
+                    $msg = sprintf('<br />Error "%s": %s<br />', $fb_transaction['Description'], $relation_error);
+                    $_lib['message']->add(array('message' => $msg));
+                    echo $msg;
                 }
             }                
 

@@ -73,18 +73,20 @@ elseif($_lib['input']->getProperty('action_invoice_lock')) {
     $invoice->init(array());
     $invoice->lock();
 }
-
 elseif($_lib['input']->getProperty('action_save_internal')) {
-    /* dont store anything but internal comment */
-    $head = $_POST;
-    $head2 = $_POST;
-    foreach($head2 as $k => $v) {
-        if(strstr($k, "CommentInternal") === false) {
-            unset($head[$k]);
+    $comment = "";
+    $invoiceno = $_lib['input']->getProperty('InvoiceID');
+
+    foreach($_POST as $k => $v) {
+        if(strstr($k, "CommentInternal") !== false) {
+            $comment = $v;
         }
     }
-
-    $invoice->update($head);    
+    
+    $query = sprintf("UPDATE invoiceout SET CommentInternal = '%s' WHERE InvoiceID = %d",
+                     $_lib['db']->db_escape($comment), 
+                     $invoiceno);
+    $_lib['db']->db_query($query);
 }
 
 

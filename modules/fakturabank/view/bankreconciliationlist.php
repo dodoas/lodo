@@ -77,11 +77,31 @@ while($row = $_lib['db']->db_fetch_object($result_fakturabankbankreconciliationr
 
     if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark"; };
 
-    $checkQuery = sprintf("SELECT AccountName, Active FROM accountplan WHERE AccountPlanID = %d", $row->AccountPlanID);
+    $checkQuery = sprintf("SELECT AccountName, Active, AccountPlanType FROM accountplan WHERE AccountPlanID = %d", $row->AccountPlanID);
     if( ($check = $_lib['db']->get_row(array('query' => $checkQuery))) ) {
+        $correct_account = false;
+
+        switch($row->LedgerType) {
+        case 'customer':
+            $correct_account = $check->AccountPlanType == 'customer'; break;
+        case 'supplier':
+            $correct_account = $check->AccountPlanType == 'supplier'; break;
+        case 'salary':
+            $correct_account = $check->AccountPlanType == 'employee'; break;
+        case 'main':
+            $correct_account = $check->AccountPlanType == 'balance' || $check->AccountPlanType == 'result'; break;
+        }
+
         $found = true;
         $active = $check->Active;
         $name = $check->AccountName;
+
+        if($correct_account) {
+            $found = true;
+        }
+        else {
+            $found = false;
+        }
     }
     else {
         $found = false;

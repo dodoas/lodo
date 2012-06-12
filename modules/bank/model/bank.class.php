@@ -1113,7 +1113,7 @@ class framework_logic_bank {
                                 );
                             
                             if(!$accountplan_row)
-                                printf("Could not find outgoing: %s<br />", $rel['InvoiceSupplierIdentity']);
+                                printf("Could not find outgoing: %s<br />", $rel['InvoiceCustomerIdentity']);
 
 
                             if($accountplan_row) {
