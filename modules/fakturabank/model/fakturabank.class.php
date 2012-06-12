@@ -736,11 +736,11 @@ class lodo_fakturabank_fakturabank {
             }
 
             if (!empty($acc_cost_params['customerreconciliationreasonid']) && is_numeric($acc_cost_params['customerreconciliationreasonid'])) {
-                $InvoiceO->CustomerFakturabankReconciliationReasonID = $acc_cost_params['customerreconciliationreasonid'];
+                $InvoiceO->FakturabankCustomerReconciliationReasonID = $acc_cost_params['customerreconciliationreasonid'];
             }
 
             if (!empty($acc_cost_params['supplierreconciliationreasonid']) && is_numeric($acc_cost_params['supplierreconciliationreasonid'])) {
-                $InvoiceO->SupplierFakturabankReconciliationReasonID = $acc_cost_params['supplierreconciliationreasonid'];
+                $InvoiceO->FakturabankSupplierReconciliationReasonID = $acc_cost_params['supplierreconciliationreasonid'];
             }
         }
         
