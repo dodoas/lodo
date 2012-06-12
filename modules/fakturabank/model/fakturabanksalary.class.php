@@ -344,10 +344,15 @@ class lodo_fakturabank_fakturabanksalary {
 
         $data = curl_exec($ch); 
 
-        $import_paycheck_result = $this->parseResult(substr($data, strpos($data, "<?xml version")));
-
+        $unauthorized_error = false;
+        if (!($unauthorized_error = strstr($data, "401 Unauthorized"))) {
+            $import_paycheck_result = $this->parseResult(substr($data, strpos($data, "<?xml version")));
+        }
         $ret = false;
-        if (curl_errno($ch)) {
+        if ($unauthorized_error) {
+            $_lib['message']->add("Error: lastet opp l&oslash;nnslipp: Du har feil brukernavn eller passord " . $import_paycheck_result['message']);
+            $ret = false;
+        } else if (curl_errno($ch)) {
             $_lib['message']->add("Error: lastet opp lønnslipp: " . curl_error($ch) . " " . $import_paycheck_result['message']);
             if (!empty($import_paycheck_result['paycheck-results'])) {
                 $_lib['message']->add("Error info: " . $import_paycheck_result['paycheck-results'][0]['error-message']);
@@ -367,7 +372,7 @@ class lodo_fakturabank_fakturabanksalary {
                 $ret = false;
             } else {
                 $_lib['message']->add("L&oslash;nnslippen ble opprettet riktig");
-                $ret  = $import_paycheck_result['paycheck-results'][0]['paycheck-result']['id'];
+                $ret = $import_paycheck_result['paycheck-results'][0]['paycheck-result']['id'];
             }
         }
        
@@ -380,6 +385,11 @@ class lodo_fakturabank_fakturabanksalary {
         global $_lib;
 
         $size = strlen($xml_data);
+
+        if (strstr($xml_data, "401 Unauthorized")) {
+            return false;
+        }
+
 
         if($size) {
             includelogic('xmldomtoobject/xmldomtoobject');
