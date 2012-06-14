@@ -11,7 +11,7 @@ require_once "record.inc";
 
 includelogic('vat/mvaavstemming');
 $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $_dsn, '_date' => $_date, 'year' => $_REQUEST['Period']));
-#print_r($avst);
+//print_r($avst);
 
 
 #print_r($avst->registered);
@@ -36,18 +36,18 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
 		<td class="number">Total</td>
 		<td class="number">Salg avg.<br /> fritt</td>
 		<?
-		foreach($avst->_inAccountPlanID as $Vat => $Account)
+		foreach($avst->_outAccountPlanID as $Vat => $Account)
 		{
 			?>
-			<td class="number">Grl <? print $Vat ?>%</td>
-			<td class="number">Utg <? print $Vat ?>%</td>
+			<td class="number">Grl <? print $Vat ?>% (<?= $Account ?>)</td>
+			<td class="number">Utg <? print $Vat ?>% (<?= $Account ?>)</td>
 			<?
 		}
 
 		foreach($avst->_inAccountPlanID as $Vat => $Account)
 		{
 			?>
-			<td class="number">Ing <? print $Vat ?>%</td>
+			<td class="number">Ing <? print $Vat ?>% (<?= $Account ?>)</td>
 			<?
 		}
 		?>
@@ -74,7 +74,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
                     <td class="number"><? print $_lib['format']->Amount($avst->registered[$monthly]['TotalOmsettning']) ?></td>
                     <td class="number"><? print $_lib['format']->Amount($avst->registered[$monthly]['FreeOmsettning'])?></td>
                     <?
-                    foreach($avst->_inAccountPlanID as $Vat => $Account)
+                    foreach($avst->_outAccountPlanID as $Vat => $Account)
                     {
                         ?>
                         <td class="number"><? print $_lib['format']->Amount($avst->registered[$monthly]['Grunnlag'.$Vat.'Mva']) ?></td>
@@ -97,17 +97,21 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
         }
         ?>
         <tr>
+            <? $account_sums = array(); ?>
+
             <td class="number">SUM</td>
             <td class="number"><? print $_lib['format']->Amount($avst->registered['total']['NoVatOmsettning'])?></td>
             <td class="number"><? print $_lib['format']->Amount($avst->registered['total']['TotalOmsettning'])?></td>
             <td class="number"><? print $_lib['format']->Amount($avst->registered['total']['FreeOmsettning'])?></td>
             <?
-            foreach($avst->_inAccountPlanID as $Vat => $Account)
+            foreach($avst->_outAccountPlanID as $Vat => $Account)
             {
                 ?>
                 <td class="number"><? print $_lib['format']->Amount($avst->registered['total']['Grunnlag'.$Vat.'Mva']) ?></td>
                 <td class="number"><? print $_lib['format']->Amount($avst->registered['total']['Out'.$Vat.'Mva']) ?></td>
                 <?
+
+                $account_sums['Out'.$Account] = $avst->registered['total']['Out'.$Vat.'Mva'];
             }
 
             foreach($avst->_inAccountPlanID as $Vat => $Account)
@@ -115,6 +119,8 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
                 ?>
                 <td class="number"><? print $_lib['format']->Amount($avst->registered['total']['In'.$Vat.'Mva']) ?></td>
                 <?
+
+                $account_sums['In'.$Account] = $avst->registered['total']['In'.$Vat.'Mva'];
             }
             ?>
             <td class="number"><? print $_lib['format']->Amount($avst->registered['total'][$avst->undefinedVatAccountPlanID]) ?></td>
@@ -152,7 +158,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
             <td class="number">Total</td>
             <td class="number">Fri</td>
             <?
-            foreach($avst->_inAccountPlanID as $Vat => $Account)
+            foreach($avst->_outAccountPlanID as $Vat => $Account)
             {
                 ?>
                 <td class="number">Grl <? print $Vat ?>%</td>
@@ -219,6 +225,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
             }
         }
         ?>
+
         <tr>
             <td>SUM</td>
             <td class="number"><? print $_lib['format']->Amount($avst->reported['total']['NoVatOmsettning']) ?></td>
@@ -273,7 +280,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
             <td class="number"><b><? print $_lib['format']->Amount($avst->diff['TotalOmsettning']) ?></b></td>
             <td class="number"><b><? print $_lib['format']->Amount($avst->diff['FreeOmsettning']) ?></b></td>
             <?
-            foreach($avst->_inAccountPlanID as $Vat => $Account)
+            foreach($avst->_outAccountPlanID as $Vat => $Account)
             {
                 ?>
                 <td class="number"><b><? print $_lib['format']->Amount($avst->diff['Grunnlag'.$Vat.'Mva']) ?></b></td>
@@ -305,11 +312,27 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
     <td colspan="8">Eksempel: Bel&oslash;pet p&aring; utg 25% i f&oslash;lge bokf&oslash;rt regnskap skal v&aelig;re samme tall som p&aring; konto 2701 kode 11 - 25% i listen her</td>
 </tr>
 <tr><td><? print $row->AccountPlanID ?></td></tr>
+<tr><th>Kontonavn</th><th class="number">P&aring; konto</th><th class="number">Bokf&oslash;rt</th><th class="number">Differanse</th>
     <tbody>
         <?
         $totalSum = 0;
 
-        $query = "select v.*, a.AccountName from vat as v, accountplan as a where v.VatID < 40 and v.Percent>=0 and v.AccountPlanID=a.AccountPlanID group by v.AccountPlanID order by v.VatID";
+        $query = sprintf("
+                  select 
+                    v.*, a.AccountName 
+                  from 
+                    vat as v, 
+                    accountplan as a 
+                  where 
+                    v.VatID < 40 
+                    and v.Percent>=0 
+                    and v.AccountPlanID=a.AccountPlanID 
+                    and v.ValidFrom <= '%d-01-01'
+                    and v.ValidTo >= '%d-01-01'
+                  group by v.AccountPlanID 
+                  order by v.VatID",
+           $avst->year, $avst->year + 1);
+
         #print "$query<br />";
         $result = $_lib['db']->db_query($query);
         while($row = $_lib['db']->db_fetch_object($result))
@@ -324,6 +347,18 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
                 <tr>
                     <td><? print  $row->AccountPlanID . ' - ' . $row->AccountName . " Utg. MVA kode $row->VatID ($row->Percent%)" ?></td>
                     <td class="number"><? print $_lib['format']->Amount(($sumRow->sumin - $sumRow->sumOut)) ?></td>
+                    <td class="number"><? print $_lib['format']->Amount($account_sums['Out'.$row->AccountPlanID]) ?></td>
+                    <td class="number">
+                      <? 
+                         print $_lib['format']->Amount(
+                            ($sumRow->sumin - $sumRow->sumOut) - $account_sums['Out'.$row->AccountPlanID]
+                         ); 
+                      ?>
+                    </td>
+                    <td>
+                      <a href="<? printf('%st=mvaavstemming.view_diary&amp;AccountPlanID=%d&amp;Year=%d', 
+                               $_lib['sess']->dispatch, $row->AccountPlanID, $avst->year); ?>">Vis</a>
+                    </td>
                 </tr>
                 <?
             }
@@ -344,6 +379,18 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
                 <tr>
                     <td><? print  $row->AccountPlanID . ' - ' . $row->AccountName . " inng. MVA kode $row->VatID ($row->Percent%)" ?></td>
                     <td class="number"><? print $_lib['format']->Amount(($sumRow->sumin - $sumRow->sumOut)) ?></td>
+                    <td class="number"><? print $_lib['format']->Amount($account_sums['In'.$row->AccountPlanID]) ?></td>
+                    <td class="number">
+                      <? 
+                         print $_lib['format']->Amount(
+                             ($sumRow->sumin - $sumRow->sumOut) - $account_sums['In'.$row->AccountPlanID]
+                         ); 
+                      ?>
+                    </td>
+                    <td>
+                      <a href="<? printf('%st=mvaavstemming.view_diary&amp;AccountPlanID=%d&amp;Year=%d', 
+                               $_lib['sess']->dispatch, $row->AccountPlanID, $avst->year); ?>">Vis</a>
+                    </td>
                 </tr>
                 <?
             }

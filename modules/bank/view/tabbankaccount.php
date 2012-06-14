@@ -255,9 +255,9 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
   <tr>
     <td class="menu">Pri</td>
     <td class="menu">Bilagsnr</td>
-    <td class="menu">Dag</td>
     <td class="menu">Ut av konto</td>
     <td class="menu">Inn p&aring; konto</td>
+    <td class="menu">Dag</td>
     <td class="menu">KID</td>
     <td class="menu">Fakturanr</td>
     <td class="menu">Tekst hovedbok</td>
@@ -281,10 +281,15 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
     <td class="menu">Dato</td>
   </tr>
   <tr>
-    <td colspan="3">Saldo<? print $bank->ThisPeriod ?>-01</td>
+    <td colspan="2">Saldo<? print $bank->ThisPeriod ?>-01</td>
     <td><? print $_lib['form3']->text(array('table' => 'bankvotingperiod', 'field' => 'AmountOut', 'pk' => $bank->bankvotingperiod->BankVotingPeriodID, 'value' =>$_lib['format']->Amount($bank->bankvotingperiod->AmountOut),     'class' => 'number')) ?></td>
     <td><? print $_lib['form3']->text(array('table' => 'bankvotingperiod', 'field' => 'AmountIn',  'pk' => $bank->bankvotingperiod->BankVotingPeriodID, 'value' =>$_lib['format']->Amount($bank->bankvotingperiod->AmountIn),      'class' => 'number')) ?></td>
-    <td colspan="14" class="red">Saldo fra forrige mnd (<? print $bank->PrevPeriod ?>): <? print $_lib['format']->Amount($bank->prevbankaccountcalc->AmountSaldo) ?> <? if($bank->bankvotingperiod->AmountSaldo - $bank->prevbankaccountcalc->AmountSaldo != 0) { print "Saldo differanse " . $_lib['format']->Amount($bank->bankvotingperiod->AmountSaldo - $bank->prevbankaccountcalc->AmountSaldo); } ?></td>
+    <td colspan="14" 
+        class="<? $v = $bank->bankvotingperiod->AmountSaldo - $bank->prevbankaccountcalc->AmountSaldo; if(abs($v) < 0.00001 && abs($v) > -0.00001) print 'sub'; else print 'red';?>">
+      Saldo fra forrige mnd (<? print $bank->PrevPeriod ?>): 
+      <? print $_lib['format']->Amount($bank->prevbankaccountcalc->AmountSaldo) ?> 
+      <? print "Saldo differanse " . $_lib['format']->Amount($bank->bankvotingperiod->AmountSaldo - $bank->prevbankaccountcalc->AmountSaldo); ?>
+    </td>
     <td colspan="4" class="sub"></td>
     <td class="number sub"><? print $_lib['format']->Amount($bank->voucher->saldo) ?></td>
     <td colspan="5" class="sub"></td>
@@ -342,7 +347,6 @@ if(is_array($bank->bankaccount)) {
         <td>
             <? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'JournalID', 'pk' => $row->AccountLineID, 'value' => $row->JournalID, 'width' => 6, 'tabindex' => $tabindexH[1])); ?>
         </td>
-        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Day', 'pk' => $row->AccountLineID, 'value' => $row->Day, 'class' => 'number', 'width' => 2, 'tabindex' => $tabindexH[2])) ?></td>
         <td class="<? print $bank->CreditColor ?>">
         <? 
             if($row->AmountOut > 0)
@@ -360,6 +364,8 @@ if(is_array($bank->bankaccount)) {
     
             #print $_lib['form3']->URL(array('url' => $bank->url . '&amp;type=bank&amp;side=AmountIn&amp;searchstring=' . $row->AmountIn, 'description' => '<img src="/lib/icons/search.gif">')) ?>
         </td>
+        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Day', 'pk' => $row->AccountLineID, 'value' => $row->Day, 'class' => 'number', 'width' => 2, 'tabindex' => $tabindexH[2])) ?></td>
+
         <td <? if($row->InvoiceNumber == '' && count($row->MatchSelect) >= 1) { print " colspan=\"2\""; } ?>>
             <? 
             if($row->InvoiceNumber == '' && count($row->MatchSelect) >= 1) {
@@ -510,9 +516,10 @@ if(is_array($bank->bankvoucher_this_hash)) {
 ##############################################################################################################################
 ?>
 <tr>
-    <td colspan="3"></td>
+    <td colspan="2"></td>
     <td class="number"><? print $_lib['format']->Amount($bank->bankaccountcalc->AmountOut)  ?></td>
     <td class="number"><? print $_lib['format']->Amount($bank->bankaccountcalc->AmountIn)  ?></td>
+    <td></td>
     <td colspan="17"></td>
     <td>Sum</td>
     <td class="number"><? print $_lib['format']->Amount($bank->voucher->sumAmountIn) ?></td>
@@ -520,9 +527,10 @@ if(is_array($bank->bankvoucher_this_hash)) {
     <td colspan="3"></td>
 </tr>
 <tr>
-    <td colspan="3"></td>
+    <td colspan="2"></td>
     <td>Saldo <? print $_lib['date']->get_last_day_in_month($bank->ThisPeriod) ?></td>
     <td class="number"><? print $_lib['format']->Amount($bank->bankaccountcalc->AmountSaldo)  ?></td>
+    <td></td>
     <td colspan="17"></td>
     <td>Saldo</td>
     <td class="number"><? print $_lib['format']->Amount($bank->voucher->sumSaldo) ?></td>

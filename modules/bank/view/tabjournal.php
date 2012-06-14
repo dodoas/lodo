@@ -194,9 +194,9 @@ $warningH = array();
   <tr>
     <td class="menu">Pri</td>
     <td class="menu">Bilagsnr</td>
-    <td class="menu">Dag</td>
     <td class="menu menu-left-border">Ut av konto</td>
     <td class="menu menu-right-border">Inn p&aring; konto</td>
+    <td class="menu">Dag</td>
     <td class="menu">KID</td>
     <td class="menu">Faktura</td>
     <td class="menu">Beskrivelse</td>
@@ -212,20 +212,20 @@ $warningH = array();
     <td class="menu"></td>
   </tr>
 <tr>
-    <td colspan="2">Saldo bank <? print $_lib['date']->get_last_day_in_month($bank->ThisPeriod) ?></td>
+    <td colspan="1">Saldo bank <? print $_lib['date']->get_last_day_in_month($bank->ThisPeriod) ?></td>
     <td></td>
 <?php 
-                                                        if ($bank->bankaccountcalc->AmountSaldo < 0) {
+    if ($bank->bankaccountcalc->AmountSaldo < 0) {
 ?>
     <td class="number"><? print $_lib['format']->Amount($bank->bankaccountcalc->AmountSaldo)  ?></td>
     <td></td>
   <?php
-                                                        } else {
+    } else {
 ?>
     <td></td>
     <td class="number"><? print $_lib['format']->Amount($bank->bankaccountcalc->AmountSaldo)  ?></td>
   <?php
-                                                        }
+    }
 ?>
     <td colspan="4"></td>
     <td><input type="button" onclick="$('input[name*=accountline.Approved]').attr('checked', true)" value="OK" /></td>
@@ -373,9 +373,9 @@ if(is_array($bank->unvotedaccount)) {
       <tr class="<? print "$sec_color"; ?>">
         <td><? print $row->Priority ?></td>
            <td><? print ($bank->VoucherType . $row->JournalID) ?></td>
-        <td><? print $row->Day ?></td>
         <td class="number menu-left-border"><? if($row->AmountOut > 0) print $_lib['format']->Amount($row->AmountOut); ?></td>
         <td class="number menu-right-border"><? if($row->AmountIn > 0)  print $_lib['format']->Amount($row->AmountIn); ?></td>
+        <td><? print $row->Day ?></td>
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID',             'pk' => $row->AccountLineID, 'value' => $row->KID,               'class' => 'number', 'width' => 22)) ?></td>
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber',   'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 23)) ?></td>
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Description',     'pk' => $row->AccountLineID, 'value' => $row->Description,       'width' => 22, 'maxlength' => 255, 'tabindex' => $tabindexH[6])) ?></td>
@@ -460,7 +460,7 @@ if(is_array($bank->unvotedvoucher)) {
 </tr>
      <?php } ?>
 <tr>
-                                                                    <td class="menu" colspan="3">Saldo avstemming <? print $bank->ThisPeriod ?>-30/31</td>
+                                                                    <td class="menu" colspan="2">Saldo avstemming <? print $bank->ThisPeriod ?>-30/31</td>
     <td class="number menu-left-border"><? print $_lib['format']->Amount($bank->unvotedcalc->AmountSaldo)  ?></td>
     <td class="menu-right-border"></td>
     <td></td>
@@ -468,7 +468,7 @@ if(is_array($bank->unvotedvoucher)) {
     <td><? print $warningH['chosseaccount'] ?></td>
 </tr>
 <tr>
-    <td class="menu" colspan="3">Saldo hovedbok <? print $bank->ThisPeriod ?>-30/31</td>
+    <td class="menu" colspan="2">Saldo hovedbok <? print $bank->ThisPeriod ?>-30/31</td>
     <td class="number menu-left-border"><? print $_lib['format']->Amount($bank->voucher->sumSaldo) ?></td>
     <td class="menu-right-border"></td>
     <td></td>
@@ -477,7 +477,7 @@ if(is_array($bank->unvotedvoucher)) {
 
 </tr>
 <tr>
-    <td class="menu" colspan="3">Diff</td>
+    <td class="menu" colspan="2">Diff</td>
     <td class="number menu-left-border"><? print $_lib['format']->Amount(abs($bank->unvotedcalc->AmountSaldo - $bank->voucher->sumSaldo))  ?></td>
     <td class="menu-right-border"></td>
     <td></td>

@@ -312,7 +312,7 @@ print $_lib['sess']->doctype ?>
         <td><?
             $aconf = array();
             $aconf['name']            = 'AccountPlanID';
-	        $aconf['type'][] 		  = 'hovedbokwreskontro';
+            $aconf['type'][] 	      = 'hovedbokwreskontro';
             $aconf['tabindex']        = '';
             $aconf['accesskey']       = 'K';
             $aconf['required']        = true;
@@ -468,7 +468,7 @@ print $_lib['sess']->doctype ?>
 
 <table class="lodo_data" width="100%">
 <tr>
-	<th rowspan="4">R<br />A<br />P<br />P<br />O<br />R<br />T<br />E<br />R<br /></th>
+	<th rowspan="5">R<br />A<br />P<br />P<br />O<br />R<br />T<br />E<br />R<br /></th>
 	<td><a href="<? print $_lib['sess']->dispatch ?>t=mvaavstemming.list" target="_blank">MVA Avstemming</a></td>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=report.verify_consistency&report_Type=balancenotok&report_Sort=VoucherID" target="_blank">Bilags, balanse, resultat, reskontro, dato og periode kontroll</a></td>
 </tr>
@@ -484,6 +484,30 @@ print $_lib['sess']->doctype ?>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=varelager.list">Varelager</a></td>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=report.tellbilagrapport" target="_blank">Antall bilag og posteringer</a></td>
 </tr>
+
+<form class="voucher" name="<? print $form_name ?>" action="<? print $_lib['sess']->dispatch ?>t=mvaavstemming.view_diary" method="post" target="_blank">
+<tr class="r0">
+    <td>MVA-rapport</td>
+    <td>Konto <?
+            $aconf = array();
+            $aconf['name']            = 'AccountPlanID';
+            $aconf['type'][] 	      = 'hovedbok';
+            $aconf['tabindex']        = '';
+            $aconf['accesskey']       = 'K';
+            $aconf['required']        = true;
+            print $_lib['form3']->accountplan_number_menu($aconf);
+            ?>
+    </td>
+
+    <td>&Aring;r
+        <?
+            print $_lib['form3']->Type_menu3(array('table' => 'report', 'field' => 'Year', 'type'=>'PosibleSalaryYears', 'required'=>true, 'value' => $thisYear));
+        ?>
+    </td>
+    <td align="right"><input type="submit" name="show_report_search" value="Kj&oslash;r rapport"  class="button"></td>
+</tr>
+</form>
+
 </table>
 
 <hr>
