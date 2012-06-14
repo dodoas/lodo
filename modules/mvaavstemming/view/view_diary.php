@@ -1,6 +1,6 @@
 <?php
 
-$Year = $_REQUEST["report_Year"];
+$Year = (isset($_REQUEST["Year"]) ? $_REQUEST["Year"] :$_REQUEST["report_Year"]);
 $AccountPlanID = $_REQUEST["AccountPlanID"];
 
 $vat_query = sprintf("SELECT 
