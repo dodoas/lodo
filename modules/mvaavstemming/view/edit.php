@@ -328,10 +328,10 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
                     and v.Percent>=0 
                     and v.AccountPlanID=a.AccountPlanID 
                     and v.ValidFrom <= '%d-01-01'
-                    and v.ValidTo >= '%d-01-01'
+                    and v.ValidTo >= '%d-12-31'
                   group by v.AccountPlanID 
                   order by v.VatID",
-           $avst->year, $avst->year + 1);
+           $avst->year, $avst->year);
 
         #print "$query<br />";
         $result = $_lib['db']->db_query($query);

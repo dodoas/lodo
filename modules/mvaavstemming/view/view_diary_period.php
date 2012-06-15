@@ -11,9 +11,9 @@ $vat_query = sprintf("SELECT
                       WHERE 
                         AccountPlanID = %d
                         AND ValidFrom <= '%d-01-01'
-                        AND ValidTo >= '%d-01-01'",
+                        AND ValidTo >= '%d-12-31'",
                      $AccountPlanID,
-                     $Year, $Year+1
+                     $Year, $Year
     );
 $vat = $_lib['storage']->get_row(array('query' => $vat_query));
 
