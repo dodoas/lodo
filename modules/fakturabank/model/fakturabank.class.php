@@ -267,10 +267,12 @@ class lodo_fakturabank_fakturabank {
             
             if (!empty($invoice->FakturabankCustomerReconciliationReasonID)) {
                 $dataH['FakturabankCustomerReconciliationReasonID'] = $invoice->FakturabankCustomerReconciliationReasonID;
+                $dataH['FakturabankCustomerReconciliationReasonAmount'] = $invoice->FakturabankCustomerReconciliationReasonAmount;
             }
             
             if (!empty($invoice->FakturabankSupplierReconciliationReasonID)) {
                 $dataH['FakturabankSupplierReconciliationReasonID'] = $invoice->FakturabankSupplierReconciliationReasonID;
+                $dataH['FakturabankSupplierReconciliationReasonAmount'] = $invoice->FakturabankSupplierReconciliationReasonAmount;
             }
             
             $ret = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'fakturabankinvoicein', 'action' => $action, 'debug' => false));			
@@ -355,9 +357,11 @@ class lodo_fakturabank_fakturabank {
 
             if (!empty($invoice->FakturabankCustomerReconciliationReasonID)) {
                 $dataH['FakturabankCustomerReconciliationReasonID'] = $invoice->FakturabankCustomerReconciliationReasonID;
+                $dataH['FakturabankCustomerReconciliationReasonAmount'] = $invoice->FakturabankCustomerReconciliationReasonAmount;
             }
             if (!empty($invoice->FakturabankSupplierReconciliationReasonID)) {
                 $dataH['FakturabankSupplierReconciliationReasonID'] = $invoice->FakturabankSupplierReconciliationReasonID;
+                $dataH['FakturabankSupplierReconciliationReasonAmount'] = $invoice->FakturabankSupplierReconciliationReasonAmount;
             }
 
 			$ret = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'fakturabankinvoiceout', 'action' => $action, 'debug' => false));			
@@ -545,11 +549,13 @@ class lodo_fakturabank_fakturabank {
             }
 
             if (!empty($acc_cost_params['customerreconciliationreasonid']) && is_numeric($acc_cost_params['customerreconciliationreasonid'])) {
-                $InvoiceO->CustomerFakturabankInvoiceReconciliationReasonID = $acc_cost_params['customerreconciliationreasonid'];
+                $InvoiceO->FakturabankCustomerReconciliationReasonID = $acc_cost_params['customerreconciliationreasonid'];
+                $InvoiceO->FakturabankCustomerReconciliationReasonAmount = $acc_cost_params['customerreconciliationreasonamount'];
             }
 
             if (!empty($acc_cost_params['supplierreconciliationreasonid']) && is_numeric($acc_cost_params['supplierreconciliationreasonid'])) {
-                $InvoiceO->SupplierFakturabankInvoiceReconciliationReasonID = $acc_cost_params['supplierreconciliationreasonid'];
+                $InvoiceO->FakturabankSupplierReconciliationReasonID = $acc_cost_params['supplierreconciliationreasonid'];
+                $InvoiceO->FakturabankSupplierReconciliationReasonAmount = $acc_cost_params['supplierreconciliationreasonamount'];
             }
         }
 
@@ -739,12 +745,16 @@ class lodo_fakturabank_fakturabank {
                 $InvoiceO->Reisegarantifond = $value;
             }
 
+            error_log("modules/fakturabank/model/fakturabank.class.php-" . __LINE__ . ":acc_cost_params:" . (is_array($acc_cost_params) || is_object($acc_cost_params) ? print_r($acc_cost_params, true) : $acc_cost_params . ". <br/>\n"));
             if (!empty($acc_cost_params['customerreconciliationreasonid']) && is_numeric($acc_cost_params['customerreconciliationreasonid'])) {
                 $InvoiceO->FakturabankCustomerReconciliationReasonID = $acc_cost_params['customerreconciliationreasonid'];
+                $InvoiceO->FakturabankCustomerReconciliationReasonAmount = $acc_cost_params['customerreconciliationreasonamount'];
             }
 
             if (!empty($acc_cost_params['supplierreconciliationreasonid']) && is_numeric($acc_cost_params['supplierreconciliationreasonid'])) {
                 $InvoiceO->FakturabankSupplierReconciliationReasonID = $acc_cost_params['supplierreconciliationreasonid'];
+                $InvoiceO->FakturabankSupplierReconciliationReasonAmount = $acc_cost_params['supplierreconciliationreasonamount'];
+
             }
         }
         
