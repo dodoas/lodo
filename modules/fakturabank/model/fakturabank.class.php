@@ -745,7 +745,6 @@ class lodo_fakturabank_fakturabank {
                 $InvoiceO->Reisegarantifond = $value;
             }
 
-            error_log("modules/fakturabank/model/fakturabank.class.php-" . __LINE__ . ":acc_cost_params:" . (is_array($acc_cost_params) || is_object($acc_cost_params) ? print_r($acc_cost_params, true) : $acc_cost_params . ". <br/>\n"));
             if (!empty($acc_cost_params['customerreconciliationreasonid']) && is_numeric($acc_cost_params['customerreconciliationreasonid'])) {
                 $InvoiceO->FakturabankCustomerReconciliationReasonID = $acc_cost_params['customerreconciliationreasonid'];
                 $InvoiceO->FakturabankCustomerReconciliationReasonAmount = $acc_cost_params['customerreconciliationreasonamount'];
