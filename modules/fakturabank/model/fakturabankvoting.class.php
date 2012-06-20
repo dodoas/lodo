@@ -503,6 +503,12 @@ class lodo_fakturabank_fakturabankvoting {
             if($r)
                 return $r;
         }
+        else if($scheme_id == 'IBAN') {
+            $query = "SELECT AccountPlanID FROM accountplan WHERE IBAN = '$identity' AND AccountPlanType = '$type'";
+            $r = $_lib['storage']->get_row(array('query' => $query));
+            if($r)
+                return $r;
+        }
 
         $query = "SELECT AccountPlanID, OrgNumber FROM accountplan WHERE AccountPlanID = '$identity'";
         $accountplan = $_lib['storage']->get_row(array('query' => $query));
