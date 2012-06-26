@@ -217,10 +217,10 @@ class logic_invoicein_invoicein implements Iterator {
     }
 
     /***************************************************************************
-    * Create new incoming invoice
-    * @param None
-    * @return Current iteration
-    */
+     * Create new incoming invoice
+     * @param None
+     * @return Current iteration
+     */
     public function add() {
         $dataH['CustomerBankAccount']       = $_lib['sess']->get_companydef('BankAccount');
         $old_pattern                        = array("/[^0-9]/");
@@ -234,25 +234,26 @@ class logic_invoicein_invoicein implements Iterator {
     #update the bankaccount in accountplan.
     public function journal() {
         global $_lib, $accounting;
-
-        if(is_array($this->iteratorH)) {
-            $this->Journaled = 1; #So that we immideately list the journaled vouchers
-    
-            foreach($this->iteratorH as $InvoiceO) {
-    
-                if($InvoiceO->Journal) {
-                
-                    #print "\n\nNeste faktura\n";
-                    #print_r($InvoiceO);
-                    $countjournaled++;
         
-                    #ToBe Done: Check Payment means for codes 10, 42, 48 - and change the journaling accorging to this.    
+        if(is_array($this->iteratorH)) {
+            $this->Journaled = 1; //#So that we immideately list the journaled vouchers
+            
+            foreach($this->iteratorH as $InvoiceO) {
+                
+                if($InvoiceO->Journal) {
+                    
+                    //#print "\n\nNeste faktura\n";
+                    //#print_r($InvoiceO);
+                    $countjournaled++;
+                    
+                    //#ToBe Done: Check Payment means for codes 10, 42, 48 - and change the journaling accorging to this.    
                     $VoucherH = array();
                     $VoucherH['voucher_ExternalID']         = $InvoiceO->ExternalID;
-
+                    
                     if ($accounting->is_valid_accountperiod($InvoiceO->Period, $_lib['sess']->get_person('AccessLevel'))) {
                         $VoucherH['voucher_VoucherPeriod']      = $InvoiceO->Period;
-                    } else {
+                    } 
+                    else {
                         $first_open_period = $accounting->get_first_open_accountingperiod();
                         if ($first_open_period > $InvoiceO->Period) { // since periods are 0 preceded we can use normal string comparison
                             // first open period is later then Invoice0->Period, so use it
@@ -262,17 +263,17 @@ class logic_invoicein_invoicein implements Iterator {
                             $VoucherH['voucher_VoucherPeriod'] = $last_open_period;
                         }
                     }
-
+                    
                     $VoucherH['voucher_VoucherDate']        = $InvoiceO->InvoiceDate;
                     $VoucherH['voucher_DueDate']            = $InvoiceO->DueDate;
                     $VoucherH['voucher_EnableAutoBalance']  = 0;
                     $VoucherH['voucher_AddedByAutoBalance'] = 0;
                     $VoucherH['voucher_VoucherType']        = $InvoiceO->VoucherType;
-                    $VoucherH['voucher_AutoKID']            = 0; #Information updated automatically from KID information
-
-//$InvoiceO->DocumentCurrencyCode = 'EUR'; //DELETE
-
-                    #Foreign currency
+                    $VoucherH['voucher_AutoKID']            = 0; //#Information updated automatically from KID information
+                                                                     
+                    //$InvoiceO->DocumentCurrencyCode = 'EUR'; //DELETE
+                                                                     
+                    //#Foreign currency
                     $TotCustPrice = $InvoiceO->TotalCustPrice;
                     if ($InvoiceO->DocumentCurrencyCode != exchange::getLocalCurrency()) {
                         $TotCustPrice = exchange::convertToLocal($InvoiceO->DocumentCurrencyCode, $InvoiceO->TotalCustPrice);
@@ -280,38 +281,39 @@ class logic_invoicein_invoicein implements Iterator {
                         $VoucherH['voucher_ForeignAmount']      = (float)abs($InvoiceO->ForeignAmount); //abs($InvoiceO->TotalCustPrice);
                         $VoucherH['voucher_ForeignConvRate']    = (float)$InvoiceO->ForeignConvRate; //exchange::getConversionRate($InvoiceO->DocumentCurrencyCode);
                     }
+
                     if($InvoiceO->TotalCustPrice < 0)
                         $VoucherH['voucher_AmountIn']           = abs($InvoiceO->TotalCustPrice);
                     else
                         $VoucherH['voucher_AmountOut']          = abs($InvoiceO->TotalCustPrice);
-
+                    
                     $VoucherH['voucher_Active']             = 1;
                     $VoucherH['voucher_Description']        = "";
                     $VoucherH['voucher_AutomaticReason']    = "Fra innk faktura ID: " . $InvoiceO->ID;
-    
+                    
                     $VoucherH['voucher_KID']                = $InvoiceO->KID;
                     $VoucherH['voucher_DepartmentID']       = $InvoiceO->Department;
                     $VoucherH['voucher_ProjectID']          = $InvoiceO->Project;
                     $VoucherH['voucher_InvoiceID']          = $InvoiceO->InvoiceNumber;
                     $VoucherH['voucher_AccountPlanID']      = $InvoiceO->SupplierAccountPlanID;
-
-                    #We can not guarantee that the reserved JournalIDs is held, so we have to check before really registering the voucher
+                    
+                    //#We can not guarantee that the reserved JournalIDs is held, so we have to check before really registering the voucher
                     list($InvoiceO->JournalID) = $this->accounting->get_next_available_journalid(array('available' => true, 'update' => true, 'type' => $InvoiceO->VoucherType, 'reuse' => false, 'from' => 'Invoicein voucher'));
-                  
+                    
                     $VoucherH['voucher_JournalID']          = $InvoiceO->JournalID;
-                    #$VoucherH['voucher_JournalID']          = $InvoiceO->JournalID;
-
-                    #Update the voucherID back to the incoming invoice
-
-                    #print_r($VoucherH);
+                    //#$VoucherH['voucher_JournalID']          = $InvoiceO->JournalID;
+                    
+                    //#Update the voucherID back to the incoming invoice
+                    
+                    //#print_r($VoucherH);
                     $this->accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $InvoiceO->VoucherType, 'comment' => 'Fra invoicein'));
-            
-                    ####################################################################################
-                    #Each line has a different Vat - motkonto is from supplier
+                    
+                    //####################################################################################
+                    //#Each line has a different Vat - motkonto is from supplier
                     $query_invoiceline      = "select il.* from invoiceinline as il where il.ID='$InvoiceO->ID' and il.Active <> 0 order by il.LineID asc";
-                    #print "query_invoiceline" . $query_invoiceline . "<br>\n";
+                    //#print "query_invoiceline" . $query_invoiceline . "<br>\n";
                     $result2                = $_lib['db']->db_query($query_invoiceline);
-
+                    
                     $lines = array();
 
                     while ($line = $_lib['db']->db_fetch_object($result2)) {
@@ -319,14 +321,14 @@ class logic_invoicein_invoicein implements Iterator {
                     }
 
                     $num_lines = count($lines);
-
+                    
                     $invoice_line_sum = 0;
 
                     for ($i = 0; $i < $num_lines; $i++) {
                         $line = $lines[$i];
-
+                        
                         $last_line = ($i == $num_lines - 1) ? true : false;
-                            
+                        
                         $VoucherH['voucher_AmountIn']       = 0;
                         $VoucherH['voucher_AmountOut']      = 0;
                         $VoucherH['voucher_Vat']            = '';
@@ -334,16 +336,16 @@ class logic_invoicein_invoicein implements Iterator {
                         $VoucherH['voucher_AccountPlanID']  = 0;
                         
                         $TotalPrice = $line->QuantityDelivered * $line->UnitCustPrice;
-
+                        
                         if($line->Vat > 0) {
-                            #Add VAT to the price - since it is ex VAT
-                            #print "$line->UnitCustPrice * (($line->Vat/100) +1)";
+                            //#Add VAT to the price - since it is ex VAT
+                            //#print "$line->UnitCustPrice * (($line->Vat/100) +1)";
                             $TotalPrice = $TotalPrice * (($line->Vat/100) +1);
                             $invoice_line_sum += $TotalPrice;
                         } else {
                             $invoice_line_sum += $TotalPrice;
                         }
-
+                        
                         if ($last_line) {
                             if ($invoice_line_sum != $InvoiceO->TotalCustPrice) {
                                 if ($invoice_line_sum < $InvoiceO->TotalCustPrice) {
@@ -353,7 +355,7 @@ class logic_invoicein_invoicein implements Iterator {
                                 }
                             }
                         }
-
+                        
                         if($TotalPrice > 0) {
                             $VoucherH['voucher_AmountIn']   = abs($TotalPrice);
                             $VoucherH['voucher_AmountOut']  = 0;
@@ -362,69 +364,228 @@ class logic_invoicein_invoicein implements Iterator {
                             $VoucherH['voucher_AmountOut']  = abs($TotalPrice);
                             $VoucherH['voucher_AmountIn']   = 0;
                         }
-    
+                        
                         $VoucherH['voucher_Vat']            = $line->Vat;
-                        #$VoucherH['voucher_VatID']         = $line->VatID; Has to be mapped properly
+                        //#$VoucherH['voucher_VatID']         = $line->VatID; Has to be mapped properly
                         if($line->QuantityDelivered > 0) {
                             $VoucherH['voucher_Description']    .= round($line->QuantityDelivered,2) . 'x';
                         }
+
                         if($line->ProductNumber) {
                             $VoucherH['voucher_Description']    .= $line->ProductNumber . ':';
                         }
+
                         if($line->ProductName) {
                             $VoucherH['voucher_Description']    .= $line->ProductName;
                         }
-    
-                        #Motkonto resultat.
+                        
+                        //#Motkonto resultat.
                         $VoucherH['voucher_AccountPlanID']  = $line->AccountPlanID;
-                        #print_r($VoucherH);
+                        //#print_r($VoucherH);
                         $this->accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $InvoiceO->VoucherType, 'comment' => 'Fra fakturabank'));
                     }
+                    
+                    /* 
+                       maw 
+                       
+                       her i stroeket trengs det en fetch fra fakturabank-tabellen som fikser
+                       "reason"-linjene, f.eks. kontant fra kasse o.l.
+
+                     */
+                    $fb_query = sprintf("SELECT * FROM fakturabankinvoicein WHERE LodoID = %d", 
+                                        $InvoiceO->ID);
+                    $fb_row = $_lib['storage']->get_row(array('query' => $fb_query, 'debug' => true));
+                    $original_accountplanid = $InvoiceO->SupplierAccountPlanID;
+
+                    if($fb_row) {
+                        if($fb_row->FakturabankCustomerReconciliationReasonID) {
+                            $reasonID = $fb_row->FakturabankCustomerReconciliationReasonID;
+                            $reconciliation_amount = $fb_row->FakturabankCustomerReconciliationReasonAmount;
+
+                            $VoucherH['voucher_AmountIn']       = 0;
+                            $VoucherH['voucher_AmountOut']      = 0;
+                            $VoucherH['voucher_Vat']            = '';
+                            $VoucherH['voucher_Description']    = '';
+                            $VoucherH['voucher_AccountPlanID']  = 0;
+                            
+                            if($reasonID) {
+                                $VoucherH['voucher_Description'] = sprintf(
+                                    'Reconciliation from reason %d',
+                                    $reasonID
+                                    );
+                                
+                                $reasonQuery = sprintf(
+                                    "SELECT r.* 
+                                   FROM fakturabankinvoicereconciliationreason r,
+                                        accountplan a
+                                   WHERE r.FakturabankInvoiceReconciliationReasonID = %d
+                                     AND r.AccountPlanID = a.AccountPlanID",
+                                    $reasonID
+                                    );
+                                
+                                $reason_row = $_lib['storage']->get_row(array('query' => $reasonQuery, 'debug' => true));
+                                if(!$reason_row) {
+                                    $_lib['message']->add(sprintf("Noe galt med reconciliationreason %d", $reasonID));
+                                }
+                                else {
+                                    $VoucherH['voucher_AccountPlanID'] = $reason_row->AccountPlanID;
+                                    
+                                    if($reconciliation_amount > 0) {
+                                        $VoucherH['voucher_AmountIn']   = abs($reconciliation_amount);
+                                        $VoucherH['voucher_AmountOut']  = 0;
+                                    }
+                                    else {
+                                        $VoucherH['voucher_AmountOut']  = abs($reconciliation_amount);
+                                        $VoucherH['voucher_AmountIn']   = 0;
+                                    }            
+                                    
+                                    $this->accounting->insert_voucher_line(
+                                        array(
+                                            'post' => $VoucherH, 
+                                            'accountplanid' => $VoucherH['voucher_AccountPlanID'], 
+                                            'VoucherType'=> $InvoiceO->VoucherType, 
+                                            'comment' => 'Fra fakturabank - Reconciliation'
+                                            )
+                                        );
+
+                                    /* motpost */
+                                    $VoucherH['voucher_AccountPlanID'] = $original_accountplanid;
+                                    $tmp = $VoucherH['voucher_AmountIn'];
+                                    $VoucherH['voucher_AmountIn'] = $VoucherH['voucher_AmountOut'];
+                                    $VoucherH['voucher_AmountOut'] = $tmp;
+
+                                    $this->accounting->insert_voucher_line(
+                                        array(
+                                            'post' => $VoucherH, 
+                                            'accountplanid' => $VoucherH['voucher_AccountPlanID'], 
+                                            'VoucherType'=> $InvoiceO->VoucherType, 
+                                            'comment' => 'Fra fakturabank - Reconciliation'
+                                            )
+                                        );
+                                }
+                            }
+
+                        }
+                        
+
+                        if($fb_row->FakturabankSupplierReconciliationReasonID) {
+                            $reasonID = $fb_row->FakturabankSupplierReconciliationReasonID;
+                            $reconciliation_amount = -$fb_row->FakturabankSupplierReconciliationReasonAmount;
+
+                            if($reasonID) {
+                                $VoucherH['voucher_Description'] = sprintf(
+                                    'Reconciliation from reason %d',
+                                    $reasonID
+                                    );
+                                
+                                $reasonQuery = sprintf(
+                                    "SELECT r.* 
+                                   FROM fakturabankinvoicereconciliationreason r,
+                                        accountplan a
+                                   WHERE r.FakturabankInvoiceReconciliationReasonID = %d
+                                     AND r.AccountPlanID = a.AccountPlanID",
+                                    $reasonID
+                                    );
+                                
+                                $reason_row = $_lib['storage']->get_row(array('query' => $reasonQuery, 'debug' => true));
+                                if(!$reason_row) {
+                                    $_lib['message']->add(sprintf("Noe galt med reconciliationreason %d", $reasonID));
+                                }
+                                else {
+                                    $VoucherH['voucher_AccountPlanID'] = $reason_row->AccountPlanID;
+                                    
+                                    if($reconciliation_amount > 0) {
+                                        $VoucherH['voucher_AmountIn']   = abs($reconciliation_amount);
+                                        $VoucherH['voucher_AmountOut']  = 0;
+                                    }
+                                    else {
+                                        $VoucherH['voucher_AmountOut']  = abs($reconciliation_amount);
+                                        $VoucherH['voucher_AmountIn']   = 0;
+                                    }            
+                                    
+                                    $this->accounting->insert_voucher_line(
+                                        array(
+                                            'post' => $VoucherH, 
+                                            'accountplanid' => $VoucherH['voucher_AccountPlanID'], 
+                                            'VoucherType'=> $InvoiceO->VoucherType, 
+                                            'comment' => 'Fra fakturabank - Reconciliation'
+                                            )
+                                        );
+
+                                    /* motpost */
+                                    $VoucherH['voucher_AccountPlanID'] = $original_accountplanid;
+                                    $tmp = $VoucherH['voucher_AmountIn'];
+                                    $VoucherH['voucher_AmountIn'] = $VoucherH['voucher_AmountOut'];
+                                    $VoucherH['voucher_AmountOut'] = $tmp;
+
+                                    $this->accounting->insert_voucher_line(
+                                        array(
+                                            'post' => $VoucherH, 
+                                            'accountplanid' => $VoucherH['voucher_AccountPlanID'], 
+                                            'VoucherType'=> $InvoiceO->VoucherType, 
+                                            'comment' => 'Fra fakturabank - Reconciliation'
+                                            )
+                                        );
+                                }
+                            }
+                        }
 
 
-					# If VatID missing (which it always will be here), and we have accountplanid, and
-					# InvoiceO->InvoiceDate != "", then
-					# get VatID from account plan. This is suboptimal since we do not know if VatID
-					# matches Vat percentage from last invoiceinline, but that will have to be the 
-					# simplification to live with for now, because of time constraints.
-					if (!isset($VoucherH['voucher_VatID']) || $VoucherH['voucher_VatID'] === "" || is_null($VoucherH['Voucher_VatID'])) {
-						if (isset($VoucherH['voucher_AccountPlanID']) && is_numeric($VoucherH['voucher_AccountPlanID']) &&
-							$InvoiceO->InvoiceDate != "") {
-							$account_vatid_query = "SELECT VatID from accountplan WHERE AccountPlanID = '" . $VoucherH['voucher_AccountPlanID'] . "'";
-							if ($result = $_lib['storage']->db_query3(array('query' => $account_vatid_query))) {
-								$account_vatid_obj = $_lib['storage']->db_fetch_object($result);
-								if (!empty($account_vatid_obj)) {
-									$VAT = $accounting->get_vataccount_object(array('VatID' => $account_vatid_obj->VatID, 'date' => $InvoiceO->InvoiceDate));
-									$VoucherH['voucher_VatID'] = $VAT->VatID;								
-								}
-							}
-						}
-					}
 
+                    }
+                    
+
+                    //# If VatID missing (which it always will be here), and we have accountplanid, and
+                    //# InvoiceO->InvoiceDate != "", then
+                    //# get VatID from account plan. This is suboptimal since we do not know if VatID
+                    //# matches Vat percentage from last invoiceinline, but that will have to be the 
+                    //# simplification to live with for now, because of time constraints.
+                    if (!isset($VoucherH['voucher_VatID']) || $VoucherH['voucher_VatID'] === "" || is_null($VoucherH['Voucher_VatID'])) {
+
+                        if (isset($VoucherH['voucher_AccountPlanID']) && is_numeric($VoucherH['voucher_AccountPlanID']) &&
+                            $InvoiceO->InvoiceDate != "") {
+
+                            $account_vatid_query = "SELECT VatID from accountplan WHERE AccountPlanID = '" . $VoucherH['voucher_AccountPlanID'] . "'";
+
+                            if ($result = $_lib['storage']->db_query3(array('query' => $account_vatid_query))) {
+
+                                $account_vatid_obj = $_lib['storage']->db_fetch_object($result);
+                                if (!empty($account_vatid_obj)) {
+                                    $VAT = $accounting->get_vataccount_object(array('VatID' => $account_vatid_obj->VatID, 'date' => $InvoiceO->InvoiceDate));
+                                    $VoucherH['voucher_VatID'] = $VAT->VatID;								
+                                }
+
+                            }
+
+                        }
+
+                    }
+                    
                     $this->accounting->set_journal_motkonto(array('post' => $VoucherH, 'VoucherType' => $VoucherH['voucher_VoucherType']));
                     $this->accounting->correct_journal_balance($VoucherH, $VoucherH['voucher_JournalID'], $VoucherH['voucher_VoucherType']);
 
-                    ####################################################################################
-                    #Update invoicein to journaled
+                    //####################################################################################
+                    //#Update invoicein to journaled
                     $dataH = array();
                     $dataH['ID']        = $InvoiceO->ID;
                     $dataH['JournalID'] = $InvoiceO->JournalID;
                     $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoicein', 'debug' => false));
-    
-                    ####################################################################################
-                    #Update bankaccount on accountplan (for later usage in direkte remittering - could be punched to - 
-                    #Could be erronus i the same accountplan has more than one bank account. We just ignore it for now.
+                    
+                    //####################################################################################
+                    //#Update bankaccount on accountplan (for later usage in direkte remittering - could be punched to - 
+                    //#Could be erronus i the same accountplan has more than one bank account. We just ignore it for now.
                     if($InvoiceO->BankAccount) {
                         $dataH = array();
                         $dataH['DomesticBankAccount']   = $InvoiceO->BankAccount;
                         $dataH['AccountPlanID']         = $InvoiceO->SupplierAccountPlanID;
                         $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'accountplan', 'debug' => false));
                     }
-                } else {
+                } 
+                else {
                     print "Fakturaen er bilagsf¿rt<br>";
                 }
             }
-            $this->fill(array()); #Refresh the list after a new query - because lots of paramters get updated when journaling.
+            $this->fill(array()); //#Refresh the list after a new query - because lots of paramters get updated when journaling.
             $_lib['message']->add("$countjournaled fakturaer er bilagsf&oslash;rt");
         }
     }
