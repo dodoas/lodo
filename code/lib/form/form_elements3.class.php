@@ -62,8 +62,11 @@ class form3
       $name     = $this->MakeName($args);
       $tabindex = $this->MakeTabindex($args);
 
-      if(isset($args['disabled']) && $args['disabled'] == true)
-        $disabled="disabled";
+      if(isset($args['disabled']) && $args['disabled'] == true
+         || isset($args['readonly']) && $args['readonly'] == true)
+          $disabled="disabled";
+      else
+          $disabled="";
 
       $element = "<input type=\"hidden\" name=\"$name\" value=\"0\" tabindex=\"$tabindex\" $disabled/>\n";
       $element = " $element <input type=\"checkbox\" name=\"$name\" id=\"$name\" value=\"1\" $disabled tabindex=\"$args[tabindex]\"";
@@ -384,6 +387,12 @@ class form3
             $element .= " onClick=\"return confirm('" . $args['confirm'] . "')\"";
         }
 
+        if((isset($args['disabled']) && $args['disabled'] == true) 
+           || (isset($args['readonly']) && $args['readonly'] == true)) {
+            $element .= " disabled='disabled'";
+        }
+        
+
         $element .= " />\n";
         //print_r($args);
         if(isset($args['validation']) && $args['validation'] == 'Date' or $args['validation'] == 'Datetime')
@@ -514,8 +523,9 @@ class form3
 
         $name       = $this->MakeName($args);
         $tabindex   = $this->MakeTabindex($args);
-
-        if(isset($args['disabled'])) {
+        
+        if((isset($args['disabled']) && $args['disabled'] == true) 
+           || (isset($args['readonly']) && $args['readonly'] == true)) {
             $disabled = true;
         }
         else {
@@ -938,8 +948,8 @@ class form3
         return $element;
     }
 
-	###########################################################
-	#$args[type][] = hovedbok, reskontro, employee, balance, result, customer, supplier, hovedbokwreskontro (bare list hovedbokskontoer med reskontro), hovedbokwemployee (list hovedbok og ansatt i menyen)
+    ###########################################################
+    #$args[type][] = hovedbok, reskontro, employee, balance, result, customer, supplier, hovedbokwreskontro (bare list hovedbokskontoer med reskontro), hovedbokwemployee (list hovedbok og ansatt i menyen) 
     function accountplan_number_menu($args) {
         //print_r($args);
         global $_lib;
@@ -1046,7 +1056,16 @@ class form3
 
         $element .= "</select>\n";
 
-        $element = "<select $selectedcolor name=\"".$name."\" tabindex=\"".$args['tabindex']."\" accesskey=\"".$args['accesskey']."\" class=\"".$args['class']."\"" . $element;
+        if((isset($args['disabled']) && $args['disabled'] == true) 
+           || (isset($args['readonly']) && $args['readonly'] == true)) {
+            $disabled = "disabled='disabled'; style='color: black; background: grey;'";
+        }
+        else 
+        {
+            $disabled = "";
+        }
+
+        $element = "<select $disabled $selectedcolor name=\"".$name."\" tabindex=\"".$args['tabindex']."\" accesskey=\"".$args['accesskey']."\" class=\"".$args['class']."\"" . $element;
 
         #$_lib['db']->db_free_result($result);
         return $element;

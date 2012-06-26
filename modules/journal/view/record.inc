@@ -9,6 +9,7 @@ $AccountPlanID      = $_REQUEST['AccountPlanID'];*/
 #print "<br>\n";
 
 includelogic('voucher/voucherinput');
+
 $voucher_input      = new framework_logic_voucherinput($_REQUEST);
 
 includelogic('journal/search');
@@ -289,22 +290,28 @@ elseif(($voucher_input->action['voucher_update'] || $voucher_input->action['vouc
 
 if(($voucher_input->action['voucher_update'] or $voucher_input->action['voucher_head_update'] or $voucher_input->action['voucher_new'] or $voucher_input->action['voucher_delete'] or $voucher_input->action['voucher_head_delete']) and !$voucher_input->exit)
 {
-	#The following code has to be run for all actions that potentially changes data in the voucher.
-    #Vi mŒ korrigere balanse f¿r vi oppdaterer motkonto-. Dvs vi mŒ beregne resultatet etter at alle posteringer er postert
+    //#The following code has to be run for all actions that potentially changes data in the voucher.
+    //#Vi mŒ korrigere balanse f¿r vi oppdaterer motkonto-. Dvs vi mŒ beregne resultatet etter at alle posteringer er postert
 
-	#This will run more often now (also on delete) so it will probably be more correct. Or could it have zero data for period etc?
-    #FEIL HER?
-    $accounting->voucher_to_hovedbok_auto($voucher_input->AccountPlanID, $voucher_input->request('voucher_to_hovedbok_auto'), $voucher_input->VoucherIDOld);
+    //#This will run more often now (also on delete) so it will probably be more correct. Or could it have zero data for period etc?
+    //#FEIL HER?
+    /* Just in case... */
+    if($accounting->is_valid_accountperiod($voucher_input->VoucherPeriod, $_lib['sess']->get_person('AccessLevel'))) {
+        $accounting->voucher_to_hovedbok_auto($voucher_input->AccountPlanID, $voucher_input->request('voucher_to_hovedbok_auto'), $voucher_input->VoucherIDOld);
+        
+        $accounting->delete_credit_debit_zero_lines($voucher_input->JournalID, $voucher_input->VoucherType); //#Dette blir feil bla nŒr vi legger til ny linje
+        $accounting->correct_journal_balance($voucher_input->request('correct_journal_balance'), $voucher_input->JournalID, $voucher_input->VoucherType);
 
-    $accounting->delete_credit_debit_zero_lines($voucher_input->JournalID, $voucher_input->VoucherType); #Dette blir feil bla nŒr vi legger til ny linje
-    $accounting->correct_journal_balance($voucher_input->request('correct_journal_balance'), $voucher_input->JournalID, $voucher_input->VoucherType);
-
-    #We only do this if the user has clicked new or update
-    #################################################################################################################
-    # Automatically update motkonto resultat og balanse for perioden (Always on all changes)
-    $post = array();
-    $post['voucher_VoucherPeriod']      = $voucher_input->VoucherPeriod;
-    $accounting->set_journal_motkonto(array('post' => $post));
+        //#We only do this if the user has clicked new or update
+        //#################################################################################################################
+        //# Automatically update motkonto resultat og balanse for perioden (Always on all changes)
+        $post = array();
+        $post['voucher_VoucherPeriod']      = $voucher_input->VoucherPeriod;
+        $accounting->set_journal_motkonto(array('post' => $post));
+    }
+    else {
+        $_lib['message']->add("Lagring i stengt periode ble hindret");
+    }
 }
 
 //print_r($_REQUEST);
