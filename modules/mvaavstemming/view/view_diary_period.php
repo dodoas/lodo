@@ -172,3 +172,65 @@ function merge_keys($a1, $a2) {
     <td><b><? print $_lib['format']->Amount($diff_acc) ?></b></td>
   </tr>
 </table>
+<br />
+<fieldset>
+  <legend>10. Mistenkelige bilag</legend>
+  <table class="lodo_data">
+    <thead>
+      <tr>
+        <th class="sub">Bilagsnummer</th>
+        <th class="sub">Dato</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <?
+    
+        $query = sprintf("
+SELECT 
+  V1.JournalID, V1.VoucherType, V1.VoucherDate
+FROM
+  voucher AS V1
+  LEFT JOIN voucher AS V2 ON (V2.VoucherID = V1.AutomaticVatVoucherID)
+  LEFT JOIN voucher AS V3 ON (V3.VoucherID = V2.AutomaticVatVoucherID)
+  LEFT JOIN vat AS VAT on (VAT.VatID = V1.VatID AND VAT.ValidFrom <= V1.VoucherDate AND VAT.ValidTo >= V1.VoucherDate)
+WHERE
+  (V1.Active = 1
+   AND V1.VoucherDate >= '%s-01' AND V1.VoucherDate <= ('%s-01' + INTERVAL 1 MONTH))
+  AND 
+   ((V1.VatID != 0
+    AND V1.Vat > 0.0
+    AND V1.AmountIn + V1.AmountOut > 0.1
+    AND (
+      (V2.VoucherID IS NULL 
+         OR V2.Active = 0)
+      OR
+      (V3.VoucherID IS NULL
+         OR V3.Active = 0)
+      OR
+      (V2.AmountIn != V3.AmountOut
+        OR V2.AmountOut != V3.AmountIn)
+    ))
+  OR
+    (VAT.Percent != V1.Vat)
+  )
+", $Period, $Period);
+   
+         $res = $_lib['db']->db_query($query);   
+         while( ($row = $_lib['db']->db_fetch_assoc($res)) ) {
+      ?>
+      <tr class="BGColorLight">
+        <td>
+          <a href="<? print $_SETUP[DISPATCH]."t=journal.edit&amp;voucher_VoucherType=". $row['VoucherType'] ."&amp;voucher_JournalID=". $row['JournalID']; ?>&amp;action_journalid_search=1">
+            <? printf("%s%s", $row['VoucherType'], $row['JournalID']); ?>
+          </a>
+        </td>
+        <td><? printf("%s", $row['VoucherDate']); ?></td>
+        
+      </tr>
+      <?
+         }
+         ?>
+    </tbody>
+  </table>
+</fieldset>
