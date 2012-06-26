@@ -453,7 +453,10 @@ while($voucher = $_lib['db']->db_fetch_object($result_bad_date))
 </thead>
 <tbody>
 <?
-$query_notactive        = "select v.* from voucher as v left join  accountplan as a on a.AccountPlanID=v.AccountPlanID where a.AccountPlanID is null";
+$query_notactive        = "select v.* from voucher as v left join  accountplan as a on a.AccountPlanID=v.AccountPlanID where a.AccountPlanID is null and v.Active = 1";
+
+echo $query_notactive;
+
 $result_notactive       = $_lib['db']->db_query($query_notactive);
 while($voucher          = $_lib['db']->db_fetch_object($result_notactive))
 { ?>
