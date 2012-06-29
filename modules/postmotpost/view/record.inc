@@ -2,10 +2,12 @@
 if(isset($_REQUEST['action_postpost_update'])) {
   $primarykey = "VoucherID";
   $_lib['db']->db_update_multi_record($_POST, $db_table, $primarykey);
+  $_lib['db']->db_update_multi_record($_POST, 'vouchermatch', 'VoucherMatchID');
 }
 elseif(isset($_REQUEST['action_postmotpost_close'])) {
     #print "Lukker post mot post<br>";
-    $postmotpost->closePost($_REQUEST['MatchAccountPlanID'], $_REQUEST['MatchKid'], $_REQUEST['MatchInvoiceID']);
+    //$postmotpost->closePost($_REQUEST['MatchAccountPlanID'], $_REQUEST['MatchKid'], $_REQUEST['MatchInvoiceID']);
+    $postmotpost->closeVoucher($_REQUEST['MatchAccountPlanID'], $_REQUEST['MatchVoucherID']);
 }
 elseif(isset($_REQUEST['action_postmotpost_closeall'])) {
     $postmotpost->closeAllPosts();
@@ -15,6 +17,11 @@ elseif(isset($_REQUEST['action_postmotpost_openall'])) {
 }
 elseif(isset($_REQUEST['action_postmotpost_save_currency'])) {
     exchange::updateVoucherForeignCurrency();
+}
+else if(isset($_REQUEST['action_postmotpost_closeselected']) && isset($_REQUEST['selectedClose'])) {
+    foreach($_REQUEST['selectedClose'] as $acc) {
+        $postmotpost->closeAllPostsAccount($acc);
+    }
 }
 else {
     /*
