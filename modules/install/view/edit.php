@@ -86,7 +86,7 @@ else
 	  </tr>
       <tr>
         <td class="menu">Kontoplan oppsett</td>
-        <td><? print $_lib['form3']->radiobutton(array('table'=>'install', 'field'=>'accountplan', 'value'=>'1', 'choice'=>'1')) ?> Alle konto - <? print $_lib['form3']->radiobutton(array('table'=>'install', 'field'=>'accountplan', 'value'=>'2')) ?> NS4102
+        <td><? print $_lib['form3']->radiobutton(array('table'=>'install', 'field'=>'accountplan', 'value'=>'1')) ?> Alle konto - <? print $_lib['form3']->radiobutton(array('table'=>'install', 'field'=>'accountplan', 'value'=>'2', 'choise' => '1')) ?> NS4102
       </tr>
       <tr>
         <td class="menu">MVA</td>
@@ -98,7 +98,7 @@ else
       </tr>
       <tr>
         <td class="menu">Arbeidsgiveravgift oppsett</td>
-        <td><? print $_lib['form3']->checkbox(array('table' => 'install', 'field' => 'arbeidsgiveravgift')); ?></td>
+        <td><? print $_lib['form3']->checkbox(array('table' => 'install', 'field' => 'arbeidsgiveravgift', 'value' => '1')); ?></td>
       </tr>
       <tr>
         <td class="menu">Velg valuta</td>
@@ -122,7 +122,7 @@ foreach ($currencies as $currency) {
       </tr>
       <tr>
         <td class="menu">Valuta oppsett</td>
-                                                                                                                     <td><? print $_lib['form3']->checkbox(array('table' => 'install', 'field' => 'exchange')); ?></td>
+        <td><? print $_lib['form3']->checkbox(array('table' => 'install', 'field' => 'exchange')); ?></td>
       </tr>
       <tr>
         <td class="menu">Prosjekt oppsett</td>
@@ -217,23 +217,23 @@ foreach ($currencies as $currency) {
       </tr>
       <tr>
         <td class="menu">Fornavn</td>
-        <td><? print $_lib['form3']->text(array('name' => 'FirstName', 'width' => '40')); ?></td>
+        <td><? print $_lib['form3']->text(array('name' => 'FirstName', 'width' => '40', 'value' => 'Marit')); ?></td>
       </tr>
       <tr>
         <td class="menu">Etternavn</td>
-        <td><? print $_lib['form3']->text(array('name' => 'LastName', 'width' => '40')); ?></td>
+        <td><? print $_lib['form3']->text(array('name' => 'LastName', 'width' => '40', 'value' => 'Telhaug')); ?></td>
       </tr>
       <tr>
         <td class="menu">Mobil</td>
-        <td><? print $_lib['form3']->text(array('name' => 'MobilePhoneNumber', 'width' => '40')); ?></td>
+        <td><? print $_lib['form3']->text(array('name' => 'MobilePhoneNumber', 'width' => '40', 'value' => '41459353')); ?></td>
       </tr>
       <tr>
         <td class="menu">E-Post - blir brukt som brukernavn</td>
-        <td><? print $_lib['form3']->text(array('name' => 'Email', 'width' => '40')); ?></td>
+        <td><? print $_lib['form3']->text(array('name' => 'Email', 'width' => '40', 'value' => 'marit@telhaug.no')); ?></td>
       </tr>
       <tr>
         <td class="menu">Passord</td>
-        <td><? print $_lib['form3']->password(array('name' => 'Password', 'width' => '40')); ?></td>
+        <td><? print $_lib['form3']->password(array('name' => 'Password', 'width' => '40', 'value' => '1')); ?></td>
       </tr>
       <? } ?>
       <tr>
