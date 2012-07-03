@@ -1084,6 +1084,7 @@ class lodo_fakturabank_fakturabankvoting {
 			$dataH['KID'] = $transaction->kid;
 			$dataH['InvoiceNumber'] = $transaction->invoiceno;
 			$dataH['IsSplit'] = $transaction->{"is-split"};
+			$dataH['ParentID'] = $transaction->{"parent-id"};
 			$dataH['CounterpartName'] = $transaction->{"counterpart-name"};
 
 			$dataH['TransactionBatchId'] = $transaction->{"transaction-batch-id"};
