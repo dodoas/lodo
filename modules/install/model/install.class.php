@@ -197,7 +197,31 @@ class Install
 
         #print insert role
         #print "Setter inn rolle<br>";
-        $query = "insert into company set CompanyID=1, CreatedDate=NOW(), ValidFrom=NOW(), CompanyName='" . $args['installation_VName']. "', VName='" . $args['installation_VName']. "', VAddress='" . $args['installation_VAddress']. "', VZipCode='" . $args['installation_VZipCode']. "', VCity='" . $args['installation_VCity']. "', Phone='" . $args['installation_Phone']. "', Fax='" . $args['installation_Fax']. "', WWW='" . $args['installation_WWW']. "', OrgNumber='" . $args['installation_CompanyNumber']. "'";
+        $query = "
+insert 
+into company 
+set 
+CompanyID=1, 
+CreatedDate=NOW(), 
+ValidFrom=NOW(), 
+
+CompanyName='" . $args['installation_VName']. "', 
+VName='" . $args['installation_VName']. "', 
+VAddress='" . $args['installation_VAddress']. "', 
+VZipCode='" . $args['installation_VZipCode']. "', 
+VCity='" . $args['installation_VCity']. "', 
+
+IName='" . $args['installation_VName']. "', 
+IAddress='" . $args['installation_VAddress']. "', 
+IZipCode='" . $args['installation_VZipCode']. "', 
+ICity='" . $args['installation_VCity']. "', 
+ICountryCode='NO',
+InvoiceCommentCustomerPosition='top',
+
+Phone='" . $args['installation_Phone']. "', 
+Fax='" . $args['installation_Fax']. "', 
+WWW='" . $args['installation_WWW']. "', 
+OrgNumber='" . $args['installation_CompanyNumber']. "'";
         if($this->debug) print "$query<br>\n";
         $this->_dbh[$this->dsn_remote]->db_insert2(array('query' => $query, 'insert_id' => false));
 

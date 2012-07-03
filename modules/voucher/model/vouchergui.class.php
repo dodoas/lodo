@@ -41,8 +41,8 @@ class framework_logic_vouchergui
     * @param
     * @return
     */
-    #Vat fields in posteringslinjer
-    function vat($voucher, $accountplan, $VAT, $oldVatID, $VatID, $VatPercent) {
+    //#Vat fields in posteringslinjer
+    function vat($voucher, $accountplan, $VAT, $oldVatID, $VatID, $VatPercent, $closed = false) {
         global $_lib;
         $html = '';
      
@@ -50,8 +50,7 @@ class framework_logic_vouchergui
         {
             if($accountplan->EnableVATOverride or $VAT->EnableVatOverride)
             {
-                
-                $html .= $VatID . ' ' . '<nobr>' . $_lib['form3']->text(array('name' => 'voucher.Vat', 'value' => $VatPercent, 'class' => 'voucher', 'width' => '4', 'tabindex' => $tabindex++, 'accesskey' => 'M')) . '%</nobr>';
+                $html .= $VatID . ' ' . '<nobr>' . $_lib['form3']->text(array('name' => 'voucher.Vat', 'value' => $VatPercent, 'class' => 'voucher', 'width' => '4', 'tabindex' => $tabindex++, 'accesskey' => 'M', 'readonly' => $closed)) . '%</nobr>';
                 $html .= $_lib['form3']->hidden(array('name' => 'voucher.VatID', 'value' => $VatID));
                 $html .= $_lib['form3']->hidden(array('name' => 'voucher.VatOld',   'value' => $VatPercent));
                 $html .= $_lib['form3']->hidden(array('name' => 'voucher.VatIDOld', 'value' => $VatID));
@@ -176,8 +175,8 @@ class framework_logic_vouchergui
     * @param
     * @return
     */
-    #Print accout menu on line
-    function account($VoucherPeriod, $new, $db_table, $voucher, $AccountPlanID, $autosubmit) {
+    //#Print accout menu on line
+    function account($VoucherPeriod, $new, $db_table, $voucher, $AccountPlanID, $autosubmit, $disabled = false) {
         global $_lib, $accounting, $tabindex;
         $html = '';
 
@@ -194,6 +193,7 @@ class framework_logic_vouchergui
                 $aconf['type'][]        = 'reskontro';
                 $aconf['type'][]        = 'hovedbok';
                 $aconf['type'][]        = 'employee';
+                $aconf['disabled']      = $disabled;
                 $html .=  $_lib['form3']->accountplan_number_menu($aconf);
             } else {
                 $acctmp = $accounting->get_accountplan_object($AccountPlanID);
@@ -211,13 +211,13 @@ class framework_logic_vouchergui
     * @param
     * @return
     */
-    #Print credit/debit fields in td menu on line
-    function creditdebitfield($AmountField, $accountplan, $AmountIn, $AmountOut) {
+    //#Print credit/debit fields in td menu on line
+    function creditdebitfield($AmountField, $accountplan, $AmountIn, $AmountOut, $closed = false) {
         global $_lib, $tabindex;
         $html = '<td class="' . $accountplan->DebitColor . '">';
         $tabindexin  = '';
         $tabindexout = '';
-        if($accountplan->EnableCurrency) { #Not possibel to edit in and out when currency is enabled
+        if($accountplan->EnableCurrency || $closed) { #Not possibel to edit in and out when currency is enabled
           $readonly = "readonly disable";
         } else {
           if($AmountField == 'in')

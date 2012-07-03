@@ -89,8 +89,8 @@ $new_pattern    = array("_", "_", "");
 $InstallName    = strtoupper(preg_replace($old_pattern, $new_pattern , (string) $xml->firma)); 
 
 $dataH['InstallName']       = $InstallName; #regexp
-$dataH['DealerName']        = 'Akademikernes Servicesenter AS';
-$dataH['DealerEmail']       = 'support@konsulentvikaren.no';
+$dataH['DealerName']        = 'Marit Telhaug';
+$dataH['DealerEmail']       = 'support@lodo.no';
 $dataH['VName']             = (string) $xml->firma;
 $dataH['VAddress']          = (string) $xml->adresse;
 $dataH['VCity']             = (string) $xml->sted;

@@ -453,7 +453,8 @@ while($voucher = $_lib['db']->db_fetch_object($result_bad_date))
 </thead>
 <tbody>
 <?
-$query_notactive        = "select v.* from voucher as v left join  accountplan as a on a.AccountPlanID=v.AccountPlanID where a.AccountPlanID is null";
+$query_notactive        = "select v.* from voucher as v left join  accountplan as a on a.AccountPlanID=v.AccountPlanID where a.AccountPlanID is null and v.Active = 1";
+
 $result_notactive       = $_lib['db']->db_query($query_notactive);
 while($voucher          = $_lib['db']->db_fetch_object($result_notactive))
 { ?>
@@ -535,9 +536,12 @@ FROM
   voucher AS V1
   LEFT JOIN voucher AS V2 ON (V2.VoucherID = V1.AutomaticVatVoucherID)
   LEFT JOIN voucher AS V3 ON (V3.VoucherID = V2.AutomaticVatVoucherID)
+  LEFT JOIN vat AS VAT on (VAT.VatID = V1.VatID AND VAT.ValidFrom <= V1.VoucherDate AND VAT.ValidTo >= V1.VoucherDate)
 WHERE
   V1.Active = 1
-  AND V1.VatID != 0
+  AND 
+
+  (V1.VatID != 0
   AND V1.Vat > 0.0
   AND V1.AmountIn + V1.AmountOut > 0.1
   AND (
@@ -549,7 +553,9 @@ WHERE
     OR
     (V2.AmountIn != V3.AmountOut
       OR V2.AmountOut != V3.AmountIn)
-  )
+  ))
+  OR
+  (VAT.Percent != V1.Vat)
 ";
    
          $res = $_lib['db']->db_query($query);   

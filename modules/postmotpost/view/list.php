@@ -98,6 +98,7 @@ if(count($postmotpost->voucherH) > 0)
                 <th class="sub">Forfall</th>
                 <th class="sub">Tekst</th>
                 <th class="sub">KID</th>
+                <th class="sub">MatchNummer</th>
                 <th class="sub">Fakturanr</th>
                 <th class="sub"></th>
                 <th class="sub noprint"></th>
@@ -176,15 +177,20 @@ if(count($postmotpost->voucherH) > 0)
                         <td class="<? print $class ?>"><? print $_lib['form3']->text(array('table'=>'voucher', 'field'=>'KID', 'pk' => $voucher->VoucherID, 'value' => $voucher->KID, 'width' => 22)); ?></td>
                         <td class="<? print $class ?>"><? print $_lib['form3']->text(array('table'=>'voucher', 'field'=>'InvoiceID', 'pk' => $voucher->VoucherID, 'value' => $voucher->InvoiceID, 'width' => 22)); ?></td>
                         <td class="<? print $class ?>">
+                          <? print $_lib['form3']->text(array('table'=>'vouchermatch', 'field'=>'MatchNumber', 'pk' => $voucher->VoucherMatchID, 'value' => $voucher->MatchNumber, 'width' => 22)); ?>
+                        </td>
+                        <td class="<? print $class ?>">
                         	<?
-                        	if($postmotpost->isCloseAble($AccountPlanID, $voucher->KID, $voucher->InvoiceID)) {
+                                   if($postmotpost->isCloseAbleVoucher($voucher->VoucherID)) {
                                     $closeable++;
                                     
-                                    print $_lib['form3']->button(array('url'=>$_SETUP['DISPATCH']."t=postmotpost.list&amp;MatchAccountPlanID=$voucher->AccountPlanID&amp;MatchKid=$voucher->KID&amp;MatchInvoiceID=$voucher->InvoiceID&amp;AccountPlanID=$postmotpost->AccountPlanID&amp;action_postmotpost_close=1", 'name'=>'Lukk')); 
+                                    print $_lib['form3']->button(array('url'=>$_SETUP['DISPATCH']."t=postmotpost.list&amp;MatchAccountPlanID=$voucher->AccountPlanID&amp;MatchKid=$voucher->KID&amp;MatchVoucherID=$voucher->VoucherID&amp;MatchInvoiceID=$voucher->InvoiceID&amp;AccountPlanID=$postmotpost->AccountPlanID&amp;action_postmotpost_close=1", 'name'=>'Lukk')); 
                                 } else {
                                     print $_lib['format']->Amount($postmotpost->getDiff($AccountPlanID, $voucher->KID, $voucher->InvoiceID));
                                 }
                                 ?>
+
+                                <? echo $postmotpost->voucherMessage($voucher->VoucherID); ?>
                         </td>
                         <td class="noprint"><? print $_lib['form3']->button(array('url'=> $_lib['sess']->dispatch ."t=postmotpost.list&AccountPlanID=" . $postmotpost->AccountPlanID . "&amp;MatchAccountPlanID=" . $voucher->AccountPlanID . "&amp;MatchKID=" . $voucher->KID, 'name'=>'Vis samme kid')) ?></td>
                     </tr>
@@ -194,6 +200,7 @@ if(count($postmotpost->voucherH) > 0)
             <tr>
               <td colspan="18">
               <td colspan="6">
+                <input type="checkbox" name="selectedClose[]" value="<? echo $AccountPlanID; ?>">
                <?
                  if($closeable) {
                      print $_lib['form3']->submit(
@@ -250,6 +257,7 @@ if(count($postmotpost->voucherH) > 0)
                 <? print $_lib['form3']->submit(array('name'=>'action_postpost_update', 'value'=>'Lagre (S)', 'accesskey' => 'S')) ?>
                 <? if($_lib['sess']->get_person('AccessLevel') >= 3) { print $_lib['form3']->submit(array('name' => 'action_postmotpost_openall', 'value'=>'&Aring;pne alle (L)', 'accesskey' => 'O')); } ?> 
                 <? print $_lib['form3']->submit(array('name' => 'action_postmotpost_closeall', 'value'=>'Lukk alle (L)', 'accesskey' => 'L')) ?>
+                <? print $_lib['form3']->submit(array('name' => 'action_postmotpost_closeselected', 'value'=>'Lukk utvalgte (R)', 'accesskey' => 'R')) ?>
 
                 </th>
             </tr>

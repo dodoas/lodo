@@ -1,10 +1,16 @@
 <?
 class postmotpost {
 
-    public  $sum;                       # Total sum
-    public  $sumaccountH    = array();  # Sum pr konto
-    public  $voucherH       = array();  # All open vouchers
-    public  $matchH         = array();  # All matches on KID and Invoice
+    public  $sum;                       //# Total sum
+    public  $sumaccountH    = array();  //# Sum pr konto
+    public  $voucherH       = array();  //# All open vouchers
+    public  $matchH         = array();  //# All matches on KID and Invoice
+    
+    
+    private $matched        = array(); // Matched vouchers - closable
+    private $journalMessages= array(); // Message for each voucher - misleading name
+    private $closeAgainst   = array(); // Map of all vochers closed against eachother ie m5(vocuher1 . "#" . voucher2)
+    private $closedVouchers = array(); // Vouchers closed while running the close algorithm
 
     private $_reference     = "";
     private $_sumIn         = 0;
@@ -41,7 +47,7 @@ class postmotpost {
     }
 
     /***************************************************************************
-    * Funkjson som finner ï¿½pne poster (linjer) med oppgitt KID
+    * Funkjson som finner $(B~A)I½(Bpne poster (linjer) med oppgitt KID-A
     * kid = KID to search for
     * JournalID = The JournalID you are searching from
     */
@@ -68,7 +74,7 @@ class postmotpost {
               a.EnableReskontro=0 and 
               v.Active=1 
             order by VoucherStructID asc";
-            #print "pne poster (derfor is null sjekk): $query_open_voucher<br>\n";
+            #print "$(B!Q(Bne poster (derfor is null sjekk): $query_open_voucher<br>\n";
             $open_voucher_result = $_lib['db']->db_query($query_open_voucher);
 
             while($voucherH = $_lib['db']->db_fetch_assoc($open_voucher_result)) {
@@ -99,7 +105,7 @@ class postmotpost {
     }
 
     /***************************************************************************
-    * Funksjon som finner reskontroen i en open_voucherH, og returnerer Amount + Accountplan som skal fï¿½res mot KID
+    * Funksjon som finner reskontroen i en open_voucherH, og returnerer Amount + Accountplan som skal f$(B~A)I½(Bres mot KID-A
     */
     function getKIDInfo($open_voucherH) {
         global $_lib, $accounting;
@@ -179,11 +185,19 @@ class postmotpost {
 
             $where .= " A.AccountPlanType='" . $accountplan->ReskontroAccountPlanType . "' and ";
 
-            $query_voucher      = "select V.* from accountplan A, voucher V left join voucherstruct as VS on VS.ParentVoucherID=V.VoucherID or VS.ChildVoucherID=V.VoucherID 
-            where V.Active=1 and V.AccountPlanID=A.AccountPlanID and 
-            A.EnablePostPost=1
-            and $where $whereextra (VS.Closed is NULL or VS.Closed=0) 
-            order by V.AccountPlanID asc, V.VoucherPeriod asc, V.VoucherDate asc, V.VoucherID asc";
+            $query_voucher      = 
+                "select V.*, M.VoucherMatchID, M.MatchNumber from 
+                   accountplan A, 
+                   voucher V 
+                   left join voucherstruct as VS on VS.ParentVoucherID=V.VoucherID or VS.ChildVoucherID=V.VoucherID  
+                   left join vouchermatch as M on M.VoucherID = V.VoucherID
+                 where 
+                   V.Active=1 
+                   and V.AccountPlanID=A.AccountPlanID 
+                   and A.EnablePostPost=1
+                   and $where $whereextra (VS.Closed is NULL or VS.Closed=0) 
+                   order by V.AccountPlanID asc, V.VoucherPeriod asc, V.VoucherDate asc, V.VoucherID asc";
+
             #$vouchers          = $_lib['db']->get_hashhash(array('query' => $query_voucher, 'key'=>'VoucherID'));
             #print "$query_voucher<br>\n";
 
@@ -200,10 +214,28 @@ class postmotpost {
 
                 if($voucher->KID       && !$this->matchH[$AccountPlanID]['KID'][$voucher->KID]) {
                     $this->matchH[$AccountPlanID]['KID'][$voucher->KID] = 0;
+                    $this->matchH[$AccountPlanID]['KIDJournals'][$voucher->KID] = array();
                 }
                 if($voucher->InvoiceID && !$this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID]) {
                     $this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID] = 0;
+                    $this->matchH[$AccountPlanID]['InvoiceIDJournals'][$voucher->InvoiceID] = array();
                 }
+
+                // if there is no join on VoucherMatchID, create one
+                if(!$voucher->VoucherMatchID) {
+                    $_lib['db']->db_query(
+                        sprintf("INSERT INTO vouchermatch (`VoucherID`, `MatchNumber`) VALUES (%d, 0);",
+                                $voucher->VoucherID)
+                        );
+                    $voucher->VoucherMatchID = $_lib['db']->db_insert_id();
+                    $voucher->MatchNumber = 0;
+                }
+
+                if($voucher->MatchNumber && !$this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber]) {
+                    $this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber] = 0;
+                    $this->matchH[$AccountPlanID]['MatchNumberJournals'][$voucher->MatchNumber] = array();
+                }
+                
 
                 /*******************************************************************
                 * Total sum for the loop
@@ -234,11 +266,33 @@ class postmotpost {
                 #$calc = ($voucher->AmountIn - $voucher->AmountOut);
 
                 if($voucher->KID) {
-                    $this->matchH[$AccountPlanID]['KID'][$voucher->KID]             = round($this->matchH[$AccountPlanID]['KID'][$voucher->KID], 3) + ($voucher->AmountIn - $voucher->AmountOut);
+                    $this->matchH[$AccountPlanID]['KID'][$voucher->KID]             
+                        = round($this->matchH[$AccountPlanID]['KID'][$voucher->KID], 3) + ($voucher->AmountIn - $voucher->AmountOut);
+
+                    $this->matchH[$AccountPlanID]['KIDJournals'][$voucher->KID][] = array(
+                        'JournalID' => $voucher->JournalID,
+                        'VoucherID' => $voucher->VoucherID
+                        );
                 }
                 if($voucher->InvoiceID) {
-                    $this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID] = round($this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID], 3) + ($voucher->AmountIn - $voucher->AmountOut);
+                    $this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID] = 
+                        round($this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID], 3) + ($voucher->AmountIn - $voucher->AmountOut);
+
+                    $this->matchH[$AccountPlanID]['InvoiceIDJournals'][$voucher->InvoiceID][] = array(
+                        'JournalID' => $voucher->JournalID,
+                        'VoucherID' => $voucher->VoucherID
+                        );
                 }
+                if($voucher->MatchNumber) {
+                    $this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber] = 
+                        round($this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber], 3) + ($voucher->AmountIn - $voucher->AmountOut);
+
+                    $this->matchH[$AccountPlanID]['MatchNumberJournals'][$voucher->MatchNumber][] = array(
+                        'JournalID' => $voucher->JournalID,
+                        'VoucherID' => $voucher->VoucherID
+                        );
+                }
+                
 
                 #print $this->matchH[$AccountPlanID]['KID']; print "<br>";
 
@@ -247,6 +301,8 @@ class postmotpost {
                 */
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->AccountPlanID     = $voucher->AccountPlanID;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->JournalID         = $voucher->JournalID;
+                $this->voucherH[$AccountPlanID][$voucher->VoucherID]->VoucherMatchID    = $voucher->VoucherMatchID;
+                $this->voucherH[$AccountPlanID][$voucher->VoucherID]->MatchNumber       = $voucher->MatchNumber;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->VoucherDate       = $voucher->VoucherDate;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->VoucherPeriod     = $voucher->VoucherPeriod;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->VoucherType       = $voucher->VoucherType;
@@ -271,7 +327,7 @@ class postmotpost {
             }
 
             /***************************************************************
-            * Account sum - Dette er det som faktisk er registrert pï¿½ hovedbokskontoen
+            * Account sum - Dette er det som faktisk er registrert p$(B~A)I½(B hovedbokskontoen-A
             */
             $query_saldo = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout, sum(V.ForeignAmountIn) as fsumin, sum(V.ForeignAmountOut) as fsumout from voucher as V where V.AccountPlanID = '" . $this->AccountPlanID . "' and $whereextra V.Active=1 ";
             #print "XX: $query_saldo<br>\n";
@@ -303,8 +359,8 @@ class postmotpost {
             $this->total['total']->FDiff    = $this->total['total']->FAmountIn  - $this->total['total']->FAmountOut;
 
             /***************************************************************
-            * Calculate diff - dette er for ï¿½ finne om det er en differenase mellom reskontro og hovedbok pï¿½ sumn
-            * Hvis det er en differanse, sï¿½ er det feil.
+            * Calculate diff - dette er for $(B~A)I½(B finne om det er en differenase mellom reskontro og hovedbok p$(B~A½(B sumn-A
+            * Hvis det er en differanse, s$(B~A)I½(B er det feil.-A
             */
             $this->total['diff']->Name       = 'Differanse';
             $this->total['diff']->AmountIn   = $this->total['account']->AmountIn    - $this->total['total']->AmountIn;
@@ -323,8 +379,71 @@ class postmotpost {
         {
           print "Ingen kontoer er valgt<br>";
         }
+
+        // for each account
+        //   for each P in (InvoiceID, KID, MatchNumber)
+        //      for each sum equal to 0 of matches on P
+        //         if none of the vouchers in the sum is already used
+        //            mark all of the vouchers in the sum as used
         
-        #print_r($this->matchH);
+        $matchOrder = array("InvoiceID", "KID", "MatchNumber");
+
+        // for each account
+        foreach($this->matchH as $AccountPlanID => $matches) {
+            // for each P in (InvoiceID, KID)
+            foreach($matchOrder as $prefix) {
+
+                // for each sum equal to 0 of matches on P (prefix)
+                if(!isset($this->matchH[$AccountPlanID][$prefix]))
+                    continue;
+
+                foreach($this->matchH[$AccountPlanID][$prefix] as $k => $v) {
+                    if(isset($this->matchH[$AccountPlanID][$prefix][$k]) 
+                       && round($this->matchH[$AccountPlanID][$prefix][$k], 2) == 0) {
+
+                        // if none of the journals in the sum is already used
+                        $used = false;
+                        $s = "";
+                        foreach($this->matchH[$AccountPlanID][$prefix."Journals"][$k] as $info) {
+                            $journal = $info['JournalID'];
+                            $voucher = $info['VoucherID'];
+
+                            if(in_array($voucher, $this->matched)) {
+                                $used = true;
+                            }
+                            $s .= $journal . " ";
+                        }
+
+                        if($used === false) {
+                            // mark all of the vouchers in the sum as used
+                            foreach($this->matchH[$AccountPlanID][$prefix."Journals"][$k] as $info) {
+                                $journal = $info['JournalID'];
+                                $voucher = $info['VoucherID'];
+                                $this->matched[] = $voucher;
+                                $this->journalMessages[$voucher] .= "$prefix ( $s)";
+                                $this->closeAgainst[$voucher] = $this->matchH[$AccountPlanID][$prefix."Journals"][$k];
+                            }
+                        }
+                        else {
+                            foreach($this->matchH[$AccountPlanID][$prefix."Journals"][$k] as $info) {
+                                $journal = $info['JournalID'];
+                                $voucher = $info['VoucherID'];
+
+                                if(!in_array($voucher, $this->matched)) {
+                                    $used = true;
+                                    $this->journalMessages[$voucher] .= "Dobbelmatch$prefix ( $s)";
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
+
+        
+        //echo "<pre>"; print_r($this->matchH);
     }
 
     /***************************************************************************
@@ -352,6 +471,15 @@ class postmotpost {
 
         return $success;
     }
+
+    function isCloseAbleVoucher($VoucherID) {
+        return in_array($VoucherID, $this->matched);
+    }
+
+    function voucherMessage($VoucherID) {
+        return $this->journalMessages[$VoucherID];
+    }
+
 
     /***************************************************************************
     * @Function that returns the KID or InvoiceID diff
@@ -417,7 +545,7 @@ class postmotpost {
         
         #print "closePost: AccountPlanID: $matchAccountPlanID, KID: $KID, InvoiceID: $InvoiceID<br>\n";
         
-        #Skulle vi ha joinet slik at vi ikke kan finne en linje med samme kid, hvis kid er gjenbrukt pï¿½ samme konto? TE 2005-11-11
+        #Skulle vi ha joinet slik at vi ikke kan finne en linje med samme kid, hvis kid er gjenbrukt p$(B~A)I½(B samme konto? TE 2005-11-11-A
         #Dvs ikke ta med tidligere lukkede KID/Fakturanummer.
         if($KID && $balance != 0) {
             $query_voucher = "select * from voucher where AccountPlanID='".$matchAccountPlanID."' and KID = '".$KID."' and Active=1 order by VoucherDate desc"; #Order by to always choose the newest if more than one
@@ -459,6 +587,29 @@ class postmotpost {
                     }
                 }
             }
+        }
+    }
+
+    function closeVoucher($AccountPlanID, $VoucherID) {
+        foreach($this->closeAgainst[$VoucherID] as $info) {
+            $VoucherID2 = $info['VoucherID'];
+            
+            // do not close against self
+            if($VoucherID2 == $VoucherID) 
+                continue;
+            
+            $hash1 = md5($VoucherID . "#" . $VoucherID2);
+            $hash2 = md5($VoucherID2 . "#" . $VoucherID);
+
+            // do not reclose posts
+            if(isset($this->closedPosts[$hash1]) || isset($this->closedPosts[$hash2]))
+                continue;
+
+            /* register as closed */
+            $this->closedPosts[$hash1] = true;
+            $this->closedPosts[$hash2] = true;
+
+            $this->closePostSQL($VoucherID, $VoucherID2);
         }
     }
 
@@ -537,8 +688,7 @@ class postmotpost {
         $account = $this->voucherH[$AccountPlanID];
         
         foreach($account as $voucher) {
-            if($this->isCloseAble($AccountPlanID, $voucher->KID, $voucher->InvoiceID)) {
-                
+            if($this->isCloseAbleVoucher($voucher->VoucherID)) {
                 #print "Kan lukkes: AccountPlanID: $AccountPlanID<br>\n";
                 #print_r($account);
                 
@@ -546,6 +696,7 @@ class postmotpost {
                 $close->matchAccountPlanID  = $voucher->AccountPlanID;
                 $close->matchKid            = $voucher->KID;
                 $close->matchInvoiceID      = $voucher->InvoiceID;
+                $close->VoucherID           = $voucher->VoucherID;
                 $close->AccountPlanID       = $this->AccountPlanID;
                 $closeableH[]               = $close;
             }
@@ -554,7 +705,8 @@ class postmotpost {
         $_lib['message']->add("Lukker " . count($closeableH) . " bilag p&aring; $AccountPlanID som g&aring;r i null");
         if(count($closeableH)) {
             foreach($closeableH as $close) {
-                $this->closePost($close->matchAccountPlanID, $close->matchKid, $close->matchInvoiceID);
+                //$this->closePost($close->matchAccountPlanID, $close->matchKid, $close->matchInvoiceID);
+                $this->closeVoucher($close->matchAccountPlanID, $close->VoucherID);
             }
         }
     }
@@ -571,7 +723,8 @@ class postmotpost {
             foreach($this->voucherH as $AccountPlanID => $account) {
                 foreach($account as $voucher) {
 
-                    if($this->isCloseAble($AccountPlanID, $voucher->KID, $voucher->InvoiceID)) {
+                    //if($this->isCloseAble($AccountPlanID, $voucher->KID, $voucher->InvoiceID)) {
+                    if($this->isCloseAbleVoucher($this->VoucherID)) {
                         
                         #print "Kan lukkes: AccountPlanID: $AccountPlanID<br>\n";
                         #print_r($account);
@@ -581,9 +734,10 @@ class postmotpost {
                         $close->matchAccountPlanID  = $voucher->AccountPlanID;
                         $close->matchKid            = $voucher->KID;
                         $close->matchInvoiceID      = $voucher->InvoiceID;
+                        $close->VoucherID           = $voucher->VoucherID;
                         $close->AccountPlanID       = $this->AccountPlanID;
                         $closeableH[]               = $close;
-				    }
+                    }
                 }
             }
         }
@@ -595,7 +749,8 @@ class postmotpost {
             foreach($closeableH as $close) {
                 #$_lib['message']->add("Lukker: $close->matchAccountPlanID, KID: $close->matchKID, Fnr: $close->matchInvoiceID");
                 #print("Lukker: $close->matchAccountPlanID, KID: $close->matchKid, Fnr: $close->matchInvoiceID<br>\n");
-                $this->closePost($close->matchAccountPlanID, $close->matchKid, $close->matchInvoiceID);
+                //$this->closePost($close->matchAccountPlanID, $close->matchKid, $close->matchInvoiceID);
+                $this->closeVoucher($close->matchAccountPlanID, $close->VoucherID);
             }
         }
         

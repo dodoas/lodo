@@ -38,7 +38,7 @@ if($_REQUEST['action_accountperiod_update'])
             $sql_check_period = "select Status from $db_table where $primarykey=$pk_new";
             $row = $_lib['storage']->get_row(array('query' => $sql_check_period));
 
-            if($value > $row->Status)
+            if(($value > $row->Status) or $_lib['sess']->get_person('AccessLevel') >= 4)
             {
                 if($key)
                 {
