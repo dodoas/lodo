@@ -57,7 +57,7 @@ $result_vat = $_lib['db']->db_query($query_vat);
                 <? } ?>
                 </td>
                 <td>
-                <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
+                <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
                   <input type="submit" name="action_arbeidsgiveravgift_delete" value="Slett" accesskey="D" />
                 <? } ?>
                 </td>
