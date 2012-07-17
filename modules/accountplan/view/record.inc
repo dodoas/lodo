@@ -104,29 +104,38 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
             /* Create a new salaryconfig for an employee based on the hovedmal (Id:1) */
             $query = "SELECT * FROM salaryconfline WHERE SalaryConfID = 1";
             $hovedmal = $_lib['db']->get_arrayrow(array('query' => $query));
+
+            $query = "SELECT * FROM salaryconfline WHERE SalaryConfID = 1";
+            $hovedmal = $_lib['db']->get_arrayrow(array('query' => $query));
+
+            $query = "SELECT * FROM salaryconf where AccountPlanID = '$AccountPlanID'";
+            $salaryconf = $_lib['db']->get_arrayrow(array('query' => $query));
+
+            if (empty($salaryconf)) {
+                $query = "INSERT INTO salaryconf VALUES (NULL, $AccountPlanID, 0, NULL); ";
+                $id = $_lib['db']->db_insert($query);
             
-            $query = "INSERT INTO salaryconf VALUES (NULL, $AccountPlanID, 0, NULL); ";
-            $id = $_lib['db']->db_insert($query);
-            
-            foreach($hovedmal as $line) {
-                $q = "INSERT INTO salaryconfline VALUES (";
-                $i = 0;
-                foreach($line as $k => $v) {
-                    if($k == "SalaryConfLineID") {
-                        $v = "NULL";
-                    } 
-                    else if($k == "SalaryConfID") {
-                        $v = $id;
+                foreach($hovedmal as $line) {
+                    $q = "INSERT INTO salaryconfline VALUES (";
+                    $i = 0;
+                    foreach($line as $k => $v) {
+                        if($k == "SalaryConfLineID") {
+                            $v = "NULL";
+                        } 
+                        else if($k == "SalaryConfID") {
+                            $v = $id;
+                        }
+                    
+                        if($i++ != 0) 
+                            $q .= ",";
+                    
+                        $q .= "'" .  $_lib['db']->db_escape($v) . "'";
                     }
-                    
-                    if($i++ != 0) 
-                        $q .= ",";
-                    
-                    $q .= "'" .  $_lib['db']->db_escape($v) . "'";
-                }
-                $q .= ")";
+                    $q .= ")";
                 
-                $_lib['db']->db_query($q);
+                    $_lib['db']->db_query($q);
+                }
+
             }
         }
 
