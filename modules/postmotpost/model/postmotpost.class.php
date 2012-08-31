@@ -208,8 +208,14 @@ class postmotpost {
             /*******************************************************************
             * Loop and calculate all data
             */
+            $vouchersProcessed = array();
             while($voucher = $_lib['db']->db_fetch_object($result2))
             {
+                if(in_array($voucher->VoucherID, $vouchersProcessed)) {
+                    continue;
+                }
+                $vouchersProcessed[] = $voucher->VoucherID;
+
                 $AccountPlanID = $voucher->AccountPlanID;
 
                 if($voucher->KID       && !$this->matchH[$AccountPlanID]['KID'][$voucher->KID]) {
@@ -274,6 +280,7 @@ class postmotpost {
                         'VoucherID' => $voucher->VoucherID
                         );
                 }
+
                 if($voucher->InvoiceID) {
                     $this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID] = 
                         round($this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID], 3) + ($voucher->AmountIn - $voucher->AmountOut);
@@ -282,7 +289,10 @@ class postmotpost {
                         'JournalID' => $voucher->JournalID,
                         'VoucherID' => $voucher->VoucherID
                         );
+
+                    //echo "IN: " . $voucher->InvoiceID . ": " . $this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID] . " - " . $voucher->VoucherID . "<br />";
                 }
+
                 if($voucher->MatchNumber) {
                     $this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber] = 
                         round($this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber], 3) + ($voucher->AmountIn - $voucher->AmountOut);
@@ -291,14 +301,16 @@ class postmotpost {
                         'JournalID' => $voucher->JournalID,
                         'VoucherID' => $voucher->VoucherID
                         );
+
+                    //echo "MN: " . $voucher->MatchNumber . ": " . $this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber] . "<br />";
                 }
-                
+
 
                 #print $this->matchH[$AccountPlanID]['KID']; print "<br>";
 
                 /*******************************************************************
-                * Data from each voucher line
-                */
+                 * Data from each voucher line
+                 */
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->AccountPlanID     = $voucher->AccountPlanID;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->JournalID         = $voucher->JournalID;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->VoucherMatchID    = $voucher->VoucherMatchID;
@@ -388,6 +400,8 @@ class postmotpost {
         
         $matchOrder = array("InvoiceID", "KID", "MatchNumber");
 
+        //print_r($this->matchH);
+
         // for each account
         foreach($this->matchH as $AccountPlanID => $matches) {
             // for each P in (InvoiceID, KID)
@@ -441,8 +455,6 @@ class postmotpost {
             }
         }
 
-
-        
         //echo "<pre>"; print_r($this->matchH);
     }
 
@@ -591,6 +603,9 @@ class postmotpost {
     }
 
     function closeVoucher($AccountPlanID, $VoucherID) {
+        if(count($this->closeAgainst) == 0)
+            $this->getopenpost();
+
         foreach($this->closeAgainst[$VoucherID] as $info) {
             $VoucherID2 = $info['VoucherID'];
             
