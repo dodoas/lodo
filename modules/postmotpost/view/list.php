@@ -97,9 +97,11 @@ if(count($postmotpost->voucherH) > 0)
                 <th class="sub">Prosjekt</th>
                 <th class="sub">Forfall</th>
                 <th class="sub">Tekst</th>
+
+                <th class="sub">Fakturanr</th>
                 <th class="sub">KID</th>
                 <th class="sub">MatchNummer</th>
-                <th class="sub">Fakturanr</th>
+
                 <th class="sub"></th>
                 <th class="sub noprint"></th>
             </tr>
@@ -174,11 +176,18 @@ if(count($postmotpost->voucherH) > 0)
                         <td><? if($voucher->ProjectID > 0)    { print $voucher->ProjectID; } ?></td>
                         <td><? if(isset($voucher->DueDate))   { print $voucher->DueDate; } ?></td>
                         <td><? if(isset($voucher->DescriptionID) or isset($voucher->Description)) { print substr($voucher->DescriptionID." - ".$voucher->Description, 0, 25); } ?></td>
-                        <td class="<? print $class ?>"><? print $_lib['form3']->text(array('table'=>'voucher', 'field'=>'KID', 'pk' => $voucher->VoucherID, 'value' => $voucher->KID, 'width' => 22)); ?></td>
-                        <td class="<? print $class ?>"><? print $_lib['form3']->text(array('table'=>'voucher', 'field'=>'InvoiceID', 'pk' => $voucher->VoucherID, 'value' => $voucher->InvoiceID, 'width' => 22)); ?></td>
+
                         <td class="<? print $class ?>">
-                          <? print $_lib['form3']->text(array('table'=>'vouchermatch', 'field'=>'MatchNumber', 'pk' => $voucher->VoucherMatchID, 'value' => $voucher->MatchNumber, 'width' => 22)); ?>
+                          <? print $_lib['form3']->text(array('table'=>'voucher', 'field'=>'InvoiceID', 'pk' => $voucher->VoucherID, 'value' => $voucher->InvoiceID, 'width' => 22)); ?>
                         </td>
+
+
+                        <td class="<? print $class ?>"><? print $_lib['form3']->text(array('table'=>'voucher', 'field'=>'KID', 'pk' => $voucher->VoucherID, 'value' => $voucher->KID, 'width' => 22)); ?></td>
+                        
+                        <td class="<? print $class ?>">
+                          <? print $_lib['form3']->text(array('table'=>'vouchermatch', 'field'=>'MatchNumber', 'pk' => $voucher->VoucherMatchID, 'value' =>  $voucher->MatchNumber == "0" ? "" : $voucher->MatchNumber, 'width' => 22)); ?>
+                        </td>
+
                         <td class="<? print $class ?>">
                         	<?
                                    if($postmotpost->isCloseAbleVoucher($voucher->VoucherID)) {
@@ -216,7 +225,7 @@ if(count($postmotpost->voucherH) > 0)
             </tr>
 
             <tr>
-                <th class="sub" colspan="6">Sum for konto <? print $AccountPlanID ?></th>
+                <th class="sub" colspan="5">Sum for konto <? print $AccountPlanID ?></th>
                 <th class="sub number"><? if($postmotpost->sumaccountH[$AccountPlanID]->Diff  >= 0) { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->Diff); } ?></th>
                 <th class="sub number"><? if($postmotpost->sumaccountH[$AccountPlanID]->Diff  < 0)  { print $_lib['format']->Amount(abs($postmotpost->sumaccountH[$AccountPlanID]->Diff)); } ?></th>
                 <th class="sub number"><? if($postmotpost->sumaccountH[$AccountPlanID]->FAmountIn  > 0) { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->FAmountIn) ; } ?></th>
