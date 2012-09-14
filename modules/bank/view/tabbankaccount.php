@@ -549,7 +549,7 @@ if(is_array($bank->bankvoucher_this_hash)) {
     <input type="submit" name="action_bank_update" value="Lagre (S)" accesskey="S">
     <? } ?>
     <? if($_lib['sess']->get_person('AccessLevel') >= 2) {
-        print $_lib['form3']->submit(array('name' => 'action_bank_periodremove', 'value' => 'Slett hele perioden',  'accesskey' => 'D', 'confirm' => "Vil du virkelig slette kontoutskriften for perioden " . $bank->ThisPeriod));
+    print $_lib['form3']->submit(array('name' => 'action_bank_periodremove', 'value' => 'Slett hele perioden', 'confirm' => 'Er du sikker p&aring; at du vil slette hele perioden', 'accesskey' => 'D', 'confirm' => "Vil du virkelig slette kontoutskriften for perioden " . $bank->ThisPeriod));
         print $_lib['form3']->submit(array('name' => 'action_bank_periodlock',   'value' => 'L&aring;s',            'accesskey' => 'L', 'confirm' => "Vil du virkelig l&aring;se perioden " . $bank->ThisPeriod));
     } ?>
     </td>
