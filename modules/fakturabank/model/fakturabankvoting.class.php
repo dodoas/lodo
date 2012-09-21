@@ -502,9 +502,15 @@ class lodo_fakturabank_fakturabankvoting {
             $r = $_lib['storage']->get_row(array('query' => $query));
             if($r)
                 return $r;
+
+            /* fall back to normal email */
+            $query = "SELECT AccountPlanID, OrgNumber FROM accountplan WHERE Email = '$identity' AND AccountPlanType = '$type'";
+            $r = $_lib['storage']->get_row(array('query' => $query));
+            if($r)
+                return $r;
         }
         else if($scheme_id == 'IBAN') {
-            $query = "SELECT AccountPlanID FROM accountplan WHERE IBAN = '$identity' AND AccountPlanType = '$type'";
+            $query = "SELECT AccountPlanID, OrgNumber FROM accountplan WHERE IBAN = '$identity' AND AccountPlanType = '$type'";
             $r = $_lib['storage']->get_row(array('query' => $query));
             if($r)
                 return $r;
@@ -533,6 +539,24 @@ class lodo_fakturabank_fakturabankvoting {
         if ($scheme_id == 'NO:ORGNR') {
             $query = "SELECT AccountPlanID, OrgNumber FROM accountplan WHERE OrgNumber = '$identity'";
             return $_lib['storage']->get_row(array('query' => $query));
+        }
+        else if($scheme_id == 'FAKTURABANK:EMAIL') {
+            $query = "SELECT AccountPlanID FROM fakturabankemail WHERE Email = '$identity'";
+            $r = $_lib['storage']->get_row(array('query' => $query));
+            if($r)
+                return $r;
+
+            /* fall back to normal email */
+            $query = "SELECT AccountPlanID, OrgNumber FROM accountplan WHERE Email = '$identity'";
+            $r = $_lib['storage']->get_row(array('query' => $query));
+            if($r)
+                return $r;
+        }
+        else if($scheme_id == 'IBAN') {
+            $query = "SELECT AccountPlanID, OrgNumber FROM accountplan WHERE IBAN = '$identity'";
+            $r = $_lib['storage']->get_row(array('query' => $query));
+            if($r)
+                return $r;
         }
 
         return false;
