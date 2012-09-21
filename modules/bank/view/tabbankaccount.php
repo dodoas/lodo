@@ -258,8 +258,8 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
     <td class="menu">Ut av konto</td>
     <td class="menu">Inn p&aring; konto</td>
     <td class="menu">Dag</td>
-    <td class="menu">KID</td>
     <td class="menu">Fakturanr</td>
+    <td class="menu">KID</td>
     <td class="menu">Tekst hovedbok</td>
     <td class="menu">Kommentarer</td>
     <td class="menu">OK</td>    
@@ -272,8 +272,9 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
     <td class="menu">Prosjekt</td>
     <td class="menu">KID match</td>
     <td class="menu"></td>
-    <td class="menu">KID</td>
+
     <td class="menu">Fakturanr</td>
+    <td class="menu">KID</td>
     <td class="menu">Bilag</td>
     <td class="menu"></td>
     <td class="menu">Inn</td>
@@ -366,31 +367,37 @@ if(is_array($bank->bankaccount)) {
         </td>
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Day', 'pk' => $row->AccountLineID, 'value' => $row->Day, 'class' => 'number', 'width' => 2, 'tabindex' => $tabindexH[2])) ?></td>
 
+
+        <? if($row->InvoiceNumber != '' || count($row->MatchSelect) < 1) { ?>
+        <td>
+            <? 
+            
+            print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber', 'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[5]));
+        
+            if(substr($row->InvoiceNumber, 0, 2) == "FB") {
+                preg_match("/FB\((\d+)\)/", $row->InvoiceNumber, $matches);
+                $fakturabankID = $matches[1];
+
+                print $relationcount[$fakturabankID]; 
+            }
+
+            ?>
+        </td>
+        <? } ?>
+
+
         <td <? if($row->InvoiceNumber == '' && count($row->MatchSelect) >= 1) { print " colspan=\"2\""; } ?>>
             <? 
             if($row->InvoiceNumber == '' && count($row->MatchSelect) >= 1) {
                 print $_lib['form3']->select(array('table' => 'accountline', 'field' => 'KIDandInvoiceIDandAccountPlanID', 'pk' => $row->AccountLineID, 'value' => $row->KID, 'data' => $row->MatchSelect, 'width' => 50, 'required' => false)); 
             } else {
-                print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID', 'pk' => $row->AccountLineID, 'value' => $row->KID,     'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[5]));
+                print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID', 'pk' => $row->AccountLineID, 'value' => $row->KID,     'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[6]));
             }
             ?>
         </td>
-        <? if($row->InvoiceNumber != '' || count($row->MatchSelect) < 1) { ?>
-        <td>
-            <? 
-            
-            print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber', 'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[6]));
-        
-        if(substr($row->InvoiceNumber, 0, 2) == "FB") {
-            preg_match("/FB\((\d+)\)/", $row->InvoiceNumber, $matches);
-            $fakturabankID = $matches[1];
 
-            print $relationcount[$fakturabankID]; 
-        }
 
-            ?>
-        </td>
-        <? } ?>
+
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Description',     'pk' => $row->AccountLineID, 'value' => $row->Description,      'width' => 12, 'maxlength' => 255, 'tabindex' => $tabindexH[7])) ?></td>
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Comment',         'pk' => $row->AccountLineID, 'value' => $row->Comment,          'width' => 12, 'maxlength' => 255, 'tabindex' => $tabindexH[8])) ?></td>
         <td class="<? print $classApproved ?>"><? print $_lib['form3']->checkbox(array('table' => 'accountline', 'field' => 'Approved',     'pk' => $row->AccountLineID, 'value' => $row->Approved)) ?></td>
@@ -452,8 +459,11 @@ if(is_array($bank->bankaccount)) {
                 <? print $_lib['form3']->URL(array('url' => $_lib['sess']->dispatch . "t=bank.tabbankaccount&amp;action_bank_accountlinedelete=1&amp;AccountLineID=$row->AccountLineID&amp;AccountID=$bank->AccountID&amp;Period=$bank->ThisPeriod", 'description' => '<img src="/lib/icons/trash.gif">', 'title' => 'Slett')) ?>
             </td>
         <? if($bankvoucher) { ?>
-        <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID', 'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->KID,     'class' => 'number', 'width' => 22)) ?></td>
+
         <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID', 'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->InvoiceID,     'class' => 'number', 'width' => 22)) ?></td>
+
+        <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID', 'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->KID,     'class' => 'number', 'width' => 22)) ?></td>
+
         <td class="sub"><? print $_lib['form3']->URL(array('url' => $bank->urlvoucher . '&amp;voucher_JournalID=' . $bankvoucher->JournalID . '&amp;voucher_VoucherType=' . $bankvoucher->VoucherType . "&amp;action_journalid_search=1", 'description' => $bankvoucher->VoucherType . $bankvoucher->JournalID)) ?></td>
         <td class="sub"><? if($bank->is_closeable($row->ReskontroAccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID)) print "Lukket"; else print "Diff (" . $_lib['format']->Amount($bank->getDiff($bankvoucher->AccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID)) . ")"; ?></td>
         <td class="<? print $bankvoucher->classAmountIn ?> <? print $bank->DebitColor ?>">

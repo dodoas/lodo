@@ -197,8 +197,10 @@ $warningH = array();
     <td class="menu menu-left-border">Ut av konto</td>
     <td class="menu menu-right-border">Inn p&aring; konto</td>
     <td class="menu">Dag</td>
-    <td class="menu">KID</td>
+
     <td class="menu">Faktura</td>
+    <td class="menu">KID</td>
+
     <td class="menu">Beskrivelse</td>
     <td class="menu">Kommentar</td>
     <td class="menu">OK</td>
@@ -376,10 +378,15 @@ if(is_array($bank->unvotedaccount)) {
         <td class="number menu-left-border"><? if($row->AmountOut > 0) print $_lib['format']->Amount($row->AmountOut); ?></td>
         <td class="number menu-right-border"><? if($row->AmountIn > 0)  print $_lib['format']->Amount($row->AmountIn); ?></td>
         <td><? print $row->Day ?></td>
-        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID',             'pk' => $row->AccountLineID, 'value' => $row->KID,               'class' => 'number', 'width' => 22)) ?></td>
+
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber',   'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 23)) ?></td>
+
+        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID',             'pk' => $row->AccountLineID, 'value' => $row->KID,               'class' => 'number', 'width' => 22)) ?></td>
+
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Description',     'pk' => $row->AccountLineID, 'value' => $row->Description,       'width' => 22, 'maxlength' => 255, 'tabindex' => $tabindexH[6])) ?></td>
+
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Comment',         'pk' => $row->AccountLineID, 'value' => $row->Comment,           'width' => 12, 'maxlength' => 255, 'tabindex' => $tabindexH[7])) ?></td>
+
         <td class="<? print $classApproved ?>"><? print $_lib['form3']->checkbox(array('table' => 'accountline', 'field' => 'Approved', 'pk' => $row->AccountLineID, 'value' => $row->Approved)) ?></td>
         <td>
             <?

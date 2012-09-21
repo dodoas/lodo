@@ -379,8 +379,8 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     <th>A<u>v</u>d.</th>
     <th><u>P</u>rosjekt</th>
     <th><u>F</u>orfallsdato</th>
-    <th><u>K</u>ID.</th>
     <th>Faktura</th>
+    <th><u>K</u>ID.</th>
     <th colspan="2">Te<u>k</u>st</th>
     <th>&nbsp;</th>
   </tr>
@@ -430,9 +430,13 @@ if($accountplan->EnableProject)
 ?>
     </td>
 <td><input class="voucher" type="text" size="10" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" accesskey="F" name="voucher.DueDate" value="<? if ($voucherHead->DueDate != "") print $voucherHead->DueDate; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
-<td><input class="voucher" type="text" size="22" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>"  accesskey="R" name="voucher.KID" value="<? print $voucher_input->KID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
+
 <td><input class="voucher" type="text" size="22" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>"  accesskey="R" name="voucher.InvoiceID" value="<? print $voucher_input->InvoiceID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
+
+<td><input class="voucher" type="text" size="22" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>"  accesskey="R" name="voucher.KID" value="<? print $voucher_input->KID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
+
     <td><!-- <? if($rowCount>1) { $tmp = ''; } else { $tmp = $tabindex++; }; print $_lib['form3']->Type_menu3(array('table' => $db_table, 'field' => 'DescriptionID', 'value' => $voucherHead->DescriptionID, 'type' => 'VoucherDescriptionID', 'tabindex' => $tmp, 'accesskey' => 'E')); ?> --></td>
+
 <td><input class="voucher" type="text" size="10" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" accesskey="G" name="voucher.Description"       value="<? print $voucher_input->Description; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
     <td align="right">
 <? 
