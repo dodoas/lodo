@@ -28,15 +28,13 @@ elseif($AccountPlanID) #since this is automatically created
 #print "query: $query<br>\n";
 $account = $_lib['storage']->get_row(array('query' => $query));
 
+var_dump($account);
+var_dump($_lib['input']->getProperty('NewAccount'));
+
 /*
  * Hack for å få korrekt info ved opprettelse av ny konto 
  */
-if($OrgNumber && $_lib['input']->getProperty('NewAccount'))
-{
-    $account->OrgNumber = $OrgNumber;
-    $account->EnableCredit = 1;
-}
-else if(!$account && $_lib['input']->getProperty('NewAccount'))
+if(!$account && $_lib['input']->getProperty('NewAccount'))
 {
     /* fetch data from template */
     $query = sprintf("SELECT * FROM accountplantemplate WHERE AccountPlanType = '%s'", $AccountPlanType);
@@ -52,6 +50,13 @@ else if(!$account && $_lib['input']->getProperty('NewAccount'))
         }
     }
 }
+
+if($OrgNumber && $_lib['input']->getProperty('NewAccount'))
+{
+    $account->OrgNumber = $OrgNumber;
+    $account->EnableCredit = 1;
+}
+
 
 if($account->AccountPlanID){
     $AccountPlanID = $account->AccountPlanID;
