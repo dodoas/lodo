@@ -28,9 +28,6 @@ elseif($AccountPlanID) #since this is automatically created
 #print "query: $query<br>\n";
 $account = $_lib['storage']->get_row(array('query' => $query));
 
-var_dump($account);
-var_dump($_lib['input']->getProperty('NewAccount'));
-
 /*
  * Hack for å få korrekt info ved opprettelse av ny konto 
  */
