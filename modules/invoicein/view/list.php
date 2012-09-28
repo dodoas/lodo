@@ -116,6 +116,8 @@ print $_lib['sess']->doctype; ?>
     <th class="number">Bel&oslash;p</th>
     <th>Avdeling</th>
     <th>Prosjekt</th>
+    <th>Reason</th>
+    <th>Reason Amount</th>
     <th class="number">Bankkonto</th>
     <th class="number">Betaling</th>
     <th class="number">KID</th>
@@ -126,11 +128,32 @@ print $_lib['sess']->doctype; ?>
 </thead>
 <tbody>
 <?
+
+$reasons_query = "SELECT FakturabankInvoiceReconciliationReasonID, FakturabankInvoiceReconciliationReasonCode
+                    FROM fakturabankinvoicereconciliationreason";
+$reasons_r = $_lib['db']->db_query($reasons_query);
+$reasons = array();
+
+while($row = $_lib['db']->db_fetch_object($reasons_r)) {
+    $reasons[$row->FakturabankInvoiceReconciliationReasonID] = $row->FakturabankInvoiceReconciliationReasonCode;
+}
+
 foreach($invoicein as $InvoiceO) {
     $TotalCustPrice += $InvoiceO->TotalCustPrice;
     $TotalCustPriceForeign += $InvoiceO->ForeignAmount;
     $ForeignCurrencyID = '';
     $count++;
+
+    $fb_query = sprintf("SELECT * FROM fakturabankinvoicein WHERE JournalID = %d", $InvoiceO->JournalID);
+    $fb_row = $_lib['storage']->get_row(array('query' => $fb_query, 'debug' => true));
+
+    if($fb_row) {
+        $reason = $reasons[$fb_row->FakturabankCustomerReconciliationReasonID];
+    }
+    else { 
+        $reason = "";
+    }
+
     ?>
     <tr class="<? print $InvoiceO->Class ?>">
       <td class="number"><? if($InvoiceO->Journaled) { ?><a href="<? print $_SETUP['DISPATCH']."t=journal.edit&amp;voucher_VoucherType=$InvoiceO->VoucherType&amp;voucher_JournalID=$InvoiceO->JournalID"; ?>&amp;action_journalid_search=1" target="_new"><? print $InvoiceO->VoucherType ?><? print $InvoiceO->JournalID ?></a><? } else { print $InvoiceO->VoucherType . $InvoiceO->JournalID; }  ?></td>
@@ -153,6 +176,8 @@ foreach($invoicein as $InvoiceO) {
       </td>
       <td><? print $InvoiceO->Department ?></td>
       <td><? print $InvoiceO->Project ?></td>
+      <td><? print $reason ?></td>
+      <td><? if($reason) print $_lib['format']->Amount($fb_row->FakturabankCustomerReconciliationReasonAmount); ?></td>
       <td><? print $InvoiceO->SupplierBankAccount ?></td>
       <td class="number"><? print $InvoiceO->PaymentMeans ?></td>
       <td class="number"><? print $InvoiceO->KID ?></td>

@@ -403,11 +403,11 @@ class logic_invoicein_invoicein implements Iterator {
 
                     if($fb_row) {
 
-                        echo "<br /><br />Got row!" . $VoucherH['voucher_JournalID'] . "<br />";
-                        print_r($fb_row);
+                        //echo "<br /><br />Got row!" . $VoucherH['voucher_JournalID'] . "<br />";
+                        //print_r($fb_row);
 
                         if($fb_row->FakturabankCustomerReconciliationReasonID) {
-                            echo "ReasonID: " . $fb_row->FakturabankCustomerReconciliationReasonID . " : " . $InvoiceO->ID . "<br />";
+                            //echo "ReasonID: " . $fb_row->FakturabankCustomerReconciliationReasonID . " : " . $InvoiceO->ID . "<br />";
                             $reasonID = $fb_row->FakturabankCustomerReconciliationReasonID;
                             $reconciliation_amount = $fb_row->FakturabankCustomerReconciliationReasonAmount;
 
