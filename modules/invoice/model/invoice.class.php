@@ -221,13 +221,57 @@ class invoice {
     function update($args) {
         global $_lib, $_SETUP, $accounting;
 
-        #Update multi into db to support old format        
+        #enrich args with address data
+        self::enrichArgsWithAddressFields($args);
+        #Update multi into db to support old format
         #print_r($args);
         $_lib['db']->db_update_multi_table($args, array('invoiceout' => 'InvoiceID', 'invoiceoutline' => 'LineID', 'invoiceoutprint' => 'InvoiceID'));
 
         #Then read everything from disk and correct calculations
         $this->init($args);
         $this->make_invoice();
+    }
+
+    function enrichArgsWithAddressFields(&$args) {
+        if (!is_numeric($args['InvoiceID'])) {
+            return;
+        }
+        
+        global $_lib;
+
+        $invoiceout_due_date_key = "invoiceout_DueDate_" . $args['InvoiceID'];
+        $prefix = isset($args[$invoiceout_due_date_key]) ? "invoiceout" : "invoicein";
+
+        $get_invoicefrom = "select IName as FromName, IAddress as FromAddress, Email, WWW, IZipCode as Zip, ICity as City, ICountryCode as CountryCode, Phone, Fax, BankAccount, Mobile, OrgNumber, VatNumber from company where CompanyID='" . $_lib['sess']->get_companydef('CompanyID') . "'";
+        $row_from = $_lib['storage']->get_row(array('query' => $get_invoicefrom));
+
+        $args[$prefix . "_SName_" . $args['InvoiceID']] = $row_from->FromName;
+        $args[$prefix . "_SAddress_" . $args['InvoiceID']] = $row_from->FromAddress;
+        $args[$prefix . "_SZipCode_" . $args['InvoiceID']] = $row_from->Zip;
+        $args[$prefix . "_SCity_" . $args['InvoiceID']] = $row_from->City;
+        $args[$prefix . "_SCountryCode_" . $args['InvoiceID']] = $row_from->CountryCode;
+        $args[$prefix . "_SPhone_" . $args['InvoiceID']] = $row_from->Phone;
+        $args[$prefix . "_SFax_" . $args['InvoiceID']] = $row_from->Fax;
+        $args[$prefix . "_SBankAccount_" . $args['InvoiceID']] = $row_from->BankAccount;
+        $args[$prefix . "_SEmail_" . $args['InvoiceID']] = $row_from->Email;
+        $args[$prefix . "_SMobile_" . $args['InvoiceID']] = $row_from->Mobile;
+        $args[$prefix . "_SWeb_" . $args['InvoiceID']] = $row_from->WWW;
+        $args[$prefix . "_SOrgNo_" . $args['InvoiceID']] = $row_from->OrgNumber;
+        $args[$prefix . "_SVatNo_" . $args['InvoiceID']] = $row_from->VatNumber;
+
+        $customer_accountplan_id = $args["invoiceout_CustomerAccountPlanID_" . $args["InvoiceID"]];
+        if (!is_numeric($customer_accountplan_id)) {
+            return;
+        }
+        $get_invoiceto = "select * from accountplan where AccountPlanID='" . $customer_accountplan_id . "'";
+        $row_to = $_lib["storage"]->get_row(array("query" => $get_invoiceto));
+        $args[$prefix . "_IOrgNo_" . $args['InvoiceID']] = $row_to->OrgNumber;
+        $args[$prefix . "_IVatNo_" . $args['InvoiceID']] = $row_to->VatNumber;
+        $args[$prefix . "_IMobile_" . $args['InvoiceID']] = $row_to->Mobile;
+        $args[$prefix . "_IWeb_" . $args['InvoiceID']] = $row_to->Web;
+        $args[$prefix . "_Phone_" . $args['InvoiceID']] = $row_to->Phone;
+        $args[$prefix . "_IAddress_" . $args['InvoiceID']] = $row_to->Address;
+        $args[$prefix . "_IZipCode_" . $args['InvoiceID']] = $row_to->ZipCode;
     }
 
     function make_invoice()
@@ -788,9 +832,6 @@ class invoice {
         $this->invoiceO->IssueDate            = $invoice->InvoiceDate;
         $this->invoiceO->Note            = $invoice->CommentCustomer;
 
-        $sql_supplier = "select * from company where CompanyID=" . (int) $invoice->FromCompanyID;
-        $supplier               = $_lib['storage']->get_row(array('query' => $sql_supplier));
-
         $this->invoiceO->DocumentCurrencyCode = exchange::getLocalCurrency();
 
         if ($invoice->DepartmentID != "" || $invoice->DepartmentID === 0) { // "0" is valid
@@ -836,41 +877,41 @@ class invoice {
 
         ############################################################################################
 
-        $this->invoiceO->AccountingSupplierParty->Party->WebsiteURI                     = $supplier->WWW;
-        $this->invoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID        = preg_replace('/[^0-9]/', '', $supplier->OrgNumber);
-        if (!empty($supplier->VatNumber)) {
-            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = $supplier->VatNumber;
-            if ($supplier->ICountryCode == 'SE') {
+        $this->invoiceO->AccountingSupplierParty->Party->WebsiteURI                     = $invoice->SWeb;
+        $this->invoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID        = preg_replace('/[^0-9]/', '', $invoice->SOrgNo);
+        if (!empty($invoice->SVatNo)) {
+            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = $invoice->SOrgNo;
+            if ($invoice->SCountryCode == 'SE') {
                 $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'SE:VAT';
-            } else if ($supplier->ICountryCode == 'NO') {
+            } else if ($invoice->SCountryCode == 'NO') {
                 $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
             } // else leave empty
-        } else if (strstr(strtolower($supplier->OrgNumber), 'mva')) {
-            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = $supplier->OrgNumber;
+        } else if (strstr(strtolower($invoice->SOrgNo), 'mva')) {
+            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = $invoice->SOrgNo;
             $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
         }
-        $this->invoiceO->AccountingSupplierParty->Party->PartyName->Name                = $supplier->CompanyName;
-        $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName      = $supplier->IAddress;
+        $this->invoiceO->AccountingSupplierParty->Party->PartyName->Name                = $invoice->SName;
+        $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName      = $invoice->SAddress;
         $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->BuildingNumber  = '';
-        $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->CityName        = $supplier->ICity;
-        $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone      = $supplier->IZipCode;
-        if (empty($supplier->ICountryCode)) {
+        $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->CityName        = $invoice->SCity;
+        $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone      = $invoice->SZipCode;
+        if (empty($invoice->SCountryCode)) {
             $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode= 'NO';
         } else {
-            $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode= $supplier->ICountryCode;
+            $this->invoiceO->AccountingSupplierParty->Party->PostalAddress->Country->IdentificationCode= $invoice->SCountryCode;
         }
 
-        if (!empty($supplier->Phone)) {
-            $this->invoiceO->AccountingSupplierParty->Party->Contact->Telephone = $supplier->Phone;
+        if (!empty($invoice->SPhone)) {
+            $this->invoiceO->AccountingSupplierParty->Party->Contact->Telephone = $invoice->SPhone;
         }
-        if (!empty($supplier->Mobile)) {
-            $this->invoiceO->AccountingSupplierParty->Party->Contact->Mobile = $supplier->Mobile;
+        if (!empty($invoice->SMobile)) {
+            $this->invoiceO->AccountingSupplierParty->Party->Contact->Mobile = $invoice->SMobile;
         }
-        if (!empty($supplier->Fax)) {
-            $this->invoiceO->AccountingSupplierParty->Party->Contact->Telefax = $supplier->Fax;
+        if (!empty($invoice->SFax)) {
+            $this->invoiceO->AccountingSupplierParty->Party->Contact->Telefax = $invoice->SFax;
         }
-        if (!empty($supplier->Email)) {
-            $this->invoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail = $supplier->Email;
+        if (!empty($invoice->SEmail)) {
+            $this->invoiceO->AccountingSupplierParty->Party->Contact->ElectronicMail = $invoice->SEmail;
         }
 
 
@@ -888,47 +929,45 @@ class invoice {
         }
 
         ############################################################################################
-        $sql_customer = "select * from accountplan where AccountPlanID=" . (int) $invoice->CustomerAccountPlanID;
-        $customer     = $_lib['storage']->get_row(array('query' => $sql_customer));
+        $this->invoiceO->AccountingCustomerParty->Party->WebsiteURI                     = $invoice->IWeb;
+        $this->invoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID        = preg_replace('/[^0-9]+/', '', $invoice->IOrgNo);
 
-        $this->invoiceO->AccountingCustomerParty->Party->WebsiteURI                     = $customer->Web;
-        $this->invoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID        = preg_replace('/[^0-9]+/', '', $customer->OrgNumber);
-
-        if (!empty($customer->VatNumber)) {
-            $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID        = $customer->VatNumber;
-            if ($customer->CountryCode == 'SE') {
+        if (!empty($invoice->SVatNo)) {
+            $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID        = $invoice->IVatNo;
+            if ($invoice->ICountryCode == 'SE') {
                 $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'SE:VAT';
-            } else if ($customer->CountryCode == 'NO') {
+            } else if ($invoice->ICountryCode == 'NO') {
                 $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
             } // else leave empty
-        } else if (strstr(strtolower($customer->OrgNumber), 'mva')) {
-            $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID        = $customer->OrgNumber;
+        } else if (strstr(strtolower($invoice->IOrgNo), 'mva')) {
+            $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID        = $invoice->IOrgNo;
             $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'NO:ORGNR';
         }
 
-        $this->invoiceO->AccountingCustomerParty->Party->PartyIdentification->ID = $customer->AccountPlanID;
-        $this->invoiceO->AccountingCustomerParty->Party->PartyName->Name                = $customer->AccountName;
-        $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName      = $customer->Address;
+        $this->invoiceO->AccountingCustomerParty->Party->PartyIdentification->ID = $invoice->CustomerAccountPlanID;
+        $this->invoiceO->AccountingCustomerParty->Party->PartyName->Name                = $invoice->IName;
+        $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->StreetName      = $invoice->IAddress;
         $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->BuildingNumber  = '';
-        $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->CityName        = $customer->City;
-        $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->PostalZone     = $customer->ZipCode;
-        if (empty($customer->CountryCode)) {
+        $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->CityName        = $invoice->ICity;
+        $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->PostalZone     = $invoice->IZipCode;
+        if (empty($invoice->ICountryCode)) {
             $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->Country->IdentificationCode= 'NO';
         } else {
-            $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->Country->IdentificationCode= $customer->CountryCode;
+            $this->invoiceO->AccountingCustomerParty->Party->PostalAddress->Country->IdentificationCode= $invoice->ICountryCode;
         }
 
-        if (!empty($customer->Phone)) {
-            $this->invoiceO->AccountingCustomerParty->Party->Contact->Telephone = $customer->Phone;
+        if (!empty($invoice->Phone)) {
+            $this->invoiceO->AccountingCustomerParty->Party->Contact->Telephone = $invoice->Phone;
         }
-        if (!empty($customer->Mobile)) {
-            $this->invoiceO->AccountingCustomerParty->Party->Contact->Mobile = $customer->Mobile;
+        if (!empty($invoice->IMobile)) {
+            $this->invoiceO->AccountingCustomerParty->Party->Contact->Mobile = $invoice->IMobile;
         }
-        if (!empty($customer->Fax)) {
-            $this->invoiceO->AccountingCustomerParty->Party->Contact->Telefax = $customer->Fax;
+        if (!empty($invoice->IFax)) {
+            $this->invoiceO->AccountingCustomerParty->Party->Contact->Telefax = $invoice->IFax;
         }
-        if (!empty($customer->Email)) {
-            $this->invoiceO->AccountingCustomerParty->Party->Contact->ElectronicMail = $customer->Email;
+        $email = $invoice->Email;
+        if (!empty($invoice->IEmail)) {
+            $this->invoiceO->AccountingCustomerParty->Party->Contact->ElectronicMail = $invoice->IEmail;
         }
 
         if (!empty($invoice->RefInternal)) { 
@@ -949,7 +988,7 @@ class invoice {
         ############################################################################################
         $this->invoiceO->PaymentMeans->PaymentMeansCode             = 42;
         $this->invoiceO->PaymentMeans->PaymentDueDate               = $invoice->DueDate;
-        $this->invoiceO->PaymentMeans->PayeeFinancialAccount->ID    = $supplier->BankAccount;
+        $this->invoiceO->PaymentMeans->PayeeFinancialAccount->ID    = $invoice->SBankAccount;
         $this->invoiceO->PaymentMeans->PayeeFinancialAccount->Name  = 'Bank';
 
         if (!empty($invoice->BankAccount)) {

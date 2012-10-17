@@ -189,8 +189,10 @@ class recurring {
 
     function update($args) {
         global $_lib, $_SETUP, $accounting;
+        #enrich args with address data
+        self::enrichArgsWithAddressFields($args);
 
-        #Update multi into db to support old format        
+        #Update multi into db to support old format
         #print_r($args);
         $_lib['db']->db_update_multi_table($args, array('recurringout' => 'RecurringID', 'recurringoutline' => 'LineID'));
 
@@ -198,6 +200,45 @@ class recurring {
         $this->init($args);
         $this->make_invoice();
     }
+
+    function enrichArgsWithAddressFields(&$args) {
+        if (!is_numeric($args['RecurringID'])) {
+            return;
+        }
+        
+        global $_lib;
+
+        $prefix = "recurringout";
+
+        $get_invoicefrom = "select IName as FromName, IAddress as FromAddress, Email, WWW, IZipCode as Zip, ICity as City, ICountryCode as CountryCode, Phone, BankAccount, Mobile, OrgNumber, VatNumber from company where CompanyID='" . $_lib['sess']->get_companydef('CompanyID') . "'";
+        $row_from = $_lib['storage']->get_row(array('query' => $get_invoicefrom));
+
+        $args[$prefix . "_SName_" . $args['RecurringID']] = $row_from->FromName;
+        $args[$prefix . "_SAddress_" . $args['RecurringID']] = $row_from->FromAddress;
+        $args[$prefix . "_SZipCode_" . $args['RecurringID']] = $row_from->Zip;
+        $args[$prefix . "_SCity_" . $args['RecurringID']] = $row_from->City;
+        $args[$prefix . "_SCountryCode_" . $args['RecurringID']] = $row_from->CountryCode;
+        $args[$prefix . "_SPhone_" . $args['RecurringID']] = $row_from->Phone;
+        $args[$prefix . "_SBankAccount_" . $args['RecurringID']] = $row_from->BankAccount;
+        $args[$prefix . "_SEmail_" . $args['RecurringID']] = $row_from->Email;
+        $args[$prefix . "_SMobile_" . $args['RecurringID']] = $row_from->Mobile;
+        $args[$prefix . "_SWeb_" . $args['RecurringID']] = $row_from->WWW;
+        $args[$prefix . "_SOrgNo_" . $args['RecurringID']] = $row_from->OrgNumber;
+        $args[$prefix . "_SVatNo_" . $args['RecurringID']] = $row_from->VatNumber;
+
+        $customer_accountplan_id = $args["recurringout_CustomerAccountPlanID_" . $args["RecurringID"]];
+        if (!is_numeric($customer_accountplan_id)) {
+            return;
+        }
+        $get_invoiceto = "select * from accountplan where AccountPlanID='" . $customer_accountplan_id . "'";
+        $row_to = $_lib["storage"]->get_row(array("query" => $get_invoiceto));
+        $args[$prefix . "_IOrgNo_" . $args['RecurringID']] = $row_to->OrgNumber;
+        $args[$prefix . "_IVatNo_" . $args['RecurringID']] = $row_to->VatNumber;
+        $args[$prefix . "_IMobile_" . $args['RecurringID']] = $row_to->Mobile;
+        $args[$prefix . "_IWeb_" . $args['RecurringID']] = $row_to->Web;
+        $args[$prefix . "_Phone_" . $args['RecurringID']] = $row_to->Phone;
+    }
+
 
     function make_invoice()
     {
@@ -515,7 +556,7 @@ class recurring {
 	if($update === false)
 	{
 	    $get = sprintf("select RecurringID from recurring where RecurringID = '%d'", $this->RecurringID);
-	    $row = $_lib['storage']->get_row(array('query'=>$get));
+  	    $row = $_lib['storage']->get_row(array('query'=>$get));
 	    
 	    if(!$row)
 	    {

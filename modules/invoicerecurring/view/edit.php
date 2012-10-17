@@ -43,15 +43,8 @@ $get_invoice            = "select I.* from $db_table as I where RecurringID='$Re
 #print "Get invoice " . $get_invoice . "<br>\n";
 $row                    = $_lib['storage']->get_row(array('query' => $get_invoice));
 
-$get_invoiceto          = "select * from accountplan where AccountPlanID=" . (int) $row->AccountPlanID;
-$row_to                 = $_lib['storage']->get_row(array('query' => $get_invoiceto));
-
 $get_recurring_row      = sprintf("select * from recurring where RecurringID=%d", $RecurringID);
 $recurring_row          = $_lib['storage']->get_row(array('query' => $get_recurring_row, 'debug'=>true));
-
-$get_invoicefrom        = "select IName as FromName, IAddress as FromAddress, Email, IZipCode as Zip, ICity as City, ICountryCode as CountryCode, Phone, BankAccount, Mobile, OrgNumber from company where CompanyID='$row->FromCompanyID'";
-#print "get_invoicefrom " . $get_invoicefrom . "<br>\n";
-$row_from               = $_lib['storage']->get_row(array('query' => $get_invoicefrom));
 
 $query_invoiceline      = "select * from $db_table2 where RecurringID='$RecurringID' and Active <> 0 order by LineID asc";
 #print "query_invoiceline" . $query_invoiceline . "<br>\n";
@@ -96,13 +89,13 @@ print $_lib['sess']->doctype ?>
     </tr>
     <tr>
         <td><b>Avsender</b></td>
-        <td><? print $row_from->FromName ?></td>
+        <td><? print $row->SName ?></td>
         <td><b>Mottaker</b></td>
         <td><? print $_lib['form3']->accountplan_number_menu(array('table'=>$db_table, 'field'=>'CustomerAccountPlanID', 'pk'=>$RecurringID, 'value'=>$row->CustomerAccountPlanID,  'type' => array(0 => customer))) ?></td>
     </tr>
     <tr>
         <td>Adresse</a></td>
-        <td><? print $row_from->FromAddress ?></td>
+        <td><? print $row->SAddress ?></td>
         <? if( $row->IAddress) { ?>
           <td>Adresse</td>
           <td><? print $row->IAddress ?></td>
@@ -113,7 +106,7 @@ print $_lib['sess']->doctype ?>
     </tr>
     <tr>
         <td>Postnr/Poststed</td>
-        <td><? print $row_from->Zip." ".$row_from->City ?></td>
+        <td><? print $row->SZipCode." ".$row->SCity ?></td>
         <? if( $row->IAddress) { ?>
           <td>Postnr/Poststed</td>
           <td><? print $row->IZipCode." ".$row->ICity ?></td>
@@ -124,40 +117,40 @@ print $_lib['sess']->doctype ?>
     </tr>
     <tr>
         <td>Land</td>
-        <td><? print $_lib['format']->codeToCountry($row_from->CountryCode) ?></td>
+        <td><? print $_lib['format']->codeToCountry($row->SCountryCode) ?></td>
         <td>Land</td>
         <td><? print $_lib['format']->codeToCountry($row->ICountryCode) ?></td>
     </tr>
     <tr>
         <td>Tlf nr</td>
-        <td><? print $row_from->Phone ?></td>
+        <td><? print $row->SPhone ?></td>
         <td>Tlf nr</td>
-        <td><? print $row_to->Phone ?></td>
+        <td><? print $row->Phone ?></td>
     </tr>
     </tr>
         <tr>
         <td>Mobil nr</td>
-        <td><? print $row_from->Mobile ?></td>
+        <td><? print $row->SMobile ?></td>
         <td>Mobil nr</td>
-        <td><? print $row_to->Mobile ?></td>
+        <td><? print $row->IMobile ?></td>
     </tr>
     <tr>
         <td>Email</td>
-        <td><? print $row_from->Email ?></td>
+        <td><? print $row->SEmail ?></td>
         <td>Email</td>
         <td><? print $row->IEmail ?></td>
     </tr>
     <tr>
         <td>Konto nr</td>
-        <td><? print $row_from->BankAccount ?></td>
+        <td><? print $row->SBankAccount ?></td>
         <td>Konto nr</td>
         <td><? print $row->BankAccount ?></td>
     </tr>
     <tr>
         <td>Org nr</td>
-        <td><? print $row_from->OrgNumber ?></td>
+        <td><? print $row->SOrgNo ?></td>
         <td>Org nr</td>
-        <td><? print $row_to->OrgNumber ?></td>
+        <td><? print $row->IOrgNo ?></td>
     </tr>
     <tr height="5">
         <td colspan="4"></td>

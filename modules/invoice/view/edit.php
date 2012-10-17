@@ -25,14 +25,6 @@ $get_invoice            = "select I.* from $db_table as I where InvoiceID='$Invo
 #print "Get invoice " . $get_invoice . "<br>\n";
 $row                    = $_lib['storage']->get_row(array('query' => $get_invoice));
 
-$get_invoiceto          = "select * from accountplan where AccountPlanID=" . (int) $row->CustomerAccountPlanID;
-#print "invoiceto " . $get_invoiceto . "<br>\n";
-$row_to                 = $_lib['storage']->get_row(array('query' => $get_invoiceto));
-
-$get_invoicefrom        = "select IName as FromName, IAddress as FromAddress, Email, WWW, IZipCode as Zip, ICity as City, ICountryCode as CountryCode, Phone, BankAccount, Mobile, OrgNumber, VatNumber from company where CompanyID='$row->FromCompanyID'";
-#print "get_invoicefrom " . $get_invoicefrom . "<br>\n";
-$row_from               = $_lib['storage']->get_row(array('query' => $get_invoicefrom));
-
 $query_invoiceline      = "select * from $db_table2 where InvoiceID='$InvoiceID' and Active <> 0 order by LineID asc";
 #print "query_invoiceline" . $query_invoiceline . "<br>\n";
 $result2                = $_lib['db']->db_query($query_invoiceline);
@@ -78,13 +70,13 @@ print $_lib['sess']->doctype;
     </tr>
     <tr>
         <td><b>Avsender</b></td>
-        <td><? print $row_from->FromName ?></td>
+        <td><? print $row->SName ?></td>
         <td><b>Mottaker</b></td>
         <td><? print $_lib['form3']->accountplan_number_menu(array('table'=>$db_table, 'field'=>'CustomerAccountPlanID', 'pk'=>$InvoiceID, 'value'=>$row->CustomerAccountPlanID,  'type' => array(0 => customer))) ?></td>
     </tr>
     <tr>
         <td>Adresse</a></td>
-        <td><? print $row_from->FromAddress ?></td>
+        <td><? print $row->SAddress ?></td>
         <? if( $row->IAddress) { ?>
           <td>Adresse</td>
           <td><? print $row->IAddress ?></td>
@@ -95,66 +87,66 @@ print $_lib['sess']->doctype;
     </tr>
     <tr>
         <td>Postnr/Poststed</td>
-        <td><? print $row_from->Zip." ".$row_from->City ?></td>
+        <td><? print $row->SZipCode." ".$row->SCity ?></td>
         <? if( $row->IAddress) { ?>
           <td>Postnr/Poststed</td>
           <td><? print $row->IZipCode." ".$row->ICity ?></td>
         <? } else { ?>
           <td>Postnr/Poststed</td>
           <td><? print $row->IPoBoxZipCode ?> <? print $row->IPoBoxZipCodeCity ?></td>
-        <? } ?>
+           <? } ?>
     </tr>
     <tr>
         <td>Land</td>
-        <td><? print $_lib['format']->codeToCountry($row_from->CountryCode) ?></td>
+        <td><? print $_lib['format']->codeToCountry($row->SCountryCode) ?></td>
         <td>Land</td>
-        <td><? print $_lib['format']->codeToCountry($row_to->CountryCode) ?></td>
+        <td><? print $_lib['format']->codeToCountry($row->ICountryCode) ?></td>
     </tr>
     <tr>
         <td>Tlf nr</td>
-        <td><? print $row_from->Phone ?></td>
+        <td><? print $row->SPhone ?></td>
         <td>Tlf nr</td>
-        <td><? print $row_to->Phone ?></td>
+        <td><? print $row->Phone ?></td>
     </tr>
     </tr>
         <tr>
         <td>Mobil nr</td>
-        <td><? print $row_from->Mobile ?></td>
+        <td><? print $row->SMobile ?></td>
         <td>Mobil nr</td>
-        <td><? print $row_to->Mobile ?></td>
+        <td><? print $row->IMobile ?></td>
     </tr>
     <tr>
         <td>Email</td>
-        <td><? print $row_from->Email ?></td>
+        <td><? print $row->SEmail ?></td>
         <td>Email</td>
         <td><? print $row->IEmail ?></td>
     </tr>
 
     <tr>
         <td>Web</td>
-        <td><? print $row_from->WWW ?></td>
+        <td><? print $row->SWeb ?></td>
         <td>Web</td>
-        <td><? print $row_to->Web ?></td>
+        <td><? print $row->IWeb ?></td>
     </tr>
 
 
     <tr>
         <td>Konto nr</td>
-        <td><? print $row_from->BankAccount ?></td>
+        <td><? print $row->SBankAccount ?></td>
         <td>Konto nr</td>
         <td><? print $row->BankAccount ?></td>
     </tr>
     <tr>
         <td>Org nr</td>
-        <td><? print $row_from->OrgNumber ?></td>
+        <td><? print $row->SOrgNo ?></td>
         <td>Org nr</td>
-        <td><? print $row_to->OrgNumber ?></td>
+        <td><? print $row->IOrgNo ?></td>
     </tr>
     <tr>
-        <td><?php if (!empty($row_from->VatNumber)) echo 'Vat nr' ?></td>
-        <td><? if (!empty($row_from->VatNumber)) print $row_from->VatNumber ?></td>
-        <td><?php if (!empty($row_to->VatNumber)) echo 'Vat nr' ?></td>
-        <td><? if (!empty($row_to->VatNumber)) print $row_to->VatNumber ?></td>
+        <td><?php if (!empty($row->SVatNo)) echo 'Vat nr' ?></td>
+        <td><? if (!empty($row->SVatNo)) print $row->SVatNo ?></td>
+        <td><?php if (!empty($row->IVatNo)) echo 'Vat nr' ?></td>
+        <td><? if (!empty($row->IVatNo)) print $row->IVatNo ?></td>
     </tr>
     <tr height="5">
         <td colspan="4"></td>
@@ -393,7 +385,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 
         if($_lib['sess']->get_person('FakturabankExportInvoiceAccess')) {
             print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
-            echo "<br />Orgnummer: ".  $row_to->OrgNumber;
+            echo "<br />Orgnummer: ".  $row->IOrgNo;
 
 
         }
@@ -417,7 +409,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <form name="send_mail" action="<? print $_lib['sess']->dispatch ?>t=invoice.sendmail&InvoiceID=<? print $InvoiceID ?>" method="post">
             <br />
             <input type="text" value="<? print $row->IEmail; ?>" name="email_recipient" />
-            <input type="hidden" value="<? print $row_from->Email ?>" name="send_mail_copy_mail" />
+            <input type="hidden" value="<? print $row->SEmail ?>" name="send_mail_copy_mail" />
             <input name="send_mail_copy" type="checkbox" checked /> kopi til firma 
             <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_send_email2', 'value'=>'Send email')) ?>
         </form>

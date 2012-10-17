@@ -13,14 +13,9 @@ $db_table3 = "invoiceoutprint";
 includelogic('accounting/accounting');
 $accounting = new accounting();
 require_once "record.inc";
-
-$get_invoice            = "select I.*, A.InvoiceCommentCustomerPosition, A.OrgNumber, A.VatNumber, A.Mobile, A.Phone, A.AccountName, A.Web from $db_table as I, accountplan as A where InvoiceID='$InvoiceID' and A.AccountPlanID=I.CustomerAccountPlanID";
+$get_invoice            = "select I.*, A.InvoiceCommentCustomerPosition from $db_table as I, accountplan as A where InvoiceID='$InvoiceID' and A.AccountPlanID=I.CustomerAccountPlanID";
 #print "$get_invoice<br>\n";
 $row                    = $_lib['storage']->get_row(array('query' => $get_invoice));
-
-$get_invoicefrom        = "select IName as FromName, IAddress as FromAddress, Email, WWW, IZipCode as Zip, ICity as City, Phone, BankAccount, Mobile, OrgNumber, VatNumber, ICountryCode as CountryCode from company where CompanyID='$row->FromCompanyID'";
-#print "$get_invoicefrom<br>\n";
-$row_from               = $_lib['storage']->get_row(array('query' => $get_invoicefrom));
 
 $query_invoiceline      = "select * from $db_table2 where InvoiceID='$InvoiceID' and Active <> 0 order by LineID asc";
 $result2                = $_lib['db']->db_query($query_invoiceline);
@@ -57,13 +52,13 @@ print $_lib['sess']->doctype ?>
 <thead>
     <tr>
         <td><label>Avsender</label></td>
-        <td><nobr><? print $row_from->FromName ?></nobr></td>
+        <td><nobr><? print $row->SName ?></nobr></td>
         <td><label>Mottaker</label></td>
-        <td><nobr><? print $row->AccountName." (".$row->CustomerAccountPlanID.")" ?></nobr></td>
+        <td><nobr><? print $row->IName." (".$row->CustomerAccountPlanID.")" ?></nobr></td>
     </tr>
     <tr>
         <td><label>Adresse</label></td>
-        <td><? print $row_from->FromAddress ?></td>
+        <td><? print $row->SAddress ?></td>
         <? if($row->IAddress) { ?>
           <td><label>Adresse</label></td>
           <td><? print $row->IAddress ?></td>
@@ -74,7 +69,7 @@ print $_lib['sess']->doctype ?>
     </tr>
     <tr>
         <td><label>Postnr/Poststed</label></td>
-        <td><? print $row_from->Zip." ".$row_from->City ?></td>
+        <td><? print $row->SZipCode." ".$row->SCity ?></td>
         <? if($row->IAddress) { ?>
           <td><label>Postnr/Poststed</label></td>
           <td><? print $row->IZipCode." ".$row->ICity ?></td>
@@ -85,37 +80,37 @@ print $_lib['sess']->doctype ?>
     </tr>
     <tr>
         <td><label>Land</label></td>
-        <td><? print $_lib['format']->codeToCountry($row_from->CountryCode) ?></td>
+        <td><? print $_lib['format']->codeToCountry($row->SCountryCode) ?></td>
         <td><label>Land</label></td>
-        <td><? print $_lib['format']->codeToCountry($row_from->CountryCode) ?></td>
+        <td><? print $_lib['format']->codeToCountry($row->ICountryCode) ?></td>
     </tr>
     <tr>
         <td><label>Tlf nr</label></td>
-        <td><? print $row_from->Phone ?></td>
+        <td><? print $row->SPhone ?></td>
         <td><label>Tlf nr</label></td>
         <td><? print $row->Phone ?></td>
     </tr>
     <tr>
         <td><label>Mobil nr</label></td>
-        <td><? print $row_from->Mobile ?></td>
+        <td><? print $row->SMobile ?></td>
         <td><label>Mobil nr</label></td>
-        <td><? print $row->Mobile ?></td>
+        <td><? print $row->IMobile ?></td>
     </tr>
     <tr>
         <td><label>Email</label></td>
-        <td><? print $row_from->Email ?></td>
+        <td><? print $row->SEmail ?></td>
         <td><label>Email</label></td>
         <td><? print $row->IEmail ?></td>
     </tr>
     <tr>
         <td><label>Web</label></td>
-        <td><? print $row_from->WWW ?></td>
+        <td><? print $row->SWeb ?></td>
         <td><label>Web</label></td>
-        <td><? print $row->Web ?></td>
+        <td><? print $row->IWeb ?></td>
     </tr>
     <tr>
         <td><label>Konto nr</label></td>
-        <td><? print $row_from->BankAccount ?></td>
+        <td><? print $row->SBankAccount ?></td>
         <td><label>Konto nr</label></td>
         <td><b><? print $row->BankAccount ?><b></td>
     </tr>
@@ -129,15 +124,15 @@ print $_lib['sess']->doctype ?>
 
     <tr>
         <td><label>Org nr</label></td>
-        <td><? print $row_from->OrgNumber ?></td>
+        <td><? print $row->SOrgNo ?></td>
         <td><label>Org nr</label></td>
-        <td><? print $row->OrgNumber ?></td>
+        <td><? print $row->IOrgNo ?></td>
     </tr>
     <tr>
-        <td><label><?php if (!empty($row_from->VatNumber)) echo 'Vat nr' ?></label></td>
-        <td><? if (!empty($row_from->VatNumber)) print $row_from->VatNumber ?></td>
-        <td><label><?php if (!empty($row->VatNumber)) echo 'Vat nr' ?></label></td>
-        <td><? if (!empty($row->VatNumber)) print $row->VatNumber ?></td>
+        <td><label><?php if (!empty($row->SVatNo)) echo 'Vat nr' ?></label></td>
+        <td><? if (!empty($row->SVatNo)) print $row->SVatNo ?></td>
+        <td><label><?php if (!empty($row->IVatNo)) echo 'Vat nr' ?></label></td>
+        <td><? if (!empty($row->IVatNo)) print $row->IVatNo ?></td>
     </tr>
     <tr>
       <td>Avdeling</td>

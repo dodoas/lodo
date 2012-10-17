@@ -277,11 +277,17 @@ class model_tablemetadata_tablemetadata {
         {
             if (!empty($tableFilter)) {
                 $table_choice = "Tables_in_$databaseName ($tableFilter)";
+                $table_choice_lcase_dbname = "Tables_in_" . strtolower($databaseName) . " ($tableFilter)";
             } else {
                 $table_choice = "Tables_in_$databaseName";
-
+                $table_choice_lcase_dbname = "Tables_in_" . strtolower($databaseName) . " ($tableFilter)";
             }
-            $table = $table_obj->{$table_choice};
+            if (isset($table_obj->{$table_choice})) {
+                $table = $table_obj->{$table_choice};
+            } else { # work around for strange issue where dbname in table_choice key comes out lowercase from db_fetch_object call
+                $table = $table_obj->{$table_choice_lcase_dbname};
+            }
+
             #print_r($table);
     
             #print "tabell: $table<br>";
