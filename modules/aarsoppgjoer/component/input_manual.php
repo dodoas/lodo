@@ -106,7 +106,7 @@
 		<td>Bilagsdato:</td><td><input class="left" type="text" id="bilag1-dato" name="bilag1-dato" value="<?php print $b1->getDate(); ?>" /></td>
 	</tr>
 	<tr>
-		<td colspan="3"><input type="submit" name="submit" id="submit" value="Forhåndsvisning" /></td>
+		<td colspan="3"><input type="submit" name="submit" id="submit" value="Lagre" /></td>
 		<td>Periode:</td><td><input class="left" type="text" id="bilag2-periode" name="bilag2-periode" value="<?php print $b2->getPeriod(); ?>" /></td>
 		<td>Periode:</td><td><input class="left" type="text" id="bilag1-periode" name="bilag1-periode" value="<?php print $b1->getPeriod(); ?>" /></td>
 	</tr>
