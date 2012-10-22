@@ -75,7 +75,7 @@
 				}
 				
 				$kto  = $linje->getKonto()->nummer;
-				$ktmp = $linje->getKonto()->navn;
+				$ktmp = $linje->getKonto()->AccountPlanType;
 				if ($ktmp != $kn) {
 					if ($kn != '') {
 						//sum her
