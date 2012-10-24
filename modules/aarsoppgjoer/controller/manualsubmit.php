@@ -47,14 +47,14 @@
 	} else if ($_REQUEST['radiotype'] == 'direkte') {
 		$_SESSION['aarsoppgjoer_type'] = 'direkte';
 		
-		$script = 'window.open ("?t=aarsoppgjoer.index&a=review", "Forhåndsvisning","'. $window_options .'");';
-		//$a = "review";
-		require("$a.php");
+        $script = 'window.location.href =  "?t=aarsoppgjoer.index&a=review";';
+		$a = "review";
+        require("$a.php");
 	} else if ($_REQUEST['radiotype'] == 'diff') {
 		$_SESSION['aarsoppgjoer_type'] = 'diff';
-		$script = 'window.open ("?t=aarsoppgjoer.index&a=review_diff", "Forhåndsvisning","'. $window_options .'");';
-		//$a = "review_diff";
-		require("$a.php");
+        $script = 'window.location.href =  "?t=aarsoppgjoer.index&a=review_diff";';
+		$a = "review_diff";
+        require("$a.php");
 	} else {
 		$_SESSION['aarsoppgjoer_type'] = 'lagre';
 		$a = "input_manual";

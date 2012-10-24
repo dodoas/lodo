@@ -13,14 +13,15 @@
 	<li><a href="?t=aarsoppgjoer.index&a=input_manual">Rediger</a></li>
 <?php
 	if ($b3->sum() == 0 && ($b1->sum() == 0 || $b1->getNummer() == 0)) {
-		print "<li><a href=\"?t=aarsoppgjoer.index&a=lagrediff\">Lagre (Bokfør i Lodo)</a></li>";
+		print "<li><a href=\"?t=aarsoppgjoer.index&a=lagrediff&journal=both\">Bokfør</a> ";
+        print " / <a href=\"?t=aarsoppgjoer.index&a=lagrediff&journal=one\">Bokfør kun bilag 1</a>";
+		print " / <a href=\"?t=aarsoppgjoer.index&a=lagrediff&journal=two\">Bokfør kun Differanse-bilag</a></li>";
 	} else {
 		print "<li>Kan ikke lagre. Bilagene må gå i null.</li>";
 		print "<li>differanse: " . $b3->sum() . "</li>";
 		print "<li>bilag1: " . $b1->sum() . "</li>";
 	}
 ?>
-	<li><a href="?t=aarsoppgjoer.index&a=reset">Nullstill</a></li>
 </ul>
 
 <table id="review"><tr>

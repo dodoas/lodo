@@ -6,6 +6,15 @@
  * Window - Preferences - PHPeclipse - PHP - Code Templates
  */
 
+$journal = "both";
+if (isset($_GET['journal'])) {
+    if ($_GET['journal'] == "one") {
+        $journal = "one";
+    } else if ($_GET['journal'] == "two") {
+        $journal = "two";
+    }
+}
+
  	$error = null;
 	$a = "savesuccessful";
 	$title = "Tittel";
@@ -28,8 +37,12 @@
 		
 		$b3 = Bilag::diff($b1, $b2);
 
-		$b1->lagre();
-		$b3->lagre();
+        if ($journal == "one" || $journal == "both") {
+            $b1->lagre();
+        }
+        if ($journal == "two" || $journal == "both") {
+            $b3->lagre();
+        }
 		
  	} catch (Exception $e) {
  		$error = "Det oppsto en feil under lagring. " . $e;
