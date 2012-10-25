@@ -49,6 +49,7 @@ if (isset($_GET['journal'])) {
  		$a = "error";
  		die($error);
  	}
-	
+
+print str_replace("VoucherPeriod wrong in function update_motkonto: ##. Aborting update<br />", "", $_lib['message']->get());	
 ?>
 

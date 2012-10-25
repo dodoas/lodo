@@ -10,7 +10,7 @@
 	require_once $_SETUP['HOME_DIR']."/modules/altinn/_include/class_lodo.php";
 	includemodel('accounting/accounting');
 	$accounting = new accounting();
-	
+
 	//egne modeller
 	includemodel("aarsoppgjoer/konto");
 	includemodel("aarsoppgjoer/linje");
@@ -36,7 +36,9 @@
 ?>
 <html>
 <head>
-	<title><?php print $title; ?></title>
+<title><?php 
+if ($title == 'Tittel') $title = "&Aring;rsoppgj&oslash;r"; 
+print $title; ?></title>
 	
 	
 <?php

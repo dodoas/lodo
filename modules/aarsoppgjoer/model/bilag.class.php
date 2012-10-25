@@ -534,6 +534,15 @@ class bilag {
 	    	if ($this->getNummer() == -1) {
 				list($JournalID, $message) = $accounting->get_next_available_journalid($_sess, array('available' => true, 'update' => true, 'type' => $this->type));
 	    	} else {
+                $sql_voucher = "select * from voucher where JournalID='$this->journal_id' and VoucherType='$this->type' and Active=1 order by VoucherID desc";
+                $result_voucher         = $_lib['db']->db_query($sql_voucher);
+                $rowCount               = $_lib['db']->db_numrows($result_voucher);
+                if($rowCount >= 1) {
+                    while($voucher = $_lib['db']->db_fetch_object($result_voucher)) {
+                        $accounting->delete_voucher_line_smart($voucher->VoucherID, $this->journal_id, $this->type, 'recreate_aarsoppgjoer_journal');
+                    }
+                }
+
 	    	    $accounting->delete_journal($this->journal_id, $this->type);
 	    	}
 	    	
