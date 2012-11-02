@@ -187,7 +187,11 @@ class Date
     {
         global $_lib;
 
-        $period = $args['value'];
+        if(is_array($args)){
+          $period = $args['value'];
+        } else {
+          $period = $args;
+        }
 
         if($args['realPeriod'] == 1)
         {
