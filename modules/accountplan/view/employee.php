@@ -135,21 +135,21 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
   <tr>
     <td class="menu">Telefon</td>
     <td></td>
-    <td><input type="text" name="accountplan.Phone" value="<? print $account->Phone  ?>" size="20"></td>
+    <td><input type="text" name="accountplan.Phone" value="<? print $account->Phone  ?>" size="30"></td>
     <td>Mobil</td>
     <td><input type="text" name="accountplan.Mobile" value="<? print $account->Mobile  ?>" size="20"></td>
   </tr>
   <tr>
     <td class="menu">E-Post privat</td>
     <td></td>
-    <td><input class="lodoreqfelt" type="text" name="accountplan.Email" value="<? print $account->Email  ?>" size="20"></td>
+    <td><input class="lodoreqfelt" type="text" name="accountplan.Email" value="<? print $account->Email  ?>" size="30"></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
     <td class="menu">E-Post fakturabank</td>
     <td></td>
-    <td><input type="text" name="fakturabankemail.Email" value="<? print $fakturabankemail->Email  ?>" size="20"></td>
+    <td><input type="text" name="fakturabankemail.Email" value="<? print $fakturabankemail->Email  ?>" size="30"></td>
     <td></td>
     <td></td>    
   </tr>

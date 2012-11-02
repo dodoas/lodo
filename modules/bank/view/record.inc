@@ -49,8 +49,8 @@ elseif($_lib['input']->getProperty('action_bank_accountlinedelete')) {
     $_lib['db']->db_delete($sql_delete);
 }
 elseif($_lib['input']->getProperty('action_bank_accountlinenew')) {
-
-    $bank->AddAccountLines($_lib['input']->getProperty('numnewlines'));
+    $startat = $_lib['input']->getProperty('action_bank_accountlinenew_startat');
+    $bank->AddAccountLinesWithJournalID($_lib['input']->getProperty('numnewlines'), $startat);
 }
 elseif($_lib['input']->getProperty('action_bank_zerojournalid')) {
     $bank->ZeroAccountLineJournalID();
@@ -76,6 +76,28 @@ elseif($_lib['input']->getProperty('action_bank_commentupdate')) {
 	$tables['bankvotingperiod']    = 'BankVotingPeriodID';
 	$_lib['storage']->db_update_multi_table($_POST, $tables);
 }
+elseif($_lib['input']->getProperty('action_save_extras')) {
+    $period = $_lib['input']->getProperty('Period');
+
+    $_lib['db']->db_query(
+        sprintf("DELETE FROM accountextras WHERE AccountID = %d AND Period = '%s'", 
+                $bank->AccountID, $bank->ThisPeriod)
+        );
+
+    $q = sprintf("
+INSERT INTO accountextras 
+  (`AccountID`, `Period`, `BankEntryIn`, `BankEntryOut`, `BankLastIn`, `BankLastOut`)
+VALUES
+  ('%d', '%s', '%s', '%s', '%s', '%s');
+", 
+                 $bank->AccountID, 
+                 $bank->ThisPeriod,
+                 $_POST['extraEntryIn'], $_POST['extraEntryOut'], 
+                 $_POST['extraLastIn'], $_POST['extraLastOut']
+        );
+
+    $_lib['db']->db_query($q);
+}
 
 
 function do_bank_update($AccountID, $Period) {
@@ -97,8 +119,6 @@ function do_bank_update($AccountID, $Period) {
     $fbvoting         = new lodo_fakturabank_fakturabankvoting();
     $fbreconcilationreason = new lodo_fakturabank_bankreconciliationreason();
     
-    printf("ANYBODY HERE?<br />\n");
-
     foreach($DataH as $server_name => $server_data) {
         foreach($server_data as $database_name => $database_data) {
             foreach($database_data as $table_name => $table_data) {
