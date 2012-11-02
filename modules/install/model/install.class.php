@@ -204,6 +204,7 @@ set
 CompanyID=1, 
 CreatedDate=NOW(), 
 ValidFrom=NOW(), 
+VATDuty=1,
 
 CompanyName='" . $args['installation_VName']. "', 
 VName='" . $args['installation_VName']. "', 
