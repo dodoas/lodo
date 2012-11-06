@@ -42,9 +42,9 @@ class pdfInvoice
     public $invoiceHeadRecipientLeftMargin = 9;
 
     public $invoiceHeadCompanyInfoStart = 20;
-    public $invoiceHeadCompanyInfoLeftMargin = 135;
+    public $invoiceHeadCompanyInfoLeftMargin = 132;
     public $invoiceHeadCompanyBetingelserLeftMargin = 135;
-    public $invoiceHeadCompanyInfoWidth = 25;
+    public $invoiceHeadCompanyInfoWidth = 29;
     public $invoiceHeadCompanyInfoWidth2 = 22;
     public $invoiceHeadCompanyInfoFont = 9;
     public $invoiceHeadlineHeight = 3.5;
