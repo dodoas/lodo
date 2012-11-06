@@ -123,9 +123,9 @@ print $_lib['sess']->doctype ?>
 
 
     <tr>
-        <td><label>Org nr</label></td>
+        <td><label>Foretaksregisteret</label></td>
         <td><? print $row->SOrgNo ?></td>
-        <td><label>Org nr</label></td>
+        <td><label>Foretaksregisteret</label></td>
         <td><? print $row->IOrgNo ?></td>
     </tr>
     <tr>

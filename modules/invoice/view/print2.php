@@ -96,21 +96,21 @@ else
     $params["companyInfo"]["Kontonr"] = $row->SBankAccount;
 
 if  (!empty($row->SVatNo)) {
-        $params["companyInfo"]["OrgNr"] = orgnr($row->SOrgNo);
+        $params["companyInfo"]["Foretaksreg"] = orgnr($row->SOrgNo);
         $params["companyInfo"]["MvaNr"] = orgnr($row->SVatNo);
 } else {
     if   (strlen($row->SOrgNo) == 9)
     {
         if ($_lib['sess']->get_companydef('VATDuty'))
         {
-            $params["companyInfo"]["OrgNr"] = orgnr($row->SOrgNo) . " MVA";
+            $params["companyInfo"]["Foretaksreg"] = orgnr($row->SOrgNo) . " MVA";
         }
         else
         {
-            $params["companyInfo"]["OrgNr"] = orgnr($row->SOrgNo);
+            $params["companyInfo"]["Foretaksreg"] = orgnr($row->SOrgNo);
         }
     } else {
-        $params["companyInfo"]["OrgNr"] = $row->SOrgNo;
+        $params["companyInfo"]["Foretaksreg"] = $row->SOrgNo;
     }
 }
 

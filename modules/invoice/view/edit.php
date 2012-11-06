@@ -137,9 +137,9 @@ print $_lib['sess']->doctype;
         <td><? print $row->BankAccount ?></td>
     </tr>
     <tr>
-        <td>Org nr</td>
+        <td>Foretaksregisteret</td>
         <td><? print $row->SOrgNo ?></td>
-        <td>Org nr</td>
+        <td>Foretaksregisteret</td>
         <td><? print $row->IOrgNo ?></td>
     </tr>
     <tr>
