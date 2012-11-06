@@ -829,16 +829,16 @@ class timesheet_user_page
             $dest, $width
             );
 
+        printf(
+            "</tr>\n"
+            );
+
         /* Headers */
         foreach($fields as $field => $field_data)
         {
             printf(' <th style="text-align: left;">%s</th> ', $field_data['translation']);
         }
-
-        printf(
-            "</tr>\n"
-            );
-
+        
         $sum_fields = array();
         $i = 0;
         $sum_h  = 0;
@@ -877,17 +877,26 @@ class timesheet_user_page
                     $line_date = $entry['Date'];
                     $sum_time = 0.0;
                     $control = 0;
-                    for($i = 0; $entries[$entries_i + $i]['Date'] == $line_date; $i++)
+                    for($i_ = 0; $entries[$entries_i + $i_]['Date'] == $line_date; $i_++)
                     {
                         if ($control++ > 2000) {
                             break;
                         }
-                        $t = explode(':', $entries[$entries_i + $i]['SumTime']);
+                        $t = explode(':', $entries[$entries_i + $i_]['SumTime']);
 
                         $sum_time += ((int)$t[0] * 60) + (int)$t[1];
                     }
 
                     $w = date('w', strtotime($period . '-' . $day_no));
+
+                    if($w == 0 && $i > 6) {
+                        /* Headers */
+                        foreach($fields as $field => $field_data)
+                        {
+                            printf(' <th style="text-align: left;">%s</th> ', $field_data['translation']);
+                        }
+                    }
+
                     $wd = array('S&oslash;ndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'L&oslash;rdag');
                     $w2 = $wd[$w];
                     printf("<tr style='height: 25px;', class='day_%d'><td><b>%s</b></td><td colspan='2'><b>%s</b></td><td>%02d:%02d</td>".
@@ -899,7 +908,8 @@ class timesheet_user_page
 
                 }
 
-                printf("<tr style='%s' id='rowno_%d' class='row'><td></td>\n", "color:black;", $i);
+                $w = date('w', strtotime($period . '-' . $day_no));
+                printf("<tr style='%s' id='rowno_%d' class='row day_%d'><td></td>\n", "color:black;", $i, $w);
                 $last_day = $day_no;
                 
                 $buttons = "";
@@ -910,9 +920,9 @@ class timesheet_user_page
                     $buttons .= sprintf("<input type='submit' name='lock_line_%d' class='lock_line' value='L&aring;s linje' /> ", 
                                         $entry['EntryID']);
 
-                    $buttons .= sprintf("<input type='button' id='new_line_%s_%d' value='Ny linje' class='new_line' /> ".
+                    $buttons .= sprintf("<input type='button' id='new_line_%s_%d_%d' value='Ny linje' class='new_line' /> ".
                                         "<input type='button' id='del_line_%s' class='del_line' value='Slett linje' />",
-                                        $entry['Day'], $i, $i);
+                                        $entry['Day'], $i, $w, $i);
                 }
                 else if(!$locked)
                 {
@@ -1169,20 +1179,29 @@ class timesheet_user_page
         $projects  = $this->user->list_projects();
 
 
-        printf("<pre style='page-break-before: always;'>");
-        printf("%-40s %.2f\n", "Jobbet timer", $sum_h + $sum_m / 60);
+        //printf("<pre style='page-break-before: always;'>");
+
+        printf("<table>");
+        printf("<tr><td>%s</td><td></td><td style='text-align: right;'>%.2f</td></tr>", "Jobber timer", $sum_h + $sum_m / 60);
+        //printf("</table>");
+
+        //printf("%-40s %.2f\n", "Jobbet timer", $sum_h + $sum_m / 60);
 
 
         foreach($sum_fields as $f => $a) {
             if($f == 'Project' || $f == 'Customer' || $f == 'CompanyDepartment' || $f == 'WorkType')
             {
-                printf("\n%s - timer\n", $fields[$f]['translation']);
-                $format = "    %-36s %.2f\n";
+                //printf("\n%s - timer\n", $fields[$f]['translation']);
+                printf("<tr><td>%s - timer</td></tr>", $fields[$f]['translation']);
+                //$format = "    %-36s %.2f\n";
+                $format = "<tr><td></td><td>%s</td><td style='text-align: right;'>%.2f</td></tr>";
             }
             else if($f == 'Diet' || $f == 'Accommodation')
             {
-                printf("\n%s, antall\n", $fields[$f]['translation']);
-                $format = "    %-36s %d\n";
+                //printf("\n%s, antall\n", $fields[$f]['translation']);
+                printf("<tr><td>%s, antall</td></tr>", $fields[$f]['translation']);
+                //$format = "    %-36s %d\n";
+                $format = "<tr><td></td><td>%s</td><td style='text-align: right;'>%d</td></tr>";
             }
 
             $o = $fields[$f]['options'];
@@ -1197,21 +1216,30 @@ class timesheet_user_page
  
             if($f == 'Project' || $f == 'Customer' || $f == 'CompanyDepartment' || $f == 'WorkType')
             {
-                printf("    %-36s %2.2f\n", "Sum " . $fields[$f]['translation'], $sum);
+                printf("<tr><td></td><td>%s</td><td style='text-align: right;'>%2.2f</td></tr>", 
+                       "Sum " . $fields[$f]['translation'], $sum);
+                //printf("    %-36s %2.2f\n", "Sum " . $fields[$f]['translation'], $sum);
             }
 
         }
 
-        if($sum_km > 0)
-            printf("\n%-47s %d\n", "Kilometer kj&oslash;rt", $sum_km);
+        if($sum_km > 0) {
+            //printf("\n%-47s %d\n", "Kilometer kj&oslash;rt", $sum_km);
+            printf("<tr><td></td><td>Kilometer kj&oslash;rt</td><td>%d</td></tr>", $sum_km);
+        }
 
         if($sum_toll + $sum_parking + $sum_drivingexpenses > 0) 
         {
             printf("\nUtlagt - kroner\n");
-            if($sum_toll > 0) printf("    %-36s %2.2f\n", "Bompenger", $sum_toll);
-            if($sum_parking > 0) printf("    %-36s %2.2f\n", "Parkering", $sum_parking);
-            if($sum_drivingexpenses > 0) printf("    %-36s %2.2f\n", "Reiseutgifter", $sum_drivingexpenses);
+            if($sum_toll > 0) printf("<tr><td></td><td>%s</td><td>%2.2f</td></tr>", "Bompenger", $sum_toll);
+            if($sum_parking > 0) printf("<tr><td></td><td>%s</td><td>%2.2f</td></tr>", "Bompenger", $sum_parking);
+            if($sum_drivingexpenses > 0) printf("<tr><td></td><td>%s</td><td>%2.2f</td></tr>", "Bompenger", $sum_drivingexpenses);
+            //if($sum_toll > 0) printf("    %-36s %2.2f\n", "Bompenger", $sum_toll);
+            //if($sum_parking > 0) printf("    %-36s %2.2f\n", "Parkering", $sum_parking);
+            //if($sum_drivingexpenses > 0) printf("    %-36s %2.2f\n", "Reiseutgifter", $sum_drivingexpenses);
         }
+
+        printf("</table>");
 
         ?>
         
@@ -1230,15 +1258,15 @@ $(document).ready(function() {
 
     $('.new_line').click(function() {
         var arr = this.id.split('_');
-        var day = arr[2], i = arr[3];
+        var day = arr[2], i = arr[3], wd = ''+arr[4];
 
         var color = (day % 2 != 0 ? "background-color: #000; color: white;" : "background-color:#FFF; color:black;");
 <?
-                $row = sprintf("<tr id='rowno_%%I%%' class='row'>\n");
+                $row = sprintf("<tr id='rowno_%%I%%' class='row day_%%WD%%'>\n");
 
-                $buttons = sprintf("<td><input type='button' id='new_line_%s_%s' value='Ny linje' class='new_line' /> ".
+                $buttons = sprintf("<td><input type='button' id='new_line_%s_%s_%s' value='Ny linje' class='new_line' /> ".
                                    "<input type='button' id='del_line_%s' class='del_line' value='Slett linje' /></td>",
-                                   "%DAY%", "%I%", "%I%");
+                                   "%DAY%", "%I%", "%WD%", "%I%");
                 
                 /*
                  * Folgende kode er identisk med noe som ligger lengre opp.
@@ -1346,10 +1374,12 @@ $(document).ready(function() {
 ?>
         line = line.replace(/\%I\%/g, nextI)
                    .replace(/\%COLOR\%/g, color)
+                   .replace(/\%WD\%/g, wd)
                    .replace(/\%DAY\%/g, day);
+
         var last_line = $(this).closest('tr');
         last_line.after(line);
-        $('#new_line_' + day + '_' + nextI).click(arguments.callee);
+        $('#new_line_' + day + '_' + nextI + '_' + wd).click(arguments.callee);
         $('#del_line_' + nextI).click(del_function);
         nextI ++;
 

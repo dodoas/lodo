@@ -223,6 +223,7 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
         </th>
     </tr>
 </form>
+
 <form id="list_form" name="template_update"  name="bankvoting" action="<? print $MY_SELF ?>" method="post">
 <? print $_lib['form3']->hidden(array('name' => 'AccountID', 'value' => $bank->AccountID)) ?>
 <? print $_lib['form3']->hidden(array('name' => 'Period',    'value' => $bank->ThisPeriod)) ?>
@@ -234,7 +235,9 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
     </td>
     <td>
     <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
-      <input type="text" name="numnewlines" value="0" size="3" class="number">
+      Antall: <input type="text" name="numnewlines" value="0" size="3" class="number">
+      Bilagsnummer: <input type="text" value="0" size="11" name="action_bank_accountlinenew_startat">
+
     <? } ?>
     <? if($_lib['sess']->get_person('AccessLevel') >= 2 && !$bank->bankvotingperiod->Locked) { ?>
         <input type="submit" name="action_bank_accountlinenew" value="Nye linjer (N)" accesskey="N" tabindex="100000">
@@ -243,6 +246,43 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
     <td colspan="19">
     </td>
   </tr>
+
+<?php
+   $extras_r = $_lib['db']->db_query(
+       sprintf("SELECT * FROM accountextras WHERE AccountID = %d AND Period = '%s'", $bank->AccountID, $bank->ThisPeriod)
+       );
+   $extras = $_lib['db']->db_fetch_assoc($extras_r);
+   if(!$extras) {
+      $extraEntryIn = 0;
+      $extraEntryOut = 0;
+      $extraLastIn = 0;
+      $extraLastOut = 0;
+   }
+   else {
+      $extraEntryIn = $extras['BankEntryIn'];
+      $extraEntryOut = $extras['BankEntryOut'];
+      $extraLastIn = $extras['BankLastIn'];
+      $extraLastOut = $extras['BankLastOut'];
+   }
+?>
+
+<tr>
+  <td>Bank den f&oslash;rste</td>
+  <td class="<? print $bank->DebitColor ?>"><input type="text" style="text-align: right;" value="<?= $extraEntryIn ?>" name="extraEntryIn" /></td>
+  <td class="<? print $bank->CreditColor ?>"><input type="text" style="text-align: right;" value="<?= $extraEntryOut ?>" name="extraEntryOut" /></td>
+  <td></td>
+  <td><? if( ($bank->bankvotingperiod->AmountIn - $bank->bankvotingperiod->AmountOut) != ($extraEntryIn - $extraEntryOut) ) echo "<span style='color:red'>Differanse fra bank: " . (($bank->bankvotingperiod->AmountIn - $bank->bankvotingperiod->AmountOut) - ($extraEntryIn - $extraEntryOut)) . "</span>";  ?></td>
+
+</tr>
+<tr>
+  <td>Bank den siste</td>
+  <td class="<? print $bank->DebitColor ?>"><input type="text" style="text-align: right;" value="<?= $extraLastIn ?>" name="extraLastIn" /></td>
+  <td class="<? print $bank->CreditColor ?>"><input type="text" style="text-align: right;" value="<?= $extraLastOut ?>" name="extraLastOut" /></td>
+  <td><input type="submit" name="action_save_extras" value="Lagre bank" /></td>
+  <td><? if($bank->bankaccountcalc->AmountSaldo != ($extraLastIn - $extraLastOut)) echo "<span style='color:red'>Differanse fra bank: " . ($bank->bankaccountcalc->AmountSaldo - ($extraLastIn - $extraLastOut)) . "</span>";  ?></td>
+</tr>
+
+
 
 <tr class="red">
     <td colspan="19">
@@ -282,9 +322,25 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
     <td class="menu">Dato</td>
   </tr>
   <tr>
+    <?php
+    if($bank->bankvotingperiod->AmountIn - $bank->bankvotingperiod->AmountOut == 0) {
+        $bankin = $extraEntryIn;
+        $bankout = $extraEntryOut;
+    }
+    else {
+        $bankin = $bank->bankvotingperiod->AmountIn;
+        $bankout = $bank->bankvotingperiod->AmountOut;
+    }
+    ?>
+
+
     <td colspan="2">Saldo<? print $bank->ThisPeriod ?>-01</td>
-    <td><? print $_lib['form3']->text(array('table' => 'bankvotingperiod', 'field' => 'AmountOut', 'pk' => $bank->bankvotingperiod->BankVotingPeriodID, 'value' =>$_lib['format']->Amount($bank->bankvotingperiod->AmountOut),     'class' => 'number')) ?></td>
-    <td><? print $_lib['form3']->text(array('table' => 'bankvotingperiod', 'field' => 'AmountIn',  'pk' => $bank->bankvotingperiod->BankVotingPeriodID, 'value' =>$_lib['format']->Amount($bank->bankvotingperiod->AmountIn),      'class' => 'number')) ?></td>
+    <td><? print $_lib['form3']->text(array('table' => 'bankvotingperiod', 'field' => 'AmountOut',
+                                            'pk' => $bank->bankvotingperiod->BankVotingPeriodID,
+                                            'value' =>$_lib['format']->Amount($bankout),     'class' => 'number')) ?></td>
+    <td><? print $_lib['form3']->text(array('table' => 'bankvotingperiod', 'field' => 'AmountIn',
+                                            'pk' => $bank->bankvotingperiod->BankVotingPeriodID,
+                                            'value' =>$_lib['format']->Amount($bankin),      'class' => 'number')) ?></td>
     <td colspan="14" 
         class="<? $v = $bank->bankvotingperiod->AmountSaldo - $bank->prevbankaccountcalc->AmountSaldo; if(abs($v) < 0.00001 && abs($v) > -0.00001) print 'sub'; else print 'red';?>">
       Saldo fra forrige mnd (<? print $bank->PrevPeriod ?>): 

@@ -92,6 +92,7 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
         
         $_lib['storage']->store_record(array('data' => array('AccountPlanID' => $AccountPlanID, 'Active' => 1), 'table' => 'accountplan', 'debug' => false));
         $_POST['accountplan_Active'] = 1;
+	$_POST['accountplan_EnablePostPost'] = 1;
         
         // Possible to extend or alter parameters here
         $query   = "select * from $db_table where AccountPlanID = $AccountPlanID";

@@ -972,6 +972,47 @@ class framework_logic_bank {
         }
     }
 
+    public function AddAccountLinesWithJournalID($num, $JournalID_startat) {
+        if($JournalID_startat == 0) {
+            $this->AddAccountLines($num);
+        }
+        else {
+            for($i = 0; $i < $num; $i++) {
+                global $_lib;
+                
+                if($this->debug) print "AddAccountLine<br>\n";
+                
+                $LastDate = $_lib['date']->get_last_day_in_month($this->ThisPeriod);
+                
+                $DataH = array();
+                $DataH['Period']            = $this->ThisPeriod;
+                $DataH['AccountID']         = $this->AccountID;
+                $DataH['Active']            = 1;
+                $DataH['AccountID']         = $this->AccountID;
+                $DataH['InterestDate']      = $LastDate;
+                $DataH['BookKeepingDate']   = $LastDate;
+                $DataH['Period']            = $this->ThisPeriod;
+                $DataH['Day']               = substr($LastDate,8,2);
+                $DataH['JournalID']         = $JournalID_startat + $i;
+                $DataH['Priority']          = $this->getMaxAccountlinePriority();
+                
+                $DataH['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');
+                $DataH['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
+                $DataH['UpdatedByPersonID'] = $_lib['sess']->get_person('PersonID');
+                
+                if(is_array($args)) {
+                    foreach($args as $key => $value) {
+                        $DataH[$key] = $value;
+                    }
+                }
+
+                $postvl['AccountLineID'] = $_lib['storage']->store_record(array('table' => 'accountline', 'data' => $DataH, 'debug' => $this->debug));
+                $AccountLineID = $_lib['db']->store_record(array('data' => $postvl, 'table' => 'voucheraccountline', 'debug' => $this->debug));
+            }
+        }
+            
+    }
+
     /***********************************************************************************************
     * Checks if it exists accountlines for the specified AccountID and Period
     * @param none

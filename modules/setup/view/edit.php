@@ -112,7 +112,7 @@ print $_lib['sess']->doctype ?>
     <td class="submenu">Faktura kontant</td>
     <td><? print $_lib['form3']->accountplan_number_menu(array('table' => 'setup.value', 'field' => 'salecashut', 'value' => $setup['salecashut'], 'type' => array(0 => 'balance'))) ?></td>
     <td>&nbsp;</td>
-    <td><? print $_lib['form3']->accountplan_number_menu(array('table' => 'setup.value', 'field' => 'salecashreskontro', 'value' => $setup['salecashreskontro'], 'type' => array(0 => 'supplier'))) ?></td>
+    <td><? print $_lib['form3']->accountplan_number_menu(array('table' => 'setup.value', 'field' => 'salecashreskontro', 'value' => $setup['salecashreskontro'], 'type' => array(0 => 'customer'))) ?></td>
     <td>&nbsp;</td>
     <td><? print $_lib['form3']->accountplan_number_menu(array('table' => 'setup.value', 'field' => 'salecashinntekt', 'value' => $setup['salecashinntekt'], 'type' => array(0 => 'result'))) ?></td>
   </tr>
