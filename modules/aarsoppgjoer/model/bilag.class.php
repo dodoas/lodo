@@ -411,7 +411,7 @@ class bilag {
     			$kname       = $accountplan->AccountPlanType;
     			$temp_kto    = $kres;
     		} while ($temp_kto != 0);
-    		if (strripos($kname, "balance") === 0) {
+    		if (!(strripos($kname, "result") === 0)) { # show diff for anything but result accounts (balance, supplier, customer and employees)
 				foreach ($tmp as $avd => $val) {
 					if (!isset($ny[$kto][$avd])) {
 						$ny[$kto][$avd] = -$val;
