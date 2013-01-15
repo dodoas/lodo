@@ -1,76 +1,5 @@
-<head>
-    <title>Empatix - salary list</title>
-    <meta name="cvs"                content="$Id: list.php,v 1.49 2005/10/28 17:59:41 thomasek Exp $" />
-    <? includeinc('head') ?>
-
-</head>
-<body>
-
-<? includeinc('top') ?>
-<? includeinc('left') ?>
-
 <?php
-
 $year = isset($_REQUEST["year"]) ? (int)$_REQUEST["year"] : (isset($_REQUEST["report_year"]) ? (int)$_REQUEST["report_year"] : date("Y"));
-
-include('record_salaryreport.php');
-includemodel('salary/salaryreport');
-
-/*
-
-CREATE TABLE  `salaryreport` (
-`SalaryReportID` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`Date` DATE NOT NULL ,
-`AccountPlanID` INT( 11 ) NOT NULL ,
-`Locked` BOOL NOT NULL ,
-`LockedBy` INT( 11 ) NOT NULL
-) ENGINE = MYISAM
-
-
-CREATE TABLE  `salaryreportentries` (
-`SalaryReportEntryID` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`SalaryReportID` INT( 11 ) NOT NULL ,
-`Code` VARCHAR( 7 ) NOT NULL ,
-`Amount` FLOAT NOT NULL
-) ENGINE = MYISAM
-
-CREATE TABLE  `salaryreportaccount` (
-`SalaryReportAccountID` INT( 11 ) NOT NULL AUTO_INCREMENT ,
-`AccountPlanID` INT( 11 ) NOT NULL ,
-`Year` YEAR NOT NULL ,
-`Locked` BOOL NOT NULL ,
-`LockedBy` INT( 11 ) NOT NULL ,
-PRIMARY KEY (  `SalaryReportAccountID` ) 
-) ENGINE = MYISAM
-
-CREATE TABLE  `salaryreportaccountentries` (
-`SalaryReportAccountEntryID` INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`SalaryReportAccountID` INT( 11 ) NOT NULL ,
-`Code` VARCHAR( 7 ) NOT NULL ,
-`Amount` FLOAT NOT NULL
-) ENGINE = MYISAM
-
-*/
-
-include('reportcodes.php');
-
-$employees_q = "select *, A.KommuneID as NoKommune from salaryconf as S, accountplan as A, kommune as K where S.AccountPlanID=A.AccountPlanID and (A.KommuneID=K.KommuneID or (A.KommuneID = 0 and K.KommuneID = 1) ) and S.SalaryConfID!=1 order by AccountName asc";
-$employees_r = $_lib['db']->db_query($employees_q);
-
-printf("<h1>%s - L&oslash;nnsrapport for %d</h1>", $_lib['sess']->get_companydef('CompanyName'), $year);
-
-print('<table class="lodo_data" border=1">
-<tr>
-  <th></th>
-  <th></th>
-  <th>Innberettet</th>
-');
-
-foreach($codes as $code) {
-    printf('<th>%s</th>', $code);
-}
-
-print('</tr>');
 
 function print_values($codes, $line, $print_extra = true) {
     global $_lib, $year;
@@ -127,20 +56,79 @@ function print_sums($employee_id, $codes, $report) {
         printf("<td><a href='%st=salary.addreport&AccountPlanID=%d&year=%d'>+</td>", $_lib['sess']->dispatch, $employee_id, $year);
 }
 
+?>
+
+<head>
+    <title>Empatix - salary list</title>
+    <meta name="cvs"                content="$Id: list.php,v 1.49 2005/10/28 17:59:41 thomasek Exp $" />
+    <? includeinc('head') ?>
+
+</head>
+<body>
+
+<? includeinc('top') ?>
+<? includeinc('left') ?>
+
+<?php
+
+include('record_salaryreport.php');
+includemodel('salary/salaryreport');
+include('reportcodes.php');
+
+printf("<h1>%s - L&oslash;nnsrapport for %d</h1>", $_lib['sess']->get_companydef('CompanyName'), $year);
+
+/*
+ * Detaljetabellen
+ */
+print('<table class="lodo_data" border=1">
+<tr>
+  <th></th>
+  <th></th>
+  <th>Innberettet</th>
+');
+
+foreach($codes as $code) {
+    printf('<th>%s</th>', $code);
+}
+
+print('</tr>');
 
 $all_reports = array();
+$employees_q = "
+select 
+  *, A.KommuneID as NoKommune from salaryconf as S, accountplan as A, kommune as K 
+where 
+  S.AccountPlanID=A.AccountPlanID and (A.KommuneID=K.KommuneID or (A.KommuneID = 0 and K.KommuneID = 1) ) and S.SalaryConfID !=1 
+order by AccountName asc
+";
+$employees_r = $_lib['db']->db_query($employees_q);
 
 while( $employee = $_lib['db']->db_fetch_assoc( $employees_r ) ) {
     $salaryreport = new salaryreport(array('year'=>$year, 'employeeID'=>$employee['AccountPlanID']));
     
-    $reports_r = $_lib['db']->db_query( sprintf("select * from salaryreport WHERE Date >= '%d-01-01' AND Date < '%d-01-01' AND AccountPlanID = %d ORDER BY Date", $year, $year + 1, $employee['AccountPlanID']) );
+    $reports_r = $_lib['db']->db_query( 
+        sprintf(
+            "select * 
+             from salaryreport 
+             where Date >= '%d-01-01' AND Date < '%d-01-01' AND AccountPlanID = %d 
+             order by Date", 
+            $year, $year + 1, $employee['AccountPlanID']) 
+        );
 
     $report_lines = array(); 
     while( $report = $_lib['db']->db_fetch_assoc($reports_r) ) {
-        $report_line = array( 'Date' => $report['ReportDate'], 'Locked' => $report['Locked'], 'LockedBy' => $report['LockedBy'], 'ID' => $report['SalaryReportID'] );
+        $report_line = array( 
+            'Date' => $report['ReportDate'], 
+            'Locked' => $report['Locked'], 
+            'LockedBy' => $report['LockedBy'], 
+            'ID' => $report['SalaryReportID'],
+            'Employee' => $employee
+            );
         $report_amounts = array();
 
-        $amounts_r = $_lib['db']->db_query( sprintf("select * from salaryreportentries WHERE SalaryReportID = %d", $report['SalaryReportID']) );
+        $amounts_r = $_lib['db']->db_query(
+            sprintf("select * from salaryreportentries WHERE SalaryReportID = %d", $report['SalaryReportID']) 
+            );
         while( $amount = $_lib['db']->db_fetch_assoc($amounts_r) ) {
             $report_amounts[$amount['Code']] = $amount['Amount'];
         }
@@ -150,15 +138,6 @@ while( $employee = $_lib['db']->db_fetch_assoc( $employees_r ) ) {
         $all_reports[] = $report_line;
     }
 
-    /*
-    $query = sprintf("SELECT DATEDIFF( DATE('%s'), DATE('%s') ) AS d", $salaryreport->_reportHash['account']['WorkStop'], $salaryreport->_reportHash['account']['WorkStart']);
-    $workedDays_r = $_lib['db']->db_query($query);
-    $workedDays = $_lib['db']->db_fetch_assoc($workedDays_r);
-    $workedDays['d'] += 1;
-
-    if($workedDays['d'] < 1)
-    continue;*/
-
     $query = sprintf("SELECT SalaryID FROM salary WHERE PayDate >= '%d-01-01' AND PayDate < '%d-01-01'",
                      $year, $year + 1);
     if($_lib['db']->get_row(array('query' => $query)) == false) {
@@ -166,7 +145,7 @@ while( $employee = $_lib['db']->db_fetch_assoc( $employees_r ) ) {
     }
 
     $fields = array(
-        array($employee['AccountPlanID'] . ' <b>'.$salaryreport->_reportHash['account']['AccountName'].'</b>', $salaryreport->_reportHash['account']['SocietyNumber']),
+        array($employee['AccountPlanID'].' <b>'.$salaryreport->_reportHash['account']['AccountName'].'</b>', $salaryreport->_reportHash['account']['SocietyNumber']),
         array($salaryreport->_reportHash['account']['Address'], 'alle dager: ' . ($salaryreport->_reportHash['account']['WorkedWholeYear'] ? 'ja' : 'nei') ),
         array($salaryreport->_reportHash['account']['ZipCode'], $salaryreport->_reportHash['account']['WorkStart']),
         array($salaryreport->_reportHash['account']['City'], $salaryreport->_reportHash['account']['WorkStop']),
@@ -202,19 +181,23 @@ while( $employee = $_lib['db']->db_fetch_assoc( $employees_r ) ) {
 
 echo '</table><br />';
 
+/*
+ * Tabell 2 - oppsummering
+ */
+
 echo '<table class="lodo_data" border=1>';
 
-print('<tr><th></th>');
+print('<tr><th></th><th></th>');
 foreach($codes as $c) {
     printf("<th><b>%s</b></th>", $c);
 }
 print('</tr>');
 
 foreach($all_reports as $report) {
-     //print_r($report);
-     print('<tr>');
-     print_values($codes, $report, false);
-     print('</tr>');
+    print('<tr>');
+    printf('<td>%s</td>', $report["Employee"]["AccountName"]);
+    print_values($codes, $report, false);
+    print('</tr>');
 }
 print_sums(0, $codes, $all_reports);
 print('<tr><td>diff</td>');
@@ -223,7 +206,9 @@ foreach($codes as $c) {
 }
 print('</tr></table>');	
 
-
+/*
+ * Kontosum
+ */
 
 print('
 <br /><br />
