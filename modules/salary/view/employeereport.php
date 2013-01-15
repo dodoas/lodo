@@ -98,7 +98,9 @@ $employees_q = "
 select 
   *, A.KommuneID as NoKommune from salaryconf as S, accountplan as A, kommune as K 
 where 
-  S.AccountPlanID=A.AccountPlanID and (A.KommuneID=K.KommuneID or (A.KommuneID = 0 and K.KommuneID = 1) ) and S.SalaryConfID !=1 
+  S.AccountPlanID=A.AccountPlanID 
+  and ( A.KommuneID=K.KommuneID or (A.KommuneID = 0 and K.KommuneID = 1) ) 
+  and S.SalaryConfID !=1 
 order by AccountName asc
 ";
 $employees_r = $_lib['db']->db_query($employees_q);
@@ -110,7 +112,7 @@ while( $employee = $_lib['db']->db_fetch_assoc( $employees_r ) ) {
         sprintf(
             "select * 
              from salaryreport 
-             where Date >= '%d-01-01' AND Date < '%d-01-01' AND AccountPlanID = %d 
+             where Date >= '%d-01-01' and Date < '%d-01-01' and AccountPlanID = %d 
              order by Date", 
             $year, $year + 1, $employee['AccountPlanID']) 
         );
@@ -199,8 +201,12 @@ foreach($all_reports as $report) {
     print_values($codes, $report, false);
     print('</tr>');
 }
+
+print('<tr>');
+print('<td></td>');
 print_sums(0, $codes, $all_reports);
-print('<tr><td>diff</td>');
+print('</tr>');
+print('<tr><td></td><td>diff</td>');
 foreach($codes as $c) {
     print('<td>0</td>');
 }
