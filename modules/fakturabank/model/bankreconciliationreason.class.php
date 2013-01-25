@@ -94,7 +94,7 @@ class lodo_fakturabank_bankreconciliationreason {
         }
 
         foreach ($reasons as $reason) {
-            $account = $reason['bank_transaction_account'];
+            $account = $reason;
             $query   = "select * from $db_table where FakturabankBankReconciliationReasonID = '" . $account['id'] . "'";
             $fakturabankbankreconciliationreason = $_lib['storage']->get_row(array('query' => $query));
             if (!empty($fakturabankbankreconciliationreason)) {                
