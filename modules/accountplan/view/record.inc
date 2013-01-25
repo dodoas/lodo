@@ -32,6 +32,15 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
         $_lib['db']->db_query($fakturabankemail_query);
     }
 
+    if(isset($_POST['accountplangln_GLN'])) {
+        $gln_query = sprintf("DELETE FROM accountplangln WHERE AccountPlanID = %d", $AccountPlanID);
+        $_lib['db']->db_query($gln_query);
+
+        $gln_query = sprintf("INSERT INTO accountplangln (`AccountPlanID`, `GLN`) VALUES ('%d', '%s')",
+                             $AccountPlanID, $_POST['accountplangln_GLN']);
+        $_lib['db']->db_query($gln_query);
+    }
+
 
     if (!empty($_POST['accountplan_OrgNumber'])) {
         $_POST['accountplan_OrgNumber'] = clean_org_number($_POST['accountplan_OrgNumber']);

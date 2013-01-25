@@ -61,6 +61,11 @@ if($account->AccountPlanID){
 if($account->AccountPlanType) {
     $AccountPlanType = $account->AccountPlanType;
 }
+
+$gln_q = sprintf("SELECT GLN FROM accountplangln WHERE AccountPlanID = '%d'", $AccountPlanID);
+$gln_r = $_lib['db']->db_query($gln_q);
+$gln_row = $_lib['db']->db_fetch_assoc($gln_r);
+$gln_number = $gln_row['GLN'];
     
 print $_lib['sess']->doctype ?>
 
@@ -114,61 +119,64 @@ if($JournalID) {
     <td class="menu">Navn</td>
     <td></td>
     <td><input type="text" name="accountplan.AccountName" value="<? print $account->AccountName  ?>" size="30"><? if($account->AccountName) { ?><a href="http://w2.brreg.no/enhet/sok/treffliste.jsp?navn=<? print urlencode($account->AccountName) ?>" target="top">brreg</a><? } ?></td>
-    <td>Organisasjonsnummer (opplysninger hentes automatisk basert p&aring; orgnummer)</td>
+    <td style="text-align:right">Organisasjonsnummer (opplysninger hentes automatisk basert p&aring; orgnummer)</td>
     <td><input type="text" name="accountplan.OrgNumber" value="<? print $account->OrgNumber  ?>" size="30"><? if($account->OrgNumber) { ?><a href="http://w2.brreg.no/enhet/sok/detalj.jsp?orgnr=<? print $account->OrgNumber ?>" target="top">brreg</a><? } ?></td>
   </tr>
   </tr>
   <tr>
     <td class="menu">Adresse</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableInvoiceAddress", $account->EnableInvoiceAddress,'') ?></td>
-    <td><input type="text" name="accountplan.Address" value="<? print $account->Address  ?>" size="30"></td>
-    <td>MVA-nummer</td>
+    <td><input type="text" name="accountplan.Address" value="<? print $account->Address  ?>" size="40"></td>
+    <td style="text-align:right">MVA-nummer</td>
     <td><input type="text" name="accountplan.VatNumber" value="<? print $account->VatNumber  ?>" size="30"></td>
   </tr>
   <tr>
     <td class="menu">Postnummer</td>
     <td></td>
-    <td><input type="text" name="accountplan.ZipCode" value="<? print $account->ZipCode  ?>" size="6"></td><td>Poststed</td><td><input type="text" name="accountplan.City" value="<? print $account->City  ?>" size="30">
-    </td>
+    <td><input type="text" name="accountplan.ZipCode" value="<? print $account->ZipCode  ?>" size="6"></td>
+    <td style="text-align:right">Poststed</td>
+    <td><input type="text" name="accountplan.City" value="<? print $account->City  ?>" size="30"></td>
   </tr>
   <tr>
     <td class="menu">Postboks</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableInvoicePoBox", $account->EnableInvoicePoBox,'') ?></td>
     <td><input type="text" name="accountplan.IPoBox" value="<? print $account->IPoBox  ?>" size="4"></td>
-    <td>Postbokssted</td>
+    <td style="text-align:right">Postbokssted</td>
     <td><input type="text" name="accountplan.IPoBoxCity" value="<? print $account->IPoBoxCity  ?>" size="30"></td>
   </tr>
   <tr>
     <td class="menu">Postbokspostnummer</td>
     <td></td>
     <td><input type="text" name="accountplan.IPoBoxZipCode" value="<? print $account->IPoBoxZipCode  ?>" size="6"></td>
-    <td>Postbokspostnummersted</td>
+    <td style="text-align:right">Postbokspostnummersted</td>
     <td><input type="text" name="accountplan.IPoBoxZipCodeCity" value="<? print $account->IPoBoxZipCodeCity  ?>" size="30"></td>
   </tr>
   <tr>
     <td class="menu">Land</td>
     <td></td>
     <td><? print $_lib['form3']->Country_menu3(array('table'=>'accountplan', 'field'=>'CountryCode', 'value'=>$account->CountryCode, 'required'=>false)); ?></td>
-    <td colspan="2">&nbsp</td>
+
+    <td style="text-align:right">GLN</td>
+    <td><input type="text" name="accountplangln.GLN" value="<? print $gln_number ?>" size="30" /></td>
   </tr>
   <tr>
     <td class="menu">Telefon</td>
     <td></td>
-    <td><input type="text" name="accountplan.Phone" value="<? print $account->Phone  ?>" size="30"></td>
-    <td>Mobil</td>
+    <td><input type="text" name="accountplan.Phone" value="<? print $account->Phone  ?>" size="40"></td>
+    <td style="text-align:right">Mobil</td>
     <td><input type="text" name="accountplan.Mobile" value="<? print $account->Mobile  ?>" size="30"></td>
   </tr>
   <tr>
     <td class="menu">E-Post</td>
     <td></td>
-    <td><input type="text" name="accountplan.Email" value="<? print $account->Email  ?>" size="30"></td>
+    <td><input type="text" name="accountplan.Email" value="<? print $account->Email  ?>" size="40"></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
     <td class="menu">Web</td>
     <td></td>
-    <td><input type="text" name="accountplan.Web" value="<? print $account->Web  ?>" size="30"></td>
+    <td><input type="text" name="accountplan.Web" value="<? print $account->Web  ?>" size="40"></td>
     <td></td>
     <td></td>
   </tr>
@@ -191,15 +199,15 @@ if($JournalID) {
   <tr>
     <td class="menu">Kundenummer hos mottaker</td>
     <td></td>
-    <td><input type="text" name="accountplan.CustomerNumber" value="<? print $account->CustomerNumber  ?>" size="30"></td>
+    <td><input type="text" name="accountplan.CustomerNumber" value="<? print $account->CustomerNumber  ?>" size="40"></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
     <td class="menu">Bankkonto (norsk)</td>
     <td></td>
-    <td><input type="text" name="accountplan.DomesticBankAccount" value="<? print $account->DomesticBankAccount  ?>" size="30"></td>
-    <td>IBAN (utenlandsk)</td>
+    <td><input type="text" name="accountplan.DomesticBankAccount" value="<? print $account->DomesticBankAccount  ?>" size="40"></td>
+    <td style="text-align:right">IBAN (utenlandsk)</td>
     <td><input type="text" name="accountplan.IBAN" value="<? print $account->IBAN ?>" size="30"></td>
   </tr>
   <tr>
@@ -213,14 +221,14 @@ if($JournalID) {
     <td class="menu">Debit tekst</td>
     <td></td>
     <td class="<? print $account->DebitColor ?>"><input type="text" name="accountplan.debittext" value="<? print $account->debittext  ?>" size="30"></td>
-    <td>Farge:</td>
+    <td style="text-align:right">Farge:</td>
     <td><? print $_lib['form3']->Type_menu3(array('table'=>$db_table, 'field'=>'DebitColor', 'value'=>$account->DebitColor, 'type'=>'DebitColor', 'required' => 1)) ?></td>
   </tr>
   <tr>
     <td class="menu">Kredit tekst</td>
     <td></td>
     <td class="<? print $account->CreditColor ?>"><input type="text" name="accountplan.credittext" value="<? print $account->credittext  ?>" size="30"></td>
-    <td>Farge:</td>
+    <td style="text-align:right">Farge:</td>
     <td><? print $_lib['form3']->Type_menu3(array('table'=>$db_table, 'field'=>'CreditColor', 'value'=>$account->CreditColor, 'type'=>'CreditColor', 'required' => 1)) ?></td>
   </tr>
   <!--<tr>
