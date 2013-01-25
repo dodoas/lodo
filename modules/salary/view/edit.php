@@ -401,7 +401,10 @@ $formname = "salaryUpdate";
     <td colspan="<? echo ($head->FakturabankPersonID) ? '2' : '6'  ?>">
       <?
 		if($_lib['sess']->get_person('FakturabankExportPaycheckAccess')) {
-		    print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_salary_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
+                    if($head->FEmail)
+                        print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_salary_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
+                    else
+                        print "Mangler fakturabankepost";
 		}
 
       ?>

@@ -312,7 +312,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
     <td colspan="8">Eksempel: Bel&oslash;pet p&aring; utg 25% i f&oslash;lge bokf&oslash;rt regnskap skal v&aelig;re samme tall som p&aring; konto 2701 kode 11 - 25% i listen her</td>
 </tr>
 <tr><td><? print $row->AccountPlanID ?></td></tr>
-<tr><th>Kontonavn</th><th class="number">P&aring; konto</th><th class="number">Bokf&oslash;rt</th><th class="number">Differanse</th>
+<tr><th>Kontonavn</th><th class="number">Regnskap</th><th class="number">MVA kode</th><th class="number">Differanse</th>
     <tbody>
         <?
         $totalSum = 0;
