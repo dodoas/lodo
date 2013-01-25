@@ -154,14 +154,15 @@ while( $employee = $_lib['db']->db_fetch_assoc( $employees_r ) ) {
     }
 
     $fields = array(
-
-        //         array($employee['AccountPlanID'].' <b>'.$salaryreport->_reportHash['account']['AccountName'].'</b>', $salaryreport->_reportHash['account']['SocietyNumber']),
         array($employee['AccountPlanID'], '<b>'.$salaryreport->_reportHash['account']['AccountName'].'</b>', $salaryreport->_reportHash['account']['SocietyNumber']),
         array('',$salaryreport->_reportHash['account']['Address'], 'alle dager: ' . ($salaryreport->_reportHash['account']['WorkedWholeYear'] ? 'ja' : 'nei') ),
         array('',$salaryreport->_reportHash['account']['ZipCode'], $salaryreport->_reportHash['account']['WorkStart']),
         array('',$salaryreport->_reportHash['account']['City'], $salaryreport->_reportHash['account']['WorkStop']),
-        array('',$salaryreport->_reportHash['account']['KommuneNumber'] . " ". $salaryreport->_reportHash['account']['KommuneName'], $workedDays['d'] . ' dager' )
-    );
+        array('',$salaryreport->_reportHash['account']['KommuneNumber'] . " ". $salaryreport->_reportHash['account']['KommuneName'], 
+              (round($salaryreport->_reportHash['account']['WorkedDays']) != 0 ? 
+               ((int)$salaryreport->_reportHash['account']['WorkPercent']) . '%: ' . round($salaryreport->_reportHash['account']['WorkedDays']) . ' dager' 
+               : ''))
+        );
 
     $no_lines = count($report_lines);
     $no_fields = count($fields);
@@ -214,9 +215,10 @@ foreach($all_reports as $report) {
 
 print('<tr>');
 print('<td></td>');
+print('<td></td>');
 print_sums(0, $codes, $all_reports);
 print('</tr>');
-print('<tr><td></td><td>diff</td>');
+print('<tr><td></td><td></td><td>diff</td>');
 foreach($codes as $c) {
     print('<td>0</td>');
 }
