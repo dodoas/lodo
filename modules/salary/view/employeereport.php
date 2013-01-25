@@ -84,6 +84,7 @@ print('<table class="lodo_data" border=1">
 <tr>
   <th></th>
   <th></th>
+  <th></th>
   <th>Innberettet</th>
 ');
 
@@ -107,6 +108,12 @@ $employees_r = $_lib['db']->db_query($employees_q);
 
 while( $employee = $_lib['db']->db_fetch_assoc( $employees_r ) ) {
     $salaryreport = new salaryreport(array('year'=>$year, 'employeeID'=>$employee['AccountPlanID']));
+
+    $query = sprintf("SELECT VoucherID FROM voucher WHERE VoucherType = 'L' AND AccountPlanID = '%d' AND VoucherPeriod >= '%d-01-01' AND VoucherPeriod < '%d-01-01'",
+                     $employee['AccountPlanID'], $year, $year + 1);
+    if($_lib['db']->get_row(array('query' => $query)) == false) {
+        continue;
+    }
     
     $reports_r = $_lib['db']->db_query( 
         sprintf(
@@ -147,11 +154,13 @@ while( $employee = $_lib['db']->db_fetch_assoc( $employees_r ) ) {
     }
 
     $fields = array(
-        array($employee['AccountPlanID'].' <b>'.$salaryreport->_reportHash['account']['AccountName'].'</b>', $salaryreport->_reportHash['account']['SocietyNumber']),
-        array($salaryreport->_reportHash['account']['Address'], 'alle dager: ' . ($salaryreport->_reportHash['account']['WorkedWholeYear'] ? 'ja' : 'nei') ),
-        array($salaryreport->_reportHash['account']['ZipCode'], $salaryreport->_reportHash['account']['WorkStart']),
-        array($salaryreport->_reportHash['account']['City'], $salaryreport->_reportHash['account']['WorkStop']),
-        array($salaryreport->_reportHash['account']['KommuneNumber'] . " ". $salaryreport->_reportHash['account']['KommuneName'], $workedDays['d'] . ' dager' )
+
+        //         array($employee['AccountPlanID'].' <b>'.$salaryreport->_reportHash['account']['AccountName'].'</b>', $salaryreport->_reportHash['account']['SocietyNumber']),
+        array($employee['AccountPlanID'], '<b>'.$salaryreport->_reportHash['account']['AccountName'].'</b>', $salaryreport->_reportHash['account']['SocietyNumber']),
+        array('',$salaryreport->_reportHash['account']['Address'], 'alle dager: ' . ($salaryreport->_reportHash['account']['WorkedWholeYear'] ? 'ja' : 'nei') ),
+        array('',$salaryreport->_reportHash['account']['ZipCode'], $salaryreport->_reportHash['account']['WorkStart']),
+        array('',$salaryreport->_reportHash['account']['City'], $salaryreport->_reportHash['account']['WorkStop']),
+        array('',$salaryreport->_reportHash['account']['KommuneNumber'] . " ". $salaryreport->_reportHash['account']['KommuneName'], $workedDays['d'] . ' dager' )
     );
 
     $no_lines = count($report_lines);
@@ -189,7 +198,7 @@ echo '</table><br />';
 
 echo '<table class="lodo_data" border=1>';
 
-print('<tr><th></th><th></th>');
+print('<tr><th></th><th></th><th></th>');
 foreach($codes as $c) {
     printf("<th><b>%s</b></th>", $c);
 }
@@ -197,6 +206,7 @@ print('</tr>');
 
 foreach($all_reports as $report) {
     print('<tr>');
+    printf('<td>%s</td>', $report["Employee"]["AccountPlanID"]);
     printf('<td>%s</td>', $report["Employee"]["AccountName"]);
     print_values($codes, $report, false);
     print('</tr>');
