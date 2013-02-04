@@ -104,12 +104,13 @@ where
   and S.SalaryConfID !=1 
 order by AccountName asc
 ";
+
 $employees_r = $_lib['db']->db_query($employees_q);
 
 while( $employee = $_lib['db']->db_fetch_assoc( $employees_r ) ) {
     $salaryreport = new salaryreport(array('year'=>$year, 'employeeID'=>$employee['AccountPlanID']));
 
-    $query = sprintf("SELECT VoucherID FROM voucher WHERE VoucherType = 'L' AND AccountPlanID = '%d' AND VoucherPeriod >= '%d-01-01' AND VoucherPeriod < '%d-01-01'",
+    $query = sprintf("SELECT VoucherID FROM voucher WHERE VoucherType = 'L' AND AccountPlanID = '%d' AND VoucherPeriod >= '%d-01' AND VoucherPeriod < '%d-01'",
                      $employee['AccountPlanID'], $year, $year + 1);
     if($_lib['db']->get_row(array('query' => $query)) == false) {
         continue;
@@ -159,9 +160,9 @@ while( $employee = $_lib['db']->db_fetch_assoc( $employees_r ) ) {
         array('',$salaryreport->_reportHash['account']['ZipCode'], $salaryreport->_reportHash['account']['WorkStart']),
         array('',$salaryreport->_reportHash['account']['City'], $salaryreport->_reportHash['account']['WorkStop']),
         array('',$salaryreport->_reportHash['account']['KommuneNumber'] . " ". $salaryreport->_reportHash['account']['KommuneName'], 
-              (round($salaryreport->_reportHash['account']['WorkedDays']) != 0 ? 
+              (round($salaryreport->_reportHash['account']['WorkedDays']) != 0 && ((int)$salaryreport->_reportHash['account']['WorkPercent']) != 100 ?
                ((int)$salaryreport->_reportHash['account']['WorkPercent']) . '%: ' . round($salaryreport->_reportHash['account']['WorkedDays']) . ' dager' 
-               : ''))
+               : '100%'))
         );
 
     $no_lines = count($report_lines);

@@ -310,8 +310,10 @@ $formname = "salaryUpdate";
 </tr>
 
 <tr height="20">
-  <td colspan="13">
+  <td colspan="4">
+  <td colspan="9">Skattetrekk trekkes bare med hele kroner
 </tr>
+
 <tr>
 <th colspan="13">Kommentar</th>
 </tr>
@@ -414,6 +416,17 @@ $formname = "salaryUpdate";
 
     </td>
 </tr>
+
+<tr>
+  <td colspan = "7"></td>
+  <td colspan = "4">Kommune: <? if(!$kommune) { echo "<span style='color: red'>mangler kommune</span>"; } else { echo $kommune->KommuneNumber . " " . $kommune->KommuneName; } ?></td>
+</tr>
+
+<tr>
+  <td colspan = "7"></td>
+  <td colspan = "4">Personnummer: <? echo $head->SocietyNumber ?></td>
+</tr>
+
 <tr>
     <td colspan="8"></td>
 

@@ -515,6 +515,12 @@ class lodo_fakturabank_fakturabankvoting {
             if($r)
                 return $r;
         }
+        else if($scheme_id == "GLN") {
+            $query = "SELECT a.AccountPlanID, a.OrgNumber, g.GLN FROM accountplan a, accountplangln g WHERE g.GLN = '$identity' AND a.AccountPlanType = '$type' AND a.AccountPlanID = g.AccountPlanID";
+            $r = $_lib['storage']->get_row(array('query' => $query));
+            if($r)
+                return $r;
+        }
 
         $query = "SELECT AccountPlanID, OrgNumber FROM accountplan WHERE AccountPlanID = '$identity'";
         $accountplan = $_lib['storage']->get_row(array('query' => $query));
@@ -554,6 +560,12 @@ class lodo_fakturabank_fakturabankvoting {
         }
         else if($scheme_id == 'IBAN') {
             $query = "SELECT AccountPlanID, OrgNumber FROM accountplan WHERE IBAN = '$identity'";
+            $r = $_lib['storage']->get_row(array('query' => $query));
+            if($r)
+                return $r;
+        }
+        else if($scheme_id == "GLN") {
+            $query = "SELECT a.AccountPlanID, a.OrgNumber, g.GLN FROM accountplan a, accountplangln g WHERE g.GLN = '$identity' AND a.AccountPlanID = g.AccountPlanID";
             $r = $_lib['storage']->get_row(array('query' => $query));
             if($r)
                 return $r;
