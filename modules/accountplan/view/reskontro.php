@@ -66,6 +66,12 @@ $gln_q = sprintf("SELECT GLN FROM accountplangln WHERE AccountPlanID = '%d'", $A
 $gln_r = $_lib['db']->db_query($gln_q);
 $gln_row = $_lib['db']->db_fetch_assoc($gln_r);
 $gln_number = $gln_row['GLN'];
+
+$swift_q = sprintf("SELECT * FROM accountplanswift WHERE AccountPlanID = '%d'", $AccountPlanID);
+$swift_r = $_lib['db']->db_query($swift_q);
+$swift_row = $_lib['db']->db_fetch_assoc($swift_r);
+$swift_number = $swift_row['Swift'];
+$swift_number_account = $swift_row['SwiftAccount'];
     
 print $_lib['sess']->doctype ?>
 
@@ -207,6 +213,7 @@ if($JournalID) {
     <td class="menu">Bankkonto (norsk)</td>
     <td></td>
     <td><input type="text" name="accountplan.DomesticBankAccount" value="<? print $account->DomesticBankAccount  ?>" size="40"></td>
+
     <td style="text-align:right">IBAN (utenlandsk)</td>
     <td><input type="text" name="accountplan.IBAN" value="<? print $account->IBAN ?>" size="30"></td>
   </tr>
@@ -214,9 +221,20 @@ if($JournalID) {
     <td class="menu">Valuta</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableCurrency", $account->EnableCurrency,'') ?></td>
     <td><? $_lib['form2']->currency_menu2($db_table, "Currency", $account->Currency) ?></td>
-    <td></td>
-    <td></td>
+
+    <td style="text-align:right">SWIFT</td>
+    <td><input type="text" name="accountplanswift.SWIFT" value="<? print $swift_number ?>" size="30"></td>
   </tr>
+
+  <tr>
+    <td class="menu"></td>
+    <td></td>
+    <td></td>
+
+    <td style="text-align:right">SWIFT ACCOUNT</td>
+    <td><input type="text" name="accountplanswift.SWIFTACCOUNT" value="<? print $swift_number_account ?>" size="30"></td>
+  </tr>
+
   <tr>
     <td class="menu">Debit tekst</td>
     <td></td>

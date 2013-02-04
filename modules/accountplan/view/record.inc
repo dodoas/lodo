@@ -18,7 +18,7 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
         $password_sql = sprintf("DELETE FROM timesheetpasswords WHERE AccountPlanID = %d", $AccountPlanID);
         $_lib['db']->db_query($password_sql);
         $password_sql = sprintf("INSERT INTO timesheetpasswords (`AccountPlanID`, `Password`)
-  		VALUES ('%d', '%s');", $AccountPlanID, $_POST['timesheetpasswords_Password']);
+  		VALUES ('%d', '%s');", $AccountPlanID, mysql_escape_string($_POST['timesheetpasswords_Password']));
         $_lib['db']->db_query($password_sql);
     }
     
@@ -28,7 +28,7 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
         
         $fakturabankemail_query = sprintf("INSERT INTO fakturabankemail (`AccountPlanID`, `Email`) 
     						VALUES('%d', '%s');",
-                                          $AccountPlanID, $_POST['fakturabankemail_Email']);
+                                          $AccountPlanID, mysql_escape_string($_POST['fakturabankemail_Email']));
         $_lib['db']->db_query($fakturabankemail_query);
     }
 
@@ -37,8 +37,20 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
         $_lib['db']->db_query($gln_query);
 
         $gln_query = sprintf("INSERT INTO accountplangln (`AccountPlanID`, `GLN`) VALUES ('%d', '%s')",
-                             $AccountPlanID, $_POST['accountplangln_GLN']);
+                             $AccountPlanID, mysql_escape_string($_POST['accountplangln_GLN']));
         $_lib['db']->db_query($gln_query);
+    }
+
+    if(isset($_POST['accountplanswift_SWIFT'])) {
+        $swift_query = sprintf("DELETE FROM accountplanswift WHERE AccountPlanID = %d", $AccountPlanID);
+        $_lib['db']->db_query($swift_query);
+        
+        $swift_query = sprintf("INSERT INTO accountplanswift (`AccountPlanID`, `Swift`, `SwiftAccount`) 
+                                  VALUES ('%d', '%s', '%s');",
+                               $AccountPlanID, 
+                               mysql_escape_string($_POST['accountplanswift_SWIFT']),
+                               mysql_escape_string($_POST['accountplanswift_SWIFTACCOUNT']));
+        $_lib['db']->db_query($swift_query);
     }
 
 
