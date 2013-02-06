@@ -20,7 +20,6 @@ else if(isset($_POST['edit_report'])) {
     foreach($_POST['edit_amounts'] as $code => $amount) {
         $query = sprintf("UPDATE salaryreportentries SET Amount = '%s' WHERE Code = '%s' AND SalaryReportID = %d", 
                          mysql_escape_string(str_replace(array(" ", ","), array("", "."), $amount)), mysql_escape_string($code), $_POST['SalaryReportID']);
-        echo $query;
         $_lib['db']->db_query($query);
     }
 }

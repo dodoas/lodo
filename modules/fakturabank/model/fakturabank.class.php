@@ -499,6 +499,7 @@ class lodo_fakturabank_fakturabank {
     private function extractOutgoingAccountingCost(&$InvoiceO) {
         // we support using ; instead of &
         parse_str(str_replace(";", "&", $InvoiceO->AccountingCost), $acc_cost_params);
+
         /* department information is not required for outgoing invoices, so no error if empty */
         if (!empty($acc_cost_params)) {
             if (!empty($acc_cost_params['customerdepartment'])) {
@@ -682,6 +683,7 @@ class lodo_fakturabank_fakturabank {
     private function extractIncomingAccountingCost(&$InvoiceO) {
         // we support using ; instead of &
         parse_str(str_replace(";", "&", $InvoiceO->AccountingCost), $acc_cost_params);
+
         /* department information is not required for incoming invoices, so no error if empty */
         if (!empty($acc_cost_params)) {
             /* Ignore department for now, since we currently don't store it in the db
@@ -753,7 +755,6 @@ class lodo_fakturabank_fakturabank {
             if (!empty($acc_cost_params['supplierreconciliationreasonid']) && is_numeric($acc_cost_params['supplierreconciliationreasonid'])) {
                 $InvoiceO->FakturabankSupplierReconciliationReasonID = $acc_cost_params['supplierreconciliationreasonid'];
                 $InvoiceO->FakturabankSupplierReconciliationReasonAmount = $acc_cost_params['supplierreconciliationreasonamount'];
-
             }
         }
         
@@ -878,9 +879,15 @@ class lodo_fakturabank_fakturabank {
 
                 #$this->registerincoming($InvoiceO);
             } else {
-                $InvoiceO->Status   .= "Finner ikke leverand&oslash;r basert p&aring; PartyIdentification: " . $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID; 
+                $InvoiceO->Status   .= "Finner ikke leverand&oslash;r basert p&aring; PartyIdentification: " . 
+                    $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID; 
 
-                $InvoiceO->Status   .= sprintf('<a href="%s&t=fakturabank.createaccount&accountplanid=%s&orgnumber=%s&type=supplier">Opprett</a>', $_lib['sess']->dispatch, $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID, $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID);
+                $InvoiceO->Status   .= sprintf(
+                    '<a href="%s&t=fakturabank.createaccount&accountplanid=%s&orgnumber=%s&type=supplier">Opprett</a>', 
+                    $_lib['sess']->dispatch, 
+                    $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID, 
+                    $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID
+                    );
 
                 $InvoiceO->Journal = false;
                 $InvoiceO->Class   = 'red';
@@ -952,7 +959,6 @@ class lodo_fakturabank_fakturabank {
     
             }
             foreach($SequenceH as $key => $value) {
-        
                 #We should look at SchemeID - but the parser does not give us the scheme id - so we look in the preferred sequence until we find an account.
                 $query                  = "select * from accountplan where REPLACE($key, ' ', '') like '%" . $PartyIdentification . "%' and $key <> '' and $key is not null and AccountPlanType='$type'";
                 #print "$query<br>\n";
@@ -962,6 +968,16 @@ class lodo_fakturabank_fakturabank {
                     #print "Fant den med $SchemeID: $PartyIdentification<br />\n";
                     break;
                 }
+            }
+        }
+
+        // try with GLN
+        if(!$account) {
+            $query = sprintf("select a.* from accountplan a, accountplangln g WHERE a.AccountPlanID = g.AccountPlanID AND g.GLN = '%s'",
+                             $PartyIdentification);
+            $account                = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
+            if($account) {
+                $SchemeID = "GLN";
             }
         }
         #Forutsatt antall bare 1.

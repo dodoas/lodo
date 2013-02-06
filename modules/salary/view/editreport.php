@@ -20,7 +20,7 @@ $amounts = array();
 while($row = $_lib['db']->db_fetch_assoc($res)) {
     $amounts[ $row['Code'] ] = $row['Amount'];
 }
-$query = sprintf("SELECT Date FROM salaryreport WHERE SalaryReportID = %d", $_GET['SalaryReportID']);
+$query = sprintf("SELECT `ReportDate` FROM salaryreport WHERE SalaryReportID = %d", $_GET['SalaryReportID']);
 $res = $_lib['db']->db_query($query);
 $row = $_lib['db']->db_fetch_assoc($res);
 $report_date = $row['ReportDate'];

@@ -372,6 +372,14 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <td colspan="6" align="right">
         <?
 
+        if($_lib['sess']->get_person('FakturabankExportInvoiceAccess')) {
+            echo "Orgnummer: ".  $row->IOrgNo . "<br />";
+
+            if($row->IOrgNo)
+                print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
+            else
+                print "Mangler orgnummer ";
+        }
 
         if(!$row->Locked || $_lib['sess']->get_person('AccessLevel') >= 4) {
             if($_lib['sess']->get_person('AccessLevel') >= 4 && $inline == 'edit') {
@@ -381,13 +389,6 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         } 
         else {
             print "Faktura l&aring;st";
-        }
-
-        if($_lib['sess']->get_person('FakturabankExportInvoiceAccess')) {
-            print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_fakturabanksend', 	'value'=>'Fakturabank (F)', 'accesskey'=>'F'));
-            echo "<br />Orgnummer: ".  $row->IOrgNo;
-
-
         }
 
 
