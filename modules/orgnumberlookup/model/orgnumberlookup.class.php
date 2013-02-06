@@ -2,13 +2,13 @@
 #http://gullfisk:rTp3Qzy@brreg.lodo.no/rest/companies/970131450
 
 class lodo_orgnumberlookup_orgnumberlookup {
-    #private $host           = 'fakturabank.cavatina.no';
-    private $host           = 'brreg.lodo.no';
-    #private $protocol       = 'http';
-    private $protocol       = 'http';
+#    private $host           = '192.168.56.4:3000';
+    private $host           = 'fakturabank.no';
+#    private $protocol       = 'http';
+    private $protocol       = 'https';
     private $username       = '';
     private $password       = '';
-    private $path           = '/rest/companies/';   #Do not store in svn
+    private $path           = '/rest/companies/';
     private $url            = '';
     private $credentials    = '';
     public  $startexectime  = '';
@@ -48,9 +48,9 @@ class lodo_orgnumberlookup_orgnumberlookup {
 
         if(strlen($OrgNumber) == 9) {
 
-            $url = $this->url . $OrgNumber;
+            $url = $this->url . $OrgNumber . ".xml";
 
-            $path = $this->path . $OrgNumber;
+            $path = $this->path . $OrgNumber . ".xml";
 
             $this->getOrgNumber2($path, $url);
 
