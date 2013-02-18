@@ -57,37 +57,16 @@ print $_lib['sess']->doctype
                V.VareLagerID, 
                V.CreatedDate, 
                V.Description, 
-               VL.VareLagerLineID, 
-               VL.ProductNr, 
-               VL.ProductName, 
-               VL.Antall, 
-               VL.CostPrice,
-               DEP.DepartmentName,
-               P.UnitSize as UnitSize,
-               P.BulkSize as BulkSize,
-               PRO.Heading as ProjectName,
-               SHELF.Name as ShelfName,
-               P.ShelfID as hasShelf,
-               P.ProductNumber as ProductNumber
+               VL.*
              from 
                $db_table as V, 
                $db_table2 as VL
-                 left join 
-                   (product as P, 
-                   shelf as SHELF, 
-                   companydepartment as DEP, 
-                   project as PRO)
-                   ON (VL.ProductNr = P.productID
-                      and PRO.ProjectID = P.ProjectID
-                      and DEP.CompanyDepartmentID = P.CompanyDepartmentID
-                      and (SHELF.ShelfID = P.ShelfID or (P.ShelfID = 0 and SHELF.ShelfID = 1)))
              where 
                V.VareLagerID='".$VareLagerID."' 
                and V.VareLagerID=VL.VareLagerID 
              order by 
-               DepartmentName, ProjectName, ShelfName, VL.ProductNr asc
+               VL.Department, VL.Project, VL.Shelf, VL.ProductNr asc
         ";
-
         $result = $_lib['db']->db_query($query);
 
         $lastDepartment = "";
@@ -139,12 +118,12 @@ print $_lib['sess']->doctype
 
         while($row = $_lib['db']->db_fetch_object($result))
         {
-            if($row->DepartmentName != $lastDepartment) {
+            if($row->Department != $lastDepartment) {
                 sumShelf();
                 sumProject();
                 sumDepartment();
 
-                $lastDepartment = $row->DepartmentName;
+                $lastDepartment = $row->Department;
                 $lastProject = "";
                 $lastShelf = "";
 
@@ -158,11 +137,11 @@ print $_lib['sess']->doctype
                 printf("<tr><td><b>%s</b></td></tr>\n", $lastDepartment);
             }
             
-            if($row->ProjectName != $lastProject) {
+            if($row->Project != $lastProject) {
                 sumShelf();
                 sumProject();
 
-                $lastProject = $row->ProjectName;
+                $lastProject = $row->Project;
                 $lastShelf = "";
 
                 $projectSum = 0;
@@ -173,10 +152,10 @@ print $_lib['sess']->doctype
                 printf("<tr><td><b>- %s</b></td></tr>\n", $lastProject);
             }
             
-            if($row->ShelfName != $lastShelf) {
+            if($row->Shelf != $lastShelf) {
                 sumShelf();
 
-                $lastShelf = $row->ShelfName;
+                $lastShelf = $row->Shelf;
 
                 $shelfSum = 0;
                 $shelfAmount = 0;
@@ -200,7 +179,7 @@ print $_lib['sess']->doctype
             <tr>
                 <td></td>
                 <td><? print $row->ProductNr; // this is product ID ?></td>
-                <td><? print $row->ProductNumber ?></td>
+                <td><? print $row->RealProductNumber ?></td>
                 <td><? print $row->ProductName ?></td>
                 <td class="number"><? print $row->UnitSize ?></td>
                 <td class="number"><? print $row->BulkSize ?></td>
@@ -272,6 +251,13 @@ print $_lib['sess']->doctype
               <? 
                  }  
                  ?>
+            </tr>
+            <tr>
+            <td>
+              <? if(!$locked)
+                 print $_lib['form3']->submit(array('name'=>'action_varelager_reload_products', 'value' => 'Last inn produktene p&aring;nytt'))
+              ?>
+            </td>
             </tr>
             <tr>
                 <td colspan="10" align="right"><input type="button" name="name" value=" Lukk "/ onClick="window.close();">
