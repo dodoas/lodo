@@ -430,8 +430,15 @@ class timesheet_user_page
         /* fix period-strings. 
            Somehow it expects dates in format 2011-2 instead of 2011-02 
          */
-        list($fix_y, $fix_m) = explode('-', $_REQUEST['period']);
-        $_REQUEST['period'] = sprintf("%d-%d", $fix_y, (int)$fix_m);
+
+        if($_REQUEST['period'][0] == '_') {
+            list($fix_y, $fix_m) = explode('-', substr($_REQUEST['period'], 1));
+            $_REQUEST['period'] = sprintf("_%d-%d", $fix_y, (int)$fix_m);
+        }
+        else {
+            list($fix_y, $fix_m) = explode('-', $_REQUEST['period']);
+            $_REQUEST['period'] = sprintf("%d-%d", $fix_y, (int)$fix_m);
+        }
     }
 
     public function set_root($root)
@@ -509,7 +516,11 @@ class timesheet_user_page
             ".noprint,hr { display: none; }\n".
             "textarea { border: 0px; }\n".
             "input { border: 0px; }\n".
-            "tr { border: 1px solid black; }\n".
+            "table { page-break-inside:auto }\n".
+            "thead { display:table-header-group }\n".
+            "tfoot { display:table-footer-group }\n".
+            "td    { page-break-inside:avoid; page-break-after:auto }\n".
+            "tr { border: 1px solid black; page-break-inside:avoid; page-break-after:auto; }\n".
             "</style>"
 
             );
@@ -785,9 +796,7 @@ class timesheet_user_page
             $locked = $period_info['Locked'];
         }
 
-
         $period_info = $this->user->get_period_info($period);
-        
         
         /*
          * Save button javascript-callback. Concats time-fields to one field before submit.
@@ -899,12 +908,22 @@ class timesheet_user_page
 
                     $wd = array('S&oslash;ndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'L&oslash;rdag');
                     $w2 = $wd[$w];
-                    printf("<tr style='height: 25px;', class='day_%d'><td><b>%s</b></td><td colspan='2'><b>%s</b></td><td>%02d:%02d</td>".
-                           "<td colspan='%d'><input type='submit' value='L&aring;s dag' name='lock_day_%s' />".
-                           "<input type='submit' value='Lagre' name='save' /></td></tr>", 
-                           $w, $day_no, $w2, 
-                           (int)$sum_time / 60, $sum_time % 60,
-                           count($fields)-2, $day_no);
+
+                    if(isset($_POST['report'])) {
+                        printf("<tr style='height: 25px;', class='day_%d'><td><b>%s</b></td><td colspan='2'><b>%s</b></td><td>%02d:%02d</td>".
+                               "<td colspan='%d'></tr>", 
+                               $w, $day_no, $w2, 
+                               (int)$sum_time / 60, $sum_time % 60,
+                               count($fields)-2);
+                    }
+                    else {
+                        printf("<tr style='height: 25px;', class='day_%d'><td><b>%s</b></td><td colspan='2'><b>%s</b></td><td>%02d:%02d</td>".
+                               "<td colspan='%d'><input type='submit' value='L&aring;s dag' name='lock_day_%s' />".
+                               "<input type='submit' value='Lagre' name='save' /></td></tr>", 
+                               $w, $day_no, $w2, 
+                               (int)$sum_time / 60, $sum_time % 60,
+                               count($fields)-2, $day_no);
+                    }
 
                 }
 
