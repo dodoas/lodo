@@ -132,6 +132,8 @@ $result2 = $_lib['db']->db_query($query2);
     <td class="BGColorDark">Justeres utenfor rekkef&oslash;lge</td>
     <td class="BGColorLight"><? $_lib['form2']->checkbox2($db_table, "EnableWeeklysaleNumberSequence", $row->EnableWeeklysaleNumberSequence,'') ?></td>
   </tr>
+
+  <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
   <tr>
     <td class="BGColorDark">Resultatkonto balanse</td>
     <td class="BGColorLight">
@@ -142,9 +144,24 @@ $result2 = $_lib['db']->db_query($query2);
     <? print $_lib['form3']->accountplan_number_menu(array('table'=> 'company', 'field'=>'VoucherResultAccount', 'value'=>$row->VoucherResultAccount, 'type' => array(0 => 'result'), 'required' => 1)) ?>
     </td>
   </tr>
+  <? } else { ?>
+  <tr>
+    <td class="BGColorDark">Resultatkonto balanse</td>
+    <td class="BGColorLight">
+      <? print $_lib['form3']->accountplan_number_menu(array('table'=> 'company', 'field'=>'VoucherBalanceAccount', 'value'=>$row->VoucherBalanceAccount, 'type' => array(0 => 'balance'), 'required' => 1, 'disabled' => 1)) ?>
+    </td>
+    <td class="BGColorDark">Resultatkonto resultat</td>
+    <td class="BGColorLight">
+    <? print $_lib['form3']->accountplan_number_menu(array('table'=> 'company', 'field'=>'VoucherResultAccount', 'value'=>$row->VoucherResultAccount, 'type' => array(0 => 'result'), 'required' => 1, 'disabled' => 1)) ?>
+    </td>
+  </tr>
+  <? } ?>
+
   <tr>
     <th colspan="4" class="menu">MVA</th>
   </tr>
+
+
   <tr>
     <td class="BGColorDark">MVAplikt (gjelder også auto MVA)</td>
     <td class="BGColorLight"><? $_lib['form2']->checkbox2($db_table, "VATDuty",$row->VATDuty,'') ?><br></td>
@@ -159,6 +176,7 @@ $result2 = $_lib['db']->db_query($query2);
     <td></td>
     <td></td>
   </tr>
+
   <?
   /*if($_lib['sess']->get_person('AccessLevel') > 2)
   {
