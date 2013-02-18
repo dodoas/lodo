@@ -275,16 +275,8 @@ print $_lib['sess']->doctype ?>
                 <b>linje 10 - 69 = Inntekt</b><br />
                 <b>linje 70-100 = Utgift</b><br />
                 <br />
-                <b>linje 11 = Timel&oslash;nn</b><br />
-                <b>linje 12 = Fastl&oslash;nn</b><br />
-                <b>linje 90 = Skattetrekk tabell</b><br />
-                <b>linje 91 = Skattetrekk prosent</b><br />
-                <b>linje 92 = Skattetrekk ekstra</b><br />
-                <br />
                 <b>linje 100 = Forskudd</b><br />
                 <br />
-                Linjene 11 og 91 blir automatisk fylt ut fra Empatix timel&oslash;nn hvis denne brukes.<br />
-                Linjene 50, 51, 52, 53,54,55, 56, 58, 59, 64, 65 fylles automatisk ut fra Empatix reiseregning hvis denne brukes.
             </fieldset>
         </td>
     </tr>
