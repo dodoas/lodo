@@ -24,6 +24,8 @@ if($_REQUEST['action_varelager_new'])
     $post = array();
     $post['varelager_CreatedDate'] = $_POST['varelager_CreatedDate'];
     $post['varelager_Description'] = $_POST['varelager_Description'];
+    $post['varelager_Comment'] = "Det er ikke ukurans p&aring; varelageret.
+Varelager er priset til innkj&oslash;pspris.";
     $VareLagerID = $_lib['db']->db_new_hash($post, 'varelager');
 
     $post = array();
