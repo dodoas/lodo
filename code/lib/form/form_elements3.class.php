@@ -882,6 +882,10 @@ class form3
         {
             $element .= " title=\"".$args['title']."\" ";
         }
+        if($args['confirm'])
+        {
+            $element .= " onclick='return confirm(\"" . $args['confirm'] . "\")' ";
+        }
         $element .= ">".$args['description']."</a>";
         return $element;
     }
