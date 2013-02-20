@@ -179,6 +179,29 @@ class timesheet_user
         return $entries;
     }
 
+    public function extra_customer_info($period, $customer) {
+        global $_lib;
+
+        $period = $this->escape($period);
+
+        $sql = sprintf(
+            "SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(SumTime))) as SumTime, WorkType
+               FROM timesheets
+               WHERE AccountPlanID = %d AND Customer = %d
+                     AND CONCAT(YEAR(date), '-', MONTH(date)) = '%s'
+               GROUP BY WorkType", $this->id, $customer, $period);
+
+        $r = $_lib['db']->db_query($sql);
+            
+        $entries = array();
+        while( $row = $_lib['db']->db_fetch_assoc($r) )
+        {
+            $entries[] = $row;
+        }
+        
+        return $entries;
+    }
+
     public function list_diets() 
     {
         global $_lib;
@@ -856,6 +879,7 @@ class timesheet_user_page
         $sum_parking = 0;
         $sum_drivingexpenses = 0;
         $sum_toll = 0;
+        $sum_curstomer = array();
         $last_day = -1;
 
         /* Table Body */
@@ -963,7 +987,10 @@ class timesheet_user_page
 
                 if($lockedLine && $entry['LockedBy'] != '') 
                 {
-                    $buttons .= sprintf('<p>L&aring;st av %s %s</p>', $entry['LockedBy'], $entry['LockedTime']);
+                    $buttons .= sprintf('<p>L&aring;st %s<br />%s</p>', 
+                                        $entry['LockedTime'],                       
+                                        $entry['LockedBy']
+                        );
                 }
                 
                 $buttons .= sprintf('</td>');
@@ -1229,7 +1256,27 @@ class timesheet_user_page
             {
                 if($v <= 0.001) continue;
                 if(!isset($o[$c])) $o[$c] = 'Diverse';
-                printf($format, $o[$c], $v);
+
+                if($f == 'Customer') {
+                    if($c != 0 && isset($_REQUEST['customer_stats']) && $c == $_REQUEST['customer_stats']) {
+                        printf($format, $o[$c], $v);
+                        $extra = $this->user->extra_customer_info($period, $c);
+                        
+                        foreach($extra as $extraline) {
+                            printf("<tr><td></td><td></td> <td>%s</td><td style='text-align: right;'>%s</td></tr>",
+                                   $fields["WorkType"]['options'][$extraline["WorkType"]], $extraline["SumTime"]);
+                        }
+                    }
+                    else {
+                        $url = sprintf("%s&tp=view&period=%s&customer_stats=%d", $this->root, $period, $c);
+                        $format = "<tr><td></td><td>%s</td><td style='text-align: right;'>%.2f</td><td><a href='$url'>+</a></td></tr>";
+                        printf($format, $o[$c], $v);
+                    }
+                }
+                else {
+                    printf($format, $o[$c], $v);
+                }
+
                 $sum += $v;
             }
  
