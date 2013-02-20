@@ -258,31 +258,35 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
   <td class="<? print $bank->DebitColor ?>"><input type="text" style="text-align: right;" value="<?= $extraEntryIn ?>" name="extraEntryIn" /></td>
   <td class="<? print $bank->CreditColor ?>"><input type="text" style="text-align: right;" value="<?= $extraEntryOut ?>" name="extraEntryOut" /></td>
   <td></td>
-  <td colspan="3"><? if( ($bank->bankvotingperiod->AmountIn - $bank->bankvotingperiod->AmountOut) != ($extraEntryIn - $extraEntryOut) ) echo "<span style='color:red'>Differanse fra bank: " . $_lib['format']->Amount(($bank->bankvotingperiod->AmountIn - $bank->bankvotingperiod->AmountOut) - ($extraEntryIn - $extraEntryOut)) . "</span>";  ?></td>
-
+  <? $val = ($bank->bankvotingperiod->AmountIn - $bank->bankvotingperiod->AmountOut) - ($extraEntryIn - $extraEntryOut);
+     $color = ($val < 0.001 && $val > -0.001) ? "black" : "red"; ?>
+  <td colspan="3"><? echo "<span style='color: $color'>Differanse fra bank: " . $_lib['format']->Amount(($bank->bankvotingperiod->AmountIn - $bank->bankvotingperiod->AmountOut) - ($extraEntryIn - $extraEntryOut)) . "</span>";  ?></td>
 </tr>
 <tr>
   <td>Bank den siste</td>
   <td class="<? print $bank->DebitColor ?>"><input type="text" style="text-align: right;" value="<?= $extraLastIn ?>" name="extraLastIn" /></td>
   <td class="<? print $bank->CreditColor ?>"><input type="text" style="text-align: right;" value="<?= $extraLastOut ?>" name="extraLastOut" /></td>
-  <td colspan="3"><? if($bank->bankaccountcalc->AmountSaldo != ($extraLastIn - $extraLastOut)) echo "<span style='color:red'>Differanse fra bank: " . $_lib['format']->Amount($bank->bankaccountcalc->AmountSaldo - ($extraLastIn - $extraLastOut)) . "</span>";  ?></td>
+  <td><input type="submit" name="action_save_extras" value="Lagre bank" /></td>
+
+  <? $val = $bank->bankaccountcalc->AmountSaldo - ($extraLastIn - $extraLastOut);
+     $color = ($val < 0.001 && $val > -0.001) ? "black" : "red"; ?>
+  <td colspan="3"><? echo "<span style='color: $color'>Differanse fra bank: " . $_lib['format']->Amount($bank->bankaccountcalc->AmountSaldo - ($extraLastIn - $extraLastOut)) . "</span>";  ?></td>
 </tr>
 
 <tr>
   <td></td>
   <td></td>
-  <td style="text-align: left;">
+  <td style="text-align: right;">
   <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
-    Bilagsno: <input type="text" value="0" size="11" name="action_bank_accountlinenew_startat">
+    Bilagsnr: <input type="text" value="0" size="11" name="action_bank_accountlinenew_startat" class="number">
   <? } ?>
   </td>
-  <td><input type="submit" name="action_save_extras" value="Lagre bank" /></td>
 </tr>
 
 <tr>
   <td></td>
   <td></td>
-  <td style="text-align: left;">
+  <td style="text-align: right;">
     <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
       Antall: <input type="text" name="numnewlines" value="0" size="3" class="number">
     <? } ?>

@@ -581,7 +581,7 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
                                          $voucher, 
                                          $voucher->AccountPlanID, 
                                          true, 
-                                         !$period_open);
+                                         !($period_open && $voucher->VoucherType != 'A'));
         ?></td>
       <? print $voucher_gui->creditdebitfield($AmountField, $accountplan, $voucher->AmountIn, $voucher->AmountOut, !$period_open) ?>
       <? //print $voucher_gui->currency($voucherHead, $accountplan, $vb, $class1) ?>
@@ -643,7 +643,9 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
     <? print $_lib['form3']->hidden(array('name' => 'AccountLineID'     , 'value' => $voucher_input->AccountLineID)) ?>
     <? print $_lib['form3']->hidden(array('name' => 'view_mvalines'     , 'value' => $view_mvalines)) ?>
     <? print $_lib['form3']->hidden(array('name' => 'view_linedetails'  , 'value' => $view_linedetails)) ?>
+    <? if($voucher->VoucherType != 'A') { ?>
     <input type="submit" name="action_voucherline_new"  value="Ny postering til bilag <? print $voucher_input->JournalID ?> (L)" class="button" tabindex="<? print $tabindex++; ?>" accesskey="L" >
+    <? } ?>
     </form>
   <? }
   } ?>
