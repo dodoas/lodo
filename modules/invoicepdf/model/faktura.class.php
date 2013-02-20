@@ -191,7 +191,7 @@ class pdfInvoice
     {
         ////Disse linjene er tatt vekk etter endringspec fra geir
         $lineNumber = 0;
-        $this->pdf->SetFont($this->invoiceFont,'B',16);
+        $this->pdf->SetFont($this->invoiceFont,'B',12);
         ////$this->pdf->SetXY($this->invoiceHeadSenderLeftMargin, $this->invoiceHeadSenderStart -1.5);
         ////$this->pdf->Cell($this->invoiceHeadAdressWidth, 6, $this->korriger($params["sender"]["name"]), $this->showMyFrame);
         $compNameArr = $this->splitString($params["sender"]["name"], 100);
@@ -234,7 +234,7 @@ class pdfInvoice
         // Mottaker navn og adresse
         ////Disse linjene er tatt vekk etter endringspec fra geir
         $lineNumber = 0;
-        $this->pdf->SetFont($this->invoiceFont,'B',16);
+        $this->pdf->SetFont($this->invoiceFont,'B',12);
         ////$this->pdf->SetXY($this->invoiceHeadRecipientLeftMargin, $this->invoiceHeadRecipientStart -1.5);
         ////$this->pdf->Cell($this->invoiceHeadAdressWidth, 6, $this->korriger($params["recipient"]["name"]), $this->showMyFrame);
         $compNameArr = $this->splitString($params["recipient"]["name"], 100);
