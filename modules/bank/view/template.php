@@ -29,33 +29,48 @@ $bank           = $_lib['db']->db_fetch_object($result_bank);
 
 <form name="template_update" action="<? print $MY_SELF ?>" method="post">
 <input type="hidden" name="AccountID"       value="<? print $AccountID ?>">
+
 <table class="lodo_data">
-  <tr>
-    <th colspan="21">Bankkonto oppsett: <? print $bank->AccountDescription ?>
-  </tr>
-  <tr>
-    <th class="sub">ID</th>
-    <td><? print $bank->AccountID ?></td>
-  </tr>
-  <tr>
-    <th class="sub">Kontonavn</th>
-    <td><input type="text" name="account.AccountDescription.<? print $bank->AccountID ?>"   value="<? print $bank->AccountDescription ?>" size="30" class="number"></td>
-  </tr>
-  <tr>
-    <th class="sub">Bankens navn</th>
-    <td><input type="text" name="account.BankName.<? print $bank->AccountID ?>"             value="<? print $bank->BankName ?>" size="30" class="number"></td>
-  </tr>
-  <tr>
-    <th class="sub">Kontoinnehavers navn</th>
-    <td><input type="text" name="account.OwnerName.<? print $bank->AccountID ?>"        value="<? print $bank->OwnerName ?>" size="30" class="number"></td>
-  </tr>
-  <tr>
-    <th class="sub">Kontonummer</th>
-    <td><input type="text" name="account.AccountNumber.<? print $bank->AccountID ?>"    value="<? print $bank->AccountNumber ?>" size="30" class="number"></td>
-  </tr>
-  <tr>
-    <th class="sub">Koblet til regnskapskonto</th>
-    <td>
+    <tr>
+      <th></th>
+      <th>ID</th>
+      <th>Aktiv</th>
+      <th>Saldobergning</th>
+
+      <th>Default periode</th>
+      <th>Kontonummer</th>
+      <th>Banknavn</th>
+      <th>Kontonavn</th>
+      <th>Konto</th>
+      <th>Eier</th>
+      <th>Type</th>
+      <th>Gyldig fra</th>
+      <th>Gyldig til</th>
+
+
+      <th>Sortering</th>
+      <th></th>
+      <th></th>
+
+    </tr>
+    <tr>
+      <td><? print $bank->AccountDescription ?></td>
+
+      <td><? print $bank->AccountID ?></td>
+
+      <td><? $_lib['form2']->checkbox2('account', "Active", $bank->Active, $bank->AccountID); ?></td>
+
+      <td><? $_lib['form2']->checkbox2('account', "includeinsaldo", $bank->includeinsaldo, $bank->AccountID); ?></td>
+
+      <td><? print $_lib['form3']->AccountPeriod_menu3(array('table' => 'account', 'field' => 'DefaultPeriod', 'pk' => $bank->AccountID, 'value' => $bank->DefaultPeriod, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> false)); ?></td>    
+
+      <td><input type="text" name="account.AccountNumber.<? print $bank->AccountID ?>"    value="<? print $bank->AccountNumber ?>" size="30" class="number"></td>
+
+      <td><input type="text" name="account.BankName.<? print $bank->AccountID ?>"             value="<? print $bank->BankName ?>" size="30" class="number"></td>
+
+      <td><input type="text" name="account.AccountDescription.<? print $bank->AccountID ?>"   value="<? print $bank->AccountDescription ?>" size="30" class="number"></td>
+
+      <td>
         <?
         $aconf = array();
         $aconf['table']         = 'account';
@@ -68,35 +83,15 @@ $bank           = $_lib['db']->db_fetch_object($result_bank);
         $aconf['type'][]        = 'balance';
         print $_lib['form3']->accountplan_number_menu($aconf);
         ?>
-  </tr>
-  <tr>
-    <th class="sub">Gyldig fra (yyyy-mm-dd)</th>
-    <td><input type="text" name="account.ValidFrom.<? print $bank->AccountID ?>" value="<? print $bank->ValidFrom ?>" size="30" class="number"></td>
-  </tr>
-  <tr>
-    <th class="sub">Gyldig til (yyyy-mm-dd)</th>
-    <td><input type="text" name="account.ValidTo.<? print $bank->AccountID ?>"  value="<? print $bank->ValidTo ?>" size="30" class="number"></td>
-  </tr>
-  <tr>
-    <th class="sub">Sortering</th>
-    <td><input type="text" name="account.Sort.<? print $bank->AccountID ?>"  value="<? print $bank->Sort ?>" size="30" class="number"></td>
-  </tr>
-  <tr>
-    <th class="sub">Default periode</th>
-    <td><? print $_lib['form3']->AccountPeriod_menu3(array('table' => 'account', 'field' => 'DefaultPeriod', 'pk' => $bank->AccountID, 'value' => $bank->DefaultPeriod, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> false)); ?></td>
-  </tr>
-  <tr>
-    <th class="sub">Bilagstype</th>
-    <td><? print $_lib['form3']->Type_menu3(array('table' => 'account', 'field' => 'VoucherType', 'pk' => $bank->AccountID, 'type' => 'VoucherType','value' => $bank->VoucherType, 'required'=>'1')) ?></td>
-  </tr>
-  <tr>
-    <th class="sub">Inkluder i saldoberegning ved siden av resultat</th>
-    <td><? $_lib['form2']->checkbox2('account', "includeinsaldo", $bank->includeinsaldo, $bank->AccountID); ?></td>
-  </tr>
-  <tr>
-    <th class="sub">Aktiv</th>
-    <td><? $_lib['form2']->checkbox2('account', "Active", $bank->Active, $bank->AccountID); ?></td>
-  </tr>
+      </td>
+      <td><input type="text" name="account.OwnerName.<? print $bank->AccountID ?>"        value="<? print $bank->OwnerName ?>" size="30" class="number"></td>      
+      <td><? print $_lib['form3']->Type_menu3(array('table' => 'account', 'field' => 'VoucherType', 'pk' => $bank->AccountID, 'type' => 'VoucherType','value' => $bank->VoucherType, 'required'=>'1')) ?></td>
+
+      <td><input type="text" name="account.ValidFrom.<? print $bank->AccountID ?>" value="<? print $bank->ValidFrom ?>" size="30" class="number"></td>
+      <td><input type="text" name="account.ValidTo.<? print $bank->AccountID ?>"  value="<? print $bank->ValidTo ?>" size="30" class="number"></td>    
+
+      <td><input type="text" name="account.Sort.<? print $bank->AccountID ?>"  value="<? print $bank->Sort ?>" size="30" class="number"></td>
+    </tr>
 </table>
 <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
   <input type="submit" name="action_bank_update"     value="Lagre (S)" accesskey="S" />
