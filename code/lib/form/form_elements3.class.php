@@ -995,7 +995,7 @@ class form3
 			print "No type argument supplied to accountplan_number_menu";
 		}
 
-        $query = "select AccountPlanID, AccountName, AccountPlanType from accountplan where Active=1 and ($where) order by AccountPlanID";
+        $query = "select AccountPlanID, AccountName, AccountPlanType, Active from accountplan where ($where) order by AccountPlanID";
         #print "$query<br>";
         $result = $_lib['db']->db_query($query);
 
@@ -1006,7 +1006,7 @@ class form3
         else
         {
             $num_letters = $args['num_letters'];
-        } #Default number of letters in menu
+        } //#Default number of letters in menu
 
         if($args['autosubmit'])
         {
@@ -1022,16 +1022,21 @@ class form3
 
         while($_row = $_lib['db']->db_fetch_object($result))
         {
+            $optioncolor = " style=\"background: " . $colorH[$_row->AccountPlanType] . "\"";
+            if($_row->AccountPlanID == $args['value']) {
 
-			#$optioncolor = "class=\"$_row->AccountPlanType\""; 
-			$optioncolor = " style=\"background: " . $colorH[$_row->AccountPlanType] . "\"";
-			if($_row->AccountPlanID == $args['value']) {
-				$element .= " <option style=\"background: #CCCCCC\" value=\"$_row->AccountPlanID\" selected>" . substr("$_row->AccountPlanID-$_row->AccountName",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) . ")</option>\n";
-				$found = true;
-				$selectedcolor = $optioncolor;
-			}
-			else
-				$element .= " <option $optioncolor value=\"$_row->AccountPlanID\">" . substr("$_row->AccountPlanID-$_row->AccountName",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) . ")</option>\n";
+                if($_row->Active) {
+                    $element .= " <option style=\"background: #CCCCCC\" value=\"$_row->AccountPlanID\" selected>" . substr("$_row->AccountPlanID-$_row->AccountName",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) . ")</option>\n";
+                }
+                else {
+                    $element .= " <option style=\"background: #CCCCCC\" value=\"$_row->AccountPlanID\" selected>INAKTIV: " . substr("$_row->AccountPlanID-$_row->AccountName",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) . ")</option>\n";
+                }
+                $found = true;
+                $selectedcolor = $optioncolor;
+            }
+            else if($_row->Active) {
+                $element .= " <option $optioncolor value=\"$_row->AccountPlanID\">" . substr("$_row->AccountPlanID-$_row->AccountName",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) . ")</option>\n";
+            }
         }
 
         $query = "select AccountPlanID, AccountName, AccountPlanType from accountplan where Active=1 and ($where) order by AccountName";
@@ -1039,23 +1044,21 @@ class form3
 
         while($_row = $_lib['db']->db_fetch_object($result))
         {
-			#$optioncolor = "class=\"$_row->AccountPlanType\""; 
-			$optioncolor = " style=\"background: " . $colorH[$_row->AccountPlanType] . "\"";
-
+            $optioncolor = " style=\"background: " . $colorH[$_row->AccountPlanType] . "\"";
             $element .= "<option $optioncolor value=\"$_row->AccountPlanID\">" . substr("$_row->AccountName-$_row->AccountPlanID",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) . ")</option>\n";
         }
 
         if(!$found && isset($args['value']) && $args['value'] > 0)
         {
-			$optioncolor = " style=\"background: #FF0000\"";
+            $optioncolor = " style=\"background: #FF0000\"";
             $element .= "<option $optioncolor class=\"$_row->AccountPlanType\" value=\"" . $args['value'] . "\" selected>" . substr("Konto finnes ikke: " . $args['value'],0, $num_letters) . "</option>";
-			$selectedcolor = $optioncolor;
+            $selectedcolor = $optioncolor;
         }
         elseif(!$found && isset($args['value']))
         {
-			$optioncolor = " style=\"background: #FFFFFF\"";
+            $optioncolor = " style=\"background: #FFFFFF\"";
             $element .= "<option $optioncolor class=\"$_row->AccountPlanType\" value=\"" . $args['value'] . "\" selected>" . substr("Velg konto",0, $num_letters) . "</option>";
-			$selectedcolor = $optioncolor;
+            $selectedcolor = $optioncolor;
         }
 
         $element .= "</select>\n";
