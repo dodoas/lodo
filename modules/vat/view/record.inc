@@ -45,6 +45,7 @@ if($_REQUEST['action_vat_update'])
             $POST['vat_ValidTo'] = $row->ValidTo;
             $POST['vat_Active']   = $row->Active;
             $POST['vat_EnableVatOverride']   = $row->EnableVatOverride;
+
             //print_r($POST);
             $PairID = $_lib['db']->db_new_hash($POST, 'vat');
         }
@@ -55,9 +56,11 @@ elseif($_REQUEST['action_vat_new'])
     #Possible to extend or alter parameters here
     $_REQUEST['vat_Type']   = 'sale';
     $ID = $_lib['db']->db_new_hash($_REQUEST, 'vat');
+    $_REQUEST['vat_UpdateBy'] = $_SESSION['login_id'];
     $_REQUEST['vat_PairID'] = $ID;
     $_REQUEST['vat_Type']   = 'buy';
     $_REQUEST['vat_VatID']  = (int) $_REQUEST['vat_VatID'] + 30; #Interval difference between buy and sale
+                                                                     
     $PairID = $_lib['db']->db_new_hash($_REQUEST, 'vat');
     $_lib['db']->db_update("update vat set PairID=$PairID where ID=$ID");
 }

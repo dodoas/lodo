@@ -13,8 +13,7 @@ require_once "record.inc";
 
 /* Sokestreng */
 $date = $_lib['sess']->get_session('LoginFormDate');
-$query_vat  = "select * from vat where VatID <= 62 and ValidFrom <= '$date' and ValidTo >= '$date' order by VatID asc";
-//print "$query_vat<br>\n";
+$query_vat  = "select v.*, p.LastName, p.FirstName from vat v left join person p on p.PersonID = v.UpdateBy where v.VatID <= 62 and v.ValidFrom <= '$date' and v.ValidTo >= '$date' order by VatID asc";
 $result_vat = $_lib['db']->db_query($query_vat);
 ?>
 
@@ -71,6 +70,7 @@ $result_vat = $_lib['db']->db_query($query_vat);
                 <form name="<? print $form_name ?>" action="<? print $MY_SELF ?>" method="post">
                     <input type="hidden" name="ID"      value="<? print $vat->ID ?>">
                     <input type="hidden" name="vat_VatID"   value="<? print $vat->VatID ?>">
+                    <input type="hidden" name="vat_UpdateBy"   value="<? print $_SESSION['login_id'] ?>">
                     <td class="menu"><? print $vat->VatID ?></td>
                     <td>
                         <?
@@ -139,7 +139,7 @@ $result_vat = $_lib['db']->db_query($query_vat);
                     ?>
                     <td><? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?><input type="submit" name="action_vat_update" value="Lagre" /><?}?></td>
                     <td><? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?><input type="submit" name="action_vat_new" value="Ny" /><?}?></td>
-                    <td><? print $vat->TS ?></td>
+                    <td><? print $vat->TS ?> <? print $vat->FirstName . " " . $vat->LastName ?></td>
                 </form>
             </tr>
             <?
@@ -159,6 +159,7 @@ $result_vat = $_lib['db']->db_query($query_vat);
                 <form name="<? print $form_name ?>" action="<? print $MY_SELF ?>" method="post">
                     <input type="hidden" name="ID"      value="<? print $vat->ID ?>">
                     <input type="hidden" name="vat_VatID"   value="<? print $vat->VatID ?>">
+                    <input type="hidden" name="vat_UpdateBy"   value="<? print $_SESSION['login_id'] ?>">
                     <td class="menu"><? print $vat->VatID ?></td>
                     <td>
                         <?
@@ -200,9 +201,9 @@ $result_vat = $_lib['db']->db_query($query_vat);
                         <?
                     }
                     ?>
-                    <td><? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?><input type="submit" name="action_vat_new" value="Ny" /><?}?></td>
                     <td><? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?><input type="submit" name="action_vat_update" value="Lagre" /><?}?></td>
-                    <td><? print $vat->TS ?></td>
+                    <td><? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?><input type="submit" name="action_vat_new" value="Ny" /><?}?></td>
+                    <td><? print $vat->TS ?> <? print $vat->FirstName . " " . $vat->LastName ?></td>
                 </form>
             </tr>
             <?
