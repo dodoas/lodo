@@ -214,7 +214,7 @@ class framework_logic_vouchergui
     //#Print credit/debit fields in td menu on line
     function creditdebitfield($AmountField, $accountplan, $AmountIn, $AmountOut, $closed = false) {
         global $_lib, $tabindex;
-        $html = '<td class="' . $accountplan->DebitColor . '">';
+        $html = '<td class="' . $accountplan->DebitColor . '" style="text-align: right;">';
         $tabindexin  = '';
         $tabindexout = '';
         if($accountplan->EnableCurrency || $closed) { #Not possibel to edit in and out when currency is enabled
@@ -233,7 +233,7 @@ class framework_logic_vouchergui
         $html .= $_lib['form3']->text(array('name' => 'voucher.AmountIn', 'readonly' => $readonly, 'value' => $_lib['format']->Amount($AmountIn), 'class' => 'number', 'width' => '12', 'tabindex' => $tabindexin, 'accesskey' => 'I')); 
         $html .= '<br>' . $accountplan->debittext;
         $html .= "</td>\n";
-        $html .= '<td class="' . $accountplan->CreditColor . '">';
+        $html .= '<td class="' . $accountplan->CreditColor . '" style="text-align: right;">';
         $html .= $_lib['form3']->text(array('name' => 'voucher.AmountOut', 'readonly' => $readonly, 'value' => $_lib['format']->Amount($AmountOut), 'class' => 'number', 'width' => '12', 'tabindex' => $tabindexout, 'accesskey' => 'I')); 
         $html .= '<br>' . $accountplan->credittext;
         $html .= "</td>\n";
