@@ -399,8 +399,16 @@ $formname = "salaryUpdate";
 
 <tr>
   <td colspan = "7"></td>
-  <td colspan = "4">Fakturabankepost: <?php print $head->FEmail; ?></td>
-    <td colspan="<? echo ($head->FakturabankPersonID) ? '2' : '6'  ?>">
+  <td colspan="6">
+      <? if ($head->FakturabankPersonID) { ?>
+           Sendt til Fakturabank <? print $head->FakturabankDateTime ?>, av <? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?>
+      <? } ?>
+  </td>
+</tr>
+
+<tr>
+  <td colspan = "7"></td>
+  <td colspan="6">
       <?
 		if($_lib['sess']->get_person('FakturabankExportPaycheckAccess')) {
                     if($head->FEmail)
@@ -410,11 +418,16 @@ $formname = "salaryUpdate";
 		}
 
       ?>
-      <? if ($head->FakturabankPersonID) { ?>
-           <td colspan="4">Sendt til Fakturabank <? print $head->FakturabankDateTime ?>, av <? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?></td>
-      <? } ?>
+  </td>
+</tr>
 
-    </td>
+<tr>
+  <td></td>
+</tr>
+
+<tr>
+  <td colspan = "7"></td>
+  <td colspan = "4">Fakturabankepost: <?php print $head->FEmail; ?></td>
 </tr>
 
 <tr>
