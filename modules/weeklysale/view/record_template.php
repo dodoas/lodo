@@ -31,8 +31,22 @@ else if(isset($_POST['template_add_defaults'])) {
 
     // check if first day is sunday
     $first_day_of_year = date("N", $d);
-    if($first_day_of_year == 7) {
-        $template->addEntry($selected_year, '1', date("Y-m-d", $d), date("Y-m", $d), 'O');
+    if($first_day_of_year != 1) {
+        if(date("N", $d) != 7)
+            $tmp_d = strtotime("next sunday", $d);
+        else
+            $tmp_d = $d;
+
+        $template->addEntry(
+            $selected_year, 
+            '1', 
+            date("Y-m-d", $d),
+            date("Y-m-d", $tmp_d),
+            date("Y-m", $d), 
+            'O'
+            );
+
+        $d = $tmp_d;
     }
 
     $last_month = date("M", $d);
@@ -49,7 +63,10 @@ else if(isset($_POST['template_add_defaults'])) {
             $tmp_d = strtotime($selected_year . "-" . $this_month . "-01");
             $tmp_d -= 60*60*24;
 
-            $monday_d = strtotime("last monday", $tmp_d);
+            if(date("N", $tmp_d) != 1)
+                $monday_d = strtotime("last monday", $tmp_d);
+            else
+                $monday_d = $tmp_d;
             
             $template->addEntry(
                 $selected_year,
@@ -82,8 +99,19 @@ else if(isset($_POST['template_add_defaults'])) {
         }
 
         $last_month = $this_month;
+    }
 
-
+    // add last week 53
+    if(date('d', $d) != '31') {
+        $d = strtotime("last monday", strtotime($selected_year . "-12-31"));
+        $template->addEntry(
+            $selected_year,
+            '53',
+            date('Y-m-d', $d),
+            $selected_year . '-12-31',
+            date('Y-m', $d),
+            'O'
+            );
     }
 
     $template->reload();
