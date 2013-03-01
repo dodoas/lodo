@@ -49,8 +49,6 @@ else if(isset($_POST['template_add_defaults'])) {
             $tmp_d = strtotime($selected_year . "-" . $this_month . "-01");
             $tmp_d -= 60*60*24;
 
-            echo "Special<br />";
-
             $monday_d = strtotime("last monday", $tmp_d);
             
             $template->addEntry(
