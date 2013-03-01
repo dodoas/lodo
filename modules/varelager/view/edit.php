@@ -178,10 +178,10 @@ print $_lib['sess']->doctype
             ?>
             <tr>
                 <td></td>
-                <td><? print $row->ProductNr; // this is product ID ?></td>
+                <td><? print $row->ProductNr; /* this is product ID */ ?></td>
                 <td><? print $row->RealProductNumber ?></td>
                 <td><? print $row->ProductName ?></td>
-                <td class="number"><? print $row->UnitSize ?></td>
+                <td class="number"><? printf("%2.2f", $row->UnitSize) ?></td>
                 <td class="number"><? print $row->BulkSize ?></td>
                 <td class="number"><? print ($locked?
                                               $_lib['format']->Amount(array('value'=>$row->CostPrice, 'return'=>'value'))
@@ -189,7 +189,7 @@ print $_lib['sess']->doctype
                                               ) ?></td>
                 <td class="number"><? print ($locked?$row->Antall:$_lib['form3']->text(array('table'=>'varelagerline', 'field'=>'Antall', 'pk'=>$row->VareLagerLineID, 'value'=>$row->Antall, 'width'=>'10', 'class'=>'number'))) ?></td>
                 <td class="number"><nobr><? print $_lib['format']->Amount(array('value'=>$row->CostPrice * $row->Antall, 'return'=>'value')) ?></nobr></td>
-                <td class="number"><?= $stock * $row->UnitSize * $row->BulkSize ?></td>
+                <td class="number"><?= sprintf("%2.2f", $stock * $row->UnitSize * $row->BulkSize); ?></td>
             </tr>
         <?
         }

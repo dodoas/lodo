@@ -42,7 +42,9 @@ if($_REQUEST['action_varelager_new'])
     $post['varelager_CreatedDate'] = $_POST['varelager_CreatedDate'];
     $post['varelager_Description'] = $_POST['varelager_Description'];
     $post['varelager_Comment'] = "Det er ikke ukurans p&aring; varelageret.
-Varelager er priset til innkj&oslash;pspris.";
+Varelager er priset til innkj&oslash;pspris.
+Varelager er priset og telt av 
+";
     $VareLagerID = $_lib['db']->db_new_hash($post, 'varelager');
 
     $post = array();
@@ -60,6 +62,9 @@ Varelager er priset til innkj&oslash;pspris.";
         $post['varelagerline_ProductName'] = $row->ProductName;
         $post['varelagerline_CostPrice']   = $row->UnitCostPrice;
         $post['varelagerline_Antall']      = 0;
+
+        //if(!$row->ProjectID) $row->ProjectID = 1;
+        if(!$row->ShelfID) $row->ShelfID = 1;
 
         $post['varelagerline_Department'] = $departments[ $row->CompanyDepartmentID ]["DepartmentName"];
         $post['varelagerline_Project'] = $projects[ $row->ProjectID ]["Heading"];
@@ -97,6 +102,9 @@ elseif($_REQUEST['action_varelager_reload_products']) {
         $post['varelagerline_ProductNr']   = $row->ProductID;
         $post['varelagerline_ProductName'] = $row->ProductName;
         
+        //if(!$row->ProjectID) $row->ProjectID = 1;
+        if(!$row->ShelfID) $row->ShelfID = 1;
+
         $post['varelagerline_Department'] = $departments[ $row->CompanyDepartmentID ]["DepartmentName"];
         $post['varelagerline_Project'] = $projects[ $row->ProjectID ]["Heading"];
         $post['varelagerline_Shelf'] = $shelfs[ $row->ShelfID ]["Name"];
