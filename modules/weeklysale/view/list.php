@@ -98,6 +98,9 @@ function set_cookie(name, elid)
 <table cellspacing="0">
 
 <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
+<p>
+  <a href="<? print $_lib['sess']->dispatch ?>t=weeklysale.edittemplate">Nye ukeomsetningsgrensesnitt</a>
+</p>
 
 <table class="lodo_data">
   <tr>
