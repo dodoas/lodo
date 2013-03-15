@@ -96,7 +96,7 @@ elseif($_lib['input']->getProperty('action_salaryline_new'))
     $fields['salaryline_ProjectID']         = $orgLine->ProjectID;
     $fields['salaryline_DepartmentID']      = $orgLine->DepartmentID;
     $fields['salaryline_EmployeeTax']       = $orgLine->EmployeeTax;
-    $fields['salaryline_SalaryCode']      	= $orgLine->SalaryCode;
+    $fields['salaryline_SalaryCode']        = $orgLine->SalaryCode;
 
     $_lib['storage']->db_new_hash($fields, 'salaryline');
 }
@@ -194,6 +194,20 @@ elseif($_lib['input']->getProperty('action_salary_new'))
       if($debug) print_r($postmain);
 
       $SalaryID = $_lib['storage']->db_new_hash($postmain, 'salary');
+
+      $query_arb = "select a.Percent from kommune as k, arbeidsgiveravgift as a where a.Code=k.Sone";
+      $arb = $_lib['storage']->get_row(array('query' => $query_arb));
+
+      $postextra['salaryextra_SalaryID'] = $SalaryID;
+      $postextra['salaryextra_AccountName'] = $accountplan->AccountName;
+      $postextra['salaryextra_Address'] = $accountplan->Address;
+      $postextra['salaryextra_City'] = $accountplan->City;
+      $postextra['salaryextra_ZipCode'] = $accountplan->ZipCode;
+      $postextra['salaryextra_SocietyNumber'] = $accountplan->SocietyNumber;
+      $postextra['salaryextra_TabellTrekk'] = $accountplan->TabellTrekk;
+      $postextra['salaryextra_ProsentTrekk'] = $accountplan->ProsentTrekk;
+      $postextra['salaryextra_MunicipalityPercent'] = $arb->Percent;
+      $_lib['storage']->db_new_hash($postextra, 'salaryextra');
 
       ################################################################
       #Get configuration hovedmal - used as a basis for salary

@@ -15,11 +15,88 @@ $SalaryperiodconfID = (int) $_REQUEST['SalaryperiodconfID'];
 includelogic('accounting/accounting');
 $accounting = new accounting();
 require_once "record.inc";
-$query_head     = "select F.Email as FEmail, S.*, A.AccountName, A.Address, A.City, A.ZipCode, A.SocietyNumber, A.TabellTrekk, A.ProsentTrekk from salary as S, fakturabankemail F, accountplan as A where S.SalaryID='$SalaryID' and S.AccountPlanID=A.AccountPlanID and F.AccountPlanID = A.AccountPlanID";
-$head           = $_lib['storage']->get_row(array('query' => $query_head));
 
-$query_arb 		= "select a.Percent from kommune as k, arbeidsgiveravgift as a where a.Code=k.Sone";
-$arb           	= $_lib['storage']->get_row(array('query' => $query_arb));
+$query_head = "
+select
+  F.Email as FEmail,
+  S.*,
+  E.*,
+  E.MunicipalityPercent as Percent,
+  (NOT (E.AccountName IS NULL)) as isUpdated
+from
+  salary as S
+  left join (salaryextra as E)
+    on (S.SalaryID = E.SalaryID),
+  fakturabankemail F
+where
+  S.SalaryID = '$SalaryID'
+  and F.AccountPlanID = S.AccountPlanID
+";
+
+// Code to update old entries.
+// Inserts account data into presistent table salaryextra
+$head = $_lib['storage']->get_row(array('query' => $query_head));
+if(!$head->isUpdated || isset($_POST['action_salary_update_extra'])) {
+    $query_head     = "
+     select
+       F.Email as FEmail, 
+       S.*, 
+       A.AccountName, 
+       A.Address, 
+       A.City, 
+       A.ZipCode, 
+       A.SocietyNumber, 
+       A.TabellTrekk, 
+       A.ProsentTrekk 
+     from 
+       salary as S, 
+       fakturabankemail F, 
+       accountplan as A 
+     where 
+       S.SalaryID='$SalaryID' 
+       and S.AccountPlanID=A.AccountPlanID 
+       and F.AccountPlanID = A.AccountPlanID
+    ";
+    $head = $_lib['storage']->get_row(array('query' => $query_head));
+    $query_arb = "select a.Percent from kommune as k, arbeidsgiveravgift as a where a.Code=k.Sone";
+    $arb = $_lib['storage']->get_row(array('query' => $query_arb));
+    
+    $query_update_presistent = sprintf("
+     replace
+     into
+       salaryextra
+     (
+       SalaryID,
+       AccountName,
+       Address,
+       City,
+       ZipCode,
+       SocietyNumber,
+       TabellTrekk,
+       ProsentTrekk,
+       MunicipalityPercent
+     )
+     VALUES (
+       %d,
+       '%s',
+       '%s',
+       '%s',
+       '%s',
+       '%s',
+       '%s',
+       '%s',
+       '%s'
+     );
+     ", $head->SalaryID, $head->AccountName, $head->Address, 
+                                       $head->City, $head->ZipCode, $head->SocietyNumber, 
+                                       $head->TabellTrekk, $head->ProsentTrekk, $arb->Percent);
+
+    $_lib['db']->db_query($query_update_presistent);
+    $_lib['message']->add("Updated presistent data");
+}
+else {
+    $arb = $head;
+}
 
 $ishovedmal = $head->SalaryConfID;
 
@@ -350,6 +427,7 @@ $formname = "salaryUpdate";
             }
     
             echo '<input type="submit" name="action_salary_internal" value="Lagre internkommentar(S)" accesskey="S" align="right" />';
+            echo '<input type="submit" name="action_salary_update_extra" value="Updater kontoinformasjon" accesskey="U" align="right" />';
           ?>
 
           </td>
@@ -376,6 +454,7 @@ $formname = "salaryUpdate";
                   }
 
                   echo '<input type="submit" name="action_salary_internal" value="Lagre internkommentar(S)" accesskey="S" align="right" />';
+                  echo '<input type="submit" name="action_salary_update_extra" value="Updater kontoinformasjon" accesskey="U" align="right" />';
             ?>
           </td>
         </tr>
