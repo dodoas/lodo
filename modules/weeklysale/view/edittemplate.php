@@ -72,7 +72,7 @@ EOT;
    ?>
 <?if($_lib['message']->get()) { ?> <div class="warning"><? print $_lib['message']->get() ?></div><br><? } ?>
  
-
+<?php $journalid_tab = 10000; ?>
 <form action="<? print $_SETUP['DISPATCH'] ?>&t=<?= $t ?>" method="post" enctype="multipart/form-data">
   <input type="hidden" name="year" value="<?= $selected_year ?>" />
   <input type="hidden" name="config" value="<?= $selected_config ?>" />
@@ -109,8 +109,14 @@ EOT;
       <td><input type="text" name="weeklysaletemplate.LastDate.<?= $entry["WeeklySaleTemplateID"] ?>" size="10" value="<?= $entry['LastDate'] ?>" /> <?= $last_day ?></td>
       <td><input type="text" name="weeklysaletemplate.Period.<?= $entry["WeeklySaleTemplateID"] ?>" size="7" value="<?= $entry['Period'] ?>" /></td>
       <td><input type="text" name="weeklysaletemplate.VoucherType.<?= $entry["WeeklySaleTemplateID"] ?>" size="1" value="<?= $entry['VoucherType'] ?>" /></td>
-      <td><input type="text" name="weeklysaletemplate.JournalID.<?= $entry["WeeklySaleTemplateID"] ?>" size="11" value="<?= $entry['JournalID'] ?>" /></td>
-      <td><input type="checkbox" name="template_selected[]" value="<?= $entry["WeeklySaleTemplateID"] ?>" /></td>
+
+      <? if(!$entry["journalInUse"]) { ?>
+        <td><input type="text" name="weeklysaletemplate.JournalID.<?= $entry["WeeklySaleTemplateID"] ?>" size="11" value="<?= $entry['JournalID'] ?>" class="lodoreqfelt" tabindex="<?= ++$journalid_tab ?>" /></td>
+        <td><input type="checkbox" name="template_selected[]" value="<?= $entry["WeeklySaleTemplateID"] ?>" /></td>
+      <? } else { ?>
+        <td><input type="text" name="weeklysaletemplate.JournalID.<?= $entry["WeeklySaleTemplateID"] ?>" size="11" value="<?= $entry['JournalID'] ?>" style="background-color: red" tabindex="<?= ++$journalid_tab ?>" /></td>
+        <td><input type="checkbox" name="template_selected[]" value="<?= $entry["WeeklySaleTemplateID"] ?>" disabled='disabled' /></td>
+      <? } ?>
     </tr>
     <? } else { ?>
     <tr>
@@ -122,7 +128,7 @@ EOT;
       <td><input type="text" name="weeklysaletemplate.LastDate.<?= $entry["WeeklySaleTemplateID"] ?>" size="10" value="<?= $entry['LastDate'] ?>" disabled='disabled' /> <?= $last_day ?></td>
       <td><input type="text" name="weeklysaletemplate.Period.<?= $entry["WeeklySaleTemplateID"] ?>" size="7" value="<?= $entry['Period'] ?>" disabled='disabled' /></td>
       <td><input type="text" name="weeklysaletemplate.VoucherType.<?= $entry["WeeklySaleTemplateID"] ?>" size="1" value="<?= $entry['VoucherType'] ?>" disabled='disabled' /></td>
-      <td><input type="text" name="weeklysaletemplate.JournalID.<?= $entry["WeeklySaleTemplateID"] ?>" size="11" value="<?= $entry['JournalID'] ?>" disabled='disabled' /></td>
+      <td><input type="text" name="weeklysaletemplate.JournalID.<?= $entry["WeeklySaleTemplateID"] ?>" size="11" value="<?= $entry['JournalID'] ?>" disabled='disabled' tabindex="<?= ++$journalid_tab ?>" /></td>
       <td><input type="checkbox" name="template_selected[]" value="<?= $entry["WeeklySaleTemplateID"] ?>" disabled='disabled' /></td>
     </tr>
     <? } ?>

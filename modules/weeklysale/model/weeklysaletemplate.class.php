@@ -33,9 +33,18 @@ class WeeklysaleTemplate {
         global $_lib;
         $entries = array();
 
-        $q = sprintf("SELECT * FROM weeklysaletemplate WHERE Year = %d AND WeeklySaleConfID = %d 
-                       ORDER BY WeekNo, FirstDate", 
-                     $this->year, $this->config);
+        $q = sprintf("
+          SELECT 
+            t.*,
+            (not (v.JournalID IS NULL)) as journalInUse
+            FROM weeklysaletemplate t
+              LEFT JOIN (voucher v)
+                ON (v.JournalID = t.JournalID AND v.voucherType = t.voucherType)
+            WHERE t.Year = %d AND t.WeeklySaleConfID = %d 
+            GROUP BY t.WeeklySaleTemplateID
+            ORDER BY t.WeekNo, t.FirstDate
+        ",
+        $this->year, $this->config);
 
         $r = $_lib['db']->db_query($q);
         while($row = $_lib['db']->db_fetch_assoc($r)) 
@@ -201,7 +210,6 @@ class WeeklysaleTemplate {
                     $WeeklySaleID, $entry['WeeklySaleTemplateID'])
             );
                                
-
         do { 
             $postsub['weeklysaleday_WeeklySaleID'] = $WeeklySaleID;
             $postsub['weeklysaleday_Day']          = date('j', $d); 
