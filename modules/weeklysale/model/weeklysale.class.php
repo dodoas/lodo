@@ -104,11 +104,11 @@ class weeklysale {
           $readonly = "readonly disable";
         }
 
-        $query_sale         = "select * from weeklysaleday where WeeklySaleID = '" . $this->head->WeeklySaleID . "' and Type=1 order by DayID asc";
+        $query_sale         = "select * from weeklysaleday where WeeklySaleID = '" . $this->head->WeeklySaleID . "' and Type=1 order by DayID, WeeklySaleDayID asc";
         #print "q4: $query_sale<br />\n";
         $result_sale        = $_lib['db']->db_query($query_sale);
 
-        $query_revenue  = "select * from weeklysaleday where WeeklySaleID = '" . $this->head->WeeklySaleID . "' and Type=2 order by DayID asc";
+        $query_revenue  = "select * from weeklysaleday where WeeklySaleID = '" . $this->head->WeeklySaleID . "' and Type=2 order by DayID, WeeklySaleDayID asc";
         #print "q5: $query_revenue<br />\n";
 
         $result_revenue = $_lib['db']->db_query($query_revenue);

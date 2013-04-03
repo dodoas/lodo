@@ -64,17 +64,14 @@ class WeeklysaleTemplate {
     public static function listYears() {
         global $_lib;
 
-        $years = array();
+        $years = array(date("Y"), date("Y") - 1, date("Y") + 1);
         $r = $_lib['db']->db_query("SELECT `Year` FROM weeklysaletemplate GROUP BY `Year`");
         while($row = $_lib['db']->db_fetch_assoc($r)) {
-            $years[] = $row["Year"];
+            if(!in_array($row["Year"], $years))
+                $years[] = $row["Year"];
         }
 
-        $curYear = date("Y");
-        if(!in_array($curYear, $years))
-            $years[] = $curYear;
-
-        rsort($years);
+        sort($years);
         return $years;
     }
 
@@ -155,6 +152,17 @@ class WeeklysaleTemplate {
         }
     }
 
+    public function deleteEntryVoucher($WeeklySaleTemplateID) {
+        global $_lib;
+
+        if(!isset($this->entries[$WeeklySaleTemplateID]))
+            return false;
+
+        $e = $this->entries[$WeeklySaleTemplateID];
+        $q = sprintf("DELETE FROM weeklysaleday WHERE WeeklySaleID = %d", $e['WeeklySaleID']);
+        $q = sprintf("DELETE FROM weeklysale WHERE WeeklySaleID = %d", $e['WeeklySaleID']);
+    }
+
     public function create($WeeklySaleTemplateID) {
         global $_lib;
 
@@ -192,15 +200,13 @@ class WeeklysaleTemplate {
         $postmain['weeklysale_InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
         $postmain['weeklysale_UpdatedByPersonID'] = $_lib['sess']->get_person('PersonID');
         $postmain['weeklysale_WeeklySaleConfID']  = $WeeklySaleConfID;
-        $postmain['weeklysale_JournalDate']       = $_lib['sess']->get_session('LoginFormDate');
+        $postmain['weeklysale_JournalDate']       = $entry['LastDate'];
         $postmain['weeklysale_JournalID']         = $entry["JournalID"];
         $postmain['weeklysale_VoucherType']       = $sale_conf->VoucherType;
 
         $postmain['weeklysale_Week'] = $entry['WeekNo'];
 
         $WeeklySaleID = $_lib['storage']->db_new_hash($postmain, 'weeklysale');
-
-        echo "Got '$WeeklySaleID'";
 
         $d = strtotime($entry['FirstDate']);
         $last_d = strtotime($entry['LastDate']);
@@ -209,12 +215,35 @@ class WeeklysaleTemplate {
             sprintf("update weeklysaletemplate set WeeklySaleID = %d where WeeklySaleTemplateID = %d",
                     $WeeklySaleID, $entry['WeeklySaleTemplateID'])
             );
+
+        // add dummy days before
+        if(date('N', $d) != 1) {
+            $tmp_d = strtotime("last monday", $d);
+            
+            do {
+                $postsub['weeklysaleday_WeeklySaleID'] = $WeeklySaleID;
+                $postsub['weeklysaleday_Day']          = date('j', $tmp_d);
+                $postsub['weeklysaleday_DayID']        = date('N', $tmp_d);
+                $postsub['weeklysaleday_Type']         = 1;
+                $postsub['weeklysaleday_Locked']       = 1;
+            
+                $WeeklySaleDayID = $_lib['storage']->db_new_hash($postsub, 'weeklysaleday');
+                $_lib['db']->db_update("update weeklysaleday set ParentWeeklySaleDayID=$WeeklySaleDayID where WeeklySaleDayID=$WeeklySaleDayID");
+
+                $postsub['weeklysaleday_ParentWeeklySaleDayID'] = $WeeklySaleDayID;
+                $postsub['weeklysaleday_Type']                  = 2;
+                $_lib['storage']->db_new_hash($postsub, 'weeklysaleday');           
+
+                $tmp_d += 60 * 60 * 24;
+            } while($tmp_d < $d);
+        }
                                
         do { 
             $postsub['weeklysaleday_WeeklySaleID'] = $WeeklySaleID;
             $postsub['weeklysaleday_Day']          = date('j', $d); 
             $postsub['weeklysaleday_DayID']        = date('N', $d);
             $postsub['weeklysaleday_Type']         = 1;
+            $postsub['weeklysaleday_Locked']       = 0;
             
             $WeeklySaleDayID = $_lib['storage']->db_new_hash($postsub, 'weeklysaleday');
             $_lib['db']->db_update("update weeklysaleday set ParentWeeklySaleDayID=$WeeklySaleDayID where WeeklySaleDayID=$WeeklySaleDayID");
@@ -225,5 +254,24 @@ class WeeklysaleTemplate {
 
             $d += 60 * 60 * 24;
         } while($d <= $last_d);
+
+        // add dummy days after
+        while(date('N', $d) != 1) {
+            $postsub['weeklysaleday_WeeklySaleID'] = $WeeklySaleID;
+            $postsub['weeklysaleday_Day']          = date('j', $d);
+            $postsub['weeklysaleday_DayID']        = date('N', $d);
+            $postsub['weeklysaleday_Type']         = 1;
+            $postsub['weeklysaleday_Locked']       = 1;
+            
+            $WeeklySaleDayID = $_lib['storage']->db_new_hash($postsub, 'weeklysaleday');
+            $_lib['db']->db_update("update weeklysaleday set ParentWeeklySaleDayID=$WeeklySaleDayID where WeeklySaleDayID=$WeeklySaleDayID");
+
+            $postsub['weeklysaleday_ParentWeeklySaleDayID'] = $WeeklySaleDayID;
+            $postsub['weeklysaleday_Type']                  = 2;
+            $_lib['storage']->db_new_hash($postsub, 'weeklysaleday');           
+
+            $d += 60 * 60 * 24;
+        }
+
     }
 };

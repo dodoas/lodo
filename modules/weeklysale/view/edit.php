@@ -373,9 +373,9 @@ if($_lib['db']->db_numrows($duplicates) >= 1) {
                 <td class="menu" style="text-align: right;">Kontant ut</td>
                 <td class="menu" style="text-align: right;">Opptelling</td>
                 <td class="menu" style="text-align: right;">Diff</td>
-                <td class="menu" style="text-align: right;">Forklaring</td>
-                <td class="menu" style="text-align: right;">Sig</td>
-                <td class="menu" style="text-align: right;">L&aring;s</td>
+                <td class="menu" style="text-align: left;">Forklaring</td>
+                <td class="menu" style="text-align: left;">Sig</td>
+                <td class="menu" style="text-align: left;">L&aring;s</td>
             <?
             $sumtot = 0;
             $sum = array();

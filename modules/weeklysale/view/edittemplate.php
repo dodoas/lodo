@@ -28,6 +28,9 @@
     <select name="year">
       <?php 
          foreach($years as $y) {
+           if($y == $selected_year)
+             printf("<option value='%d' selected>%d</option>", $y, $y);
+           else
              printf("<option value='%d'>%d</option>", $y, $y);
          }
          ?>
@@ -58,13 +61,14 @@
 
    $control_row = <<<EOT
     <tr>
-      <td colspan="4">
+      <td colspan="3">
         <input type="submit" value="Lagre alle" name="template_save" />
         <input type="submit" value="+" name="template_add_blank_entry" />
       </td>
-      <td colspan="4">
+      <td colspan="5">
         <input type="submit" value="Opprett markerte" name="template_create_weeklysales" onclick="return confirm('Opprett?')" />
         <input type="submit" value="Slett markerte" name="template_delete_marked" onclick="return confirm('Slett?')" />
+        <input type="submit" value="Slett markerte bilag og &aring;pne linjen" name="template_delete_marked_voucher" onclick="return confirm('Slett?')" />
       </td>
     </tr>
 EOT;
@@ -72,7 +76,7 @@ EOT;
    ?>
 <?if($_lib['message']->get()) { ?> <div class="warning"><? print $_lib['message']->get() ?></div><br><? } ?>
  
-<?php $journalid_tab = 10000; ?>
+<?php $journalid_tab = 10000; $vouchertype_tab = 100000; ?>
 <form action="<? print $_SETUP['DISPATCH'] ?>&t=<?= $t ?>" method="post" enctype="multipart/form-data">
   <input type="hidden" name="year" value="<?= $selected_year ?>" />
   <input type="hidden" name="config" value="<?= $selected_config ?>" />
@@ -108,7 +112,7 @@ EOT;
       <td><input type="text" name="weeklysaletemplate.FirstDate.<?= $entry["WeeklySaleTemplateID"] ?>" size="10" value="<?= $entry['FirstDate'] ?>" /> <?= $first_day ?></td>
       <td><input type="text" name="weeklysaletemplate.LastDate.<?= $entry["WeeklySaleTemplateID"] ?>" size="10" value="<?= $entry['LastDate'] ?>" /> <?= $last_day ?></td>
       <td><input type="text" name="weeklysaletemplate.Period.<?= $entry["WeeklySaleTemplateID"] ?>" size="7" value="<?= $entry['Period'] ?>" /></td>
-      <td><input type="text" name="weeklysaletemplate.VoucherType.<?= $entry["WeeklySaleTemplateID"] ?>" size="1" value="<?= $entry['VoucherType'] ?>" /></td>
+      <td><input type="text" name="weeklysaletemplate.VoucherType.<?= $entry["WeeklySaleTemplateID"] ?>" size="1" value="<?= $entry['VoucherType'] ?>" tabindex="<?= ++$vouchertype_tab ?>" /></td>
 
       <? if(!$entry["journalInUse"]) { ?>
         <td><input type="text" name="weeklysaletemplate.JournalID.<?= $entry["WeeklySaleTemplateID"] ?>" size="11" value="<?= $entry['JournalID'] ?>" class="lodoreqfelt" tabindex="<?= ++$journalid_tab ?>" /></td>
@@ -127,9 +131,9 @@ EOT;
       <td><input type="text" name="weeklysaletemplate.FirstDate.<?= $entry["WeeklySaleTemplateID"] ?>" size="10" value="<?= $entry['FirstDate'] ?>" disabled='disabled' /> <?= $first_day ?></td>
       <td><input type="text" name="weeklysaletemplate.LastDate.<?= $entry["WeeklySaleTemplateID"] ?>" size="10" value="<?= $entry['LastDate'] ?>" disabled='disabled' /> <?= $last_day ?></td>
       <td><input type="text" name="weeklysaletemplate.Period.<?= $entry["WeeklySaleTemplateID"] ?>" size="7" value="<?= $entry['Period'] ?>" disabled='disabled' /></td>
-      <td><input type="text" name="weeklysaletemplate.VoucherType.<?= $entry["WeeklySaleTemplateID"] ?>" size="1" value="<?= $entry['VoucherType'] ?>" disabled='disabled' /></td>
+      <td><input type="text" name="weeklysaletemplate.VoucherType.<?= $entry["WeeklySaleTemplateID"] ?>" size="1" value="<?= $entry['VoucherType'] ?>" disabled='disabled' tabindex="<?= ++$vouchertype_tab ?>" /></td>
       <td><input type="text" name="weeklysaletemplate.JournalID.<?= $entry["WeeklySaleTemplateID"] ?>" size="11" value="<?= $entry['JournalID'] ?>" disabled='disabled' tabindex="<?= ++$journalid_tab ?>" /></td>
-      <td><input type="checkbox" name="template_selected[]" value="<?= $entry["WeeklySaleTemplateID"] ?>" disabled='disabled' /></td>
+      <td><input type="checkbox" name="template_selected[]" value="<?= $entry["WeeklySaleTemplateID"] ?>" /></td>
     </tr>
     <? } ?>
 
