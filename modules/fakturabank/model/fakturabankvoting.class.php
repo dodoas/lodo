@@ -486,6 +486,13 @@ class lodo_fakturabank_fakturabankvoting {
 		return $ret;
     }
 
+    /* 
+     * Lookup accountplan of a given type
+     *
+     * @param identity - value. i.e. an actual organization number
+     * @param scheme_id - value type. i.e. NO:ORGNR for norwegian organization number
+     * @param type - account type such as 'supplier' or 'customer'
+     */
     public function find_account_plan_type($identity, $scheme_id, $type) {
         global $_lib;
 
@@ -531,6 +538,12 @@ class lodo_fakturabank_fakturabankvoting {
         return false;
     }
 
+    /* 
+     * Lookup accountplan
+     *
+     * @param identity - value. i.e. an actual organization number
+     * @param scheme_id - value type. i.e. NO:ORGNR for norwegian organization number
+     */
     public function find_account_plan($identity, $scheme_id) {
         global $_lib;
 
