@@ -116,19 +116,23 @@ elseif($_lib['input']->getProperty('action_defconf_save'))
 }
 elseif($_lib['input']->getProperty('action_salary_new'))
 {
-  list($JournalID, $tmp) = $accounting->get_next_available_journalid(array('available'=>true, 'update'=>true, 'type' =>'L'));
+    list($JournalID, $tmp) = 
+        $accounting->get_next_available_journalid(
+            array('available'=>true, 'update'=>true, 'type' =>'L'));
 
-  $query="select SalaryID from salary where JournalID=$JournalID";
-  if($debug) print "$query<br>\n";
-  $row_salary = $_lib['storage']->get_row(array('query' => $query));
-  if(isset($row_salary->SalaryID) and strlen($row_salary->SalaryID)>0)
-  {
-      $SalaryID=$row_salary->SalaryID;
-  }
-  else
-  {
+    $query="select SalaryID from salary where JournalID=$JournalID";
+    if($debug) print "$query<br>\n";
+    $row_salary = $_lib['storage']->get_row(array('query' => $query));
+    if(isset($row_salary->SalaryID) and strlen($row_salary->SalaryID)>0)
+    {
+        $SalaryID=$row_salary->SalaryID;
+    }
+    else
+    {
         $query_setup    = "select name, value from setup";
-        $setup          = $_lib['storage']->get_hash(array('query' => $query_setup, 'key' => 'name', 'value' => 'value'));
+        $setup          = $_lib['storage']->get_hash(
+            array('query' => $query_setup, 'key' => 'name', 'value' => 'value')
+            );
         if($debug) print_r($setup);
 
         $query_salary_period_conf = "select * from salaryperiodconf where SalaryperiodconfID = '" . (int) $_lib['input']->getProperty('SalaryperiodconfID') . "'";
@@ -138,162 +142,163 @@ elseif($_lib['input']->getProperty('action_salary_new'))
 
 
         if(!empty($salary_period_conf->Voucherdate))
-      {
-          $journalDate = $salary_period_conf->Voucherdate;
-      }
-      else
-      {
-        $journalDate = $_lib['sess']->get_session('Date');
-      }
+        {
+            $journalDate = $salary_period_conf->Voucherdate;
+        }
+        else
+        {
+            $journalDate = $_lib['sess']->get_session('Date');
+        }
 
         if(!empty($salary_period_conf->Fromdate))
-      {
-          $fromDate = $salary_period_conf->Fromdate;
-      }
-      else
-      {
-          $fromDate = $_lib['sess']->get_session('Date');
-      }
+        {
+            $fromDate = $salary_period_conf->Fromdate;
+        }
+        else
+        {
+            $fromDate = $_lib['sess']->get_session('Date');
+        }
 
         if(!empty($salary_period_conf->Todate))
-      {
-          $toDate = $salary_period_conf->Todate;
-      }
-      else
-      {
-          $toDate = $_lib['sess']->get_session('Date');
-      }
-
-      ################################################################
-      #Get configuration spesific to this employee - overrides hovedmal on same line numbers
-      $query_head_employee  = "select * from salaryconf where SalaryConfID = '" . (int) $_lib['input']->getProperty('SalaryConfID') . "'";
-      $result_head_employee = $_lib['db']->db_query($query_head_employee);
-      $head_employee        = $_lib['db']->db_fetch_object($result_head_employee);
-      $accountplan = $accounting->get_accountplan_object($head_employee->AccountPlanID);
-
-      #Possible to extend or alter parameters here
-      $postmain['salary_JournalID']           = $JournalID;
-      $postmain['salary_SalaryConfID']        = $SalaryConfID;
-      $postmain['salary_AccountPlanID']       = $head_employee->AccountPlanID;
-      $postmain['salary_ValidFrom']           = $fromDate;
-      $postmain['salary_ValidTo']             = $toDate;
-      $postmain['salary_JournalDate']         = $journalDate;
-      $postmain['salary_Period']              = $salary_period_conf->Period;  //$_lib['date']->get_this_period($journalDate);
-      $postmain['salary_KommuneID']           = $accountplan->KommuneID;
-      echo "KOMMUNE!" . $accountplan->KommuneID;
-
-      if($accountplan->EnableCredit == 1)
-        $postmain['salary_PayDate']           = $_lib['date']->add_Days($journalDate, $accountplan->CreditDays);
-      else
-        $postmain['salary_PayDate']           = $journalDate;
-
-      $postmain['salary_DomesticBankAccount'] = $accountplan->DomesticBankAccount;
-      $postmain['salary_CreatedByPersonID']   = $_lib['sess']->get_person('PersonID');
-
-      #Insert salary head
-      if($debug) print_r($postmain);
-
-      $SalaryID = $_lib['storage']->db_new_hash($postmain, 'salary');
-
-      $query_arb = "select a.Percent from kommune as k, arbeidsgiveravgift as a where a.Code=k.Sone";
-      $arb = $_lib['storage']->get_row(array('query' => $query_arb));
-
-      $postextra['salaryextra_SalaryID'] = $SalaryID;
-      $postextra['salaryextra_AccountName'] = $accountplan->AccountName;
-      $postextra['salaryextra_Address'] = $accountplan->Address;
-      $postextra['salaryextra_City'] = $accountplan->City;
-      $postextra['salaryextra_ZipCode'] = $accountplan->ZipCode;
-      $postextra['salaryextra_SocietyNumber'] = $accountplan->SocietyNumber;
-      $postextra['salaryextra_TabellTrekk'] = $accountplan->TabellTrekk;
-      $postextra['salaryextra_ProsentTrekk'] = $accountplan->ProsentTrekk;
-      $postextra['salaryextra_MunicipalityPercent'] = $arb->Percent;
-      $_lib['storage']->db_new_hash($postextra, 'salaryextra');
-
-      ################################################################
-      #Get configuration hovedmal - used as a basis for salary
-      $query_head_default   = "select * from salaryconf where SalaryConfID = '1'";
-      $result_head_default  = $_lib['db']->db_query($query_head_default);
-      $head_default         = $_lib['db']->db_fetch_object($result_head_default);
-
-      ################################################################
-      #Get default / hovedmal configuration lines
-      $query_salary_default     = "select * from salaryconfline where SalaryConfID = '1'";
-      if($debug) print "$query_salary_default<br>\n";
-      $result_salary_default    = $_lib['db']->db_query($query_salary_default);
-
-      $lines = array();
-      while($line = $_lib['db']->db_fetch_object($result_salary_default)) {
-        $lines[$line->LineNumber]['AccountPlanID']      = $line->AccountPlanID;
-        $lines[$line->LineNumber]['NumberInPeriod']     = $line->NumberInPeriod;
-        $lines[$line->LineNumber]['Rate']               = $line->Rate;
-        $lines[$line->LineNumber]['SalaryText']         = $line->SalaryText;
-        $lines[$line->LineNumber]['AmountThisPeriod']   = $line->AmountThisPeriod;
-        $lines[$line->LineNumber]['EnableEmployeeTax']  = $line->EnableEmployeeTax;
-        $lines[$line->LineNumber]['SalaryID']           = $SalaryID;
-        $lines[$line->LineNumber]['ProjectID']          = $line->ProjectID;
-        $lines[$line->LineNumber]['DepartmentID']       = $line->DepartmentID;
-        $lines[$line->LineNumber]['EnableVacationPayment']  = $line->EnableVacationPayment;
-        $lines[$line->LineNumber]['SalaryCode']  		= $line->SalaryCode;
-      }
-
-      ################################################################
-      #Get employee spesific lines
-      #This overrides default / hovedmal lines with the same line number.
-      $query_salary_employee    = "select * from salaryconfline where SalaryConfID = '$SalaryConfID'";
-      if($debug) print "$query_salary_employee<br>\n";
-      $result_salary_employee   = $_lib['db']->db_query($query_salary_employee);
-
-      while($line = $_lib['db']->db_fetch_object($result_salary_employee)) {
-        if(!$line->Active)
         {
-          unset($lines[$line->LineNumber]);
-          continue;
+            $toDate = $salary_period_conf->Todate;
         }
-        $lines[$line->LineNumber]['AccountPlanID']      = $line->AccountPlanID;
-        $lines[$line->LineNumber]['NumberInPeriod']     = $line->NumberInPeriod;
-        $lines[$line->LineNumber]['Rate']               = $line->Rate;
-        $lines[$line->LineNumber]['SalaryText']         = $line->SalaryText;
-        $lines[$line->LineNumber]['AmountThisPeriod']   = $line->AmountThisPeriod;
-        $lines[$line->LineNumber]['EnableEmployeeTax']  = $line->EnableEmployeeTax;
-        $lines[$line->LineNumber]['SalaryID']           = $SalaryID;
-        $lines[$line->LineNumber]['ProjectID']          = $line->ProjectID;
-        $lines[$line->LineNumber]['DepartmentID']       = $line->DepartmentID;
-        $lines[$line->LineNumber]['EnableVacationPayment']  = $line->EnableVacationPayment;
-        #$lines[$line->LineNumber]['SalaryCode']  			= $line->SalaryCode;
-      }
-
-      ################################################################
-      #Insert salary lines in database
-
-      $postsub['salaryline_SalaryID'] = $SalaryID;
-
-      foreach ($lines as $linenum => $field)
-      {
-        if($lines[$linenum]['EnableEmployeeTax'] == 1)
+        else
         {
-            $query = "select a.Percent from arbeidsgiveravgift as a, kommune as k, accountplan as ap where ap.AccountPlanID=$head_employee->AccountPlanID and ap.KommuneID=k.KommuneID and a.Code=k.Sone";
-            if($debug) print "$query<br>\n";
-            $arbavgift = $_lib['storage']->get_row(array('query' => $query));
-            $lines[$linenum]['EmployeeTax'] = $arbavgift->Percent;
+            $toDate = $_lib['sess']->get_session('Date');
         }
-        #print "linenum: $linenum : text : " . $lines[$linenum]['SalaryText'] . "<br>";
-        $postsub['salaryline_LineNumber']        = $linenum;
-        $postsub['salaryline_AccountPlanID']     = $lines[$linenum]['AccountPlanID'];
-        $postsub['salaryline_NumberInPeriod']    = $lines[$linenum]['NumberInPeriod'];
-        $postsub['salaryline_Rate']              = $lines[$linenum]['Rate'];
-        $postsub['salaryline_SalaryText']        = $lines[$linenum]['SalaryText'];
-        $postsub['salaryline_AmountThisPeriod']  = $lines[$linenum]['AmountThisPeriod'];
-        $postsub['salaryline_EnableEmployeeTax'] = $lines[$linenum]['EnableEmployeeTax'];
-        $postsub['salaryline_ProjectID']         = $lines[$linenum]['ProjectID'];
-        $postsub['salaryline_DepartmentID']      = $lines[$linenum]['DepartmentID'];
-        $postsub['salaryline_EnableVacationPayment'] = $lines[$linenum]['EnableVacationPayment'];
-        $postsub['salaryline_EmployeeTax']     	= $lines[$linenum]['EmployeeTax'];
-        $postsub['salaryline_SalaryCode']       = $lines[$linenum]['SalaryCode'];
-        if($debug) print_r($postsub);
 
-        $_lib['storage']->db_new_hash($postsub, 'salaryline');
-      }
-  }
+        //################################################################
+        //#Get configuration spesific to this employee - overrides hovedmal on same line numbers
+        $query_head_employee  = "select * from salaryconf where SalaryConfID = '" . (int) $_lib['input']->getProperty('SalaryConfID') . "'";
+        $result_head_employee = $_lib['db']->db_query($query_head_employee);
+        $head_employee        = $_lib['db']->db_fetch_object($result_head_employee);
+        $accountplan = $accounting->get_accountplan_object($head_employee->AccountPlanID);
+
+        //#Possible to extend or alter parameters here
+        $postmain['salary_JournalID']           = $JournalID;
+        $postmain['salary_SalaryConfID']        = $SalaryConfID;
+        $postmain['salary_AccountPlanID']       = $head_employee->AccountPlanID;
+        $postmain['salary_ValidFrom']           = $fromDate;
+        $postmain['salary_ValidTo']             = $toDate;
+        $postmain['salary_JournalDate']         = $journalDate;
+        $postmain['salary_Period']              = $salary_period_conf->Period;  //$_lib['date']->get_this_period($journalDate);
+        $postmain['salary_KommuneID']           = $accountplan->KommuneID;
+
+        if($accountplan->EnableCredit == 1)
+            $postmain['salary_PayDate']           = $_lib['date']->add_Days($journalDate, $accountplan->CreditDays);
+        else
+            $postmain['salary_PayDate']           = $journalDate;
+
+        $postmain['salary_DomesticBankAccount'] = $accountplan->DomesticBankAccount;
+        $postmain['salary_CreatedByPersonID']   = $_lib['sess']->get_person('PersonID');
+
+        //#Insert salary head
+        if($debug) print_r($postmain);
+
+        $SalaryID = $_lib['storage']->db_new_hash($postmain, 'salary');
+
+        $query_arb = "select a.Percent from kommune as k, arbeidsgiveravgift as a where a.Code=k.Sone";
+        $arb = $_lib['storage']->get_row(array('query' => $query_arb));
+
+        /*
+          $postextra['salaryextra_SalaryID'] = $SalaryID;
+          $postextra['salaryextra_AccountName'] = $accountplan->AccountName;
+          $postextra['salaryextra_Address'] = $accountplan->Address;
+          $postextra['salaryextra_City'] = $accountplan->City;
+          $postextra['salaryextra_ZipCode'] = $accountplan->ZipCode;
+          $postextra['salaryextra_SocietyNumber'] = $accountplan->SocietyNumber;
+          $postextra['salaryextra_TabellTrekk'] = $accountplan->TabellTrekk;
+          $postextra['salaryextra_ProsentTrekk'] = $accountplan->ProsentTrekk;
+          $postextra['salaryextra_MunicipalityPercent'] = $arb->Percent;
+          $_lib['storage']->db_new_hash($postextra, 'salaryextra');
+        */
+
+        //################################################################
+        //#Get configuration hovedmal - used as a basis for salary
+        $query_head_default   = "select * from salaryconf where SalaryConfID = '1'";
+        $result_head_default  = $_lib['db']->db_query($query_head_default);
+        $head_default         = $_lib['db']->db_fetch_object($result_head_default);
+
+        //################################################################
+        //#Get default / hovedmal configuration lines
+        $query_salary_default     = "select * from salaryconfline where SalaryConfID = '1'";
+        if($debug) print "$query_salary_default<br>\n";
+        $result_salary_default    = $_lib['db']->db_query($query_salary_default);
+
+        $lines = array();
+        while($line = $_lib['db']->db_fetch_object($result_salary_default)) {
+            $lines[$line->LineNumber]['AccountPlanID']      = $line->AccountPlanID;
+            $lines[$line->LineNumber]['NumberInPeriod']     = $line->NumberInPeriod;
+            $lines[$line->LineNumber]['Rate']               = $line->Rate;
+            $lines[$line->LineNumber]['SalaryText']         = $line->SalaryText;
+            $lines[$line->LineNumber]['AmountThisPeriod']   = $line->AmountThisPeriod;
+            $lines[$line->LineNumber]['EnableEmployeeTax']  = $line->EnableEmployeeTax;
+            $lines[$line->LineNumber]['SalaryID']           = $SalaryID;
+            $lines[$line->LineNumber]['ProjectID']          = $line->ProjectID;
+            $lines[$line->LineNumber]['DepartmentID']       = $line->DepartmentID;
+            $lines[$line->LineNumber]['EnableVacationPayment']  = $line->EnableVacationPayment;
+            $lines[$line->LineNumber]['SalaryCode']  		= $line->SalaryCode;
+        }
+
+        //################################################################
+        //#Get employee spesific lines
+        //#This overrides default / hovedmal lines with the same line number.
+        $query_salary_employee    = "select * from salaryconfline where SalaryConfID = '$SalaryConfID'";
+        if($debug) print "$query_salary_employee<br>\n";
+        $result_salary_employee   = $_lib['db']->db_query($query_salary_employee);
+
+        while($line = $_lib['db']->db_fetch_object($result_salary_employee)) {
+            if(!$line->Active)
+            {
+                unset($lines[$line->LineNumber]);
+                continue;
+            }
+            $lines[$line->LineNumber]['AccountPlanID']      = $line->AccountPlanID;
+            $lines[$line->LineNumber]['NumberInPeriod']     = $line->NumberInPeriod;
+            $lines[$line->LineNumber]['Rate']               = $line->Rate;
+            $lines[$line->LineNumber]['SalaryText']         = $line->SalaryText;
+            $lines[$line->LineNumber]['AmountThisPeriod']   = $line->AmountThisPeriod;
+            $lines[$line->LineNumber]['EnableEmployeeTax']  = $line->EnableEmployeeTax;
+            $lines[$line->LineNumber]['SalaryID']           = $SalaryID;
+            $lines[$line->LineNumber]['ProjectID']          = $line->ProjectID;
+            $lines[$line->LineNumber]['DepartmentID']       = $line->DepartmentID;
+            $lines[$line->LineNumber]['EnableVacationPayment']  = $line->EnableVacationPayment;
+            #$lines[$line->LineNumber]['SalaryCode']  			= $line->SalaryCode;
+        }
+
+        //################################################################
+        //#Insert salary lines in database
+
+        $postsub['salaryline_SalaryID'] = $SalaryID;
+
+        foreach ($lines as $linenum => $field)
+        {
+            if($lines[$linenum]['EnableEmployeeTax'] == 1)
+            {
+                $query = "select a.Percent from arbeidsgiveravgift as a, kommune as k, accountplan as ap where ap.AccountPlanID=$head_employee->AccountPlanID and ap.KommuneID=k.KommuneID and a.Code=k.Sone";
+                if($debug) print "$query<br>\n";
+                $arbavgift = $_lib['storage']->get_row(array('query' => $query));
+                $lines[$linenum]['EmployeeTax'] = $arbavgift->Percent;
+            }
+            #print "linenum: $linenum : text : " . $lines[$linenum]['SalaryText'] . "<br>";
+            $postsub['salaryline_LineNumber']        = $linenum;
+            $postsub['salaryline_AccountPlanID']     = $lines[$linenum]['AccountPlanID'];
+            $postsub['salaryline_NumberInPeriod']    = $lines[$linenum]['NumberInPeriod'];
+            $postsub['salaryline_Rate']              = $lines[$linenum]['Rate'];
+            $postsub['salaryline_SalaryText']        = $lines[$linenum]['SalaryText'];
+            $postsub['salaryline_AmountThisPeriod']  = $lines[$linenum]['AmountThisPeriod'];
+            $postsub['salaryline_EnableEmployeeTax'] = $lines[$linenum]['EnableEmployeeTax'];
+            $postsub['salaryline_ProjectID']         = $lines[$linenum]['ProjectID'];
+            $postsub['salaryline_DepartmentID']      = $lines[$linenum]['DepartmentID'];
+            $postsub['salaryline_EnableVacationPayment'] = $lines[$linenum]['EnableVacationPayment'];
+            $postsub['salaryline_EmployeeTax']     	= $lines[$linenum]['EmployeeTax'];
+            $postsub['salaryline_SalaryCode']       = $lines[$linenum]['SalaryCode'];
+            if($debug) print_r($postsub);
+
+            $_lib['storage']->db_new_hash($postsub, 'salaryline');
+        }
+    }
 }
 elseif($_lib['input']->getProperty('action_salary_delete'))
 {

@@ -16,7 +16,7 @@ includelogic('accounting/accounting');
 $accounting = new accounting();
 require_once "record.inc";
 
-$query_head = "
+$query_head = sprintf("
 select
   F.Email as FEmail,
   S.*,
@@ -29,9 +29,9 @@ from
     on (S.SalaryID = E.SalaryID),
   fakturabankemail F
 where
-  S.SalaryID = '$SalaryID'
+  S.SalaryID = '%d'
   and F.AccountPlanID = S.AccountPlanID
-";
+", $SalaryID);
 
 // Code to update old entries.
 // Inserts account data into presistent table salaryextra
@@ -60,7 +60,7 @@ if(!$head->isUpdated || isset($_POST['action_salary_update_extra'])) {
     $head = $_lib['storage']->get_row(array('query' => $query_head));
     $query_arb = "select a.Percent from kommune as k, arbeidsgiveravgift as a where a.Code=k.Sone";
     $arb = $_lib['storage']->get_row(array('query' => $query_arb));
-    
+
     $query_update_presistent = sprintf("
      replace
      into
