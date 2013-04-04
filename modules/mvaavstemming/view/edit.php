@@ -13,7 +13,6 @@ includelogic('vat/mvaavstemming');
 $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $_dsn, '_date' => $_date, 'year' => $_REQUEST['Period']));
 //print_r($avst);
 
-echo "<pre>";print_r($avst->registered); echo "</pre>";
 #print_r($avst->registered);
 ?>
 <? print $_lib['sess']->doctype ?>
@@ -332,7 +331,7 @@ echo "<pre>";print_r($avst->registered); echo "</pre>";
                   group by v.AccountPlanID 
                   order by v.VatID",
            $avst->year, $avst->year);
-        print "$query<br />";
+//print "$query<br />";
         $result = $_lib['db']->db_query($query);
         while($row = $_lib['db']->db_fetch_object($result))
         {
