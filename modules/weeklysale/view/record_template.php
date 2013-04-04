@@ -14,6 +14,19 @@ else if(isset($_POST['template_delete_marked'])) {
         }
     }
 }
+else if(isset($_POST['template_delete_marked_voucher'])) {
+    if(!$_POST["template_selected"]) {
+        $_lib['message']->add(array('message' => 'Ingen slettet'));
+    }
+    else {
+        $marked = $_POST["template_selected"];
+        foreach($marked as $id) {
+            $template->deleteEntryVoucher($id);
+        }
+    }
+
+    $template->reload();
+}
 else if(isset($_POST['template_save'])) {
     $template->updateFromPost();
 }

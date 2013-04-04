@@ -52,7 +52,7 @@
 </p>
 
 <?
-   if($selected_year === null) {
+   if($selected_year === null || $selected_config === null) {
        exit;
    }
 
@@ -65,10 +65,10 @@
         <input type="submit" value="Lagre alle" name="template_save" />
         <input type="submit" value="+" name="template_add_blank_entry" />
       </td>
-      <td colspan="5">
+      <td colspan="6">
         <input type="submit" value="Opprett markerte" name="template_create_weeklysales" onclick="return confirm('Opprett?')" />
-        <input type="submit" value="Slett markerte" name="template_delete_marked" onclick="return confirm('Slett?')" />
-        <input type="submit" value="Slett markerte bilag og &aring;pne linjen" name="template_delete_marked_voucher" onclick="return confirm('Slett?')" />
+        <input type="submit" value="Slett markerte linjer" name="template_delete_marked" onclick="return confirm('Slett?')" />
+        <input type="submit" value="&Aring;pne markerte linjer og slett bilag" name="template_delete_marked_voucher" onclick="return confirm('&Aring;pne?')" />
       </td>
     </tr>
 EOT;

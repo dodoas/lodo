@@ -159,8 +159,24 @@ class WeeklysaleTemplate {
             return false;
 
         $e = $this->entries[$WeeklySaleTemplateID];
+        if(!$e["WeeklySaleID"])
+            return false;
+
+        $q = sprintf("DELETE FROM voucher WHERE JournalID = %d AND VoucherType = '%c'", 
+                     $e["JournalID"], $e["VoucherType"]);
+        $_lib['db']->db_query($q);
+
         $q = sprintf("DELETE FROM weeklysaleday WHERE WeeklySaleID = %d", $e['WeeklySaleID']);
+        $_lib['db']->db_query($q);
+
         $q = sprintf("DELETE FROM weeklysale WHERE WeeklySaleID = %d", $e['WeeklySaleID']);
+        $_lib['db']->db_query($q);
+
+        $q = sprintf("UPDATE weeklysaletemplate SET WeeklySaleID = 0 WHERE WeeklySaleTemplateID = %d",
+                     $WeeklySaleTemplateID);
+        $_lib['db']->db_query($q);
+
+        return true;
     }
 
     public function create($WeeklySaleTemplateID) {
