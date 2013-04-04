@@ -13,7 +13,7 @@ includelogic('vat/mvaavstemming');
 $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $_dsn, '_date' => $_date, 'year' => $_REQUEST['Period']));
 //print_r($avst);
 
-
+echo "<pre>";print_r($avst->registered); echo "</pre>";
 #print_r($avst->registered);
 ?>
 <? print $_lib['sess']->doctype ?>
@@ -332,8 +332,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
                   group by v.AccountPlanID 
                   order by v.VatID",
            $avst->year, $avst->year);
-
-        #print "$query<br />";
+        print "$query<br />";
         $result = $_lib['db']->db_query($query);
         while($row = $_lib['db']->db_fetch_object($result))
         {
@@ -364,7 +363,11 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
             }
             $_lib['sess']->debug($query);
         }
-        $query = "select  v.*, a.AccountName from vat as v, accountplan as a where v.VatID>=40 and v.Percent>=0 and v.AccountPlanID=a.AccountPlanID group by v.AccountPlanID order by v.VatID";
+
+        $query = sprintf("select  v.*, a.AccountName from vat as v, accountplan as a where v.VatID>=40 and v.Percent>=0 and v.AccountPlanID=a.AccountPlanID and v.ValidFrom <= '%d-01-01' and v.ValidTo >= '%d-12-31' group by v.AccountPlanID order by v.VatID",
+                         $avst->year, $avst->year
+        );
+
         $result = $_lib['db']->db_query($query);
         while($row = $_lib['db']->db_fetch_object($result))
         {
