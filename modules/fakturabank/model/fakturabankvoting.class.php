@@ -277,6 +277,18 @@ class lodo_fakturabank_fakturabankvoting {
         }
 
 
+        $q_extras = sprintf("SELECT * FROM accountextras WHERE AccountID = %d AND Period = '%s'",
+                           $account_id, $period);
+        $r_extras = $_lib['db']->db_query($q_extras);
+
+        if($_lib['db']->db_numrows($r_extras)) {
+            $extras = $_lib['db']->db_fetch_assoc($r_extras);
+            $extras_JournalID = $extras['JournalID'];
+        }
+        else {
+            $extras_JournalID = 0;
+        }
+
         $transactionsimported = 0;
         $duplicatetransaction = 0;
         $Priority = 0;
@@ -305,6 +317,12 @@ class lodo_fakturabank_fakturabankvoting {
             $lineH['ArchiveRef'] 		= $_lib['db']->db_escape($fb_transaction['Ref']);
             $lineH['KID'] 		        = $_lib['db']->db_escape($fb_transaction['KID']);
 
+
+            if($extras_JournalID != 0) {
+                $lineH['JournalID'] = $extras_JournalID++;
+            }
+
+
             //
             // It is most likely an error that Invoiceno is used here. The field in fakturabanktransaction is called InvoiceNumber.
             // That field might also be wrong since I have never observed it having a value.
@@ -316,13 +334,13 @@ class lodo_fakturabank_fakturabankvoting {
 
             $lineH['InvoiceNumber'] = $_lib['db']->db_escape($fb_transaction['InvoiceNumber']);
 
-            echo $fb_transaction['FakturabankID']."<br />";
+            //echo $fb_transaction['FakturabankID']."<br />";
             $transaction_relations = $this->get_faturabanktransactionrelations( $fb_transaction['FakturabankID'] );
             if(count($transaction_relations) > 1 || $lineH['InvoiceNumber'] == '') {
                 if(count($transaction_relations) == 1) {
                     $lineH['InvoiceNumber'] = $transaction_relations[0]['InvoiceNumber'];
                     $lineH['KID'] = $transaction_relations[0]['KID'];
-                    print_r($transaction_relations);
+                    //print_r($transaction_relations);
 
                     if($lineH['InvoiceNumber'] == '') {
                         $lineH['InvoiceNumber'] = "FB(" . $fb_transaction['FakturabankID'] . ")";
@@ -354,7 +372,9 @@ class lodo_fakturabank_fakturabankvoting {
                 if($rel['PaycheckNo'] != '') {
                     $lineH['Comment'] .= 'Lon ';
 
-                    $accountplan_row = $this->find_account_plan_type($rel['InvoiceSupplierIdentity'], $rel['InvoiceSupplierIdentitySchemeID'], 'supplier');
+                    $accountplan_row = $this->find_account_plan_type(
+                        $rel['InvoiceSupplierIdentity'], $rel['InvoiceSupplierIdentitySchemeID'], 'supplier'
+                        );
 
                     if(!$accountplan_row) {
                         $relation_error = sprintf("Missing supplier with %s = %s", 
@@ -406,9 +426,9 @@ class lodo_fakturabank_fakturabankvoting {
 
                     $reconciliation = $_lib['storage']->get_row(array('query' => $query));
                     
-                    echo "<br>Rec:<br>";
-                    print_r($reconciliation);
-                    echo "<br><br>";
+                    //echo "<br>Rec:<br>";
+                    //print_r($reconciliation);
+                    //echo "<br><br>";
 
                     if(!$reconciliation) {
                         $relation_error = sprintf("Missing reason id %d\n", $rel['AccountID']);
@@ -430,7 +450,6 @@ class lodo_fakturabank_fakturabankvoting {
                 if(!$relation_found) {
                     $msg = sprintf('<br />Error "%s": %s<br />', $fb_transaction['Description'], $relation_error);
                     $_lib['message']->add(array('message' => $msg));
-                    echo $msg;
                 }
             }                
 
@@ -463,7 +482,6 @@ class lodo_fakturabank_fakturabankvoting {
             #print_r($lineH);
 
             $postvl['AccountLineID'] = $_lib['storage']->store_record(array('table' => 'accountline', 'data' => $lineH));
-            print_r($postvl);
             //#Do we really need voucheraccountline - or could we throw it away????
             $_lib['db']->store_record(array('data' => $postvl, 'table' => 'voucheraccountline'));
         }
@@ -596,12 +614,12 @@ class lodo_fakturabank_fakturabankvoting {
                 if (isset($transaction) && !empty($transaction) && 
                     isset($transaction->relations) && !empty($transaction->relations)) {
                     
-                    printf("Transaction: %d: <br />", $transaction->{'id'});
+                    //printf("Transaction: %d: <br />", $transaction->{'id'});
 
                     foreach ($transaction->relations->relation as &$relation) {
                         $dataH = array();
 
-                        printf("Relation: %d<br />", $relation->{'id'});
+                        //printf("Relation: %d<br />", $relation->{'id'});
 
                         $relation->{'FakturabankID'} = $relation->{'id'};
 			

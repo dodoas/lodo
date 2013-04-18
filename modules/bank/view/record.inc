@@ -86,14 +86,17 @@ elseif($_lib['input']->getProperty('action_save_extras')) {
 
     $q = sprintf("
 INSERT INTO accountextras 
-  (`AccountID`, `Period`, `BankEntryIn`, `BankEntryOut`, `BankLastIn`, `BankLastOut`)
+  (`AccountID`, `Period`, `BankEntryIn`, `BankEntryOut`, `BankLastIn`, `BankLastOut`, `JournalID`)
 VALUES
-  ('%d', '%s', '%s', '%s', '%s', '%s');
+  ('%d', '%s', '%s', '%s', '%s', '%s', '%d');
 ", 
                  $bank->AccountID, 
                  $bank->ThisPeriod,
-                 $_POST['extraEntryIn'], $_POST['extraEntryOut'], 
-                 $_POST['extraLastIn'], $_POST['extraLastOut']
+                 $_lib['convert']->Amount($_POST['extraEntryIn']), 
+                 $_lib['convert']->Amount($_POST['extraEntryOut']), 
+                 $_lib['convert']->Amount($_POST['extraLastIn']),
+                 $_lib['convert']->Amount($_POST['extraLastOut']),
+                 $_POST['action_bank_accountlinenew_startat']
         );
 
     $_lib['db']->db_query($q);

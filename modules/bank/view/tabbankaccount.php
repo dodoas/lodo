@@ -244,19 +244,24 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
       $extraEntryOut = 0;
       $extraLastIn = 0;
       $extraLastOut = 0;
+      $extraStartAtJournalID = 0;
    }
    else {
       $extraEntryIn = $extras['BankEntryIn'];
       $extraEntryOut = $extras['BankEntryOut'];
       $extraLastIn = $extras['BankLastIn'];
       $extraLastOut = $extras['BankLastOut'];
+      $extraStartAtJournalID = $extras['JournalID'];
    }
 ?>
 
+</table>
+<table class="lodo_data">
+
 <tr>
   <td>Bank den f&oslash;rste</td>
-  <td class="<? print $bank->DebitColor ?>"><input type="text" style="text-align: right;" value="<?= $extraEntryIn ?>" name="extraEntryIn" /></td>
-  <td class="<? print $bank->CreditColor ?>"><input type="text" style="text-align: right;" value="<?= $extraEntryOut ?>" name="extraEntryOut" /></td>
+  <td class="<? print $bank->DebitColor ?>"><input type="text" style="text-align: right;" value="<?= $_lib['format']->Amount($extraEntryIn) ?>" name="extraEntryIn" /></td>
+  <td class="<? print $bank->CreditColor ?>"><input type="text" style="text-align: right;" value="<?= $_lib['format']->Amount($extraEntryOut) ?>" name="extraEntryOut" /></td>
   <td></td>
   <? $val = ($bank->bankvotingperiod->AmountIn - $bank->bankvotingperiod->AmountOut) - ($extraEntryIn - $extraEntryOut);
      $color = ($val < 0.001 && $val > -0.001) ? "black" : "red"; ?>
@@ -264,9 +269,9 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
 </tr>
 <tr>
   <td>Bank den siste</td>
-  <td class="<? print $bank->DebitColor ?>"><input type="text" style="text-align: right;" value="<?= $extraLastIn ?>" name="extraLastIn" /></td>
-  <td class="<? print $bank->CreditColor ?>"><input type="text" style="text-align: right;" value="<?= $extraLastOut ?>" name="extraLastOut" /></td>
-  <td><input type="submit" name="action_save_extras" value="Lagre bank" /></td>
+  <td class="<? print $bank->DebitColor ?>"><input type="text" style="text-align: right;" value="<?= $_lib['format']->Amount($extraLastIn) ?>" name="extraLastIn" /></td>
+  <td class="<? print $bank->CreditColor ?>"><input type="text" style="text-align: right;" value="<?= $_lib['format']->Amount($extraLastOut) ?>" name="extraLastOut" /></td>
+  <td></td>
 
   <? $val = $bank->bankaccountcalc->AmountSaldo - ($extraLastIn - $extraLastOut);
      $color = ($val < 0.001 && $val > -0.001) ? "black" : "red"; ?>
@@ -278,9 +283,12 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
   <td></td>
   <td style="text-align: right;">
   <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
-    Bilagsnr: <input type="text" value="0" size="11" name="action_bank_accountlinenew_startat" class="number">
+    Bilagsnr: <input type="text" size="11" name="action_bank_accountlinenew_startat" class="number" 
+                     value="<?= $extraStartAtJournalID ?>">
   <? } ?>
   </td>
+  <td><input type="submit" name="action_save_extras" value="Lagre bank" /></td>
+
 </tr>
 
 <tr>
@@ -298,6 +306,9 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
   </td>
 </tr>
 
+</table>
+<table class="lodo_data">
+
 <tr>
     <td colspan="14" 
         class="<? $v = $bank->bankvotingperiod->AmountSaldo - $bank->prevbankaccountcalc->AmountSaldo; if(abs($v) < 0.00001 && abs($v) > -0.00001) print 'sub'; else print 'red';?>">
@@ -310,7 +321,13 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
 <tr class="red">
     <td colspan="19">
         <? if(round($bank->bankvotingperiod->topAmountSaldo,2) != round($bank->voucher->saldo,2)) { ?>
-        <b>Det er differanse mellom summen av tilbakef&oslash;rte + tilleggsf&oslash;rte bilag (<? print $bank->bankvotingperiod->topAmountSaldo ?>) og summen av transaksjoner p&aring; kto <? print $bank->AccountPlanID ?> (<? print $bank->voucher->saldo ?>) : <? print round($bank->bankvotingperiod->topAmountSaldo - $bank->voucher->saldo, 2) ?></b>
+          <b>
+          Det er differanse mellom summen av tilbakef&oslash;rte + tilleggsf&oslash;rte bilag 
+          (<? print $_lib['format']->Amount($bank->bankvotingperiod->topAmountSaldo) ?>) 
+            og summen av transaksjoner p&aring; kto 
+          <? print $bank->AccountPlanID ?> (<? print $_lib['format']->Amount($bank->voucher->saldo) ?>) :
+          <? print $_lib['format']->Amount($bank->bankvotingperiod->topAmountSaldo - $bank->voucher->saldo) ?>
+          </b>
         <? } ?>
         </td>
     <td colspan="6" class="sub"><b>Hovedbokskonto: <? print $bank->AccountPlanID ?>  - <?= $bankname ?></b></td>
@@ -318,9 +335,9 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
   <tr>
     <td class="menu">Pri</td>
     <td class="menu">Bilagsnr</td>
+    <td class="menu">Dag</td>
     <td class="menu">Ut av konto</td>
     <td class="menu">Inn p&aring; konto</td>
-    <td class="menu">Dag</td>
     <td class="menu">Fakturanr</td>
     <td class="menu">KID</td>
     <td class="menu">Tekst hovedbok</td>
@@ -363,6 +380,7 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
     <? } ?>
     </td>
 
+    <td></td>
     <td><? print $_lib['form3']->text(array('table' => 'bankvotingperiod', 'field' => 'AmountOut',
                                             'pk' => $bank->bankvotingperiod->BankVotingPeriodID,
                                             'value' =>$_lib['format']->Amount($bankout),     'class' => 'number')) ?></td>
@@ -424,9 +442,19 @@ if(is_array($bank->bankaccount)) {
         <td>
             <? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Priority', 'pk' => $row->AccountLineID, 'value' => $row->Priority, 'width' => 3, 'tabindex' => $tabindexH[0])); ?>
         </td>
-        <td>
+
+        <?php
+           // check if journalID is already in use
+           {
+               $JournalIDExists = $accounting->checkJournalID($bank->VoucherType, $row->JournalID);
+               $JournalIDColColor = $JournalIDExists ? "style='background-color: red;'" : "";
+           }
+        ?>
+        <td <?= $JournalIDColColor ?>>
             <? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'JournalID', 'pk' => $row->AccountLineID, 'value' => $row->JournalID, 'width' => 6, 'tabindex' => $tabindexH[1])); ?>
         </td>
+        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Day', 'pk' => $row->AccountLineID, 'value' => $row->Day, 'class' => 'number', 'width' => 2, 'tabindex' => $tabindexH[2])) ?></td>
+
         <td class="<? print $bank->CreditColor ?>">
         <? 
             if($row->AmountOut > 0)
@@ -444,8 +472,6 @@ if(is_array($bank->bankaccount)) {
     
             #print $_lib['form3']->URL(array('url' => $bank->url . '&amp;type=bank&amp;side=AmountIn&amp;searchstring=' . $row->AmountIn, 'description' => '<img src="/lib/icons/search.gif">')) ?>
         </td>
-        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Day', 'pk' => $row->AccountLineID, 'value' => $row->Day, 'class' => 'number', 'width' => 2, 'tabindex' => $tabindexH[2])) ?></td>
-
 
         <? if($row->InvoiceNumber != '' || count($row->MatchSelect) < 1) { ?>
         <td>
@@ -605,7 +631,7 @@ if(is_array($bank->bankvoucher_this_hash)) {
 ##############################################################################################################################
 ?>
 <tr>
-    <td colspan="2"></td>
+    <td colspan="3"></td>
     <td class="number"><? print $_lib['format']->Amount($bank->bankaccountcalc->AmountOut)  ?></td>
     <td class="number"><? print $_lib['format']->Amount($bank->bankaccountcalc->AmountIn)  ?></td>
     <td></td>
@@ -616,7 +642,7 @@ if(is_array($bank->bankvoucher_this_hash)) {
     <td colspan="3"></td>
 </tr>
 <tr>
-    <td colspan="2"></td>
+    <td colspan="3"></td>
     <td>Saldo <? print $_lib['date']->get_last_day_in_month($bank->ThisPeriod) ?></td>
     <td class="number"><? print $_lib['format']->Amount($bank->bankaccountcalc->AmountSaldo)  ?></td>
     <td></td>

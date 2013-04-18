@@ -1782,6 +1782,7 @@ class accounting {
         } else {
           $query = "select Period from accountperiod where Period='$period' and Status=2 order by Period";
         }
+        
         #print "$query<br>\n";
         $row = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
 
@@ -2146,6 +2147,18 @@ class accounting {
         } else {
             return false;
         }
+    }
+
+
+    // Check if JournalID exists with a given VoucherType
+    public function checkJournalID($VoucherType, $JournalID) {
+        global $_lib;
+
+        $q = sprintf("SELECT JournalID FROM voucher WHERE VoucherType = '%s' AND JournalID = '%s' LIMIT 1",
+                     $VoucherType, $JournalID);
+        $r = $_lib['db']->db_query($q);
+
+        return ($_lib['db']->db_numrows($r) != 0);
     }
 
 	public function invoiceIDAvailable($JournalID,
