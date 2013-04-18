@@ -76,6 +76,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>';
   <tr>
     <td class="menu">Kontonummer</td>
     <td><? print $AccountPlanID ?></td>
+
   </tr>
   <tr>
     <td class="menu">Aktiv</td>
@@ -84,10 +85,12 @@ print '<h1>' . $_lib['message']->get() . '</h1>';
   <tr>
     <td class="menu">Navn</td>
     <td><input type="text" name="accountplan.AccountName" value="<? print $account->AccountName ?>"   size="50"></td>
+
   </tr>
   <tr>
     <td class="menu">Lodo konto</td>
     <td><? print $_lib['form3']->Checkbox(array('table'=>$db_table, 'field'=>'EnableNorwegianStandard', 'value'=>$account->EnableNorwegianStandard)); print $_lib['form3']->text(array('table'=>$db_table, 'field'=>'NorwegianStandardText', 'value'=>$account->NorwegianStandardText, 'width'=>'50')) ?>
+
   </tr>
   <tr>
     <td class="menu">Debit tekst</td>
@@ -118,6 +121,7 @@ print '<h1>' . $_lib['message']->get() . '</h1>';
   <tr>
     <td class="menu">KID referanse</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnablePostPost",$account->EnablePostPost,'') ?></td>
+
   </tr>
   <tr>
     <td class="menu">Mva kode</td>
@@ -211,25 +215,23 @@ print '<h1>' . $_lib['message']->get() . '</h1>';
     </td>
   </tr>
   <tr>
-    <!--<td class="menu">Rapport 10</td>-->
-    <td class="menu">Varelager - Fortjeneste</td>
+    <td class="menu">Rapport 10</td>
     <td>
     <? print $_lib['form3']->checkbox(array('table' => $db_table, 'field' => 'EnableReport10', 'value' => $account->EnableReport10)) ?>
-    Linjenummer:<? $_lib['form2']->account_report_menu(array('table' => $db_table,  'field' =>  'Report10Line',  'value' =>  $account->Report10Line, 'tabindex' => $tabindex++, 'accesskey' => '')) ?>
-    <!--Linjenummer: <input type="text" name="accountplan.Report10Line" value="<? print $account->Report10Line ?>" size="5" class="number">-->
+    Linjenummer: <input type="text" name="accountplan.Report10Line" value="<? print $account->Report10Line ?>" size="5" class="number">
     </td>
 
   </tr>
   <tr>
-    <td class="menu">Kortfattet rapport</td>
+    <td class="menu">Kortfattet rapport
     <td><? $_lib['form2']->checkbox2($db_table, "EnableReportShort",$account->EnableReportShort,'') ?>
-    Linjenummer:<? $_lib['form2']->account_report_menu(array('table' => $db_table,  'field' =>  'ReportShort',  'value' =>  $account->ReportShort, 'tabindex' => $tabindex++, 'accesskey' => '')) ?>
-     <!--<input type="text" name="accountplan.accountplan.ReportShort" value="<? print "$account->ReportShort"; ?>" size="5" class="number">-->
+    Linjenummer: <input type="text" name="accountplan.accountplan.ReportShort" value="<? print "$account->ReportShort"; ?>" size="5" class="number">
     </td>
   </tr>
   <tr>
     <td class="menu">Budsjett resultat</td>
     <td><? $_lib['form2']->checkbox2($db_table, "EnableBudgetResult",$account->EnableBudgetResult,'') ?></td>
+
   </tr>
   <tr>
     <td class="menu">Budsjett likviditet

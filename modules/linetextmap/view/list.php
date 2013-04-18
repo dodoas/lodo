@@ -106,7 +106,7 @@ $i++;
 ?>
                     <tr>
                         <td align="center"><a href="<? print $_lib['sess']->dispatch ?>t=linetextmap.edit&RapportID=<?php print $i; ?>"><?php print $i; ?></a></td>
-                        <td><a href="<? print $_lib['sess']->dispatch ?>t=linetextmap.edit&RapportID=<?php print $i; ?>">Varelager - Fortjeneste</a></td>
+                        <td><a href="<? print $_lib['sess']->dispatch ?>t=linetextmap.edit&RapportID=<?php print $i; ?>">Rapport <?php print $i; ?></a></td>
                     </tr>
 <?php
 $i = 100;

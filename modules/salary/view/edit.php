@@ -7,14 +7,15 @@ $lineInTo    =  69;
 $lineOutFrom =  70;
 $lineOutTo   = 100;
 #########################################
-//echo "<pre>";print_r($_REQUEST);
+
 $SalaryID       = (int) $_REQUEST['SalaryID'];
-$SalaryConfID   = (int) $_REQUEST['SalaryConfID']; 
-$SalaryperiodconfID = (int) $_REQUEST['SalaryperiodconfID'];  
+$SalaryConfID   = (int) $_REQUEST['SalaryConfID'];
+$SalaryperiodconfID = (int) $_REQUEST['SalaryperiodconfID'];
 
 includelogic('accounting/accounting');
 $accounting = new accounting();
 require_once "record.inc";
+
 $query_head = sprintf("
 select
   F.Email as FEmail,
@@ -56,12 +57,9 @@ if(!$head->isUpdated || isset($_POST['action_salary_update_extra'])) {
        and S.AccountPlanID=A.AccountPlanID 
        and F.AccountPlanID = A.AccountPlanID
     ";
-
-$query_head     = "select F.Email as FEmail, S.*, A.AccountName, A.Address, A.City, A.ZipCode, A.SocietyNumber, A.TabellTrekk, A.ProsentTrekk from salary as S, fakturabankemail F, accountplan as A where S.SalaryID='$SalaryID' and S.AccountPlanID=A.AccountPlanID and F.AccountPlanID = A.AccountPlanID";
-$head           = $_lib['storage']->get_row(array('query' => $query_head));
-
-$query_arb 		= "select a.Percent from kommune as k, arbeidsgiveravgift as a where a.Code=k.Sone";
-$arb           	= $_lib['storage']->get_row(array('query' => $query_arb));
+    $head = $_lib['storage']->get_row(array('query' => $query_head));
+    $query_arb = "select a.Percent from kommune as k, arbeidsgiveravgift as a where a.Code=k.Sone";
+    $arb = $_lib['storage']->get_row(array('query' => $query_arb));
 
     $query_update_presistent = sprintf("
      replace
@@ -113,7 +111,7 @@ $remove_info = sprintf("DELETE FROM salaryinfo WHERE SalaryConfID = %d AND Salar
 $_lib['db']->db_query($remove_info);
 
 if($SalaryperiodconfID)
-{   
+{
     $periodconf_query = sprintf("SELECT * FROM salaryperiodconf WHERE SalaryperiodconfID = %d", $SalaryperiodconfID);
     $periodconf_result = $_lib['db']->db_query($periodconf_query);
     $periodconf_row = $_lib['db']->db_fetch_assoc($periodconf_result);
@@ -136,13 +134,13 @@ if($SalaryperiodconfID)
                                $SalaryperiodconfID, $head->AccountPlanID);
         $entry_result = $_lib['db']->db_query($entry_query);
         if($_lib['db']->db_numrows($entry_result))
-        {   
+        {
             $entry_update_query = sprintf(
                 "UPDATE salaryperiodentries SET Processed = 1, JournalID = %d, SalaryID = %d WHERE SalaryperiodconfID = %d AND AccountPlanID = %d AND Processed = 0 LIMIT 1",
                 $head->JournalID, $SalaryID, $SalaryperiodconfID, $head->AccountPlanID);
         }
         else
-        {   
+        {
             $entry_update_query = sprintf(
                  "INSERT INTO salaryperiodentries (`SalaryperiodconfID`, `JournalID`, `SalaryID`, `AccountPlanID`, `Processed`)
                                             VALUES(%d, %d, %d, %d, 1);", 
@@ -150,11 +148,6 @@ if($SalaryperiodconfID)
         }
 
         $_lib['db']->db_query($entry_update_query);
-        
-        /*for($i=0;$i<count($_POST['advancepayment.Amount']);$i++){
-    		$query = "insert into advancepayment (SalaryID, AccountID, Amount) values ('".$SalaryID."','".$_POST['advancepayment.AccountID'][$i]."','".$_POST['advancepayment.Amount'][$i]."')";
-			  $_lib['db']->db_query($query);
-       	} */
     }
 }
 
@@ -397,6 +390,7 @@ $formname = "salaryUpdate";
   <td colspan="4">
   <td colspan="9">Skattetrekk trekkes bare med hele kroner
 </tr>
+
 <tr>
 <th colspan="13">Kommentar</th>
 </tr>
@@ -415,110 +409,7 @@ $formname = "salaryUpdate";
 <td colspan="13">
 <textarea name="salary.InternComment.<? print $head->SalaryID ?>" cols="100" rows="4"><?= $head->InternComment  ?></textarea>
 </td>
-</tr> 
-<!--- Code For Advance payment--------->
-<tr>
-<td colspan="13" style="background-color:#FFB600;">Advance Paycheck</td>
 </tr>
-
-<tr> 
-<td colspan="13"> 
-<table id="table1">
-<?
-      $i = 0;
-      $headcount = 0;
-      $query = "select * from advancepayment where SalaryID = '".$SalaryID."' order by AdvancePaymentID asc";
-			//print $query;
-			$result_heading = $_dbh[$_dsn]->db_query($query);
-			
-      $count=$result_heading->num_rows;//echo $count;
-		
-			$query_account  = "select * from account order By AccountID asc";
-			$result_account = $_lib['db']->db_query($query_account);
-      $result_account1 = $_lib['db']->db_query($query_account);
-      
-      while($result_account_arr = $_dbh[$_dsn]->db_fetch_object($result_account1))
-		  {           
-        $bank_arr[] = $result_account_arr->AccountID;
-        $bank_name_arr[] = $result_account_arr->BankName; 
-      } //echo "<pre>";print_r($bank_arr);
-      ?>
-      <tr>
-         <th class="sub">Bankkonto</th>
-         <th class="sub">Advance Beløp</th>
-         <th class="sub">Legg til ny linje</th>
-         <th class="sub"></th>
-      </tr>
-      
-      <?
-      if($count == 0){ 
-      ?>
-      
-      <tr id="tr-payment-<?=$headcount?>" >
-        <td><select name="advancepayment.AccountID[]" id="AccountID">
-          <?php  while($row = $_dbh[$_dsn]->db_fetch_object($result_account)){ ?>                      
-                  <option value="<?php echo $row->AccountID ;?>" <?php if($result_heading->AccountID == $row->AccountID){?>selected <?php }?> ><?php echo $row->BankName;?></option>                                            
-          <?php } ?>
-          </select>
-        </td>
-        <td><? print $_lib['form3']->text(array('table'=>'advancepayment', 'field'=>'Amount[]', 'value'=>$row_heading->Amount)) ?></td>  
-        <td><? print $_lib['form3']->hidden(array('table'=>'advancepayment', 'field'=>'SalaryID[]', 'value'=>$SalaryID )) ?></td>
-      </tr>
-      
-     
-      <?}else{ 
-         $headcount = 0;
-      while($row_heading = $_dbh[$_dsn]->db_fetch_object($result_heading))
-      {
-         $headcount++;
-         $query_account1  = "select * from account order By AccountID asc";
-			   $result_account1 = $_lib['db']->db_query($query_account1);
-      
-      ?>
-      <tr id="tr-payment-<?=$headcount?>" >
-        <td><select name="advancepayment.AccountID[]" id="AccountID">
-          <?php  while($row = $_dbh[$_dsn]->db_fetch_object($result_account1)){ ?>                      
-                  <option value="<?php echo $row->AccountID ;?>" <?php if($row_heading->AccountID == $row->AccountID){?>selected <?php }?> ><?php echo $row->BankName;?></option>                                            
-          <?php } ?>
-          </select>
-        </td>
-        <td><? print $_lib['form3']->text(array('table'=>'advancepayment', 'field'=>'Amount[]', 'value'=>$row_heading->Amount)) ?></td>  
-        <td><? print $_lib['form3']->hidden(array('table'=>'advancepayment', 'field'=>'SalaryID[]', 'value'=>$SalaryID )) ?></td>
-      </tr>
-      
-      <? 
-      }   // end of while loop  
-      }   // end of else
-      ?>
-      <tr>
-      <td></td>
-      <td></td>
-      <td><? print $_lib['form3']->submit(array('name'=>'tr-payment-'.$headcount, 'value'=>'Legg til ny linje', 'tabindex'=>'0', 'accesskey'=>'N', 'OnClick'=>'return createline(1)'));?></td>
-      </tr>
-</table>
-</td>
-</tr>
-
-<br />
-<? if($count != 0){ 
-   $query = "select sum(Amount)as total from advancepayment where SalaryID = '".$SalaryID."'";
-   #print "$query<br>";
-   $totaladvance = $_lib['storage']->get_row(array('query' => $query));
-   
-   //$totaladvance = $_dbh[$_dsn]->db_query($query);
-	 //$totaladvance1 = $_dbh[$_dsn]->db_fetch_object($totaladvance);
-   
-?>
-   <tr>
-   <td><strong>Total Advance</strong></td>
-   <td><? print $totaladvance->total ?></td>
-   </tr>
-   <tr>
-   <td><strong>Netto betalt</strong></td>
-   <td><? print $_lib['format']->Amount(array('value'=>$sumThisPeriod-$totaladvance->total, 'return'=>'value')) ?></td>
-   </tr>
-<?}?>
-<!--- Code For Advance payment ends --------->
 
 <?
     if($_lib['sess']->get_person('AccessLevel') >= 2)
@@ -627,6 +518,7 @@ $formname = "salaryUpdate";
   <td colspan = "7"></td>
   <td colspan = "4">Personnummer: <? echo $head->SocietyNumber ?></td>
 </tr>
+
 <tr>
     <td colspan="8"></td>
 
@@ -655,7 +547,7 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 </table>
 <table>
 <?php
-    $firstDate = substr($head->JournalDate, 0, 4) . "-01-01";
+        $firstDate = substr($head->JournalDate, 0, 4) . "-01-01";
 		$lastDate = $head->JournalDate;
 		$query = "select sum(SL.AmountThisPeriod) as total from salary S, salaryline SL where S.SalaryID=SL.SalaryID and S.JournalDate>='$firstDate' and S.JournalDate<='$lastDate' and SL.LineNumber < 70 and SL.EnableVacationPayment = 1 and S.AccountPlanID = '" . $head->AccountPlanID . "';";
 		#print "$query<br>";
@@ -706,72 +598,3 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 <? includeinc('bottom') ?>
 </body>
 </html>
-
-<script type="text/javascript">
-var        $counter = 0; // initialize 0 for limitting textboxes
-
-function createsection(){
-document.getElementById("newsection").style.display='';     
-}
-function cancelsection(){
-document.getElementById("newsection").style.display='none';
-}
-function checkvalid(){
-if(document.getElementById("Title").value == ''){
-alert("Please enter Section name");
-return false;
-}
-document.frmsection.mode.value='addsection';
-}
-
-function createline(secid){
-            var table = document.getElementById("table"+secid);
-            //alert(table);return false;
-            var rowCount = table.rows.length-1;
-            var row = table.insertRow(rowCount);
- 			      var rowCounter = rowCount-1;
-
-            var cell1 = row.insertCell(0);
-            //cell1.innerHTML = rowCounter++;
-            var element2 = document.createElement("select");
-            //theOption=document.createElement("OPTION");
-            var options = ["<?php echo implode('","',$bank_arr); ?>"];
-            
-            for(var i=0;i<options.length;i++){
-               var opt = options[i];
-               var option_name = ["<?php echo implode('","',$bank_name_arr);?>"];
-               var opt_name = option_name[i];
-               var el = document.createElement("option");
-               el.textContent = opt_name;
-               el.value = opt;
-               element2.appendChild(el);
-            }
-            
-            element2.type = "select";
-            element2.name = "advancepayment.AccountID[]";
-            element2.id = "AccountID";
-            cell1.appendChild(element2);
-
- 
-	          var cell2 = row.insertCell(1);
-            var element2 = document.createElement("input");
-            element2.type = "text";
-            element2.name = "advancepayment.Amount[]";
-            cell2.appendChild(element2);
-
-	          var cell3 = row.insertCell(2);
-            var element2 = document.createElement("input");
-            element2.type = "hidden";
-            element2.name = "advancepayment.SalaryID[]";
-            cell3.appendChild(element2);
-			
-	          /*var cell4 = row.insertCell(3);
-            var element2 = document.createElement("input");
-		       	element2.type = "hidden";
-		        element2.name = "advancepayment.SalaryID[]";
-            cell4.appendChild(element2);*/
-
-return false; 
-}
-</script>
-

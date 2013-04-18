@@ -26,7 +26,7 @@ print $_lib['sess']->doctype ?>
 <table class="lodo_data">
 <thead>
   <tr>
-      <th align="left">Varetelling 
+      <th align="left">Varetelling
       <th colspan="3">
   </tr>
   <tr>
@@ -75,7 +75,7 @@ if (!($i % 2)) { $sec_color = "BGColorLight"; } else { $sec_color = "BGColorDark
       </td>
       <td>
       <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
-      <a href="<? print $_lib['sess']->dispatch ?>t=report.expense&action_varelager_delete=<? print $row->VareLagerID ?>" class="button">Slett</a>
+      <a href="<? print $_lib['sess']->dispatch ?>t=varelager.list&action_varelager_delete=<? print $row->VareLagerID ?>" class="button">Slett</a>
       <? } ?>
       </td>
 

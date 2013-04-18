@@ -49,19 +49,19 @@ $result2 = $_lib['db']->db_query($query);
 
     <table class="sortable lodo_data" width="700px">
             <tr>
-                <th class="sub">produkt-ID</th>
-                <th class="sub">Produktnummer</th>
-                <th class="sub">Produktnavn</th>
-                <th class="sub" align="right">MVA</th>
-                <th class="sub" align="right">Kostpris</th>
-                <th class="sub" align="right">Pris</th>
-                <th class="sub" align="right">Hovedbok</th>
-                <th class="sub" align="right">Avdeling</th>
-                <th class="sub" align="right">Prosjekt</th>
+              <th class="sub">Produkt ID</th>
+              <th class="sub">Produktnummer</th>
+              <th class="sub">Produktnavn</th>
+              <th class="sub" align="right">MVA</th>
+              <th class="sub" align="right">Kostpris</th>
+              <th class="sub" align="right">Pris</th>
+              <th class="sub" align="right">Hovedbok</th>
+              <th class="sub" align="right">Avdeling</th>
+              <th class="sub" align="right">Prosjekt</th>
             </tr>
             <?
                 while($row = $_lib['db']->db_fetch_object($result2))
-                {    
+                {
                     if($row->AccountPlanID) {
                         $vat_query = "select Percent from vat as v, accountplan as a where a.AccountPlanID=$row->AccountPlanID and a.VatID=v.VatID";
                         $vatRow = $_lib['storage']->get_row(array('query' => $vat_query));
@@ -70,7 +70,7 @@ $result2 = $_lib['db']->db_query($query);
                     }
                     ?>
                     <tr>
-                        <td align="center"><? print $row->ProductID ?></td>
+                        <td align="center"><a href="<? print $_lib['sess']->dispatch ?>t=product.edit&ProductID=<? print $row->ProductID ?>"><? print $row->ProductID ?></a></td>
                         <td align="center"><a href="<? print $_lib['sess']->dispatch ?>t=product.edit&ProductID=<? print $row->ProductID ?>"><? print $row->ProductNumber ?></a></td>
                         <td><a href="<? print $_lib['sess']->dispatch ?>t=product.edit&ProductID=<? print $row->ProductID ?>"><? print $row->ProductName ?></a></td>
                         <td align="right"><? print $_lib['format']->Percent(array('value'=>$vatRow->Percent*1, 'return'=>'value')) ?></td>
