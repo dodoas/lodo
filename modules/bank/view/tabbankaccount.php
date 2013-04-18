@@ -435,6 +435,27 @@ if(is_array($bank->bankaccount)) {
         }    
 	if(is_array($bank->bankvoucher_this_hash)) 
         	$bankvoucher = array_pop($bank->bankvoucher_this_hash);
+
+        // check if journalID is already in use
+        //  and mark it red if it is.
+        {
+            $JournalIDExists = $accounting->checkJournalID($bank->VoucherType, $row->JournalID);
+            $JournalIDColColor = $JournalIDExists ? "style='background-color: red;'" : "";
+        }
+
+        if($row->KID || $row->InvoiceNumber) {
+            if($bank->is_closeable($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber)) {
+                // if it has been closed then JournalID should not be red.
+                $JournalIDColColor = '';
+                $matchCaption = "Lukket";
+            } else { 
+                $matchCaption = "Diff(" . $_lib['format']->Amount($bank->getDiff($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber)) . ")";
+            } 
+        } else { 
+            $sumBalance = $row->AmountIn - $row->AmountOut;
+            $matchCaption = " Diff(" . $sumBalance . ")"; 
+        } 
+
     
         if (!($i % 3)) { $sec_color = "r0"; } else { $sec_color = "r1"; };
         ?>
@@ -444,11 +465,6 @@ if(is_array($bank->bankaccount)) {
         </td>
 
         <?php
-           // check if journalID is already in use
-           {
-               $JournalIDExists = $accounting->checkJournalID($bank->VoucherType, $row->JournalID);
-               $JournalIDColColor = $JournalIDExists ? "style='background-color: red;'" : "";
-           }
         ?>
         <td <?= $JournalIDColColor ?>>
             <? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'JournalID', 'pk' => $row->AccountLineID, 'value' => $row->JournalID, 'width' => 6, 'tabindex' => $tabindexH[1])); ?>
@@ -535,8 +551,8 @@ if(is_array($bank->bankaccount)) {
         <td>
             <? 
               if(!empty($resultaccountplan) && $resultaccountplan->EnableVAT) {
-                print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Vat',        'pk' => $row->AccountLineID, 'value' => (int) $row->Vat,         'width' => 2, 'maxlength' => 3));
-            }
+                  print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Vat',        'pk' => $row->AccountLineID, 'value' => (int) $row->Vat,         'width' => 2, 'maxlength' => 3));
+              }
             ?>
         </td>
         <td>
@@ -548,19 +564,10 @@ if(is_array($bank->bankaccount)) {
         </td>
         <td><? if(!empty($resultaccountplan) && $resultaccountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => 'accountline', 'field' => 'DepartmentID',  'pk' => $row->AccountLineID, 'value' => $row->DepartmentID)); } ?></td>
         <td><? if(!empty($resultaccountplan) && $resultaccountplan->EnableProject)    { ?><? $_lib['form2']->project_menu2(array(   'table' => 'accountline', 'field' => 'ProjectID',     'pk' => $row->AccountLineID, 'value' => $row->ProjectID)); } ?></td>
-        <td><? 
-            if($row->KID || $row->InvoiceNumber) {
-                if($bank->is_closeable($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber)) {
-                    print "Lukket"; 
-                } else { 
-                    print "Diff(" . $_lib['format']->Amount($bank->getDiff($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber)) . ")";
-                } 
-            } else { 
-                $sumBalance = $row->AmountIn - $row->AmountOut;
-                print " Diff(" . $sumBalance . ")"; 
-            } ?>
-            </td>
-            <td class="horiz">
+        <td>
+          <?= $matchCaption ?>
+        </td>
+        <td class="horiz">
                   <? print $_lib['form3']->URL(array('url' => $_lib['sess']->dispatch . "t=bank.tabbankaccount&amp;action_bank_accountlinedelete=1&amp;AccountLineID=$row->AccountLineID&amp;AccountID=$bank->AccountID&amp;Period=$bank->ThisPeriod", 'description' => '<img src="/lib/icons/trash.gif">', 'title' => 'Slett', 'confirm' => 'Er du sikker?')) ?>
             </td>
         <? if($bankvoucher) { ?>
