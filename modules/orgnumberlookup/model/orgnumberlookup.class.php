@@ -2,7 +2,9 @@
 #http://gullfisk:rTp3Qzy@brreg.lodo.no/rest/companies/970131450
 
 class lodo_orgnumberlookup_orgnumberlookup {
+#    private $host           = '192.168.56.4:3000';
     private $host           = 'fakturabank.no';
+#    private $protocol       = 'http';
     private $protocol       = 'https';
     private $username       = '';
     private $password       = '';
@@ -98,7 +100,7 @@ class lodo_orgnumberlookup_orgnumberlookup {
     }
 
     function mapdata($company) {
-
+    
         if($company) {
             $this->success               = true;
             $this->OrgNumber            = (string) utf8_decode($company->number);
@@ -109,8 +111,10 @@ class lodo_orgnumberlookup_orgnumberlookup {
             $this->Phone                = (string) utf8_decode($company->phone);
             $this->URL                  = (string) utf8_decode($company->website);
             $this->DomesticBankAccount  = (string) utf8_decode($company->{'bank-account-number'});
-            $this->MotkontoResultat1    = (string) utf8_decode($company->{'default-result-account-number'});
-            $this->MotkontoBalanse1    = (string) utf8_decode($company->{'default-balance-account-number'});            
+            $this->CreditDays           = (string) utf8_decode($company->{'credit-days'});
+            $this->MotkontoResultat1    = (string) utf8_decode($company->{'default-bookkeeping-account1'});
+            $this->MotkontoResultat2    = (string) utf8_decode($company->{'default-bookkeeping-account2'});
+            
             $this->IAdress->Address1    = (string) utf8_decode($company->{'business-address'}->address1);
             $this->IAdress->Address2    = (string) utf8_decode($company->{'business-address'}->address2);
             $this->IAdress->Address3    = (string) utf8_decode($company->{'business-address'}->address3);

@@ -102,10 +102,6 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
             	$_POST['accountplan_EnableMotkontoResultat'] = 1;
             	$_POST['accountplan_MotkontoResultat2'] = $org->MotkontoResultat2;
             }
-            if($org->MotkontoBalanse1) {
-            	$_POST['accountplan_EnableMotkontoResultat'] = 1;
-            	$_POST['accountplan_MotkontoBalanse1'] = $org->MotkontoBalanse1;
-            }
         }
     }
     
