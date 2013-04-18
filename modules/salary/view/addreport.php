@@ -28,6 +28,7 @@ foreach($codes as $code) {
     printf("<th>%s</th>", $code);
 }
 
+
 ?>
     <th></th>
     </tr>

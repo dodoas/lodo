@@ -488,6 +488,103 @@ class form2 {
       #$_lib['db']->db_free_result($result);
       ?>
   <? }
+  
+  function project_account_menu($args) {
+      global $_lib;
+
+     $query = "select ProjectID, Heading from project where Active='1' order by ProjectID";
+     $result = $_lib['db']->db_query($query);
+
+      while($_row = $_lib['db']->db_fetch_object($result)) {
+      
+         $query = "select AccountPlanID,AccountName from accountplan where ProjectID = '".$_row->ProjectID."' der by AccountPlanID";
+         $result1 = $_lib['db']->db_query($query);
+  
+      if(!$conf['num_letters']) {
+        $num_letters = '20';
+      } else {
+        $num_letters = $conf['num_letters'];
+      }; #Default number of letters in menu
+
+
+      if($args['pk']) {
+        print "<select name=\"$args[table].$args[field].$args[pk]\" tabindex=\"$args[tabindex]\" accesskey=\"$args[accesskey]\">\n";
+      } else {
+        print "<select name=\"$args[table].$args[field]\" tabindex=\"$args[tabindex]\" accesskey=\"$args[accesskey]\">\n";
+      }
+      if($conf['value']) {
+        print "<option value=\"\">" . substr("Finnes ikke: . $conf[value]",0, $num_letters);
+      } else {
+        print "<option value=\"\">" . substr('Velg prosjekt',0, $num_letters);
+      }
+      while($_row1 = $_lib['db']->db_fetch_object($result1)) {
+          if($_row1->AccountPlanID == $args[value])
+              print "<option value=\"$_row1->AccountPlanID\" selected>$_row1->AccountPlanID - " . substr($_row1->AccountName,0,$num_letters) . "\n";
+          else
+              print "<option value=\"$_row1->AccountPlanID\">$_row1->AccountPlanID - " . substr($_row1->AccountName,0,$num_letters) . "\n";
+      }
+
+      print "</select>\n";
+      #$_lib['db']->db_free_result($result);
+      ?>
+  <? }}
+  
+  
+  
+  ###############################################################################
+  # replicate of project_menu2
+  #args input: , $args[table, $args[field, $args[value, $args[tabindex, $args[accesskey, $args[pk, $num_letters, company_id
+  function account_report_menu($args) {
+      global $_lib;
+      //echo "<pre>";print_r($args);exit;
+      if($args['field'] == "Report10Line"){
+        $query = "select LineTextMapID, ReportID, Line, Text from linetextmap where ReportID='10' order by LineTextMapID";
+      }
+      if($args['field'] == "ReportShort"){
+        $query = "select LineTextMapID, ReportID, Line, Text from linetextmap where ReportID='100' order by LineTextMapID";
+      }                        
+      $result = $_lib['db']->db_query($query);
+
+      if(!$conf['num_letters']) {
+        $num_letters = '20';
+      } else {
+        $num_letters = $conf['num_letters'];
+      }; #Default number of letters in menu
+
+
+      if($args['pk']) {
+        print "<select name=\"$args[table].$args[field].$args[pk]\" tabindex=\"$args[tabindex]\" accesskey=\"$args[accesskey]\">\n";
+      } else {
+        print "<select name=\"$args[table].$args[field]\" tabindex=\"$args[tabindex]\" accesskey=\"$args[accesskey]\">\n";
+      }
+      if($conf['value']) {
+        print "<option value=\"\">" . substr("Finnes ikke: . $conf[value]",0, $num_letters);
+      } else {
+        print "<option value=\"\">" . substr('Velg Konto',0, $num_letters);
+      }
+      while($_row = $_lib['db']->db_fetch_object($result)) {
+          if($_row->Line == $args[value])
+              print "<option value=\"$_row->Line\" selected>$_row->Line - " . substr($_row->Text,0,$num_letters) . "\n";
+          else
+              print "<option value=\"$_row->Line\">$_row->Line - " . substr($_row->Text,0,$num_letters) . "\n";
+      }
+
+      print "</select>\n";
+      #$_lib['db']->db_free_result($result);
+      ?>
+  <? }
+  ###############################################################################
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
   #$args[project_id], num_letters, table, field, value, tabindex, accesskey
   function projectactivity_menu2($args) {
@@ -530,7 +627,7 @@ class form2 {
 
       $query = "select CompanyDepartmentID, DepartmentName from companydepartment where Active='1' order by CompanyDepartmentID";
       $result = $_lib['db']->db_query($query);
-      if($args['num_letters']) {
+      if($args['num_letters']){
         $num_letters = $args['num_letters'];
       } else {
         $num_letters = 10;

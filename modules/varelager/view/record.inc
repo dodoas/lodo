@@ -41,6 +41,9 @@ if($_REQUEST['action_varelager_new'])
     $post = array();
     $post['varelager_CreatedDate'] = $_POST['varelager_CreatedDate'];
     $post['varelager_Description'] = $_POST['varelager_Description'];
+    $post['varelager_DepartmentID'] = $_POST['varelager_DepartmentID'];
+    $post['varelager_Period'] = $_POST['varelager_Period'];
+  
     $post['varelager_Comment'] = "Det er ikke ukurans p&aring; varelageret.
 Varelager er priset til innkj&oslash;pspris.
 Varelager er priset og telt av 

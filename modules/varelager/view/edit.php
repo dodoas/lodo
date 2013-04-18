@@ -4,17 +4,21 @@
 # Based on EasyComposer technology
 # Copyright Thomas Ekdahl, 1994-2005, thomas@ekdahl.no, http://www.ekdahl.no
 
-$VareLagerID = $_REQUEST['VareLagerID'];
-
+$VareLagerID = $_REQUEST['VareLagerID']; 
+//echo "<pre>";print_r($_REQUEST);exit;
 $db_table = "varelager";
 $db_table2 = "varelagerline";
 
 require_once "record.inc";
 
 $query  = "select * from varelager where VareLagerID=$VareLagerID";
-$head   = $_lib['storage']->get_row(array('query' => $query));
+$head   = $_lib['storage']->get_row(array('query' => $query));//echo "<pre>";print_r($head);
 $locked = ($head->LockedBy != 0);
 
+$query_department  = "select * from companydepartment where CompanyDepartmentID=$head->DepartmentID";
+$department   = $_lib['storage']->get_row(array('query' => $query_department));
+//print($query);exit;
+//print_r($department->DepartmentName);
 $lockedByQuery = sprintf("SELECT FirstName, LastName FROM person WHERE PersonID = %d", $head->LockedBy);
 $lockedByRes = $_lib['db']->db_query($lockedByQuery);
 $lockedBy = $_lib['db']->db_fetch_assoc($lockedByRes);
@@ -28,17 +32,18 @@ print $_lib['sess']->doctype
     <? include $_SETUP['HOME_DIR'] . "/code/lib/html/head.inc"; ?>
 </head>
 <body>
-<h2><? print $_lib['sess']->get_companydef('VName') ?> - <? print $head->CreatedDate ?>  - <? print $head->Description ?></h2>
+<h2><? print $_lib['sess']->get_companydef('VName') ?> - <? print $head->CreatedDate ?>  - <? print $head->Description ?> - <? print $head->Period ?> - <? print $department->DepartmentName ?> </h2><hr />
     <form name="varetelling" action="<? print $MY_SELF ?>" method="post">
     <? print $_lib['form3']->hidden(array('name'=>'VareLagerID', 'value'=>$VareLagerID)) ?>
     <table class="lodo_data">
         <thead>
             <tr>
-                <th>Varetelling
-                <th colspan="10" style="text-align:right;">side 1
+                <th>Varetelling</th>
+                <th colspan="10" style="text-align:right;">side 1</th>
             <tr>
-                <th>Avdeling/Prosjekt/Hylle</th>
-                <th>ProduktID</th>
+                <th>Avdeling</th>
+                <th>Prosjekt</th>
+                <th>Hylle</th>
                 <th>Produktnr</th>
                 <th>Produktnavn</th>
                 <th style="text-align: right">Enhetsst&oslash;relse</th>
@@ -57,18 +62,38 @@ print $_lib['sess']->doctype
                V.VareLagerID, 
                V.CreatedDate, 
                V.Description, 
-               VL.*
+               VL.VareLagerLineID, 
+               VL.ProductNr, 
+               VL.ProductName, 
+               VL.Antall, 
+               VL.CostPrice,
+               DEP.DepartmentName,
+               P.UnitSize as UnitSize,
+               P.BulkSize as BulkSize,
+               P.ProductNumber as ProductNumber,
+               PRO.Heading as ProjectName,
+               SHELF.Name as ShelfName,
+               P.ShelfID as hasShelf
              from 
                $db_table as V, 
-               $db_table2 as VL
+               $db_table2 as VL,
+               product as P,
+               companydepartment as DEP,
+               project as PRO,
+               shelf as SHELF
              where 
                V.VareLagerID='".$VareLagerID."' 
                and V.VareLagerID=VL.VareLagerID 
+               and P.ProductID = VL.ProductNr
+               and PRO.ProjectID = P.ProjectID
+               and DEP.CompanyDepartmentID = P.CompanyDepartmentID
+               and (SHELF.ShelfID = P.ShelfID or (P.ShelfID = 0 and SHELF.ShelfID = 1)) 
              order by 
-               VL.Department, VL.Project, VL.Shelf, VL.ProductNr asc
+               DepartmentName, ProjectName, ShelfName, VL.ProductNr asc
         ";
         $result = $_lib['db']->db_query($query);
-
+        
+        //echo "<pre>";print_r($result);exit;
         $lastDepartment = "";
         $lastProject = "";
         $lastShelf = "";
@@ -84,7 +109,7 @@ print $_lib['sess']->doctype
             global $departmentSum, $departmentAmount, $lastDepartment, $_lib;
 
             if($departmentSum != -1) {
-                printf("<tr style='background-color: #888;'><td colspan='2'><b>Sum %s</b></td><td></td><td></td><td></td><td></td><td></td><td></td><td style='text-align: right'><b>%s</b></td><td style='text-align: right'><b>%s</b></td></tr>", 
+                printf("<tr style='background-color: #888;'><td><b>Sum %s</b><td></td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td style='text-align: right'><b>%s</b></td><td style='text-align: right'><b>%s</b></td></tr>", 
                        $lastDepartment, 
                        $_lib['format']->Amount(array('value'=>$departmentSum, 'return'=>'value')),
                        $departmentAmount
@@ -96,7 +121,7 @@ print $_lib['sess']->doctype
             global $projectSum, $projectAmount, $lastProject, $_lib;
 
             if($projectSum != -1) {
-                printf("<tr style='background-color: #aaa;'><td colspan='2'><b>Sum %s</b></td><td></td><td></td><td></td><td></td><td><td></td><td style='text-align: right'><b>%s</b></td><td style='text-align: right'><b>%s</b></td></tr>", 
+                printf("<tr style='background-color: #aaa;'><td></td><td><b>Sum %s</b></td><td></td><td></td><td></td><td></td><td></td><td><td></td><td style='text-align: right'><b>%s</b></td><td style='text-align: right'><b>%s</b></td></tr>", 
                        $lastProject, 
                        $_lib['format']->Amount(array('value'=>$projectSum, 'return'=>'value')),
                        $projectAmount
@@ -108,7 +133,7 @@ print $_lib['sess']->doctype
             global $shelfSum, $shelfAmount, $lastShelf, $_lib;
 
             if($shelfSum != -1) {
-                printf("<tr style='background-color: #ccc;'><td colspan='2'><b>Sum %s</b></td><td></td><td></td><td></td><td></td><td></td><td><td style='text-align: right'><b>%s</b></td><td style='text-align: right'><b>%s</b></td></tr>", 
+                printf("<tr style='background-color: #ccc;'><td></td><td></td><td><b>Sum %s</b></td><td></td><td></td><td></td><td></td><td></td><td><td style='text-align: right'><b>%s</b></td><td style='text-align: right'><b>%s</b></td></tr>", 
                        $lastShelf, 
                        $_lib['format']->Amount(array('value'=>$shelfSum, 'return'=>'value')),
                        $shelfAmount
@@ -117,13 +142,13 @@ print $_lib['sess']->doctype
         }
 
         while($row = $_lib['db']->db_fetch_object($result))
-        {
-            if($row->Department != $lastDepartment) {
+        {   
+            if($row->DepartmentName != $lastDepartment) {
                 sumShelf();
                 sumProject();
                 sumDepartment();
 
-                $lastDepartment = $row->Department;
+                $lastDepartment = $row->DepartmentName;
                 $lastProject = "";
                 $lastShelf = "";
 
@@ -137,11 +162,11 @@ print $_lib['sess']->doctype
                 printf("<tr><td><b>%s</b></td></tr>\n", $lastDepartment);
             }
             
-            if($row->Project != $lastProject) {
+            if($row->ProjectName != $lastProject) {
                 sumShelf();
                 sumProject();
 
-                $lastProject = $row->Project;
+                $lastProject = $row->ProjectName;
                 $lastShelf = "";
 
                 $projectSum = 0;
@@ -149,17 +174,17 @@ print $_lib['sess']->doctype
                 $projectAmount = 0;
                 $shelfAmount = 0;
                 
-                printf("<tr><td><b>- %s</b></td></tr>\n", $lastProject);
+                printf("<tr><td></td><td><b>%s</b></td></tr>\n", $lastProject);
             }
             
-            if($row->Shelf != $lastShelf) {
+            if($row->ShelfName != $lastShelf) {
                 sumShelf();
 
-                $lastShelf = $row->Shelf;
+                $lastShelf = $row->ShelfName;
 
                 $shelfSum = 0;
                 $shelfAmount = 0;
-                printf("<tr><td><b>-- %s</b></td></tr>\n", $lastShelf);
+                printf("<tr><td></td><td></td><td><b>%s</b></td></tr>\n", $lastShelf);
             }
  
             $counter++;
@@ -177,19 +202,19 @@ print $_lib['sess']->doctype
 
             ?>
             <tr>
-                <td></td>
-                <td><? print $row->ProductNr; /* this is product ID */ ?></td>
-                <td><? print $row->RealProductNumber ?></td>
+                <td></td><td></td><td></td>
+                <!--<td><? print $row->ProductNr ?></td>-->
+                <td><? print $row->ProductNumber ?></td>
                 <td><? print $row->ProductName ?></td>
-                <td class="number"><? printf("%2.2f", $row->UnitSize) ?></td>
+                <td class="number"><? print $row->UnitSize ?></td>
                 <td class="number"><? print $row->BulkSize ?></td>
-                <td class="number"><? print ($locked?
+                 <td class="number"><? print ($locked?
                                               $_lib['format']->Amount(array('value'=>$row->CostPrice, 'return'=>'value'))
                                               : $_lib['form3']->text(array('table'=>'varelagerline', 'field'=>'CostPrice', 'pk'=>$row->VareLagerLineID, 'value'=>$row->CostPrice, 'width'=>'10', 'class'=>'number'))
                                               ) ?></td>
-                <td class="number"><? print ($locked?$row->Antall:$_lib['form3']->text(array('table'=>'varelagerline', 'field'=>'Antall', 'pk'=>$row->VareLagerLineID, 'value'=>$row->Antall, 'width'=>'10', 'class'=>'number'))) ?></td>
+                 <td class="number"><? print ($locked?$row->Antall:$_lib['form3']->text(array('table'=>'varelagerline', 'field'=>'Antall', 'pk'=>$row->VareLagerLineID, 'value'=>$row->Antall, 'width'=>'10', 'class'=>'number'))) ?></td>
                 <td class="number"><nobr><? print $_lib['format']->Amount(array('value'=>$row->CostPrice * $row->Antall, 'return'=>'value')) ?></nobr></td>
-                <td class="number"><?= sprintf("%2.2f", $stock * $row->UnitSize * $row->BulkSize); ?></td>
+                <td class="number"><?= $stock * $row->UnitSize * $row->BulkSize ?></td>
             </tr>
         <?
         }
@@ -251,13 +276,6 @@ print $_lib['sess']->doctype
               <? 
                  }  
                  ?>
-            </tr>
-            <tr>
-            <td>
-              <? if(!$locked)
-                 print $_lib['form3']->submit(array('name'=>'action_varelager_reload_products', 'value' => 'Last inn produktene p&aring;nytt'))
-              ?>
-            </td>
             </tr>
             <tr>
                 <td colspan="10" align="right"><input type="button" name="name" value=" Lukk "/ onClick="window.close();">

@@ -471,7 +471,6 @@ print $_lib['sess']->doctype ?>
 	<th rowspan="5">R<br />A<br />P<br />P<br />O<br />R<br />T<br />E<br />R<br /></th>
 	<td><a href="<? print $_lib['sess']->dispatch ?>t=mvaavstemming.list" target="_blank">MVA Avstemming</a></td>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=report.verify_consistency&report_Type=balancenotok&report_Sort=VoucherID" target="_blank">Bilags, balanse, resultat, reskontro, dato og periode kontroll</a></td>
-    <td><a href="<? print $_lib['sess']->dispatch ?>t=auditorreport.list" target="_blank">Saldobalanse selvangivelse &aring;rsregnskap</a></td>
 </tr>
 <tr>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=report.regnskapsrapport" target="_blank">Kortfattet rapport / Regnskapsrapport</a></td>
@@ -482,7 +481,7 @@ print $_lib['sess']->doctype ?>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=budget.list" target="_blank">Resultatsbudsjett og likviditetsbudsjett</a></td>
 </tr>
 <tr>
-    <td><a href="<? print $_lib['sess']->dispatch ?>t=varelager.list">Varelager</a></td>
+    <td><a href="<? print $_lib['sess']->dispatch ?>t=report.expense">Varelager</a></td>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=report.tellbilagrapport" target="_blank">Antall bilag og posteringer</a></td>
 </tr>
 
@@ -664,7 +663,7 @@ $thisPeriod = $_lib['date']->get_this_period($_lib['sess']->get_session('LoginFo
     <td colspan="2"><input type="submit" name="show_report7" value="Rapport 7"  class="button"></td>
     <td><input type="submit" name="show_report8" value="Rapport 8"  class="button"></td>
     <td colspan="2"><input type="submit" name="show_report9" value="Rapport 9"  class="button"></td>
-    <td><input type="submit" name="show_report10" value="Rapport 10"  class="button"></td>
+    <td><input type="submit" name="show_report10" value="Varelager - Fortjeneste"  class="button"></td>
 </tr>
 </form>
 </table>
