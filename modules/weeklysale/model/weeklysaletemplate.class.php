@@ -50,6 +50,19 @@ class WeeklysaleTemplate {
         while($row = $_lib['db']->db_fetch_assoc($r)) 
             $entries[ $row['WeeklySaleTemplateID'] ] = $row;
 
+        // mark lines with duplicate journalid
+        $usedJournalIDs = array();
+        foreach($entries as &$e) {
+            if($e['JournalID']) {
+                $fullJournalID = $e['VoucherType'] . $e['JournalID'];
+                if(isset($usedJournalIDs[$fullJournalID])) {
+                    $e['journalInUse'] = true;
+                }
+
+                $usedJournalIDs[$fullJournalID] = true;
+            }
+        }
+
         return $entries;
     }
 
@@ -190,6 +203,17 @@ class WeeklysaleTemplate {
         }
 
         $query_free_journalid = sprintf("select * from voucher where JournalID = '%d' and VoucherType = '%s'",
+                                        $entry['JournalID'], $entry['VoucherType']);
+        $result_free_journalid = $_lib['db']->db_query($query_free_journalid);
+        if($_lib['db']->db_numrows($result_free_journalid)) {
+            $_lib['message']->add(array('message' => 
+                                        sprintf("Bilagsnummer %s%d opptatt ID:$WeeklySaleTemplateID",
+                                                $entry['VoucherType'], $entry['JournalID']
+                                            )));
+            return;
+        }
+
+        $query_free_journalid = sprintf("select * from weeklysale where JournalID = '%d' and VoucherType = '%s'",
                                         $entry['JournalID'], $entry['VoucherType']);
         $result_free_journalid = $_lib['db']->db_query($query_free_journalid);
         if($_lib['db']->db_numrows($result_free_journalid)) {
