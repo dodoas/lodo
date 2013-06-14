@@ -18,7 +18,7 @@ require_once "record.inc";
 
 #Input parameters should be validated - also against roles
 $query   = "select * from $db_table where ";
-if($OrgNumber)
+if($OrgNumber && !isset($_GET['force_new']))
 	$query   .= " OrgNumber = '$OrgNumber'";
 elseif($DomesticBankAccount)
 	$query   .= " DomesticBankAccount = '$DomesticBankAccount'";
@@ -345,9 +345,11 @@ if($JournalID) {
     <td><? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'EnableMoneyFlow', 'value'=>$account->EnableMoneyFlow, 'disabled' => true)) ?></td>
     <td>Oppstartsaldo <? print $_lib['form3']->checkbox(array('table'=>$db_table, 'field'=>'EnableSaldo', 'value'=>$account->EnableSaldo)) ?></td>
   </tr-->
+
   <tr class="result">
     <th colspan="5">Logg</th>
   </tr>
+
   <tr>
     <td class="menu">Sist brukt i bilag</td>
     <td></td>
@@ -376,8 +378,12 @@ if($JournalID) {
         <? print $_lib['form3']->submit(array('value'=>'Lagre (S)', 'name'=>'action_accountplan_update', 'accesskey' => 'S')) ?>
     <? } ?>
     </td>
-    </form>
   </tr>
+
+  <? include("schemeid.php") ?>
+
+  </form>
+
   <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
   <tr>
     <td colspan="4" align="right">
@@ -391,6 +397,8 @@ if($JournalID) {
     </td>
   </tr>
   <? } ?>
+
+
 </table>
 </form>
 <? includeinc('bottom') ?>

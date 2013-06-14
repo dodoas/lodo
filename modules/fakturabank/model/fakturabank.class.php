@@ -809,14 +809,15 @@ class lodo_fakturabank_fakturabank {
             #print "URL: " . $InvoiceO->UBLExtensions->UBLExtension->ExtensionContent->URL . "<br>\n";
             #print "FB ID:   $InvoiceO->FakturabankID<br>\n";
 
-            #Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to oly look in the correct records? No?
-            list($account, $SchemeID)  = $this->find_reskontro($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID, 'supplier');
+            //#Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to oly look in the correct records? No?
+            
+            list($account, $SchemeID)  = $this->find_reskontro($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID, 'supplier', $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID);
             if($account) {
                 $InvoiceO->AccountPlanID   = $account->AccountPlanID;
 
                 #Check if this invoice exists
                 $query          = "select * from invoicein where SupplierAccountPlanID='" . $InvoiceO->AccountPlanID . "' and InvoiceNumber='" . $InvoiceO->ID . "'";
-                #print "$query<br>\n";
+                //print "$query<br>\n";
                 $invoiceexists  = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
                 if($invoiceexists) {
                     $InvoiceO->Journal = false;
@@ -832,7 +833,13 @@ class lodo_fakturabank_fakturabank {
                 }
                     
                 if(!$InvoiceO->MotkontoAccountPlanID) {
-                    $InvoiceO->Status .= 'Motkonto resultat/balanse ikke satt for konto ' . $InvoiceO->AccountPlanID . '. ';
+                    $InvoiceO->Status   .= sprintf(
+                        'Motkonto resultat/balanse ikke satt for konto <a href="%s&t=accountplan.reskontro&AccountPlanID=%s&inline=show" target="_blank">%s</a>',
+                        $_lib['sess']->dispatch, 
+                        $InvoiceO->AccountPlanID,
+                        $InvoiceO->AccountPlanID
+                        );
+
                     $InvoiceO->Journal = false;
                     $InvoiceO->Class   = 'red';
                 }
@@ -883,7 +890,7 @@ class lodo_fakturabank_fakturabank {
                     $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID; 
 
                 $InvoiceO->Status   .= sprintf(
-                    '<a href="%s&t=fakturabank.createaccount&accountplanid=%s&orgnumber=%s&type=supplier">Opprett</a>', 
+                    '<a href="%s&t=fakturabank.createaccount&accountplanid=%s&orgnumber=%s&type=supplier" target="_blank">Opprett</a>', 
                     $_lib['sess']->dispatch, 
                     $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID, 
                     $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID
@@ -927,7 +934,7 @@ class lodo_fakturabank_fakturabank {
     ################################################################################################
     # Try to find the reskontro in the following sequenze: OrgNumber, E-Mail, Phone, AccountPlanID/Customer number
     # It will be possible to add a lot of mappings here - but it will be a lot of manuell adminsitration to get it working
-    private function find_reskontro($PartyIdentification, $type) {
+    private function find_reskontro($PartyIdentification, $type, $SchemeType = '') {
         global $_lib;
         
         if($PartyIdentification) {
@@ -979,6 +986,17 @@ class lodo_fakturabank_fakturabank {
             if($account) {
                 $SchemeID = "GLN";
             }
+        }
+
+        // Scheme ID lookup
+        if(!$account && $SchemeType) {
+            $schemeLookup = lodo_accountplan_scheme::findAccountPlanType($SchemeType, $PartyIdentification, $type);
+            if($schemeLookup !== null) {
+                $query = sprintf("select * from accountplan where accountplanid = %d", $schemeLookup);
+                $account                = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));   
+                $SchemeID = $SchemeType;
+            }
+
         }
         #Forutsatt antall bare 1.
 

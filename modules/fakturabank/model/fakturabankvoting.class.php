@@ -1,6 +1,7 @@
 <?
 #should split to factory pattern with incoming and outgoing invoices.
 includelogic('invoice/invoice');
+includelogic("accountplan/scheme");
 
 class lodo_fakturabank_fakturabankvoting {
     private $host           = '';
@@ -514,8 +515,14 @@ class lodo_fakturabank_fakturabankvoting {
     public function find_account_plan_type($identity, $scheme_id, $type) {
         global $_lib;
 
-        /* no account found on identity value, try lookup on orgnumber if it exists */
+        $schemeLookup = lodo_accountplan_scheme::findAccountPlanType($scheme_id, $identity, $type);
+        if($schemeLookup !== null) {
+            return array('AccountPlanID' => $schemeLookup);
+        }
 
+        /* 
+         * This is legacy code from when each field was static.
+         */
         if ($scheme_id == 'NO:ORGNR') {
             $query = "SELECT AccountPlanID, OrgNumber FROM accountplan WHERE OrgNumber = '$identity' AND AccountPlanType = '$type'";
             $r = $_lib['storage']->get_row(array('query' => $query));
@@ -523,7 +530,7 @@ class lodo_fakturabank_fakturabankvoting {
                 return $r;
         }
         else if($scheme_id == 'FAKTURABANK:EMAIL') {
-            $query = "SELECT AccountPlanID FROM fakturabankemail WHERE Email = '$identity'";
+            $query = "SELECT a.AccountPlanID FROM fakturabankemail e, accountplan a WHERE e.Email = '$identity' AND a.AccountPlanID = e.AccountPlanID AND a.AccountPlanType = '$type'";
             $r = $_lib['storage']->get_row(array('query' => $query));
             if($r)
                 return $r;
@@ -564,6 +571,11 @@ class lodo_fakturabank_fakturabankvoting {
      */
     public function find_account_plan($identity, $scheme_id) {
         global $_lib;
+
+        $schemeLookup = lodo_accountplan_scheme::findAccountPlan($scheme_id, $identity);
+        if($schemeLookup !== null) {
+            return array('AccountPlanID' => $schemeLookup);
+        }
 
         $query = "SELECT AccountPlanID, OrgNumber FROM accountplan WHERE AccountPlanID = '$identity'";
         $accountplan = $_lib['storage']->get_row(array('query' => $query));

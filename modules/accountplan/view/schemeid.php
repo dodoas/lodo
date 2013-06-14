@@ -4,7 +4,12 @@
 includelogic("accountplan/scheme");
 
 $schemeControl = new lodo_accountplan_scheme($AccountPlanID);
+if($_lib['input']->getProperty('action_refresh_sheme')) {
+    $schemeControl->refreshSchemes();
+}
+
 $schemes = $schemeControl->listSchemes();
+
 
 $availableSchemeTypes = $schemeControl->listTypes();
 function createSchemeOptions($selected) {
@@ -24,36 +29,33 @@ function createSchemeOptions($selected) {
 }
 ?>
 
-<?
-
-// Dette er enda under utvikling, men siden det ser ut til at det blir en stund til
-// jeg skal jobbe igjen så legger jeg det bare ut.
-// Denne filen blir akkurat nå bare inkludert i reskontro.php 
-/*
 <tr class="result">
   <th colspan="5">Fakturabank Scheme ID</th>
 </tr>
 
 <? foreach($schemes as $scheme) { ?>
 <tr>
-  <td class="menu"></td>
-  <td><input type="checkbox" name="schemeid_to_delete[]" value="<?= $scheme['AccountPlanSchemeID'] ?>" /></td>
-  <td>
+  <td class="menu">
+  </td>
+  <td colspan=2>
     <select name="accountplanscheme.FakturabankSchemeID.<?= $scheme['AccountPlanSchemeID'] ?>">
       <?= createSchemeOptions($scheme['FakturabankSchemeID']) ?>
     </select>
     <input type="text" value="<?= $scheme['SchemeValue'] ?>" name="accountplanscheme.SchemeValue.<?= $scheme['AccountPlanSchemeID'] ?>" />
   </td>
+  <td><input type="checkbox" name="schemeid_to_delete[]" value="<?= $scheme['AccountPlanSchemeID'] ?>" /></td>
 </tr>
 <? } ?>
 <tr>
   <td class="menu"></td>
-  <td><input type="submit" name="action_del_scheme" value="-" /></td>
-  <td>
-    <input type="submit" name="action_add_scheme" value="+" />
+  <td colspan="2">
     <input type="submit" name="action_save_scheme" value="Lagre scheme id" />
+    <input type="submit" name="action_add_scheme" value="Legg til ny" />
+  </td>
+  <td>
+    <input type="submit" name="action_del_scheme" value="Slett markerte" onclick="return confirm('Er du sikker p&aring; at du vil slette markerte?');" />
+    <input type="submit" name="action_refresh_sheme" value="Oppdater schemetyper" />
   </td>
 </tr>
-*/
 
-?>
+

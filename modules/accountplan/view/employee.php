@@ -302,8 +302,10 @@ print '<h1>' . $_lib['message']->get() . '</h1>'; ?>
         <input type="submit" value="Lagre (S)" name="action_accountplan_update" accesskey="S">
     <? } ?>
     </td>
-    </form>
   </tr>
+  <? include("schemeid.php") ?>
+  </form>
+
 
   <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
   <tr>
