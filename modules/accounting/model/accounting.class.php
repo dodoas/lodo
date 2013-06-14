@@ -2154,7 +2154,9 @@ class accounting {
     public function checkJournalID($VoucherType, $JournalID) {
         global $_lib;
 
-        $q = sprintf("SELECT JournalID FROM voucher WHERE VoucherType = '%s' AND JournalID = '%s' LIMIT 1",
+        $q = sprintf("SELECT JournalID FROM voucher 
+                      WHERE VoucherType = '%s' AND JournalID = '%s' AND Active = 1
+                      LIMIT 1",
                      $VoucherType, $JournalID);
         $r = $_lib['db']->db_query($q);
 
