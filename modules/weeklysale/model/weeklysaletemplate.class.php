@@ -239,9 +239,9 @@ class WeeklysaleTemplate {
             return;
         }
 
-        if($entry['WeeklySaleConfID'] && $this->weeklySaleIsActive($entry['WeeklySaleConfID'])) {
+        if($entry['WeeklySaleID'] && $this->weeklySaleIsActive($entry['WeeklySaleID'])) {
             $_lib['message']->add(array('message' => 
-                                        "Ukeomsetning finnes fra f&oslash;rst ID:$WeeklySaleTemplateID"));
+                                        "Ukeomsetning finnes fra f&oslash;r ID:$WeeklySaleTemplateID"));
 
             return;
         }
