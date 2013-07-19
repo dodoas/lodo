@@ -1,4 +1,5 @@
 <?
+//xdebug_start_trace("/home/martinaw/public_html/stack.log");
 #print_r($_REQUEST);
 $MatchAccountPlanID     = $_REQUEST['MatchAccountPlanID'];
 $db_table 				= 'voucher';
@@ -10,10 +11,25 @@ $accounting = new accounting();
 includelogic('postmotpost/postmotpost');
 includelogic('exchange/exchange');
 
+$showAll = isset($_REQUEST["showAll"]) ? true : false;
+$showOnly = isset($_REQUEST["showOnly"]) ? $_REQUEST["showOnly"] : "1";
+
+if($showAll) {
+    $showURL = "showAll";
+}
+else {
+    $showURL = "showOnly=" . $showOnly;
+}
+
 $postmotpost = new postmotpost(array('AccountPlanID' => $_REQUEST['AccountPlanID'], 'ReskontroFromAccount' => $_REQUEST['ReskontroFromAccount'], 'ReskontroToAccount' => $_REQUEST['ReskontroToAccount'], 'DepartmentID' => $_REQUEST['report_DepartmentID'], 'ProjectID' => $_REQUEST['report_ProjectID']));
 require "record.inc";
 
-$postmotpost->getopenpost();
+if(!$showAll) {
+    $postmotpost->getopenpost($showOnly);
+}
+else {
+    $postmotpost->getopenpost();
+}
 
 if($fieldCount > 0)
 {
@@ -67,12 +83,16 @@ print $_lib['sess']->doctype ?>
 <b>Trykk p&aring; lukk alle for &aring; lukke alle &aring;pne poster som g&aring;r i null og som det er mulig &aring; lukke</b><br />
 <b>Trykk p&aring; &aring;pne alle for &aring; &aring;pne alle poster for alle kunder i alle perioder</b><br />
 
+<p>
+<a href="<?= $_SETUP['DISPATCH'] ?>t=postmotpost.list&report_Sort=JournalID&AccountPlanID=<?= $_REQUEST['AccountPlanID'] ?>&ReskontroFromAccount=<?= $_REQUEST['ReskontroFromAccount'] ?>&ReskontroToAccount=<?= $_REQUEST['ReskontroToAccount'] ?>&report.DepartmentID=<?= $_REQUEST['report_DepartmentID'] ?>&report.ProjectID=<?= $_REQUEST['report_ProjectID'] ?>&show_report_search=Kj%F8r+rapport&showAll">Vis alle (Advarsel: Kan tar lang tid)</a>
+</p>
+
 <?
 #print_r($postmotpost);
-if(count($postmotpost->voucherH) > 0)
+if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
 {
 ?>
-    <form class="voucher" name="postvspost" action="<? print $MY_SELF ?>" method="post">
+    <form class="voucher" name="postvspost" action="<? print $MY_SELF ?>&amp;<?= $showURL ?>" method="post">
     <? print $_lib['form3']->hidden(array('name'=>'AccountPlanID',          'value' => $postmotpost->AccountPlanID)) ?>
     <? print $_lib['form3']->hidden(array('name'=>'ReskontroFromAccount',   'value' => $postmotpost->ReskontroFromAccount)) ?>
     <? print $_lib['form3']->hidden(array('name'=>'ReskontroToAccount',     'value' => $postmotpost->ReskontroToAccount)) ?>
@@ -111,7 +131,8 @@ if(count($postmotpost->voucherH) > 0)
             #print_r($postmotpost->voucherH);
             foreach($postmotpost->voucherH as $AccountPlanID => $account)
             {
-            ?>
+
+                ?>
                 <tr class="voucher">
                     <th colspan="12"><? print $postmotpost->sumaccountH[$AccountPlanID]->Name ?></th>
                     <th colspan="6">
@@ -193,7 +214,7 @@ if(count($postmotpost->voucherH) > 0)
                                    if($postmotpost->isCloseAbleVoucher($voucher->VoucherID)) {
                                     $closeable++;
                                     
-                                    print $_lib['form3']->button(array('url'=>$_SETUP['DISPATCH']."t=postmotpost.list&amp;MatchAccountPlanID=$voucher->AccountPlanID&amp;MatchKid=$voucher->KID&amp;MatchVoucherID=$voucher->VoucherID&amp;MatchInvoiceID=$voucher->InvoiceID&amp;AccountPlanID=$postmotpost->AccountPlanID&amp;action_postmotpost_close=1", 'name'=>'Lukk')); 
+                                    print $_lib['form3']->button(array('url'=>$_SETUP['DISPATCH']."t=postmotpost.list&amp;MatchAccountPlanID=$voucher->AccountPlanID&amp;MatchKid=$voucher->KID&amp;MatchVoucherID=$voucher->VoucherID&amp;MatchInvoiceID=$voucher->InvoiceID&amp;AccountPlanID=$postmotpost->AccountPlanID&amp;action_postmotpost_close=1&amp;$showURL", 'name'=>'Lukk')); 
                                 } else {
                                     print $_lib['format']->Amount($postmotpost->getDiff($AccountPlanID, $voucher->KID, $voucher->InvoiceID));
                                 }
@@ -201,11 +222,12 @@ if(count($postmotpost->voucherH) > 0)
 
                                 <? echo $postmotpost->voucherMessage($voucher->VoucherID); ?>
                         </td>
-                        <td class="noprint"><? print $_lib['form3']->button(array('url'=> $_lib['sess']->dispatch ."t=postmotpost.list&AccountPlanID=" . $postmotpost->AccountPlanID . "&amp;MatchAccountPlanID=" . $voucher->AccountPlanID . "&amp;MatchKID=" . $voucher->KID, 'name'=>'Vis samme kid')) ?></td>
+                        <td class="noprint"><? print $_lib['form3']->button(array('url'=> $_lib['sess']->dispatch ."t=postmotpost.list&AccountPlanID=" . $postmotpost->AccountPlanID . "&amp;MatchAccountPlanID=" . $voucher->AccountPlanID . "&amp;MatchKID=" . $voucher->KID . "&amp;$showURL", 'name'=>'Vis samme kid')) ?></td>
                     </tr>
                     <?
                 }
                 ?>
+
             <tr>
               <td colspan="18">
               <td colspan="6">
@@ -233,6 +255,20 @@ if(count($postmotpost->voucherH) > 0)
                 <th class="sub" colspan="10"></th>
             </tr>
             <? } ?>
+
+
+           <? foreach($postmotpost->hidingAccounts as $account) { ?>
+           <tr>
+             <th colspan=21>
+             <a href="<?= $_SETUP['DISPATCH'] ?>t=postmotpost.list&report_Sort=JournalID&AccountPlanID=<?= $_REQUEST['AccountPlanID'] ?>&ReskontroFromAccount=<?= $_REQUEST['ReskontroFromAccount'] ?>&ReskontroToAccount=<?= $_REQUEST['ReskontroToAccount'] ?>&report.DepartmentID=<?= $_REQUEST['report_DepartmentID'] ?>&report.ProjectID=<?= $_REQUEST['report_ProjectID'] ?>&show_report_search=Kj%F8r+rapport&showOnly=<?= $account['AccountPlanID'] ?>">
+             +  <?= $account['AccountName'] ?>
+             </a>
+             </th>
+           </tr>
+           <tr><td></td></tr>
+           <? } ?>
+
+
             <tr>
                 <td colspan="19"></td>
             </tr>

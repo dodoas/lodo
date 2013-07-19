@@ -5,6 +5,7 @@ class postmotpost {
     public  $sumaccountH    = array();  //# Sum pr konto
     public  $voucherH       = array();  //# All open vouchers
     public  $matchH         = array();  //# All matches on KID and Invoice
+    public  $hidingAccounts = array();  //# When only creating table for one account, this one contains the name of all the uncalculated accounts
     
     
     private $matched        = array(); // Matched vouchers - closable
@@ -47,7 +48,7 @@ class postmotpost {
     }
 
     /***************************************************************************
-    * Funkjson som finner $(B~A)I½(Bpne poster (linjer) med oppgitt KID-A
+    * Funkjson som finner pne poster (linjer) med oppgitt KID-A
     * kid = KID to search for
     * JournalID = The JournalID you are searching from
     */
@@ -152,7 +153,7 @@ class postmotpost {
     * Function that generate arrays with open post information
     * @Param AccountPlanID, ReskontroFrom, ReskontroTo
     */
-    function getopenpost() {
+    function getopenpost($onlyAccountPlanID = 0) {
         global $_lib, $accounting;
 
         /* clean old totals */
@@ -164,6 +165,7 @@ class postmotpost {
         $this->voucherH = array();
         $this->matchH = array();
         $this->sumaccountH = array();
+        $this->hidingAccounts = array();
 
         if($this->AccountPlanID){
 
@@ -193,10 +195,47 @@ class postmotpost {
                    left join vouchermatch as M on M.VoucherID = V.VoucherID
                  where 
                    V.Active=1 
-                   and V.AccountPlanID=A.AccountPlanID 
+                   and V.AccountPlanID=A.AccountPlanID
                    and A.EnablePostPost=1
                    and $where $whereextra (VS.Closed is NULL or VS.Closed=0) 
                    order by V.AccountPlanID asc, V.VoucherPeriod asc, V.VoucherDate asc, V.VoucherID asc";
+
+
+
+            if($onlyAccountPlanID) {
+                // Run a modified version of the original query where it groups by AccountPlan, then
+                // replace the original with a query which only ask for the given accountplan
+                $query_voucher      = 
+                "select A.AccountName, V.AccountPlanID from
+                   accountplan A, 
+                   voucher V 
+                   left join voucherstruct as VS on VS.ParentVoucherID=V.VoucherID or VS.ChildVoucherID=V.VoucherID             
+                 where
+                   V.Active=1 
+                   and V.AccountPlanID=A.AccountPlanID
+                   and A.EnablePostPost=1
+                   and $where $whereextra (VS.Closed is NULL or VS.Closed=0)
+                   group by V.AccountPlanID";
+
+                $r = $_lib['db']->db_query($query_voucher);
+                while(($row = $_lib['db']->db_fetch_assoc($r))) {
+                    $this->hidingAccounts[] = $row;
+                }
+
+                $query_voucher      = 
+                  "select V.*, M.VoucherMatchID, M.MatchNumber from 
+                   accountplan A, 
+                   voucher V 
+                   left join voucherstruct as VS on VS.ParentVoucherID=V.VoucherID or VS.ChildVoucherID=V.VoucherID  
+                   left join vouchermatch as M on M.VoucherID = V.VoucherID
+                 where 
+                   V.Active=1 
+                   and V.AccountPlanID=A.AccountPlanID AND V.AccountPlanID = $onlyAccountPlanID
+                   and A.EnablePostPost=1
+                   and $where $whereextra (VS.Closed is NULL or VS.Closed=0) 
+                   order by V.AccountPlanID asc, V.VoucherPeriod asc, V.VoucherDate asc, V.VoucherID asc";
+
+            }
 
             #$vouchers          = $_lib['db']->get_hashhash(array('query' => $query_voucher, 'key'=>'VoucherID'));
             #print "$query_voucher<br>\n";
@@ -204,6 +243,11 @@ class postmotpost {
             $result2            = $_lib['db']->db_query($query_voucher);
             #exit;
             $CountOpenVoucher   = $_lib['db']->db_numrows($result2);
+
+
+            /* cache ALL accountplans */
+            $accounting->cache_all_accountplans();
+
 
             /*******************************************************************
             * Loop and calculate all data

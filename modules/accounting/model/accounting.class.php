@@ -221,6 +221,17 @@ class accounting {
         return round($sum, 2);
     }
 
+    public function cache_all_accountplans() {
+        global $_lib;
+
+        $accountplanCacheQuery = "SELECT * FROM accountplan WHERE Active=1";
+        $accountplanCacheR = $_lib['db']->db_query($accountplanCacheQuery);
+        while(($row = $_lib['db']->db_fetch_object($accountplanCacheR))) {
+            $this->accountplanH[ $row->AccountPlanID ] 
+                = $row;
+        }
+    }
+
     /***************************************************************************
     * Hent konto
     * @param
