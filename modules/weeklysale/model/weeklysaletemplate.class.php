@@ -29,6 +29,24 @@ class WeeklysaleTemplate {
         $this->entries = $this->createEntries();
     }
 
+    public function weeklySaleIsActive($WeeklySaleID) {
+        global $_lib;
+
+        $q = sprintf("
+          SELECT w.WeeklySaleID
+            FROM weeklysale w, voucher v
+            WHERE w.WeeklySaleID = %d AND w.JournalID = v.JournalID AND v.Active = 1",
+                     $WeeklySaleID);
+
+        $r = $_lib['db']->db_query($q);
+        $n = $_lib['db']->db_numrows($r);
+
+        if($n)
+            return true;
+        else
+            return false;
+    }
+
     public function createEntries() {
         global $_lib;
         $entries = array();
@@ -39,7 +57,7 @@ class WeeklysaleTemplate {
             (not (v.JournalID IS NULL)) as journalInUse
             FROM weeklysaletemplate t
               LEFT JOIN (voucher v)
-                ON (v.JournalID = t.JournalID AND v.voucherType = t.voucherType)
+                ON (v.JournalID = t.JournalID AND v.voucherType = t.voucherType AND v.Active = 1)
             WHERE t.Year = %d AND t.WeeklySaleConfID = %d 
             GROUP BY t.WeeklySaleTemplateID
             ORDER BY t.WeekNo, t.FirstDate
@@ -52,6 +70,7 @@ class WeeklysaleTemplate {
 
         // mark lines with duplicate journalid
         $usedJournalIDs = array();
+
         foreach($entries as &$e) {
             if($e['JournalID']) {
                 $fullJournalID = $e['VoucherType'] . $e['JournalID'];

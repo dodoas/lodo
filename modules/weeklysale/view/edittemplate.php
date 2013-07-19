@@ -99,7 +99,11 @@ EOT;
 
            $first_day = strftime("%A", strtotime($entry['FirstDate']));
            $last_day = strftime("%A", strtotime($entry['LastDate']));
-           $open = $entry['WeeklySaleID'] == 0;
+           
+           if($entry['WeeklySaleID'] == 0)
+               $open = true;
+           else
+               $open = !$template->weeklySaleIsActive($entry['WeeklySaleID']);
 
            $i++;
            if($i % 20 == 0 && $n - $i > 5) echo $control_row;
