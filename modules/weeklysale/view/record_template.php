@@ -40,6 +40,13 @@ else if(isset($_POST['template_import_file'])) {
     }
 }
 else if(isset($_POST['template_add_defaults'])) {
+
+    $query_sale_conf  = sprintf(
+        "select * from weeklysaleconf where WeeklySaleConfID = '%s'",
+        $selected_config);
+    $result_sale_conf = $_lib['db']->db_query($query_sale_conf);
+    $sale_conf        = $_lib['db']->db_fetch_object($result_sale_conf);
+
     $d = strtotime($selected_year . "-01-01");
 
     // check if first day is sunday
@@ -56,7 +63,7 @@ else if(isset($_POST['template_add_defaults'])) {
             date("Y-m-d", $d),
             date("Y-m-d", $tmp_d),
             date("Y-m", $d), 
-            'O'
+            $sale_conf->VoucherType
             );
 
         $d = $tmp_d;
@@ -87,7 +94,7 @@ else if(isset($_POST['template_add_defaults'])) {
                 date('Y-m-d', $monday_d),
                 date('Y-m-d', $tmp_d),
                 date('Y-m', $tmp_d), 
-                'O'
+                $sale_conf->VoucherType
                 );
 
             $template->addEntry(
@@ -96,7 +103,7 @@ else if(isset($_POST['template_add_defaults'])) {
                 date('Y-m-d', $tmp_d + 60*60*24),
                 date('Y-m-d', $d),
                 date('Y-m', $d),
-                'O'
+                $sale_conf->VoucherType
                 );
         }
         else {
@@ -107,7 +114,7 @@ else if(isset($_POST['template_add_defaults'])) {
                 date('Y-m-d', $monday_d),
                 date('Y-m-d', $d),
                 date('Y-m', $d),
-                'O'
+                $sale_conf->VoucherType
                 );
         }
 
@@ -123,7 +130,7 @@ else if(isset($_POST['template_add_defaults'])) {
             date('Y-m-d', $d),
             $selected_year . '-12-31',
             date('Y-m', $d),
-            'O'
+            $sale_conf->VoucherType
             );
     }
 

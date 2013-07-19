@@ -288,7 +288,7 @@ class WeeklysaleTemplate {
         $postmain['weeklysale_WeeklySaleConfID']  = $WeeklySaleConfID;
         $postmain['weeklysale_JournalDate']       = $entry['LastDate'];
         $postmain['weeklysale_JournalID']         = $entry["JournalID"];
-        $postmain['weeklysale_VoucherType']       = $sale_conf->VoucherType;
+        $postmain['weeklysale_VoucherType']       = $VoucherType; //$sale_conf->VoucherType;
 
         $postmain['weeklysale_Week'] = $entry['WeekNo'];
 
