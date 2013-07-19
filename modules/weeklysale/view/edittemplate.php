@@ -63,16 +63,33 @@
     <tr>
       <td colspan="3">
         <input type="submit" value="Lagre alle" name="template_save" />
-        <input type="submit" value="+" name="template_add_blank_entry" />
       </td>
       <td colspan="6">
         <input type="submit" value="Opprett markerte" name="template_create_weeklysales" onclick="return confirm('Opprett?')" />
-        <input type="submit" value="Slett markerte linjer" name="template_delete_marked" onclick="return confirm('Slett?')" />
         <input type="submit" value="&Aring;pne markerte linjer og slett bilag" name="template_delete_marked_voucher" onclick="return confirm('&Aring;pne?')" />
       </td>
     </tr>
 EOT;
 
+   if($_lib['sess']->get_person('AccessLevel') >= 4) {
+     $control_row_full = <<<EOT
+      <tr>
+        <td colspan="3">
+          <input type="submit" value="Lagre alle" name="template_save" />
+          <input type="submit" value="+" name="template_add_blank_entry" />
+        </td>
+        <td colspan="6">
+          <input type="submit" value="Opprett markerte" name="template_create_weeklysales" onclick="return confirm('Opprett?')" />
+          <input type="submit" value="Slett markerte linjer" name="template_delete_marked" onclick="return confirm('Slett?')" />
+          <input type="submit" value="&Aring;pne markerte linjer og slett bilag" name="template_delete_marked_voucher" onclick="return confirm('&Aring;pne?')" />
+        </td>
+      </tr>
+EOT;
+   }
+   else {
+     $control_row_full = $control_row;
+   }
+   
    ?>
 <?if($_lib['message']->get()) { ?> <div class="warning"><? print $_lib['message']->get() ?></div><br><? } ?>
  
@@ -103,7 +120,7 @@ EOT;
            if($entry['WeeklySaleID'] == 0)
                $open = true;
            else
-               $open = !$template->weeklySaleIsActive($entry['WeeklySaleID']);
+               $open = !$template->weeklySaleExists($entry['WeeklySaleID']);
 
            $i++;
            if($i % 20 == 0 && $n - $i > 5) echo $control_row;
@@ -146,7 +163,7 @@ EOT;
        }
        ?>
 
-    <?= $control_row ?>
+    <?= $control_row_full ?>
 
     <tr>
       <td colspan="3">

@@ -47,6 +47,24 @@ class WeeklysaleTemplate {
             return false;
     }
 
+    public function weeklySaleExists($WeeklySaleID) {
+        global $_lib;
+
+        $q = sprintf("
+          SELECT w.WeeklySaleID
+            FROM weeklysale w
+            WHERE w.WeeklySaleID = %d",
+                     $WeeklySaleID);
+
+        $r = $_lib['db']->db_query($q);
+        $n = $_lib['db']->db_numrows($r);
+
+        if($n)
+            return true;
+        else
+            return false;
+    }
+
     public function createEntries() {
         global $_lib;
         $entries = array();
@@ -221,7 +239,14 @@ class WeeklysaleTemplate {
             return;
         }
 
-        $query_free_journalid = sprintf("select * from voucher where JournalID = '%d' and VoucherType = '%s'",
+        if($entry['WeeklySaleConfID'] && $this->weeklySaleIsActive($entry['WeeklySaleConfID'])) {
+            $_lib['message']->add(array('message' => 
+                                        "Ukeomsetning finnes fra f&oslash;rst ID:$WeeklySaleTemplateID"));
+
+            return;
+        }
+
+        $query_free_journalid = sprintf("select * from voucher where JournalID = '%d' and VoucherType = '%s' and active = 1",
                                         $entry['JournalID'], $entry['VoucherType']);
         $result_free_journalid = $_lib['db']->db_query($query_free_journalid);
         if($_lib['db']->db_numrows($result_free_journalid)) {
@@ -229,6 +254,7 @@ class WeeklysaleTemplate {
                                         sprintf("Bilagsnummer %s%d opptatt ID:$WeeklySaleTemplateID",
                                                 $entry['VoucherType'], $entry['JournalID']
                                             )));
+
             return;
         }
 
@@ -240,6 +266,7 @@ class WeeklysaleTemplate {
                                         sprintf("Bilagsnummer %s%d opptatt ID:$WeeklySaleTemplateID",
                                                 $entry['VoucherType'], $entry['JournalID']
                                             )));
+
             return;
         }
 
