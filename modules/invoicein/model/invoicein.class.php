@@ -392,11 +392,7 @@ class logic_invoicein_invoicein implements Iterator {
                        "reason"-linjene, f.eks. kontant fra kasse o.l.
 
                      */
-                    /*$fb_query = sprintf("SELECT * FROM fakturabankinvoicein WHERE LodoID = %d", 
-                      $InvoiceO->ID);*/
-
-                    $fb_query = sprintf("SELECT * FROM fakturabankinvoicein WHERE JournalID = %d", 
-                                        $VoucherH['voucher_JournalID']);
+                    $fb_query = sprintf("SELECT * FROM fakturabankinvoicein WHERE LodoID = %d", $InvoiceO->ID);
 
                     $fb_row = $_lib['storage']->get_row(array('query' => $fb_query, 'debug' => true));
                     $original_accountplanid = $InvoiceO->SupplierAccountPlanID;
