@@ -144,7 +144,7 @@ foreach($invoicein as $InvoiceO) {
     $ForeignCurrencyID = '';
     $count++;
 
-    $fb_query = sprintf("SELECT * FROM fakturabankinvoicein WHERE JournalID = %d", $InvoiceO->JournalID);
+    $fb_query = sprintf("SELECT * FROM fakturabankinvoicein WHERE LodoID = %d", $InvoiceO->ID);
     $fb_row = $_lib['storage']->get_row(array('query' => $fb_query, 'debug' => true));
 
     if($fb_row) {
