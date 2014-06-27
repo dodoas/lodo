@@ -1117,7 +1117,7 @@ class lodo_fakturabank_fakturabank {
         if (!empty($invoicesO->Invoice)) {
 
         foreach($invoicesO->Invoice as &$InvoiceO) {
-        
+            $is_foreign = false;
             #If all essential data quality is ok - download the invoice
             if($InvoiceO->Journal) {
                 $dataH = array();
