@@ -413,7 +413,11 @@ class lodo_fakturabank_fakturabank {
 
 
         $size = strlen($xml_data);
-
+	$xml_std_header = '<?xml version="1.0"?>';
+	$std_hd_len = strlen($xml_std_header);
+	if (substr($xml_data, 0, $std_hd_len) == $xml_std_header) {
+		$xml_data = trim(substr($xml_data, $std_hd_len));
+	}
         if(substr($xml_data,0,9) != '<Invoices') {
 
             $_lib['message']->add($xml_data);
@@ -425,7 +429,6 @@ class lodo_fakturabank_fakturabank {
                 $domtoobject = new empatix_framework_logic_xmldomtoobject(array('arrayTags' => $this->ArrayTag, 'attributesOfInterest' => $this->attributesOfInterest));
                 #print "\n<hr>$xml_data\n<hr>";
                 $invoiceO    = $domtoobject->convert($xml_data);
-    
             } else {
                 $_lib['message']->add("XML Dokument tomt - pr&oslash;v igjen: $url");            
             }
