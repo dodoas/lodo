@@ -374,7 +374,7 @@ class lodo_fakturabank_fakturabankvoting {
                     $lineH['Comment'] .= 'Lon ';
 
                     $accountplan_row = $this->find_account_plan_type(
-                        $rel['InvoiceSupplierIdentity'], $rel['InvoiceSupplierIdentitySchemeID'], 'supplier'
+                        $rel['InvoiceSupplierIdentity'], $rel['InvoiceSupplierIdentitySchemeID'], 'employee'
                         );
 
                     if(!$accountplan_row) {
