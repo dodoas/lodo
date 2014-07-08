@@ -19,6 +19,9 @@ class model_log_log extends model_invoicerecurring_recurring
         foreach($dbs as $db)
         {
             $name = $db->Database;
+
+            if($name == "phpmyadmin") continue;
+
             $_lib['storage'] = $_lib['db'] =
                 new db_mysql(array('host' => $_SETUP['DB_SERVER_DEFAULT'],
                                    'database' => $name,
