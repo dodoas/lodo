@@ -1063,7 +1063,7 @@ class framework_logic_bank {
                 // mawcode
                 if( substr($unvoted->InvoiceNumber, 0, 2) == "FB" ) {
                     $VoucherH['voucher_AccountPlanID']       = $this->AccountPlanID;
-                    printf("<hr />%s:<br />", $unvoted->InvoiceNumber);
+                    # printf("<hr />%s:<br />", $unvoted->InvoiceNumber);
                     
                     $fbbank = new lodo_fakturabank_fakturabankvoting();
                     $FBVoucherH = $VoucherH;
@@ -1073,9 +1073,9 @@ class framework_logic_bank {
                     //print_r($matches);
                     $transaction = $fbbank->get_fakturabanktransactionobject($fakturabankID);
                     
-                    print("TRANSACTION: ");
-                    print_r($transaction);
-                    print("<br />");
+                    #print("TRANSACTION: ");
+                    #print_r($transaction);
+                    #print("<br />");
                     
                     $relations = $fbbank->get_faturabanktransactionrelations($fakturabankID);
                     $relations_invoices = array();
@@ -1087,7 +1087,7 @@ class framework_logic_bank {
                     
                     foreach($relations as $rel) {
                         $sum -= $rel['Amount'];
-                        print_r($rel);
+                        #print_r($rel);
                     }
                     
                     if($sum >= 0.0001 || $sum <= -0.0001) {
@@ -1115,8 +1115,8 @@ class framework_logic_bank {
                     $FBVoucherH['voucher_VAT']           = $unvoted->VAT;
                     
                     foreach($relations as $rel) {
-                        print_r($rel);
-                        echo "<br>\n";
+                        #print_r($rel);
+                        #echo "<br>\n";
                         
                         if($rel['InvoiceType'] == 'incoming') {
                             $accountplan_row = $fbbank->find_account_plan_type(
@@ -1137,7 +1137,7 @@ class framework_logic_bank {
                                 $FBVoucherH['voucher_KID']           = $rel['KID'];
                                 $FBVoucherH['voucher_Description']   = $rel['Description'];
                                 
-                                print_r($FBVoucherH);
+                                #print_r($FBVoucherH);
                                 $accounting->insert_voucher_line(
                                     array(
                                         'post' => $FBVoucherH, 
@@ -1168,7 +1168,7 @@ class framework_logic_bank {
                                 $FBVoucherH['voucher_KID']           = $rel['KID'];
                                 $FBVoucherH['voucher_Description']   = $rel['Description'];
                                 
-                                print_r($FBVoucherH);
+                                #print_r($FBVoucherH);
                                 $accounting->insert_voucher_line(
                                     array(
                                         'post' => $FBVoucherH, 
@@ -1185,15 +1185,15 @@ class framework_logic_bank {
                             // Hovedsbokfoering ved f.eks. rabatt
                             //
                             if($rel['AccountID'] != 0) {
-                                printf("Adding extra ");
-                                print_r($rel);
+                                #printf("Adding extra ");
+                                #print_r($rel);
                                 $query = sprintf(
                                     "SELECT AccountPlanID 
                                            FROM fakturabankbankreconciliationreason
                                            WHERE FakturabankBankReconciliationReasonID = %d",
                                     $rel['AccountID']);
                                 
-                                printf("%s\n", $query);
+                                #printf("%s\n", $query);
                                 
                                 $reconciliation = $_lib['storage']->get_row(array('query' => $query));
                                 
