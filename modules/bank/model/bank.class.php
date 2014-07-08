@@ -1127,7 +1127,8 @@ class framework_logic_bank {
                                 printf("Could not find incoming: %s<br />", $rel['InvoiceSupplierIdentity']);
                             
                             if($accountplan_row) {
-                                printf("Adding normal Incoming\n");
+				
+                                if ($this->debug) printf("Adding normal Incoming\n");
                                 $FBVoucherH['voucher_AccountPlanID'] = $accountplan_row->AccountPlanID;
                                 
                                 $FBVoucherH['voucher_AmountOut']     = $rel['Amount'];
@@ -1158,7 +1159,7 @@ class framework_logic_bank {
 
 
                             if($accountplan_row) {
-                                printf("Adding normal Outgoing\n");
+                                if ($this->debug) printf("Adding normal Outgoing\n");
                                 $FBVoucherH['voucher_AccountPlanID'] = $accountplan_row->AccountPlanID;
                                 
                                 $FBVoucherH['voucher_AmountOut']     = $rel['Amount'];
@@ -1168,7 +1169,6 @@ class framework_logic_bank {
                                 $FBVoucherH['voucher_KID']           = $rel['KID'];
                                 $FBVoucherH['voucher_Description']   = $rel['Description'];
                                 
-                                #print_r($FBVoucherH);
                                 $accounting->insert_voucher_line(
                                     array(
                                         'post' => $FBVoucherH, 
@@ -1185,19 +1185,14 @@ class framework_logic_bank {
                             // Hovedsbokfoering ved f.eks. rabatt
                             //
                             if($rel['AccountID'] != 0) {
-                                #printf("Adding extra ");
-                                #print_r($rel);
                                 $query = sprintf(
                                     "SELECT AccountPlanID 
                                            FROM fakturabankbankreconciliationreason
                                            WHERE FakturabankBankReconciliationReasonID = %d",
                                     $rel['AccountID']);
                                 
-                                #printf("%s\n", $query);
-                                
                                 $reconciliation = $_lib['storage']->get_row(array('query' => $query));
                                 
-                                print("Found an AccountID " . $rel['AccountID'] . " on account " . $reconciliation->AccountPlanID . " <br />");
                                 $FBVoucherH['voucher_AccountPlanID'] = $reconciliation->AccountPlanID;
                                 
                                 if($rel['Amount'] > 0) {
