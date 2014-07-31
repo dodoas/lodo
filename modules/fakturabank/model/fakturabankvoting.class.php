@@ -9,7 +9,7 @@ class lodo_fakturabank_fakturabankvoting {
     private $username       = '';
     private $password       = '';
     private $login          = false;
-    private $timeout        = 30; 
+    private $timeout        = 30;
     private $retrievestatus = '';
     private $credentials    = '';
     private $OrgNumber      = '';
@@ -46,8 +46,8 @@ class lodo_fakturabank_fakturabankvoting {
 		}
 
 		// strip anything but numbers
-		return preg_replace("/[^0-9]*/", 
-							"", 
+		return preg_replace("/[^0-9]*/",
+							"",
 							$account_str);
 	}
 
@@ -69,9 +69,9 @@ class lodo_fakturabank_fakturabankvoting {
 
         $old_pattern    = array("/[^0-9]/", "/_+/", "/_$/");
         $new_pattern    = array("", "", "");
-        $this->OrgNumber = strtolower(preg_replace($old_pattern, $new_pattern , $_lib['sess']->get_companydef('OrgNumber'))); 
+        $this->OrgNumber = strtolower(preg_replace($old_pattern, $new_pattern , $_lib['sess']->get_companydef('OrgNumber')));
 
-        $this->credentials = "$this->username:$this->password";		
+        $this->credentials = "$this->username:$this->password";
 	}
 
 	function get_balance_report($account_id = null, $period = null) {
@@ -102,7 +102,7 @@ class lodo_fakturabank_fakturabankvoting {
         global $_lib;
 
         if(!$this->login) return false;
-        
+
         $headers = array(
             "GET ".$page." HTTP/1.0",
             "Content-type: text/xml;charset=\"utf-8\"",
@@ -121,7 +121,7 @@ class lodo_fakturabank_fakturabankvoting {
         #curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->timeout);
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1); #Is this safe?
-        #curl_setopt($ch, CURLOPT_CAINFO, "path:/ca-bundle.crt"); 
+        #curl_setopt($ch, CURLOPT_CAINFO, "path:/ca-bundle.crt");
 
         $xml_data           = curl_exec($ch);
 
@@ -132,7 +132,7 @@ class lodo_fakturabank_fakturabankvoting {
             $_lib['message']->add("Nettverkskobling til Fakturabank OK");
         }
         curl_close($ch);
-        
+
         $size = strlen($xml_data);
 
         if(!strstr(substr($xml_data,0,100), '<bank-transactions')) {
@@ -143,7 +143,7 @@ class lodo_fakturabank_fakturabankvoting {
                 $domtoobject = new empatix_framework_logic_xmldomtoobject(array('arrayTags' => $this->ArrayTag, 'attributesOfInterest' => $this->attributesOfInterest));
                 #print "\n<hr>$xml_data\n<hr>";
                 $voting    = $domtoobject->convert($xml_data);
-    
+
             } else {
                 $_lib['message']->add("XML Dokument tomt - pr&oslash;v igjen: $url");
             }
@@ -156,27 +156,27 @@ class lodo_fakturabank_fakturabankvoting {
         if (!is_numeric($account_id)) {
             return false;
         }
-        
+
         if (empty($period)) {
             return false;
         }
-        
+
         if (!preg_match('/([0-9]{4})-([0-9]){2}/', $period, $matches)) {
             return false;
         }
-        
+
         global $_lib;
-        
+
         //# get transaction data from fakturabank
         $voting = $this->get_balance_report($account_id, $period);
         if (!is_array($voting) || empty($voting)) {
             return false;
         }
         $this->save_transactions($voting, $period);
-        
+
         // I believe import_transactions_to_accounting need this data to work.
         $this->save_voting_relation($voting);
-        
+
         //# import fakturabank transaction records accountline table
         $this->import_transactions_to_accounting($account_id, $period);
     }
@@ -188,7 +188,7 @@ class lodo_fakturabank_fakturabankvoting {
     protected function period_to_enddate($period) {
         if (!preg_match('/([0-9]{4})-([0-9]{2})/', $period, $matches)) {
             return false;
-        }        
+        }
 
         $month = (int) $matches[2];
         $year = (int) $matches[1];
@@ -234,22 +234,22 @@ class lodo_fakturabank_fakturabankvoting {
             "SELECT AccountPlanID FROM accountplan WHERE OrgNumber = '%s'",
             $rel['InvoiceSupplierIdentity']
             );
-        
-        $row = $_lib['storage']->get_row(array('query' => $query));        
+
+        $row = $_lib['storage']->get_row(array('query' => $query));
 
         return $row;
     }
 
     /*private function decide_transactiontype($transaction) {
         global $_lib;
-        
+
         if($transaction['InvoiceCustomerIdentitySchemeID'] == 'NO:ORGNR'
            && $transaction['InvoiceCustomerIdentity'] == $this->OrgNumber)
             return 'ING';
         else if($transaction['InvoiceSupplierIdentitySchemeID'] == 'NO:ORGNR'
                 && $transaction['InvoiceSupplierIdentity'] == $this->OrgNumber)
             return 'UTG';
-        
+
             }*/
 
     protected function import_transactions_to_accounting($account_id, $period) {
@@ -265,9 +265,9 @@ class lodo_fakturabank_fakturabankvoting {
         $period_start = $_lib['db']->db_escape($period_start);
         $period_end = $_lib['db']->db_escape($period_end);
 
-        $query = "SELECT * FROM fakturabanktransaction WHERE 
+        $query = "SELECT * FROM fakturabanktransaction WHERE
                         PostingDate >= '$period_start' AND
-                        PostingDate < '$period_end' AND 
+                        PostingDate < '$period_end' AND
                         (FromBankAccount = '$account_number' OR ToBankAccount = '$account_number')
                         ORDER BY PostingDate ASC";
 
@@ -312,7 +312,7 @@ class lodo_fakturabank_fakturabankvoting {
             $lineH['Active'] 			= 1;
             $lineH['InterestDate'] 		= $fb_transaction['PostingDate'];
             $lineH['Day'] 				= substr($fb_transaction['PostingDate'], 8, 2);
-				
+
             #Kunne hatt delvis automatisk reskontro match basert paa beskrivelse.
             $lineH['Description'] 		= $_lib['db']->db_escape($fb_transaction['Description']);
             $lineH['ArchiveRef'] 		= $_lib['db']->db_escape($fb_transaction['Ref']);
@@ -378,8 +378,8 @@ class lodo_fakturabank_fakturabankvoting {
                         );
 
                     if(!$accountplan_row) {
-                        $relation_error = sprintf("Missing supplier with %s = %s", 
-                                                  $rel['InvoiceSupplierIdentitySchemeID'], 
+                        $relation_error = sprintf("Missing supplier with %s = %s",
+                                                  $rel['InvoiceSupplierIdentitySchemeID'],
                                                   $rel['InvoiceSupplierIdentity']);
                     }
                     else {
@@ -393,8 +393,8 @@ class lodo_fakturabank_fakturabankvoting {
                     $accountplan_row = $this->find_account_plan_type($rel['InvoiceSupplierIdentity'], $rel['InvoiceSupplierIdentitySchemeID'], 'supplier');
 
                     if(!$accountplan_row) {
-                        $relation_error = sprintf("Missing supplier with %s = %s", 
-                                                  $rel['InvoiceSupplierIdentitySchemeID'], 
+                        $relation_error = sprintf("Missing supplier with %s = %s",
+                                                  $rel['InvoiceSupplierIdentitySchemeID'],
                                                   $rel['InvoiceSupplierIdentity']);
                     }
                     else {
@@ -408,8 +408,8 @@ class lodo_fakturabank_fakturabankvoting {
                     $accountplan_row = $this->find_account_plan_type($rel['InvoiceCustomerIdentity'], $rel['InvoiceCustomerIdentitySchemeID'], 'customer');
 
                     if(!$accountplan_row) {
-                        $relation_error = sprintf("Missing customer with %s = %s", 
-                                                  $rel['InvoiceCustomerIdentitySchemeID'], 
+                        $relation_error = sprintf("Missing customer with %s = %s",
+                                                  $rel['InvoiceCustomerIdentitySchemeID'],
                                                   $rel['InvoiceCustomerIdentity']);
                     }
                     else {
@@ -426,7 +426,7 @@ class lodo_fakturabank_fakturabankvoting {
                         $rel['AccountID']);
 
                     $reconciliation = $_lib['storage']->get_row(array('query' => $query));
-                    
+
                     //echo "<br>Rec:<br>";
                     //print_r($reconciliation);
                     //echo "<br><br>";
@@ -434,7 +434,7 @@ class lodo_fakturabank_fakturabankvoting {
                     if(!$reconciliation) {
                         $relation_error = sprintf("Missing reason id %d\n", $rel['AccountID']);
                     }
-                    else {                    
+                    else {
                         if($reconciliation->LedgerType == "main") {
                             $lineH['ResultAccountPlanID'] = $reconciliation->AccountPlanID;
                             $lineH['Comment'] .= 'Hov(Result) ';
@@ -452,7 +452,7 @@ class lodo_fakturabank_fakturabankvoting {
                     $msg = sprintf('<br />Error "%s": %s<br />', $fb_transaction['Description'], $relation_error);
                     $_lib['message']->add(array('message' => $msg));
                 }
-            }                
+            }
 
             if($fb_transaction['Incoming']) {
                 $lineH['AmountIn'] = $fb_transaction['Amount'];
@@ -468,17 +468,17 @@ class lodo_fakturabank_fakturabankvoting {
 
                 $exist   	     = $_lib['storage']->get_row(array('query' => $sql_exists));
                 if($exist) {
-                    $duplicatetransaction++;                
+                    $duplicatetransaction++;
                 } else {
-                    $linesA[] = $lineH;                    
+                    $linesA[] = $lineH;
                 }
             }
             $transactionsimported++;
         }
 
-        foreach($linesA as $lineH) { 				
+        foreach($linesA as $lineH) {
             $Priority++;
-            
+
             $lineH['Priority'] 		 = $Priority;
             #print_r($lineH);
 
@@ -505,7 +505,7 @@ class lodo_fakturabank_fakturabankvoting {
 		return $ret;
     }
 
-    /* 
+    /*
      * Lookup accountplan of a given type
      *
      * @param identity - value. i.e. an actual organization number
@@ -517,10 +517,12 @@ class lodo_fakturabank_fakturabankvoting {
 
         $schemeLookup = lodo_accountplan_scheme::findAccountPlanType($scheme_id, $identity, $type);
         if($schemeLookup !== null) {
-            return array('AccountPlanID' => $schemeLookup);
+          $obj = new stdClass();
+          $obj->AccountPlanID = $schemeLookup;
+          return $obj;
         }
 
-        /* 
+        /*
          * This is legacy code from when each field was static.
          */
         if ($scheme_id == 'NO:ORGNR') {
@@ -563,7 +565,7 @@ class lodo_fakturabank_fakturabankvoting {
         return false;
     }
 
-    /* 
+    /*
      * Lookup accountplan
      *
      * @param identity - value. i.e. an actual organization number
@@ -619,13 +621,13 @@ class lodo_fakturabank_fakturabankvoting {
 
     public function save_voting_relation(&$voting) {
         global $_lib;
-        
+
         if(isset($voting))
             foreach ($voting as &$transaction) {
-                
-                if (isset($transaction) && !empty($transaction) && 
+
+                if (isset($transaction) && !empty($transaction) &&
                     isset($transaction->relations) && !empty($transaction->relations)) {
-                    
+
                     //printf("Transaction: %d: <br />", $transaction->{'id'});
 
                     foreach ($transaction->relations->relation as &$relation) {
@@ -634,7 +636,7 @@ class lodo_fakturabank_fakturabankvoting {
                         //printf("Relation: %d<br />", $relation->{'id'});
 
                         $relation->{'FakturabankID'} = $relation->{'id'};
-			
+
                         if ($LodoID = $this->get_fakturabanktransactionrelation($relation->{'FakturabankID'})) {
                             $relation->{'LodoID'} = $LodoID;
                             $action = "update";
@@ -644,13 +646,13 @@ class lodo_fakturabank_fakturabankvoting {
                             $action = "insert";
                             unset($dataH['ID']);
                         }
-                        
+
                         $dataH['FakturabankID'] = $relation->{'id'};
                         $dataH['FakturabankTransactionID'] = $transaction->{"id"};
-                        
-                        
+
+
                         /* find and set invoice related data */
-                        
+
                         $dataH['FakturabankInvoiceID'] = $relation->{"invoice-id"};
                         if (!empty($relation->{"invoice-id"})) {
                             $dataH['InvoiceNumber'] = $relation->{"invoiceno"};
@@ -658,11 +660,11 @@ class lodo_fakturabank_fakturabankvoting {
                                 $dataH['KID'] = $relation->{"kid"};
                             }
                             $has_counterpart_id = false;
-                            
+
                             // assume incoming unless supplier id is our id, as we should have all our
                             // outgoing invoices with a proper supplier orgnr
-                            $dataH['InvoiceType'] = 'incoming'; 
-                            
+                            $dataH['InvoiceType'] = 'incoming';
+
                             if (!empty($relation->{"invoice-supplier-identity"})) {
                                 $dataH['InvoiceSupplierIdentity'] = $relation->{"invoice-supplier-identity"};
                                 $dataH['InvoiceSupplierIdentitySchemeID'] = $relation->{"invoice-supplier-identity-scheme-id"};
@@ -683,7 +685,7 @@ class lodo_fakturabank_fakturabankvoting {
                                     $has_counterpart_id = true;
                                 }
                             }
-                            
+
                             //# update relation with invoice data, to enable easy lookup of relations in bank reconciliation
                             if ($invoice = $this->lookup_invoice($dataH['FakturabankInvoiceID'])) {
                                 $dataH['InvoiceID'] = $invoice->ID;
@@ -699,7 +701,7 @@ class lodo_fakturabank_fakturabankvoting {
                                 } else {
                                     $accountplan = $this->find_account_plan($dataH['InvoiceSupplierIdentity'], $dataH['InvoiceSupplierIdentitySchemeID']);
                                 }
-                                
+
                                 if ($accountplan) {
                                     $dataH['AccountPlanID'] = $accountplan->AccountPlanID;
                                     if (!empty($accountplan->OrgNumber)) {
@@ -708,12 +710,12 @@ class lodo_fakturabank_fakturabankvoting {
                                 }
                             }
                         }
-                        
-                        
+
+
                         /* look for paycheck data */
-                        
+
                         if (!empty($relation->{"paycheck-no"})) {
-                            $dataH['PaycheckNo'] = $relation->{"paycheck-no"};                        
+                            $dataH['PaycheckNo'] = $relation->{"paycheck-no"};
                             if (empty($transaction->invoiceno)) {
                                 //# set InvoiceNumber = PaycheckNo if PaycheckNo present and InvoiceNumber empty
                                 $transaction_query = "UPDATE accountline SET InvoiceNumber = '" . $relation->{"paycheck-no"} . "' WHERE FakturabankTransactionLodoID = (SELECT ID from fakturabanktransaction WHERE FakturabankID = '" . $transaction->{"id"} . "')";
@@ -748,8 +750,8 @@ class lodo_fakturabank_fakturabankvoting {
                             $dataH['AccountCreatedAt'] = $_lib['date']->t_to_mysql_format($relation->{'account'}->{"created-at"});
                             $dataH['AccountUpdatedAt'] = $_lib['date']->t_to_mysql_format($relation->{'account'}->{"updated-at"});
                         }
-                        
-                        $ret = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'fakturabanktransactionrelation', 'action' => $action, 'debug' => false));			
+
+                        $ret = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'fakturabanktransactionrelation', 'action' => $action, 'debug' => false));
                         if ($action == "insert") {
                             $relation->{'LodoID'} = $ret;
                         }
@@ -779,7 +781,7 @@ class lodo_fakturabank_fakturabankvoting {
 		$AccountPlanOrgNumber = reset($org_hash);
 		$AccountPlanOrgNumber = $AccountPlanOrgNumber['OrgNumber'];
 
-		# Update fakturabankinvoicein, fakturabanktransactionrelation tables 
+		# Update fakturabankinvoicein, fakturabanktransactionrelation tables
 		# (to enable lookup of lodo invoice given bank transaction information)
 
 		$query = "UPDATE fakturabanktransactionrelation SET InvoiceID = '$InvoiceID', AccountPlanID = '$AccountPlanID', AccountPlanOrgNumber = '$AccountPlanOrgNumber' WHERE FakturabankInvoiceID = '$FakturabankInvoiceID'";
@@ -812,7 +814,7 @@ class lodo_fakturabank_fakturabankvoting {
 		$AccountPlanOrgNumber = reset($org_hash);
 		$AccountPlanOrgNumber = $AccountPlanOrgNumber['OrgNumber'];
 
-		# Update fakturabankinvoiceout, fakturabanktransactionrelation tables 
+		# Update fakturabankinvoiceout, fakturabanktransactionrelation tables
 		# (to enable lookup of lodo invoice given bank transaction information)
 
 		$query = "UPDATE fakturabanktransactionrelation SET InvoiceID = '$InvoiceID', AccountPlanID = '$AccountPlanID', AccountPlanOrgNumber = '$AccountPlanOrgNumber' WHERE FakturabankInvoiceID = '$FakturabankInvoiceID'";
@@ -826,36 +828,36 @@ class lodo_fakturabank_fakturabankvoting {
 
 	public function lookup_invoice_relations($args) {
             global $_lib;
-            
+
             $invoice_ids = array();
-            
+
             if (empty($args['id']) || !is_numeric($args['id'])) {
                 return false;
             }
-            
+
             $query = "SELECT * FROM accountline WHERE `AccountLineID` = '" . $args['id'] . "'";
-            
+
             $accountline = $_lib['storage']->get_row(array('query' => $query));
             if (empty($accountline)) {
                 return false;
             }
 
-            
+
             // if transaction was imported from fakturabank, match on fakturabankid
             if (!empty($accountline->FakturabankTransactionLodoID) &&
                 is_numeric($accountline->FakturabankTransactionLodoID)) {
-                
+
                 $query = "SELECT FakturabankID FROM fakturabanktransaction WHERE `ID` = '" . $accountline->FakturabankTransactionLodoID . "'";
                 $result = $_lib['storage']->db_query3(array('query' => $query));
                 if (!$result) {
                     return false;
                 }
-                
+
                 if (!($obj = $_lib['storage']->db_fetch_object($result)) || !is_numeric($obj->FakturabankID)) {
                     return false;
                 }
                 $FakturabankTransactionID = $obj->FakturabankID;
-                
+
                 $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
 				tr.FakturabankTransactionID = '$FakturabankTransactionID'";
             } else { // ... else, transaction imported from csv or punched, match on date, amount, account
@@ -863,41 +865,41 @@ class lodo_fakturabank_fakturabankvoting {
                 $Incoming = $_lib['storage']->db_escape($args['Incoming']);
                 $bank_account = $_lib['storage']->db_escape($args['BankAccount']);
                 $amount = $_lib['storage']->db_escape($args['Amount']);
-                
+
                 if ($Incoming) {
                     $bank_account_stmt = "tr.FromBankAccount = '$bank_account' AND";
                 } else {
-                    $bank_account_stmt = "tr.ToBankAccount = '$bank_account' AND";            
+                    $bank_account_stmt = "tr.ToBankAccount = '$bank_account' AND";
                 }
-                
+
                 $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
 				tr.PostingDate = '$transaction_date' AND
 				$bank_account_stmt
 				tr.Incoming = '$Incoming' AND
 				ROUND(tr.TransactionAmount, 2) = ROUND('$amount', 2)";
             }
-            
+
             //# there might be several relations for a transaction and only those with AccountPlanID set serves a purpose since that is the only ones we currently can handle
             $relations = $_lib['storage']->get_hashhash(array('query' => $query . " AND AccountPlanID is not NULL AND AccountPlanID != '' AND FakturabankInvoiceID IS NOT NULL", 'key' => 'FakturabankInvoiceID'));
-            
+
             if (empty($relations)) {
                 return false;
             }
-            
+
             return $relations;
 	}
 
 	public function lookup_paycheck_relations($args) {
             global $_lib;
-            
+
             $invoice_ids = array();
-            
+
             if (empty($args['id']) || !is_numeric($args['id'])) {
                 return false;
             }
-            
+
             $query = "SELECT * FROM accountline WHERE `AccountLineID` = '" . $args['id'] . "'";
-            
+
             $accountline = $_lib['storage']->get_row(array('query' => $query));
             if (empty($accountline)) {
                 return false;
@@ -907,18 +909,18 @@ class lodo_fakturabank_fakturabankvoting {
             // if transaction was imported from fakturabank, match on fakturabankid
             if (!empty($accountline->FakturabankTransactionLodoID) &&
                 is_numeric($accountline->FakturabankTransactionLodoID)) {
-                
+
                 $query = "SELECT FakturabankID FROM fakturabanktransaction WHERE `ID` = '" . $accountline->FakturabankTransactionLodoID . "'";
                 $result = $_lib['storage']->db_query3(array('query' => $query));
                 if (!$result) {
                     return false;
                 }
-                
+
                 if (!($obj = $_lib['storage']->db_fetch_object($result)) || !is_numeric($obj->FakturabankID)) {
                     return false;
                 }
                 $FakturabankTransactionID = $obj->FakturabankID;
-                
+
                 $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
 				tr.FakturabankTransactionID = '$FakturabankTransactionID' and PaycheckNo is not null";
             } else { // ... else, transaction imported from css or punched, match on date, amount, account
@@ -930,7 +932,7 @@ class lodo_fakturabank_fakturabankvoting {
                 if ($Incoming) {
                     $bank_account_stmt = "tr.FromBankAccount = '$bank_account' AND";
                 } else {
-                    $bank_account_stmt = "tr.ToBankAccount = '$bank_account' AND";            
+                    $bank_account_stmt = "tr.ToBankAccount = '$bank_account' AND";
             }
 
                 $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
@@ -945,45 +947,45 @@ class lodo_fakturabank_fakturabankvoting {
 
             //# there might be several relations for a transaction and only those with AccountPlanID set serves a purpose since that is the only ones we currently can handle
             $relations = $_lib['storage']->get_hashhash(array('query' => $query, 'key' => 'PaycheckNo'));
-            
+
             if (empty($relations)) {
                 return false;
             }
-            
+
             return $relations;
 	}
 
         function lookup_reconciliation_reason_relations($args) {
             global $_lib;
-            
+
             $invoice_ids = array();
-            
+
             if (empty($args['id']) || !is_numeric($args['id'])) {
                 return false;
             }
 
             $query = "SELECT * FROM accountline WHERE `AccountLineID` = '" . $args['id'] . "'";
-            
+
             $accountline = $_lib['storage']->get_row(array('query' => $query));
             if (empty($accountline)) {
                 return false;
             }
-            
+
             // if transaction was imported from fakturabank, match on fakturabankid
             if (!empty($accountline->FakturabankTransactionLodoID) &&
                 is_numeric($accountline->FakturabankTransactionLodoID)) {
-                
+
                 $query = "SELECT FakturabankID FROM fakturabanktransaction WHERE `ID` = '" . $accountline->FakturabankTransactionLodoID . "'";
                 $result = $_lib['storage']->db_query3(array('query' => $query));
                 if (!$result) {
                     return false;
                 }
-                
+
                 if (!($obj = $_lib['storage']->db_fetch_object($result)) || !is_numeric($obj->FakturabankID)) {
                     return false;
                 }
                 $FakturabankTransactionID = $obj->FakturabankID;
-                
+
                 $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
 				tr.FakturabankTransactionID = '$FakturabankTransactionID'";
             } else { // ... else, transaction imported from css or punched, match on date, amount, account
@@ -991,13 +993,13 @@ class lodo_fakturabank_fakturabankvoting {
                 $Incoming = $_lib['storage']->db_escape($args['Incoming']);
                 $bank_account = $_lib['storage']->db_escape($args['BankAccount']);
                 $amount = $_lib['storage']->db_escape($args['Amount']);
-                
+
                 if ($Incoming) {
                     $bank_account_stmt = "tr.FromBankAccount = '$bank_account' AND";
                 } else {
-                    $bank_account_stmt = "tr.ToBankAccount = '$bank_account' AND";            
+                    $bank_account_stmt = "tr.ToBankAccount = '$bank_account' AND";
                 }
-                
+
                 $query = "SELECT * FROM fakturabanktransactionrelation tr WHERE
 				tr.InvoiceID IS NOT NULL AND
 				tr.PostingDate = '$transaction_date' AND
@@ -1005,10 +1007,10 @@ class lodo_fakturabank_fakturabankvoting {
 				tr.Incoming = '$Incoming' AND
 				ROUND(tr.TransactionAmount, 2) = ROUND('$amount', 2)";
             }
-            
+
             //# there might be several relations for a transaction and only those with FakturabankBankTransactionAccountID set serves a purpose since that is the only ones we currently can handle
             $relations = $_lib['storage']->get_hashhash(array('query' => $query . " AND (InvoiceID IS NULL) AND FakturabankBankTransactionAccountID IS NOT NULL AND FakturabankBankTransactionAccountID != '0'", 'key' => 'FakturabankID'));
-            
+
             if (empty($relations)) {
                 return false;
             }
@@ -1018,12 +1020,12 @@ class lodo_fakturabank_fakturabankvoting {
 
         public function get_faturabanktransactionrelations($FakturabankTransactionID) {
             global $_lib;
-            
+
             if(!is_numeric($FakturabankTransactionID)) {
                 return false;
             }
-            
-            $query = sprintf("SELECT * FROM fakturabanktransactionrelation WHERE FakturabankTransactionID = '%d'", 
+
+            $query = sprintf("SELECT * FROM fakturabanktransactionrelation WHERE FakturabankTransactionID = '%d'",
                              $FakturabankTransactionID);
 
             //printf("%s<br />", $query);
@@ -1040,12 +1042,12 @@ class lodo_fakturabank_fakturabankvoting {
 
 	public function get_fakturabanktransactionrelation($FakturabankID) {
             global $_lib;
-            
+
             if (!is_numeric($FakturabankID)) {
                 printf("False1<br>");
                 return false;
             }
-            
+
             $query = "SELECT `ID` FROM fakturabanktransactionrelation WHERE `FakturabankID` = '$FakturabankID'";
             $result = $_lib['storage']->db_query3(array('query' => $query));
             if (!$result) {
@@ -1054,7 +1056,7 @@ class lodo_fakturabank_fakturabankvoting {
             if (($obj = $_lib['storage']->db_fetch_object($result)) && is_numeric($obj->ID)) {
                 return $obj->ID;
             }
-            
+
             return false;
 	}
 
@@ -1073,7 +1075,7 @@ class lodo_fakturabank_fakturabankvoting {
 		if (($obj = $_lib['storage']->db_fetch_object($result)) && is_numeric($obj->ID)) {
 			return $obj->ID;
 		}
-		
+
 		return false;
 	}
 
@@ -1092,11 +1094,11 @@ class lodo_fakturabank_fakturabankvoting {
 		if (($obj = $_lib['storage']->db_fetch_object($result)) && is_numeric($obj->ID)) {
 			return $obj;
 		}
-		
+
 		return false;
 	}
 
-        
+
 
 	private function save_transactions($voting, $period) {
 		global $_lib;
@@ -1108,10 +1110,10 @@ class lodo_fakturabank_fakturabankvoting {
          * after doing import of a period, we must first delete existing transactions and relations, in this
          * period.
          *
-         * In save_voting_relations(), called after this function if $period exists, 
-         * we will update relations with invoice data like done in 
+         * In save_voting_relations(), called after this function if $period exists,
+         * we will update relations with invoice data like done in
          * update_fakturabank_outgoing/ingoing_invoice().
-         * If we don't do this, then the data linking a relation to an invoice (and 
+         * If we don't do this, then the data linking a relation to an invoice (and
          * thereby to a ledger (reskontro)) could be lost, since this data is added
          * when importing invoices.
          */
@@ -1123,7 +1125,7 @@ class lodo_fakturabank_fakturabankvoting {
                 $query = "delete from fakturabanktransactionrelation where FakturabankTransactionID = '$ExistingFakturabankID'";
                 $_lib['db']->db_delete($query);
             }
-            
+
             $query = "delete from fakturabanktransaction where PostingDate LIKE '$period%'";
                 $_lib['db']->db_delete($query);
         }
@@ -1172,7 +1174,7 @@ class lodo_fakturabank_fakturabankvoting {
 			$dataH['CreatedBy'] = $transaction->{"created-by"};
 			$dataH['UpdatedAt'] = $_lib['date']->t_to_mysql_format($transaction->{"updated-at"});
 
-			$ret = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'fakturabanktransaction', 'action' => $action, 'debug' => false));			
+			$ret = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'fakturabanktransaction', 'action' => $action, 'debug' => false));
 			if ($action == "insert") {
 				$transaction->LodoID = $ret;
 			}
@@ -1181,23 +1183,23 @@ class lodo_fakturabank_fakturabankvoting {
 
         public function findinvoicematch($args) {
             global $_lib;
-            
+
             $args['VoucherDate'] = substr($args['VoucherDate'], 0, 10);
-            
+
             $query = "SELECT AccountNumber FROM account WHERE AccountID='" . $args['BankAccountID'] . "'";
-            
+
             printf("Got id: %d\n", $args['id']);
 
             $row = $_lib['storage']->get_row(array('query' => $query));
-            
+
             if (empty($row)) {
                 return false;
             }
 
             $args['BankAccount'] = str_replace(" ", "", $row->AccountNumber);
-            
+
             $relations = $this->lookup_invoice_relations($args);
-            
+
             if (!isset($relations) || empty($relations)) {
                 return false;
             }
@@ -1207,7 +1209,7 @@ class lodo_fakturabank_fakturabankvoting {
 
             return $relation;
         }
-   
+
 
     public function findpaycheckmatch($args) {
         global $_lib;
@@ -1271,7 +1273,7 @@ class lodo_fakturabank_fakturabankvoting {
     }
 
     ################################################################################################
-    #validate - 
+    #validate -
     private function validate_voting($voting) {
 		# since transactions will not be shown we currently need no validation
 		$arrayname = "bank-transaction";
