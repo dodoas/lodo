@@ -2,7 +2,7 @@
 //xdebug_start_trace("/home/martinaw/public_html/stack.log");
 #print_r($_REQUEST);
 $MatchAccountPlanID     = $_REQUEST['MatchAccountPlanID'];
-$db_table 				= 'voucher';
+$db_table         = 'voucher';
 
 #print_r($_REQUEST);
 
@@ -140,21 +140,21 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
 
                     /* display motkontoresultat and -balanse from accountplan */
                     $reskonto = $postmotpost->findMotKonto($AccountPlanID);
-                
+
                     $last = "";
                     foreach($reskonto as $kontokey => $konto) {
                         if(!$konto)
                             continue;
-                        
-                        if($last != substr($kontokey, 0, -1)) { 
+
+                        if($last != substr($kontokey, 0, -1)) {
                             $last = substr($kontokey, 0, -1);
-                            
-                            printf(" %s: ", $last); 
+
+                            printf(" %s: ", $last);
                         }
                         else {
                             printf(", ");
                         }
-                        
+
                         printf("%d", $konto);
                     }
                     ?>
@@ -171,7 +171,7 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
                     } else {
                         $class  = 'voucher';
                     }
-                    
+
                     #change currency
                     if($voucher->ForeignCurrencyID != '' && $voucher->ForeignAmount > 0 && $voucher->ForeignConvRate > 0) {
                         $tmp_foreign = $voucher->ForeignCurrencyID ." ". $_lib['format']->Amount($voucher->ForeignAmount) ." / ". $voucher->ForeignConvRate;
@@ -200,21 +200,27 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
 
                         <td class="<? print $class ?>">
                           <? print $_lib['form3']->text(array('table'=>'voucher', 'field'=>'InvoiceID', 'pk' => $voucher->VoucherID, 'value' => $voucher->InvoiceID, 'width' => 22)); ?>
+                          <input type="checkbox" name="" value="" <?= $postmotpost->isMatchable($AccountPlanID, $voucher->KID, $voucher->InvoiceID, $voucher->MatchNumber) == 1 ? 'checked' : '' ?>>
                         </td>
 
 
-                        <td class="<? print $class ?>"><? print $_lib['form3']->text(array('table'=>'voucher', 'field'=>'KID', 'pk' => $voucher->VoucherID, 'value' => $voucher->KID, 'width' => 22)); ?></td>
-                        
+                        <td class="<? print $class ?>">
+                          <? print $_lib['form3']->text(array('table'=>'voucher', 'field'=>'KID', 'pk' => $voucher->VoucherID, 'value' => $voucher->KID, 'width' => 22)); ?>
+                          <input type="checkbox" name="" value="" <?= $postmotpost->isMatchable($AccountPlanID, $voucher->KID, $voucher->InvoiceID, $voucher->MatchNumber) == 2 ? 'checked' : '' ?>>
+                        </td>
+
                         <td class="<? print $class ?>">
                           <? print $_lib['form3']->text(array('table'=>'vouchermatch', 'field'=>'MatchNumber', 'pk' => $voucher->VoucherMatchID, 'value' =>  $voucher->MatchNumber == "0" ? "" : $voucher->MatchNumber, 'width' => 22)); ?>
+                         <input type="checkbox" name="" value="" <?= $postmotpost->isMatchable($AccountPlanID, $voucher->KID, $voucher->InvoiceID, $voucher->MatchNumber) == 3 ? 'checked' : '' ?>>
+
                         </td>
 
                         <td class="<? print $class ?>">
-                        	<?
+                          <?
                                    if($postmotpost->isCloseAbleVoucher($voucher->VoucherID)) {
                                     $closeable++;
-                                    
-                                    print $_lib['form3']->button(array('url'=>$_SETUP['DISPATCH']."t=postmotpost.list&amp;MatchAccountPlanID=$voucher->AccountPlanID&amp;MatchKid=$voucher->KID&amp;MatchVoucherID=$voucher->VoucherID&amp;MatchInvoiceID=$voucher->InvoiceID&amp;AccountPlanID=$postmotpost->AccountPlanID&amp;action_postmotpost_close=1&amp;$showURL", 'name'=>'Lukk')); 
+
+                                    print $_lib['form3']->button(array('url'=>$_SETUP['DISPATCH']."t=postmotpost.list&amp;MatchAccountPlanID=$voucher->AccountPlanID&amp;MatchKid=$voucher->KID&amp;MatchVoucherID=$voucher->VoucherID&amp;MatchInvoiceID=$voucher->InvoiceID&amp;AccountPlanID=$postmotpost->AccountPlanID&amp;action_postmotpost_close=1&amp;$showURL", 'name'=>'Lukk'));
                                 } else {
                                     print $_lib['format']->Amount($postmotpost->getDiff($AccountPlanID, $voucher->KID, $voucher->InvoiceID));
                                 }
@@ -300,7 +306,7 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
                 <th class="sub" colspan="17"></th>
                 <th class="sub number" colspan="3">
                 <? print $_lib['form3']->submit(array('name'=>'action_postpost_update', 'value'=>'Lagre (S)', 'accesskey' => 'S')) ?>
-                <? if($_lib['sess']->get_person('AccessLevel') >= 3) { print $_lib['form3']->submit(array('name' => 'action_postmotpost_openall', 'value'=>'&Aring;pne alle (L)', 'accesskey' => 'O')); } ?> 
+                <? if($_lib['sess']->get_person('AccessLevel') >= 3) { print $_lib['form3']->submit(array('name' => 'action_postmotpost_openall', 'value'=>'&Aring;pne alle (L)', 'accesskey' => 'O')); } ?>
                 <? print $_lib['form3']->submit(array('name' => 'action_postmotpost_closeall', 'value'=>'Lukk alle (L)', 'accesskey' => 'L')) ?>
                 <? print $_lib['form3']->submit(array('name' => 'action_postmotpost_closeselected', 'value'=>'Lukk utvalgte (R)', 'accesskey' => 'R')) ?>
 
