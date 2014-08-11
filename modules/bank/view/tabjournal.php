@@ -1,14 +1,16 @@
 <?
 /* $Id: edit.php,v 1.36 2005/10/24 11:50:24 svenn Exp $ main.php,v 1.12 2001/11/20 17:55:12 thomasek Exp $ */
 includelogic('bank/bank');
+includemodel('bank/bankaccount');
 includelogic('accounting/accounting');
 includelogic('postmotpost/postmotpost');
+includelogic('fakturabank/fakturabankvoting');
 
 $accounting     = new accounting();
 $bank           = new framework_logic_bank($_lib['input']->request);
 $postmotpost    = new postmotpost(array());
 //$bank->init(); #Read data
-
+$fbbank = new lodo_fakturabank_fakturabankvoting();
 require_once "record.inc";
 $bank->init(); #Read data
 
@@ -161,7 +163,26 @@ $warningH = array();
 
 <? includeinc('top') ?>
 <? includeinc('left') ?>
+<?
+$relationcount = array();
+if(is_array($bank->bankaccount)) {
+    foreach($bank->bankaccount as $row) { 
+        if( substr($row->InvoiceNumber, 0, 2) == "FB" ) {
+            preg_match("/FB\((\d+)\)/", $row->InvoiceNumber, $matches);
+            $fakturabankID = $matches[1];
 
+            $relations = $fbbank->get_faturabanktransactionrelations($fakturabankID);
+
+            $c = count($relations);
+            $relationcount[$fakturabankID] = $c;
+
+            if($c == 0) {
+                printf("<b>Noe er galt med denne importen fra fakturabank FB(%d).</b><br />", $fakturabankID);
+            }
+        }        
+    }
+}
+?>
 <form name="template_update" name="period_choice" action="<? print $MY_SELF ?>" method="post">
 <? print $_lib['form3']->hidden(array('name' => 'AccountID', 'value' => $bank->AccountID)) ?>
 
@@ -382,7 +403,15 @@ if(is_array($bank->unvotedaccount)) {
         <td class="number menu-left-border"><? if($row->AmountOut > 0) print $_lib['format']->Amount($row->AmountOut); ?></td>
         <td class="number menu-right-border"><? if($row->AmountIn > 0)  print $_lib['format']->Amount($row->AmountIn); ?></td>
 
-        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber',   'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 23)) ?></td>
+        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber',   'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 23)); 
+                if(substr($row->InvoiceNumber, 0, 2) == "FB") {
+                  preg_match("/FB\((\d+)\)/", $row->InvoiceNumber, $matches);
+                  $fakturabankID = $matches[1];
+
+                  print $relationcount[$fakturabankID]; 
+                  }
+            ?>
+        </td>
 
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID',             'pk' => $row->AccountLineID, 'value' => $row->KID,               'class' => 'number', 'width' => 22)) ?></td>
 
@@ -450,7 +479,8 @@ if(is_array($bank->unvotedvoucher)) {
         <td class="number menu-left-border"><? if ($row->AmountOut > 0) print $_lib['format']->Amount($row->AmountOut) ?></td>
         <td class="number menu-right-border"><? if ($row->AmountIn > 0) print $_lib['format']->Amount($row->AmountIn) ?></td>
         <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID',         'pk' => $row->VoucherID, 'value' => $row->KID,     'class' => 'number', 'width' => 22)) ?></td>
-        <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID',   'pk' => $row->VoucherID, 'value' => $row->InvoiceID,     'class' => 'number', 'width' => 22)) ?></td>
+        
+        <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID',   'pk' => $row->VoucherID, 'value' => $row->InvoiceID,     'class' => 'number', 'width' => 22))?></td>
         <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'Description', 'pk' => $row->VoucherID, 'value' => $row->Description,      'width' => 12, 'maxlength' => 255)) ?></td>
         <td></td>
         <td><? print $row->AccountPlanID ?></td>
