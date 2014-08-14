@@ -180,9 +180,9 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
                     }
                     $ch_curr = '<a href="' . $_lib['sess']->dispatch ."t=journal.edit&voucher_JournalID=" . $voucher->JournalID . '&amp;voucher_VoucherType=' . $voucher->VoucherType . '&action_journalid_search=1">' . $tmp_foreign . '</a></td>';
                     ?>
-                    <tr class="<? print $class ?>">
+                    <tr id="row_<?= $voucher->VoucherID ?>" class="<? print $class ?>">
                         <td><? print $voucher->Name; ?></td>
-                        <td><? if($postmotpost->isCloseAble($AccountPlanID, $voucher->KID, $voucher->InvoiceID)) { print "*"; } ?></td>
+                        <td><? if($postmotpost->isCloseAble($AccountPlanID, $voucher->KID, $voucher->MatchNumber, $voucher->InvoiceID, $voucher)) { print "*"; } ?></td>
                         <td><? print $voucher->VoucherType; ?> <a href="<? print $_lib['sess']->dispatch ."t=journal.edit&voucher_JournalID=" . $voucher->JournalID ?>&amp;voucher_VoucherType=<? print $voucher->VoucherType; ?>&action_journalid_search=1"><? print $voucher->JournalID; ?></a></td>
                         <td><? print $voucher->VoucherDate; ?></td>
                         <td><? print $voucher->VoucherPeriod; ?></td>
@@ -216,12 +216,11 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
 
                         <td class="<? print $class ?>">
                           <?
-                                   if($postmotpost->isCloseAbleVoucher($voucher->VoucherID)) {
-                                    $closeable++;
-
-                                    print $_lib['form3']->button(array('url'=>$_SETUP['DISPATCH']."t=postmotpost.list&amp;MatchAccountPlanID=$voucher->AccountPlanID&amp;MatchKid=$voucher->KID&amp;MatchVoucherID=$voucher->VoucherID&amp;MatchInvoiceID=$voucher->InvoiceID&amp;AccountPlanID=$postmotpost->AccountPlanID&amp;action_postmotpost_close=1&amp;$showURL", 'name'=>'Lukk'));
+                                if($postmotpost->isCloseAbleVoucher($voucher->VoucherID)) {
+                                  $closeable++;
+                                  print $_lib['form3']->button(array('url'=>$_SETUP['DISPATCH']."t=postmotpost.list&amp;MatchAccountPlanID=$voucher->AccountPlanID&amp;MatchKid=$voucher->KID&amp;MatchVoucherID=$voucher->VoucherID&amp;MatchInvoiceID=$voucher->InvoiceID&amp;AccountPlanID=$postmotpost->AccountPlanID&amp;action_postmotpost_close=1&amp;$showURL", 'name'=>'Lukk'));
                                 } else {
-                                    print $_lib['format']->Amount($postmotpost->getDiff($AccountPlanID, $voucher->KID, $voucher->InvoiceID));
+                                  print $_lib['format']->Amount($postmotpost->getDiff($AccountPlanID, $voucher->KID, $voucher->InvoiceID, $voucher->MatchNumber, $voucher));
                                 }
                                 ?>
 
@@ -319,29 +318,53 @@ Ingen &aring;pne poster funnet
     </form>
     <script type="text/javascript">
       $(document).ready(function() {
+
+
+        // Handle clicking on voucher ids
+        $('.navigate.to').click(function(e) {
+          var element = $(e.target);
+          var targetID = element.attr('id');
+
+          $('#row_' + targetID)[0].scrollIntoView( false );
+          hlight('#row_' + targetID);
+
+        });
+
+        function hlight(elementid){
+          $(elementid).css('background-color','rgba(255, 182, 0, 0.6)');
+          setTimeout(function() { $(elementid).css('background-color','#E1E1E1'); } , 2500);
+        }
+
+        // Handle clicking on checkboxes to match vouchers
         var tempdata = [];
         $('.chk').click(function(e) {
           var element = $(e.target);
 
-          switch(e.target.id) {
-            case 'invoice':
-              var input = element.prev('input[type=text]');
-              var kid = element.parent().next('td').children('input[type=text]');
-              var match = kid.parent().next('td').children('input[type=text]');
-              makeajax("invoice", e.target.name.split('.')[2]);
-            break;
-            case 'kid':
-              var input = element.parent().prev('td').children('input[type=text]');
-              var kid = element.prev('input[type=text]');
-              var match = element.parent().next('td').children('input[type=text]');
-              makeajax("kid", e.target.name.split('.')[2]);
-            break;
-            case 'match':
-              var kid = element.parent().prev('td').children('input[type=text]');
-              var input = kid.parent().prev('td').children('input[type=text]');
-              var match = element.prev('input[type=text]');
-              makeajax("match", e.target.name.split('.')[2]);
-            break;
+          if(element.attr('checked')) {
+
+            switch(e.target.id) {
+              case 'invoice':
+                var input = element.prev('input[type=text]');
+                var kid = element.parent().next('td').children('input[type=text]');
+                var match = kid.parent().next('td').children('input[type=text]');
+                makeajax("invoice", e.target.name.split('.')[2]);
+              break;
+              case 'kid':
+                var input = element.parent().prev('td').children('input[type=text]');
+                var kid = element.prev('input[type=text]');
+                var match = element.parent().next('td').children('input[type=text]');
+                makeajax("kid", e.target.name.split('.')[2]);
+              break;
+              case 'match':
+                var kid = element.parent().prev('td').children('input[type=text]');
+                var input = kid.parent().prev('td').children('input[type=text]');
+                var match = element.prev('input[type=text]');
+                makeajax("match", e.target.name.split('.')[2]);
+              break;
+            }
+          } else {
+            // That or just dont allow uncheking at all?
+            makeajax("none", e.target.name.split('.')[2]);
           }
 
           var data = { type: e.target.id, name: e.target.name, invoiceid: input.attr("id"), invoiceval: input.val(), kidid: kid.attr('id'), kidval: kid.val(), matchid: match.attr('id'), matchval: match.val() };
@@ -356,7 +379,7 @@ Ingen &aring;pne poster funnet
             id: id
           },
           function(data,status){
-            console.log("Data: " + data + "\nStatus: " + status);
+            console.log("Status: " + status);
           });
         }
 

@@ -322,8 +322,10 @@ class postmotpost {
 
                       $this->matchH[$AccountPlanID]['KIDJournals'][$voucher->KID][] = array(
                           'JournalID' => $voucher->JournalID,
-                          'VoucherID' => $voucher->VoucherID
+                          'VoucherID' => $voucher->VoucherID,
+                          'Match' => 'KID'
                           );
+                      // echo "KID: " . $voucher->KID . ": " . $this->matchH[$AccountPlanID]['KID'][$voucher->KID] . "<br />";
                   }
 
                 if($voucher->matched_by == "invoice")
@@ -333,9 +335,11 @@ class postmotpost {
 
                       $this->matchH[$AccountPlanID]['InvoiceIDJournals'][$voucher->InvoiceID][] = array(
                           'JournalID' => $voucher->JournalID,
-                          'VoucherID' => $voucher->VoucherID
+                          'VoucherID' => $voucher->VoucherID,
+                          'Match' => 'InvoiceID'
                           );
 
+                      // echo "IN: " . $voucher->InvoiceID . ": " . $this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID] . "<br />";
                   }
 
                 if($voucher->matched_by == "match")
@@ -345,10 +349,11 @@ class postmotpost {
 
                       $this->matchH[$AccountPlanID]['MatchNumberJournals'][$voucher->MatchNumber][] = array(
                           'JournalID' => $voucher->JournalID,
-                          'VoucherID' => $voucher->VoucherID
+                          'VoucherID' => $voucher->VoucherID,
+                          'Match' => 'MatchNumber'
                           );
 
-                      //echo "MN: " . $voucher->MatchNumber . ": " . $this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber] . "<br />";
+                      // echo "MN: " . $voucher->MatchNumber . ": " . $this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber] . "<br />";
                   }
 
 
@@ -477,13 +482,16 @@ class postmotpost {
                         $used = false;
                         $s = "";
                         foreach($this->matchH[$AccountPlanID][$prefix."Journals"][$k] as $info) {
+                          if($info['Match'] == $prefix) {
+
                             $journal = $info['JournalID'];
                             $voucher = $info['VoucherID'];
 
                             if(in_array($voucher, $this->matched)) {
                                 $used = true;
                             }
-                            $s .= $journal . " ";
+                            $s .= "<span class=\"navigate to\" id=\"" . $voucher . "\">" . $journal . "</span>" . " ";
+                          }
                         }
 
                         if($used === false) {
@@ -518,7 +526,7 @@ class postmotpost {
     * Function that returns true if it is a closing match
     * @Param AccountPlanID, KID, InvoiceID
     */
-    function isCloseAble($AccountPlanID, $KID, $InvoiceID, $MatchNumber = NULL) {
+    function isCloseAble($AccountPlanID, $KID, $InvoiceID, $MatchNumber = NULL, $voucher = NULL) {
         $success    = false;
         $KID        = trim($KID);
         $InvoiceID  = trim($InvoiceID);
@@ -540,6 +548,18 @@ class postmotpost {
             if(isset($this->matchH[$AccountPlanID]['MatchNumber'][$MatchNumber]) && round($this->matchH[$AccountPlanID]['MatchNumber'][$MatchNumber], 2) == 0) {
                 $success = true;
             }
+        }
+
+        if(!is_null($voucher)) {
+          if($voucher->matched_by == "kid") {
+            $success = true;
+          }
+          if($voucher->matched_by == "invoice") {
+            $success = true;
+          }
+          if($voucher->matched_by == "match") {
+            $success = true;
+          }
         }
 
         return $success;
@@ -570,6 +590,7 @@ class postmotpost {
           }
         }
 
+        # Getting overriden by this flag if it is set
         if($voucher->matched_by == "kid") {
           $success = 2;
         }
@@ -596,17 +617,32 @@ class postmotpost {
     * @Function that returns the KID or InvoiceID diff
     * @Param AccountPlanID*, [KID, InvoiceID]. One of KID or InvoiceID should
     */
-    function getDiff($AccountPlanID, $KID, $InvoiceID) {
-        $success    = false;
+    function getDiff($AccountPlanID, $KID, $InvoiceID, $MatchNumber = NULL, $voucher = NULL) {
         $KID        = trim($KID);
         $InvoiceID  = trim($InvoiceID);
+        $MatchNumber = trim($MatchNumber);
 
-        if($KID) {
+        # Just return if matched with some
+        if($voucher) {
+          if($KID && $voucher->matched_by == "kid") {
             $value = $this->matchH[$AccountPlanID]['KID'][$KID];
-        } elseif($InvoiceID) {
+          } elseif($InvoiceID && $voucher->matched_by == "invoice") {
             $value = $this->matchH[$AccountPlanID]['InvoiceID'][$InvoiceID];
-        } else {
+          } elseif($MatchNumber && $voucher->matched_by == "match") {
+            $value = $this->matchH[$AccountPlanID]['MatchNumber'][$MatchNumber];
+          } else {
             $value = 0;
+          }
+        } else {
+          if($KID) {
+            $value = $this->matchH[$AccountPlanID]['KID'][$KID];
+          } elseif($InvoiceID) {
+            $value = $this->matchH[$AccountPlanID]['InvoiceID'][$InvoiceID];
+          } elseif($MatchNumber) {
+            $value = $this->matchH[$AccountPlanID]['MatchNumber'][$MatchNumber];
+          } else {
+            $value = 0;
+          }
         }
 
         return $value;
