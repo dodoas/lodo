@@ -1,15 +1,16 @@
 <?
 /* $Id: edit.php,v 1.36 2005/10/24 11:50:24 svenn Exp $ main.php,v 1.12 2001/11/20 17:55:12 thomasek Exp $ */
-
 includelogic('bank/bank');
+includemodel('bank/bankaccount');
 includelogic('accounting/accounting');
 includelogic('postmotpost/postmotpost');
+includelogic('fakturabank/fakturabankvoting');
 
 $accounting     = new accounting();
 $bank           = new framework_logic_bank($_lib['input']->request);
 $postmotpost    = new postmotpost(array());
 //$bank->init(); #Read data
-
+$fbbank = new lodo_fakturabank_fakturabankvoting();
 require_once "record.inc";
 $bank->init(); #Read data
 
@@ -22,7 +23,7 @@ $warningH = array();
     <meta name="cvs"                content="$Id: edit.php,v 1.36 2005/10/24 11:50:24 svenn Exp $" />
     <? includeinc('head') ?>
 
-    <script> 
+    <script>
       /* script for å generere de enorme konto-listene */
       /*
         $reskontroconf['field']         = 'ReskontroAccountPlanID';
@@ -34,17 +35,17 @@ $warningH = array();
       <?php
         function generate_kontoliste($conf) {
             global $_lib;
-    
+
             /* lager javascript-funksjon-toppen */
             echo "function kontoliste_";
             foreach($conf['type'] as $v)
                 echo $v;
             echo "(name, selected, dest) {\n";
-            
+
             /* lager JSON-array med alle kontoene. */
             printf("var data = %s", json_encode($_lib['form3']->accountplan_number_menu3($conf)));
-            
-            echo " 
+
+            echo "
           color = '';
           text  = 'Velg konto';
 
@@ -105,9 +106,9 @@ $warningH = array();
               color = data[i][1];
               text  = data[i][2];
 
-              if(value == selected || text == '') 
+              if(value == selected || text == '')
                 continue;
- 
+
               var option = document.createElement('option');
               option.value = value;
               option.style.backgroundColor = color;
@@ -134,10 +135,10 @@ $warningH = array();
 
             $field_counter++;
             printf("<select id='kontoliste_%d'></select>", $field_counter);
-            
+
             echo "<script> kontoliste_";
             foreach($conf['type'] as $v)
-                echo $v;            
+                echo $v;
             printf("('%s.%s.%d', %d, %d);</script>", $conf['table'], $conf['field'], $conf['pk'], $conf['value'], $field_counter);
         }
 
@@ -149,7 +150,7 @@ $warningH = array();
 
         $resultconf['field']         = 'ResultAccountPlanID';
         $resultconf['value']         = $row->ResultAccountPlanID;
-        $resultconf['type'][]        = 'hovedbok';        
+        $resultconf['type'][]        = 'hovedbok';
         generate_kontoliste($resultconf);
 
         $reskontroconf = null;
@@ -162,23 +163,42 @@ $warningH = array();
 
 <? includeinc('top') ?>
 <? includeinc('left') ?>
+<?
+$relationcount = array();
+if(is_array($bank->bankaccount)) {
+    foreach($bank->bankaccount as $row) { 
+        if( substr($row->InvoiceNumber, 0, 2) == "FB" ) {
+            preg_match("/FB\((\d+)\)/", $row->InvoiceNumber, $matches);
+            $fakturabankID = $matches[1];
 
+            $relations = $fbbank->get_faturabanktransactionrelations($fakturabankID);
+
+            $c = count($relations);
+            $relationcount[$fakturabankID] = $c;
+
+            if($c == 0) {
+                printf("<b>Noe er galt med denne importen fra fakturabank FB(%d).</b><br />", $fakturabankID);
+            }
+        }        
+    }
+}
+?>
 <form name="template_update" name="period_choice" action="<? print $MY_SELF ?>" method="post">
 <? print $_lib['form3']->hidden(array('name' => 'AccountID', 'value' => $bank->AccountID)) ?>
 
 <table class="lodo_data">
     <tr class="result">
         <th colspan="18">
-        Velg periode         
-        
+        Velg periode
+
         <? print $_lib['form3']->URL(array('url' => $MY_SELF . "&amp;AccountID=$bank->AccountID&amp;Period=" . $_lib['date']->get_prev_period($bank->ThisPeriod), 'description' => '<<', 'title' => 'Prev')) ?>
         <? print $_lib['form3']->AccountPeriod_menu3(array('name' => 'Period', 'value' => $bank->ThisPeriod, 'accesskey' => 'P', 'noaccess' => true, 'autosubmit' => true)); ?>
         <? print $_lib['form3']->URL(array('url' => $MY_SELF . "&amp;AccountID=$bank->AccountID&amp;Period=" . $_lib['date']->get_next_period($bank->ThisPeriod), 'description' => '>>', 'title' => 'Next')) ?>
 
-        <? print $_lib['form3']->url(array('description' => 'Avstemming f&oslash;rst i m&aring;neden',      'url' => $_lib['sess']->dispatch . 't=bank.tabstatus'       . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> | 
-        <? print $_lib['form3']->url(array('description' => 'Kontoutskrift',    'url' => $_lib['sess']->dispatch . 't=bank.tabbankaccount'  . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> | 
+        <? print $_lib['form3']->url(array('description' => 'Avstemming f&oslash;rst i m&aring;neden',      'url' => $_lib['sess']->dispatch . 't=bank.tabstatus'       . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
+        <? print $_lib['form3']->url(array('description' => 'Kontoutskrift',    'url' => $_lib['sess']->dispatch . 't=bank.tabbankaccount'  . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
         <? print $_lib['form3']->url(array('description' => 'Bilagsf&oslash;r/Avstemming i slutten av m&aring;neden',          'url' => $_lib['sess']->dispatch . 't=bank.tabjournal'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
-        <? print $_lib['form3']->url(array('description' => 'Enkel',          'url' => $_lib['sess']->dispatch . 't=bank.tabsimple'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> | 
+        <? print $_lib['form3']->url(array('description' => 'Enkel',          'url' => $_lib['sess']->dispatch . 't=bank.tabsimple'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
         <? print $_lib['form3']->url(array('description' => 'Import',          'url' => $_lib['sess']->dispatch . 't=bank.import'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?>
 
         <h2>Kasse/bank-avstemming for periode: <? print $bank->ThisPeriod ?> med bilag av type <? print $bank->VoucherType ?> p&aring; konto <? print $bank->AccountNumber ?> <? print $bank->AccountName ?></h2>
@@ -189,7 +209,7 @@ $warningH = array();
 <form name="template_update"  name="bankvoting" action="<? print $MY_SELF ?>" method="post">
 <? print $_lib['form3']->hidden(array('name' => 'AccountID',        'value' => $bank->AccountID)) ?>
 <? print $_lib['form3']->hidden(array('name' => 'Period',    'value' => $bank->ThisPeriod)) ?>
-  
+
   <tr><th colspan="18">Avstemming i slutten av m&aring;neden</th></tr>
   <tr>
     <td class="menu">Pri</td>
@@ -218,7 +238,7 @@ $warningH = array();
 <tr>
     <td colspan="2">Saldo bank <? print $_lib['date']->get_last_day_in_month($bank->ThisPeriod) ?></td>
     <td></td>
-<?php 
+<?php
     if ($bank->bankaccountcalc->AmountSaldo < 0) {
 ?>
     <td class="number"><? print $_lib['format']->Amount($bank->bankaccountcalc->AmountSaldo)  ?></td>
@@ -285,7 +305,7 @@ if(is_array($bank->unvotedaccount)) {
             $warning .= "Ikke lovlig bilagsnummer. ";
             $warningH['notapproved']++;
             $classWarning = 'creditred';
-            
+
         } else {
             $warning .= $_lib['form3']->URL(array('url' => $bank->urlvoucher . '&amp;VoucherType=' . $bank->VoucherType . '&amp;voucher_AmountIn=' . $row->AmountIn . '&amp;voucher_AmountOut=' . $row->AmountOut . '&amp;voucher_KID=' . $row->KID . '&amp;voucher_VoucherDate=' . $row->Period . '-' . $row->Day . '&amp;AccountLineID=' . $row->AccountLineID . '&amp;JournalID=' . $row->JournalID . '&amp;voucher_Description=' . $row->Description . '&amp;new=1', 'description' => 'F&oslash;r bilag'));
             $classWarning = 'creditblue';
@@ -298,8 +318,8 @@ if(is_array($bank->unvotedaccount)) {
             if($pmp_status) {
                 foreach($pmp_possible_invoices as $tmp) {
                     foreach($tmp as $pmp_invoice) {
-                        if($pmp_invoice['InvoiceID'] == $row->InvoiceNumber 
-                           && (int)$pmp_invoice['AmountIn'] == (int)$row->AmountIn 
+                        if($pmp_invoice['InvoiceID'] == $row->InvoiceNumber
+                           && (int)$pmp_invoice['AmountIn'] == (int)$row->AmountIn
                            && (int)$pmp_invoice['AmountOut'] == (int)$row->AmountOut) {
 
                             if($warning == '' || $warning == "Ikke godkjent. ") {
@@ -325,15 +345,15 @@ if(is_array($bank->unvotedaccount)) {
             }
         }
         else if(!$row->Aproved && $row->KID == '') {
-            $query_open_voucher = 
+            $query_open_voucher =
                 sprintf(
-                    "select 
-                         v.JournalID, v.VoucherID, v.AmountIn, v.AmountOut, v.AccountPlanID, v.VoucherDate, v.KID, v.InvoiceID 
-                     from 
-                         accountplan as a, 
-                         voucher as v 
-                     left join 
-                          voucherstruct as vs on (vs.ParentVoucherID=v.VoucherID or vs.ChildVoucherID=v.VoucherID)                                 
+                    "select
+                         v.JournalID, v.VoucherID, v.AmountIn, v.AmountOut, v.AccountPlanID, v.VoucherDate, v.KID, v.InvoiceID
+                     from
+                         accountplan as a,
+                         voucher as v
+                     left join
+                          voucherstruct as vs on (vs.ParentVoucherID=v.VoucherID or vs.ChildVoucherID=v.VoucherID)
                      where
                           v.AccountPlanID = %d and
                           v.InvoiceID = '%s' and
@@ -343,19 +363,19 @@ if(is_array($bank->unvotedaccount)) {
                           a.EnableReskontro=0 and
                           v.Active=1
                      order by VoucherStructID asc",
-                    $row->ReskontroAccountPlanID, 
+                    $row->ReskontroAccountPlanID,
                     $row->InvoiceNumber
                     );
-            
+
             $pmp_invoice = $_lib['db']->get_row(array('query' => $query_open_voucher));
-            
+
             if($pmp_invoice) {
-                if($pmp_invoice->InvoiceID == $row->InvoiceNumber 
-                   && (int)$pmp_invoice->AmountIn == (int)$row->AmountIn 
+                if($pmp_invoice->InvoiceID == $row->InvoiceNumber
+                   && (int)$pmp_invoice->AmountIn == (int)$row->AmountIn
                    && (int)$pmp_invoice->AmountOut == (int)$row->AmountOut) {
                     if($warning == '' || $warning == "Ikke godkjent. ") {
                         $row->Approved = 1;
-                        
+
                         $warning .= "OK! ";
                         $classApproved = 'creditred';
                         $pmp_found = true;
@@ -370,7 +390,7 @@ if(is_array($bank->unvotedaccount)) {
             }
         }
 
-        
+
       ?>
       <? print $_lib['form3']->hidden(array('table' => 'accountline', 'field' => 'JournalID',   'pk' => $row->AccountLineID, 'value' => $row->JournalID)) ?>
       <? print $_lib['form3']->hidden(array('table' => 'accountline', 'field' => 'Day',         'pk' => $row->AccountLineID, 'value' => $row->Day)) ?>
@@ -383,7 +403,15 @@ if(is_array($bank->unvotedaccount)) {
         <td class="number menu-left-border"><? if($row->AmountOut > 0) print $_lib['format']->Amount($row->AmountOut); ?></td>
         <td class="number menu-right-border"><? if($row->AmountIn > 0)  print $_lib['format']->Amount($row->AmountIn); ?></td>
 
-        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber',   'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 23)) ?></td>
+        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber',   'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 23)); 
+                if(substr($row->InvoiceNumber, 0, 2) == "FB") {
+                  preg_match("/FB\((\d+)\)/", $row->InvoiceNumber, $matches);
+                  $fakturabankID = $matches[1];
+
+                  print $relationcount[$fakturabankID]; 
+                  }
+            ?>
+        </td>
 
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID',             'pk' => $row->AccountLineID, 'value' => $row->KID,               'class' => 'number', 'width' => 22)) ?></td>
 
@@ -398,30 +426,30 @@ if(is_array($bank->unvotedaccount)) {
             $reskontroconf['value']         = $row->ReskontroAccountPlanID;
             $reskontroconf['type'][]        = 'reskontro';
             $reskontroconf['type'][]        = 'employee';
-            //print $_lib['form3']->accountplan_number_menu($reskontroconf);    
+            //print $_lib['form3']->accountplan_number_menu($reskontroconf);
             display_kontoliste($reskontroconf);
             print $reskontroaccountplan->OrgNumber;
             ?>
         </td>
         <td><? print $_lib['form3']->checkbox(array('table' => 'accountline', 'field' => 'AutoResultAccount',     'pk' => $row->AccountLineID, 'value' => $row->AutoResultAccount, 'title' => 'Klikk her for &aring; velge resultatkonto automatisk fra reskontro')) ?></td>
         <td>
-            <?            
+            <?
             $resultconf['field']         = 'ResultAccountPlanID';
             $resultconf['value']         = $row->ResultAccountPlanID;
             $resultconf['type'][]        = 'hovedbok';
-            //print $_lib['form3']->accountplan_number_menu($resultconf);                
+            //print $_lib['form3']->accountplan_number_menu($resultconf);
             display_kontoliste($resultconf);
-            ?>                
+            ?>
         </td>
         <td>
-            <? 
+            <?
             if($resultaccountplan->EnableVAT) {
                 print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Vat',        'pk' => $row->AccountLineID, 'value' => (int) $row->Vat,         'width' => 2, 'maxlength' => 3));
             }
             ?>
         </td>
         <td>
-            <? 
+            <?
             if($resultaccountplan->EnableQuantity) {
                 print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'ResultQuantity',        'pk' => $row->AccountLineID, 'value' => $row->ResultQuantity,         'width' => 5, 'maxlength' => 255));
             }
@@ -433,7 +461,7 @@ if(is_array($bank->unvotedaccount)) {
             <? print $warning ?>
         </td>
       </tr>
-    <? } 
+    <? }
 }
 ?>
   <tr>
@@ -451,7 +479,8 @@ if(is_array($bank->unvotedvoucher)) {
         <td class="number menu-left-border"><? if ($row->AmountOut > 0) print $_lib['format']->Amount($row->AmountOut) ?></td>
         <td class="number menu-right-border"><? if ($row->AmountIn > 0) print $_lib['format']->Amount($row->AmountIn) ?></td>
         <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID',         'pk' => $row->VoucherID, 'value' => $row->KID,     'class' => 'number', 'width' => 22)) ?></td>
-        <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID',   'pk' => $row->VoucherID, 'value' => $row->InvoiceID,     'class' => 'number', 'width' => 22)) ?></td>
+        
+        <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID',   'pk' => $row->VoucherID, 'value' => $row->InvoiceID,     'class' => 'number', 'width' => 22))?></td>
         <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'Description', 'pk' => $row->VoucherID, 'value' => $row->Description,      'width' => 12, 'maxlength' => 255)) ?></td>
         <td></td>
         <td><? print $row->AccountPlanID ?></td>

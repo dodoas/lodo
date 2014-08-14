@@ -1,4 +1,6 @@
 <?
+// var_dump($_POST);
+// die();
 if(isset($_REQUEST['action_postpost_update'])) {
   $primarykey = "VoucherID";
   $_lib['db']->db_update_multi_record($_POST, $db_table, $primarykey);
@@ -36,13 +38,13 @@ else {
         if(substr($k, 0, $search1_len) == $search1) {
             $close_id = substr($k, $search1_len);
             $postmotpost->closeAllPostsAccount($close_id);
-            
+
             break;
         }
         else if(substr($k, 0, $search2_len) == $search2) {
             $open_id = substr($k, $search2_len);
             $postmotpost->openAllPostsAccount($open_id);
-            
+
             break;
         }
     }

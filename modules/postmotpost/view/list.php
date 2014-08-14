@@ -2,7 +2,7 @@
 //xdebug_start_trace("/home/martinaw/public_html/stack.log");
 #print_r($_REQUEST);
 $MatchAccountPlanID     = $_REQUEST['MatchAccountPlanID'];
-$db_table 				= 'voucher';
+$db_table         = 'voucher';
 
 #print_r($_REQUEST);
 
@@ -140,21 +140,21 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
 
                     /* display motkontoresultat and -balanse from accountplan */
                     $reskonto = $postmotpost->findMotKonto($AccountPlanID);
-                
+
                     $last = "";
                     foreach($reskonto as $kontokey => $konto) {
                         if(!$konto)
                             continue;
-                        
-                        if($last != substr($kontokey, 0, -1)) { 
+
+                        if($last != substr($kontokey, 0, -1)) {
                             $last = substr($kontokey, 0, -1);
-                            
-                            printf(" %s: ", $last); 
+
+                            printf(" %s: ", $last);
                         }
                         else {
                             printf(", ");
                         }
-                        
+
                         printf("%d", $konto);
                     }
                     ?>
@@ -171,7 +171,7 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
                     } else {
                         $class  = 'voucher';
                     }
-                    
+
                     #change currency
                     if($voucher->ForeignCurrencyID != '' && $voucher->ForeignAmount > 0 && $voucher->ForeignConvRate > 0) {
                         $tmp_foreign = $voucher->ForeignCurrencyID ." ". $_lib['format']->Amount($voucher->ForeignAmount) ." / ". $voucher->ForeignConvRate;
@@ -180,9 +180,9 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
                     }
                     $ch_curr = '<a href="' . $_lib['sess']->dispatch ."t=journal.edit&voucher_JournalID=" . $voucher->JournalID . '&amp;voucher_VoucherType=' . $voucher->VoucherType . '&action_journalid_search=1">' . $tmp_foreign . '</a></td>';
                     ?>
-                    <tr class="<? print $class ?>">
+                    <tr id="row_<?= $voucher->VoucherID ?>" class="<? print $class ?>">
                         <td><? print $voucher->Name; ?></td>
-                        <td><? if($postmotpost->isCloseAble($AccountPlanID, $voucher->KID, $voucher->InvoiceID)) { print "*"; } ?></td>
+                        <td><? if($postmotpost->isCloseAble($AccountPlanID, $voucher->KID, $voucher->MatchNumber, $voucher->InvoiceID, $voucher)) { print "*"; } ?></td>
                         <td><? print $voucher->VoucherType; ?> <a href="<? print $_lib['sess']->dispatch ."t=journal.edit&voucher_JournalID=" . $voucher->JournalID ?>&amp;voucher_VoucherType=<? print $voucher->VoucherType; ?>&action_journalid_search=1"><? print $voucher->JournalID; ?></a></td>
                         <td><? print $voucher->VoucherDate; ?></td>
                         <td><? print $voucher->VoucherPeriod; ?></td>
@@ -199,24 +199,28 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
                         <td><? if(isset($voucher->DescriptionID) or isset($voucher->Description)) { print substr($voucher->DescriptionID." - ".$voucher->Description, 0, 25); } ?></td>
 
                         <td class="<? print $class ?>">
-                          <? print $_lib['form3']->text(array('table'=>'voucher', 'field'=>'InvoiceID', 'pk' => $voucher->VoucherID, 'value' => $voucher->InvoiceID, 'width' => 22)); ?>
-                        </td>
-
-
-                        <td class="<? print $class ?>"><? print $_lib['form3']->text(array('table'=>'voucher', 'field'=>'KID', 'pk' => $voucher->VoucherID, 'value' => $voucher->KID, 'width' => 22)); ?></td>
-                        
-                        <td class="<? print $class ?>">
-                          <? print $_lib['form3']->text(array('table'=>'vouchermatch', 'field'=>'MatchNumber', 'pk' => $voucher->VoucherMatchID, 'value' =>  $voucher->MatchNumber == "0" ? "" : $voucher->MatchNumber, 'width' => 22)); ?>
+                          <? print $_lib['form3']->text(array('table'=>'voucher', 'field'=>'InvoiceID', 'pk' => $voucher->VoucherID, 'value' => $voucher->InvoiceID, 'width' => 22, 'id' => 'invoice')); ?>
+                          <input type="checkbox" class="chk" id="invoice" name="chk.invoice.<?= $voucher->VoucherID ?>" value="checked" <?= $postmotpost->isMatchable($AccountPlanID, $voucher->KID, $voucher->InvoiceID, $voucher->MatchNumber, $voucher) == 1 ? 'checked' : '' ?>>
                         </td>
 
                         <td class="<? print $class ?>">
-                        	<?
-                                   if($postmotpost->isCloseAbleVoucher($voucher->VoucherID)) {
-                                    $closeable++;
-                                    
-                                    print $_lib['form3']->button(array('url'=>$_SETUP['DISPATCH']."t=postmotpost.list&amp;MatchAccountPlanID=$voucher->AccountPlanID&amp;MatchKid=$voucher->KID&amp;MatchVoucherID=$voucher->VoucherID&amp;MatchInvoiceID=$voucher->InvoiceID&amp;AccountPlanID=$postmotpost->AccountPlanID&amp;action_postmotpost_close=1&amp;$showURL", 'name'=>'Lukk')); 
+                          <? print $_lib['form3']->text(array('table'=>'voucher', 'field'=>'KID', 'pk' => $voucher->VoucherID, 'value' => $voucher->KID, 'width' => 22, 'id' => 'kid')); ?>
+                          <input type="checkbox" class="chk" id="kid" name="chk.kid.<?= $voucher->VoucherID ?>" value="checked" <?= $postmotpost->isMatchable($AccountPlanID, $voucher->KID, $voucher->InvoiceID, $voucher->MatchNumber, $voucher) == 2 ? 'checked' : '' ?>>
+                        </td>
+
+                        <td class="<? print $class ?>">
+                          <? print $_lib['form3']->text(array('table'=>'vouchermatch', 'field'=>'MatchNumber', 'pk' => $voucher->VoucherMatchID, 'value' =>  $voucher->MatchNumber == "0" ? "" : $voucher->MatchNumber, 'width' => 22, 'id' => 'match')); ?>
+                         <input type="checkbox" class="chk" id="match" name="chk.match.<?= $voucher->VoucherMatchID ?>" value="checked" <?= $postmotpost->isMatchable($AccountPlanID, $voucher->KID, $voucher->InvoiceID, $voucher->MatchNumber, $voucher) == 3 ? 'checked' : '' ?>>
+
+                        </td>
+
+                        <td class="<? print $class ?>">
+                          <?
+                                if($postmotpost->isCloseAbleVoucher($voucher->VoucherID)) {
+                                  $closeable++;
+                                  print $_lib['form3']->button(array('url'=>$_SETUP['DISPATCH']."t=postmotpost.list&amp;MatchAccountPlanID=$voucher->AccountPlanID&amp;MatchKid=$voucher->KID&amp;MatchVoucherID=$voucher->VoucherID&amp;MatchInvoiceID=$voucher->InvoiceID&amp;AccountPlanID=$postmotpost->AccountPlanID&amp;action_postmotpost_close=1&amp;$showURL", 'name'=>'Lukk'));
                                 } else {
-                                    print $_lib['format']->Amount($postmotpost->getDiff($AccountPlanID, $voucher->KID, $voucher->InvoiceID));
+                                  print $_lib['format']->Amount($postmotpost->getDiff($AccountPlanID, $voucher->KID, $voucher->InvoiceID, $voucher->MatchNumber, $voucher));
                                 }
                                 ?>
 
@@ -300,7 +304,7 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
                 <th class="sub" colspan="17"></th>
                 <th class="sub number" colspan="3">
                 <? print $_lib['form3']->submit(array('name'=>'action_postpost_update', 'value'=>'Lagre (S)', 'accesskey' => 'S')) ?>
-                <? if($_lib['sess']->get_person('AccessLevel') >= 3) { print $_lib['form3']->submit(array('name' => 'action_postmotpost_openall', 'value'=>'&Aring;pne alle (L)', 'accesskey' => 'O')); } ?> 
+                <? if($_lib['sess']->get_person('AccessLevel') >= 3) { print $_lib['form3']->submit(array('name' => 'action_postmotpost_openall', 'value'=>'&Aring;pne alle (L)', 'accesskey' => 'O')); } ?>
                 <? print $_lib['form3']->submit(array('name' => 'action_postmotpost_closeall', 'value'=>'Lukk alle (L)', 'accesskey' => 'L')) ?>
                 <? print $_lib['form3']->submit(array('name' => 'action_postmotpost_closeselected', 'value'=>'Lukk utvalgte (R)', 'accesskey' => 'R')) ?>
 
@@ -312,5 +316,99 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
 Ingen &aring;pne poster funnet
 <? } ?>
     </form>
+    <script type="text/javascript">
+      $(document).ready(function() {
+
+
+        // Handle clicking on voucher ids
+        $('.navigate.to').click(function(e) {
+          var element = $(e.target);
+          var targetID = element.attr('id');
+
+          $('#row_' + targetID)[0].scrollIntoView( false );
+          hlight('#row_' + targetID);
+
+        });
+
+        function hlight(elementid){
+          $(elementid).css('background-color','rgba(255, 182, 0, 0.6)');
+          setTimeout(function() { $(elementid).css('background-color','#E1E1E1'); } , 2500);
+        }
+
+        // Handle clicking on checkboxes to match vouchers
+        var tempdata = [];
+        $('.chk').click(function(e) {
+          var element = $(e.target);
+
+          if(element.attr('checked')) {
+
+            switch(e.target.id) {
+              case 'invoice':
+                var input = element.prev('input[type=text]');
+                var kid = element.parent().next('td').children('input[type=text]');
+                var match = kid.parent().next('td').children('input[type=text]');
+                makeajax("invoice", e.target.name.split('.')[2]);
+              break;
+              case 'kid':
+                var input = element.parent().prev('td').children('input[type=text]');
+                var kid = element.prev('input[type=text]');
+                var match = element.parent().next('td').children('input[type=text]');
+                makeajax("kid", e.target.name.split('.')[2]);
+              break;
+              case 'match':
+                var kid = element.parent().prev('td').children('input[type=text]');
+                var input = kid.parent().prev('td').children('input[type=text]');
+                var match = element.prev('input[type=text]');
+                makeajax("match", e.target.name.split('.')[2]);
+              break;
+            }
+          } else {
+            // That or just dont allow uncheking at all?
+            makeajax("none", e.target.name.split('.')[2]);
+          }
+
+          var data = { type: e.target.id, name: e.target.name, invoiceid: input.attr("id"), invoiceval: input.val(), kidid: kid.attr('id'), kidval: kid.val(), matchid: match.attr('id'), matchval: match.val() };
+
+          updateUI(data, element);
+        });
+
+        function makeajax (type, id) {
+          $.post("<?= $_SETUP['DISPATCH'] . 't=postmotpost.ajax' ?>",
+          {
+            type: type,
+            id: id
+          },
+          function(data,status){
+            console.log("Status: " + status);
+          });
+        }
+
+        function updateUI(data, element) {
+          switch(data.type) {
+            case 'invoice':
+              $("input[id='" + data.kidid + "']").next('.chk').attr('checked', false);
+              // $("input[id='" + data.kidid + "']").val('');
+
+              $("input[id='" + data.matchid + "']").next('.chk').attr('checked', false);
+              // $("input[id='" + data.matchid + "']").val('');
+            break;
+            case 'kid':
+              $("input[id='" + data.invoiceid + "']").next('.chk').attr('checked', false);
+              // $("input[id='" + data.invoiceid + "']").val('');
+
+              $("input[id='" + data.matchid + "']").next('.chk').attr('checked', false);
+              // $("input[id='" + data.matchid + "']").val('');
+            break;
+            case 'match':
+              $("input[id='" + data.kidid + "']").next('.chk').attr('checked', false);
+              // $("input[id='" + data.kidid + "']").val('');
+
+              $("input[id='" + data.invoiceid + "']").next('.chk').attr('checked', false);
+              // $("input[id='" + data.invoiceid + "']").val('');
+            break;
+          }
+        }
+      });
+    </script>
 </body>
 </html>
