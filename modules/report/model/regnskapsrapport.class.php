@@ -72,34 +72,34 @@ class framework_logic_regnskapsrapport {
 
         if($LineID) {
             
-            $queryThisYear = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout from voucher V, accountplan as A where V.AccountPlanID=A.AccountPlanID and $where  V.VoucherPeriod<='".$this->thisEndPeriod."' and V.VoucherPeriod>='".$this->thisStartPeriod."' and A.EnableReportShort=1 and A.Active=1 and V.Active=1 and A.ReportShort='" . $LineID . "' group by A.ReportShort";
+            $queryThisYear = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout from voucher V, accountplan as A where V.AccountPlanID=A.AccountPlanID and $where  V.VoucherPeriod<='".$this->thisEndPeriod."' and V.VoucherPeriod>='".$this->thisStartPeriod."' and A.EnableReportShort=1 and A.ReportShort='" . $LineID . "' group by A.ReportShort";
             #print "$queryThisYear";
             $compareThisYear        = $_lib['storage']->get_row(array('query' => $queryThisYear));
             $ThisYearSum            = $compareThisYear->sumin - $compareThisYear->sumout;
 
-            $queryLastYear          = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout from voucher V, accountplan as A where V.AccountPlanID=A.AccountPlanID and $where  V.VoucherPeriod<='".$this->prevEndPeriod."' and V.VoucherPeriod>='".$this->prevStartPeriod."' and A.EnableReportShort=1 and A.Active=1 and V.Active=1 and A.ReportShort='" . $LineID . "' group by A.ReportShort";
+            $queryLastYear          = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout from voucher V, accountplan as A where V.AccountPlanID=A.AccountPlanID and $where  V.VoucherPeriod<='".$this->prevEndPeriod."' and V.VoucherPeriod>='".$this->prevStartPeriod."' and A.EnableReportShort=1 and A.ReportShort='" . $LineID . "' group by A.ReportShort";
             $compareLastYear        = $_lib['storage']->get_row(array('query' => $queryLastYear));
             $LastYearSum            = $compareLastYear->sumin - $compareLastYear->sumout;
 
-            $queryWholeLastYear     = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout from voucher V, accountplan as A where V.AccountPlanID=A.AccountPlanID and $where substring(V.VoucherPeriod,1,4)='".(substr($this->thisStartPeriod,0,4)-1)."' and A.EnableReportShort=1 and A.Active=1 and V.Active=1 and A.ReportShort='" . $LineID . "' group by A.ReportShort";
+            $queryWholeLastYear     = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout from voucher V, accountplan as A where V.AccountPlanID=A.AccountPlanID and $where substring(V.VoucherPeriod,1,4)='".(substr($this->thisStartPeriod,0,4)-1)."' and A.EnableReportShort=1 and A.ReportShort='" . $LineID . "' group by A.ReportShort";
             $compareWholeLastYear   = $_lib['storage']->get_row(array('query' => $queryWholeLastYear));
             $WholeLastYearSum       = $compareWholeLastYear->sumin - $compareWholeLastYear->sumout;
         }
 
-        $query = "select AccountPlanID, AccountName, ReportShort from accountplan where EnableReportShort=1 and Active=1 order by ReportShort";
+        $query = "select AccountPlanID, AccountName, ReportShort from accountplan where EnableReportShort=1 order by ReportShort";
         $result2 = $_lib['db']->db_query($query);
         
         while($row = $_lib['db']->db_fetch_object($result2)) {
             #print_r($row);
 
-            $queryThisYear = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout from voucher V where V.AccountPlanID=$row->AccountPlanID and V.VoucherPeriod<='".$this->thisEndPeriod."' and V.Active=1 and $where V.VoucherPeriod>='".$this->thisStartPeriod."'";
+            $queryThisYear = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout from voucher V where V.AccountPlanID=$row->AccountPlanID and V.VoucherPeriod<='".$this->thisEndPeriod."' and $where V.VoucherPeriod>='".$this->thisStartPeriod."'";
             $rowThisYear = $_lib['storage']->get_row(array('query' => $queryThisYear));
 
-            $queryLastYear = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout from voucher V where V.AccountPlanID=$row->AccountPlanID and V.VoucherPeriod<='".$this->prevEndPeriod."' and V.Active=1 and $where V.VoucherPeriod>='".$this->prevStartPeriod."'";
+            $queryLastYear = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout from voucher V where V.AccountPlanID=$row->AccountPlanID and V.VoucherPeriod<='".$this->prevEndPeriod."' and $where V.VoucherPeriod>='".$this->prevStartPeriod."'";
             #print "sql: $queryLastYear<br />";
             $rowLastYear = $_lib['storage']->get_row(array('query' => $queryLastYear));
 
-            $queryWholeLastYear = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout from voucher V where V.AccountPlanID=$row->AccountPlanID and V.Active=1 and $where substring(V.VoucherPeriod,1,4)='".(substr($this->thisStartPeriod,0,4)-1)."'";
+            $queryWholeLastYear = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout from voucher V where V.AccountPlanID=$row->AccountPlanID and $where substring(V.VoucherPeriod,1,4)='".(substr($this->thisStartPeriod,0,4)-1)."'";
             $rowWholeLastYear = $_lib['storage']->get_row(array('query' => $queryWholeLastYear));
 
             # Line
