@@ -35,7 +35,7 @@ class model_log_log extends model_invoicerecurring_recurring
             $query = "SHOW TABLES LIKE 'mvaavstemming';";
             $row = $_lib['db']->get_row(array('query' => $query));
 
-            if (empty($row)) 
+            if (empty($row))
             {
                 continue;
             }
