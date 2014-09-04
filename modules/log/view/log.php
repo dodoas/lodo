@@ -1,7 +1,13 @@
 <? print $_lib['sess']->doctype ?>
 <head>
   <title>Empatix - Logging</title>
-   <? includeinc('head') ?>
+  <?php
+    includeinc('head');
+    includelogic('log/log');
+
+    $logger = new model_log_log();
+    $logger->iter_all_db();
+  ?>
 </head>
 
 <style>
@@ -70,7 +76,7 @@ function rating(index)
 
     var rating = Math.min( (7 * entries) / (4 * diff ), 1.0 );
     var percent = Math.round( rating * 100 );
-    
+
     return percent;
 }
 
@@ -99,7 +105,7 @@ $(document).ready(
 
                 // (n / (60*60*24* d )) * 151200 = (7*n) / (4*d)
                 var percent = rating(index);
-                
+
                 var color = colors[ Math.round( (colors.length - 1) * percent / 100) ];
 
                 var row = $('<div>')
@@ -138,12 +144,12 @@ $(document).ready(
 
                             toggle = !toggle;
                         });
-                
+
                 row
                     .append(hide_button)
                     .append(inner_row);
-                    
-                
+
+
                 $('body').append(row);
             })(data_keys[d]);
         }
@@ -152,7 +158,7 @@ $(document).ready(
 
 </script>
 
-<!-- 
+<!--
 <div style="background-color: #F22; width: 100px; height: 20px;"></div>
 <div style="background-color: #A33; width: 100px; height: 20px;"></div>
 <div style="background-color: #844; width: 100px; height: 20px;"></div>

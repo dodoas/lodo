@@ -262,7 +262,7 @@ class postmotpost {
 
                 $AccountPlanID = $voucher->AccountPlanID;
 
-                if($voucher->KID       && !$this->matchH[$AccountPlanID]['KID'][$voucher->KID]) {
+                if($voucher->KID && !$this->matchH[$AccountPlanID]['KID'][$voucher->KID]) {
                     $this->matchH[$AccountPlanID]['KID'][$voucher->KID] = 0;
                     $this->matchH[$AccountPlanID]['KIDJournals'][$voucher->KID] = array();
                 }
@@ -315,7 +315,7 @@ class postmotpost {
                 #print "Fant " . $this->matchH[$AccountPlanID][KID] . "+ (inn - ut) for seg selv " . ($voucher->AmountIn - $voucher->AmountOut) . "<br>";
                 #$calc = ($voucher->AmountIn - $voucher->AmountOut);
 
-                if($voucher->matched_by == "kid")
+                // if($voucher->matched_by == "kid")
                   if($voucher->KID) {
                       $this->matchH[$AccountPlanID]['KID'][$voucher->KID]
                           = round($this->matchH[$AccountPlanID]['KID'][$voucher->KID], 3) + ($voucher->AmountIn - $voucher->AmountOut);
@@ -328,7 +328,7 @@ class postmotpost {
                       // echo "KID: " . $voucher->KID . ": " . $this->matchH[$AccountPlanID]['KID'][$voucher->KID] . "<br />";
                   }
 
-                if($voucher->matched_by == "invoice")
+                // if($voucher->matched_by == "invoice")
                   if($voucher->InvoiceID) {
                       $this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID] =
                           round($this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID], 3) + ($voucher->AmountIn - $voucher->AmountOut);
@@ -342,7 +342,7 @@ class postmotpost {
                       // echo "IN: " . $voucher->InvoiceID . ": " . $this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID] . "<br />";
                   }
 
-                if($voucher->matched_by == "match")
+                // if($voucher->matched_by == "match")
                   if($voucher->MatchNumber) {
                       $this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber] =
                           round($this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber], 3) + ($voucher->AmountIn - $voucher->AmountOut);
@@ -534,13 +534,13 @@ class postmotpost {
         #print "KID: $KID, InvoiceID: $InvoiceID<br>\n";
         #print_r($this->matchH[$AccountPlanID]);
 
-        if($KID && !$success) {
-            if(isset($this->matchH[$AccountPlanID]['KID'][$KID]) && round($this->matchH[$AccountPlanID]['KID'][$KID], 2) == 0) {
+        if($InvoiceID && !$success) {
+            if(isset($this->matchH[$AccountPlanID]['InvoiceID'][$InvoiceID]) && round($this->matchH[$AccountPlanID]['InvoiceID'][$InvoiceID], 2) == 0) {
                 $success = true;
             }
         }
-        if($InvoiceID && !$success) {
-            if(isset($this->matchH[$AccountPlanID]['InvoiceID'][$InvoiceID]) && round($this->matchH[$AccountPlanID]['InvoiceID'][$InvoiceID], 2) == 0) {
+        if($KID && !$success) {
+            if(isset($this->matchH[$AccountPlanID]['KID'][$KID]) && round($this->matchH[$AccountPlanID]['KID'][$KID], 2) == 0) {
                 $success = true;
             }
         }
@@ -551,10 +551,10 @@ class postmotpost {
         }
 
         if(!is_null($voucher)) {
-          if($voucher->matched_by == "kid") {
+          if($voucher->matched_by == "invoice") {
             $success = true;
           }
-          if($voucher->matched_by == "invoice") {
+          if($voucher->matched_by == "kid") {
             $success = true;
           }
           if($voucher->matched_by == "match") {
@@ -574,14 +574,14 @@ class postmotpost {
 
         // var_dump($vaucher);
 
-        if($KID && !$success) {
-          if(isset($this->matchH[$AccountPlanID]['KID'][$KID]) && round($this->matchH[$AccountPlanID]['KID'][$KID], 2) == 0) {
-            $success = 2;
-          }
-        }
         if($InvoiceID && !$success) {
           if(isset($this->matchH[$AccountPlanID]['InvoiceID'][$InvoiceID]) && round($this->matchH[$AccountPlanID]['InvoiceID'][$InvoiceID], 2) == 0) {
             $success = 1;
+          }
+        }
+        if($KID && !$success) {
+          if(isset($this->matchH[$AccountPlanID]['KID'][$KID]) && round($this->matchH[$AccountPlanID]['KID'][$KID], 2) == 0) {
+            $success = 2;
           }
         }
         if($MatchNumber && !$success) {
@@ -591,11 +591,11 @@ class postmotpost {
         }
 
         # Getting overriden by this flag if it is set
-        if($voucher->matched_by == "kid") {
-          $success = 2;
-        }
         if($voucher->matched_by == "invoice") {
           $success = 1;
+        }
+        if($voucher->matched_by == "kid") {
+          $success = 2;
         }
         if($voucher->matched_by == "match") {
           $success = 3;
@@ -623,7 +623,7 @@ class postmotpost {
         $MatchNumber = trim($MatchNumber);
 
         # Just return if matched with some
-        if($voucher) {
+        if(is_null($voucher)) {
           if($KID && $voucher->matched_by == "kid") {
             $value = $this->matchH[$AccountPlanID]['KID'][$KID];
           } elseif($InvoiceID && $voucher->matched_by == "invoice") {
@@ -631,17 +631,18 @@ class postmotpost {
           } elseif($MatchNumber && $voucher->matched_by == "match") {
             $value = $this->matchH[$AccountPlanID]['MatchNumber'][$MatchNumber];
           } else {
-            $value = 0;
+            $value = $voucher->AmountIn - $voucher->AmountOut;
           }
         } else {
-          if($KID) {
+          // var_dump(array($voucher->AmountIn - $voucher->AmountOut));
+          if($KID && $voucher->matched_by == "kid") {
             $value = $this->matchH[$AccountPlanID]['KID'][$KID];
-          } elseif($InvoiceID) {
+          } elseif($InvoiceID && $voucher->matched_by == "invoice") {
             $value = $this->matchH[$AccountPlanID]['InvoiceID'][$InvoiceID];
-          } elseif($MatchNumber) {
+          } elseif($MatchNumber && $voucher->matched_by == "match") {
             $value = $this->matchH[$AccountPlanID]['MatchNumber'][$MatchNumber];
           } else {
-            $value = 0;
+            $value = $voucher->AmountIn - $voucher->AmountOut;
           }
         }
 
