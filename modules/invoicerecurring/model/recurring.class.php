@@ -41,7 +41,7 @@ class recurring {
             $this->{$key} = $value;
             #print "$key = $value<br>\n";
         }
-        
+
         if(!$this->JournalID)
             $this->JournalID = $this->RecurringID;
         #print "ferdig<br />\n";
@@ -68,10 +68,10 @@ class recurring {
             while($lineH = $_lib['db']->db_fetch_assoc($result_line)) {
                 $this->set_line($lineH);
             }
-        } 
-        
+        }
+
         if(!$result_head){
-        
+
             /* Set default values for invoice head*/
             $headH['InsertedByPersonID']      = $_lib['sess']->get_person('PersonID');
             $headH['UpdatedByPersonID']      = $_lib['sess']->get_person('PersonID');
@@ -136,10 +136,10 @@ class recurring {
             }
         }
 
-        if(!$headH['ProjectID'] && $accountplan->ProjectID) 
+        if(!$headH['ProjectID'] && $accountplan->ProjectID)
             $headH['ProjectID'] = $accountplan->ProjectID;
 
-        if(!$headH['DepartmentID'] && $accountplan->DepartmentID) 
+        if(!$headH['DepartmentID'] && $accountplan->DepartmentID)
             $headH['DepartmentID'] = $accountplan->DepartmentID;
 
         /*$args['invoiceout_ICountry_'.$this->RecurringID] = $accountplan->address;
@@ -172,17 +172,17 @@ class recurring {
             $_lib['message']->add(array('message' => "Du m&aring; velge kunden som skal motta fakturaen"));
 
         unset($headH['TotalCustPrice']);
-        
+
         if($_lib['setup']->get_value('kid.accountplanid') || $_lib['setup']->get_value('kid.RecurringID')) {
             $kidO         = new lodo_logic_kid();
             $headH['KID'] = $kidO->generate($headH);
         }
-        
+
         $this->set_head($headH);
     }
 
     /*******************************************************************************
-    * Update invoice based on std 
+    * Update invoice based on std
     * @param array
     * @return
     */
@@ -205,7 +205,7 @@ class recurring {
         if (!is_numeric($args['RecurringID'])) {
             return;
         }
-        
+
         global $_lib;
 
         $prefix = "recurringout";
@@ -268,11 +268,11 @@ class recurring {
                 $lineH['RecurringID'] = $this->RecurringID;
                 if($this->debug) print_r($lineH);
                 $_lib['storage']->store_record(array('data' => $lineH, 'table' => $this->table_line, 'debug' => false));
-            } 
+            }
         }
         else
         {
-        
+
             #print "Sletter bilag pga mangel pŒ linjer: $this->JournalID, $this->VoucherType<br />";
             #Slett billag hvis det ikke har noen linjer
             $accounting->delete_journal($this->JournalID, $this->VoucherType);
@@ -312,7 +312,7 @@ class recurring {
         $this->init($args);
         $this->set_head($args);
         $this->set_line(array('Active' => 1));
-        
+
         $this->make_invoice();
 
         return $args['RecurringID'];
@@ -341,7 +341,7 @@ class recurring {
         $headH['RecurringID']           = $this->RecurringID;
         $headH['OrderDate']           = $_lib['sess']->get_session('LoginFormDate');
         $headH['Period']              = $_lib['date']->get_this_period($_lib['sess']->get_session('Date'));
-        
+
         $headH['Status']              = "progress";
         $headH['Active']              = 1;
         $headH['CreatedDateTime']     = $_lib['sess']->get_session('Date');
@@ -371,7 +371,7 @@ class recurring {
         while($lineH = $_lib['db']->db_fetch_assoc($result2))
         {
             unset($lineH['LineID']); #This id is pk so we cannot copy it.
-            unset($lineH['RecurringID']); 
+            unset($lineH['RecurringID']);
             #print "linje\n";
             #print_r($lineH);
             $this->set_line($lineH);
@@ -391,9 +391,9 @@ class recurring {
         global $_lib;
         $query="update $this->table_line set Active=0 where LineID=" . $LineID;
         $ret = $_lib['db']->db_update($query);
-        
+
         $_lib['message']->add(array('message' => "Linje $LineID p&aring; faktura $this->RecurringID er slettet"));
-        
+
         $this->init(array());
         $this->make_invoice();
     }
@@ -447,15 +447,15 @@ class recurring {
         foreach($line as $key => $value) {
             $lineH[$key]  = $value;
         }
-        
+
         if($line['ProductID'] > 0) {
         $query = "select * from product as P where P.ProductID='" . $line['ProductID'] . "'";
         #print "$query<br>";
         $product = $_lib['storage']->get_row(array('query' => $query));
-        
+
         $accountplan = $accounting->get_accountplan_object($product->AccountPlanID);
         #print_r($accountplan);
-        
+
         $VAT = $accounting->get_vataccount_object(array('VatID' => $accountplan->VatID, 'date' => $this->headH['InvoiceDate']));
         #print_r($VAT);
 
@@ -489,9 +489,9 @@ class recurring {
 
         $this->totalSum += round($tmpquant * $custprice, 2);
         $this->totalMva += round($tmpquant * $custprice * ($lineH['Vat']/100), 2);
-        
+
         $this->lineH[] = $lineH;
-        
+
         $this->TotalCustPrice = $this->totalSum + $this->totalMva;
         #print "<b>TotalCustPrice: $this->TotalCustPrice</b><br>";
         #$this->headH[] = 199; #$this->TotalCustPrice;
@@ -535,7 +535,7 @@ class recurring {
 
         return $_lib['db']->db_new_hash($invoicelineH, $this->table_line);
     }
-    
+
     /**
      * lag en ny recurring invoice
      * @param update
@@ -544,7 +544,7 @@ class recurring {
     function create_recurring($args, $update = false)
     {
         global $_lib;
-	
+
 	$data = array(
 	    'RecurringID' => $this->RecurringID,
 	    'StartDate' => $args["recurring_StartDate_$this->RecurringID"],
@@ -557,7 +557,7 @@ class recurring {
 	{
 	    $get = sprintf("select RecurringID from recurring where RecurringID = '%d'", $this->RecurringID);
   	    $row = $_lib['storage']->get_row(array('query'=>$get));
-	    
+
 	    if(!$row)
 	    {
 		$_lib['storage']->store_record(array('data' => $data, 'table' => 'recurring', 'debug' => false));
@@ -566,9 +566,9 @@ class recurring {
 	else
 	{
 	    $_lib['db']->db_update(
-		sprintf("update recurring SET StartDate = '%s', TimeInterval = '%s', PrintInterval = '%d', EndDate = '%s' WHERE RecurringID = '%d'", 
+		sprintf("update recurring SET StartDate = '%s', TimeInterval = '%s', PrintInterval = '%d', EndDate = '%s' WHERE RecurringID = '%d'",
 			mysql_escape_string($data['StartDate']), mysql_escape_string($data['TimeInterval']),
-			$data['PrintInterval'], $data['EndDate'], $this->RecurringID));    
+			$data['PrintInterval'], $data['EndDate'], $this->RecurringID));
 	}
     }
 
@@ -579,10 +579,10 @@ class recurring {
      *     streng hvor utbyttingen skal skje
      * @param date
      *     dato for fakturaen
-     * 
-     * @return 
-     *     streng med følgende erstatninger: 
-     *      - %M med månedsnavn, 
+     *
+     * @return
+     *     streng med følgende erstatninger:
+     *      - %M med månedsnavn,
      *      - %W med ukestall
      *      - %K med kvartalstreng
      *      - %H med halvårstreng
@@ -591,13 +591,13 @@ class recurring {
     function replace_tokens($str, $date)
     {
 	$date_info = $this->get_date_info($date);
-        
+
 	$replace = array('%M',                 '%W',            '%K',                  '%H',                 '%Y',            '%LM',            '%NM',            '%LY',             '%NY');
 	$with    = array($date_info['m_name'], $date_info['w'], $date_info['kvartal'], $date_info['halvar'], $date_info['y'], $date_info['lm'], $date_info['nm'], $date_info['y']-1, $date_info['y'] + 1);
-        
+
 	return str_replace($replace, $with, $str);
     }
-    
+
     /**
      * Legger til en ny invoice i invoiceoutline-tabellen
      * @param
@@ -605,14 +605,14 @@ class recurring {
      * @return
      *     true om fakturaen ble sendt, ellers false
      */
-    function send_invoice($row) 
+    function send_invoice($row)
     {
 	global $accounting, $_lib;
-        
+
         $sql = "SELECT RecurringID, CustomerAccountPlanID, CommentCustomer FROM recurringout WHERE RecurringID = " . $row["RecurringID"];
         $r = $_lib['db']->db_query($sql);
         $head = $_lib['db']->db_fetch_assoc($r);
-        
+
 	$id = $head['RecurringID'];
         if($head['CustomerAccountPlanID'] == 0)
             return false;
@@ -630,7 +630,7 @@ class recurring {
 
         return true;
     }
-    
+
     /**
      * Send en repeterende faktura
      * @param recurring
@@ -650,10 +650,10 @@ class recurring {
 
         if($recurring["StartDate"] == "0000-00-00")
             return;
-        
+
 	if($recurring["LastDate"] == "0000-00-00")
 	{
-            $sql = sprintf("UPDATE recurring 
+            $sql = sprintf("UPDATE recurring
 					SET LastDate = StartDate - INTERVAL %s
 					WHERE RecurringID = %d", $interval, $recurring["RecurringID"]);
 
@@ -662,22 +662,22 @@ class recurring {
             $r = $_lib['db']->db_query(sprintf("SELECT * FROM recurring WHERE RecurringID = %d", $recurring["RecurringID"]));
             $recurring = $_lib['db']->db_fetch_assoc($r);
 	}
-        
+
 	/* teller for hvor mange fakturaer som er generert */
 	$n = 0;
-        
+
 	$_lib['message']->add(sprintf("%d (%s):\n", $recurring["RecurringID"], $interval));
-        
+
 	while(1)
 	{
-            /* 
+            /*
                oppdater denne linjen med ny LastDate om det skal sendes ut en ny
                faktura nå
 
             */
             $sql = sprintf(
                         "
-			UPDATE recurring 
+			UPDATE recurring
 				SET LastDate = DATE_ADD(LastDate,  INTERVAL %s)
 			WHERE RecurringID = %d
 				AND DATEDIFF(DATE_SUB(DATE_ADD(LastDate, INTERVAL %s), INTERVAL %s), CURDATE()) <= 0
@@ -687,7 +687,7 @@ class recurring {
                            $recurring["RecurringID"],
                            $interval, $printinterval, $interval
 		);
-            
+
             $r = $_lib['db']->db_query($sql);
             echo $sql;
 
@@ -696,12 +696,12 @@ class recurring {
 
             $r = $_lib['db']->db_query($sql);
             $row = $_lib['db']->db_fetch_assoc($r);
-            
+
             /* sjekker om LastDate ble oppdatert */
             if($row["LastDate"] == $recurring["LastDate"])
             {
                 $_lib['message']->add(sprintf("\t%s fakturaer\n", $n));
-                
+
                 return true;
             }
             else
@@ -712,7 +712,7 @@ class recurring {
             }
 	}
     }
-    
+
     /**
      * Funksjon for å generere info om måneden til en faktura.
      * @param date
@@ -731,9 +731,9 @@ class recurring {
 	$m = (int)date("n", $date);
 	$w = (int)date("W", $date);
 	$y = (int)date("Y", $date);
-        
+
 	$mnd = array("N/A",
-                     "Januar", 
+                     "Januar",
                      "Februar",
                      "Mars",
                      "April",
@@ -745,14 +745,14 @@ class recurring {
                      "Oktober",
                      "November",
                      "Desember");
-        
+
 	$num = array(
             "f&oslash;rste",
             "andre",
             "tredje",
             "fjerde");
-        
-	/* 
+
+	/*
 	   kvartal:
              1      2      3       4
            1,2,3  4,5,6  7,8,9  10,11,12
@@ -765,7 +765,7 @@ class recurring {
             $k = 3;
 	else
             $k = 4;
-        
+
 	/* halvår */
 	if($m <= 6)
             $h = 1;
@@ -780,13 +780,13 @@ class recurring {
             $lm = 11;
             $nm = 1;
         }
-        else { 
+        else {
             $lm = $m-1;
             $nm = $m+1;
         }
-        
 
-	return 
+
+	return
             array(
                 'm_name' => $mnd[$m],       /* månedsnavn */
                 'm' => $m,                  /* månedstall */
@@ -797,18 +797,18 @@ class recurring {
                 'nm' => $mnd[$nm],
                 'lm' => $mnd[$lm]
 		);
-        
+
     }
 
     /**
-     * Henter tabell me de forskjellige intervalene. 
+     * Henter tabell me de forskjellige intervalene.
      * etter dette er satt i produksjon kan man ikke fjerne linjer eller endre betydning
-     * uten at det vil foraarsake mye rot 
+     * uten at det vil foraarsake mye rot
      */
-    function get_intervals() 
+    function get_intervals()
     {
         $recurring_intervals =
-            array(  
+            array(
                 "year" => array("&Aring;rlig", "1 YEAR"),
                 "y13"  => array("Hver 3. m&aring;ned", "3 MONTH"),
                 "y14"  => array("Hver 4. m&aring;ned", "4 MONTH"),
@@ -832,50 +832,50 @@ function shutdown_handle()
   global $_lib;
 
 //  echo $_lib['message']->get();
-   
+
 }
 
-class model_invoicerecurring_recurring 
+class model_invoicerecurring_recurring
 {
     function database_list() {
         global $_lib;
 
         $ret = array();
-        $system_dbs = array('lodo', 'mysql', 'test', 'information_schema');
-        
+        $system_dbs = array('lodo', 'mysql', 'test', 'information_schema', 'performance_schema');
+
         $query_show = "show databases";
         $result     = $_lib['db']->db_query($query_show);
         $i = 0;
-        while ($row = $_lib['db']->db_fetch_object($result)) 
+        while ($row = $_lib['db']->db_fetch_object($result))
         {
-            if (in_array($row->Database, $system_dbs)) 
+            if (in_array($row->Database, $system_dbs))
             {
                 continue;
             }
 
             $ret[] = $row;
         }
-            
+
         return $ret;
     }
 
-    function iter_all_db() 
+    function iter_all_db()
     {
         global $_lib, $_SETUP;
 
         register_shutdown_function('shutdown_handle');
         $dbs = $this->database_list();
-        
-        foreach($dbs as $db) 
+
+        foreach($dbs as $db)
         {
             $name = $db->Database;
             $_lib['message']->add("\n$name\n---------------\n");
 
             /* sett opp alle de forskjellige _lib-entriene som kreves for denne koden */
-            $_lib['storage'] = $_lib['db'] = 
-                new db_mysql(array('host' => $_SETUP['DB_SERVER_DEFAULT'], 
-                                   'database' => $name, 
-                                   'username' => $_SETUP['DB_USER_DEFAULT'], 
+            $_lib['storage'] = $_lib['db'] =
+                new db_mysql(array('host' => $_SETUP['DB_SERVER_DEFAULT'],
+                                   'database' => $name,
+                                   'username' => $_SETUP['DB_USER_DEFAULT'],
                                    'password' => $_SETUP['DB_PASSWORD_DEFAULT']));
 
             $_lib['cache'] = new Cache(array());
@@ -884,7 +884,7 @@ class model_invoicerecurring_recurring
 
             $query = "SHOW TABLES LIKE 'mvaavstemming';";
             $row = $_lib['db']->get_row(array('query' => $query));
-            
+
             if (empty($row)) {
                 continue;
             }
@@ -893,24 +893,24 @@ class model_invoicerecurring_recurring
             $sql = "SELECT * FROM company WHERE CompanyID=1";
             $row = $_lib['db']->get_row(array('query' => $sql));
             $_lib['sess']->companydef = $row;
-            
+
             /* check and send */
             global $accounting;
-            
+
             $accounting = 0;
 
-            /* check_and_send does not check if startDate is in the future. 
+            /* check_and_send does not check if startDate is in the future.
                This is done here to save a query. */
-            $r =  $_lib['db']->db_query("SELECT * FROM recurring WHERE DATE_SUB(StartDate, INTERVAL `PrintInterval` DAY) <= NOW()") 
+            $r =  $_lib['db']->db_query("SELECT * FROM recurring WHERE DATE_SUB(StartDate, INTERVAL `PrintInterval` DAY) <= NOW()")
                            or die("ERROR: " . mysql_error());
-            $recurring_array = array();	
+            $recurring_array = array();
             while($row = $_lib['db']->db_fetch_assoc($r))
-            {   
+            {
                 $recurring_array[] = $row;
             }
 
             foreach($recurring_array as $line)
-            {   
+            {
                 $recurring = new recurring(array());
                 $recurring->check_and_send($line);
             }
