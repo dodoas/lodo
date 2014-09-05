@@ -165,8 +165,10 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
                 $closeable = 0;
                 foreach($account as $voucher)
                 {
-   
+                   
                     $class  = 'voucher';
+                    
+
 
                     #change currency
                     if($voucher->ForeignCurrencyID != '' && $voucher->ForeignAmount > 0 && $voucher->ForeignConvRate > 0) {
@@ -178,7 +180,6 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
                     ?>
                     <tr id="row_<?= $voucher->VoucherID ?>" class="<? print $class ?>">
                         <td><? print $voucher->Name; ?></td>
-                        <td><? if($postmotpost->isCloseAble($AccountPlanID, $voucher->KID, $voucher->MatchNumber, $voucher->InvoiceID, $voucher)) { print "*"; } ?></td>
                         <td><? print $voucher->VoucherType; ?> <a href="<? print $_lib['sess']->dispatch ."t=journal.edit&voucher_JournalID=" . $voucher->JournalID ?>&amp;voucher_VoucherType=<? print $voucher->VoucherType; ?>&action_journalid_search=1"><? print $voucher->JournalID; ?></a></td>
                         <td><? print $voucher->VoucherDate; ?></td>
                         <td><? print $voucher->VoucherPeriod; ?></td>

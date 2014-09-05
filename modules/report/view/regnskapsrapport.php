@@ -83,22 +83,23 @@ $rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'Line
     <tbody>
         <?
         foreach($rapport->lineSumH as $lineH) { ?>
-            <tr>
-                <th class="sub"><? print $lineH['LineID'] ?></td>
-                <th class="sub"><? print $lineH['LineText'] ?></td>
-                <td class="number"><? print $_lib['format']->Amount($lineH['ThisYearAmount']) ?></td>
-                <td class="number"><? print $_lib['format']->Amount($lineH['ThisYearPercent']) ?>%</td>
-                <td class="number"><? print $_lib['format']->Amount($lineH['LastYearAmount']) ?></td>
-                <td class="number"><? print $_lib['format']->Amount($lineH['LastYearPercent']) ?>%</td>
-                <td class="number"><? print $_lib['format']->Amount($lineH['Year']) ?></td>
-                <td class="number"><? print $_lib['format']->Amount($lineH['Percent']) ?>%</td>
-                <td class="number"><? print $_lib['form3']->radiobutton(array('name' => 'LineID', 'value' => $lineH['LineID'], 'choice' => $rapport->LineID)); ?></td>
-            </tr>
+                <tr>
+                    <th class="sub"><? print $lineH['LineID'] ?></td>
+                    <th class="sub"><? print $lineH['LineText'] ?></td>
+                    <td class="number"><? print $_lib['format']->Amount($lineH['ThisYearAmount']) ?></td>
+                    <td class="number"><? print $_lib['format']->Amount($lineH['ThisYearPercent']) ?>%</td>
+                    <td class="number"><? print $_lib['format']->Amount($lineH['LastYearAmount']) ?></td>
+                    <td class="number"><? print $_lib['format']->Amount($lineH['LastYearPercent']) ?>%</td>
+                    <td class="number"><? print $_lib['format']->Amount($lineH['Year']) ?></td>
+                    <td class="number"><? print $_lib['format']->Amount($lineH['Percent']) ?>%</td>
+                    <td class="number"><? print $_lib['form3']->radiobutton(array('name' => 'LineID', 'value' => $lineH['LineID'], 'choice' => $rapport->LineID)); ?></td>
+                </tr>
             
             <?
             if($detail) {
                 foreach($rapport->lineH[$lineH['LineID']] as $AccountH)
-                {
+                { if(
+                        (($AccountH['ThisYearAmount']) <> 0) or (($AccountH['LastYearAmount']) <> 0) or (($AccountH['Year']) <> 0)) { 
                     ?>
                     <tr>
                     <td><? print $AccountH['AccountPlanID'] ?></td>
@@ -110,8 +111,9 @@ $rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'Line
                     <td align="right"><? print $_lib['format']->Amount($AccountH['Year']) ?></td>
                     <td align="right"></td>
                     </tr>
-                    <?
-                }
+                    <? 
+                } else { continue;}
+            }
             }
         }
         ?>
