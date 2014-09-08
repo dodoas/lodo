@@ -413,9 +413,9 @@ if(is_array($bank->unvotedaccount)) {
             ?>
         </td>
 
-        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID',             'pk' => $row->AccountLineID, 'value' => $row->KID,               'class' => 'number', 'width' => 22)) ?></td>
+        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID',             'pk' => $row->AccountLineID, 'value' => $row->KID,               'class' => 'number', 'width' => 25)) ?></td>
 
-        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Description',     'pk' => $row->AccountLineID, 'value' => $row->Description,       'width' => 22, 'maxlength' => 255, 'tabindex' => $tabindexH[6])) ?></td>
+        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Description',     'pk' => $row->AccountLineID, 'value' => $row->Description,       'width' => 25, 'maxlength' => 255, 'tabindex' => $tabindexH[6])) ?></td>
 
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Comment',         'pk' => $row->AccountLineID, 'value' => $row->Comment,           'width' => 12, 'maxlength' => 255, 'tabindex' => $tabindexH[7])) ?></td>
 
@@ -478,9 +478,9 @@ if(is_array($bank->unvotedvoucher)) {
         <td><? print substr($row->VoucherDate,8,2) ?></td>
         <td class="number menu-left-border"><? if ($row->AmountOut > 0) print $_lib['format']->Amount($row->AmountOut) ?></td>
         <td class="number menu-right-border"><? if ($row->AmountIn > 0) print $_lib['format']->Amount($row->AmountIn) ?></td>
-        <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID',         'pk' => $row->VoucherID, 'value' => $row->KID,     'class' => 'number', 'width' => 22)) ?></td>
+        <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID',         'pk' => $row->VoucherID, 'value' => $row->KID,     'class' => 'number', 'width' => 25)) ?></td>
         
-        <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID',   'pk' => $row->VoucherID, 'value' => $row->InvoiceID,     'class' => 'number', 'width' => 22))?></td>
+        <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID',   'pk' => $row->VoucherID, 'value' => $row->InvoiceID,     'class' => 'number', 'width' => 25))?></td>
         <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'Description', 'pk' => $row->VoucherID, 'value' => $row->Description,      'width' => 12, 'maxlength' => 255)) ?></td>
         <td></td>
         <td><? print $row->AccountPlanID ?></td>

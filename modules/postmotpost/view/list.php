@@ -102,7 +102,6 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
         <thead>
             <tr class="voucher">
                 <th class="sub"></th>
-                <th class="sub"></th>
                 <th class="sub">Bilagsnr</th>
                 <th class="sub">Bilagsdato</th>
                 <th class="sub">Periode</th>
@@ -196,17 +195,17 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
                         <td><? if(isset($voucher->DescriptionID) or isset($voucher->Description)) { print substr($voucher->DescriptionID." - ".$voucher->Description, 0, 25); } ?></td>
 
                         <td class="<? print $class ?>">
-                          <? print $_lib['form3']->text(array('table'=>'voucher', 'field'=>'InvoiceID', 'pk' => $voucher->VoucherID, 'value' => $voucher->InvoiceID, 'width' => 22, 'id' => 'invoice')); ?>
+                          <? print $_lib['form3']->text(array('table'=>'voucher', 'field'=>'InvoiceID', 'pk' => $voucher->VoucherID, 'value' => $voucher->InvoiceID, 'width' => 25, 'id' => 'invoice')); ?>
                           <input type="checkbox" class="chk" id="invoice" name="chk.invoice.<?= $voucher->VoucherID ?>" value="checked" <?= $postmotpost->isMatchable($AccountPlanID, $voucher->KID, $voucher->InvoiceID, $voucher->MatchNumber, $voucher) == 1 ? 'checked' : '' ?>>
                         </td>
 
                         <td class="<? print $class ?>">
-                          <? print $_lib['form3']->text(array('table'=>'voucher', 'field'=>'KID', 'pk' => $voucher->VoucherID, 'value' => $voucher->KID, 'width' => 22, 'id' => 'kid')); ?>
+                          <? print $_lib['form3']->text(array('table'=>'voucher', 'field'=>'KID', 'pk' => $voucher->VoucherID, 'value' => $voucher->KID, 'width' => 25, 'id' => 'kid')); ?>
                           <input type="checkbox" class="chk" id="kid" name="chk.kid.<?= $voucher->VoucherID ?>" value="checked" <?= $postmotpost->isMatchable($AccountPlanID, $voucher->KID, $voucher->InvoiceID, $voucher->MatchNumber, $voucher) == 2 ? 'checked' : '' ?>>
                         </td>
 
                         <td class="<? print $class ?>">
-                          <? print $_lib['form3']->text(array('table'=>'vouchermatch', 'field'=>'MatchNumber', 'pk' => $voucher->VoucherMatchID, 'value' =>  $voucher->MatchNumber == "0" ? "" : $voucher->MatchNumber, 'width' => 22, 'id' => 'match')); ?>
+                          <? print $_lib['form3']->text(array('table'=>'vouchermatch', 'field'=>'MatchNumber', 'pk' => $voucher->VoucherMatchID, 'value' =>  $voucher->MatchNumber == "0" ? "" : $voucher->MatchNumber, 'width' => 25, 'id' => 'match')); ?>
                          <input type="checkbox" class="chk" id="match" name="chk.match.<?= $voucher->VoucherMatchID ?>" value="checked" <?= $postmotpost->isMatchable($AccountPlanID, $voucher->KID, $voucher->InvoiceID, $voucher->MatchNumber, $voucher) == 3 ? 'checked' : '' ?>>
 
                         </td>

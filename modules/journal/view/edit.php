@@ -437,7 +437,7 @@ if($accountplan->EnableProject)
 
     <td><!-- <? if($rowCount>1) { $tmp = ''; } else { $tmp = $tabindex++; }; print $_lib['form3']->Type_menu3(array('table' => $db_table, 'field' => 'DescriptionID', 'value' => $voucherHead->DescriptionID, 'type' => 'VoucherDescriptionID', 'tabindex' => $tmp, 'accesskey' => 'E')); ?> --></td>
 
-<td><input class="voucher" type="text" size="10" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" accesskey="G" name="voucher.Description"       value="<? print $voucher_input->Description; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
+<td><input class="voucher" type="text" size="20" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" accesskey="G" name="voucher.Description"       value="<? print $voucher_input->Description; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
     <td align="right">
 <? 
 if($period_open) 
@@ -598,7 +598,7 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
       <td><input class="voucher" type="text" size="22"  tabindex="<? print $tabindex++; ?>" name="voucher.KID"   accesskey="R" value="<? print $voucher->KID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 
       <td><!-- <? print $_lib['form3']->Type_menu3(array('table' => $db_table, 'field' => 'DescriptionID', 'value' => $voucher->DescriptionID, 'type' => 'VoucherDescriptionID', 'tabindex' => $tabindex++, 'accesskey' => 'E')); ?> </td>-->
-      <td><input class="voucher" type="text" size="10" tabindex="<? print $tabindex++; ?>" accesskey="G" name="voucher.Description"       value="<? print $voucher->Description; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
+      <td><input class="voucher" type="text" size="20" tabindex="<? print $tabindex++; ?>" accesskey="G" name="voucher.Description"       value="<? print $voucher->Description; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
       <td colspan="5" align="right"><? if($period_open) print $voucher_gui->update_journal_button_line($voucher, $voucher_input->VoucherPeriod, $voucher_input->JournalID, $voucher_input->VoucherType, $voucher_input->type) ?></td>
     </tr>
     <? if($view_linedetails == 1) { ?>
