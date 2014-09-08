@@ -98,21 +98,21 @@ $rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'Line
             <?
             if($detail) {
                 foreach($rapport->lineH[$lineH['LineID']] as $AccountH)
-                { if(
-                        (($AccountH['ThisYearAmount']) <> 0) or (($AccountH['LastYearAmount']) <> 0) or (($AccountH['Year']) <> 0)) { 
+                { 
+                    if((($AccountH['ThisYearAmount']) <> 0) or (($AccountH['LastYearAmount']) <> 0) or (($AccountH['Year']) <> 0)) { 
                     ?>
-                    <tr>
-                    <td><? print $AccountH['AccountPlanID'] ?></td>
-                    <td><? print $AccountH['AccountName'] ?></td>
-                    <td align="right"><? print $_lib['format']->Amount($AccountH['ThisYearAmount']) ?></td>
-                    <td align="right"></td>
-                    <td align="right"><? print $_lib['format']->Amount($AccountH['LastYearAmount']) ?></td>
-                    <td align="right"></td>
-                    <td align="right"><? print $_lib['format']->Amount($AccountH['Year']) ?></td>
-                    <td align="right"></td>
-                    </tr>
+                        <tr>
+                        <td><? print $AccountH['AccountPlanID'] ?></td>
+                        <td><? print $AccountH['AccountName'] ?></td>
+                        <td align="right"><? print $_lib['format']->Amount($AccountH['ThisYearAmount']) ?></td>
+                        <td align="right"></td>
+                        <td align="right"><? print $_lib['format']->Amount($AccountH['LastYearAmount']) ?></td>
+                        <td align="right"></td>
+                        <td align="right"><? print $_lib['format']->Amount($AccountH['Year']) ?></td>
+                        <td align="right"></td>
+                        </tr>
                     <? 
-                } else { continue;}
+                    }else{continue;}
             }
             }
         }

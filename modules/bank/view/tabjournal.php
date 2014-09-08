@@ -403,7 +403,7 @@ if(is_array($bank->unvotedaccount)) {
         <td class="number menu-left-border"><? if($row->AmountOut > 0) print $_lib['format']->Amount($row->AmountOut); ?></td>
         <td class="number menu-right-border"><? if($row->AmountIn > 0)  print $_lib['format']->Amount($row->AmountIn); ?></td>
 
-        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber',   'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 23)); 
+        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber',   'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 20, 'maxlength' => 25)); 
                 if(substr($row->InvoiceNumber, 0, 2) == "FB") {
                   preg_match("/FB\((\d+)\)/", $row->InvoiceNumber, $matches);
                   $fakturabankID = $matches[1];
@@ -413,11 +413,11 @@ if(is_array($bank->unvotedaccount)) {
             ?>
         </td>
 
-        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID',             'pk' => $row->AccountLineID, 'value' => $row->KID,               'class' => 'number', 'width' => 22)) ?></td>
+        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID',             'pk' => $row->AccountLineID, 'value' => $row->KID,               'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
 
-        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Description',     'pk' => $row->AccountLineID, 'value' => $row->Description,       'width' => 22, 'maxlength' => 255, 'tabindex' => $tabindexH[6])) ?></td>
+        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Description',     'pk' => $row->AccountLineID, 'value' => $row->Description,       'width' => 25, 'maxlength' => 255, 'tabindex' => $tabindexH[6])) ?></td>
 
-        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Comment',         'pk' => $row->AccountLineID, 'value' => $row->Comment,           'width' => 12, 'maxlength' => 255, 'tabindex' => $tabindexH[7])) ?></td>
+        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Comment',         'pk' => $row->AccountLineID, 'value' => $row->Comment,           'width' => 25, 'maxlength' => 255, 'tabindex' => $tabindexH[7])) ?></td>
 
         <td class="<? print $classApproved ?>"><? print $_lib['form3']->checkbox(array('table' => 'accountline', 'field' => 'Approved', 'pk' => $row->AccountLineID, 'value' => $row->Approved)) ?></td>
         <td>
@@ -478,14 +478,14 @@ if(is_array($bank->unvotedvoucher)) {
         <td><? print substr($row->VoucherDate,8,2) ?></td>
         <td class="number menu-left-border"><? if ($row->AmountOut > 0) print $_lib['format']->Amount($row->AmountOut) ?></td>
         <td class="number menu-right-border"><? if ($row->AmountIn > 0) print $_lib['format']->Amount($row->AmountIn) ?></td>
-        <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID',         'pk' => $row->VoucherID, 'value' => $row->KID,     'class' => 'number', 'width' => 22)) ?></td>
+        <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID',         'pk' => $row->VoucherID, 'value' => $row->KID,     'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
         
-        <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID',   'pk' => $row->VoucherID, 'value' => $row->InvoiceID,     'class' => 'number', 'width' => 22))?></td>
-        <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'Description', 'pk' => $row->VoucherID, 'value' => $row->Description,      'width' => 12, 'maxlength' => 255)) ?></td>
+        <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID',   'pk' => $row->VoucherID, 'value' => $row->InvoiceID,     'class' => 'number', 'width' => 20, 'maxlength' => 25))?></td>
+        <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'Description', 'pk' => $row->VoucherID, 'value' => $row->Description,      'width' => 25, 'maxlength' => 255)) ?></td>
         <td></td>
         <td><? print $row->AccountPlanID ?></td>
         <td></td>
-        <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'Quantity',        'pk' => $row->VoucherID, 'value' => $row->Quantity,         'width' => 12, 'maxlength' => 255)) ?></td>
+        <td><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'Quantity',        'pk' => $row->VoucherID, 'value' => $row->Quantity,         'width' => 25, 'maxlength' => 255)) ?></td>
         <td></td>
       </tr>
     <? }

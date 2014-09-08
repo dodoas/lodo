@@ -135,9 +135,9 @@ if(is_array($bank->bankaccount)) {
         <td>
             <? 
             if(count($row->MatchSelect) >= 1) {
-                print $_lib['form3']->select(array('table' => 'accountline', 'field' => 'KID', 'pk' => $row->AccountLineID, 'value' => $row->KID, 'data' => $row->MatchSelect, 'width' => 30));
+                print $_lib['form3']->select(array('table' => 'accountline', 'field' => 'KID', 'pk' => $row->AccountLineID, 'value' => $row->KID, 'data' => $row->MatchSelect, 'width' => 20, 'maxlength' => 25));
             } else {
-                print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID', 'pk' => $row->AccountLineID, 'value' => $row->KID,     'class' => 'number', 'width' => 22));
+                print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID', 'pk' => $row->AccountLineID, 'value' => $row->KID,     'class' => 'number', 'width' => 20, 'maxlength' => 25));
             }
             ?>
         </td>

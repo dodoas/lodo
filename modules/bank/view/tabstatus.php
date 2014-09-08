@@ -76,7 +76,7 @@ if(is_array($bank->bankvote_tilbake)) {
     <? print $_lib['form3']->text(array('table' => 'bankvotingline', 'field' => 'AmountOut',    'pk' => $bankvote->BankVotingLineID, 'value' =>$_lib['format']->Amount($bankvote->AmountOut),    'class' => $bankvote->classAmountOut)) ?>
     <? print $_lib['form3']->URL(array('url' => $bank->url . '&amp;type=voucher&amp;side=AmountOut&amp;searchstring=' . $bankvote->AmountOut, 'description' => 'S')) ?>
     </td>    
-    <td><? print $_lib['form3']->text(array('table' => 'bankvotingline', 'field' => 'KID',          'pk' => $bankvote->BankVotingLineID, 'value' =>$bankvote->KID,          'class' => 'number', 'width' => 22)) ?></td>
+    <td><? print $_lib['form3']->text(array('table' => 'bankvotingline', 'field' => 'KID',          'pk' => $bankvote->BankVotingLineID, 'value' =>$bankvote->KID,          'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
     <td></td>
     <td><? if($bank->is_closeable($bankvote->KID)) print "Lukket"?></td>
 </tr>

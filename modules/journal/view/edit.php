@@ -344,7 +344,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
         ?>
         &nbsp;-&nbsp;<b>Bilags<u>d</u>ato</b>
         
-        <input class="voucher" type="text" size="10" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" name="voucher.VoucherDate" id="voucher.VoucherDate" value="<? print $voucher_input->VoucherDate; ?>"  accesskey="D" OnChange="update_period(this, '<? print $form_name2 ?>', 'voucher.VoucherDate', 'voucher.VoucherPeriod');">
+        <input class="voucher" type="text" size="20" maxlength="25" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" name="voucher.VoucherDate" id="voucher.VoucherDate" value="<? print $voucher_input->VoucherDate; ?>"  accesskey="D" OnChange="update_period(this, '<? print $form_name2 ?>', 'voucher.VoucherDate', 'voucher.VoucherPeriod');">
         &nbsp;-&nbsp;<b><u>P</u>eriode</b>
         <?
 /*if($accounting->is_valid_accountperiod($voucher_input->VoucherPeriod, $_lib['sess']->get_person('AccessLevel')) || isset($voucher_input->new)) */
@@ -429,15 +429,15 @@ if($accountplan->EnableProject)
 } 
 ?>
     </td>
-<td><input class="voucher" type="text" size="10" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" accesskey="F" name="voucher.DueDate" value="<? if ($voucherHead->DueDate != "") print $voucherHead->DueDate; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
+<td><input class="voucher" type="text" size="20" maxlength="25" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" accesskey="F" name="voucher.DueDate" value="<? if ($voucherHead->DueDate != "") print $voucherHead->DueDate; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 
-<td><input class="voucher" type="text" size="22" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>"  accesskey="R" name="voucher.InvoiceID" value="<? print $voucher_input->InvoiceID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
+<td><input class="voucher" type="text" size="20" maxlength="25" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>"  accesskey="R" name="voucher.InvoiceID" value="<? print $voucher_input->InvoiceID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 
-<td><input class="voucher" type="text" size="22" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>"  accesskey="R" name="voucher.KID" value="<? print $voucher_input->KID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
+<td><input class="voucher" type="text" size="20" maxlength="25" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>"  accesskey="R" name="voucher.KID" value="<? print $voucher_input->KID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 
     <td><!-- <? if($rowCount>1) { $tmp = ''; } else { $tmp = $tabindex++; }; print $_lib['form3']->Type_menu3(array('table' => $db_table, 'field' => 'DescriptionID', 'value' => $voucherHead->DescriptionID, 'type' => 'VoucherDescriptionID', 'tabindex' => $tmp, 'accesskey' => 'E')); ?> --></td>
 
-<td><input class="voucher" type="text" size="10" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" accesskey="G" name="voucher.Description"       value="<? print $voucher_input->Description; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
+<td><input class="voucher" type="text" size="20" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" accesskey="G" name="voucher.Description"       value="<? print $voucher_input->Description; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
     <td align="right">
 <? 
 if($period_open) 
@@ -591,14 +591,14 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
       <td><? if($accountplan->EnableQuantity)   { ?><input class="voucher" type="text" size="5"  tabindex="<? print $tabindex++; ?>" accesskey="Q" name="voucher.Quantity"        value="<? print "$voucher->Quantity"; ?>"><? } ?></td>
       <td><? if($accountplan->EnableDepartment) { ?><? $_lib['form2']->department_menu2(array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher->DepartmentID, 'tabindex' => $tabindex++, 'accesskey' => 'V')); } ?></td>
       <td><? if($accountplan->EnableProject)    { ?><? $_lib['form2']->project_menu2(array('table' => $db_table,  'field' => 'ProjectID', 'value' => $voucher->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P')); } ?></td>
-      <td><input class="voucher" type="text" size="10" tabindex="<? print $tabindex++; ?>" name="voucher.DueDate"     accesskey="F" value="<? if ($voucherHead->DueDate != "") print $voucherHead->DueDate; else print $voucher_input->DueDate; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
+      <td><input class="voucher" type="text" size="20" tabindex="<? print $tabindex++; ?>" name="voucher.DueDate"     accesskey="F" value="<? if ($voucherHead->DueDate != "") print $voucherHead->DueDate; else print $voucher_input->DueDate; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 
-      <td><input class="voucher" type="text" size="22"  tabindex="<? print $tabindex++; ?>" name="voucher.InvoiceID"   accesskey="R" value="<? print $voucher->InvoiceID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
+      <td><input class="voucher" type="text" size="20" maxlength="25"  tabindex="<? print $tabindex++; ?>" name="voucher.InvoiceID"   accesskey="R" value="<? print $voucher->InvoiceID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 
-      <td><input class="voucher" type="text" size="22"  tabindex="<? print $tabindex++; ?>" name="voucher.KID"   accesskey="R" value="<? print $voucher->KID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
+      <td><input class="voucher" type="text" size="20" maxlength="25"  tabindex="<? print $tabindex++; ?>" name="voucher.KID"   accesskey="R" value="<? print $voucher->KID ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
 
       <td><!-- <? print $_lib['form3']->Type_menu3(array('table' => $db_table, 'field' => 'DescriptionID', 'value' => $voucher->DescriptionID, 'type' => 'VoucherDescriptionID', 'tabindex' => $tabindex++, 'accesskey' => 'E')); ?> </td>-->
-      <td><input class="voucher" type="text" size="10" tabindex="<? print $tabindex++; ?>" accesskey="G" name="voucher.Description"       value="<? print $voucher->Description; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
+      <td><input class="voucher" type="text" size="20" tabindex="<? print $tabindex++; ?>" accesskey="G" name="voucher.Description"       value="<? print $voucher->Description; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
       <td colspan="5" align="right"><? if($period_open) print $voucher_gui->update_journal_button_line($voucher, $voucher_input->VoucherPeriod, $voucher_input->JournalID, $voucher_input->VoucherType, $voucher_input->type) ?></td>
     </tr>
     <? if($view_linedetails == 1) { ?>

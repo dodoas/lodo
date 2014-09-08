@@ -493,7 +493,7 @@ if(is_array($bank->bankaccount)) {
         <td>
             <? 
             
-            print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber', 'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[5]));
+            print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber', 'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 20, 'maxlength' => 25, 'tabindex' => $tabindexH[5]));
         
             if(substr($row->InvoiceNumber, 0, 2) == "FB") {
                 preg_match("/FB\((\d+)\)/", $row->InvoiceNumber, $matches);
@@ -512,15 +512,15 @@ if(is_array($bank->bankaccount)) {
             if($row->InvoiceNumber == '' && count($row->MatchSelect) >= 1) {
                 print $_lib['form3']->select(array('table' => 'accountline', 'field' => 'KIDandInvoiceIDandAccountPlanID', 'pk' => $row->AccountLineID, 'value' => $row->KID, 'data' => $row->MatchSelect, 'width' => 50, 'required' => false)); 
             } else {
-                print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID', 'pk' => $row->AccountLineID, 'value' => $row->KID,     'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[6]));
+                print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID', 'pk' => $row->AccountLineID, 'value' => $row->KID,     'class' => 'number', 'width' => 20, 'maxlength' => 25, 'tabindex' => $tabindexH[6]));
             }
             ?>
         </td>
 
 
 
-        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Description',     'pk' => $row->AccountLineID, 'value' => $row->Description,      'width' => 12, 'maxlength' => 255, 'tabindex' => $tabindexH[7])) ?></td>
-        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Comment',         'pk' => $row->AccountLineID, 'value' => $row->Comment,          'width' => 12, 'maxlength' => 255, 'tabindex' => $tabindexH[8])) ?></td>
+        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Description',     'pk' => $row->AccountLineID, 'value' => $row->Description,      'width' => 28, 'maxlength' => 255, 'tabindex' => $tabindexH[7])) ?></td>
+        <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Comment',         'pk' => $row->AccountLineID, 'value' => $row->Comment,          'width' => 28, 'maxlength' => 255, 'tabindex' => $tabindexH[8])) ?></td>
         <td class="<? print $classApproved ?>"><? print $_lib['form3']->checkbox(array('table' => 'accountline', 'field' => 'Approved',     'pk' => $row->AccountLineID, 'value' => $row->Approved)) ?></td>
         <td>
             <?
@@ -572,9 +572,9 @@ if(is_array($bank->bankaccount)) {
             </td>
         <? if($bankvoucher) { ?>
 
-        <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID', 'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->InvoiceID,     'class' => 'number', 'width' => 22)) ?></td>
+        <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID', 'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->InvoiceID,     'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
 
-        <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID', 'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->KID,     'class' => 'number', 'width' => 22)) ?></td>
+        <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID', 'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->KID,     'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
 
         <td class="sub"><? print $_lib['form3']->URL(array('url' => $bank->urlvoucher . '&amp;voucher_JournalID=' . $bankvoucher->JournalID . '&amp;voucher_VoucherType=' . $bankvoucher->VoucherType . "&amp;action_journalid_search=1", 'description' => $bankvoucher->VoucherType . $bankvoucher->JournalID)) ?></td>
         <td class="sub"><? if($bank->is_closeable($row->ReskontroAccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID)) print "Lukket"; else print "Diff (" . $_lib['format']->Amount($bank->getDiff($bankvoucher->AccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID)) . ")"; ?></td>
@@ -616,8 +616,8 @@ if(is_array($bank->bankvoucher_this_hash)) {
         ?>
       <tr class="<? print $sec_color ?>">
         <td colspan="19"></td>
-        <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID',           'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->KID,       'class' => 'number', 'class' => 'number', 'width' => 22)) ?></td>
-        <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID',     'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->InvoiceID, 'class' => 'number', 'class' => 'number', 'width' => 22)) ?></td>
+        <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'KID',           'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->KID,       'class' => 'number', 'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
+        <td class="sub"><? print $_lib['form3']->text(array('table' => 'voucher', 'field' => 'InvoiceID',     'pk' => $bankvoucher->VoucherID, 'value' => $bankvoucher->InvoiceID, 'class' => 'number', 'class' => 'number', 'width' => 20, 'maxlength' => 25)) ?></td>
         <td class="sub"><? print $_lib['form3']->URL(array('url' => $bank->urlvoucher . '&amp;voucher_JournalID=' . $bankvoucher->JournalID . '&amp;voucher_VoucherType=' . $bankvoucher->VoucherType . "&amp;action_journalid_search=1", 'description' => $bankvoucher->VoucherType . $bankvoucher->JournalID)) ?></td>
         <td class="sub"><? if($bank->is_closeable($bankvoucher->ReskontroAccountPlanID, $bankvoucher->KID, $bankvoucher->InvoiceID)) print "Lukket"?></td>
         <td class="<? print $bank->DebitColor ?>">
