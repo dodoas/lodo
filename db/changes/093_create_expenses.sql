@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `expense_groups` (
   `department_id` int(11) NOT NULL,
   `expense_period_id` int(11) NOT NULL,
   `stock_level_start_year` float(16, 2) NOT NULL DEFAULT  '0',
+  `stock_level_end_year` float(16, 2) NOT NULL DEFAULT  '0',
   `expected_stock_level_this_year` float(16, 2) NOT NULL DEFAULT  '0',
   `expected_stock_level_next_year` float(16, 2) NOT NULL DEFAULT  '0',
   PRIMARY KEY  (`id`)
@@ -25,11 +26,10 @@ CREATE TABLE IF NOT EXISTS `expense_groups` (
 CREATE TABLE IF NOT EXISTS `expense_projects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `project_id` int(11) NOT NULL,
+  `department_id` int(11) NOT NULL,
   `expense_period_id` int(11) NOT NULL,
   `stock_level_start_year` float(16, 2) NOT NULL DEFAULT  '0',
   `stock_level_end_year` float(16, 2) NOT NULL DEFAULT  '0',
-  `purchases` float(16, 2) NOT NULL DEFAULT  '0',
-  `sales` float(16, 2) NOT NULL DEFAULT  '0',
   PRIMARY KEY  (`id`)
 
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
