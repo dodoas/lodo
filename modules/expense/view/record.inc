@@ -183,6 +183,50 @@
     return $data;
   }
 
+  function get_year_amount($rapport, $code, $project_name) {
+    foreach($rapport->lineSumH as $lineH) {
+      foreach ($rapport->lineH[$code] as $AccountH) {
+        if($AccountH['AccountName'] == $project_name) {
+          return $AccountH['ThisYearAmount'];
+        }
+      }
+    }
+  }
+
+  function print_calculated_line($project, $group_id, $project_data, $group_data) {
+    global $_lib;
+
+    if($group_data[1]->stock_level_start_year == 0)
+      echo "<td class=\"number\"> - </td>";
+    else
+      echo "<td class=\"number\">" .  $_lib['format']->Amount($project->stock_level_start_year / $group_data[$group_id]->stock_level_start_year) . "</td>";
+
+    if($group_data[$group_id]->stock_level_end_year == 0)
+      echo "<td class=\"number\"> - </td>";
+    else
+      echo "<td class=\"number\">" .  $_lib['format']->Amount($project->stock_level_end_year / $group_data[$group_id]->stock_level_end_year) . "</td>";
+
+    echo "<td class=\"number\"> - </td>";
+
+    if($group_data[$group_id]->sum == 0)
+      echo "<td class=\"number\"> - </td>";
+    else
+      echo "<td class=\"number\">" .  $_lib['format']->Amount($project_data[$project->id]['varekjop'] / $group_data[$group_id]->sum) . "</td>";
+
+    if($group_data[$group_id]->salg == 0)
+      echo "<td class=\"number\"> - </td>";
+    else
+      echo "<td class=\"number\">" .  $_lib['format']->Amount($num1 = $project_data[$project->id]['forbruk'] / $group_data[$group_id]->salg) . "</td>";
+
+    if($group_data[$group_id]->salg == 0)
+      echo "<td class=\"number\"> - </td>";
+    else
+      echo "<td class=\"number\">" .  $_lib['format']->Amount($num2 = $project_data[$project->id]['salg'] / $group_data[$group_id]->salg) . "</td>";
+
+    echo "<td class=\"number\">" .   $_lib['format']->Amount($krfort = ($num2 - $num1)) . "</td>";
+    echo "<td class=\"number\">" .  $_lib['format']->Amount($percent = (100 / $num1 * $krfort)) . "</td>";
+  }
+
   function extract_id($str, $delim) {
     return end(explode($delim, $str));
   }
@@ -209,12 +253,5 @@
     $num1 = str_replace(" ", "", $str);
     $num2 = str_replace(",", ".", $num1);
     return $num2;
-  }
-
-  function to_norway($str) {
-    if($str != "")
-      return number_format($str, 2, ',', ' ');
-    else
-      return "0,00";
   }
 ?>

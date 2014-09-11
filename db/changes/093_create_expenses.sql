@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `expense_lines` (
   `beer_purchased` float(16, 2) NOT NULL DEFAULT  '0',
   `wine_purchased` float(16, 2) NOT NULL DEFAULT  '0',
   `spirits_purchased` float(16, 2) NOT NULL DEFAULT  '0',
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY (`id`)
 
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS `expense_groups` (
   `stock_level_end_year` float(16, 2) NOT NULL DEFAULT  '0',
   `expected_stock_level_this_year` float(16, 2) NOT NULL DEFAULT  '0',
   `expected_stock_level_next_year` float(16, 2) NOT NULL DEFAULT  '0',
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY (`id`)
 
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
@@ -30,14 +30,14 @@ CREATE TABLE IF NOT EXISTS `expense_projects` (
   `expense_period_id` int(11) NOT NULL,
   `stock_level_start_year` float(16, 2) NOT NULL DEFAULT  '0',
   `stock_level_end_year` float(16, 2) NOT NULL DEFAULT  '0',
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY (`id`)
 
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `expense_periods` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `year` int(11) NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY (`id`)
 
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
