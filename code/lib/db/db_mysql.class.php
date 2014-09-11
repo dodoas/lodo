@@ -43,6 +43,11 @@ class db_mysql {
         return mysql_pconnect($this->host, $this->username, $this->password) or $_sess->error("You are not authorized to login to this database");
     }
 
+    #################################################################
+    function db_seek($result, $offset) {
+      return mysql_data_seek($result, $offset);
+    }
+
    #################################################################
    # $_lib['db']->db_query($sql);
    # Kun for Œ hente data
@@ -206,7 +211,7 @@ class db_mysql {
 
    #################################################################
    # $primarykey['RequestID']                        = $args['RequestID'];
-   #     
+   #
    # $input['request_FinishedByPersonID']  = $_lib['sess']->login_id;
    # $input['request_DateFinished']        = 'NOW()';
    # $input['request_Status']              = 5;
@@ -259,7 +264,7 @@ class db_mysql {
       }
     }
 
-   #################################################################    
+   #################################################################
    # $input['request_FinishedByPersonID']  = $_lib['sess']->login_id;
    # $input['request_DateFinished']        = 'NOW()';
    # $input['request_Status']              = 5;
@@ -335,7 +340,7 @@ class db_mysql {
 				if($pk_name) {
 					$query_set = "";
 					$query_update = "update $table_name set";
-		
+
 					foreach($pk_data as $field => $value) {
 					  #Should we check if it is funsctions here? no.
 					  $query_set .= "$field = '$value',";
@@ -353,7 +358,7 @@ class db_mysql {
 				  } else {
 					#print "Missing pk name";
 				  }
-              } 
+              }
             } else {
               $_sess->warning("Access denied: $table_name");
               print "Access denied: $table_name<br>";
