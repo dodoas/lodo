@@ -445,9 +445,33 @@ table.tab a:hover{
    border: 1px solid #a9a9a9;
 }
 
-
 .navigate.to {
   text-decoration: underline;
   cursor: pointer;
   color: #3498db;
+}
+
+.bordered th {
+  border: solid 1px #666;
+}
+
+.new-button {
+  text-decoration: none;
+  color: #2c3e50;
+  border: solid 1px #7f8c8d;
+  background-color: #ecf0f1;
+  padding: 2px;
+  display: block;
+  width: 100%;
+}
+
+.new-button:hover {
+  background-color: #7f8c8d;
+  color: #ecf0f1;
+}
+
+.new-button:active {
+  border: solid 1px #ecf0f1;
+  background-color: #ecf0f1;
+  color: #7f8c8d;
 }

@@ -49,11 +49,15 @@ class db_mysql {
         return $this->link;
     }
 
+    #################################################################
+    function db_seek($result, $offset) {
+      return mysqli_data_seek($result, $offset);
+    }
    #################################################################
    function db_query($db_query) {
        global $_lib;;
        # if($this->debug) print "$db_query<br>\n";
-       if(empty($db_query)) 
+       if(empty($db_query))
        {
            throw new Exception( sprintf("Empty query: `%s'\n", $db_query) );
        }
@@ -124,7 +128,7 @@ class db_mysql {
     function fetch_row($result){
         return $result->fetch_row();
     }
-    
+
    #################################################################
    function db_insert_id() {
        /* This does not exist in ODBC */
@@ -324,7 +328,7 @@ class db_mysql {
           #print_r($database_name);
           foreach($database_data as $table_name => $table_data) {
             #print_r($table_name);
-            
+
             #Check table access
             if($_lib['sess']->get_tableaccess($table_name) >= 2 or !$_SETUP['SECURITY']['ROLE']) {
 
@@ -648,7 +652,7 @@ class db_mysql {
         }
         return $data;
     }
-    
+
     #input: query, key
     function get_hashrow($args) {
         global $_lib;
@@ -665,7 +669,7 @@ class db_mysql {
         }
         return $hash;
     }
-    
+
     #################################################################
     #Deprecated
     #args['query'], debug=true/false - returns object row directly: object->field notation for usage
@@ -794,7 +798,7 @@ class db_mysql {
         $row = $this->get_row(array('query' => $query));
         return $row->TableField;
     }
-  
+
     /***************************************************************************
     * Preferred new function
     * Updates or stores a single record automatically, deletes a record with optinal parameter, or could be forced to only update or insert.
@@ -957,6 +961,6 @@ class db_mysql {
 
         return $success;
     }
-  
+
 } # end class
 ?>
