@@ -73,6 +73,7 @@ $rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'Star
 <form name="update" action="<? print $MY_SELF ?>&Period=<? print $rapport->Period ?>" method="post">
 <? print $_lib['form3']->hidden(array('name' => 'detail',               'value' => $detail)) ?>
 <? print $_lib['form3']->hidden(array('name' => 'Period',               'value' => $Period)) ?>
+<? print $_lib['form3']->hidden(array('name' => 'StartPeriod',          'value' => $StartPeriod)) ?>
 <? print $_lib['form3']->hidden(array('name' => 'report_DepartmentID',  'value' => $DepartmentID)) ?>
 <? print $_lib['form3']->hidden(array('name' => 'report_ProjectID',     'value' => $ProjectID)) ?>
 <table border="0" cellspacing="0">
@@ -135,6 +136,7 @@ $rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'Star
 <form name="update" action="<? print $MY_SELF ?>&Period=<? print $rapport->Period ?>" method="post">
 <? print $_lib['form3']->hidden(array('name' => 'detail', 'value' => $detail)) ?>
 <? print $_lib['form3']->hidden(array('name' => 'Period', 'value' => $Period)) ?>
+<? print $_lib['form3']->hidden(array('name' => 'StartPeriod', 'value' => $StartPeriod)) ?>
     <table border="0" cellspacing="0" cellpadding="0">
         <tbody>
             <tr>
