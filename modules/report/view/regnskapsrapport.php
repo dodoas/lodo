@@ -4,9 +4,14 @@
 # Copyright Thomas Ekdahl, 1994-2005, thomas@ekdahl.no, http://www.ekdahl.no
 
 $Period         = $_REQUEST['Period'];
+$StartPeriod         = $_REQUEST['StartPeriod'];
 $detail         = $_REQUEST['detail'];
 $DepartmentID   = $_REQUEST['report_DepartmentID'];
 $ProjectID      = $_REQUEST['report_ProjectID'];
+
+$thisDate             = $_lib['sess']->get_session('LoginFormDate');
+$thisYear             = substr($thisDate,0,4);
+$firstPeriodThisYear  = $_lib['date']->get_this_year($thisDate).'-01';
 
 $db_table = "shortreport";
 require_once "record.inc";
@@ -14,7 +19,7 @@ require_once "record.inc";
 includelogic('linetextmap/linetextmap');
 includelogic('report/regnskapsrapport');
 
-$rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'LineID' => $_REQUEST['LineID'], 'DepartmentID' => $DepartmentID, 'ProjectID'=> $ProjectID));
+$rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'StartPeriod' => $StartPeriod, 'LineID' => $_REQUEST['LineID'], 'DepartmentID' => $DepartmentID, 'ProjectID'=> $ProjectID));
 ?>
 <? print $_lib['sess']->doctype ?>
 <head>
@@ -27,18 +32,20 @@ $rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'Line
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
-<form name="velg" action="<? print $MY_SELF ?>" method="post">
+<form name="velg" action="<?= $MY_SELF ?>" method="post">
     <table border="0" cellspacing="0">
         <thead>
             <tr>
-                <th>Periode</th>
+                <th>Fra Periode</th>
+                <th>Til Periode</th>
                 <th>Avdeling</th>
                 <th>Prosjekt</th>
                 <th>Detaljer</th>
                 <th>Til m&aring;ned</th>
             </tr>
             <tr>
-                <th><? print $_lib['form3']->AccountPeriod_menu3(array('name'=>'Period', 'value'=>$rapport->Period, 'noaccess'=>'1')) ?></th>
+                <th><?= $_lib['form3']->AccountPeriod_menu3(array('name' => 'StartPeriod', 'value' => $rapport->thisStartPeriod, 'noaccess' => '1')) ?></th>
+                <th><?= $_lib['form3']->AccountPeriod_menu3(array('name' => 'Period', 'value' => $rapport->Period, 'noaccess' => '1')) ?></th>
                 <th><?
                     $aconf = array();
                     $aconf['table']         = 'report';
@@ -94,12 +101,12 @@ $rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'Line
                     <td class="number"><? print $_lib['format']->Amount($lineH['Percent']) ?>%</td>
                     <td class="number"><? print $_lib['form3']->radiobutton(array('name' => 'LineID', 'value' => $lineH['LineID'], 'choice' => $rapport->LineID)); ?></td>
                 </tr>
-            
+
             <?
             if($detail) {
                 foreach($rapport->lineH[$lineH['LineID']] as $AccountH)
-                { 
-                    if((($AccountH['ThisYearAmount']) <> 0) or (($AccountH['LastYearAmount']) <> 0) or (($AccountH['Year']) <> 0)) { 
+                {
+                    if((($AccountH['ThisYearAmount']) <> 0) or (($AccountH['LastYearAmount']) <> 0) or (($AccountH['Year']) <> 0)) {
                     ?>
                         <tr>
                         <td><? print $AccountH['AccountPlanID'] ?></td>
@@ -111,7 +118,7 @@ $rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'Line
                         <td align="right"><? print $_lib['format']->Amount($AccountH['Year']) ?></td>
                         <td align="right"></td>
                         </tr>
-                    <? 
+                    <?
                     }else{continue;}
             }
             }

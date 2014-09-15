@@ -11,24 +11,29 @@ class framework_logic_regnskapsrapport {
         foreach($args as $key => $value) {
             $this->{$key} = $value;
         }
-        
+
         if(!$this->Period) {
             $this->Period = $_lib['date']->get_this_period($_lib['sess']->get_session('LoginFormDate'));
         }
-        
+
         $this->misc();
-        $this->data($this->LineID, $this->Period);
+
+        if(is_null($this->StartPeriod))
+          $this->data($this->LineID, $this->Period);
+        else
+          $this->data($this->LineID, $this->Period, $this->StartPeriod);
+
     }
-   
+
 
     function misc() {
         global $_lib;
-        
+
         if(strlen($this->LineID) > 0) {
             $sql_update = "update shortreport set RememberLineChoice=" . (int) $this->LineID;
             $_lib['db']->db_query($sql_update);
         }
-        
+
         $check_query = "select Period from accountperiod where Period='".$this->Period."'";
         $reportResult = $_lib['db']->db_query($check_query);
         if($_lib['db']->db_numrows($reportResult) == 0)
@@ -46,16 +51,20 @@ class framework_logic_regnskapsrapport {
             $query = "insert into $this->db_table (Period) values ('".$this->Period."')";
             $tmp = $_lib['db']->db_query($query);
         }
-        
+
         $this->info = $_lib['storage']->get_row(array('query' => $get_accountreport));
         $this->LineID = $this->info->RememberLineChoice;
     }
-    
-    
-    function data($LineID, $Period) {
+
+
+    function data($LineID, $Period, $StartPeriod = null) {
         global $_lib;
 
-        $this->thisStartPeriod  = substr($Period,0,4)."-01";
+        if(is_null($StartPeriod))
+          $this->thisStartPeriod  = substr($Period,0,4)."-01";
+        else
+          $this->thisStartPeriod  = $StartPeriod;
+
         $this->thisEndPeriod    = $Period;
         $this->thisYear         = $_lib['date']->get_this_year($this->thisStartPeriod);
 
@@ -71,7 +80,7 @@ class framework_logic_regnskapsrapport {
         }
 
         if($LineID) {
-            
+
             $queryThisYear = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout from voucher V, accountplan as A where V.AccountPlanID=A.AccountPlanID and $where  V.VoucherPeriod<='".$this->thisEndPeriod."' and V.VoucherPeriod>='".$this->thisStartPeriod."' and A.EnableReportShort=1 and A.ReportShort='" . $LineID . "' group by A.ReportShort";
             #print "$queryThisYear";
             $compareThisYear        = $_lib['storage']->get_row(array('query' => $queryThisYear));
@@ -88,7 +97,7 @@ class framework_logic_regnskapsrapport {
 
         $query = "select AccountPlanID, AccountName, ReportShort from accountplan where EnableReportShort=1 order by ReportShort";
         $result2 = $_lib['db']->db_query($query);
-        
+
         while($row = $_lib['db']->db_fetch_object($result2)) {
             #print_r($row);
 
@@ -112,7 +121,7 @@ class framework_logic_regnskapsrapport {
             $this->lineH[$row->ReportShort][$row->AccountPlanID]['Year']             = $rowWholeLastYear->sumin - $rowWholeLastYear->sumout;
             $this->lineH[$row->ReportShort][$row->AccountPlanID]['Percent']          = '';
             $this->lineH[$row->ReportShort][$row->AccountPlanID]['LineID']           = $row->ReportShort;
-            
+
             # Sum
             $this->lineSumH[$row->ReportShort]['ThisYearAmount']   += ($rowThisYear->sumin - $rowThisYear->sumout);
             $this->lineSumH[$row->ReportShort]['LastYearAmount']   += ($rowLastYear->sumin - $rowLastYear->sumout);
@@ -127,7 +136,7 @@ class framework_logic_regnskapsrapport {
 
         #Oversett linjenavn
         $linetext = new linetextmap(array('ReportID' => 100));
-        
+
         foreach($this->lineSumH as $LineID => $tmp) {
             $this->lineSumH[$LineID]['LineText']        = $linetext->getTextFromLineNr(array('Line' =>$LineID, 'LanguageID' => 'no'));
             if($LastYearSum != 0) {
@@ -137,10 +146,10 @@ class framework_logic_regnskapsrapport {
 
             if($WholeLastYearSum != 0)
                 $this->lineSumH[$LineID]['Percent'] = (100 / $WholeLastYearSum) * $this->lineSumH[$LineID]['Year'];
-            
+
             if($ThisYearSum != 0)
                 $this->lineSumH[$LineID]['ThisYearPercent'] = (100 / $ThisYearSum) * $this->lineSumH[$LineID]['ThisYearAmount'];
-                  
+
         }
     }
 }
