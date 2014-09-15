@@ -187,6 +187,10 @@ if(!isset($row_comp->CompanyID))
     <td class="BGColorDark">WWW</td>
     <td class="BGColorLight"><input type="text" name="company.WWW"  value="<? print $row_comp->WWW; ?>" size="24"></td>
   </tr>
+  <tr>
+    <td class="BGColorDark">Kopi Faktura E-Post</td>
+    <td class="BGColorLight"><input type="text" name="company.CopyFakturaMail"    value="<? print $row_comp->CopyFakturaMail; ?>" size="24"></td>
+  </tr>
 </tbody>
 
 <tfoot>

@@ -186,7 +186,7 @@ foreach ($currencies as $currency) {
     </tr>
     <tr>
         <td>Faktura periode</td>
-        <td>        
+        <td>
         <?
         if($accounting->is_valid_accountperiod($row->Period, $_lib['sess']->get_person('AccessLevel'))) {
             print $_lib['form3']->AccountPeriod_menu3(array('table' => $db_table, 'field' => 'Period', 'pk'=>$InvoiceID, 'value' => $row->Period, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> true, 'tabindex' => ''));
@@ -287,9 +287,9 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
         <td align="right"><? print $_lib['format']->Amount($sumline) ?></td>
         <td>
         <? if(
-               (!$row->Locked && 
+               (!$row->Locked &&
                    $_lib['sess']->get_person('AccessLevel') >= 2 && $inline == 'edit' && $accounting->is_valid_accountperiod($row->Period, $_lib['sess']->get_person('AccessLevel')))
-               ||  
+               ||
                 ($_lib['sess']->get_person('AccessLevel') >= 4 && $inline == 'edit' && $accounting->is_valid_accountperiod($row->Period, $_lib['sess']->get_person('AccessLevel')))) { ?>
         <a href="<? print $_SETUP[DISPATCH]."t=invoice.edit&InvoiceID=$InvoiceID&action_invoice_outlinedelete=1&amp;LineID=$LineID&amp;inline=edit" ?>" class="button">Slett</a>
         <? } ?>
@@ -361,8 +361,8 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     <tr>
         <td>
         <?
-	if(!$row->Locked) { 
-		print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_lock', 'value'=>'L&aring;s (L)', 'accesskey'=>'L', 'confirm'=>'Er du sikker p&aring; at du vil l&aring;se fakturaen?')); 
+	if(!$row->Locked) {
+		print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_lock', 'value'=>'L&aring;s (L)', 'accesskey'=>'L', 'confirm'=>'Er du sikker p&aring; at du vil l&aring;se fakturaen?'));
 	};
 
         ?>
@@ -386,7 +386,7 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
                 if($accounting->is_valid_accountperiod($_lib['date']->get_this_period($row->Period), $_lib['sess']->get_person('AccessLevel')))
                     print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_delete', 'value'=>'Slett faktura (D)', 'accesskey'=>'D', 'confirm' => 'Er du sikker p&aring; at du vil slette denne fakturaen?'));
             }
-        } 
+        }
         else {
             print "Faktura l&aring;st";
         }
@@ -408,10 +408,13 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
      <tr>
         <td colspan="7" align="right">
         <form name="send_mail" action="<? print $_lib['sess']->dispatch ?>t=invoice.sendmail&InvoiceID=<? print $InvoiceID ?>" method="post">
+          <?php
+            $rowcomapny = $_lib['storage']->get_row(array('query' => "SELECT * FROM `company` WHERE CompanyID=" . $row->FromCompanyID));
+          ?>
             <br />
             <input type="text" value="<? print $row->IEmail; ?>" name="email_recipient" />
-            <input type="hidden" value="<? print $row->SEmail ?>" name="send_mail_copy_mail" />
-            <input name="send_mail_copy" type="checkbox" checked /> kopi til firma 
+            <input type="hidden" value="<?=  $rowcomapny->CopyFakturaMail ?>" name="send_mail_copy_mail" />
+            <input name="send_mail_copy" type="checkbox" checked /> kopi til firma
             <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_send_email2', 'value'=>'Send email')) ?>
         </form>
      </tr>

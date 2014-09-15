@@ -34,28 +34,15 @@ function send_invoice($to, $from, $invoiceno, $html, $attachment, $subject) {
                        $invoiceno, $invoiceno,
                        $attachment);
 
-    // mail(
-    //       $to
-    //     , $_lib['sess']->company->CompanyName . " - invoice " . $invoiceno
-    //     , $message
-    //     , $headers
-    // );
     $mailer = new Mailer();
     $mailer->send("admin@lodo.no", $to, $subject, $message, $firstb);
 }
 
-// ob_start();
-// include('print.php');
-// $data_html = ob_get_contents();
-// ob_end_clean();
 ob_start();
 include('print2.php');
 header('Content-type: text/html;');
 $data_pdf = ob_get_contents();
 ob_end_clean();
-
-// $data_html = "<html><body>" . strstr($data_html, "<h2>");
-// $data_html = strip_tags($data_html, "<html><body><table><h2><tr><td><thead><tbody><tfoot><label><colgroup><br><th>");
 
 $recipient = $_REQUEST['email_recipient'];
 
@@ -72,7 +59,9 @@ $row                    = $_lib['storage']->get_row(array('query' => $get_invoic
 $data_html = "Her er faktura fra " . $row->SName . " til " . $row->IName . ".<br>";
 $data_html .= "Faktura med fakturanummer: " . $InvoiceID . "<br>";
 $data_html .= "Se vedlegg for " . iconv("UTF-8", "ISO-8859-1", 'å') . " se hele fakturaen";
+
 send_invoice($recipient, $row_from->Email, $_REQUEST['InvoiceID'], $data_html, $data_pdf, $row->SName . " - faktura " . $InvoiceID);
+
 echo $recipient;
 echo '<h2>Email sent</h2>';
 echo '<META HTTP-EQUIV="Refresh" CONTENT="1; URL='. $_lib['sess']->dispatch . 't=invoice.edit&InvoiceID=' . $InvoiceID . '">';

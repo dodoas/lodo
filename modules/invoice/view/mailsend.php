@@ -5,8 +5,8 @@ class Mailer {
 
   public $host = "ssl://smtp.googlemail.com";
   public $port = "465";
-  public $username = "peacemaker.994@gmail.com";
-  public $password = "h5gmailH8O463";
+  public $username = "";
+  public $password = "";
 
   public function send($from, $to, $subject, $message, $boundary) {
     $headers = array ('From' => $from,
