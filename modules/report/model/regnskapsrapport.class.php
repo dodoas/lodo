@@ -96,7 +96,7 @@ class framework_logic_regnskapsrapport {
             $WholeLastYearSum       = $compareWholeLastYear->sumin - $compareWholeLastYear->sumout;
         }
 
-        $query = "select AccountPlanID, AccountName, ReportShort from accountplan where EnableReportShort=1 order by ReportShort";
+        $query = "select AccountPlanID, AccountName, ReportShort from accountplan where EnableReportShort=1 and Active=1 order by ReportShort";
         $result2 = $_lib['db']->db_query($query);
 
         while($row = $_lib['db']->db_fetch_object($result2)) {
