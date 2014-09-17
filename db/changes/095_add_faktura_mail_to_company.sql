@@ -1,3 +1,1 @@
-ALTER TABLE  `company` ADD  `CopyFakturaMail` VARCHAR( 255 ) NULL AFTER  `Email`;
-
-INSERT INTO `AB`.`confdbfields` (`ConfDBFieldID`, `TableField`, `Active`, `TS`, `ValidFrom`, `ValidTo`, `TableName`, `PrimaryKey`, `FormHeight`, `FormWidth`, `DefaultValue`, `FormType`, `FieldType`, `FieldNull`, `FieldExtra`, `DefaultLink`, `InputValidation`, `OutputValidation`, `Required`, `FormTypeEdit`, `FieldExtraEdit`, `MD5Created`, `MD5Updated`, `CreatedByPersonID`, `UpdatedByPersonID`, `CreatedDateTime`) VALUES (NULL, 'CopyFakturaMail', '1', CURRENT_TIMESTAMP, '2001-01-01 00:00:00', '9999-12-31 00:00:00', 'company', '0', '1', '0', '0', 'text', 'varchar(255)', '', '', NULL, 'Email', 'Email', '0', '', '', '', '', '0', '0', '2014-09-15 00:00:00');
+ALTER TABLE  `company` ADD  `CopyFakturaMail` VARCHAR( 255 ) NULL AFTER `Email`;
