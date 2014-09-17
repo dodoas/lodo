@@ -362,6 +362,7 @@
 
     function addline() {
       var index = parseInt($('#tabindex').val());
+      $('#add_table tbody tr:last input:last').unbind();
       $('#add_table tbody tr:last').after("<tr> \
         <td><input type=\"text\" name=\"expense_lines.supplier_name[]\" id=\"expense_lines.supplier_name[]\" value=\"\" size=\"22\" tabindex=\"" + index++ + "\" maxlength=\"22\"></td> \
         <td><input type=\"text\" name=\"expense_lines.beer_purchased[]\" id=\"expense_lines.beer_purchased[]\" value=\"0,00\" size=\"22\" tabindex=\"" + index++ + "\" maxlength=\"22\" class=\"number\"></td> \
@@ -370,7 +371,7 @@
         <td>0,00</td> \
       </tr>");
       $('#tabindex').val(index);
-            $('#add_table tbody tr:last input:last').keyup(function(e) {
+      $('#add_table tbody tr:last input:last').keyup(function(e) {
         var code = e.keyCode || e.which;
         if (code == '9') {
           addline();
