@@ -224,7 +224,11 @@
       echo "<td class=\"number\">" .  $_lib['format']->Amount($num2 = $project_data[$project->id]['salg'] / $group_data[$group_id]->salg) . "</td>";
 
     echo "<td class=\"number\">" .   $_lib['format']->Amount($krfort = ($num2 - $num1)) . "</td>";
-    echo "<td class=\"number\">" .  $_lib['format']->Amount($percent = (100 / $num1 * $krfort)) . "</td>";
+
+    if($num1 == 0 || $krfort == 0)
+      echo "<td class=\"number\"> - </td>";
+    else
+      echo "<td class=\"number\">" .  $_lib['format']->Amount($percent = (100 / $num1 * $krfort)) . "</td>";
   }
 
   function extract_id($str, $delim) {
