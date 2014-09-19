@@ -215,7 +215,10 @@
             $dirtyname = 'expense_projects_dirty_' . $project->id;
             echo "<input type=\"hidden\" name=\"" . $dirtyname . "\" id=\"" . $dirtyname . "\" value=\"0\">";
 
-            $project_name = $_lib['db']->db_fetch_object($_lib['db']->db_query("SELECT Heading FROM project WHERE ProjectID=" . $project->project_id))->Heading;
+            $project = $_lib['db']->db_fetch_object($_lib['db']->db_query("SELECT Heading, ProjectID FROM project WHERE ProjectID=" . $project->project_id));
+            $project_name =  $project->Heading;
+            $project_id = $project->ProjectID;
+            //var_dump($project_name);
 
             echo "<tr>";
 
@@ -228,11 +231,11 @@
 
             $rapport = new framework_logic_regnskapsrapport(array('Period' => $year . '-13', 'LineID' => $_REQUEST['LineID'], 'DepartmentID' => $cid, 'ProjectID'=> $project->project_id));
 
-            echo "<td class=\"number\">" . $_lib['format']->Amount($varekjop = get_year_amount($rapport, 400, $project_name)) . "</td>";
+            echo "<td class=\"number\">" . $_lib['format']->Amount($varekjop = get_year_amount($rapport, 400, $project_id)) . "</td>";
 
             // echo "<td class=\"number\">" . $_lib['format']->Amount($varekjop =  69951.44) . "</td>";
             echo "<td class=\"number\">" . $_lib['format']->Amount($forbruk = $stock_diff + $varekjop) . "</td>";
-            echo "<td class=\"number\">" . $_lib['format']->Amount($salg = get_year_amount($rapport, 300, $project_name)) . "</td>";
+            echo "<td class=\"number\">" . $_lib['format']->Amount($salg = get_year_amount($rapport, 300, $project_id)) . "</td>";
             // echo "<td class=\"number\">" . $_lib['format']->Amount($salg = 3746054.80) . "</td>";
             echo "<td class=\"number\">" . $_lib['format']->Amount($fortjeneste = -$forbruk + $salg) . "</td>";
 

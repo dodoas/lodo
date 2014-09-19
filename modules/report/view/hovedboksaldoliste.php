@@ -116,49 +116,49 @@ if($_type == 'hovedbok')
       $safe_to_period = mysql_escape_string($_to_period);
 
       /* henter ut aktive kontoer og kontoer satt til uaktiv, men allikevel har en voucher registrert --m */
-      $query_balance = "SELECT 
-				A.AccountPlanID, A.AccountName, 
-				A.EnableBudgetResult 
+      $query_balance = "SELECT
+				A.AccountPlanID, A.AccountName,
+				A.EnableBudgetResult
 			FROM
 				accountplan A,
 				voucher V
-			WHERE 
-				( A.Active = 1 AND A.AccountPlanType = 'balance' ) 
-				
-				OR 
-				
-				( 
-					-- A.Active = 0 AND 
+			WHERE
+				( A.Active = 1 AND A.AccountPlanType = 'balance' )
+
+				OR
+
+				(
+					-- A.Active = 0 AND
 					A.AccountPlanType = 'balance' AND
-					V.AccountPlanID = A.AccountPlanID AND 
+					V.AccountPlanID = A.AccountPlanID AND
 					V.VoucherPeriod >= '$safe_from_period' AND
-					V.VoucherPeriod < '$safe_to_period' 
+					V.VoucherPeriod < '$safe_to_period'
 				)
 			GROUP BY
-				A.AccountPlanID 
-			ORDER BY 
+				A.AccountPlanID
+			ORDER BY
 				A.AccountPlanID ASC";
 
-      $query_result  = "SELECT 
-				A.AccountPlanID, A.AccountName, A.EnableBudgetResult 
+      $query_result  = "SELECT
+				A.AccountPlanID, A.AccountName, A.EnableBudgetResult
 			FROM
 				accountplan A,
-				voucher V 
-			WHERE 
+				voucher V
+			WHERE
 				( A.Active = 1 AND A.AccountPlanType = 'result' )
-		
+
 				OR
-			
+
 				(
-					-- A.Active = 0 AND 
+					-- A.Active = 0 AND
 					A.AccountPlanType = 'result' AND
 					V.AccountPlanID = A.AccountPlanID AND
 					V.VoucherPeriod >= '$safe_from_period' AND
 					V.VoucherPeriod < '$safe_to_period'
-				) 
-			GROUP BY 
-				A.AccountPlanID 
-			ORDER BY 
+				)
+			GROUP BY
+				A.AccountPlanID
+			ORDER BY
 				A.AccountPlanID asc";
   }
   elseif($_active == 0)
@@ -180,10 +180,10 @@ elseif($_type == 'reskontro')
   {
       $query_balance = "select A.AccountPlanID, A.AccountName, A.EnableBudgetResult from accountplan A where A.AccountPlanType='" . $selectedaccount->ReskontroAccountPlanType . "' ";
   }
-  
+
   	if($_reskontroFrom)
   		$query_balance .= "and A.AccountPlanID >= '$_reskontroFrom' ";
-  
+
   	if($_reskontroTo)
   		$query_balance .= "and A.AccountplanID <= '$_reskontroTo' ";
 
@@ -311,10 +311,10 @@ while($account = $_lib['db']->db_fetch_object($balance_accounts))
     } else {
       $budget = "";
     }
-    
+
     $accountsumH[substr($account->AccountPlanID, 0,1)]->Amount += $sumrow_new;
     $accountsumH[substr($account->AccountPlanID, 0,1)]->Budget += $budget;
-    
+
     $urltmp = $url . "&amp;report_FromAccount=$account->AccountPlanID&amp;report_ToAccount=$account->AccountPlanID";
     ?>
     <tr class="voucher">
@@ -354,8 +354,7 @@ else
 
 if($sumTotal_prev != 0)
 {
-    $printsum_prev = "<font color=\"red\">$sumTotal_prev</font>";
-    $printtext_prev = "<font color=\"red\">Sum</font>";
+    $printsumclass = "red";
 }
 else
 {
@@ -372,10 +371,10 @@ else
       <? if($EnableLastYear) { ?>
       <td class="number"><? print $_lib['format']->Amount($sumTotal_prev_old) ?></td>
       <td class="number"><? print $_lib['format']->Amount($sumTotal_prev_new) ?></td>
-      <td class="number"><? print $_lib['format']->Amount($printsum_prev) ?></td>
+      <td class="number <?= $printsumclass ?>"><? print $_lib['format']->Amount($sumTotal_prev) ?></td>
       <? } ?>
       <? if($EnableBudget) { ?>
-      <td class="number"><? print $_lib['format']->Amount($budgetTotal) ?></td>
+        <td class="number"><? print $_lib['format']->Amount($budgetTotal) ?></td>
       <? } ?>
       <td><? print $_lib['form3']->URL(array('description' => 'Detaljer', 'url' => 'http://regnskap.empatix.no/lodo.php?SID=ff3e9avftqiigr55qu1hd6c2m4&view_mvalines=1&view_linedetails=1&t=report.verify_consistency&report_Type=balancenotok&report_Sort=VoucherID')) ?></td>
   </tr>
@@ -505,7 +504,7 @@ else
       } else {
         $budget = "";
       }
-      
+
       $accountsumH[substr($account->AccountPlanID, 0,1)]->Amount += $sumrow_new;
       $accountsumH[substr($account->AccountPlanID, 0,1)]->Budget += $budget;
 
@@ -580,7 +579,7 @@ else
     <th>Diff</th>
 </tr>
 
-<? foreach($accountsumH as $key => $sumO) { 
+<? foreach($accountsumH as $key => $sumO) {
 if($key == 8) continue;
 if($key == 4 || $key == 5 || $key == 6 || $key == 7) {
     $sumexpences += $sumO->Amount;
@@ -621,8 +620,8 @@ if($key == 3) { ?>
 </tr>
 <tr>
     <th class="sub">Diff</th>
-    <? 
-    $diffexpences = $sumexpences + $accountsumH[3]->Amount; 
+    <?
+    $diffexpences = $sumexpences + $accountsumH[3]->Amount;
     $diffbudget   = $sumbudget   + $accountsumH[3]->Budget;
     ?>
     <th class="number sub"><? print $_lib['format']->Amount($diffexpences) ?></th>

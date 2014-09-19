@@ -96,7 +96,7 @@ class framework_logic_regnskapsrapport {
             $WholeLastYearSum       = $compareWholeLastYear->sumin - $compareWholeLastYear->sumout;
         }
 
-        $query = "select AccountPlanID, AccountName, ReportShort from accountplan where EnableReportShort=1 and Active=1 order by ReportShort";
+        $query = "select AccountPlanID, AccountName, ReportShort, ProjectID from accountplan where EnableReportShort=1 order by ReportShort";
         $result2 = $_lib['db']->db_query($query);
 
         while($row = $_lib['db']->db_fetch_object($result2)) {
@@ -115,6 +115,7 @@ class framework_logic_regnskapsrapport {
             # Line
             $this->lineH[$row->ReportShort][$row->AccountPlanID]['AccountPlanID']    = $row->AccountPlanID;
             $this->lineH[$row->ReportShort][$row->AccountPlanID]['AccountName']      = $row->AccountName;
+            $this->lineH[$row->ReportShort][$row->AccountPlanID]['ProjectID']        = $row->ProjectID;
             $this->lineH[$row->ReportShort][$row->AccountPlanID]['ThisYearAmount']   = $rowThisYear->sumin - $rowThisYear->sumout;
             $this->lineH[$row->ReportShort][$row->AccountPlanID]['ThisYearPercent']  = '';
             $this->lineH[$row->ReportShort][$row->AccountPlanID]['LastYearAmount']   = $rowLastYear->sumin - $rowLastYear->sumout;

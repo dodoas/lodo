@@ -183,10 +183,10 @@
     return $data;
   }
 
-  function get_year_amount($rapport, $code, $project_name) {
+  function get_year_amount($rapport, $code, $project_id) {
     foreach($rapport->lineSumH as $lineH) {
       foreach ($rapport->lineH[$code] as $AccountH) {
-        if($AccountH['AccountName'] == $project_name) {
+        if($AccountH['ProjectID'] == $project_id) {
           return $AccountH['ThisYearAmount'];
         }
       }
