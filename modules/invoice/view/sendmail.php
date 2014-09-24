@@ -5,6 +5,8 @@
 
 function send_invoice($to, $from, $invoiceno, $html, $attachment) {
     global $_lib;
+
+    $invoice = $_lib['storage']->get_row(array("query" => "select I.*, A.InvoiceCommentCustomerPosition from invoiceout as I, accountplan as A where InvoiceID='$invoiceno' and A.AccountPlanID=I.CustomerAccountPlanID"));
     $attachment = str_replace("\r", "", chunk_split(base64_encode($attachment)));
     $html = str_replace(array("=", "\r"), array("=3D", ""), $html);
     $hash = md5(time());
@@ -34,7 +36,7 @@ function send_invoice($to, $from, $invoiceno, $html, $attachment) {
 
     mail(
           $to
-        , $_lib['sess']->company->CompanyName . " - invoice " . $invoiceno
+        , $invoice->SName . ", fakturanr " . $invoiceno . " kr " . $invoice->TotalCustPrice
         , $message
         , $headers
     );
