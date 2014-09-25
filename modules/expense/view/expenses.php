@@ -215,9 +215,9 @@
             $dirtyname = 'expense_projects_dirty_' . $project->id;
             echo "<input type=\"hidden\" name=\"" . $dirtyname . "\" id=\"" . $dirtyname . "\" value=\"0\">";
 
-            $project = $_lib['db']->db_fetch_object($_lib['db']->db_query("SELECT Heading, ProjectID FROM project WHERE ProjectID=" . $project->project_id));
-            $project_name =  $project->Heading;
-            $project_id = $project->ProjectID;
+            $projectP = $_lib['db']->db_fetch_object($_lib['db']->db_query("SELECT Heading, ProjectID FROM project WHERE ProjectID=" . $project->project_id));
+            $project_name =  $projectP->Heading;
+            $project_id = $projectP->ProjectID;
             //var_dump($project_name);
 
             echo "<tr>";
