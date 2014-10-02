@@ -3,7 +3,7 @@ set -e
 database=LODO
 dbuser=lodo
 
-ln -s lodo html
+ln -s html lodo
 echo "Warning: MySQL passwords will be passed on commandline"
 
 trap 'stty echo; echo; exit' TERM INT
@@ -124,6 +124,11 @@ header("Pragma: no-cache");
 \$_SETUP['MYSQLADMIN']       = "/usr/bin/mysqladmin";
 \$_SETUP['MYSQL']        = "/usr/bin/mysql";
 \$_SETUP['MYSQLDUMP']        = "/usr/bin/mysqldump";
+
+##################################################################
+#Setting default session length for normal users (in seconds)
+\$_SETUP['SessLength']  = 300;
+
 ?>
 EOF
 
