@@ -99,6 +99,17 @@ $row = $_lib['storage']->get_row(array('query' => $query));
       <input type="text" name="company.CompanyNumber"   value="<? print $row->CompanyNumber; ?>" size="24">
       <input type="text" name="company.OrgNumber"   value="<? print $row->OrgNumber; ?>" size="24">
 
+  <?php if($_lib['sess']->get_person('AccessLevel') >= 3): ?>
+    <tr>
+      <td>Kontotype</td>
+      <td>
+        <select name="account_type">
+          <option value="normal" <?= $row->account_type == 'normal' ? 'selected="selected"' : '' ?> >Normal</option>
+          <option value="betale" <?= $row->account_type == 'betale' ? 'selected="selected"' : '' ?> >Betale</option>
+        </select>
+      </td>
+    </tr>
+  <?php endif; ?>
 </tbody>
 
 <tfoot>

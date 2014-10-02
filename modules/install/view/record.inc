@@ -15,6 +15,7 @@ if($_REQUEST['action_install_new'])
 }
 elseif($_REQUEST['action_install_db'])
 {
+    $acc_type = filter_input(INPUT_POST, 'account_type', FILTER_SANITIZE_STRING);
     $primarykey['InstallationID'] = $InstallationID;
     $_POST['installation_CreatedDateTime']  = 'NOW()';
 
@@ -113,7 +114,6 @@ elseif($_REQUEST['action_install_db'])
     ##########
     $install->create_periods();
 
-
     #Do not insert user information if we have chosen to copy company tables
 
     # Install Admin user
@@ -150,6 +150,8 @@ elseif($_REQUEST['action_install_db'])
 
     #print "Installasjon ferdig<br>";
     $_REQUEST['installation_finished'] = true;
+
+    $install->install_account_type($acc_type);
 }
 elseif($_REQUEST['action_install_drop'])
 {

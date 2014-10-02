@@ -264,6 +264,15 @@ foreach ($currencies as $currency) {
         <td><? print $_lib['form3']->text(array('table' => 'installation', 'field' => 'Version', 'value' => $row->Version)); ?></td>
       </tr>
       <tr>
+        <td class="menu">Kontotype</td>
+        <td>
+          <select name="account_type">
+            <option value="normal">Normal</option>
+            <option value="betale">Betale</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
         <td class="menu"></td>
         <td colspan="3" align="right"><? print $_lib['form3']->submit(array('name' => 'action_install_update', 'value' => 'Lagre')); ?><? if($type == 'installation') { ?><? print $_lib['form3']->submit(array('name' => 'action_install_db', 'value' => 'Installer')); ?><? } ?></td>
       </tr>

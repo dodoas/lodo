@@ -38,6 +38,10 @@ elseif($_lib['input']->getProperty('action_company_update')) {
           $_POST['company_ICountryCode'] = $_POST['company_VCountryCode'];
       }
 
+      $acc_type = filter_input(INPUT_POST, 'account_type', FILTER_SANITIZE_STRING);
+      $query = "update company set account_type='" . $acc_type . "'";
+      $_dbh[$_dsn]->db_query3(array('query'=>$query, 'do_not_die'=>'1'));
+
       $_dbh[$_dsn]->db_update_hash($_POST, $db_table, $primarykey);
 }
 elseif ($_lib['input']->getProperty('action_company_delete'))
