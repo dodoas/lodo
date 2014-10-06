@@ -37,7 +37,7 @@
     includeinc('left');
   ?>
 
-  <h2>Expenses for <?= $department->DepartmentName ?> for year <?= $year ?> - <small><?= iconv("UTF-8", "ISO-8859-1", 'Å') ?>ret <?= $year ?> 1 jan <?= $year ?> 31 des <?= $year ?></small></h2>
+  <h2>Expenses for <?= $department->DepartmentName ?> for year <?= $year ?> - &Aring;ret <?= $year ?> 1 jan <?= $year ?> 31 des <?= $year ?></small></h2>
 
   <form action="" method="POST">
     <input type="hidden" name="period_id" value="<?= $yearObj->id ?>">
@@ -46,7 +46,7 @@
       <thead>
         <tr>
           <th>Supplier name</th>
-          <th><?= iconv("UTF-8", "ISO-8859-1", 'Ø') ?>l 2,5% til 4,7%</th>
+          <th>&Oslash;l 2,5% til 4,7%</th>
           <th>Vin 4,7% til 21%</th>
           <th>Brennevin 22% til 60%</th>
           <th>Sum Liter</th>
@@ -99,13 +99,13 @@
         <tr>
           <th></th>
           <th>Lager liter den 1 jan</th>
-          <th>Kj<?= iconv("UTF-8", "ISO-8859-1", 'ø') ?>p liter <?= iconv("UTF-8", "ISO-8859-1", 'Ø') ?>l</th>
-          <th>Kj<?= iconv("UTF-8", "ISO-8859-1", 'ø') ?>p liter Vin</th>
-          <th>Kj<?= iconv("UTF-8", "ISO-8859-1", 'ø') ?>p liter Brennevin</th>
+          <th>Kj&oslash;p liter &Oslash;l</th>
+          <th>Kj&oslash;p liter Vin</th>
+          <th>Kj&oslash;p liter Brennevin</th>
           <th>Lager liter den 31 des</th>
-          <th>Salg <?= iconv("UTF-8", "ISO-8859-1", 'Å') ?>ret <?= $year ?></th>
-          <th>Forventet <?= iconv("UTF-8", "ISO-8859-1", 'Å') ?>ret <?= $year ?></th>
-          <th>Forventet <?= iconv("UTF-8", "ISO-8859-1", 'Å') ?>ret <?= $year + 1 ?></th>
+          <th>Salg &Aring;ret <?= $year ?></th>
+          <th>Forventet &Aring;ret <?= $year ?></th>
+          <th>Forventet &Aring;ret <?= $year + 1 ?></th>
         </tr>
       </thead>
       <tbody>
@@ -196,9 +196,9 @@
           <th>Varelager 1 jan <?= $year ?></th>
           <th>Varelager 31 des <?= $year ?></th>
           <th>Varelager regulering</th>
-          <th>Varekj<?= iconv("UTF-8", "ISO-8859-1", 'ø') ?>p</th>
+          <th>Varekj&oslash;p</th>
           <th>Vare forbruk</th>
-          <th>Salg <?= iconv("UTF-8", "ISO-8859-1", 'Å') ?>ret <?= $year ?></th>
+          <th>Salg &Aring;ret <?= $year ?></th>
           <th>Fortjeneste i kr</th>
           <th>Fortjeneste i %</th>
         </tr>
@@ -215,9 +215,9 @@
             $dirtyname = 'expense_projects_dirty_' . $project->id;
             echo "<input type=\"hidden\" name=\"" . $dirtyname . "\" id=\"" . $dirtyname . "\" value=\"0\">";
 
-            $project = $_lib['db']->db_fetch_object($_lib['db']->db_query("SELECT Heading, ProjectID FROM project WHERE ProjectID=" . $project->project_id));
-            $project_name =  $project->Heading;
-            $project_id = $project->ProjectID;
+            $projectP = $_lib['db']->db_fetch_object($_lib['db']->db_query("SELECT Heading, ProjectID FROM project WHERE ProjectID=" . $project->project_id));
+            $project_name =  $projectP->Heading;
+            $project_id = $projectP->ProjectID;
             //var_dump($project_name);
 
             echo "<tr>";

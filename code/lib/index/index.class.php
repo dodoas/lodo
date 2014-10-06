@@ -92,6 +92,9 @@ if(strlen($_REQUEST['submit_login'])>0 and $_SETUP['ACTIVE_INTERFACE']=='lodo')
 # session_set_cookie_params($_SETUP[SECURITY][SESSIONTIMEOUT], empatix, $_SERVER['HTTP_HOST']);
 
 session_start();
+if ( ! isset($_SESSION['StartTS']) ) {
+    $_SESSION['StartTS'] = time();
+}
 if(isset($_REQUEST['LoginFormDate']))  $_SESSION['LoginFormDate'] = $_REQUEST['LoginFormDate'];
 $_action = $_REQUEST['action'];
 

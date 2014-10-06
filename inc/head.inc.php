@@ -3,6 +3,14 @@
 //{
   $_SESSION['css'] = "default";
 //}
+$DEFAULT_ACCOUNT_TYPE = 'normal';
+$MIN_SESSION_LENGTH = 5; //Minimum session length is set to be 5 sec.
+$current_time = time();
+$account_type = $_lib['sess']->get_companydef('account_type') or $DEFAULT_ACCOUNT_TYPE;
+$session_length = ( $current_time - $_SESSION['StartTS'] < $_SETUP['SessLength'] ) ? $_SETUP['SessLength'] - ( $current_time - $_SESSION['StartTS'] ) : $MIN_SESSION_LENGTH;
+if ( $account_type == $DEFAULT_ACCOUNT_TYPE ) {
+    echo '<meta http-equiv="refresh" content="' . $session_length . ';URL=http://' . $_SERVER['SERVER_NAME'] . '/redirect.php" />';
+}
 ?>
     <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
     <meta name="author"             content="Thomas Ekdahl, thomas@ekdahl.no, http://www.ekdahl.no/" />

@@ -41,6 +41,12 @@ class Install
         }
     }
 
+    function install_account_type($account_type) {
+      global $_lib;
+      $query = "update company set account_type='" . $account_type . "'";
+      $this->_dbh[$this->dsn_remote]->db_query3(array('query'=>$query, 'do_not_die'=>'1'));
+    }
+
     #only datastructure
     function install_database()
     {
