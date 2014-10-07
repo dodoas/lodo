@@ -237,7 +237,7 @@
             echo "<td class=\"number\">" . $_lib['format']->Amount($forbruk = $stock_diff + $varekjop) . "</td>";
             echo "<td class=\"number\">" . $_lib['format']->Amount($salg = get_year_amount($rapport, 300, $project_id)) . "</td>";
             // echo "<td class=\"number\">" . $_lib['format']->Amount($salg = 3746054.80) . "</td>";
-            echo "<td class=\"number\">" . $_lib['format']->Amount($fortjeneste = -$forbruk + $salg) . "</td>";
+            echo "<td class=\"number\">" . $_lib['format']->Amount($fortjeneste = $forbruk + $salg) . "</td>";
 
             if($forbruk * $fortjeneste != 0)
               echo "<td class=\"number\">" . $_lib['format']->Amount($percent = (100 / $forbruk * $fortjeneste)) . "</td>";
@@ -289,12 +289,6 @@
 
   <table class="lodo_data bordered">
       <thead>
-        <tr>
-          <th>Regnskap</th>
-          <?php foreach($sums as $key => $value): ?>
-            <th class="number"><?= $_lib['format']->Amount($value) ?></th>
-          <?php endforeach; ?>
-        </tr>
         <tr>
           <th>Priser pr. liter u/mva</th>
           <?php for($i = 0; $i < 6; $i++): ?>
