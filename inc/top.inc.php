@@ -170,7 +170,7 @@ $topclass = 'topclass';
     </div>
     <?php if($_lib['sess']->get_companydef('account_type') == 'normal'): ?>
       <div class="warning">
-        <p>You are using free version of Lodo, you are going to be redirected in few minutes.</p>
+        <p>Du bruker gratis versjon av lodo. Du vil bli sent til en reklame side.</p>
       </div>
     <?php endif; ?>
     <hr>
