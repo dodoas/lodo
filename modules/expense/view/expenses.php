@@ -239,7 +239,7 @@
             // echo "<td class=\"number\">" . $_lib['format']->Amount($salg = 3746054.80) . "</td>";
             echo "<td class=\"number\">" . $_lib['format']->Amount($fortjeneste = -$forbruk + $salg) . "</td>";
 
-            if($forbruk * $fortjeneste != 0)
+            if(($forbruk * $fortjeneste) != 0)
               echo "<td class=\"number\">" . $_lib['format']->Amount($percent = (100 / $forbruk * $fortjeneste)) . "</td>";
             else
               echo "<td class=\"number\">" . $_lib['format']->Amount($percent = (0)) . "</td>";
@@ -253,7 +253,6 @@
             $sums['forbruk'] += $forbruk;
             $sums['salg'] += $salg;
             $sums['fortjeneste'] += $fortjeneste;
-            $sums['percent'] += $percent;
 
             $project_data[$project->id]['stock_diff'] = $stock_diff;
             $project_data[$project->id]['varekjop'] = $varekjop;
@@ -264,6 +263,7 @@
 
             $tabindexH[1]++;
           }
+          $sums['percent'] = 100 / $sums['forbruk'] * $sums['fortjeneste'];
           echo "<input type=\"hidden\" value=\"" . $tabindexH[1] . "\" id=\"tabindex\">";
         ?>
       </tbody>

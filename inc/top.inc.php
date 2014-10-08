@@ -168,4 +168,9 @@ $topclass = 'topclass';
             </tr>
         </table>
     </div>
+    <?php if($_lib['sess']->get_companydef('account_type') == 'normal'): ?>
+      <div class="warning">
+        <p>You are using free version of Lodo, you are going to be redirected in few minutes.</p>
+      </div>
+    <?php endif; ?>
     <hr>
