@@ -235,9 +235,9 @@
 
             // echo "<td class=\"number\">" . $_lib['format']->Amount($varekjop =  69951.44) . "</td>";
             echo "<td class=\"number\">" . $_lib['format']->Amount($forbruk = $stock_diff + $varekjop) . "</td>";
-            echo "<td class=\"number\">" . $_lib['format']->Amount($salg = get_year_amount($rapport, 300, $project_id)) . "</td>";
+            echo "<td class=\"number\">" . $_lib['format']->Amount($salg = abs(get_year_amount($rapport, 300, $project_id))) . "</td>";
             // echo "<td class=\"number\">" . $_lib['format']->Amount($salg = 3746054.80) . "</td>";
-            echo "<td class=\"number\">" . $_lib['format']->Amount($fortjeneste = $forbruk + $salg) . "</td>";
+            echo "<td class=\"number\">" . $_lib['format']->Amount($fortjeneste = -$forbruk + $salg) . "</td>";
 
             if($forbruk * $fortjeneste != 0)
               echo "<td class=\"number\">" . $_lib['format']->Amount($percent = (100 / $forbruk * $fortjeneste)) . "</td>";
