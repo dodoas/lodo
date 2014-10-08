@@ -12,7 +12,11 @@ $current_time = time();
 $account_type = $_lib['sess']->get_companydef('account_type') or $DEFAULT_ACCOUNT_TYPE;
 $session_length = ( $current_time - $_SESSION['StartTS'] < $_SETUP['SESS_LENGTH'] ) ? $_SETUP['SESS_LENGTH'] - ( $current_time - $_SESSION['StartTS'] ) : $MIN_SESSION_LENGTH;
 if ( $account_type == $DEFAULT_ACCOUNT_TYPE ) {
-    echo '<meta http-equiv="refresh" content="' . $session_length . ';URL=http://' . $_SERVER['SERVER_NAME'] . '/redirect.php" />';
+    $protocol_string = 'http://';
+    if ( $_SERVER['HTTPS'] ) {
+        $protocol_string = 'https://';
+    }
+    echo '<meta http-equiv="refresh" content="' . $session_length . ';URL=' . $protocol_string . $_SERVER['SERVER_NAME'] . '/redirect.php" />';
 }
 ?>
     <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
