@@ -1221,7 +1221,7 @@ class lodo_fakturabank_fakturabank {
                             }
                         } else {
                             $Quantity   = 1;
-                            $CustPrice  = $line->TaxTotal->TaxSubtotal[0]->TaxableAmount;                            
+                            $CustPrice  = $line->TaxTotal->TaxSubtotal[0]->TaxAmount;
                         }
                     } else {
                         $Quantity   = 1;
