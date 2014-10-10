@@ -1334,7 +1334,6 @@ class lodo_fakturabank_fakturabank {
                         $dataH['KID']  = $InvoiceO->PaymentMeans->InstructionID; #KID
                     }
                     $ID = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoiceout', 'debug' => false));
-    
                     #MŒ sjekke at produktnummer stemmer og matcher
                     foreach($InvoiceO->InvoiceLine as $line) {
 
@@ -1350,7 +1349,7 @@ class lodo_fakturabank_fakturabank {
                                 }
                             } else {
                                 $Quantity   = 1;
-                                $CustPrice  = $line->TaxTotal->TaxSubtotal[0]->TaxableAmount;                            
+                                $CustPrice  = $line->TaxTotal->TaxSubtotal[0]->TaxAmount;
                             }
                         } else {
                             $Quantity   = 1;
@@ -1397,7 +1396,6 @@ class lodo_fakturabank_fakturabank {
                 } else {
                     #print "Faktura finnes: " . $InvoiceO->AccountPlanID . "', InvoiceID='" . $InvoiceO->ID . "<br>\n";
                 }
-                
                 $invoice = new invoice(array('CustomerAccountPlanID' => $dataH['CustomerAccountPlanID'], 'VoucherType' => 'S', 'InvoiceID' => $dataH['InvoiceID']));
                 $invoice->init(array());
                 $invoice->journal();

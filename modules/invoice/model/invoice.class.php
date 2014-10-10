@@ -197,7 +197,6 @@ class invoice {
                 $headH['Period']            = $_lib['date']->get_this_period($headH['InvoiceDate']);
             }
         }
-
         #print_r($headH);
         if(!$headH['CustomerAccountPlanID'])
             $_lib['message']->add(array('message' => "Du m&aring; velge kunden som skal motta fakturaen"));
@@ -606,8 +605,9 @@ class invoice {
         if($line['QuantityDelivered'] == 0) #Rettet av Geir. Maa vare mulig aa lage kreditnota med minus i antall.
             $lineH['QuantityDelivered'] = 0;
 
-        if($line['UnitCustPrice'] <= 0)
-            $lineH['UnitCustPrice'] = $product->UnitCustPrice;
+        # Not sure if it safe to comment it out, because i don't know where it is used...
+        // if($line['UnitCustPrice'] <= 0)
+        //     $lineH['UnitCustPrice'] = $product->UnitCustPrice;
 
         #if($line['Vat'] <= 0)
         $lineH['Vat']   = $VAT->Percent;
