@@ -45,12 +45,12 @@
     <table id="add_table" class="lodo_data bordered">
       <thead>
         <tr>
-          <th>Supplier name</th>
-          <th>&Oslash;l 2,5% til 4,7%</th>
-          <th>Vin 4,7% til 21%</th>
-          <th>Brennevin 22% til 60%</th>
-          <th>Sum Liter</th>
-          <th></th>
+          <th class="number">Supplier name</th>
+          <th class="number">&Oslash;l 2,5% til 4,7%</th>
+          <th class="number">Vin 4,7% til 21%</th>
+          <th class="number">Brennevin 22% til 60%</th>
+          <th class="number">Sum Liter</th>
+          <th class="number"></th>
         </tr>
       </thead>
       <tbody>
@@ -67,13 +67,13 @@
             echo "<tr id=" . $idname . ">";
 
             echo "<input type=\"hidden\" name=\"" . $dirtyname . "\" id=\"" . $dirtyname . "\" value=\"0\">";
-            echo "<td>" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_lines', 'field' => 'supplier_name', 'pk' => $line->id, 'value' => $line->supplier_name, 'class' => '', 'width' => 22, 'tabindex' => $tabindexH[1]++)) . "</td>";
-            echo "<td>" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_lines', 'field' => 'beer_purchased', 'pk' => $line->id, 'value' => $_lib['format']->Amount($line->beer_purchased), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1]++)) . "</td>";
-            echo "<td>" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_lines', 'field' => 'wine_purchased', 'pk' => $line->id, 'value' => $_lib['format']->Amount($line->wine_purchased), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1]++)) . "</td>";
-            echo "<td>" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_lines', 'field' => 'spirits_purchased', 'pk' => $line->id, 'value' => $_lib['format']->Amount($line->spirits_purchased), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1])) . "</td>";
+            echo "<td class=\"number\">" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_lines', 'field' => 'supplier_name', 'pk' => $line->id, 'value' => $line->supplier_name, 'class' => '', 'width' => 22, 'tabindex' => $tabindexH[1]++)) . "</td>";
+            echo "<td class=\"number\">" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_lines', 'field' => 'beer_purchased', 'pk' => $line->id, 'value' => $_lib['format']->Amount($line->beer_purchased), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1]++)) . "</td>";
+            echo "<td class=\"number\">" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_lines', 'field' => 'wine_purchased', 'pk' => $line->id, 'value' => $_lib['format']->Amount($line->wine_purchased), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1]++)) . "</td>";
+            echo "<td class=\"number\">" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_lines', 'field' => 'spirits_purchased', 'pk' => $line->id, 'value' => $_lib['format']->Amount($line->spirits_purchased), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1])) . "</td>";
 
-            echo "<td>" . $_lib['format']->Amount($line->beer_purchased + $line->wine_purchased + $line->spirits_purchased) . "</td>";
-            echo "<td>" . "<a onclick=\"return delete_line('#" . $idname . "', " . $line->id . ");\" href=\"" . $_lib['sess']->dispatch."t=expense.expenses&action_line_delete=1&LineID=" . $line->id . "&Period=" . $year . "&Department=" . $department->CompanyDepartmentID . "\">" .'<img src="/lib/icons/trash.gif">' . "</a>" . "</td>";
+            echo "<td class=\"number\">" . $_lib['format']->Amount($line->beer_purchased + $line->wine_purchased + $line->spirits_purchased) . "</td>";
+            echo "<td class=\"number\">" . "<a onclick=\"return delete_line('#" . $idname . "', " . $line->id . ");\" href=\"" . $_lib['sess']->dispatch."t=expense.expenses&action_line_delete=1&LineID=" . $line->id . "&Period=" . $year . "&Department=" . $department->CompanyDepartmentID . "\">" .'<img src="/lib/icons/trash.gif">' . "</a>" . "</td>";
             echo "</tr>";
             $tabindexH[1]++;
           }
@@ -97,15 +97,15 @@
     <table class="lodo_data bordered">
       <thead>
         <tr>
-          <th></th>
-          <th>Lager liter den 1 jan</th>
-          <th>Kj&oslash;p liter &Oslash;l</th>
-          <th>Kj&oslash;p liter Vin</th>
-          <th>Kj&oslash;p liter Brennevin</th>
-          <th>Lager liter den 31 des</th>
-          <th>Salg &Aring;ret <?= $year ?></th>
-          <th>Forventet &Aring;ret <?= $year ?></th>
-          <th>Forventet &Aring;ret <?= $year + 1 ?></th>
+          <th class="number"></th>
+          <th class="number">Lager liter den 1 jan</th>
+          <th class="number">Kj&oslash;p liter &Oslash;l</th>
+          <th class="number">Kj&oslash;p liter Vin</th>
+          <th class="number">Kj&oslash;p liter Brennevin</th>
+          <th class="number">Lager liter den 31 des</th>
+          <th class="number">Salg &Aring;ret <?= $year ?></th>
+          <th class="number">Forventet &Aring;ret <?= $year ?></th>
+          <th class="number">Forventet &Aring;ret <?= $year + 1 ?></th>
         </tr>
       </thead>
       <tbody>
@@ -126,13 +126,13 @@
             echo "<tr>";
             switch ($group->group_id) {
               case 1:
-                echo "<td>Varegrupp 1<br />2,5% til 4,7% alkohol</td>";
+                echo "<td class=\"number\">Varegrupp 1<br />2,5% til 4,7% alkohol</td>";
                 break;
               case 2:
-                echo "<td>Varegrupp 1<br />4,7% til 22% alkohol</td>";
+                echo "<td class=\"number\">Varegrupp 1<br />4,7% til 22% alkohol</td>";
                 break;
               case 3:
-                echo "<td>Varegrupp 1<br />22% til 60% alkohol</td>";
+                echo "<td class=\"number\">Varegrupp 1<br />22% til 60% alkohol</td>";
                 break;
             }
             echo "<td>" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_groups', 'field' => 'stock_level_start_year', 'pk' => $group->id, 'value' => $_lib['format']->Amount($group->stock_level_start_year), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1]++)) . "</td>";
@@ -141,19 +141,19 @@
               case 1:
                 $sum = $beer_sum = $_lib['db']->db_fetch_object($_lib['db']->db_query("SELECT SUM(beer_purchased) as total FROM `expense_lines` WHERE department_id=$cid AND expense_period_id=" . $yearObj->id));
                 echo "<td class=\"number\">" . $_lib['format']->Amount($sum->total) . "</td>";
-                echo "<td></td>";
-                echo "<td></td>";
+                echo "<td class=\"number\"></td>";
+                echo "<td class=\"number\"></td>";
                 break;
               case 2:
                 $sum = $wine_sum = $_lib['db']->db_fetch_object($_lib['db']->db_query("SELECT SUM(wine_purchased) as total FROM `expense_lines` WHERE department_id=$cid AND expense_period_id=" . $yearObj->id));
-                echo "<td></td>";
+                echo "<td class=\"number\"></td>";
                 echo "<td class=\"number\">" . $_lib['format']->Amount($sum->total) . "</td>";
-                echo "<td></td>";
+                echo "<td class=\"number\"></td>";
                 break;
               case 3:
                 $sum = $spirits_sum = $_lib['db']->db_fetch_object($_lib['db']->db_query("SELECT SUM(spirits_purchased) as total FROM `expense_lines` WHERE department_id=$cid AND expense_period_id=" . $yearObj->id));
-                echo "<td></td>";
-                echo "<td></td>";
+                echo "<td class=\"number\"></td>";
+                echo "<td class=\"number\"></td>";
                 echo "<td class=\"number\">" . $_lib['format']->Amount($sum->total) . "</td>";
                 break;
               default:
@@ -161,11 +161,11 @@
                 break;
             }
 
-            echo "<td>" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_groups', 'field' => 'stock_level_end_year', 'pk' => $group->id, 'value' => $_lib['format']->Amount($group->stock_level_end_year), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1]++)) . "</td>";
+            echo "<td class=\"number\">" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_groups', 'field' => 'stock_level_end_year', 'pk' => $group->id, 'value' => $_lib['format']->Amount($group->stock_level_end_year), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1]++)) . "</td>";
             echo "<td class=\"number\">" . $_lib['format']->Amount($salg = ($group->stock_level_start_year + $sum->total - $group->stock_level_end_year)) . "</td>";
 
-            echo "<td>" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_groups', 'field' => 'expected_stock_level_this_year', 'pk' => $group->id, 'value' => $_lib['format']->Amount($group->expected_stock_level_this_year), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1]++)) . "</td>";
-            echo "<td>" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_groups', 'field' => 'expected_stock_level_next_year', 'pk' => $group->id, 'value' => $_lib['format']->Amount($group->expected_stock_level_next_year), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1]++)) . "</td>";
+            echo "<td class=\"number\">" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_groups', 'field' => 'expected_stock_level_this_year', 'pk' => $group->id, 'value' => $_lib['format']->Amount($group->expected_stock_level_this_year), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1]++)) . "</td>";
+            echo "<td class=\"number\">" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_groups', 'field' => 'expected_stock_level_next_year', 'pk' => $group->id, 'value' => $_lib['format']->Amount($group->expected_stock_level_next_year), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1]++)) . "</td>";
             echo "</tr>";
 
             $group_data[$group->group_id]->sum = $sum->total;
@@ -192,15 +192,15 @@
     <table class="lodo_data bordered">
       <thead>
         <tr>
-          <th></th>
-          <th>Varelager 1 jan <?= $year ?></th>
-          <th>Varelager 31 des <?= $year ?></th>
-          <th>Varelager regulering</th>
-          <th>Varekj&oslash;p</th>
-          <th>Vare forbruk</th>
-          <th>Salg &Aring;ret <?= $year ?></th>
-          <th>Fortjeneste i kr</th>
-          <th>Fortjeneste i %</th>
+          <th class="number"></th>
+          <th class="number">Varelager 1 jan <?= $year ?></th>
+          <th class="number">Varelager 31 des <?= $year ?></th>
+          <th class="number">Varelager regulering</th>
+          <th class="number">Varekj&oslash;p</th>
+          <th class="number">Vare forbruk</th>
+          <th class="number">Salg &Aring;ret <?= $year ?></th>
+          <th class="number">Fortjeneste i kr</th>
+          <th class="number">Fortjeneste i %</th>
         </tr>
       </thead>
       <tbody>
@@ -222,10 +222,10 @@
 
             echo "<tr>";
 
-            echo "<td>" .  $project_name . "</td>";
+            echo "<td class=\"number\">" .  $project_name . "</td>";
 
-            echo "<td>" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_projects', 'field' => 'stock_level_start_year', 'pk' => $project->id, 'value' => $_lib['format']->Amount($project->stock_level_start_year), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1]++)) . "</td>";
-            echo "<td>" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_projects', 'field' => 'stock_level_end_year', 'pk' => $project->id, 'value' => $_lib['format']->Amount($project->stock_level_end_year), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1]++)) . "</td>";
+            echo "<td class=\"number\">" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_projects', 'field' => 'stock_level_start_year', 'pk' => $project->id, 'value' => $_lib['format']->Amount($project->stock_level_start_year), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1]++)) . "</td>";
+            echo "<td class=\"number\">" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_projects', 'field' => 'stock_level_end_year', 'pk' => $project->id, 'value' => $_lib['format']->Amount($project->stock_level_end_year), 'class' => 'number', 'width' => 22, 'tabindex' => $tabindexH[1]++)) . "</td>";
 
             echo "<td class=\"number\">" . $_lib['format']->Amount($stock_diff = $project->stock_level_start_year - $project->stock_level_end_year) . "</td>";
 
@@ -269,7 +269,7 @@
       </tbody>
       <tfoot>
         <tr>
-          <td>sum</td>
+          <td class="number">sum</td>
           <?php foreach ($sums as $key => $value): ?>
             <td class="number"><?= $_lib['format']->Amount($value) ?></td>
           <?php endforeach; ?>
@@ -290,12 +290,12 @@
   <table class="lodo_data bordered">
       <thead>
         <tr>
-          <th>Priser pr. liter u/mva</th>
+          <th class="number">Priser pr. liter u/mva</th>
           <?php for($i = 0; $i < 6; $i++): ?>
-            <th></th>
+            <th class="number"></th>
           <?php endfor; ?>
-          <th>kr fortjeneste</th>
-          <th>% fortjeneste</th>
+          <th class="number">kr fortjeneste</th>
+          <th class="number">% fortjeneste</th>
         </tr>
       </thead>
       <tbody>
@@ -306,7 +306,7 @@
           $project_name = $_lib['db']->db_fetch_object($_lib['db']->db_query("SELECT Heading FROM project WHERE ProjectID=" . $project->project_id))->Heading;
           if($project_name == iconv("UTF-8", "ISO-8859-1", 'Ø') . 'l' || $project_name == 'Vin' || $project_name == 'Brennevin') {
             echo "<tr>";
-            echo "<td>" .  $project_name . "</td>";
+            echo "<td class=\"number\">" .  $project_name . "</td>";
 
             switch ($project_name) {
               case iconv("UTF-8", "ISO-8859-1", 'Ø') . 'l':
