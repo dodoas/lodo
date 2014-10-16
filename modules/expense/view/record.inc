@@ -67,10 +67,10 @@
           $dirty = true;
       }
       if($dirty) {
-        $sql .= "stock_level_start_year=" . from_norway($dvalues['stock_level_start_year']) . ", ";
-        $sql .= "stock_level_end_year=" . from_norway($dvalues['stock_level_end_year']) . ", ";
-        $sql .= "expected_stock_level_this_year=" . from_norway($dvalues['expected_stock_level_this_year']) . ", ";
-        $sql .= "expected_stock_level_next_year=" . from_norway($dvalues['expected_stock_level_next_year']) . " ";
+        $sql .= "stock_level_start_year=" . from_norway(empty($dvalues['stock_level_start_year']) ? 0 : $dvalues['stock_level_start_year']) . ", ";
+        $sql .= "stock_level_end_year=" . from_norway(empty($dvalues['stock_level_end_year']) ? 0 : $dvalues['stock_level_end_year']) . ", ";
+        $sql .= "expected_stock_level_this_year=" . from_norway(empty($dvalues['expected_stock_level_this_year']) ? 0 : $dvalues['expected_stock_level_this_year']) . ", ";
+        $sql .= "expected_stock_level_next_year=" . from_norway(empty($dvalues['expected_stock_level_next_year']) ? 0 : $dvalues['expected_stock_level_next_year']) . " ";
         $sql .= "WHERE id=" . $id;
         $_lib['db']->db_update($sql);
       }
@@ -90,8 +90,8 @@
           $dirty = true;
       }
       if($dirty) {
-        $sql .= "stock_level_start_year=" . from_norway($dvalues['stock_level_start_year']) . ", ";
-        $sql .= "stock_level_end_year=" . from_norway($dvalues['stock_level_end_year']) . " ";
+        $sql .= "stock_level_start_year=" . from_norway(empty($dvalues['stock_level_start_year']) ? 0 : $dvalues['stock_level_start_year']) . ", ";
+        $sql .= "stock_level_end_year=" . from_norway(empty($dvalues['stock_level_end_year']) ? 0 : $dvalues['stock_level_end_year']) . " ";
         $sql .= "WHERE id=" . $id;
         $_lib['db']->db_update($sql);
       }
@@ -114,9 +114,9 @@
       }
       if($dirty) {
         $sql .= "supplier_name='" . $dvalues['supplier_name'] . "', ";
-        $sql .= "beer_purchased=" . from_norway($dvalues['beer_purchased']) . ", ";
-        $sql .= "wine_purchased=" . from_norway($dvalues['wine_purchased']) . ", ";
-        $sql .= "spirits_purchased=" . from_norway($dvalues['spirits_purchased']) . " ";
+        $sql .= "beer_purchased=" . from_norway(empty($dvalues['beer_purchased']) ? 0 : $dvalues['beer_purchased']) . ", ";
+        $sql .= "wine_purchased=" . from_norway(empty($dvalues['wine_purchased']) ? 0 : $dvalues['wine_purchased']) . ", ";
+        $sql .= "spirits_purchased=" . from_norway(empty($dvalues['spirits_purchased']) ? 0 : $dvalues['spirits_purchased']) . " ";
         $sql .= "WHERE id=" . $id;
         $db->db_update($sql);
       }
@@ -196,7 +196,7 @@
   function print_calculated_line($project, $group_id, $project_data, $group_data) {
     global $_lib;
 
-    if($group_data[1]->stock_level_start_year == 0)
+    if($group_data[$group_id]->stock_level_start_year == 0)
       echo "<td class=\"number\"> - </td>";
     else
       echo "<td class=\"number\">" .  $_lib['format']->Amount($project->stock_level_start_year / $group_data[$group_id]->stock_level_start_year) . "</td>";
