@@ -106,14 +106,7 @@ $result_vat = $_lib['db']->db_query($query_vat);
                     </td>
                     <td>
                         <?
-                        if($vat->VatID == 32 || $vat->VatID == 62)
-                        {
-                            print "Ingen konto";
-                        }
-                        else
-                        {
-                            print $_lib['form3']->accountplan_number_menu(array('table' => 'vat', 'field' => 'AccountPlanID', 'value' => $vat->AccountPlanID, 'type' => array(0 => 'balance')));
-                        }
+                          print $_lib['form3']->accountplan_number_menu(array('table' => 'vat', 'field' => 'AccountPlanID', 'value' => $vat->AccountPlanID, 'type' => array(0 => 'balance')));
                         ?>
 
                     </td>
