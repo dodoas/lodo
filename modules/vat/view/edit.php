@@ -106,7 +106,7 @@ $result_vat = $_lib['db']->db_query($query_vat);
                     </td>
                     <td>
                         <?
-                        if($vat->VatID == 30 || $vat->VatID == 32 || $vat->VatID == 60 || $vat->VatID == 62)
+                        if($vat->VatID == 32 || $vat->VatID == 62)
                         {
                             print "Ingen konto";
                         }
