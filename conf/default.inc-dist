@@ -1,0 +1,72 @@
+<?
+##################################################################
+# Based on EasyComposer technology
+# Copyright Thomas Ekdahl, 2004, thomas@ekdahl.no, http://www.ekdahl.no/
+# All variables should be upper case
+# This file only controls uninloged action before a separate setup file is choosed
+
+##################################################################
+#Headers to make sure dynamic content is not cached
+#header("Expires: Wed, 24 Dec 2003 05:00:00 GMT");
+header("Expires: 0"); #Better
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-cache, must-revalidate");
+header("Pragma: no-cache");
+
+##################################################################
+#Default database and preferences to cchoose if not explisitly given
+$_SETUP['DB_TYPE_DEFAULT']       	= "mysqli";
+$_SETUP['DB_NAME_DEFAULT']        = "LODO"; 				#Default database to use
+$_SETUP['DB_USER_DEFAULT']        = "root";			#User in database
+$_SETUP['DB_PASSWORD_DEFAULT']    = "<your database password>";				#Password to user in database
+$_SETUP['DB_SERVER_DEFAULT']		= "localhost"; 		#Server where the database is
+$_SETUP['DB_OFFSET_DEFAULT']		= 30;				#Defines how many rows to display at once
+$_SETUP['DB_LIMIT_DEFAULT']		= 50;				#Defines max number of rows to get
+$_SETUP['DB_ALLOW_DEFAULT']		= "(Active = '1' AND ValidFrom <= NOW() AND ValidTo >= NOW())"; #Define the criterias for an article beeing published
+
+##################################################################
+#Publish settings
+$_SETUP['PUBLISH_INTERNETT_START']  	= 10; 				#Level to start internett publish
+$_SETUP['PUBLISH_EXTRANETT_START']  	= 20; 				#Level to start extranett publish
+$_SETUP['PUBLISH_INTRANETT_START']  	= 30; 				#Level to start intranett publish
+
+##################################################################
+#Basic setup information
+$_SETUP['COMPANY_ID']		= 1;  				#CompanyID
+$_SETUP['XML_VERSION']		= "";
+$_SETUP['CSS']				= "/css/default";	#Possible to have complet path
+$_SETUP['LANGUAGE']			= "en";
+$_SETUP['DISPATCH']			= "/index.php?";
+$_SETUP['INTERFACE']		= "internett";
+$_SETUP['SLASH']			= "/";
+
+##################################################################
+#Set default debug level
+$_SETUP[DEBUG]				= false;  						#Debug level
+$_SETUP['FB_SERVER']        = "fakturabank.no";
+$_SETUP['FB_SERVER_PROTOCOL']        = "https";
+# $_SETUP['FB_SERVER']        = "localhost:3000";
+# $_SETUP['FB_SERVER_PROTOCOL']        = "http";
+$_SETUP['FB_URL'] = $_SETUP['FB_SERVER_PROTOCOL'] . "//" . $_SETUP['FB_SERVER'] . "/";
+
+##################################################################
+#Number format
+$_NF['decimals']			= 2;
+$_NF['dec_point']			= ',';
+$_NF['thousands_sep']		= ' ';
+
+##################
+#Input to date function
+#dd   = day 2 digit
+#mm   = month 2 digit
+#MM   = month text
+#yyyy = year 4 digit
+$_SETUP['date_format']      = 'yyyyMMdd';
+$_SETUP['date_separator']   = ' ';
+
+##################################################################
+#Path to mysql binaries
+$_SETUP['MYSQLADMIN']		= "/usr/bin/mysqladmin";
+$_SETUP['MYSQL']		= "/usr/bin/mysql";
+$_SETUP['MYSQLDUMP']		= "/usr/bin/mysqldump";
+?>
