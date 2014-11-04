@@ -18,6 +18,7 @@ class lodo_fakturabank_fakturabankvoting {
     public  $stopexectime   = '';
     public  $diffexectime   = '';
     public  $error          = '';
+    public  $tempBankAccount = '';
     public  $success        = false;
     private $ArrayTag       = array(
                                  'bank-transaction' => true,
@@ -76,6 +77,7 @@ class lodo_fakturabank_fakturabankvoting {
 
 	function get_balance_report($account_id = null, $period = null) {
         global $_lib;
+        $this->tempBankAccount = $this->get_account_number($account_id);
 
 		$this->setup_connection_values();
 
@@ -1119,7 +1121,7 @@ class lodo_fakturabank_fakturabankvoting {
          * when importing invoices.
          */
 
-        $query = "select FakturabankID from fakturabanktransaction where PostingDate LIKE '$period%'";
+        $query = "select FakturabankID from fakturabanktransaction where PostingDate LIKE '$period%' AND (FromBankAccount=" . $this->tempBankAccount . " OR ToBankAccount=" . $this->tempBankAccount . ")";
         $existing_transactions = $_lib['storage']->get_hashhash(array('query' => $query, 'key' => 'FakturabankID'));
         if (!empty($existing_transactions)) {
             foreach ($existing_transactions as $ExistingFakturabankID => $ExistingFakturabankTransaction) {

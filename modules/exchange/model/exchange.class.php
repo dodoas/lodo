@@ -218,7 +218,7 @@ class exchange {
 	 * @param  String $action_url The form action attribute
 	 * @return string HTML form inside a div block. Div is initially hidden (display:none)
 	 */
-	function getFormVoucherForeignCurrency($voucher_id, $voucher_foreign_amount, $voucher_foreign_rate, $voucher_foreign_currency, $action_url='', $has_save_button = true, $has_direction_radio = true) {
+	function getFormVoucherForeignCurrency($voucher_id, $voucher_foreign_amount, $voucher_foreign_rate, $voucher_foreign_currency, $voucher_foreign_currency_direction, $action_url='', $has_save_button = true, $has_direction_radio = true) {
         if ($voucher_id == "") {
             $voucher_id_text = "newvoucher"; // set to new to make js work
         } else {
@@ -257,8 +257,8 @@ class exchange {
         $ch_curr .= 'Valuta: <select name="voucher.ForeignCurrencyID" ' . $block_return . '>'. $select_options .'"</select><br />';
         $ch_curr .= 'Verdi: <input class="number" type="text" name="voucher.ForeignAmount" size="10" value="'. $voucher_foreign_amount .'" ' . $block_return . ' style="margin-bottom: 3px;"/>';
         if ($has_direction_radio) {
-            $ch_curr .= '<input type="radio" name="voucher_ForeignCurrencyDirection" value="in">Inn';
-            $ch_curr .= '<input type="radio" name="voucher_ForeignCurrencyDirection" value="out" checked>Ut';
+            $ch_curr .= '<input type="radio" name="voucher_ForeignCurrencyDirection" value="in"' . ($voucher_foreign_currency_direction == "in" ? " checked" : "") . '>Inn';
+            $ch_curr .= '<input type="radio" name="voucher_ForeignCurrencyDirection" value="out"' . ($voucher_foreign_currency_direction == "out" ? " checked" : "") . '>Ut';
         }
         $ch_curr .= '<br />';
         $ch_curr .= 'Rate: <input class="number" type="text" name="voucher.ForeignConvRate" size="10" value="'. $voucher_foreign_rate .'" ' . $block_return . ' /> =100' . self::getLocalCurrency();

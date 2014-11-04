@@ -50,10 +50,10 @@ class form2 {
       print "<select name=\"$table.$field\">\n";
       print "<option value=\"\">Ikke valgt";
       while($_row = $_lib['db']->db_fetch_object($result)) {
-          if($_row->Currency == $value)
-              print "<option value=\"$_row->Currency\" selected>$_row->Currency \n";
+          if($_row->CurrencyID == $value)
+              print "<option value=\"$_row->CurrencyID\" selected>$_row->CurrencyID</option>\n";
           else
-              print "<option value=\"$_row->Currency\">$_row->Currency \n";
+              print "<option value=\"$_row->CurrencyID\">$_row->CurrencyID</option>\n";
       }
 
       print "</select>\n";
