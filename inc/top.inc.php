@@ -74,7 +74,7 @@ $topclass = 'topclass';
                 </td>
                 <td class="<? print $class ?>">Perioden <? print $_from_date ?>
                 <? print $_lib['form3']->start(array()) ?>
-                  <? print $_lib['form3']->text(array('name' => 'LoginFormDate'    , 'value' => $_SESSION['LoginFormDate'], 'class' => $class)) ?> 
+                  <? print $_lib['form3']->text(array('name' => 'LoginFormDate'    , 'value' => $_SESSION['LoginFormDate'], 'class' => $class)) ?>
                   <? print $_lib['form3']->submit(array('name' => 'view_journal_changedate'    , 'value' => 'Bytt dato')) ?>
                   <? print $_lib['form3']->stop(array()) ?>
                   </td>
@@ -133,17 +133,17 @@ $topclass = 'topclass';
                                 </div>-->
                                   <?
                                   if($_lib['setup']->get_value('invoice.outgoing') == 'empatix') { ?>
-                                      Faktura er i Empatix                                  
+                                      Faktura er i Empatix
                                   <? } else { ?>
                                     <a href="<? print $_lib['sess']->dispatch ?>t=invoice.listoutgoing">Utg&aring;ende faktura (salg)</a>
-                                  <? } ?>                              
+                                  <? } ?>
 
                                   <a href="<? print $_lib['sess']->dispatch ?>t=invoicerecurring.list">Repeterende faktura</a>
                                 </fieldset>
                                 </td>
                                 <td>
                                 <fieldset>
-                                <legend>Oppsett</legend>   
+                                <legend>Oppsett</legend>
                                 <a href="<? print $_lib['sess']->dispatch ?>t=report.list">Rapporter</a>
                                 <!--a href="<? print $_lib['sess']->dispatch ?>t=accountplan.list&accountplan_type=hovedbok">Hovedbokskontoer</a-->
                                 <a href="<? print $_lib['sess']->dispatch ?>t=accountplan.list&accountplan_type=balance">Hovedbok balanse 4</a>
@@ -160,7 +160,7 @@ $topclass = 'topclass';
                                 ?>
                                 </fieldset>
                                 </td>
-                                
+
                             </tr>
                         </table>
                     </div>
@@ -170,7 +170,7 @@ $topclass = 'topclass';
     </div>
     <?php if($_lib['sess']->get_companydef('account_type') == 'normal'): ?>
       <div class="warning">
-        <p>Du bruker gratis versjon av lodo. Du vil bli sent til en reklame side.</p>
+        <p>Du bruker gratis versjon av lodo. Du vil bli sent til en reklame side. <span id="log_out_timer"></span></p>
       </div>
     <?php endif; ?>
     <hr>

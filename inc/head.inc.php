@@ -1,16 +1,16 @@
 <?
-//if(!$_SESSION['css'])
-//{
+if(!$_SESSION['css'])
+{
   $_SESSION['css'] = "default";
-//}
-$DEFAULT_ACCOUNT_TYPE = 'normal';
-$MIN_SESSION_LENGTH = 5; //Minimum session length is set to be 5 sec.
-if ( empty($_SETUP['SESS_LENGTH']) ) {
-    $_SETUP['SESS_LENGTH'] = 300;
 }
+$DEFAULT_ACCOUNT_TYPE = 'normal';
+// $MIN_SESSION_LENGTH = 30000000; //Minimum session length is set to be 5 sec.
+$_SETUP['SESS_LENGTH'] = 900;
+
 $current_time = time();
 $account_type = $_lib['sess']->get_companydef('account_type') or $DEFAULT_ACCOUNT_TYPE;
-$session_length = ( $current_time - $_SESSION['StartTS'] < $_SETUP['SESS_LENGTH'] ) ? $_SETUP['SESS_LENGTH'] - ( $current_time - $_SESSION['StartTS'] ) : $MIN_SESSION_LENGTH;
+// $session_length = ( $current_time - $_SESSION['StartTS'] < $_SETUP['SESS_LENGTH'] ) ? $_SETUP['SESS_LENGTH'] - ( $current_time - $_SESSION['StartTS'] ) : $MIN_SESSION_LENGTH;
+$session_length = $_SETUP['SESS_LENGTH'] - ( $current_time - $_SESSION['StartTS'] );
 if ( $account_type == $DEFAULT_ACCOUNT_TYPE ) {
     $protocol_string = 'http://';
     if ( $_SERVER['HTTPS'] ) {
@@ -34,3 +34,21 @@ if ( $account_type == $DEFAULT_ACCOUNT_TYPE ) {
     <script type="text/javascript"  src="/lib/tigra_calendar/calendar1.js"></script>
     <script type="text/javascript"  src='/lib/js/jquery.js'></script>
     <style  type="text/css">@import url(/lib/htmlarea3/htmlarea.css)</style>
+<?php if($account_type == $DEFAULT_ACCOUNT_TYPE): ?>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var seconds = parseInt($('meta[http-equiv="refresh"]').attr('content').split(';')[0]);
+            document.getElementById('log_out_timer').innerHTML = timer(seconds);
+            setInterval(function(){
+                seconds = seconds - 1;
+                document.getElementById('log_out_timer').innerHTML = timer(seconds);
+            }, 1000);
+        });
+
+        function timer(time){
+            var minutes = "0" + Math.floor(time / 60);
+            var seconds = "0" + (time - minutes * 60);
+            return minutes.substr(-2) + ":" + seconds.substr(-2);
+        }
+    </script>
+<? endif ?>
