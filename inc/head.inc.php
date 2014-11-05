@@ -10,6 +10,10 @@ $_SETUP['SESS_LENGTH'] = 900;
 $current_time = time();
 $account_type = $_lib['sess']->get_companydef('account_type') or $DEFAULT_ACCOUNT_TYPE;
 // $session_length = ( $current_time - $_SESSION['StartTS'] < $_SETUP['SESS_LENGTH'] ) ? $_SETUP['SESS_LENGTH'] - ( $current_time - $_SESSION['StartTS'] ) : $MIN_SESSION_LENGTH;
+if (($_SETUP['SESS_LENGTH'] - ( $current_time - $_SESSION['StartTS'])) < 0) {
+    session_start();
+    $_SESSION['StartTS'] = $current_time;
+}
 $session_length = $_SETUP['SESS_LENGTH'] - ( $current_time - $_SESSION['StartTS'] );
 if ( $account_type == $DEFAULT_ACCOUNT_TYPE ) {
     $protocol_string = 'http://';
