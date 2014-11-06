@@ -74,7 +74,7 @@ function rating(index)
     var first = parse_ts(array[entries - 1]['TS']);
     var diff = (now - first) / (60*60*24*1000);
 
-    var rating = Math.min( (7 * entries) / (4 * diff ), 1.0 );
+    var rating = Math.min( (7 * entries) / (5 * diff ), 1.0 );
     var percent = Math.round( rating * 100 );
 
     return percent;
