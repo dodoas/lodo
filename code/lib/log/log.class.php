@@ -27,6 +27,7 @@ class logg {
         $this->path     = $args['path'];
         $this->module   = $args['module'];
         $this->template = $args['template'];
+
         #Sess not used yet
         #How to access $this->sess->get session
     }
@@ -42,7 +43,7 @@ class logg {
               $fields['logusage_Interface']  = $_lib['sess']->get_session('Interface');
               $fields['logusage_IPAdress']   = $_lib['sess']->get_session('RemoteAddr');
               $fields['logusage_SessionID']  = $_lib['sess']->get_session('SID');
-              $fields['logusage_PersonID']   = $_lib['sess']->get_person('PersonID');
+              $fields['logusage_PersonID']   = $args['person_id'];
               $fields['logusage_PkField']    = $args{'PkField'};
               $fields['logusage_PkValue']    = $args{'PkValue'};
     
@@ -52,7 +53,7 @@ class logg {
               if($template->LogUserAgent) {
                 $fields['logusage_UserAgent']  = $_sess->get_session('HttpUserAgent');
               }
-    
+
               $_lib['db']->db_new_hash($fields, 'logusage');
       #} else {
       #  print "<!-- Logging turned off -->";
