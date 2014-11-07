@@ -85,7 +85,7 @@ function desc_sort(a, b)
     if(data[a].length > 0 && data[b].length > 0) {
         var aDate = Date.parse(data[a][0]['TS'].replace(/-/g, '/'));
         var bDate = Date.parse(data[b][0]['TS'].replace(/-/g, '/'));
-        return aDate < bDate ? 1 : -1;
+        return bDate - aDate;
     } else if(data[a].length <= 0 && data[b].length > 0) {
         return 1;
     } else if(data[a].length > 0 && data[b].length <= 0) {
