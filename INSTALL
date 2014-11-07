@@ -1,7 +1,7 @@
 To install LODO
 ---------------
 
-symlink 
+symlink
 ln -s lodo html
 chmod u+x install.sh
 ./install.sh
@@ -9,3 +9,4 @@ chmod u+x install.sh
 chmod 777 modules/log/view/
 * If you use CentOS, Fedora or any other Linux distribution that uses SELinux, you should set appropriate context to the directory. On CentOS or Fedora, try this:
 chcon -t httpd_log_t modules/log/view/
+---------------
