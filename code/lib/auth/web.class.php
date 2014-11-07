@@ -83,7 +83,7 @@ trim(Password) <> ''";
     else {
         // log login to company database table `logusage'
         $tmp_logger = new logg(array('_dsn' => $_dsn, '_SETUP' => $_SETUP, '_sess' => $_sess, 'path' => $log_path, 'module' => $args[0], 'template' => $args[1]));
-        $tmp_logger->usage(array('sess'=>$_lib['sess']));
+        $tmp_logger->usage(array('sess'=>$_lib['sess'], 'person_id' => $_row->PersonID));
     }
     #Global information on logged in users
     $_SESSION['login_id'] = $_row->PersonID;

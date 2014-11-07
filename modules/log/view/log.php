@@ -74,15 +74,26 @@ function rating(index)
     var first = parse_ts(array[entries - 1]['TS']);
     var diff = (now - first) / (60*60*24*1000);
 
-    var rating = Math.min( (7 * entries) / (4 * diff ), 1.0 );
+    var rating = Math.min( (7 * entries) / (5 * diff ), 1.0 );
     var percent = Math.round( rating * 100 );
 
     return percent;
 }
 
-function asc_sort(a, b)
+function desc_sort(a, b)
 {
-    return rating(b) - rating(a);
+    if(data[a].length > 0 && data[b].length > 0) {
+        var aDate = Date.parse(data[a][0]['TS'].replace(/-/g, '/'));
+        var bDate = Date.parse(data[b][0]['TS'].replace(/-/g, '/'));
+        return aDate < bDate ? 1 : -1;
+    } else if(data[a].length <= 0 && data[b].length > 0) {
+        return 1;
+    } else if(data[a].length > 0 && data[b].length <= 0) {
+        return -1;
+    } else {
+        return 0;
+    }
+    //return rating(b) - rating(a);
 }
 
 var keys = []
@@ -91,7 +102,7 @@ for(k in data)
     keys.push(k);
 }
 
-var data_keys = keys.sort(asc_sort);
+var data_keys = keys.sort(desc_sort);
 
 $(document).ready(
     function() {
@@ -133,7 +144,7 @@ $(document).ready(
                                 var str = ''
                                 for(l in array)
                                 {
-                                    str += array[l]['TS'] + '<br />';
+                                    str += array[l]['Email'] + ' - ' + array[l]['TS'] + '<br />';
                                 }
                                 inner_row.html(str + '<br />hide info');
                             }
