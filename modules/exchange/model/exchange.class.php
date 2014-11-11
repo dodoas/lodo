@@ -209,6 +209,63 @@ class exchange {
 		$_lib['db']->db_update($query_update);
 	}
 
+	/**
+	 * @param  int    $voucher The voucher
+	 * @return string HTML form inside a div block. Div is initially hidden (display:none)
+	 */
+	function getFormHeaderCurrencyDropdown($voucher) {
+        $voucher_id = $voucher->voucher_id;
+
+        if ($voucher_id == "") {
+            $voucher_id_text = "newvoucher"; // set to new to make js work
+        } else {
+            $voucher_id_text = "";
+        }
+
+        $voucher_foreign_rate = $voucher->ForeignConvRate;
+        $voucher_foreign_currency = $voucher->ForeignCurrencyID;
+
+        $action_url = 'lodo.php?'. $_SERVER['QUERY_STRING'];
+        $currencies = self::getActiveCurrencies();
+
+        if (empty($currencies)) {
+            return "";
+        }
+
+        $select_options = '<option value="">Standard</option>';
+        foreach ($currencies as $currency) {
+            if ($voucher_foreign_currency && $currency->CurrencyISO == $voucher_foreign_currency)
+                $select_options .= '<option value="'. $currency->CurrencyISO .'" selected="selected" onchange="onCurrencyChange(this, \''. $voucher_id_text . '\')" onclick="onCurrencyChange(this, \''. $voucher_id_text . '\')">'. $currency->CurrencyISO .'</option>';
+            else
+                $select_options .= '<option value="'. $currency->CurrencyISO .'" onchange="onCurrencyChange(this, \''. $voucher_id_text . '\')" onclick="onCurrencyChange(this, \''. $voucher_id_text . '\')">'. $currency->CurrencyISO .'</option>';
+        }
+
+        // we create one currency array for each voucher to allow for specific rates to be tied to specific accountplans or dates (which might be needed in the future) in reports
+        $currency_js = '<script type="text/javascript">';
+        // $currency_js .= 'if (!window.currency_rates) var currency_rates = new Object();';
+
+        $currency_js .= 'window.currency_rates[\''. $voucher_id_text . '\'] = new Object();';
+        foreach ($currencies as $currency) {
+            $currency_js .= 'window.currency_rates[\''. $voucher_id_text . '\'][\'' . $currency->CurrencyISO . '\'] = ' . $currency->Amount . ';';
+        } 
+        $currency_js .= '</script>';
+        $ch_curr .= $currency_js;
+
+        $block_return = 'onKeyPress="return disableEnterKey(event)"';
+        $ch_curr  .= '<div class="vouchercurrencyheaderwrapper" id="voucher_currency_div_'. $voucher_id_text .'" style="display:inline;">';
+        $ch_curr .= 'Valuta: <select name="voucher.ForeignCurrencyID" ' . $block_return . '>'. $select_options .'"</select>';
+        $ch_curr .= 'Verdi: <input class="number" type="text" name="voucher.ForeignAmount" size="10" value="'. $voucher_foreign_amount .'" ' . $block_return . ' style="margin-bottom: 3px;"/>';
+        $ch_curr .= 'Rate: <input class="number" type="text" name="voucher.ForeignConvRate" size="10" value="'. $voucher_foreign_rate .'" ' . $block_return . ' /> =100' . self::getLocalCurrency();
+        $ch_curr .= ' <a href="#" onclick="exchangeFindRate(this)" style="display: inline">finn kurs </a><br />';
+        $ch_curr .= '<input class="number" type="hidden" name="voucher.VoucherID" value="'. $voucher_id .'" />';
+        $ch_curr .= '<input class="number" type="hidden" name="voucher.ForeignCurrencyIDSelection" value="" />';
+        if ($has_save_button) {
+            $ch_curr .= '<input type="hidden" name="action_postmotpost_save_currency" value="1" />';
+            $ch_curr .= '<input type="button" name="action_postmotpost_save_currency_button" onclick="return voucherCurrencyChange(this, \'' . $action_url . '\'); " value="Lagre" />';
+        }
+        $ch_curr .= '</div>';
+        return $ch_curr;
+    }
 
 	/**
 	 * @param  int    $voucher_id The voucher id
@@ -218,6 +275,50 @@ class exchange {
 	 * @param  String $action_url The form action attribute
 	 * @return string HTML form inside a div block. Div is initially hidden (display:none)
 	 */
+	function getFormVoucherForeignCurrency($voucher_id, $voucher_foreign_amount, $voucher_foreign_rate, $voucher_foreign_currency, $voucher_foreign_currency_direction) {
+        if ($voucher_id == "") {
+            $voucher_id_text = "newvoucher"; // set to new to make js work
+        } else {
+            $voucher_id_text = "";
+        }
+
+        if (empty($voucher_foreign_currency)) {
+            $voucher_foreign_amount_in = 0;
+            $voucher_foreign_amount_out = 0;
+        } else {
+            if ($voucher->AmountIn > 0) {
+                $voucher_foreign_amount_in = $voucher_foreign_amount;
+                $voucher_foreign_amount_out = 0;
+            } else {
+                $voucher_foreign_amount_in = 0;
+                $voucher_foreign_amount_out = $voucher_foreign_amount;
+            }
+        }
+
+        if (empty($voucher_foreign_currency)) {
+            $display = "display:none;";
+        } else {
+            $display = "";
+        }
+
+        $block_return = 'onKeyPress="return disableEnterKey(event)"';
+        $ch_curr  .= '<div style="' . $display . '" class="vouchercurrencywrapper" id="voucher_currency_div_'. $voucher_id_text .'">';
+        $ch_curr .= 'Inn: <input class="number" type="text" name="voucher.ForeignAmount" size="10" value="'. $voucher_foreign_amount_in .'" ' . $block_return . ' style="margin-bottom: 3px;"/>';
+        $ch_curr .= 'Ut: <input class="number" type="text" name="voucher.ForeignAmount" size="10" value="'. $voucher_foreign_amount_out .'" ' . $block_return . ' style="margin-bottom: 3px;"/>';
+
+		return $ch_curr;
+	}
+
+	/**
+	 * @param  int    $voucher_id The voucher id
+	 * @param  float  $voucher_foreign_amount The amount in foreign currency
+	 * @param  float  $voucher_foreign_rate The conversion rate based in 100 of local currency
+	 * @param  String $voucher_foreign_currency The currency ISO code
+	 * @param  String $action_url The form action attribute
+	 * @return string HTML form inside a div block. Div is initially hidden (display:none)
+	 */
+
+    /*
 	function getFormVoucherForeignCurrency($voucher_id, $voucher_foreign_amount, $voucher_foreign_rate, $voucher_foreign_currency, $voucher_foreign_currency_direction, $action_url='', $has_save_button = true, $has_direction_radio = true) {
         if ($voucher_id == "") {
             $voucher_id_text = "newvoucher"; // set to new to make js work
@@ -273,7 +374,7 @@ class exchange {
 		
 		return $ch_curr;
 	}
-
+*/
 
 	/**
 	 * @param  int    $voucher_id The voucher id

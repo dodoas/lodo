@@ -144,12 +144,7 @@ class framework_logic_vouchergui
         
         #Show conversion rate
         $html .= '<td>';
-        if($is_foreign) {
-            $html .= exchange::getAnchorVoucherForeignCurrency($voucher->VoucherID, 'Rate '. $voucher->ForeignConvRate);
-        } else {
-            $html .= exchange::getAnchorVoucherForeignCurrency($voucher->VoucherID, 'Valuta');
-        }
-        $html .= exchange::getFormVoucherForeignCurrency($voucher->VoucherID, $voucher->ForeignAmount, $voucher->ForeignConvRate, $voucher->ForeignCurrencyID, $voucher->AmountIn > 0 ? "in" : "out", '', false);
+        $html .= exchange::getFormVoucherForeignCurrency($voucher->VoucherID, $voucher->ForeignAmount, $voucher->ForeignConvRate, $voucher->ForeignCurrencyID);
         $html .= '</td>';
 
         #AmountIn
