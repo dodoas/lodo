@@ -315,9 +315,10 @@ class postmotpost {
                 #print "Fant " . $this->matchH[$AccountPlanID][KID] . "+ (inn - ut) for seg selv " . ($voucher->AmountIn - $voucher->AmountOut) . "<br>";
                 #$calc = ($voucher->AmountIn - $voucher->AmountOut);
 
-                // if($voucher->matched_by == "kid")
 
-                if($voucher->matched_by == 0) {
+                // Automatic matching
+                if($voucher->matched_by == '0') {
+                    // if($voucher->matched_by == "kid")
                     if($voucher->KID) {
                         $this->matchH[$AccountPlanID]['KID'][$voucher->KID]
                             = round($this->matchH[$AccountPlanID]['KID'][$voucher->KID], 3) + ($voucher->AmountIn - $voucher->AmountOut);
@@ -357,47 +358,50 @@ class postmotpost {
 
                         // echo "MN: " . $voucher->MatchNumber . ": " . $this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber] . "<br />";
                     }
-                } else {
-                    if($voucher->KID && $voucher->matched_by == "kid") {
-                        $this->matchH[$AccountPlanID]['KID'][$voucher->KID]
-                            = round($this->matchH[$AccountPlanID]['KID'][$voucher->KID], 3) + ($voucher->AmountIn - $voucher->AmountOut);
-
-                        $this->matchH[$AccountPlanID]['KIDJournals'][$voucher->KID][] = array(
-                            'JournalID' => $voucher->JournalID,
-                            'VoucherID' => $voucher->VoucherID,
-                            'Match' => 'KID'
-                        );
-                        // echo "KID: " . $voucher->KID . ": " . $this->matchH[$AccountPlanID]['KID'][$voucher->KID] . "<br />";
-                    }
-
-                    // if($voucher->matched_by == "invoice")
-                    if($voucher->InvoiceID && $voucher->matched_by == "invoice") {
-                        $this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID] =
-                            round($this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID], 3) + ($voucher->AmountIn - $voucher->AmountOut);
-
-                        $this->matchH[$AccountPlanID]['InvoiceIDJournals'][$voucher->InvoiceID][] = array(
-                            'JournalID' => $voucher->JournalID,
-                            'VoucherID' => $voucher->VoucherID,
-                            'Match' => 'InvoiceID'
-                        );
-
-                        // echo "IN: " . $voucher->InvoiceID . ": " . $this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID] . "<br />";
-                    }
-
-                    // if($voucher->matched_by == "match")
-                    if($voucher->MatchNumber && $voucher->matched_by == "match") {
-                        $this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber] =
-                            round($this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber], 3) + ($voucher->AmountIn - $voucher->AmountOut);
-
-                        $this->matchH[$AccountPlanID]['MatchNumberJournals'][$voucher->MatchNumber][] = array(
-                            'JournalID' => $voucher->JournalID,
-                            'VoucherID' => $voucher->VoucherID,
-                            'Match' => 'MatchNumber'
-                        );
-
-                        // echo "MN: " . $voucher->MatchNumber . ": " . $this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber] . "<br />";
-                    }
                 }
+
+
+                // Overwrite Match that was automatically assigned with one that is selected in checkbox.
+                if($voucher->KID && $voucher->matched_by == "kid") {
+                    $this->matchH[$AccountPlanID]['KID'][$voucher->KID]
+                        = round($this->matchH[$AccountPlanID]['KID'][$voucher->KID], 3) + ($voucher->AmountIn - $voucher->AmountOut);
+
+                    $this->matchH[$AccountPlanID]['KIDJournals'][$voucher->KID][] = array(
+                        'JournalID' => $voucher->JournalID,
+                        'VoucherID' => $voucher->VoucherID,
+                        'Match' => 'KID'
+                    );
+                    // echo "KID: " . $voucher->KID . ": " . $this->matchH[$AccountPlanID]['KID'][$voucher->KID] . "<br />";
+                }
+
+                // if($voucher->matched_by == "invoice")
+                if($voucher->InvoiceID && $voucher->matched_by == "invoice") {
+                    $this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID] =
+                        round($this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID], 3) + ($voucher->AmountIn - $voucher->AmountOut);
+
+                    $this->matchH[$AccountPlanID]['InvoiceIDJournals'][$voucher->InvoiceID][] = array(
+                        'JournalID' => $voucher->JournalID,
+                        'VoucherID' => $voucher->VoucherID,
+                        'Match' => 'InvoiceID'
+                    );
+
+                    // echo "IN: " . $voucher->InvoiceID . ": " . $this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID] . "<br />";
+                }
+
+                // if($voucher->matched_by == "match")
+                if($voucher->MatchNumber && $voucher->matched_by == "match") {
+                    $this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber] =
+                        round($this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber], 3) + ($voucher->AmountIn - $voucher->AmountOut);
+
+                    $this->matchH[$AccountPlanID]['MatchNumberJournals'][$voucher->MatchNumber][] = array(
+                        'JournalID' => $voucher->JournalID,
+                        'VoucherID' => $voucher->VoucherID,
+                        'Match' => 'MatchNumber'
+                    );
+
+                    // echo "MN: " . $voucher->MatchNumber . ": " . $this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber] . "<br />";
+                }
+
 
                 #print $this->matchH[$AccountPlanID]['KID']; print "<br>";
 
@@ -550,7 +554,6 @@ class postmotpost {
                             foreach($this->matchH[$AccountPlanID][$prefix."Journals"][$k] as $info) {
                                 $journal = $info['JournalID'];
                                 $voucher = $info['VoucherID'];
-
                                 if(!in_array($voucher, $this->matched)) {
                                     $used = true;
                                     $this->journalMessages[$voucher] .= "Dobbelmatch$prefix ( $s)";
@@ -576,7 +579,6 @@ class postmotpost {
 
         #print "KID: $KID, InvoiceID: $InvoiceID<br>\n";
         #print_r($this->matchH[$AccountPlanID]);
-var_dump($this->matchH[$AccountPlanID]['InvoiceID'][$InvoiceID]);
         if($InvoiceID && !$success) {
             if(isset($this->matchH[$AccountPlanID]['InvoiceID'][$InvoiceID]) && round($this->matchH[$AccountPlanID]['InvoiceID'][$InvoiceID], 2) == 0) {
                 $success = true;
@@ -630,10 +632,7 @@ var_dump($this->matchH[$AccountPlanID]['InvoiceID'][$InvoiceID]);
           }
         }
 
-        if($voucher->matched_by == 0) {
-          $success = 0;
-        }
-        
+
         # Getting overriden by this flag if it is set
         if($voucher->matched_by == "invoice") {
           $success = 1;
@@ -920,7 +919,6 @@ var_dump($this->matchH[$AccountPlanID]['InvoiceID'][$InvoiceID]);
 
                     //if($this->isCloseAble($AccountPlanID, $voucher->KID, $voucher->InvoiceID)) {
                     if($this->isCloseAbleVoucher($this->VoucherID)) {
-
                         #print "Kan lukkes: AccountPlanID: $AccountPlanID<br>\n";
                         #print_r($account);
 
