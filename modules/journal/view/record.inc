@@ -119,6 +119,11 @@ elseif($voucher_input->action['voucher_delete'])
     $accounting->correct_journal_balance($_REQUEST, $voucher_input->JournalID, $voucher_input->VoucherType);
     $voucher_input->exit = 1;
 }
+elseif($voucher_input->action['currency_update'])
+{
+    // update currency for all vouchers of this journal
+    // if foreign currency set, on all vouchers we should only display foreign currency in and out amount field, all should lock normal in and out fields
+}
 
 
 #################################################################################################################

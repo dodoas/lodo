@@ -206,6 +206,10 @@ class framework_logic_voucherinput
             $this->action['journalid_search']  = true;
         if(isset($args['view_linedetails']))
             $this->action['view_linedetails']      = true;      
+        if(isset($args['action_currency_update'])) {
+            $this->action['voucher_currency_update']      = true;
+            unset($this->action['view_linedetails']);
+        }
 
         if(!$this->action['voucher_new'] && !$this->action['voucher_head_update'] && $this->VoucherID)
         {
