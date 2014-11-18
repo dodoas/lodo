@@ -876,7 +876,7 @@ class postmotpost {
     public function closeAllPostsAccount($AccountPlanID) {
         global $_lib;
 
-        $this->getopenpost();
+        $this->getopenpost($AccountPlanID);
         $closeableH = array();
 
         $account = $this->voucherH[$AccountPlanID];
@@ -918,7 +918,7 @@ class postmotpost {
                 foreach($account as $voucher) {
 
                     //if($this->isCloseAble($AccountPlanID, $voucher->KID, $voucher->InvoiceID)) {
-                    if($this->isCloseAbleVoucher($this->VoucherID)) {
+                    if($this->isCloseAbleVoucher($voucher->VoucherID)) {
                         #print "Kan lukkes: AccountPlanID: $AccountPlanID<br>\n";
                         #print_r($account);
 
