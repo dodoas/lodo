@@ -125,10 +125,6 @@ header("Pragma: no-cache");
 \$_SETUP['MYSQL']        = "/usr/bin/mysql";
 \$_SETUP['MYSQLDUMP']        = "/usr/bin/mysqldump";
 
-##################################################################
-#Setting default session length for normal users (in seconds)
-\$_SETUP['SessLength']  = 300;
-
 ?>
 EOF
 
@@ -195,7 +191,7 @@ cat <<EOF > code/lib/setup/prefs_$database.inc
 \$_SETUP['SECURITY']['ROLE']           	= true; #Turns on and off role control checks
 \$_SETUP['SECURITY']['SESSION']		= true;  #Check ip number, browser, protocol to cookies - hash
 \$_SETUP['SECURITY']['SESSIONTIMEOUT'] 	= 3600;	 #Login timeout value
-\$_SETUP['SECURITY']['LODO']     	 	= true; 
+\$_SETUP['SECURITY']['LODO']     	 	= true;
 
 ##################################################################
 #Server admin url
