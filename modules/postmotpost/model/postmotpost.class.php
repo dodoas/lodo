@@ -316,7 +316,7 @@ class postmotpost {
                 #$calc = ($voucher->AmountIn - $voucher->AmountOut);
 
                 // if($voucher->matched_by == "kid")
-                  if($voucher->KID) {
+                  if($voucher->KID && $voucher->matched_by == "kid") {
                       $this->matchH[$AccountPlanID]['KID'][$voucher->KID]
                           = round($this->matchH[$AccountPlanID]['KID'][$voucher->KID], 3) + ($voucher->AmountIn - $voucher->AmountOut);
 
@@ -329,7 +329,7 @@ class postmotpost {
                   }
 
                 // if($voucher->matched_by == "invoice")
-                  if($voucher->InvoiceID) {
+                  if($voucher->InvoiceID && $voucher->matched_by == "invoice") {
                       $this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID] =
                           round($this->matchH[$AccountPlanID]['InvoiceID'][$voucher->InvoiceID], 3) + ($voucher->AmountIn - $voucher->AmountOut);
 
@@ -343,7 +343,7 @@ class postmotpost {
                   }
 
                 // if($voucher->matched_by == "match")
-                  if($voucher->MatchNumber) {
+                  if($voucher->MatchNumber && $voucher->matched_by == "match") {
                       $this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber] =
                           round($this->matchH[$AccountPlanID]['MatchNumber'][$voucher->MatchNumber], 3) + ($voucher->AmountIn - $voucher->AmountOut);
 
@@ -385,9 +385,9 @@ class postmotpost {
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->KID               = $voucher->KID;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->InvoiceID         = $voucher->InvoiceID;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->ForeignCurrencyID = $voucher->ForeignCurrencyID;
-                $this->voucherH[$AccountPlanID][$voucher->VoucherID]->ForeignAmount		= $voucher->ForeignAmount;
+                $this->voucherH[$AccountPlanID][$voucher->VoucherID]->ForeignAmount		  = $voucher->ForeignAmount;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->ForeignConvRate   = $voucher->ForeignConvRate;
-                $this->voucherH[$AccountPlanID][$voucher->VoucherID]->matched_by   = $voucher->matched_by;
+                $this->voucherH[$AccountPlanID][$voucher->VoucherID]->matched_by        = $voucher->matched_by;
             }
 
             /***************************************************************
@@ -566,13 +566,10 @@ class postmotpost {
     }
 
     function isMatchable($AccountPlanID, $KID, $InvoiceID, $MatchNumber, $voucher) {
-        $success    = 0;
+        $success    = false;
         $KID        = trim($KID);
         $InvoiceID  = trim($InvoiceID);
-
-        // var_dump($voucher);
-
-        // var_dump($vaucher);
+        $MatchNumber = trim($MatchNumber);
 
         if($InvoiceID && !$success) {
           if(isset($this->matchH[$AccountPlanID]['InvoiceID'][$InvoiceID]) && round($this->matchH[$AccountPlanID]['InvoiceID'][$InvoiceID], 2) == 0) {
