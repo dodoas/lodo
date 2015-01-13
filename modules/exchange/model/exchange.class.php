@@ -235,9 +235,9 @@ class exchange {
         $select_options = '<option value="">Standard</option>';
         foreach ($currencies as $currency) {
             if ($voucher_foreign_currency && $currency->CurrencyISO == $voucher_foreign_currency)
-                $select_options .= '<option value="'. $currency->CurrencyISO .'" selected="selected" onchange="onCurrencyChange(this, \''. $voucher_id_text . '\')" onclick="onCurrencyChange(this, \''. $voucher_id_text . '\')">'. $currency->CurrencyISO .'</option>';
+                $select_options .= '<option value="'. $currency->CurrencyISO .'" selected="selected">'. $currency->CurrencyISO .'</option>';
             else
-                $select_options .= '<option value="'. $currency->CurrencyISO .'" onchange="onCurrencyChange(this, \''. $voucher_id_text . '\')" onclick="onCurrencyChange(this, \''. $voucher_id_text . '\')">'. $currency->CurrencyISO .'</option>';
+                $select_options .= '<option value="'. $currency->CurrencyISO .'">'. $currency->CurrencyISO .'</option>';
         }
 
         // we create one currency array for each voucher to allow for specific rates to be tied to specific accountplans or dates (which might be needed in the future) in reports
@@ -253,7 +253,7 @@ class exchange {
 
         $block_return = 'onKeyPress="return disableEnterKey(event)"';
         $ch_curr  .= '<div class="vouchercurrencyheaderwrapper" id="voucher_currency_div_'. $voucher_id_text .'" style="display:inline;">';
-        $ch_curr .= 'Valuta: <select name="voucher.ForeignCurrencyID" ' . $block_return . '>'. $select_options .'"</select>';
+        $ch_curr .= 'Valuta: <select name="voucher.ForeignCurrencyID" ' . $block_return . ' onchange="onCurrencyChange(this, \'' . $voucher_id_text . '\')">'. $select_options .'"</select>';
         $ch_curr .= 'Rate: <input class="number" type="text" name="voucher.ForeignConvRate" size="10" value="'. $voucher_foreign_rate .'" ' . $block_return . ' /> =100' . self::getLocalCurrency();
         $ch_curr .= ' <a href="#" onclick="exchangeFindRate(this)" style="display: inline">finn kurs </a>';
         $ch_curr .= '<input class="number" type="hidden" name="voucher.VoucherID" value="'. $voucher_id .'" />';

@@ -193,7 +193,7 @@ function onCurrencyChange(selObj, voucher_id) {
 }
 
 
-function voucherCurrencyChange(btn, action_url)
+function journalCurrencyChange(btn, action_url)
 {
     var wrapper = btn.parentNode;
 
@@ -201,7 +201,6 @@ function voucherCurrencyChange(btn, action_url)
 
     var currency_id_input = null;
     var currency_id_selected_input = null;
-    var currency_amount_input = null;
     var currency_rate_input = null;
 
     for(var i = 0; i < wrapper_children.length; i++)
@@ -214,8 +213,6 @@ function voucherCurrencyChange(btn, action_url)
             currency_id_input = wrapper_children[i];
         } else if (wrapper_children[i].name == "voucher.ForeignCurrencyIDSelection") {
             currency_id_selected_input = wrapper_children[i];
-        } else if (wrapper_children[i].name == "voucher.ForeignAmount") {
-            currency_amount_input = wrapper_children[i];
         } else if (wrapper_children[i].name == "voucher.ForeignConvRate") {
             currency_rate_input = wrapper_children[i];
         }
@@ -223,11 +220,6 @@ function voucherCurrencyChange(btn, action_url)
     var currency = currency_id_input[currency_id_input.selectedIndex].value;
     if (currency == "") {
         alert("Velg en valuta");
-        return false;
-    }
-
-    if (currency_amount_input.value == 0) {
-        alert("Velg en verdi");
         return false;
     }
 
