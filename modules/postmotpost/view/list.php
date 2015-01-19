@@ -336,42 +336,49 @@ Ingen &aring;pne poster funnet
         $('.chk').click(function(e) {
           var element = $(e.target);
 
-          if(element.attr('checked')) {
-
-            switch(e.target.id) {
-              case 'invoice':
-                var input = element.prev('input[type=text]');
-                var kid = element.parent().next('td').children('input[type=text]');
-                var match = kid.parent().next('td').children('input[type=text]');
-                makeajax("invoice", e.target.name.split('.')[2]);
-              break;
-              case 'kid':
-                var input = element.parent().prev('td').children('input[type=text]');
-                var kid = element.prev('input[type=text]');
-                var match = element.parent().next('td').children('input[type=text]');
-                makeajax("kid", e.target.name.split('.')[2]);
-              break;
-              case 'match':
-                var kid = element.parent().prev('td').children('input[type=text]');
-                var input = kid.parent().prev('td').children('input[type=text]');
-                var match = element.prev('input[type=text]');
-                makeajax("match", e.target.name.split('.')[2]);
-              break;
-            }
-          } else {
-            // That or just dont allow uncheking at all?
-            makeajax("none", e.target.name.split('.')[2]);
+          switch(e.target.id) {
+            case 'invoice':
+              var input = element.prev('input[type=text]');
+              var kid = element.parent().next('td').children('input[type=text]');
+              var match = kid.parent().next('td').children('input[type=text]');
+              if(element.attr('checked')) {
+                makeajax("invoice", "invoice", e.target.name.split('.')[2]);
+              }else{
+                // Legacy to set 0 if none is checked.
+                makeajax("invoice", "0", e.target.name.split('.')[2]);
+              }
+            break;
+            case 'kid':
+              var input = element.parent().prev('td').children('input[type=text]');
+              var kid = element.prev('input[type=text]');
+              var match = element.parent().next('td').children('input[type=text]');
+              if(element.attr('checked')) {
+                makeajax("kid", "kid", e.target.name.split('.')[2]);
+              }else{
+                makeajax("kid", "0", e.target.name.split('.')[2]);
+              }
+            break;
+            case 'match':
+              var kid = element.parent().prev('td').children('input[type=text]');
+              var input = kid.parent().prev('td').children('input[type=text]');
+              var match = element.prev('input[type=text]');
+              if(element.attr('checked')) {
+                makeajax("match", "match", e.target.name.split('.')[2]);
+              }else{
+                makeajax("match", "0", e.target.name.split('.')[2]);
+              }
+            break;
           }
 
           var data = { type: e.target.id, name: e.target.name, invoiceid: input.attr("id"), invoiceval: input.val(), kidid: kid.attr('id'), kidval: kid.val(), matchid: match.attr('id'), matchval: match.val() };
-
           updateUI(data, element);
         });
 
-        function makeajax (type, id) {
+        function makeajax (type, newValue, id) {
           $.post("<?= $_SETUP['DISPATCH'] . 't=postmotpost.ajax' ?>",
           {
             type: type,
+            newValue: newValue,
             id: id
           },
           function(data,status){
