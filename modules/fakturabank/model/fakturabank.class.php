@@ -911,7 +911,7 @@ class lodo_fakturabank_fakturabank {
         $schemeid = null;
 
         if (!empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)) {
-            if ($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID != 'FAKTURABANK:CUSTOMERNUMBER') {
+            if ($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID != 'NO:SUP-ACCNT-RE') {
                 $companyid = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
                 $schemeid = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
             }
@@ -1607,7 +1607,7 @@ class lodo_fakturabank_fakturabank {
                 // Add customer nr
                 $identification = $doc->createElement('cac:PartyIdentification');
                 $cbc = $doc->createElement('cbc:ID', utf8_encode($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)); 
-                $cbc->setAttribute('schemeID', 'FAKTURABANK:CUSTOMERNUMBER');
+                $cbc->setAttribute('schemeID', 'NO:SUP-ACCNT-RE');
                 $identification->appendChild($cbc);
                 $cacparty->appendChild($identification);
 
