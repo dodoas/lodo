@@ -198,7 +198,8 @@ class lodo_fakturabank_fakturabank {
         
         foreach ($invoices->Invoice as &$invoice) {
             $dataH = array();
-            
+            $dataRR = array(); // ReconciliationReasons for invoice
+
             if ($invoice->LodoID) {
                 $action = "update";
                 $dataH['ID'] = $invoice->LodoID;
@@ -264,25 +265,39 @@ class lodo_fakturabank_fakturabank {
             $dataH['JournalID'] = $invoice->JournalID;
             $dataH['AccountPlanID'] = $invoice->AccountPlanID;
             $dataH['VoucherType'] = $invoice->VoucherType;
-            
-            if (!empty($invoice->FakturabankCustomerReconciliationReasonID)) {
-                $dataH['FakturabankCustomerReconciliationReasonID'] = $invoice->FakturabankCustomerReconciliationReasonID;
-                $dataH['FakturabankCustomerReconciliationReasonAmount'] = $invoice->FakturabankCustomerReconciliationReasonAmount;
+
+
+            $ret = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'fakturabankinvoicein', 'action' => $action, 'debug' => false));
+
+            $reason_array = array();
+            if (!empty($invoice->ReconciliationReasons)) {
+                foreach ($invoice->ReconciliationReasons as &$reason) {
+                     $dataRR['FakturabankInvoiceInId'] = $this->get_fakturabankincominginvoice($invoice->FakturabankID);
+                     $dataRR['ClosingReasonId'] = $reason[0];
+                     $dataRR['Amount'] = $reason[1];
+                     $dataRR['IsCustomerClosingReason'] = (int)$reason[2];
+                     $reason_array[] = $dataRR;
+                }
             }
-            
-            if (!empty($invoice->FakturabankSupplierReconciliationReasonID)) {
-                $dataH['FakturabankSupplierReconciliationReasonID'] = $invoice->FakturabankSupplierReconciliationReasonID;
-                $dataH['FakturabankSupplierReconciliationReasonAmount'] = $invoice->FakturabankSupplierReconciliationReasonAmount;
+
+            // Cleaning all reasons records from database so we can skip checking if we have more or less reason in updated download
+            if ($action = "update") {
+                if ($invoice->LodoID) {
+                    $query = 'DELETE FROM fbdownloadedinvoicereasons where FakturabankInvoiceInId = ' . $invoice->LodoID;
+                    $_lib['storage']->db_query($query);
+                }
+
             }
-            
-            $ret = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'fakturabankinvoicein', 'action' => $action, 'debug' => false));			
-            
+            foreach ($reason_array as $dataRR) {
+                $ret = $_lib['storage']->store_record(array('data' => $dataRR, 'table' => 'fbdownloadedinvoicereasons', 'action' => "insert", 'debug' => false));
+            }
+
             if ($action == "insert") {
                 $invoice->LodoID = $ret;
             }
         }
     }
-    
+
     private function save_outgoing($invoices) {
         if (empty($invoices)) {
             return false;
@@ -292,6 +307,7 @@ class lodo_fakturabank_fakturabank {
 
 		foreach ($invoices->Invoice as &$invoice) {
 			$dataH = array();
+            $dataRR = array(); // ReconciliationReasons for invoice
 
 			if ($invoice->LodoID) {
 				$action = "update";
@@ -355,16 +371,31 @@ class lodo_fakturabank_fakturabank {
 			$dataH['AccountPlanID'] = $invoice->AccountPlanID;
 			$dataH['VoucherType'] = $invoice->VoucherType;
 
-            if (!empty($invoice->FakturabankCustomerReconciliationReasonID)) {
-                $dataH['FakturabankCustomerReconciliationReasonID'] = $invoice->FakturabankCustomerReconciliationReasonID;
-                $dataH['FakturabankCustomerReconciliationReasonAmount'] = $invoice->FakturabankCustomerReconciliationReasonAmount;
-            }
-            if (!empty($invoice->FakturabankSupplierReconciliationReasonID)) {
-                $dataH['FakturabankSupplierReconciliationReasonID'] = $invoice->FakturabankSupplierReconciliationReasonID;
-                $dataH['FakturabankSupplierReconciliationReasonAmount'] = $invoice->FakturabankSupplierReconciliationReasonAmount;
+			$ret = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'fakturabankinvoiceout', 'action' => $action, 'debug' => false));
+
+            $reason_array = array();
+            if (!empty($invoice->ReconciliationReasons)) {
+                foreach ($invoice->ReconciliationReasons as &$reason) {
+                     $dataRR['FakturabankInvoiceInId'] = $this->get_fakturabankoutgoinginvoice($invoice->FakturabankID);
+                     $dataRR['ClosingReasonId'] = $reason[0];
+                     $dataRR['Amount'] = $reason[1];
+                     $dataRR['IsCustomerClosingReason'] = (int)$reason[2];
+                     $reason_array[] = $dataRR;
+                }
             }
 
-			$ret = $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'fakturabankinvoiceout', 'action' => $action, 'debug' => false));			
+            // Cleaning all reasons records from database so we can skip checking if we have more or less reason in updated download
+            if ($action = "update") {
+                if ($invoice->LodoID) {
+                    $query = 'DELETE FROM fbdownloadedinvoicereasons where FakturabankInvoiceInId = ' . $invoice->LodoID;
+                    $_lib['storage']->db_query($query);
+                }
+
+            }
+
+            foreach ($reason_array as $dataRR) {
+                $ret = $_lib['storage']->store_record(array('data' => $dataRR, 'table' => 'fbdownloadedinvoicereasons', 'action' => "insert", 'debug' => false));
+            }
 
 			if ($action == "insert") {
 				$invoice->LodoID = $ret;
@@ -552,14 +583,13 @@ class lodo_fakturabank_fakturabank {
                 }
             }
 
-            if (!empty($acc_cost_params['customerreconciliationreasonid']) && is_numeric($acc_cost_params['customerreconciliationreasonid'])) {
-                $InvoiceO->FakturabankCustomerReconciliationReasonID = $acc_cost_params['customerreconciliationreasonid'];
-                $InvoiceO->FakturabankCustomerReconciliationReasonAmount = $acc_cost_params['customerreconciliationreasonamount'];
-            }
-
-            if (!empty($acc_cost_params['supplierreconciliationreasonid']) && is_numeric($acc_cost_params['supplierreconciliationreasonid'])) {
-                $InvoiceO->FakturabankSupplierReconciliationReasonID = $acc_cost_params['supplierreconciliationreasonid'];
-                $InvoiceO->FakturabankSupplierReconciliationReasonAmount = $acc_cost_params['supplierreconciliationreasonamount'];
+            if (!empty($acc_cost_params['supplierreconciliationreasons'])) {
+                foreach ($acc_cost_params['supplierreconciliationreasons'] as $key => $value) {
+                    if (is_numeric($value)) {
+                        // Passing true or false may not be needed anymore
+                        $InvoiceO->ReconciliationReasons[] = array($key, $value, false);
+                    }
+                }
             }
         }
 
@@ -593,6 +623,7 @@ class lodo_fakturabank_fakturabank {
             $InvoiceO->AccountPlanID = 0;
             $InvoiceO->MotkontoAccountPlanID = 0;
             $InvoiceO->Period        = substr($InvoiceO->IssueDate, 0, 7);
+            $InvoiceO->ReconciliationReasons = array();
 
             $urlH = explode('/', $InvoiceO->UBLExtensions->UBLExtension->ExtensionContent->URL);
             $InvoiceO->FakturabankID = $urlH[4]; #Last element is the internalID.
@@ -750,17 +781,17 @@ class lodo_fakturabank_fakturabank {
                 $InvoiceO->Reisegarantifond = $value;
             }
 
-            if (!empty($acc_cost_params['customerreconciliationreasonid']) && is_numeric($acc_cost_params['customerreconciliationreasonid'])) {
-                $InvoiceO->FakturabankCustomerReconciliationReasonID = $acc_cost_params['customerreconciliationreasonid'];
-                $InvoiceO->FakturabankCustomerReconciliationReasonAmount = $acc_cost_params['customerreconciliationreasonamount'];
+            if (!empty($acc_cost_params['customerreconciliationreasons'])) {
+                foreach ($acc_cost_params['customerreconciliationreasons'] as $key => $value) {
+                    if (is_numeric($value)) {
+                        // Passing true or false may not be needed anymore
+                        $InvoiceO->ReconciliationReasons[] = array($key, $value, true);
+                    }
+                }
             }
 
-            if (!empty($acc_cost_params['supplierreconciliationreasonid']) && is_numeric($acc_cost_params['supplierreconciliationreasonid'])) {
-                $InvoiceO->FakturabankSupplierReconciliationReasonID = $acc_cost_params['supplierreconciliationreasonid'];
-                $InvoiceO->FakturabankSupplierReconciliationReasonAmount = $acc_cost_params['supplierreconciliationreasonamount'];
-            }
         }
-        
+
         return true;
     }
 
@@ -793,6 +824,7 @@ class lodo_fakturabank_fakturabank {
             $InvoiceO->MotkontoAccountPlanID = 0;
             $InvoiceO->Period        = substr($InvoiceO->IssueDate, 0, 7);
             $InvoiceO->VoucherType   = $VoucherType;
+            $InvoiceO->ReconciliationReasons = array();
 
             if (!$this->extractIncomingAccountingCost($InvoiceO)) {
                 continue;

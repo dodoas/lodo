@@ -794,6 +794,10 @@ class lodo_fakturabank_fakturabankvoting {
 		$query = "UPDATE fakturabankinvoicein SET LodoID = '$InvoiceID', AccountPlanID = '$AccountPlanID', AccountPlanOrgNumber = '$AccountPlanOrgNumber' WHERE FakturabankID = '$FakturabankInvoiceID'";
 
 		$_lib['storage']->db_query3(array('query' => $query));
+
+        $query = "UPDATE fbdownloadedinvoicereasons SET LodoID = '$InvoiceID' WHERE FakturabankInvoiceInID in (SELECT ID from fakturabankinvoicein WHERE FakturabankID = '$FakturabankInvoiceID')";
+
+        $_lib['storage']->db_query3(array('query' => $query));
 	}
 
 	public function update_fakturabank_outgoing_invoice($FakturabankInvoiceID, $InvoiceID, $AccountPlanID) {
@@ -827,6 +831,10 @@ class lodo_fakturabank_fakturabankvoting {
 		$query = "UPDATE fakturabankinvoiceout SET LodoID = '$InvoiceID', AccountPlanID = '$AccountPlanID', AccountPlanOrgNumber = '$AccountPlanOrgNumber' WHERE FakturabankID = '$FakturabankInvoiceID'";
 
 		$_lib['storage']->db_query3(array('query' => $query));
+
+        $query = "UPDATE fbdownloadedinvoicereasons SET LodoID = '$InvoiceID' WHERE FakturabankInvoiceInID in (SELECT ID from fakturabankinvoiceout WHERE FakturabankID = '$FakturabankInvoiceID')";
+
+        $_lib['storage']->db_query3(array('query' => $query));
 	}
 
 	public function lookup_invoice_relations($args) {

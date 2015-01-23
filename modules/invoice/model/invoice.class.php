@@ -739,6 +739,7 @@ class invoice {
         #print "$query_invoiceline<br>";
         $result2 = $_lib['db']->db_query($query_invoiceline);
 
+        // Generate vouchers for invoice lines
         while($row = $_lib['db']->db_fetch_object($result2))
         {
             $fieldsline = array();
@@ -800,6 +801,87 @@ class invoice {
             #print_r($fieldsline);
             #print "linje: $line_accountplanid<br>\n";
             $accounting->insert_voucher_line(array('post'=>$fieldsline, 'accountplanid'=>$line_accountplanid, 'type'=>'result1', 'VoucherType'=>$this->VoucherType, 'invoice'=>'1', 'debug' => true));
+        }
+
+
+
+        // Generate vouchers for reconciliation reasons
+        $VoucherH = array();
+        $fb_query = sprintf("SELECT * FROM fbdownloadedinvoicereasons WHERE LodoID = %d", $this->InvoiceID);
+
+        $fb_rows = $_lib['db']->db_query($fb_query);
+        $original_accountplanid = $this->headH['CustomerAccountPlanID'];
+
+        while($fb_row = $_lib['db']->db_fetch_object($fb_rows)) {
+            $reasonID = $fb_row->ClosingReasonId;
+            $reconciliation_amount = $fb_row->Amount;
+
+            $VoucherH['voucher_AmountIn']       = 0;
+            $VoucherH['voucher_AmountOut']      = 0;
+            $VoucherH['voucher_Vat']            = '';
+            $VoucherH['voucher_Description']    = '';
+            $VoucherH['voucher_AccountPlanID']  = 0;
+            $VoucherH['voucher_JournalID']        = $this->JournalID;
+            $VoucherH['voucher_VoucherPeriod']    = $this->headH['Period'];
+            $VoucherH['voucher_VoucherDate']      = $this->headH['InvoiceDate'];
+            $VoucherH['voucher_DueDate']          = $this->headH['DueDate'];
+
+            if($reasonID) {
+                $VoucherH['voucher_Description'] = sprintf(
+                    'Reconciliation from reason %d',
+                    $reasonID
+                    );
+
+                $reasonQuery = sprintf(
+                    "SELECT r.*
+                   FROM fakturabankinvoicereconciliationreason r,
+                        accountplan a
+                   WHERE r.FakturabankInvoiceReconciliationReasonID = %d
+                     AND r.AccountPlanID = a.AccountPlanID",
+                    $reasonID
+                    );
+
+                $reason_row = $_lib['storage']->get_row(array('query' => $reasonQuery, 'debug' => true));
+                if(!$reason_row) {
+                    $_lib['message']->add(sprintf("Noe galt med reconciliationreason %d", $reasonID));
+                }
+                else {
+                    $VoucherH['voucher_AccountPlanID'] = $reason_row->AccountPlanID;
+
+                    if($reconciliation_amount > 0) {
+                        $VoucherH['voucher_AmountIn']   = abs($reconciliation_amount);
+                        $VoucherH['voucher_AmountOut']  = 0;
+                    }
+                    else {
+                        $VoucherH['voucher_AmountOut']  = abs($reconciliation_amount);
+                        $VoucherH['voucher_AmountIn']   = 0;
+                    }
+
+                    $accounting->insert_voucher_line(
+                        array(
+                            'post' => $VoucherH,
+                            'accountplanid' => $VoucherH['voucher_AccountPlanID'],
+                            'VoucherType'=> $this->VoucherType,
+                            'comment' => 'Fra fakturabank - Reconciliation'
+                            )
+                        );
+
+                    /* motpost */
+                    $VoucherH['voucher_AccountPlanID'] = $original_accountplanid;
+                    $tmp = $VoucherH['voucher_AmountIn'];
+                    $VoucherH['voucher_AmountIn'] = $VoucherH['voucher_AmountOut'];
+                    $VoucherH['voucher_AmountOut'] = $tmp;
+
+                    $accounting->insert_voucher_line(
+                        array(
+                            'post' => $VoucherH,
+                            'accountplanid' => $VoucherH['voucher_AccountPlanID'],
+                            'VoucherType'=> $this->VoucherType,
+                            'comment' => 'Fra fakturabank - Reconciliation'
+                            )
+                        );
+                }
+            }
         }
 
 
