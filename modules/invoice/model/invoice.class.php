@@ -821,6 +821,7 @@ class invoice {
             $VoucherH['voucher_Vat']            = '';
             $VoucherH['voucher_Description']    = '';
             $VoucherH['voucher_AccountPlanID']  = 0;
+            $VoucherH['voucher_InvoiceID']        = $this->InvoiceID;
             $VoucherH['voucher_JournalID']        = $this->JournalID;
             $VoucherH['voucher_VoucherPeriod']    = $this->headH['Period'];
             $VoucherH['voucher_VoucherDate']      = $this->headH['InvoiceDate'];
