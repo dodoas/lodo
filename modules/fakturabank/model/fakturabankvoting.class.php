@@ -1199,7 +1199,8 @@ class lodo_fakturabank_fakturabankvoting {
 
             $query = "SELECT AccountNumber FROM account WHERE AccountID='" . $args['BankAccountID'] . "'";
 
-            printf("Got id: %d\n", $args['id']);
+            // Commented this so we don't print out id's in view. Debug leftover?
+            // printf("Got id: %d\n", $args['id']);
 
             $row = $_lib['storage']->get_row(array('query' => $query));
 
