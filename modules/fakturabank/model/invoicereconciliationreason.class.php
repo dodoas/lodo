@@ -55,8 +55,8 @@ class lodo_fakturabank_invoicereconciliationreason {
         $this->credentials = "$this->username:$this->password";		
 
 
-		$page       = "discrepency_reasons.json";
-        $params     = "?identifier=" . $this->OrgNumber . '&identifier_type=NO:ORGNR';
+		$page       = "closing_reasons.json";
+        $params     = "?identifier=" . $this->OrgNumber . '&identifier_type=NO:ORGNR&type=invoice';
 //        if($this->retrievestatus) $params .= '&customer_status=' . $this->retrievestatus;
         $url    = "$this->protocol://$this->host/$page$params";
         $_lib['message']->add($url);

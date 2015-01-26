@@ -53,7 +53,7 @@ class invoice {
             $this->{$key} = $value;
             #print "$key = $value<br>\n";
         }
-        
+
         if(!$this->JournalID)
             $this->JournalID = $this->InvoiceID;
         #print "ferdig<br />\n";
@@ -77,8 +77,8 @@ class invoice {
             $headH = $_lib['db']->db_fetch_assoc($result_head);
             //print_r($headH);
 
-            /* 
-             * InvoiceDate is needed by set_line to select correct VAT 
+            /*
+             * InvoiceDate is needed by set_line to select correct VAT
              */
             if(isset($headH['InvoiceDate'])) {
                 $this->set_head(array('InvoiceDate' => $headH['InvoiceDate']));
@@ -87,10 +87,10 @@ class invoice {
             while($lineH = $_lib['db']->db_fetch_assoc($result_line)) {
                 $this->set_line($lineH);
             }
-        } 
-        
+        }
+
         if(!$result_head){
-        
+
             /* Set default values for invoice head*/
             $headH['InsertedByPersonID']      = $_lib['sess']->get_person('PersonID');
             $headH['UpdatedByPersonID']      = $_lib['sess']->get_person('PersonID');
@@ -142,7 +142,7 @@ class invoice {
         $headH['IZipCode']              = $accountplan->ZipCode;
         $headH['ICity']                 = $accountplan->City;
         $headH['DCity']                 = $accountplan->City;
-        
+
         $headH['DCountryCode']              = $accountplan->CountryCode;
         $headH['ICountryCode']              = $accountplan->CountryCode;
         $headH['DEmail']                = $accountplan->Email;
@@ -161,10 +161,10 @@ class invoice {
             }
         }
 
-        if(!$headH['ProjectID'] && $accountplan->ProjectID) 
+        if(!$headH['ProjectID'] && $accountplan->ProjectID)
             $headH['ProjectID'] = $accountplan->ProjectID;
 
-        if(!$headH['DepartmentID'] && $accountplan->DepartmentID) 
+        if(!$headH['DepartmentID'] && $accountplan->DepartmentID)
             $headH['DepartmentID'] = $accountplan->DepartmentID;
 
         /*$args['invoiceout_ICountry_'.$this->InvoiceID] = $accountplan->address;
@@ -202,17 +202,17 @@ class invoice {
             $_lib['message']->add(array('message' => "Du m&aring; velge kunden som skal motta fakturaen"));
 
         unset($headH['TotalCustPrice']);
-        
+
         if($_lib['setup']->get_value('kid.accountplanid') || $_lib['setup']->get_value('kid.invoiceid')) {
             $kidO         = new lodo_logic_kid();
             $headH['KID'] = $kidO->generate($headH);
         }
-        
+
         $this->set_head($headH);
     }
 
     /*******************************************************************************
-    * Update invoice based on std 
+    * Update invoice based on std
     * @param array
     * @return
     */
@@ -235,7 +235,7 @@ class invoice {
         if (!is_numeric($args['InvoiceID'])) {
             return;
         }
-        
+
         global $_lib;
 
         $invoiceout_due_date_key = "invoiceout_DueDate_" . $args['InvoiceID'];
@@ -288,7 +288,7 @@ class invoice {
             unset($this->headH['DeliveryDate']);
             unset($this->headH['OrderDate']);
             unset($this->headH['inline']);
-            
+
             $headH = $this->headH;
 
             if($this->debug) print_r($headH);
@@ -304,7 +304,7 @@ class invoice {
                 if($this->debug) print_r($lineH);
                 $_lib['storage']->store_record(array('data' => $lineH, 'table' => $this->table_line, 'debug' => false));
             }
-            
+
             if((count($this->lineH) == 1 && $this->lineH[0]['ProductID'] > 0 && $this->lineH[0]['QuantityDelivered'] != 0) || count($this->lineH) > 1) {
                 $this->journal();
             } else {
@@ -314,7 +314,7 @@ class invoice {
         }
         else
         {
-        
+
             #print "Sletter bilag pga mangel pŒ linjer: $this->JournalID, $this->VoucherType<br />";
             #Slett billag hvis det ikke har noen linjer
             $accounting->delete_journal($this->JournalID, $this->VoucherType);
@@ -348,9 +348,9 @@ class invoice {
         $query_invprint = "select * from invoiceoutprint where InvoiceID='" . $args['InvoiceID'] . "'";
         $result2 = $_lib['db']->db_query($query_invprint);
         if (!$result2 || !($row = $_lib['db']->db_fetch_assoc($result2))) {
-            /* create the invoiceoutprint row */    
-            $s = sprintf("INSERT INTO invoiceoutprint (`InvoiceID`, `InvoicePrintDate`) VALUES ('%d', '0000-00-00');", 
-                         $args['InvoiceID']); 
+            /* create the invoiceoutprint row */
+            $s = sprintf("INSERT INTO invoiceoutprint (`InvoiceID`, `InvoicePrintDate`) VALUES ('%d', '0000-00-00');",
+                         $args['InvoiceID']);
             $_lib['db']->db_query($s);
 
         }
@@ -359,7 +359,7 @@ class invoice {
         return $args['InvoiceID'];
     }
 
-    function copy_from_recurring($recurring_id, $customer_comment = false) 
+    function copy_from_recurring($recurring_id, $customer_comment = false)
     {
         global $_lib, $accounting;
         $this->OldInvoiceID = $this->InvoiceID;
@@ -388,7 +388,7 @@ class invoice {
         $headH['InvoiceID']           = $this->InvoiceID;
         $headH['OrderDate']           = $_lib['sess']->get_session('LoginFormDate');
         $headH['Period']              = $_lib['date']->get_this_period($_lib['sess']->get_session('Date'));
-        
+
         $headH['Status']              = "progress";
         $headH['Active']              = 1;
         $headH['CreatedDateTime']     = $_lib['sess']->get_session('Date');
@@ -401,7 +401,7 @@ class invoice {
             $headH['InvoiceDate'] = $recurring['LastDate'];
             $headH['Period']      = $_lib['date']->get_this_period($recurring['LastDate']);
 
-            $s = sprintf("REPLACE INTO invoiceoutprint (`InvoiceID`, `InvoicePrintDate`) 
+            $s = sprintf("REPLACE INTO invoiceoutprint (`InvoiceID`, `InvoicePrintDate`)
 				VALUES ('%d', DATE_SUB(DATE('%s'), INTERVAL %d DAY));",
                          $this->InvoiceID, $recurring['LastDate'], $recurring['PrintInterval']);
             $_lib['db']->db_query($s);
@@ -441,7 +441,7 @@ class invoice {
         $this->make_invoice();
         return $this->InvoiceID;
     }
-   
+
     /*******************************************************************************
     * Copy invoice
     * @param
@@ -465,7 +465,7 @@ class invoice {
         $headH['InvoiceID']           = $this->InvoiceID;
         $headH['OrderDate']           = $_lib['sess']->get_session('LoginFormDate');
         $headH['Period']              = $_lib['date']->get_this_period($_lib['sess']->get_session('Date'));
-        
+
         $headH['Status']              = "progress";
         $headH['Active']              = 1;
         $headH['Locked']              = 0; // hard code to unlocked since this is a new invoice
@@ -498,7 +498,7 @@ class invoice {
         while($lineH = $_lib['db']->db_fetch_assoc($result2))
         {
             unset($lineH['LineID']); #This id is pk so we cannot copy it.
-            unset($lineH['InvoiceID']); 
+            unset($lineH['InvoiceID']);
             #print "linje\n";
             #print_r($lineH);
             $this->set_line($lineH);
@@ -518,21 +518,21 @@ class invoice {
         global $_lib;
         $query="update $this->table_line set Active=0 where LineID=" . $LineID;
         $ret = $_lib['db']->db_update($query);
-        
+
         $_lib['message']->add(array('message' => "Linje $LineID p&aring; faktura $this->InvoiceID er slettet"));
 
         if($this->CustomerAccountPlanID == 0) {
             $query = sprintf(
-                "SELECT I.CustomerAccountPlanID FROM 
+                "SELECT I.CustomerAccountPlanID FROM
                       invoiceout I,
                       invoiceoutline IL
                     WHERE
                         IL.LineID = %d AND I.InvoiceID = IL.InvoiceID",
                 $LineID
                 );
-            
+
             $row = $_lib['db']->get_row(array('query' => $query));
-            
+
             $this->CustomerAccountPlanID = $row->CustomerAccountPlanID;
         }
 
@@ -589,17 +589,17 @@ class invoice {
         foreach($line as $key => $value) {
             $lineH[$key]  = $value;
         }
-        
+
         if($line['ProductID'] > 0) {
         $query = "select * from product as P where P.ProductID='" . $line['ProductID'] . "'";
         #print "$query<br>";
         $product = $_lib['storage']->get_row(array('query' => $query));
-        
+
         $accountplan = $accounting->get_accountplan_object($product->AccountPlanID);
         #print_r($accountplan);
-        
+
         $VAT = $accounting->get_vataccount_object(array('VatID' => $accountplan->VatID, 'date' => $this->headH['InvoiceDate']));
-        
+
         #print_r($product);
 
         if($line['QuantityDelivered'] == 0) #Rettet av Geir. Maa vare mulig aa lage kreditnota med minus i antall.
@@ -631,9 +631,9 @@ class invoice {
 
         $this->totalSum += round($tmpquant * $custprice, 2);
         $this->totalMva += round($tmpquant * $custprice * ($lineH['Vat']/100), 2);
-        
+
         $this->lineH[] = $lineH;
-        
+
         $this->TotalCustPrice = $this->totalSum + $this->totalMva;
         #print "<b>TotalCustPrice: $this->TotalCustPrice</b><br>";
         #$this->headH[] = 199; #$this->TotalCustPrice;
@@ -677,13 +677,13 @@ class invoice {
         $invoicelineH['invoiceoutline_InvoiceID']    = $this->InvoiceID;
         return $_lib['db']->db_new_hash($invoicelineH, $this->table_line);
     }
-    
+
     /***********************************************************************
     *Start accounting
     ***********************************************************************/
     public function journal() {
         global $_lib, $accounting;
-        
+
         /**********************************************************************/
         #Regnskapsf¿ringne begynner
         if(isset($this->headH['InvoiceID']))
@@ -739,6 +739,7 @@ class invoice {
         #print "$query_invoiceline<br>";
         $result2 = $_lib['db']->db_query($query_invoiceline);
 
+        // Generate vouchers for invoice lines
         while($row = $_lib['db']->db_fetch_object($result2))
         {
             $fieldsline = array();
@@ -752,11 +753,11 @@ class invoice {
             $fieldsline['voucher_AutomaticReason']  = "Faktura: $this->JournalID";
 
             $sumprice = round($row->UnitCustPrice * $row->QuantityDelivered, 2);
-            if($row->Discount) {                
+            if($row->Discount) {
                 $sumprice = $sumprice * (1-$row->Discount/100);
             }
             $fieldsline['voucher_AmountOut']        = round($sumprice * (1 + ($row->Vat/100)), 2 );
-            
+
             #print "verdi: " . $fieldsline['voucher_AmountOut'] . "<br>";
             if($fieldsline['voucher_AmountOut'] < 0)
             {
@@ -771,17 +772,17 @@ class invoice {
             #$fieldsline['voucher_KID']       = $this->JournalID; #Ikke kid Œ linjer
             $fieldsline['voucher_VatID']            = $row->VatID;
             $fieldsline['voucher_Vat']              = $row->Vat;
-            
+
             if(isset($this->headH['DepartmentID']) && $this->headH['DepartmentID'] > 0)
                 $fieldsline['voucher_DepartmentID']     = $this->headH['DepartmentID'];
             else
                 $fieldsline['voucher_DepartmentID']     = $productRow->CompanyDepartmentID;
 
-            if(isset($this->headH['ProjectID']) && $this->headH['ProjectID'] > 0)        
+            if(isset($this->headH['ProjectID']) && $this->headH['ProjectID'] > 0)
                 $fieldsline['voucher_ProjectID']        = $this->headH['ProjectID'];
             else
                 $fieldsline['voucher_ProjectID']        = $productRow->ProjectID;
-            
+
             $fieldsline['voucher_Description']      = $this->headH['CommentCustomer']; # Take the description from the head to each line. $row->Comment;
             $fieldsline['voucher_VoucherText']      = $row->ProductID;
             $fieldsline['voucher_VoucherPeriod']    = $this->headH['Period'];
@@ -789,7 +790,7 @@ class invoice {
             $fieldsline['voucher_VoucherType']      = $this->VoucherType;
             $fieldsline['voucher_DueDate']          = $this->headH['DueDate'];
             $fieldsline['voucher_Active']           = 1;
- 
+
             if(strlen($productRow->AccountPlanID)>0)
                 $line_accountplanid = $productRow->AccountPlanID;
             else
@@ -800,6 +801,88 @@ class invoice {
             #print_r($fieldsline);
             #print "linje: $line_accountplanid<br>\n";
             $accounting->insert_voucher_line(array('post'=>$fieldsline, 'accountplanid'=>$line_accountplanid, 'type'=>'result1', 'VoucherType'=>$this->VoucherType, 'invoice'=>'1', 'debug' => true));
+        }
+
+
+
+        // Generate vouchers for reconciliation reasons
+        $VoucherH = array();
+        $fb_query = sprintf("SELECT * FROM fbdownloadedinvoicereasons WHERE LodoID = %d", $this->InvoiceID);
+
+        $fb_rows = $_lib['db']->db_query($fb_query);
+        $original_accountplanid = $this->headH['CustomerAccountPlanID'];
+
+        while($fb_row = $_lib['db']->db_fetch_object($fb_rows)) {
+            $reasonID = $fb_row->ClosingReasonId;
+            $reconciliation_amount = $fb_row->Amount;
+
+            $VoucherH['voucher_AmountIn']       = 0;
+            $VoucherH['voucher_AmountOut']      = 0;
+            $VoucherH['voucher_Vat']            = '';
+            $VoucherH['voucher_Description']    = '';
+            $VoucherH['voucher_AccountPlanID']  = 0;
+            $VoucherH['voucher_InvoiceID']        = $this->InvoiceID;
+            $VoucherH['voucher_JournalID']        = $this->JournalID;
+            $VoucherH['voucher_VoucherPeriod']    = $this->headH['Period'];
+            $VoucherH['voucher_VoucherDate']      = $this->headH['InvoiceDate'];
+            $VoucherH['voucher_DueDate']          = $this->headH['DueDate'];
+
+            if($reasonID) {
+                $VoucherH['voucher_Description'] = sprintf(
+                    'Reconciliation from reason %d',
+                    $reasonID
+                    );
+
+                $reasonQuery = sprintf(
+                    "SELECT r.*
+                   FROM fakturabankinvoicereconciliationreason r,
+                        accountplan a
+                   WHERE r.FakturabankInvoiceReconciliationReasonID = %d
+                     AND r.AccountPlanID = a.AccountPlanID",
+                    $reasonID
+                    );
+
+                $reason_row = $_lib['storage']->get_row(array('query' => $reasonQuery, 'debug' => true));
+                if(!$reason_row) {
+                    $_lib['message']->add(sprintf("Noe galt med reconciliationreason %d", $reasonID));
+                }
+                else {
+                    $VoucherH['voucher_AccountPlanID'] = $reason_row->AccountPlanID;
+
+                    if($reconciliation_amount > 0) {
+                        $VoucherH['voucher_AmountIn']   = abs($reconciliation_amount);
+                        $VoucherH['voucher_AmountOut']  = 0;
+                    }
+                    else {
+                        $VoucherH['voucher_AmountOut']  = abs($reconciliation_amount);
+                        $VoucherH['voucher_AmountIn']   = 0;
+                    }
+
+                    $accounting->insert_voucher_line(
+                        array(
+                            'post' => $VoucherH,
+                            'accountplanid' => $VoucherH['voucher_AccountPlanID'],
+                            'VoucherType'=> $this->VoucherType,
+                            'comment' => 'Fra fakturabank - Reconciliation'
+                            )
+                        );
+
+                    /* motpost */
+                    $VoucherH['voucher_AccountPlanID'] = $original_accountplanid;
+                    $tmp = $VoucherH['voucher_AmountIn'];
+                    $VoucherH['voucher_AmountIn'] = $VoucherH['voucher_AmountOut'];
+                    $VoucherH['voucher_AmountOut'] = $tmp;
+
+                    $accounting->insert_voucher_line(
+                        array(
+                            'post' => $VoucherH,
+                            'accountplanid' => $VoucherH['voucher_AccountPlanID'],
+                            'VoucherType'=> $this->VoucherType,
+                            'comment' => 'Fra fakturabank - Reconciliation'
+                            )
+                        );
+                }
+            }
         }
 
 
@@ -814,7 +897,7 @@ class invoice {
         $accounting->set_journal_motkonto(array('post'=>$fields, 'VoucherType'=>$this->VoucherType));
         $accounting->correct_journal_balance($fields, $this->JournalID, $this->VoucherType);
     }
-    
+
     ################################################################################################
     #Legger fakturadata over i fakturabank dataformat og sender det over fakturabank.
     function fakturabank_send() {
@@ -863,7 +946,7 @@ class invoice {
         if (!empty($invoice->ProjectNameCustomer)) {
             $this->invoiceO->CustomerProject = $invoice->ProjectNameCustomer;
         }
-        
+
 
         /* Do not transmit references as OrderReference, because in Lodo they are not reference ids, but instead CONTACT PERSONS
         if (!empty($invoice->RefInternal)) {
@@ -915,7 +998,7 @@ class invoice {
         }
 
 
-        if (!empty($invoice->RefCustomer)) { 
+        if (!empty($invoice->RefCustomer)) {
             // We should use RefSupplier but has been hardcoded the wrong way other places in lodo and must be reverted (incl in existing database records) before we can use RefSupplier
             $ref_names = explode(" ", $invoice->RefCustomer, 2); // max two segments
             $this->invoiceO->AccountingSupplierParty->Party->Person->FirstName = $ref_names[0];
@@ -970,7 +1053,7 @@ class invoice {
             $this->invoiceO->AccountingCustomerParty->Party->Contact->ElectronicMail = $invoice->IEmail;
         }
 
-        if (!empty($invoice->RefInternal)) { 
+        if (!empty($invoice->RefInternal)) {
             // We should use RefCustomer but has been hardcoded the wrong way other places in lodo and must be reverted (incl in existing database records) before we can use RefCustomer
             $ref_names = explode(" ", $invoice->RefInternal, 2); // max two segments
             $this->invoiceO->AccountingCustomerParty->Party->Person->FirstName = $ref_names[0];
@@ -1004,7 +1087,7 @@ class invoice {
         $query_invoiceline      = "select il.*, p.UNSPSC, p.EAN from invoiceoutline as il, product as p where il.InvoiceID='" . (int) $this->InvoiceID . "' and il.ProductID=p.ProductID and il.Active <> 0 order by il.LineID asc";
         #print "$query_invoiceline\n";
         $result2                = $_lib['db']->db_query($query_invoiceline);
-        
+
         while($line = $_lib['db']->db_fetch_object($result2)) {
             #print_r($line);
             $linetotal      = $line->UnitCustPrice * $line->QuantityDelivered;
@@ -1033,7 +1116,7 @@ class invoice {
 
         ############################################################################################
         $this->invoiceO->TaxTotal['TaxAmount'] = $taxtotal;
-        
+
         #TODO: Subtotal should be repeated for each tax amount - forach - and function
         foreach($this->taxH as $VatPercent => $vat) {
             $this->invoiceO->TaxTotal[$VatPercent]->TaxSubtotal->TaxableAmount                = $vat->TaxableAmount;
@@ -1047,23 +1130,23 @@ class invoice {
         $this->invoiceO->LegalMonetaryTotal->TaxExclusiveAmount = $total;
 
         #print_r($this->invoiceO);
-        
+
         $fb = new lodo_fakturabank_fakturabank();
         if($fb->write($this->invoiceO)) {
-            
+
             $dataH = array();
             $dataH['InvoiceID']             = $this->InvoiceID;
             $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
             $dataH['FakturabankDateTime']   = $_lib['sess']->get_session('Datetime');
             $dataH['Locked']                = 1;
-            
+
             $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoiceout', 'debug' => false));
         }
 
         #print_r($this->invoiceO->InvoiceLine);
         return $this->invoiceO;
     }
-    
+
     function fakturabankjournal() {
         throw new Exception("lodo_fakturabank_fakturabank::journal function not implemented");
 
@@ -1075,11 +1158,11 @@ class invoice {
 
     function lock() {
         global $_lib;
-        
+
         $dataH = array();
         $dataH['InvoiceID']             = $this->InvoiceID;
         $dataH['Locked']                = 1;
-            
+
         $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoiceout', 'debug' => false));
     }
 }
