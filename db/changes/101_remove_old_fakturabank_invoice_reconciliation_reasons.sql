@@ -1,0 +1,1 @@
+DELETE FROM `fakturabankinvoicereconciliationreason` WHERE `FakturabankInvoiceReconciliationReasonID` BETWEEN  1 AND 30;
