@@ -485,10 +485,8 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
     }
     
    #Sum foreign amount
-   if ($voucher->AmountIn > 0)
-      $totalForeignAmountIn  += $voucher->ForeignAmount;
-   if ($voucher->AmountOut > 0)
-      $totalForeignAmountOut += $voucher->ForeignAmount;
+    $totalForeignAmountIn  += $voucher->ForeignAmountIn;
+    $totalForeignAmountOut += $voucher->ForeignAmountOut;
    $totalForeignCurrency = $voucher->ForeignCurrencyID;
 
   if($accountplan->EnableReskontro == 0 and ($view_mvalines == 1 or ($view_mvalines == 0 and $voucher->DisableAutoVat != 1)))
@@ -626,8 +624,6 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
     <td></td>
     <td align="right"><? print $_lib['format']->Amount($totalAmountIn) ?></td>
     <td align="right"><? print $_lib['format']->Amount($totalAmountOut) ?></td>
-    <td align="right"></td>
-    <td align="right"></td>
     <td align="right"><? print $totalForeignCurrency ." ". $_lib['format']->Amount($totalForeignAmountIn) ?></td>
     <td align="right"><? print $totalForeignCurrency ." ". $_lib['format']->Amount($totalForeignAmountOut) ?></td>
   <td colspan="10" align="right">

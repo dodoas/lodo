@@ -44,6 +44,7 @@ if($voucher_input->action['voucher_head_update']){
     $accounting->update_voucher_head($voucher_input);
 }
 
+
 #print_r($voucher_input->action);
 #Get next available or update journal id
 if($voucher_input->action['voucher_new']) { #We are saving a billag for the first time, update journal id
@@ -69,7 +70,8 @@ if($voucher_input->action['voucher_new']) { #We are saving a billag for the firs
     }
 }
 
-elseif($voucher_input->new && !$_lib['input']->getProperty('action_journalid_search')){ #We are just asking the next available journal id
+elseif($voucher_input->new && !$_lib['input']->getProperty('action_journalid_search')
+       && empty($_REQUEST['action_postmotpost_save_currency'])){ #We are just asking the next available journal id
     #print "Finn billag";
    
      #TE changes to make it possible to set JournalID from bank avstemming to get nicer series of journalids
@@ -119,12 +121,11 @@ elseif($voucher_input->action['voucher_delete'])
     $accounting->correct_journal_balance($_REQUEST, $voucher_input->JournalID, $voucher_input->VoucherType);
     $voucher_input->exit = 1;
 }
-elseif($voucher_input->action['currency_update'])
+elseif(!empty($_REQUEST['action_postmotpost_save_currency']))
 {
     // update currency for all vouchers of this journal
-    // if foreign currency set, on all vouchers we should only display foreign currency in and out amount field, all should lock normal in and out fields
+    exchange::updateJournalForeignCurrency();
 }
-
 
 #################################################################################################################
 #################################################################################################################

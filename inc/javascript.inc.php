@@ -236,6 +236,19 @@ function journalCurrencyChange(btn, action_url)
     currencyform.appendChild(wrapper.cloneNode(true));
     currencyform.style.display='none';
     document.body.appendChild(currencyform);
+    var voucherIdInput = $(".lodo_data input[name=voucher.JournalID]");
+    voucherIdInput.clone().appendTo(currencyform);
+    var voucherTypeInput = document.createElement("input");
+    voucherTypeInput.setAttribute("type", "hidden");
+    voucherTypeInput.setAttribute("name", "voucher_VoucherType");
+    voucherTypeInput.setAttribute("value", $("select[name=voucher.VoucherType]").val());
+    currencyform.appendChild(voucherTypeInput);
+
+    var voucherTypeInput = document.createElement("input");
+    voucherTypeInput.setAttribute("type", "hidden");
+    voucherTypeInput.setAttribute("name", "action_postmotpost_save_currency");
+    voucherTypeInput.setAttribute("value", "1");
+    currencyform.appendChild(voucherTypeInput);
     currencyform.submit();
 }
 
@@ -291,6 +304,7 @@ function voucherCurrencyChange(btn, action_url)
     currencyform.style.display='none';
     document.body.appendChild(currencyform);
     currencyform.submit();
+    return false;
 }
 
 function disableEnterKey(e)

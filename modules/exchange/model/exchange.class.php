@@ -167,6 +167,56 @@ class exchange {
 	/**
 	 * @return string Conversion rate
 	 */
+	function updateJournalForeignCurrency() {
+        global $_lib;
+        if (empty($_POST['voucher_JournalID']) ||
+            !is_numeric($_POST['voucher_JournalID'])) {
+            return false;
+        }
+
+        if (empty($_POST['voucher_VoucherType']) ||
+            strlen($_POST['voucher_VoucherType']) != 1) {
+            return false;
+        }
+
+        $journal_id = $_POST['voucher_JournalID'];
+        $voucher_type = $_POST['voucher_VoucherType'];
+
+        $currency_id_key = 'voucher_ForeignCurrencyIDSelection';
+        $amount_key = 'voucher_ForeignAmount';
+        $rate_key = 'voucher_ForeignConvRate';
+
+        $args = array(
+                      'voucher_JournalID' => $journal_id,
+                      'voucher_ForeignCurrencyID' => $_POST[$currency_id_key],
+                      $amount_key => 1, // hard set to 1, to get validate true
+                      $rate_key => $_POST[$rate_key],
+                      );
+
+        if (!self::validateForeignCurrencyFields($args)) {
+            return false;
+        }
+
+
+		$rate = $_POST[$rate_key] = str_replace(',', '.', $_POST[$rate_key]);
+        $currency_id = $_POST[$currency_id_key];
+
+		$data = $_lib['input']->get_data();
+        $escaped_rate = $_lib['db']->db_escape($rate);
+		$query_update = " UPDATE voucher SET ".
+            "  ForeignCurrencyID='". $_lib['db']->db_escape($currency_id) . "'" .
+            ", ForeignAmount=IF(AmountIn > 0, AmountIn / '"     . $escaped_rate . "', AmountOut / '"     . $escaped_rate . "')" . 
+            ", ForeignAmountIn=(AmountIn  / '"  . $escaped_rate . "')" . 
+            ", ForeignAmountOut=(AmountOut  / '" . $escaped_rate . "')" . 
+            ", ForeignConvRate="   . "'" . $escaped_rate . "'" .
+						" WHERE JournalID = '" . $journal_id . "'";
+						" AND VoucherType = '" . $voucher_type . "'";
+		$_lib['db']->db_update($query_update);
+	}
+
+	/**
+	 * @return string Conversion rate
+	 */
 	function updateVoucherForeignCurrency($use_selection_var = true) {
 		global $_lib;
         if (empty($_POST['voucher_VoucherID']) || 
@@ -260,7 +310,6 @@ class exchange {
         $ch_curr .= '<input class="number" type="hidden" name="voucher.ForeignCurrencyIDSelection" value="" />';
         $has_save_button = true;
         if ($has_save_button) {
-            $ch_curr .= '<input type="hidden" name="action_postmotpost_save_currency" value="1" />';
             $ch_curr .= '<input type="button" name="action_postmotpost_save_currency_button" onclick="return journalCurrencyChange(this, \'' . $action_url . '\'); " value="Lagre" />';
         }
         $ch_curr .= '</div>';
@@ -275,24 +324,11 @@ class exchange {
 	 * @param  String $action_url The form action attribute
 	 * @return string HTML form inside a div block. Div is initially hidden (display:none)
 	 */
-	function getFormVoucherForeignCurrency($voucher_id, $voucher_foreign_amount, $voucher_foreign_rate, $voucher_foreign_currency, $voucher_foreign_currency_direction) {
+	function getFormVoucherForeignCurrency($voucher_id, $voucher_foreign_amount_in, $voucher_foreign_amount_out, $voucher_foreign_rate, $voucher_foreign_currency) {
         if ($voucher_id == "") {
             $voucher_id_text = "newvoucher"; // set to new to make js work
         } else {
             $voucher_id_text = "";
-        }
-
-        if (empty($voucher_foreign_currency)) {
-            $voucher_foreign_amount_in = 0;
-            $voucher_foreign_amount_out = 0;
-        } else {
-            if ($voucher->AmountIn > 0) {
-                $voucher_foreign_amount_in = $voucher_foreign_amount;
-                $voucher_foreign_amount_out = 0;
-            } else {
-                $voucher_foreign_amount_in = 0;
-                $voucher_foreign_amount_out = $voucher_foreign_amount;
-            }
         }
 
         if (empty($voucher_foreign_currency)) {
@@ -303,8 +339,8 @@ class exchange {
 
         $block_return = 'onKeyPress="return disableEnterKey(event)"';
         $ch_curr  .= '<div style="' . $display . '" class="vouchercurrencywrapper" id="voucher_currency_div_'. $voucher_id_text .'">';
-        $ch_curr .= 'Inn: <input class="number" type="text" name="voucher.ForeignAmount" size="10" value="'. $voucher_foreign_amount_in .'" ' . $block_return . ' style="margin-bottom: 3px;"/>';
-        $ch_curr .= 'Ut: <input class="number" type="text" name="voucher.ForeignAmount" size="10" value="'. $voucher_foreign_amount_out .'" ' . $block_return . ' style="margin-bottom: 3px;"/>';
+        $ch_curr .= 'Inn: <input class="number" type="text" name="voucher.ForeignAmountIn" size="10" value="'. $voucher_foreign_amount_in .'" ' . $block_return . ' style="margin-bottom: 3px;"/>';
+        $ch_curr .= 'Ut: <input class="number" type="text" name="voucher.ForeignAmountOut" size="10" value="'. $voucher_foreign_amount_out .'" ' . $block_return . ' style="margin-bottom: 3px;"/>';
 
 		return $ch_curr;
 	}
