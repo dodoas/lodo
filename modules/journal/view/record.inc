@@ -10,6 +10,8 @@ $AccountPlanID      = $_REQUEST['AccountPlanID'];*/
 
 includelogic('voucher/voucherinput');
 
+
+
 $voucher_input      = new framework_logic_voucherinput($_REQUEST);
 
 includelogic('journal/search');
@@ -49,7 +51,7 @@ if($voucher_input->action['voucher_head_update']){
 #Get next available or update journal id
 if($voucher_input->action['voucher_new']) { #We are saving a billag for the first time, update journal id
     $voucher_input->JournalIDOrg = $voucher_input->JournalID;
-    
+
     list($voucher_input->JournalID, $tmp) = $accounting->get_next_available_journalid(array('JournalID' => $voucher_input->JournalID, 'verify' => true, 'update' => true, 'type' => $voucher_input->VoucherType, 'reuse' => true, 'from' => 'voucher_new'));
 
     if($voucher_input->JournalIDOrg != $voucher_input->JournalID) {
@@ -73,7 +75,7 @@ if($voucher_input->action['voucher_new']) { #We are saving a billag for the firs
 elseif($voucher_input->new && !$_lib['input']->getProperty('action_journalid_search')
        && empty($_REQUEST['action_postmotpost_save_currency'])){ #We are just asking the next available journal id
     #print "Finn billag";
-   
+
      #TE changes to make it possible to set JournalID from bank avstemming to get nicer series of journalids
     if($voucher_input->JournalID > 0) {
         list($voucher_input->JournalID, $tmp) = $accounting->get_next_available_journalid(array('verify' => true, 'JournalID' => $voucher_input->JournalID, 'type' => $voucher_input->VoucherType));
@@ -105,7 +107,7 @@ elseif($voucher_input->action['voucher_head_delete'])
 {
 	$accounting->delete_journal($voucher_input->JournalID, $voucher_input->VoucherType);
 	$voucher_input->setNew(1, 'voucher_head_delete');
-	$voucher_input->exit    = 1;	
+	$voucher_input->exit    = 1;
 }
 elseif($voucher_input->action['voucher_delete'])
 {
@@ -260,11 +262,11 @@ if($voucher_input->action['voucher_new'] and !$voucher_input->exit)
                     $tmp = $requestcopy['voucher_AmountIn'];
                     $requestcopy['voucher_AmountIn']           = $requestcopy['voucher_AmountOut'];
                     $requestcopy['voucher_AmountOut']          = $tmp;
-                    
+
                     #print_r($requestcopy);
                 }
             }
- 
+
             $tmp_account_obj = $accounting->get_accountplan_object($account);
 
             if($tmp_account_obj->EnableProject)     $requestcopy['voucher_ProjectID']          = $tmp_account_obj->ProjectID;
@@ -286,9 +288,10 @@ if($voucher_input->action['voucher_new'] and !$voucher_input->exit)
 }
 #################################################################################################################
 elseif(($voucher_input->action['voucher_update'] || $voucher_input->action['voucher_head_update']) && !$voucher_input->exit){
-    
+
 	#print_r($voucher_input->request('voucher_update'));
-	$accounting->update_voucher_line_smart($voucher_input->request('voucher_update'), $voucher_input->VoucherIDOld, 'record');
+
+    $accounting->update_voucher_line_smart($voucher_input->request('voucher_update'), $voucher_input->VoucherIDOld, 'record');
 
     #print "<h2>Test2</h2>";
     #Update hovedbokskonto for this postering, it may have changed
@@ -304,7 +307,7 @@ if(($voucher_input->action['voucher_update'] or $voucher_input->action['voucher_
     /* Just in case... */
     if($accounting->is_valid_accountperiod($voucher_input->VoucherPeriod, $_lib['sess']->get_person('AccessLevel'))) {
         $accounting->voucher_to_hovedbok_auto($voucher_input->AccountPlanID, $voucher_input->request('voucher_to_hovedbok_auto'), $voucher_input->VoucherIDOld);
-        
+
         $accounting->delete_credit_debit_zero_lines($voucher_input->JournalID, $voucher_input->VoucherType); //#Dette blir feil bla n�r vi legger til ny linje
         $accounting->correct_journal_balance($voucher_input->request('correct_journal_balance'), $voucher_input->JournalID, $voucher_input->VoucherType);
 
@@ -324,7 +327,7 @@ if(($voucher_input->action['voucher_update'] or $voucher_input->action['voucher_
 #Hvis det er en reskontro sï¿½ vis en liste med alle ï¿½pne poster mot denne reskontroen (dette er den kontoen  man har valgt pï¿½ en posteringslinje
 #print "AccountPlanID: $AccountPlanID<br>\n";
 
-if(!empty($voucher_input->AccountPlanID) && 
+if(!empty($voucher_input->AccountPlanID) &&
    $accounting->is_reskontro($voucher_input->AccountPlanID)) {
     $accountplan = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
     if($accountplan->EnablePostPost)
@@ -352,7 +355,7 @@ if($voucher_input->action['voucherline_new'])
    $fields['voucher_VoucherType']       = $voucher_input->VoucherType;
    $fields['voucher_AutomaticReason']   = 'Ny linje';
    $fields['voucher_Active']            = 1;
-   #print_r($fields); 
+   #print_r($fields);
    $_lib['storage']->db_new_hash($fields,'voucher');
 }
 ?>

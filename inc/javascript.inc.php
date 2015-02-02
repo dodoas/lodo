@@ -252,6 +252,10 @@ function journalCurrencyChange(btn, action_url)
     currencyform.submit();
 }
 
+
+ // TODO (lnluksa)
+ // REMOVE THIS FUNCTION
+ // We don't use it anymore
 function voucherCurrencyChange(btn, action_url)
 {
     var wrapper = btn.parentNode;
@@ -272,11 +276,11 @@ function voucherCurrencyChange(btn, action_url)
         if (wrapper_children[i].name == "voucher.ForeignCurrencyID") {
             currency_id_input = wrapper_children[i];
         } else if (wrapper_children[i].name == "voucher.ForeignCurrencyIDSelection") {
-            currency_id_selected_input = wrapper_children[i];            
+            currency_id_selected_input = wrapper_children[i];
         } else if (wrapper_children[i].name == "voucher.ForeignAmount") {
-            currency_amount_input = wrapper_children[i];            
+            currency_amount_input = wrapper_children[i];
         } else if (wrapper_children[i].name == "voucher.ForeignConvRate") {
-            currency_rate_input = wrapper_children[i];            
+            currency_rate_input = wrapper_children[i];
         }
     }
     var currency = currency_id_input[currency_id_input.selectedIndex].value;
@@ -309,14 +313,14 @@ function voucherCurrencyChange(btn, action_url)
 
 function disableEnterKey(e)
 {
-     var key;      
+     var key;
      if(window.event)
           key = window.event.keyCode; //IE
      else
-          key = e.which; //firefox      
+          key = e.which; //firefox
 
      return (key != 13);
-} 
+}
 
 
 function exchangeFindRate(btn)
@@ -347,9 +351,9 @@ function exchangeFindRate(btn)
     var googleQuery = '100 NOK in ' + currency;
     var url = 'http://www.google.com/search?q=' + googleQuery;
 
-    window.open(url,'_blank');    
+    window.open(url,'_blank');
 
     return false;
-} 
+}
 
 </script>

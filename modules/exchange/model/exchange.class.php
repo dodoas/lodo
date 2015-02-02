@@ -63,7 +63,7 @@ class exchange {
 			if ($tmp)
 				$currencies[] = $tmp;
 		}
-		
+
 		return $currencies;
 	}
 
@@ -83,7 +83,7 @@ class exchange {
 			if ($tmp)
 				$currencies[] = $tmp;
 		}
-		
+
 		return $currencies;
 	}
 
@@ -102,7 +102,7 @@ class exchange {
 			if ($tmp)
 				$currencies[] = $tmp;
 		}
-		
+
 		return $currencies;
 	}
 
@@ -121,7 +121,7 @@ class exchange {
 			if ($tmp)
 				$currencies[$tmp->CurrencyISO] = $tmp;
 		}
-		
+
 		return $currencies;
 	}
 
@@ -145,11 +145,13 @@ class exchange {
 	}
 
     function validateForeignCurrencyFields($args) {
-        $amount_key = 'voucher_ForeignAmount';
+        $amount_key_in = 'voucher_ForeignAmountIn';
+        $amount_key_out = 'voucher_ForeignAmountOut';
         $rate_key = 'voucher_ForeignConvRate';
         $currency_id_key = 'voucher_ForeignCurrencyID';
 
-        if (empty($args[$amount_key])) {
+
+        if (empty($args[$amount_key_in]) && empty($args[$amount_key_out])) {
             return false;
         }
 
@@ -160,7 +162,7 @@ class exchange {
         if (empty($args[$currency_id_key])) {
             return false;
         }
-        
+
         return true;
     }
 
@@ -183,13 +185,15 @@ class exchange {
         $voucher_type = $_POST['voucher_VoucherType'];
 
         $currency_id_key = 'voucher_ForeignCurrencyIDSelection';
-        $amount_key = 'voucher_ForeignAmount';
+        $amount_key_in = 'voucher_ForeignAmountIn';
+        $amount_key_out = 'voucher_ForeignAmountOut';
         $rate_key = 'voucher_ForeignConvRate';
 
         $args = array(
                       'voucher_JournalID' => $journal_id,
                       'voucher_ForeignCurrencyID' => $_POST[$currency_id_key],
-                      $amount_key => 1, // hard set to 1, to get validate true
+                      $amount_key_in => 1, // hard set to 1, to get validate true
+                      $amount_key_out => 1, // hard set to 1, to get validate true
                       $rate_key => $_POST[$rate_key],
                       );
 
@@ -205,9 +209,12 @@ class exchange {
         $escaped_rate = $_lib['db']->db_escape($rate);
 		$query_update = " UPDATE voucher SET ".
             "  ForeignCurrencyID='". $_lib['db']->db_escape($currency_id) . "'" .
-            ", ForeignAmount=IF(AmountIn > 0, AmountIn / '"     . $escaped_rate . "', AmountOut / '"     . $escaped_rate . "')" . 
-            ", ForeignAmountIn=(AmountIn  / '"  . $escaped_rate . "')" . 
-            ", ForeignAmountOut=(AmountOut  / '" . $escaped_rate . "')" . 
+            ", ForeignAmount=IF(AmountIn > 0, AmountIn / '"     . $escaped_rate . "', AmountOut / '"     . $escaped_rate . "')" .
+            # TODO (lnluksa)
+            # Think if we should populate these fields
+            # We are breaking DB consistence but it is just extra info. May be used in future.
+            // ", ForeignAmountIn=(AmountIn  / '"  . $escaped_rate . "')" .
+            // ", ForeignAmountOut=(AmountOut  / '" . $escaped_rate . "')" .
             ", ForeignConvRate="   . "'" . $escaped_rate . "'" .
 						" WHERE JournalID = '" . $journal_id . "'";
 						" AND VoucherType = '" . $voucher_type . "'";
@@ -219,11 +226,12 @@ class exchange {
 	 */
 	function updateVoucherForeignCurrency($use_selection_var = true) {
 		global $_lib;
-        if (empty($_POST['voucher_VoucherID']) || 
+
+        if (empty($_POST['voucher_VoucherID']) ||
             !is_numeric($_POST['voucher_VoucherID'])) {
             return false;
         }
-        
+
         $voucher_id = $_POST['voucher_VoucherID'];
 
         if ($use_selection_var) {
@@ -264,7 +272,7 @@ class exchange {
 	 * @return string HTML form inside a div block. Div is initially hidden (display:none)
 	 */
 	function getFormHeaderCurrencyDropdown($voucher) {
-        $voucher_id = $voucher->voucher_id;
+        $voucher_id = $voucher->VoucherID;
 
         if ($voucher_id == "") {
             $voucher_id_text = "newvoucher"; // set to new to make js work
@@ -297,7 +305,7 @@ class exchange {
         $currency_js .= 'window.currency_rates[\''. $voucher_id_text . '\'] = new Object();';
         foreach ($currencies as $currency) {
             $currency_js .= 'window.currency_rates[\''. $voucher_id_text . '\'][\'' . $currency->CurrencyISO . '\'] = ' . $currency->Amount . ';';
-        } 
+        }
         $currency_js .= '</script>';
         $ch_curr .= $currency_js;
 
@@ -385,9 +393,9 @@ class exchange {
         $currency_js .= 'window.currency_rates[\''. $voucher_id_text . '\'] = new Object();';
         foreach ($currencies as $currency) {
             $currency_js .= 'window.currency_rates[\''. $voucher_id_text . '\'][\'' . $currency->CurrencyISO . '\'] = ' . $currency->Amount . ';';
-        } 
+        }
         $currency_js .= '</script>';
-        $ch_curr .= $currency_js;        
+        $ch_curr .= $currency_js;
 
         $block_return = 'onKeyPress="return disableEnterKey(event)"';
         $ch_curr  .= '<div style="display:none;" class="vouchercurrencywrapper" id="voucher_currency_div_'. $voucher_id_text .'">';
@@ -407,7 +415,7 @@ class exchange {
             $ch_curr .= '<input type="button" name="action_postmotpost_save_currency_button" onclick="return voucherCurrencyChange(this, \'' . $action_url . '\'); " value="Lagre" />';
         }
         $ch_curr .= '</div>';
-		
+
 		return $ch_curr;
 	}
 */
@@ -427,13 +435,13 @@ class exchange {
 
     /**
      * queries Google for the current exchange rate, doesn't need cURL
-     * 
+     *
      * @param mixed  $amount
      * @param string $currency
      * @param string $exchangeIn
      * @return mixed
      * @author Adapted from Tudor Barbu
-     * @copyright MIT 
+     * @copyright MIT
      */
     static function googleExchangeRateUrl($amount, $currency, $exchangeIn)
     {
