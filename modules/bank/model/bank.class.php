@@ -1072,11 +1072,7 @@ class framework_logic_bank {
                     
                     //print_r($matches);
                     $transaction = $fbbank->get_fakturabanktransactionobject($fakturabankID);
-                    
-                    #print("TRANSACTION: ");
-                    #print_r($transaction);
-                    #print("<br />");
-                    
+
                     $relations = $fbbank->get_faturabanktransactionrelations($fakturabankID);
                     $relations_invoices = array();
                     foreach($relations as $rel) {
@@ -1115,14 +1111,19 @@ class framework_logic_bank {
                     $FBVoucherH['voucher_VAT']           = $unvoted->VAT;
                     
                     foreach($relations as $rel) {
-                        #print_r($rel);
-                        #echo "<br>\n";
-                        
+
                         if($rel['InvoiceType'] == 'incoming') {
                             $accountplan_row = $fbbank->find_account_plan_type(
                                 $rel['InvoiceSupplierIdentity'], $rel['InvoiceSupplierIdentitySchemeID'], 'supplier'
                                 );
 
+                            // For some reason employee is also under incoming invoice.
+                            // We add this check also.
+                            if(!$accountplan_row){
+                                $accountplan_row = $fbbank->find_account_plan_type(
+                                    $rel['InvoiceSupplierIdentity'], $rel['InvoiceSupplierIdentitySchemeID'], 'employee'
+                                    );
+}
                             if(!$accountplan_row)
                                 printf("Could not find incoming: %s<br />", $rel['InvoiceSupplierIdentity']);
                             

@@ -640,7 +640,9 @@ class lodo_fakturabank_fakturabankvoting {
 
                         $relation->{'FakturabankID'} = $relation->{'id'};
 
-                        if ($LodoID = $this->get_fakturabanktransactionrelation($relation->{'FakturabankID'})) {
+                        // FakturabankID is not enough anymore.
+                        // Logic is changed in Fakturabank so FakturabankID is not unique.
+                        if ($LodoID = $this->get_fakturabanktransactionrelation($relation->{'FakturabankID'}, $transaction->{"id"})) {
                             $relation->{'LodoID'} = $LodoID;
                             $action = "update";
                             $dataH['ID'] = $relation->{'LodoID'};
@@ -1051,7 +1053,7 @@ class lodo_fakturabank_fakturabankvoting {
             return $arr;
         }
 
-	public function get_fakturabanktransactionrelation($FakturabankID) {
+	public function get_fakturabanktransactionrelation($FakturabankID, $FakturabankTransactionID) {
             global $_lib;
 
             if (!is_numeric($FakturabankID)) {
@@ -1059,7 +1061,7 @@ class lodo_fakturabank_fakturabankvoting {
                 return false;
             }
 
-            $query = "SELECT `ID` FROM fakturabanktransactionrelation WHERE `FakturabankID` = '$FakturabankID'";
+            $query = "SELECT `ID` FROM fakturabanktransactionrelation WHERE `FakturabankID` = '$FakturabankID' AND `FakturabankTransactionID` = $FakturabankTransactionID";
             $result = $_lib['storage']->db_query3(array('query' => $query));
             if (!$result) {
                 return false;
