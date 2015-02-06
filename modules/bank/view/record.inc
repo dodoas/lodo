@@ -80,20 +80,20 @@ elseif($_lib['input']->getProperty('action_save_extras')) {
     $period = $_lib['input']->getProperty('Period');
 
     $_lib['db']->db_query(
-        sprintf("DELETE FROM accountextras WHERE AccountID = %d AND Period = '%s'", 
+        sprintf("DELETE FROM accountextras WHERE AccountID = %d AND Period = '%s'",
                 $bank->AccountID, $bank->ThisPeriod)
         );
 
     $q = sprintf("
-INSERT INTO accountextras 
+INSERT INTO accountextras
   (`AccountID`, `Period`, `BankEntryIn`, `BankEntryOut`, `BankLastIn`, `BankLastOut`, `JournalID`)
 VALUES
   ('%d', '%s', '%s', '%s', '%s', '%s', '%d');
-", 
-                 $bank->AccountID, 
+",
+                 $bank->AccountID,
                  $bank->ThisPeriod,
-                 $_lib['convert']->Amount($_POST['extraEntryIn']), 
-                 $_lib['convert']->Amount($_POST['extraEntryOut']), 
+                 $_lib['convert']->Amount($_POST['extraEntryIn']),
+                 $_lib['convert']->Amount($_POST['extraEntryOut']),
                  $_lib['convert']->Amount($_POST['extraLastIn']),
                  $_lib['convert']->Amount($_POST['extraLastOut']),
                  $_POST['action_bank_accountlinenew_startat']
@@ -105,33 +105,33 @@ VALUES
 
 function do_bank_update($AccountID, $Period) {
     global $_lib, $accounting;
-    
+
     $debugline = 99999999999999999;
-    
+
     //#print_r($_input->get_data());
-    
+
     $PrevPeriod     = $_lib['date']->get_prev_period(array('value' => $Period . '-01', 'realPeriod' => 1));
     $PrevPrevPeriod = $_lib['date']->get_prev_period(array('value' => $PrevPeriod . '-01', 'realPeriod' => 1));
     $moneyflow  = new moneyflow(array('StartDate' =>  $PrevPrevPeriod . '-01'));
-  
+
     //#Automatically update and increment JournalIDs thats missing
     $DataH = $_lib['input']->get_data();
     //#print_r($DataH);
-    
+
     // get fakturabank
     $fbvoting         = new lodo_fakturabank_fakturabankvoting();
     $fbreconcilationreason = new lodo_fakturabank_bankreconciliationreason();
-    
+
     foreach($DataH as $server_name => $server_data) {
         foreach($server_data as $database_name => $database_data) {
             foreach($database_data as $table_name => $table_data) {
                 //#print_r($table_data);
                 foreach($table_data as $pk_name => $pk_data) {
-                
+
                     //#Most of the logic could probably have been here for speed
-                
+
                     foreach($pk_data as $field => $value) {
-                        
+
                         if($field == 'JournalID') {
                             if($value > 0) {
                                 if($value > $PrevJournalID) {
@@ -141,11 +141,11 @@ function do_bank_update($AccountID, $Period) {
                                 $DataH[$server_name][$database_name][$table_name][$pk_name][$field] = $PrevJournalID + 1;
                                 $PrevJournalID++;
                             }
-                        }							
+                        }
                     }
 
                     $accountplan = null;
-                    
+
                     //#Speedier to have it here? Could we throw away the inner loop?
                     if($table_name == 'accountline') { //#We are just working on accountline?
                         //# Allow unsetting a reskontro
@@ -179,7 +179,7 @@ function do_bank_update($AccountID, $Period) {
                             if($DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] == $debugline) print "Resultat fra meny: KIDandInvoiceIDandAccountPlanID<br>\n";
                             #print_r($DataH[$server_name][$database_name][$table_name][$pk_name]['KIDandInvoiceIDandAccountPlanID']);
 
-                            
+
                             if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
                                 $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] = $ReskontroAccountPlanID;
                             }
@@ -191,13 +191,13 @@ function do_bank_update($AccountID, $Period) {
                             }
                             #print_r($DataH[$server_name][$database_name][$table_name][$pk_name]);
                         }
-                        
+
                         unset($DataH[$server_name][$database_name][$table_name][$pk_name]['KIDandInvoiceIDandAccountPlanID']); //#Does not exist in db.
-                        
+
                         //#Add a zero of the day is only one char.
                         if($DataH[$server_name][$database_name][$table_name][$pk_name]['Day'])
                             $DataH[$server_name][$database_name][$table_name][$pk_name]['Day']  = str_pad($DataH[$server_name][$database_name][$table_name][$pk_name]['Day'], 2, '0', STR_PAD_LEFT);;
-                        
+
                         /**************************************************
                          *
                          * Automatching code begins
@@ -207,14 +207,14 @@ function do_bank_update($AccountID, $Period) {
                         /* if we are missing account then look for matches in bank transaction relations */
                         if(
                             ($DataH[$server_name][$database_name][$table_name][$pk_name]['AmountIn'] > 0 || $DataH[$server_name][$database_name][$table_name][$pk_name]['AmountOut'] > 0) &&
-                            // ((!$DataH[$server_name][$database_name][$table_name][$pk_name]['KID'] && !$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber'] && !$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) || 
-                            (!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] && !$DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID'])) 
+                            // ((!$DataH[$server_name][$database_name][$table_name][$pk_name]['KID'] && !$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber'] && !$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) ||
+                            (!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] && !$DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID']))
                         {
                             //# KID, invoicenumber or reskontro missing. Find match from fakturabank data or moneyflow
 
                             if($DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] == $debugline) print "P: " . $DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] . "Ikke KID ikke ReskontroAccountPlanID<br>";
 
-                            
+
                             if($DataH[$server_name][$database_name][$table_name][$pk_name]['AmountIn'] > 0) {
                                 $incoming = 0;
                                 $field = 'AmountIn';
@@ -224,7 +224,7 @@ function do_bank_update($AccountID, $Period) {
                                 $field = 'AmountOut';
                                 $value = $DataH[$server_name][$database_name][$table_name][$pk_name]['AmountOut'];
                             }
-							
+
 
                             $accountline = $DataH[$server_name][$database_name][$table_name][$pk_name];
 
@@ -233,23 +233,23 @@ function do_bank_update($AccountID, $Period) {
                                 if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
                                     $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] = $match['AccountPlanID'];
                                 }
-                            } 
+                            }
                             elseif (
                                 (
                                     $match = $fbvoting->findinvoicematch(
-                                        array('Amount' => $value, 
-                                              'VoucherDate' => $Period . '-' . $accountline['Day'], 
-                                              'BankAccountID' => $AccountID, 
-                                              'Incoming' => $incoming, 
-                                              'id' => $pk_name, 
-                                              'accountline' => $DataH[$server_name][$database_name][$table_name][$pk_name], 
+                                        array('Amount' => $value,
+                                              'VoucherDate' => $Period . '-' . $accountline['Day'],
+                                              'BankAccountID' => $AccountID,
+                                              'Incoming' => $incoming,
+                                              'id' => $pk_name,
+                                              'accountline' => $DataH[$server_name][$database_name][$table_name][$pk_name],
                                               'period' => $Period))
-                                    )   
+                                    )
                                 && !empty($match['AccountPlanID']) // only invoice matches (i.e. with orgnr)
                                 && !empty($match['AccountPlanOrgNumber'])
-                                ) 
+                                )
                             {
-                                
+
                                 if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
                                     $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] = $match['AccountPlanID'];
                                 }
@@ -259,23 +259,23 @@ function do_bank_update($AccountID, $Period) {
                                 if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['KID'] && !empty($match['KID'])) {
                                     $DataH[$server_name][$database_name][$table_name][$pk_name]['KID']                    = $match['KID'];
                                 }
-                                
+
                                 if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber'] && !empty($match['InvoiceNumber'])) {
                                     $DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber']          = $match['InvoiceNumber'];
                                 }
-                            } 
-                            else 
+                            }
+                            else
                             {
                                 //# find possible matches on non-invoice reconcilation reasons
                                 $match = $fbvoting->findnoninvoicematch(array('Amount' => $value, 'VoucherDate' => $Period . '-' . $accountline['Day'], 'BankAccountID' => $AccountID, 'Incoming' => $incoming, 'id' => $pk_name, 'accountline' => $DataH[$server_name][$database_name][$table_name][$pk_name], 'period' => $Period));
                                 $reconciliation_accountplan_id = null;
                                 $reconciliation_accountplan = null;
-                                if ($match && 
+                                if ($match &&
                                     //                                    empty($DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID']) &&
                                     !empty($match['FakturabankBankTransactionAccountID'])) {
                                     $reconciliation_accountplan = $fbreconcilationreason->bank_reconciliation_reason_to_accountplan($match['FakturabankBankTransactionAccountID']);
                                 }
-                                
+
                                 if (!empty($reconciliation_accountplan)) {
                                     if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID']) {
                                         $DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID'] = $reconciliation_accountplan['AccountPlanID'];
@@ -289,7 +289,7 @@ function do_bank_update($AccountID, $Period) {
                                     if(count($match) == 1) {
                                         //#Fant eksakt en match på beløp.
                                         //#print_r($match[0]);
-                                        
+
                                         if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
                                             $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] = $match[0]->AccountPlanID;
                                         }
@@ -303,13 +303,13 @@ function do_bank_update($AccountID, $Period) {
                                             $DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber']          = $match[0]->InvoiceID;
                                         }
                                     }
-                                }								
+                                }
                             }
                         }
                         elseif($DataH[$server_name][$database_name][$table_name][$pk_name]['KID'] > 0 && !$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
                             //#Finn kontoplan til bankavstemminglinje basert på KID
                             if($DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] == $debugline) print "P: " . $DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] . "Finn kontoplan til bankavstemminglinje basert på KID<br>\n";
-                            
+
                             //#print "Finn kid: " . $DataH[$server_name][$database_name][$table_name][$pk_name]['KID'] . "<br />";
                             $voucher = $accounting->FindJournalWithKid($DataH[$server_name][$database_name][$table_name][$pk_name]['KID']);
                             #print_r($voucher);
@@ -322,10 +322,10 @@ function do_bank_update($AccountID, $Period) {
                         }
                         elseif($DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber'] > 0 && !$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
                             //#print "Finn kontoplan til bankavstemminglinje basert p&aring; Fakturanummer: " . $DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber'] . "<br>\n";
-                            
+
                             if($DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] == $debugline) print "P: " . $DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] . "Finn kontoplan til bankavstemminglinje basert på Fakturanummer<br>\n";
                             if($DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] == $debugline) print "Finn fakturanummer: " . $DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber'] . "<br />";
-                            
+
                             $voucher = $accounting->FindJournalWithInvoiceID($DataH[$server_name][$database_name][$table_name][$pk_name]['InvoiceNumber']);
                             #print_r($voucher);
                             if(!$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
@@ -335,15 +335,15 @@ function do_bank_update($AccountID, $Period) {
                                 $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroOrgNumber']     = $voucher->OrgNumber;
                             }
                         }
-			
+
                         if($DataH[$server_name][$database_name][$table_name][$pk_name]['AutoResultAccount'] && $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
                             if($DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] == $debugline) print "P: " . $DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] . "AutoResultAccount<br>\n";
-                            //#Reset to the 
+                            //#Reset to the
                             $reskontroaccountplan   = $accounting->get_accountplan_object($DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']);
                             if($reskontroaccountplan->MotkontoResultat1) {
                                 $DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID'] = $reskontroaccountplan->MotkontoResultat1;
                             } else {
-                                $DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID'] = $reskontroaccountplan->MotkontoBalanse1;    					    
+                                $DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID'] = $reskontroaccountplan->MotkontoBalanse1;
                             }
                         }
 
@@ -353,26 +353,26 @@ function do_bank_update($AccountID, $Period) {
                             //#sprint "Remove approved<br>\n";
                             $DataH[$server_name][$database_name][$table_name][$pk_name]['Approved'] = 0;
                         }
-                        
+
                         //#Used for simple bankavstemming
                         //#print "ReskontroAccountPlanID: " . $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] . " && ReskontroOrgNumber: " . !$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroOrgNumber'] . "<br>\n";
                         //#Hvis Reskontrorgnummer ikke er satt og rekontrokonto er satt- så setter vi det nå (uansett)
                         if($DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] && !$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroOrgNumber']) {
                             if($DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] == $debugline) print "P: " . $DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] . "ReskontroAccountPlanID og ikke ReskontroOrgNummer<br>\n";
-                            
+
                             $accountplan = $accounting->get_accountplan_object($DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']);
                             $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroOrgNumber']     	= $accountplan->OrgNumber; #$match[0]->OrgNumber;
-                            
+
                         } elseif($DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroOrgNumber'] && !$DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']) {
                             if($DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] == $debugline) print "P: " . $DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] . "ReskontroOrgNummer og ikke ReskontroAccountPlanID<br>\n";
-                            
+
                             //#Hvis reskontro er satt og ikke reskontrokontoorgnummer er satt - så setter vi den nå
                             $accountplan = $accounting->getAccountPlanFromOrgNumber($DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroOrgNumber']);
                             $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID']   = $accountplan->AccountPlanID;
                         } else {
                             //#We know nothing about this reskontro.
                         }
-                        					
+
 
                         if($DataH[$server_name][$database_name][$table_name][$pk_name]['Day'] < 1 || $DataH[$server_name][$database_name][$table_name][$pk_name]['Day'] > 31) {
                             $DataH[$server_name][$database_name][$table_name][$pk_name]['Approved'] = 0;
@@ -382,27 +382,27 @@ function do_bank_update($AccountID, $Period) {
                             $DataH[$server_name][$database_name][$table_name][$pk_name]['Approved'] = 0;
                             $_lib['message']->add('Bilagsnummer mindre enn 0 - fjerner ok flagg');
                         }
-                        
+
                         if($DataH[$server_name][$database_name][$table_name][$pk_name]['Priority'] == $debugline) print_r($DataH[$server_name][$database_name][$table_name][$pk_name]);
-                        
-                        
-                        //# if unset flag, then unset ReskontroAccountPlanID                        
+
+
+                        //# if unset flag, then unset ReskontroAccountPlanID
                         if ($UnsetReskontroAccountPlanID) {
                             $DataH[$server_name][$database_name][$table_name][$pk_name]['ReskontroAccountPlanID'] = DB_NULL_PLACEHOLDER;
                             $UnsetReskontroAccountPlanID = false;
-                        }   
-                        
+                        }
+
                         //# if unset flag, then unset ResultAccountPlanID
                         if ($UnsetResultAccountPlanID) {
                             $DataH[$server_name][$database_name][$table_name][$pk_name]['ResultAccountPlanID'] = DB_NULL_PLACEHOLDER;
                             $UnsetResultAccountPlanID = false;
-                        }   
+                        }
                     }
                 }
             }
         }
     }
-    
+
     //#print_r($DataH);
     $_lib['storage']->update($DataH);
 

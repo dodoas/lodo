@@ -721,12 +721,14 @@ class lodo_fakturabank_fakturabankvoting {
 
                         if (!empty($relation->{"paycheck-no"})) {
                             $dataH['PaycheckNo'] = $relation->{"paycheck-no"};
+
                             if (empty($transaction->invoiceno)) {
                                 //# set InvoiceNumber = PaycheckNo if PaycheckNo present and InvoiceNumber empty
                                 $transaction_query = "UPDATE accountline SET InvoiceNumber = '" . $relation->{"paycheck-no"} . "' WHERE FakturabankTransactionLodoID = (SELECT ID from fakturabanktransaction WHERE FakturabankID = '" . $transaction->{"id"} . "')";
                                 $_lib['storage']->db_query3(array('query' => $transaction_query));
                             }
                         }
+
                         $dataH['Incoming'] = $transaction->incoming;
                         $dataH['Description'] = $transaction->description;
                         $dataH['DoneReconciliatedAt'] = $_lib['date']->t_to_mysql_format($transaction->{"done-reconciliated-at"});
