@@ -3,9 +3,9 @@
 * Empatix functionality
 *
 * @package empatix_core1_action
-* @version  $Id: 
+* @version  $Id:
 * @author Thomas Ekdahl, Empatix AS
-* @copyright http://www.empatix.com/ Empatix AS, 1994-2006, post@empatix.com 
+* @copyright http://www.empatix.com/ Empatix AS, 1994-2006, post@empatix.com
 */
 
 includelogic('moneyflow/moneyflow');
@@ -25,7 +25,7 @@ class framework_logic_bank {
     public $VoucherType         = 'B';
     public $bankaccountcalc;
     public $prevbankaccountcalc;
-    
+
     private $closeablevouchertilbakeline = array();
     private $closeableaccounttilleggline = array();
     private $closeablevoucheraccountline = array();
@@ -46,7 +46,7 @@ class framework_logic_bank {
     /***********************************************************************************************
     * One line description of function
     * @param Define input parameters
-    * @return Define return og function 
+    * @return Define return og function
     */
     public function __construct($args) {
         global $_lib;
@@ -69,51 +69,51 @@ class framework_logic_bank {
             $this->ThisPeriod = $_lib['date']->get_prev_period(array('value' => $_lib['sess']->get_session('LoginFormDate'), 'realPeriod' => 1));
             $this->AccountID    = $args['AccountID'];
         }
-        
-        if(!$this->AccountID || !$this->ThisPeriod) { 
+
+        if(!$this->AccountID || !$this->ThisPeriod) {
             print "Mangler AccountID eller Period";
             exit;
         }
-        
+
         $this->searchstring = $_lib['convert']->Amount($args['searchstring']);
         $this->side         = $args['side'];
         $this->type         = $args['type'];
         if(!$this->side)
             $this->side = 'AmountOut';
-            
-        if($this->side == 'AmountOut') 
+
+        if($this->side == 'AmountOut')
             $this->oside = 'AmountIn';
         else
             $this->oside = 'AmountOut';
-            
+
         $this->PrevPeriod   = $_lib['date']->get_prev_period(array('value'=>$this->ThisPeriod));
         $this->NextPeriod   = $_lib['date']->get_next_period(array('value'=>$this->ThisPeriod));
         $this->_dbh         = $_dbh;
         $this->_dsn         = $_dsn;
-            
+
         ###############################################################
         #Find config
         $query_bank_head    = "select * from account where AccountID='$this->AccountID'";
         $bank_head          = $_lib['storage']->get_row(array('query' => $query_bank_head));
-  
+
         $query_accountplan  = "select * from accountplan where AccountPlanID=" . (int) $bank_head->AccountPlanID;
         $accountplan        = $_lib['storage']->get_row(array('query' => $query_accountplan));
-  
+
         $this->AccountNumber    = $bank_head->AccountNumber;
         $this->AccountName      = $bank_head->AccountDescription;
         $this->AccountPlanID    = $bank_head->AccountPlanID;
         $this->VoucherType      = $bank_head->VoucherType;
         $this->DebitColor       = $accountplan->DebitColor;
         $this->CreditColor      = $accountplan->CreditColor;
-  
+
         $this->url        = $_lib['sess']->dispatch . 't=bank.edit&amp;AccountID=' . $this->AccountID . '&amp;report_Period=' . $this->ThisPeriod;
         $this->urlvoucher = $_lib['sess']->dispatch . 't=journal.edit&amp;voucher_AccountPlanID=' . $this->AccountPlanID . '&amp;new=1&amp;voucher_Period=' . $this->ThisPeriod . '&amp;';
     }
-  
+
     /***********************************************************************************************
     * Reads all data from database to object
     * @param None
-    * @return Loaded object 
+    * @return Loaded object
     */
     public function init() {
         global $_lib;
@@ -123,15 +123,15 @@ class framework_logic_bank {
         #print "Running init<br>\n";
         $this->unvotedaccount               = array();
         $this->sumunvotedaccount            = new stdClass();
-        
+
         $this->unvotedvoucher               = array();
         $this->sumunvotedvoucher            = new stdClass();
-        
+
         $this->voucher_this_hash            = array();
         $this->bank_this_hash               = array();
         $this->voucher_prev_hash            = array();
         $this->bank_prev_hash               = array();
-        
+
         $this->bankvoucher_this_hash        = array();
         $this->bankvote_tillegg             = array();
         $this->bankvote_tilbake             = array();
@@ -142,7 +142,7 @@ class framework_logic_bank {
 
         ############################################################################################
         $this->voucher->saldo       = $this->getAccountplanSaldo();
-    
+
         $this->bankvoucher_this_hash= $this->_get_bank_voucher_hash($this->AccountPlanID, $this->ThisPeriod);
         $this->bankvote_tillegg     = $this->_get_bank_voting_tillegg($this->ThisPeriod);
         $this->bankvote_tilbake     = $this->_get_bank_voting_tilbake($this->ThisPeriod);
@@ -158,13 +158,13 @@ class framework_logic_bank {
         $tmptopAmountSaldo =   $this->bankvotingperiod->topAmountIn  - $this->bankvotingperiod->topAmountOut;
         $tmptilbakeSaldo   = - $this->sumbankvotingtilbake->AmountIn + $this->sumbankvotingtilbake->AmountOut;
         $tmptilleggSaldo   =   $this->sumbankvotingtillegg->AmountIn - $this->sumbankvotingtillegg->AmountOut;
-        $this->bankvotingperiod->topAmountSaldo = $tmptopAmountSaldo + $tmptilbakeSaldo + $tmptilleggSaldo;        
+        $this->bankvotingperiod->topAmountSaldo = $tmptopAmountSaldo + $tmptilbakeSaldo + $tmptilleggSaldo;
     }
 
     /***********************************************************************************************
     * One line description of function
     * @param Define input parameters
-    * @return Define return og function 
+    * @return Define return og function
     */
     #Avstemming mot tilbakef¿ring i perioden
     private function _get_bank_voting_tilbake($Period) {
@@ -177,37 +177,37 @@ class framework_logic_bank {
         while($row_voucher = $_lib['db']->db_fetch_object($result_voucher_hash)){
             $id = $row_voucher->VoucherDate . ':' . $row_voucher->BankVotingLineID;
             #print_r($row_voucher);
-            
+
             $bankvoting_tilbake_hash[$id] = $row_voucher;
 
             #print "_get_bank_voting_tilbake for topp: ut: " . $this->bankvotingperiod->topAmountOut . ", inn" . $this->bankvotingperiod->topAmountIn . "<br>\n";
 
             $this->sumbankvotingtilbake->AmountIn    += $row_voucher->AmountIn;
             $this->sumbankvotingtilbake->AmountOut   += $row_voucher->AmountOut;
-  
+
             #print "<b>_get_bank_voting_tilbake : inn: " . $row_voucher->AmountOut . ", ut" . $row_voucher->AmountIn . "</b><br>\n";
             #print "_get_bank_voting_tilbake etter topp: ut: " . $this->bankvotingperiod->topAmountOut . ", inn" . $this->bankvotingperiod->topAmountIn . "<br>\n";
-    
+
             $bankvoting_tilbake_hash[$id]->{'class' . $this->side} = 'number';
             $bankvoting_tilbake_hash[$id]->{'class' . $this->oside} = 'number';
 
             if($this->type == 'voucher' && round($row_voucher->{$this->side},2) == round($this->searchstring,2) && round($this->searchstring, 2) > 0)
                 $bankvoting_tilbake_hash[$id]->{'class' . $this->side} = 'number red';
-  
+
             $this->set_closeable_vouchertilbake(0, $row_voucher->KID, $row_voucher->InvoiceNumber, - $row_voucher->AmountIn + $row_voucher->AmountOut, 'bank voting tilbake');
         }
-        
+
         #print_r($this->closeableaccounttilleggline);
         if(is_array($bankvoting_tilbake_hash))
             ksort($bankvoting_tilbake_hash, SORT_REGULAR);
         #print_r($bankvoting_tilbake_hash['VoucherDate']);
         return $bankvoting_tilbake_hash;
     }
-  
+
     /***********************************************************************************************
     * Avstemming mot tillegsf¿ring i perioden
     * @param Define input parameters
-    * @return Define return og function 
+    * @return Define return og function
     */
     private function _get_bank_voting_tillegg($Period) {
         global  $_lib;
@@ -219,7 +219,7 @@ class framework_logic_bank {
 
         while($row_voucher = $_lib['db']->db_fetch_object($result_voucher_hash)){
             $id = $row_voucher->VoucherDate . ':' . $row_voucher->BankVotingLineID;
-    
+
             $bankvoting_tillegg_hash[$id] = $row_voucher;
 
             #print "_get_bank_voting_tillegg for topp: ut: " . $this->bankvotingperiod->topAmountOut . ", inn" . $this->bankvotingperiod->topAmountIn . "<br>\n";
@@ -248,7 +248,7 @@ class framework_logic_bank {
     /***********************************************************************************************
     * One line description of function
     * @param Define input parameters
-    * @return Define return og function 
+    * @return Define return og function
     */
     private function getAccountplanSaldo() {
         global $_lib;
@@ -262,7 +262,7 @@ class framework_logic_bank {
     /***********************************************************************************************
     * One line description of function
     * @param Define input parameters
-    * @return Define return og function 
+    * @return Define return og function
     */
     private function getBankAccountSaldo($Period) {
         global $_lib;
@@ -272,32 +272,32 @@ class framework_logic_bank {
         $query_voucher  = "select sum(AmountIn) as sumin, sum(AmountOut) as sumout from accountline where AccountID=" . $this->AccountID . " and Period = '" . $Period . "' and Active=1";
         if($this->debug) print "$query_voucher<br>\n";
         $row = $_lib['storage']->get_row(array('query' => $query_voucher));
-        
+
         $row->sumin  += $bankvotingperiod->AmountIn;
         $row->sumout += $bankvotingperiod->AmountOut;
-        
+
         return array($row->sumin, $row->sumout, $row->sumin - $row->sumout);
     }
 
     /***********************************************************************************************
     * Kontoutskrift
     * @param Define input parameters
-    * @return Define return og function 
+    * @return Define return og function
     */
     private function _get_bankaccount($Period) {
         global  $_lib;
         if($this->debug) print "_get_bankaccount<br>\n";
-        
+
         $this->bankaccountcalc->AmountOut += $this->bankvotingperiod->AmountOut;
         $this->bankaccountcalc->AmountIn  += $this->bankvotingperiod->AmountIn;
-        
+
         $bankvoting_tillegg_hash = array();
         $query_bank     = "select a.* from accountline as a, voucheraccountline as vl where a.AccountID=$this->AccountID and a.Period='$Period' and a.AccountLineID=vl.AccountLineID and a.Active=1 order by a.Priority asc, a.Day";
         if($this->debug) print "$query_bank<br>\n";
         $result_bank    = $_lib['db']->db_query($query_bank);
 
         while($row = $_lib['db']->db_fetch_object($result_bank)) {
-        
+
             $row->VoucherDate = $row->BookKeepingDate;
 
             $this->bankaccountcalc->AmountIn  += $row->AmountIn;
@@ -311,7 +311,7 @@ class framework_logic_bank {
 
             $this->set_closeable_accounttillegg($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber, -$row->AmountIn + $row->AmountOut, "fra konto linje nummer: $row->Priority");
             $this->set_closeable_voucheraccount($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber, -$row->AmountIn + $row->AmountOut, "fra konto linje nummer: $row->Priority");
-            
+
             $bankaccount_hash[] = $row;
         }
 
@@ -320,11 +320,11 @@ class framework_logic_bank {
 
         return $bankaccount_hash;
     }
-    
+
     /***********************************************************************************************
     * One line description of function
     * @param Define input parameters
-    * @return Define return og function 
+    * @return Define return og function
     */
     private function bankvotingperiod($Period) {
         global $_lib;
@@ -348,23 +348,23 @@ class framework_logic_bank {
                 $bankvotingperiod->AmountOut        = $postmain['bankvotingperiod_AmountOut']         = abs($this->prevbankaccountcalc->AmountSaldo);
             }
 
-            $bankvotingperiod->BankVotingPeriodID   = $_lib['db']->db_new_hash($postmain, 'bankvotingperiod');            
+            $bankvotingperiod->BankVotingPeriodID   = $_lib['db']->db_new_hash($postmain, 'bankvotingperiod');
         }
-        
+
         #Denne er snudd
         $bankvotingperiod->AmountSaldo    = $bankvotingperiod->AmountIn - $bankvotingperiod->AmountOut;
-        
+
         $bankvotingperiod->topAmountOut  += $bankvotingperiod->AmountOut;
         $bankvotingperiod->topAmountIn   += $bankvotingperiod->AmountIn;
         #print_r($bankvotingperiod);
-        
+
         return $bankvotingperiod;
     }
 
     /***********************************************************************************************
     * One line description of function
     * @param Define input parameters
-    * @return Define return og function 
+    * @return Define return og function
     */
     private function is_closeable_voucheraccount($AccountPlanID, $KID, $InvoiceID){
         $success    = false;
@@ -418,11 +418,11 @@ class framework_logic_bank {
 
         return $value;
     }
-    
+
     /***********************************************************************************************
     * One line description of function
     * @param Define input parameters
-    * @return Define return og function 
+    * @return Define return og function
     */
     private function is_closeable_accounttillegg($AccountPlanID, $KID, $InvoiceID){
         $success    = false;
@@ -432,7 +432,7 @@ class framework_logic_bank {
         if($KID && !$success) {
             if(isset($this->closeableaccounttilleggline['KID'][$KID]) && round($this->closeableaccounttilleggline['KID'][$KID], 2) == 0) {
                 $success = true;
-            }        
+            }
         }
         if($InvoiceID && !$success) {
             if(isset($this->closeableaccounttilleggline['InvoiceID'][$InvoiceID]) && round($this->closeableaccounttilleggline['InvoiceID'][$InvoiceID], 2) == 0) {
@@ -474,7 +474,7 @@ class framework_logic_bank {
     /***********************************************************************************************
     * One line description of function
     * @param Define input parameters
-    * @return Define return og function 
+    * @return Define return og function
     */
     private function is_closeable_vouchertilbake($AccountPlanID, $KID, $InvoiceID){
         $success    = false;
@@ -523,7 +523,7 @@ class framework_logic_bank {
 
     /***********************************************************************************************
     * Super funksjon som ser pŒ alle kombinasjoner av lukninger
-    * @param 
+    * @param
     * @return
     */
     public function is_closeable($AccountPlanID, $KID, $InvoiceID) {
@@ -541,7 +541,7 @@ class framework_logic_bank {
             $status  = true;
             $comment = "closeable_vouchertilbake";
         }
-            
+
         #print "$comment: $AccountPlanID, KID: $KID, InvoiceID: $InvoiceID";
         return $status;
     }
@@ -555,7 +555,7 @@ class framework_logic_bank {
         }
         if(!$value) {
             $value = $this->get_vouchertilbake($AccountPlanID, $KID, $InvoiceID);
-        }        
+        }
         return $value;
     }
 
@@ -563,7 +563,7 @@ class framework_logic_bank {
     /***********************************************************************************************
     * Alle banktransaksjoner som er f¿rt mot kto 1920 i perioden som er oppgitt
     * @param Define input parameters
-    * @return Define return og function 
+    * @return Define return og function
     */
     private function _get_bank_voucher_hash($AccountPlanID, $Period) {
         global $_lib;
@@ -572,7 +572,7 @@ class framework_logic_bank {
 
         if($this->voucher->saldo > 0)
             $this->voucher->sumAmountIn += $this->voucher->saldo;
-        else 
+        else
             $this->voucher->sumAmountOut += abs($this->voucher->saldo);
 
         $voucher_hash = array();
@@ -583,7 +583,7 @@ class framework_logic_bank {
         #print "$query_voucher<br>";
         $result_voucher_hash    = $_lib['db']->db_query($query_voucher);
         while($row_voucher = $_lib['db']->db_fetch_object($result_voucher_hash)){
-          
+
             $row_hash = array();
             $row_hash = $row_voucher;
             $Amount = 0;
@@ -605,23 +605,23 @@ class framework_logic_bank {
             #print "side:" . $row_voucher->{$this->side} . ' x ' . $this->searchstring . "<br>\n";
             if($this->type == 'voucher' && round($row_voucher->{$this->oside},2) == round($this->searchstring,2) && round($this->searchstring, 2) > 0)
                 $row_hash->{'class' . $this->oside} = 'number red';
-            
+
             $this->set_closeable_vouchertilbake($row_voucher->AccountPlanID, $row_voucher->KID, $row_voucher->InvoiceID, ($row_voucher->AmountIn - $row_voucher->AmountOut), "fra bilag med JournalID: $row_voucher->JournalID");
             $this->set_closeable_voucheraccount($row_voucher->AccountPlanID, $row_voucher->KID, $row_voucher->InvoiceID, ($row_voucher->AmountIn - $row_voucher->AmountOut), "fra bilag med JournalID: $row_voucher->JournalID");
             #print "JID: $row_voucher->JournalID, Amount: $Amount, ref: $row_voucher->KID, date: $row_voucher->VoucherDate<br>";
             $bankvoucher_hash[] = $row_hash;
         }
         #print_r($voucher_hash);
-        
+
         $this->voucher->sumSaldo = $this->voucher->sumAmountIn - $this->voucher->sumAmountOut;
-        
+
         return $bankvoucher_hash;
     }
 
     /***********************************************************************************************
     * Make a hash of unmatched accountlines and vouchers
     * @param Define input parameters
-    * @return Define return og function 
+    * @return Define return og function
     */
     private function unvoted() {
         global $_lib;
@@ -630,19 +630,19 @@ class framework_logic_bank {
 
         if($this->bankaccountcalc->AmountSaldo > 0)
             $this->unvotedcalc->AmountIn  += $this->bankaccountcalc->AmountSaldo;
-        else 
+        else
             $this->unvotedcalc->AmountOut += abs($this->bankaccountcalc->AmountSaldo);
 
         /******************************************************************************************/
         #Ikke matchede bank konto og tillegsf¿ringslinjer
         if(is_array($this->bankvote_tilbake)) {
             foreach($this->bankvote_tilbake as $line) {
-                
+
                 #print "KID1: $line->KID, AmountIn: $line->AmountIn AmountOut: $line->AmountOut<br>\n";
                 #print_r($line);
-            
+
                 if(!$this->is_closeable_voucheraccount(0, $line->KID, $line->InvoiceNumber) && !$this->is_closeable_vouchertilbake(0, $line->KID, $line->InvoiceNumber) && !$this->is_closeable_accounttillegg(0, $line->KID, $line->InvoiceNumber)) {
-                    
+
                     if($line->AmountIn > 0 || $line->AmountOut > 0) {
                         $this->unvotedaccount[] = $line;
                         #print_r($line);
@@ -653,7 +653,7 @@ class framework_logic_bank {
                 }
             }
         }
-        
+
         if(is_array($this->bankaccount)) {
             foreach($this->bankaccount as $line) {
 
@@ -666,7 +666,7 @@ class framework_logic_bank {
                     #print_r($line);
 
                     if($line->AmountIn > 0 || $line->AmountOut > 0) {
-                                        
+
                         $this->unvotedaccount[] = $line;
                         #print_r($line);
 
@@ -677,7 +677,7 @@ class framework_logic_bank {
             }
         }
 
-        /******************************************************************************************/      
+        /******************************************************************************************/
         #Ikke matchede bilag og tilbakef¿ringslinjer
         foreach($this->bankvote_tillegg as $line) {
 
@@ -723,14 +723,14 @@ class framework_logic_bank {
                 }
             }
         }
-        
+
         /******************************************************************************************/
         #Find match to moneyflow and suggest it as a voucher
         $prevprevperiod = $_lib['date']->get_prev_period(array('value' => $this->PrevPeriod . '-01', 'realPeriod' => 1));
         $moneyflow = new moneyflow(array('StartDate' =>  $prevprevperiod . '-01'));
         if(is_array($this->unvotedaccount)) {
             foreach($this->unvotedaccount as $id => $unvotedmatch) {
-  
+
                 if(!$unvotedmatch->KID) {
                     $match = $moneyflow->findmatch(array('AmountIn' => $unvotedmatch->AmountIn, 'AmountOut' => $unvotedmatch->AmountOut, 'VoucherDate' => $line->Period .'-'.$line->Day ));
                     if(count($match) == 1) {
@@ -745,7 +745,7 @@ class framework_logic_bank {
                     } elseif(count($match) > 1) {
 
                         #print "Fant mer enn en match<br>";
-                        
+
                         # Found more than one match, see if we can discriminate on InvoiceNumber
                         //$unvotedmatch->InvoiceNumber
 
@@ -779,7 +779,7 @@ class framework_logic_bank {
                             $dataH = array();
 
                             $dataH['Manuell match'] = 'Ingen match';
-                            $only_match = null;                        
+                            $only_match = null;
 
                             foreach($match as $tmp => $info) {
                                 #We have to make a compound key - to return three values.
@@ -796,7 +796,7 @@ class framework_logic_bank {
             print "Ingen unvotedaccount<br>\n";
         }
 
-        /******************************************************************************************/      
+        /******************************************************************************************/
 
         $tmpaccountsaldo = -$this->sumunvotedaccount->AmountIn + $this->sumunvotedaccount->AmountOut;
         $tmpvouchersaldo = $this->sumunvotedvoucher->AmountIn - $this->sumunvotedvoucher->AmountOut;
@@ -807,28 +807,28 @@ class framework_logic_bank {
         #print "<br>unvotedcalc: <br>";
         #print_r($this->unvotedcalc);
         #print "endunvotedcalc: <br>";
-        
+
         #Sort the hashes accordingly
         if(is_array($this->unvotedvoucher)) ksort($this->unvotedvoucher);
         if(is_array($this->unvotedaccount)) ksort($this->unvotedaccount);
-        
+
         #print_r($this->unvotedvoucher);
-        
+
         #print_r($this->closeablevoucheraccountline);
-        
+
         return true;
     }
 
     /***********************************************************************************************
     * Finds all occurences of amount, returns the number found and the last occurence id
     * @param Define input parameters
-    * @return Define return og function 
+    * @return Define return og function
     */
     public function find_bank_amount($bank_hash, $amount) {
         if($this->debug) print "find_bank_amount<br>\n";
         $num            = 0;
         $accountline_id = 0;
-        
+
         foreach ($bank_hash as $id => $tmp) {
             #Check if this amount eksists in bank_hash
             if($bank_hash[$id]['Amount'] == $amount) {
@@ -844,14 +844,14 @@ class framework_logic_bank {
     /***********************************************************************************************
     *   Finds all occurences of amount, returns the number found and the last occurence id
     * @param Define input parameters
-    * @return Define return og function 
+    * @return Define return og function
     */
     public function find_voucher_amount($voucher_hash, $amount) {
         if($this->debug) print "find_voucher_amount<br>\n";
-    
+
         $num        = 0;
         $journalid  = 0;
-       
+
         foreach ($voucher_hash as $id => $tmp) {
             #Check if this amount eksists in bank_hash
             if($voucher_hash[$id]['Amount'] == $amount) {
@@ -866,7 +866,7 @@ class framework_logic_bank {
     /***********************************************************************************************
     * Checks if it exists accountlines for the specified AccountID and Period
     * @param none
-    * @return true/false 
+    * @return true/false
     */
     private function CheckIfAccountlineExist() {
         global $_lib;
@@ -892,14 +892,14 @@ class framework_logic_bank {
         if($this->debug) print "$select_high_priority_sql<br>\n";
         $maxpriority = $_lib['storage']->get_row(array('query' => $select_high_priority_sql));
 
-        if($maxpriority->Priority) 
-            $Priority  = $maxpriority->Priority + 1; 
-        else 
+        if($maxpriority->Priority)
+            $Priority  = $maxpriority->Priority + 1;
+        else
             $Priority  = 1;
 
         return $Priority;
     }
-    
+
     private function getMaxAccountlineJournalID() {
         global $_lib;
 
@@ -911,8 +911,8 @@ class framework_logic_bank {
         $maxjournal = $_lib['storage']->get_row(array('query' => $select_high_journalid_sql));
 
         if($maxjournal->JournalID)
-            $JournalID  = $maxjournal->JournalID + 1; 
-        else 
+            $JournalID  = $maxjournal->JournalID + 1;
+        else
             $JournalID  = $_lib['sess']->get_companydef('VoucherBankNumber');
 
         return $JournalID;
@@ -921,13 +921,13 @@ class framework_logic_bank {
     /***********************************************************************************************
     * Checks if it exists accountlines for the specified AccountID and Period
     * @param none
-    * @return true/false 
+    * @return true/false
     */
     private function AddAccountLine($args) {
         global $_lib;
 
         if($this->debug) print "AddAccountLine<br>\n";
-    
+
         #Default date is last day in month for better sorting when saving before everything is punched
         $LastDate = $_lib['date']->get_last_day_in_month($this->ThisPeriod);
 
@@ -964,7 +964,7 @@ class framework_logic_bank {
     /***********************************************************************************************
     * Function that adds new accounting lines with the highest journal number increased
     * @param num (of new lines)
-    * @return adds accountline records 
+    * @return adds accountline records
     */
     public function AddAccountLines($num) {
         for($i=1; $i<= $num; $i++) {
@@ -979,11 +979,11 @@ class framework_logic_bank {
         else {
             for($i = 0; $i < $num; $i++) {
                 global $_lib;
-                
+
                 if($this->debug) print "AddAccountLine<br>\n";
-                
+
                 $LastDate = $_lib['date']->get_last_day_in_month($this->ThisPeriod);
-                
+
                 $DataH = array();
                 $DataH['Period']            = $this->ThisPeriod;
                 $DataH['AccountID']         = $this->AccountID;
@@ -995,11 +995,11 @@ class framework_logic_bank {
                 $DataH['Day']               = substr($LastDate,8,2);
                 $DataH['JournalID']         = $JournalID_startat + $i;
                 $DataH['Priority']          = $this->getMaxAccountlinePriority();
-                
+
                 $DataH['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');
                 $DataH['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
                 $DataH['UpdatedByPersonID'] = $_lib['sess']->get_person('PersonID');
-                
+
                 if(is_array($args)) {
                     foreach($args as $key => $value) {
                         $DataH[$key] = $value;
@@ -1010,29 +1010,29 @@ class framework_logic_bank {
                 $AccountLineID = $_lib['db']->store_record(array('data' => $postvl, 'table' => 'voucheraccountline', 'debug' => $this->debug));
             }
         }
-            
+
     }
 
     /***********************************************************************************************
     * Checks if it exists accountlines for the specified AccountID and Period
     * @param none
-    * @return true/false 
-    */    
+    * @return true/false
+    */
     public function ZeroAccountLineJournalID() {
         global $_lib;
-        
+
         $fields['accountline_JournalID']    = 0;
         $primarykey['AccountID']            = $this->AccountID;
         $primarykey['Period']               = $this->ThisPeriod;
 
         $_lib['storage']->db_update_hash($fields, 'accountline', $primarykey);
     }
-    
+
     public function journal() {
         global $_lib, $accounting;
-       
+
         foreach($this->unvotedaccount as $unvoted) {
-        
+
             if($unvoted->Approved && !$accounting->IsJournalIDInUse($unvoted->JournalID, $this->VoucherType) && ($unvoted->ReskontroAccountPlanID || $unvoted->ResultAccountPlanID) && $unvoted->Day >= 1 && $unvoted->Day <= 31 && $unvoted->JournalID > 0) {
 
                 #print_r($unvoted);
@@ -1053,7 +1053,7 @@ class framework_logic_bank {
                 $VoucherH['voucher_DueDate']             = $VoucherH['voucher_VoucherDate']; #Same as voucher date since this is bank account direct transactions
                 $VoucherH['voucher_InvoiceID']           = $unvoted->InvoiceNumber;
                 $VoucherH['voucher_KID']                 = $unvoted->KID;
-                
+
                 if(!$unvoted->InvoiceNumber && !$unvoted->KID) {
                     #If InvoiceNumber and KID is empty - we put JournalID in InvoiceID field for bankavstemming
                     $VoucherH['voucher_InvoiceID']           = $unvoted->JournalID;
@@ -1064,96 +1064,96 @@ class framework_logic_bank {
                 if( substr($unvoted->InvoiceNumber, 0, 2) == "FB" ) {
                     $VoucherH['voucher_AccountPlanID']       = $this->AccountPlanID;
                     # printf("<hr />%s:<br />", $unvoted->InvoiceNumber);
-                    
+
                     $fbbank = new lodo_fakturabank_fakturabankvoting();
                     $FBVoucherH = $VoucherH;
                     preg_match("/FB\((\d+)\)/", $unvoted->InvoiceNumber, $matches);
                     $fakturabankID = $matches[1];
-                    
+
                     //print_r($matches);
                     $transaction = $fbbank->get_fakturabanktransactionobject($fakturabankID);
-                    
-                    #print("TRANSACTION: ");
-                    #print_r($transaction);
-                    #print("<br />");
-                    
+
                     $relations = $fbbank->get_faturabanktransactionrelations($fakturabankID);
                     $relations_invoices = array();
                     foreach($relations as $rel) {
                         $relations_invoices[] = $rel['InvoiceNumber'];
                     }
-                    
+
                     $sum = $unvoted->AmountIn - $unvoted->AmountOut;
-                    
+
                     foreach($relations as $rel) {
                         $sum -= $rel['Amount'];
                         #print_r($rel);
                     }
-                    
+
                     if($sum >= 0.0001 || $sum <= -0.0001) {
                         $_lib['message']->add("Sum is not zero in " . $unvoted->InvoiceNumber);
-                        
+
                         echo "Sum is not zero in " . $unvoted->InvoiceNumber . " ". $sum;
-                        
+
                         continue;
                     }
-                    
+
                     //$VoucherH['voucher_InvoiceID'] = implode(',', $relations_invoices);
-                    
+
                     $accounting->insert_voucher_line(
                         array(
-                            'post' => $VoucherH, 
-                            'accountplanid' => $VoucherH['voucher_AccountPlanID'], 
-                            'VoucherType'=> $this->VoucherType, 
+                            'post' => $VoucherH,
+                            'accountplanid' => $VoucherH['voucher_AccountPlanID'],
+                            'VoucherType'=> $this->VoucherType,
                             'comment' => 'Fra bankavstemming'
                             )
                         );
-                    
+
                     $FBVoucherH['voucher_ProjectID']     = $unvoted->ProjectID;
                     $FBVoucherH['voucher_DepartmentID']  = $unvoted->DepartmentID;
                     $FBVoucherH['voucher_Quantity']      = $unvoted->ResultQuantity;
                     $FBVoucherH['voucher_VAT']           = $unvoted->VAT;
-                    
+
                     foreach($relations as $rel) {
-                        #print_r($rel);
-                        #echo "<br>\n";
-                        
+
                         if($rel['InvoiceType'] == 'incoming') {
                             $accountplan_row = $fbbank->find_account_plan_type(
                                 $rel['InvoiceSupplierIdentity'], $rel['InvoiceSupplierIdentitySchemeID'], 'supplier'
                                 );
 
+                            // For some reason employee is also under incoming invoice.
+                            // We add this check also.
+                            if(!$accountplan_row){
+                                $accountplan_row = $fbbank->find_account_plan_type(
+                                    $rel['InvoiceSupplierIdentity'], $rel['InvoiceSupplierIdentitySchemeID'], 'employee'
+                                    );
+}
                             if(!$accountplan_row)
                                 printf("Could not find incoming: %s<br />", $rel['InvoiceSupplierIdentity']);
-                            
+
                             if($accountplan_row) {
-				
+
                                 if ($this->debug) printf("Adding normal Incoming\n");
                                 $FBVoucherH['voucher_AccountPlanID'] = $accountplan_row->AccountPlanID;
-                                
+
                                 $FBVoucherH['voucher_AmountOut']     = $rel['Amount'];
                                 $FBVoucherH['voucher_AmountIn']      = 0;
-                                
+
                                 $FBVoucherH['voucher_InvoiceID']     = $rel['InvoiceNumber'];
                                 $FBVoucherH['voucher_KID']           = $rel['KID'];
                                 $FBVoucherH['voucher_Description']   = $rel['Description'];
-                                
-                                #print_r($FBVoucherH);
+
                                 $accounting->insert_voucher_line(
                                     array(
-                                        'post' => $FBVoucherH, 
-                                        'accountplanid' => $FBVoucherH['voucher_AccountPlanID'], 
-                                        'VoucherType'=> $this->VoucherType, 
+                                        'post' => $FBVoucherH,
+                                        'accountplanid' => $FBVoucherH['voucher_AccountPlanID'],
+                                        'VoucherType'=> $this->VoucherType,
                                         'comment' => 'Ing. Fra bankavstemming'
                                         )
                                     );
-                            }    
+                            }
                         }
                         else if($rel['InvoiceType'] == 'outgoing') {
                             $accountplan_row = $fbbank->find_account_plan_type(
                                 $rel['InvoiceCustomerIdentity'], $rel['InvoiceCustomerIdentitySchemeID'], 'customer'
                                 );
-                            
+
                             if(!$accountplan_row)
                                 printf("Could not find outgoing: %s<br />", $rel['InvoiceCustomerIdentity']);
 
@@ -1161,40 +1161,39 @@ class framework_logic_bank {
                             if($accountplan_row) {
                                 if ($this->debug) printf("Adding normal Outgoing\n");
                                 $FBVoucherH['voucher_AccountPlanID'] = $accountplan_row->AccountPlanID;
-                                
+
                                 $FBVoucherH['voucher_AmountOut']     = $rel['Amount'];
                                 $FBVoucherH['voucher_AmountIn']      = 0;
-                                
+
                                 $FBVoucherH['voucher_InvoiceID']     = $rel['InvoiceNumber'];
                                 $FBVoucherH['voucher_KID']           = $rel['KID'];
                                 $FBVoucherH['voucher_Description']   = $rel['Description'];
-                                
+
                                 $accounting->insert_voucher_line(
                                     array(
-                                        'post' => $FBVoucherH, 
-                                        'accountplanid' => $FBVoucherH['voucher_AccountPlanID'], 
-                                        'VoucherType'=> $this->VoucherType, 
+                                        'post' => $FBVoucherH,
+                                        'accountplanid' => $FBVoucherH['voucher_AccountPlanID'],
+                                        'VoucherType'=> $this->VoucherType,
                                         'comment' => 'Utg. Fra bankavstemming'
                                         )
                                     );
-                            }    
+                            }
                         }
                         else {
-                            
                             //
                             // Hovedsbokfoering ved f.eks. rabatt
                             //
                             if($rel['AccountID'] != 0) {
                                 $query = sprintf(
-                                    "SELECT AccountPlanID 
+                                    "SELECT AccountPlanID
                                            FROM fakturabankbankreconciliationreason
                                            WHERE FakturabankBankReconciliationReasonID = %d",
                                     $rel['AccountID']);
-                                
+
                                 $reconciliation = $_lib['storage']->get_row(array('query' => $query));
-                                
+
                                 $FBVoucherH['voucher_AccountPlanID'] = $reconciliation->AccountPlanID;
-                                
+
                                 if($rel['Amount'] > 0) {
                                     $FBVoucherH['voucher_AmountOut']    = $rel['Amount'];
                                     $FBVoucherH['voucher_AmountIn']     = 0;
@@ -1202,14 +1201,14 @@ class framework_logic_bank {
                                     $FBVoucherH['voucher_AmountIn']     = -$rel['Amount'];
                                     $FBVoucherH['voucher_AmountOut']    = 0;
                                 }
-                                
+
                                 $FBVoucherH['voucher_InvoiceID']     = '';
                                 $FBVoucherH['voucher_KID']           = '';
                                 $FBVoucherH['voucher_Description']   = $rel['Description'];
-                                
-                                $accounting->insert_voucher_line(array('post' => $FBVoucherH, 
-                                                                       'accountplanid' => $FBVoucherH['voucher_AccountPlanID'], 
-                                                                       'VoucherType'=> $this->VoucherType, 
+
+                                $accounting->insert_voucher_line(array('post' => $FBVoucherH,
+                                                                       'accountplanid' => $FBVoucherH['voucher_AccountPlanID'],
+                                                                       'VoucherType'=> $this->VoucherType,
                                                                        'comment' => 'Hov. Fra bankavstemming'));
                             }
                         }
@@ -1217,10 +1216,9 @@ class framework_logic_bank {
                 }
                 ####################################################################################
                 else if($unvoted->ReskontroAccountPlanID && $unvoted->ResultAccountPlanID) {
-
                     ############
                     #1.st line
-                    $VoucherH['voucher_AccountPlanID']       = $this->AccountPlanID;                    
+                    $VoucherH['voucher_AccountPlanID']       = $this->AccountPlanID;
                     $accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $this->VoucherType, 'comment' => 'Fra bankavstemming'));
 
                     ############
@@ -1231,7 +1229,7 @@ class framework_logic_bank {
 
                     ############
                     #3d line
-                    $VoucherH = $this->SwitchSideAmount($VoucherH);                    
+                    $VoucherH = $this->SwitchSideAmount($VoucherH);
                     $accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $this->VoucherType, 'comment' => 'Fra bankavstemming'));
 
                     ############
@@ -1242,7 +1240,7 @@ class framework_logic_bank {
                     $VoucherH['voucher_Quantity']           = $unvoted->ResultQuantity;
                     $VoucherH['voucher_VAT']                = $unvoted->VAT;
 
-                    $VoucherH = $this->SwitchSideAmount($VoucherH);                    
+                    $VoucherH = $this->SwitchSideAmount($VoucherH);
                     $accounting->insert_voucher_line(array('post'=> $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $this->VoucherType, 'comment' => 'Fra bankavstemming'));
 
                 ####################################################################################
@@ -1252,7 +1250,7 @@ class framework_logic_bank {
                     #1.st line
                     $VoucherH['voucher_AccountPlanID']       = $this->AccountPlanID;
 
-                    //else 
+                    //else
                     {
                         $accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $this->VoucherType, 'comment' => 'Fra bankavstemming'));
                         //############
@@ -1261,10 +1259,9 @@ class framework_logic_bank {
                         $VoucherH = $this->SwitchSideAmount($VoucherH);
                         $accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $this->VoucherType, 'comment' => 'Fra bankavstemming'));
                     }
-                
+
                 ####################################################################################
                 } elseif($unvoted->ResultAccountPlanID) {
-
                     ############
                     #1.st line
                     $VoucherH['voucher_AccountPlanID']       = $this->AccountPlanID;
@@ -1281,7 +1278,7 @@ class framework_logic_bank {
                     $VoucherH = $this->SwitchSideAmount($VoucherH);
                     $accounting->insert_voucher_line(array('post' => $VoucherH, 'accountplanid' => $VoucherH['voucher_AccountPlanID'], 'VoucherType'=> $this->VoucherType, 'comment' => 'Fra bankavstemming'));
 
-                ####################################################################################                
+                ####################################################################################
                 } else {
                     print "This should not happen";
                 }
@@ -1301,7 +1298,7 @@ class framework_logic_bank {
             }
         }
 
-        #Oppdater balanse og resultat    
+        #Oppdater balanse og resultat
         $post = array();
         $post['voucher_VoucherPeriod'] = $this->ThisPeriod;
         $post['voucher_VoucherDate']   = $this->ThisPeriod . '-01';
@@ -1315,9 +1312,9 @@ class framework_logic_bank {
         $VoucherH['voucher_AmountOut']  = $AmountIn;
         return $VoucherH;
     }
-    
+
     public function __destruct() {
-    
+
         #print "Avslutt<br>\n";
         #print_r($this->closeablevoucheraccountline);
         #print_r($this->closeableaccounttilleggline);
