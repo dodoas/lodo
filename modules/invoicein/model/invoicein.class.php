@@ -133,6 +133,20 @@ class logic_invoicein_invoicein implements Iterator {
             #Motkonto resultat.
             if($account) {
 
+                if($account->EnableMotkontoResultat && $account->MotkontoResultat1) {
+                    $row->MotkontoAccountPlanID   = $account->MotkontoResultat1;
+                } elseif($account->EnableMotkontoBalanse && $account->MotkontoBalanse1) {
+                    $row->MotkontoAccountPlanID   = $account->MotkontoBalanse1;
+                }
+
+                // Bookkeeping account data
+                $query = "select * from accountplan where AccountPlanID='" . $row->MotkontoAccountPlanID . "' and Active=1";
+
+                $acc = $_lib['storage']->get_row(array('query' => $query, 'debug' => true));
+
+                $row->MotkontoAccountName = $acc->AccountName;
+
+
                 $query_line  = "select * from invoiceinline where ID='" . $row->ID . "' and Active=1";
                 $_lib['sess']->debug("linje: $query");
                 $result_line = $_lib['db']->db_query($query_line);

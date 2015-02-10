@@ -640,7 +640,9 @@ class lodo_fakturabank_fakturabankvoting {
 
                         $relation->{'FakturabankID'} = $relation->{'id'};
 
-                        if ($LodoID = $this->get_fakturabanktransactionrelation($relation->{'FakturabankID'})) {
+                        // FakturabankID is not enough anymore.
+                        // Logic is changed in Fakturabank so FakturabankID is not unique.
+                        if ($LodoID = $this->get_fakturabanktransactionrelation($relation->{'FakturabankID'}, $transaction->{"id"})) {
                             $relation->{'LodoID'} = $LodoID;
                             $action = "update";
                             $dataH['ID'] = $relation->{'LodoID'};
@@ -719,12 +721,14 @@ class lodo_fakturabank_fakturabankvoting {
 
                         if (!empty($relation->{"paycheck-no"})) {
                             $dataH['PaycheckNo'] = $relation->{"paycheck-no"};
+
                             if (empty($transaction->invoiceno)) {
                                 //# set InvoiceNumber = PaycheckNo if PaycheckNo present and InvoiceNumber empty
                                 $transaction_query = "UPDATE accountline SET InvoiceNumber = '" . $relation->{"paycheck-no"} . "' WHERE FakturabankTransactionLodoID = (SELECT ID from fakturabanktransaction WHERE FakturabankID = '" . $transaction->{"id"} . "')";
                                 $_lib['storage']->db_query3(array('query' => $transaction_query));
                             }
                         }
+
                         $dataH['Incoming'] = $transaction->incoming;
                         $dataH['Description'] = $transaction->description;
                         $dataH['DoneReconciliatedAt'] = $_lib['date']->t_to_mysql_format($transaction->{"done-reconciliated-at"});
@@ -1051,7 +1055,7 @@ class lodo_fakturabank_fakturabankvoting {
             return $arr;
         }
 
-	public function get_fakturabanktransactionrelation($FakturabankID) {
+	public function get_fakturabanktransactionrelation($FakturabankID, $FakturabankTransactionID) {
             global $_lib;
 
             if (!is_numeric($FakturabankID)) {
@@ -1059,7 +1063,7 @@ class lodo_fakturabank_fakturabankvoting {
                 return false;
             }
 
-            $query = "SELECT `ID` FROM fakturabanktransactionrelation WHERE `FakturabankID` = '$FakturabankID'";
+            $query = "SELECT `ID` FROM fakturabanktransactionrelation WHERE `FakturabankID` = '$FakturabankID' AND `FakturabankTransactionID` = $FakturabankTransactionID";
             $result = $_lib['storage']->db_query3(array('query' => $query));
             if (!$result) {
                 return false;

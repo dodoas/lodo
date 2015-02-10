@@ -29,7 +29,7 @@ print $_lib['sess']->doctype; ?>
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
-<h2><a href="<? print $_lib['sess']->dispatch ?>t=invoicein.list">Innkommende fakturaer</a> 
+<h2><a href="<? print $_lib['sess']->dispatch ?>t=invoicein.list">Innkommende fakturaer</a>
 <? if($_lib['sess']->get_person('FakturabankImportInvoiceAccess')) { ?> / <a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.listincoming">Fakturabank</a></h2> <? } ?>
 <a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.invoicereconciliationlist">Oppsett av koblinger mellom avstemmings&aring;rsaker og kontoer</a>
 
@@ -112,6 +112,7 @@ print $_lib['sess']->doctype; ?>
     <th class="number">Lev. Konto</th>
     <th>Firmanavn</th>
     <th>Motkonto</th>
+    <th>MotkontoNavn</th>
     <th class="number">Forfallsdato</th>
     <th class="number">Bel&oslash;p</th>
     <th>Avdeling</th>
@@ -150,7 +151,7 @@ foreach($invoicein as $InvoiceO) {
     if($fb_row) {
         $reason = $reasons[$fb_row->FakturabankCustomerReconciliationReasonID];
     }
-    else { 
+    else {
         $reason = "";
     }
 
@@ -163,7 +164,8 @@ foreach($invoicein as $InvoiceO) {
       <td class="number"><? print $InvoiceO->OrgNumber ?> ?</td>
       <td class="number"><? print $InvoiceO->SupplierAccountPlanID ?></td>
       <td><? print substr($InvoiceO->IName,0,20) ?></td>
-      <td><? print $InvoiceO->Motkonto ?> ?</td>
+      <td><? print $InvoiceO->MotkontoAccountPlanID ?></td>
+      <td><? print $InvoiceO->MotkontoAccountName ?></td>
       <td class="number"><? print $InvoiceO->DueDate ?></td>
       <td class="number">
         <?
@@ -188,7 +190,7 @@ foreach($invoicein as $InvoiceO) {
 <? } ?>
 </tbody>
 <tr>
-    <th colspan="8">Antall: <? print $count ?></th>
+    <th colspan="9">Antall: <? print $count ?></th>
     <th>SUM</th>
     <th class="number">
     <?
@@ -198,7 +200,7 @@ foreach($invoicein as $InvoiceO) {
         }
     ?>
     </th>
-    <th colspan="8"></th>
+    <th colspan="10"></th>
 </tr>
 <tr>
     <td><input type="submit" value="Bilagsf&oslash;r alle i listen (B)" name="action_invoicein_journal" accesskey="B"></td>

@@ -38,7 +38,7 @@ if($searchstring) {
 		$account_name   = $accountplan_type;
 		$func 			= "employee";
 	}
-	
+
 	if($accountplan_type == 'result' || $accountplan_type == 'balance') {
 	  	$func 			= "hovedbok";
 	}
@@ -126,7 +126,7 @@ if(isset($limitSet))
     <th class="menu">Konto</th>
     <th class="menu">Beskrivelse</th>
     <th class="menu">Type</th>
-    <th class="menu">Kreditt</th>    
+    <th class="menu">Kreditt</th>
     <th class="menu">Lodo konto</th>
     <th class="menu">Debet tekst</th>
     <th class="menu">Kredit tekst</th>
@@ -175,10 +175,10 @@ while($row = $_lib['db']->db_fetch_object($result_plan))
           <td><? print $row->debittext ?></td>
           <td><? print $row->credittext ?></td>
           <td align="right"><? if($row->EnableVAT)    { print $row->VatID; } ?></td>
-          
+
           <? // forandret fra DepartmentID til EnableDepartment 6/1-2005 ?>
           <td align="right"><? if($row->EnableDepartment) { print $row->DepartmentID; } ?></td>
-          
+
           <? // forandret fra ProjectID til EnableProject 6/1-2005 ?>
           <td align="right"><? if($row->EnableProject)    { print $row->ProjectID; } ?></td>
           <td align="right"><? if($row->EnableMotkontoBalanse)    { print $row->MotkontoBalanse1; } ?></td>
