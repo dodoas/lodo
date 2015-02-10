@@ -867,6 +867,13 @@ class lodo_fakturabank_fakturabank {
                     $InvoiceO->MotkontoAccountPlanID   = $account->MotkontoBalanse1;
                 }
 
+                // Bookkeeping account data
+                $query = "select * from accountplan where AccountPlanID='" . $InvoiceO->MotkontoAccountPlanID . "' and Active=1";
+
+                $acc = $_lib['storage']->get_row(array('query' => $query, 'debug' => true));
+
+                $InvoiceO->MotkontoAccountName = $acc->AccountName;
+
                 if(!$InvoiceO->MotkontoAccountPlanID) {
                     $InvoiceO->Status   .= sprintf(
                         'Motkonto resultat/balanse ikke satt for konto <a href="%s&t=accountplan.reskontro&AccountPlanID=%s&inline=show" target="_blank">%s</a>',

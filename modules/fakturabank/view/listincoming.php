@@ -57,6 +57,7 @@ Merk: Du m&aring; registrere brukeren din p&aring; <a href="http://fakturabank.n
     <th class="number">Lev. Konto</th>
     <th>Firmanavn</th>
     <th>Motkonto</th>
+    <th>MotkontoNavn</th>
     <th class="number">Forfallsdato</th>
     <th class="number">Bel&oslash;p</th>
     <th>Avdeling</th>
@@ -85,6 +86,7 @@ if (!empty($InvoicesO->Invoice)) {
       <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&AccountPlanID=<? print $InvoiceO->AccountPlanID ?>&inline=show" target="_new"><? print $InvoiceO->AccountPlanID ?></a></td>
       <td>&nbsp;<? print substr($InvoiceO->AccountingSupplierParty->Party->PartyName->Name,0,30) ?></td>
       <td>&nbsp;<? print substr($InvoiceO->MotkontoAccountPlanID,0,30) ?></td>
+      <td><? print $InvoiceO->MotkontoAccountName ?></td>
       <td class="number"><b><? print $InvoiceO->PaymentMeans->PaymentDueDate ?></b></td>
       <!--<td class="number"><? print $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) ?></td>-->
       <td class="number">
@@ -111,12 +113,12 @@ if (!empty($InvoicesO->Invoice)) {
       <td align="center"><a href="<?php echo $_SETUP['FB_URL'] ?>suppliers/<? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID ?>/invoices/<? print str_replace(".", "%2E", rawurlencode($InvoiceO->ID)) ?>" title="Vis faktura i fakturabank" target="_new">Vis</a>
       <td class="number"><? print $InvoiceO->Status ?></td>
   </tr>
-<? 
-  } 
+<?
+  }
 }
 ?>
 <tr>
-    <th colspan="8"></th>
+    <th colspan="9"></th>
     <th>SUM</th>
     <th class="number"><? print  $_lib['format']->Amount($TotalCustPrice) ?></th>
     <th colspan="6"></th>
