@@ -29,7 +29,7 @@ print $_lib['sess']->doctype; ?>
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
-<h2><a href="<? print $_lib['sess']->dispatch ?>t=invoicein.list">Innkommende fakturaer</a> 
+<h2><a href="<? print $_lib['sess']->dispatch ?>t=invoicein.list">Innkommende fakturaer</a>
 <? if($_lib['sess']->get_person('FakturabankImportInvoiceAccess')) { ?> / <a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.listincoming">Fakturabank</a></h2> <? } ?>
 <a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.invoicereconciliationlist">Oppsett av koblinger mellom avstemmings&aring;rsaker og kontoer</a>
 
@@ -151,7 +151,7 @@ foreach($invoicein as $InvoiceO) {
     if($fb_row) {
         $reason = $reasons[$fb_row->FakturabankCustomerReconciliationReasonID];
     }
-    else { 
+    else {
         $reason = "";
     }
 
