@@ -157,7 +157,11 @@ foreach($invoicein as $InvoiceO) {
 
     ?>
     <tr class="<? print $InvoiceO->Class ?>">
+      <? if ($InvoiceO->TotalCustPrice != 0) {?>
       <td class="number"><? if($InvoiceO->Journaled) { ?><a href="<? print $_SETUP['DISPATCH']."t=journal.edit&amp;voucher_VoucherType=$InvoiceO->VoucherType&amp;voucher_JournalID=$InvoiceO->JournalID"; ?>&amp;action_journalid_search=1" target="_new"><? print $InvoiceO->VoucherType ?><? print $InvoiceO->JournalID ?></a><? } else { print $InvoiceO->VoucherType . $InvoiceO->JournalID; }  ?></td>
+      <?} else {?>
+      <td></td>
+      <? } ?>
       <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=invoicein.edit&ID=<? print $InvoiceO->ID ?>&amp;inline=edit" title="Endre faktura"><? print $InvoiceO->InvoiceNumber ?></a></td>
       <td class="number"><? print $InvoiceO->InvoiceDate ?></td>
       <td class="number"><? print $InvoiceO->Period ?></td>
