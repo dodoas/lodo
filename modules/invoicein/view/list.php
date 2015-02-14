@@ -139,6 +139,7 @@ while($row = $_lib['db']->db_fetch_object($reasons_r)) {
     $reasons[$row->FakturabankInvoiceReconciliationReasonID] = $row->FakturabankInvoiceReconciliationReasonCode;
 }
 
+$invoicein->changeOrder();
 foreach($invoicein as $InvoiceO) {
     $TotalCustPrice += $InvoiceO->TotalCustPrice;
     $TotalCustPriceForeign += $InvoiceO->ForeignAmount;
