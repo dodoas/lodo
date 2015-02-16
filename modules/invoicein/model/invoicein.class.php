@@ -533,7 +533,14 @@ class logic_invoicein_invoicein implements Iterator {
                     print "Fakturaen er bilagsf¿rt<br>";
                 }
             }
+
+            # this weird logic to make theNewlyJournaled on top and in correct order
+            $theNewlyJournaled = $this->iteratorH;
+            $this->iteratorH = array();
+
             $this->fill(array()); //#Refresh the list after a new query - because lots of paramters get updated when journaling.
+            $this->iteratorH = array_merge($this->iteratorH, $theNewlyJournaled);
+
             $_lib['message']->add("$countjournaled fakturaer er bilagsf&oslash;rt");
         }
     }
@@ -581,6 +588,13 @@ class logic_invoicein_invoicein implements Iterator {
     */
     function rewind() {
         $this->valid = (FALSE !== reset($this->iteratorH)); ;
+    }
+
+    /***************************************************************************
+    * Change order on IteratorH
+    */
+    function changeOrder() {
+        $this->iteratorH = array_reverse($this->iteratorH);
     }
 
 
