@@ -29,9 +29,11 @@ print $_lib['sess']->doctype; ?>
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
-<h2><a href="<? print $_lib['sess']->dispatch ?>t=invoicein.list">Innkommende fakturaer</a>
-<? if($_lib['sess']->get_person('FakturabankImportInvoiceAccess')) { ?> / <a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.listincoming">Fakturabank</a></h2> <? } ?>
+
+<h2>
+<? if($_lib['sess']->get_person('FakturabankImportInvoiceAccess')) { ?><a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.listincoming">Importer fakturaer med status approved fra Fakturabank</a><br> <? } ?>
 <a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.invoicereconciliationlist">Oppsett av koblinger mellom avstemmings&aring;rsaker og kontoer</a>
+</h2>
 
 <? if($_lib['message']->get()) { ?>
     <div class="red error"><? print $_lib['message']->get() ?></div>
@@ -117,8 +119,7 @@ print $_lib['sess']->doctype; ?>
     <th class="number">Bel&oslash;p</th>
     <th>Avdeling</th>
     <th>Prosjekt</th>
-    <th>Reason</th>
-    <th>Reason Amount</th>
+    <th>&Aringrsaks informasjon</th>
     <th class="number">Bankkonto</th>
     <th class="number">Betaling</th>
     <th class="number">KID</th>
@@ -130,15 +131,6 @@ print $_lib['sess']->doctype; ?>
 <tbody>
 <?
 
-$reasons_query = "SELECT FakturabankInvoiceReconciliationReasonID, FakturabankInvoiceReconciliationReasonCode
-                    FROM fakturabankinvoicereconciliationreason";
-$reasons_r = $_lib['db']->db_query($reasons_query);
-$reasons = array();
-
-while($row = $_lib['db']->db_fetch_object($reasons_r)) {
-    $reasons[$row->FakturabankInvoiceReconciliationReasonID] = $row->FakturabankInvoiceReconciliationReasonCode;
-}
-
 foreach($invoicein as $InvoiceO) {
     $TotalCustPrice += $InvoiceO->TotalCustPrice;
     $TotalCustPriceForeign += $InvoiceO->ForeignAmount;
@@ -148,11 +140,12 @@ foreach($invoicein as $InvoiceO) {
     $fb_query = sprintf("SELECT * FROM fakturabankinvoicein WHERE LodoID = %d", $InvoiceO->ID);
     $fb_row = $_lib['storage']->get_row(array('query' => $fb_query, 'debug' => true));
 
-    if($fb_row) {
-        $reason = $reasons[$fb_row->FakturabankCustomerReconciliationReasonID];
-    }
-    else {
-        $reason = "";
+    // new logic for getting reason information
+    $reasons_query = sprintf("SELECT LodoID, ClosingReasonId, Amount, FakturabankInvoiceReconciliationReasonCode FROM `fbdownloadedinvoicereasons` as fbdir join `fakturabankinvoicereconciliationreason` as fbirr on fbdir.ClosingReasonId = fbirr.FakturabankInvoiceReconciliationReasonID WHERE fbdir.LodoID= %d", $InvoiceO->ID);
+    $reasons_r = $_lib['db']->db_query($reasons_query);
+    $ReasonsInfo = "";
+    while($row = $_lib['db']->db_fetch_object($reasons_r)) {
+        $ReasonsInfo = $ReasonsInfo . $row->FakturabankInvoiceReconciliationReasonCode . " = " . $_lib['format']->Amount($row->Amount) . " ";
     }
 
     ?>
@@ -182,8 +175,7 @@ foreach($invoicein as $InvoiceO) {
       </td>
       <td><? print $InvoiceO->Department ?></td>
       <td><? print $InvoiceO->Project ?></td>
-      <td><? print $reason ?></td>
-      <td><? if($reason) print $_lib['format']->Amount($fb_row->FakturabankCustomerReconciliationReasonAmount); ?></td>
+      <td><? print $ReasonsInfo ?></td>
       <td><? print $InvoiceO->SupplierBankAccount ?></td>
       <td class="number"><? print $InvoiceO->PaymentMeans ?></td>
       <td class="number"><? print $InvoiceO->KID ?></td>
