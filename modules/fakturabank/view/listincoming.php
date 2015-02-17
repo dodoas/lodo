@@ -89,8 +89,10 @@ if (!empty($InvoicesO->Invoice)) {
     foreach($InvoiceO->ReconciliationReasons as $Reason) {
         $r_query = sprintf("SELECT * FROM fakturabankinvoicereconciliationreason WHERE FakturabankInvoiceReconciliationReasonID = %d", $Reason[0]);
         $r_row = $_lib['storage']->get_row(array('query' => $r_query, 'debug' => true));
-        $ReasonsInfo = $ReasonsInfo . $r_row->FakturabankInvoiceReconciliationReasonCode . " = " . $_lib['format']->Amount($Reason[1]) . " ";
+        $ReasonsInfo = $ReasonsInfo . $r_row->FakturabankInvoiceReconciliationReasonCode . " = " . $_lib['format']->Amount($Reason[1]) . " | ";
     }
+    // remove last 3 characters " | "
+    $ReasonsInfo = substr($ReasonsInfo, 0, -3);
     ?>
 
     <tr class="<? print $InvoiceO->Class ?>">
