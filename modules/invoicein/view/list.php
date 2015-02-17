@@ -100,7 +100,7 @@ print $_lib['sess']->doctype; ?>
 <tr>
     <td><? print $_lib['form3']->submit(array('name' => 'show_search',   'value' => 'S&oslash;k (S)')) ?></td>
     <td></td>
-    <td></td>
+    <td><input type="submit" value="Bilagsf&oslash;r alle i listen (B)" name="action_invoicein_journal" accesskey="B"></td>
 </tr>
 </table>
 <table class="lodo_data">
@@ -130,7 +130,7 @@ print $_lib['sess']->doctype; ?>
 </thead>
 <tbody>
 <?
-
+$invoicein->changeOrder();
 foreach($invoicein as $InvoiceO) {
     $TotalCustPrice += $InvoiceO->TotalCustPrice;
     $TotalCustPriceForeign += $InvoiceO->ForeignAmount;
@@ -197,9 +197,6 @@ foreach($invoicein as $InvoiceO) {
     ?>
     </th>
     <th colspan="10"></th>
-</tr>
-<tr>
-    <td><input type="submit" value="Bilagsf&oslash;r alle i listen (B)" name="action_invoicein_journal" accesskey="B"></td>
 </tr>
 </table>
 </form>

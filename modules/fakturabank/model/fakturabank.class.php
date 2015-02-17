@@ -907,6 +907,15 @@ class lodo_fakturabank_fakturabank {
                     $InvoiceO->Status .= 'Finner ikke valutaverdi for '. $InvoiceO->DocumentCurrencyCode;
                 }
 
+                if ($InvoiceO->IssueDate == '0000-00-00') {
+                    $InvoiceO->Journal = false;
+                    $InvoiceO->Class   = 'red';
+                    $InvoiceO->Status .= 'Dato kan ikke v&aelig;re '. $InvoiceO->IssueDate;
+                }
+                if ($InvoiceO->LegalMonetaryTotal->PayableAmount == 0) {
+                    $InvoiceO->Status .= "Vil du ha fakturabel&oslash;p kr " . $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) . '? ';
+                }
+
                 #Check that we have not journaled the same invoices earlier. C
                 $query          = "select * from invoicein where SupplierAccountPlanID='" . $InvoiceO->AccountPlanID . "' and InvoiceNumber='" . $InvoiceO->ID . "' and Active=1";
                 #print "$query<br>\n";
