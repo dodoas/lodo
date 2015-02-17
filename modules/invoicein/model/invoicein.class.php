@@ -533,7 +533,14 @@ class logic_invoicein_invoicein implements Iterator {
                     print "Fakturaen er bilagsf¿rt<br>";
                 }
             }
+
+            # this weird logic to make theNewlyJournaled on top and in correct order
+            $theNewlyJournaled = $this->iteratorH;
+            $this->iteratorH = array();
+
             $this->fill(array()); //#Refresh the list after a new query - because lots of paramters get updated when journaling.
+            $this->iteratorH = array_merge($this->iteratorH, $theNewlyJournaled);
+
             $_lib['message']->add("$countjournaled fakturaer er bilagsf&oslash;rt");
         }
     }
@@ -583,6 +590,13 @@ class logic_invoicein_invoicein implements Iterator {
         $this->valid = (FALSE !== reset($this->iteratorH)); ;
     }
 
+    /***************************************************************************
+    * Change order on IteratorH
+    */
+    function changeOrder() {
+        $this->iteratorH = array_reverse($this->iteratorH);
+    }
+
 
     /***************************************************************************
     *
@@ -592,7 +606,7 @@ class logic_invoicein_invoicein implements Iterator {
 		global $_lib;
 		$query = "SELECT COUNT(*) AS cnt, EXTRACT(YEAR FROM i.InvoiceDate) AS Y, EXTRACT(MONTH FROM i.InvoiceDate) AS M
 					FROM invoicein i
-					WHERE i.InvoiceNumber NOT IN (SELECT q.`InvoiceID` FROM `voucher` q WHERE i.InvoiceNumber = q.InvoiceID)
+					WHERE i.TotalCustPrice != 0 and i.InvoiceNumber NOT IN (SELECT q.`InvoiceID` FROM `voucher` q WHERE i.InvoiceNumber = q.InvoiceID)
 					GROUP BY Y, M
 					ORDER BY Y, M
 					LIMIT 0,1000";
