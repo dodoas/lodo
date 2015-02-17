@@ -145,9 +145,10 @@ foreach($invoicein as $InvoiceO) {
     $reasons_r = $_lib['db']->db_query($reasons_query);
     $ReasonsInfo = "";
     while($row = $_lib['db']->db_fetch_object($reasons_r)) {
-        $ReasonsInfo = $ReasonsInfo . $row->FakturabankInvoiceReconciliationReasonCode . " = " . $_lib['format']->Amount($row->Amount) . " ";
+        $ReasonsInfo = $ReasonsInfo . $row->FakturabankInvoiceReconciliationReasonCode . " = " . $_lib['format']->Amount($row->Amount) . " | ";
     }
-
+    // remove last 3 characters " | "
+    $ReasonsInfo = substr($ReasonsInfo, 0, -3);
     ?>
     <tr class="<? print $InvoiceO->Class ?>">
       <? if ($InvoiceO->TotalCustPrice != 0) {?>
