@@ -99,36 +99,34 @@ class framework_logic_voucherinput
             if ($args['voucher_ForeignCurrencyID'] != "") {
                 if (Exchange::validateForeignCurrencyFields($args)) {
                     $this->ForeignCurrencyID = $args['voucher_ForeignCurrencyID'];
-                    if ($args['voucher_ForeignAmountIn']) {
-                      $amt = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignAmountIn']));
-                      $this->ForeignAmount = $amt['value'];
-                    } else {
-                      $amt = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignAmountOut']));
-                      $this->ForeignAmount = $amt['value'];
-                    }
 
-
-                    # TODO (lnluksa)
-                    # REMOVE
-                    // $foreign_currency_direction = isset($args['voucher_ForeignCurrencyDirection']) &&
-                        // $args['voucher_ForeignCurrencyDirection'] == 'in' ? 'in' : 'out';
-
-                    // $hash = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignAmount']));
-                    // $this->ForeignAmount = $hash['value'];
                     $hash = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignConvRate']));
                     $this->ForeignConvRate = $hash['value'];
 
+                    $amt_in = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignAmountIn']));
+                    $v_amt_in = $amt_in['value'];
+                    $amt_out = $_lib['convert']->Amount(array('value'=>$args['voucher_ForeignAmountOut']));
+                    $v_amt_out = $amt_out['value'];
+                    if ($v_amt_in == 0 && $v_amt_out == 0) {
+                      $v_amt_in = $this->AmountIn / (100 / $this->ForeignConvRate);
+                      $v_amt_out = $this->AmountOut / (100 / $this->ForeignConvRate);
+                    }
+                    if ($this->AmountIn > 0) {
+                      $this->ForeignAmount = $v_amt_in;
+                    } else {
+                      $this->ForeignAmount = $v_amt_out;
+                    }
+
                     $foreign_converted_amount = abs($this->ForeignAmount * (100 / $this->ForeignConvRate));
-                    if ($foreign_converted_amount) {
-                        /* if ($foreign_converted_amount > 0) { */
-                        if ($args['voucher_ForeignAmountIn']) {
+                    if ($foreign_converted_amount > 0) {
+                        if ($args['voucher_ForeignAmountIn'] > 0) {
                             $this->AmountIn = $foreign_converted_amount;
                             $this->AmountOut = 0;
-                        } else {
+                        } else if (($args['voucher_ForeignAmountOut'] > 0)) {
                             $this->AmountIn = 0;
                             $this->AmountOut = $foreign_converted_amount;
                         }
-                    }
+                      }
                 } else {
                     // invalid data, ignore for now
                 }
@@ -738,7 +736,16 @@ class framework_logic_voucherinput
 
             $request['voucher_ForeignCurrencyID']      = $this->ForeignCurrencyID;
             $request['voucher_ForeignConvRate']      = $this->ForeignConvRate;
-            $request['voucher_ForeignAmount']      = $this->ForeignAmountIn ? $this->ForeignAmountIn : $this->ForeignAmountOut;
+            if ($this->ForeignConvRate) {
+              if ($this->AmountIn > 0) {
+                if ($this->ForeignAmountIn > 0) $request['voucher_ForeignAmount'] = $this->ForeignAmountIn;
+                else $request['voucher_ForeignAmount'] = $this->AmountIn/(100/$this->ForeignConvRate);
+              }
+              if ($this->AmountOut > 0) {
+                if ($this->ForeignAmountOut > 0) $request['voucher_ForeignAmount'] = $this->ForeignAmountOut;
+                else $request['voucher_ForeignAmount'] = $this->AmountOut/(100/$this->ForeignConvRate);
+              }
+            } else $request['voucher_ForeignAmount'] = 0;
         }
 
 

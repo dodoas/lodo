@@ -300,15 +300,15 @@ $numfields = 0;
 
   #if ($accountplan->EnableReskontro == 0)
   #{
-    $totalAmountIn  += $voucher_input->AmountIn;
-    $totalAmountOut += $voucher_input->AmountOut;
+    $totalAmountIn  += $voucherHead->AmountIn;
+    $totalAmountOut += $voucherHead->AmountOut;
   #}
 
-       #Sum foreign amount
-    if ($voucher_input->AmountIn > 0) {
-        $totalForeignAmountIn += $voucher_input->ForeignAmount;
-    } else {
-        $totalForeignAmountOut += $voucher_input->ForeignAmount;
+    #Sum foreign amount
+    if ($voucherHead->AmountIn > 0) {
+        $totalForeignAmountIn += $voucherHead->ForeignAmount;
+    } else if ($voucherHead->AmountOut > 0) {
+        $totalForeignAmountOut += $voucherHead->ForeignAmount;
     }
 
 
@@ -492,11 +492,13 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
     }
 
    #Sum foreign amount
-    if ($voucher->AmountIn > 0) {
+   if($accountplan->EnableReskontro == 0) {
+      if ($voucher->AmountIn > 0) {
         $totalForeignAmountIn += $voucher->ForeignAmount;
-    } else {
+      } else {
         $totalForeignAmountOut += $voucher->ForeignAmount;
-    }
+      }
+   }
     // $totalForeignAmountIn  += $voucher->ForeignAmountIn;
     // $totalForeignAmountOut += $voucher->ForeignAmountOut;
    $totalForeignCurrency = $voucher->ForeignCurrencyID;
@@ -660,6 +662,10 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
     <? print $_lib['form3']->hidden(array('name' => 'AccountLineID'     , 'value' => $voucher_input->AccountLineID)) ?>
     <? print $_lib['form3']->hidden(array('name' => 'view_mvalines'     , 'value' => $view_mvalines)) ?>
     <? print $_lib['form3']->hidden(array('name' => 'view_linedetails'  , 'value' => $view_linedetails)) ?>
+    <? print $_lib['form3']->hidden(array('name' => 'voucher.ForeignCurrencyID'  , 'value' => $voucher->ForeignCurrencyID)) ?>
+    <? print $_lib['form3']->hidden(array('name' => 'voucher.ForeignConvRate'  , 'value' => $voucher->ForeignConvRate)) ?>
+    <? print $_lib['form3']->hidden(array('name' => 'voucher.ForeignAmountIn'  , 'value' => '0.0')) ?>
+    <? print $_lib['form3']->hidden(array('name' => 'voucher.ForeignAmountOut'  , 'value' => '0.0')) ?>
     <? if($voucher->VoucherType != 'A') { ?>
     <input type="submit" name="action_voucherline_new"  value="Ny postering til bilag <? print $voucher_input->JournalID ?> (L)" class="button" tabindex="<? print $tabindex++; ?>" accesskey="L" >
     <? } ?>
@@ -760,4 +766,4 @@ if($VoucherID > 0) { #Vi har ikke dette på den forste linjen for den er lagret.
             </form>
     <? }
 }?>
-<? includeinc('bottom') ?>
+<? includeinc('bottom'); ?>

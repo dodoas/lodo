@@ -234,11 +234,11 @@ class framework_logic_vouchergui
           }
         }
 
-        $html .= $_lib['form3']->text(array('name' => 'voucher.AmountIn', 'readonly' => $readonly, 'value' => $_lib['format']->Amount($AmountIn), 'class' => 'number', 'width' => '12', 'tabindex' => $tabindexin, 'accesskey' => 'I'));
+        $html .= $_lib['form3']->text(array('name' => 'voucher.AmountIn', 'readonly' => $readonly, 'value' => $_lib['format']->Amount($AmountIn), 'class' => 'number', 'width' => '12', 'tabindex' => $tabindexin, 'accesskey' => 'I', 'OnChange' => 'return allowOnlyCreditOrDebit(this, \'credit\')'));
         $html .= '<br>' . $accountplan->debittext;
         $html .= "</td>\n";
         $html .= '<td class="' . $accountplan->CreditColor . '" style="text-align: right;">';
-        $html .= $_lib['form3']->text(array('name' => 'voucher.AmountOut', 'readonly' => $readonly, 'value' => $_lib['format']->Amount($AmountOut), 'class' => 'number', 'width' => '12', 'tabindex' => $tabindexout, 'accesskey' => 'I'));
+        $html .= $_lib['form3']->text(array('name' => 'voucher.AmountOut', 'readonly' => $readonly, 'value' => $_lib['format']->Amount($AmountOut), 'class' => 'number', 'width' => '12', 'tabindex' => $tabindexout, 'accesskey' => 'I', 'OnChange' => 'return allowOnlyCreditOrDebit(this, \'debit\')'));
         $html .= '<br>' . $accountplan->credittext;
         $html .= "</td>\n";
 

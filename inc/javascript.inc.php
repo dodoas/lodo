@@ -9,12 +9,71 @@ else {
 
 <script language="javascript1.1">
 
+/*
+ * This function gets a number and returns a string with that number formated
+ * as amount with specified number of decimal places. It can be called with
+ * only one argument and then the number of decimal places defaults to 2.
+ * Called in journal/edit view.
+ * Example:
+ * var amount = toAmountString(123456.45, 4);
+ * // variable amount is now '123 456,4500'
+ */
+function toAmountString(num, decimal_places) {
+  // if not defined, set number of decimal places to default value
+  decimal_places = (typeof decimal_places !== 'undefined')? decimal_places : 2;
+  var precision = Math.pow(10, decimal_places);
+  var decimal = String(Math.floor(num * precision - Math.floor(num) * precision));
+  while (decimal.length < decimal_places) decimal = "0" + decimal;
+  num = Math.floor(num);
+  var s = "," + decimal;
+  var i = 0;
+  if (num < 1000) {
+    s = String(num) + s;
+    num = Math.floor(num / 1000);
+  }
+  while (num >= 1) {
+    var moduo = String(Math.floor(num % 1000));
+    while (!(num < 1000) && moduo.length < 3) moduo = "0" + moduo;
+    if ((i != 0) && (num >= 1000)) s = moduo + s;
+    else s = " " + moduo + s;
+    num = Math.floor(num / 1000);
+    i++;
+  }
+  return s;
+}
+
+/*
+ * This function does the reverse of toAmountString(). It gets a string and
+ * returns the value as a number.
+ * Called in journal/edit view.
+ * Example:
+ * var amount = toNumber('10 333,01');
+ * // variable amount is now 10333.01
+ */
+function toNumber(str) {
+  var arr = str.split(" ");
+  var s = "";
+  var i = 0;
+  for (i = 0; i < arr.length; i++) {
+    s = s + arr[i];
+  }
+  arr = s.split(",");
+  s = "";
+  for (i = 0; i < arr.length; i++) {
+    if (i != 0 && i != arr.length) s = s + "." + arr[i];
+    else s = s + arr[i];
+  }
+  return Number(s);
+}
+
 function place_cursor(formname, fromfieldname) {
   /* document.getElementById('voucher.VoucherDate').focus(); */
   /* document.forms[document.forms.length-4].elements['voucher.VoucherDate'].focus(); */
   document.forms[formname].elements[fromfieldname].focus();
 }
 
+// TODO (mladjo2505)
+// Empty function, we should look if it is called anywhere, if not remove it.
 function update_voucher(location)
 {
     //(location, type, JournalID, VoucherID, VoucherPeriod, VoucherType, VoucherDate, AccountPlanID, OldAccountPlanID, AmountIn, AmountOut, DueDate, KID, InvoiceID, DescriptionID, Description)
@@ -176,10 +235,29 @@ function findDirectChildByName(parent, childName) {
 
 window.currency_rates = new Object();
 
+/*
+ * OnChange action for currency select field.
+ * The first argument is the select element and the second argument is a string
+ * with which we show and hide the valuta related fields for a new voucher.
+ * Used in journal/edit view.
+ */
 function onCurrencyChange(selObj, voucher_id) {
     var currency = selObj.value;
     var parent = document.getElementById('voucher_currency_div_' + voucher_id);
 
+    for(var i = 0; i < selObj.options.length; i++)
+    {
+      if(selObj.options[i].value === currency) {
+        selObj.options[i].selected = 'selected';
+        break;
+      }
+    }
+    selObj.value = currency;
+    if (voucher_id == "newvoucher") {
+      var valuta_fields = document.getElementById("voucher_line_currency_div_newvoucher");
+      if (!(currency == "")) valuta_fields.style.display = "inline";
+      else valuta_fields.style.display = "none";
+    }
     if (currency == "") {
         rate = 0;
     } else {
@@ -188,11 +266,38 @@ function onCurrencyChange(selObj, voucher_id) {
 
     var currency_rate_input = findDirectChildByName(parent, "voucher.ForeignConvRate");
 
-    currency_rate_input.value = rate;
-    currency_rate_input.display = "none";
+    currency_rate_input.value = toAmountString(rate, 4);
+    onCurrencyRateChange(currency_rate_input);
+    // next line does nothing, to be removed
+    // currency_rate_input.display = "none";
 }
 
+/*
+ * OnChange action for currency rate input field.
+ * The first element is the input field.
+ * Used in journal/edit view.
+ */
+function onCurrencyRateChange(element) {
+    var valuta_ids = document.getElementsByName("voucher.ForeignCurrencyID");
+    var valuta_rates = document.getElementsByName("voucher.ForeignConvRate");
+    var valuta_id = valuta_ids[0].value;
+    var valuta_rate = valuta_rates[0].value;
+    for (i = 1; i < valuta_ids.length; i++) {
+      valuta_ids[i].value = valuta_id;
+      valuta_rates[i].value = valuta_rate;
+    }
+    var valuta_ids = document.getElementsByName("voucher.ForeignCurrencyIDSelection");
+    for (i = 1; i < valuta_ids.length; i++) {
+      valuta_ids[i].value = valuta_id;
+    }
+    valuta_rates[0].value = toAmountString(toNumber(valuta_rates[0].value), 4);
+}
 
+/*
+ * OnSubmit action for valuta related form. Sends the request to change
+ * the valuta (id, currency rate) for the whole current journal.
+ * Used in journal/edit view.
+ */
 function journalCurrencyChange(btn, action_url)
 {
     var wrapper = btn.parentNode;
@@ -217,7 +322,7 @@ function journalCurrencyChange(btn, action_url)
             currency_rate_input = wrapper_children[i];
         }
     }
-    var currency = currency_id_input[currency_id_input.selectedIndex].value;
+    var currency = currency_id_input.value;
     if (currency == "") {
         alert("Velg en valuta");
         return false;
@@ -229,13 +334,16 @@ function journalCurrencyChange(btn, action_url)
     }
 
     currency_id_selected_input.value = currency;
-
+/*
+    // TODO (mladjo2505)
+    // not needed, to be removed
     var currencyform = document.createElement("form");
     currencyform.method = "post";
     currencyform.action = action_url;
     currencyform.appendChild(wrapper.cloneNode(true));
-    currencyform.style.display='none';
+    //currencyform.style.display='none';
     document.body.appendChild(currencyform);
+    //onCurrencyChange(currencyform.elements[0]);
     var voucherIdInput = $(".lodo_data input[name=voucher.JournalID]");
     voucherIdInput.clone().appendTo(currencyform);
     var voucherTypeInput = document.createElement("input");
@@ -248,8 +356,10 @@ function journalCurrencyChange(btn, action_url)
     voucherTypeInput.setAttribute("type", "hidden");
     voucherTypeInput.setAttribute("name", "action_postmotpost_save_currency");
     voucherTypeInput.setAttribute("value", "1");
-    currencyform.appendChild(voucherTypeInput);
-    currencyform.submit();
+    form.appendChild(voucherTypeInput);
+ */
+    var form = document.getElementsByName('voucher')[0];
+    form.submit();
 }
 
 
@@ -354,6 +464,88 @@ function exchangeFindRate(btn)
     window.open(url,'_blank');
 
     return false;
+}
+
+/*
+ * OnChange action for foreign amount fields for each voucher.
+ * Calculate amount in domestic currency from specified foreign amount with the
+ * current currency rate. Set other fields to 0 so we don't get a problem of
+ * having both incoming and outgoung amount set.
+ * The first argument is the input element we have changed and the second is a
+ * boolean which indicates if it is an incoming or an outgoung field so we change
+ * the correct domestic amount field.
+ * Used in journal/edit view.
+ */
+function calculateFromForeignAmount(element, in_flag) {
+  var in_amount   = element.parentElement.parentElement.parentElement.getElementsByTagName('input')[0];
+  var out_amount  = element.parentElement.parentElement.parentElement.getElementsByTagName('input')[1];
+
+  var f_in_amount  = element.parentElement.parentElement.parentElement.getElementsByTagName('input')[2];
+  var f_out_amount = element.parentElement.parentElement.parentElement.getElementsByTagName('input')[3];
+
+  var foreign_amount = toNumber(element.value);
+  var conv_rate = 100.0/toNumber(document.getElementsByName('voucher.ForeignConvRate')[0].value);
+  if (in_flag) { // incoming
+    in_amount.value = toAmountString(Math.round(foreign_amount * conv_rate * 100)/100, 2);
+    out_amount.value = toAmountString(0, 2);
+    f_in_amount.value = toAmountString(toNumber(f_in_amount.value), 2);
+    f_out_amount.value = toAmountString(0, 2);
+  }
+  else { // outgoing
+    out_amount.value = toAmountString(Math.round(foreign_amount * conv_rate * 100)/100, 2);
+    in_amount.value = toAmountString(0, 2);
+    f_in_amount.value = toAmountString(0, 2);
+    f_out_amount.value = toAmountString(toNumber(f_out_amount.value), 2);
+  }
+  return false;
+}
+
+/*
+ * OnChange action for incoming and outgoing amount fields for each voucher.
+ * When domestic amount field is changed we need to recalculate the currency
+ * rate based on the currently set foreign amount(if it is 0, warn user, set
+ * this field to 0). Set other to 0 so we dont get a problem of having both both
+ * incoming and outgoing amounts set.
+ * The first argument is the input element we have changed and the second is a
+ * string which indicates if it is an incoming or an outgoung field so we can
+ * set the other to 0.
+ * Used in journal/edit view.
+ */
+function allowOnlyCreditOrDebit(element, credit_or_debit) {
+  var in_amount    = element.parentElement.parentElement.getElementsByTagName('input')[0];
+  var out_amount   = element.parentElement.parentElement.getElementsByTagName('input')[1];
+  var conv_rate    = document.getElementsByName('voucher.ForeignConvRate')[0];
+  var currency     = document.getElementsByName('voucher.ForeignCurrencyID')[0];
+  var f_in_amount  = element.parentElement.parentElement.getElementsByTagName('input')[2];
+  var f_out_amount = element.parentElement.parentElement.getElementsByTagName('input')[3];
+
+  var val_in_amount    = toNumber(in_amount.value);
+  var val_out_amount   = toNumber(out_amount.value);
+  var val_conv_rate    = toNumber(conv_rate.value);
+  var val_f_in_amount  = toNumber(f_in_amount.value);
+  var val_f_out_amount = toNumber(f_out_amount.value);
+
+  // if the valuta is only domestic, do nothing
+  if (currency.value == '') return false;
+
+  if ((element == in_amount && val_f_in_amount == 0) || (element == out_amount && val_f_out_amount == 0)) {
+    // TODO (mladjo2505)
+    // Translate message to Norwegian
+    alert("Can't recalculate currency rate when foreign amount is 0.");
+    element.value = toAmountString(0, 2);
+    return false;
+  }
+  if (credit_or_debit == 'credit') {
+    out_amount.value = toAmountString(0, 2);
+    in_amount.value = toAmountString(toNumber(in_amount.value), 2);
+    conv_rate.value = toAmountString(Math.round((100/(val_in_amount/val_f_in_amount)) * 10000)/10000, 4);
+  }
+  else if (credit_or_debit == 'debit') {
+    in_amount.value = toAmountString(0, 2);
+    out_amount.value = toAmountString(toNumber(out_amount.value), 2);
+    conv_rate.value = toAmountString(Math.round((100/(val_out_amount/val_f_out_amount)) * 10000)/10000, 4);
+  }
+  onCurrencyRateChange(conv_rate);
 }
 
 </script>

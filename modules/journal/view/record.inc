@@ -14,6 +14,12 @@ includelogic('voucher/voucherinput');
 
 $voucher_input      = new framework_logic_voucherinput($_REQUEST);
 
+// if the valuta(either currency_id or exchange_rate) has changed for the voucher we are saving, then we update foreign currency for the whole journal
+global $_lib;
+$result = $_lib['db']->db_query('SELECT * FROM voucher WHERE JournalID = ' . $voucher_input->JournalID . ' LIMIT 1');
+$voucher_current = $_lib['db']->db_fetch_assoc($result);
+if (($voucher_input->ForeignCurrencyID != $voucher_current['ForeignCurrencyID']) || ($voucher_input->ForeignConvRate != $voucher_current['ForeignConvRate'])) exchange::updateJournalForeignCurrency();
+
 includelogic('journal/search');
 $search_class   = new search_class();
 
@@ -353,6 +359,9 @@ if($voucher_input->action['voucherline_new'])
    $fields['voucher_Description']       = $voucher_input->Description;
    $fields['voucher_JournalID']         = $voucher_input->JournalID;
    $fields['voucher_VoucherType']       = $voucher_input->VoucherType;
+   $fields['voucher_ForeignCurrencyID'] = $voucher_input->ForeignCurrencyID;
+   $fields['voucher_ForeignConvRate']   = $voucher_input->ForeignConvRate;
+   $fields['voucher_ForeignAmount']     = 0;
    $fields['voucher_AutomaticReason']   = 'Ny linje';
    $fields['voucher_Active']            = 1;
    #print_r($fields);
