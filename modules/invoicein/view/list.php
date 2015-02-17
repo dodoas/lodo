@@ -176,7 +176,12 @@ foreach($invoicein as $InvoiceO) {
       </td>
       <td><? print $InvoiceO->Department ?></td>
       <td><? print $InvoiceO->Project ?></td>
-      <td><? print $ReasonsInfo ?></td>
+      <td title="<? print $ReasonsInfo ?>"><?
+        if (strlen($ReasonsInfo) > 40){
+         print substr($ReasonsInfo, 0, 37) . '...';
+        }else {
+          print $ReasonsInfo;
+        } ?></td>
       <td><? print $InvoiceO->SupplierBankAccount ?></td>
       <td class="number"><? print $InvoiceO->PaymentMeans ?></td>
       <td class="number"><? print $InvoiceO->KID ?></td>

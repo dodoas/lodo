@@ -586,12 +586,12 @@ class lodo_fakturabank_fakturabank {
             if (!empty($acc_cost_params['supplierreconciliationreasons'])) {
                 foreach ($acc_cost_params['supplierreconciliationreasons'] as $key => $value) {
                     // we will get reconciliation_line_reason.id-closing_reason.id
-                    $value_array = explode('-', $$value);
-                    $value = $value_array[count($value_array)-1];
+                    $key_array = explode('-', $key);
+                    $key = $key_array[count($key_array)-1];
 
-                    if (is_numeric($value)) {
+                    if (is_numeric($key)) {
                         // Passing true or false may not be needed anymore
-                        $InvoiceO->ReconciliationReasons[] = array($key, $value, false);
+                        $InvoiceO->ReconciliationReasons[] = array($key, $key, false);
                     }
                 }
             }

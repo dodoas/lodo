@@ -126,7 +126,13 @@ if (!empty($InvoicesO->Invoice)) {
       </td>
       <td class="number"><? print $InvoiceO->Department ?></td>
       <td class="number"><? print $InvoiceO->Project ?></td>
-      <td class="number"><? print $ReasonsInfo ?></td>
+      <td class="number" title="<? print $ReasonsInfo ?>"><?
+        if (strlen($ReasonsInfo) > 40){
+         print substr($ReasonsInfo, 0, 37) . '...';
+        }else {
+          print $ReasonsInfo;
+        } ?>
+      </td>
       <td class="number"><? print $InvoiceO->PaymentMeans->PayeeFinancialAccount->ID ?></td>
       <td class="number"><? print $InvoiceO->PaymentMeans->InstructionID ?></td>
       <td align="center"><a href="<?php echo $_SETUP['FB_URL'] ?>suppliers/<? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID ?>/invoices/<? print str_replace(".", "%2E", rawurlencode($InvoiceO->ID)) ?>" title="Vis faktura i fakturabank" target="_new">Vis</a>
