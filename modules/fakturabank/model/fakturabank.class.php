@@ -585,9 +585,13 @@ class lodo_fakturabank_fakturabank {
 
             if (!empty($acc_cost_params['supplierreconciliationreasons'])) {
                 foreach ($acc_cost_params['supplierreconciliationreasons'] as $key => $value) {
-                    if (is_numeric($value)) {
+                    // we will get reconciliation_line_reason.id-closing_reason.id
+                    $key_array = explode('-', $key);
+                    $key = $key_array[count($key_array)-1];
+
+                    if (is_numeric($key)) {
                         // Passing true or false may not be needed anymore
-                        $InvoiceO->ReconciliationReasons[] = array($key, $value, false);
+                        $InvoiceO->ReconciliationReasons[] = array($key, $key, false);
                     }
                 }
             }
@@ -783,6 +787,10 @@ class lodo_fakturabank_fakturabank {
 
             if (!empty($acc_cost_params['customerreconciliationreasons'])) {
                 foreach ($acc_cost_params['customerreconciliationreasons'] as $key => $value) {
+                    // we will get reconciliation_line_reason.id-closing_reason.id
+                    $key_array = explode('-', $key);
+                    $key = $key_array[count($key_array)-1];
+
                     if (is_numeric($value)) {
                         // Passing true or false may not be needed anymore
                         $InvoiceO->ReconciliationReasons[] = array($key, $value, true);
@@ -897,6 +905,15 @@ class lodo_fakturabank_fakturabank {
                     $InvoiceO->Journal = false;
                     $InvoiceO->Class   = 'red';
                     $InvoiceO->Status .= 'Finner ikke valutaverdi for '. $InvoiceO->DocumentCurrencyCode;
+                }
+
+                if ($InvoiceO->IssueDate == '0000-00-00') {
+                    $InvoiceO->Journal = false;
+                    $InvoiceO->Class   = 'red';
+                    $InvoiceO->Status .= 'Dato kan ikke v&aelig;re '. $InvoiceO->IssueDate;
+                }
+                if ($InvoiceO->LegalMonetaryTotal->PayableAmount == 0) {
+                    $InvoiceO->Status .= "Vil du ha fakturabel&oslash;p kr " . $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) . '? ';
                 }
 
                 #Check that we have not journaled the same invoices earlier. C
