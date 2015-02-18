@@ -70,9 +70,8 @@ class lodo_fakturabank_bankreconciliationreason {
 
         $this->credentials = "$this->username:$this->password";		
 
-
-		$page       = "bank_transaction_accounts.json";
-        $params     = "?identifier=" . $this->OrgNumber . '&identifier_type=NO:ORGNR';
+		$page       = "closing_reasons.json";
+        $params     = "?identifier=" . $this->OrgNumber . '&identifier_type=NO:ORGNR&type=bank_transactions';
 //        if($this->retrievestatus) $params .= '&customer_status=' . $this->retrievestatus;
         $url    = "$this->protocol://$this->host/$page$params";
         $_lib['message']->add($url);
