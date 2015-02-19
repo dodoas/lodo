@@ -495,7 +495,7 @@ elseif($_lib['input']->getProperty('action_salary_journal'))
       {
         $sumTotal += $_POST['salaryline_AmountThisPeriod_'.$lineID];
       }
-      elseif( ($_POST['salaryline_LineNumber_'.$lineID] >= $lineOutFrom) and ($_POST['salaryline_LineNumber_'.$lineID] < $lineOutTo) )
+      elseif( ($_POST['salaryline_LineNumber_'.$lineID] >= $lineOutFrom) and ($_POST['salaryline_LineNumber_'.$lineID] <= $lineOutTo) )
       {
         $sumTotal -= $_POST['salaryline_AmountThisPeriod_'.$lineID];
       }
@@ -633,7 +633,7 @@ elseif($_lib['input']->getProperty('action_salary_journal'))
       {
         $fields['voucher_AmountIn'] 	= $salaryline->AmountThisPeriod;
       }
-      elseif( ($salaryline->LineNumber >= $lineOutFrom) and ($salaryline->LineNumber < $lineOutTo) )
+      elseif( ($salaryline->LineNumber >= $lineOutFrom) and ($salaryline->LineNumber <= $lineOutTo) )
       {
         $fields['voucher_AmountOut'] 	= $salaryline->AmountThisPeriod;
       }
@@ -641,6 +641,7 @@ elseif($_lib['input']->getProperty('action_salary_journal'))
       $fields['voucher_DepartmentID']   = $salaryline->DepartmentID;
       $account = $salaryline->AccountPlanID;
       #print "insert voucherline<br>\n";
+      if ($salaryline->LineNumber == 100) $fields['voucher_InvoiceID'] .= "-F";
       $tmpID = $accounting->insert_voucher_line(array('post'=>$fields, 'accountplanid'=>$account, 'VoucherType'=>$VoucherType));
 
       #Update hovedbokskonto for this postering, it may have changed
