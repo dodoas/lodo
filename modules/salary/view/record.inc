@@ -448,8 +448,43 @@ elseif($_lib['input']->getProperty('action_salary_internal')) {
 
     $_lib['storage']->db_update_multi_table($head, array('salary' => 'SalaryID'));
 }
-elseif($_lib['input']->getProperty('action_salary_journal'))
+if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getProperty('action_salary_new'))
 {
+  // if we are journaling a newly created salary we need to manualy make $_POST so same logic can be used
+  if ($_lib['input']->getProperty('action_salary_new')) {
+    $_POST['SalaryID'] = $SalaryID;
+
+    $query="select * from salary where SalaryID=".$_POST['SalaryID'];
+    $row = $_lib['storage']->get_row(array('query' => $query));
+    $_POST['salary_JournalDate_'.$SalaryID] = $row->JournalDate;
+    $_POST['salary_Period_'.$SalaryID] = $row->Period;
+    $_POST['AccountPlanID'] = $_POST['salary_AccountPlanID_'.$SalaryID] = $row->AccountPlanID;
+    $_POST['salary_ValidFrom_'.$SalaryID] = $row->ValidFrom;
+    $_POST['salary_ValidTo_'.$SalaryID] = $row->ValidTo;
+    $_POST['salary_PayDate_'.$SalaryID] = $row->PayDate;
+    $_POST['salary_DomesticBankAccount_'.$SalaryID] = $row->DomesticBankAccount;
+    $_POST['salary_Comment_'.$SalaryID] = $row->Comment;
+    $_POST['salary_InternComment_'.$SalaryID] = $row->InternComment;
+    $_POST['salary_VacationPayment_'.$SalaryID] = $row->VacationPayment;
+
+    $query="select count(*) as fieldcount from salaryline where SalaryID=".$_POST['SalaryID'];
+    $row = $_lib['storage']->get_row(array('query' => $query));
+    $_POST['fieldcount'] = $row->fieldcount;
+
+    $query="select * from salaryline where SalaryID=".$_POST['SalaryID'];
+    $result=$_lib['db']->db_query($query);
+    $icount = 0;
+    while ($row = $_lib['db']->db_fetch_object($result)) {
+      $i++;
+      //echo "row"; var_dump($row);
+      $_POST[$i] = $row->SalaryLineID;
+      $_POST['salaryline_LineNumber_'.$row->SalaryLineID] = $row->LineNumber;
+      $_POST['salaryline_NumberInPeriod_'.$row->SalaryLineID] = $row->NumberInPeriod;
+      $_POST['salaryline_Rate_'.$row->SalaryLineID] = $row->Rate;
+      $_POST['salaryline_AmountThisPeriod_'.$row->SalaryLineID] = $row->AmountThisPeriod;
+      $_POST['EnableVacationPayment_'.$row->SalaryLineID] = $row->EnableVacationPayment;
+    }
+  }
   ################################################################
   #First save the content of the forms
   $counter = $_POST['fieldcount'];
