@@ -577,5 +577,47 @@ WHERE
   </table>
 </fieldset>
 
+<br />
+<br />
+
+<fieldset>
+<legend>11. Lønnsslipp</legend>
+<table class="lodo_data">
+<thead>
+  <tr class="voucher">
+    <th class="sub">Art</th>
+    <th class="sub">Bilagsnummer</th>
+    <th class="sub">Bilagsdato</th>
+    <th class="sub">Periode</th>
+    <th class="sub">Ansatt</th>
+    <th class="sub">Fra dato</th>
+    <th class="sub">Til dato</th>
+    <th class="sub">Utbetalt dato</th>
+    <th class="sub">Konto for utbetaling</th>
+    <th class="sub">Skattekommune</th>
+  </tr>
+</thead>
+<tbody>
+<?
+  $query_salary  = "SELECT s.SalaryID, s.JournalDate, s.Period, s.AccountPlanID, ap.AccountName, s.ValidFrom, s.ValidTo, s.PayDate, s.DomesticBankAccount, k.KommuneNumber, k.KommuneName FROM salary s, accountplan ap, kommune k WHERE s.AccountPlanID = ap.AccountPlanID AND s.KommuneID = k.KommuneID AND s.JournalID NOT IN (SELECT DISTINCT(JournalID) FROM voucher WHERE VoucherType = 'L')";
+         $result_salary = $_lib['db']->db_query($query_salary);
+  while($salary = $_lib['db']->db_fetch_object($result_salary)) { ?>
+    <tr class="voucher">
+        <td><? print "L" ?></td>
+        <td><a href="<? print $_SETUP[DISPATCH]."t=salary.edit&SalaryID=".$salary->SalaryID; ?>" target="_blank"><? print $salary->SalaryID; ?></a></td>
+        <td><? print $salary->JournalDate; ?></td>
+        <td><? print $salary->Period; ?></td>
+        <td><? print $salary->AccountPlanID . " " . $salary->AccountName; ?></td>
+        <td><? print $salary->ValidFrom; ?></td>
+        <td><? print $salary->ValidTo; ?></td>
+        <td><? print $salary->PayDate; ?></td>
+        <td><? print $salary->DomesticBankAccount; ?></td>
+        <td><? print $salary->KommuneNumber . " " . $salary->KommuneName; ?></td>
+    </tr>
+<? } ?>
+</tbody>
+</table>
+</fieldset>
+
 </body>
 </html>
