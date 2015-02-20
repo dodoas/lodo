@@ -21,6 +21,13 @@ $bankname = $bankname['AccountName'];
 
 $_lib['form3']->Locked = $bank->bankvotingperiod->Locked;
 
+$host = $GLOBALS['_SETUP']['FB_SERVER'];
+$protocol = $GLOBALS['_SETUP']['FB_SERVER_PROTOCOL'] . "://";
+$old_pattern    = array("/[^0-9]/", "/_+/", "/_$/");
+$new_pattern    = array("", "", "");
+$identifier = strtolower(preg_replace($old_pattern, $new_pattern , $_lib['sess']->get_companydef('OrgNumber')));
+$params = "/bank_statements/get_bank_statement_for_lodo?identifier=" . $identifier . "&account_number=" . preg_replace("/\s+/","", $bank->AccountNumber) . "&period=" . $bank->ThisPeriod;
+
 ?>
 <? print $_lib['sess']->doctype ?>
 <head>
@@ -292,7 +299,7 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
 </tr>
 
 <tr>
-  <td></td>
+  <td><a href= "<?= $protocol . $host . $params?>"$protocol target="_new"><input type="button" value="Vis kontoutskrift i fakturaBank"></input></a></td>
   <td></td>
   <td style="text-align: right;">
     <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
