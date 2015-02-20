@@ -29,7 +29,7 @@ $_lib['form3']->Locked = $bank->bankvotingperiod->Locked;
     <? includeinc('head') ?>
 
 
-    <script> 
+    <script>
       /* script for å generere de enorme konto-listene */
       /*
         $reskontroconf['field']         = 'ReskontroAccountPlanID';
@@ -41,17 +41,17 @@ $_lib['form3']->Locked = $bank->bankvotingperiod->Locked;
       <?php
         function generate_kontoliste($conf) {
             global $_lib;
-    
+
             /* lager javascript-funksjon-toppen */
             echo "function kontoliste_";
             foreach($conf['type'] as $v)
                 echo $v;
             echo "(name, selected, dest) {\n";
-            
+
             /* lager JSON-array med alle kontoene. */
             printf("var data = %s", json_encode($_lib['form3']->accountplan_number_menu3($conf)));
-            
-            echo " 
+
+            echo "
           color = '';
           text  = 'Velg konto';
 
@@ -115,9 +115,9 @@ var selectedOptionText = targ.options[targ.selectedIndex].text;
               color = data[i][1];
               text  = data[i][2];
 
-              if(value == selected || text == '') 
+              if(value == selected || text == '')
                 continue;
- 
+
               var option = document.createElement('option');
               option.value = value;
               option.style.backgroundColor = color;
@@ -144,10 +144,10 @@ var selectedOptionText = targ.options[targ.selectedIndex].text;
 
             $field_counter++;
             printf("<select id='kontoliste_%d'></select>", $field_counter);
-            
+
             echo "<script> kontoliste_";
             foreach($conf['type'] as $v)
-                echo $v;            
+                echo $v;
             printf("('%s.%s.%d', %d, %d);</script>", $conf['table'], $conf['field'], $conf['pk'], $conf['value'], $field_counter);
         }
 
@@ -180,7 +180,7 @@ var selectedOptionText = targ.options[targ.selectedIndex].text;
 <?
 $relationcount = array();
 if(is_array($bank->bankaccount)) {
-    foreach($bank->bankaccount as $row) { 
+    foreach($bank->bankaccount as $row) {
         if( substr($row->InvoiceNumber, 0, 2) == "FB" ) {
             preg_match("/FB\((\d+)\)/", $row->InvoiceNumber, $matches);
             $fakturabankID = $matches[1];
@@ -193,7 +193,7 @@ if(is_array($bank->bankaccount)) {
             if($c == 0) {
                 printf("<b>Noe er galt med denne importen fra fakturabank FB(%d).</b><br />", $fakturabankID);
             }
-        }        
+        }
     }
 }
 ?>
@@ -206,14 +206,14 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
 <table class="lodo_data">
     <tr class="result">
         <th colspan="26">
-        Velg periode 
+        Velg periode
 
         <? print $_lib['form3']->URL(array('url' => $MY_SELF . "&amp;AccountID=$bank->AccountID&amp;Period=" . $_lib['date']->get_prev_period($bank->ThisPeriod), 'description' => '<<', 'title' => 'Prev')) ?>
         <? print $_lib['form3']->AccountPeriod_menu3(array('name' => 'Period', 'value' => $bank->ThisPeriod, 'accesskey' => 'P', 'noaccess' => true, 'autosubmit' => true)); ?>
         <? print $_lib['form3']->URL(array('url' => $MY_SELF . "&amp;AccountID=$bank->AccountID&amp;Period=" . $_lib['date']->get_next_period($bank->ThisPeriod), 'description' => '>>', 'title' => 'Next')) ?>
-    
-        <? print $_lib['form3']->url(array('description' => 'Avstemming f&oslash;rst i m&aring;neden',      'url' => $_lib['sess']->dispatch . 't=bank.tabstatus'       . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> | 
-        <? print $_lib['form3']->url(array('description' => 'Kontoutskrift',    'url' => $_lib['sess']->dispatch . 't=bank.tabbankaccount'  . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> | 
+
+        <? print $_lib['form3']->url(array('description' => 'Avstemming f&oslash;rst i m&aring;neden',      'url' => $_lib['sess']->dispatch . 't=bank.tabstatus'       . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
+        <? print $_lib['form3']->url(array('description' => 'Kontoutskrift',    'url' => $_lib['sess']->dispatch . 't=bank.tabbankaccount'  . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
         <? print $_lib['form3']->url(array('description' => 'Bilagsf&oslash;r/Avstemming i slutten av m&aring;neden',          'url' => $_lib['sess']->dispatch . 't=bank.tabjournal'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
         <? print $_lib['form3']->url(array('description' => 'Enkel',          'url' => $_lib['sess']->dispatch . 't=bank.tabsimple'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> |
         <? print $_lib['form3']->url(array('description' => 'Import',          'url' => $_lib['sess']->dispatch . 't=bank.import'      . '&amp;AccountID=' . $bank->AccountID . '&amp;Period=' . $bank->ThisPeriod)) ?> <? if($_lib['sess']->get_person('FakturabankImportBankTransactionAccess')) { ?> |
@@ -283,7 +283,7 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
   <td></td>
   <td style="text-align: right;">
   <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
-    Bilagsnr: <input type="text" size="11" name="action_bank_accountlinenew_startat" class="number" 
+    Bilagsnr: <input type="text" size="11" name="action_bank_accountlinenew_startat" class="number"
                      value="<?= $extraStartAtJournalID ?>">
   <? } ?>
   </td>
@@ -310,10 +310,10 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
 <table class="lodo_data">
 
 <tr>
-    <td colspan="14" 
+    <td colspan="14"
         class="<? $v = $bank->bankvotingperiod->AmountSaldo - $bank->prevbankaccountcalc->AmountSaldo; if(abs($v) < 0.00001 && abs($v) > -0.00001) print 'sub'; else print 'red';?>">
-      Saldo fra forrige mnd (<? print $bank->PrevPeriod ?>): 
-      <? print $_lib['format']->Amount($bank->prevbankaccountcalc->AmountSaldo) ?> 
+      Saldo fra forrige mnd (<? print $bank->PrevPeriod ?>):
+      <? print $_lib['format']->Amount($bank->prevbankaccountcalc->AmountSaldo) ?>
       <? print "Saldo differanse " . $_lib['format']->Amount($bank->bankvotingperiod->AmountSaldo - $bank->prevbankaccountcalc->AmountSaldo); ?>
     </td>
 </tr>
@@ -322,9 +322,9 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
     <td colspan="19">
         <? if(round($bank->bankvotingperiod->topAmountSaldo,2) != round($bank->voucher->saldo,2)) { ?>
           <b>
-          Det er differanse mellom summen av tilbakef&oslash;rte + tilleggsf&oslash;rte bilag 
-          (<? print $_lib['format']->Amount($bank->bankvotingperiod->topAmountSaldo) ?>) 
-            og summen av transaksjoner p&aring; kto 
+          Det er differanse mellom summen av tilbakef&oslash;rte + tilleggsf&oslash;rte bilag
+          (<? print $_lib['format']->Amount($bank->bankvotingperiod->topAmountSaldo) ?>)
+            og summen av transaksjoner p&aring; kto
           <? print $bank->AccountPlanID ?> (<? print $_lib['format']->Amount($bank->voucher->saldo) ?>) :
           <? print $_lib['format']->Amount($bank->bankvotingperiod->topAmountSaldo - $bank->voucher->saldo) ?>
           </b>
@@ -342,7 +342,7 @@ Neste ledige Bank (B) bilagsnummer: <? print $_lib['sess']->get_companydef('Vouc
     <td class="menu">KID</td>
     <td class="menu">Tekst hovedbok</td>
     <td class="menu">Kommentarer</td>
-    <td class="menu">OK</td>    
+    <td class="menu">OK</td>
     <td class="menu">Reskontro</td>
     <td class="menu">Auto</td>
     <td class="menu">Hovedbokskonto</td>
@@ -409,7 +409,7 @@ $tabindexH[7] = $tabindex + ($count * 7);
 
 
 if(is_array($bank->bankaccount)) {
-    foreach($bank->bankaccount as $row) { 
+    foreach($bank->bankaccount as $row) {
 
         $i++;
 
@@ -427,13 +427,13 @@ if(is_array($bank->bankaccount)) {
         $aconf['pk']            = $row->AccountLineID;
 
         $reskontroconf = $resultconf = $aconf;
-    
+
         if($row->Approved) {
             $classApproved = 'creditblue';
         } else {
             $classApproved = 'creditred';
-        }    
-	if(is_array($bank->bankvoucher_this_hash)) 
+        }
+	if(is_array($bank->bankvoucher_this_hash))
         	$bankvoucher = array_pop($bank->bankvoucher_this_hash);
 
         // check if journalID is already in use
@@ -448,15 +448,15 @@ if(is_array($bank->bankaccount)) {
                 // if it has been closed then JournalID should not be red.
                 $JournalIDColColor = '';
                 $matchCaption = "Lukket";
-            } else { 
+            } else {
                 $matchCaption = "Diff(" . $_lib['format']->Amount($bank->getDiff($row->ReskontroAccountPlanID, $row->KID, $row->InvoiceNumber)) . ")";
-            } 
-        } else { 
+            }
+        } else {
             $sumBalance = $row->AmountIn - $row->AmountOut;
-            $matchCaption = " Diff(" . $sumBalance . ")"; 
-        } 
+            $matchCaption = " Diff(" . $sumBalance . ")";
+        }
 
-    
+
         if (!($i % 3)) { $sec_color = "r0"; } else { $sec_color = "r1"; };
         ?>
       <tr class="<? print $sec_color ?>">
@@ -472,7 +472,7 @@ if(is_array($bank->bankaccount)) {
         <td><? print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Day', 'pk' => $row->AccountLineID, 'value' => $row->Day, 'class' => 'number', 'width' => 2, 'tabindex' => $tabindexH[2])) ?></td>
 
         <td class="<? print $bank->CreditColor ?>">
-        <? 
+        <?
             if($row->AmountOut > 0)
                 print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'AmountOut', 'pk' => $row->AccountLineID, 'value' => $_lib['format']->Amount($row->AmountOut), 'class' => $row->classAmountOut, 'tabindex' => $tabindexH[3]));
             else
@@ -480,26 +480,26 @@ if(is_array($bank->bankaccount)) {
         ?>
         </td>
         <td class="<? print $bank->DebitColor ?>">
-            <? 
+            <?
             if($row->AmountIn > 0)
                 print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'AmountIn', 'pk' => $row->AccountLineID, 'value' => $_lib['format']->Amount($row->AmountIn),     'class' => $row->classAmountIn, 'tabindex' => $tabindexH[4]));
-            else 
+            else
                 print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'AmountIn', 'pk' => $row->AccountLineID, 'value' => '',     'class' => $row->classAmountIn, 'tabindex' => $tabindexH[4]));
-    
+
             #print $_lib['form3']->URL(array('url' => $bank->url . '&amp;type=bank&amp;side=AmountIn&amp;searchstring=' . $row->AmountIn, 'description' => '<img src="/lib/icons/search.gif">')) ?>
         </td>
 
         <? if($row->InvoiceNumber != '' || count($row->MatchSelect) < 1) { ?>
         <td>
-            <? 
-            
+            <?
+
             print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'InvoiceNumber', 'pk' => $row->AccountLineID, 'value' => $row->InvoiceNumber,     'class' => 'number', 'width' => 20, 'maxlength' => 25, 'tabindex' => $tabindexH[5]));
-        
+
             if(substr($row->InvoiceNumber, 0, 2) == "FB") {
                 preg_match("/FB\((\d+)\)/", $row->InvoiceNumber, $matches);
                 $fakturabankID = $matches[1];
 
-                print $relationcount[$fakturabankID]; 
+                print $relationcount[$fakturabankID];
             }
 
             ?>
@@ -508,9 +508,9 @@ if(is_array($bank->bankaccount)) {
 
 
         <td <? if($row->InvoiceNumber == '' && count($row->MatchSelect) >= 1) { print " colspan=\"2\""; } ?>>
-            <? 
+            <?
             if($row->InvoiceNumber == '' && count($row->MatchSelect) >= 1) {
-                print $_lib['form3']->select(array('table' => 'accountline', 'field' => 'KIDandInvoiceIDandAccountPlanID', 'pk' => $row->AccountLineID, 'value' => $row->KID, 'data' => $row->MatchSelect, 'width' => 50, 'required' => false)); 
+                print $_lib['form3']->select(array('table' => 'accountline', 'field' => 'KIDandInvoiceIDandAccountPlanID', 'pk' => $row->AccountLineID, 'value' => $row->KID, 'data' => $row->MatchSelect, 'width' => 50, 'required' => false));
             } else {
                 print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'KID', 'pk' => $row->AccountLineID, 'value' => $row->KID,     'class' => 'number', 'width' => 20, 'maxlength' => 25, 'tabindex' => $tabindexH[6]));
             }
@@ -530,7 +530,7 @@ if(is_array($bank->bankaccount)) {
             $reskontroconf['type'][]        = 'employee';
 
             display_kontoliste($reskontroconf);
-            //print $_lib['form3']->accountplan_number_menu($reskontroconf);    // OLD 
+            //print $_lib['form3']->accountplan_number_menu($reskontroconf);    // OLD
             print $_lib['form3']->URL(array('url' => $_lib['sess']->dispatch . "t=accountplan.reskontro&accountplan_AccountPlanID=$row->ReskontroAccountPlanID", 'description' => 'K', 'title' => 'Endre oppsett p&aring; denne kontoen', 'target' => '_top'));
             if (!empty($reskontroaccountplan)) {
                 print $reskontroaccountplan->OrgNumber;
@@ -539,24 +539,24 @@ if(is_array($bank->bankaccount)) {
         </td>
         <td><? print $_lib['form3']->checkbox(array('table' => 'accountline', 'field' => 'AutoResultAccount',     'pk' => $row->AccountLineID, 'value' => $row->AutoResultAccount, 'title' => 'Klikk her for &aring; velge resultatkonto automatisk fra reskontro')) ?></td>
         <td>
-            <?      
+            <?
             $resultconf['field']         = 'ResultAccountPlanID';
             $resultconf['value']         = $row->ResultAccountPlanID;
             $resultconf['type'][]        = 'hovedbok';
 	    display_kontoliste($resultconf);
 
             //print $_lib['form3']->accountplan_number_menu($resultconf);    // OLD
-            ?>                
+            ?>
         </td>
         <td>
-            <? 
+            <?
               if(!empty($resultaccountplan) && $resultaccountplan->EnableVAT) {
                   print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'Vat',        'pk' => $row->AccountLineID, 'value' => (int) $row->Vat,         'width' => 2, 'maxlength' => 3));
               }
             ?>
         </td>
         <td>
-            <? 
+            <?
             if(!empty($resultaccountplan) && $resultaccountplan->EnableQuantity) {
                 print $_lib['form3']->text(array('table' => 'accountline', 'field' => 'ResultQuantity',        'pk' => $row->AccountLineID, 'value' => $row->ResultQuantity,         'width' => 5, 'maxlength' => 255));
             }
@@ -598,7 +598,7 @@ if(is_array($bank->bankaccount)) {
     <?
         $sumin  += $row->AmountIn;
         $sumout += $row->AmountOut;
-        
+
         $tabindexH[1]++;
         $tabindexH[2]++;
         $tabindexH[3] += 2;
@@ -611,7 +611,7 @@ if(is_array($bank->bankaccount)) {
 
 if(is_array($bank->bankvoucher_this_hash)) {
     foreach($bank->bankvoucher_this_hash as $bankvoucher) {
-    
+
         if (!($i % 2)) { $sec_color = "r0"; } else { $sec_color = "r1"; };
         ?>
       <tr class="<? print $sec_color ?>">
