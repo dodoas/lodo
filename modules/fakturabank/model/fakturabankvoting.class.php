@@ -96,8 +96,12 @@ class lodo_fakturabank_fakturabankvoting {
         $_lib['message']->add($url);
 
         $voting = $this->retrieve_voting($page, $url);
+
+        $bank_statement = $voting->{"bank-statement"};
+
 		$validated_voting = $this->validate_voting($voting);
-		return $validated_voting;
+
+		return array($validated_voting, $bank_statement);
 	}
 
     private function retrieve_voting($page, $url) {
@@ -170,10 +174,15 @@ class lodo_fakturabank_fakturabankvoting {
         global $_lib;
 
         //# get transaction data from fakturabank
-        $voting = $this->get_balance_report($account_id, $period);
+        list($voting, $bank_statement) = $this->get_balance_report($account_id, $period);
         if (!is_array($voting) || empty($voting)) {
             return false;
         }
+
+        // Save bank statement if exists.
+        if ($bank_statement)
+            $this->save_bank_statement($bank_statement, $account_id, $period);
+
         $this->save_transactions($voting, $period);
 
         // I believe import_transactions_to_accounting need this data to work.
@@ -181,6 +190,44 @@ class lodo_fakturabank_fakturabankvoting {
 
         //# import fakturabank transaction records accountline table
         $this->import_transactions_to_accounting($account_id, $period);
+    }
+
+    public function save_bank_statement($bank_statement, $account_id, $period) {
+        global $_lib;
+        $result = $_lib['db']->db_query(sprintf("SELECT count(*) FROM accountextras WHERE AccountID = %d AND Period = '%s'",
+                                        $account_id, $period));
+
+        $count = $_lib['db']->fetch_row($result);
+
+        if ($count[0] == 0) {
+            $start_amount = $_lib['convert']->Amount($bank_statement->{"start-amount"});
+            $end_amount = $_lib['convert']->Amount($bank_statement->{"end-amount"});
+
+            if ($start_amount <= 0) {
+                $extra_entry_in = 0;
+                $extra_entry_out = abs($start_amount);
+            } else {
+                $extra_entry_in = abs($start_amount);
+                $extra_entry_out = 0;
+            }
+
+            if ($end_amount <= 0) {
+                $extra_last_in = 0;
+                $extra_last_out = abs($end_amount);
+            } else {
+                $extra_last_in = abs($end_amount);
+                $extra_last_out = 0;
+            }
+
+            $q = sprintf("INSERT INTO accountextras
+              (`AccountID`, `Period`, `BankEntryIn`, `BankEntryOut`, `BankLastIn`, `BankLastOut`, `JournalID`)
+            VALUES
+              ('%d', '%s', '%s', '%s', '%s', '%s', '%d');
+            ",
+                 $account_id, $period, $extra_entry_in, $extra_entry_out, $extra_last_in, $extra_last_out, 0);
+
+            $_lib['db']->db_query($q);
+        }
     }
 
     protected function period_to_startdate($period) {

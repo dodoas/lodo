@@ -41,13 +41,13 @@ class accounting {
     * @return
     */
     function __destruct() {
-        
+
         #If we had a hash with all periods we had been touching - we could loop over this hash and update all auto posteringer - just once - and never forget it.
         #$this->set_journal_motkonto(array('post'=> array('voucher_VoucherPeriod' => $voucher->VoucherPeriod)));
-        
+
         #We could also correct the balance in all journals involved when object dies.
         #$this->correct_journal_balance();
-        
+
     }
 
     /***************************************************************************
@@ -86,7 +86,7 @@ class accounting {
         $sequencefield['L']  = "VoucherSalaryNumber";
         $sequencefield['A']  = "VoucherAutoNumber";
         $sequencefield['O']  = "VoucherWeeklysaleNumber";
-        
+
         #print_r($voucersequence);
 
         if(isset($args['verify']))
@@ -104,7 +104,7 @@ class accounting {
                 }
                 $_lib['sess']->debug($select_journalid);
                 $row              = $_lib['storage']->get_row(array('query' => $select_journalid));
-  
+
                 if($row->JournalID)
                 {
                     if($args['reuse'])
@@ -172,10 +172,10 @@ class accounting {
 
         return array($args['JournalID'], $message);
     }
-    
+
     public function IsJournalIDInUse($JournalID, $VoucherType) {
         global $_lib;
-        
+
         $status = false;
         $select_journalid = "select JournalID from voucher where JournalID='" . $JournalID . "' and VoucherType='" . $VoucherType . "' and Active=1 limit 1";
         $_lib['sess']->debug($select_journalid);
@@ -184,7 +184,7 @@ class accounting {
         if($row->JournalID) {
             $status = true;
         }
-        
+
         return $status;
     }
 
@@ -227,7 +227,7 @@ class accounting {
         $accountplanCacheQuery = "SELECT * FROM accountplan WHERE Active=1";
         $accountplanCacheR = $_lib['db']->db_query($accountplanCacheQuery);
         while(($row = $_lib['db']->db_fetch_object($accountplanCacheR))) {
-            $this->accountplanH[ $row->AccountPlanID ] 
+            $this->accountplanH[ $row->AccountPlanID ]
                 = $row;
         }
     }
@@ -281,7 +281,7 @@ class accounting {
         else {
           $query_vat  = "select * from vat where Active=1 and AccountPlanID='".$args['AccountPlanID']."' and '$date' >= ValidFrom  and '$date' <= ValidTo limit 1";
         }
-        #if($this->debug) 
+        #if($this->debug)
         #print "$query_vat<br>\n";
 
         $vat = $_lib['storage']->get_row(array('query' => $query_vat));
@@ -301,7 +301,7 @@ class accounting {
     */
     private function get_vataccount_hash($args) {
         global $_lib;
-  
+
         if(isset($args['date'])) {
           $date = $args['date'];
         } else {
@@ -310,7 +310,7 @@ class accounting {
         $date = $_lib['sess']->get_session('LoginFormDate');
         $query_vat  = "select AccountPlanID, 1 from vat where Active=1 and VatID <= 62 and '$date' >= ValidFrom  and '$date' <= ValidTo order by VatID asc";
         $_lib['sess']->debug($query_vat);
-  
+
         #print "$query_vat<br>";
         return $_lib['storage']->get_hash(array('query' => $query_vat, 'key' => 'AccountPlanID', 'value' => 1));
     }
@@ -501,7 +501,7 @@ class accounting {
             } else {
                 unset($fields['voucher_VatID']);
             }
-    
+
             if(isset($VAT->Percent))
             {
                 $fields['voucher_Vat'] = $VAT->Percent;
@@ -584,11 +584,11 @@ class accounting {
             #print_r($fields);
             #print "Args<br>\n";
             #print_r($fields);
-            
-            
+
+
             $VoucherID = $_lib['storage']->db_new_hash($fields, $db_table);
             #print "<h2>Opprett linje: $VoucherID , ref: " . $fields['voucher_KID'] . "</h2>";
-            
+
             unset($fields['voucher_KID']);
             unset($fields['voucher_InvoiceID']);
             $this->voucher_to_hovedbok_auto($fields['voucher_AccountPlanID'], $fields, $VoucherID); #New. We update the hovedbok whenever we insert a new postering
@@ -709,7 +709,7 @@ class accounting {
     private function sub_AutoVat($args)
     {
         global $_lib;
-        
+
         #print "sub_AutoVat args[voucher]\n"; print_r($args['voucher']); print "\n###############################\n";
         $voucher = $args['voucher'];
 
@@ -787,14 +787,14 @@ class accounting {
     private function sub_mva_voucher($args)
     {
         global $_lib;
-        
+
         unset($args['post']['voucher_Quantity']); #Quantity should bever be updated on a vat line.
         unset($args['post']['voucher_ProjectID']); #Quantity should bever be updated on a vat line.
         unset($args['post']['voucher_DepartmentID']); #Quantity should bever be updated on a vat line.
 
         #print "Finnes VATID fra forrige postering her<br>\n";
         #print_r($args);
-        
+
         $_lib['sess']->debug('');
 
         if((!isset($args['post']['voucher_AmountIn']) || $args['post']['voucher_AmountIn'] <= 0) && (!isset($args['post']['voucher_AmountOut']) && $args['post']['voucher_AmountOut'] > 0))
@@ -996,7 +996,7 @@ class accounting {
                     $voucherAV = $this->get_voucher_object(array('voucherID'=>$voucherAV->AutomaticVatVoucherID));
 
                     if($voucherAV->DisableAutoVat == 1)
-                    {                        
+                    {
                         $this->delete_voucher_line($voucherAV->VoucherID, $args['voucher']->JournalID, $args['voucher']->VoucherType, 'sub_mva_voucher2');
                     }
                 }
@@ -1075,7 +1075,7 @@ class accounting {
         if(!$currency) {
           $currency = exchange::getLocalCurrency();
         }
-  
+
         $query_currency  = "select * from exchange where Currency='$currency'";
         $_lib['sess']->debug($query_currency);
         return $_lib['storage']->get_row(array('query' => $query_currency));
@@ -1092,11 +1092,11 @@ class accounting {
             $AccountPlanID = $AccountPlanID->AccountPlanID;
         }
         global $_lib;
-    
+
         $query_plan = "select * from accountplan where AccountPlanID = '$AccountPlanID'";
         $_lib['sess']->debug($query_plan);
         $reskontroO = $_lib['storage']->get_row(array('query' => $query_plan));
-    
+
         $query_plan = "select * from accountplan where Active=1 and EnableReskontro=1 and ReskontroAccountPlanType='" . $reskontroO->AccountPlanType . "'";
         $_lib['sess']->debug($query_plan);
         return $_lib['storage']->get_row(array('query' => $query_plan));
@@ -1119,16 +1119,16 @@ class accounting {
         {
           #print "Det er en reskontro: $AccountPlanID<br>\n";
           #This is a reskontro - find out which hovedbokskonto it belongs to
-  
+
           $query_voucher    = "select vat.Percent, V.VatID from voucher as V, vat where V.VoucherID='$VoucherID' and V.VatID=vat.VatID and V.Active=1";
           $_lib['sess']->debug($query_voucher);
           $voucher          = $_lib['storage']->get_row(array('query' => $query_voucher));
-  
+
           $hovedbok = $this->getHovedbokToAccount($AccountPlanID);
-  
+
           unset($field['voucher_Vat']);
           unset($field['voucher_VatID']);
-  
+
           if($hovedbok->AccountPlanID)
           {
 
@@ -1318,14 +1318,14 @@ class accounting {
             #Oppretter ny postering, da den ikke fantes fra f?r.
             #Get the fields we need, could be a more fancy hash map
             #Opprett voucher id, returner den ogsï¿½.
-  
+
             if(isset($args['JournalID']))
             {
                 $fieldsbalance['voucher_JournalID'] = $args['JournalID'];
             } else {
                 list($fieldsbalance['voucher_JournalID'], $message) = $this->get_next_available_journalid(array('available' => true, 'update' => true, 'type' => $VoucherType));
             }
-  
+
             $fieldsbalance['voucher_BalanceOk']           = 1;
             $fieldsbalance['voucher_VoucherType']         = $VoucherType;
             $fieldsbalance['voucher_VoucherDate']         = $post['voucher_VoucherPeriod'] . "-01";
@@ -1333,7 +1333,7 @@ class accounting {
             $fieldsbalance['voucher_Active']              = 1;
             $fieldsbalance['voucher_AddedByAutoBalance']  = 0;
             #$fieldsbalance['voucher_DisableAutoVat']     = 0; #mï¿½ jeg ha denne her?
-  
+
             #This period postering does not exist, insert it
             $fieldsbalance['voucher_AutomaticReason']     = $args['Reason'];
             $fieldsbalance['voucher_AccountPlanID']       = $args['AccountAuto'];
@@ -1359,32 +1359,32 @@ class accounting {
             $query_voucher  = "select* from voucher where VoucherID='" . $voucher_input->VoucherIDOld . "'";
             $_lib['sess']->debug($query_voucher);
             $old            = $_lib['storage']->get_row(array('query' => $query_voucher));
-    
+
             #Merk at det er viktig at dette kommer tidlig
             #Should probably update motkonto balanse and result for old and new period?
-    
+
             $fieldshead['voucher_VoucherDate']      = $voucher_input->VoucherDate;
             $fieldshead['voucher_VoucherPeriod']    = $voucher_input->VoucherPeriod;
             $fieldshead['voucher_UpdatedByPersonID']= $_lib['sess']->get_person('PersonID');
-    
+
             #$fieldshead['voucher_JournalID']        = $voucher_input->JournalID; #Eller skal dette v?re lov
-    
+
             $primarykeyhead['JournalID']    = $voucher_input->JournalID;
             $primarykeyhead['VoucherType']  = $voucher_input->VoucherType;
             $_lib['db']->db_update_hash($fieldshead, 'voucher', $primarykeyhead);
-            
+
             ########################################
-            #Oppdater balanse og resultat    
+            #Oppdater balanse og resultat
             $post = array();
             $post['voucher_VoucherPeriod'] = $voucher_input->VoucherPeriod;
             $this->set_journal_motkonto(array('post' => $post));
-            
+
             #Should probably look if accountplan / period is changed from befor - and update both the new and previous correctly
-            
+
             #########################################
             #Update line values
             $this->update_voucher_line_smart($voucher_input->request('voucher_new'), $voucher_input->VoucherIDOld, 'update_voucher_head');
-            
+
             ########################################
             #oppdatere motkontoer hvis vi har byttet periode
             if($old->VoucherPeriod != $voucher_input->VoucherPeriod){
@@ -1393,14 +1393,14 @@ class accounting {
                 $post['voucher_VoucherPeriod']      = $old->VoucherPeriod;
                 $post['voucher_VoucherDate']        = $old->VoucherDate;
                 $this->set_journal_motkonto(array('post'=>$post));
-        
+
                 $post = array();
                 $post['voucher_VoucherPeriod']      = $voucher_input->VoucherPeriod;
                 $post['voucher_VoucherDate']        = $voucher_input->VoucherDate;
                 $this->set_journal_motkonto(array('post'=>$post));
-        
+
                 $_lib['message']->add(array('message' => "Periode er byttet. Kalkuler forrige periode på nytt"));
-            }        
+            }
             ########################################
             #Ferdig
         } else {
@@ -1452,7 +1452,7 @@ class accounting {
 
                         $fields['voucher_AutoKID']           = 1; #Information updated automatically from KID information
                         $fields['voucher_AutomaticReason']   = "Automatisk fra KID: " . $voucher_input->KID;
-    
+
                         #print "Setting voucher values AccountPlanID:$KIDAccountPlanID,  AmountIn:$KIDAmountIn, AmountOut:$KIDAmountOut, KIDJournalID:$KIDJournalID, KIDVoucherID:$KIDVoucherID<br />";
                     }
                 }
@@ -1488,7 +1488,7 @@ class accounting {
             $_lib['message']->add(array('message' => 'Default prosjekt og avdeling satt pga bytte av kontoplan'));
             $fields['voucher_ProjectID']    = $accpl->ProjectID;    #Default project
             $fields['voucher_DepartmentID'] = $accpl->DepartmentID; #Default department
-    
+
             $this->delete_auto_vat($VoucherID, $fields['voucher_JournalID'], $fields['voucher_VoucherType']);
             $this->postmotpost->openPost($VoucherID);
         }
@@ -1500,34 +1500,34 @@ class accounting {
         }
 
         $this->update_voucher_line($fields, $VoucherID, $comment);
-        
+
         $this->update_vat_smart(array('VoucherID'=>$voucher->VoucherID, 'post'=> $fields, 'comment' => 'Called from: update_voucher_line_smart'));
     }
-    
+
     #This is the function that actually carries out the dirty work. Can not be called from outside this library
     #Will not check or update anything - it i the smart version that is for normal usage.
 	# $check_only_period is a period which is supplied for allowing a period check to go through without
-	# actually updating the voucherPeriod (i.e. without having voucherPeriod in fields array). 
-    # This was added as a quick solution to avoid unintended 
+	# actually updating the voucherPeriod (i.e. without having voucherPeriod in fields array).
+    # This was added as a quick solution to avoid unintended
 	# consequences when fixing
     private function update_voucher_line($fields, $VoucherID, $comment, $check_only_period = false) {
         global $_lib;
 
-        if ($this->is_valid_accountperiod($fields['voucher_VoucherPeriod'], $_lib['sess']->get_person('AccessLevel')) || 
+        if ($this->is_valid_accountperiod($fields['voucher_VoucherPeriod'], $_lib['sess']->get_person('AccessLevel')) ||
 			($check_only_period && $this->is_valid_accountperiod($check_only_period, $_lib['sess']->get_person('AccessLevel')))) {
-    
+
             unset($fields['voucher_VoucherID']); #If voucher id is set, we risk that we change it. This will prevent voucherid change it permanently.
             $fields['voucher_UpdatedByPersonID']  = $_lib['sess']->get_person('PersonID');
-    
+
             ########################################
             #Run the update in the database
             $primarykey['VoucherID'] = $VoucherID;
-    
+
             $this->set_accountplan_usednow($fields['voucher_AccountPlanID']);
-    
+
             #print_r($fields);
             #print "<br>\n<b>update_voucher_line - finished: $VoucherID AmountIn: " . $fields['voucher_AmountIn'] . ", AmountOut: " . $fields['voucher_AmountOut'] . ", Vat: " . $fields['voucher_Vat'] . ", VatID: " . $fields['voucher_VatID'] . "</b><br>\n";
-            $_lib['storage']->db_update_hash($fields, 'voucher', $primarykey);        
+            $_lib['storage']->db_update_hash($fields, 'voucher', $primarykey);
         } else {
             print "Ikke lov &aring; oppdatere en bilagslinje i en stengt periode: " . $fields['voucher_VoucherPeriod'] . " - Linjenummer: $VoucherID - kommentar: $comment<br>\n";
         }
@@ -1671,7 +1671,7 @@ class accounting {
                     $query       = "select VoucherID, AutomaticVatVoucherID from voucher where VoucherID=" . (int) $VoucherIDtmp . " and JournalID=" . (int) $fields['voucher_JournalID'] . " and VoucherType='" . $fields['voucher_VoucherType'] . "' and Active=1";
                     #print "vat inne i loop $query<br>\n";
                     $hovedbok    = $_lib['storage']->get_row(array('query' => $query));
-                   
+
                     #print "For sletting: VoucherID: $hovedbok->VoucherID, JournalID: " . $fields['voucher_JournalID'] . ", type: " . $fields['voucher_VoucherType'] . "<br>\n";
                     $this->delete_voucher_line_smart($hovedbok->VoucherID, $fields['voucher_JournalID'], $fields['voucher_VoucherType'], 'vat_line_update');
                 }
@@ -1679,7 +1679,7 @@ class accounting {
                     $VatID        = 10;  #Fritt Salg, ikke MVA
                     $vatreason    = 'Fritt salg ikke MVA';
                     $Vat          = '';
-                
+
                 } else {
                     $VatID = 40;  #Fritt kjï¿½p, ikke MVA
                     $Vat   = '';
@@ -1716,17 +1716,17 @@ class accounting {
     private function vat_input_control($AccountPlanID, $VatPercent, $VoucherDate) {
         global $_lib;
         $vat = new stdClass();
-        
+
         $_lib['sess']->debug("vat_input_control: AccountPlanID: $AccountPlanID, VatPercent: #$VatPercent#, VoucherDate: $VoucherDate");
         $accountplan = $this->get_accountplan_object($AccountPlanID); #Get all info about this account
-        
+
         if($accountplan->EnableVAT && $accountplan->EnableVATOverride && strlen($VatPercent)) {
             #If vat is enabled and override is ok and a percent is defined - check if the ovverride is valid
             #If vatpercent has a length - we assume it is manually assigned at will.
-            
+
             $vathash      = $this->get_vatpercenthash(array('accountVatID' => $accountplan->VatID, 'date' => $VoucherDate, 'decimal' => 2));
             $VatPercent   = $_lib['format']->Amount($VatPercent); #trenger ikke (int) forran her hvis vi sender med decimal i linjen over
-    
+
             $_lib['sess']->debug("VatOverride: OK, VatPercent: #" . $VatPercent . "# - finnes i hash?");
 
             if($vathash[$VatPercent])
@@ -1750,12 +1750,12 @@ class accounting {
               $vat->VatReason   = "Udefinert Salg VatID";
             }
         } elseif($accountplan->EnableVAT) {
-            
+
             $vat = $this->get_vataccount_object(array('VatID' => $accountplan->VatID, 'date' => $VoucherDate));
             $vat->VatReason   = "MVA sats plukket fra kontoplan";
 
         } else {
-            
+
             $vat->VatReason   = "Denne kontoen har ikke MVA definert";
         }
 
@@ -1793,7 +1793,7 @@ class accounting {
         } else {
           $query = "select Period from accountperiod where Period='$period' and Status=2 order by Period";
         }
-        
+
         #print "$query<br>\n";
         $row = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
 
@@ -1842,7 +1842,7 @@ class accounting {
     function get_first_open_accountingperiod() {
 
         $PeriodH = $this->get_open_accountperiod_hash();
-        return array_shift($PeriodH); # Get 
+        return array_shift($PeriodH); # Get
     }
 
     /***************************************************************************
@@ -1853,7 +1853,7 @@ class accounting {
     function get_last_open_accountingperiod() {
 
         $PeriodH = $this->get_open_accountperiod_hash();
-        return array_pop($PeriodH); # Get 
+        return array_pop($PeriodH); # Get
     }
 
     /***************************************************************************
@@ -1987,9 +1987,9 @@ class accounting {
 
             if($this->is_valid_accountperiod($voucher->VoucherPeriod, $_lib['sess']->get_person('AccessLevel'))) {
                 #print "Sletter lonns bilag<br>\n";
-    
+
                 $this->postmotpost->openPostJournal($JournalID, $VoucherType);
-        
+
                 $primarykey['JournalID']     = $JournalID;
                 $primarykey['VoucherType']   = $VoucherType;
 
@@ -2002,9 +2002,9 @@ class accounting {
                 $_lib['message']->add(array('message' => 'Prøver å slette en periode som er stengt. Rapporter denne feilen og hvordan den oppstod'));
             }
         } else {
-            #$_lib['message']->add(array('message' => 'Her var det ikke noe å slette'));        
+            #$_lib['message']->add(array('message' => 'Her var det ikke noe å slette'));
         }
-        
+
     }
 
     /***************************************************************************
@@ -2041,21 +2041,21 @@ class accounting {
     */
     private function delete_voucher_line($VoucherID, $JournalID, $VoucherType, $comment) {
         global $_lib;
-        
+
         #Den må finne periode selv, og se om den er åpen for det spesifiserte bilaget
-        #Select for å finne perioden til spesifiserte data        
+        #Select for å finne perioden til spesifiserte data
         $voucher = $this->get_voucher_object(array('voucherID' => $VoucherID));
-        
+
         #print_r($voucher);
         $_lib['sess']->debug("Sletter linje: Periode: #" . $voucher->VoucherPeriod . "# strlen(" . strlen($voucher->VoucherPeriod) . "), VoucherID: $VoucherID, comment: $comment");
 
         if($voucher && strlen($voucher->VoucherPeriod) == 7) {
             if($this->is_valid_accountperiod($voucher->VoucherPeriod, $_lib['sess']->get_person('AccessLevel'))) {
-            
+
                 $primarykey['VoucherID']    = $VoucherID;
                 $primarykey['VoucherType']  = $VoucherType;
                 $primarykey['JournalID']    = $JournalID;
-                
+
                 #print "Sletter VoucherID: $VoucherID<br>\n";
                 #debug_print_backtrace();
                 #$_lib['storage']->db_delete_hash('voucher', $primarykey);
@@ -2066,7 +2066,7 @@ class accounting {
             }
         } else {
             #print "Sletter ikke1 : VoucherID: $VoucherID, Periode: $voucher->VoucherPeriod<br>\n";
-            #$_lib['message']->add(array('message' => 'Her var det ikke noe å slette'));        
+            #$_lib['message']->add(array('message' => 'Her var det ikke noe å slette'));
         }
     }
 
@@ -2082,26 +2082,26 @@ class accounting {
             $query = "select VoucherID from voucher where AutomaticFromVoucherID=" . (int) $VoucherID . " and JournalID=" . (int) $JournalID . " and VoucherType='" . $VoucherType . "' and Active=1";
             $_lib['sess']->debug($query);
             $hovedbok = $_lib['storage']->get_row(array('query' => $query));
-    
+
             if(isset($hovedbok->VoucherID) and strlen($hovedbok->VoucherID)>0)
             {
                 $this->delete_voucher_line_smart($hovedbok->VoucherID, $JournalID, $VoucherType, 'delete_autofrom_line');
             }
         } else {
-            $_lib['sess']->debug("Missing: VoucherID: $VoucherID or JournalID: $JournalID or VoucherType: $VoucherType"); 
+            $_lib['sess']->debug("Missing: VoucherID: $VoucherID or JournalID: $JournalID or VoucherType: $VoucherType");
         }
     }
 
     function get_department_object($CompanyDepartmentID) {
         global $_lib;
-        
+
         $query="select * from companydepartment where CompanyDepartmentID=" . (int) $CompanyDepartmentID;
         return $_lib['storage']->get_row(array('query' => $query));
     }
 
     function get_project_object($ProjectID) {
         global $_lib;
-        
+
         $query="select * from project where ProjectID=" . (int) $ProjectID;
         return $_lib['storage']->get_row(array('query' => $query));
     }
@@ -2111,7 +2111,7 @@ class accounting {
 
         $query = "select * from accountline where AccountLineID=" . (int) $AccountLineID;
         $row   = $_lib['storage']->get_row(array('query' => $query));
-        
+
         if(strlen($row->KID) == 0) {
             #Only update if empty, not overwrite
             $dataH = array(
@@ -2165,7 +2165,7 @@ class accounting {
     public function checkJournalID($VoucherType, $JournalID) {
         global $_lib;
 
-        $q = sprintf("SELECT JournalID FROM voucher 
+        $q = sprintf("SELECT JournalID FROM voucher
                       WHERE VoucherType = '%s' AND JournalID = '%s' AND Active = 1
                       LIMIT 1",
                      $VoucherType, $JournalID);
@@ -2181,7 +2181,7 @@ class accounting {
 		if (!is_numeric($JournalID)) {
 			return false;
 		}
-		
+
 		if (!is_numeric($AccountPlanID)) {
 			return false;
 		}
@@ -2189,18 +2189,18 @@ class accounting {
 		if (!is_numeric($InvoiceID)) {
 			return false;
 		}
-		
+
 		if ($VoucherType == "" || strlen($VoucherType) != 1) {
 			return false;
 		}
-		
+
 
 		global $_lib;
         $query = "select COUNT(*) AS cnt from voucher as v
-                where v.InvoiceID='$InvoiceID' AND 
-                v.InvoiceID != '' AND 
-                v.VoucherType='$VoucherType' AND 
-                v.JournalID != '$JournalID' AND 
+                where v.InvoiceID='$InvoiceID' AND
+                v.InvoiceID != '' AND
+                v.VoucherType='$VoucherType' AND
+                v.JournalID != '$JournalID' AND
                 v.AccountPlanID='$AccountPlanID'";
         #print "$query<br>\n";
         $row = $_lib['storage']->get_row(array('query' => $query));
