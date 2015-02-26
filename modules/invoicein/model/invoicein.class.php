@@ -341,8 +341,19 @@ class logic_invoicein_invoicein implements Iterator {
                         if($line->Vat > 0) {
                             //#Add VAT to the price - since it is ex VAT
                             //#print "$line->UnitCustPrice * (($line->Vat/100) +1)";
-                            $TotalPrice = round(($TotalPrice * (($line->Vat/100) +1)), 2);
-                            $TotalForeignPrice = round(($TotalForeignPrice * (($line->Vat/100) +1)), 2);
+
+                            // $TotalPrice = round(($TotalPrice * (($line->Vat/100) +1)), 2);
+                            // $TotalForeignPrice = round(($TotalForeignPrice * (($line->Vat/100) +1)), 2);
+                            // We already have tax amount given to us by fakturabank.
+                            // So why recalculate, and possibly make 0.01 error in recalculation?
+                            // Just add them up and get the correct amount.
+                            if ($VoucherH['voucher_ForeignCurrencyID'] != '') {
+                              $TotalForeignPrice = round(($TotalForeignPrice + $line->TaxAmount), 2);
+                              $TotalPrice = round(($TotalPrice + exchange::convertToLocal($VoucherH['voucher_ForeignCurrencyID'], $line->TaxAmount)), 2);
+                            }
+                            else {
+                              $TotalPrice = round(($TotalPrice + $line->TaxAmount), 2);
+                            }
                             $invoice_line_sum += $TotalPrice;
                         } else {
                             $invoice_line_sum += $TotalPrice;
