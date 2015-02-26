@@ -22,7 +22,7 @@ function toAmountString(num, decimal_places) {
   // if not defined, set number of decimal places to default value
   decimal_places = (typeof decimal_places !== 'undefined')? decimal_places : 2;
   var precision = Math.pow(10, decimal_places);
-  var decimal = String(Math.floor(num * precision - Math.floor(num) * precision));
+  var decimal = String(Math.floor(Math.round(num * precision) - Math.floor(num) * precision));
   while (decimal.length < decimal_places) decimal = "0" + decimal;
   num = Math.floor(num);
   var s = "," + decimal;
@@ -51,34 +51,15 @@ function toAmountString(num, decimal_places) {
  * // variable amount is now 10333.01
  */
 function toNumber(str) {
-  var arr = str.split(" ");
-  var s = "";
-  var i = 0;
-  for (i = 0; i < arr.length; i++) {
-    s = s + arr[i];
-  }
-  arr = s.split(",");
-  s = "";
-  for (i = 0; i < arr.length; i++) {
-    if (i != 0 && i != arr.length) s = s + "." + arr[i];
-    else s = s + arr[i];
-  }
-  return Number(s);
+  str = str.replace( new RegExp(" ", "g"), "");
+  str = str.replace( new RegExp(",", "g"), ".");
+  return Number(str);
 }
 
 function place_cursor(formname, fromfieldname) {
   /* document.getElementById('voucher.VoucherDate').focus(); */
   /* document.forms[document.forms.length-4].elements['voucher.VoucherDate'].focus(); */
   document.forms[formname].elements[fromfieldname].focus();
-}
-
-// TODO (mladjo2505)
-// Empty function, we should look if it is called anywhere, if not remove it.
-function update_voucher(location)
-{
-    //(location, type, JournalID, VoucherID, VoucherPeriod, VoucherType, VoucherDate, AccountPlanID, OldAccountPlanID, AmountIn, AmountOut, DueDate, KID, InvoiceID, DescriptionID, Description)
-    //alert(location);
-    //window.location="'https://www.lodo.no/" + location + "'";
 }
 
 function update_reference(element, formname, fromfieldname, tofieldname){
@@ -268,8 +249,6 @@ function onCurrencyChange(selObj, voucher_id) {
 
     currency_rate_input.value = toAmountString(rate, 4);
     onCurrencyRateChange(currency_rate_input);
-    // next line does nothing, to be removed
-    // currency_rate_input.display = "none";
 }
 
 /*
@@ -285,10 +264,6 @@ function onCurrencyRateChange(element) {
     for (i = 1; i < valuta_ids.length; i++) {
       valuta_ids[i].value = valuta_id;
       valuta_rates[i].value = valuta_rate;
-    }
-    var valuta_ids = document.getElementsByName("voucher.ForeignCurrencyIDSelection");
-    for (i = 1; i < valuta_ids.length; i++) {
-      valuta_ids[i].value = valuta_id;
     }
     valuta_rates[0].value = toAmountString(toNumber(valuta_rates[0].value), 4);
 }
@@ -316,8 +291,6 @@ function journalCurrencyChange(btn, action_url)
 
         if (wrapper_children[i].name == "voucher.ForeignCurrencyID") {
             currency_id_input = wrapper_children[i];
-        } else if (wrapper_children[i].name == "voucher.ForeignCurrencyIDSelection") {
-            currency_id_selected_input = wrapper_children[i];
         } else if (wrapper_children[i].name == "voucher.ForeignConvRate") {
             currency_rate_input = wrapper_children[i];
         }
@@ -333,92 +306,9 @@ function journalCurrencyChange(btn, action_url)
         return false;
     }
 
-    currency_id_selected_input.value = currency;
-/*
-    // TODO (mladjo2505)
-    // not needed, to be removed
-    var currencyform = document.createElement("form");
-    currencyform.method = "post";
-    currencyform.action = action_url;
-    currencyform.appendChild(wrapper.cloneNode(true));
-    //currencyform.style.display='none';
-    document.body.appendChild(currencyform);
-    //onCurrencyChange(currencyform.elements[0]);
-    var voucherIdInput = $(".lodo_data input[name=voucher.JournalID]");
-    voucherIdInput.clone().appendTo(currencyform);
-    var voucherTypeInput = document.createElement("input");
-    voucherTypeInput.setAttribute("type", "hidden");
-    voucherTypeInput.setAttribute("name", "voucher_VoucherType");
-    voucherTypeInput.setAttribute("value", $("select[name=voucher.VoucherType]").val());
-    currencyform.appendChild(voucherTypeInput);
-
-    var voucherTypeInput = document.createElement("input");
-    voucherTypeInput.setAttribute("type", "hidden");
-    voucherTypeInput.setAttribute("name", "action_postmotpost_save_currency");
-    voucherTypeInput.setAttribute("value", "1");
-    form.appendChild(voucherTypeInput);
- */
+    currency_id_input.value = currency;
     var form = document.getElementsByName('voucher')[0];
     form.submit();
-}
-
-
- // TODO (lnluksa)
- // REMOVE THIS FUNCTION
- // We don't use it anymore
-function voucherCurrencyChange(btn, action_url)
-{
-    var wrapper = btn.parentNode;
-
-    var wrapper_children = wrapper.childNodes;
-
-    var currency_id_input = null;
-    var currency_id_selected_input = null;
-    var currency_amount_input = null;
-    var currency_rate_input = null;
-
-    for(var i = 0; i < wrapper_children.length; i++)
-    {
-        if (typeof(wrapper_children[i].name) == 'undefined') {
-            continue;
-        }
-
-        if (wrapper_children[i].name == "voucher.ForeignCurrencyID") {
-            currency_id_input = wrapper_children[i];
-        } else if (wrapper_children[i].name == "voucher.ForeignCurrencyIDSelection") {
-            currency_id_selected_input = wrapper_children[i];
-        } else if (wrapper_children[i].name == "voucher.ForeignAmount") {
-            currency_amount_input = wrapper_children[i];
-        } else if (wrapper_children[i].name == "voucher.ForeignConvRate") {
-            currency_rate_input = wrapper_children[i];
-        }
-    }
-    var currency = currency_id_input[currency_id_input.selectedIndex].value;
-    if (currency == "") {
-	    alert("Velg en valuta");
-	    return false;
-    }
-
-    if (currency_amount_input.value == 0) {
-	    alert("Velg en verdi");
-	    return false;
-    }
-
-    if (currency_rate_input.value == 0) {
-	    alert("Velg en vekslingsrate");
-	    return false;
-    }
-
-    currency_id_selected_input.value = currency;
-
-    var currencyform = document.createElement("form");
-    currencyform.method = "post";
-    currencyform.action = action_url;
-    currencyform.appendChild(wrapper.cloneNode(true));
-    currencyform.style.display='none';
-    document.body.appendChild(currencyform);
-    currencyform.submit();
-    return false;
 }
 
 function disableEnterKey(e)

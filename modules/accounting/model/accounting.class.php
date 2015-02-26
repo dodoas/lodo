@@ -211,7 +211,7 @@ class accounting {
         foreach($voucherH as $voucher) {
             if(!isset($hovedbokmedreskontroH[$voucher['AccountPlanID']])) {
                 $sum += ($voucher['AmountIn'] - $voucher['AmountOut']);
-                $fsum += ($voucher['AmountIn'] > 0)?$voucher['ForeignAmount']:(($voucher['AmountOut'] > 0)?-$voucher['ForeignAmount']:0);
+                $fsum += ($voucher['AmountIn'] > 0) ? $voucher['ForeignAmount'] : (($voucher['AmountOut'] > 0) ? -$voucher['ForeignAmount'] : 0);
                 #print "num " . $voucher['VoucherID'] . "  * $sum += (" . $voucher['AmountIn'] . ' - ' . $voucher['AmountOut'] . ")<br>\n";
 
             }
@@ -819,15 +819,6 @@ class accounting {
                 }
                 $fields = $args['fields'];
 
-                # unset foreign currency fields for vat lines, as we only want them in header line
-                $delete_fields = array('voucher_ForeignCurrencyID',
-                                       'voucher_ForeignAmount',
-                                       'voucher_ForeignConvRate');
-
-                foreach ($delete_fields as $df) {
-                    if (isset($fields[$df])) unset($fields[$df]);
-                }
-
                 $vat = $this->get_vataccount_object(array('VatID'=>$args['post']['voucher_VatID'], 'date' => $args['voucher']->VoucherDate));
                 $fields['voucher_AccountPlanID']  = $vat->AccountPlanID;
                 $_lib['sess']->debug("Kontoplan: $vat->AccountPlanID fra VatID" . $args['post']['voucher_VatID'] . "dato: " . $args['voucher']->VoucherDate);
@@ -839,6 +830,14 @@ class accounting {
                 elseif($fields['voucher_Vat'] > 0)
                     $percent = $fields['voucher_Vat'];
 
+                if(isset($args['post']['voucher_ForeignCurrencyID']) and $args['post']['voucher_ForeignCurrencyID'] != '')
+                {
+                  $fields['voucher_ForeignCurrencyID'] = $args['post']['voucher_ForeignCurrencyID'];
+                }
+                if(isset($args['post']['voucher_ForeignConvRate']) and $args['post']['voucher_ForeignConvRate'] > 0)
+                {
+                  $fields['voucher_ForeignConvRate'] = $args['post']['voucher_ForeignConvRate'];
+                }
                 if(isset($args['post']['voucher_AmountIn']) and $args['post']['voucher_AmountIn'] > 0)
                 {
                   $fields['voucher_AmountIn'] = $_lib['convert']->Amount(($args['post']['voucher_AmountIn'] / (100 + $percent)) * $percent);
@@ -848,6 +847,11 @@ class accounting {
                 {
                   $fields['voucher_AmountOut'] = $_lib['convert']->Amount(($args['post']['voucher_AmountOut'] / (100 + $percent))  * $percent);
                   $fields['voucher_AmountIn']  = 0;
+                }
+                if ($fields['voucher_ForeignCurrencyID'] != '') {
+                  $fields['voucher_ForeignAmount'] = $_lib['convert']->Amount(($args['post']['voucher_ForeignAmount'] / (100 + $percent))  * $percent);
+                  if ($fields['voucher_AmountIn'] > 0) $fields['voucher_AmountIn'] = $_lib['convert']->Amount(exchange::convertToLocal($fields['voucher_ForeignCurrencyID'], $fields['voucher_ForeignAmount']));
+                  if ($fields['voucher_AmountOut'] > 0) $fields['voucher_AmountOut'] = $_lib['convert']->Amount(exchange::convertToLocal($fields['voucher_ForeignCurrencyID'], $fields['voucher_ForeignAmount']));
                 }
 
                 $fields['voucher_Description']        = $args['voucher']->VatID . ':' . $percent . '%';
@@ -1505,8 +1509,6 @@ class accounting {
 
         // TODO (mladjo2505)
         // Investigate if we should change $voucher->VoucherID to $VoucherID.
-        // Possibly the voucherID we send to this function is not correct.
-        // This only raises an error when the automatic balanse line that has no kontoplan is to be removed, but everything is updated correctly.
         $this->update_vat_smart(array('VoucherID'=>$voucher->VoucherID, 'post'=> $fields, 'comment' => 'Called from: update_voucher_line_smart'));
     }
 

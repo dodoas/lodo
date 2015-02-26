@@ -210,35 +210,35 @@ class exchange {
 		$data = $_lib['input']->get_data();
         $escaped_rate = $_lib['db']->db_escape($rate);
         $escaped_e_rate = $_lib['db']->db_escape($e_rate);
-    // update whole journal's currency and recalculate amounts for new currency rate
-		$query_update = " UPDATE voucher SET ".
-            "  ForeignCurrencyID='". $_lib['db']->db_escape($currency_id) . "'" .
-            //", ForeignAmount=IF(AmountIn > 0, AmountIn / '"     . $escaped_e_rate . "', AmountOut / '"     . $escaped_e_rate . "')" .
-            ", AmountIn=IF(AmountIn > 0 and ForeignAmount <> 0, ForeignAmount * "     . $escaped_e_rate . ", AmountIn)" .
-            ", AmountOut=IF(AmountOut > 0 and ForeignAmount <> 0, ForeignAmount * "     . $escaped_e_rate . ", AmountOut)" .
-            # TODO (lnluksa)
-            # Think if we should populate these fields
-            # We are breaking DB consistence but it is just extra info. May be used in future.
-            // ", ForeignAmountIn=(AmountIn  / '"  . $escaped_rate . "')" .
-            // ", ForeignAmountOut=(AmountOut  / '" . $escaped_rate . "')" .
-            ", ForeignConvRate="   . "'" . $escaped_rate . "'" .
-						" WHERE JournalID = '" . $journal_id . "'".
-        " AND VoucherType = '" . $voucher_type . "'";
-		$_lib['db']->db_update($query_update);
-    // used when we add valuta to a journal that previously had only domestic amounts
-    // so, for convinience, we calculate the foreign amounts(using domestic amounts) with the chosen exchange rate
-		$query_update = " UPDATE voucher SET ".
-            "  ForeignAmount=IF(AmountIn > 0, AmountIn / " . $escaped_e_rate . ", IF(AmountOut > 0, AmountOut / " . $escaped_e_rate . ", 0))" .
-						" WHERE JournalID = '" . $journal_id . "'".
-            " AND VoucherType = '" . $voucher_type . "'".
-            " AND (ForeignAmount = 0 OR ISNULL(ForeignAmount))";
-		$_lib['db']->db_update($query_update);
+
+        // Think if we should populate ForeignAmountIn and ForeignAmountOut fields. In current logic only ForeignAmount field is used.
+        // Saving to those fields may be just extra info, but we may consider it in the future.
+
+        // used when we add valuta to a journal that previously had only domestic amounts
+        // so, for convinience, we calculate the foreign amounts(using domestic amounts) with the chosen exchange rate
+		    $query_update = " UPDATE voucher SET ".
+                        "  ForeignAmount=IF(AmountIn > 0, AmountIn / " . $escaped_e_rate . ", IF(AmountOut > 0, AmountOut / " . $escaped_e_rate . ", 0))" .
+						            " WHERE JournalID = '" . $journal_id . "'".
+                        " AND VoucherType = '" . $voucher_type . "'".
+                        " AND (ForeignAmount = 0 OR ISNULL(ForeignAmount))";
+        $number_of_lines_changed = $_lib['db']->db_update($query_update);
+
+        // update whole journal's currency and recalculate amounts for new currency rate
+		    $query_update = " UPDATE voucher SET ".
+                        "  ForeignCurrencyID='". $_lib['db']->db_escape($currency_id) . "'" .
+                        ", AmountIn=IF(AmountIn > 0 and (ForeignAmount <> 0 OR NOT ISNULL(ForeignAmount)), ForeignAmount * "     . $escaped_e_rate . ", AmountIn)" .
+                        ", AmountOut=IF(AmountOut > 0 and (ForeignAmount <> 0 OR NOT ISNULL(ForeignAmount)), ForeignAmount * "     . $escaped_e_rate . ", AmountOut)" .
+                        ", ForeignConvRate="   . "'" . $escaped_rate . "'" .
+						            " WHERE JournalID = '" . $journal_id . "'".
+                        " AND VoucherType = '" . $voucher_type . "'";
+        // update only if no lines were affected by previous query
+        if ($number_of_lines_changed == 0) $_lib['db']->db_update($query_update);
 	}
 
 	/**
 	 * @return string Conversion rate
 	 */
-	function updateVoucherForeignCurrency($use_selection_var = true) {
+	function updateVoucherForeignCurrency() {
 		global $_lib;
 
         if (empty($_POST['voucher_VoucherID']) ||
@@ -248,11 +248,7 @@ class exchange {
 
         $voucher_id = $_POST['voucher_VoucherID'];
 
-        if ($use_selection_var) {
-            $currency_id_key = 'voucher_ForeignCurrencyIDSelection';
-        } else {
-            $currency_id_key = 'voucher_ForeignCurrencyID';
-        }
+        $currency_id_key = 'voucher_ForeignCurrencyID';
         $amount_key = 'voucher_ForeignAmount';
         $rate_key = 'voucher_ForeignConvRate';
 
@@ -330,7 +326,6 @@ class exchange {
         $ch_curr .= ' <a href="#" onclick="exchangeFindRate(this)" style="display: inline">finn kurs </a>';
         $ch_curr .= '<input class="number" type="hidden" name="voucher.VoucherID" value="'. $voucher_id .'" />';
         $ch_curr .= '<input type="hidden" name="action_postmotpost_save_currency" value="1" />';
-        $ch_curr .= '<input class="number" type="hidden" name="voucher.ForeignCurrencyIDSelection" value="" />';
         $has_save_button = true;
         if ($has_save_button) {
             $ch_curr .= '<input type="button" name="action_postmotpost_save_currency_button" onclick="return journalCurrencyChange(this, \'' . $action_url . '\'); " value="Lagre" />';
@@ -370,75 +365,6 @@ class exchange {
 
 		return $ch_curr;
 	}
-
-  // TODO (mladjo2505)
-  // Remove commented out code below.
-	/**
-	 * @param  int    $voucher_id The voucher id
-	 * @param  float  $voucher_foreign_amount The amount in foreign currency
-	 * @param  float  $voucher_foreign_rate The conversion rate based in 100 of local currency
-	 * @param  String $voucher_foreign_currency The currency ISO code
-	 * @param  String $action_url The form action attribute
-	 * @return string HTML form inside a div block. Div is initially hidden (display:none)
-	 */
-
-    /*
-	function getFormVoucherForeignCurrency($voucher_id, $voucher_foreign_amount, $voucher_foreign_rate, $voucher_foreign_currency, $voucher_foreign_currency_direction, $action_url='', $has_save_button = true, $has_direction_radio = true) {
-        if ($voucher_id == "") {
-            $voucher_id_text = "newvoucher"; // set to new to make js work
-        } else {
-            $voucher_id_text = "";
-        }
-
-        if ($action_url == '')
-			$action_url = 'lodo.php?'. $_SERVER['QUERY_STRING'];
-		$currencies = self::getActiveCurrencies();
-
-        if (empty($currencies)) {
-            return "";
-        }
-
-        $select_options = '<option value="">Standard</option>';
-        foreach ($currencies as $currency) {
-            if ($voucher_foreign_currency && $currency->CurrencyISO == $voucher_foreign_currency)
-                $select_options .= '<option value="'. $currency->CurrencyISO .'" selected="selected" onchange="onCurrencyChange(this, \''. $voucher_id_text . '\')" onclick="onCurrencyChange(this, \''. $voucher_id_text . '\')">'. $currency->CurrencyISO .'</option>';
-            else
-                $select_options .= '<option value="'. $currency->CurrencyISO .'" onchange="onCurrencyChange(this, \''. $voucher_id_text . '\')" onclick="onCurrencyChange(this, \''. $voucher_id_text . '\')">'. $currency->CurrencyISO .'</option>';
-        }
-
-        // we create one currency array for each voucher to allow for specific rates to be tied to specific accountplans or dates (which might be needed in the future) in reports
-        $currency_js = '<script type="text/javascript">';
-        // $currency_js .= 'if (!window.currency_rates) var currency_rates = new Object();';
-
-        $currency_js .= 'window.currency_rates[\''. $voucher_id_text . '\'] = new Object();';
-        foreach ($currencies as $currency) {
-            $currency_js .= 'window.currency_rates[\''. $voucher_id_text . '\'][\'' . $currency->CurrencyISO . '\'] = ' . $currency->Amount . ';';
-        }
-        $currency_js .= '</script>';
-        $ch_curr .= $currency_js;
-
-        $block_return = 'onKeyPress="return disableEnterKey(event)"';
-        $ch_curr  .= '<div style="display:none;" class="vouchercurrencywrapper" id="voucher_currency_div_'. $voucher_id_text .'">';
-        $ch_curr .= 'Valuta: <select name="voucher.ForeignCurrencyID" ' . $block_return . '>'. $select_options .'"</select><br />';
-        $ch_curr .= 'Verdi: <input class="number" type="text" name="voucher.ForeignAmount" size="10" value="'. $voucher_foreign_amount .'" ' . $block_return . ' style="margin-bottom: 3px;"/>';
-        if ($has_direction_radio) {
-            $ch_curr .= '<input type="radio" name="voucher_ForeignCurrencyDirection" value="in"' . ($voucher_foreign_currency_direction == "in" ? " checked" : "") . '>Inn';
-            $ch_curr .= '<input type="radio" name="voucher_ForeignCurrencyDirection" value="out"' . ($voucher_foreign_currency_direction == "out" ? " checked" : "") . '>Ut';
-        }
-        $ch_curr .= '<br />';
-        $ch_curr .= 'Rate: <input class="number" type="text" name="voucher.ForeignConvRate" size="10" value="'. $voucher_foreign_rate .'" ' . $block_return . ' /> =100' . self::getLocalCurrency();
-        $ch_curr .= ' <a href="#" onclick="exchangeFindRate(this)" style="display: inline">finn kurs </a><br />';
-        $ch_curr .= '<input class="number" type="hidden" name="voucher.VoucherID" value="'. $voucher_id .'" />';
-        $ch_curr .= '<input class="number" type="hidden" name="voucher.ForeignCurrencyIDSelection" value="" />';
-        if ($has_save_button) {
-            $ch_curr .= '<input type="hidden" name="action_postmotpost_save_currency" value="1" />';
-            $ch_curr .= '<input type="button" name="action_postmotpost_save_currency_button" onclick="return voucherCurrencyChange(this, \'' . $action_url . '\'); " value="Lagre" />';
-        }
-        $ch_curr .= '</div>';
-
-		return $ch_curr;
-	}
-*/
 
 	/**
 	 * @param  int    $voucher_id The voucher id

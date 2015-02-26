@@ -1262,7 +1262,7 @@ class lodo_fakturabank_fakturabank {
                         $datalineH['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
                         $datalineH['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');
                         $datalineH['UpdatedByPersonID'] = $_lib['sess']->get_person('PersonID');
-    
+  
                         $_lib['storage']->store_record(array('data' => $datalineH, 'table' => 'invoiceinline', 'debug' => false));
                     }
                 }
