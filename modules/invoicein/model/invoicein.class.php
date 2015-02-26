@@ -323,7 +323,6 @@ class logic_invoicein_invoicein implements Iterator {
                     $num_lines = count($lines);
                     
                     $invoice_line_sum = 0;
-                    $invoice_line_fsum = 0;
 
                     for ($i = 0; $i < $num_lines; $i++) {
                         $line = $lines[$i];
@@ -342,13 +341,11 @@ class logic_invoicein_invoicein implements Iterator {
                         if($line->Vat > 0) {
                             //#Add VAT to the price - since it is ex VAT
                             //#print "$line->UnitCustPrice * (($line->Vat/100) +1)";
-                            $TotalPrice = $TotalPrice * (($line->Vat/100) +1);
-                            $TotalForeignPrice = round(($TotalForeignPrice + $line->TaxAmount),2);
+                            $TotalPrice = round(($TotalPrice * (($line->Vat/100) +1)), 2);
+                            $TotalForeignPrice = round(($TotalForeignPrice * (($line->Vat/100) +1)), 2);
                             $invoice_line_sum += $TotalPrice;
-                            $invoice_line_fsum += $TotaForeignPrice;
                         } else {
                             $invoice_line_sum += $TotalPrice;
-                            $invoice_line_fsum += $TotalForeignPrice;
                         }
                         
                         if ($last_line) {
