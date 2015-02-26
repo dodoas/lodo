@@ -799,6 +799,9 @@ class accounting {
 
         $_lib['sess']->debug('');
 
+        if(isset($args['post']['voucher_AmountIn']) && $args['post']['voucher_AmountIn'] == 0 && isset($args['post']['voucher_AmountOut']) && $args['post']['voucher_AmountOut'] == 0)
+            return;
+
         if((!isset($args['post']['voucher_AmountIn']) || $args['post']['voucher_AmountIn'] <= 0) && (!isset($args['post']['voucher_AmountOut']) && $args['post']['voucher_AmountOut'] > 0))
             return;
 

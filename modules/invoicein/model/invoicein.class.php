@@ -335,8 +335,8 @@ class logic_invoicein_invoicein implements Iterator {
                         $VoucherH['voucher_Description']    = '';
                         $VoucherH['voucher_AccountPlanID']  = 0;
                         
-                        $TotalPrice = $line->QuantityDelivered * $line->UnitCustPrice;
-                        $TotalForeignPrice = $line->ForeignAmount;
+                        $TotalPrice = round(($line->QuantityDelivered * $line->UnitCustPrice), 2);
+                        $TotalForeignPrice = round($line->ForeignAmount, 2);
                         
                         if($line->Vat > 0) {
                             //#Add VAT to the price - since it is ex VAT
@@ -571,6 +571,7 @@ class logic_invoicein_invoicein implements Iterator {
                     
                     $this->accounting->set_journal_motkonto(array('post' => $VoucherH, 'VoucherType' => $VoucherH['voucher_VoucherType']));
                     $this->accounting->correct_journal_balance($VoucherH, $VoucherH['voucher_JournalID'], $VoucherH['voucher_VoucherType']);
+                    $this->accounting->delete_credit_debit_zero_lines($VoucherH['voucher_JournalID'], $VoucherH['voucher_VoucherType']);
 
                     //####################################################################################
                     //#Update invoicein to journaled
