@@ -76,7 +76,14 @@ class salaryreport
         
         $this->_reportHash['head']['000']['sumLineCode'] = $result["SkyldigFeriepengeGrunnlag"];
         
-        $this->_query = "select sum(sl.AmountThisPeriod) as sumLineCode, sl.SalaryCode, sl.SalaryText, sum(sl.NumberInPeriod) as NumberInPeriod, sl.LineNumber from salary as s, salaryline as sl where s.AccountPlanID='$this->_personID' and s.SalaryID=sl.SalaryID and substring(s.Period, 1, 4)='$this->_year' and sl.SalaryCode is not null and sl.SalaryCode != '' group by sl.LineNumber";
+        $this->_query = "select sum(AmountThisPeriod) as sumLineCode, SalaryCode, SalaryText, sum(NumberInPeriod) as NumberInPeriod, LineNumber
+                         from (
+                            select sl.AmountThisPeriod, sl.SalaryCode, sl.SalaryText, sl.NumberInPeriod, sl.LineNumber
+                            from salary as s, salaryline as sl
+                            where s.AccountPlanID='$this->_personID' and s.SalaryID=sl.SalaryID and substring(s.Period, 1, 4)='$this->_year' and sl.SalaryCode is not null and sl.SalaryCode != ''
+                            order by sl.TS desc
+                         ) as tmp
+                         group by LineNumber";
         $this->_salaryLineHash = $_lib['storage']->get_hashhash(array('query'=>$this->_query, 'key'=>'LineNumber'));
         foreach($this->_salaryLineHash as $LineNumber => $lineHash)
         {
