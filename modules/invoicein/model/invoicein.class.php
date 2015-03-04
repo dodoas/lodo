@@ -348,10 +348,10 @@ class logic_invoicein_invoicein implements Iterator {
                         $VoucherH['voucher_Vat']            = '';
                         $VoucherH['voucher_Description']    = '';
                         $VoucherH['voucher_AccountPlanID']  = 0;
-                        
+
                         $TotalPrice = round(($line->QuantityDelivered * $line->UnitCustPrice), 2);
                         $TotalForeignPrice = round($line->ForeignAmount, 2);
-                        
+
                         if($line->Vat > 0) {
                             //#Add VAT to the price - since it is ex VAT
                             //#print "$line->UnitCustPrice * (($line->Vat/100) +1)";
@@ -393,7 +393,7 @@ class logic_invoicein_invoicein implements Iterator {
                         }
 
                         if ($VoucherH['voucher_ForeignCurrencyID'] != '') $VoucherH['voucher_ForeignAmount']   = abs($TotalForeignPrice);
-                        
+
                         $VoucherH['voucher_Vat']            = $line->Vat;
                         //#$VoucherH['voucher_VatID']         = $line->VatID; Has to be mapped properly
                         if($line->QuantityDelivered > 0) {

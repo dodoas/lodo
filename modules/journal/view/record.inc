@@ -10,8 +10,6 @@ $AccountPlanID      = $_REQUEST['AccountPlanID'];*/
 
 includelogic('voucher/voucherinput');
 
-
-
 $voucher_input      = new framework_logic_voucherinput($_REQUEST);
 
 // if the valuta(either currency_id or exchange_rate) has changed for the voucher we are saving, then we update foreign currency for the whole journal
@@ -51,7 +49,6 @@ $hovedbokto   = $_lib['sess']->get_companydef('AccountHovedbokResultatTo');
 if($voucher_input->action['voucher_head_update']){
     $accounting->update_voucher_head($voucher_input);
 }
-
 
 #print_r($voucher_input->action);
 #Get next available or update journal id

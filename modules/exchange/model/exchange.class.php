@@ -326,10 +326,7 @@ class exchange {
         $ch_curr .= ' <a href="#" onclick="exchangeFindRate(this)" style="display: inline">finn kurs </a>';
         $ch_curr .= '<input class="number" type="hidden" name="voucher.VoucherID" value="'. $voucher_id .'" />';
         $ch_curr .= '<input type="hidden" name="action_postmotpost_save_currency" value="1" />';
-        $has_save_button = true;
-        if ($has_save_button) {
-            $ch_curr .= '<input type="button" name="action_postmotpost_save_currency_button" onclick="return journalCurrencyChange(this, \'' . $action_url . '\'); " value="Lagre" />';
-        }
+        $ch_curr .= '<input type="button" name="action_postmotpost_save_currency_button" onclick="return journalCurrencyChange(this, \'' . $action_url . '\'); " value="Lagre" />';
         $ch_curr .= '</div>';
         return $ch_curr;
     }
