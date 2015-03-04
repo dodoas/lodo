@@ -25,7 +25,11 @@ print $_lib['sess']->doctype; ?>
 <? includeinc('left') ?>
 
 
-<h2><a href="<? print $_lib['sess']->dispatch ?>t=invoicein.list">Innkommende fakturaer</a> / <a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.listincoming">Hent fakturaer fra fakturabank</a></h2>
+<h2>
+  <a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.listincoming">Hent faktura p&aring; nytt</a>
+  <br>
+  <a href="<? print $_lib['sess']->dispatch ?>t=invoicein.list">Tilbake til innkommende fakturaer</a>
+</h2>
 <? if($_lib['message']->get()) { ?>
     <div class="red error"><? print $_lib['message']->get() ?></div>
 <? } ?>
@@ -39,7 +43,7 @@ som ikke er lastet ned.
 </h3>
 
 
-<h2>Send dine innscannede innkommende pdf bilag til: <a href="mailto:<? print str_replace(" MVA","",$_lib['sess']->get_companydef('OrgNumber')) ?>@scanning.fakturabank.no"><? print str_replace(" MVA","",$_lib['sess']->get_companydef('OrgNumber')) ?>@scanning.fakturabank.no</a> s&aring; vil de bli punchet og lagt klar for automatisk bilagsf&oslash;ring i fakturabank</h2>
+
 Merk: Du m&aring; registrere brukeren din p&aring; <a href="http://fakturabank.no">http://fakturabank.no</a> for at dette skal fungere
 
 <form name="invoice_edit" action="<? print $_lib['sess']->dispatch ?>t=fakturabank.listincoming" method="post">
@@ -57,10 +61,12 @@ Merk: Du m&aring; registrere brukeren din p&aring; <a href="http://fakturabank.n
     <th class="number">Lev. Konto</th>
     <th>Firmanavn</th>
     <th>Motkonto</th>
+    <th>MotkontoNavn</th>
     <th class="number">Forfallsdato</th>
     <th class="number">Bel&oslash;p</th>
     <th>Avdeling</th>
     <th>Prosjekt</th>
+    <th>&Aringrsaks informasjon</th>
     <th class="number">Bankkonto</th>
     <th class="number">KID</th>
     <th class="number">Utskrift</th>
@@ -74,8 +80,21 @@ if (!empty($InvoicesO->Invoice)) {
   foreach($InvoicesO->Invoice as $InvoiceO) {
     $TotalCustPrice += $InvoiceO->LegalMonetaryTotal->PayableAmount;
     $tmp_currency_code = $InvoiceO->DocumentCurrencyCode;
-
+    
   ?>
+
+    <?  
+    // new logic for getting reason information
+    $ReasonsInfo = "";
+    foreach($InvoiceO->ReconciliationReasons as $Reason) {
+        $r_query = sprintf("SELECT * FROM fakturabankinvoicereconciliationreason WHERE FakturabankInvoiceReconciliationReasonID = %d", $Reason[0]);
+        $r_row = $_lib['storage']->get_row(array('query' => $r_query, 'debug' => true));
+        $ReasonsInfo = $ReasonsInfo . $r_row->FakturabankInvoiceReconciliationReasonCode . " = " . $_lib['format']->Amount($Reason[1]) . " | ";
+    }
+    // remove last 3 characters " | "
+    $ReasonsInfo = substr($ReasonsInfo, 0, -3);
+    ?>
+
     <tr class="<? print $InvoiceO->Class ?>">
       <td class="number"><? if($InvoiceO->Journaled) { ?><a href="<? print $_SETUP[DISPATCH]."t=journal.edit&amp;voucher_VoucherType=$InvoiceO->VoucherType&amp;voucher_JournalID=$InvoiceO->JournalID"; ?>&amp;action_journalid_search=1" target="_new"><? print $InvoiceO->VoucherType ?><? print $InvoiceO->JournalID ?></a><? } else { ?><i><a title="Foresl&aring;tt bilagsnummer - dette kan endre seg"><? print $InvoiceO->VoucherType ?><? print $InvoiceO->JournalID ?></a></i><? } ?></td>
       <td class="number"><? print $InvoiceO->ID ?></td>
@@ -85,6 +104,7 @@ if (!empty($InvoicesO->Invoice)) {
       <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&AccountPlanID=<? print $InvoiceO->AccountPlanID ?>&inline=show" target="_new"><? print $InvoiceO->AccountPlanID ?></a></td>
       <td>&nbsp;<? print substr($InvoiceO->AccountingSupplierParty->Party->PartyName->Name,0,30) ?></td>
       <td>&nbsp;<? print substr($InvoiceO->MotkontoAccountPlanID,0,30) ?></td>
+      <td><? print $InvoiceO->MotkontoAccountName ?></td>
       <td class="number"><b><? print $InvoiceO->PaymentMeans->PaymentDueDate ?></b></td>
       <!--<td class="number"><? print $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) ?></td>-->
       <td class="number">
@@ -106,20 +126,27 @@ if (!empty($InvoicesO->Invoice)) {
       </td>
       <td class="number"><? print $InvoiceO->Department ?></td>
       <td class="number"><? print $InvoiceO->Project ?></td>
+      <td class="number" title="<? print $ReasonsInfo ?>"><?
+        if (strlen($ReasonsInfo) > 40){
+         print substr($ReasonsInfo, 0, 37) . '...';
+        }else {
+          print $ReasonsInfo;
+        } ?>
+      </td>
       <td class="number"><? print $InvoiceO->PaymentMeans->PayeeFinancialAccount->ID ?></td>
       <td class="number"><? print $InvoiceO->PaymentMeans->InstructionID ?></td>
       <td align="center"><a href="<?php echo $_SETUP['FB_URL'] ?>suppliers/<? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID ?>/invoices/<? print str_replace(".", "%2E", rawurlencode($InvoiceO->ID)) ?>" title="Vis faktura i fakturabank" target="_new">Vis</a>
       <td class="number"><? print $InvoiceO->Status ?></td>
   </tr>
-<? 
-  } 
+<?
+  }
 }
 ?>
 <tr>
-    <th colspan="8"></th>
+    <th colspan="9"></th>
     <th>SUM</th>
     <th class="number"><? print  $_lib['format']->Amount($TotalCustPrice) ?></th>
-    <th colspan="6"></th>
+    <th colspan="7"></th>
 </tr>
 </tbody>
 

@@ -20,7 +20,7 @@ class model_log_log extends model_invoicerecurring_recurring
         {
             $name = $db->Database;
 
-            if($name == "phpmyadmin") continue;
+            if($name == "phpmyadmin" || $name == "LODO") continue;
 
             $_lib['storage'] = $_lib['db'] =
                 new db_mysql(array('host' => $_SETUP['DB_SERVER_DEFAULT'],
@@ -40,7 +40,7 @@ class model_log_log extends model_invoicerecurring_recurring
                 continue;
             }
 
-            $query = "SELECT IPAdress, TS FROM logusage ORDER BY TS DESC LIMIT 10";
+            $query = "SELECT l.IPAdress, p.Email, l.TS FROM logusage l JOIN person p ON l.PersonID=p.PersonID ORDER BY TS DESC LIMIT 10";
             $r = $_lib['db']->db_query($query);
 
             $logging[$name] = array();

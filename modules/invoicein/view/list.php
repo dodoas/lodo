@@ -29,9 +29,11 @@ print $_lib['sess']->doctype; ?>
 <? includeinc('top') ?>
 <? includeinc('left') ?>
 
-<h2><a href="<? print $_lib['sess']->dispatch ?>t=invoicein.list">Innkommende fakturaer</a> 
-<? if($_lib['sess']->get_person('FakturabankImportInvoiceAccess')) { ?> / <a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.listincoming">Fakturabank</a></h2> <? } ?>
+
+<h2>
+<? if($_lib['sess']->get_person('FakturabankImportInvoiceAccess')) { ?><a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.listincoming">Importer fakturaer med status approved fra Fakturabank</a><br> <? } ?>
 <a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.invoicereconciliationlist">Oppsett av koblinger mellom avstemmings&aring;rsaker og kontoer</a>
+</h2>
 
 <? if($_lib['message']->get()) { ?>
     <div class="red error"><? print $_lib['message']->get() ?></div>
@@ -98,7 +100,7 @@ print $_lib['sess']->doctype; ?>
 <tr>
     <td><? print $_lib['form3']->submit(array('name' => 'show_search',   'value' => 'S&oslash;k (S)')) ?></td>
     <td></td>
-    <td></td>
+    <td><input type="submit" value="Bilagsf&oslash;r alle i listen (B)" name="action_invoicein_journal" accesskey="B"></td>
 </tr>
 </table>
 <table class="lodo_data">
@@ -112,12 +114,12 @@ print $_lib['sess']->doctype; ?>
     <th class="number">Lev. Konto</th>
     <th>Firmanavn</th>
     <th>Motkonto</th>
+    <th>MotkontoNavn</th>
     <th class="number">Forfallsdato</th>
     <th class="number">Bel&oslash;p</th>
     <th>Avdeling</th>
     <th>Prosjekt</th>
-    <th>Reason</th>
-    <th>Reason Amount</th>
+    <th>&Aringrsaks informasjon</th>
     <th class="number">Bankkonto</th>
     <th class="number">Betaling</th>
     <th class="number">KID</th>
@@ -128,16 +130,7 @@ print $_lib['sess']->doctype; ?>
 </thead>
 <tbody>
 <?
-
-$reasons_query = "SELECT FakturabankInvoiceReconciliationReasonID, FakturabankInvoiceReconciliationReasonCode
-                    FROM fakturabankinvoicereconciliationreason";
-$reasons_r = $_lib['db']->db_query($reasons_query);
-$reasons = array();
-
-while($row = $_lib['db']->db_fetch_object($reasons_r)) {
-    $reasons[$row->FakturabankInvoiceReconciliationReasonID] = $row->FakturabankInvoiceReconciliationReasonCode;
-}
-
+$invoicein->changeOrder();
 foreach($invoicein as $InvoiceO) {
     $TotalCustPrice += $InvoiceO->TotalCustPrice;
     $TotalCustPriceForeign += $InvoiceO->ForeignAmount;
@@ -147,23 +140,30 @@ foreach($invoicein as $InvoiceO) {
     $fb_query = sprintf("SELECT * FROM fakturabankinvoicein WHERE LodoID = %d", $InvoiceO->ID);
     $fb_row = $_lib['storage']->get_row(array('query' => $fb_query, 'debug' => true));
 
-    if($fb_row) {
-        $reason = $reasons[$fb_row->FakturabankCustomerReconciliationReasonID];
+    // new logic for getting reason information
+    $reasons_query = sprintf("SELECT LodoID, ClosingReasonId, Amount, FakturabankInvoiceReconciliationReasonCode FROM `fbdownloadedinvoicereasons` as fbdir join `fakturabankinvoicereconciliationreason` as fbirr on fbdir.ClosingReasonId = fbirr.FakturabankInvoiceReconciliationReasonID WHERE fbdir.LodoID= %d", $InvoiceO->ID);
+    $reasons_r = $_lib['db']->db_query($reasons_query);
+    $ReasonsInfo = "";
+    while($row = $_lib['db']->db_fetch_object($reasons_r)) {
+        $ReasonsInfo = $ReasonsInfo . $row->FakturabankInvoiceReconciliationReasonCode . " = " . $_lib['format']->Amount($row->Amount) . " | ";
     }
-    else { 
-        $reason = "";
-    }
-
+    // remove last 3 characters " | "
+    $ReasonsInfo = substr($ReasonsInfo, 0, -3);
     ?>
     <tr class="<? print $InvoiceO->Class ?>">
+      <? if ($InvoiceO->TotalCustPrice != 0) {?>
       <td class="number"><? if($InvoiceO->Journaled) { ?><a href="<? print $_SETUP['DISPATCH']."t=journal.edit&amp;voucher_VoucherType=$InvoiceO->VoucherType&amp;voucher_JournalID=$InvoiceO->JournalID"; ?>&amp;action_journalid_search=1" target="_new"><? print $InvoiceO->VoucherType ?><? print $InvoiceO->JournalID ?></a><? } else { print $InvoiceO->VoucherType . $InvoiceO->JournalID; }  ?></td>
+      <?} else {?>
+      <td></td>
+      <? } ?>
       <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=invoicein.edit&ID=<? print $InvoiceO->ID ?>&amp;inline=edit" title="Endre faktura"><? print $InvoiceO->InvoiceNumber ?></a></td>
       <td class="number"><? print $InvoiceO->InvoiceDate ?></td>
       <td class="number"><? print $InvoiceO->Period ?></td>
       <td class="number"><? print $InvoiceO->OrgNumber ?> ?</td>
       <td class="number"><? print $InvoiceO->SupplierAccountPlanID ?></td>
       <td><? print substr($InvoiceO->IName,0,20) ?></td>
-      <td><? print $InvoiceO->Motkonto ?> ?</td>
+      <td><? print $InvoiceO->MotkontoAccountPlanID ?></td>
+      <td><? print $InvoiceO->MotkontoAccountName ?></td>
       <td class="number"><? print $InvoiceO->DueDate ?></td>
       <td class="number">
         <?
@@ -176,8 +176,12 @@ foreach($invoicein as $InvoiceO) {
       </td>
       <td><? print $InvoiceO->Department ?></td>
       <td><? print $InvoiceO->Project ?></td>
-      <td><? print $reason ?></td>
-      <td><? if($reason) print $_lib['format']->Amount($fb_row->FakturabankCustomerReconciliationReasonAmount); ?></td>
+      <td title="<? print $ReasonsInfo ?>"><?
+        if (strlen($ReasonsInfo) > 40){
+         print substr($ReasonsInfo, 0, 37) . '...';
+        }else {
+          print $ReasonsInfo;
+        } ?></td>
       <td><? print $InvoiceO->SupplierBankAccount ?></td>
       <td class="number"><? print $InvoiceO->PaymentMeans ?></td>
       <td class="number"><? print $InvoiceO->KID ?></td>
@@ -188,7 +192,7 @@ foreach($invoicein as $InvoiceO) {
 <? } ?>
 </tbody>
 <tr>
-    <th colspan="8">Antall: <? print $count ?></th>
+    <th colspan="9">Antall: <? print $count ?></th>
     <th>SUM</th>
     <th class="number">
     <?
@@ -198,10 +202,7 @@ foreach($invoicein as $InvoiceO) {
         }
     ?>
     </th>
-    <th colspan="8"></th>
-</tr>
-<tr>
-    <td><input type="submit" value="Bilagsf&oslash;r alle i listen (B)" name="action_invoicein_journal" accesskey="B"></td>
+    <th colspan="10"></th>
 </tr>
 </table>
 </form>

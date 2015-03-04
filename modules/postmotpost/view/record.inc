@@ -20,7 +20,7 @@ elseif(isset($_REQUEST['action_postmotpost_openall'])) {
 elseif(isset($_REQUEST['action_postmotpost_save_currency'])) {
     exchange::updateVoucherForeignCurrency();
 }
-else if(isset($_REQUEST['action_postmotpost_closeselected']) && isset($_REQUEST['selectedClose'])) {
+elseif(isset($_REQUEST['action_postmotpost_closeselected']) && isset($_REQUEST['selectedClose'])) {
     foreach($_REQUEST['selectedClose'] as $acc) {
         $postmotpost->closeAllPostsAccount($acc);
     }
