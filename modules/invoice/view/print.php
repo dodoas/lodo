@@ -153,6 +153,33 @@ print $_lib['sess']->doctype ?>
         <td></td>
         <td></td>
     </tr>
+    <tr>
+        <td colspan="2"></td>
+        <td><label><b>Leveringsadresse</b></label></td>
+        <td></td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+      <td>Adresse</td>
+      <td><? print $row->DAddress ?></td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+      <td>By</td>
+      <td><? print $row->DZipCode . " " . $row->DCity ?></td>
+    </tr>
+    <tr>
+      <td colspan="2"></td>
+      <td>Land</td>
+      <td><? print $_lib['format']->codeToCountry($row->DCountryCode) ?></td>
+    </tr>
+    <tr height="20">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+
 </thead>
 
 <tbody>
