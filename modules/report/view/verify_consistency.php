@@ -595,12 +595,59 @@ WHERE
     <th class="sub">Utbetalt dato</th>
     <th class="sub">Konto for utbetaling</th>
     <th class="sub">Skattekommune</th>
+    <th class="sub">Problem</th>
+    <th class="sub"></th>
   </tr>
 </thead>
 <tbody>
 <?
-  $query_salary  = "SELECT s.SalaryID, s.JournalDate, s.Period, s.AccountPlanID, ap.AccountName, s.ValidFrom, s.ValidTo, s.PayDate, s.DomesticBankAccount, k.KommuneNumber, k.KommuneName FROM salary s, accountplan ap, kommune k WHERE s.AccountPlanID = ap.AccountPlanID AND s.KommuneID = k.KommuneID AND s.JournalID NOT IN (SELECT DISTINCT(JournalID) FROM voucher WHERE VoucherType = 'L')";
-         $result_salary = $_lib['db']->db_query($query_salary);
+// Select all salaries that are created but not saved in the voucher table
+$query_salary  = "SELECT s.SalaryID, s.JournalDate, s.Period, s.AccountPlanID, ap.AccountName, s.ValidFrom, s.ValidTo, s.PayDate, s.DomesticBankAccount, k.KommuneNumber, k.KommuneName
+                  FROM salary s, accountplan ap, kommune k
+                  WHERE s.AccountPlanID = ap.AccountPlanID AND s.KommuneID = k.KommuneID AND s.JournalID NOT IN (
+                                                                                                                  SELECT DISTINCT(JournalID)
+                                                                                                                  FROM voucher
+                                                                                                                  WHERE VoucherType = 'L' AND Active = 1
+                                                                                                                )
+                  ORDER BY s.SalaryID DESC";
+$result_salary = $_lib['db']->db_query($query_salary);
+// Select all salaries and their corresponding journal ids that have a different lines
+// A bit of an explanation of the below query:
+// First we select all the active lines for salary in voucher table for all open 
+// periodes and compare them to all salaryline lines for all open periodes
+// based on SalaryID and corresponding JournalID
+// and we count the ones that have the correct amount and compare that number 
+// with the number of non zero lines in salaryline table for each salary
+// if they differ something is not good
+$query_diff  = "SELECT s.SalaryID, s.JournalID, s.JournalDate, s.Period, s.AccountPlanID, ap.AccountName, s.ValidFrom, s.ValidTo, s.PayDate, s.DomesticBankAccount, k.KommuneNumber, k.KommuneName 
+                FROM salary s JOIN accountplan ap ON s.AccountPlanID = ap.AccountPlanID JOIN kommune k ON ap.KommuneID = k.KommuneID
+                WHERE SalaryID IN (
+                  SELECT p1.SalaryID FROM (
+                    SELECT count(*) as NumberOfLines, t1.SalaryID FROM (
+                      SELECT s.SalaryID, s.JournalID, sl.LineNumber, sl.AmountThisPeriod, sl.AccountPlanID FROM salary s JOIN salaryline sl ON s.SalaryID = sl.SalaryID
+                      WHERE sl.AmountThisPeriod !=0 AND s.Period IN (
+                        SELECT Period FROM accountperiod WHERE Status = 2
+                      )
+                    ) t1
+                    JOIN (
+                      SELECT v.JournalID, v.AmountIn, v.AmountOut, v.AccountPlanID FROM voucher v
+                      WHERE v.VoucherType =  'L' AND v.Active =1 AND v.VoucherPeriod IN (
+                        SELECT Period FROM accountperiod WHERE Status = 2
+                      )
+                    ) t2
+                    ON (t1.JournalID = t2.JournalID  AND t1.AccountPlanID = t2.AccountPlanID AND ((t1.LineNumber < 70 AND t1.AmountThisPeriod = t2.AmountIn) OR (t1.LineNumber >= 70 AND t1.AmountThisPeriod = t2.AmountOut)))
+                    GROUP BY t1.SalaryID
+                  ) p1
+                  JOIN (
+                    SELECT SalaryID, count(*) as NumberOfLines FROM salaryline
+                    WHERE AmountThisPeriod !=0
+                    GROUP BY SalaryID
+                  ) p2
+                  ON p1.SalaryID = p2.SalaryID
+                  WHERE p1.NumberOfLines != p2.NumberOfLines
+                )";
+$result_diff = $_lib['db']->db_query($query_diff);
+
   while($salary = $_lib['db']->db_fetch_object($result_salary)) { ?>
     <tr class="voucher">
         <td><? print "L" ?></td>
@@ -613,8 +660,28 @@ WHERE
         <td><? print $salary->PayDate; ?></td>
         <td><? print $salary->DomesticBankAccount; ?></td>
         <td><? print $salary->KommuneNumber . " " . $salary->KommuneName; ?></td>
+        <td>Ikke i bilag</td>
+        <td></td>
+    </tr>
+<? }
+
+  while($salary = $_lib['db']->db_fetch_object($result_diff)) { ?>
+    <tr class="voucher">
+        <td><? print "L" ?></td>
+        <td><a href="<? print $_SETUP[DISPATCH]."t=salary.edit&SalaryID=".$salary->SalaryID; ?>" target="_blank"><? print $salary->SalaryID; ?></a></td>
+        <td><? print $salary->JournalDate; ?></td>
+        <td><? print $salary->Period; ?></td>
+        <td><? print $salary->AccountPlanID . " " . $salary->AccountName; ?></td>
+        <td><? print $salary->ValidFrom; ?></td>
+        <td><? print $salary->ValidTo; ?></td>
+        <td><? print $salary->PayDate; ?></td>
+        <td><? print $salary->DomesticBankAccount; ?></td>
+        <td><? print $salary->KommuneNumber . " " . $salary->KommuneName; ?></td>
+        <td>Linjer avvike</td>
+        <td><a href="<? print $_lib['sess']->dispatch."t=journal.edit&voucher_VoucherType=L&action_journalid_search=1&voucher_JournalID=".$salary->JournalID; ?>" target="_blank"><? print "L".$salary->JournalID; ?></a></td>
     </tr>
 <? } ?>
+
 </tbody>
 </table>
 </fieldset>
