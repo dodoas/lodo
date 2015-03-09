@@ -223,7 +223,7 @@ if(!$period_open) {
     ?>
     <div style="padding: 20px; border: 1px solid black;">
         <form action="<? print $MY_SELF ?>" method="post">
-        Endre fra stengt bilagsdato: 
+        Endre fra stengt bilagsdato:
         <input type="text" value="<? print date("Y-m-d"); ?>" name="voucher_VoucherDate" />
         <input type="submit" value="Endre" />
 
@@ -300,9 +300,16 @@ $numfields = 0;
 
   #if ($accountplan->EnableReskontro == 0)
   #{
-    $totalAmountIn  += $voucher_input->AmountIn;
-    $totalAmountOut += $voucher_input->AmountOut;
+    $totalAmountIn  += $voucherHead->AmountIn;
+    $totalAmountOut += $voucherHead->AmountOut;
   #}
+
+    #Sum foreign amount
+    if ($voucherHead->AmountIn > 0) {
+        $totalForeignAmountIn += $voucherHead->ForeignAmount;
+    } else if ($voucherHead->AmountOut > 0) {
+        $totalForeignAmountOut += $voucherHead->ForeignAmount;
+    }
 
 
 if(!$accountplan->EnableCurrency)   { $numfields += 2; };
@@ -343,7 +350,7 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
             }
         ?>
         &nbsp;-&nbsp;<b>Bilags<u>d</u>ato</b>
-        
+
         <input class="voucher" type="text" size="20" maxlength="25" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" name="voucher.VoucherDate" id="voucher.VoucherDate" value="<? print $voucher_input->VoucherDate; ?>"  accesskey="D" OnChange="update_period(this, '<? print $form_name2 ?>', 'voucher.VoucherDate', 'voucher.VoucherPeriod');">
         &nbsp;-&nbsp;<b><u>P</u>eriode</b>
         <?
@@ -355,11 +362,16 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
         <?
 	    if($voucherHead->ExternalID) {
 	    	print $_lib['form3']->button(array('name' => 'Vis i fakturabank', 'url' => 'https://fakturabank.no/invoices/' . $voucherHead->ExternalID, 'target' => '_new'));
-	    } 
+	    }
         ?>
-        <? 
+        <?
             if(!$period_open)
                 printf("Perioden %s er stengt", $voucher_input->VoucherPeriod);
+        ?>
+        &nbsp;-&nbsp;<b><u>V</u>aluta</b>
+	    &nbsp;&nbsp;
+        <?
+        echo exchange::getFormHeaderCurrencyDropdown($voucherHead);
         ?>
         <br /><br />
 
@@ -387,8 +399,8 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
   <tr class="voucher" valign="top">
     <td><? print $voucher_gui->active_line($voucher_input->VoucherIDOld, $voucherHead->VoucherID); ?></td>
     <td>
-    <? 
-      print $voucher_gui->account($voucher_input->VoucherPeriod, $voucher_input->new, $db_table, $voucher, $voucher_input->AccountPlanID, false, !$period_open) 
+    <?
+      print $voucher_gui->account($voucher_input->VoucherPeriod, $voucher_input->new, $db_table, $voucher, $voucher_input->AccountPlanID, false, !$period_open)
     ?>
     </td>
 <? print $voucher_gui->creditdebitfield($AmountField, $accountplan, $voucher_input->AmountIn, $voucher_input->AmountOut, !$period_open) ?>
@@ -397,36 +409,36 @@ $acctmp = $accounting->get_accountplan_object($voucher_input->AccountPlanID);
 <td><? print $voucher_gui->vat($voucherHead, $accountplan, $VAT, $oldVatID, $voucher_input->VatID, $voucher_input->VatPercent, !$period_open) ?></td>
     <td><? if($accountplan->EnableQuantity)   { ?><input class="voucher" type="text" size="5"  tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" name="voucher.Quantity" accesskey="Q" value="<? print $_lib['format']->Amount($voucherHead->Quantity) ?>"><? } ?></td>
     <td>
-      <? 
-if($rowCount>1) { 
-    $tmp = ''; 
-} 
-else { 
-    $tmp = $tabindex++; 
+      <?
+if($rowCount>1) {
+    $tmp = '';
+}
+else {
+    $tmp = $tabindex++;
 }
 
-if($accountplan->EnableDepartment) { 
+if($accountplan->EnableDepartment) {
     $_lib['form2']->department_menu2(
-        array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher_input->DepartmentID, 'tabindex' => $tmp, 'accesskey' => 'V', 
-              'disabled' => $period_disabled)); 
+        array('table' => $db_table, 'field' => 'DepartmentID', 'value' => $voucher_input->DepartmentID, 'tabindex' => $tmp, 'accesskey' => 'V',
+              'disabled' => $period_disabled));
 } ?></td>
 
     <td>
-<? 
-if($rowCount>1) 
-{ 
-    $tmp = ''; 
-} else 
-{ 
-    $tmp = $tabindex++; 
+<?
+if($rowCount>1)
+{
+    $tmp = '';
+} else
+{
+    $tmp = $tabindex++;
 }
 
-if($accountplan->EnableProject)    
-{ 
+if($accountplan->EnableProject)
+{
     $_lib['form2']->project_menu2(
         array('table' => $db_table,  'field' =>  'ProjectID',  'value' =>  $voucher_input->ProjectID, 'tabindex' => $tmp, 'accesskey' => 'P',
               'disabled' => $period_disabled));
-} 
+}
 ?>
     </td>
 <td><input class="voucher" type="text" size="20" maxlength="25" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" accesskey="F" name="voucher.DueDate" value="<? if ($voucherHead->DueDate != "") print $voucherHead->DueDate; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
@@ -439,11 +451,11 @@ if($accountplan->EnableProject)
 
 <td><input class="voucher" type="text" size="40" tabindex="<? if($rowCount>1) { print ''; } else { print $tabindex++; } ?>" accesskey="G" name="voucher.Description"       value="<? print $voucher_input->Description; ?>" <? if(!$period_open) print "disabled='disabled'"; ?>></td>
     <td align="right">
-<? 
-if($period_open) 
-    print $voucher_gui->update_journal_button_head($voucherHead, $voucher_input->VoucherPeriod, $voucher_input->VoucherType, $voucher_input->JournalID, $voucher_input->new, $rowCount) 
+<?
+if($period_open)
+    print $voucher_gui->update_journal_button_head($voucherHead, $voucher_input->VoucherPeriod, $voucher_input->VoucherType, $voucher_input->JournalID, $voucher_input->new, $rowCount)
 ?>
-    </td>    
+    </td>
   </tr>
   <? if($view_linedetails == 1) { ?>
   <tr valign="top">
@@ -478,12 +490,15 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
         $totalAmountIn  += $voucher->AmountIn;
         $totalAmountOut += $voucher->AmountOut;
     }
-    
+
    #Sum foreign amount
-   if ($voucher->AmountIn > 0)
-      $totalForeignAmountIn  += $voucher->ForeignAmount;
-   if ($voucher->AmountOut > 0)
-      $totalForeignAmountOut += $voucher->ForeignAmount;
+   if($accountplan->EnableReskontro == 0) {
+      if ($voucher->AmountIn > 0) {
+        $totalForeignAmountIn += $voucher->ForeignAmount;
+      } else {
+        $totalForeignAmountOut += $voucher->ForeignAmount;
+      }
+   }
    $totalForeignCurrency = $voucher->ForeignCurrencyID;
 
   if($accountplan->EnableReskontro == 0 and ($view_mvalines == 1 or ($view_mvalines == 0 and $voucher->DisableAutoVat != 1)))
@@ -572,15 +587,18 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
     <input type="hidden" name="voucher.VoucherDateOld"   value="<? print $voucher->VoucherDate ?>" />
     <input type="hidden" name="view_mvalines"         value="<? print $view_mvalines ?>" />
     <input type="hidden" name="view_linedetails"      value="<? print $view_linedetails ?>" />
+    <input type="hidden" name="voucher.ForeignCurrencyID"      value="<? print $voucher->ForeignCurrencyID ?>" />
+    <input type="hidden" name="voucher.ForeignConvRate"      value="<? print $voucher->ForeignConvRate ?>" />
+
 
     <tr class="<? print $row_class ?> voucher">
       <td><? print $voucher_gui->active_line($voucher_input->VoucherIDOld, $voucher->VoucherID); ?></td>
-      <td><? print $voucher_gui->account($voucher_input->VoucherPeriod, 
-                                         $voucher_input->new, 
-                                         $db_table, 
-                                         $voucher, 
-                                         $voucher->AccountPlanID, 
-                                         true, 
+      <td><? print $voucher_gui->account($voucher_input->VoucherPeriod,
+                                         $voucher_input->new,
+                                         $db_table,
+                                         $voucher,
+                                         $voucher->AccountPlanID,
+                                         true,
                                          !($period_open && $voucher->VoucherType != 'A'));
         ?></td>
       <? print $voucher_gui->creditdebitfield($AmountField, $accountplan, $voucher->AmountIn, $voucher->AmountOut, !$period_open) ?>
@@ -621,8 +639,7 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
     <td></td>
     <td align="right"><? print $_lib['format']->Amount($totalAmountIn) ?></td>
     <td align="right"><? print $_lib['format']->Amount($totalAmountOut) ?></td>
-    <td align="right"></td>
-    <td align="right"></td>
+    <td colspan="2"></td>
     <td align="right"><? print $totalForeignCurrency ." ". $_lib['format']->Amount($totalForeignAmountIn) ?></td>
     <td align="right"><? print $totalForeignCurrency ." ". $_lib['format']->Amount($totalForeignAmountOut) ?></td>
   <td colspan="10" align="right">
@@ -631,7 +648,7 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
     <form name="form_new_line" action="<? print $MY_SELF ?>" method="post">
     <input type="hidden" name="type"                    value="<? print $voucher_input->type ?>">
     <input type="hidden" name="voucher.JournalID"       value="<? print $voucher_input->JournalID ?>">
-    <input type="hidden" name="voucher.VoucherID"       value="<? // kommentert ut av Geir for  at momsen ikke skal slettes ved klikk pa ny postering. print $voucherHead->VoucherID ?>">
+
     <input type="hidden" name="voucher.VoucherPeriod"   value="<? print $voucherHead->VoucherPeriod ?>">
     <input type="hidden" name="voucher.VoucherDate"     value="<? print $voucherHead->VoucherDate ?>">
     <input type="hidden" name="voucher.AccountPlanID"   value="<? print $voucherHead->AccountPlanID ?>">
@@ -643,6 +660,10 @@ while($voucher = $_lib['db']->db_fetch_object($result_voucher) and $rowCount>0) 
     <? print $_lib['form3']->hidden(array('name' => 'AccountLineID'     , 'value' => $voucher_input->AccountLineID)) ?>
     <? print $_lib['form3']->hidden(array('name' => 'view_mvalines'     , 'value' => $view_mvalines)) ?>
     <? print $_lib['form3']->hidden(array('name' => 'view_linedetails'  , 'value' => $view_linedetails)) ?>
+    <? print $_lib['form3']->hidden(array('name' => 'voucher.ForeignCurrencyID'  , 'value' => $voucher->ForeignCurrencyID)) ?>
+    <? print $_lib['form3']->hidden(array('name' => 'voucher.ForeignConvRate'  , 'value' => $voucher->ForeignConvRate)) ?>
+    <? print $_lib['form3']->hidden(array('name' => 'voucher.ForeignAmountIn'  , 'value' => '0.0')) ?>
+    <? print $_lib['form3']->hidden(array('name' => 'voucher.ForeignAmountOut'  , 'value' => '0.0')) ?>
     <? if($voucher->VoucherType != 'A') { ?>
     <input type="submit" name="action_voucherline_new"  value="Ny postering til bilag <? print $voucher_input->JournalID ?> (L)" class="button" tabindex="<? print $tabindex++; ?>" accesskey="L" >
     <? } ?>
@@ -709,6 +730,7 @@ if($VoucherID > 0) { #Vi har ikke dette på den forste linjen for den er lagret.
             <td><? print $row->InvoiceID ?></td>
             <td><? print $row->KID ?></td>
 
+
             <form name="<? print $form_name ?>" action="<? print $MY_SELF ?>" method="post">
             <? print $_lib['form3']->hidden(array('name' => 'type'                  , 'value' => $voucher_input->type)) ?>
             <? print $_lib['form3']->hidden(array('name' => 'VoucherType'           , 'value' => $voucher_input->VoucherType)) ?>
@@ -742,4 +764,4 @@ if($VoucherID > 0) { #Vi har ikke dette på den forste linjen for den er lagret.
             </form>
     <? }
 }?>
-<? includeinc('bottom') ?>
+<? includeinc('bottom'); ?>
