@@ -476,7 +476,7 @@ class accounting {
         $fields['voucher_KID']                = $post['voucher_KID'];
         $fields['voucher_InvoiceID']          = $post['voucher_InvoiceID'];
         $fields['voucher_InsertedByPersonID'] = $_lib['sess']->get_person('PersonID');
-        $fields['voucher_InsertedByPersonID'] = $_lib['sess']->get_session('Datetime');
+        $fields['voucher_InsertedDateTime']   = $_lib['sess']->get_session('Datetime');
         $fields['voucher_UpdatedByPersonID']  = $_lib['sess']->get_person('PersonID');
         $fields['voucher_DisableAutoVat']     = 0;
         $fields['voucher_AutoFromWeeklySale'] = $post['voucher_AutoFromWeeklySale'];
@@ -875,7 +875,7 @@ class accounting {
                     $fields['voucher_KID']                = $args['voucher']->KID;
                     $fields['voucher_InvoiceID']          = $args['voucher']->InvoiceID;
                     $fields['voucher_InsertedByPersonID'] = $_lib['sess']->get_person('PersonID');
-                    $fields['voucher_InsertedByPersonID'] = $_lib['sess']->get_session('Datetime');
+                    $fields['voucher_InsertedDateTime']    = $_lib['sess']->get_session('Datetime');
                     $fields['voucher_UpdatedByPersonID']  = $_lib['sess']->get_person('PersonID');
                     $fields['voucher_AddedByAutoBalance'] = 0;
                 }
@@ -965,7 +965,7 @@ class accounting {
                     $fields['voucher_KID']                = $args['voucherAV']->KID;
                     $fields['voucher_InvoiceID']          = $args['voucherAV']->InvoiceID;
                     $fields['voucher_InsertedByPersonID'] = $_lib['sess']->get_person('PersonID');
-                    $fields['voucher_InsertedDatetime']   = $_lib['sess']->get_session('Datetime');
+                    $fields['voucher_InsertedDateTime']   = $_lib['sess']->get_session('Datetime');
                     $fields['voucher_UpdatedByPersonID']  = $_lib['sess']->get_person('PersonID');
                     $fields['voucher_ProjectID']          = $args['voucher']->ProjectID;
                     $fields['voucher_DepartmentID']       = $args['voucher']->DepartmentID;
