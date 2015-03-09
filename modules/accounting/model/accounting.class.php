@@ -198,7 +198,7 @@ class accounting {
         global $_lib;
 
         #Finn alle linjer i bilaget - ikke prøv å join i tilfelle noen avhengigheter mangler
-        $select_voucher_sql = "select AmountIn, AmountOut, AccountPlanID, VoucherID from voucher where JournalID='$JournalID' and VoucherType='$VoucherType' and Active=1";
+        $select_voucher_sql = "select AmountIn, AmountOut, AccountPlanID, VoucherID, ForeignAmount from voucher where JournalID='$JournalID' and VoucherType='$VoucherType' and Active=1";
         $_lib['sess']->debug($select_voucher_sql);
         $voucherH = $_lib['storage']->get_hashhash(array('query' => $select_voucher_sql, 'key' => 'VoucherID'));
 
@@ -207,9 +207,11 @@ class accounting {
 
         #loop over og summer alle linjer som ikke har match i reskontroer
         $sum = 0;
+        $fsum = 0;
         foreach($voucherH as $voucher) {
             if(!isset($hovedbokmedreskontroH[$voucher['AccountPlanID']])) {
                 $sum += ($voucher['AmountIn'] - $voucher['AmountOut']);
+                $fsum += ($voucher['AmountIn'] > 0) ? $voucher['ForeignAmount'] : (($voucher['AmountOut'] > 0) ? -$voucher['ForeignAmount'] : 0);
                 #print "num " . $voucher['VoucherID'] . "  * $sum += (" . $voucher['AmountIn'] . ' - ' . $voucher['AmountOut'] . ")<br>\n";
 
             }
@@ -218,7 +220,7 @@ class accounting {
         $_lib['sess']->debug("sum: $sum $select_voucher_sql");
         #print (round(($voucher->sumin - $voucher->sumout), 2))."<br>\n";
 
-        return round($sum, 2);
+        return array(round($sum, 2), round($fsum, 2));
     }
 
     public function cache_all_accountplans() {
@@ -476,7 +478,7 @@ class accounting {
         $fields['voucher_KID']                = $post['voucher_KID'];
         $fields['voucher_InvoiceID']          = $post['voucher_InvoiceID'];
         $fields['voucher_InsertedByPersonID'] = $_lib['sess']->get_person('PersonID');
-        $fields['voucher_InsertedByPersonID'] = $_lib['sess']->get_session('Datetime');
+        $fields['voucher_InsertedDateTime']   = $_lib['sess']->get_session('Datetime');
         $fields['voucher_UpdatedByPersonID']  = $_lib['sess']->get_person('PersonID');
         $fields['voucher_DisableAutoVat']     = 0;
         $fields['voucher_AutoFromWeeklySale'] = $post['voucher_AutoFromWeeklySale'];
@@ -797,6 +799,9 @@ class accounting {
 
         $_lib['sess']->debug('');
 
+        if(isset($args['post']['voucher_AmountIn']) && $args['post']['voucher_AmountIn'] == 0 && isset($args['post']['voucher_AmountOut']) && $args['post']['voucher_AmountOut'] == 0)
+            return;
+
         if((!isset($args['post']['voucher_AmountIn']) || $args['post']['voucher_AmountIn'] <= 0) && (!isset($args['post']['voucher_AmountOut']) && $args['post']['voucher_AmountOut'] > 0))
             return;
 
@@ -817,15 +822,6 @@ class accounting {
                 }
                 $fields = $args['fields'];
 
-                # unset foreign currency fields for vat lines, as we only want them in header line
-                $delete_fields = array('voucher_ForeignCurrencyID',
-                                       'voucher_ForeignAmount',
-                                       'voucher_ForeignConvRate');
-
-                foreach ($delete_fields as $df) {
-                    if (isset($fields[$df])) unset($fields[$df]);
-                }
-
                 $vat = $this->get_vataccount_object(array('VatID'=>$args['post']['voucher_VatID'], 'date' => $args['voucher']->VoucherDate));
                 $fields['voucher_AccountPlanID']  = $vat->AccountPlanID;
                 $_lib['sess']->debug("Kontoplan: $vat->AccountPlanID fra VatID" . $args['post']['voucher_VatID'] . "dato: " . $args['voucher']->VoucherDate);
@@ -836,7 +832,16 @@ class accounting {
                     $percent = $args['post']['voucher_Vat'];
                 elseif($fields['voucher_Vat'] > 0)
                     $percent = $fields['voucher_Vat'];
+                else return; // VAT percent is not set(it will be zero) so we will create VAT lines with zero amount if we do not exit here
 
+                if(isset($args['post']['voucher_ForeignCurrencyID']) and $args['post']['voucher_ForeignCurrencyID'] != '')
+                {
+                  $fields['voucher_ForeignCurrencyID'] = $args['post']['voucher_ForeignCurrencyID'];
+                }
+                if(isset($args['post']['voucher_ForeignConvRate']) and $args['post']['voucher_ForeignConvRate'] > 0)
+                {
+                  $fields['voucher_ForeignConvRate'] = $args['post']['voucher_ForeignConvRate'];
+                }
                 if(isset($args['post']['voucher_AmountIn']) and $args['post']['voucher_AmountIn'] > 0)
                 {
                   $fields['voucher_AmountIn'] = $_lib['convert']->Amount(($args['post']['voucher_AmountIn'] / (100 + $percent)) * $percent);
@@ -846,6 +851,11 @@ class accounting {
                 {
                   $fields['voucher_AmountOut'] = $_lib['convert']->Amount(($args['post']['voucher_AmountOut'] / (100 + $percent))  * $percent);
                   $fields['voucher_AmountIn']  = 0;
+                }
+                if ($fields['voucher_ForeignCurrencyID'] != '') {
+                  $fields['voucher_ForeignAmount'] = $_lib['convert']->Amount(($args['post']['voucher_ForeignAmount'] / (100 + $percent))  * $percent);
+                  if ($fields['voucher_AmountIn'] > 0) $fields['voucher_AmountIn'] = $_lib['convert']->Amount(exchange::convertToLocal($fields['voucher_ForeignCurrencyID'], $fields['voucher_ForeignAmount']));
+                  if ($fields['voucher_AmountOut'] > 0) $fields['voucher_AmountOut'] = $_lib['convert']->Amount(exchange::convertToLocal($fields['voucher_ForeignCurrencyID'], $fields['voucher_ForeignAmount']));
                 }
 
                 $fields['voucher_Description']        = $args['voucher']->VatID . ':' . $percent . '%';
@@ -875,7 +885,7 @@ class accounting {
                     $fields['voucher_KID']                = $args['voucher']->KID;
                     $fields['voucher_InvoiceID']          = $args['voucher']->InvoiceID;
                     $fields['voucher_InsertedByPersonID'] = $_lib['sess']->get_person('PersonID');
-                    $fields['voucher_InsertedByPersonID'] = $_lib['sess']->get_session('Datetime');
+                    $fields['voucher_InsertedDateTime']    = $_lib['sess']->get_session('Datetime');
                     $fields['voucher_UpdatedByPersonID']  = $_lib['sess']->get_person('PersonID');
                     $fields['voucher_AddedByAutoBalance'] = 0;
                 }
@@ -965,7 +975,7 @@ class accounting {
                     $fields['voucher_KID']                = $args['voucherAV']->KID;
                     $fields['voucher_InvoiceID']          = $args['voucherAV']->InvoiceID;
                     $fields['voucher_InsertedByPersonID'] = $_lib['sess']->get_person('PersonID');
-                    $fields['voucher_InsertedDatetime']   = $_lib['sess']->get_session('Datetime');
+                    $fields['voucher_InsertedDateTime']   = $_lib['sess']->get_session('Datetime');
                     $fields['voucher_UpdatedByPersonID']  = $_lib['sess']->get_person('PersonID');
                     $fields['voucher_ProjectID']          = $args['voucher']->ProjectID;
                     $fields['voucher_DepartmentID']       = $args['voucher']->DepartmentID;
@@ -1281,6 +1291,7 @@ class accounting {
 
             $hash = $_lib['convert']->Amount(array('value'=> abs($sum_balance)) );
             $fieldsbalance['voucher_AmountOut'] = $hash['value'];
+            //$fieldsbalance['voucher_ForeignAmount'] = $hash['value'];
             $tmp = $hash['error'];
 
             $message .= $tmp;
@@ -1383,7 +1394,7 @@ class accounting {
 
             #########################################
             #Update line values
-            $this->update_voucher_line_smart($voucher_input->request('voucher_new'), $voucher_input->VoucherIDOld, 'update_voucher_head');
+            $this->update_voucher_line_smart($voucher_input->request('voucher_head_update'), $voucher_input->VoucherIDOld, 'update_voucher_head');
 
             ########################################
             #oppdatere motkontoer hvis vi har byttet periode
@@ -1418,7 +1429,6 @@ class accounting {
         }
 
         unset($fields['voucher_VoucherID']); #If voucher id is set, we risk that we change it. This will prevent voucherid change it permanently.
-
         #Find the old values of this line. Could have checked for active.........
         $voucher = $this->get_voucher_object(array('voucherID' => $VoucherID));
 
@@ -1501,6 +1511,8 @@ class accounting {
 
         $this->update_voucher_line($fields, $VoucherID, $comment);
 
+        // TODO (mladjo2505)
+        // Investigate if we should change $voucher->VoucherID to $VoucherID.
         $this->update_vat_smart(array('VoucherID'=>$voucher->VoucherID, 'post'=> $fields, 'comment' => 'Called from: update_voucher_line_smart'));
     }
 
@@ -1549,22 +1561,27 @@ class accounting {
 
 
         #Hvis bilagets balanse ikke er 0 blir det foreslï¿½tt en motpostering automatisk.
-        $sum = $this->sum_journal($JournalID, $VoucherType);
+        list($sum, $fsum) = $this->sum_journal($JournalID, $VoucherType);
         $absSum = abs($sum);
+        $fabsSum = abs($fsum);
 
         #print "<h2>this->correct_journal_balance(: diff: $absSum)</h2>";
 
-        if($absSum != 0)
+        if($absSum != 0 || $fabsSum != 0)
         {
             ##################################################
             #Check if it exists unsaved journal entries
-            $query_balance_voucher  = "select VoucherID, AmountIn, AmountOut from voucher where JournalID='$JournalID' and VoucherType='$VoucherType' and AddedByAutoBalance=1 and Active=1";
+            $query_balance_voucher  = "select VoucherID, AmountIn, AmountOut, ForeignAmount from voucher where JournalID='$JournalID' and VoucherType='$VoucherType' and AddedByAutoBalance=1 and Active=1";
             $balance_voucher        = $_lib['storage']->get_row(array('query' => $query_balance_voucher));
             $VoucherID              = $balance_voucher->VoucherID;
             $sumbalance             = $balance_voucher->AmountIn - $balance_voucher->AmountOut;
+            $fsumbalance            = (float)($balance_voucher->ForeignAmount);
+            if ($sumbalance < 0) $fsumbalance = -$fsumbalance;
 
             $sum = -$sum;
+            $fsum = -$fsum;
             $updatedsum             = $sum + $sumbalance; #Fix if this is 0 delete it.
+            $fupdatedsum             = $fsum + $fsumbalance; #Fix if this is 0 delete it.
 
             #print "ny sum: $updatedsum             = sumbilag:$sum + sumbalansepostering:$sumbalance<br>\n";
 
@@ -1572,14 +1589,17 @@ class accounting {
             if($updatedsum < 0) {
               $fields['voucher_AmountOut'] = abs($updatedsum);
               $fields['voucher_AmountIn']  = 0;
+              $fields['voucher_ForeignAmount'] = abs($fupdatedsum);
             }
             elseif($updatedsum > 0) {
               $fields['voucher_AmountIn']  = $updatedsum;
               $fields['voucher_AmountOut'] = 0;
+              $fields['voucher_ForeignAmount'] = $fupdatedsum;
             }
             else {
               $fields['voucher_AmountIn']  = 0;
               $fields['voucher_AmountOut'] = 0;
+              $fields['voucher_ForeignAmount'] = 0;
               $fields['voucher_Active']    = 0;
               $this->delete_voucher_line_smart($VoucherID, $JournalID, $VoucherType, 'correct_journal_balance'); #Sjekk
               #print "Den er null, vi kan bare slette den<br>\n";
@@ -1605,9 +1625,13 @@ class accounting {
                 $this->update_voucher_line_smart($fields, $VoucherID, 'correct_journal_balance');
             }
             else {
+                $query_get_valuta  = "select ForeignConvRate, ForeignCurrencyID from voucher where JournalID='$JournalID' and VoucherType='$VoucherType' and Active=1";
+                $valuta_voucher    = $_lib['storage']->get_row(array('query' => $query_get_valuta));
                 #print "correct_journal_balance: new<br>";
                 $fields['voucher_AddedByAutoBalance']   = 1;
                 $fields['voucher_Active']               = 1;
+                $fields['voucher_ForeignConvRate']      = $valuta_voucher->ForeignConvRate;
+                $fields['voucher_ForeignCurrencyID']    = $valuta_voucher->ForeignCurrencyID;
                 #print_r($fields);
                 $VoucherID = $_lib['storage']->db_new_hash($fields, 'voucher');
                 $this->set_accountplan_usednow($fields['voucher_AccountPlanID']);
@@ -2016,6 +2040,9 @@ class accounting {
     function delete_voucher_line_smart($VoucherID, $JournalID, $VoucherType, $comment = "") {
         global $_lib;
 
+        //if (is_null($voucher_input)) return;
+        // Variable voucher_input is a global which might not be set here.
+        // We should probably pass it to this function as an argument.
         $_lib['sess']->debug("delete_voucher_line_smart VoucherID: $VoucherID, JournalID: $JournalID, VoucherType: $VoucherType, comment: $comment");
         $post = array();
         $post['voucher_VoucherPeriod'] = $voucher_input->VoucherPeriod;

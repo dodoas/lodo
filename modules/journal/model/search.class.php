@@ -13,10 +13,10 @@ class search_class {
         if($args['VoucherID'] > 0) {
             //print_r($args);
             #Find all open posts defined on this customer
-            
+
             $accountplan = $accounting->get_accountplan_object($args['AccountPlanID']);
             #print_r($account);
-            
+
             $query = "select v.VoucherID, v.AmountIn, v.AmountOut, v.JournalID, v.VoucherType, v.KID, v.InvoiceID, v.VoucherDate, a.AccountName, a.AccountPlanID from accountplan as a , voucher as v left join voucherstruct as s on (v.VoucherID=s.ParentVoucherID or v.VoucherID=s.ChildVoucherID)  where v.AccountPlanID = " . $args['AccountPlanID'] . " and (s.Closed=0 or s.Closed IS NULL) and (a.AccountPlanType='customer' or a.AccountPlanType='supplier') and a.AccountPlanID=v.AccountPlanID";
             #print "$query<br>";
             $result = $_lib['db']->db_query($query);
@@ -33,7 +33,7 @@ class search_class {
                     $_showresult .= "<th></th>";
                 }
                 $_showresult .= "</tr>";
-    
+
                 while($row = $_lib['db']->db_fetch_object($result))
                 {
                     if($row->VoucherType != $args['VoucherType'] or $row->JournalID != $args['JournalID'])
@@ -42,10 +42,10 @@ class search_class {
                         $sec_color=($bgit % 2)?"BGColorLight":"BGColorDark";
 
                         $_showresult .= "\n<tr class=\"$sec_color\"><td>$row->VoucherType</td><td class=\"number\">";
-                        
+
                         $_showresult .= "<a href=\"" . $_lib['sess']->dispatch . "t=journal.edit&amp;voucher_VoucherType=$row->VoucherType&amp;voucher_JournalID=$row->JournalID&amp;action_journalid_search=1\">$row->JournalID</a>";
                         #$row->JournalID
-                        
+
                         $_showresult .= "</td><td>$row->VoucherDate</td><td>$row->AccountPlanID</td><td>$row->AccountName</td><td class=\"" . $accountplan->CreditColor . " number\">";
                         if($row->AmountIn > 0) $_showresult .= $_lib['format']->Amount($row->AmountIn);
                         $_showresult .= "</td>\n<td class=\"" . $accountplan->DebitColor . " number\">";

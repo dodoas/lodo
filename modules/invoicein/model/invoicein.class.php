@@ -349,12 +349,25 @@ class logic_invoicein_invoicein implements Iterator {
                         $VoucherH['voucher_Description']    = '';
                         $VoucherH['voucher_AccountPlanID']  = 0;
 
-                        $TotalPrice = $line->QuantityDelivered * $line->UnitCustPrice;
+                        $TotalPrice = round(($line->QuantityDelivered * $line->UnitCustPrice), 2);
+                        $TotalForeignPrice = round($line->ForeignAmount, 2);
 
                         if($line->Vat > 0) {
                             //#Add VAT to the price - since it is ex VAT
                             //#print "$line->UnitCustPrice * (($line->Vat/100) +1)";
-                            $TotalPrice = $TotalPrice * (($line->Vat/100) +1);
+
+                            // $TotalPrice = round(($TotalPrice * (($line->Vat/100) +1)), 2);
+                            // $TotalForeignPrice = round(($TotalForeignPrice * (($line->Vat/100) +1)), 2);
+                            // We already have tax amount given to us by fakturabank.
+                            // So why recalculate, and possibly make 0.01 error in recalculation?
+                            // Just add them up and get the correct amount.
+                            if ($VoucherH['voucher_ForeignCurrencyID'] != '') {
+                              $TotalForeignPrice = round(($TotalForeignPrice + $line->TaxAmount), 2);
+                              $TotalPrice = round(($TotalPrice + exchange::convertToLocal($VoucherH['voucher_ForeignCurrencyID'], $line->TaxAmount)), 2);
+                            }
+                            else {
+                              $TotalPrice = round(($TotalPrice + $line->TaxAmount), 2);
+                            }
                             $invoice_line_sum += $TotalPrice;
                         } else {
                             $invoice_line_sum += $TotalPrice;
@@ -378,6 +391,8 @@ class logic_invoicein_invoicein implements Iterator {
                             $VoucherH['voucher_AmountOut']  = abs($TotalPrice);
                             $VoucherH['voucher_AmountIn']   = 0;
                         }
+
+                        if ($VoucherH['voucher_ForeignCurrencyID'] != '') $VoucherH['voucher_ForeignAmount']   = abs($TotalForeignPrice);
 
                         $VoucherH['voucher_Vat']            = $line->Vat;
                         //#$VoucherH['voucher_VatID']         = $line->VatID; Has to be mapped properly
@@ -511,6 +526,7 @@ class logic_invoicein_invoicein implements Iterator {
 
                     $this->accounting->set_journal_motkonto(array('post' => $VoucherH, 'VoucherType' => $VoucherH['voucher_VoucherType']));
                     $this->accounting->correct_journal_balance($VoucherH, $VoucherH['voucher_JournalID'], $VoucherH['voucher_VoucherType']);
+                    $this->accounting->delete_credit_debit_zero_lines($VoucherH['voucher_JournalID'], $VoucherH['voucher_VoucherType']);
 
                     //####################################################################################
                     //#Update invoicein to journaled
