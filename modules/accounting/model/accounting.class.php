@@ -832,6 +832,7 @@ class accounting {
                     $percent = $args['post']['voucher_Vat'];
                 elseif($fields['voucher_Vat'] > 0)
                     $percent = $fields['voucher_Vat'];
+                else return; // VAT percent is not set(it will be zero) so we will create VAT lines with zero amount if we do not exit here
 
                 if(isset($args['post']['voucher_ForeignCurrencyID']) and $args['post']['voucher_ForeignCurrencyID'] != '')
                 {
@@ -2039,6 +2040,9 @@ class accounting {
     function delete_voucher_line_smart($VoucherID, $JournalID, $VoucherType, $comment = "") {
         global $_lib;
 
+        //if (is_null($voucher_input)) return;
+        // Variable voucher_input is a global which might not be set here.
+        // We should probably pass it to this function as an argument.
         $_lib['sess']->debug("delete_voucher_line_smart VoucherID: $VoucherID, JournalID: $JournalID, VoucherType: $VoucherType, comment: $comment");
         $post = array();
         $post['voucher_VoucherPeriod'] = $voucher_input->VoucherPeriod;
