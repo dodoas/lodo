@@ -116,50 +116,15 @@ if($_type == 'hovedbok')
       $safe_to_period = mysql_escape_string($_to_period);
 
       /* henter ut aktive kontoer og kontoer satt til uaktiv, men allikevel har en voucher registrert --m */
-      $query_balance = "SELECT
-				A.AccountPlanID, A.AccountName,
-				A.EnableBudgetResult
-			FROM
-				accountplan A,
-				voucher V
-			WHERE
-				( A.Active = 1 AND A.AccountPlanType = 'balance' )
+      $query_balance = "SELECT A.AccountPlanID, A.AccountName, A.EnableBudgetResult, A.Active
+			                  FROM accountplan A
+                        WHERE
+                          A.AccountPlanType = 'balance' AND
+                          (A.AccountPlanID IN ( SELECT AccountPlanID FROM voucher V WHERE $_departmentID $_projectID $VoucherType V.VoucherPeriod < '$_to_period' AND V.Active = 1 ) OR A.Active = 1)
+                        GROUP BY A.AccountPlanID
+                        ORDER BY A.AccountPlanID ASC";
 
-				OR
-
-				(
-					-- A.Active = 0 AND
-					A.AccountPlanType = 'balance' AND
-					V.AccountPlanID = A.AccountPlanID AND
-					V.VoucherPeriod >= '$safe_from_period' AND
-					V.VoucherPeriod < '$safe_to_period'
-				)
-			GROUP BY
-				A.AccountPlanID
-			ORDER BY
-				A.AccountPlanID ASC";
-
-      $query_result  = "SELECT
-				A.AccountPlanID, A.AccountName, A.EnableBudgetResult
-			FROM
-				accountplan A,
-				voucher V
-			WHERE
-				( A.Active = 1 AND A.AccountPlanType = 'result' )
-
-				OR
-
-				(
-					-- A.Active = 0 AND
-					A.AccountPlanType = 'result' AND
-					V.AccountPlanID = A.AccountPlanID AND
-					V.VoucherPeriod >= '$safe_from_period' AND
-					V.VoucherPeriod < '$safe_to_period'
-				)
-			GROUP BY
-				A.AccountPlanID
-			ORDER BY
-				A.AccountPlanID asc";
+      $query_result  = str_replace("balance", "result", $query_balance);
   }
   elseif($_active == 0)
   {
@@ -280,9 +245,6 @@ while($account = $_lib['db']->db_fetch_object($balance_accounts))
 
     $sumrow_new     = 0;
     $sumrow_new     = $saldo_old + $saldo_new;
-    $sumTotal_old   += $saldo_old;
-    $sumTotal_new   += $saldo_new;
-    $sumTotal       += $sumrow_new;
 
     ################################################################################
     $saldo_prev_old             = 0;
@@ -299,9 +261,9 @@ while($account = $_lib['db']->db_fetch_object($balance_accounts))
 
     $sumrow_prev_new    = 0;
     $sumrow_prev_new    = $saldo_prev_old + $saldo_prev_new;
-    $sumTotal_prev_old  += $saldo_prev_old;
-    $sumTotal_prev_new  += $saldo_prev_new;
-    $sumTotal_prev      += $sumrow_prev_new;
+
+    // if all saldos are zero and account plan is not active then skip it
+    if ($saldo_old == 0 && $saldo_new == 0 && $sumrow_new == 0 && $saldo_prev_old == 0 && $saldo_prev_new == 0 && $sumrow_prev_new == 0 && $account->Active == 0) continue;
 
     ################################################################################
     #print_r($account);
@@ -314,6 +276,13 @@ while($account = $_lib['db']->db_fetch_object($balance_accounts))
 
     $accountsumH[substr($account->AccountPlanID, 0,1)]->Amount += $sumrow_new;
     $accountsumH[substr($account->AccountPlanID, 0,1)]->Budget += $budget;
+
+    $sumTotal_old   += $saldo_old;
+    $sumTotal_new   += $saldo_new;
+    $sumTotal       += $sumrow_new;
+    $sumTotal_prev_old  += $saldo_prev_old;
+    $sumTotal_prev_new  += $saldo_prev_new;
+    $sumTotal_prev      += $sumrow_prev_new;
 
     $urltmp = $url . "&amp;report_FromAccount=$account->AccountPlanID&amp;report_ToAccount=$account->AccountPlanID";
     ?>
@@ -489,14 +458,11 @@ else
       $saldo_prev_new       = (round($voucher_prev_saldo->sumin, 2) - round($voucher_prev_saldo->sumout, 2));
 
       $sumrow_new           = $saldo_old + $saldo_new;
-      $sumTotal_old         += $saldo_old;
-      $sumTotal_new         += $saldo_new;
-      $sumTotal             += $sumrow_new;
 
       $sumrow_prev_new      = $saldo_prev_old + $saldo_prev_new;
-      $sumTotal_prev_old    += $saldo_prev_old;
-      $sumTotal_prev_new    += $saldo_prev_new;
-      $sumTotal_prev        += $sumrow_prev_new;
+
+      // if all saldos are zero and account plan is not active then skip it
+      if ($saldo_old == 0 && $saldo_new == 0 && $sumrow_new == 0 && $saldo_prev_old == 0 && $saldo_prev_new == 0 && $sumrow_prev_new == 0 && $account->Active == 0) continue;
 
       if($account->EnableBudgetResult > 0) {
         $budget         = get_budget($account->AccountPlanID, $_from_period, $_to_period);
@@ -504,6 +470,14 @@ else
       } else {
         $budget = "";
       }
+
+      $sumTotal_old         += $saldo_old;
+      $sumTotal_new         += $saldo_new;
+      $sumTotal             += $sumrow_new;
+
+      $sumTotal_prev_old    += $saldo_prev_old;
+      $sumTotal_prev_new    += $saldo_prev_new;
+      $sumTotal_prev        += $sumrow_prev_new;
 
       $accountsumH[substr($account->AccountPlanID, 0,1)]->Amount += $sumrow_new;
       $accountsumH[substr($account->AccountPlanID, 0,1)]->Budget += $budget;
