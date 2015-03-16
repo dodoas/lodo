@@ -609,41 +609,33 @@ $query_salary  = "SELECT s.SalaryID, s.JournalDate, s.Period, s.AccountPlanID, a
                                                                                                                   FROM voucher
                                                                                                                   WHERE VoucherType = 'L' AND Active = 1
                                                                                                                 )
+                        AND s.Period IN ( SELECT Period FROM accountperiod WHERE Status < 4 )
                   ORDER BY s.SalaryID DESC";
 $result_salary = $_lib['db']->db_query($query_salary);
-// Select all salaries and their corresponding journal ids that have a different lines
+// Select all salaries and their corresponding journal ids that have different lines
 // A bit of an explanation of the below query:
-// First we select all the active lines for salary in voucher table for all open 
-// periodes and compare them to all salaryline lines for all open periodes
-// based on SalaryID and corresponding JournalID
-// and we count the ones that have the correct amount and compare that number 
-// with the number of non zero lines in salaryline table for each salary
-// if they differ something is not good
+// First we select the number of active lines for salary in voucher table for all open 
+// periodes and compare them to number of lines in salaryline table for all open periodes
+// based on corresponding JournalID
+// if the numbers differ then something is not good
 $query_diff  = "SELECT s.SalaryID, s.JournalID, s.JournalDate, s.Period, s.AccountPlanID, ap.AccountName, s.ValidFrom, s.ValidTo, s.PayDate, s.DomesticBankAccount, k.KommuneNumber, k.KommuneName 
                 FROM salary s JOIN accountplan ap ON s.AccountPlanID = ap.AccountPlanID JOIN kommune k ON ap.KommuneID = k.KommuneID
                 WHERE SalaryID IN (
-                  SELECT p1.SalaryID FROM (
-                    SELECT count(*) as NumberOfLines, t1.SalaryID FROM (
-                      SELECT s.SalaryID, s.JournalID, sl.LineNumber, sl.AmountThisPeriod, sl.AccountPlanID FROM salary s JOIN salaryline sl ON s.SalaryID = sl.SalaryID
-                      WHERE sl.AmountThisPeriod !=0 AND s.Period IN (
-                        SELECT Period FROM accountperiod WHERE Status = 2
-                      )
-                    ) t1
-                    JOIN (
-                      SELECT v.JournalID, v.AmountIn, v.AmountOut, v.AccountPlanID FROM voucher v
-                      WHERE v.VoucherType =  'L' AND v.Active =1 AND v.VoucherPeriod IN (
-                        SELECT Period FROM accountperiod WHERE Status = 2
-                      )
-                    ) t2
-                    ON (t1.JournalID = t2.JournalID  AND t1.AccountPlanID = t2.AccountPlanID AND ((t1.LineNumber < 70 AND t1.AmountThisPeriod = t2.AmountIn) OR (t1.LineNumber >= 70 AND t1.AmountThisPeriod = t2.AmountOut)))
-                    GROUP BY t1.SalaryID
-                  ) p1
-                  JOIN (
-                    SELECT SalaryID, count(*) as NumberOfLines FROM salaryline
-                    WHERE AmountThisPeriod !=0
-                    GROUP BY SalaryID
-                  ) p2
-                  ON p1.SalaryID = p2.SalaryID
+                  SELECT p1.SalaryID
+                  FROM (
+                    -- number of non-zero lines in salaryline table
+                    SELECT count(*) as NumberOfLines, s.JournalID, s.SalaryID
+                    FROM salaryline sl JOIN salary s ON s.SalaryID = sl.SalaryID
+                    WHERE sl.AmountThisPeriod != 0
+                    AND s.Period IN ( SELECT Period FROM accountperiod WHERE Status < 4 )
+                    GROUP BY s.JournalID
+                  ) p1 JOIN (
+                    -- number of active lines in voucher table, -1 is for the total sum line
+                    SELECT count(*) - 1 as NumberOfLines, v.JournalID
+                    FROM voucher v JOIN accountplan ap ON v.AccountPlanID = ap.AccountPlanID
+                    WHERE v.VoucherType = 'L' AND v.Active = 1 AND ap.EnableReskontro = 0 AND v.VoucherPeriod IN ( SELECT Period FROM accountperiod WHERE Status < 4 )
+                    GROUP BY v.JournalID
+                  ) p2 ON p1.JournalID = p2.JournalID
                   WHERE p1.NumberOfLines != p2.NumberOfLines
                 )";
 $result_diff = $_lib['db']->db_query($query_diff);
