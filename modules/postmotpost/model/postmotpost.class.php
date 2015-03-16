@@ -293,8 +293,8 @@ class postmotpost {
                 $this->total['total']->Name        = 'Total';
                 $this->total['total']->AmountIn   += $voucher->AmountIn;
                 $this->total['total']->AmountOut  += $voucher->AmountOut;
-                $this->total['total']->FAmountIn  += $voucher->ForeignAmountIn;
-                $this->total['total']->FAmountOut += $voucher->ForeignAmountOut;
+                if ($voucher->AmountIn > 0) $this->total['total']->FAmountIn  += $voucher->ForeignAmount;
+                if ($voucher->AmountOut > 0) $this->total['total']->FAmountOut += $voucher->ForeignAmount;
 
                 /*******************************************************************
                 * New sum each time we change the account
@@ -305,8 +305,8 @@ class postmotpost {
                 }
                 $this->sumaccountH[$AccountPlanID]->AmountIn   += $voucher->AmountIn;
                 $this->sumaccountH[$AccountPlanID]->AmountOut  += $voucher->AmountOut;
-                $this->sumaccountH[$AccountPlanID]->FAmountIn  += $voucher->ForeignAmountIn;
-                $this->sumaccountH[$AccountPlanID]->FAmountOut += $voucher->ForeignAmountOut;
+                if ($voucher->AmountIn > 0) $this->sumaccountH[$AccountPlanID]->FAmountIn  += $voucher->ForeignAmount;
+                if ($voucher->AmountOut > 0) $this->sumaccountH[$AccountPlanID]->FAmountOut += $voucher->ForeignAmount;
 
                 /*******************************************************************
                 * matchKIDH kid references on the same account (always)
@@ -417,8 +417,8 @@ class postmotpost {
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->VoucherType       = $voucher->VoucherType;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->AmountIn          = $voucher->AmountIn;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->AmountOut         = $voucher->AmountOut;
-                $this->voucherH[$AccountPlanID][$voucher->VoucherID]->ForeignAmountIn   = $voucher->ForeignAmountIn;
-                $this->voucherH[$AccountPlanID][$voucher->VoucherID]->ForeignAmountOut  = $voucher->ForeignAmountOut;
+                if ($voucher->AmountIn > 0) $this->voucherH[$AccountPlanID][$voucher->VoucherID]->ForeignAmountIn   = $voucher->ForeignAmount;
+                if ($voucher->AmountOut > 0) $this->voucherH[$AccountPlanID][$voucher->VoucherID]->ForeignAmountOut  = $voucher->ForeignAmount;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->VAT               = $voucher->VAT;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->Quantity          = $voucher->Quantity;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->DepartmentID      = $voucher->DepartmentID;
@@ -439,7 +439,7 @@ class postmotpost {
             /***************************************************************
             * Account sum - Dette er det som faktisk er registrert p$(B~A)I½(B hovedbokskontoen-A
             */
-            $query_saldo = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout, sum(V.ForeignAmountIn) as fsumin, sum(V.ForeignAmountOut) as fsumout from voucher as V where V.AccountPlanID = '" . $this->AccountPlanID . "' and $whereextra V.Active=1 ";
+            $query_saldo = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout, sum(if(V.AmountIn > 0, V.ForeignAmount, 0)) as fsumin, sum(if(V.AmountOut > 0, V.ForeignAmount, 0)) as fsumout from voucher as V where V.AccountPlanID = '" . $this->AccountPlanID . "' and $whereextra V.Active=1 ";
             #print "XX: $query_saldo<br>\n";
             $saldo = $_lib['storage']->get_row(array('query' => $query_saldo));
 

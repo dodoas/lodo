@@ -26,10 +26,10 @@ class framework_logic_voucher
           $commentstring .= " - Auto MVA: ".$voucher->DisableAutoVat;
         if($voucher->AutoKID)
           $commentstring .= " - Auto KID: ".$voucher->AutoKID;
-          
+
         return $commentstring;
     }
-    
+
     /***************************************************************************
     * Beregn postering
     * @param
@@ -39,12 +39,12 @@ class framework_logic_voucher
     function vat($voucher, $accountplan, $VAT, $oldVatID, $VatID, $VatPercent) {
         global $_lib;
         $html = '';
-     
+
         if( ($accountplan->EnableVAT == 1) and ($voucher->DisableAutoVat != 1) )
         {
             if($accountplan->EnableVATOverride or $VAT->EnableVatOverride)
             {
-                
+
                 $html .= '<nobr>' . $_lib['form3']->text(array('name' => 'voucher.Vat', 'value' => $VatPercent, 'class' => 'voucher', 'width' => '4', 'tabindex' => $tabindex++, 'accesskey' => 'M')) . '%</nobr>';
                 $html .= $_lib['form3']->hidden(array('name' => 'voucher.VatID', 'value' => $VatID));
             }
@@ -55,7 +55,7 @@ class framework_logic_voucher
                     #Not secure with hidden VAT code if security is very important
                     $html .= $_lib['form3']->hidden(array('name' => 'voucher.Vat',      'value' => $VatPercent));
                     $html .= $_lib['form3']->hidden(array('name' => 'voucher.VatID',    'value' => $VatID));
-    
+
                     if($oldVatID != $VatID)
                         $html .= $VatID . ' ' . '<font color="red">'.$VatPercent.'%</font>';
                     else
@@ -69,7 +69,7 @@ class framework_logic_voucher
         }
         return $html;
     }
-    
+
     /***************************************************************************
     * Beregn postering
     * @param
@@ -77,7 +77,7 @@ class framework_logic_voucher
     */
     function currency($voucher, $accountplan, $vb, $class) {
         global $_lib, $tabindex;
-    
+
         $html = '<td class="' . $class1 . '"><nobr>' . $_lib['format']->Amount(array('value'=>($vb->sumin - $vb->sumout), 'return'=>'value'));
         if($accountplan->EnableCurrency) {
             $tabindexin  = '';
@@ -92,23 +92,23 @@ class framework_logic_voucher
               $tabindexin  = '';
               $tabindexout = $tabindex++;
             }
-        } 
+        }
         $html .= '</nobr>';
         $html .= '<td>';
         if($accountplan->EnableCurrency) {
-            $html .= $_lib['form3']->text(array('name' => 'voucher.ForeignAmountIn', 'value' => $_lib['format']->Amount($voucher->ForeignAmountIn), 'class' => 'number', 'size' => '6', 'tabindex' => $tabindexin, 'accesskey' => 'N')) . $accountplan->Currency; 
+            $html .= $_lib['form3']->text(array('name' => 'voucher.ForeignAmountIn', 'value' => $_lib['format']->Amount($voucher->ForeignAmountIn), 'class' => 'number', 'size' => '6', 'tabindex' => $tabindexin, 'accesskey' => 'N')) . $accountplan->Currency;
         };
         $html .= '</td>';
-    
+
         $html .= '<td>';
         if($accountplan->EnableCurrency) {
-            $html .= $_lib['form3']->text(array('name' => 'voucher.ForeignAmountOut', 'value' => $_lib['format']->Amount($voucher->ForeignAmountOut), 'class' => 'number', 'size' => '6', 'tabindex' => $tabindexout, 'accesskey' => 'T')) . $accountplan->Currency; 
+            $html .= $_lib['form3']->text(array('name' => 'voucher.ForeignAmountOut', 'value' => $_lib['format']->Amount($voucher->ForeignAmountOut), 'class' => 'number', 'size' => '6', 'tabindex' => $tabindexout, 'accesskey' => 'T')) . $accountplan->Currency;
         }
         $html .= '</td>';
-    
+
         return $html;
     }
-    
+
     /***************************************************************************
     * Beregn postering
     * @param
@@ -134,14 +134,14 @@ class framework_logic_voucher
 
             $html .=  $_lib['form3']->accountplan_number_menu($aconf);
             $html .=  $_lib['form3']->hidden(array('name'=>'OldAccountPlanID', 'value'=>$AccountPlanID));
-    
+
         } else {
             $acctmp = $accounting->get_accountplan_object($AccountPlanID);
             $html  .= $acctmp->AccountName;
         }
         return $html;
     }
-    
+
     /***************************************************************************
     * Beregn postering
     * @param
@@ -165,23 +165,23 @@ class framework_logic_voucher
               $tabindexout = $tabindex++;
           }
         }
-    
-        $html .= $_lib['form3']->text(array('name' => 'voucher.AmountIn', 'readonly' => $readonly, 'value' => $_lib['format']->Amount($AmountIn), 'class' => 'number', 'width' => '12', 'tabindex' => $tabindexin, 'accesskey' => 'I')); 
+
+        $html .= $_lib['form3']->text(array('name' => 'voucher.AmountIn', 'readonly' => $readonly, 'value' => $_lib['format']->Amount($AmountIn), 'class' => 'number', 'width' => '12', 'tabindex' => $tabindexin, 'accesskey' => 'I'));
         $html .= '<br>' . $accountplan->debittext;
         $html .= '</td>';
         $html .= '<td class="' . $accountplan->CreditColor . '">';
-        $html .= $_lib['form3']->text(array('name' => 'voucher.AmountOut', 'readonly' => $readonly, 'value' => $_lib['format']->Amount($AmountOut), 'class' => 'number', 'width' => '12', 'tabindex' => $tabindexout, 'accesskey' => 'I')); 
+        $html .= $_lib['form3']->text(array('name' => 'voucher.AmountOut', 'readonly' => $readonly, 'value' => $_lib['format']->Amount($AmountOut), 'class' => 'number', 'width' => '12', 'tabindex' => $tabindexout, 'accesskey' => 'I'));
         $html .= '<br>' . $accountplan->credittext;
         $html .= '</td>';
-    
+
         return $html;
     }
-    
+
     /***************************************************************************
     * Beregn postering
     * @param
     * @return
-    */    
+    */
     #Buttons on line
     function update_journal_button_line($voucher, $VoucherPeriod, $JournalID, $VoucherType, $type) {
         global $_lib, $accounting, $tabindex, $MY_SELF;
@@ -210,16 +210,16 @@ class framework_logic_voucher
         }
         return $html;
     }
-    
+
     /***************************************************************************
     * Beregn postering
     * @param
     * @return
-    */    
+    */
     #Buttons on head
     function update_journal_button_head($voucherHead, $VoucherPeriod, $VoucherType, $JournalID, $new, $rowCount) {
         global $_lib, $tabindex, $accounting, $MY_SELF;
-    
+
         $html = '';
         $html .= $_lib['form3']->button(array('url' => "$MY_SELF&amp;voucher.VoucherPeriod=$VoucherPeriod&amp;voucher.VoucherDate=$voucherHead->VoucherDate&amp;voucher.JournalID=$JournalID&amp;VoucherType=$VoucherType&amp;type=$type&amp;action_voucher_head_delete=1", 'name'=>'S'));
 
@@ -227,10 +227,10 @@ class framework_logic_voucher
             if(isset($new))
             {
                 $html .= '<input type="submit" name="action_voucher_new" value="Lagre" class="green" tabindex="';
-                if($rowCount>1) { 
-                    $html .= ''; 
-                } else { 
-                    $html .= $tabindex++; 
+                if($rowCount>1) {
+                    $html .= '';
+                } else {
+                    $html .= $tabindex++;
                 }
                 $html .= ' class="button">';
             }
@@ -239,9 +239,9 @@ class framework_logic_voucher
 
                 $html .= '<input type="submit" name="action_voucher_head_update" value="Lagre" class="green" tabindex="';
                 if($rowCount>1) {
-                    $html .= ''; 
-                } else { 
-                    $html .= $tabindex++; 
+                    $html .= '';
+                } else {
+                    $html .= $tabindex++;
                 }
                 $html .= '" class="button" accesskey="S" />';
             }
@@ -250,7 +250,7 @@ class framework_logic_voucher
                 $html .= 'Perioden er avsluttet';
             }
         }
-    
+
         return $html;
     }
 }
