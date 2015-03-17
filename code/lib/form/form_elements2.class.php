@@ -536,10 +536,18 @@ class form2 {
         $num_letters = 10;
       }
 
-      if($args[pk]) {
-        print "<select name=\"$args[table].$args[field].$args[pk]\" tabindex=\"$args[tabindex]\" accesskey=\"$accesskey\">\n";
+      if($args[table]){
+        if($args[pk]) {
+          print "<select name=\"$args[table].$args[field].$args[pk]\" tabindex=\"$args[tabindex]\" accesskey=\"$accesskey\">\n";
+        } else {
+          print "<select name=\"$args[table].$args[field]\" tabindex=\"$tabindex\" accesskey=\"$args[accesskey]\">\n";
+        }
       } else {
-        print "<select name=\"$args[table].$args[field]\" tabindex=\"$tabindex\" accesskey=\"$args[accesskey]\">\n";
+        if($args[pk]) {
+          print "<select name=\"$args[field].$args[pk]\" tabindex=\"$args[tabindex]\" accesskey=\"$accesskey\">\n";
+        } else {
+          print "<select name=\"$args[field]\" tabindex=\"$tabindex\" accesskey=\"$args[accesskey]\">\n";
+        }
       }
       print "Greit<br>";
       if($conf['value']) {

@@ -147,6 +147,16 @@ class Date
     }
   }
 
+  function get_first_period_in_year($date){
+    global $_lib;
+
+    if(preg_match('{(\d\d\d\d)-(\d\d)(.*)}', $date, $m)) {
+            return $m['1']."-01";
+    } else {
+        $_lib['sess']->warning("Unable to get period for this date: $date");
+    }
+  }
+
     function get_next_period($args)
     {
         global $_lib;
