@@ -258,4 +258,5 @@
     $num2 = str_replace(",", ".", $num1);
     return $num2;
   }
+
 ?>
