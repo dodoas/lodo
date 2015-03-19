@@ -3,14 +3,6 @@
   includelogic('linetextmap/linetextmap');
   includelogic('report/regnskapsrapport');
 
-  if($_REQUEST['action_year_new'])
-  {
-    $year = filter_input(INPUT_POST, 'year', FILTER_SANITIZE_NUMBER_INT);
-    //$periodsQuery = "INSERT INTO expense_periods ('year') VALUES ($year)";
-    $periodsQuery = "INSERT INTO expense_periods (year) VALUES ($year)";
-    $periodsList = $_lib['db']->db_query($periodsQuery);
-  }
-
   if($_lib['input']->getProperty('action_lines_save')) {
     $department_id = filter_input(INPUT_POST, 'department_id', FILTER_SANITIZE_NUMBER_INT);
     $period_id = filter_input(INPUT_POST, 'period_id', FILTER_SANITIZE_NUMBER_INT);
@@ -161,6 +153,15 @@
     }
   }
 
+  function create_year($year, $db) {
+    $year = (int) $year;
+    $num_rows =  $db->db_numrows( $db->db_query("SELECT * FROM expense_periods WHERE year = $year"));
+    if ($num_rows == 0) {
+      $periodsQuery = "INSERT INTO expense_periods (year) VALUES ($year)";
+      $db->db_query($periodsQuery);
+    }
+  }
+
   function extract_data($raw, $table_name) {
     $data = array();
 
@@ -185,11 +186,13 @@
 
   function get_year_amount($rapport, $code, $project_id) {
     foreach($rapport->lineSumH as $lineH) {
+      $sum = 0;
       foreach ($rapport->lineH[$code] as $AccountH) {
         if($AccountH['ProjectID'] == $project_id) {
-          return $AccountH['ThisYearAmount'];
+          $sum += $AccountH['ThisYearAmount'];
         }
       }
+      return $sum;
     }
   }
 
