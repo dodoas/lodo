@@ -855,6 +855,22 @@ class postmotpost {
     }
 
     /**
+     * Open all posts on given accountplan for open peroids.
+     */
+    public function openAllPostsAccountForOpenPeriods($AccountPlanID) {
+        global $_lib;
+
+        $voucher_query = "select VoucherID from voucher where AccountPlanID=$AccountPlanID and VoucherPeriod in (select Period from accountperiod where Status < 4)";
+        $r = $_lib['db']->db_query($voucher_query);
+
+        while($voucher = $_lib['db']->db_fetch_assoc($r)) {
+            $id = $voucher['VoucherID'];
+            $delete_query = "DELETE FROM voucherstruct WHERE ParentVoucherID = $id OR ChildVoucherID = $id";
+            $_lib['db']->db_delete($delete_query);
+        }
+    }
+
+    /**
      * Open all posts on given accountplan.
      */
     public function openAllPostsAccount($AccountPlanID) {

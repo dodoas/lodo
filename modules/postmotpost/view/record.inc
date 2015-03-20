@@ -1,6 +1,7 @@
 <?
 // var_dump($_POST);
 // die();
+$AccountPlanID = $_REQUEST['AccountPlanID'];
 if(isset($_REQUEST['action_postpost_update'])) {
   $primarykey = "VoucherID";
   $_lib['db']->db_update_multi_record($_POST, $db_table, $primarykey);
@@ -15,7 +16,7 @@ elseif(isset($_REQUEST['action_postmotpost_closeall'])) {
     $postmotpost->closeAllPosts();
 }
 elseif(isset($_REQUEST['action_postmotpost_openall'])) {
-    $postmotpost->openAllPosts();
+    $postmotpost->openAllPostsAccountForOpenPeriods($AccountPlanID);
 }
 elseif(isset($_REQUEST['action_postmotpost_save_currency'])) {
     exchange::updateVoucherForeignCurrency();
