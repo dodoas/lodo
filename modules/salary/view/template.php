@@ -282,7 +282,7 @@ print $_lib['sess']->doctype ?>
     </tr>
 </table>
 <a href="http://www.skatteetaten.no/upload/PDFer/Kodeoversikt2006_2.pdf" target="_blank">Kodeoversikt p&aring; skatteetaten</a>
-<? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $SalaryConfID ?>&amp;action_salary_updatetemplatecode=1" class="button">Hent kode/feriepenger/arbeidsgiveravgift flagg fra hovedmal</a><?}?>
+<? if($_lib['sess']->get_person('AccessLevel') >= 3) { if ($SalaryConfID != 1) { ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $SalaryConfID ?>&amp;action_salary_updatetemplatecode=1" class="button">Hent kode/feriepenger/arbeidsgiveravgift flagg fra hovedmal</a><? } } ?>
 
 
 <? includeinc('bottom') ?>
