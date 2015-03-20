@@ -318,7 +318,7 @@ class form3
     function input($args)
     {
         #print_r($args);
-        
+
         if($this->Locked) {
             return $args['value'];
         }
@@ -387,11 +387,11 @@ class form3
             $element .= " onClick=\"return confirm('" . $args['confirm'] . "')\"";
         }
 
-        if((isset($args['disabled']) && $args['disabled'] == true) 
+        if((isset($args['disabled']) && $args['disabled'] == true)
            || (isset($args['readonly']) && $args['readonly'] == true)) {
             $element .= " disabled='disabled'";
         }
-        
+
 
         $element .= " />\n";
         //print_r($args);
@@ -523,8 +523,8 @@ class form3
 
         $name       = $this->MakeName($args);
         $tabindex   = $this->MakeTabindex($args);
-        
-        if((isset($args['disabled']) && $args['disabled'] == true) 
+
+        if((isset($args['disabled']) && $args['disabled'] == true)
            || (isset($args['readonly']) && $args['readonly'] == true)) {
             $disabled = true;
         }
@@ -536,7 +536,7 @@ class form3
         {
             $class = $args['class'];
         }
-        else 
+        else
         {
             $class = "";
         }
@@ -572,7 +572,7 @@ class form3
             if(true || $_sess->language == 'no') # hardcode to norwegian since language not working
                 $notChoosenText = 'Ikke valgt';
             else
-                $notChoosenText = 'Not chosen'; 
+                $notChoosenText = 'Not chosen';
         }
 
         if(isset($args['debug']))
@@ -580,24 +580,24 @@ class form3
             print "query: ".$args['query']."<br />name: ".$name."<br />";
         }
 
-        if(isset($args['id'])) 
+        if(isset($args['id']))
         {
             $id = $args['id'];
         }
         else
         {
             $id = $name;
-        }   
+        }
 
-        // Disabled fields doesn't get submited 
-        // a quick fix for this is to make the selectbox with a different name than 
+        // Disabled fields doesn't get submited
+        // a quick fix for this is to make the selectbox with a different name than
         // requested and make a second hidden field with the original name and the value.
         if($disabled) {
             $element    = '<input type="hidden" name="'.$name.'" value="'.$args['value'].'" />';
             $element    .= "<select name=\"".$name."_disabled\" id=\"$id\" class=\"$class\" disabled=\"disabled\" ";
         }
         else {
-            $element    = "<select name=\"$name\" id=\"$id\" class=\"$class\" "; 
+            $element    = "<select name=\"$name\" id=\"$id\" class=\"$class\" ";
         }
         if($tabindex)  { $element .= " tabindex=\"$tabindex\""; }
         if($accesskey) { $element .= " accesskey=\"$args[accesskey]\""; }
@@ -610,11 +610,11 @@ class form3
         }
 
         $combinedmenudata = array(); #Make a menu with the ids listed and the names listed in front combined
-        
+
         if($args['query']) {
             $result     = $_lib['db']->db_query($args['query']);
             $fieldCount = $_lib['db']->db_NumFields($result);
-    
+
             while($_row = $_lib['db']->fetch_row($result)) {
                 if($fieldCount > 1) {
                     $tmp = '';
@@ -623,8 +623,8 @@ class form3
                         $tmp .= strip_tags($_row[$i]) ." ";
                     }
                     $tmp = trim($tmp);
-    
-                    if($notShowKey == 0) 
+
+                    if($notShowKey == 0)
                     {
                         if(strlen(trim($tmp)) == 0)
                         {
@@ -702,7 +702,7 @@ class form3
 
         $query_card             = "select * from confmenues where Active=1 and MenuName='PaymentMeans' order by Sort";
         $bankaccountcardA       = $_lib['db']->get_arrayrow(array('query' => $query_card));
-        
+
         return $this->select(array('data' => $bankaccountcardA));
     }
 
@@ -710,7 +710,7 @@ class form3
 
     function AccountTypeMenu($name, $value) {
         global $_lib;
-        
+
         return $this->_MakeSelect(array('name' => $name,
                                         'value' => $value,
                                         'required' => true,
@@ -902,7 +902,7 @@ class form3
     function project_menu($args)
     {
         global $_lib;
-        
+
         $name = $this->MakeName($args);
 
         if($args['company_id'])
@@ -953,7 +953,7 @@ class form3
     }
 
     ###########################################################
-    #$args[type][] = hovedbok, reskontro, employee, balance, result, customer, supplier, hovedbokwreskontro (bare list hovedbokskontoer med reskontro), hovedbokwemployee (list hovedbok og ansatt i menyen) 
+    #$args[type][] = hovedbok, reskontro, employee, balance, result, customer, supplier, hovedbokwreskontro (bare list hovedbokskontoer med reskontro), hovedbokwemployee (list hovedbok og ansatt i menyen)
     function accountplan_number_menu($args) {
         //print_r($args);
         global $_lib;
@@ -972,9 +972,9 @@ class form3
 		if(count($args['type'])) {
 			#print_r($args['type']);
 			foreach($args['type'] as $tmp => $type) {
-	
+
 				#print "type: $type<br>\n";
-	
+
 				if($type == 'hovedbok') {
 					$where .= " ((AccountPlanType='balance' or AccountPlanType='result') and EnableReskontro = 0) or ";
 				} elseif($type == 'hovedbokwreskontro') {
@@ -1063,11 +1063,11 @@ class form3
 
         $element .= "</select>\n";
 
-        if((isset($args['disabled']) && $args['disabled'] == true) 
+        if((isset($args['disabled']) && $args['disabled'] == true)
            || (isset($args['readonly']) && $args['readonly'] == true)) {
             $disabled = "disabled='disabled'; style='color: black; background: grey;'";
         }
-        else 
+        else
         {
             $disabled = "";
         }
@@ -1089,15 +1089,15 @@ class form3
             'supplier' => '#FFF000',
             'customer' => '#00FF00'
             );
-        
+
         $where = '';
-        
+
         if(count($args['type'])) {
             #print_r($args['type']);
             foreach($args['type'] as $tmp => $type) {
-                
+
                 //#print "type: $type<br>\n";
-                
+
                 if($type == 'hovedbok') {
                     $where .= " ((AccountPlanType='balance' or AccountPlanType='result') and EnableReskontro = 0) or ";
                 } elseif($type == 'hovedbokwreskontro') {
@@ -1112,9 +1112,9 @@ class form3
                     print "No type argument supplied to accountplan_number_menu";
                 }
 			}
-            
+
             $where = substr($where, 0, -4); //#remove the last or
-        } 
+        }
         else {
             print "No type argument supplied to accountplan_number_menu";
         }
@@ -1135,13 +1135,13 @@ class form3
         {
             $num_letters = $args['num_letters'];
         } //Default number of letters in menu
-        
+
         $element_array = array();
-              
+
         while($_row = $_lib['db']->db_fetch_object($result))
         {
 
-			#$optioncolor = "class=\"$_row->AccountPlanType\""; 
+			#$optioncolor = "class=\"$_row->AccountPlanType\"";
 			if($_row->AccountPlanID == $args['value']) {
                             $found = true;
                             $selectedcolor = $optioncolor;
@@ -1155,9 +1155,9 @@ class form3
 			else {
                             $element_array[] = array(
                                 $_row->AccountPlanID,
-                                $colorH[$_row->AccountPlanType], 
+                                $colorH[$_row->AccountPlanType],
                                 utf8_encode(substr("$_row->AccountPlanID-$_row->AccountName",0,$num_letters) . " (" . substr($_row->AccountPlanType,0,1) . ")")
-                                ); 
+                                );
                         }
         }
 
