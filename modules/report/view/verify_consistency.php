@@ -22,13 +22,13 @@ function hovedbokreskonrooppdateringdiff() {
     global $_lib;
     $query_voucher_hovedbok  = "select concat(v.VoucherType , v.JournalID,'#',AutomaticFromVoucherID) as Compare, v.VoucherType, v.JournalID, sum(v.AmountIn - v.AmountOut) as saldo, v.VoucherDate, v.VoucherPeriod, v.AccountPlanID, a.AccountPlanType, a.ReskontroAccountPlanType, v.VoucherID from voucher as v, accountplan as a where a.AccountPlanID=v.AccountPlanID and a.EnableReskontro=1 and (a.AccountPlanType='balance' or a.AccountPlanType='result') and v.Active=1 group by Compare order by Compare";
     $query_voucher_reskontro = "select concat(v.VoucherType , v.JournalID,'#',VoucherID)              as Compare, v.VoucherType, v.JournalID, sum(v.AmountIn - v.AmountOut) as saldo, v.VoucherDate, v.VoucherPeriod, v.AccountPlanID, a.AccountPlanType, a.ReskontroAccountPlanType, v.VoucherID from voucher as v, accountplan as a where a.AccountPlanID=v.AccountPlanID and a.AccountPlanType != 'balance' and a.AccountPlanType !='result' and v.Active=1 group by Compare order by Compare";
-    
+
     #print "XXXX: $query_voucher_hovedbok<br>\n";
     #print "YYYY: $query_voucher_reskontro<br>\n";
-    
+
     $hovedboksaldoH     = $_lib['storage']->get_hashrow(array('query' => $query_voucher_hovedbok,   'key' => 'Compare'));
     $reskontrosaldoH    = $_lib['storage']->get_hashrow(array('query' => $query_voucher_reskontro,  'key' => 'Compare'));
-    
+
     if(is_array($hovedboksaldoH)) {
         foreach($hovedboksaldoH as $journal) {
 
@@ -45,7 +45,7 @@ function hovedbokreskonrooppdateringdiff() {
                 $saldodiffH[$journal->Compare]            = $journal;
                 $saldodiffH[$journal->Compare]->status    = 'Saldo differanse: hovedbok ' . $journal->AccountPlanID . '(' . $journal->AccountPlanType . ')  linje ' . $journal->VoucherID . ' : ' . $journal->saldo . ' != reskontro ' . $reskontrosaldoH[$journal->Compare]->AccountPlanID . '($journal->ReskontroAccountPlanType): ' . $reskontrosaldoH[$journal->Compare]->saldo;
                 #print "reskontro $Compare: Finnes ikke eller sum differanse<br>\n";
-            } 
+            }
             elseif(isset($reskontrosaldoH[$journal->Compare]) && $reskontrosaldoH[$journal->Compare]->saldo == $journal->saldo) {
                 #If saldo is equal - we have to check that the reskontro is related to the hovedbok:
                 if($reskontrosaldoH[$journal->Compare]->AccountPlanType != $journal->ReskontroAccountPlanType) {
@@ -56,7 +56,7 @@ function hovedbokreskonrooppdateringdiff() {
             }
         }
     }
-     
+
     if(is_array($reskontrosaldoH)) {
         foreach($reskontrosaldoH as $journal) {
 
@@ -71,7 +71,7 @@ function hovedbokreskonrooppdateringdiff() {
                 $saldodiffH[$journal->Compare]            = $journal;
                 $saldodiffH[$journal->Compare]->status    = 'Saldo differanse: reskontro ' . $journal->AccountPlanID . '(' . $journal->AccountPlanType . ') linje ' . $journal->VoucherID . ' : ' . $journal->saldo . ' != hovedbok: ' . $hovedboksaldoH[$journal->Compare]->saldo . ' konto' . $hovedboksaldoH[$journal->Compare]->AccountPlanID;
                 #print "hovedbok $Compare: Finnes ikke eller sum differanse<br>\n";
-            } 
+            }
             elseif(isset($hovedboksaldoH[$journal->Compare]) && $hovedboksaldoH[$journal->Compare]->saldo == $journal->saldo) {
                 #If saldo is equal - we have to check that the reskontro is related to the hovedbok:
                 if($hovedboksaldoH[$journal->Compare]->ReskontroAccountPlanType != $journal->AccountPlanType) {
@@ -160,7 +160,7 @@ $result_voucher_account_0   = $_lib['db']->db_query($query_voucher_account_0);
                 <a class="button" href="<? print $MY_SELF . "&amp;voucher.JournalID=$voucher->JournalID&amp;$voucher->VoucherType&amp;action_voucher_head_delete=1" ?>">Slett bilag</a>
                 <? } ?>
             </td>
-                
+
         </tr>
       <?
       }
@@ -414,7 +414,7 @@ while($voucher = $_lib['db']->db_fetch_object($result_bad_date))
                 <a class="button" href="<? print $MY_SELF . "&amp;voucher.JournalID=$voucher->JournalID&amp;$voucher->VoucherType&amp;VoucherPeriod=$voucher->VoucherPeriod&amp;action_voucher_head_delete=1" ?>">Slett bilag</a>
                 <? } ?>
             </td>
-                
+
         </tr>
       <?
       }
@@ -479,7 +479,7 @@ while($voucher          = $_lib['db']->db_fetch_object($result_notactive))
             <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
             <a class="button" href="<? print $MY_SELF . "&amp;voucher.JournalID=$voucher->JournalID&amp;$voucher->VoucherType&amp;action_voucher_head_delete=1" ?>">Slett bilag</a>
             <? } ?>
-        </td>               
+        </td>
     </tr>
 <? } ?>
 </tbody>
@@ -528,9 +528,9 @@ while($row = $_lib['db']->db_fetch_object($result_week))
 
     <tbody>
       <?
-    
+
          $query = "
-SELECT 
+SELECT
   V1.JournalID, V1.VoucherType, V1.VoucherDate
 FROM
   voucher AS V1
@@ -539,13 +539,13 @@ FROM
   LEFT JOIN vat AS VAT on (VAT.VatID = V1.VatID AND VAT.ValidFrom <= V1.VoucherDate AND VAT.ValidTo >= V1.VoucherDate)
 WHERE
   V1.Active = 1
-  AND 
+  AND
 
   (V1.VatID != 0
   AND V1.Vat > 0.0
   AND V1.AmountIn + V1.AmountOut > 0.1
   AND (
-    (V2.VoucherID IS NULL 
+    (V2.VoucherID IS NULL
        OR V2.Active = 0)
     OR
     (V3.VoucherID IS NULL
@@ -557,8 +557,8 @@ WHERE
   OR
   (VAT.Percent != V1.Vat)
 ";
-   
-         $res = $_lib['db']->db_query($query);   
+
+         $res = $_lib['db']->db_query($query);
          while( ($row = $_lib['db']->db_fetch_assoc($res)) ) {
       ?>
       <tr class="BGColorLight">
@@ -568,7 +568,7 @@ WHERE
           </a>
         </td>
         <td><? printf("%s", $row['VoucherDate']); ?></td>
-        
+
       </tr>
       <?
          }
@@ -614,11 +614,11 @@ $query_salary  = "SELECT s.SalaryID, s.JournalDate, s.Period, s.AccountPlanID, a
 $result_salary = $_lib['db']->db_query($query_salary);
 // Select all salaries and their corresponding journal ids that have different lines
 // A bit of an explanation of the below query:
-// First we select the number of active lines for salary in voucher table for all open 
+// First we select the number of active lines for salary in voucher table for all open
 // periodes and compare them to number of lines in salaryline table for all open periodes
 // based on corresponding JournalID
 // if the numbers differ then something is not good
-$query_diff  = "SELECT s.SalaryID, s.JournalID, s.JournalDate, s.Period, s.AccountPlanID, ap.AccountName, s.ValidFrom, s.ValidTo, s.PayDate, s.DomesticBankAccount, k.KommuneNumber, k.KommuneName 
+$query_diff  = "SELECT s.SalaryID, s.JournalID, s.JournalDate, s.Period, s.AccountPlanID, ap.AccountName, s.ValidFrom, s.ValidTo, s.PayDate, s.DomesticBankAccount, k.KommuneNumber, k.KommuneName
                 FROM salary s JOIN accountplan ap ON s.AccountPlanID = ap.AccountPlanID JOIN kommune k ON ap.KommuneID = k.KommuneID
                 WHERE SalaryID IN (
                   SELECT p1.SalaryID

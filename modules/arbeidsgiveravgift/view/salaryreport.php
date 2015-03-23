@@ -32,7 +32,7 @@ $factor = 4;
                 <td><font size="4" face="Arial, Helvetica, SansSerif"><b>L&oslash;nns- og trekkoppgave for <? print $salaryreport->_year ?> </b></font><br><br><br><br><br></td>
                 <td><font style="font-family: Arial, Helvetica, SansSerif; font-size: 7pt;">Regler om lønnsoppgaveplikt er gitt i ligningsloven kap. 6 med forskrifter.<br>
 									Opplysningene i denne oppgaven vil bli benyttet ved forhåndsutfylling av<br>
-									selvangivelsen for lønnstakere og pensjonister mv.	
+									selvangivelsen for lønnstakere og pensjonister mv.
                 </font></td>
              </tr>
         </thead>
@@ -126,18 +126,18 @@ function NorskDato($dato)
 	list($y, $m, $d) = split("-", $dato);
 	return $d . ". " . $maaned[$m] . " " . $y;
 }
-                
- 					if($salaryreport->_reportHash['account']['WorkedWholeYear'] != 1)
- 					{ 
- 						if ($salaryreport->_reportHash['account']['WorkPercent'] == 100)              
- 						{
+
+					if($salaryreport->_reportHash['account']['WorkedWholeYear'] != 1)
+					{
+						if ($salaryreport->_reportHash['account']['WorkPercent'] == 100)
+						{
                 ?>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<? print NorskDato($salaryreport->_reportHash['account']['WorkStart']) . " - " . NorskDato($salaryreport->_reportHash['account']['WorkStop']); 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<? print NorskDato($salaryreport->_reportHash['account']['WorkStart']) . " - " . NorskDato($salaryreport->_reportHash['account']['WorkStop']);
  						}
  						else
  						{
                 ?>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<? print round($salaryreport->_reportHash['account']['WorkedDays']) ." dager"; 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<? print round($salaryreport->_reportHash['account']['WorkedDays']) ." dager";
  						}
 					}
                 ?>
@@ -285,16 +285,16 @@ function NorskDato($dato)
                   $multiple = $lineHash['MultipleLines'];
                   if ($multiple) {
                     for ($i=0; $i < $lineHash['MultipleLinesNumber']; $i++) {
-                	if ($lineHash[$i]['sumLineCode'] != 0)
-                	if ($lineHash[$i]['SalaryCode'] == "610" || $lineHash[$i]['SalaryCode'] == "613" || $lineHash[$i]['SalaryCode'] == "616" || $lineHash[$i]['SalaryCode'] == "619" || $lineHash[$i]['SalaryCode'] == "620"  || $lineHash[$i]['SalaryCode'] == "623"  || $lineHash[$i]['SalaryCode'] == "624" || $lineHash[$i]['SalaryCode'] == "626" || $lineHash[$i]['SalaryCode'] == "627" || $lineHash[$i]['SalaryCode'] == "628")
+                    if ($lineHash[$i]['sumLineCode'] != 0)
+                    if ($lineHash[$i]['SalaryCode'] == "610" || $lineHash[$i]['SalaryCode'] == "613" || $lineHash[$i]['SalaryCode'] == "616" || $lineHash[$i]['SalaryCode'] == "619" || $lineHash[$i]['SalaryCode'] == "620"  || $lineHash[$i]['SalaryCode'] == "623"  || $lineHash[$i]['SalaryCode'] == "624" || $lineHash[$i]['SalaryCode'] == "626" || $lineHash[$i]['SalaryCode'] == "627" || $lineHash[$i]['SalaryCode'] == "628")
                             print $lineHash[$i]['SalaryText'] . ", Antall d&oslash;gn: " . $lineHash[$i]['NumberInPeriod']."<br />";
-                	elseif ($lineHash[$i]['SalaryCode'] == "614")
+                    elseif ($lineHash[$i]['SalaryCode'] == "614")
                             print $lineHash[$i]['SalaryText'] . ", Antall dager: " . $lineHash[$i]['NumberInPeriod']."<br />";
                         elseif ($lineHash[$i]['SalaryCode'] == "721")
                             print $lineHash[$i]['SalaryText'] . ", Antall km: " . $lineHash[$i]['NumberInPeriod']."<br />";
                     else
                     {
-                    	print $lineHash[$i]['SalaryText']."<br />";
+                        print $lineHash[$i]['SalaryText']."<br />";
                     }
                     }
                   }
