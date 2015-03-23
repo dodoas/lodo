@@ -246,7 +246,15 @@ function NorskDato($dato)
 		if (is_array($salaryreport->_reportHash['body']))
                 foreach($salaryreport->_reportHash['body'] as $LineNumber => $lineHash)
                 {
-                	if ($lineHash['sumLineCode'] != 0)
+                  $multiple = $lineHash['MultipleLines'];
+                  if ($multiple) {
+                    for ($i=0; $i < $lineHash['MultipleLinesNumber']; $i++) {
+                      if ($lineHash[$i]['sumLineCode'] != 0)
+                        print $lineHash[$i]['SalaryCode']."<br />";
+                    }
+                  }
+                  else
+                    if ($lineHash['sumLineCode'] != 0)
                     	print $lineHash['SalaryCode']."<br />";
                 }
                 ?>
@@ -256,8 +264,16 @@ function NorskDato($dato)
 		if (is_array($salaryreport->_reportHash['body']))
                 foreach($salaryreport->_reportHash['body'] as $LineNumber => $lineHash)
                 {
-                	if ($lineHash['sumLineCode'] != 0)
-                    print $_lib['format']->Amount(array('value'=>$lineHash['sumLineCode'], 'return'=>'value', 'decimals'=>'0', 'roundoff'=>'down', 'nonzero'=>'1'))."<br />";
+                  $multiple = $lineHash['MultipleLines'];
+                  if ($multiple) {
+                    for ($i=0; $i < $lineHash['MultipleLinesNumber']; $i++) {
+                      if ($lineHash[$i]['sumLineCode'] != 0)
+                        print $_lib['format']->Amount(array('value'=>$lineHash[$i]['sumLineCode'], 'return'=>'value', 'decimals'=>'0', 'roundoff'=>'down', 'nonzero'=>'1'))."<br />";
+                    }
+                  }
+                  else
+                      if ($lineHash['sumLineCode'] != 0)
+                        print $_lib['format']->Amount(array('value'=>$lineHash['sumLineCode'], 'return'=>'value', 'decimals'=>'0', 'roundoff'=>'down', 'nonzero'=>'1'))."<br />";
                 }
                 ?>
                 </td>
@@ -266,6 +282,23 @@ function NorskDato($dato)
 		if (is_array($salaryreport->_reportHash['body']))
                 foreach($salaryreport->_reportHash['body'] as $LineNumber => $lineHash)
                 {
+                  $multiple = $lineHash['MultipleLines'];
+                  if ($multiple) {
+                    for ($i=0; $i < $lineHash['MultipleLinesNumber']; $i++) {
+                	if ($lineHash[$i]['sumLineCode'] != 0)
+                	if ($lineHash[$i]['SalaryCode'] == "610" || $lineHash[$i]['SalaryCode'] == "613" || $lineHash[$i]['SalaryCode'] == "616" || $lineHash[$i]['SalaryCode'] == "619" || $lineHash[$i]['SalaryCode'] == "620"  || $lineHash[$i]['SalaryCode'] == "623"  || $lineHash[$i]['SalaryCode'] == "624" || $lineHash[$i]['SalaryCode'] == "626" || $lineHash[$i]['SalaryCode'] == "627" || $lineHash[$i]['SalaryCode'] == "628")
+                            print $lineHash[$i]['SalaryText'] . ", Antall d&oslash;gn: " . $lineHash[$i]['NumberInPeriod']."<br />";
+                	elseif ($lineHash[$i]['SalaryCode'] == "614")
+                            print $lineHash[$i]['SalaryText'] . ", Antall dager: " . $lineHash[$i]['NumberInPeriod']."<br />";
+                        elseif ($lineHash[$i]['SalaryCode'] == "721")
+                            print $lineHash[$i]['SalaryText'] . ", Antall km: " . $lineHash[$i]['NumberInPeriod']."<br />";
+                    else
+                    {
+                    	print $lineHash[$i]['SalaryText']."<br />";
+                    }
+                    }
+                  }
+                  else {
                 	if ($lineHash['sumLineCode'] != 0)
                 	if ($lineHash['SalaryCode'] == "610" || $lineHash['SalaryCode'] == "613" || $lineHash['SalaryCode'] == "616" || $lineHash['SalaryCode'] == "619" || $lineHash['SalaryCode'] == "620"  || $lineHash['SalaryCode'] == "623"  || $lineHash['SalaryCode'] == "624" || $lineHash['SalaryCode'] == "626" || $lineHash['SalaryCode'] == "627" || $lineHash['SalaryCode'] == "628")
                             print $lineHash['SalaryText'] . ", Antall d&oslash;gn: " . $lineHash['NumberInPeriod']."<br />";
@@ -277,6 +310,7 @@ function NorskDato($dato)
                     {
                     	print $lineHash['SalaryText']."<br />";
                     }
+                  }
                 }
                 ?>
                 </td>

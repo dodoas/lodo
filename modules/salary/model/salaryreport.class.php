@@ -76,15 +76,23 @@ class salaryreport
         
         $this->_reportHash['head']['000']['sumLineCode'] = $result["SkyldigFeriepengeGrunnlag"];
         
-        $this->_query = "select sum(sl.AmountThisPeriod) as sumLineCode, sl.SalaryCode, sl.SalaryText, sum(sl.NumberInPeriod) as NumberInPeriod, sl.LineNumber from salary as s, salaryline as sl where s.AccountPlanID='$this->_personID' and s.SalaryID=sl.SalaryID and substring(s.Period, 1, 4)='$this->_year' and sl.SalaryCode is not null and sl.SalaryCode != '' group by sl.LineNumber";
-        $this->_salaryLineHash = $_lib['storage']->get_hashhash(array('query'=>$this->_query, 'key'=>'LineNumber'));
-        foreach($this->_salaryLineHash as $LineNumber => $lineHash)
+        $this->_query = "select sum(sl.AmountThisPeriod) as sumLineCode, sl.SalaryCode, sl.SalaryText, sum(sl.NumberInPeriod) as NumberInPeriod, sl.LineNumber from salary as s, salaryline as sl where s.AccountPlanID='$this->_personID' and s.SalaryID=sl.SalaryID and substring(s.Period, 1, 4)='$this->_year' and sl.SalaryCode is not null and sl.SalaryCode != '' group by sl.SalaryText, sl.LineNumber";
+        $this->_salaryLineHash = $_lib['storage']->get_hashhash(array('query'=>$this->_query, 'key'=>'SalaryText'));
+        foreach($this->_salaryLineHash as $SalaryText => $lineHash)
         {
         	$salaryCode = $lineHash["SalaryCode"];
             if($this->_salaryTopLineHash[$salaryCode] != 1)
             {
                 //$this->_salaryBottomLineHash[$salaryCode] = $lineHash;
-                $this->_reportHash['body'][$LineNumber] = $lineHash;
+                $this->_reportHash['body'][$lineHash['LineNumber']] = $lineHash;
+                if (!isset($this->_reportHash['body'][$lineHash['LineNumber']]['MultipleLines'])) {
+                  $this->_reportHash['body'][$lineHash['LineNumber']]['MultipleLines'] = false;
+                  $this->_reportHash['body'][$lineHash['LineNumber']]['MultipleLinesNumber'] = 0;
+                }
+                else $this->_reportHash['body'][$lineHash['LineNumber']]['MultipleLines'] = true;
+                $i = $this->_reportHash['body'][$lineHash['LineNumber']]['MultipleLinesNumber'];
+                $this->_reportHash['body'][$lineHash['LineNumber']][$i] = $lineHash;
+                $this->_reportHash['body'][$lineHash['LineNumber']]['MultipleLinesNumber']++;
             }
         }
     }
