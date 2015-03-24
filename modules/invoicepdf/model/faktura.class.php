@@ -270,8 +270,9 @@ class pdfInvoice
         }
         // Delivery address
         $lineNumber = 0;
-        if (isset($params["delivery"]["name"])) {
+        if (isset($params["delivery"]["address1"])) {
           $this->pdf->SetFont($this->invoiceFont,'B',12);
+          if (!isset($params['delivery']['name'])) $params['delivery']['name'] = $params['recipient']['name'];
           $deliverTo = $this->splitString($params["delivery"]["name"], 100);
           for ($i =0; $i < count($deliverTo); $i++)
           {
