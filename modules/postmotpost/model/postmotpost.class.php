@@ -857,10 +857,10 @@ class postmotpost {
     /**
      * Open all posts on given accountplan for open peroids.
      */
-    public function openAllPostsAccountForOpenPeriods($AccountPlanID) {
+    public function openAllPostsForOpenPeriods() {
         global $_lib;
 
-        $voucher_query = "select VoucherID from voucher where AccountPlanID=$AccountPlanID and VoucherPeriod in (select Period from accountperiod where Status < 4)";
+        $voucher_query = "select VoucherID from voucher where VoucherPeriod in (select Period from accountperiod where Status < 4)";
         $r = $_lib['db']->db_query($voucher_query);
 
         while($voucher = $_lib['db']->db_fetch_assoc($r)) {
