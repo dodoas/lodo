@@ -38,8 +38,12 @@ class pdfInvoice
     public $invoiceHeadSenderStart = 14;
     public $invoiceHeadSenderLeftMargin = 9;
 
-    public $invoiceHeadRecipientStart = 45;
+    public $invoiceHeadRecipientStart = 40;
     public $invoiceHeadRecipientLeftMargin = 9;
+    public $invoiceHeadRecipientUnderline = 94;
+
+    public $invoiceHeadDeliveryStart = 66;
+    public $invoiceHeadDeliveryLeftMargin = 9;
 
     public $invoiceHeadCompanyInfoStart = 20;
     public $invoiceHeadCompanyInfoLeftMargin = 132;
@@ -58,7 +62,7 @@ class pdfInvoice
     public $invoiceLinesPerSite = 18;
 
     public $invoiceLineHeadFontSize = 9;
-    public $invoiceLineHeadStart = 83;
+    public $invoiceLineHeadStart = 98;
     public $invoiceLineHeadLeft1 = 14;
     public $invoiceLineHeadLeft2 = 30;
     public $invoiceLineHeadLeft3 = 99;
@@ -163,7 +167,6 @@ class pdfInvoice
         $this->pdf->AddPage();
         $this->pdf->SetAutoPageBreak(false);
         $this->fakturaHead($params);
-        $this->setBetalingsbetingelserTekst($params);
         $this->invoiceLineCurrentLine = 0;
         $this->headerParams["invoiceData"]["Side"]++;
     }
@@ -265,6 +268,39 @@ class pdfInvoice
             $this->pdf->SetXY($this->invoiceHeadRecipientLeftMargin, $this->invoiceHeadRecipientStart + ($this->lineHeight * $lineNumber));
             $this->pdf->Cell($this->invoiceHeadAdressWidth, $this->lineHeight, $this->korriger($params["recipient"]["country"]),$this->showMyFrame);
         }
+
+        $this->pdf->Line($this->invoiceHeadRecipientLeftMargin, $this->invoiceHeadRecipientStart + ($this->lineHeight * ($lineNumber+1)), $this->invoiceHeadRecipientUnderline, $this->invoiceHeadRecipientStart + ($this->lineHeight * ($lineNumber+1)));
+
+        // Delivery address
+        $lineNumber = 0;
+        if (isset($params["delivery"]["address1"])) {
+          $this->pdf->SetFont($this->invoiceFont,'B', 10);
+          if (!isset($params['delivery']['name'])) $params['delivery']['name'] = $params['recipient']['name'];
+          $deliverTo = $this->splitString($params["delivery"]["name"], 100);
+
+          $this->pdf->SetXY($this->invoiceHeadDeliveryLeftMargin, $this->invoiceHeadDeliveryStart - 3 + ($this->lineHeight * $lineNumber));
+          $this->pdf->SetFillColor(240,240,240);
+          $this->pdf->Cell($this->invoiceHeadAdressWidth, 4, "Leveringsadresse", $this->showMyFrame, 0, 'L', 1);
+          $lineNumber++;
+
+          for ($i =0; $i < count($deliverTo); $i++)
+          {
+            $this->pdf->SetXY($this->invoiceHeadDeliveryLeftMargin, $this->invoiceHeadDeliveryStart -3.5 + ($this->lineHeight * $lineNumber));
+            $this->pdf->Cell($this->invoiceHeadAdressWidth, 4, $this->korriger($deliverTo[$i]), $this->showMyFrame);
+            $lineNumber++;
+          }
+          $this->pdf->SetFont($this->invoiceFont,'',10);
+          $this->pdf->SetXY($this->invoiceHeadDeliveryLeftMargin, $this->invoiceHeadDeliveryStart + ($this->lineHeight * $lineNumber) - 4);
+          $this->pdf->Cell($this->invoiceHeadAdressWidth,$this->lineHeight - 1, $this->korriger($params["delivery"]["address1"]),$this->showMyFrame);
+          $lineNumber++;
+          $this->pdf->SetXY($this->invoiceHeadDeliveryLeftMargin, $this->invoiceHeadDeliveryStart + ($this->lineHeight * $lineNumber) - 4.5);
+          $this->pdf->Cell($this->invoiceHeadAdressWidth, $this->lineHeight - 1, $this->korriger($params["delivery"]["zip"]) . " " . $this->korriger($params["delivery"]["city"]), $this->showMyFrame);
+          if($params["delivery"]["country"] != $params["sender"]["country"]) {
+            $lineNumber++;
+            $this->pdf->SetXY($this->invoiceHeadDeliveryLeftMargin, $this->invoiceHeadDeliveryStart + ($this->lineHeight * $lineNumber) - 5);
+            $this->pdf->Cell($this->invoiceHeadAdressWidth, $this->lineHeight - 1, $this->korriger($params["delivery"]["country"]),$this->showMyFrame);
+          }
+        }
     }
 /**
  * Burde vært privat. Lager feltet til venstre med fakturainfo.
@@ -295,10 +331,31 @@ class pdfInvoice
 
             $this->pdf->SetFont($this->invoiceFont,'', $this->invoiceHeadCompanyInfoFont);
             $this->pdf->SetXY($this->invoiceHeadCompanyInfoLeftMargin + $this->invoiceHeadCompanyInfoWidth, $this->invoiceHeadCompanyInfoStart + ($this->invoiceHeadlineHeight * $lineNumber));
-            $this->pdf->Cell($this->invoiceHeadCompanyInfoWidth2, $this->invoiceHeadlineHeight, 
+            $this->pdf->Cell($this->invoiceHeadCompanyInfoWidth2, $this->invoiceHeadlineHeight,
                              $this->korriger($value),$this->showMyFrame);
 
             $lineNumber++;
+        }
+
+        // Betalingsbetingelser
+        if ($params["betingelser"]) {
+            $this->pdf->SetFont($this->invoiceFont,'B',$this->invoiceLineFontSize - 1);
+            $lines = $this->splitString($params["betingelser"], 42);
+            $this->pdf->SetXY($this->invoiceHeadCompanyInfoLeftMargin, $this->invoiceHeadCompanyInfoStart + ($this->invoiceHeadlineHeight * $lineNumber));
+            $this->pdf->Cell($this->invoiceHeadCompanyInfoWidth,$this->invoiceHeadlineHeight, $this->korriger("Betalingsbetingelser"), $this->showMyFrame, 0, "L");
+            $this->pdf->SetFont($this->invoiceFont,'',$this->invoiceLineFontSize - 1);
+
+            for($i = 0; $i < count($lines); $i++)
+            {
+                $myTekst = $lines[$i];
+                $this->pdf->SetFont($this->invoiceFont,'',$this->invoiceLineFontSize - 1);
+
+                $myLeft = "invoiceLineHeadLeft1";
+                $myRight = "invoiceLineHeadLeft8";
+                $this->pdf->SetXY($this->invoiceHeadCompanyInfoLeftMargin + $this->invoiceHeadCompanyInfoWidth, $this->invoiceHeadCompanyInfoStart + ($this->invoiceHeadlineHeight * $lineNumber));
+                $this->pdf->Cell($this->invoiceHeadCompanyInfoWidth2, $this->invoiceHeadlineHeight, $this->korriger($myTekst), $this->showMyFrame, 0, "L");
+                $lineNumber++;
+            }
         }
 
         if($this->invoiceHeadCompanyInfoStart + ($this->invoiceHeadlineHeight * ($lineNumber + 1)) > $this->invoiceLineHeadStart - ($this->lineHeight * 1.2)) {
@@ -322,6 +379,7 @@ class pdfInvoice
         $this->pdf->SetFont($this->invoiceFont,'B',$this->invoiceHeaderFont);
         $this->pdf->SetXY($this->invoiceHeadCompanyInfoLeftMargin, $this->invoiceHeadCompanyInfoStart - 5);
         $this->pdf->Cell($this->invoiceHeaderWidth, $this->invoiceHeaderHeight, $this->korriger($params["fakturatype"]),$this->showMyFrame);
+        $this->pdf->Line(130, 20, 200, 20);
     }
 /**
  * Burde vært privat. Kalles av fakturaHead. Skriver ut overskrifter for tabellen med fakturalinjer.
@@ -521,9 +579,9 @@ class pdfInvoice
 
     #Place the multinline comment in the correct spot
     function addComment($params) {
-        
+
         #print_r($params);
-    
+
         if ($params["comment"] != "")
         {
             $commentH = split("\n", $params["comment"]);
@@ -555,7 +613,7 @@ class pdfInvoice
 #special function to split a long string and return it as an array with correct length
 function SplitByLength($string, $chunkLength=1){
 
-    $result = array();     
+    $result = array();
     $strLength = strlen($string);
     $x = 0;
 
@@ -563,41 +621,10 @@ function SplitByLength($string, $chunkLength=1){
         $result[] = substr($string, ($x * $chunkLength), $chunkLength);
         $x++;
     }
-    
+
     return $result;
 }
 
-/**
- * Burde vært privat. Setter inn betalingsbetingelser under fakturainformasjonen.
- *
- * @param array $params:
- * $params["betingelser"] (tekst som deles opp i flere linjer. Kan ikke inneholde <CR><LF>, men
- * teksten splittes der det er nødvendig)
- */
-    function setBetalingsbetingelserTekst($params)
-    {
-        // From 88 mm to 169 mm. ( 30 mm is consumed by full vat spec or 14 mm if simple vat spec. )
-        // This means that you have available 86 mm or 21 lines or 14 lines if full spec vat og  18 lines if simple spec vat
-        $this->pdf->SetFont($this->invoiceFont,'B',$this->invoiceLineFontSize - 1);
-        $lines = $this->splitString($params["betingelser"], 65);
-        $this->pdf->SetXY($this->invoiceHeadCompanyBetingelserLeftMargin, 60 + ($myLine * ($this->lineHeight -1)));
-        $this->pdf->Cell(60, ($this->lineHeight -1), $this->korriger("Betalingsbetingelser"), $this->showMyFrame, 0, "L");
-        $this->pdf->SetFont($this->invoiceFont,'',$this->invoiceLineFontSize - 1);
-        $myLine = 1;
-
-        for($i = 0; $i < count($lines); $i++)
-        {
-            $myTekst = $lines[$i];
-            $this->pdf->SetFont($this->invoiceFont,'',$this->invoiceLineFontSize - 1);
-
-            $myLeft = "invoiceLineHeadLeft1";
-            $myRight = "invoiceLineHeadLeft8";
-            $this->pdf->SetXY($this->invoiceHeadCompanyBetingelserLeftMargin, 60 + ($myLine * ($this->lineHeight -1)));
-            $this->pdf->Cell(60, ($this->lineHeight -1), $this->korriger($myTekst), $this->showMyFrame, 0, "L");
-            $myLine++;
-        }
-
-    }
 /**
  * Skriver ut giro delen av fakturaen. Dette gjøres når alle fakturalinjene er på plass, teksten på plass
  * og summeringslinjen på plass.
