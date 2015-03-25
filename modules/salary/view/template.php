@@ -242,7 +242,7 @@ print $_lib['sess']->doctype ?>
     ?>
     </td>
     <td>
-        <nobr><? if($_lib['sess']->get_person('AccessLevel') >= 3) { ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $SalaryConfID ?>&amp;SalaryConfLineID=<? print $line->SalaryConfLineID ?>&amp;action_salaryconfline_new=1" class="button">Ny linje nr <? print $line->LineNumber ?></a><?}?>
+        <nobr><? if($_lib['sess']->get_person('AccessLevel') >= 3) { if($SalaryConfID == 1) { ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.template&amp;SalaryConfID=<? print $SalaryConfID ?>&amp;SalaryConfLineID=<? print $line->SalaryConfLineID ?>&amp;action_salaryconfline_new=1" class="button">Ny linje nr <? print $line->LineNumber ?></a><?} }?>
     </td>
    <?
     $counter++;

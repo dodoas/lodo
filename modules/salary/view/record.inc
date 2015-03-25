@@ -760,7 +760,7 @@ elseif($_lib['input']->getProperty('action_salaryconf_delete'))
     $_lib['storage']->db_delete_hash('salaryconfline', $pk);
     $_lib['storage']->db_delete_hash('salaryconf', $pk);
 }
-elseif($_lib['input']->getProperty('action_salarysubconf_enter'))
+elseif($_lib['input']->getProperty('action_salarysubconf_enter') || $_lib['input']->getProperty('action_salary_updatetemplatecode'))
 {
     $query = "select * from salaryconfline where SalaryConfID=1";
     $query_result = $_lib['storage']->db_query($query);
@@ -770,7 +770,7 @@ elseif($_lib['input']->getProperty('action_salarysubconf_enter'))
     {
         $query_exists="SELECT * FROM salaryconfline WHERE SalaryConfID = '". $SalaryConfID ."' AND LineNumber = '". $row['LineNumber'] ."' AND SalaryText = '". $row['SalaryText'] ."'";
         $query_exists_result = $_lib['storage']->db_query($query_exists);
-        $exists = ($_lib['storage']->db_numrows($query_exists_result) == 1);
+        $exists = ($_lib['storage']->db_numrows($query_exists_result) > 0);
         if (!$exists) {
             $fields = array();
             $fields['salaryconfline_SalaryConfID']          = $SalaryConfID;
@@ -800,7 +800,7 @@ elseif($_lib['input']->getProperty('action_salarysubconf_enter'))
     {
         $query_exists="SELECT * FROM salaryconfline WHERE SalaryConfID = 1 AND LineNumber = '". $row['LineNumber'] ."' AND SalaryText = '". $row['SalaryText'] ."'";
         $query_exists_result = $_lib['storage']->db_query($query_exists);
-        $exists = ($_lib['storage']->db_numrows($query_exists_result) == 1);
+        $exists = ($_lib['storage']->db_numrows($query_exists_result) > 0);
         if (!$exists) {
             $pk = array();
             $pk['SalaryConfLineID']=$row['SalaryConfLineID'];
@@ -809,30 +809,6 @@ elseif($_lib['input']->getProperty('action_salarysubconf_enter'))
             print "Slettet linje nr ".$salarylinehash['SalaryConfLineID']."<br>\n";
         }
     }
-}
-elseif($_lib['input']->getProperty('action_salary_updatetemplatecode')) {
-  #Get code and holiday money from hovedmal
-  $SalaryConfID = $_lib['input']->getProperty('SalaryConfID');
-
-  $query 	= "select * from salaryconfline where SalaryConfID=1";
-  $query_result = $_lib['storage']->db_query($query);
-  #print_r($codehash);
-
-  while($row = $_lib['storage']->db_fetch_assoc($query_result)) {
-    $query_exists = "SELECT * FROM salaryconfline WHERE SalaryConfID='$SalaryConfID' AND LineNumber = '". $row['LineNumber'] . "' AND SalaryText='". $row['SalaryText'] ."'";
-    $query_exists_result = $_lib['storage']->db_query($query_exists);
-    $exists = ($_lib['storage']->db_numrows($query_exists_result) == 1);
-    if ($exists) {
-      $sql_update = "UPDATE salaryconfline SET SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "' WHERE SalaryConfID='$SalaryConfID' AND LineNumber='" . $row['LineNumber'] . "' AND SalaryText = '". $row['SalaryText'] ."'";
-      #print "$sql_update<br>\n";
-      $_lib['db']->db_update($sql_update);
-    }
-    else {
-      $sql_insert = "INSERT INTO salaryconfline(SalaryCode, EnableVacationPayment, EnableEmployeeTax, SalaryConfID, LineNumber, SalaryText, NumberInPeriod, Rate, AmountThisPeriod, AccountPlanID, ProjectID, DepartmentID) VALUES('". $row['SalaryCode'] ."', '". $row['EnableVacationPayment'] ."', '". $row['EnableEmployeeTax'] ."', '$SalaryConfID', '". $row['LineNumber'] ."', '". $row['SalaryText'] ."', '". $row['NumberInPeriod'] ."', '". $row['Rate'] ."', '". $row['AmountThisPeriod'] ."', '". $row['AccountPlanID'] ."', '". $row['ProjectID'] ."', '". $row['DepartmentID'] ."')";
-      #print "$sql_update<br>\n";
-      $_lib['db']->db_insert($sql_insert);
-    }
-  }
 }
 elseif($_lib['input']->getProperty('action_salary_updatesalarycode')) {
     #print_r($_REQUEST);
@@ -847,7 +823,7 @@ elseif($_lib['input']->getProperty('action_salary_updatesalarycode')) {
     while($row = $_lib['storage']->db_fetch_assoc($query_result)) {
       $query_exists = "SELECT * FROM salaryline WHERE SalaryID='$SalaryID' AND LineNumber = '". $row['LineNumber'] . "' AND SalaryText='". $row['SalaryText'] ."'";
       $query_exists_result = $_lib['storage']->db_query($query_exists);
-      $exists = ($_lib['storage']->db_numrows($query_exists_result) == 1);
+      $exists = ($_lib['storage']->db_numrows($query_exists_result) > 0);
       if (!$exists) {
         #print "Lager ny linje";
         $sql_insert = "insert into salaryline (SalaryLineID, SalaryID, LineNumber, SalaryText) values(NULL, '$SalaryID', '" . $row['LineNumber'] . "', '". $row['SalaryText'] ."');";
