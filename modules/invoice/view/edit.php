@@ -42,6 +42,7 @@ if(!$factoring->isGlobalEnabled() || (!$factoring->hasFactoring() && (int)$row->
 }*/
 
 print $_lib['sess']->doctype;
+$tabindex = 1;
 
 ?>
 <head>
@@ -72,7 +73,7 @@ print $_lib['sess']->doctype;
         <td><b>Avsender</b></td>
         <td><? print $row->SName ?></td>
         <td><b>Mottaker</b></td>
-        <td><? print $_lib['form3']->accountplan_number_menu(array('table'=>$db_table, 'field'=>'CustomerAccountPlanID', 'pk'=>$InvoiceID, 'value'=>$row->CustomerAccountPlanID,  'type' => array(0 => customer))) ?></td>
+        <td><? print $_lib['form3']->accountplan_number_menu(array('table'=>$db_table, 'field'=>'CustomerAccountPlanID', 'pk'=>$InvoiceID, 'value'=>$row->CustomerAccountPlanID,  'type' => array(0 => customer), 'tabindex' => $tabindex++)) ?></td>
     </tr>
     <tr>
         <td>Adresse</a></td>
@@ -147,6 +148,31 @@ print $_lib['sess']->doctype;
         <td><? if (!empty($row->SVatNo)) print $row->SVatNo ?></td>
         <td><?php if (!empty($row->IVatNo)) echo 'Vat nr' ?></td>
         <td><? if (!empty($row->IVatNo)) print $row->IVatNo ?></td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+        <td colspan="2"><b>Leveringsadresse</b></td>
+    </tr>
+
+    <tr>
+        <td colspan="2"></td>
+        <td>Adresse</td>
+        <td><? print $_lib['form3']->text(array('field'=>'DAddress', 'value'=>$row->DAddress, 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+        <td>Postnummer</td>
+        <td><? print $_lib['form3']->text(array('field'=>'DZipCode', 'value'=>$row->DZipCode, 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+        <td>By</td>
+        <td><? print $_lib['form3']->text(array('field'=>'DCity', 'value'=>$row->DCity, 'width'=>'30', 'tabindex'=> $tabindex++)) ?></td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+        <td>Land</td>
+        <td><? print $_lib['form3']->Country_menu3(array('field'=>'DCountryCode', 'value'=>(($row->DCountryCode != "") ? $row->DCountryCode : "NO"), 'required'=>false, 'tabindex' => $tabindex++)); ?></td>
     </tr>
     <tr height="5">
         <td colspan="4"></td>

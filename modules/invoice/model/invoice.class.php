@@ -121,8 +121,8 @@ class invoice {
 
         $headH['IName']                 = $accountplan->AccountName;
         $headH['DName']                 = $accountplan->AccountName;
-        $headH['DAddress']              = $accountplan->Address;
-        $headH['DZipCode']              = $accountplan->ZipCode;
+        $headH['DAddress']              = $args['invoiceout_DAddress_' . $this->InvoiceID];
+        $headH['DZipCode']              = $args['invoiceout_DZipCode_' . $this->InvoiceID];
 
         if($accountplan->EnableInvoicePoBox) {
           $headH['IPoBox']              = $accountplan->IPoBox;
@@ -141,9 +141,9 @@ class invoice {
 
         $headH['IZipCode']              = $accountplan->ZipCode;
         $headH['ICity']                 = $accountplan->City;
-        $headH['DCity']                 = $accountplan->City;
+        $headH['DCity']                 = $args['invoiceout_DCity_' . $this->InvoiceID];
 
-        $headH['DCountryCode']              = $accountplan->CountryCode;
+        $headH['DCountryCode']              = $args['invoiceout_DCountryCode_' . $this->InvoiceID];
         $headH['ICountryCode']              = $accountplan->CountryCode;
         $headH['DEmail']                = $accountplan->Email;
         $headH['IEmail']                = $accountplan->Email;
@@ -271,6 +271,15 @@ class invoice {
         $args[$prefix . "_Phone_" . $args['InvoiceID']] = $row_to->Phone;
         $args[$prefix . "_IAddress_" . $args['InvoiceID']] = $row_to->Address;
         $args[$prefix . "_IZipCode_" . $args['InvoiceID']] = $row_to->ZipCode;
+
+        // Set delivery address fields. If account plan has changed we set delivery address to customer address which is default.
+        $get_invoice = "select * from invoiceout where InvoiceID = " . $args['InvoiceID'];
+        $invoice_row = $_lib["storage"]->get_row(array("query" => $get_invoice));
+        $customer_accountplan_changed = $invoice_row->CustomerAccountPlanID != $customer_accountplan_id;
+        $args[$prefix . "_DAddress_" . $args['InvoiceID']] = ($customer_accountplan_changed) ? $row_to->Address : $args['_DAddress'];
+        $args[$prefix . "_DZipCode_" . $args['InvoiceID']] = ($customer_accountplan_changed) ? $row_to->ZipCode : $args['_DZipCode'];
+        $args[$prefix . "_DCity_" . $args['InvoiceID']] = ($customer_accountplan_changed) ? $row_to->City : $args['_DCity'];
+        $args[$prefix . "_DCountryCode_" . $args['InvoiceID']] = ($customer_accountplan_changed) ? $row_to->CountryCode : $args['_DCountryCode'];
     }
 
     function make_invoice()
@@ -1067,6 +1076,11 @@ class invoice {
         }
 
 
+        // Delivery address
+        $this->invoiceO->DeliveryAddress->Address     = $invoice->DAddress;
+        $this->invoiceO->DeliveryAddress->City        = $invoice->DCity;
+        $this->invoiceO->DeliveryAddress->ZipCode     = $invoice->DZipCode;
+        $this->invoiceO->DeliveryAddress->CountryCode = $invoice->DCountryCode;
 
         ############################################################################################
         $this->invoiceO->PaymentMeans->PaymentMeansCode             = 42;
