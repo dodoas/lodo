@@ -39,22 +39,22 @@ $head = $_lib['storage']->get_row(array('query' => $query_head));
 if(!$head->isUpdated || isset($_POST['action_salary_update_extra'])) {
     $query_head     = "
      select
-       F.Email as FEmail, 
-       S.*, 
-       A.AccountName, 
-       A.Address, 
-       A.City, 
-       A.ZipCode, 
-       A.SocietyNumber, 
-       A.TabellTrekk, 
-       A.ProsentTrekk 
-     from 
-       salary as S, 
-       fakturabankemail F, 
-       accountplan as A 
-     where 
-       S.SalaryID='$SalaryID' 
-       and S.AccountPlanID=A.AccountPlanID 
+       F.Email as FEmail,
+       S.*,
+       A.AccountName,
+       A.Address,
+       A.City,
+       A.ZipCode,
+       A.SocietyNumber,
+       A.TabellTrekk,
+       A.ProsentTrekk
+     from
+       salary as S,
+       fakturabankemail F,
+       accountplan as A
+     where
+       S.SalaryID='$SalaryID'
+       and S.AccountPlanID=A.AccountPlanID
        and F.AccountPlanID = A.AccountPlanID
     ";
     $head = $_lib['storage']->get_row(array('query' => $query_head));
@@ -87,8 +87,8 @@ if(!$head->isUpdated || isset($_POST['action_salary_update_extra'])) {
        '%s',
        '%s'
      );
-     ", $head->SalaryID, $head->AccountName, $head->Address, 
-                                       $head->City, $head->ZipCode, $head->SocietyNumber, 
+     ", $head->SalaryID, $head->AccountName, $head->Address,
+                                       $head->City, $head->ZipCode, $head->SocietyNumber,
                                        $head->TabellTrekk, $head->ProsentTrekk, $arb->Percent);
 
     $_lib['db']->db_query($query_update_presistent);
@@ -115,7 +115,7 @@ if($SalaryperiodconfID)
     $periodconf_query = sprintf("SELECT * FROM salaryperiodconf WHERE SalaryperiodconfID = %d", $SalaryperiodconfID);
     $periodconf_result = $_lib['db']->db_query($periodconf_query);
     $periodconf_row = $_lib['db']->db_fetch_assoc($periodconf_result);
-    
+
     $interCommentProject = $_lib['db']->db_fetch_assoc( $_lib['db']->db_query(
                                sprintf("SELECT Heading FROM project WHERE ProjectID = %d", $info_row['project'])
                            ));
@@ -130,7 +130,7 @@ if($SalaryperiodconfID)
     $entry_test_result = $_lib['db']->db_query($entry_test_query);
     if( !$_lib['db']->db_numrows($entry_test_result) )
     {
-        $entry_query = sprintf("SELECT * FROM salaryperiodentries WHERE SalaryperiodconfID = %d AND AccountPlanID = %d AND Processed = 0", 
+        $entry_query = sprintf("SELECT * FROM salaryperiodentries WHERE SalaryperiodconfID = %d AND AccountPlanID = %d AND Processed = 0",
                                $SalaryperiodconfID, $head->AccountPlanID);
         $entry_result = $_lib['db']->db_query($entry_query);
         if($_lib['db']->db_numrows($entry_result))
@@ -143,7 +143,7 @@ if($SalaryperiodconfID)
         {
             $entry_update_query = sprintf(
                  "INSERT INTO salaryperiodentries (`SalaryperiodconfID`, `JournalID`, `SalaryID`, `AccountPlanID`, `Processed`)
-                                            VALUES(%d, %d, %d, %d, 1);", 
+                                            VALUES(%d, %d, %d, %d, 1);",
                  $SalaryperiodconfID, $head->JournalID, $SalaryID, $head->AccountPlanID);
         }
 
@@ -192,7 +192,7 @@ $formname = "salaryUpdate";
     <th class="sub"><? print $_lib['form3']->text(array('table'=>'salary', 'field'=>'JournalDate', 'pk'=>$head->SalaryID, 'value'=>$head->JournalDate, 'OnChange'=>"update_period(this, '".$formname."', 'salary.JournalDate.".$head->SalaryID."', 'salary.Period.".$head->SalaryID."');")) ?>
     <th class="sub"><? print $_lib['form3']->AccountPeriod_menu3(array('table' => 'salary', 'field' => 'Period', 'pk'=>$head->SalaryID, 'value' => $head->Period, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'pk' => $head->SalaryID, 'required'=>'1')); ?>
     <th class="sub"><?
-        $aconf = array('table'=>'salary', 'field'=>'AccountPlanID', 'value'=>$head->AccountPlanID, 
+        $aconf = array('table'=>'salary', 'field'=>'AccountPlanID', 'value'=>$head->AccountPlanID,
                        'tabindex'=>'', 'accesskey'=>'K', 'pk'=>$head->SalaryID, 'type'=> array('0' => 'employee'));
         print $_lib['form3']->accountplan_number_menu($aconf);
         ?>
@@ -200,10 +200,10 @@ $formname = "salaryUpdate";
     <th class="sub"><input type="text" name="salary.ValidTo.<? print $head->SalaryID ?>" value="<? print $head->ValidTo ?>" size="10" class="number">
     <th class="sub"><input type="text" name="salary.PayDate.<? print $head->SalaryID ?>" value="<? print $head->PayDate ?>" size="10" class="number">
     <th class="sub"><input type="text" name="salary.DomesticBankAccount.<? print $head->SalaryID ?>" value="<? print $head->DomesticBankAccount ?>" size="16" class="number">
-    <th class="sub"><? 
-            if($kommune) { 
-                printf("%s %s", $kommune->KommuneNumber, $kommune->KommuneName); 
-            } 
+    <th class="sub"><?
+            if($kommune) {
+                printf("%s %s", $kommune->KommuneNumber, $kommune->KommuneName);
+            }
             else {
                 print $_lib['form3']->kommune_menu(array(
                                                        'table' => 'salary',
@@ -211,7 +211,7 @@ $formname = "salaryUpdate";
                                                        'value' => 0,
                                                        'accesskey' => 'K',
                                                        'pk' => $head->SalaryID,
-                                                       
+
                                                        ));
             }
     ?>
@@ -326,7 +326,7 @@ $formname = "salaryUpdate";
 	                    }
                     	$oldLine = $line->LineNumber;
                     }
-                    
+
                     if($line->EnableEmployeeTax == 1)
                     {
                     	if($line->LineNumber >= $lineInFrom and $line->LineNumber <= $lineInTo)
@@ -419,13 +419,13 @@ $formname = "salaryUpdate";
         {
             ?>
         <tr>
-          <td> 
+          <td>
           <?php
-            if(!$head->LockedBy || $_lib['sess']->get_person('AccessLevel') >= 4) 
+            if(!$head->LockedBy || $_lib['sess']->get_person('AccessLevel') >= 4)
             {
               echo '<input type="submit" name="action_salary_journal" value="Lagre (S)" accesskey="S" align="right" />';
             }
-    
+
             echo '<input type="submit" name="action_salary_internal" value="Lagre internkommentar(S)" accesskey="S" align="right" />';
             echo '<input type="submit" name="action_salary_update_extra" value="Updater kontoinformasjon" accesskey="U" align="right" />';
           ?>
@@ -447,8 +447,8 @@ $formname = "salaryUpdate";
         <tr>
           <td>
                 <?php
-              
-                  if(!$head->LockedBy || $_lib['sess']->get_person('AccessLevel') >= 4) 
+
+                  if(!$head->LockedBy || $_lib['sess']->get_person('AccessLevel') >= 4)
                   {
                     echo '<input type="submit" name="action_salary_journal" value="Lagre (S)" accesskey="S" align="right" /><br />';
                   }
@@ -468,7 +468,7 @@ $formname = "salaryUpdate";
         </tr>
             <?
         }
-        else 
+        else
         {
             echo "<td>Perioden er stengt</td>";
         }
@@ -532,7 +532,7 @@ $formname = "salaryUpdate";
 <tr>
 <td colspan="4"></td>
 <td colspan="7">
-<? if($_lib['message']->get()) { 
+<? if($_lib['message']->get()) {
     $msg = $_lib['message']->get();
 $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 ?>
@@ -559,7 +559,7 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 
 		$fpGrunnlag_da = $totalThisYear_da->total - $totalThisYearFradrag_da->total;
 
-		
+
 		$query = "select sum(SL.AmountThisPeriod) as total from salary S, salaryline SL where S.SalaryID=SL.SalaryID and S.SalaryID = '" . $head->SalaryID . "' and SL.LineNumber < 70 and SL.EnableVacationPayment = 1;";
 		#print "$query<br>";
 		$totalThisYear = $_lib['storage']->get_row(array('query' => $query));
