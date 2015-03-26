@@ -264,7 +264,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
             $lines[$line->LineNumber]['ProjectID']          = $line->ProjectID;
             $lines[$line->LineNumber]['DepartmentID']       = $line->DepartmentID;
             $lines[$line->LineNumber]['EnableVacationPayment']  = $line->EnableVacationPayment;
-            #$lines[$line->LineNumber]['SalaryCode']  			= $line->SalaryCode;
+            $lines[$line->LineNumber]['SalaryCode']  			= $line->SalaryCode;
             if (!isset($lines[$line->LineNumber]['MultipleLines'])) {
               $lines[$line->LineNumber]['MultipleLines'] = false;
               $lines[$line->LineNumber]['MultipleLinesNumber'] = 0;
@@ -281,6 +281,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
             $lines[$line->LineNumber][$i]['ProjectID'] = $lines[$line->LineNumber]['ProjectID'];
             $lines[$line->LineNumber][$i]['DepartmentID'] = $lines[$line->LineNumber]['DepartmentID'];
             $lines[$line->LineNumber][$i]['EnableVacationPayment'] = $lines[$line->LineNumber]['EnableVacationPayment'];
+            $lines[$line->LineNumber][$i]['SalaryCode'] = $lines[$line->LineNumber]['SalaryCode'];
             $lines[$line->LineNumber]['MultipleLinesNumber']++;
         }
 
@@ -791,6 +792,10 @@ elseif($_lib['input']->getProperty('action_salarysubconf_enter') || $_lib['input
             $_lib['storage']->db_new_hash($fields, 'salaryconfline');
 
             #print "Lagt til linje nr ".$SalaryConfID."<br>\n";
+        }
+        else {
+          $sql_update = "UPDATE salaryconfline SET SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "' WHERE SalaryConfID='$SalaryConfID' AND LineNumber='" . $row['LineNumber'] . "' AND SalaryText = '". $row['SalaryText'] ."'";
+          $_lib['db']->db_update($sql_update);
         }
     }
     $query = "select * from salaryconfline where SalaryConfID='". $SalaryConfID ."'";
