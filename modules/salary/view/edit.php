@@ -100,7 +100,7 @@ else {
 
 $ishovedmal = $head->SalaryConfID;
 
-$query_salary   = "select * from salaryline where SalaryID = '$SalaryID' order by LineNumber asc";
+$query_salary   = "select * from salaryline where SalaryID = '$SalaryID' order by LineNumber, SalaryText asc";
 #print "$query_salary<br>";
 $result_salary  = $_lib['db']->db_query($query_salary);
 

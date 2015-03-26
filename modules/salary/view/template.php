@@ -14,7 +14,7 @@ $query_head     = "select * from $db_table where SalaryConfID = '$SalaryConfID'"
 $head           = $_lib['storage']->get_row(array('query' => $query_head));
 $ishovedmal = $head->SalaryConfID;
 
-$query_salary   = "select * from $db_table2 where SalaryConfID = '$SalaryConfID' order by LineNumber asc";
+$query_salary   = "select * from $db_table2 where SalaryConfID = '$SalaryConfID' order by LineNumber, SalaryText asc";
 $result_salary  = $_lib['db']->db_query($query_salary);
 
 print $_lib['sess']->doctype ?>
