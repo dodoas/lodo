@@ -222,7 +222,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
 
         //################################################################
         //#Get default / hovedmal configuration lines
-        $query_salary_default     = "select * from salaryconfline where SalaryConfID = '1'";
+        $query_salary_default     = "select * from salaryconfline where SalaryConfID = '1' and Active=1";
         if($debug) print "$query_salary_default<br>\n";
         $result_salary_default    = $_lib['db']->db_query($query_salary_default);
 
@@ -244,7 +244,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
         //################################################################
         //#Get employee spesific lines
         //#This overrides default / hovedmal lines with the same line number.
-        $query_salary_employee    = "select * from salaryconfline where SalaryConfID = '$SalaryConfID'";
+        $query_salary_employee    = "select * from salaryconfline where SalaryConfID = '$SalaryConfID' order by Active ASC";
         if($debug) print "$query_salary_employee<br>\n";
         $result_salary_employee   = $_lib['db']->db_query($query_salary_employee);
 
