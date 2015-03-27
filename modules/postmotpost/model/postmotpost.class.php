@@ -854,6 +854,39 @@ class postmotpost {
         }
     }
 
+    // get all voucher parent/child ids for a voucher id in voucherstruct table
+    private function getParentOrChildIDs($VoucherID, $ParentOrChild) {
+      global $_lib;
+      $GetID = $ParentOrChild;
+      $SearchID = ($ParentOrChild == "ParentVoucherID")?"ChildVoucherID":"ParentVoucherID";
+      $ids = array();
+      $query_get_ids = "SELECT $GetID FROM voucherstruct WHERE $SearchID = $VoucherID";
+      $ids_result = $_lib['db']->db_query($query_get_ids);
+      if ($_lib['db']->db_numrows($ids_result) == 0) return $ids;
+      while($id_row = $_lib['db']->db_fetch_assoc($ids_result)) {
+        $id = $id_row[$GetID];
+        $ids[] = $id;
+        $_ids = array_merge($ids, $this->getParentOrChildIDs($id, $GetID));
+        $ids = array_unique($_ids);
+      }
+      return $ids;
+    }
+
+    // helper function to get all parent and child voucher ids from voucherstruct table for given voucher id
+    private function getVoucherParentAndChildIDs($VoucherID) {
+      global $_lib;
+      $ids = array($VoucherID);
+      $query_exists = "SELECT * FROM voucherstruct WHERE ParentVoucherID = $VoucherID OR ChildVoucherID = $VoucherID";
+      $exists_result = $_lib['db']->db_query($query_exists);
+      $exists = $_lib['db']->db_numrows($exists_result) > 0;
+      if ($exists) {
+        $parent_ids = $this->getParentOrChildIDs($VoucherID, "ParentVoucherID");
+        $child_ids = $this->getParentOrChildIDs($VoucherID, "ChildVoucherID");
+        $ids = array_merge($parent_ids, $child_ids, $ids);
+      }
+      return array_unique($ids);
+    }
+
     /**
      * Open all posts on given accountplan for open peroids.
      */
@@ -865,8 +898,18 @@ class postmotpost {
 
         while($voucher = $_lib['db']->db_fetch_assoc($r)) {
             $id = $voucher['VoucherID'];
-            $delete_query = "DELETE FROM voucherstruct WHERE ParentVoucherID = $id OR ChildVoucherID = $id";
-            $_lib['db']->db_delete($delete_query);
+            $ids = $this->getVoucherParentAndChildIDs($id);
+            if (!empty($ids)) {
+              $ids_string = "(";
+              $len = count($ids);
+              for($i=0; $i < $len; $i++) {
+                if ($i == 0) $ids_string .= " ". $ids[$i];
+                else $ids_string .= ", ". $ids[$i];
+              }
+              $ids_string .= ")";
+              $delete_query = "DELETE FROM voucherstruct WHERE ParentVoucherID IN $ids_string OR ChildVoucherID IN $ids_string";
+              $_lib['db']->db_delete($delete_query);
+            }
         }
     }
 
