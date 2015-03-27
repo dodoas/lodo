@@ -75,6 +75,15 @@ if (!empty($row->VatNumber)) {
 $params["recipient"]["email"]       = $row->DEmail;
 
 
+if($row->DAddress) {
+    //$params["delivery"]["name"]   = "";
+    $params["delivery"]["address1"] = $row->DAddress;
+    $params["delivery"]["zip"]      = $row->DZipCode;
+    $params["delivery"]["city"]     = $row->DCity;
+    $params["delivery"]["country"]  = $_lib['format']->codeToCountry($row->DCountryCode);
+}
+
+
 function kontonr($knr)
 {
     $del1 = substr($knr, 0, 4);
