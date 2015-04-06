@@ -476,7 +476,7 @@ print $_lib['sess']->doctype ?>
 <tr>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=report.regnskapsrapport" target="_blank">Kortfattet rapport / Regnskapsrapport</a></td>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=report.pengeflyt" target="_blank">Pengeflyt</a></td>
-    <td><a href="<? print $_lib['sess']->dispatch ?>t=expense.list_year" target="_blank">FORTJENESTERAPPORT /prosjekt</a></td>
+    <td><a href="<? print $_lib['sess']->dispatch ?>t=expense.expenses" target="_blank">FORTJENESTERAPPORT /prosjekt</a></td>
 </tr>
 <tr>
     <td><a href="<? print $_lib['sess']->dispatch ?>t=report.privatforbruk" target="_blank">Privat forbruk</a></td>

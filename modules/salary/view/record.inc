@@ -222,7 +222,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
 
         //################################################################
         //#Get default / hovedmal configuration lines
-        $query_salary_default     = "select * from salaryconfline where SalaryConfID = '1'";
+        $query_salary_default     = "select * from salaryconfline where SalaryConfID = '1' and Active=1";
         if($debug) print "$query_salary_default<br>\n";
         $result_salary_default    = $_lib['db']->db_query($query_salary_default);
 
@@ -244,12 +244,12 @@ elseif($_lib['input']->getProperty('action_salary_new'))
         //################################################################
         //#Get employee spesific lines
         //#This overrides default / hovedmal lines with the same line number.
-        $query_salary_employee    = "select * from salaryconfline where SalaryConfID = '$SalaryConfID'";
+        $query_salary_employee    = "select * from salaryconfline where SalaryConfID = '$SalaryConfID' order by Active ASC";
         if($debug) print "$query_salary_employee<br>\n";
         $result_salary_employee   = $_lib['db']->db_query($query_salary_employee);
 
         while($line = $_lib['db']->db_fetch_object($result_salary_employee)) {
-            if(!$line->Active)
+            if(!$line->Active && !isset($lines[$line->LineNumber]['MultipleLines']))
             {
                 unset($lines[$line->LineNumber]);
                 continue;
@@ -264,7 +264,25 @@ elseif($_lib['input']->getProperty('action_salary_new'))
             $lines[$line->LineNumber]['ProjectID']          = $line->ProjectID;
             $lines[$line->LineNumber]['DepartmentID']       = $line->DepartmentID;
             $lines[$line->LineNumber]['EnableVacationPayment']  = $line->EnableVacationPayment;
-            #$lines[$line->LineNumber]['SalaryCode']  			= $line->SalaryCode;
+            $lines[$line->LineNumber]['SalaryCode']  			= $line->SalaryCode;
+            if (!isset($lines[$line->LineNumber]['MultipleLines'])) {
+              $lines[$line->LineNumber]['MultipleLines'] = false;
+              $lines[$line->LineNumber]['MultipleLinesNumber'] = 0;
+            }
+            else $lines[$line->LineNumber]['MultipleLines'] = true;
+            $i = $lines[$line->LineNumber]['MultipleLinesNumber'];
+            $lines[$line->LineNumber][$i]['AccountPlanID'] = $lines[$line->LineNumber]['AccountPlanID'];
+            $lines[$line->LineNumber][$i]['NumberInPeriod'] = $lines[$line->LineNumber]['NumberInPeriod'];
+            $lines[$line->LineNumber][$i]['Rate'] = $lines[$line->LineNumber]['Rate'];
+            $lines[$line->LineNumber][$i]['SalaryText'] = $lines[$line->LineNumber]['SalaryText'];
+            $lines[$line->LineNumber][$i]['AmountThisPeriod'] = $lines[$line->LineNumber]['AmountThisPeriod'];
+            $lines[$line->LineNumber][$i]['EnableEmployeeTax'] = $lines[$line->LineNumber]['EnableEmployeeTax'];
+            $lines[$line->LineNumber][$i]['SalaryID'] = $lines[$line->LineNumber]['SalaryID'];
+            $lines[$line->LineNumber][$i]['ProjectID'] = $lines[$line->LineNumber]['ProjectID'];
+            $lines[$line->LineNumber][$i]['DepartmentID'] = $lines[$line->LineNumber]['DepartmentID'];
+            $lines[$line->LineNumber][$i]['EnableVacationPayment'] = $lines[$line->LineNumber]['EnableVacationPayment'];
+            $lines[$line->LineNumber][$i]['SalaryCode'] = $lines[$line->LineNumber]['SalaryCode'];
+            $lines[$line->LineNumber]['MultipleLinesNumber']++;
         }
 
         //################################################################
@@ -274,6 +292,35 @@ elseif($_lib['input']->getProperty('action_salary_new'))
 
         foreach ($lines as $linenum => $field)
         {
+            $multiple = $field['MultipleLines'];
+            if ($multiple) {
+              for ($i=0; $i < $field['MultipleLinesNumber']; $i++) {
+                if($field[$i]['EnableEmployeeTax'] == 1)
+                {
+                  $query = "select a.Percent from arbeidsgiveravgift as a, kommune as k, accountplan as ap where ap.AccountPlanID=$head_employee->AccountPlanID and ap.KommuneID=k.KommuneID and a.Code=k.Sone";
+                  if($debug) print "$query<br>\n";
+                  $arbavgift = $_lib['storage']->get_row(array('query' => $query));
+                  $field[$i]['EmployeeTax'] = $arbavgift->Percent;
+                }
+                #print "linenum: $linenum : text : " . $lines[$linenum]['SalaryText'] . "<br>";
+                $postsub['salaryline_LineNumber']        = $linenum;
+                $postsub['salaryline_AccountPlanID']     = $field[$i]['AccountPlanID'];
+                $postsub['salaryline_NumberInPeriod']    = $field[$i]['NumberInPeriod'];
+                $postsub['salaryline_Rate']              = $field[$i]['Rate'];
+                $postsub['salaryline_SalaryText']        = $field[$i]['SalaryText'];
+                $postsub['salaryline_AmountThisPeriod']  = $field[$i]['AmountThisPeriod'];
+                $postsub['salaryline_EnableEmployeeTax'] = $field[$i]['EnableEmployeeTax'];
+                $postsub['salaryline_ProjectID']         = $field[$i]['ProjectID'];
+                $postsub['salaryline_DepartmentID']      = $field[$i]['DepartmentID'];
+                $postsub['salaryline_EnableVacationPayment'] = $field[$i]['EnableVacationPayment'];
+                $postsub['salaryline_EmployeeTax']     	= $field[$i]['EmployeeTax'];
+                $postsub['salaryline_SalaryCode']       = $field[$i]['SalaryCode'];
+                if($debug) print_r($postsub);
+
+                $_lib['storage']->db_new_hash($postsub, 'salaryline');
+              }
+            }
+            else {
             if($lines[$linenum]['EnableEmployeeTax'] == 1)
             {
                 $query = "select a.Percent from arbeidsgiveravgift as a, kommune as k, accountplan as ap where ap.AccountPlanID=$head_employee->AccountPlanID and ap.KommuneID=k.KommuneID and a.Code=k.Sone";
@@ -297,6 +344,7 @@ elseif($_lib['input']->getProperty('action_salary_new'))
             if($debug) print_r($postsub);
 
             $_lib['storage']->db_new_hash($postsub, 'salaryline');
+          }
         }
     }
 }
@@ -448,8 +496,43 @@ elseif($_lib['input']->getProperty('action_salary_internal')) {
 
     $_lib['storage']->db_update_multi_table($head, array('salary' => 'SalaryID'));
 }
-elseif($_lib['input']->getProperty('action_salary_journal'))
+if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getProperty('action_salary_new'))
 {
+  // if we are journaling a newly created salary we need to manualy make $_POST so same logic can be used
+  if ($_lib['input']->getProperty('action_salary_new')) {
+    $_POST['SalaryID'] = $SalaryID;
+
+    $query="select * from salary where SalaryID=".$_POST['SalaryID'];
+    $row = $_lib['storage']->get_row(array('query' => $query));
+    $_POST['salary_JournalDate_'.$SalaryID] = $row->JournalDate;
+    $_POST['salary_Period_'.$SalaryID] = $row->Period;
+    $_POST['AccountPlanID'] = $_POST['salary_AccountPlanID_'.$SalaryID] = $row->AccountPlanID;
+    $_POST['salary_ValidFrom_'.$SalaryID] = $row->ValidFrom;
+    $_POST['salary_ValidTo_'.$SalaryID] = $row->ValidTo;
+    $_POST['salary_PayDate_'.$SalaryID] = $row->PayDate;
+    $_POST['salary_DomesticBankAccount_'.$SalaryID] = $row->DomesticBankAccount;
+    $_POST['salary_Comment_'.$SalaryID] = $row->Comment;
+    $_POST['salary_InternComment_'.$SalaryID] = $row->InternComment;
+    $_POST['salary_VacationPayment_'.$SalaryID] = $row->VacationPayment;
+
+    $query="select count(*) as fieldcount from salaryline where SalaryID=".$_POST['SalaryID'];
+    $row = $_lib['storage']->get_row(array('query' => $query));
+    $_POST['fieldcount'] = $row->fieldcount;
+
+    $query="select * from salaryline where SalaryID=".$_POST['SalaryID'];
+    $result=$_lib['db']->db_query($query);
+    $icount = 0;
+    while ($row = $_lib['db']->db_fetch_object($result)) {
+      $i++;
+      //echo "row"; var_dump($row);
+      $_POST[$i] = $row->SalaryLineID;
+      $_POST['salaryline_LineNumber_'.$row->SalaryLineID] = $row->LineNumber;
+      $_POST['salaryline_NumberInPeriod_'.$row->SalaryLineID] = $row->NumberInPeriod;
+      $_POST['salaryline_Rate_'.$row->SalaryLineID] = $row->Rate;
+      $_POST['salaryline_AmountThisPeriod_'.$row->SalaryLineID] = $row->AmountThisPeriod;
+      $_POST['EnableVacationPayment_'.$row->SalaryLineID] = $row->EnableVacationPayment;
+    }
+  }
   ################################################################
   #First save the content of the forms
   $counter = $_POST['fieldcount'];
@@ -495,7 +578,7 @@ elseif($_lib['input']->getProperty('action_salary_journal'))
       {
         $sumTotal += $_POST['salaryline_AmountThisPeriod_'.$lineID];
       }
-      elseif( ($_POST['salaryline_LineNumber_'.$lineID] >= $lineOutFrom) and ($_POST['salaryline_LineNumber_'.$lineID] < $lineOutTo) )
+      elseif( ($_POST['salaryline_LineNumber_'.$lineID] >= $lineOutFrom) and ($_POST['salaryline_LineNumber_'.$lineID] <= $lineOutTo) )
       {
         $sumTotal -= $_POST['salaryline_AmountThisPeriod_'.$lineID];
       }
@@ -633,7 +716,7 @@ elseif($_lib['input']->getProperty('action_salary_journal'))
       {
         $fields['voucher_AmountIn'] 	= $salaryline->AmountThisPeriod;
       }
-      elseif( ($salaryline->LineNumber >= $lineOutFrom) and ($salaryline->LineNumber < $lineOutTo) )
+      elseif( ($salaryline->LineNumber >= $lineOutFrom) and ($salaryline->LineNumber <= $lineOutTo) )
       {
         $fields['voucher_AmountOut'] 	= $salaryline->AmountThisPeriod;
       }
@@ -641,6 +724,7 @@ elseif($_lib['input']->getProperty('action_salary_journal'))
       $fields['voucher_DepartmentID']   = $salaryline->DepartmentID;
       $account = $salaryline->AccountPlanID;
       #print "insert voucherline<br>\n";
+      if ($salaryline->LineNumber == 100) $fields['voucher_InvoiceID'] .= "-F";
       $tmpID = $accounting->insert_voucher_line(array('post'=>$fields, 'accountplanid'=>$account, 'VoucherType'=>$VoucherType));
 
       #Update hovedbokskonto for this postering, it may have changed
@@ -677,97 +761,83 @@ elseif($_lib['input']->getProperty('action_salaryconf_delete'))
     $_lib['storage']->db_delete_hash('salaryconfline', $pk);
     $_lib['storage']->db_delete_hash('salaryconf', $pk);
 }
-elseif($_lib['input']->getProperty('action_salarysubconf_enter'))
+elseif($_lib['input']->getProperty('action_salarysubconf_enter') || $_lib['input']->getProperty('action_salary_updatetemplatecode'))
 {
     $query = "select * from salaryconfline where SalaryConfID=1";
-    $confhash = $_lib['storage']->get_hashhash(array('query'=>$query, 'key'=>'LineNumber'));
+    $query_result = $_lib['storage']->db_query($query);
     //print_r($confhash);
 
-    $query = "select * from salaryconfline where SalaryConfID=$SalaryConfID";
-    $salaryhash = $_lib['storage']->get_hashhash(array('query'=>$query, 'key'=>'LineNumber'));
-    //print_r($salaryhash);
-
-    foreach($confhash as $key => $conflinehash)
+    while($row = $_lib['storage']->db_fetch_assoc($query_result))
     {
-        if(isset($salaryhash[$key]))
-        {
-            //print $key." eksisterer<br>";
-        }
-        else
-        {
+        $query_exists="SELECT * FROM salaryconfline WHERE SalaryConfID = '". $SalaryConfID ."' AND LineNumber = '". $row['LineNumber'] ."' AND SalaryText = '". $row['SalaryText'] ."'";
+        $query_exists_result = $_lib['storage']->db_query($query_exists);
+        $exists = ($_lib['storage']->db_numrows($query_exists_result) > 0);
+        if (!$exists) {
             $fields = array();
             $fields['salaryconfline_SalaryConfID']          = $SalaryConfID;
-            $fields['salaryconfline_LineNumber']            = $conflinehash['LineNumber'];
-            $fields['salaryconfline_Active']            = $conflinehash['Active'];
-            $fields['salaryconfline_SalaryText']            = $conflinehash['SalaryText'];
-            $fields['salaryconfline_NumberInPeriod']        = $conflinehash['NumberInPeriod'];
-            $fields['salaryconfline_Rate']                  = $conflinehash['Rate'];
-            $fields['salaryconfline_AmountThisPeriod']      = $conflinehash['AmountThisPeriod'];
-            $fields['salaryconfline_AccountPlanID']         = $conflinehash['AccountPlanID'];
-            $fields['salaryconfline_EnableEmployeeTax']     = $conflinehash['EnableEmployeeTax'];
-            $fields['salaryconfline_ProjectID']             = $conflinehash['Project ID'];
-            $fields['salaryconfline_DepartmentID']          = $conflinehash['DepartmentID'];
-            $fields['salaryconfline_SalaryCode']            = $conflinehash['SalaryCode'];
-            $fields['salaryconfline_EnableVacationPayment'] = $conflinehash['EnableVacationPayment'];
+            $fields['salaryconfline_LineNumber']            = $row['LineNumber'];
+            $fields['salaryconfline_Active']                = $row['Active'];
+            $fields['salaryconfline_SalaryText']            = $row['SalaryText'];
+            $fields['salaryconfline_NumberInPeriod']        = $row['NumberInPeriod'];
+            $fields['salaryconfline_Rate']                  = $row['Rate'];
+            $fields['salaryconfline_AmountThisPeriod']      = $row['AmountThisPeriod'];
+            $fields['salaryconfline_AccountPlanID']         = $row['AccountPlanID'];
+            $fields['salaryconfline_EnableEmployeeTax']     = $row['EnableEmployeeTax'];
+            $fields['salaryconfline_ProjectID']             = $row['Project ID'];
+            $fields['salaryconfline_DepartmentID']          = $row['DepartmentID'];
+            $fields['salaryconfline_SalaryCode']            = $row['SalaryCode'];
+            $fields['salaryconfline_EnableVacationPayment'] = $row['EnableVacationPayment'];
             //print_r($fields);
 
             $_lib['storage']->db_new_hash($fields, 'salaryconfline');
 
             #print "Lagt til linje nr ".$SalaryConfID."<br>\n";
         }
-    }
-    foreach($salaryhash as $key => $salarylinehash)
-    {
-        if(isset($confhash[$key]))
-        {
-            //print $key." eksisterer<br>";
+        else {
+          $sql_update = "UPDATE salaryconfline SET SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "' WHERE SalaryConfID='$SalaryConfID' AND LineNumber='" . $row['LineNumber'] . "' AND SalaryText = '". $row['SalaryText'] ."'";
+          $_lib['db']->db_update($sql_update);
         }
-        else
-        {
+    }
+    $query = "select * from salaryconfline where SalaryConfID='". $SalaryConfID ."'";
+    $query_result = $_lib['storage']->db_query($query);
+
+    while($row = $_lib['storage']->db_fetch_assoc($query_result))
+    {
+        $query_exists="SELECT * FROM salaryconfline WHERE SalaryConfID = 1 AND LineNumber = '". $row['LineNumber'] ."' AND SalaryText = '". $row['SalaryText'] ."'";
+        $query_exists_result = $_lib['storage']->db_query($query_exists);
+        $exists = ($_lib['storage']->db_numrows($query_exists_result) > 0);
+        if (!$exists) {
             $pk = array();
-            $pk['SalaryConfLineID']=$salarylinehash['SalaryConfLineID'];
+            $pk['SalaryConfLineID']=$row['SalaryConfLineID'];
             $_lib['storage']->db_delete_hash('salaryconfline', $pk);
 
             print "Slettet linje nr ".$salarylinehash['SalaryConfLineID']."<br>\n";
         }
     }
 }
-elseif($_lib['input']->getProperty('action_salary_updatetemplatecode')) {
-  #Get code and holiday money from hovedmal
-  $SalaryConfID = $_lib['input']->getProperty('SalaryConfID');
-  
-  $query 	= "select LineNumber, SalaryCode, EnableVacationPayment, EnableEmployeeTax, SalaryText from salaryconfline where SalaryConfID=1";
-  $codehash = $_lib['storage']->get_hashhash(array('query'=>$query, 'key'=>'LineNumber'));
-  #print_r($codehash);
-  
-  foreach($codehash as $line => $row) {
-    $sql_update = "update salaryconfline set SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "', SalaryText='" . $row['SalaryText'] . "' where SalaryConfID='$SalaryConfID' and LineNumber='" . $line . "'";
-    #print "$sql_update<br>\n";
-    $_lib['db']->db_update($sql_update);
-  }
-}
 elseif($_lib['input']->getProperty('action_salary_updatesalarycode')) {
     #print_r($_REQUEST);
     $SalaryID 	    = $_lib['input']->getProperty('SalaryID');
     $SalaryConfID   = $_lib['input']->getProperty('SalaryConfID');
-    
-    $query 	= "select LineNumber, SalaryCode, EnableVacationPayment, EnableEmployeeTax, SalaryText, AccountPlanID from salaryconfline where SalaryConfID='$SalaryConfID' AND Active = 1";
+
+    $query 	= "select * from salaryconfline where SalaryConfID='$SalaryConfID' AND Active = 1";
     #print $query;
-    $codehash = $_lib['storage']->get_hashhash(array('query'=>$query, 'key'=>'LineNumber'));
+    $query_result = $_lib['storage']->db_query($query);
     #print_r($codehash);
-    
-    foreach($codehash as $line => $row) {
-        $query_sjekk 	= "select LineNumber from salaryline where SalaryID='$SalaryID' and LineNumber='" . $line . "';";
-        $orgConfLine = $_lib['storage']->get_row(array('query' => $query_sjekk));
-        if ($orgConfLine->LineNumber == "") {
-            #print "Lager ny linje";
-            $sql_insert = "insert into salaryline (SalaryLineID, SalaryID, LineNumber) values(NULL, '$SalaryID', '" . $line . "');";
-            #print "$sql_insert<br>\n";
-            $_lib['db']->db_update($sql_insert);          
-        }
-        $sql_update = "update salaryline set SalaryText='" . $row['SalaryText'] . "', SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "', AccountPlanID='" . $row['AccountPlanID'] . "' where SalaryID='$SalaryID' and LineNumber='" . $line . "'";
-        #print "$sql_update<br>\n";
-        $_lib['db']->db_update($sql_update);
+
+    while($row = $_lib['storage']->db_fetch_assoc($query_result)) {
+      $query_exists = "SELECT * FROM salaryline WHERE SalaryID='$SalaryID' AND LineNumber = '". $row['LineNumber'] . "' AND SalaryText='". $row['SalaryText'] ."'";
+      $query_exists_result = $_lib['storage']->db_query($query_exists);
+      $exists = ($_lib['storage']->db_numrows($query_exists_result) > 0);
+      if (!$exists) {
+        #print "Lager ny linje";
+        $sql_insert = "insert into salaryline (SalaryLineID, SalaryID, LineNumber, SalaryText) values(NULL, '$SalaryID', '" . $row['LineNumber'] . "', '". $row['SalaryText'] ."');";
+        #print "$sql_insert<br>\n";
+        $_lib['db']->db_update($sql_insert);
+      }
+      $sql_update = "update salaryline set SalaryCode='" . $row['SalaryCode'] . "', EnableVacationPayment='" . $row['EnableVacationPayment'] . "', EnableEmployeeTax='" . $row['EnableEmployeeTax'] . "', AccountPlanID='" . $row['AccountPlanID'] . "' where SalaryID='$SalaryID' and LineNumber='" . $row['LineNumber'] . "' and SalaryText='". $row['SalaryText']  ."'";
+      #print "$sql_update<br>\n";
+      $_lib['db']->db_update($sql_update);
     }
 } elseif($_lib['input']->getProperty('action_salary_fakturabanksend')) {
     if($_lib['sess']->get_person('FakturabankExportPaycheckAccess')) {

@@ -1470,6 +1470,7 @@ class lodo_fakturabank_fakturabank {
 
         $invoices = $doc->getElementsByTagNameNS('urn:oasis:names:specification:ubl:schema:xsd:Invoice-2', 'Invoice');
 
+        // Not an empty foreach loop! Sets up $invoice var for later use.
         foreach($invoices as $invoice) {
             #print_r($invoice);
         }
@@ -1787,6 +1788,36 @@ class lodo_fakturabank_fakturabank {
             $customer->appendChild($cacparty);
 
         $invoice->appendChild($customer);
+
+        // Delivery (DeliveryAddress)
+        $delivery = $doc->createElement('cac:Delivery');
+
+        $cacaddress = $doc->createElement('cac:DeliveryAddress');
+
+        $cbc = $doc->createElement('cbc:StreetName', utf8_encode($InvoiceO->DeliveryAddress->Address));
+        $cacaddress->appendChild($cbc);
+
+        $cbc = $doc->createElement('cbc:CityName', utf8_encode($InvoiceO->DeliveryAddress->City));
+        $cacaddress->appendChild($cbc);
+
+        $cbc = $doc->createElement('cbc:PostalZone', utf8_encode($InvoiceO->DeliveryAddress->ZipCode));
+        $cacaddress->appendChild($cbc);
+
+        $cbcaddressline = $doc->createElement('cac:AddressLine');
+        $cbc = $doc->createElement('cbc:Line', utf8_encode($InvoiceO->DeliveryAddress->Address));
+        $cbcaddressline->appendChild($cbc);
+        $cacaddress->appendChild($cbcaddressline);
+
+        $cbccountry = $doc->createElement('cac:Country');
+        $cbc = $doc->createElement('cbc:IdentificationCode', utf8_encode($InvoiceO->DeliveryAddress->CountryCode));
+        $cbc->setAttribute('listID', 'ISO3166-1:Alpha2');
+        $cbccountry->appendChild($cbc);
+        $cacaddress->appendChild($cbccountry);
+
+        $delivery->appendChild($cacaddress);
+
+        $invoice->appendChild($delivery);
+
 
         ############################################################################################
         $paymentmeans = $doc->createElement('cac:PaymentMeans');

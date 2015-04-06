@@ -147,6 +147,16 @@ class Date
     }
   }
 
+  function get_first_period_in_year($date){
+    global $_lib;
+
+    if(preg_match('{(\d\d\d\d)-(\d\d)(.*)}', $date, $m)) {
+            return $m['1']."-01";
+    } else {
+        $_lib['sess']->warning("Unable to get period for this date: $date");
+    }
+  }
+
     function get_next_period($args)
     {
         global $_lib;
@@ -265,25 +275,25 @@ class Date
 
     return floor($diff / 86400);
   }
-  
+
   # for legal format strings, see: http://php.net/manual/en/function.strftime.php
   public function mysql_format($informat, $string) {
 	  ## only supported in php 5.3
 	  # for legal format strings, see: http://www.php.net/manual/en/function.date.php
 	  # $dt = DateTime::createFromFormat($format, $string);
-	  
+
 	  # return $dt->format( 'Y-m-d H:i:s' );
 
-  	  $outformat =  '%Y-%m-%d %H:%M:%S'; 
-	  $ftime = strptime($string, $informat); 
-	  $unxTimestamp = mktime( 
-							 $ftime['tm_hour'], 
-							 $ftime['tm_min'], 
-							 $ftime['tm_sec'], 
-							 1 , 
-							 $ftime['tm_yday'] + 1, 
-							 $ftime['tm_year'] + 1900 
-                 ); 
+  	  $outformat =  '%Y-%m-%d %H:%M:%S';
+	  $ftime = strptime($string, $informat);
+	  $unxTimestamp = mktime(
+							 $ftime['tm_hour'],
+							 $ftime['tm_min'],
+							 $ftime['tm_sec'],
+							 1 ,
+							 $ftime['tm_yday'] + 1,
+							 $ftime['tm_year'] + 1900
+                 );
 
 	  return strftime($outformat, $unxTimestamp);
   }
