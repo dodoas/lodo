@@ -15,7 +15,7 @@ elseif(isset($_REQUEST['action_postmotpost_closeall'])) {
     $postmotpost->closeAllPosts();
 }
 elseif(isset($_REQUEST['action_postmotpost_openall'])) {
-    $postmotpost->openAllPosts();
+    $postmotpost->openAllPostsForOpenPeriods();
 }
 elseif(isset($_REQUEST['action_postmotpost_save_currency'])) {
     exchange::updateVoucherForeignCurrency();
