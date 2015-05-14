@@ -36,7 +36,7 @@ $account = $_lib['storage']->get_row(array('query' => $query));
 if (isset($_POST['Period'])) {
 
     $fbvoting = new lodo_fakturabank_fakturabankvoting();
-    $fbvoting->import_transactions($AccountID, $Period);
+    $fbvoting->import_transactions($AccountID, $Period, $account->CountryCode);
 }
 
 ?>

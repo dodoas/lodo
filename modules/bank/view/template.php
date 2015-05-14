@@ -36,6 +36,7 @@ $bank           = $_lib['db']->db_fetch_object($result_bank);
       <th>ID</th>
       <th>Aktiv</th>
       <th>Saldobergning</th>
+      <th>Land</th>
 
       <th>Default periode</th>
       <th>Kontonummer</th>
@@ -61,6 +62,8 @@ $bank           = $_lib['db']->db_fetch_object($result_bank);
       <td><? $_lib['form2']->checkbox2('account', "Active", $bank->Active, $bank->AccountID); ?></td>
 
       <td><? $_lib['form2']->checkbox2('account', "includeinsaldo", $bank->includeinsaldo, $bank->AccountID); ?></td>
+      <td><? print $_lib['form3']->Country_menu3(array('table' => 'account', 'field' => 'CountryCode', 'pk' => $bank->AccountID, 'value'=>$bank->CountryCode, 'required'=> false)); ?></td>
+      <script>$('#account\\.CountryCode\\.<? echo $bank->AccountID; ?>').css({'width': 100});</script>
 
       <td><? print $_lib['form3']->AccountPeriod_menu3(array('table' => 'account', 'field' => 'DefaultPeriod', 'pk' => $bank->AccountID, 'value' => $bank->DefaultPeriod, 'access' => $_lib['sess']->get_person('AccessLevel'), 'accesskey' => 'P', 'required'=> false)); ?></td>    
 
