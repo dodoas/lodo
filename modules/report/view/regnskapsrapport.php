@@ -4,14 +4,13 @@
 # Copyright Thomas Ekdahl, 1994-2005, thomas@ekdahl.no, http://www.ekdahl.no
 
 $Period         = $_REQUEST['Period'];
-$StartPeriod         = $_REQUEST['StartPeriod'];
+$StartPeriod    = $_REQUEST['StartPeriod'];
 $detail         = $_REQUEST['detail'];
 $DepartmentID   = $_REQUEST['report_DepartmentID'];
 $ProjectID      = $_REQUEST['report_ProjectID'];
 
 $thisDate             = $_lib['sess']->get_session('LoginFormDate');
 $thisYear             = substr($thisDate,0,4);
-$firstPeriodThisYear  = $_lib['date']->get_this_year($thisDate).'-01';
 
 $db_table = "shortreport";
 require_once "record.inc";

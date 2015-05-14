@@ -1,11 +1,20 @@
 <?php
   require_once "record.inc";
 
-  $year = filter_input(INPUT_GET, 'Period', FILTER_SANITIZE_STRING);
-  $cid = filter_input(INPUT_GET, 'Department', FILTER_SANITIZE_STRING);
+  $login_period = $_lib['date']->get_this_period($_lib['sess']->get_session('LoginFormDate'));
+
+  $start_period    = $_REQUEST['start_period'] ? $_REQUEST['start_period'] : $_lib['date']->get_first_period_in_year($login_period);
+  $end_period    = $_REQUEST['end_period'] ? $_REQUEST['end_period'] : $login_period;
+  $cid = $_REQUEST['department_id'] ? $_REQUEST['department_id'] : 0;
+  // All logic around this report was made to depend on year and department.
+  // Since request is changed to have from - to period (important just for one part of report),
+  // we will keep rest of report to have set year dependent on from date.
+  $year = $_lib['date']->get_this_year($start_period);
 
   $departmentQuery = "SELECT * FROM companydepartment WHERE CompanyDepartmentID=$cid";
   $department = $_lib['db']->db_fetch_object($_lib['db']->db_query($departmentQuery));
+
+  create_year($year, $_lib['db']);
 
   $yearQuery = "SELECT * FROM expense_periods WHERE year=$year";
   $yearObj = $_lib['db']->db_fetch_object($_lib['db']->db_query($yearQuery));
@@ -39,12 +48,42 @@
 
   <h2>Expenses for <?= $department->DepartmentName ?> for year <?= $year ?> - &Aring;ret <?= $year ?> 1 jan <?= $year ?> 31 des <?= $year ?></small></h2>
 
+<form name="velg" action="<?= $MY_SELF ?>" method="post">
+    <table border="0" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Fra Periode</th>
+                <th>Til Periode</th>
+                <th>Avdeling</th>
+                <th>Til m&aring;ned</th>
+            </tr>
+            <tr>
+                <th><?= $_lib['form3']->AccountPeriod_menu3(array('name' => 'start_period', 'value' => $start_period, 'noaccess' => '1')) ?></th>
+                <th><?= $_lib['form3']->AccountPeriod_menu3(array('name' => 'end_period', 'value' => $end_period, 'noaccess' => '1')) ?></th>
+                <th><?
+                    $aconf = array();
+                    $aconf['field']         = 'department_id';
+                    $aconf['accesskey']     = 'D';
+                    $aconf['value']         = $cid;
+                    $_lib['form2']->department_menu2($aconf);
+                    ?>
+                </th>
+                <th><input type="submit" value="Velg periode (V)" name="velg_periode" accesskey="V"></th>
+            </tr>
+    </table>
+</form>
+
+<br><br>
+
   <form action="" method="POST">
     <input type="hidden" name="period_id" value="<?= $yearObj->id ?>">
     <input type="hidden" name="department_id" value="<?= $cid ?>">
+    <input type="hidden" name="start_period" value="<?= $start_period ?>">
+    <input type="hidden" name="end_period" value="<?= $end_period ?>">
     <table id="add_table" class="lodo_data bordered">
       <thead>
         <tr>
+          <th></th>
           <th class="number">Supplier name</th>
           <th class="number">&Oslash;l 2,5% til 4,7%</th>
           <th class="number">Vin 4,7% til 21%</th>
@@ -64,7 +103,7 @@
             $dirtyname = 'expense_lines_dirty_' . $line->id;
             $idname = 'expense_lines_id_' . $line->id;
 
-            echo "<tr id=" . $idname . ">";
+            echo "<tr id=" . $idname . "><td></td>";
 
             echo "<input type=\"hidden\" name=\"" . $dirtyname . "\" id=\"" . $dirtyname . "\" value=\"0\">";
             echo "<td class=\"number\">" . $_lib['form3']->text(array('OnKeyUp' => 'make_dirty(\'#' . $dirtyname . '\')', 'table' => 'expense_lines', 'field' => 'supplier_name', 'pk' => $line->id, 'value' => $line->supplier_name, 'class' => '', 'width' => 22, 'tabindex' => $tabindexH[1]++)) . "</td>";
@@ -82,7 +121,7 @@
       </tbody>
       <tfoot>
         <tr>
-          <td><input class="new-button" type="submit" name="action_lines_save" value="Save" /></td>
+          <td><input class="new-button" type="submit" name="action_lines_save" value="Lagre <? echo $year ?>" onclick="disable_multiple_submit(this, 'action_lines_save')"/></td>
           <td><input onclick="addline();" type="button" class="new-button" value="+" /></td>
         </tr>
       </tfoot>
@@ -94,6 +133,8 @@
   <form action="" method="POST">
     <input type="hidden" name="period_id" value="<?= $yearObj->id ?>">
     <input type="hidden" name="department_id" value="<?= $cid ?>">
+    <input type="hidden" name="start_period" value="<?= $start_period ?>">
+    <input type="hidden" name="end_period" value="<?= $end_period ?>">
     <table class="lodo_data bordered">
       <thead>
         <tr>
@@ -178,7 +219,7 @@
       </tbody>
       <tfoot>
         <tr>
-          <td><input class="new-button" type="submit" name="action_groups_save" value="Save" /></td>
+          <td><input class="new-button" type="submit" name="action_groups_save" value="Lagre <? echo $year ?>" onclick="disable_multiple_submit(this, 'action_groups_save')"/></td>
         </tr>
       </tfoot>
     </table>
@@ -189,6 +230,8 @@
   <form action="" method="POST">
     <input type="hidden" name="period_id" value="<?= $yearObj->id ?>">
     <input type="hidden" name="department_id" value="<?= $cid ?>">
+    <input type="hidden" name="start_period" value="<?= $start_period ?>">
+    <input type="hidden" name="end_period" value="<?= $end_period ?>">
     <table class="lodo_data bordered">
       <thead>
         <tr>
@@ -196,9 +239,9 @@
           <th class="number">Varelager 1 jan <?= $year ?></th>
           <th class="number">Varelager 31 des <?= $year ?></th>
           <th class="number">Varelager regulering</th>
-          <th class="number">Varekj&oslash;p</th>
+          <th class="number">Varekj&oslash;p fra <?= $start_period ?> til <?= $end_period ?></th>
           <th class="number">Vare forbruk</th>
-          <th class="number">Salg &Aring;ret <?= $year ?></th>
+          <th class="number">Salg &Aring;ret fra <?= $start_period ?> til <?= $end_period ?></th>
           <th class="number">Fortjeneste i kr</th>
           <th class="number">Fortjeneste i %</th>
         </tr>
@@ -218,7 +261,6 @@
             $projectP = $_lib['db']->db_fetch_object($_lib['db']->db_query("SELECT Heading, ProjectID FROM project WHERE ProjectID=" . $project->project_id));
             $project_name =  $projectP->Heading;
             $project_id = $projectP->ProjectID;
-            //var_dump($project_name);
 
             echo "<tr>";
 
@@ -229,7 +271,7 @@
 
             echo "<td class=\"number\">" . $_lib['format']->Amount($stock_diff = $project->stock_level_start_year - $project->stock_level_end_year) . "</td>";
 
-            $rapport = new framework_logic_regnskapsrapport(array('Period' => $year . '-13', 'LineID' => $_REQUEST['LineID'], 'DepartmentID' => $cid, 'ProjectID'=> $project->project_id));
+            $rapport = new framework_logic_regnskapsrapport(array('StartPeriod' => $start_period, 'Period' => $end_period, 'LineID' => $_REQUEST['LineID'], 'DepartmentID' => $cid, 'ProjectID'=> $project->project_id));
 
             echo "<td class=\"number\">" . $_lib['format']->Amount($varekjop = get_year_amount($rapport, 400, $project_id)) . "</td>";
 
@@ -275,7 +317,7 @@
           <?php endforeach; ?>
         </tr>
         <tr>
-          <td><input class="new-button" type="submit" name="action_projects_save" value="Save" /></td>
+          <td><input class="new-button" type="submit" name="action_projects_save" value="Lagre <? echo $year ?>" onclick="disable_multiple_submit(this, 'action_projects_save')"/></td>
         </tr>
       </tfoot>
     </table>
@@ -334,6 +376,19 @@
       $(element).val(1);
     }
 
+    // Ugly hack for disabling multiple submit
+    // Creation of input element is needed since record.inc depends on button name
+    // which is not collected if we submit trough JS
+    function disable_multiple_submit(el, name) {
+      el.disabled = true;
+      var html = document.createElement("input");
+      html.name = name;
+      html.type = "hidden";
+      html.value = 1;
+      el.form.appendChild(html);
+      el.form.submit();
+    }
+
     function delete_line (element, id) {
       if(confirm('Er du sikker?')) {
         $.post("<?= $_SETUP['DISPATCH'] . 't=expense.ajax' ?>",
@@ -361,11 +416,12 @@
       var index = parseInt($('#tabindex').val());
       $('#add_table tbody tr:last input:last').unbind();
       $('#add_table tbody tr:last').after("<tr> \
-        <td><input type=\"text\" name=\"expense_lines.supplier_name[]\" id=\"expense_lines.supplier_name[]\" value=\"\" size=\"22\" tabindex=\"" + index++ + "\" maxlength=\"22\"></td> \
-        <td><input type=\"text\" name=\"expense_lines.beer_purchased[]\" id=\"expense_lines.beer_purchased[]\" value=\"0,00\" size=\"22\" tabindex=\"" + index++ + "\" maxlength=\"22\" class=\"number\"></td> \
-        <td><input type=\"text\" name=\"expense_lines.wine_purchased[]\" id=\"expense_lines.wine_purchased[]\" value=\"0,00\" size=\"22\" tabindex=\"" + index++ + "\" maxlength=\"22\" class=\"number\"></td> \
-        <td><input type=\"text\" name=\"expense_lines.spirits_purchased[]\" id=\"expense_lines.spirits_purchased[]\" value=\"0,00\" size=\"22\" tabindex=\"" + index + "\" maxlength=\"22\" class=\"number\"></td> \
-        <td>0,00</td> \
+        <td></td> \
+        <td class=\"number\"><input type=\"text\" name=\"expense_lines.supplier_name[]\" id=\"expense_lines.supplier_name[]\" value=\"\" size=\"22\" tabindex=\"" + index++ + "\" maxlength=\"22\"></td> \
+        <td class=\"number\"><input type=\"text\" name=\"expense_lines.beer_purchased[]\" id=\"expense_lines.beer_purchased[]\" value=\"0,00\" size=\"22\" tabindex=\"" + index++ + "\" maxlength=\"22\" class=\"number\"></td> \
+        <td class=\"number\"><input type=\"text\" name=\"expense_lines.wine_purchased[]\" id=\"expense_lines.wine_purchased[]\" value=\"0,00\" size=\"22\" tabindex=\"" + index++ + "\" maxlength=\"22\" class=\"number\"></td> \
+        <td class=\"number\"><input type=\"text\" name=\"expense_lines.spirits_purchased[]\" id=\"expense_lines.spirits_purchased[]\" value=\"0,00\" size=\"22\" tabindex=\"" + index + "\" maxlength=\"22\" class=\"number\"></td> \
+        <td class=\"number\">0,00</td> \
       </tr>");
       $('#tabindex').val(index);
       $('#add_table tbody tr:last input:last').keyup(function(e) {

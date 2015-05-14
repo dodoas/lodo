@@ -75,7 +75,7 @@ class lodo_fakturabank_fakturabankvoting {
         $this->credentials = "$this->username:$this->password";
 	}
 
-	function get_balance_report($account_id = null, $period = null) {
+	function get_balance_report($account_id = null, $period = null, $country_code = null) {
         global $_lib;
         $this->tempBankAccount = $this->get_account_number($account_id);
 
@@ -84,12 +84,14 @@ class lodo_fakturabank_fakturabankvoting {
 		$page       = "balance_report.xml";
 		// http://fakturabank.no/balance_report.xml?identifier=
         // TODO: limit on account
+        # If no country_code is set, send Norway's country code
+        $country_code = ($country_code == '')?'NO':$country_code;
         $params     = "?identifier=" . $this->OrgNumber . '&identifier_type=NO:ORGNR';
         if ($account_id != null && $period != null) {
             $params     .= '&';
             $params .= "start_date=" . $this->period_to_startdate($period) . "&";
             $params .= "end_date=" . $this->period_to_enddate($period) . "&";
-            $params .= "country_code=NO&";
+            $params .= "country_code=" . $country_code . "&";
             $params .= "account_number=" . $this->get_account_number($account_id) . "&";
         }
         $url    = "$this->protocol://$this->host/$page$params";
@@ -158,7 +160,7 @@ class lodo_fakturabank_fakturabankvoting {
         return $voting;
     }
 
-    public function import_transactions($account_id, $period) {
+    public function import_transactions($account_id, $period, $country_code) {
         if (!is_numeric($account_id)) {
             return false;
         }
@@ -174,7 +176,7 @@ class lodo_fakturabank_fakturabankvoting {
         global $_lib;
 
         //# get transaction data from fakturabank
-        list($voting, $bank_statement) = $this->get_balance_report($account_id, $period);
+        list($voting, $bank_statement) = $this->get_balance_report($account_id, $period, $country_code);
         if (!is_array($voting) || empty($voting)) {
             return false;
         }

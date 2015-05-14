@@ -293,8 +293,8 @@ class postmotpost {
                 $this->total['total']->Name        = 'Total';
                 $this->total['total']->AmountIn   += $voucher->AmountIn;
                 $this->total['total']->AmountOut  += $voucher->AmountOut;
-                $this->total['total']->FAmountIn  += $voucher->ForeignAmountIn;
-                $this->total['total']->FAmountOut += $voucher->ForeignAmountOut;
+                if ($voucher->AmountIn > 0) $this->total['total']->FAmountIn  += $voucher->ForeignAmount;
+                if ($voucher->AmountOut > 0) $this->total['total']->FAmountOut += $voucher->ForeignAmount;
 
                 /*******************************************************************
                 * New sum each time we change the account
@@ -305,8 +305,8 @@ class postmotpost {
                 }
                 $this->sumaccountH[$AccountPlanID]->AmountIn   += $voucher->AmountIn;
                 $this->sumaccountH[$AccountPlanID]->AmountOut  += $voucher->AmountOut;
-                $this->sumaccountH[$AccountPlanID]->FAmountIn  += $voucher->ForeignAmountIn;
-                $this->sumaccountH[$AccountPlanID]->FAmountOut += $voucher->ForeignAmountOut;
+                if ($voucher->AmountIn > 0) $this->sumaccountH[$AccountPlanID]->FAmountIn  += $voucher->ForeignAmount;
+                if ($voucher->AmountOut > 0) $this->sumaccountH[$AccountPlanID]->FAmountOut += $voucher->ForeignAmount;
 
                 /*******************************************************************
                 * matchKIDH kid references on the same account (always)
@@ -417,8 +417,8 @@ class postmotpost {
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->VoucherType       = $voucher->VoucherType;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->AmountIn          = $voucher->AmountIn;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->AmountOut         = $voucher->AmountOut;
-                $this->voucherH[$AccountPlanID][$voucher->VoucherID]->ForeignAmountIn   = $voucher->ForeignAmountIn;
-                $this->voucherH[$AccountPlanID][$voucher->VoucherID]->ForeignAmountOut  = $voucher->ForeignAmountOut;
+                if ($voucher->AmountIn > 0) $this->voucherH[$AccountPlanID][$voucher->VoucherID]->ForeignAmountIn   = $voucher->ForeignAmount;
+                if ($voucher->AmountOut > 0) $this->voucherH[$AccountPlanID][$voucher->VoucherID]->ForeignAmountOut  = $voucher->ForeignAmount;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->VAT               = $voucher->VAT;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->Quantity          = $voucher->Quantity;
                 $this->voucherH[$AccountPlanID][$voucher->VoucherID]->DepartmentID      = $voucher->DepartmentID;
@@ -439,7 +439,7 @@ class postmotpost {
             /***************************************************************
             * Account sum - Dette er det som faktisk er registrert p$(B~A)I½(B hovedbokskontoen-A
             */
-            $query_saldo = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout, sum(V.ForeignAmountIn) as fsumin, sum(V.ForeignAmountOut) as fsumout from voucher as V where V.AccountPlanID = '" . $this->AccountPlanID . "' and $whereextra V.Active=1 ";
+            $query_saldo = "select sum(V.AmountIn) as sumin, sum(V.AmountOut) as sumout, sum(if(V.AmountIn > 0, V.ForeignAmount, 0)) as fsumin, sum(if(V.AmountOut > 0, V.ForeignAmount, 0)) as fsumout from voucher as V where V.AccountPlanID = '" . $this->AccountPlanID . "' and $whereextra V.Active=1 ";
             #print "XX: $query_saldo<br>\n";
             $saldo = $_lib['storage']->get_row(array('query' => $query_saldo));
 
@@ -851,6 +851,65 @@ class postmotpost {
             $_lib['db']->db_insert($query_ins);
         } else {
             #$_lib['message']->add("Duplikatlukking: $ParentVoucherID:$ChildVoucherID");
+        }
+    }
+
+    // get all voucher parent/child ids for a voucher id in voucherstruct table
+    private function getParentOrChildIDs($VoucherID, $ParentOrChild) {
+      global $_lib;
+      $GetID = $ParentOrChild;
+      $SearchID = ($ParentOrChild == "ParentVoucherID")?"ChildVoucherID":"ParentVoucherID";
+      $ids = array();
+      $query_get_ids = "SELECT $GetID FROM voucherstruct WHERE $SearchID = $VoucherID";
+      $ids_result = $_lib['db']->db_query($query_get_ids);
+      if ($_lib['db']->db_numrows($ids_result) == 0) return $ids;
+      while($id_row = $_lib['db']->db_fetch_assoc($ids_result)) {
+        $id = $id_row[$GetID];
+        $ids[] = $id;
+        $_ids = array_merge($ids, $this->getParentOrChildIDs($id, $GetID));
+        $ids = array_unique($_ids);
+      }
+      return $ids;
+    }
+
+    // helper function to get all parent and child voucher ids from voucherstruct table for given voucher id
+    private function getVoucherParentAndChildIDs($VoucherID) {
+      global $_lib;
+      $ids = array($VoucherID);
+      $query_exists = "SELECT * FROM voucherstruct WHERE ParentVoucherID = $VoucherID OR ChildVoucherID = $VoucherID";
+      $exists_result = $_lib['db']->db_query($query_exists);
+      $exists = $_lib['db']->db_numrows($exists_result) > 0;
+      if ($exists) {
+        $parent_ids = $this->getParentOrChildIDs($VoucherID, "ParentVoucherID");
+        $child_ids = $this->getParentOrChildIDs($VoucherID, "ChildVoucherID");
+        $ids = array_merge($parent_ids, $child_ids, $ids);
+      }
+      return array_unique($ids);
+    }
+
+    /**
+     * Open all posts on given accountplan for open peroids.
+     */
+    public function openAllPostsForOpenPeriods() {
+        global $_lib;
+
+        $voucher_query = "select VoucherID from voucher where VoucherPeriod in (select Period from accountperiod where Status < 4)";
+        $r = $_lib['db']->db_query($voucher_query);
+
+        while($voucher = $_lib['db']->db_fetch_assoc($r)) {
+            $id = $voucher['VoucherID'];
+            $ids = $this->getVoucherParentAndChildIDs($id);
+            if (!empty($ids)) {
+              $ids_string = "(";
+              $len = count($ids);
+              for($i=0; $i < $len; $i++) {
+                if ($i == 0) $ids_string .= " ". $ids[$i];
+                else $ids_string .= ", ". $ids[$i];
+              }
+              $ids_string .= ")";
+              $delete_query = "DELETE FROM voucherstruct WHERE ParentVoucherID IN $ids_string OR ChildVoucherID IN $ids_string";
+              $_lib['db']->db_delete($delete_query);
+            }
         }
     }
 
