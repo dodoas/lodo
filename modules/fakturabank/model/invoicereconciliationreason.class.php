@@ -78,7 +78,7 @@ class lodo_fakturabank_invoicereconciliationreason {
         }
 
         foreach ($reasons as $reason) {
-            $account = $reason;
+            $account = $reason['closing_reason'];
             $query   = "select * from $db_table where FakturabankInvoiceReconciliationReasonID = '" . $account['id'] . "'";
             $fakturabankinvoicereconciliationreason = $_lib['storage']->get_row(array('query' => $query));
             if (!empty($fakturabankinvoicereconciliationreason)) {                
