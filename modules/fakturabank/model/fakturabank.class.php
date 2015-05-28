@@ -2084,6 +2084,10 @@ class lodo_fakturabank_fakturabank {
         curl_close($ch);
         return $this->success;
     }
+
+    public function construct_fakturabank_url($page=''){
+      return "$this->protocol://$this->host/$page";
+    }
 }
 
 ####################################################################################################
