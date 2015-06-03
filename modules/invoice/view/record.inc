@@ -64,7 +64,7 @@ elseif($_lib['input']->getProperty('action_invoice_newonthis')) {
 }
 elseif($_lib['input']->getProperty('action_invoice_fakturabanksend')) {
     $invoice->init(array());
-    $invoice->fakturabank_send();
+    if ($invoice->fakturabank_send_precheck()) $invoice->fakturabank_send();
 }
 elseif($_lib['input']->getProperty('action_invoice_fakturabankjournal')) {
     $invoice->fakturabankjournal();
