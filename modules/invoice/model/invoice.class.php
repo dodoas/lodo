@@ -291,6 +291,28 @@ class invoice {
       # required fields
       $head_required_fields = array('InvoiceDate', 'SName', 'SCity', 'SZipCode', 'IName', 'ICity', 'IZipCode', array('Phone', 'IMobile', 'IFax', 'IEmail'), 'DueDate', 'SBankAccount');
       $line_required_fields = array('QuantityDelivered', 'ProductName', 'UnitCustPrice');
+
+      # Translations for mandatory fields
+      $translated_head_required_fields = array(
+        'InvoiceDate'  => "Fakturadato",
+        'SName' => "Leverandør navn",
+        'SCity' => "Leverandør by",
+        'SZipCode' => "Leverandør porstnr",
+        'IName' => "Kunde navn",
+        'ICity' => "Kunde by",
+        'IZipCode' => "Kunde portnr",
+        'CustomerAddressArray' => "Telefon, Mobil, Fax eller Email.",
+        'DueDate' => "Forfallsdato",
+        'SBankAccount' => "Bankkonto"
+      );
+
+      $translated_line_required_fields = array(
+        'QuantityDelivered' => "Antall Levert",
+        'ProductName' => "Produkt navn",
+        'UnitCustPrice' => "Enhets pris"
+      );
+
+
       # main/head fields
       foreach($head_required_fields as $field_name) {
         $is_array = is_array($field_name);
@@ -303,13 +325,13 @@ class invoice {
         else $is_set = !empty($this->headH[$field_name]);
         if (!$is_set) {
           $ready_to_send = false;
-          if ($is_array) $_lib['message']->add(array('message' => 'Before you can send to fakturabank at least one of the following fields needs to be set: ' . join($field_name, ', ')));
-          else $_lib['message']->add(array('message' => 'Before you can send to fakturabank you need to set ' . $field_name . ' field.'));
+          if ($is_array) $_lib['message']->add(array('message' => 'Før du kan sende til Fakturabank er du nøtt til å fylle ut ett av følgene felt: ' . $translated_head_required_fields['CustomerAddressArray']));
+          else $_lib['message']->add(array('message' => 'Før du kan sende til Fakturabank er du nøtt til å fylle ut ett av følgene felt: ' . $translated_head_required_fields[$field_name] . ' field.'));
         }
       }
       # if no invoice lines
       if (!(count($this->lineH) > 0)) {
-        $_lib['message']->add(array('message' => 'Before you can send to fakturabank the invoice should have at least one invoice line!'));
+        $_lib['message']->add(array('message' => 'Før du kan sende til Fakturabank er du nøtt til å fylle ut ett av følgene felt!'));
         return false;
       }
       # if any invoice lines, check each for required fields
@@ -319,7 +341,7 @@ class invoice {
           $is_set = !empty($line[$field_name]);
           if (!$is_set) {
             $ready_to_send = false;
-            $_lib['message']->add(array('message' => 'Before you can send to fakturabank you need to set ' . $field_name . ' field in invoice line number ' . $line_count . '.'));
+            $_lib['message']->add(array('message' => 'Før du kan sende til Fakturabank er du nøtt til å fylle: ' . $translated_line_required_fields[$field_name] . ' på faktura  linje ' . $line_count . '.'));
           }
         }
         $line_count++;
