@@ -2076,7 +2076,9 @@ class lodo_fakturabank_fakturabank {
         } else {
             // Show me the result
             $_lib['message']->add(microtime() . " Opprettet faktura: $i");
-            $_lib['message']->add("<pre>$data</pre>");
+            $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+            $body = substr($data, $header_size);
+            $_lib['message']->add("<pre>$body</pre>");
             #print_r(curl_getinfo($ch));
             $this->success  = true;
         }
