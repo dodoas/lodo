@@ -132,8 +132,11 @@ class lodo_accountplan_scheme {
 
     function refreshSchemes() {
         global $_lib;
+        includelogic("fakturabank/fakturabank");
+        $fakturabank = new lodo_fakturabank_fakturabank();
 
-        $url = "http://fakturabank.no/identificators.json";
+        $page = "identificators.json";
+        $url = $fakturabank->construct_fakturabank_url($page);
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -141,12 +144,12 @@ class lodo_accountplan_scheme {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $result = curl_exec($ch);
 
-        $a = json_decode($result);
+        $decoded_json = json_decode($result);
 
-        foreach($a as $k) {
+        foreach($decoded_json as $json_node) {
             $found = false;
             foreach($this->globalSchemes as $existing) {
-                if($existing["FakturabankRemoteSchemeID"] == $k->id) {
+                if($existing["FakturabankRemoteSchemeID"] == $json_node->identificator->id) {
                     $found = true;
                     break;
                 }
@@ -155,11 +158,11 @@ class lodo_accountplan_scheme {
             if(!$found) {
                 $q = sprintf("INSERT INTO fakturabankscheme 
                               (`FakturabankRemoteSchemeID`, `SchemeType`)
-                              VALUES (%d, '%s');", $k->id, $k->name);
+                              VALUES (%d, '%s');", $json_node->identificator->id, $json_node->identificator->name);
             }
             else {
                 $q = sprintf("UPDATE fakturabankscheme SET SchemeType = '%s' WHERE FakturabankRemoteSchemeID = %d",
-                             $k->name, $k->id);
+                             $json_node->identificator->name, $json_node->identificator->id);
             }
 
 

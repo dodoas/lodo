@@ -282,6 +282,73 @@ class invoice {
         $args[$prefix . "_DCountryCode_" . $args['InvoiceID']] = ($customer_accountplan_changed) ? $row_to->CountryCode : $args['_DCountryCode'];
     }
 
+    # check if all the needed fields are set in oreder to create a valid xml for sending to fakturabank
+    function fakturabank_send_precheck()
+    {
+      global $_lib;
+
+      $ready_to_send = true;
+      # required fields
+      $head_required_fields = array('InvoiceDate', 'SName', 'SCity', 'SZipCode', 'IName', 'ICity', 'IZipCode', array('Phone', 'IMobile', 'IFax', 'IEmail'), 'DueDate', 'SBankAccount');
+      $line_required_fields = array('QuantityDelivered', 'ProductName', 'UnitCustPrice');
+
+      # Translations for mandatory fields
+      $translated_head_required_fields = array(
+        'InvoiceDate'  => "Fakturadato",
+        'SName' => "Leverandør navn",
+        'SCity' => "Leverandør by",
+        'SZipCode' => "Leverandør porstnr",
+        'IName' => "Kunde navn",
+        'ICity' => "Kunde by",
+        'IZipCode' => "Kunde portnr",
+        'CustomerAddressArray' => "Telefon, Mobil, Fax eller Email.",
+        'DueDate' => "Forfallsdato",
+        'SBankAccount' => "Bankkonto"
+      );
+
+      $translated_line_required_fields = array(
+        'QuantityDelivered' => "Antall Levert",
+        'ProductName' => "Produkt navn",
+        'UnitCustPrice' => "Enhets pris"
+      );
+
+
+      # main/head fields
+      foreach($head_required_fields as $field_name) {
+        $is_array = is_array($field_name);
+        $is_set = false;
+        if ($is_array) {
+          foreach($field_name as $field) {
+            $is_set = $is_set || !empty($this->headH[$field]);
+          }
+        }
+        else $is_set = !empty($this->headH[$field_name]);
+        if (!$is_set) {
+          $ready_to_send = false;
+          if ($is_array) $_lib['message']->add(array('message' => 'Før du kan sende til Fakturabank er du nøtt til å fylle ut ett av følgene felt: ' . $translated_head_required_fields['CustomerAddressArray']));
+          else $_lib['message']->add(array('message' => 'Før du kan sende til Fakturabank er du nøtt til å fylle ut ett av følgene felt: ' . $translated_head_required_fields[$field_name] . ' field.'));
+        }
+      }
+      # if no invoice lines
+      if (!(count($this->lineH) > 0)) {
+        $_lib['message']->add(array('message' => 'Før du kan sende til Fakturabank er du nøtt til å fylle ut ett av følgene felt!'));
+        return false;
+      }
+      # if any invoice lines, check each for required fields
+      $line_count = 1;
+      foreach($this->lineH as $line) {
+        foreach($line_required_fields as $field_name) {
+          $is_set = !empty($line[$field_name]);
+          if (!$is_set) {
+            $ready_to_send = false;
+            $_lib['message']->add(array('message' => 'Før du kan sende til Fakturabank er du nøtt til å fylle: ' . $translated_line_required_fields[$field_name] . ' på faktura  linje ' . $line_count . '.'));
+          }
+        }
+        $line_count++;
+      }
+      return $ready_to_send;
+    }
+
     function make_invoice()
     {
         global $_lib, $accounting;

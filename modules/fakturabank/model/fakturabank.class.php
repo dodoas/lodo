@@ -2076,13 +2076,19 @@ class lodo_fakturabank_fakturabank {
         } else {
             // Show me the result
             $_lib['message']->add(microtime() . " Opprettet faktura: $i");
-            $_lib['message']->add("<pre>$data</pre>");
+            $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+            $body = substr($data, $header_size);
+            $_lib['message']->add("<pre>$body</pre>");
             #print_r(curl_getinfo($ch));
             $this->success  = true;
         }
 
         curl_close($ch);
         return $this->success;
+    }
+
+    public function construct_fakturabank_url($page=''){
+      return "$this->protocol://$this->host/$page";
     }
 }
 
