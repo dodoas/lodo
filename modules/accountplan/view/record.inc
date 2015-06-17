@@ -96,6 +96,8 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
             if($org->Email)       $_POST['accountplan_Email']       = $org->Email;
             if($org->Mobile)      $_POST['accountplan_Mobile']      = $org->Mobile;
             if($org->Phone)       $_POST['accountplan_Phone']       = $org->Phone;
+            if($org->ParentCompanyName)    $_POST['accountplan_ParentName']   = $org->ParentCompanyName;
+            if($org->ParentCompanyNumber)  $_POST['accountplan_ParentOrgNumber']   = $org->ParentCompanyNumber;
             
             $_POST['accountplan_EnableInvoiceAddress'] = 1;
             if($org->IAdress->Address1) $_POST['accountplan_Address'] = $org->IAdress->Address1;

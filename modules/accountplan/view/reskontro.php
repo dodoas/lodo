@@ -121,6 +121,15 @@ if($JournalID) {
     <td>Viktig! M&aring; settes riktig for at regnskapet skal fungere</td>
     <td></td>
   </tr>
+  <? if ($account->ParentName) { ?>
+  <tr>
+    <td class="menu">Parent</td>
+    <td></td>
+    <td><? print $account->ParentName . " (" . $account->ParentOrgNumber . ")"  ?></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <? } ?>
   <tr>
     <td class="menu">Navn</td>
     <td></td>

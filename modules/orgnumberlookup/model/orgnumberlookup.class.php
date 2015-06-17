@@ -143,6 +143,8 @@ class lodo_orgnumberlookup_orgnumberlookup {
             
             $this->Municipality         = (string) utf8_decode($company->{'business-address'}->municipality);
             #$this->MunicipalityNo      = (string) utf8_decode($company->{'business-address'}->municipality-no);    
+            $this->ParentCompanyName    = (string) utf8_decode($company->{'parent-unit-name'});
+            $this->ParentCompanyNumber  = (string) utf8_decode($company->{'parent-unit-number'});
         }
     }
 }
