@@ -24,6 +24,8 @@ class lodo_orgnumberlookup_orgnumberlookup {
         $this->password = $_lib['setup']->get_value('orgnumberlookup.password');
 
         $this->credentials = "$this->username:$this->password";
+        $this->host = $GLOBALS['_SETUP']['FB_SERVER'];
+        $this->protocol = $GLOBALS['_SETUP']['FB_SERVER_PROTOCOL'];
         $this->url = "$this->protocol://$this->host$this->path";
         #print "$this->url<br>\n";
         #print "$this->credentials   <br>\n";
@@ -54,6 +56,26 @@ class lodo_orgnumberlookup_orgnumberlookup {
 
         } else {
             $_lib['message']->add("Orgnummer m? best&aring; av 9 siffer");        
+        }
+    }
+
+    function getOrgNumberOrScheme($OrgNumber, $scheme_value, $scheme_type) {
+        global $_lib;
+
+        $old_pattern    = array("/[^0-9]/", "/_+/", "/_$/");
+        $new_pattern    = array("", "", "");
+        $OrgNumber      = strtolower(preg_replace($old_pattern, $new_pattern , $OrgNumber));
+
+        if(strlen($OrgNumber) == 9) {
+
+            $url = $this->url . $OrgNumber . ".xml?value=" . $scheme_value . "&type=" . $scheme_type;
+
+            $path = $this->path . $OrgNumber . ".xml?value=" . $scheme_value . "&type=" . $scheme_type;
+
+            $this->getOrgNumber2($path, $url);
+
+        } else {
+            $_lib['message']->add("Orgnummer m? best&aring; av 9 siffer");
         }
     }
 
