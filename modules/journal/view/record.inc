@@ -20,7 +20,7 @@ if (($voucher_input->ForeignCurrencyID != $voucher_current['ForeignCurrencyID'])
 
 // Log warning (to logapplication table) if some required fields are not set
 $res = var_export($_REQUEST, true);
-if ((isset($_REQUEST['action_voucher_new']) || isset($_REQUEST['action_voucher_head_update']) || isset($_REQUEST['action_voucher_update'])) && (!isset($_REQUEST['VoucherType']) || !isset($_REQUEST['voucher_VoucherDate']))) $_lib['sess']->warning('Possible error while saving voucherline! ' . $res);
+if ((isset($_REQUEST['action_voucher_new']) || isset($_REQUEST['action_voucher_head_update']) || isset($_REQUEST['action_voucher_update'])) && (empty($_REQUEST['VoucherType']) || empty($_REQUEST['voucher_VoucherDate']))) $_lib['sess']->warning('Possible error while saving voucherline!\n $_REQUEST:\n ' . mysql_escape_string($res));
 
 includelogic('journal/search');
 $search_class   = new search_class();
