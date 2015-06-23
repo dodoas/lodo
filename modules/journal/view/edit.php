@@ -279,9 +279,9 @@ if(!$period_open) {
     <? print $_lib['form3']->checkbox(array('value'=>$view_linedetails, 'name'=>'view_linedetails', 'autosubmit'=>'1')) ?> Detaljer
 </form>
 &nbsp;
-<? print $_lib['form3']->URL(array('description' => '<<', 'title' => 'Klikk for &aring; se forrige bilag', 'url' => $_lib['sess']->dispatch . 't=journal.edit&amp;voucher_VoucherType=' . $voucher_input->VoucherType . '&amp;voucher_JournalID=' . ($voucher_input->JournalID - 1) . '&amp;action_journalid_search=1&amp;new=1')) ?>
+<? print $_lib['form3']->URL(array('accesskey' => '<', 'description' => '<<', 'title' => 'Klikk for &aring; se forrige bilag', 'url' => $_lib['sess']->dispatch . 't=journal.edit&amp;voucher_VoucherType=' . $voucher_input->VoucherType . '&amp;voucher_JournalID=' . ($voucher_input->JournalID - 1) . '&amp;action_journalid_search=1&amp;new=1')) ?>
 &nbsp;
-<? print $_lib['form3']->URL(array('description' => '>>', 'title' => 'Klikk for &aring; se neste bilag',   'url' => $_lib['sess']->dispatch . 't=journal.edit&amp;voucher_VoucherType=' . $voucher_input->VoucherType . '&amp;voucher_JournalID=' . ($voucher_input->JournalID + 1) . '&amp;action_journalid_search=1&amp;new=1')) ?>
+<? print $_lib['form3']->URL(array('accesskey' => '>', 'description' => '>>', 'title' => 'Klikk for &aring; se neste bilag',   'url' => $_lib['sess']->dispatch . 't=journal.edit&amp;voucher_VoucherType=' . $voucher_input->VoucherType . '&amp;voucher_JournalID=' . ($voucher_input->JournalID + 1) . '&amp;action_journalid_search=1&amp;new=1')) ?>
 
 <br />
 <br />
