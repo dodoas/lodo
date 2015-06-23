@@ -18,6 +18,10 @@ $result = $_lib['db']->db_query('SELECT * FROM voucher WHERE JournalID = ' . $vo
 $voucher_current = $_lib['db']->db_fetch_assoc($result);
 if (($voucher_input->ForeignCurrencyID != $voucher_current['ForeignCurrencyID']) || ($voucher_input->ForeignConvRate != $voucher_current['ForeignConvRate'])) exchange::updateJournalForeignCurrency();
 
+// Log warning (to logapplication table) if some required fields are not set
+$res = var_export($_REQUEST, true);
+if ((isset($_REQUEST['action_voucher_new']) || isset($_REQUEST['action_voucher_head_update']) || isset($_REQUEST['action_voucher_update'])) && (!isset($_REQUEST['VoucherType']) || !isset($_REQUEST['voucher_VoucherDate']))) $_lib['sess']->warning('Possible error while saving voucherline! ' . $res);
+
 includelogic('journal/search');
 $search_class   = new search_class();
 
