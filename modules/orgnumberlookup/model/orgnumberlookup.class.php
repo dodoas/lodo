@@ -59,24 +59,18 @@ class lodo_orgnumberlookup_orgnumberlookup {
         }
     }
 
-    function getOrgNumberOrScheme($OrgNumber, $scheme_value, $scheme_type) {
+    function getOrgNumberByScheme($scheme_value, $scheme_type) {
         global $_lib;
 
-        $old_pattern    = array("/[^0-9]/", "/_+/", "/_$/");
-        $new_pattern    = array("", "", "");
-        $OrgNumber      = strtolower(preg_replace($old_pattern, $new_pattern , $OrgNumber));
-
-        if(strlen($OrgNumber) == 9) {
-
-            $url = $this->url . $OrgNumber . ".xml?value=" . $scheme_value . "&type=" . $scheme_type;
-
-            $path = $this->path . $OrgNumber . ".xml?value=" . $scheme_value . "&type=" . $scheme_type;
-
-            $this->getOrgNumber2($path, $url);
-
-        } else {
-            $_lib['message']->add("Orgnummer m? best&aring; av 9 siffer");
+        if ($scheme_type == "NO:ORGNR") {
+          $old_pattern    = array("/[^0-9]/", "/_+/", "/_$/");
+          $new_pattern    = array("", "", "");
+          $scheme_value   = strtolower(preg_replace($old_pattern, $new_pattern , $scheme_value));
         }
+
+        $url = $this->url . "index.xml?value=" . $scheme_value . "&type=" . $scheme_type;
+        $path = $this->path . "index.xml?value=" . $scheme_value . "&type=" . $scheme_type;
+        $this->getOrgNumber2($path, $url);
     }
 
     function getOrgNumber2($path, $url) {

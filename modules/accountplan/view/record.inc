@@ -70,16 +70,17 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
         $schemes = $schemeControl->listSchemes();
         $availableSchemeTypes = $schemeControl->listTypes();
         # added so if no schemes are present to try with AccountPlanId or OrgNo
-        if (empty($schemes)) $schemes[] = array("SchemeValue" => "", "FakturabankSchemeID" => "");
+        if (empty($schemes)) $schemes[] = array("SchemeValue" => "", "FakturabankSchemeID" => 1);
         # try to download info for each scheme. we only need one success
         foreach ($schemes as $scheme) {
           $scheme_value = $scheme['SchemeValue'];
           $scheme_type = $availableSchemeTypes[$scheme['FakturabankSchemeID'] - 1]['SchemeType'];
           $org = new lodo_orgnumberlookup_orgnumberlookup();
-          if(strlen($_POST['accountplan_OrgNumber']) >= 9)
-            $org->getOrgNumberOrScheme($_POST['accountplan_OrgNumber'], $scheme_value, $scheme_type);
-          elseif(strlen($AccountPlanID) >= 9)
-            $org->getOrgNumberOrScheme($_POST['accountplan_AccountPlanID'], $scheme_value, $scheme_type);
+          if (empty($scheme_value)) {
+            if(strlen($_POST['accountplan_OrgNumber']) >= 9) $scheme_value = $_POST['accountplan_OrgNumber'];
+            elseif(strlen($AccountPlanID) >= 9) $scheme_value = $AccountPlanID;
+          }
+          $org->getOrgNumberByScheme($scheme_value, $scheme_type);
         
           if($org->success) {
             $_lib['message']->add("Opplysninger er hentet automatisk basert p&aring; organisasjonsnummeret.");
