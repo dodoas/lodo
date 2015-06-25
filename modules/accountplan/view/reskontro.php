@@ -121,6 +121,15 @@ if($JournalID) {
     <td>Viktig! M&aring; settes riktig for at regnskapet skal fungere</td>
     <td></td>
   </tr>
+  <? if ($account->ParentName) { ?>
+  <tr>
+    <td class="menu">Parent</td>
+    <td></td>
+    <td><? print $account->ParentName . " (" . $account->ParentOrgNumber . ")"  ?></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <? } ?>
   <tr>
     <td class="menu">Navn</td>
     <td></td>
@@ -199,6 +208,9 @@ if($JournalID) {
     <td></td>
     <td></td>
   </tr>
+
+  <? include("schemeid.php") ?>
+
   <tr class="result">
     <th colspan="5">Bilagsf&oslash;ringsinformasjon</th>
   </tr>
@@ -374,13 +386,11 @@ if($JournalID) {
   <tr>
     <td colspan="5" align="right">
     <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
-        <? print $_lib['form3']->submit(array('value'=>'Oppdater fra Br&oslash;nn&oslash;ysund basert p&aring; organisasjonsnummer(U)', 'name'=>'action_accountplan_updateautomatic', 'accesskey' => 'U', 'confirm' => 'Opplysninger som er endret kan bli overskrevet')) ?>
+        <? print $_lib['form3']->submit(array('value'=>'Oppdater fra Fakturabank(U)', 'name'=>'action_accountplan_updateautomatic', 'accesskey' => 'U', 'confirm' => 'Opplysninger som er endret kan bli overskrevet')) ?>
         <? print $_lib['form3']->submit(array('value'=>'Lagre (S)', 'name'=>'action_accountplan_update', 'accesskey' => 'S')) ?>
     <? } ?>
     </td>
   </tr>
-
-  <? include("schemeid.php") ?>
 
   </form>
 

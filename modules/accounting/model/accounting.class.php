@@ -937,6 +937,7 @@ class accounting {
 
                 $fields['voucher_ProjectID']        = $args['voucher']->ProjectID;
                 $fields['voucher_DepartmentID']     = $args['voucher']->DepartmentID;
+                $fields['voucher_VoucherPeriod']     = $args['voucher']->VoucherPeriod;
 
                 #print "Oppdater MVA postering pk VoucherID: " . $args['voucherAV']->VoucherID; print_r($fields) ; print "<br>\n";
                 $this->update_voucher_line($fields, $args['voucherAV']->VoucherID, 'sub_mva_voucher3');
@@ -1511,9 +1512,8 @@ class accounting {
 
         $this->update_voucher_line($fields, $VoucherID, $comment);
 
-        // TODO (mladjo2505)
-        // Investigate if we should change $voucher->VoucherID to $VoucherID.
-        $this->update_vat_smart(array('VoucherID'=>$voucher->VoucherID, 'post'=> $fields, 'comment' => 'Called from: update_voucher_line_smart'));
+        // Changed $voucher->VoucherID to $VoucherID because it was causing the "Missing VoucherID" error, since $voucher->VoucherID is not always set.
+        $this->update_vat_smart(array('VoucherID'=>$VoucherID, 'post'=> $fields, 'comment' => 'Called from: update_voucher_line_smart'));
     }
 
     #This is the function that actually carries out the dirty work. Can not be called from outside this library
