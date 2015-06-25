@@ -17,7 +17,7 @@ class lodo_orgnumberlookup_orgnumberlookup {
 
     function __construct() {
         global $_lib;
-        
+
         $this->startexectime  = microtime();
 
         $this->username = $_lib['setup']->get_value('orgnumberlookup.username');
@@ -73,7 +73,7 @@ class lodo_orgnumberlookup_orgnumberlookup {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
 
-        $xml_data = curl_exec($ch);        
+        $xml_data = curl_exec($ch);
         $xml_data = html_entity_decode($xml_data, ENT_NOQUOTES, 'UTF-8');
         $xml_data = str_replace("&", "&amp;", $xml_data);
 
@@ -83,13 +83,13 @@ class lodo_orgnumberlookup_orgnumberlookup {
             $_lib['message']->add("Fant OrgNumber");
             #var_dump($data);
             #print_r(curl_getinfo($ch));
-            
+
            #print_r(simplexml_load_string($data));
         }
-        
+
         curl_close($ch);
-        
-        $company = simplexml_load_string($xml_data);        
+
+        $company = simplexml_load_string($xml_data);
         $this->mapdata($company);
     }
 
@@ -106,7 +106,7 @@ class lodo_orgnumberlookup_orgnumberlookup {
             $this->URL                  = (string) utf8_decode($company->website);
             $this->DomesticBankAccount  = (string) utf8_decode($company->{'bank-account-number'});
             $this->MotkontoResultat1    = (string) utf8_decode($company->{'default-result-account-number'});
-            $this->MotkontoBalanse1    = (string) utf8_decode($company->{'default-balance-account-number'});            
+            $this->MotkontoBalanse1    = (string) utf8_decode($company->{'default-balance-account-number'});
             $this->IAdress->Address1    = (string) utf8_decode($company->{'business-address'}->address1);
             $this->IAdress->Address2    = (string) utf8_decode($company->{'business-address'}->address2);
             $this->IAdress->Address3    = (string) utf8_decode($company->{'business-address'}->address3);
@@ -114,9 +114,9 @@ class lodo_orgnumberlookup_orgnumberlookup {
             $this->IAdress->ZipCode     = (string) utf8_decode($company->{'business-address'}->zip);
             $this->IAdress->Country     = (string) utf8_decode($company->{'business-address'}->country);
             #$CountryCode               = (string) utf8_decode($company->{'businessaddress'}->country-code);
-            
+
             $this->Municipality         = (string) utf8_decode($company->{'business-address'}->municipality);
-            #$this->MunicipalityNo      = (string) utf8_decode($company->{'business-address'}->municipality-no);    
+            #$this->MunicipalityNo      = (string) utf8_decode($company->{'business-address'}->municipality-no);
             $this->ParentCompanyName    = (string) utf8_decode($company->{'parent-unit-name'});
             $this->ParentCompanyNumber  = (string) utf8_decode($company->{'parent-unit-number'});
         }
