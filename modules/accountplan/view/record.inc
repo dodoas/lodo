@@ -65,13 +65,24 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
     if((!$accountexist || $_lib['input']->getProperty('action_accountplan_updateautomatic'))) {
         // Hvis kontoen ikke finnes fra før eller vi har bedt om en automatisk oppdatering - så kjører vi orgnummer lookup mot integrasjonspunktet
         includelogic('orgnumberlookup/orgnumberlookup');
-        $org = new lodo_orgnumberlookup_orgnumberlookup();
-        if(strlen($_POST['accountplan_OrgNumber']) >= 9) 
-            $org->getOrgNumber($_POST['accountplan_OrgNumber']);
-        elseif(strlen($AccountPlanID) >= 9)
-            $org->getOrgNumber($_POST['accountplan_AccountPlanID']);
+        includelogic("accountplan/scheme");
+        $schemeControl = new lodo_accountplan_scheme($AccountPlanID);
+        $schemes = $schemeControl->listSchemes();
+        $availableSchemeTypes = $schemeControl->listTypes();
+        # added so if no schemes are present to try with AccountPlanId or OrgNo
+        if (empty($schemes)) $schemes[] = array("SchemeValue" => "", "FakturabankSchemeID" => 1);
+        # try to download info for each scheme. we only need one success
+        foreach ($schemes as $scheme) {
+          $scheme_value = $scheme['SchemeValue'];
+          $scheme_type = $availableSchemeTypes[$scheme['FakturabankSchemeID'] - 1]['SchemeType'];
+          $org = new lodo_orgnumberlookup_orgnumberlookup();
+          if (empty($scheme_value)) {
+            if(strlen($_POST['accountplan_OrgNumber']) >= 9) $scheme_value = $_POST['accountplan_OrgNumber'];
+            elseif(strlen($AccountPlanID) >= 9) $scheme_value = $AccountPlanID;
+          }
+          $org->getOrgNumberByScheme($scheme_value, $scheme_type);
         
-        if($org->success) {
+          if($org->success) {
             $_lib['message']->add("Opplysninger er hentet automatisk basert p&aring; organisasjonsnummeret.");
 	
             // Only update if the fields contains a value
@@ -80,6 +91,8 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
             if($org->Email)       $_POST['accountplan_Email']       = $org->Email;
             if($org->Mobile)      $_POST['accountplan_Mobile']      = $org->Mobile;
             if($org->Phone)       $_POST['accountplan_Phone']       = $org->Phone;
+            if($org->ParentCompanyName)    $_POST['accountplan_ParentName']   = $org->ParentCompanyName;
+            if($org->ParentCompanyNumber)  $_POST['accountplan_ParentOrgNumber']   = $org->ParentCompanyNumber;
             
             $_POST['accountplan_EnableInvoiceAddress'] = 1;
             if($org->IAdress->Address1) $_POST['accountplan_Address'] = $org->IAdress->Address1;
@@ -106,6 +119,9 @@ if($_lib['input']->getProperty('action_accountplan_update') || $_lib['input']->g
             	$_POST['accountplan_EnableMotkontoResultat'] = 1;
             	$_POST['accountplan_MotkontoBalanse1'] = $org->MotkontoBalanse1;
             }
+            # if one successful download is done, then we are done
+            break;
+          }
         }
     }
     
