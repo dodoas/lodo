@@ -36,29 +36,9 @@ class lodo_orgnumberlookup_orgnumberlookup {
         $this->stopexectime   = microtime();
         $this->diffexectime   = $this->stopexectime - $this->startexectime;
     }
-        
+
     ####################################################################################################
-    #READ XML    
-    function getOrgNumber($OrgNumber) {
-        global $_lib;
-
-        $old_pattern    = array("/[^0-9]/", "/_+/", "/_$/");
-        $new_pattern    = array("", "", "");
-        $OrgNumber      = strtolower(preg_replace($old_pattern, $new_pattern , $OrgNumber)); 
-
-        if(strlen($OrgNumber) == 9) {
-
-            $url = $this->url . $OrgNumber . ".xml";
-
-            $path = $this->path . $OrgNumber . ".xml";
-
-            $this->getOrgNumber2($path, $url);
-
-        } else {
-            $_lib['message']->add("Orgnummer m? best&aring; av 9 siffer");        
-        }
-    }
-
+    #READ XML
     function getOrgNumberByScheme($scheme_value, $scheme_type) {
         global $_lib;
 
@@ -75,7 +55,7 @@ class lodo_orgnumberlookup_orgnumberlookup {
 
     function getOrgNumber2($path, $url) {
         global $_lib;
-                
+
         $headers = array(
             "GET " . $this->path . " HTTP/1.0",
             "Content-type: text/xml;charset=\"utf-8\"",
