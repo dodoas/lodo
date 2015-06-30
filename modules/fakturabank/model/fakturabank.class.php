@@ -2069,15 +2069,16 @@ class lodo_fakturabank_fakturabank {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 
         $data = curl_exec($ch);
+        $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+        $body = substr($data, $header_size);
         #$_lib['message']->add("FB->write()->exec()");
 
-        if (curl_errno($ch)) {
-            $_lib['message']->add("Error: opprette faktura: " . curl_error($ch));
+        if (curl_errno($ch) || curl_getinfo($ch, CURLINFO_HTTP_CODE) != 201) {
+            if (curl_errno($ch)) $_lib['message']->add("Error: opprette faktura: " . curl_error($ch));
+            else $_lib['message']->add("Error: opprette faktura: " . $body);
         } else {
             // Show me the result
             $_lib['message']->add(microtime() . " Opprettet faktura: $i");
-            $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
-            $body = substr($data, $header_size);
             $_lib['message']->add("<pre>$body</pre>");
             #print_r(curl_getinfo($ch));
             $this->success  = true;
