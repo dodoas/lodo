@@ -129,9 +129,9 @@ print $_lib['sess']->doctype ?>
         <td><? print $row->IOrgNo ?></td>
     </tr>
     <tr>
-        <td><label><?php if (!empty($row->SVatNo)) echo 'Vat nr' ?></label></td>
+        <td><label><?php if (!empty($row->SVatNo)) echo 'MVA reg' ?></label></td>
         <td><? if (!empty($row->SVatNo)) print $row->SVatNo ?></td>
-        <td><label><?php if (!empty($row->IVatNo)) echo 'Vat nr' ?></label></td>
+        <td><label><?php if (!empty($row->IVatNo)) echo 'MVA reg' ?></label></td>
         <td><? if (!empty($row->IVatNo)) print $row->IVatNo ?></td>
     </tr>
     <tr>
@@ -186,7 +186,7 @@ print $_lib['sess']->doctype ?>
     <tr>
       <td>Fakturanummer</td>
       <td><?= $InvoiceID ?></td>
- 
+
       <td>Valuta</td>
       <td><?= $row->CurrencyID ?></td>
     </tr>
@@ -198,12 +198,12 @@ print $_lib['sess']->doctype ?>
       <td><b><? print substr($row->DueDate,0,10) ?></b></td>
     </tr>
     <? if($row_print && $row_print->InvoicePrintDate != '0000-00-00') { ?>
-    <tr> 
+    <tr>
       <td>Utskriftsdato</td>
       <td><b><? print substr($row_print->InvoicePrintDate,0,10) ?></b></td>
     </tr>
     <? } ?>
- 
+
     <tr>
       <td>V&aring;r ref.</td>
       <td><? print $row->RefCustomer ?></td>
@@ -216,7 +216,7 @@ print $_lib['sess']->doctype ?>
       <td>Betalings betingelse</td>
       <td><? print $row->PaymentCondition ?></td>
     </tr>
-    <tr>  
+    <tr>
             <td></td><td></td>
 	    <td>Merk</td>
 	    <td><? print $row->Note ?></td>

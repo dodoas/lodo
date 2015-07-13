@@ -74,7 +74,6 @@ if (!empty($row->VatNumber)) {
 }
 $params["recipient"]["email"]       = $row->DEmail;
 
-
 if($row->DAddress) {
     //$params["delivery"]["name"]   = "";
     $params["delivery"]["address1"] = $row->DAddress;
@@ -82,7 +81,6 @@ if($row->DAddress) {
     $params["delivery"]["city"]     = $row->DCity;
     $params["delivery"]["country"]  = $_lib['format']->codeToCountry($row->DCountryCode);
 }
-
 
 function kontonr($knr)
 {
@@ -106,7 +104,7 @@ else
 
 if  (!empty($row->SVatNo)) {
         $params["companyInfo"]["Foretaksregisteret"] = orgnr($row->SOrgNo);
-        $params["companyInfo"]["MvaNr"] = orgnr($row->SVatNo);
+        $params["companyInfo"]["MVA reg"] = orgnr($row->SVatNo);
 } else {
     if   (strlen($row->SOrgNo) == 9)
     {
@@ -135,7 +133,6 @@ $params["invoiceData"]["Kundenr"]   = $row->CustomerAccountPlanID;
 if($row->KID)  { $params["invoiceData"]["KID"]     = $row->KID; $params["kid"] = $row->KID; }
 if($row->Note) $params["invoiceData"]["Merk"]      = $row->Note;
 
-$params["invoiceData"]["Side"] = "1";
 $params["invoiceData"]["Fakturadato"] = $myFakutra->norwegianDate(substr($row->InvoiceDate,0,10));
 $params["invoiceData"]["Betalingsfrist"] = $myFakutra->norwegianDate(substr($row->DueDate,0,10));
 if($row_print && $row_print->InvoicePrintDate != '0000-00-00') $params["invoiceData"]["Utskriftsdato"] = $myFakutra->norwegianDate(substr($row_print->InvoicePrintDate, 0, 10));
@@ -156,9 +153,12 @@ $params["comment"] = $row->CommentCustomer;
 // Legg til en ny faktura, lage header med sender og mottaker av fakturaen.
 $myFakutra->newInvoice($params);
 
+
 $sumlines = 0;
 $vatlines = 0;
 $rowCounter = 0;
+$myFakutraLines = array();
+// Find and sum all the lines first
 while($row2 = $_lib['db']->db_fetch_object($result2))
 {
     $LineID=$row2->LineID;
@@ -174,32 +174,42 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
     $params2["mva"] = $row2->Vat;
     $params2["mvabelop"] = $vatline;
     $params2["linjesum"] = $sumline;
-    if($row_company->InvoiceLineCommentPosition == 'bottom')
-        $myFakutra->addInvoiceLine ($params2);
-    if ($row2->Comment != "")
-        $myFakutra->addLongTextLine(array('tekst' =>$row2->Comment));
-    if($row_company->InvoiceLineCommentPosition == 'top' || !$row_company->InvoiceLineCommentPosition)
-        $myFakutra->addInvoiceLine ($params2);
-    $rowCounter++;
-    #print_r($row_company);
+
+    $myFakutraLines[] = array($row2->Comment, $params2);
 }
 
-        if($_lib['sess']->get_companydef('ShowInvoiceAmountThisYear') == 1 && 1 == 0)
-        {
-            $myFakutra->addLongTextLine(array('tekst' =>"Hittil i " . $choosenYear ." har du handlet for: " . $_lib['format']->Amount(array('value'=>$rowTotal->Total, 'return'=>'value')) . " eks MVA (" . $_lib['format']->Amount($rowTotal->TotalWithVAT + $rowTotal->Total) . " inkl MVA)"));
-        }
+// setting up params for SumLine
 $params["totaltumva"] = $sumlines;
 $params["totaltmva"] = $vatlines;
 $params["totaltmmva"] = $vatlines + $sumlines;
 // $params["kid"] = "";
+
+// print giroinfo
+// Need to be before printing lines since it should be on first page
+$myFakutra->addSumLine($params);
+$myFakutra->fakturaGiro($params);
+
+// printing lines
+foreach ($myFakutraLines as $params2) {
+    if($row_company->InvoiceLineCommentPosition == 'bottom')
+    $myFakutra->addInvoiceLine ($params2[1]);
+    if ($params2[0] != "")
+        $myFakutra->addLongTextLine(array('tekst' =>$params2[0]));
+    if($row_company->InvoiceLineCommentPosition == 'top' || !$row_company->InvoiceLineCommentPosition)
+        $myFakutra->addInvoiceLine ($params2[1]);
+    $rowCounter++;
+}
+
+if($_lib['sess']->get_companydef('ShowInvoiceAmountThisYear') == 1 && 1 == 0)
+{
+    $myFakutra->addLongTextLine(array('tekst' =>"Hittil i " . $choosenYear ." har du handlet for: " . $_lib['format']->Amount(array('value'=>$rowTotal->Total, 'return'=>'value')) . " eks MVA (" . $_lib['format']->Amount($rowTotal->TotalWithVAT + $rowTotal->Total) . " inkl MVA)"));
+}
 
 if ($row->DeliveryCondition  != "")
 {
     $myFakutra->addTextLine(array('tekst' => ""));
     $myFakutra->addLongTextLine(array('tekst' => "Leverings betingelse: " . $row->DeliveryCondition));
 }
-$myFakutra->addSumLine($params);
-$myFakutra->fakturaGiro($params);
 $myFakutra->printFaktura();
 //print_r($myFakutra);
 ?>
