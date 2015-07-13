@@ -1038,8 +1038,9 @@ class invoice {
 
         $this->invoiceO->AccountingSupplierParty->Party->WebsiteURI                     = $invoice->SWeb;
         $this->invoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID        = preg_replace('/[^0-9]/', '', $invoice->SOrgNo);
+
         if (!empty($invoice->SVatNo)) {
-            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = $invoice->SOrgNo;
+            $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyID        = $invoice->SVatNo;
             if ($invoice->SCountryCode == 'SE') {
                 $this->invoiceO->AccountingSupplierParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'SE:VAT';
             } else if ($invoice->SCountryCode == 'NO') {
@@ -1091,7 +1092,7 @@ class invoice {
         $this->invoiceO->AccountingCustomerParty->Party->WebsiteURI                     = $invoice->IWeb;
         $this->invoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID        = preg_replace('/[^0-9]+/', '', $invoice->IOrgNo);
 
-        if (!empty($invoice->SVatNo)) {
+        if (!empty($invoice->IVatNo)) {
             $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyID        = $invoice->IVatNo;
             if ($invoice->ICountryCode == 'SE') {
                 $this->invoiceO->AccountingCustomerParty->Party->PartyTaxScheme->CompanyIDSchemeID = 'SE:VAT';
