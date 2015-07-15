@@ -144,9 +144,9 @@ $tabindex = 1;
         <td><? print $row->IOrgNo ?></td>
     </tr>
     <tr>
-        <td><?php if (!empty($row->SVatNo)) echo 'Vat nr' ?></td>
+        <td><?php if (!empty($row->SVatNo)) echo 'MVA reg' ?></td>
         <td><? if (!empty($row->SVatNo)) print $row->SVatNo ?></td>
-        <td><?php if (!empty($row->IVatNo)) echo 'Vat nr' ?></td>
+        <td><?php if (!empty($row->IVatNo)) echo 'MVA reg' ?></td>
         <td><? if (!empty($row->IVatNo)) print $row->IVatNo ?></td>
     </tr>
     <tr>

@@ -59,14 +59,15 @@ class pdfInvoice
     public $invoiceHeaderFont = 16;
     public $invoiceHeaderHeight = 5;
 
-    public $invoiceLinesPerSite = 18;
+    public $invoiceLinesPerSite = 14;
+    public $invoiceLinesPerSiteFormSecondPage = 39;
 
     public $invoiceLineHeadFontSize = 9;
     public $invoiceLineHeadStart = 98;
     public $invoiceLineHeadLeft1 = 14;
     public $invoiceLineHeadLeft2 = 30;
-    public $invoiceLineHeadLeft3 = 99;
-    public $invoiceLineHeadLeft4 = 104;
+    public $invoiceLineHeadLeft3 = 93;
+    public $invoiceLineHeadLeft4 = 109;
     public $invoiceLineHeadLeft5 = 130;
     public $invoiceLineHeadLeft6 = 146;
     public $invoiceLineHeadLeft7 = 176;
@@ -88,7 +89,7 @@ class pdfInvoice
     public $invoiceLineRefName7 = "linjesum";
     public $invoiceLineAlignment1 = "L";
     public $invoiceLineAlignment2 = "L";
-    public $invoiceLineAlignment3 = "L";
+    public $invoiceLineAlignment3 = "R";
     public $invoiceLineAlignment4 = "R";
     public $invoiceLineAlignment5 = "R";
     public $invoiceLineAlignment6 = "R";
@@ -136,7 +137,6 @@ class pdfInvoice
  *
  * $params["invoiceData"]["Fakturanr"]
  * $params["invoiceData"]["Kundenr"]
- * $params["invoiceData"]["Side"] (Reservert felt. Blir satt til 1 og økes for hver side)
  * $params["invoiceData"]["Fakturadato"]
  * $params["invoiceData"]["Ordredato"]
  * $params["invoiceData"]["Betalingsfrist"]
@@ -150,11 +150,8 @@ class pdfInvoice
     {
         // Lager ny faktura.
         $this->headerParams = $params;
-        $this->headerParams["invoiceData"]["Side"] = 1;
-        $params["invoiceData"]["Side"] = 1;
         $this->newInvoicePage($params);
-    }
-/**
+    }/**
  * Fuksjon som burde vært privat. Brukes internt.
  *
  * @param array $params
@@ -168,7 +165,6 @@ class pdfInvoice
         $this->pdf->SetAutoPageBreak(false);
         $this->fakturaHead($params);
         $this->invoiceLineCurrentLine = 0;
-        $this->headerParams["invoiceData"]["Side"]++;
     }
 /**
  * Burde vært privat. Lager headeren til fakturaen. Kalles av newInvoicePage.
@@ -269,7 +265,7 @@ class pdfInvoice
             $this->pdf->Cell($this->invoiceHeadAdressWidth, $this->lineHeight, $this->korriger($params["recipient"]["country"]),$this->showMyFrame);
         }
 
-        $this->pdf->Line($this->invoiceHeadRecipientLeftMargin, $this->invoiceHeadRecipientStart + ($this->lineHeight * ($lineNumber+1)), $this->invoiceHeadRecipientUnderline, $this->invoiceHeadRecipientStart + ($this->lineHeight * ($lineNumber+1)));
+        // $this->pdf->Line($this->invoiceHeadRecipientLeftMargin, $this->invoiceHeadRecipientStart + ($this->lineHeight * ($lineNumber+1)), $this->invoiceHeadRecipientUnderline, $this->invoiceHeadRecipientStart + ($this->lineHeight * ($lineNumber+1)));
 
         // Delivery address
         $lineNumber = 0;
@@ -323,6 +319,19 @@ class pdfInvoice
 
             $lineNumber++;
         }
+
+        $this->pdf->SetFont($this->invoiceFont,'B', $this->invoiceHeadCompanyInfoFont);
+        $this->pdf->SetXY($this->invoiceHeadCompanyInfoLeftMargin, $this->invoiceHeadCompanyInfoStart + ($this->invoiceHeadlineHeight * $lineNumber));
+        $this->pdf->Cell($this->invoiceHeadCompanyInfoWidth,$this->invoiceHeadlineHeight, "Side",$this->showMyFrame);
+
+        $this->pdf->SetFont($this->invoiceFont,'', $this->invoiceHeadCompanyInfoFont);
+        $this->pdf->SetXY($this->invoiceHeadCompanyInfoLeftMargin + $this->invoiceHeadCompanyInfoWidth, $this->invoiceHeadCompanyInfoStart + ($this->invoiceHeadlineHeight * $lineNumber));
+
+        $this->pdf->AliasNbPages('{totalPages}');
+        $this->pdf->Cell($this->invoiceHeadCompanyInfoWidth2, $this->invoiceHeadlineHeight, $this->pdf->PageNo() . " av {totalPages}",$this->showMyFrame);
+
+        $lineNumber++;
+
         foreach ($params["invoiceData"] as $key => $value)
         {
             $this->pdf->SetFont($this->invoiceFont,'B', $this->invoiceHeadCompanyInfoFont);
@@ -360,7 +369,7 @@ class pdfInvoice
 
         if($this->invoiceHeadCompanyInfoStart + ($this->invoiceHeadlineHeight * ($lineNumber + 1)) > $this->invoiceLineHeadStart - ($this->lineHeight * 1.2)) {
             $this->invoiceLineHeadStart = $this->invoiceHeadCompanyInfoStart + ($this->invoiceHeadlineHeight * ($lineNumber)) + ($this->lineHeight * 1.2) + 10;
-            $this->invoiceLinesPerSite = 17;
+            $this->invoiceLinesPerSite = 12;
         }
 
         if($this->invoiceHeadCompanyInfoStart + ($this->invoiceHeadlineHeight * $lineNumber) > 60) {
@@ -460,9 +469,8 @@ class pdfInvoice
                 {
                     $this->pdf->SetFont($this->invoiceFont,'',$this->invoiceLineFontSize);
                     if ($j == 0)
-                    $this->pdf->Cell($this->{$myRight} - $this->{$myLeft} - 1, $this->lineHeight, $prodTekstArray[$j], $this->showMyFrame, 0, $this->{$myAlignment});
-                    else
-                    {
+                        $this->pdf->Cell($this->{$myRight} - $this->{$myLeft} - 1, $this->lineHeight, $prodTekstArray[$j], $this->showMyFrame, 0, $this->{$myAlignment});
+                    else {
                         $this->pdf->SetXY($this->{$myLeft}, $this->invoiceLineHeadStart + ($this->lineHeight * ($this->invoiceLineCurrentLine + $j)));
                         $this->pdf->Cell($this->{$myRight} - $this->{$myLeft} - 1, $this->lineHeight, $prodTekstArray[$j], $this->showMyFrame, 0, $this->{$myAlignment});
                     }
@@ -500,8 +508,8 @@ class pdfInvoice
     {
         $correction = 0.2;
         $this->pdf->SetLineWidth(0.2);
-        $this->pdf->Line(14, $this->invoiceLineFootStart - $correction, 198, $this->invoiceLineFootStart - $correction);
         $this->newInvoicePage();
+        $this->invoiceLinesPerSite = $this->invoiceLinesPerSiteFormSecondPage;
     }
 /**
  * Legger inn nye tekstlinjer sammem med fakturalinjene. Denne må kalles hvis det blir mer enn en linje,
@@ -572,8 +580,9 @@ class pdfInvoice
 
         $correction = 0.2;
         $this->pdf->SetLineWidth(0.2);
-        $this->pdf->Line(14, $this->invoiceLineFootStart - $correction, 198, $this->invoiceLineFootStart - $correction);
-        $this->pdf->Line(14, $this->invoiceLineFootStart + $this->lineHeight + $correction, 198, $this->invoiceLineFootStart + $this->lineHeight + $correction);
+
+        // $this->pdf->Line(14, $this->invoiceLineFootStart - $correction, 198, $this->invoiceLineFootStart - $correction);
+        // $this->pdf->Line(14, $this->invoiceLineFootStart + $this->lineHeight + $correction, 198, $this->invoiceLineFootStart + $this->lineHeight + $correction);
 
     }
 
