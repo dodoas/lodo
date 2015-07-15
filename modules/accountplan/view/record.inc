@@ -218,6 +218,9 @@ elseif($_lib['input']->getProperty('action_accountplan_delete')) {
     $query = "delete from $db_table where AccountPlanID='" . $_POST['AccountPlanID'] . "'";
     $_lib['sess']->debug($query);
     $_lib['db']->db_delete($query);
+    $query = "delete from accountplanscheme where AccountPlanID='" . $_POST['AccountPlanID'] . "'";
+    $_lib['sess']->debug($query);
+    $_lib['db']->db_delete($query);
     $message = "Kontoen er deaktivert";
 }
 elseif($_lib['input']->getProperty('action_add_scheme')) {
