@@ -3,6 +3,9 @@
 includelogic('invoice/invoice');
 includelogic('fakturabank/fakturabankvoting');
 includelogic('exchange/exchange');
+# needed for updating unit from fakturabank
+includelogic('orgnumberlookup/orgnumberlookup');
+includelogic("accountplan/scheme");
 
 class lodo_fakturabank_fakturabank {
     private $host           = '';
@@ -1060,6 +1063,72 @@ class lodo_fakturabank_fakturabank {
         #Forutsatt antall bare 1.
 
         return array($account, $SchemeID);
+    }
+
+    #Update AccountPlan from Fakturabank unit
+    public function update_accountplan_from_fakturabank($AccountPlanID) {
+      global $_lib;
+
+      $schemeControl = new lodo_accountplan_scheme($AccountPlanID);
+      $schemes = $schemeControl->listSchemes();
+      $availableSchemeTypes = $schemeControl->listTypes();
+      # added so if no schemes are present to try with AccountPlanId or OrgNo
+      if (empty($schemes)) $schemes[] = array("SchemeValue" => "", "FakturabankSchemeID" => 1);
+      # try to download info for each scheme. we only need one success
+      foreach ($schemes as $scheme) {
+        $scheme_value = $scheme['SchemeValue'];
+        $scheme_type = $availableSchemeTypes[$scheme['FakturabankSchemeID'] - 1]['SchemeType'];
+        $org = new lodo_orgnumberlookup_orgnumberlookup();
+        if (empty($scheme_value)) {
+          if(strlen($_POST['accountplan_OrgNumber']) >= 9) $scheme_value = $_POST['accountplan_OrgNumber'];
+          elseif(strlen($AccountPlanID) >= 9) $scheme_value = $AccountPlanID;
+        }
+        $org->getOrgNumberByScheme($scheme_value, $scheme_type);
+
+        if($org->success) {
+          $_lib['message']->add("Opplysninger er hentet automatisk basert p&aring; organisasjonsnummeret.");
+
+          // Only update if the fields contains a value
+          if($org->OrgNumber)   $_POST['accountplan_OrgNumber']   = $dataH['OrgNumber'] = $org->OrgNumber;
+          if($org->AccountName) $_POST['accountplan_AccountName'] = $dataH['AccountName'] = $org->AccountName;
+          if($org->Email)       $_POST['accountplan_Email']       = $dataH['Email'] = $org->Email;
+          if($org->Mobile)      $_POST['accountplan_Mobile']      = $dataH['Mobile'] = $org->Mobile;
+          if($org->Phone)       $_POST['accountplan_Phone']       = $dataH['Phone'] = $org->Phone;
+          if(!empty($org->ParentCompanyName))    $_POST['accountplan_ParentName']   = $dataH['ParentName'] = $org->ParentCompanyName;
+          if(!empty($org->ParentCompanyNumber))  $_POST['accountplan_ParentOrgNumber']   = $dataH['ParentOrgNumber'] = $org->ParentCompanyNumber;
+
+          $_POST['accountplan_EnableInvoiceAddress'] = $dataH['EnableInvoiceAddress'] = 1;
+          if($org->IAdress->Address1) $_POST['accountplan_Address'] = $dataH['Address'] = $org->IAdress->Address1;
+          if($org->IAdress->City)     $_POST['accountplan_City']    = $dataH['City'] = $org->IAdress->City;
+          if($org->IAdress->ZipCode)  $_POST['accountplan_ZipCode'] = $dataH['ZipCode'] = $org->IAdress->ZipCode;
+
+          if($org->IAdress->Country)  $_POST['accountplan_CountryCode'] = $dataH['CountryCode'] = $_lib['format']->countryToCode($org->IAdress->Country);
+
+          if($org->DomesticBankAccount) $_POST['accountplan_DomesticBankAccount'] = $dataH['DomesticBankAccount'] = $org->DomesticBankAccount;
+
+          if($org->CreditDays) {
+            $_POST['accountplan_EnableCredit'] = $dataH['EnableCredit'] = 1;
+            $_POST['accountplan_CreditDays'] = $dataH['CreditDays'] = $org->CreditDays;
+          }
+          if($org->MotkontoResultat1)	{
+            $_POST['accountplan_EnableMotkontoResultat'] = $dataH['EnableMotkontoResultat'] = 1;
+            $_POST['accountplan_MotkontoResultat1'] = $dataH['MotkontoResultat1'] = $org->MotkontoResultat1;
+          }
+          if($org->MotkontoResultat2)	{
+            $_POST['accountplan_EnableMotkontoResultat'] = $dataH['EnableMotkontoResultat'] = 1;
+            $_POST['accountplan_MotkontoResultat2'] = $dataH['MotkontoResultat2'] = $org->MotkontoResultat2;
+          }
+          if($org->MotkontoBalanse1) {
+            $_POST['accountplan_EnableMotkontoResultat'] = $dataH['EnableMotkontoResultat'] = 1;
+            $_POST['accountplan_MotkontoBalanse1'] = $dataH['MotkontoBalanse1'] = $org->MotkontoBalanse1;
+          }
+          $dataH['AccountPlanID'] = $AccountPlanID;
+          $dataH['Active'] = 1;
+          # if one successful download is done, then we are done
+          break;
+        }
+      }
+      $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'accountplan', 'debug' => false));
     }
 
     #Only for adding new customers at this point in time.
