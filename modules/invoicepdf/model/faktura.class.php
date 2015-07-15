@@ -265,7 +265,7 @@ class pdfInvoice
             $this->pdf->Cell($this->invoiceHeadAdressWidth, $this->lineHeight, $this->korriger($params["recipient"]["country"]),$this->showMyFrame);
         }
 
-        $this->pdf->Line($this->invoiceHeadRecipientLeftMargin, $this->invoiceHeadRecipientStart + ($this->lineHeight * ($lineNumber+1)), $this->invoiceHeadRecipientUnderline, $this->invoiceHeadRecipientStart + ($this->lineHeight * ($lineNumber+1)));
+        // $this->pdf->Line($this->invoiceHeadRecipientLeftMargin, $this->invoiceHeadRecipientStart + ($this->lineHeight * ($lineNumber+1)), $this->invoiceHeadRecipientUnderline, $this->invoiceHeadRecipientStart + ($this->lineHeight * ($lineNumber+1)));
 
         // Delivery address
         $lineNumber = 0;
@@ -580,8 +580,9 @@ class pdfInvoice
 
         $correction = 0.2;
         $this->pdf->SetLineWidth(0.2);
-        $this->pdf->Line(14, $this->invoiceLineFootStart - $correction, 198, $this->invoiceLineFootStart - $correction);
-        $this->pdf->Line(14, $this->invoiceLineFootStart + $this->lineHeight + $correction, 198, $this->invoiceLineFootStart + $this->lineHeight + $correction);
+
+        // $this->pdf->Line(14, $this->invoiceLineFootStart - $correction, 198, $this->invoiceLineFootStart - $correction);
+        // $this->pdf->Line(14, $this->invoiceLineFootStart + $this->lineHeight + $correction, 198, $this->invoiceLineFootStart + $this->lineHeight + $correction);
 
     }
 
