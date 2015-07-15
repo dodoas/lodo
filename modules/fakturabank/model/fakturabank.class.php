@@ -979,6 +979,20 @@ class lodo_fakturabank_fakturabank {
         return array($companyid, $schemeid);
     }
 
+    private function extractSupplierSchemeID($InvoiceO) {
+        $companyid = null;
+        $schemeid = null;
+
+        if (!empty($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID)) {
+            if ($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID != 'NO:SUP-ACCNT-RE') {
+                $companyid = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
+                $schemeid = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
+            }
+        }
+
+        return array($companyid, $schemeid);
+    }
+
 
     private function find_customer_reskontro_by_customernumber($customernumber) {
         global $_lib;
@@ -1215,20 +1229,78 @@ class lodo_fakturabank_fakturabank {
         $_lib['message']->add("$count kontoplaner automatisk opprettet - motkonto m&aring; settes manuelt");
     }
 
-    public function incomingaddmissingaccountplan() {
+    #Only for adding new suppliers at this point in time.
+    public function incomingaddmissingaccountplan($single_invoice_id = false) {
+        global $_lib;
 
-        $invoicesO = $this->outgoing();
+        $invoicesO  = $this->incoming();
+        $count      = 0;
 
         foreach($invoicesO->Invoice as $InvoiceO) {
+            if (!empty($single_invoice_id) && $InvoiceO->ID != $single_invoice_id) {
+                continue; // this is not the droid you are looking for
+            }
 
-            #check if exists first
-            $dataH = array();
-            $dataH['AccountPlanID']         = $InvoiceO->AccountingCustomerParty->Party->PartyName->Name;
-            $dataH['DomesticBankAccount']   = $InvoiceO->BankAccount;
-            $dataH['AccountPlanName']       = $InvoiceO->AccountingSupplierParty->Party->PartyName->Name;
+            if (empty($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID)) {
+              $_lib['message']->add("Ikke mulig &aring; auto-opprette fordi leverand&oslash;rnr mangler.");
+                continue;
+            }
 
-            $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'accountplan', 'debug' => false));
+            list($SchemeID, $SchemeIDType) = $this->extractSupplierSchemeID($InvoiceO);
+            list($account, $_SchemeID)  = $this->find_reskontro($SchemeID, 'supplier', $SchemeIDType);
+            if($account) {
+                continue; // exists already
+            } else {
+                if ($SchemeIDType == 'NO:ORGNR') $AccountPlanID = $SchemeID;
+                else {
+                  // the first available account plan id
+                  $used_accounts_hash = array_keys($_lib['storage']->get_hash(array('key' => 'AccountPlanID', 'value' => 'AccountPlanID', 'query' => "select AccountPlanID from accountplan where AccountPlanType = 'supplier' order by AccountPlanID")));
+                  for ($i = 100000000, $j = 0; $i <= 999999999; $i++) if ($i != $used_accounts_hash[$j++]) break;
+                  $AccountPlanID = $i;
+                }
+                $dataH = array();
+                $dataH['AccountPlanID']     = $AccountPlanID;
+                $dataH['AccountName']       = $InvoiceO->AccountingSupplierParty->Party->PartyName->Name;
+                $dataH['AccountPlanType']   = 'supplier';
+
+                $dataH['Address']           = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName;
+                $dataH['City']              = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->CityName;
+                $dataH['ZipCode']           = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone;
+
+                $dataH['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
+                $dataH['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');
+                $dataH['UpdatedByPersonID'] = $_lib['sess']->get_person('PersonID');
+                $dataH['Active']            = 1;
+
+                #creditdays
+                $dataH['EnableCredit']      = 1;
+                $dataH['CreditDays']        = $_lib['date']->dateDiff($InvoiceO->PaymentMeans->PaymentDueDate, $InvoiceO->IssueDate);
+
+                #Credit/debit color and text
+                $dataH['debittext']         = 'Salg';
+                $dataH['credittext']        = 'Betal';
+                $dataH['DebitColor']        = 'debitblue';
+                $dataH['CreditColor']       = 'creditred';
+
+                $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'accountplan', 'action' => 'auto', 'debug' => false));
+                $FakturabankScheme = $_lib['storage']->get_row(array('query' => "select FakturabankSchemeID from fakturabankscheme where SchemeType = '$SchemeIDType'"));
+                $FakturabankSchemeID = $FakturabankScheme->FakturabankSchemeID;
+                $schemedataH = array();
+                $schemedataH['FakturabankSchemeID'] = $FakturabankSchemeID;
+                $schemedataH['SchemeValue'] = $SchemeID;
+                $schemedataH['AccountPlanID'] = $AccountPlanID;
+                $_lib['storage']->store_record(array('data' => $schemedataH, 'table' => 'accountplanscheme', 'action' => 'auto', 'debug' => false));
+                # after creating the account plan update it from fakturabank
+                $this->update_accountplan_from_fakturabank($AccountPlanID);
+                #exit;
+                $count++;
+            }
+
+            if (!empty($single_invoice_id) && $InvoiceO->ID == $single_invoice_id) {
+                break; // finished since we have processed the only one we wanted
+            }
         }
+        $_lib['message']->add("$count kontoplaner automatisk opprettet - motkonto m&aring; settes manuelt");
     }
 
 

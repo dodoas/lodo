@@ -48,6 +48,7 @@ Merk: Du m&aring; registrere brukeren din p&aring; <a href="http://fakturabank.n
 
 <form name="invoice_edit" action="<? print $_lib['sess']->dispatch ?>t=fakturabank.listincoming" method="post">
 <input type="submit" value="Last ned fakturaer (L)" name="action_fakturabank_registerincoming" accesskey="B">
+<input type="submit" value="Opprett manglende kontoplaner (A)" name="action_fakturabank_addmissingaccountplan" accesskey="A">
 </form>
 
 <table class="lodo_data">
