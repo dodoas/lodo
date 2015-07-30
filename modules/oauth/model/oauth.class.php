@@ -68,12 +68,12 @@ class lodo_oauth {
    * TODO: Maybe add delete, patch?
    */
   function do_resources($url, $params = false, $code = false, $http_verb) {
+    // save url, verb and params
+    $_SESSION['oauth_resource_url'] = $url;
+    $_SESSION['oauth_http_verb'] = ($http_verb == OAuth2\Client::HTTP_METHOD_GET)?"GET":"POST";
+    if ($params) $_SESSION['oauth_resource_params'] = $params;
     // if no code, get the code
     if (!$code) {
-      // save verb, url and params so we have them when we get back the code
-      $_SESSION['oauth_resource_url'] = $url;
-      $_SESSION['oauth_http_verb'] = ($http_verb == OAuth2\Client::HTTP_METHOD_GET)?"GET":"POST";
-      if ($params) $_SESSION['oauth_resource_params'] = $params;
       // get code
       $authorize_url = $this->client->getAuthenticationUrl($this->generate_server_url() . $this->authorize_url, $this->callback_url);
       header("Location: " . $authorize_url);
