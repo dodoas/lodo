@@ -9,6 +9,13 @@ $AccountNumber  = $_REQUEST['AccountNumber'];
 $AccountID      = $_REQUEST['AccountID'];
 $Bank      		= $_REQUEST['Bank'];
 
+$tmp_redirect_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+// change only if full(with AccountID) url
+if (strpos($tmp_redirect_url, 'AccountID') !== false) $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url;
+// and if missing in url, add AccountPlanID
+else $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url . "&AccountID=" . $AccountID;
+//var_dump($_SESSION['oauth_tmp_redirect_back_url']);
+
 if($_REQUEST['Period']) {
 	$Period     = $_REQUEST['Period'];
     $PeriodSelection = $Period;
@@ -36,6 +43,9 @@ $account = $_lib['storage']->get_row(array('query' => $query));
 if (isset($_POST['Period'])) {
 
     $fbvoting = new lodo_fakturabank_fakturabankvoting();
+    $_SESSION['oauth_balance_account_id'] = $AccountID;
+    $_SESSION['oauth_balance_period'] = $Period;
+    $_SESSION['oauth_balance_country'] = $account->CountryCode;
     $fbvoting->import_transactions($AccountID, $Period, $account->CountryCode);
 }
 
@@ -82,7 +92,10 @@ Periode: <? print $_lib['form3']->AccountPeriod_menu3(array('name' => 'Period', 
 <br>
 <a href="<? print $_lib['sess']->dispatch ?>t=fakturabank.bankreconciliationlist">Oppsett av koblinger mellom avstemmings&aring;rsaker og kontoer</a>
 </p>
-<? } ?>
+<? }
+// unset so next time we load this page it will fetch new data
+unset($_SESSION['oauth_balance_report_fetched']);
+?>
 </body>
 </html>
 <pre>

@@ -2,6 +2,7 @@
 #should split to factory pattern with incoming and outgoing invoices.
 includelogic('invoice/invoice');
 includelogic("accountplan/scheme");
+includelogic("oauth/oauth");
 
 class lodo_fakturabank_fakturabankvoting {
     private $host           = '';
@@ -55,24 +56,14 @@ class lodo_fakturabank_fakturabankvoting {
 	function setup_connection_values() {
         global $_lib;
 
-        $this->username         = $_lib['sess']->get_person('FakturabankUsername');
-        $this->password         = $_lib['sess']->get_person('FakturabankPassword');
         $this->retrievestatus   = $_lib['setup']->get_value('fakturabank.status');
 
         $this->host = $GLOBALS['_SETUP']['FB_SERVER'];
         $this->protocol = $GLOBALS['_SETUP']['FB_SERVER_PROTOCOL'];
 
-        if(!$this->username || !$this->username) {
-            $_lib['message']->add("Fakturabank brukernavn og passord er ikke definert p&aring; brukeren din");
-        } else {
-            $this->login = true;
-        }
-
         $old_pattern    = array("/[^0-9]/", "/_+/", "/_$/");
         $new_pattern    = array("", "", "");
         $this->OrgNumber = strtolower(preg_replace($old_pattern, $new_pattern , $_lib['sess']->get_companydef('OrgNumber')));
-
-        $this->credentials = "$this->username:$this->password";
 	}
 
 	function get_balance_report($account_id = null, $period = null, $country_code = null) {
@@ -81,8 +72,8 @@ class lodo_fakturabank_fakturabankvoting {
 
 		$this->setup_connection_values();
 
-		$page       = "balance_report.xml";
-		// http://fakturabank.no/balance_report.xml?identifier=
+        $page       = "rest/balance_report.xml";
+        // http://fakturabank.no/rest/balance_report.xml?identifier=
         // TODO: limit on account
         # If no country_code is set, send Norway's country code
         $country_code = ($country_code == '')?'NO':$country_code;
@@ -97,7 +88,15 @@ class lodo_fakturabank_fakturabankvoting {
         $url    = "$this->protocol://$this->host/$page$params";
         $_lib['message']->add($url);
 
-        $voting = $this->retrieve_voting($page, $url);
+        if (isset($_SESSION['oauth_balance_report_fetched'])) {
+          $data = $_SESSION['oauth_resource']['result'];
+        }
+        else {
+          $_SESSION['oauth_action'] = 'get_balance_report';
+          $oauth_client = new lodo_oauth();
+          $oauth_client->get_resources($url);
+        }
+        $voting = $this->retrieve_voting($data);
 
         $bank_statement = $voting->{"bank-statement"};
 
@@ -106,40 +105,8 @@ class lodo_fakturabank_fakturabankvoting {
 		return array($validated_voting, $bank_statement);
 	}
 
-    private function retrieve_voting($page, $url) {
+    private function retrieve_voting($xml_data) {
         global $_lib;
-
-        if(!$this->login) return false;
-
-        $headers = array(
-            "GET ".$page." HTTP/1.0",
-            "Content-type: text/xml;charset=\"utf-8\"",
-            "Accept: application/xml",
-            "Cache-Control: no-cache",
-            "Pragma: no-cache",
-            "SOAPAction: \"run\"",
-            "Authorization: Basic " . base64_encode($this->credentials)
-        );
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        #curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->timeout);
-
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1); #Is this safe?
-        #curl_setopt($ch, CURLOPT_CAINFO, "path:/ca-bundle.crt");
-
-        $xml_data           = curl_exec($ch);
-
-        if (curl_errno($ch)) {
-            $_lib['message']->add("Nettverkskobling til Fakturabank ikke OK");
-            $_lib['message']->add("Error: " . curl_error($ch));
-        } else {
-            $_lib['message']->add("Nettverkskobling til Fakturabank OK");
-        }
-        curl_close($ch);
 
         $size = strlen($xml_data);
 
