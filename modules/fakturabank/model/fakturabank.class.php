@@ -67,18 +67,26 @@ class lodo_fakturabank_fakturabank {
         global $_lib;
         #https://fakturabank.no/invoices/outgoing.xml?orgnr=981951271
 
-        $page       = "invoices/outgoing.xml";
+        $page       = "rest/invoices/outgoing.xml";
 
         $params     = "?rows=200&orgnr=$this->OrgNumber"; // add top limit rows=1000, otherwise we only get one record
         $params     .= "&supplier_status=approved"; #Only retrieve with status 'approved'
         $params     .= "&order=invoiceno&sord=asc";
 
         $url    = "$this->protocol://$this->host/$page$params";
-        $_lib['sess']->debug($url);
+        $_lib['message']->add($url);
 
-        $invoicesO = $this->retrieve($page, $url);
-		$validated_invoices = $this->validate_outgoing($invoicesO);
-		$this->save_outgoing($validated_invoices);
+        if (isset($_SESSION['oauth_invoices_fetched'])) {
+          $data = $_SESSION['oauth_resource']['result'];
+        }
+        else {
+          $_SESSION['oauth_action'] = 'outgoing_invoices';
+          $oauth_client = new lodo_oauth();
+          $oauth_client->get_resources($url);
+        }
+        $invoicesO = $this->retrieve($data);
+        $validated_invoices = $this->validate_outgoing($invoicesO);
+        $this->save_outgoing($validated_invoices);
         return $validated_invoices;
     }
 
@@ -586,7 +594,7 @@ class lodo_fakturabank_fakturabank {
 				$InvoiceO->LodoID = null;
 			}
 
-            if (empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) {
+            if (empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)) {
                 $InvoiceO->Status     .= "Faktura mangler kundenummer";
                 $InvoiceO->Journal     = false;
                 $InvoiceO->Class       = 'red';
@@ -594,14 +602,15 @@ class lodo_fakturabank_fakturabank {
                 continue;
             }
 
-            $customernumber = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
+            $customernumber = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
 
             if (!$this->extractOutgoingAccountingCost($InvoiceO)) {
                 continue;
             }
 
             #Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to only look in the correct records? No?
-            $account = $this->find_customer_reskontro_by_customernumber($customernumber);
+            list($SchemeID, $SchemeIDType) = $this->extractSupplierSchemeID($InvoiceO);
+            list($account, $_SchemeID)  = $this->find_reskontro($SchemeID, 'supplier', $SchemeIDType);
             if ($account) {
                 $InvoiceO->AccountPlanID = $account->AccountPlanID;
 
@@ -1389,8 +1398,11 @@ class lodo_fakturabank_fakturabank {
     public function registeroutgoing() {
         global $_lib;
 
+        // since when we load the page we already have fetched invoices
+        $_SESSION['oauth_invoices_fetched'] = true;
         $invoicesO = $this->outgoing();
 
+        $events = array();
         foreach($invoicesO->Invoice as &$InvoiceO) {
             if($InvoiceO->Journal) {
 
@@ -1494,7 +1506,7 @@ class lodo_fakturabank_fakturabank {
 
                     #Set status in fakturabank
                     $comment = "Lodo PHP Invoiceout ID: " . $InvoiceO->ID . " registered " . $_lib['sess']->get_session('Datetime');
-                    $this->setEvent($InvoiceO->FakturabankID, 'registered', $comment);
+                    $events[] = array('id' => $InvoiceO->FakturabankID, 'status' => 'registered', 'comment' => $comment);
 
                 } else {
                     #print "Faktura finnes: " . $InvoiceO->AccountPlanID . "', InvoiceID='" . $InvoiceO->ID . "<br>\n";
@@ -1504,6 +1516,7 @@ class lodo_fakturabank_fakturabank {
                 $invoice->journal();
             }
         }
+        $this->setEvents($events);
     }
 
     ################################################################################################
