@@ -12,6 +12,11 @@ global $_lib;
 session_start();
 includelogic("oauth/oauth");
 includelogic('orgnumberlookup/orgnumberlookup');
+includelogic('fakturabank/invoicereconciliationreason');
+includelogic('fakturabank/bankreconciliationreason');
+includelogic('fakturabank/fakturabankvoting');
+includelogic('fakturabank/fakturabanksalary');
+includelogic("accountplan/scheme");
 
 // create client
 $oauth_client = new lodo_oauth();
@@ -39,13 +44,57 @@ if (!isset($_GET['code'])) {
 
 // depending on the action, do stuff
 switch ($_SESSION['oauth_action']) {
+case 'get_balance_report': // fetch balance report from FB
+  $report_xml = $_SESSION['oauth_resource']['result'];
+  $_SESSION['oauth_balance_report_fetched'] = true;
+  $fbvoting = new lodo_fakturabank_fakturabankvoting();
+  $AccountID = $_SESSION['oauth_balance_account_id'];
+  $Period    = $_SESSION['oauth_balance_period'];
+  $Country   = $_SESSION['oauth_balance_country'];
+  unset($_SESSION['oauth_balance_account_id']);
+  unset($_SESSION['oauth_balance_period']);
+  unset($_SESSION['oauth_balance_country']);
+  $fbvoting->import_transactions($AccountID, $Period, $Country);
+  redirect();
+  break;
+case 'get_identificators': // fetch all scheme types(identificators) from FB
+  $schemes = $_SESSION['oauth_resource']['result'];
+  $scheme_control = new lodo_accountplan_scheme($_SESSION['oauth_account_plan_id']);
+  $scheme_control->refreshSchemes($schemes);
+  redirect();
+  break;
+case 'get_invoice_closing_reasons': // fetch all invoice closing reasons from FB
+  $reasons = $_SESSION['oauth_resource']['result'];
+  $fbreconcilationreason = new lodo_fakturabank_invoicereconciliationreason();
+  $fbreconcilationreason->import_mappings($reasons);
+  redirect();
+  break;
+case 'get_bank_transaction_closing_reasons': // fetch all bank transaction closing reasons from FB
+  $reasons = $_SESSION['oauth_resource']['result'];
+  $fbreconcilationreason = new lodo_fakturabank_bankreconciliationreason();
+  $fbreconcilationreason->import_mappings($reasons);
+  redirect();
+  break;
+case 'send_paycheck': // sending a paycheck to FB
+  $SalaryID     = $_SESSION['oauth_salary_id'];
+  $SalaryConfID = $_SESSION['oauth_salary_conf_id'];
+  unset($_SESSION['oauth_salary_id']);
+  unset($_SESSION['oauth_salary_conf_id']);
+  $fb_salary = new lodo_fakturabank_fakturabanksalary();
+  $_SESSION['oauth_paycheck_sent'] = true;
+  $fb_salary->sendsalary($SalaryID, $SalaryConfID);
+  redirect();
+  break;
 case 'send_invoice': // sending an invoice to FB
-  var_dump($_SESSION);
-  var_dump($_SESSION['oauth_resource']);
   if ($_SESSION['oauth_resource']['code'] == 400) $_SESSION['oauth_invoice_error'] = "Error: opprette faktura: " . $_SESSION['oauth_resource']['result'];
   redirect();
   break;
-case 'incoming_invoices': // fetching all approved invoices from FB
+case 'set_invoice_statuses': // set status to registered for all invoices downloaded from FB
+  unset($_SESSION['oauth_invoices_fetched']);
+  redirect();
+  break;
+case 'outgoing_invoices': // fetching all approved outgoing/incoming invoices from FB, same action needed
+case 'incoming_invoices':
   $_SESSION['oauth_invoices_fetched'] = true;
   redirect();
   break;
