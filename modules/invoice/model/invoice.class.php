@@ -1214,16 +1214,7 @@ class invoice {
         #print_r($this->invoiceO);
 
         $fb = new lodo_fakturabank_fakturabank();
-        if($fb->write($this->invoiceO)) {
-
-            $dataH = array();
-            $dataH['InvoiceID']             = $this->InvoiceID;
-            $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
-            $dataH['FakturabankDateTime']   = $_lib['sess']->get_session('Datetime');
-            $dataH['Locked']                = 1;
-
-            $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoiceout', 'debug' => false));
-        }
+        $fb->write($this->invoiceO);
 
         #print_r($this->invoiceO->InvoiceLine);
         return $this->invoiceO;

@@ -3,6 +3,8 @@
 includelogic('invoice/invoice');
 includelogic('fakturabank/fakturabankvoting');
 includelogic('exchange/exchange');
+# oauth
+includelogic('oauth/oauth');
 # needed for updating unit from fakturabank
 includelogic('orgnumberlookup/orgnumberlookup');
 includelogic("accountplan/scheme");
@@ -37,8 +39,6 @@ class lodo_fakturabank_fakturabank {
         global $_lib;
         $this->startexectime  = microtime();
 
-        $this->username         = $_lib['sess']->get_person('FakturabankUsername');
-        $this->password         = $_lib['sess']->get_person('FakturabankPassword');
         $this->retrievestatus   = $_lib['setup']->get_value('fakturabank.status');
 
         $this->host = $GLOBALS['_SETUP']['FB_SERVER'];
@@ -50,17 +50,10 @@ class lodo_fakturabank_fakturabank {
             }
         }
 
-        if(!$this->username || !$this->username) {
-            $_lib['message']->add("Fakturabank brukernavn og passord er ikke definert p&aring; brukeren din");
-        } else {
-            $this->login = true;
-        }
-
         $old_pattern    = array("/[^0-9]/", "/_+/", "/_$/");
         $new_pattern    = array("", "", "");
         $this->OrgNumber= strtolower(preg_replace($old_pattern, $new_pattern , $_lib['sess']->get_companydef('OrgNumber')));
 
-        $this->credentials = "$this->username:$this->password";
     }
 
     function __destruct() {
@@ -2182,51 +2175,13 @@ class lodo_fakturabank_fakturabank {
 
         #print "<br>\n<br>\n$xml\n<br>\n<br>";
 
-        $page = "/invoices";
+        $page = "/rest/invoices";
         $url  = "$this->protocol://$this->host$page";
 
-        $headers = array(
-            "POST ".$page." HTTP/1.0",
-            "Content-type: text/xml;charset=\"utf-8\"",
-            "Accept: application/xml",
-            "Cache-Control: no-cache",
-            "Pragma: no-cache",
-            "SOAPAction: \"run\"",
-            "Content-length: ".strlen($xml),
-            "Authorization: Basic " . base64_encode($this->credentials)
-        );
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_USERAGENT, $defined_vars['HTTP_USER_AGENT']);
-        curl_setopt($ch, CURLOPT_HEADER, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-
-        // Apply the XML to our curl call
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
-
-        $data = curl_exec($ch);
-        $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
-        $body = substr($data, $header_size);
-        #$_lib['message']->add("FB->write()->exec()");
-
-        if (curl_errno($ch) || curl_getinfo($ch, CURLINFO_HTTP_CODE) != 201) {
-            if (curl_errno($ch)) $_lib['message']->add("Error: opprette faktura: " . curl_error($ch));
-            else $_lib['message']->add("Error: opprette faktura: " . $body);
-        } else {
-            // Show me the result
-            $_lib['message']->add(microtime() . " Opprettet faktura: $i");
-            $_lib['message']->add("<pre>$body</pre>");
-            #print_r(curl_getinfo($ch));
-            $this->success  = true;
-        }
-
-        curl_close($ch);
-        return $this->success;
+        includelogic('oauth/oauth');
+        $oauth_client = new lodo_oauth();
+        $oauth_client->post_resources($url, $xml);
+        return true;
     }
 
     public function construct_fakturabank_url($page=''){

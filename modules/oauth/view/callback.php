@@ -87,6 +87,14 @@ case 'send_paycheck': // sending a paycheck to FB
   break;
 case 'send_invoice': // sending an invoice to FB
   if ($_SESSION['oauth_resource']['code'] == 400) $_SESSION['oauth_invoice_error'] = "Error: opprette faktura: " . $_SESSION['oauth_resource']['result'];
+  else {
+    $dataH = array();
+    $dataH['InvoiceID']             = $this->InvoiceID;
+    $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
+    $dataH['FakturabankDateTime']   = $_lib['sess']->get_session('Datetime');
+    $dataH['Locked']                = 1;
+    $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoiceout', 'debug' => false));
+  }
   redirect();
   break;
 case 'set_invoice_statuses': // set status to registered for all invoices downloaded from FB
