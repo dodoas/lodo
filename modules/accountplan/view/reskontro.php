@@ -1,4 +1,6 @@
 <?
+// needed for oauth session parameters
+session_start();
 
 /* $Id: reskontro.php,v 1.65 2005/11/03 15:33:11 thomasek Exp $ main.php,v 1.12 2001/11/20 17:55:12 thomasek Exp $ */
 
@@ -10,6 +12,13 @@ $AccountPlanType    	= $_lib['input']->getProperty('accountplan_AccountPlanType'
 $JournalID      		= $_lib['input']->getProperty('JournalID');
 $OrgNumber      		= $_lib['input']->getProperty('OrgNumber');
 $DomesticBankAccount 	= $_lib['input']->getProperty('BankAccount');
+
+$tmp_redirect_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+// change only if full(with AccountPlanID) url
+if (strpos($tmp_redirect_url, 'AccountPlanID') !== false) $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url;
+// and if missing in url, add AccountPlanID
+else $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url . "&accountplan.AccountPlanID=" . $AccountPlanID;
+//var_dump($_SESSION['oauth_tmp_redirect_back_url']);
 
 $func           		= 'reskontro';
 

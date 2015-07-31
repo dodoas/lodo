@@ -1,5 +1,5 @@
 <?
-#http://gullfisk:rTp3Qzy@brreg.lodo.no/rest/companies/970131450
+includelogic("oauth/oauth");
 
 class lodo_orgnumberlookup_orgnumberlookup {
     private $host           = 'fakturabank.no';
@@ -50,44 +50,15 @@ class lodo_orgnumberlookup_orgnumberlookup {
 
         $url = $this->url . "index.xml?value=" . $scheme_value . "&type=" . $scheme_type;
         $path = $this->path . "index.xml?value=" . $scheme_value . "&type=" . $scheme_type;
-        $this->getOrgNumber2($path, $url);
+
+        $oauth_client = new lodo_oauth();
+        $_SESSION['oauth_action'] = 'get_company_info';
+        $resource = $oauth_client->get_resources($url);
     }
 
-    function getOrgNumber2($path, $url) {
-        global $_lib;
-
-        $headers = array(
-            "GET " . $this->path . " HTTP/1.0",
-            "Content-type: text/xml;charset=\"utf-8\"",
-            "Accept: application/xml",
-            "Cache-Control: no-cache",
-            "Pragma: no-cache",
-            "Authorization: Basic " . base64_encode($this->credentials)
-        );
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        #curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
-
-        $xml_data = curl_exec($ch);
-        $xml_data = html_entity_decode($xml_data, ENT_NOQUOTES, 'UTF-8');
+    function setData($response_data) {
+        $xml_data = html_entity_decode($response_data, ENT_NOQUOTES, 'UTF-8');
         $xml_data = str_replace("&", "&amp;", $xml_data);
-
-        if (curl_errno($ch)) {
-            $_lib['message']->add("Error: " . curl_error($ch));
-        } else {
-            $_lib['message']->add("Fant OrgNumber");
-            #var_dump($data);
-            #print_r(curl_getinfo($ch));
-
-           #print_r(simplexml_load_string($data));
-        }
-
-        curl_close($ch);
 
         $company = simplexml_load_string($xml_data);
         $this->mapdata($company);
