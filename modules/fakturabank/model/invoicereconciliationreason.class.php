@@ -1,7 +1,6 @@
 <?
+includelogic('oauth/oauth');
 class lodo_fakturabank_invoicereconciliationreason {
-    private $username       = '';
-    private $password       = '';
 
     public function invoice_reconciliation_reason_to_accountplan($fakturabank_bank_reconciliation_reason_id) {
         global $_lib;
@@ -29,42 +28,22 @@ class lodo_fakturabank_invoicereconciliationreason {
         return $accountplan;
     }
 
-    public function import_mappings() {
+    public function import_mappings($_mappings = false) {
         global $_lib;
-
-        $this->username         = $_lib['sess']->get_person('FakturabankUsername');
-        $this->password         = $_lib['sess']->get_person('FakturabankPassword');
-
 
         $this->host = $GLOBALS['_SETUP']['FB_SERVER'];
         $this->protocol = $GLOBALS['_SETUP']['FB_SERVER_PROTOCOL'];
 
-        if(!$this->username || !$this->username) {
-            $_lib['message']->add("Fakturabank brukernavn og passord er ikke definert p&aring; brukeren din");
-        } else {
-            $this->login = true;
-        }
-
-        $old_pattern    = array("/[^0-9]/", "/_+/", "/_$/");
-        $new_pattern    = array("", "", "");
-        $this->OrgNumber = strtolower(preg_replace($old_pattern, $new_pattern , $_lib['sess']->get_companydef('OrgNumber'))); 
-
-        $this->credentials = "$this->username:$this->password";		
-
-
-        $this->credentials = "$this->username:$this->password";		
-
-
-		$page       = "closing_reasons.json";
-        $params     = "?identifier=" . $this->OrgNumber . '&identifier_type=NO:ORGNR&type=invoice';
-//        if($this->retrievestatus) $params .= '&customer_status=' . $this->retrievestatus;
+		    $page   = "rest/closing_reasons.json";
+        $params = "?type=invoice";
         $url    = "$this->protocol://$this->host/$page$params";
         $_lib['message']->add($url);
 
-        $reasons = $this->retrieve_reasons($page, $url);
+        if (!$_mappings) $this->retrieve_reasons($page, $url);
+        else $reasons = $_mappings;
 
         $this->update_database($reasons);
-		return true;
+        return true;
     }
     
     private function update_database($reasons) 
@@ -111,48 +90,10 @@ class lodo_fakturabank_invoicereconciliationreason {
     private function retrieve_reasons($page, $url) {
         global $_lib;
 
-        if(!$this->login) return false;
-        
-        $headers = array(
-            "GET ".$page." HTTP/1.0",
-            "Content-type: text/xml;charset=\"utf-8\"",
-            "Accept: application/xml",
-            "Cache-Control: no-cache",
-            "Pragma: no-cache",
-            "SOAPAction: \"run\"",
-            "Authorization: Basic " . base64_encode($this->credentials)
-        );
+        $client = new lodo_oauth();
+        $_SESSION['oauth_action'] = 'get_invoice_closing_reasons';
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        #curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->timeout);
-
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1); #Is this safe?
-        #curl_setopt($ch, CURLOPT_CAINFO, "path:/ca-bundle.crt"); 
-
-        $json_data           = curl_exec($ch);
-
-        if (curl_errno($ch)) {
-            $_lib['message']->add("Nettverkskobling til Fakturabank ikke OK");
-            $_lib['message']->add("Error: " . curl_error($ch));
-        } else {
-            $_lib['message']->add("Nettverkskobling til Fakturabank OK");
-        }
-        curl_close($ch);
-        
-        $size = strlen($json_data);
-
-        if($size) {
-            
-            $reasons = json_decode($json_data, true); // this functions only works with utf8
-        } else {
-            $_lib['message']->add("JSON Dokument tomt - pr&oslash;v igjen: $url");
-        }
-
-        return $reasons;
+        $json_data = $client->get_resources($url);
     }
 }
 ?>
