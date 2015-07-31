@@ -1,4 +1,6 @@
 <?
+// needed to access session parameters for oauth
+session_start();
 /* $Id: edit.php,v 1.66 2005/10/28 17:59:41 thomasek Exp $ main.php,v 1.12 2001/11/20 17:55:12 thomasek Exp $ */
 #########################################
 #This should be placed under firmaoppsett
@@ -11,6 +13,13 @@ $lineOutTo   = 100;
 $SalaryID       = (int) $_REQUEST['SalaryID'];
 $SalaryConfID   = (int) $_REQUEST['SalaryConfID'];
 $SalaryperiodconfID = (int) $_REQUEST['SalaryperiodconfID'];
+
+$tmp_redirect_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+// change only if full(with SalaryID) url
+if (strpos($tmp_redirect_url, 'SalaryID') !== false) $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url;
+// and if missing in url, add SalaryID
+else $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url . "&SalaryID=" . $SalaryID;
+//var_dump($_SESSION['oauth_tmp_redirect_back_url']);
 
 includelogic('accounting/accounting');
 $accounting = new accounting();
@@ -598,3 +607,6 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
 <? includeinc('bottom') ?>
 </body>
 </html>
+<?php
+unset($_SESSION['oauth_paycheck_sent']);
+?>

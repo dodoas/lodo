@@ -1,15 +1,12 @@
 <?
 //includelogic('salary/salaryreport');
 includelogic('exchange/exchange');
+includelogic('oauth/oauth');
 
 class lodo_fakturabank_fakturabanksalary {
     private $host           = '';
     private $protocol       = '';
-    private $username       = '';
-    private $password       = '';
-    private $login          = false;
     private $timeout        = 30; 
-    private $credentials    = '';
     private $OrgNumber      = '';
     private $ArrayTag       = array(
                                     'import-paychecks-result' => true,
@@ -21,9 +18,6 @@ class lodo_fakturabank_fakturabanksalary {
     function __construct() {
         global $_lib;
 
-        $this->username         = $_lib['sess']->get_person('FakturabankUsername');
-        $this->password         = $_lib['sess']->get_person('FakturabankPassword');
-
         $this->host = $GLOBALS['_SETUP']['FB_SERVER'];
         $this->protocol = $GLOBALS['_SETUP']['FB_SERVER_PROTOCOL'];
 
@@ -33,17 +27,9 @@ class lodo_fakturabank_fakturabanksalary {
             }
         }
 
-        if(!$this->username || !$this->username) {
-            $_lib['message']->add("Fakturabank brukernavn og passord er ikke definert p&aring; brukeren din");
-        } else {
-            $this->login = true;
-        }
-
         $old_pattern    = array("/[^0-9]/", "/_+/", "/_$/");
         $new_pattern    = array("", "", "");
         $this->OrgNumber = strtolower(preg_replace($old_pattern, $new_pattern , $_lib['sess']->get_companydef('OrgNumber'))); 
-
-        $this->credentials = "$this->username:$this->password";
     }
     
     
@@ -293,6 +279,8 @@ class lodo_fakturabank_fakturabanksalary {
             return false;
         }
 
+        $_SESSION['oauth_salary_id'] = $SalaryID;
+        $_SESSION['oauth_salary_conf_id'] = $SalaryConfID;
         $fakturabank_salary_id = $this->write($xml);
 
         if (!$fakturabank_salary_id) {
@@ -315,34 +303,18 @@ class lodo_fakturabank_fakturabanksalary {
     function write($xml) {
         global $_lib;
 
-        $page = "/import_paychecks";
+        $page = "/rest/import_paychecks.xml";
         $url  = "$this->protocol://$this->host$page";
-        
-        $headers = array(
-            "POST ".$page." HTTP/1.0",
-            "Content-type: text/xml;charset=\"utf-8\"",
-            "Accept: application/xml",
-            "Cache-Control: no-cache",
-            "Pragma: no-cache",
-            "SOAPAction: \"run\"",
-            "Content-length: ".strlen($xml),
-            "Authorization: Basic " . base64_encode($this->credentials)
-        );
-        
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_USERAGENT, $defined_vars['HTTP_USER_AGENT']);
-        curl_setopt($ch, CURLOPT_HEADER, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
-        // Apply the XML to our curl call
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $xml); 
-
-        $data = curl_exec($ch); 
+        if (isset($_SESSION['oauth_paycheck_sent'])) {
+          $data = $_SESSION['oauth_resource']['result'];
+        }
+        else {
+          $_SESSION['oauth_action'] = 'send_paycheck';
+          $oauth_client = new lodo_oauth();
+          $oauth_client->get_resources($url);
+          $oauth_client->post_resources($url, array('xml' => $xml));
+        }
 
         $unauthorized_error = false;
         if (!($unauthorized_error = strstr($data, "401 Unauthorized"))) {
@@ -352,12 +324,12 @@ class lodo_fakturabank_fakturabanksalary {
         if ($unauthorized_error) {
             $_lib['message']->add("Error: lastet opp l&oslash;nnslipp: Du har feil brukernavn eller passord " . $import_paycheck_result['message']);
             $ret = false;
-        } else if (curl_errno($ch)) {
-            $_lib['message']->add("Error: lastet opp lønnslipp: " . curl_error($ch) . " " . $import_paycheck_result['message']);
-            if (!empty($import_paycheck_result['paycheck-results'])) {
-                $_lib['message']->add("Error info: " . $import_paycheck_result['paycheck-results'][0]['error-message']);
-            }
-            $ret = false;
+        // } else if (error) {
+        //     $_lib['message']->add("Error: lastet opp lønnslipp: " . curl_error($ch) . " " . $import_paycheck_result['message']);
+        //     if (!empty($import_paycheck_result['paycheck-results'])) {
+        //         $_lib['message']->add("Error info: " . $import_paycheck_result['paycheck-results'][0]['error-message']);
+        //     }
+        //     $ret = false;
         } else {
 
             // Show me the result
@@ -375,9 +347,7 @@ class lodo_fakturabank_fakturabanksalary {
                 $ret = $import_paycheck_result['paycheck-results'][0]['paycheck-result']['id'];
             }
         }
-       
-        curl_close($ch);
-        // todo return salary id
+
         return $ret;
     }
 
