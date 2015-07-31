@@ -130,26 +130,24 @@ class lodo_accountplan_scheme {
             return null;
     }
 
-    function refreshSchemes() {
+    function refreshSchemes($_schemes = false) {
         global $_lib;
         includelogic("fakturabank/fakturabank");
+        includelogic("oauth/oauth");
         $fakturabank = new lodo_fakturabank_fakturabank();
+        $client = new lodo_oauth();
 
-        $page = "identificators.json";
+        $page = "rest/identificators.json";
         $url = $fakturabank->construct_fakturabank_url($page);
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $result = curl_exec($ch);
-
-        $decoded_json = json_decode($result);
+        $_SESSION['oauth_action'] = 'get_identificators';
+        if (!$_schemes) $client->get_resources($url);
+        else $decoded_json = $_schemes;
 
         foreach($decoded_json as $json_node) {
+            $json_node = $json_node['identificator'];
             $found = false;
             foreach($this->globalSchemes as $existing) {
-                if($existing["FakturabankRemoteSchemeID"] == $json_node->identificator->id) {
+                if($existing["FakturabankRemoteSchemeID"] == $json_node['id']) {
                     $found = true;
                     break;
                 }
@@ -158,11 +156,11 @@ class lodo_accountplan_scheme {
             if(!$found) {
                 $q = sprintf("INSERT INTO fakturabankscheme 
                               (`FakturabankRemoteSchemeID`, `SchemeType`)
-                              VALUES (%d, '%s');", $json_node->identificator->id, $json_node->identificator->name);
+                              VALUES (%d, '%s');", $json_node['id'], $json_node['name']);
             }
             else {
                 $q = sprintf("UPDATE fakturabankscheme SET SchemeType = '%s' WHERE FakturabankRemoteSchemeID = %d",
-                             $json_node->identificator->name, $json_node->identificator->id);
+                             $json_node['name'], $json_node['id']);
             }
 
 
