@@ -6,6 +6,7 @@
 includelogic('fakturabank/fakturabank');
 includelogic('accounting/accounting');
 includelogic('exchange/exchange');
+includelogic('orgnumberlookup/orgnumberlookup');
 
 $accounting = new accounting();
 
@@ -49,7 +50,7 @@ Merk: Du m&aring; registrere brukeren din p&aring; <a href="http://fakturabank.n
 <form name="invoice_edit" action="<? print $_lib['sess']->dispatch ?>t=fakturabank.listincoming" method="post">
 <input type="submit" value="Last ned fakturaer (L)" name="action_fakturabank_registerincoming" accesskey="B">
 <input type="submit" value="Opprett manglende kontoplaner (A)" name="action_fakturabank_addmissingaccountplan" accesskey="A">
-</form>
+
 
 <table class="lodo_data">
 <thead>
@@ -76,12 +77,91 @@ Merk: Du m&aring; registrere brukeren din p&aring; <a href="http://fakturabank.n
 </thead>
 <tbody>
 <?
+// clean temporary account plan data table before adding anything
+$sql  = "delete from accountplantemp where 1";
+$_lib['db']->db_delete($sql);
+
 if (!empty($InvoicesO->Invoice)) {
 
+  $used_new_accountplans = array();
+  $already_printed_new = array();
+  $already_fetched_org = array();
   foreach($InvoicesO->Invoice as $InvoiceO) {
     $TotalCustPrice += $InvoiceO->LegalMonetaryTotal->PayableAmount;
     $tmp_currency_code = $InvoiceO->DocumentCurrencyCode;
-    
+    if ($InvoiceO->MissingAccountPlan) {
+      $scheme_value = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
+      $scheme_type  = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
+      // speed up but only fetching company info for non fetched ones
+      if (!isset($already_fetched_org[$scheme_value])) {
+        $org = new lodo_orgnumberlookup_orgnumberlookup();
+        $org->getOrgNumberByScheme($scheme_value, $scheme_type);
+        $already_fetched_org[$scheme_value] = $org;
+      }
+      else $org = $already_fetched_org[$scheme_value];
+
+      // initial setup
+      $TmpAccountPlanData = array();
+      $TmpAccountPlanData['AccountName']       = $InvoiceO->AccountingSupplierParty->Party->PartyName->Name;
+      $TmpAccountPlanData['AccountPlanType']   = 'supplier';
+
+      $TmpAccountPlanData['Address']           = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName;
+      $TmpAccountPlanData['City']              = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->CityName;
+      $TmpAccountPlanData['ZipCode']           = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone;
+
+      $TmpAccountPlanData['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
+      $TmpAccountPlanData['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');
+      $TmpAccountPlanData['UpdatedByPersonID'] = $_lib['sess']->get_person('PersonID');
+      $TmpAccountPlanData['Active']            = 1;
+
+      $TmpAccountPlanData['EnableCredit']      = 1;
+      $TmpAccountPlanData['CreditDays']        = $_lib['date']->dateDiff($InvoiceO->PaymentMeans->PaymentDueDate, $InvoiceO->IssueDate);
+
+      $TmpAccountPlanData['debittext']         = 'Salg';
+      $TmpAccountPlanData['credittext']        = 'Betal';
+      $TmpAccountPlanData['DebitColor']        = 'debitblue';
+      $TmpAccountPlanData['CreditColor']       = 'creditred';
+
+      $FakturabankScheme = $_lib['storage']->get_row(array('query' => "select FakturabankSchemeID from fakturabankscheme where SchemeType = '$scheme_type'"));
+      $FakturabankSchemeID = $FakturabankScheme->FakturabankSchemeID;
+      $TmpAccountPlanData['FBSchemeLodoID']    = $FakturabankSchemeID;
+      $TmpAccountPlanData['FBSchemeType']      = $scheme_type;
+      $TmpAccountPlanData['FBSchemeValue']     = $scheme_value;
+
+      // info we get from FB
+      if($org->OrgNumber)   $TmpAccountPlanData['OrgNumber'] = $org->OrgNumber;
+      if($org->AccountName) $TmpAccountPlanData['AccountName'] = $org->AccountName;
+      if($org->Email)       $TmpAccountPlanData['Email'] = $org->Email;
+      if($org->Mobile)      $TmpAccountPlanData['Mobile'] = $org->Mobile;
+      if($org->Phone)       $TmpAccountPlanData['Phone'] = $org->Phone;
+      if(!empty($org->ParentCompanyName))    $TmpAccountPlanData['ParentName'] = $org->ParentCompanyName;
+      if(!empty($org->ParentCompanyNumber))  $TmpAccountPlanData['ParentOrgNumber'] = $org->ParentCompanyNumber;
+
+      $TmpAccountPlanData['EnableInvoiceAddress'] = 1;
+      if($org->IAdress->Address1) $TmpAccountPlanData['Address'] = $org->IAdress->Address1;
+      if($org->IAdress->City)     $TmpAccountPlanData['City'] = $org->IAdress->City;
+      if($org->IAdress->ZipCode)  $TmpAccountPlanData['ZipCode'] = $org->IAdress->ZipCode;
+
+      if($org->IAdress->Country)  $TmpAccountPlanData['CountryCode'] = $_lib['format']->countryToCode($org->IAdress->Country);
+
+      if($org->DomesticBankAccount) $TmpAccountPlanData['DomesticBankAccount'] = $org->DomesticBankAccount;
+
+      if($org->CreditDays) {
+        $TmpAccountPlanData['EnableCredit'] = 1;
+        $TmpAccountPlanData['CreditDays'] = $org->CreditDays;
+      }
+      if($org->MotkontoResultat1)	{
+        $TmpAccountPlanData['EnableMotkontoResultat'] = 1;
+        $TmpAccountPlanData['MotkontoResultat1'] = $org->MotkontoResultat1;
+        $TmpMotkonto = $org->MotkontoResultat1;
+      }
+      elseif($org->MotkontoBalanse1) {
+        $TmpAccountPlanData['EnableMotkontoBalanse'] = 1;
+        $TmpAccountPlanData['MotkontoBalanse1'] = $org->MotkontoBalanse1;
+        $TmpMotkonto = $org->MotkontoBalanse1;
+      }
+      $TmpAccountPlanData['Active'] = 1;
+    }
   ?>
 
     <?  
@@ -102,9 +182,51 @@ if (!empty($InvoicesO->Invoice)) {
       <td class="number"><? print $InvoiceO->IssueDate ?></td>
       <td class="number"><? print $InvoiceO->Period ?></td>
       <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&OrgNumber=<? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID ?>&inline=show" target="_new"><? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID ?></a></td>
-      <td class="number"><a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&AccountPlanID=<? print $InvoiceO->AccountPlanID ?>&inline=show" target="_new"><? print $InvoiceO->AccountPlanID ?></a></td>
+      <td class="number">
+        <? if (!$InvoiceO->MissingAccountPlan) { // if account exists print link to it ?>
+          <a href="<? print $_lib['sess']->dispatch ?>t=accountplan.reskontro&AccountPlanID=<? print $InvoiceO->AccountPlanID ?>&inline=show" target="_new"><? print $InvoiceO->AccountPlanID ?></a>
+        <? } else { // print input(or just number in case of NO:ORGNR) for account plan id and add scheme value to already printed array
+              if (isset($already_printed_new[$scheme_value]) && ($scheme_type != 'NO:ORGNR')) print 'Velg ovenfor'; // only print select above for non NO:ORGNR
+              elseif ($scheme_type == 'NO:ORGNR') {
+                $TemporaryAccountPlanID = $scheme_value;
+                print $TemporaryAccountPlanID;
+        ?>
+                <input type='hidden' name='<? print "accountplantemp_" . $TemporaryAccountPlanID . "_AccountPlanID"; ?>' value='<? print $TemporaryAccountPlanID; ?>' >
+        <?
+              }
+              else {
+                // find the first available account plan id
+                $starting_id = 100000001;
+                if ($_lib['sess']->get_companydef('BaseAccountIDOnMotkonto')) $starting_id += $org->MotkontoResultat1 * 10000;
+                $used_accounts_hash = $_lib['storage']->get_hash(array('key' => 'AccountPlanID', 'value' => 'AccountPlanID', 'query' => "select AccountPlanID from accountplan where AccountPlanType = 'supplier' and AccountPlanID >= $starting_id order by AccountPlanID"));
+                for ($i = $starting_id; $i <= 999999999; $i++) {
+                  if (!isset($used_accounts_hash[$i]) && !isset($used_new_accountplans[$i])) break;
+                }
+                $TemporaryAccountPlanID = $i;
+                $used_new_accountplans[$TemporaryAccountPlanID] = $TemporaryAccountPlanID;
+        ?>
+                <input name='<? print "accountplantemp_" . $TemporaryAccountPlanID . "_AccountPlanID"; ?>' value='<? print $TemporaryAccountPlanID; ?>' style='text-align: right' >
+        <?
+              }
+              $TmpAccountPlanData['AccountPlanID']     = $TemporaryAccountPlanID;
+           }
+        ?>
+      </td>
       <td>&nbsp;<? print substr($InvoiceO->AccountingSupplierParty->Party->PartyName->Name,0,30) ?></td>
-      <td>&nbsp;<? print substr($InvoiceO->MotkontoAccountPlanID,0,30) ?></td>
+      <td>&nbsp;
+        <? if (!$InvoiceO->MissingAccountPlan) { //if motkonto exists(account plan exists) print it
+          print substr($InvoiceO->MotkontoAccountPlanID,0,30);
+           } elseif (isset($already_printed_new[$scheme_value])) print 'Velg ovenfor';
+             else { // motkonto balanse and result dropdown select
+              $aconf = array();
+              $aconf['type'][] = 'result';
+              $aconf['type'][] = 'balance';
+              $aconf['table']  = 'accountplantemp_' . $TemporaryAccountPlanID;
+              $aconf['field']  = 'Motkonto';
+              $aconf['value']  = $TmpMotkonto;
+              print $_lib['form3']->accountplan_number_menu($aconf);
+           } ?>
+      </td>
       <td><? print $InvoiceO->MotkontoAccountName ?></td>
       <td class="number"><b><? print $InvoiceO->PaymentMeans->PaymentDueDate ?></b></td>
       <!--<td class="number"><? print $_lib['format']->Amount($InvoiceO->LegalMonetaryTotal->PayableAmount) ?></td>-->
@@ -140,6 +262,11 @@ if (!empty($InvoicesO->Invoice)) {
       <td class="number"><? print $InvoiceO->Status ?></td>
   </tr>
 <?
+    // only add to temp table the first time
+    if (!isset($already_printed_new[$scheme_value]) && !empty($used_new_accountplans)) {
+      $_lib['storage']->store_record(array('data' => $TmpAccountPlanData, 'table' => 'accountplantemp', 'action' => 'auto', 'debug' => false));
+      $already_printed_new[$scheme_value] = true;
+    }
   }
 }
 ?>
@@ -152,5 +279,6 @@ if (!empty($InvoicesO->Invoice)) {
 </tbody>
 
 </table>
+</form>
 </body>
 </html>

@@ -973,6 +973,7 @@ class lodo_fakturabank_fakturabank {
 
                 $InvoiceO->Journal = false;
                 $InvoiceO->Class   = 'red';
+                $InvoiceO->MissingAccountPlan = true;
             }
         }
         return $invoicesO;
@@ -1242,6 +1243,7 @@ class lodo_fakturabank_fakturabank {
         $_lib['message']->add("$count kontoplaner automatisk opprettet - motkonto m&aring; settes manuelt");
     }
 
+    # TODO(mladjo2505): Remove, since it is not used anymore
     #Only for adding new suppliers at this point in time.
     public function incomingaddmissingaccountplan($single_invoice_id = false) {
         global $_lib;
