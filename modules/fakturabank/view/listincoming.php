@@ -263,7 +263,7 @@ if (!empty($InvoicesO->Invoice)) {
   </tr>
 <?
     // only add to temp table the first time
-    if (!isset($already_printed_new[$scheme_value]) && !empty($used_new_accountplans)) {
+    if (!isset($already_printed_new[$scheme_value])) {
       $_lib['storage']->store_record(array('data' => $TmpAccountPlanData, 'table' => 'accountplantemp', 'action' => 'auto', 'debug' => false));
       $already_printed_new[$scheme_value] = true;
     }
