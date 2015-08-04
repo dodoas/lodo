@@ -34,7 +34,7 @@ if($_lib['input']->getProperty('action_fakturabank_registerincoming')) {
             if ($new_motkonto_data->AccountPlanType == 'result') {
               $update_query .= "EnableMotkontoResultat = 1, EnableMotkontoBalanse = 0, MotkontoBalanse1 = NULL, MotkontoResultat1 = $new_motkonto_value ";
             }
-            elseif ($new_motkonto_data->AccountPlanType == 'balanse') {
+            elseif ($new_motkonto_data->AccountPlanType == 'balance') {
               $update_query .= "EnableMotkontoBalanse = 1, EnableMotkontoResultat = 0, MotkontoResultat1 = NULL, MotkontoBalanse1 = $new_motkonto_value ";
             }
           }
@@ -43,10 +43,11 @@ if($_lib['input']->getProperty('action_fakturabank_registerincoming')) {
             if (!empty($update_query)) $update_query .= ", ";
             $update_query .= "AccountPlanID = $new_id_value";
           }
+          $anything_changed = !empty($update_query);
           $update_query = "UPDATE accountplantemp SET " . $update_query;
           $update_query .= " WHERE AccountPlanID = $tmp_acc_id";
           // execute query to update temporary data, then copy(create) entry to main table
-          $_lib['db']->db_query($update_query);
+          if ($anything_changed) $_lib['db']->db_query($update_query);
           $_lib['db']->db_query("INSERT INTO accountplan(AccountPlanID, AccountName, InsertedDateTime, InsertedByPersonID, debittext, credittext,
                                                          Address, ZipCode, Email, DomesticBankAccount, EnableCredit, CreditDays, DebitColor, CreditColor,
                                                          Active, EnableMotkontoBalanse, MotkontoBalanse1, MotkontoResultat1, MotkontoResultat2,
