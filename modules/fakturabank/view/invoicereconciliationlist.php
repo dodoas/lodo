@@ -6,9 +6,6 @@
 includelogic('fakturabank/invoicereconciliationreason');
 includelogic('fakturabank/bankreconciliationreason');
 
-$tmp_redirect_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-$_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url;
-
 $FakturabankInvoiceReconciliationReasonID = $_REQUEST['FakturabankInvoiceReconciliationReasonID'];
 assert(!is_int($FakturabankInvoiceReconciliationReasonID)); #All main input should be int
 
