@@ -16,23 +16,23 @@ $type = $_GET["type"];
 if (!in_array($type, array('balance', 'result', 'customer', 'employee'))) {
     $type = 'supplier';    
 }
+// initial setup
+$org = new lodo_orgnumberlookup_orgnumberlookup();
+$fb = new lodo_fakturabank_fakturabank();
+$TmpAccountPlanData = array();
+$TmpAccountPlanData['AccountPlanType']   = 'supplier';
+$TmpAccountPlanData['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
+$TmpAccountPlanData['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');
+$TmpAccountPlanData['UpdatedByPersonID'] = $_lib['sess']->get_person('PersonID');
+$TmpAccountPlanData['Active']            = 1;
+$TmpAccountPlanData['debittext']         = 'Salg';
+$TmpAccountPlanData['credittext']        = 'Betal';
+$TmpAccountPlanData['DebitColor']        = 'debitblue';
+$TmpAccountPlanData['CreditColor']       = 'creditred';
 
 if ($not_noorgno == 1) { // scheme type is not NO:ORGNR
-  // initial setup
-  $TmpAccountPlanData = array();
-  $TmpAccountPlanData['AccountPlanType']   = 'supplier';
-  $TmpAccountPlanData['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
-  $TmpAccountPlanData['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');
-  $TmpAccountPlanData['UpdatedByPersonID'] = $_lib['sess']->get_person('PersonID');
-  $TmpAccountPlanData['Active']            = 1;
-  $TmpAccountPlanData['debittext']         = 'Salg';
-  $TmpAccountPlanData['credittext']        = 'Betal';
-  $TmpAccountPlanData['DebitColor']        = 'debitblue';
-  $TmpAccountPlanData['CreditColor']       = 'creditred';
-
   $FakturabankScheme = $_lib['storage']->get_row(array('query' => "select FakturabankSchemeID from fakturabankscheme where SchemeType = '$scheme_type'"));
   $FakturabankSchemeID = $FakturabankScheme->FakturabankSchemeID;
-  $org = new lodo_orgnumberlookup_orgnumberlookup();
   $org->getOrgNumberByScheme($scheme_value, $scheme_type);
   // the first available account plan id
   $starting_id = 100000001;
@@ -45,7 +45,6 @@ if ($not_noorgno == 1) { // scheme type is not NO:ORGNR
   $TmpAccountPlanData['AccountPlanID']   = $i;
   $_lib['storage']->store_record(array('data' => $TmpAccountPlanData, 'table' => 'accountplan', 'action' => 'insert', 'debug' => false));
   $_lib['storage']->store_record(array('data' => array('AccountPlanID' => $AccountPlanID, 'FakturabankSchemeID' => $FakturabankSchemeID, 'SchemeValue' => $scheme_value), 'table' => 'accountplanscheme', 'action' => 'insert', 'debug' => false));
-  $fb = new lodo_fakturabank_fakturabank();
   $fb->update_accountplan_from_fakturabank($AccountPlanID);
 ?>
 <html>
@@ -64,6 +63,10 @@ if ($not_noorgno == 1) { // scheme type is not NO:ORGNR
 <?
 }
 else {
+  $TmpAccountPlanData['AccountPlanID'] = $accountplanid;
+  $TmpAccountPlanData['OrgNumber'] = $orgnumber;
+  $_lib['storage']->store_record(array('data' => $TmpAccountPlanData, 'table' => 'accountplan', 'action' => 'insert', 'debug' => false));
+  $fb->update_accountplan_from_fakturabank($accountplanid);
 ?>
 <html>
   <body>
@@ -79,7 +82,7 @@ else {
   </body>
   <script>
     var f = document.getElementById('form');
-//    f.submit();
+    f.submit();
   </script>
 </html>
 <? } ?>
