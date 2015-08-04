@@ -948,15 +948,28 @@ class lodo_fakturabank_fakturabank {
 
                 #$this->registerincoming($InvoiceO);
             } else {
+                $scheme_value = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
+                $scheme_type  = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
                 $InvoiceO->Status   .= "Finner ikke leverand&oslash;r basert p&aring; PartyIdentification: " .
                     $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
 
-                $InvoiceO->Status   .= sprintf(
+                // add if NO:ORGNR
+                if ($scheme_type == 'NO:ORGNR') {
+                  $InvoiceO->Status   .= sprintf(
                     '<a href="%s&t=fakturabank.createaccount&accountplanid=%s&orgnumber=%s&type=supplier" target="_blank">Opprett</a>',
                     $_lib['sess']->dispatch,
                     $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID,
                     $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID
-                    );
+                  );
+                }
+                else { // add based on scheme
+                  $InvoiceO->Status   .= sprintf(
+                    '<a href="%s&t=fakturabank.createaccount&amp;not_noorgno=1&scheme_type=%s&scheme_value=%s&type=supplier" target="_blank">Opprett</a>',
+                    $_lib['sess']->dispatch,
+                    $scheme_type,
+                    $scheme_value
+                  );
+                }
 
                 $InvoiceO->Journal = false;
                 $InvoiceO->Class   = 'red';
