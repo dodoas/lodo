@@ -57,24 +57,6 @@ case 'get_balance_report': // fetch balance report from FB
   $fbvoting->import_transactions($AccountID, $Period, $Country);
   redirect();
   break;
-case 'get_identificators': // fetch all scheme types(identificators) from FB
-  $schemes = $_SESSION['oauth_resource']['result'];
-  $scheme_control = new lodo_accountplan_scheme($_SESSION['oauth_account_plan_id']);
-  $scheme_control->refreshSchemes($schemes);
-  redirect();
-  break;
-case 'get_invoice_closing_reasons': // fetch all invoice closing reasons from FB
-  $reasons = $_SESSION['oauth_resource']['result'];
-  $fbreconcilationreason = new lodo_fakturabank_invoicereconciliationreason();
-  $fbreconcilationreason->import_mappings($reasons);
-  redirect();
-  break;
-case 'get_bank_transaction_closing_reasons': // fetch all bank transaction closing reasons from FB
-  $reasons = $_SESSION['oauth_resource']['result'];
-  $fbreconcilationreason = new lodo_fakturabank_bankreconciliationreason();
-  $fbreconcilationreason->import_mappings($reasons);
-  redirect();
-  break;
 case 'send_paycheck': // sending a paycheck to FB
   $SalaryID     = $_SESSION['oauth_salary_id'];
   $SalaryConfID = $_SESSION['oauth_salary_conf_id'];
@@ -105,56 +87,6 @@ case 'outgoing_invoices': // fetching all approved outgoing/incoming invoices fr
 case 'incoming_invoices':
   $_SESSION['oauth_invoices_fetched'] = true;
   redirect();
-  break;
-case 'get_company_info': // fetching conpany info from FB
-  $AccountPlanID = $_SESSION['oauth_account_plan_id'];
-  unset($_SESSION['oauth_account_plan_id']);
-  $org = new lodo_orgnumberlookup_orgnumberlookup($AccountPlanID);
-  $org->setData($_SESSION['oauth_resource']['result']);
-  if($org->success) {
-    $_lib['message']->add("Opplysninger er hentet automatisk basert p&aring; organisasjonsnummeret.");
-    $dataH = array();
-
-    // Only update if the fields contains a value
-    if($org->OrgNumber)   $dataH['OrgNumber'] = $org->OrgNumber;
-    if($org->AccountName) $dataH['AccountName'] = $org->AccountName;
-    if($org->Email)       $dataH['Email'] = $org->Email;
-    if($org->Mobile)      $dataH['Mobile'] = $org->Mobile;
-    if($org->Phone)       $dataH['Phone'] = $org->Phone;
-    if(!empty($org->ParentCompanyName))    $dataH['ParentName'] = $org->ParentCompanyName;
-    if(!empty($org->ParentCompanyNumber))  $dataH['ParentOrgNumber'] = $org->ParentCompanyNumber;
-
-    $dataH['EnableInvoiceAddress'] = 1;
-    if($org->IAdress->Address1) $dataH['Address'] = $org->IAdress->Address1;
-    if($org->IAdress->City)     $dataH['City'] = $org->IAdress->City;
-    if($org->IAdress->ZipCode)  $dataH['ZipCode'] = $org->IAdress->ZipCode;
-
-    if($org->IAdress->Country)  $dataH['CountryCode'] = $_lib['format']->countryToCode($org->IAdress->Country);
-
-    if($org->DomesticBankAccount) $dataH['DomesticBankAccount'] = $org->DomesticBankAccount;
-
-    if($org->CreditDays) {
-      $dataH['EnableCredit'] = 1;
-      $dataH['CreditDays'] = $org->CreditDays;
-    }
-    if($org->MotkontoResultat1)	{
-      $dataH['EnableMotkontoResultat'] = 1;
-      $dataH['MotkontoResultat1'] = $org->MotkontoResultat1;
-    }
-    if($org->MotkontoResultat2)	{
-      $dataH['EnableMotkontoResultat'] = 1;
-      $dataH['MotkontoResultat2'] = $org->MotkontoResultat2;
-    }
-    if($org->MotkontoBalanse1) {
-      $dataH['EnableMotkontoResultat'] = 1;
-      $dataH['MotkontoBalanse1'] = $org->MotkontoBalanse1;
-    }
-    $dataH['AccountPlanID'] = $AccountPlanID;
-    $dataH['Active'] = 1;
-
-    $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'accountplan', 'debug' => false));
-    redirect();
-  }
   break;
 default:  // else, not recognized action
   unset($_SESSION['oauth_action']);
