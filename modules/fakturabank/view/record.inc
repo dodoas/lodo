@@ -27,7 +27,7 @@ if($_lib['input']->getProperty('action_fakturabank_registerincoming')) {
         if (!$acc_already_exists) {
           // get new value for motkonto
           $new_motkonto_value = $_REQUEST['accountplantemp_' . $tmp_acc_id . '_Motkonto'];
-          if (isset($_REQUEST['accountplantemp_' . $tmp_acc_id . '_Motkonto'])) {
+          if (isset($_REQUEST['accountplantemp_' . $tmp_acc_id . '_Motkonto']) && !empty($new_motkonto_value)) {
             // get data for the newly selected motkonto
             $new_motkonto_data = $_lib['db']->get_row(array('query' => "select * from accountplan where AccountPlanID = $new_motkonto_value"));
             // build motkonto part of query depending on type
