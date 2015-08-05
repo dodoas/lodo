@@ -160,6 +160,7 @@ if (!empty($InvoicesO->Invoice)) {
         $TmpAccountPlanData['MotkontoBalanse1'] = $org->MotkontoBalanse1;
         $TmpMotkonto = $org->MotkontoBalanse1;
       }
+      else $TmpMotkonto = 0;
       $TmpAccountPlanData['Active'] = 1;
     }
   ?>
