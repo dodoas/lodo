@@ -57,12 +57,12 @@ if($_lib['input']->getProperty('action_fakturabank_registerincoming')) {
                                                          Address, ZipCode, Email, DomesticBankAccount, EnableCredit, CreditDays, DebitColor, CreditColor,
                                                          Active, EnableMotkontoBalanse, MotkontoBalanse1, MotkontoResultat1, MotkontoResultat2,
                                                          EnableMotkontoResultat, City, OrgNumber, Phone, Mobile, EnableInvoiceAddress, AccountPlanType,
-                                                         UpdatedByPersonID, CountryCode, ParentName, ParentOrgNumber)
+                                                         UpdatedByPersonID, CountryCode, Web, ParentName, ParentOrgNumber)
                                  SELECT AccountPlanID, AccountName, InsertedDateTime, InsertedByPersonID, debittext, credittext,
                                         Address, ZipCode, Email, DomesticBankAccount, EnableCredit, CreditDays, DebitColor, CreditColor,
                                         Active, EnableMotkontoBalanse, MotkontoBalanse1, MotkontoResultat1, MotkontoResultat2,
                                         EnableMotkontoResultat, City, OrgNumber, Phone, Mobile, EnableInvoiceAddress, AccountPlanType,
-                                        UpdatedByPersonID, CountryCode, ParentName, ParentOrgNumber
+                                        UpdatedByPersonID, CountryCode, Web, ParentName, ParentOrgNumber
                                  FROM accountplantemp WHERE AccountPlanID = $new_id_value");
           // add schemes to account plan if not NO:ORGNR
           if ($new_accountplan_data->FBSchemeType != 'NO:ORGNR') {
