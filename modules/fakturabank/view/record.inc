@@ -19,6 +19,11 @@ if($_lib['input']->getProperty('action_fakturabank_registerincoming')) {
       if (isset($_REQUEST['accountplantemp_' . $tmp_acc_id . '_AccountPlanID']) || isset($_REQUEST['accountplantemp_' . $tmp_acc_id . '_Motkonto'])) {
         // get new value for account plan id
         $new_id_value = $_REQUEST['accountplantemp_' . $tmp_acc_id . '_AccountPlanID'];
+        // if id is empty add error and skip
+        if (empty($new_id_value)) {
+          $_lib['message']->add("AccountPlanID kan ikke v&aelig;re tomt");
+          continue;
+        }
         // get temp table data for the current id
         $new_accountplan_data = $_lib['db']->get_row(array('query' => "select * from accountplantemp where AccountPlanID = $tmp_acc_id"));
         // check if there is a conflicting id in the account plan table

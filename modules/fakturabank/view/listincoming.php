@@ -134,6 +134,7 @@ if (!empty($InvoicesO->Invoice)) {
       if($org->Email)       $TmpAccountPlanData['Email'] = $org->Email;
       if($org->Mobile)      $TmpAccountPlanData['Mobile'] = $org->Mobile;
       if($org->Phone)       $TmpAccountPlanData['Phone'] = $org->Phone;
+      if($org->URL)         $TmpAccountPlanData['Web'] = $org->URL;
       if(!empty($org->ParentCompanyName))    $TmpAccountPlanData['ParentName'] = $org->ParentCompanyName;
       if(!empty($org->ParentCompanyNumber))  $TmpAccountPlanData['ParentOrgNumber'] = $org->ParentCompanyNumber;
 
