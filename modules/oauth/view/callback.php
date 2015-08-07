@@ -46,6 +46,10 @@ if (!isset($_GET['code'])) {
 switch ($_SESSION['oauth_action']) {
 case 'get_balance_report': // fetch balance report from FB
   $report_xml = $_SESSION['oauth_resource']['result'];
+  if ($_SESSION['oauth_resource']['code'] != 200) {
+    $_SESSION['oauth_balance_report_messages'][] = "<span style='color: red' >" . $report_xml . "</span>";
+    if ($_SESSION['oauth_resource']['code'] == 403) $_SESSION['oauth_balance_report_messages'][] = "<span style='color: red' >" . "Utilstrekkelige rettigheter i fakturabank!" . "</span>";
+  }
   $_SESSION['oauth_balance_report_fetched'] = true;
   $fbvoting = new lodo_fakturabank_fakturabankvoting();
   $AccountID = $_SESSION['oauth_balance_account_id'];
