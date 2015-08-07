@@ -19,7 +19,10 @@ $tmp_redirect_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 if (strpos($tmp_redirect_url, 'SalaryID') !== false) $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url;
 // and if missing in url, add SalaryID
 else $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url . "&SalaryID=" . $SalaryID;
-//var_dump($_SESSION['oauth_tmp_redirect_back_url']);
+
+// get all saved messages and remove them
+if (isset($_SESSION['oauth_paycheck_messages']) && is_array($_SESSION['oauth_paycheck_messages'])) foreach ($_SESSION['oauth_paycheck_messages'] as $message) $_lib['message']->add($message);
+unset($_SESSION['oauth_paycheck_messages']);
 
 includelogic('accounting/accounting');
 $accounting = new accounting();
@@ -548,7 +551,7 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
     <div class="<? echo $mcolor ?> error"><? print $_lib['message']->get() ?><br/></div>
 <? } ?>
 
-<? print $message ?>
+<? #print $message ?>
 </tr>
 </td>
 

@@ -281,20 +281,12 @@ class lodo_fakturabank_fakturabanksalary {
 
         $_SESSION['oauth_salary_id'] = $SalaryID;
         $_SESSION['oauth_salary_conf_id'] = $SalaryConfID;
-        $fakturabank_salary_id = $this->write($xml);
+        $_SESSION['oauth_fakturabank_salary_id'] = $fakturabank_salary_id = $this->write($xml);
 
         if (!$fakturabank_salary_id) {
             return false;
         }
 
-
-        $dataH = array();
-        $dataH['SalaryID']             = $SalaryID;
-        $dataH['FakturabankID']   = $fakturabank_salary_id;
-        $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
-        $dataH['FakturabankDateTime']   = $_lib['sess']->get_session('Datetime');
-        
-        $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'salary', 'debug' => false));
         return true;
     }
 
@@ -312,38 +304,23 @@ class lodo_fakturabank_fakturabanksalary {
         else {
           $_SESSION['oauth_action'] = 'send_paycheck';
           $oauth_client = new lodo_oauth();
-          $oauth_client->get_resources($url);
           $oauth_client->post_resources($url, array('xml' => $xml));
         }
 
-        $unauthorized_error = false;
-        if (!($unauthorized_error = strstr($data, "401 Unauthorized"))) {
+        if ($_SESSION['oauth_resource']['code'] == 201) {
             $import_paycheck_result = $this->parseResult(substr($data, strpos($data, "<?xml version")));
-        }
-        $ret = false;
-        if ($unauthorized_error) {
-            $_lib['message']->add("Error: lastet opp l&oslash;nnslipp: Du har feil brukernavn eller passord " . $import_paycheck_result['message']);
-            $ret = false;
-        // } else if (error) {
-        //     $_lib['message']->add("Error: lastet opp lønnslipp: " . curl_error($ch) . " " . $import_paycheck_result['message']);
-        //     if (!empty($import_paycheck_result['paycheck-results'])) {
-        //         $_lib['message']->add("Error info: " . $import_paycheck_result['paycheck-results'][0]['error-message']);
-        //     }
-        //     $ret = false;
-        } else {
-
             // Show me the result
             if ($import_paycheck_result['omitted-paychecks'] == 1) {
-                $_lib['message']->add("L&oslash;nnslipp finnes allerede");
+                $_SESSION['oauth_paycheck_messages'][] = "L&oslash;nnslipp finnes allerede";
                 $ret = false;
             } else if ($import_paycheck_result['failed-paychecks'] == 1) { // we might get errors even if errno is 0
-                $_lib['message']->add("Feil under opplasting: " . $import_paycheck_result['message'] . " Info: " . $import_paycheck_result['exception']);
+                $_SESSION['oauth_paycheck_messages'][] = "Feil under opplasting: " . $import_paycheck_result['message'] . " Info: " . $import_paycheck_result['exception'];
                 $ret = false;
             } else if ($import_paycheck_result['created-paychecks'] == 0) {
-                $_lib['message']->add("Feil tilbakemeldingsinfo fra server opplasting. " . $import_paycheck_result['message'] . " Info: " . (empty($import_paycheck_result['exception']) ? "Unknown error." : $import_paycheck_result['exception']));
+                $_SESSION['oauth_paycheck_messages'][] = "Feil tilbakemeldingsinfo fra server opplasting. " . $import_paycheck_result['message'] . " Info: " . (empty($import_paycheck_result['exception']) ? "Unknown error." : $import_paycheck_result['exception']);
                 $ret = false;
             } else {
-                $_lib['message']->add("L&oslash;nnslippen ble opprettet riktig");
+                $_SESSION['oauth_paycheck_messages'][] = "L&oslash;nnslippen ble opprettet riktig";
                 $ret = $import_paycheck_result['paycheck-results'][0]['paycheck-result']['id'];
             }
         }

@@ -65,6 +65,23 @@ case 'send_paycheck': // sending a paycheck to FB
   $fb_salary = new lodo_fakturabank_fakturabanksalary();
   $_SESSION['oauth_paycheck_sent'] = true;
   $fb_salary->sendsalary($SalaryID, $SalaryConfID);
+  if ($_SESSION['oauth_resource']['code'] != 201) {
+    $_SESSION['oauth_paycheck_messages'][] = $_SESSION['oauth_resource']['result'];
+    if ($_SESSION['oauth_resource']['code'] == 403) $_SESSION['oauth_paycheck_messages'][] = "Utilstrekkelige rettigheter i fakturabank!";
+  }
+  else {
+    $dataH = array();
+    $dataH['SalaryID']              = $SalaryID;
+    $dataH['FakturabankID']         = $_SESSION['oauth_fakturabank_salary_id'];
+    $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
+    $dataH['FakturabankDateTime']   = $_lib['sess']->get_session('Datetime');
+
+    $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'salary', 'debug' => false));
+
+    $query = sprintf("UPDATE salary SET LockedBy = '%s %s', LockedDate = NOW() WHERE SalaryID = %d LIMIT 1", $_lib['sess']->get_person('FirstName'), $_lib['sess']->get_person('LastName'), $SalaryID);
+    $_lib['db']->db_query($query);
+    $_SESSION['oauth_paycheck_messages'][] = "Sendt til Fakturabank.";
+  }
   redirect();
   break;
 case 'send_invoice': // sending an invoice to FB
