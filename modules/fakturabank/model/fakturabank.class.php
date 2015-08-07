@@ -428,6 +428,7 @@ class lodo_fakturabank_fakturabank {
         }
         if(substr($xml_data,0,9) != '<Invoices') {
             $_lib['message']->add($xml_data);
+            if ($_SESSION['oauth_resource']['code'] == 403) $_lib['message']->add("Utilstrekkelige rettigheter i fakturabank!");
         } else {
             if($size) {
                 includelogic('xmldomtoobject/xmldomtoobject');

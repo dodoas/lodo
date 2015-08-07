@@ -85,10 +85,13 @@ case 'send_paycheck': // sending a paycheck to FB
   redirect();
   break;
 case 'send_invoice': // sending an invoice to FB
-  if ($_SESSION['oauth_resource']['code'] == 400) $_SESSION['oauth_invoice_error'] = "Error: opprette faktura: " . $_SESSION['oauth_resource']['result'];
+  if ($_SESSION['oauth_resource']['code'] != 302 || $_SESSION['oauth_resource']['code'] != 201) { // not created or found
+    $_SESSION['oauth_invoice_error'] = "Error: opprette faktura: " . $_SESSION['oauth_resource']['result'];
+    if ($_SESSION['oauth_resource']['code'] == 403) $_SESSION['oauth_invoice_error'] .= "Utilstrekkelige rettigheter i fakturabank!";
+  }
   else {
     $dataH = array();
-    $dataH['InvoiceID']             = $this->InvoiceID;
+    $dataH['InvoiceID']             = $_SESSION['oauth_invoice_id'];
     $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
     $dataH['FakturabankDateTime']   = $_lib['sess']->get_session('Datetime');
     $dataH['Locked']                = 1;
