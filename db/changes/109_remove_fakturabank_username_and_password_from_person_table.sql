@@ -1,1 +1,1 @@
-ALTER TABLE person DROP COLUMN FakturabankUsername, FakturabankPassword;
+ALTER TABLE person DROP FakturabankUsername, DROP FakturabankPassword;
