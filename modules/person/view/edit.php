@@ -151,12 +151,6 @@ $person = $_lib['storage']->get_row(array('query' => $query));
     <tr>
         <th colspan="4" class="menu">Fakturabank tilgang</th>
     </tr>
-    <tr>
-        <td class="BGColorDark">Brukernavn</td>
-        <td><input type="text" name="<? print $db_table ?>.FakturabankUsername" value="<? print $person->FakturabankUsername ?>" size="24" tabindex="25"></td>
-        <td class="BGColorDark">Passord</td>
-        <td><input type="password" name="<? print $db_table ?>.FakturabankPassword" value="<? print $person->FakturabankPassword ?>" size="24" tabindex="26"></td>
-    </tr>
         <? if($_lib['sess']->get_person('AccessLevel') >= 4) { ?>
     <tr>
         <td class="BGColorDark">Tilgang til import av faktura</td>

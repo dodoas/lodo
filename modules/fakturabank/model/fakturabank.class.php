@@ -12,12 +12,8 @@ includelogic("accountplan/scheme");
 class lodo_fakturabank_fakturabank {
     private $host           = '';
     private $protocol       = '';
-    private $username       = '';
-    private $password       = '';
-    private $login          = false;
     private $timeout        = 30;
     private $retrievestatus = '';
-    private $credentials    = '';
     private $OrgNumber      = '';
     public  $startexectime  = '';
     public  $stopexectime   = '';
