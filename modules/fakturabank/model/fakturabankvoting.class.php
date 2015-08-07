@@ -7,12 +7,8 @@ includelogic("oauth/oauth");
 class lodo_fakturabank_fakturabankvoting {
     private $host           = '';
     private $protocol       = '';
-    private $username       = '';
-    private $password       = '';
-    private $login          = false;
     private $timeout        = 30;
     private $retrievestatus = '';
-    private $credentials    = '';
     private $OrgNumber      = '';
     private $account_number = '';
     public  $startexectime  = '';
@@ -86,7 +82,6 @@ class lodo_fakturabank_fakturabankvoting {
             $params .= "account_number=" . $this->get_account_number($account_id) . "&";
         }
         $url    = "$this->protocol://$this->host/$page$params";
-        $_lib['message']->add($url);
 
         if (isset($_SESSION['oauth_balance_report_fetched'])) {
           $data = $_SESSION['oauth_resource']['result'];
@@ -94,6 +89,7 @@ class lodo_fakturabank_fakturabankvoting {
         else {
           $_SESSION['oauth_action'] = 'get_balance_report';
           $oauth_client = new lodo_oauth();
+          $_SESSION['oauth_balance_report_messages'][] = $url;
           $oauth_client->get_resources($url);
         }
         $voting = $this->retrieve_voting($data);

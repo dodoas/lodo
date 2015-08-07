@@ -14,7 +14,10 @@ $tmp_redirect_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 if (strpos($tmp_redirect_url, 'AccountID') !== false) $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url;
 // and if missing in url, add AccountPlanID
 else $_SESSION['oauth_tmp_redirect_back_url'] = $tmp_redirect_url . "&AccountID=" . $AccountID;
-//var_dump($_SESSION['oauth_tmp_redirect_back_url']);
+
+// get all saved messages and remove them
+if (isset($_SESSION['oauth_balance_report_messages']) && is_array($_SESSION['oauth_balance_report_messages'])) foreach ($_SESSION['oauth_balance_report_messages'] as $message) $_lib['message']->add($message);
+unset($_SESSION['oauth_balance_report_messages']);
 
 if($_REQUEST['Period']) {
 	$Period     = $_REQUEST['Period'];
