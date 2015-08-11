@@ -207,7 +207,7 @@ if (!empty($InvoicesO->Invoice)) {
                 $TemporaryAccountPlanID = $i;
                 $used_new_accountplans[$TemporaryAccountPlanID] = $TemporaryAccountPlanID;
         ?>
-                <input name='<? print "accountplantemp_" . $TemporaryAccountPlanID . "_AccountPlanID"; ?>' value='<? print $TemporaryAccountPlanID; ?>' style='text-align: right' >
+                <input name='<? print "accountplantemp_" . $TemporaryAccountPlanID . "_AccountPlanID"; ?>' value='<? print $TemporaryAccountPlanID; ?>' style='text-align: right' onkeypress="return event.charCode >= 48 && event.charCode <= 57">
         <?
               }
               $TmpAccountPlanData['AccountPlanID']     = $TemporaryAccountPlanID;
