@@ -1,0 +1,1 @@
+ALTER TABLE company ADD BaseAccountIDOnMotkonto BOOL NOT NULL DEFAULT '1';
