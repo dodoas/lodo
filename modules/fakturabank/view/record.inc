@@ -24,6 +24,11 @@ if($_lib['input']->getProperty('action_fakturabank_registerincoming')) {
           $_lib['message']->add("AccountPlanID kan ikke v&aelig;re tomt");
           continue;
         }
+        // if id is not a number add error and skip
+        if (!is_numeric($new_id_value)) {
+          $_lib['message']->add("AccountPlanID m&aring; v&aelig;re et tall");
+          continue;
+        }
         // get temp table data for the current id
         $new_accountplan_data = $_lib['db']->get_row(array('query' => "select * from accountplantemp where AccountPlanID = $tmp_acc_id"));
         // check if there is a conflicting id in the account plan table
