@@ -7,7 +7,6 @@ $accountplanid = $_GET["accountplanid"];
 $orgnumber = $_GET["orgnumber"];
 $scheme_type  = $_GET["scheme_type"];
 $scheme_value = $_GET["scheme_value"];
-$scheme_type  = $_GET["scheme_type"];
 $not_noorgno  = $_GET["not_noorgno"];
 
 
