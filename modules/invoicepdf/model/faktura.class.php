@@ -879,8 +879,8 @@ function SplitByLength($string, $chunkLength=1){
         $makeLine = true;
         while ($makeLine)
         {
-            $myStr .= $words[$wordCounter] . " ";
-            if ($this->pdf->GetStringWidth($myStr) > $maxLength || $wordCounter > count($words))
+            $myStr .= $words[$wordCounter];
+            if ($this->pdf->GetStringWidth($myStr) > $maxLength || $wordCounter >= count($words))
             {
                 $makeLine = false;
             }
