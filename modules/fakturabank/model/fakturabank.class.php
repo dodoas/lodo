@@ -592,9 +592,9 @@ class lodo_fakturabank_fakturabank {
                     $key_array = explode('-', $key);
                     $key = $key_array[count($key_array)-1];
 
-                    if (is_numeric($key)) {
+                    if (is_numeric($key) && is_numeric($value)) {
                         // Passing true or false may not be needed anymore
-                        $InvoiceO->ReconciliationReasons[] = array($key, $key, false);
+                        $InvoiceO->ReconciliationReasons[] = array($key, $value, false);
                     }
                 }
             }
