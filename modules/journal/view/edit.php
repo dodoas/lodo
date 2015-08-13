@@ -49,7 +49,8 @@ $date                   = $_lib['storage']->get_row(array('query' => $sql_date))
 
 #################################################################################################################
 $voucherHead    = $_lib['db']->db_fetch_object($result_voucher_head);
-$voucherHead->ExternalID = $journal_extern->ExternalID;
+// only set if voucher type is 'U'(incoming invoice)
+if ($voucherHead->VoucherType == 'U') $voucherHead->ExternalID = $journal_extern->ExternalID;
 
 if(!$voucherHead and $voucher_input->action['journalid_search'])
 {
