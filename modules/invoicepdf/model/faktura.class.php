@@ -440,7 +440,7 @@ class pdfInvoice
         $myRight = "invoiceLineHeadLeft3";
         $myText2 = "invoiceLineRefName2";
         $myText = $this->{$myText2};
-        $newLines = count($this->splitString($params[$myText], $this->{$myRight} - $this->{$myLeft}));
+        $newLines = count($this->splitString($params[$myText], $this->{$myRight} - $this->{$myLeft} + 5));
 
         $this->pdf->SetFont($this->invoiceFont,'',$this->invoiceLineFontSize);
         if (!($this->invoiceLineCurrentLine < $this->invoiceLinesPerSite))
@@ -464,7 +464,7 @@ class pdfInvoice
             $this->pdf->SetXY($this->{$myLeft}, $this->invoiceLineHeadStart + ($this->lineHeight * $this->invoiceLineCurrentLine));
             if ($i == 2) {
                 $params[$myText] = $this->korriger($params[$myText]);
-                $prodTekstArray = $this->splitString($params[$myText], $this->{$myRight} - $this->{$myLeft});
+                $prodTekstArray = $this->splitString($params[$myText], $this->{$myRight} - $this->{$myLeft} + 5);
                 for($j = 0; $j < count($prodTekstArray); $j++)
                 {
                     $this->pdf->SetFont($this->invoiceFont,'',$this->invoiceLineFontSize);
@@ -855,6 +855,19 @@ function SplitByLength($string, $chunkLength=1){
     function splitString($str, $maxLength)
 {
     $words = explode(" ", $str);
+    // Split extra long words to two separate words
+    $split_one_word = false;
+    for($i=0;$i<count($words);$i++) {
+      $word = $words[$i];
+      if (($str_pxl_len = $this->pdf->GetStringWidth($word)) > $maxLength) {
+        $split_one_word = true;
+        $str_char_count = strlen($word);
+        $percent_fits = $maxLength/$str_pxl_len;
+        $chars_fit = (int)($percent_fits*$str_char_count) - 3;
+        $words[$i] = array(substr($word, 0, $chars_fit), substr($word, $chars_fit+1));
+      }
+    }
+    if ($split_one_word) $words = iterator_to_array(new RecursiveIteratorIterator(new RecursiveArrayIterator($words)), FALSE); // the php way to flatten an array
     $wordCounter = 0;
     $lineCounter = 0;
     $fromWord = 0;
@@ -866,8 +879,8 @@ function SplitByLength($string, $chunkLength=1){
         $makeLine = true;
         while ($makeLine)
         {
-            $myStr .= $words[$wordCounter] . " ";
-            if ($this->pdf->GetStringWidth($myStr) > $maxLength || $wordCounter > count($words))
+            $myStr .= $words[$wordCounter];
+            if ($this->pdf->GetStringWidth($myStr) > $maxLength || $wordCounter >= count($words))
             {
                 $makeLine = false;
             }
