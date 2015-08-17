@@ -33,8 +33,9 @@ $rowCount               = $_lib['db']->db_numrows($result_voucher);
 if($rowCount > 1) {
    $voucher_input->setNew(0, 'bilaget finnes og er da ikke nytt');
 }
-
-$sql_journal_extern = "select ExternalID from invoicein WHERE JournalID = '$voucher_input->JournalID'";
+$external_id_table = 'invoicein';
+if ($voucherHead->VoucherType == 'S') $external_id_table = 'invoiceout';
+$sql_journal_extern = "select ExternalID from ". $external_id_table ." WHERE JournalID = '$voucher_input->JournalID'";
 $journal_extern_line = $_lib['db']->db_query($sql_journal_extern);
 $journal_extern = $_lib['db']->db_fetch_object($journal_extern_line);
 
@@ -49,8 +50,8 @@ $date                   = $_lib['storage']->get_row(array('query' => $sql_date))
 
 #################################################################################################################
 $voucherHead    = $_lib['db']->db_fetch_object($result_voucher_head);
-// only set if voucher type is 'U'(incoming invoice)
-if ($voucherHead->VoucherType == 'U') $voucherHead->ExternalID = $journal_extern->ExternalID;
+// only set if voucher type is 'S' or 'U'(outgoing or incoming invoice)
+if ($voucherHead->VoucherType == 'U' || $voucherHead->VoucherType == 'S') $voucherHead->ExternalID = $journal_extern->ExternalID;
 
 if(!$voucherHead and $voucher_input->action['journalid_search'])
 {
