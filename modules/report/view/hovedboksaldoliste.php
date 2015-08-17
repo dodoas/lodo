@@ -51,7 +51,7 @@ else
 ###################################################
 # Henter reskontro til hovedbok og event overstyrer hvis det er valgt
 #
-$query 			 = "select AccountName, ReskontroAccountPlanType, AccountPlanType from accountplan where AccountPlanID='".$_REQUEST['report_selectedAccount']."'";
+$query 			 = "select AccountName, ReskontroAccountPlanType, AccountPlanType, AccountPlanID from accountplan where AccountPlanID='".$_REQUEST['report_selectedAccount']."'";
 $selectedaccount = $_lib['storage']->get_row(array('query' => $query));
 
 $accountName = $selectedaccount->AccountName;
@@ -280,8 +280,11 @@ while($account = $_lib['db']->db_fetch_object($balance_accounts))
       $budget = "";
     }
 
+    /* Removed per Arnt's instructions, but only commented out
+       if we need it in the future
     $accountsumH[substr($account->AccountPlanID, 0,1)]->Amount += $sumrow_new;
     $accountsumH[substr($account->AccountPlanID, 0,1)]->Budget += $budget;
+     */
 
     $sumTotal_old   += $saldo_old;
     $sumTotal_new   += $saldo_new;
@@ -489,8 +492,11 @@ else
       $sumTotal_prev_new    += $saldo_prev_new;
       $sumTotal_prev        += $sumrow_prev_new;
 
+      /* Removed per Arnt's instructions, but only commented out
+         if we need it in the future
       $accountsumH[substr($account->AccountPlanID, 0,1)]->Amount += $sumrow_new;
       $accountsumH[substr($account->AccountPlanID, 0,1)]->Budget += $budget;
+       */
 
       //print "$saldo_old + $saldo_new = $sumTotal<br>\n";
       $urltmp = $url . "&amp;report_FromAccount=$account->AccountPlanID&amp;report_ToAccount=$account->AccountPlanID";
@@ -552,7 +558,10 @@ else
         <td><? print $_lib['form3']->URL(array('description' => 'Detaljer', 'url' => 'http://regnskap.empatix.no/lodo.php?SID=ff3e9avftqiigr55qu1hd6c2m4&view_mvalines=1&view_linedetails=1&t=report.verify_consistency&report_Type=balancenotok&report_Sort=VoucherID')) ?></td>
     </tr>
 <? } ?>
-
+<? /*
+ Removed per Arnt's instructions, but only commented out
+ if we need it in the future
+?>
 </table>
 <hr>
 <table class="lodo_data">
@@ -629,5 +638,6 @@ if($key == 3) { ?>
     <td class="number"><? print $_lib['format']->Amount($resultexpences - $resultbudget) ?></td>
 </tr>
 </table>
+<? */ ?>
 </body>
 </html>
