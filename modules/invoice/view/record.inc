@@ -87,6 +87,8 @@ elseif($_lib['input']->getProperty('action_save_internal')) {
                      $_lib['db']->db_escape($comment), 
                      $invoiceno);
     $_lib['db']->db_query($query);
+    $header = "Location: lodo.php?t=invoice.edit&inline=show&InvoiceID=".$InvoiceID;
+    header ($header);
 }
 
 
