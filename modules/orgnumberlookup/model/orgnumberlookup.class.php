@@ -48,7 +48,7 @@ class lodo_orgnumberlookup_orgnumberlookup {
           $scheme_value   = strtolower(preg_replace($old_pattern, $new_pattern , $scheme_value));
         }
 
-        $url = $this->url . "index.xml?value=" . $scheme_value . "&type=" . $scheme_type;
+        $url = $this->url . "index.xml?value=" . urlencode($scheme_value) . "&type=" . $scheme_type;
         $path = $this->path . "index.xml?value=" . $scheme_value . "&type=" . $scheme_type;
         $this->getOrgNumber2($path, $url);
     }
