@@ -416,6 +416,9 @@ class invoice {
         list($args['InvoiceID'], $message)                = $accounting->get_next_available_journalid(array('available' => true, 'update' => true, 'type' => $this->VoucherType));
 
         $this->init($args);
+        // unset so we don't try to save this to invoice table in set_head function
+        if (isset($args["voucher_period"])) unset($args["voucher_period"]);
+        if (isset($args["voucher_date"])) unset($args["voucher_date"]);
         $args['CurrencyID'] = exchange::getLocalCurrency();
         $this->set_head($args);
         $this->set_line(array('Active' => 1));
@@ -681,9 +684,8 @@ class invoice {
         if($line['QuantityDelivered'] == 0) #Rettet av Geir. Maa vare mulig aa lage kreditnota med minus i antall.
             $lineH['QuantityDelivered'] = 0;
 
-        # Not sure if it safe to comment it out, because i don't know where it is used...
-        // if($line['UnitCustPrice'] <= 0)
-        //     $lineH['UnitCustPrice'] = $product->UnitCustPrice;
+        if($line['UnitCustPrice'] <= 0)
+            $lineH['UnitCustPrice'] = $product->UnitCustPrice;
 
         #if($line['Vat'] <= 0)
         $lineH['Vat']   = $VAT->Percent;
