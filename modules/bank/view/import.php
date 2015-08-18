@@ -221,7 +221,7 @@ class accountline_import {
         'nordea' => array(
             'BookKeepingDate' => 1,
             'InterestDate'    => 7,
-            'Description'     => 5,
+            'Description'     => array(3, 5),
             'AmountOut'       => 9,
             'AmountIn'        => 10,
             'AmountInOut'     => -1,
@@ -302,7 +302,8 @@ class accountline_import {
                 $lineH['Day']                           = $_lib['db']->db_escape(substr($lineH['BookKeepingDate'], 8 , 2));
                                 
                 //#Kunne hatt delvis automatisk reskontro match basert pŒ beskrivelse.
-                $lineH['Description']           = $_lib['db']->db_escape(str_replace("  ", " ", $data[$this->format[$Bank]['Description']]));
+                if (is_array($this->format[$Bank]['Description'])) $lineH['Description'] = $_lib['db']->db_escape(str_replace("  ", " ", $data[$this->format[$Bank]['Description'][0]]) . " - " . str_replace("  ", " ", $data[$this->format[$Bank]['Description'][1]]));
+                else $lineH['Description']           = $_lib['db']->db_escape(str_replace("  ", " ", $data[$this->format[$Bank]['Description']]));
                 $lineH['ArchiveRef']            = $data[$this->format[$Bank]['ArchiveRef']];
 
 
