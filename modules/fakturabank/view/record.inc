@@ -82,6 +82,8 @@ if($_lib['input']->getProperty('action_fakturabank_registerincoming')) {
         }
       }
     }
+} elseif($_lib['input']->getProperty('action_fakturabank_addmissingaccountplanoutgoing')) {
+  $fakturabank->addmissingaccountplan();
 } elseif(is_numeric($_lib['input']->getProperty('action_fakturabank_addsinglemissingaccountplan_id'))) {
     $fakturabank->addmissingaccountplan($_lib['input']->getProperty('action_fakturabank_addsinglemissingaccountplan_id'));
 }
