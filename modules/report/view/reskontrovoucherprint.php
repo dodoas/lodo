@@ -220,7 +220,7 @@ print $_lib['sess']->doctype ?>
                     <th class="sub number"><? print $accountplan->debittext ?></th>
                     <th class="sub number"><? print $accountplan->credittext ?></th>
                     <th class="sub" colspan="2"></th>
-                    <th class="sub number"><? print $sum; ?></th>
+                    <th class="sub number"><? print $_lib['format']->Amount($sum); ?></th>
                     <th class="sub number"></th>
                     <th class="sub number"></th>
                     <th class="sub number"></th>
@@ -234,7 +234,7 @@ print $_lib['sess']->doctype ?>
                     <td class="number"></td>
                     <td class="number"></td>
                     <td colspan="2"></td>
-                    <td class="number"><? print $sum; ?></td>
+                    <td class="number"><? print $_lib['format']->Amount($sum); ?></td>
                     <td colspan="6"></td>
                     <td class="noprint" colspan="2"></td>
                 </tr>
