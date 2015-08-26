@@ -48,7 +48,7 @@ foreach($apc->AccountH as $AccountID => $AccountName) {
                 'value' => $apc->DataH[$AccountID][$Period]->Comment
                 );
         else
-            $data[$year][$AccoutName][$Period] = array(
+            $data[$year][$AccountName][$Period] = array(
                 'a' => $AccountID,
                 'error' => true
                 );
