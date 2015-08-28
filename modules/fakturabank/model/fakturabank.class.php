@@ -432,8 +432,8 @@ class lodo_fakturabank_fakturabank {
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         #curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->timeout);
 
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1); #Is this safe?
-        #curl_setopt($ch, CURLOPT_CAINFO, "path:/ca-bundle.crt");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($ch, CURLOPT_CAINFO, "/etc/ssl/fakturabank/cacert.pem");
 
         $xml_data           = curl_exec($ch);
 
