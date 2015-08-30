@@ -521,6 +521,9 @@ class lodo_fakturabank_fakturabank {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
         #curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->timeout);
 
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($ch, CURLOPT_CAINFO, "/etc/ssl/fakturabank/cacert.pem");
+
         $returndata = curl_exec($ch);
 
         if (curl_errno($ch)) {
