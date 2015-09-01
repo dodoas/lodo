@@ -153,6 +153,9 @@ class lodo_fakturabank_bankreconciliationreason {
         if (curl_errno($ch)) {
             $_lib['message']->add("Nettverkskobling til Fakturabank ikke OK");
             $_lib['message']->add("Error: " . curl_error($ch));
+        } else if ($json_data == "Unauthorized") {
+            $_lib['message']->add("Nettverkskobling til Fakturabank OK");
+            $_lib['message']->add("Error: " . $json_data);
         } else {
             $_lib['message']->add("Nettverkskobling til Fakturabank OK");
         }
