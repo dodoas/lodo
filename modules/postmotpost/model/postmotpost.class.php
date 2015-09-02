@@ -1040,5 +1040,14 @@ class postmotpost {
 
         return $_lib['db']->db_fetch_assoc($r);
     }
+
+    private function updateClosedWith($VoucherID, $VoucherID2, $ClosedWith) {
+        global $_lib;
+
+        $args = array("voucher_matched_by_$VoucherID" => $ClosedWith, "voucher_matched_by_$VoucherID2" => $ClosedWith);
+        $pk = array('voucher' => 'VoucherID');
+        $_lib['db']->db_update_multi_table($args, $pk);
+
+    }
 }
 ?>
