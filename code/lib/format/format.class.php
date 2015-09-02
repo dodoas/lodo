@@ -234,7 +234,7 @@ class format {
     function Amount($args)
     {
         $args = $this->CheckInput($args);
-        $amount = $args['value'];
+        $amount = round($args['value'], 3);
 
         if($args['roundoff'] == 'down')
         {
