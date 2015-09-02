@@ -3,6 +3,8 @@
 # Based on EasyComposer technology
 # Copyright Thomas Ekdahl, 1994-2005, thomas@ekdahl.no, http://www.ekdahl.no
 
+includelogic('bank/xls');
+
 $AccountNumber  = $_REQUEST['AccountNumber'];
 $AccountID      = $_REQUEST['AccountID'];
 $Bank                   = $_REQUEST['Bank'];
@@ -215,8 +217,26 @@ class accountline_import {
             'IgnoreLines'     => 0,
             'ArchiveRef'      => -1,
             'ThousandSep'     => ','
+            ),
+        'nordea' => array(
+            'BookKeepingDate' => 1,
+            'InterestDate'    => 7,
+            'Description'     => array(3, 5),
+            'AmountOut'       => 9,
+            'AmountIn'        => 10,
+            'AmountInOut'     => -1,
+            'Comment'         => -1,
+            'Num.Ref'         => -1,
+            'Separator'       => ',',
+            'Sort'            => 'normal', // actualy the way we get the data is reversed
+                                           // but we get it one by one from the bottom
+                                           // with array_pop which pops the last item from the array
+            'IgnoreLines'     => 0,
+            'ArchiveRef'      => -1,
+            'ThousandSep'     => ',',
+            'SkipLinesBefore' => 12,
+            'SkipLinesAfter'  => 3
             )
-            
         );
                 
     //#Sort = '' - Use the sorting from the file
@@ -226,6 +246,12 @@ class accountline_import {
         global $_lib;
                 
         ini_set('auto_detect_line_endings', true);
+        // set xls data to empty and fill if the xls import file type is selected
+        $xdata = array();
+        if ($Bank == 'nordea') {
+          $xls_data = new lodo_bank_xls($filename);
+          $xdata = $xls_data->get_csv_array($this->format[$Bank]['SkipLinesBefore'], $this->format[$Bank]['SkipLinesAfter']);
+        }
                 
         $linesA                 = array();
         $duplicatetransaction   = 0;
@@ -251,7 +277,8 @@ class accountline_import {
         //# The first line header is removed
         if($this->debug) print "Bank: $Bank, Period: $Period<br>\n";
         
-        while ($data = fgetcsv ($fp, 1000, $this->format[$Bank]['Separator'])) {
+        while (($data = fgetcsv ($fp, 1000, $this->format[$Bank]['Separator'])) || $xdata) {
+            if ($xdata) $data = array_pop($xdata);
             $lineH  = array();
             $num    = count ($data);
                         
@@ -275,7 +302,8 @@ class accountline_import {
                 $lineH['Day']                           = $_lib['db']->db_escape(substr($lineH['BookKeepingDate'], 8 , 2));
                                 
                 //#Kunne hatt delvis automatisk reskontro match basert pŒ beskrivelse.
-                $lineH['Description']           = $_lib['db']->db_escape(str_replace("  ", " ", $data[$this->format[$Bank]['Description']]));
+                if (is_array($this->format[$Bank]['Description'])) $lineH['Description'] = $_lib['db']->db_escape(str_replace("  ", " ", $data[$this->format[$Bank]['Description'][0]]) . " - " . str_replace("  ", " ", $data[$this->format[$Bank]['Description'][1]]));
+                else $lineH['Description']           = $_lib['db']->db_escape(str_replace("  ", " ", $data[$this->format[$Bank]['Description']]));
                 $lineH['ArchiveRef']            = $data[$this->format[$Bank]['ArchiveRef']];
 
 
@@ -387,6 +415,7 @@ Format:
 <option value="terra">Terra - (semikolon separert, punktum desimaltegn, komma tusenskilletegn, sorteres stigende)</option>
 <option value="oest">Sparebanken &Oslash;st (, sorteres synkende)</option>
 <option value="strommensparebank1">Str&oslash;mmen sparebank (komma separert, komma tusenskilletegn, sorteres stigende)</option>
+<option value="nordea">Nordea XLS (komma separert, komma tusenskilletegn, sorteres stigende)</option>
 
 </select>
 <input type="hidden"    name="AccountID"        value="<? print $AccountID ?>">

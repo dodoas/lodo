@@ -48,7 +48,7 @@ class lodo_orgnumberlookup_orgnumberlookup {
           $scheme_value   = strtolower(preg_replace($old_pattern, $new_pattern , $scheme_value));
         }
 
-        $url = $this->url . "index.xml?value=" . $scheme_value . "&type=" . $scheme_type;
+        $url = $this->url . "index.xml?value=" . urlencode($scheme_value) . "&type=" . $scheme_type;
         $path = $this->path . "index.xml?value=" . $scheme_value . "&type=" . $scheme_type;
         $this->getOrgNumber2($path, $url);
     }
@@ -72,6 +72,9 @@ class lodo_orgnumberlookup_orgnumberlookup {
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($ch, CURLOPT_CAINFO, "/etc/ssl/fakturabank/cacert.pem");
 
         $xml_data = curl_exec($ch);
         $xml_data = html_entity_decode($xml_data, ENT_NOQUOTES, 'UTF-8');
