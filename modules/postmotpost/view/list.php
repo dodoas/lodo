@@ -105,8 +105,8 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
                 <th class="sub">Bilagsnr</th>
                 <th class="sub">Bilagsdato</th>
                 <th class="sub">Periode</th>
-                <th class="sub">Inn</th>
-                <th class="sub">Ut</th>
+                <th class="sub align-right">Inn</th>
+                <th class="sub align-right">Ut</th>
                 <th class="sub">Valuta inn</th>
                 <th class="sub">Valuta ut</th>
                 <th class="sub">Valuta/kurs</th>
@@ -134,7 +134,7 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
                 ?>
                 <tr class="voucher">
                     <th colspan="12"><? print $postmotpost->sumaccountH[$AccountPlanID]->Name ?></th>
-                    <th colspan="6">
+                    <th colspan="8">
                     <?
 
                     /* display motkontoresultat and -balanse from accountplan */
@@ -247,12 +247,12 @@ if(count($postmotpost->voucherH) > 0 || count($postmotpost->hidingAccounts) > 0)
             </tr>
 
             <tr>
-                <th class="sub" colspan="5">Sum for konto <? print $AccountPlanID ?></th>
-                <th class="sub number"><? if($postmotpost->sumaccountH[$AccountPlanID]->Diff  >= 0) { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->Diff); } ?></th>
-                <th class="sub number"><? if($postmotpost->sumaccountH[$AccountPlanID]->Diff  < 0)  { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->Diff); } ?></th>
-                <th class="sub number"><? if($postmotpost->sumaccountH[$AccountPlanID]->FAmountIn  > 0) { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->FAmountIn) ; } ?></th>
-                <th class="sub number"><? if($postmotpost->sumaccountH[$AccountPlanID]->FAmountOut > 0) { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->FAmountOut); } ?></th>
-                <th class="sub" colspan="10"></th>
+                <th class="sub" colspan="4">Sum for konto <? print $AccountPlanID ?></th>
+                <th class="sub number align-right"><? if($postmotpost->sumaccountH[$AccountPlanID]->Diff  >= 0) { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->Diff); } ?></th>
+                <th class="sub number align-right"><? if($postmotpost->sumaccountH[$AccountPlanID]->Diff  < 0)  { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->Diff); } ?></th>
+                <th class="sub number align-right"><? if($postmotpost->sumaccountH[$AccountPlanID]->FAmountIn  > 0) { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->FAmountIn) ; } ?></th>
+                <th class="sub number align-right"><? if($postmotpost->sumaccountH[$AccountPlanID]->FAmountOut > 0) { print $_lib['format']->Amount($postmotpost->sumaccountH[$AccountPlanID]->FAmountOut); } ?></th>
+                <th class="sub" colspan="13"></th>
             </tr>
             <? } ?>
 
