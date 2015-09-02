@@ -1227,6 +1227,8 @@ class lodo_fakturabank_fakturabank {
                     $dataH['DebitColor']        = 'debitblue';
                     $dataH['CreditColor']       = 'creditred';
 
+                    $dataH['EnablePostPost']    = 1;
+
                     #burde kj¿rt oppslag fra brreg samtidig med denne registreringen, men vi fŒr ganske mye info fra fakturaen
                     #Kan vi sette en default motkonto som vil v¾re "grei???"
                     #Vi mŒ kopiere defaultdata fra mor kategorien til denne - mŒ sentralisere opprettelse av kontoplaner i eget objekt
