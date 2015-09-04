@@ -21,16 +21,19 @@ select
   F.Email as FEmail,
   S.*,
   E.*,
+  A.ProsentTrekk as AP_ProsentTrekk,
   E.MunicipalityPercent as Percent,
   (NOT (E.AccountName IS NULL)) as isUpdated
 from
   salary as S
   left join (salaryextra as E)
     on (S.SalaryID = E.SalaryID),
-  fakturabankemail F
+  fakturabankemail F,
+  accountplan A
 where
   S.SalaryID = '%d'
   and F.AccountPlanID = S.AccountPlanID
+  and A.AccountPlanID = S.AccountPlanID
 ", $SalaryID);
 
 // Code to update old entries.
@@ -47,7 +50,7 @@ if(!$head->isUpdated || isset($_POST['action_salary_update_extra'])) {
        A.ZipCode,
        A.SocietyNumber,
        A.TabellTrekk,
-       A.ProsentTrekk
+       A.ProsentTrekk as AP_ProsentTrekk
      from
        salary as S,
        fakturabankemail F,
@@ -224,7 +227,7 @@ $formname = "salaryUpdate";
   </tr>
   <tr>
     <th class="sub" colspan="1"><? print $head->TabellTrekk ?></th>
-    <th class="sub"><? print $head->ProsentTrekk ?></th>
+    <th class="sub"><? print $head->AP_ProsentTrekk ?></th>
     <th class="sub"><a href="https://skort.skatteetaten.no/skd/trekk/trekk" target="_new">Vis trekktabell</a></th>
   </tr>
 </table>
