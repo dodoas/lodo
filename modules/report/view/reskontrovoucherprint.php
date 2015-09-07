@@ -100,9 +100,9 @@ function get_saldo($account, $fromperiod, $toperiod)
 {
   global $_lib;
   if($fromperiod) {
-    $query_voucher  = "select sum(AmountIn) as sumin, sum(AmountOut) as sumout, sum(Quantity) as quantity from voucher where AccountPlanID=$account and VoucherPeriod>='$fromperiod' and VoucherPeriod<'$toperiod' and Active=1";
+    $query_voucher  = "select sum(AmountIn) as sumin, sum(AmountOut) as sumout, count(Quantity) as quantity from voucher where AccountPlanID=$account and VoucherPeriod>='$fromperiod' and VoucherPeriod<'$toperiod' and Active=1";
   } else {
-    $query_voucher  = "select sum(AmountIn) as sumin, sum(AmountOut) as sumout, sum(Quantity) as quantity from voucher where AccountPlanID=$account and VoucherPeriod<'$toperiod' and Active=1";
+    $query_voucher  = "select sum(AmountIn) as sumin, sum(AmountOut) as sumout, count(Quantity) as quantity from voucher where AccountPlanID=$account and VoucherPeriod<'$toperiod' and Active=1";
   }
   $row = $_lib['storage']->get_row(array('query' => $query_voucher));
   $sum = $row->sumin - $row->sumout;
@@ -165,12 +165,16 @@ print $_lib['sess']->doctype ?>
     <?
     $i           = 0;
     $sumAccountH = array();
+    // set starting previous account to starting one
+    $prev_acc_id = $_reskontroFrom;
     
     while($voucher = $_lib['db']->db_fetch_object($result_voucher))
     {
         if($account != $voucher->AccountPlanID || $account == 0)
         {
             #Dette er siste linje i loopen
+            // only prints after first time(when $account var is set)
+            if ($account) {
             ?>
 			<tr>
 				<td colspan="4">Periode sum</td>
@@ -183,7 +187,62 @@ print $_lib['sess']->doctype ?>
 				<td class="noprint" colspan="2"></td>
 			</tr>
             <?
+            }
+            // first empty line below table headers
+            else echo "<tr><td></td></tr>";
 
+            // go trough account plans that are not in vouchers for the selected period
+            // but still have some leftover amount from the time before starting peroid
+            $acc_result   = $_lib['db']->get_hash(array('key' => 'AccountPlanID', 'value' => 'AccountPlanID', 'query' => "SELECT AccountPlanID from accountplan WHERE AccountPlanID>=". $_reskontroFrom ." AND AccountPlanID<=". $_reskontroTo));
+            foreach($acc_result as $key => $value) {
+              if ($key > $prev_acc_id && $key < $voucher->AccountPlanID) {
+                list($sum, $quantity) = get_saldo($key, $_REQUEST['report_FromPeriod'], $_REQUEST['report_ToPeriod']);
+                if ($quantity == 0) {
+                  list($sum, $quantity) = get_saldo($key, false, $_REQUEST['report_FromPeriod']);
+                  if ($sum != 0) {
+                    $sql_accountplan = "select * from accountplan where AccountPlanID=$key";
+                    $accountplan     = $_lib['storage']->get_row(array('query' => $sql_accountplan));
+                    $sumAccountH[$key] = $sum;
+                    // add to sum and print table with no vouchers since they 
+                    // are not in the selected period
+                    // print order of each tr: accountplan id and name, period and leftover amount, 
+                    // sum(leftover amount at the end of selected period, same as at the beginning)
+                ?>
+                <tr>
+                    <th colspan="9"><? print $accountplan->AccountPlanID . " " . $accountplan->AccountName ?></th>
+                    <th class="number"></th>
+                    <th colspan="2"></th>
+                    <th colspan="6"></th>
+                </tr>
+                <tr>
+                    <th class="sub" colspan="4"><? print "Periode: " . $_REQUEST['report_FromPeriod']; ?></th>
+                    <th class="sub number"></th>
+                    <th class="sub number"><? print $accountplan->debittext ?></th>
+                    <th class="sub number"><? print $accountplan->credittext ?></th>
+                    <th class="sub" colspan="2"></th>
+                    <th class="sub number"><? print $_lib['format']->Amount($sum); ?></th>
+                    <th class="sub number"></th>
+                    <th class="sub number"></th>
+                    <th class="sub number"></th>
+                    <th class="sub"></th>
+                    <th class="sub" colspan="2"></th>
+                    <th class="sub noprint" colspan="2"></th>
+                </tr>
+			          <tr>
+				            <td colspan="4">Periode sum</td>
+                    <td class="number"></td>
+                    <td class="number"></td>
+                    <td class="number"></td>
+                    <td colspan="2"></td>
+                    <td class="number"><? print $_lib['format']->Amount($sum); ?></td>
+                    <td colspan="6"></td>
+                    <td class="noprint" colspan="2"></td>
+                </tr>
+                <?
+                  }
+                }
+              }
+            }
             $period = 0;
             $account = $voucher->AccountPlanID;
 
@@ -212,6 +271,8 @@ print $_lib['sess']->doctype ?>
             } else {
                 print "Denne situasjonen har vi ikke kodet for kto mangler type: " . $accountWork->AccountPlanID;
             }
+            // just set to 0 so it don't get printed, the number of vouchers is superfluous info
+            $quantity = 0;
             ?>
 
             <tr>
@@ -296,6 +357,9 @@ print $_lib['sess']->doctype ?>
             </tr>
         <?
         $i++;
+        // set previous accountplan id so we know where to start when searching
+        // for the ones without vouchers in the selected period
+        $prev_acc_id = $voucher->AccountPlanID;
     }
     $reptype = "Totalsum alle reskontro til hovedbok";
     #print_r($sumAccountH);
