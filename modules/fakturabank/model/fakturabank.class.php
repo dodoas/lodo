@@ -3,6 +3,9 @@
 includelogic('invoice/invoice');
 includelogic('fakturabank/fakturabankvoting');
 includelogic('exchange/exchange');
+# needed for updating unit from fakturabank
+includelogic('orgnumberlookup/orgnumberlookup');
+includelogic("accountplan/scheme");
 
 class lodo_fakturabank_fakturabank {
     private $host           = '';
@@ -429,8 +432,8 @@ class lodo_fakturabank_fakturabank {
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         #curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->timeout);
 
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1); #Is this safe?
-        #curl_setopt($ch, CURLOPT_CAINFO, "path:/ca-bundle.crt");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($ch, CURLOPT_CAINFO, "/etc/ssl/fakturabank/cacert.pem");
 
         $xml_data           = curl_exec($ch);
 
@@ -517,6 +520,9 @@ class lodo_fakturabank_fakturabank {
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
         #curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->timeout);
+
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($ch, CURLOPT_CAINFO, "/etc/ssl/fakturabank/cacert.pem");
 
         $returndata = curl_exec($ch);
 
@@ -945,18 +951,32 @@ class lodo_fakturabank_fakturabank {
 
                 #$this->registerincoming($InvoiceO);
             } else {
+                $scheme_value = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
+                $scheme_type  = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
                 $InvoiceO->Status   .= "Finner ikke leverand&oslash;r basert p&aring; PartyIdentification: " .
                     $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
 
-                $InvoiceO->Status   .= sprintf(
+                // add if NO:ORGNR
+                if ($scheme_type == 'NO:ORGNR') {
+                  $InvoiceO->Status   .= sprintf(
                     '<a href="%s&t=fakturabank.createaccount&accountplanid=%s&orgnumber=%s&type=supplier" target="_blank">Opprett</a>',
                     $_lib['sess']->dispatch,
                     $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID,
                     $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID
-                    );
+                  );
+                }
+                else { // add based on scheme
+                  $InvoiceO->Status   .= sprintf(
+                    '<a href="%s&t=fakturabank.createaccount&amp;not_noorgno=1&scheme_type=%s&scheme_value=%s&type=supplier" target="_blank">Opprett</a>',
+                    $_lib['sess']->dispatch,
+                    $scheme_type,
+                    $scheme_value
+                  );
+                }
 
                 $InvoiceO->Journal = false;
                 $InvoiceO->Class   = 'red';
+                $InvoiceO->MissingAccountPlan = true;
             }
         }
         return $invoicesO;
@@ -970,6 +990,20 @@ class lodo_fakturabank_fakturabank {
             if ($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID != 'NO:SUP-ACCNT-RE') {
                 $companyid = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
                 $schemeid = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
+            }
+        }
+
+        return array($companyid, $schemeid);
+    }
+
+    private function extractSupplierSchemeID($InvoiceO) {
+        $companyid = null;
+        $schemeid = null;
+
+        if (!empty($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID)) {
+            if ($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID != 'NO:SUP-ACCNT-RE') {
+                $companyid = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
+                $schemeid = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
             }
         }
 
@@ -1062,6 +1096,72 @@ class lodo_fakturabank_fakturabank {
         return array($account, $SchemeID);
     }
 
+    #Update AccountPlan from Fakturabank unit
+    public function update_accountplan_from_fakturabank($AccountPlanID) {
+      global $_lib;
+
+      $schemeControl = new lodo_accountplan_scheme($AccountPlanID);
+      $schemes = $schemeControl->listSchemes();
+      $availableSchemeTypes = $schemeControl->listTypes();
+      # added so if no schemes are present to try with AccountPlanId or OrgNo
+      if (empty($schemes)) $schemes[] = array("SchemeValue" => "", "FakturabankSchemeID" => 1);
+      # try to download info for each scheme. we only need one success
+      foreach ($schemes as $scheme) {
+        $scheme_value = $scheme['SchemeValue'];
+        $scheme_type = $availableSchemeTypes[$scheme['FakturabankSchemeID'] - 1]['SchemeType'];
+        $org = new lodo_orgnumberlookup_orgnumberlookup();
+        if (empty($scheme_value)) {
+          if(strlen($_POST['accountplan_OrgNumber']) >= 9) $scheme_value = $_POST['accountplan_OrgNumber'];
+          elseif(strlen($AccountPlanID) >= 9) $scheme_value = $AccountPlanID;
+        }
+        $org->getOrgNumberByScheme($scheme_value, $scheme_type);
+
+        if($org->success) {
+          $_lib['message']->add("Opplysninger er hentet automatisk basert p&aring; organisasjonsnummeret.");
+
+          // Only update if the fields contains a value
+          if($org->OrgNumber)   $_POST['accountplan_OrgNumber']   = $dataH['OrgNumber'] = $org->OrgNumber;
+          if($org->AccountName) $_POST['accountplan_AccountName'] = $dataH['AccountName'] = $org->AccountName;
+          if($org->Email)       $_POST['accountplan_Email']       = $dataH['Email'] = $org->Email;
+          if($org->Mobile)      $_POST['accountplan_Mobile']      = $dataH['Mobile'] = $org->Mobile;
+          if($org->Phone)       $_POST['accountplan_Phone']       = $dataH['Phone'] = $org->Phone;
+          if(!empty($org->ParentCompanyName))    $_POST['accountplan_ParentName']   = $dataH['ParentName'] = $org->ParentCompanyName;
+          if(!empty($org->ParentCompanyNumber))  $_POST['accountplan_ParentOrgNumber']   = $dataH['ParentOrgNumber'] = $org->ParentCompanyNumber;
+
+          $_POST['accountplan_EnableInvoiceAddress'] = $dataH['EnableInvoiceAddress'] = 1;
+          if($org->IAdress->Address1) $_POST['accountplan_Address'] = $dataH['Address'] = $org->IAdress->Address1;
+          if($org->IAdress->City)     $_POST['accountplan_City']    = $dataH['City'] = $org->IAdress->City;
+          if($org->IAdress->ZipCode)  $_POST['accountplan_ZipCode'] = $dataH['ZipCode'] = $org->IAdress->ZipCode;
+
+          if($org->IAdress->Country)  $_POST['accountplan_CountryCode'] = $dataH['CountryCode'] = $_lib['format']->countryToCode($org->IAdress->Country);
+
+          if($org->DomesticBankAccount) $_POST['accountplan_DomesticBankAccount'] = $dataH['DomesticBankAccount'] = $org->DomesticBankAccount;
+
+          if($org->CreditDays) {
+            $_POST['accountplan_EnableCredit'] = $dataH['EnableCredit'] = 1;
+            $_POST['accountplan_CreditDays'] = $dataH['CreditDays'] = $org->CreditDays;
+          }
+          if($org->MotkontoResultat1)	{
+            $_POST['accountplan_EnableMotkontoResultat'] = $dataH['EnableMotkontoResultat'] = 1;
+            $_POST['accountplan_MotkontoResultat1'] = $dataH['MotkontoResultat1'] = $org->MotkontoResultat1;
+          }
+          if($org->MotkontoResultat2)	{
+            $_POST['accountplan_EnableMotkontoResultat'] = $dataH['EnableMotkontoResultat'] = 1;
+            $_POST['accountplan_MotkontoResultat2'] = $dataH['MotkontoResultat2'] = $org->MotkontoResultat2;
+          }
+          if($org->MotkontoBalanse1) {
+            $_POST['accountplan_EnableMotkontoResultat'] = $dataH['EnableMotkontoResultat'] = 1;
+            $_POST['accountplan_MotkontoBalanse1'] = $dataH['MotkontoBalanse1'] = $org->MotkontoBalanse1;
+          }
+          $dataH['AccountPlanID'] = $AccountPlanID;
+          $dataH['Active'] = 1;
+          # if one successful download is done, then we are done
+          break;
+        }
+      }
+      $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'accountplan', 'debug' => false));
+    }
+
     #Only for adding new customers at this point in time.
     public function addmissingaccountplan($single_invoice_id = false) {
         global $_lib;
@@ -1127,6 +1227,8 @@ class lodo_fakturabank_fakturabank {
                     $dataH['DebitColor']        = 'debitblue';
                     $dataH['CreditColor']       = 'creditred';
 
+                    $dataH['EnablePostPost']    = 1;
+
                     #burde kj¿rt oppslag fra brreg samtidig med denne registreringen, men vi fŒr ganske mye info fra fakturaen
                     #Kan vi sette en default motkonto som vil v¾re "grei???"
                     #Vi mŒ kopiere defaultdata fra mor kategorien til denne - mŒ sentralisere opprettelse av kontoplaner i eget objekt
@@ -1146,20 +1248,79 @@ class lodo_fakturabank_fakturabank {
         $_lib['message']->add("$count kontoplaner automatisk opprettet - motkonto m&aring; settes manuelt");
     }
 
-    public function incomingaddmissingaccountplan() {
+    # TODO(mladjo2505): Remove, since it is not used anymore
+    #Only for adding new suppliers at this point in time.
+    public function incomingaddmissingaccountplan($single_invoice_id = false) {
+        global $_lib;
 
-        $invoicesO = $this->outgoing();
+        $invoicesO  = $this->incoming();
+        $count      = 0;
 
         foreach($invoicesO->Invoice as $InvoiceO) {
+            if (!empty($single_invoice_id) && $InvoiceO->ID != $single_invoice_id) {
+                continue; // this is not the droid you are looking for
+            }
 
-            #check if exists first
-            $dataH = array();
-            $dataH['AccountPlanID']         = $InvoiceO->AccountingCustomerParty->Party->PartyName->Name;
-            $dataH['DomesticBankAccount']   = $InvoiceO->BankAccount;
-            $dataH['AccountPlanName']       = $InvoiceO->AccountingSupplierParty->Party->PartyName->Name;
+            if (empty($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID)) {
+              $_lib['message']->add("Ikke mulig &aring; auto-opprette fordi leverand&oslash;rnr mangler.");
+                continue;
+            }
 
-            $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'accountplan', 'debug' => false));
+            list($SchemeID, $SchemeIDType) = $this->extractSupplierSchemeID($InvoiceO);
+            list($account, $_SchemeID)  = $this->find_reskontro($SchemeID, 'supplier', $SchemeIDType);
+            if($account) {
+                continue; // exists already
+            } else {
+                if ($SchemeIDType == 'NO:ORGNR') $AccountPlanID = $SchemeID;
+                else {
+                  // the first available account plan id
+                  $used_accounts_hash = array_keys($_lib['storage']->get_hash(array('key' => 'AccountPlanID', 'value' => 'AccountPlanID', 'query' => "select AccountPlanID from accountplan where AccountPlanType = 'supplier' order by AccountPlanID")));
+                  for ($i = 100000000, $j = 0; $i <= 999999999; $i++) if ($i != $used_accounts_hash[$j++]) break;
+                  $AccountPlanID = $i;
+                }
+                $dataH = array();
+                $dataH['AccountPlanID']     = $AccountPlanID;
+                $dataH['AccountName']       = $InvoiceO->AccountingSupplierParty->Party->PartyName->Name;
+                $dataH['AccountPlanType']   = 'supplier';
+
+                $dataH['Address']           = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->StreetName;
+                $dataH['City']              = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->CityName;
+                $dataH['ZipCode']           = $InvoiceO->AccountingSupplierParty->Party->PostalAddress->PostalZone;
+
+                $dataH['InsertedByPersonID']= $_lib['sess']->get_person('PersonID');
+                $dataH['InsertedDateTime']  = $_lib['sess']->get_session('Datetime');
+                $dataH['UpdatedByPersonID'] = $_lib['sess']->get_person('PersonID');
+                $dataH['Active']            = 1;
+
+                #creditdays
+                $dataH['EnableCredit']      = 1;
+                $dataH['CreditDays']        = $_lib['date']->dateDiff($InvoiceO->PaymentMeans->PaymentDueDate, $InvoiceO->IssueDate);
+
+                #Credit/debit color and text
+                $dataH['debittext']         = 'Salg';
+                $dataH['credittext']        = 'Betal';
+                $dataH['DebitColor']        = 'debitblue';
+                $dataH['CreditColor']       = 'creditred';
+
+                $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'accountplan', 'action' => 'auto', 'debug' => false));
+                $FakturabankScheme = $_lib['storage']->get_row(array('query' => "select FakturabankSchemeID from fakturabankscheme where SchemeType = '$SchemeIDType'"));
+                $FakturabankSchemeID = $FakturabankScheme->FakturabankSchemeID;
+                $schemedataH = array();
+                $schemedataH['FakturabankSchemeID'] = $FakturabankSchemeID;
+                $schemedataH['SchemeValue'] = $SchemeID;
+                $schemedataH['AccountPlanID'] = $AccountPlanID;
+                $_lib['storage']->store_record(array('data' => $schemedataH, 'table' => 'accountplanscheme', 'action' => 'auto', 'debug' => false));
+                # after creating the account plan update it from fakturabank
+                $this->update_accountplan_from_fakturabank($AccountPlanID);
+                #exit;
+                $count++;
+            }
+
+            if (!empty($single_invoice_id) && $InvoiceO->ID == $single_invoice_id) {
+                break; // finished since we have processed the only one we wanted
+            }
         }
+        $_lib['message']->add("$count kontoplaner automatisk opprettet - motkonto m&aring; settes manuelt");
     }
 
 
@@ -2062,7 +2223,8 @@ class lodo_fakturabank_fakturabank {
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_USERAGENT, $defined_vars['HTTP_USER_AGENT']);
         curl_setopt($ch, CURLOPT_HEADER, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($ch, CURLOPT_CAINFO, "/etc/ssl/fakturabank/cacert.pem");
 
         // Apply the XML to our curl call
         curl_setopt($ch, CURLOPT_POST, 1);

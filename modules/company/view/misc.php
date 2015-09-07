@@ -109,6 +109,11 @@ $row = $_lib['storage']->get_row(array('query' => $query));
         </select>
       </td>
     </tr>
+    <tr>
+      <td>Baser leverand&oslash;rnr p&aring; motkonto</td>
+      <? // used to set if we use motkonto number in creation of account palan id when downloading incoming invoices ?>
+      <td class="BGColorLight"><? $_lib['form2']->checkbox2($db_table, "BaseAccountIDOnMotkonto",$row->BaseAccountIDOnMotkonto,''); ?>
+    </tr>
   <?php endif; ?>
 </tbody>
 
