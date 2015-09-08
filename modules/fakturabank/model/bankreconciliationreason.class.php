@@ -145,14 +145,17 @@ class lodo_fakturabank_bankreconciliationreason {
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         #curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->timeout);
 
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1); #Is this safe?
-        #curl_setopt($ch, CURLOPT_CAINFO, "path:/ca-bundle.crt"); 
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($ch, CURLOPT_CAINFO, "/etc/ssl/fakturabank/cacert.pem");
 
         $json_data           = curl_exec($ch);
 
         if (curl_errno($ch)) {
             $_lib['message']->add("Nettverkskobling til Fakturabank ikke OK");
             $_lib['message']->add("Error: " . curl_error($ch));
+        } else if ($json_data == "Unauthorized") {
+            $_lib['message']->add("Nettverkskobling til Fakturabank OK");
+            $_lib['message']->add("Error: " . $json_data);
         } else {
             $_lib['message']->add("Nettverkskobling til Fakturabank OK");
         }

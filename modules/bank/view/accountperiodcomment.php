@@ -10,18 +10,6 @@ includemodel('bank/bank');
 
 $apc = new accountperiodcomment();
 
-/* open the comment field for every post */
-foreach($apc->AccountH as $AccountID => $AccountName) {
-    foreach($apc->PeriodH as $Period => $tmp) {
-        if(!$apc->DataH[$AccountID][$Period]->BankVotingPeriodID) {
-            $bank = new framework_logic_bank(array('Period' => $Period, 'AccountID' => $AccountID));
-            $bank->init();
-        }
-    }
-}
-
-$apc = new accountperiodcomment();
-
 ?>
 <? print $_lib['sess']->doctype ?>
 <head>
@@ -60,7 +48,7 @@ foreach($apc->AccountH as $AccountID => $AccountName) {
                 'value' => $apc->DataH[$AccountID][$Period]->Comment
                 );
         else
-            $data[$year][$AccoutName][$Period] = array(
+            $data[$year][$AccountName][$Period] = array(
                 'a' => $AccountID,
                 'error' => true
                 );
@@ -85,11 +73,18 @@ foreach($data as $year => $accounts) {
 
         foreach($period as $pname => $d) {
             if(!isset($d['error'])) {
+              $query_max_min = "SELECT MAX(JournalID) AS max, MIN(JournalID) AS min FROM accountline WHERE AccountID = " . $d['a'] . " AND Active = 1 AND Period = '$pname'";
+              $max_min = $_lib['db']->get_row(array("query" => $query_max_min));
+              $query_acc_voucher_type = "SELECT VoucherType FROM account WHERE AccountID = " . $d['a'];
+              $voucher_type = $_lib['db']->get_row(array("query" => $query_acc_voucher_type))->VoucherType;
+              if (is_null($max_min->min) || is_null($max_min->max)) $voucher_type = "";
+              $_done_journals = "<br>" . $voucher_type . " " . $max_min->min . "-" . $max_min->max;
                 printf("<td>%s</td>", 
                        $_lib['form3']->text(array('table' => 'bankvotingperiod', 
                                                   'field' => 'Comment', 
                                                   'pk'    => $d['pk'],
                                                   'value' => $d['value']))
+                       . $_done_journals
                     );
             }
             else {

@@ -432,8 +432,8 @@ class lodo_fakturabank_fakturabank {
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         #curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->timeout);
 
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1); #Is this safe?
-        #curl_setopt($ch, CURLOPT_CAINFO, "path:/ca-bundle.crt");
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($ch, CURLOPT_CAINFO, "/etc/ssl/fakturabank/cacert.pem");
 
         $xml_data           = curl_exec($ch);
 
@@ -520,6 +520,9 @@ class lodo_fakturabank_fakturabank {
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
         #curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->timeout);
+
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($ch, CURLOPT_CAINFO, "/etc/ssl/fakturabank/cacert.pem");
 
         $returndata = curl_exec($ch);
 
@@ -1223,6 +1226,8 @@ class lodo_fakturabank_fakturabank {
                     $dataH['credittext']        = 'Betal';
                     $dataH['DebitColor']        = 'debitblue';
                     $dataH['CreditColor']       = 'creditred';
+
+                    $dataH['EnablePostPost']    = 1;
 
                     #burde kj¿rt oppslag fra brreg samtidig med denne registreringen, men vi fŒr ganske mye info fra fakturaen
                     #Kan vi sette en default motkonto som vil v¾re "grei???"
@@ -2218,7 +2223,8 @@ class lodo_fakturabank_fakturabank {
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_USERAGENT, $defined_vars['HTTP_USER_AGENT']);
         curl_setopt($ch, CURLOPT_HEADER, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($ch, CURLOPT_CAINFO, "/etc/ssl/fakturabank/cacert.pem");
 
         // Apply the XML to our curl call
         curl_setopt($ch, CURLOPT_POST, 1);
