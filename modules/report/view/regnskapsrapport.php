@@ -75,18 +75,18 @@ $rapport = new framework_logic_regnskapsrapport(array('Period' => $Period, 'Star
 <? print $_lib['form3']->hidden(array('name' => 'StartPeriod',          'value' => $StartPeriod)) ?>
 <? print $_lib['form3']->hidden(array('name' => 'report_DepartmentID',  'value' => $DepartmentID)) ?>
 <? print $_lib['form3']->hidden(array('name' => 'report_ProjectID',     'value' => $ProjectID)) ?>
-<table border="0" cellspacing="0" class="bordered">
+<table border="0" cellspacing="0" class="bordered regnskapsrapport_table">
     <thead>
         <tr>
-            <th>Konto</th>
-            <th>Kontonavn</th>
-            <th>Fra <? print $rapport->thisStartPeriod ?> til <? print $rapport->thisEndPeriod ?></th>
-            <th>Prosent</th>
-            <th>Fra <? print $rapport->prevStartPeriod ?> til <? print $rapport->prevEndPeriod ?></th>
-            <th>Prosent</th>
-            <th>&Aring;ret <? print $rapport->prevYear ?></th>
-            <th>Prosent</th>
-            <th>Beregn prosent fra</th>
+            <th class="column_konto_percent">Konto</th>
+            <th class="column_konto_name">Kontonavn</th>
+            <th class="column_amount">Fra <? print $rapport->thisStartPeriod ?> til <? print $rapport->thisEndPeriod ?></th>
+            <th class="column_konto_percent">Prosent</th>
+            <th class="column_amount">Fra <? print $rapport->prevStartPeriod ?> til <? print $rapport->prevEndPeriod ?></th>
+            <th class="column_konto_percent">Prosent</th>
+            <th class="column_amount">&Aring;ret <? print $rapport->prevYear ?></th>
+            <th class="column_konto_percent">Prosent</th>
+            <th class="column_checkbox">Beregn prosent fra</th>
     <tbody>
         <?
         foreach($rapport->lineSumH as $lineH) { ?>

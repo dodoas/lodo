@@ -480,3 +480,36 @@ table.tab a:hover{
 .number.red {
   color: red;
 }
+
+.regnskapsrapport_table {
+  table-layout: fixed;
+  width: 1090px;
+}
+
+.regnskapsrapport_table tr .column_konto_percent {
+  width: 50px;
+}
+
+.regnskapsrapport_table tr .column_amount {
+  width: 140px;
+}
+
+.regnskapsrapport_table tr .column_konto_name {
+  width: 270px;
+}
+
+.regnskapsrapport_table tr .column_checkbox {
+  width: 100px;
+}
+
+tr.sub {
+	font-size: x-small;
+	font-weight: bold;
+	color: #FFF;
+	background-color: #95979B;
+	background-image: none;
+}
+
+tr.sub.red {
+	background-color: red;
+}
