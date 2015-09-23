@@ -68,6 +68,8 @@ foreach($data as $year => $accounts) {
     echo "</tr>";
 
     foreach($accounts as $account => $period) {
+        $acc_id = $period[key($period)]['a'];
+        if (isset($apc->AccountExp[$acc_id]) && $year > date('Y', strtotime($apc->AccountExp[$acc_id]))) continue;
         echo "<tr>";
         echo "<td>$account</td>";
 
@@ -79,13 +81,9 @@ foreach($data as $year => $accounts) {
               $voucher_type = $_lib['db']->get_row(array("query" => $query_acc_voucher_type))->VoucherType;
               if (is_null($max_min->min) || is_null($max_min->max)) $voucher_type = "";
               $_done_journals = "<br>" . $voucher_type . " " . $max_min->min . "-" . $max_min->max;
-                printf("<td>%s</td>", 
-                       $_lib['form3']->text(array('table' => 'bankvotingperiod', 
-                                                  'field' => 'Comment', 
-                                                  'pk'    => $d['pk'],
-                                                  'value' => $d['value']))
-                       . $_done_journals
-                    );
+              $comment_input = $_lib['form3']->text(array('table' => 'bankvotingperiod', 'field' => 'Comment', 'pk' => $d['pk'], 'value' => $d['value']));
+              if (isset($apc->AccountExp[$acc_id]) && $pname > date('Y-m', strtotime($apc->AccountExp[$acc_id]))) $comment_input = "Avsluttet";
+              printf("<td>%s</td>", $comment_input . $_done_journals);
             }
             else {
                 echo "<td></td>";
