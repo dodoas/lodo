@@ -51,7 +51,7 @@ else
 ###################################################
 # Henter reskontro til hovedbok og event overstyrer hvis det er valgt
 #
-$query 			 = "select AccountName, ReskontroAccountPlanType, AccountPlanType from accountplan where AccountPlanID='".$_REQUEST['report_selectedAccount']."'";
+$query 			 = "select AccountName, ReskontroAccountPlanType, AccountPlanType, AccountPlanID from accountplan where AccountPlanID='".$_REQUEST['report_selectedAccount']."'";
 $selectedaccount = $_lib['storage']->get_row(array('query' => $query));
 
 $accountName = $selectedaccount->AccountName;
@@ -280,8 +280,11 @@ while($account = $_lib['db']->db_fetch_object($balance_accounts))
       $budget = "";
     }
 
+    /* Removed per Arnt's instructions, but only commented out
+       if we need it in the future
     $accountsumH[substr($account->AccountPlanID, 0,1)]->Amount += $sumrow_new;
     $accountsumH[substr($account->AccountPlanID, 0,1)]->Budget += $budget;
+     */
 
     $sumTotal_old   += $saldo_old;
     $sumTotal_new   += $saldo_new;
@@ -316,30 +319,15 @@ $sumTotal_old = $_lib['format']->Amount(round($sumTotal_old, 2));
 $sumTotal_new = $_lib['format']->Amount(round($sumTotal_new, 2));
 $sumTotal = $_lib['format']->Amount(round($sumTotal, 2));
 
-if($sumTotal != 0)
-{
-    $printsum = "<font color=\"red\">$sumTotal</font>";
-    $printtext = "<font color=\"red\">Sum</font>";
-}
-else
-{
-    $printsum = $sumTotal;
-    $printtext = "Sum";
-}
-
-if($sumTotal_prev != 0)
-{
-    $printsumclass = "red";
-}
-else
-{
-    $printsum_prev = $sumTotal_prev;
-    $printtext_prev = "Sum";
-}
+$printsum = $sumTotal;
+$printtext = "Sum reskontro";
+$printsumclass = "";
+$printsum_prev = $sumTotal_prev;
+$printtext_prev = "Sum reskontro";
 
 ?>
   <tr class="voucher">
-      <td colspan="2"><? print $printtext ?>  (Dette er sum balanse som skal g&aring; i null)</td>
+      <td colspan="2"><? print $printtext ?></td>
       <td class="number"><? print $sumTotal_old ?></td>
       <td class="number"><? print $sumTotal_new ?></td>
       <td class="number"><? print $printsum ?></td>
@@ -351,7 +339,7 @@ else
       <? if($EnableBudget) { ?>
         <td class="number"><? print $_lib['format']->Amount($budgetTotal) ?></td>
       <? } ?>
-      <td><? print $_lib['form3']->URL(array('description' => 'Detaljer', 'url' => 'http://regnskap.empatix.no/lodo.php?SID=ff3e9avftqiigr55qu1hd6c2m4&view_mvalines=1&view_linedetails=1&t=report.verify_consistency&report_Type=balancenotok&report_Sort=VoucherID')) ?></td>
+      <td></td>
   </tr>
 
 
@@ -374,6 +362,7 @@ else
         $endSum     = ($accountSumRow->AIn - $accountSumRow->AOut)-$endSum;
         $accountSum = $_lib['format']->Amount(round($accountSum, 2));
         $endSum     = $_lib['format']->Amount(round($endSum, 2));
+        $endsumclass= ($endSum != 0)?"red":"";
         ?>
         <tr class="voucher">
             <td><? print $selectedaccount->AccountPlanID ?></td>
@@ -383,11 +372,11 @@ else
             <td class="number"><? print $accountSum ?></td>
         </tr>
         <tr class="voucher">
-            <td><? print "Differanse" ?></td>
+            <td class="<? print $endsumclass; ?>">Differanse</td>
             <td></td>
             <td></td>
             <td></td>
-            <td class="number"><? print $endSum ?></td>
+            <td class="number <? print $endsumclass; ?>"><? print $endSum ?></td>
         </tr>
         <?
     }
@@ -489,8 +478,11 @@ else
       $sumTotal_prev_new    += $saldo_prev_new;
       $sumTotal_prev        += $sumrow_prev_new;
 
+      /* Removed per Arnt's instructions, but only commented out
+         if we need it in the future
       $accountsumH[substr($account->AccountPlanID, 0,1)]->Amount += $sumrow_new;
       $accountsumH[substr($account->AccountPlanID, 0,1)]->Budget += $budget;
+       */
 
       //print "$saldo_old + $saldo_new = $sumTotal<br>\n";
       $urltmp = $url . "&amp;report_FromAccount=$account->AccountPlanID&amp;report_ToAccount=$account->AccountPlanID";
@@ -514,30 +506,14 @@ else
       <?
   }
 
-  if($sumTotal != 0)
-  {
-      $printsum = "<font color=\"red\">" . $_lib['format']->Amount($sumTotal) . "</font>";
-      $printtext = "<font color=\"red\">Sum</font>";
-  }
-  else
-  {
-      $printsum = $_lib['format']->Amount($sumTotal);
-      $printtext = "Sum";
-  }
+  $printsum = $_lib['format']->Amount($sumTotal);
+  $printtext = "Sum reskontro";
+  $printsum_prev  = $_lib['format']->Amount($sumTotal_prev);
+  $printtext_prev = "Sum reskontro";
 
-  if($sumTotal_prev != 0)
-  {
-      $printsum_prev  = "<font color=\"red\">" . $_lib['format']->Amount($sumTotal_prev) . "</font>";
-      $printtext_prev = "<font color=\"red\">Sum</font>";
-  }
-  else
-  {
-      $printsum_prev  = $_lib['format']->Amount($sumTotal_prev);
-      $printtext_prev = "Sum";
-  }
   ?>
     <tr class="voucher">
-        <td colspan="2"><? print $printtext ?> (Dette er sum resultat som skal g&aring; i null)</td>
+        <td colspan="2"><? print $printtext ?></td>
         <td class="number"><? print $_lib['format']->Amount(round($sumTotal_old, 2)); ?></td>
         <td class="number"><? print $_lib['format']->Amount($sumTotal_new) ?></td>
         <td class="number"><? print $printsum ?></td>
@@ -549,10 +525,13 @@ else
         <? if($EnableBudget) { ?>
         <td class="number"><? print $_lib['format']->Amount($budgetTotal) ?></td>
         <? } ?>
-        <td><? print $_lib['form3']->URL(array('description' => 'Detaljer', 'url' => 'http://regnskap.empatix.no/lodo.php?SID=ff3e9avftqiigr55qu1hd6c2m4&view_mvalines=1&view_linedetails=1&t=report.verify_consistency&report_Type=balancenotok&report_Sort=VoucherID')) ?></td>
+        <td></td>
     </tr>
 <? } ?>
-
+<? /*
+ Removed per Arnt's instructions, but only commented out
+ if we need it in the future
+?>
 </table>
 <hr>
 <table class="lodo_data">
@@ -629,5 +608,6 @@ if($key == 3) { ?>
     <td class="number"><? print $_lib['format']->Amount($resultexpences - $resultbudget) ?></td>
 </tr>
 </table>
+<? */ ?>
 </body>
 </html>
