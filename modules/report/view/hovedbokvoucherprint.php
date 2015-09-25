@@ -132,8 +132,7 @@ print $_lib['sess']->doctype ?>
 <body onload="window.focus();">
 <h2><? print $_lib['sess']->get_companydef('CompanyName') ?> - <? print $_lib['sess']->get_person('FirstName') ?> <? print $_lib['sess']->get_person('LastName') ?> (<? print $_lib['sess']->get_session('Date') ?>)</h2>
 
-<h2>Bilagsutskrift: Hovedbok Fra <? print $_REQUEST['report_FromPeriod'] ?> Til <? print $_REQUEST['report_ToPeriod']; ?>
-<! tatt vekk fra enden av linjen over:, Sider <? print $numrows/50 ?>, Linjer <? print $numrows ?></h2>
+<h2>Bilagsutskrift: Hovedbok Fra <? print $_REQUEST['report_FromPeriod'] ?> Til <? print $_REQUEST['report_ToPeriod']; ?></h2>
 
 <form class="voucher" name="<? print $form_name ?>" action="<? print $MY_SELF ?>" method="post">
 <input type="hidden"  name="voucher.VoucherID"  value="<? print $voucher->VoucherID ?>"/>
