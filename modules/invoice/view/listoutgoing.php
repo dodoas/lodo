@@ -259,7 +259,7 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
       </td>
       <td class="number"><? if($row->Locked) { ?>L&aring;st<? } else { ?>&Aring;pen<? } ?></td>
       <td class="number"><? if($row->ExternalID > 0) { ?><a href="https://fakturabank.no/invoices/<? print $row->ExternalID ?>" title="Vis i Fakturabank" target="_new">Vis i fakturabank</a><? } ?></td>
-      <td class="number"><? if(!strstr($row->InvoiceDate, $row->Period)) { ?><span style="color: red">galt periode</span><? } ?></td>
+      <td class="number"><? if(!strstr($row->InvoiceDate, $row->Period)) { ?><span style="color: red">feil periode</span><? } ?></td>
   </form>
   </tr>
   <?

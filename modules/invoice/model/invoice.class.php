@@ -1269,7 +1269,10 @@ class invoice {
         }
         else $Value = $args[$ArgName];
         if ($Value == $Invoice->{$FieldName}) unset($args[$ArgName]);
-        else $Changed = true;
+        else {
+          $Changed = true;
+          return $Changed;
+        }
       }
       while ($InvoiceLineID = array_pop($InvoiceLineIDs)) {
         $InvoiceLine = $_lib['storage']->get_row(array('query' => "SELECT * FROM invoiceoutline WHERE LineID = " . $InvoiceLineID));
@@ -1283,7 +1286,10 @@ class invoice {
           }
           else $Value = $args[$ArgName];
           if ($Value == $InvoiceLine->{$FieldName}) unset($args[$ArgName]);
-          else $Changed = true;
+          else {
+            $Changed = true;
+            return $Changed;
+          }
         }
       }
       return $Changed;
