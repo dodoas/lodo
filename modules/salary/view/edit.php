@@ -232,20 +232,20 @@ $formname = "salaryUpdate";
   </tr>
 </table>
 <br>
-<table class="lodo_data">
+<table class="lodo_data salary_table">
   <tr>
-    <th>Linje</th>
-    <th>Tekst</th>
-    <th>Antall periode</th>
-    <th>Sats</th>
-    <th>Bel&oslash;p periode</th>
-    <th>Bel&oslash;p hittil i &aring;r</th>
-    <th>Konto</th>
-    <th>Avdeling</th>
-    <th>Prosjekt</th>
-    <th>F</th>
-    <th>Kode</th>
-    <th colspan="2"></th>
+    <th class="column1">Linje</th>
+    <th class="column2">Tekst</th>
+    <th class="column3">Antall periode</th>
+    <th class="column4">Sats</th>
+    <th class="column5">Bel&oslash;p periode</th>
+    <th class="column6">Bel&oslash;p hittil i &aring;r</th>
+    <th class="column7">Konto</th>
+    <th class="column8">Avdeling</th>
+    <th class="column9">Prosjekt</th>
+    <th class="column10">F</th>
+    <th class="column11">Kode</th>
+    <th class="column12_13" colspan="2"></th>
   </tr>
   <?
   $counter = 0;
@@ -259,7 +259,7 @@ $formname = "salaryUpdate";
       ?>
       <tr>
         <? print $_lib['form3']->hidden(array('name'=>$counter, 'value'=>$line->SalaryLineID)) ?>
-        <td>
+        <td class="column1">
         <?
             if($ishovedmal == 1)
             {
@@ -272,7 +272,7 @@ $formname = "salaryUpdate";
             }
         ?>
         </td>
-        <td>
+        <td class="column2">
         <?
             if($ishovedmal == 1)
             {
@@ -284,10 +284,10 @@ $formname = "salaryUpdate";
             }
         ?>
         </td>
-        <td><input type="text" name="salaryline.NumberInPeriod.<? print $line->SalaryLineID ?>" value="<? print $_lib['format']->Amount(array('value'=>$line->NumberInPeriod, 'return'=>'value')) ?>" size="5" class="number"></td>
-        <td><input type="text" name="salaryline.Rate.<? print $line->SalaryLineID ?>" value="<? print $_lib['format']->Amount(array('value'=>$line->Rate, 'return'=>'value')) ?>" size="5" class="number"></td>
-        <td class="number"><input type="text" name="salaryline.AmountThisPeriod.<? print $line->SalaryLineID ?>"   value="<? print $_lib['format']->Amount(array('value'=>$line->AmountThisPeriod, 'return'=>'value')) ?>" size="8" class="number"></td>
-        <td class="number">
+        <td class="column3"><input type="text" name="salaryline.NumberInPeriod.<? print $line->SalaryLineID ?>" value="<? print $_lib['format']->Amount(array('value'=>$line->NumberInPeriod, 'return'=>'value')) ?>" size="5" class="number"></td>
+        <td class="column4"><input type="text" name="salaryline.Rate.<? print $line->SalaryLineID ?>" value="<? print $_lib['format']->Amount(array('value'=>$line->Rate, 'return'=>'value')) ?>" size="5" class="number"></td>
+        <td class="column5 number"><input type="text" name="salaryline.AmountThisPeriod.<? print $line->SalaryLineID ?>"   value="<? print $_lib['format']->Amount(array('value'=>$line->AmountThisPeriod, 'return'=>'value')) ?>" size="8" class="number"></td>
+        <td class="column6 number">
             <nobr>
             <?
 
@@ -349,7 +349,7 @@ $formname = "salaryUpdate";
             ?>
             </nobr>
         </td>
-        <td>
+        <td class="column7">
         <?
             if($ishovedmal == 1)
             {
@@ -363,19 +363,19 @@ $formname = "salaryUpdate";
             $accountplan = $accounting->get_accountplan_object($line->AccountPlanID);
         ?>
         </td>
-        <td><? if($accountplan->EnableDepartment)     { $_lib['form2']->department_menu2(array('table' => 'salaryline', 'field' => 'DepartmentID', 'value' => $line->DepartmentID, 'tabindex' => $tabindex++, 'acesskey' => 'V', 'pk' => $line->SalaryLineID)); } ?></td>
-        <td><? if($accountplan->EnableProject)  { $_lib['form2']->project_menu2(array('table' => 'salaryline',  'field' =>  'ProjectID', 'value' => $line->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P', 'pk' => $line->SalaryLineID)); } ?></td>
-        <td>
+        <td class="column8"><? if($accountplan->EnableDepartment)     { $_lib['form2']->department_menu2(array('table' => 'salaryline', 'field' => 'DepartmentID', 'value' => $line->DepartmentID, 'tabindex' => $tabindex++, 'acesskey' => 'V', 'pk' => $line->SalaryLineID)); } ?></td>
+        <td class="column9"><? if($accountplan->EnableProject)  { $_lib['form2']->project_menu2(array('table' => 'salaryline',  'field' =>  'ProjectID', 'value' => $line->ProjectID, 'tabindex' => $tabindex++, 'accesskey' => 'P', 'pk' => $line->SalaryLineID)); } ?></td>
+        <td class="column10">
           <? if($line->EnableVacationPayment) { print "ja"; }; ?>
           <? print $_lib['form3']->hidden(array('name' => 'EnableVacationPayment_' . $line->SalaryLineID, 'value' => $line->EnableVacationPayment)); ?>
         </td>
-        <td><? print $line->SalaryCode ?></td>
-        <td>
+        <td class="column11"><? print $line->SalaryCode ?></td>
+        <td class="column12">
         <? if($_lib['sess']->get_person('AccessLevel') >= 2  && $accounting->is_valid_accountperiod($head->Period, $_lib['sess']->get_person('AccessLevel'))) { ?>
             <a href="<? print $MY_SELF ?>&amp;SalaryLineID=<? print $line->SalaryLineID ?>&amp;SalaryConfID=<? print $SalaryConfID ?>&amp;SalaryID=<? print $SalaryID ?>&amp;action_salaryline_delete=1" class="button">Slett</a>
         <? } ?>
         </td>
-        <td>
+        <td class="column13">
             <? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?>
             <nobr><? if($_lib['sess']->get_person('AccessLevel') >= 2) { ?><a href="<? print $_lib['sess']->dispatch ?>t=salary.edit&amp;SalaryID=<? print $SalaryID ?>&amp;SalaryLineID=<? print $line->SalaryLineID ?>&amp;action_salaryline_new=1" class="button">Ny linje nr <? print $line->LineNumber ?></a></nobr><?}?>
             <? } ?>
@@ -465,7 +465,6 @@ $formname = "salaryUpdate";
           <td>
           <?
              if(!$head->LockedBy) echo '<input type="submit" name="action_salary_lock" value="L&aring;s (L)" accesskey="L" />';
-             else echo "L&aring;st av " . $head->LockedBy . " " . $head->LockedDate;
           ?>
           </td>
         </tr>
@@ -482,9 +481,6 @@ $formname = "salaryUpdate";
 <tr>
   <td colspan = "7"></td>
   <td colspan="6">
-      <? if ($head->FakturabankPersonID) { ?>
-           Sendt til Fakturabank <? print $head->FakturabankDateTime ?>, av <? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?>
-      <? } ?>
   </td>
 </tr>
 
@@ -504,21 +500,30 @@ $formname = "salaryUpdate";
 </tr>
 
 <tr>
-  <td></td>
-</tr>
+  <td colspan = "7">
 
-<tr>
-  <td colspan = "7"></td>
+  <?
+    if($head->UpdatedBy) echo "Oppdatert " . $head->UpdatedAt . ", av " . $_lib['format']->PersonIDToName($head->UpdatedBy);
+  ?>
+  </td>
   <td colspan = "4">Fakturabankepost: <?php print $head->FEmail; ?></td>
 </tr>
 
 <tr>
-  <td colspan = "7"></td>
+  <td colspan = "7">
+  <?
+    if($head->LockedBy) echo "L&aring;st " . $head->LockedDate . ", av " . $head->LockedBy;
+  ?>
+  </td>
   <td colspan = "4">Kommune: <? if(!$kommune) { echo "<span style='color: red'>mangler kommune</span>"; } else { echo $kommune->KommuneNumber . " " . $kommune->KommuneName; } ?></td>
 </tr>
 
 <tr>
-  <td colspan = "7"></td>
+  <td colspan = "7">
+      <? if ($head->FakturabankPersonID) { ?>
+           Sendt til Fakturabank <? print $head->FakturabankDateTime ?>, av <? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?>
+      <? } ?>
+  </td>
   <td colspan = "4">Personnummer: <? echo $head->SocietyNumber ?></td>
 </tr>
 
