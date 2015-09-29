@@ -66,7 +66,7 @@ class lodo_fakturabank_fakturabank {
         $page       = "rest/invoices/outgoing.xml";
 
         $params     = "?rows=200&orgnr=$this->OrgNumber"; // add top limit rows=1000, otherwise we only get one record
-        $params     .= "&supplier_status=approved"; #Only retrieve with status 'approved'
+        $params     .= "&supplier_status=for_bookkeeping"; #Only retrieve with status 'for_bookkeeping'
         $params     .= "&order=invoiceno&sord=asc";
 
         $url    = "$this->protocol://$this->host/$page$params";
@@ -541,9 +541,9 @@ class lodo_fakturabank_fakturabank {
                     $key_array = explode('-', $key);
                     $key = $key_array[count($key_array)-1];
 
-                    if (is_numeric($key)) {
+                    if (is_numeric($key) && is_numeric($value)) {
                         // Passing true or false may not be needed anymore
-                        $InvoiceO->ReconciliationReasons[] = array($key, $key, false);
+                        $InvoiceO->ReconciliationReasons[] = array($key, $value, false);
                     }
                 }
             }
@@ -898,18 +898,32 @@ class lodo_fakturabank_fakturabank {
 
                 #$this->registerincoming($InvoiceO);
             } else {
+                $scheme_value = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
+                $scheme_type  = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
                 $InvoiceO->Status   .= "Finner ikke leverand&oslash;r basert p&aring; PartyIdentification: " .
                     $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
 
-                $InvoiceO->Status   .= sprintf(
+                // add if NO:ORGNR
+                if ($scheme_type == 'NO:ORGNR') {
+                  $InvoiceO->Status   .= sprintf(
                     '<a href="%s&t=fakturabank.createaccount&accountplanid=%s&orgnumber=%s&type=supplier" target="_blank">Opprett</a>',
                     $_lib['sess']->dispatch,
                     $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID,
                     $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID
-                    );
+                  );
+                }
+                else { // add based on scheme
+                  $InvoiceO->Status   .= sprintf(
+                    '<a href="%s&t=fakturabank.createaccount&amp;not_noorgno=1&scheme_type=%s&scheme_value=%s&type=supplier" target="_blank">Opprett</a>',
+                    $_lib['sess']->dispatch,
+                    $scheme_type,
+                    $scheme_value
+                  );
+                }
 
                 $InvoiceO->Journal = false;
                 $InvoiceO->Class   = 'red';
+                $InvoiceO->MissingAccountPlan = true;
             }
         }
         return $invoicesO;
@@ -1160,6 +1174,8 @@ class lodo_fakturabank_fakturabank {
                     $dataH['DebitColor']        = 'debitblue';
                     $dataH['CreditColor']       = 'creditred';
 
+                    $dataH['EnablePostPost']    = 1;
+
                     #burde kj¿rt oppslag fra brreg samtidig med denne registreringen, men vi fŒr ganske mye info fra fakturaen
                     #Kan vi sette en default motkonto som vil v¾re "grei???"
                     #Vi mŒ kopiere defaultdata fra mor kategorien til denne - mŒ sentralisere opprettelse av kontoplaner i eget objekt
@@ -1179,6 +1195,7 @@ class lodo_fakturabank_fakturabank {
         $_lib['message']->add("$count kontoplaner automatisk opprettet - motkonto m&aring; settes manuelt");
     }
 
+    # TODO(mladjo2505): Remove, since it is not used anymore
     #Only for adding new suppliers at this point in time.
     public function incomingaddmissingaccountplan($single_invoice_id = false) {
         global $_lib;

@@ -622,7 +622,7 @@ class logic_invoicein_invoicein implements Iterator {
 		global $_lib;
 		$query = "SELECT COUNT(*) AS cnt, EXTRACT(YEAR FROM i.InvoiceDate) AS Y, EXTRACT(MONTH FROM i.InvoiceDate) AS M
 					FROM invoicein i
-					WHERE i.TotalCustPrice != 0 and i.InvoiceNumber NOT IN (SELECT q.`InvoiceID` FROM `voucher` q WHERE i.InvoiceNumber = q.InvoiceID)
+					WHERE i.TotalCustPrice != 0 and i.JournalID NOT IN (SELECT q.JournalID FROM voucher q WHERE i.JournalID = q.JournalID AND q.VoucherType = 'U' AND q.Active = 1)
 					GROUP BY Y, M
 					ORDER BY Y, M
 					LIMIT 0,1000";

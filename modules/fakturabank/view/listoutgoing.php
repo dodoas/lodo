@@ -39,7 +39,7 @@ Merk: Du m&aring; registrere brukeren din p&aring; <a href="http://fakturabank.n
 
 <form name="invoice_edit" id="invoice_edit" action="<? print $_lib['sess']->dispatch ?>t=fakturabank.listoutgoing" method="post">
 <input type="submit" value="Registrer utg&aring;ende fakturaer (R)" name="action_fakturabank_registeroutgoing" accesskey="R">
-<input type="submit" value="Opprett manglende kontoplaner (A)" name="action_fakturabank_addmissingaccountplan" accesskey="A">
+<input type="submit" value="Opprett manglende kontoplaner (A)" name="action_fakturabank_addmissingaccountplanoutgoing" accesskey="A">
 <input type="hidden" value="" name="action_fakturabank_addsinglemissingaccountplan_id" id="action_fakturabank_addsinglemissingaccountplan_id" />
 </form>
 <script type="text/javascript">
