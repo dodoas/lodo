@@ -132,8 +132,7 @@ print $_lib['sess']->doctype ?>
 <body onload="window.focus();">
 <h2><? print $_lib['sess']->get_companydef('CompanyName') ?> - <? print $_lib['sess']->get_person('FirstName') ?> <? print $_lib['sess']->get_person('LastName') ?> (<? print $_lib['sess']->get_session('Date') ?>)</h2>
 
-<h2>Bilagsutskrift: Hovedbok Fra <? print $_REQUEST['report_FromPeriod'] ?> Til <? print $_REQUEST['report_ToPeriod']; ?>
-<! tatt vekk fra enden av linjen over:, Sider <? print $numrows/50 ?>, Linjer <? print $numrows ?></h2>
+<h2>Bilagsutskrift: Hovedbok Fra <? print $_REQUEST['report_FromPeriod'] ?> Til <? print $_REQUEST['report_ToPeriod']; ?></h2>
 
 <form class="voucher" name="<? print $form_name ?>" action="<? print $MY_SELF ?>" method="post">
 <input type="hidden"  name="voucher.VoucherID"  value="<? print $voucher->VoucherID ?>"/>
@@ -145,29 +144,32 @@ print $_lib['sess']->doctype ?>
     <th>Bilag</th>
     <th>Prosj</th>
     <th>Avd</th>
-    <th>Mengde</th>
-    <th width="50">Debet</th>
-    <th width="50">Kredit</th>
+    <th class="align-right">Mengde</th>
+    <th class="align-right" width="50">Debet</th>
+    <th class="align-right" width="50">Kredit</th>
     <th>MVA</th>
     <th>Kode</th>
-    <th width="50">Saldo</th>
+    <th class="align-right" width="50">Saldo</th>
     <th>Tekst</th>
     <th>KID</th>
     <th>Faktura</th>
-    <th class="noprint">Diff</th>
+    <th class="noprint align-right">Diff</th>
     <th class="noprint"></th>
   </tr>
     <?
     $i           = 0;
     $sumAccountH = array();
+    $quantityAccountH = array();
+    $period = null;
     while($voucher = $_lib['db']->db_fetch_object($result_voucher))
     {
-        if($account != $voucher->AccountPlanID || $account == 0)
+        if($account != $voucher->AccountPlanID || $account == 0 || $voucher->VoucherPeriod != $period)
         {
+          if ($account) {
             ?>
 			<tr>
 				<td colspan="4">Periode sum</td>
-				<td class="number"><? if($quantitysum > 0) print $_lib['format']->Amount($quantitysum); ?></td>
+        <td class="number"></td>
 				<td class="number"></td>
 				<td class="number"></td>
 				<td colspan="2"></td>
@@ -176,7 +178,20 @@ print $_lib['sess']->doctype ?>
 				<td class="noprint" colspan="2"></td>
 			</tr>
             <?
+          }
+          else echo "<tr><td></td></tr>";
         
+            if ($account != $voucher->AccountPlanID) {
+              $quantityAccountH[$voucher->AccountPlanID] = 0;
+            ?>
+
+            <tr>
+                <th colspan = "9"><? print "$voucher->AccountPlanID - ".$_lib['format']->AccountPlanIDToName($voucher->AccountPlanID) ?></th>
+                <th></th>
+                <th colspan="5"></th>
+            </tr>
+            <?
+            }
             $period = 0;
             $account = $voucher->AccountPlanID;
             
@@ -185,7 +200,6 @@ print $_lib['sess']->doctype ?>
             #print "AccountPlanType: " . $accountWork->AccountPlanType . "<br>";
 
             $saldo              = 0;
-            $quantitysum        = 0;
 
             if($accountWork->AccountPlanType == 'result') {
                 #Resultat
@@ -206,14 +220,6 @@ print $_lib['sess']->doctype ?>
                 print "Denne situasjonen har vi ikke kodet for kto mangler type: " . $accountWork->AccountPlanID;
             }
             #This is the last line in each group.
-            ?>
-
-            <tr>
-                <th colspan = "9"><? print "$account - ".$_lib['format']->AccountPlanIDToName($account) ?></th>
-                <th></th>
-                <th colspan="5"></th>
-            </tr>
-            <?
             $sql_accountplan    = "select * from accountplan where AccountPlanID=$account";
             $accountplan        = $_lib['storage']->get_row(array('query' => $sql_accountplan));
         }
@@ -225,11 +231,11 @@ print $_lib['sess']->doctype ?>
             ?>
                 <tr>
                     <th class="sub" colspan="4"><? print "Periode: $period" ?></th>
-                    <th class="sub number"><? if($quantity > 0) print $quantity; ?></th>
-                    <th class="sub number"><? print $accountplan->debittext ?></th>
-                    <th class="sub number"><? print $accountplan->credittext ?></th>
+                    <th class="sub number align-right"><? print $_lib['format']->Amount(array('decimals' => 3, 'value' => $quantityAccountH[$account], 'return' => 'value')); ?></th>
+                    <th class="sub number align-right"><? print $accountplan->debittext ?></th>
+                    <th class="sub number align-right"><? print $accountplan->credittext ?></th>
                     <th class="sub" colspan="2"></th>
-                    <th class="sub number"><? print $_lib['format']->Amount($saldo) ?></th>
+                    <th class="sub number align-right"><? print $_lib['format']->Amount($saldo) ?></th>
                     <th class="sub" colspan="3"></th>
                     <th class="sub noprint" colspan="2"></th>
                 </tr>
@@ -238,23 +244,25 @@ print $_lib['sess']->doctype ?>
 
         $sumAccountH[$account]  += ($voucher->AmountIn - $voucher->AmountOut);
         $saldo                  += ($voucher->AmountIn - $voucher->AmountOut);
-        #print "$quantitysum<br>\n";
+
+        $signed_quantity = $voucher->Quantity * (($voucher->AmountIn > 0)?1:-1);
+        $quantityAccountH[$account] += $signed_quantity;
         ?>
             <tr class="voucher">
                 <td><nobr><? print $voucher->VoucherDate    ?></nobr></td>
                 <td class="number"><? print $voucher->VoucherType    ?><a href="<? print $_SETUP[DISPATCH] . "t=journal.edit&amp;voucher_VoucherType=$voucher->VoucherType&amp;voucher_JournalID=$voucher->JournalID" ?>&amp;action_journalid_search=1"><? print $voucher->JournalID ?></a></td>
                 <td><? if($voucher->ProjectID > 0)    { print $voucher->ProjectID;  }  ?></td>
                 <td><? if($voucher->DepartmentID > 0) { print $voucher->DepartmentID; } ?></td>
-                <td><? if($voucher->Quantity > 0)     { print $voucher->Quantity; } ?></td>
-                <td class="number"><nobr><? if($voucher->AmountIn > 0) { print $_lib['format']->Amount($voucher->AmountIn); } ?></nobr></td>
-                <td class="number"><nobr><? if($voucher->AmountOut > 0) { print $_lib['format']->Amount($voucher->AmountOut); } ?></nobr></td>
+                <td class="number align-right"><? if($signed_quantity != 0)       { print $_lib['format']->Amount(array('decimals' => 3, 'value' => $signed_quantity, 'return' => 'value')); } ?></td>
+                <td class="number align-right"><nobr><? if($voucher->AmountIn > 0) { print $_lib['format']->Amount($voucher->AmountIn); } ?></nobr></td>
+                <td class="number align-right"><nobr><? if($voucher->AmountOut > 0) { print $_lib['format']->Amount(-$voucher->AmountOut); } ?></nobr></td>
                 <td class="number"><? if($voucher->VatID > 0) { print "$voucher->Vat%"; } ?> </td>
                 <td class="number"><? if($voucher->VatID > 0) { print $voucher->VatID; } ?></td>
-                <td class="number"><nobr><? print $_lib['format']->Amount($saldo); ?></nobr></td>
+                <td class="number align-right"><nobr><? print $_lib['format']->Amount($saldo); ?></nobr></td>
                 <td><? print substr($voucher->Description,0,20); if(strlen($voucher->Description) > 20) print "..."; ?></td>
                 <td><? print $voucher->KID ?></td>
                 <td><? print $voucher->InvoiceID ?></td>
-                <td class="noprint"><nobr><? print $_lib['format']->Amount(getdiffKID($voucher->AccountPlanID, $voucher->KID, $voucher->VoucherID)) ?></nobr></td>
+                <td class="noprint align-right"><nobr><? print $_lib['format']->Amount(getdiffKID($voucher->AccountPlanID, $voucher->KID, $voucher->VoucherID)) ?></nobr></td>
                 <td class="noprint"><a href="<? print $_MY_SELF ?>&amp;VoucherID=<? print $voucher->VoucherID ?>&action_postmotpost_open=1" title="&Aring;pne post">&Aring;pne post</a></td>
             </tr>
         <?

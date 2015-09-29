@@ -74,7 +74,7 @@ class salaryreport
         $grid->selectYear($this->_year);
         $result = $grid->gridPerson($this->_personID);
         
-        $this->_reportHash['head']['000']['sumLineCode'] = $result["SkyldigFeriepengeGrunnlag"];
+        $this->_reportHash['head']['000']['sumLineCode'] = round($result["SkyldigFeriepengeGrunnlag"], 2);
         
         $this->_query = "select sl.SalaryLineID, sum(sl.AmountThisPeriod) as sumLineCode, sl.SalaryCode, sl.SalaryText, sum(sl.NumberInPeriod) as NumberInPeriod, sl.LineNumber from salary as s, salaryline as sl where s.AccountPlanID='$this->_personID' and s.SalaryID=sl.SalaryID and substring(s.Period, 1, 4)='$this->_year' and sl.SalaryCode is not null and sl.SalaryCode != '' group by sl.SalaryText, sl.LineNumber";
         $this->_salaryLineHash = $_lib['storage']->get_hashhash(array('query'=>$this->_query, 'key'=>'SalaryLineID'));
