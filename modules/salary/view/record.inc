@@ -14,7 +14,10 @@ function CheckIfAnythingChanged($SalaryID, $SalaryLineIDs) {
     }
     else $Value = $_REQUEST[$ArgName];
     if ($Value == $Salary->{$FieldName}) unset($_REQUEST[$ArgName]);
-    else $Changed = true;
+    else {
+      $Changed = true;
+      return $Changed;
+    }
   }
   while ($SalaryLineID = array_pop($SalaryLineIDs)) {
     $SalaryLine = $_lib['storage']->get_row(array('query' => "SELECT * FROM salaryline WHERE SalaryLineID = " . $SalaryLineID));
@@ -28,7 +31,10 @@ function CheckIfAnythingChanged($SalaryID, $SalaryLineIDs) {
       }
       else $Value = $_REQUEST[$ArgName];
       if ($Value == $SalaryLine->{$FieldName}) unset($_REQUEST[$ArgName]);
-      else $Changed = true;
+      else {
+        $Changed = true;
+        return $Changed;
+      }
     }
   }
   return $Changed;
