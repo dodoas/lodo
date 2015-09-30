@@ -483,23 +483,27 @@ table.tab a:hover{
 
 .regnskapsrapport_table {
   table-layout: fixed;
-  width: 1090px;
+  width: auto;
 }
 
 .regnskapsrapport_table tr .column_konto_percent {
-  width: 50px;
+  min-width: 80px;
 }
 
 .regnskapsrapport_table tr .column_amount {
-  width: 140px;
+  min-width: 140px;
 }
 
 .regnskapsrapport_table tr .column_konto_name {
-  width: 270px;
+  min-width: 270px;
 }
 
 .regnskapsrapport_table tr .column_checkbox {
-  width: 100px;
+  min-width: 100px;
+}
+
+.regnskapsrapport_table tr th, .regnskapsrapport_table tr td {
+  min-width: unset;
 }
 
 tr.sub {
