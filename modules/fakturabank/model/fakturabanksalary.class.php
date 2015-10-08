@@ -287,6 +287,17 @@ class lodo_fakturabank_fakturabanksalary {
             return false;
         }
 
+<<<<<<< HEAD
+=======
+
+        $dataH = array();
+        $dataH['SalaryID']             = $SalaryID;
+        $dataH['FakturabankID']   = $fakturabank_salary_id;
+        $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
+        $dataH['FakturabankDateTime']   = strftime("%F %T");
+        
+        $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'salary', 'debug' => false));
+>>>>>>> master
         return true;
     }
 

@@ -791,6 +791,7 @@ class accounting {
         global $_lib;
 
         unset($args['post']['voucher_Quantity']); #Quantity should bever be updated on a vat line.
+        unset($args['fields']['voucher_Quantity']); #Quantity should bever be updated on a vat line.
         unset($args['post']['voucher_ProjectID']); #Quantity should bever be updated on a vat line.
         unset($args['post']['voucher_DepartmentID']); #Quantity should bever be updated on a vat line.
 

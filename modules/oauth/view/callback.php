@@ -78,7 +78,7 @@ case 'send_paycheck': // sending a paycheck to FB
     $dataH['SalaryID']              = $SalaryID;
     $dataH['FakturabankID']         = $_SESSION['oauth_fakturabank_salary_id'];
     $dataH['FakturabankPersonID']   = $_lib['sess']->get_person('PersonID');
-    $dataH['FakturabankDateTime']   = $_lib['sess']->get_session('Datetime');
+    $dataH['FakturabankDateTime']   = strftime("%F %T");
 
     $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'salary', 'debug' => false));
 

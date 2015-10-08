@@ -1,4 +1,45 @@
 <?
+
+function CheckIfAnythingChanged($SalaryID, $SalaryLineIDs) {
+  global $_lib;
+  $Changed = false;
+  $Salary = $_lib['storage']->get_row(array('query' => "SELECT * FROM salary WHERE SalaryID = " . $SalaryID));
+  // Check if anything changed
+  $SalaryFieldNames = array("JournalDate" => false, "Period" => false, "AccountPlanID" => false, "ValidFrom" => false, "ValidTo" => false, "PayDate" => false, "DomesticBankAccount" => false, "Comment" => false, "VacationPayment" => false);
+  foreach ($SalaryFieldNames as $FieldName => $IsAmount) {
+    $ArgName = "salary_".$FieldName."_".$SalaryID;
+    if ($IsAmount) {
+      $ValueHash = $_lib['convert']->Amount(array('value'=>$_REQUEST[$ArgName]));
+      $Value = $ValueHash['value'];
+    }
+    else $Value = $_REQUEST[$ArgName];
+    if ($Value == $Salary->{$FieldName}) unset($_REQUEST[$ArgName]);
+    else {
+      $Changed = true;
+      return $Changed;
+    }
+  }
+  while ($SalaryLineID = array_pop($SalaryLineIDs)) {
+    $SalaryLine = $_lib['storage']->get_row(array('query' => "SELECT * FROM salaryline WHERE SalaryLineID = " . $SalaryLineID));
+    // Check if anything changed
+    $SalaryLineFieldNames = array("NumberInPeriod" => true, "Rate" => true, "AmountThisPeriod" => true);
+    foreach($SalaryLineFieldNames as $FieldName => $IsAmount) {
+      $ArgName = "salaryline_".$FieldName."_".$SalaryLineID;
+      if ($IsAmount) {
+        $ValueHash = $_lib['convert']->Amount(array('value'=>$_REQUEST[$ArgName]));
+        $Value = $ValueHash['value'];
+      }
+      else $Value = $_REQUEST[$ArgName];
+      if ($Value == $SalaryLine->{$FieldName}) unset($_REQUEST[$ArgName]);
+      else {
+        $Changed = true;
+        return $Changed;
+      }
+    }
+  }
+  return $Changed;
+}
+
 $debug = false;
 $VoucherType = 'L';
 
@@ -99,6 +140,9 @@ elseif($_lib['input']->getProperty('action_salaryline_new'))
     $fields['salaryline_SalaryCode']        = $orgLine->SalaryCode;
 
     $_lib['storage']->db_new_hash($fields, 'salaryline');
+    // set who updated and when, since we added a line
+    $sql_update = "UPDATE salary SET UpdatedAt = NOW(), UpdatedBy = '" . $_lib['sess']->get_person('PersonID') . "' WHERE SalaryID = '$SalaryID'";
+    $_lib['db']->db_update($sql_update);
 }
 elseif($_lib['input']->getProperty('action_defconf_save'))
 {
@@ -498,6 +542,14 @@ elseif($_lib['input']->getProperty('action_salary_internal')) {
 }
 if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getProperty('action_salary_new'))
 {
+  $SalaryLineIDs = array();
+  $SalaryLinesCount = $_REQUEST["fieldcount"];
+  for ($i = 1; $i <= $SalaryLinesCount; $i++) { $SalaryLineIDs[] = $_REQUEST[$i]; }
+  if (!($_lib['input']->getProperty('action_salary_new')) && CheckIfAnythingChanged($SalaryID, $SalaryLineIDs, $_REQUEST)) {
+    // set who updated and when if anything changed
+    $_POST["salary_UpdatedBy_".$SalaryID] = $_lib['sess']->get_person('PersonID');
+    $_POST["salary_UpdatedAt_".$SalaryID] = strftime("%F %T");
+  }
   // if we are journaling a newly created salary we need to manualy make $_POST so same logic can be used
   if ($_lib['input']->getProperty('action_salary_new')) {
     $_POST['SalaryID'] = $SalaryID;
@@ -556,6 +608,15 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
   for($i=1; $i<=$counter; $i++)
   {
       $lineID = $_POST[$i];
+      $AmountThisPeriod = $_POST['salaryline_AmountThisPeriod_'.$lineID];
+      $ValueHash = $_lib['convert']->Amount(array('value'=>$AmountThisPeriod));
+      $AmountThisPeriod = $ValueHash['value'];
+      $NumberInPeriod = $_POST['salaryline_NumberInPeriod_'.$lineID];
+      $ValueHash = $_lib['convert']->Amount(array('value'=>$NumberInPeriod));
+      $NumberThisPeriod = $ValueHash['value'];
+      $Rate = $_POST['salaryline_Rate_'.$lineID];
+      $ValueHash = $_lib['convert']->Amount(array('value'=>$Rate));
+      $Rate = $ValueHash['value'];
       if( ($_POST['salaryline_AmountThisPeriod_'.$lineID] == "") || ($_POST['salaryline_AmountThisPeriod_'.$lineID] == 0) )
       {
           $hash = $_lib['convert']->Amount(array('value'=>$_POST['salaryline_NumberInPeriod_'.$lineID]));
@@ -566,7 +627,7 @@ if($_lib['input']->getProperty('action_salary_journal') || $_lib['input']->getPr
 
           $_POST['salaryline_AmountThisPeriod_'.$lineID] = ($tmpvalue1 * $tmpvalue2);
       }
-      elseif($_POST['salaryline_AmountThisPeriod_'.$lineID] != ($_POST['salaryline_NumberInPeriod_'.$lineID] * $_POST['salaryline_Rate_'.$lineID]) )
+      elseif($AmountThisPeriod != ($NumberInPeriod * $Rate) )
       {
           $message = "<font color=\"red\">OBS! Antall * Sats er ikke lik Totalen</font>";
       }
@@ -748,6 +809,9 @@ elseif($_lib['input']->getProperty('action_salaryline_delete'))
     $pk['SalaryLineID']=$_lib['input']->getProperty('SalaryLineID');
     //print_r($pk);
     $_lib['storage']->db_delete_hash('salaryline', $pk);
+    // set who updated and when, since we removed a line
+    $sql_update = "UPDATE salary SET UpdatedAt = NOW(), UpdatedBy = '" . $_lib['sess']->get_person('PersonID') . "' WHERE SalaryID = '$SalaryID'";
+    $_lib['db']->db_update($sql_update);
 }
 elseif($_lib['input']->getProperty('action_salaryconfline_delete'))
 {

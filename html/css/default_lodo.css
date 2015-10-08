@@ -480,3 +480,21 @@ table.tab a:hover{
 .number.red {
   color: red;
 }
+
+.salary_table {
+  table-layout: fixed;
+  width: auto;
+}
+
+.salary_table .line_number {
+  width: 30px;
+}
+
+.align-right, th.align-right {
+  text-align: right;
+}
+
+.align-left, th.align-left {
+  text-align: left;
+}
+

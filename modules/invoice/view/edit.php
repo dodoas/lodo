@@ -433,9 +433,17 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
 
         ?>
 </form>
-    <tr height="10">
-        <td>
     <tr>
+      <td></td>
+    </tr>
+        <?
+          if ($row->UpdatedByPersonID) echo "<tr><td>Oppdatert " . $row->UpdatedAt . ", av " . $_lib['format']->PersonIDToName($row->UpdatedByPersonID) . "</td></tr>";
+          if ($row->Locked) {
+            if ($row->LockedBy) echo "<tr><td>L&aring;st ". $row->LockedAt . ", av " . $_lib['format']->PersonIDToName($row->LockedBy) . "</td></tr>";
+            else echo "<tr><td>L&aring;st: Ja</td></tr>";
+          }
+          if ($row->FakturabankPersonID) echo "<tr><td>Sendt til Fakturabank " . $row->FakturabankDateTime . ", av " . $_lib['format']->PersonIDToName($row->FakturabankPersonID) . "</td></tr>";
+        ?>
         <td colspan="7" align="right">
         <form name="skriv_ut" action="<? print $_lib['sess']->dispatch ?>t=invoice.print&InvoiceID=<? print $InvoiceID ?>&amp;inline=edit" method="post" target="_new">
             <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_invoice_print', 'value'=>'Utskrift')) ?>
@@ -457,15 +465,9 @@ while($row2 = $_lib['db']->db_fetch_object($result2))
             <? print $_lib['form3']->Input(array('type'=>'submit', 'name'=>'action_send_email2', 'value'=>'Send email')) ?>
         </form>
      </tr>
-     <tr>
-     	<? if($row->FakturabankPersonID) { ?>
-     	<td>Sendt til Fakturabank</td>
-     	<td><? print $row->FakturabankDateTime ?></td>
-     	<td>Sendt til Fakturabank av</td>
-     	<td><? print $_lib['format']->PersonIDToName($row->FakturabankPersonID) ?></td>
-		<? } ?>
-     	<td>L&aring;st: <? if($row->Locked) { ?>Ja<? } else { ?>Nei<? } ?></td>
-     </tr>
+   <? if(!$row->Locked) { ?>
+     <tr><td>L&aring;st:  Nei</td></tr>
+   <? } ?>
 </tfoot>
 </table>
 </body>

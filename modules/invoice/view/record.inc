@@ -9,7 +9,14 @@ $invoice = new invoice(array('CustomerAccountPlanID' => $CustomerAccountPlanID, 
 
 if($_lib['input']->getProperty('action_invoice_update') or $_lib['input']->getProperty('action_invoiceline_new')) {
     #print "Oppdaterer faktura";
-    $invoice->update($_POST);
+    $InvoiceLineIDs = array();
+    for ($i = 1; $i <= $_POST['field_count']; $i++) $InvoiceLineIDs[] = $_POST[$i];
+    if ($invoice->CheckIfAnythingChanged($InvoiceID, $InvoiceLineIDs, $_POST)) {
+      // set who updated and when, since something was changed
+      $_POST['invoiceout_UpdatedByPersonID_' . $InvoiceID] = $_lib['sess']->get_person('PersonID');
+      $_POST['invoiceout_UpdatedAt_' . $InvoiceID] = strftime("%F %T");
+      $invoice->update($_POST);
+    }
 }
 
 elseif($_lib['input']->getProperty('action_invoice_new')) {
@@ -37,6 +44,8 @@ elseif($_lib['input']->getProperty('action_auto_save')) {
 elseif($_lib['input']->getProperty('action_invoice_outlinedelete')) {
     $invoice->linedelete($_lib['input']->getProperty('LineID'));
     $invoice->init(array());
+    // set who updated and when, since we deleted an invoice line
+    $invoice->update(array('invoiceout_UpdatedByPersonID_' . $InvoiceID => $_lib['sess']->get_person('PersonID'), 'invoiceout_UpdatedAt_' . $InvoiceID => strftime("%F %T")));
     #$invoice->update($_POST);
 }
 
@@ -54,6 +63,9 @@ elseif($_lib['input']->getProperty('action_invoice_delete')) {
     header ($header);
 }
 elseif($_lib['input']->getProperty('action_invoice_linenew')) {
+    // set who updated and when, since we added an invoice line
+    $_POST['invoiceout_UpdatedByPersonID_' . $InvoiceID] = $_lib['sess']->get_person('PersonID');
+    $_POST['invoiceout_UpdatedAt_' . $InvoiceID] = strftime("%F %T");
     $invoice->update($_POST);
     #print "Du fikk en ny linje<br>\n";
     $invoice->linenew();

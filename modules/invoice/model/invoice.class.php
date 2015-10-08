@@ -1237,8 +1237,53 @@ class invoice {
         $dataH = array();
         $dataH['InvoiceID']             = $this->InvoiceID;
         $dataH['Locked']                = 1;
+        $dataH['LockedBy']              = $_lib['sess']->get_person('PersonID');
+        $dataH['LockedAt']              = strftime("%F %T");
 
         $_lib['storage']->store_record(array('data' => $dataH, 'table' => 'invoiceout', 'debug' => false));
+    }
+
+    function CheckIfAnythingChanged($InvoiceID, $InvoiceLineIDs, &$args) {
+      global $_lib;
+      $Changed = false;
+      $Invoice = $_lib['storage']->get_row(array('query' => "SELECT * FROM invoiceout WHERE InvoiceID = " . $InvoiceID));
+      // Check if anything changed
+      $InvoiceFieldNames = array("CustomerAccountPlanID" => flase, "CurrencyID" => false, "InvoiceDate" => false, "DueDate" => false,
+                                 "Period" => false,"Note" => false, "RefCustomer" => false, "RefInternal" => false, "DepartmentID" => false,
+                                 "DepartmentCustomer" => false, "ProjectID" => false, "ProjectNameCustomer" => false, "DeliveryCondition" => false,
+                                 "PaymentCondition" => false, "CommentCustomer" => false);
+      foreach ($InvoiceFieldNames as $FieldName => $IsAmount) {
+        $ArgName = "invoiceout_".$FieldName."_".$InvoiceID;
+        if ($IsAmount) {
+          $ValueHash = $_lib['convert']->Amount(array('value'=>$args[$ArgName]));
+          $Value = $ValueHash['value'];
+        }
+        else $Value = $args[$ArgName];
+        if ($Value == $Invoice->{$FieldName}) unset($args[$ArgName]);
+        else {
+          $Changed = true;
+          return $Changed;
+        }
+      }
+      while ($InvoiceLineID = array_pop($InvoiceLineIDs)) {
+        $InvoiceLine = $_lib['storage']->get_row(array('query' => "SELECT * FROM invoiceoutline WHERE LineID = " . $InvoiceLineID));
+        // Check if anything changed
+        $InvoiceLineFieldNames = array("ProductID" => false, "ProductName" => false, "QuantityDelivered" => false, "UnitCustPrice" => true, "Comment" => false);
+        foreach($InvoiceLineFieldNames as $FieldName => $IsAmount) {
+          $ArgName = "invoiceoutline_".$FieldName."_".$InvoiceLineID;
+          if ($IsAmount) {
+            $ValueHash = $_lib['convert']->Amount(array('value'=>$args[$ArgName]));
+            $Value = $ValueHash['value'];
+          }
+          else $Value = $args[$ArgName];
+          if ($Value == $InvoiceLine->{$FieldName}) unset($args[$ArgName]);
+          else {
+            $Changed = true;
+            return $Changed;
+          }
+        }
+      }
+      return $Changed;
     }
 }
 ?>
