@@ -271,6 +271,14 @@ class invoice {
         $args[$prefix . "_Phone_" . $args['InvoiceID']] = $row_to->Phone;
         $args[$prefix . "_IAddress_" . $args['InvoiceID']] = $row_to->Address;
         $args[$prefix . "_IZipCode_" . $args['InvoiceID']] = $row_to->ZipCode;
+        $args[$prefix . "_IPoBox_" . $args['InvoiceID']] = $row_to->PoBox;
+        $args[$prefix . "_IPoBoxCity_" . $args['InvoiceID']] = $row_to->PoBoxCity;
+        $args[$prefix . "_ICity_" . $args['InvoiceID']] = $row_to->City;
+        $args[$prefix . "_IPoBoxZipCode_" . $args['InvoiceID']] = $row_to->PoBoxZipCode;
+        $args[$prefix . "_IPoBoxZipCodeCity_" . $args['InvoiceID']] = $row_to->PoBoxZipCodeCity;
+        $args[$prefix . "_ICountryCode_" . $args['InvoiceID']] = $row_to->CountryCode;
+        $args[$prefix . "_IEmail_" . $args['InvoiceID']] = $row_to->Email;
+        $args[$prefix . "_BankAccount_" . $args['InvoiceID']] = $row_to->BankAccount;
 
         // Set delivery address fields. If account plan has changed we set delivery address to customer address which is default.
         $get_invoice = "select * from invoiceout where InvoiceID = " . $args['InvoiceID'];

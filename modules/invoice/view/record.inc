@@ -102,7 +102,9 @@ elseif($_lib['input']->getProperty('action_save_internal')) {
     $header = "Location: lodo.php?t=invoice.edit&inline=show&InvoiceID=".$InvoiceID;
     header ($header);
 }
-
-
+// Make sure company info is updated
+$get_invoice = "SELECT * FROM $db_table WHERE InvoiceID='$InvoiceID'";
+$row = $_lib['storage']->get_row(array('query' => $get_invoice));
+$invoice->update(array('InvoiceID' => $InvoiceID, 'invoiceout_DueDate_' . $InvoiceID => $row->DueDate, 'invoiceout_CustomerAccountPlanID_' . $InvoiceID => $row->CustomerAccountPlanID));
 
 ?>
