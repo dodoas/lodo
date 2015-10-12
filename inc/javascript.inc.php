@@ -66,7 +66,7 @@ function update_reference(element, formname, fromfieldname, tofieldname){
     var journalID = element.value;
     if(!journalID)
     {
-        alert("Du mÂ taste inn Bilagsnr");
+        alert("Du m√• taste inn Bilagsnr");
     }
     //alert(journalID);
     //alert(formname +" "+ fromfieldname +" "+ tofieldname);
@@ -78,7 +78,7 @@ function update_period(element, formname, fromfieldname, tofieldname){
    var date = element.value;
    if(!date)
    {
-     alert("Du mÂ taste inn bilagsdato");
+     alert("Du m√• taste inn bilagsdato");
    }
    /* var pattern = new RegExp("/(\\d+)-(\\d+)-(\\d+)/"); */
    var pattern = /(\d{4})-(\d{2})-(\d{2})/; /* YYYY-MM-DD */
@@ -114,13 +114,13 @@ function update_period(element, formname, fromfieldname, tofieldname){
          }
          else
          {
-           alert('Dato er feilformatert, eksempel pÂ riktig dato er: YYYY-MM-DD (ISO) - 2004-12-04, DD-MM - 04-12 , DD - 04');
+           alert('Dato er feilformatert, eksempel p√• riktig dato er: YYYY-MM-DD (ISO) - 2004-12-04, DD-MM - 04-12 , DD - 04');
          }
        }
 
       /*
       We convert the date, so we can not update this automatically
-      alert('Dato er feilformatert, eksempel på riktig dato er: YYYY-MM-DD, 2004-04-04'); */
+      alert('Dato er feilformatert, eksempel p√• riktig dato er: YYYY-MM-DD, 2004-04-04'); */
     }
 }
 
@@ -132,7 +132,7 @@ function place_period(period, date, formname, fromfieldname, tofieldname)
       if(result != null)
       {
         if(result[2] <= 0 || result[2] > 12) {
-          alert("MÂned er ikke gyldig: " + result[2]);
+          alert("M√•ned er ikke gyldig: " + result[2]);
           date = '';
         }
         if(result[3] <= 0 || result[3] > 31) {
