@@ -19,7 +19,10 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
 <head>
         <title>MVA Avstemming <? print $_lib['sess']->get_companydef('VName') ?> - <? print $avst->year ?></title>
         <meta name="cvs"                content="$Id: edit.php,v 1.55 2005/10/28 17:59:40 thomasek Exp $" />
-        <? includeinc('head') ?>
+        <?
+          includeinc('head');
+          includeinc('javascript');
+        ?>
     </head>
 
 <body>
@@ -35,8 +38,10 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
 		<td class="number">Total</td>
 		<td class="number">Salg avg.<br /> fritt</td>
 		<?
+    $extra_columns_count = 0;
 		foreach($avst->_outAccountPlanID as $Vat => $Account)
 		{
+      $extra_columns_count += 2;
 			?>
 			<td class="number">Grl <? print $Vat ?>% (<?= $Account ?>)</td>
 			<td class="number">Utg <? print $Vat ?>% (<?= $Account ?>)</td>
@@ -45,6 +50,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
 
 		foreach($avst->_inAccountPlanID as $Vat => $Account)
 		{
+      $extra_columns_count++;
 			?>
 			<td class="number">Ing <? print $Vat ?>% (<?= $Account ?>)</td>
 			<?
@@ -67,7 +73,7 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
                 $Period = $avst->year."-".sprintf("%02d",$monthly);
                 ?>
                 <tr class="<? print $class ?>">
-                    <td><? print $_lib['format']->MonthToText($monthly) ?></td>
+                    <td><input id="sum_checkbox_<? print $monthly; ?>" type="checkbox" onclick="calculateCheckedSum();"><? print $_lib['format']->MonthToText($monthly) ?></td>
                     <td class="number"><? print $_lib['format']->Amount($avst->registered[$monthly]['NoVatOmsettning'])?></td>
 
                     <td class="number"><? print $_lib['format']->Amount($avst->registered[$monthly]['TotalOmsettning']) ?></td>
@@ -144,6 +150,15 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
             ?>
             <td colspan="4"></td>
         </tr>
+        <tr>
+            <td>Selected sum</td>
+            <?
+              for($i = 1; $i < 6+$extra_columns_count; $i++) {
+             ?>
+               <td id="sum_<? print $i; ?>" class="number"><? print $_lib['format']->Amount(0); ?></td>
+            <?
+              }
+             ?>
         <tr height="20">
             <td></td>
         </tr>
@@ -519,4 +534,30 @@ $avst = new mva_avstemming(array('_sess' => $_sess, '_dbh' => $_dbh, '_dsn' => $
 </table>
 </form>
 </body>
+<script>
+
+function calculateCheckedSum() {
+  var sum = [];
+  for(var i = 1; i <= 5+<? print $extra_columns_count; ?>; i++) sum[i] = 0;
+  for(i = 1; i <= 12; i++) {
+    var current_checkbox = document.getElementById('sum_checkbox_' + i);
+    if (current_checkbox.checked) {
+      var amounts = Array();
+      var amount_tds = current_checkbox.parentElement.parentElement.children;
+      for(var j = 1; j < amount_tds.length; j++) {
+        var html = '0';
+        if (j == amount_tds.length-1) html = amount_tds[j].children[0].innerHTML;
+        else html = amount_tds[j].innerHTML;
+        amounts[j] = toNumber(html);
+        sum[j] += amounts[j];
+      }
+    }
+  }
+  for(i = 1; i <= 5+<? print $extra_columns_count; ?>; i++) {
+    var current_sum_td = document.getElementById('sum_' + i);
+    current_sum_td.innerHTML = toAmountString(sum[i]);
+  }
+}
+
+</script>
 </html>

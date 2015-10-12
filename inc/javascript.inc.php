@@ -19,27 +19,20 @@ else {
  * // variable amount is now '123 456,4500'
  */
 function toAmountString(num, decimal_places) {
-  // if not defined, set number of decimal places to default value
-  decimal_places = (typeof decimal_places !== 'undefined')? decimal_places : 2;
-  var precision = Math.pow(10, decimal_places);
-  var decimal = String(Math.floor(Math.round(num * precision) - Math.floor(num) * precision));
-  while (decimal.length < decimal_places) decimal = "0" + decimal;
-  num = Math.floor(num);
-  var s = "," + decimal;
-  var i = 0;
-  if (num < 1000) {
-    s = String(num) + s;
-    num = Math.floor(num / 1000);
-  }
-  while (num >= 1) {
-    var moduo = String(Math.floor(num % 1000));
-    while (!(num < 1000) && moduo.length < 3) moduo = "0" + moduo;
-    if ((i != 0) && (num >= 1000)) s = moduo + s;
-    else s = " " + moduo + s;
-    num = Math.floor(num / 1000);
-    i++;
-  }
-  return s;
+  // c = number of decimal places
+  // d = decimal separator character
+  // t = thousand separator character
+  Number.prototype.formatMoney = function(c, d, t){
+    var n = this;
+    var c = isNaN(c = Math.abs(c)) ? 2 : c; // no need to pass c param, 2 is default
+    var d = d == undefined ? "," : d; // no need to pass d param, the ',' is default
+    var t = t == undefined ? " " : t; // no need to pass t param, the ' ' is default 
+    var s = n < 0 ? "-" : "";
+    var i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "";
+    var j = (j = i.length) > 3 ? j % 3 : 0;
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+  };
+  return num.formatMoney();
 }
 
 /*
