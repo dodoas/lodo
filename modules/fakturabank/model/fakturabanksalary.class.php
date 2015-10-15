@@ -313,7 +313,7 @@ class lodo_fakturabank_fakturabanksalary {
             if ($import_paycheck_result['omitted-paychecks'] == 1) {
                 $_SESSION['oauth_paycheck_messages'][] = "L&oslash;nnslipp finnes allerede";
                 $ret = false;
-            } else if ($import_paycheck_result['failed-paychecks'] == 1) { // we might get errors even if errno is 0
+            } else if ($import_paycheck_result['failed-paychecks'] == 1) {
                 $_SESSION['oauth_paycheck_messages'][] = "Feil under opplasting: " . $import_paycheck_result['message'] . " Info: " . $import_paycheck_result['exception'];
                 $ret = false;
             } else if ($import_paycheck_result['created-paychecks'] == 0) {

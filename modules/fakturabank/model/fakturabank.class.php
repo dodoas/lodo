@@ -1439,8 +1439,8 @@ class lodo_fakturabank_fakturabank {
                 $fbvoting->update_fakturabank_incoming_invoice($InvoiceO->FakturabankID, $ID, $InvoiceO->AccountPlanID);
 
                 #Set status in fakturabank
-                $comment = "Lodo PHP Invoicein ID: " . $ID . " registered " . $_lib['sess']->get_session('Datetime');
-                $events[] = array( 'id' => $InvoiceO->FakturabankID, 'status' => 'registered', 'comment' => $comment);
+                $comment = "Lodo PHP Invoicein ID: " . $ID . " registered " . strftime("%F %T");
+                $events[] = array( 'id' => $InvoiceO->FakturabankID, 'status' => 'accounted', 'comment' => $comment);
 
             } else {
                 #print "Faktura finnes: " . $InvoiceO->AccountPlanID . "', InvoiceID='" . $InvoiceO->ID . "<br>\n";
@@ -1560,8 +1560,8 @@ class lodo_fakturabank_fakturabank {
                     $fbvoting->update_fakturabank_outgoing_invoice($InvoiceO->FakturabankID, $ID, $InvoiceO->AccountPlanID);
 
                     #Set status in fakturabank
-                    $comment = "Lodo PHP Invoiceout ID: " . $InvoiceO->ID . " registered " . $_lib['sess']->get_session('Datetime');
-                    $events[] = array('id' => $InvoiceO->FakturabankID, 'status' => 'registered', 'comment' => $comment);
+                    $comment = "Lodo PHP Invoiceout ID: " . $InvoiceO->ID . " registered " . strftime("%F %T");
+                    $events[] = array('id' => $InvoiceO->FakturabankID, 'status' => 'accounted', 'comment' => $comment);
 
                 } else {
                     #print "Faktura finnes: " . $InvoiceO->AccountPlanID . "', InvoiceID='" . $InvoiceO->ID . "<br>\n";

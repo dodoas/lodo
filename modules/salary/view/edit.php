@@ -559,7 +559,7 @@ $mcolor = (strstr($msg, "rror")) ? "red" : "black";
     <div class="<? echo $mcolor ?> error"><? print $_lib['message']->get() ?><br/></div>
 <? } ?>
 
-<? #print $message ?>
+<? print $message ?>
 </tr>
 </td>
 
