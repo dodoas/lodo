@@ -5,6 +5,7 @@
 function redirect() {
     $redirect_url = $_SESSION['oauth_tmp_redirect_back_url'];
     unset($_SESSION['oauth_tmp_redirect_back_url']);
+    if (empty($redirect_url)) $redirect_url = "http://$_SERVER[HTTP_HOST]/lodo.php?t=lodo.main";
     header('Location: ' . $redirect_url); 
 }
 
@@ -113,7 +114,9 @@ case 'incoming_invoices':
   redirect();
   break;
 default:  // else, not recognized action
+  if ($_SESSION['oauth_action'] != "test") $_SESSION['oauth_tmp_redirect_back_url'] = "";
   unset($_SESSION['oauth_action']);
+  redirect();
   break;
 }
 

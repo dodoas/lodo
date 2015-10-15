@@ -9,6 +9,7 @@
 session_start();
 
 // include required oauth stuff
+// code from https://github.com/adoy/PHP-OAuth2
 require('Client.php');
 require('GrantType/IGrantType.php');
 require('GrantType/AuthorizationCode.php');
@@ -72,21 +73,29 @@ class lodo_oauth {
     $_SESSION['oauth_resource_url'] = $url;
     $_SESSION['oauth_http_verb'] = ($http_verb == OAuth2\Client::HTTP_METHOD_GET)?"GET":"POST";
     if ($params) $_SESSION['oauth_resource_params'] = $params;
-    // if no code, get the code
-    if (!$code) {
+    // if we have token saved in session and it has not expired yet, use it
+    if (isset($_SESSION['oauth_token']) && $_SESSION['oauth_token']['created_at']+$_SESSION['oauth_token']['expires_in'] > time()) {
+      $this->client->setAccessToken($_SESSION['oauth_token']['access_token']);
+      $this->client->setAccessTokenType(OAuth2\Client::ACCESS_TOKEN_BEARER);
+    }
+    // if no token and no code, start authentication request
+    elseif (!$code) {
       // get code
       $authorize_url = $this->client->getAuthenticationUrl($this->generate_server_url() . $this->authorize_url, $this->callback_url);
       header("Location: " . $authorize_url);
     }
-    // get token and do the request
+    // if we have the code, get the token
     else {
-      $token_params = array("code" => $_GET["code"], "redirect_uri" => $this->callback_url);
+      $token_params = array("code" => $code, "redirect_uri" => $this->callback_url);
       $response = $this->client->getAccessToken($this->generate_server_url() . $this->access_token_url, "authorization_code", $token_params);
 
       $access_token_result = $response["result"];
+      $_SESSION['oauth_token'] = $access_token_result;
       $this->client->setAccessToken($access_token_result["access_token"]);
       $this->client->setAccessTokenType(OAuth2\Client::ACCESS_TOKEN_BEARER);
-
+    }
+    // send the request if the access token is set
+    if ($this->client->hasAccessToken()) {
       $response = $this->client->fetch($url, $params, $http_verb);
       // unset the resources we do not need anymore
       unset($_SESSION['oauth_resource_url']);

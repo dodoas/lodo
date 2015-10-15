@@ -262,7 +262,7 @@ if (!empty($InvoicesO->Invoice)) {
       </td>
       <td class="number"><? print $InvoiceO->PaymentMeans->PayeeFinancialAccount->ID ?></td>
       <td class="number"><? print $InvoiceO->PaymentMeans->InstructionID ?></td>
-      <td align="center"><a href="<?php echo $_SETUP['FB_URL'] ?>suppliers/<? print $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID ?>/invoices/<? print str_replace(".", "%2E", rawurlencode($InvoiceO->ID)) ?>" title="Vis faktura i fakturabank" target="_new">Vis</a>
+      <td align="center"><a href="<?php echo $_SETUP['FB_SERVER_PROTOCOL'].'://'.$_SETUP['FB_SERVER'].'/invoices/'.str_replace(".", "%2E", rawurlencode($InvoiceO->FakturabankID)); ?>" title="Vis faktura i fakturabank" target="_new">Vis</a>
       <td class="number"><? print $InvoiceO->Status ?></td>
   </tr>
 <?

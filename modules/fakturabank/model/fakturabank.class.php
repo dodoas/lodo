@@ -78,7 +78,7 @@ class lodo_fakturabank_fakturabank {
         else {
           $_SESSION['oauth_action'] = 'outgoing_invoices';
           $oauth_client = new lodo_oauth();
-          $oauth_client->get_resources($url);
+          $data = $oauth_client->get_resources($url);
         }
         $invoicesO = $this->retrieve($data);
         $validated_invoices = $this->validate_outgoing($invoicesO);
@@ -104,7 +104,7 @@ class lodo_fakturabank_fakturabank {
         else {
           $_SESSION['oauth_action'] = 'incoming_invoices';
           $oauth_client = new lodo_oauth();
-          $oauth_client->get_resources($url);
+          $data = $oauth_client->get_resources($url);
         }
         $invoicesO = $this->retrieve($data);
         if (empty($invoicesO)) {
