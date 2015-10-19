@@ -1527,6 +1527,7 @@ class lodo_fakturabank_fakturabank {
                     $dataH['InsertedByPersonID']    = $_lib['sess']->get_person('PersonID');
                     $dataH['InsertedDateTime']      = $_lib['sess']->get_session('Datetime');
                     $dataH['UpdatedByPersonID']     = $_lib['sess']->get_person('PersonID');
+                    $dataH['UpdatedAt']             = strftime("%F %T");
                     $dataH['Active']                = 1;
                     $dataH['FromCompanyID']         = 1;
                     $dataH['SupplierAccountPlanID'] = 1;
@@ -1604,6 +1605,10 @@ class lodo_fakturabank_fakturabank {
                     #given bank transaction information, when importing transactions from bank
                     $fbvoting = new lodo_fakturabank_fakturabankvoting();
                     $fbvoting->update_fakturabank_outgoing_invoice($InvoiceO->FakturabankID, $ID, $InvoiceO->AccountPlanID);
+
+                    # blank update to set invoice sender data
+                    $tmp_invoice = new invoice(array('CustomerAccountPlanID' => $InvoiceO->AccountPlanID, 'VoucherType' => 'S', 'InvoiceID' => $ID));
+                    $tmp_invoice->update(array('InvoiceID' => $ID, 'invoiceout_DueDate_'.$ID => $InvoiceO->PaymentMeans->PaymentDueDate, 'invoiceout_CustomerAccountPlanID_'.$ID => $InvoiceO->AccountPlanID));
 
                     #Set status in fakturabank
                     $comment = "Lodo PHP Invoiceout ID: " . $InvoiceO->ID . " accounted " . $_lib['sess']->get_session('Datetime');
