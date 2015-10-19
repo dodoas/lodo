@@ -177,7 +177,7 @@ $db_sum   = $row->sum;
             {?> &lt;&lt; <?}
         ?>
     <th colspan="2">Fant:<? print $db_total ?>, viser <? print $_SETUP['DB_START']['0']." til ".$db_stop; ?></th>
-    <th colspan="10">Total salg: <? print $_lib['format']->Amount(array('value'=>$db_sum, 'return'=>'value')) ?></th>
+    <th colspan="12">Total salg: <? print $_lib['format']->Amount(array('value'=>$db_sum, 'return'=>'value')) ?></th>
     <th align="right">
         <?
         if($db_total > $db_stop)
@@ -202,6 +202,7 @@ $db_sum   = $row->sum;
     <th align="right">Total</th>
     <th align="right">Utskrift</th>
     <th align="right">Endre</th>
+    <th align="right"></th>
     <th align="right"></th>
     <th align="right"></th>
 </tr>
@@ -258,6 +259,7 @@ while($row = $_lib['db']->db_fetch_object($result_inv))
       </td>
       <td class="number"><? if($row->Locked) { ?>L&aring;st<? } else { ?>&Aring;pen<? } ?></td>
       <td class="number"><? if($row->ExternalID > 0) { ?><a href="https://fakturabank.no/invoices/<? print $row->ExternalID ?>" title="Vis i Fakturabank" target="_new">Vis i fakturabank</a><? } ?></td>
+      <td class="number"><? if(!strstr($row->InvoiceDate, $row->Period)) { ?><span style="color: red">feil periode</span><? } ?></td>
   </form>
   </tr>
   <?

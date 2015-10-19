@@ -191,7 +191,6 @@ print $_lib['sess']->doctype ?>
                 <th colspan="5"></th>
             </tr>
             <?
-            }
             $period = 0;
             $account = $voucher->AccountPlanID;
             
@@ -222,6 +221,7 @@ print $_lib['sess']->doctype ?>
             #This is the last line in each group.
             $sql_accountplan    = "select * from accountplan where AccountPlanID=$account";
             $accountplan        = $_lib['storage']->get_row(array('query' => $sql_accountplan));
+            }
         }
 
         if( ($period != $voucher->VoucherPeriod) || (!$period) )
