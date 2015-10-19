@@ -13,7 +13,6 @@ class lodo_fakturabank_fakturabank {
     private $host           = '';
     private $protocol       = '';
     private $timeout        = 30;
-    private $retrievestatus = '';
     private $OrgNumber      = '';
     public  $startexectime  = '';
     public  $stopexectime   = '';
@@ -34,8 +33,6 @@ class lodo_fakturabank_fakturabank {
     function __construct() {
         global $_lib;
         $this->startexectime  = microtime();
-
-        $this->retrievestatus   = $_lib['setup']->get_value('fakturabank.status');
 
         $this->host = $GLOBALS['_SETUP']['FB_SERVER'];
         $this->protocol = $GLOBALS['_SETUP']['FB_SERVER_PROTOCOL'];
@@ -60,13 +57,13 @@ class lodo_fakturabank_fakturabank {
     ####################################################################################################
     #Get a list of all outgoing invoices from fakturabank
     public function outgoing() {
-        global $_lib;
+        global $_lib, $_SETUP;
         #https://fakturabank.no/invoices/outgoing.xml?orgnr=981951271
 
         $page       = "rest/invoices/outgoing.xml";
 
         $params     = "?rows=200&orgnr=$this->OrgNumber"; // add top limit rows=1000, otherwise we only get one record
-        $params     .= "&supplier_status=for_bookkeeping"; #Only retrieve with status 'for_bookkeeping'
+        $params     .= "&supplier_status=" . $_SETUP['FB_INVOICE_DOWNLOAD_STATUS'];
         $params     .= "&order=invoiceno&sord=asc";
 
         $url    = "$this->protocol://$this->host/$page$params";
@@ -89,12 +86,12 @@ class lodo_fakturabank_fakturabank {
     ####################################################################################################
     #Get a list of all incoming invoices from fakturabank
     public function incoming() {
-        global $_lib;
+        global $_lib, $_SETUP;
         #https://fakturabank.no/invoices?orgnr=981951271
 
         $page       = "rest/invoices.xml";
         $params     = "?rows=200&orgnr=" . $this->OrgNumber . '&order=issue_date&sord=asc'; // add top limit rows=1000, otherwise we only get one record
-        if($this->retrievestatus) $params .= '&customer_status=' . $this->retrievestatus;
+        $params    .= '&customer_status=' . $_SETUP['FB_INVOICE_UPDATE_STATUS'];
         $url    = "$this->protocol://$this->host/$page$params";
         $_lib['message']->add($url);
 
@@ -591,7 +588,7 @@ class lodo_fakturabank_fakturabank {
 				$InvoiceO->LodoID = null;
 			}
 
-            if (empty($InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID)) {
+            if (empty($InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID)) {
                 $InvoiceO->Status     .= "Faktura mangler kundenummer";
                 $InvoiceO->Journal     = false;
                 $InvoiceO->Class       = 'red';
@@ -599,15 +596,14 @@ class lodo_fakturabank_fakturabank {
                 continue;
             }
 
-            $customernumber = $InvoiceO->AccountingCustomerParty->Party->PartyLegalEntity->CompanyID;
+            $customernumber = $InvoiceO->AccountingCustomerParty->Party->PartyIdentification->ID;
 
             if (!$this->extractOutgoingAccountingCost($InvoiceO)) {
                 continue;
             }
 
             #Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to only look in the correct records? No?
-            list($SchemeID, $SchemeIDType) = $this->extractSupplierSchemeID($InvoiceO);
-            list($account, $_SchemeID)  = $this->find_reskontro($SchemeID, 'supplier', $SchemeIDType);
+            $account = $this->find_customer_reskontro_by_customernumber($customernumber);
             if ($account) {
                 $InvoiceO->AccountPlanID = $account->AccountPlanID;
 
@@ -807,7 +803,9 @@ class lodo_fakturabank_fakturabank {
 
             //#Should this be more restricted in time or period to eliminate false searches? Any other method to limit it to oly look in the correct records? No?
 
-            list($account, $SchemeID)  = $this->find_reskontro($InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID, 'supplier', $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID);
+            $_CompanyID = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID;
+            $_SchemeID  = $InvoiceO->AccountingSupplierParty->Party->PartyLegalEntity->CompanyID_Attr_schemeID;
+            list($account, $SchemeID)  = $this->find_reskontro($_CompanyID, 'supplier', $_SchemeID);
             if($account) {
                 $InvoiceO->AccountPlanID   = $account->AccountPlanID;
 
@@ -1273,7 +1271,7 @@ class lodo_fakturabank_fakturabank {
 
     ################################################################################################
     public function registerincoming() {
-        global $_lib, $accounting;
+        global $_lib, $accounting, $_SETUP;
 
         // since when we load the page we already have fetched invoices
         $_SESSION['oauth_invoices_fetched'] = true;
@@ -1440,7 +1438,7 @@ class lodo_fakturabank_fakturabank {
 
                 #Set status in fakturabank
                 $comment = "Lodo PHP Invoicein ID: " . $ID . " registered " . strftime("%F %T");
-                $events[] = array( 'id' => $InvoiceO->FakturabankID, 'status' => 'accounted', 'comment' => $comment);
+                $events[] = array( 'id' => $InvoiceO->FakturabankID, 'status' => $_SETUP['FB_INVOICE_UPDATE_STATUS'], 'comment' => $comment);
 
             } else {
                 #print "Faktura finnes: " . $InvoiceO->AccountPlanID . "', InvoiceID='" . $InvoiceO->ID . "<br>\n";
@@ -1451,7 +1449,7 @@ class lodo_fakturabank_fakturabank {
     }
 
     public function registeroutgoing() {
-        global $_lib;
+        global $_lib, $_SETUP;
 
         // since when we load the page we already have fetched invoices
         $_SESSION['oauth_invoices_fetched'] = true;
@@ -1561,7 +1559,7 @@ class lodo_fakturabank_fakturabank {
 
                     #Set status in fakturabank
                     $comment = "Lodo PHP Invoiceout ID: " . $InvoiceO->ID . " registered " . strftime("%F %T");
-                    $events[] = array('id' => $InvoiceO->FakturabankID, 'status' => 'accounted', 'comment' => $comment);
+                    $events[] = array('id' => $InvoiceO->FakturabankID, 'status' => $_SETUP['FB_INVOICE_UPDATE_STATUS'], 'comment' => $comment);
 
                 } else {
                     #print "Faktura finnes: " . $InvoiceO->AccountPlanID . "', InvoiceID='" . $InvoiceO->ID . "<br>\n";

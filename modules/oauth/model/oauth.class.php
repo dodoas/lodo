@@ -25,7 +25,7 @@ class lodo_oauth {
 
   // the oauth provider target
   var $protocol         = 'http';
-  var $host             = '192.168.0.42:3000';
+  var $host             = 'fakturabank.no';
   var $authorize_url    = '/oauth/authorize';
   var $access_token_url = '/oauth/token';
 
@@ -37,6 +37,8 @@ class lodo_oauth {
     $this->callback_url   = $_SETUP['OAUTH_REDIRECT_URL'];
     $this->client_id      = $_SETUP['OAUTH_CLIENT_ID'];
     $this->client_secret  = $_SETUP['OAUTH_CLIENT_SECRET'];
+    $this->protocol       = $_SETUP['FB_SERVER_PROTOCOL'];
+    $this->host           = $_SETUP['FB_SERVER'];
 
     // create client
     $this->client = new OAuth2\Client($this->client_id, $this->client_secret, OAuth2\Client::AUTH_TYPE_AUTHORIZATION_BASIC);
