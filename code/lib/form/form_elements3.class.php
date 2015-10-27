@@ -96,6 +96,12 @@ class form3
 
 ###########################################################
 
+    function Car_menu3($args)
+    {
+        $args['query'] = $this->_QUERY['form']['carmenu'];
+        return $this->_MakeSelect($args);
+    }
+
     function Avd_menu3($args)
     {
         $args['query'] = $this->_QUERY['form']['avdmenu'];
