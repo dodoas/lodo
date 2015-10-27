@@ -408,6 +408,10 @@ class logic_invoicein_invoicein implements Iterator {
                             $VoucherH['voucher_Description']    .= $line->ProductName;
                         }
 
+                        if($line->CarID) {
+                            $VoucherH['voucher_CarID'] = $line->CarID;
+                        }
+
                         //#Motkonto resultat.
                         $VoucherH['voucher_AccountPlanID']  = $line->AccountPlanID;
                         //#print_r($VoucherH);

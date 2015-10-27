@@ -945,6 +945,22 @@ class lodo_fakturabank_fakturabank {
                     $JournalID++;
                 }
 
+                # validate invoice lines
+                foreach($InvoiceO->InvoiceLine as &$line) {
+                  if ($line->Item->AdditionalItemProperty->Name == 'Car') {
+                    $query = "select * from companycar where CarCode='" . $line->Item->AdditionalItemProperty->Value . "' and Active=1";
+                    $carexists = $_lib['storage']->get_row(array('query' => $query, 'debug' => false));
+                    if($carexists) {
+                      $line->Item->CarID   = $carexists->CompanyCarID;
+                      $line->Item->CarCode = $carexists->CarCode;
+                    }
+                    else {
+                      $InvoiceO->Status .= "Bil: " . $line->Item->AdditionalItemProperty->Value . " eksisterer ikke. ";
+                      $InvoiceO->Journal = false;
+                      $InvoiceO->Class   = 'red';
+                    }
+                  }
+                }
                 if($InvoiceO->Journal) {
                     $InvoiceO->Status   .= "Klar til bilagsf&oslash;ring basert p&aring: SchemeID: $SchemeID";
                 }
@@ -1453,6 +1469,7 @@ class lodo_fakturabank_fakturabank {
                         $datalineH['LineNum']           = $LineNum;
                         $datalineH['ProductName']       = $line->Item->Name;
                         $datalineH['ProductNumber']     = $line->Item->SellersItemIdentification->ID;
+                        $datalineH['CarID']             = $line->Item->CarID;
                         $datalineH['Comment']           = $line->Item->Description;
                         $datalineH['QuantityOrdered']   = $Quantity;
                         $datalineH['QuantityDelivered'] = $Quantity;
