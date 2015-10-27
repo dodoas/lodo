@@ -460,6 +460,11 @@ class accounting {
         } else {
             $fields['voucher_DepartmentID']     = $accountplan->DepartmentID; #Default department
         }
+        if(isset($post['voucher_CarID'])) {
+            $fields['voucher_CarID']     = $post['voucher_CarID'];
+        } else {
+            $fields['voucher_CarID']     = $accountplan->CarID; #Default car
+        }
 
         ############################################################################################
         #Deault values
