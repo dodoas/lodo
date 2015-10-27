@@ -481,7 +481,7 @@ table.tab a:hover{
   color: red;
 }
 
-.regnskapsrapport_table {
+.regnskapsrapport_table, .salary_table {
   table-layout: fixed;
   width: auto;
 }
@@ -517,3 +517,15 @@ tr.sub {
 tr.sub.red {
 	background-color: red;
 }
+.salary_table .line_number {
+  width: 30px;
+}
+
+.align-right, th.align-right {
+  text-align: right;
+}
+
+.align-left, th.align-left {
+  text-align: left;
+}
+

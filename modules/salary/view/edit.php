@@ -232,9 +232,9 @@ $formname = "salaryUpdate";
   </tr>
 </table>
 <br>
-<table class="lodo_data">
+<table class="lodo_data salary_table">
   <tr>
-    <th>Linje</th>
+    <th class="line_number">Linje</th>
     <th>Tekst</th>
     <th>Antall periode</th>
     <th>Sats</th>
@@ -259,7 +259,7 @@ $formname = "salaryUpdate";
       ?>
       <tr>
         <? print $_lib['form3']->hidden(array('name'=>$counter, 'value'=>$line->SalaryLineID)) ?>
-        <td>
+        <td class="line_number">
         <?
             if($ishovedmal == 1)
             {
@@ -448,7 +448,7 @@ $formname = "salaryUpdate";
         {
           ?>
         <tr>
-          <td>
+          <td colspan="14">
                 <?php
 
                   if(!$head->LockedBy || $_lib['sess']->get_person('AccessLevel') >= 4)
@@ -465,7 +465,6 @@ $formname = "salaryUpdate";
           <td>
           <?
              if(!$head->LockedBy) echo '<input type="submit" name="action_salary_lock" value="L&aring;s (L)" accesskey="L" />';
-             else echo "L&aring;st av " . $head->LockedBy . " " . $head->LockedDate;
           ?>
           </td>
         </tr>
@@ -482,9 +481,6 @@ $formname = "salaryUpdate";
 <tr>
   <td colspan = "7"></td>
   <td colspan="6">
-      <? if ($head->FakturabankPersonID) { ?>
-           Sendt til Fakturabank <? print $head->FakturabankDateTime ?>, av <? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?>
-      <? } ?>
   </td>
 </tr>
 
@@ -504,21 +500,30 @@ $formname = "salaryUpdate";
 </tr>
 
 <tr>
-  <td></td>
-</tr>
+  <td colspan = "7">
 
-<tr>
-  <td colspan = "7"></td>
+  <?
+    if($head->UpdatedBy) echo "Oppdatert " . $head->UpdatedAt . ", av " . $_lib['format']->PersonIDToName($head->UpdatedBy);
+  ?>
+  </td>
   <td colspan = "4">Fakturabankepost: <?php print $head->FEmail; ?></td>
 </tr>
 
 <tr>
-  <td colspan = "7"></td>
+  <td colspan = "7">
+  <?
+    if($head->LockedBy) echo "L&aring;st " . $head->LockedDate . ", av " . $head->LockedBy;
+  ?>
+  </td>
   <td colspan = "4">Kommune: <? if(!$kommune) { echo "<span style='color: red'>mangler kommune</span>"; } else { echo $kommune->KommuneNumber . " " . $kommune->KommuneName; } ?></td>
 </tr>
 
 <tr>
-  <td colspan = "7"></td>
+  <td colspan = "7">
+      <? if ($head->FakturabankPersonID) { ?>
+           Sendt til Fakturabank <? print $head->FakturabankDateTime ?>, av <? print $_lib['format']->PersonIDToName($head->FakturabankPersonID) ?>
+      <? } ?>
+  </td>
   <td colspan = "4">Personnummer: <? echo $head->SocietyNumber ?></td>
 </tr>
 
